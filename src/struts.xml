@@ -64,6 +64,14 @@
              </result>
          </action>
 
+         <action name="getCompTree" class="userManage.action.CompTreeAction">
+             <!--将getUserTree映射到物理地址 -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="getUserInfo" class="userManage.action.getUserInfoAction">
              <!--将getUserInfo映射到物理地址 -->
              <result name="failure">/failure.jsp</result>

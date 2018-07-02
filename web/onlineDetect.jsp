@@ -157,7 +157,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="media" id="top-menu">
 
                 <div class="pull-left">
-                    <ul id="treeDemo" class="ztree"></ul>
+                    <%--<ul id="treeDemo" class="ztree"></ul>--%>
+                        <td>
+                            <select class="select" id="province_code" name="province_code" onchange="getCity()">
+                                <option value="">请选择</option>
+                            </select>
+
+                            <select class="select" id="city_code" name="city_code" onchange="getComproom()">
+                                <option value="">请选择</option>
+                            </select>
+
+                            <select class="select" id="comproom_code" name="comproom_code">
+                                <option value="">请选择</option>
+                            </select>
+                        </td>
                 </div>
 
                 <div class="pull-right">欢迎用户${username}登录</div>
@@ -943,7 +956,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
 
-    <script>
+    <%--<script>
 
         var objprobank="<%=session.getAttribute("probank")%>";
         var objcitybank="<%=session.getAttribute("citybank")%>";
@@ -975,7 +988,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $(document).ready(function(){
             zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
         });
-    </script>
+    </script>--%>
 
     <script type="text/javascript">
 

@@ -173,17 +173,16 @@
                 <div class="pull-left">
                     <%-- <ul id="treeDemo" class="ztree"></ul>--%>
                     <%-- </pre><pre name="code" class="html"><tr>--%>
-                        <td>所在地:</td>
                         <td>
                             <select class="select" id="province_code" name="province_code" onchange="getCity()">
                                 <option value="">请选择</option>
                             </select>
 
-                            <select class="select" id="city_code" name="city_code" onchange="getArea()">
+                            <select class="select" id="city_code" name="city_code" onchange="getComproom()">
                                 <option value="">请选择</option>
                             </select>
 
-                            <select class="select" id="area_code" name="area_code">
+                            <select class="select" id="comproom_code" name="comproom_code">
                                 <option value="">请选择</option>
                             </select>
                         </td>
@@ -1331,67 +1330,47 @@
 
     <script>
         var provinceid = getQueryString("prov");
-        //alert(provinceid);
-        if(provinceid){//第一次进入这个页面，没有获取过树结构
-            //var provinceid = getQueryString("prov");
-            ///alert(provinceid);
-            $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
 
+        if(provinceid){//第一次进入这个页面，没有获取过
+            $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
         }
-        else{//已经获取过了树结构
-            // alert("else");
+        else{//已经获取过了
+            /*for (var i = 0; i < data.length; i++) {
+                $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
+            }*/
+
             var objprobank="<%=session.getAttribute("probank")%>";
             var objcitybank="<%=session.getAttribute("citybank")%>";
             var objcomputerroom="<%=session.getAttribute("computerroom")%>";
 
-            var zTreeObj;
-            // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-            var setting = {};
-            // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-            var zNodes = [
-                {name:objprobank, open:true, children:[
-                        {name:objcitybank, open:true, children:[
-                                {name:objcomputerroom}
-                            ]
-                        }
-                    ]
-                }
-            ];
+            alert("objprobank"+objprobank);
+            alert("objcitybank"+objcitybank);
+            alert("objcomputerroom"+objcomputerroom);
 
-            $(document).ready(function(){
-                zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-            });
         }
 
 
         /*加载市下拉选*/
         function getCity() {
             var pname = $("#province_code").val();
-            var pname1 = $("#provinceid").val();
-            alert(pname);
+
             $("#city_code").empty();
-            $("#area_code").empty();
+            $("#comproom_code").empty();
+
             $.ajax({
                 type: "post",
                 url: "getCityTree",
                 data: {provinceid: pname},
-               /* data: {
-                    provinceid : $("#pname1").val()
-                },*/
                 dataType : "json",
                 success: function (data) {
-                    alert("succ1");
-                    var obj = eval("(" + data + ")");
-                    alert("succ2"+obj);
 
                     $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-                    $('#area_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
-                    alert(obj);
-                    alert(obj.citybank);
-
-                    for (var i = 0; i < obj.length; i++) {
-                        $('#city_code').append("<option value='" + obj[i] + "' >" + obj[i] + "</option>");
+                    //alert(obj[0].cbname);
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < data.length; i++) {
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
                     }
 
                 },
@@ -1402,29 +1381,30 @@
         }
 
         /*加载机房下拉选*/
-        function getComRoom() {
-            var cid = $("#city_code").val();
-            $("#area_code").empty();
+        function getComproom() {
+            var cname = $("#city_code").val();
+
+            $("#comproom_code").empty();
+
             $.ajax({
                 type: "post",
-                url: "getAreaTree",
-                data: {"id": cid},
+                url: "getCompTree",
+                data: {cityid: cname},
+                dataType : "json",
                 success: function (data) {
-                    $('#area_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
                     for (var i = 0; i < data.length; i++) {
-                        $('#area_code').append("<option value='" + data[i].id + "' >" + data[i].aName + "</option>");
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
                     }
                 },
                 error: function () {
-                    alert("加载区失败");
+                    alert("加载机房失败");
                 }
             });
         }
-
-
-
-
-
 
     </script>
 

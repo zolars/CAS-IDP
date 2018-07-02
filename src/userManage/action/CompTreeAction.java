@@ -2,12 +2,8 @@ package userManage.action;
 
 
 import Util.ProvinceEnum;
-
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
-import hibernatePOJO.User;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.UserDAO;
 import userManage.dao.impl.UserDAOImpl;
@@ -17,9 +13,11 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
+//import net.sf.json.JSON;
+//import net.sf.json.JSONArray;
 
 
-public class CityTreeAction extends ActionSupport {
+public class CompTreeAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -40,17 +38,17 @@ public class CityTreeAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String province = request.getParameter("provinceid");
+            String city = request.getParameter("cityid");
 
-            int pbid = ProvinceEnum.getNo(province);
+            //int cbid = ProvinceEnum.getNo(city);
 
             UserDAO dao = new UserDAOImpl();
 
-            List citybank = new ArrayList();
+            List computerroom = new ArrayList();
 
-            citybank = dao.getCityBank(pbid);
+            computerroom = dao.getComputerroom(city);
 
-            result = JSON.toJSONString(citybank); // List转json
+            result = JSON.toJSONString(computerroom); // List转json
 
            /* JSONArray jsonArray = JSONArray.fromObject(citybank);
             result = jsonArray.toString();*/
@@ -58,7 +56,7 @@ public class CityTreeAction extends ActionSupport {
             System.out.println(result);
 
             //存到 session 中,方便后续重复使用
-            session.setAttribute("citybank", citybank);
+            session.setAttribute("computerroom", computerroom);
 
         } catch (Exception e) {
             e.printStackTrace();

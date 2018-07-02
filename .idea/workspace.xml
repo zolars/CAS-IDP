@@ -1,0 +1,1288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="IDP:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a5f57310-4c00-4b69-9ae2-1b8c75515011" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/userManage/action/CompTreeAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/struts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/struts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userManage/action/CityTreeAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userManage/action/CityTreeAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userManage/action/UserLoginAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userManage/action/UserLoginAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userManage/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userManage/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/userManage/dao/impl/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/userManage/dao/impl/UserDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/production/IDP/struts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/production/IDP/struts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/struts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/struts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/userManage/action/CityTreeAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/userManage/action/CityTreeAction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/userManage/dao/UserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/userManage/dao/UserDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/userManage/dao/impl/UserDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/userManage/dao/impl/UserDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/assets/amcharts/amcharts3.14.2.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/assets/amcharts/amcharts3.14.2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/assets/amcharts/gauge.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/assets/amcharts/gauge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/assets/amcharts/pie.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/assets/amcharts/pie.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/assets/amcharts/serial.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/assets/amcharts/serial.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/assets/amcharts/serial3.14.2.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/assets/amcharts/serial3.14.2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/area_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/area_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/deviceManager.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/deviceManager.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/energy_consumption.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/energy_consumption.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/font-awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/menu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/mstp_map.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/mstp_map.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/pick-pcc.min.1.0.1.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/pick-pcc.min.1.0.1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/reset.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/deviceManager.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/deviceManager.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/efficiencyAnalysis.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/efficiencyAnalysis.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/energy_consumption.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/energy_consumption.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/failure.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/failure.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/bootstrap-3.3.4.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/bootstrap-3.3.4.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/deviceManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/deviceManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/dianfei.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/dianfei.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/editor2.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/editor2.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/enchart.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/enchart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/energy_consumption.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/energy_consumption.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/font-awesome.4.6.0.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/font-awesome.4.6.0.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/maps/China.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/maps/China.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/modernizr.custom.49511.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/modernizr.custom.49511.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/mstp_map.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/js/mstp_map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/mstp_map.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/mstp_map.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/onlineDetect.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/onlineDetect.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/province.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/province.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/success.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/success.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/systemSetting.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/systemSetting.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/userMng.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/userMng.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/production/IDP/struts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/production/IDP/struts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/production/IDP/userManage/action/CityTreeAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/production/IDP/userManage/action/CityTreeAction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/production/IDP/userManage/dao/UserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/production/IDP/userManage/dao/UserDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/production/IDP/userManage/dao/impl/UserDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/production/IDP/userManage/dao/impl/UserDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/amcharts/amcharts3.14.2.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/amcharts/amcharts3.14.2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/amcharts/gauge.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/amcharts/gauge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/amcharts/pie.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/amcharts/pie.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/amcharts/serial.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/amcharts/serial.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/assets/amcharts/serial3.14.2.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/assets/amcharts/serial3.14.2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/area_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/area_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/deviceManager.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/deviceManager.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/energy_consumption.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/energy_consumption.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/font-awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/menu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/mstp_map.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/mstp_map.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/pick-pcc.min.1.0.1.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/pick-pcc.min.1.0.1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/reset.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/deviceManager.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/deviceManager.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/efficiencyAnalysis.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/efficiencyAnalysis.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/energy_consumption.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/energy_consumption.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/failure.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/failure.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/bootstrap-3.3.4.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/bootstrap-3.3.4.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/deviceManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/deviceManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/dianfei.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/dianfei.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/editor2.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/editor2.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/enchart.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/enchart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/energy_consumption.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/energy_consumption.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/font-awesome.4.6.0.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/font-awesome.4.6.0.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/maps/China.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/maps/China.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/modernizr.custom.49511.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/modernizr.custom.49511.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/js/mstp_map.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/js/mstp_map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/mstp_map.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/mstp_map.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/onlineDetect.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/onlineDetect.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/province.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/province.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/success.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/success.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/systemSetting.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/systemSetting.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/userMng.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/userMng.jsp" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/IDP$Tomcat_7_0_88.ic" NAME="Tomcat 7.0.88 Coverage Results" MODIFIED="1530233866874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="hibernate.cfg.xml/Hibernate" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Test@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="onlineDetect.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/onlineDetect.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="957" lean-forward="true" selection-start-line="957" selection-end-line="957" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="province.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/province.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="46">
+              <caret line="1337" column="12" selection-start-line="1337" selection-start-column="12" selection-end-line="1337" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CityTreeAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/userManage/action/CityTreeAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="419">
+              <caret line="60" column="42" selection-start-line="60" selection-start-column="34" selection-end-line="60" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompTreeAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/userManage/action/CompTreeAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/userManage/dao/UserDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="15" column="63" lean-forward="true" selection-start-line="15" selection-start-column="63" selection-end-line="15" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserDAOImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/userManage/dao/impl/UserDAOImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="328">
+              <caret line="104" column="30" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="struts_2_5" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>search</find>
+      <find>集中</find>
+      <find>pull-left</find>
+      <find>provinceid</find>
+      <find>init</find>
+      <find>ready</find>
+      <find>总能耗</find>
+      <find>用电总量统计</find>
+      <find>能耗实时排名</find>
+      <find>nx</find>
+      <find>assessbar</find>
+      <find>assesstable</find>
+      <find>start_date_picker</find>
+      <find>checkbox</find>
+      <find>table tile</find>
+      <find>在线</find>
+      <find>getALLUserInfomation()</find>
+      <find>itemNo</find>
+      <find>getALLUserInfomation</find>
+      <find>userinfotable</find>
+      <find>&quot;</find>
+      <find>subItem1</find>
+      <find>nxbar</find>
+      <find>eventbar</find>
+      <find>item1</find>
+      <find>item2</find>
+      <find>treeDemo</find>
+      <find>city_code</find>
+      <find>ztree</find>
+      <find>province_code</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>'</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/manage/HelloStructsAction.java" />
+        <option value="$PROJECT_DIR$/src/userManage/HelloStructsAction.java" />
+        <option value="$PROJECT_DIR$/src/userManage/loginDel.java" />
+        <option value="$PROJECT_DIR$/src/connectDB/DBConnect.java" />
+        <option value="$PROJECT_DIR$/web/deviceManager.html" />
+        <option value="$PROJECT_DIR$/src/userManage/UserPermission.java" />
+        <option value="$PROJECT_DIR$/src/userManage/UserLoginAction.java" />
+        <option value="$PROJECT_DIR$/web/province.html" />
+        <option value="$PROJECT_DIR$/web/chinaMap.jsp" />
+        <option value="$PROJECT_DIR$/src/userManage/dao/UserPermission.java" />
+        <option value="$PROJECT_DIR$/web/efficiencyAnalysis.html" />
+        <option value="$PROJECT_DIR$/web/energy_consumption.html" />
+        <option value="$PROJECT_DIR$/web/keyInfo.html" />
+        <option value="$PROJECT_DIR$/web/mstp_map.html" />
+        <option value="$PROJECT_DIR$/web/userMng.html" />
+        <option value="$PROJECT_DIR$/src/Util/HibernateUtil.java" />
+        <option value="$PROJECT_DIR$/src/userManage/dao/impl/UserDAO.java" />
+        <option value="$PROJECT_DIR$/web/index.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/classes/struts.xml" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/Util/HibernateSessionFactory.java" />
+        <option value="$PROJECT_DIR$/src/userManage/model/User.java" />
+        <option value="$PROJECT_DIR$/src/Util/HibernateUtils.java" />
+        <option value="$PROJECT_DIR$/src/hibernatePOJO/User.hbm.xml" />
+        <option value="$PROJECT_DIR$/src/Util/HBSessionDao.java" />
+        <option value="$PROJECT_DIR$/src/Util/HBSessionDaoImpl.java" />
+        <option value="$PROJECT_DIR$/src/userManage/action/UserLoginAction.java" />
+        <option value="$PROJECT_DIR$/web/success.jsp" />
+        <option value="$PROJECT_DIR$/src/Util/Enum.java" />
+        <option value="$PROJECT_DIR$/src/Util/provinceEnum.java" />
+        <option value="$PROJECT_DIR$/web/js/jquery.ztree.core.js" />
+        <option value="$PROJECT_DIR$/web/testZtree.jsp" />
+        <option value="$PROJECT_DIR$/web/testZtree.html" />
+        <option value="$PROJECT_DIR$/web/keyInfo.jsp" />
+        <option value="$PROJECT_DIR$/src/userManage/action/getUserInfoAction.java" />
+        <option value="$PROJECT_DIR$/web/mstp_map.jsp" />
+        <option value="$PROJECT_DIR$/web/deviceManager.jsp" />
+        <option value="$PROJECT_DIR$/web/efficiencyAnalysis.jsp" />
+        <option value="$PROJECT_DIR$/web/energy_consumption.jsp" />
+        <option value="$PROJECT_DIR$/web/systemSetting.jsp" />
+        <option value="$PROJECT_DIR$/src/Util/ProvinceEnum.java" />
+        <option value="$PROJECT_DIR$/web/userMng.jsp" />
+        <option value="$PROJECT_DIR$/src/userManage/action/UserTreeAction.java" />
+        <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/userManage/action/CityTreeAction.java" />
+        <option value="$PROJECT_DIR$/src/struts.xml" />
+        <option value="$PROJECT_DIR$/src/userManage/dao/UserDAO.java" />
+        <option value="$PROJECT_DIR$/src/userManage/dao/impl/UserDAOImpl.java" />
+        <option value="$PROJECT_DIR$/web/onlineDetect.jsp" />
+        <option value="$PROJECT_DIR$/src/userManage/action/CompTreeAction.java" />
+        <option value="$PROJECT_DIR$/web/province.jsp" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="false" />
+    <option name="FILTER_DEBUG" value="false" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="826" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="IDP" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IDP" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="JPA.DatabaseSchemaImportDialog" value="4b2940c9-4f3b-4e37-a906-da5f01860163" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/wcq/Desktop/IDP/web/userMng.jsp" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="database.console.LAST_STATE" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15436894" />
+    <property name="project.structure.side.proportion" value="0.20457143" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="userManage.action" />
+      <recent name="Util" />
+      <recent name="connectDB" />
+      <recent name="userManage" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/web/img/icon" />
+      <recent name="$PROJECT_DIR$/web/js/zTree" />
+      <recent name="$PROJECT_DIR$/web/css/zTree" />
+      <recent name="$PROJECT_DIR$/web/css/zTreeStyle" />
+    </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="hibernatePOJO" />
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/WEB-INF/lib" />
+      <recent name="$PROJECT_DIR$/web/WEB-INF" />
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/web" />
+      <recent name="$PROJECT_DIR$/web/js" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="Tomcat 7.0.88" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.88" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <deployment>
+        <artifact name="IDP:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Tomcat_7_0_88_IDP" />
+        <option name="HTTP_PORT" value="8081" />
+        <option name="JNDI_PORT" value="1101" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="58153" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="IDP:war exploded" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a5f57310-4c00-4b69-9ae2-1b8c75515011" name="Default" comment="" />
+      <created>1528816094734</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1528816094734</updated>
+      <workItem from="1528816096414" duration="670000" />
+      <workItem from="1528816782109" duration="22000" />
+      <workItem from="1528849761348" duration="9625000" />
+      <workItem from="1528874637282" duration="2760000" />
+      <workItem from="1528883076238" duration="7785000" />
+      <workItem from="1528899902656" duration="4546000" />
+      <workItem from="1529336008250" duration="3396000" />
+      <workItem from="1529340102670" duration="53000" />
+      <workItem from="1529340176565" duration="649000" />
+      <workItem from="1529340857512" duration="3106000" />
+      <workItem from="1529369236536" duration="419000" />
+      <workItem from="1529369686487" duration="920000" />
+      <workItem from="1529370711657" duration="6145000" />
+      <workItem from="1529377038903" duration="3794000" />
+      <workItem from="1529386541971" duration="8982000" />
+      <workItem from="1529397458668" duration="4626000" />
+      <workItem from="1529453332708" duration="1096000" />
+      <workItem from="1529454746754" duration="5899000" />
+      <workItem from="1529474207178" duration="15000" />
+      <workItem from="1529474237482" duration="14000" />
+      <workItem from="1529474254148" duration="722000" />
+      <workItem from="1529475017763" duration="2000" />
+      <workItem from="1529475529314" duration="379000" />
+      <workItem from="1529475911881" duration="533000" />
+      <workItem from="1529476940723" duration="2482000" />
+      <workItem from="1529481127060" duration="6187000" />
+      <workItem from="1529541169589" duration="5780000" />
+      <workItem from="1529549322553" duration="530000" />
+      <workItem from="1529549995502" duration="582000" />
+      <workItem from="1529551853772" duration="6649000" />
+      <workItem from="1529567408152" duration="6495000" />
+      <workItem from="1529578143005" duration="5006000" />
+      <workItem from="1529583322987" duration="689000" />
+      <workItem from="1529627325849" duration="13710000" />
+      <workItem from="1529650853783" duration="2436000" />
+      <workItem from="1529653455852" duration="3583000" />
+      <workItem from="1529657357282" duration="4023000" />
+      <workItem from="1529724123148" duration="6266000" />
+      <workItem from="1529736918891" duration="11307000" />
+      <workItem from="1529886681419" duration="5718000" />
+      <workItem from="1529893092473" duration="12434000" />
+      <workItem from="1529919769725" duration="134000" />
+      <workItem from="1529919931677" duration="66000" />
+      <workItem from="1529920082449" duration="991000" />
+      <workItem from="1529921114683" duration="4542000" />
+      <workItem from="1529927450371" duration="5050000" />
+      <workItem from="1529973173976" duration="8612000" />
+      <workItem from="1530004833331" duration="469000" />
+      <workItem from="1530079486329" duration="352000" />
+      <workItem from="1530079858400" duration="11243000" />
+      <workItem from="1530092080654" duration="1927000" />
+      <workItem from="1530108168405" duration="1241000" />
+      <workItem from="1530164464717" duration="6826000" />
+      <workItem from="1530171773241" duration="1552000" />
+      <workItem from="1530232547402" duration="4701000" />
+      <workItem from="1530242565038" duration="2000" />
+      <workItem from="1530257072514" duration="5221000" />
+      <workItem from="1530263470850" duration="1674000" />
+      <workItem from="1530492172555" duration="7626000" />
+      <workItem from="1530501657885" duration="10561000" />
+      <workItem from="1530537917717" duration="2985000" />
+    </task>
+    <task id="LOCAL-00001" summary="first commit！">
+      <created>1530523850769</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1530523850770</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="235810000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="826" extended-state="6" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.54291844" side_tool="true" weight="0.5779037" />
+      <window_info anchor="bottom" id="Application Servers" order="7" sideWeight="0.4985694" weight="0.3286119" />
+      <window_info anchor="right" id="Maven Projects" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Database" order="5" sideWeight="0.49150142" visible="true" weight="0.09728183" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="3" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6108727" weight="0.3895184" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4985694" weight="0.3286119" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.47353363" weight="0.18181819" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info id="Image Layers" order="7" />
+      <window_info anchor="bottom" id="Java Enterprise" order="14" sideWeight="0.49928468" weight="0.32765958" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.40084985" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.45708156" weight="0.78045326" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.5141643" />
+      <window_info id="Persistence" order="8" sideWeight="0.13119534" side_tool="true" visible="true" weight="0.25107297" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8688047" visible="true" weight="0.25107297" />
+      <window_info id="Web" order="6" sideWeight="0.43259558" side_tool="true" weight="0.19456366" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Database Console" order="13" sideWeight="0.4985694" visible="true" weight="0.16855524" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.5084986" side_tool="true" visible="true" weight="0.042203147" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49284694" weight="0.39660057" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Persistence" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.3286119" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Database Console" order="13" sideWeight="0.49928468" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6416309" weight="0.48300284" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286119" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5028612" side_tool="true" weight="0.68130314" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49713877" weight="0.3243626" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="Image Layers" order="7" />
+      <window_info anchor="bottom" id="Java Enterprise" order="14" weight="0.3286119" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
+      <window_info anchor="right" id="Maven Projects" order="6" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2081545" />
+      <window_info anchor="right" id="Database" order="5" visible="true" weight="0.072961375" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Web" order="6" side_tool="true" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49713877" weight="0.25212464" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4914163" weight="0.25815603" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit！" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commit！" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/dao/impl/UserDAOImpl.java</url>
+          <line>34</line>
+          <properties />
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web/deviceManager.jsp</url>
+          <line>588</line>
+          <properties />
+          <option name="timeStamp" value="259" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web/deviceManager.jsp</url>
+          <line>586</line>
+          <properties />
+          <option name="timeStamp" value="260" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web/deviceManager.jsp</url>
+          <line>581</line>
+          <properties />
+          <option name="timeStamp" value="261" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/dao/impl/UserDAOImpl.java</url>
+          <line>129</line>
+          <properties />
+          <option name="timeStamp" value="315" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/getUserInfoAction.java</url>
+          <line>47</line>
+          <properties />
+          <option name="timeStamp" value="317" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/getUserInfoAction.java</url>
+          <line>50</line>
+          <properties />
+          <option name="timeStamp" value="318" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Util/ProvinceEnum.java</url>
+          <line>80</line>
+          <properties />
+          <option name="timeStamp" value="319" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CityTreeAction.java</url>
+          <line>54</line>
+          <properties />
+          <option name="timeStamp" value="331" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CityTreeAction.java</url>
+          <line>57</line>
+          <properties />
+          <option name="timeStamp" value="332" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CityTreeAction.java</url>
+          <line>60</line>
+          <properties />
+          <option name="timeStamp" value="335" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CityTreeAction.java</url>
+          <line>55</line>
+          <properties />
+          <option name="timeStamp" value="346" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CityTreeAction.java</url>
+          <line>52</line>
+          <properties />
+          <option name="timeStamp" value="347" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CompTreeAction.java</url>
+          <line>42</line>
+          <properties />
+          <option name="timeStamp" value="348" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CompTreeAction.java</url>
+          <line>44</line>
+          <properties />
+          <option name="timeStamp" value="349" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CompTreeAction.java</url>
+          <line>48</line>
+          <properties />
+          <option name="timeStamp" value="350" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CompTreeAction.java</url>
+          <line>50</line>
+          <properties />
+          <option name="timeStamp" value="352" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CompTreeAction.java</url>
+          <line>55</line>
+          <properties />
+          <option name="timeStamp" value="353" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/userManage/action/CompTreeAction.java</url>
+          <line>58</line>
+          <properties />
+          <option name="timeStamp" value="354" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/userManage/dao/impl/UserDAOImpl.java</url>
+          <line>18</line>
+          <properties field="session" class="userManage.dao.impl.UserDAOImpl" />
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/userManage/dao/impl/UserDAOImpl.java</url>
+          <line>19</line>
+          <properties field="transaction" class="userManage.dao.impl.UserDAOImpl" />
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/userManage/dao/impl/UserDAOImpl.java</url>
+          <line>20</line>
+          <properties field="query" class="userManage.dao.impl.UserDAOImpl" />
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="357" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+        <watch expression="data" language="JSP" />
+        <watch expression="objs" language="JSP" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>objs</expression-string>
+        <language-id>JSP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>data</expression-string>
+        <language-id>JSP</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$USER_HOME$/Downloads/apache-tomcat-7.0.88/lib/catalina.jar!/org/apache/catalina/core/StandardHostValve.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="80" column="17" lean-forward="true" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/classes/production/IDP/struts.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="50" column="33" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/zTree">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/jquery-1.4.4.min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/zTree/jquery.ztree.core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="1720" column="8" selection-start-line="1720" selection-start-column="8" selection-end-line="1720" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/zTree/jquery.ztree.core.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="67" column="278" selection-start-line="67" selection-start-column="274" selection-end-line="67" selection-end-column="278" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/testZtree.html" />
+    <entry file="file://$PROJECT_DIR$/web/js/jquery.ztree.core.js" />
+    <entry file="file://$PROJECT_DIR$/web/css/zTree/metroStyle/metroStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/zTree/awesomeStyle/awesome.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/zTree/demo.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/zTree/zTreeStyle/zTreeStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-890">
+          <caret line="10" column="103" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernatePOJO/UserPermission.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/deviceManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="24" column="15" lean-forward="true" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernatePOJO/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernatePOJO/User.hbm.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="29" lean-forward="true" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/userManage/action/UserLoginAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="46" column="24" lean-forward="true" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Util/HBSessionDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/deviceManager.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="169" column="20" lean-forward="true" selection-start-line="169" selection-start-column="20" selection-end-line="169" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/efficiencyAnalysis.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="185" column="24" lean-forward="true" selection-start-line="185" selection-start-column="24" selection-end-line="185" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/energy_consumption.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="78" column="24" lean-forward="true" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/failure.jsp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/mstp_map.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="82" column="21" lean-forward="true" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/systemSetting.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="81" column="41" selection-start-line="81" selection-start-column="41" selection-end-line="81" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/success.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="921">
+          <caret line="76" column="35" lean-forward="true" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/userMng.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="515" lean-forward="true" selection-start-line="515" selection-end-line="515" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#2;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#3;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#4;n#tr#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/userManage/action/getUserInfoAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="38" column="47" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/demo.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/animate.min.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="287" column="1" selection-start-line="287" selection-start-column="1" selection-end-line="287" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/deviceManager.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Util/ProvinceEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="154" column="5" lean-forward="true" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="5" />
+          <folding>
+            <element signature="method#getNo#0;class#ProvinceEnum#0" />
+            <element signature="method#getName#0;class#ProvinceEnum#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/userManage/action/UserTreeAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="67" column="13" lean-forward="true" selection-start-line="67" selection-start-column="13" selection-end-line="67" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernatePOJO/ProvinceBank.hbm.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernatePOJO/ProvinceBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernatePOJO/CityBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+          <folding>
+            <element signature="e#433#438#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Util/HBSessionDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/src.zip!/java/net/SocksSocketImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="398" column="19" lean-forward="true" selection-start-line="398" selection-start-column="19" selection-end-line="398" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/json-lib-0.9.jar!/net/sf/json/util/JSONUtils.class" />
+    <entry file="jar://$PROJECT_DIR$/lib/ezmorph-1.0.6.jar!/net/sf/ezmorph/Morpher.class" />
+    <entry file="file://$PROJECT_DIR$/src/hibernatePOJO/CityBank.hbm.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/struts.xml">
+      <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="71" column="22" lean-forward="true" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernatePOJO/Computerroom.hbm.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernatePOJO/Computerroom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="24" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/userManage/dao/impl/UserDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="104" column="30" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/userManage/dao/UserDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="15" column="63" lean-forward="true" selection-start-line="15" selection-start-column="63" selection-end-line="15" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/onlineDetect.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="957" lean-forward="true" selection-start-line="957" selection-end-line="957" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/userManage/action/CompTreeAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/userManage/action/CityTreeAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="60" column="42" selection-start-line="60" selection-start-column="34" selection-end-line="60" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/province.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="1337" column="12" selection-start-line="1337" selection-start-column="12" selection-end-line="1337" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor>
+            <show-content>
+              <type id="artifact" />
+              <type id="library" />
+              <type id="javaee-facet-resources" />
+              <type id="jpa-descriptors" />
+            </show-content>
+          </artifact-editor>
+          <last-edited>IDP:war exploded</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20457143" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Web (IDP)|Web</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20457143" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20457143" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20457143" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>IDP</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20457143" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Struts 2-2.5.14.1</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20457143" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

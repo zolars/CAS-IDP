@@ -100,9 +100,9 @@ public class UserDAOImpl implements UserDAO {
         return cblist;
     }
 
-    public List<String> getComputerroom(String cbname, int pbid){
+    public List<Object> getComputerroom(String cbname){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<String> crlist = new ArrayList<>();
+        List<Object> crlist = new ArrayList<>();
 
         System.out.println("tttttttttttt  "+cbname);
 
@@ -114,7 +114,7 @@ public class UserDAOImpl implements UserDAO {
         for(int i = 0; i < coroomstr.length; i++) {
             Computerroom cp = (Computerroom)hbsessionDao.getFirst(
                     "FROM Computerroom where rid = '" + coroomstr[i] + "'");
-            crlist.add(cp.getRname());
+            crlist.add((Object)cp);
         }
 
         return crlist;
