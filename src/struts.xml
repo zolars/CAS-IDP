@@ -73,6 +73,14 @@
              </result>
          </action>
 
+         <action name="getXB" class="onlineTest.action.getXBaction">
+             <!--getXB -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
 
 
     </package>

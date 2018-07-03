@@ -170,7 +170,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <select class="select" id="comproom_code" name="comproom_code">
                                 <option value="">请选择</option>
                             </select>
-                        </td>
+
+
+                            </td>
+                            <td><button id="test" onclick="test()">tttt</button></td>
                         </tr>
                 </div>
 
@@ -955,51 +958,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>--%>
 
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
-    <%--<script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
-    --%>
-       <%--  var objprobank="<%=session.getAttribute("probank")%>";
-        var objcitybank="<%=session.getAttribute("citybank")%>";
-        var objcomputerroom="<%=session.getAttribute("computerroom")%>";
 
-        /*var objcitybank2 = objcitybank.list;
-        alert(objcitybank2);
-
-        for(var key=0; key<objcitybank2.length; key++) {
-            var temp = objcitybank2[key];
-            console.log(temp);
-        }
-        alert(objcitybank2);*/
-
-        var zTreeObj;
-        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-        var setting = {};
-        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-        var zNodes = [
-            {name:objprobank, open:true, children:[
-                    {name:objcitybank, open:true, children:[
-                            {name:objcomputerroom}
-                        ]
-                    }
-                ]
-            }
-        ];
-
-        $(document).ready(function(){
-            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-        });
-    </script>--%>
-
-    <script>
-        function getQueryString(name) {
-            var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
-            if (result == null || result.length < 1) {
-                return "";
-            }
-            //对第一个结果进行URI解码
-            return decodeURI(result[1]);
-            //return result[1];
-        }
-    </script>
     <script>
         var provinceid="<%=session.getAttribute("probank")%>";
 
@@ -1445,6 +1404,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         // 3.使用刚指定的配置项和数据显示图表。
         eventChart2.setOption(option2);
 
+    </script>
+
+    <!-- test-->
+    <script>
+        function test(){
+            alert("66");
+
+        var monitorpoint = 1;
+
+        $.ajax({
+            type: "post",
+            url: "getXB",
+            data: {monitorpointid: monitorpoint},
+            dataType : "json",
+            success: function (data) {
+                alert(data);
+                /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                var obj = eval("(" + data + ")");
+                for (var i = 0; i < obj.length; i++) {
+                    $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                }*/
+            },
+            error: function () {
+                alert("加载机房失败");
+            }
+        });
+        }
     </script>
 
 

@@ -170,7 +170,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <select class="select" id="comproom_code" name="comproom_code">
                                 <option value="">请选择</option>
                             </select>
-                        </td>
+
+
+                            </td>
+                            <td><button id="test" onclick="test()">tttt</button></td>
                         </tr>
                 </div>
 
@@ -1401,6 +1404,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         // 3.使用刚指定的配置项和数据显示图表。
         eventChart2.setOption(option2);
 
+    </script>
+
+    <!-- test-->
+    <script>
+        function test(){
+            alert("66");
+
+        var monitorpoint = 1;
+
+        $.ajax({
+            type: "post",
+            url: "getXB",
+            data: {monitorpointid: monitorpoint},
+            dataType : "json",
+            success: function (data) {
+                alert(data);
+                /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                var obj = eval("(" + data + ")");
+                for (var i = 0; i < obj.length; i++) {
+                    $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                }*/
+            },
+            error: function () {
+                alert("加载机房失败");
+            }
+        });
+        }
     </script>
 
 
