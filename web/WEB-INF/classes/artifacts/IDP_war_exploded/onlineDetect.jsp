@@ -1429,7 +1429,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }*/
             },
             error: function () {
-                alert("加载机房失败");
+                alert("失败");
             }
         });
         }
@@ -1456,7 +1456,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }*/
                 },
                 error: function () {
-                    alert("加载机房失败");
+                    alert("失败");
                 }
             });
         }

@@ -23,6 +23,7 @@
       <root url="jar://$PROJECT_DIR$/lib/log4j.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/struts2-core.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/freemarker.jar!/" />
+      <root url="jar://D:/apache-tomcat-8.5.31/lib/servlet-api.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
