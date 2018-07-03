@@ -173,7 +173,6 @@
                 <div class="pull-left">
                     <%-- <ul id="treeDemo" class="ztree"></ul>--%>
                     <%-- </pre><pre name="code" class="html"><tr>--%>
-                        <td>所在地:</td>
                         <td>
                             <select class="select" id="province_code" name="province_code" onchange="getCity()">
                                 <option value="">请选择</option>
@@ -1200,20 +1199,10 @@
     <script type="text/javascript" src="../../IDP数据中心动力管控系统/bank%20admin/js/pick-pcc.min.1.0.1.js"></script>
 
 
-    <script>
-        function getQueryString(name) {
-            var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
-            if (result == null || result.length < 1) {
-                return "";
-            }
-            //对第一个结果进行URI解码
-            return decodeURI(result[1]);
-            //return result[1];
-        }
-    </script>
 
-    <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
+
+   <%-- <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>--%>
 
    <%-- <script>
         var provinceid = getQueryString("prov");
@@ -1330,36 +1319,24 @@
     </script>--%>
 
     <script>
+        function getQueryString(name) {
+            var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+            if (result == null || result.length < 1) {
+                return "";
+            }
+            //对第一个结果进行URI解码
+            return decodeURI(result[1]);
+            //return result[1];
+        }
+    </script>
+    <script>
         var provinceid = getQueryString("prov");
-
         if(provinceid){//第一次进入这个页面，没有获取过
+            alert(provinceid);
             $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
         }
-        else{//已经获取过了
-            // alert("else");
-            var objprobank="<%=session.getAttribute("probank")%>";
-            var objcitybank="<%=session.getAttribute("citybank")%>";
-            var objcomputerroom="<%=session.getAttribute("computerroom")%>";
-
-            var zTreeObj;
-            // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-            var setting = {};
-            // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-            var zNodes = [
-                {name:objprobank, open:true, children:[
-                        {name:objcitybank, open:true, children:[
-                                {name:objcomputerroom}
-                            ]
-                        }
-                    ]
-                }
-            ];
-
-            $(document).ready(function(){
-                zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-            });
+        else{
         }
-
 
         /*加载市下拉选*/
         function getCity() {
@@ -1380,7 +1357,7 @@
 
                     //alert(obj[0].cbname);
                     var obj = eval("(" + data + ")");
-                    for (var i = 0; i < data.length; i++) {
+                    for (var i = 0; i < obj.length; i++) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
                     }
 
@@ -1394,7 +1371,7 @@
         /*加载机房下拉选*/
         function getComproom() {
             var cname = $("#city_code").val();
-            alert(cname);
+
             $("#comproom_code").empty();
 
             $.ajax({
@@ -1407,8 +1384,7 @@
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
                     var obj = eval("(" + data + ")");
-                    alert(obj[i].rname);
-                    for (var i = 0; i < data.length; i++) {
+                    for (var i = 0; i < obj.length; i++) {
                         $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
                     }
                 },
@@ -1417,11 +1393,6 @@
                 }
             });
         }
-
-
-
-
-
 
     </script>
 

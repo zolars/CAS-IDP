@@ -48,13 +48,6 @@
             <result name="success">/success.jsp</result>
             <result name="failure">/failure.jsp</result>
         </action>
-        <!--<action name="getUserTree" class="userManage.action.UserTreeAction">
-             &lt;!&ndash;将getUserTree映射到物理地址 &ndash;&gt;
-            <result name="failure">/failure.jsp</result>
-            <result name="success" type="json">
-                <param name="root">result</param>
-            </result>
-        </action>-->
 
          <action name="getCityTree" class="userManage.action.CityTreeAction">
              <!--将getUserTree映射到物理地址 -->

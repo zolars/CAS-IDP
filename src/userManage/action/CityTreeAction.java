@@ -58,6 +58,7 @@ public class CityTreeAction extends ActionSupport {
             System.out.println(result);
 
             //存到 session 中,方便后续重复使用
+            session.setAttribute("probank", province);
             session.setAttribute("citybank", citybank);
 
         } catch (Exception e) {

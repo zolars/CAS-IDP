@@ -1199,6 +1199,9 @@
     <script type="text/javascript" src="../../IDP数据中心动力管控系统/bank%20admin/js/pick-pcc.min.1.0.1.js"></script>
 
 
+   <%-- <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>--%>
+
     <script>
         function getQueryString(name) {
             var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
@@ -1210,145 +1213,14 @@
             //return result[1];
         }
     </script>
-
-    <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
-
-   <%-- <script>
-        var provinceid = getQueryString("prov");
-        //alert(provinceid);
-        if(provinceid){//第一次进入这个页面，没有获取过树结构
-            //var provinceid = getQueryString("prov");
-            //alert("if");
-
-            $.ajax({
-                type : "post",
-                url : "getUserTree", //"getUserTree.UserTreeAction",//action
-                data : {
-                    //"username" : $("#username").val(),
-                    provinceid //: $("#provinceid").val()//val()
-                },
-                //dataType : "text",
-                dataType : "json",
-                success : function(data){
-                    //alert("data: "+data);
-
-                    var obj = eval("(" + data + ")");
-
-                    /*alert(obj.probank);
-                    alert(obj.citybank);
-                    alert(obj.coputerroom);*/
-
-                    //render usertree
-                    /* dataSource.provincebank = obj.probank;
-                     dataSource.citybank = obj.citybank;
-                     dataSource.computerroom = obj.computerroom;*/
-
-                    // alert(obj.computerroom);
-                    // alert(dataSource.computerroom);
-                    /* document.getElementById('title1').innerHTML = dataSource.provincebank;
-                     document.getElementById('title2').innerHTML = dataSource.citybank;
-                     document.getElementById('title3').innerHTML = dataSource.computerroom;*/
-
-                    var zTreeObj;
-                    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-                    var setting = {};
-                    // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-                    var zNodes = [
-                        {name:obj.probank, open:true, children:[
-                                {name:obj.citybank, open:true, children:[
-                                        {name:obj.computerroom}
-                                    ]
-                                }
-                            ]
-                        }
-                    ];
-
-                    $(document).ready(function(){
-                        zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-                    });
-
-                    /* //LIST
-                    alert("data: "+data);
-                    var datas = eval(data); //解析json对象
-                    alert(datas);
-
-                    for (var key in datas) {
-                        alert(datas[key]);
-                    }*/
-
-                    /* //MAP
-                     alert("data: "+data);
-                     var datas = eval("("+data+")"); //解析json对象
-                     //alert(datas);
-                     for (var key in datas) {
-                         alert(datas[key]);
-                     }*/
-
-
-                },
-                error : function(XMLHttpRequest, textStatus) {
-                    alert(XMLHttpRequest.readyState+"--------"+XMLHttpRequest.status+ "--------"+textStatus);
-                    //4--------200--------parsererror
-                }
-            });
-        }
-        else{//已经获取过了树结构
-           // alert("else");
-            var objprobank="<%=session.getAttribute("probank")%>";
-            var objcitybank="<%=session.getAttribute("citybank")%>";
-            var objcomputerroom="<%=session.getAttribute("computerroom")%>";
-
-            /*var objcitybank2 = objcitybank.list;
-            alert(objcitybank2);
-
-            for(var key=0; key<objcitybank2.length; key++) {
-                var temp = objcitybank2[key];
-                console.log(temp);
-            }
-            alert(objcitybank2);*/
-
-            var zTreeObj;
-            // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-            var setting = {};
-            // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-            var zNodes = [
-                {name:objprobank, open:true, children:[
-                        {name:objcitybank, open:true, children:[
-                                {name:objcomputerroom}
-                            ]
-                        }
-                    ]
-                }
-            ];
-
-            $(document).ready(function(){
-                zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-            });
-        }
-    </script>--%>
-
     <script>
         var provinceid = getQueryString("prov");
-
         if(provinceid){//第一次进入这个页面，没有获取过
+            //alert(provinceid);
             $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
         }
-        else{//已经获取过了
-            /*for (var i = 0; i < data.length; i++) {
-                $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
-            }*/
-
-            var objprobank="<%=session.getAttribute("probank")%>";
-            var objcitybank="<%=session.getAttribute("citybank")%>";
-            var objcomputerroom="<%=session.getAttribute("computerroom")%>";
-
-            alert("objprobank"+objprobank);
-            alert("objcitybank"+objcitybank);
-            alert("objcomputerroom"+objcomputerroom);
-
+        else{
         }
-
 
         /*加载市下拉选*/
         function getCity() {
@@ -1369,7 +1241,7 @@
 
                     //alert(obj[0].cbname);
                     var obj = eval("(" + data + ")");
-                    for (var i = 0; i < data.length; i++) {
+                    for (var i = 0; i < obj.length; i++) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
                     }
 
@@ -1396,7 +1268,7 @@
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
                     var obj = eval("(" + data + ")");
-                    for (var i = 0; i < data.length; i++) {
+                    for (var i = 0; i < obj.length; i++) {
                         $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
                     }
                 },

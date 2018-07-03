@@ -487,52 +487,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         }
 
-        function getALLUserInfomation() {
-        $.ajax({
-            type : "post",
-            url : "getUserInfo", //"getUserTree.UserTreeAction",//action
-            dataType : "json",
-            success : function(data){
-                //alert("data: "+data);
-                var obj = eval("(" + data + ")");
-                var alluser = obj.alluser;
 
-                var table = $("#userinfotable");
-                table.empty();
-
-                /* if (obj == null || obj == "") {
-                    alert("ERROR");
-                    table.append('<tr><td colspan="5" style="text-align: center; color:red">暂无数据！</td></tr>');
-                    return false;
-                }*/
-
-                for ( var key in alluser) {
-                    var uname = alluser[key][0];
-                    var chinesename = alluser[key][1];
-                    var rolesname = alluser[key][2];
-                    var pbid = alluser[key][3];
-                    var cbid = alluser[key][4];
-                    var belongbank = null;
-
-                    if (pbid == null && cbid == null)
-                        belongbank = "总行";
-                    else if (pbid != null && cbid == null)
-                        belongbank = getProName(pbid)+"分行";//pbid;
-                    else belongbank = getCityName(cbid)+"分行";
-
-                    var trHTML = '<tr><td><div style="padding-left:20px;">' + key + '</div></td><td><div style="padding-left:20px;">' + uname + '</div></td><td><div style="padding-left:20px;">' + chinesename + '</div></td><td><div style="padding-left:20px;">' + rolesname + '</div></td><td><div style="padding-left:20px;">' +belongbank+ '</td></tr>';
-                   // var trHTML = "<tr><td><input type='checkbox' name='checkedpno' id='checkedpno' value='+rolesname+'/></td>" + uname + "</td><td>" + chinesename + "</td><td>" + rolesname + "</td></tr>";
-
-                    table.append(trHTML);
-                }
-            },
-            error : function(XMLHttpRequest, textStatus) {
-                alert(XMLHttpRequest.readyState+"--------"+XMLHttpRequest.status+ "--------"+textStatus);
-                //4--------200--------parsererror
-            }
-        });
-
-        }
     </script>
 
 
