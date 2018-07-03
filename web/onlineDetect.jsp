@@ -173,7 +173,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
                             </td>
-                            <td><button id="test" onclick="test()">tttt</button></td>
+                            <td><button id="test" onclick="test()">测试'谐波'</button></td>
+                            <td><button id="test2" onclick="test2()">测试'参数值'</button></td>
                         </tr>
                 </div>
 
@@ -1409,7 +1410,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- test-->
     <script>
         function test(){
-            alert("66");
+            alert("谐波");
 
         var monitorpoint = 1;
 
@@ -1428,9 +1429,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }*/
             },
             error: function () {
-                alert("加载机房失败");
+                alert("失败");
             }
         });
+        }
+    </script>
+
+    <script>
+        function test2(){
+            alert("参数值");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getParameter",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
         }
     </script>
 
