@@ -173,7 +173,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
                             </td>
-                            <td><button id="test" onclick="test()">tttt</button></td>
+                            <td><button id="test" onclick="test()">测试'谐波'</button></td>
+                            <td><button id="test2" onclick="test2()">测试'参数值'</button></td>
                         </tr>
                 </div>
 
@@ -1234,19 +1235,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             xAxis:  {
                 type: 'category',
                 boundaryGap: false,
-                data: ['周一','周二','周三','周四','周五','周六','周日']
+                // data: ['周一','周二','周三','周四','周五','周六','周日']
+                data:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
+
             },
             yAxis: {
                 type: 'value',
                 axisLabel: {
-                    formatter: '{value} °C'
+                    formatter: '{value}'
                 }
             },
             series: [
                 {
                     name:'U1',
                     type:'line',
-                    data:[11, 11, 15, 13, 12, 13, 10],
+                    // data:[11, 11, 15, 13, 12, 13, 10],
+                    data: []
                     /*markPoint: {
                         data: [
                             {type: 'max', name: '最大值'},
@@ -1262,7 +1266,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {
                     name:'U2',
                     type:'line',
-                    data:[1, -2, 2, 5, 3, 2, 0],
+                    // data:[1, -2, 2, 5, 3, 2, 0],
+                    data: []
                     /*markPoint: {
                         data: [
                             {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
@@ -1292,7 +1297,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {
                     name:'U3',
                     type:'line',
-                    data:[4, -9, 15, 5, 2, 3, 10],
+                    // data:[4, -9, 15, 5, 2, 3, 10],
+                    data: []
                    /* markPoint: {
                         data: [
                             {type: 'max', name: '最大值'},
@@ -1308,7 +1314,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {
                     name:'U4',
                     type:'line',
-                    data:[19, 11, 15, 13, 12, 10, 6],
+                    // data:[19, 11, 15, 13, 12, 10, 6],
+                    data: []
                     /*markPoint: {
                         data: [
                             {type: 'max', name: '最大值'},
@@ -1324,7 +1331,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {
                     name:'I1',
                     type:'line',
-                    data:[1, 7, 15, 13, 2, 3, 1],
+                    // data:[1, 7, 15, 13, 2, 3, 1],
+                    data: []
                    /* markPoint: {
                         data: [
                             {type: 'max', name: '最大值'},
@@ -1340,7 +1348,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {
                     name:'I2',
                     type:'line',
-                    data:[1, -2, 2, 5, 3, 2, 0],
+                    // data:[1, -2, 2, 5, 3, 2, 0],
+                    data: []
                    /* markPoint: {
                         data: [
                             {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
@@ -1370,7 +1379,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {
                     name:'I3',
                     type:'line',
-                    data:[1, -9, 15, 3, 12, 3, 10],
+                    // data:[1, -9, 15, 3, 12, 3, 10],
+                    data: []
                     /*markPoint: {
                         data: [
                             {type: 'max', name: '最大值'},
@@ -1386,7 +1396,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {
                     name:'I4',
                     type:'line',
-                    data:[9, 11, 15, 13, 0, 10, 6],
+                    // data:[9, 11, 15, 13, 0, 10, 6],
+                    data: []
                     /*markPoint: {
                         data: [
                             {type: 'max', name: '最大值'},
@@ -1402,14 +1413,76 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             ]
         };
         // 3.使用刚指定的配置项和数据显示图表。
+        // 获取谐波数据并显示
         eventChart2.setOption(option2);
+        $.ajax({
+            type: "post",
+            url: "getXB",
+            data: {monitorpointid: 1},
+            dataType: "json",
+            success: function (data) {
+                // alert("加载谐波数据成功");
+                var series=["u1Xb","u2Vb","u3Xb","u4Xb","i1Xb","i2Xb","i3Xb","i4Xb"];
+                // var obj=eval("("+data+")");
+                var obj=JSON.parse(data);
+                // window.console.log(obj);
+                var res=[];
+                for(var i=0;i<series.length;i++){
+                    var temp=[];
+                    for(var j=0;j<obj.length;j++){
+                        temp.push(parseFloat(obj[j][series[i]]));
+                    }
+                    res.push(temp);
+                }
+                window.console.log(res);
+                eventChart2.setOption({
+                    series: [
+                        {
+                            name: "U1",
+                            data: res[0]
+                        },
+                        {
+                            name: "U2",
+                            data: res[1]
+                        },
+                        {
+                            name: "U3",
+                            data: res[2]
+                        },
+                        {
+                            name: "U4",
+                            data: res[3]
+                        },
+                        {
+                            name: "I1",
+                            data: res[4]
+                        },
+                        {
+                            name: "I2",
+                            data: res[5]
+                        },
+                        {
+                            name: "I3",
+                            data: res[6]
+                        },
+                        {
+                            name: "I4",
+                            data: res[7]
+                        }
+                    ]
+                });
+            },
+            error: function () {
+                alert("加载谐波数据失败");
+            }
+        });
 
     </script>
 
     <!-- test-->
     <script>
         function test(){
-            alert("66");
+            alert("谐波");
 
         var monitorpoint = 1;
 
@@ -1428,9 +1501,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }*/
             },
             error: function () {
-                alert("加载机房失败");
+                alert("失败");
             }
         });
+        }
+    </script>
+
+    <script>
+        function test2(){
+            alert("参数值");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getParameter",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
         }
     </script>
 
