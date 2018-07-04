@@ -1425,7 +1425,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                 eventChart2.setOption(option2);
 
-
                 // alert("加载谐波数据成功");
                 var series=["u1Xb","u2Vb","u3Xb","u4Xb","i1Xb","i2Xb","i3Xb","i4Xb"];
                 // var obj=eval("("+data+")");
