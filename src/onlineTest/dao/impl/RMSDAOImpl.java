@@ -1,6 +1,7 @@
 package onlineTest.dao.impl;
 
 import Util.HBSessionDaoImpl;
+import hibernatePOJO.PowerxbMonitor;
 import onlineTest.dao.RMSDAO;
 import onlineTest.dao.SXDYDAO;
 import org.hibernate.Query;
@@ -20,17 +21,21 @@ public class RMSDAOImpl implements RMSDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
-        List u1list = new ArrayList<>();
+        List<PowerxbMonitor> u1list = new ArrayList<>();
 
         float u1 = 0,u2 = 0,u3 = 0;
         //(default time 3)(default time period = the latest 6 records,that is half a minute)
         //RMS_U1 = sqrt(U1^2+U2^2+U3^2+....+UN^2)
 
         u1list = hbsessionDao.search(
-                "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "'" + " and cishu = 3 order by time desc limit 0,5");
+                "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "' and cishu = 3 order by time desc");
+
+        /*u1list = hbsessionDao.search(
+                "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "'" + " and cishu = 3 order by time desc limit 0,5");*/
+        System.out.println(u1list.size());
 
         for(int i = 0; i < 5; i++){
-            u1 += Math.pow((double)u1list.get(i), 2);
+            u1 += Math.pow(u1list.get(i).getU1Xb(), 2);
         }
 
         //add RMS -U1

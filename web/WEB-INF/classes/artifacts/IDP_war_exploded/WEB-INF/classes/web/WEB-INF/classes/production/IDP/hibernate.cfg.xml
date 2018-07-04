@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/Test?useUnicode=true&amp;characterEncoding=UTF8</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">cjy123</property>
+
+
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="current_session_context_class">thread</property>
+
+
+        <mapping resource="/hibernatePOJO/User.hbm.xml"/>
+        <mapping class="hibernatePOJO.User"/>
+        <!--<mapping resource="hibernatePOJO/UserPermission.hbm.xml"/>-->
+        <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>
+        <mapping resource="hibernatePOJO/ProvinceBank.hbm.xml"/>
+        <!--<mapping class="hibernatePOJO.UserPermission"/>-->
+        <mapping class="hibernatePOJO.CityBank"/>
+        <mapping resource="hibernatePOJO/Computerroom.hbm.xml"/>
+        <mapping class="hibernatePOJO.ProvinceBank"/>
+        <mapping resource="hibernatePOJO/Roles.hbm.xml"/>
+        <mapping class="hibernatePOJO.Roles"/>
+        <mapping resource="hibernatePOJO/RolesPermission.hbm.xml"/>
+        <mapping class="hibernatePOJO.RolesPermission"/>
+        <mapping resource="hibernatePOJO/UserRoles.hbm.xml"/>
+        <mapping class="hibernatePOJO.UserRoles"/>
+        <mapping class="hibernatePOJO.Computerroom"/>
+        <mapping class="hibernatePOJO.PowerxbMonitor"/>
+        <mapping resource="hibernatePOJO/PowerxbMonitor.hbm.xml"/>
+        <mapping class="hibernatePOJO.PowerparmMonitor"/>
+        <mapping resource="hibernatePOJO/PowerparmMonitor.hbm.xml"/>
+        <mapping class="hibernatePOJO.PowersxdyMonitor"/>
+        <mapping resource="hibernatePOJO/PowersxdyMonitor.hbm.xml"/>
+
+
+    </session-factory>
+</hibernate-configuration>

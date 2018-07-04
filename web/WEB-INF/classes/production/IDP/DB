@@ -1,0 +1,725 @@
+/*
+ Navicat MySQL Data Transfer
+
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 50722
+ Source Host           : localhost
+ Source Database       : Test
+
+ Target Server Type    : MySQL
+ Target Server Version : 50722
+ File Encoding         : utf-8
+
+ Date: 07/04/2018 10:15:01 AM
+*/
+
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+--  Table structure for `alarm_setting`
+-- ----------------------------
+DROP TABLE IF EXISTS `alarm_setting`;
+CREATE TABLE `alarm_setting` (
+  `aid` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `tel` varchar(255) DEFAULT NULL,
+  `stime` time DEFAULT NULL,
+  `etime` time DEFAULT NULL,
+  PRIMARY KEY (`aid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `alarm_setting`
+-- ----------------------------
+BEGIN;
+INSERT INTO `alarm_setting` VALUES ('1', '张三', '15911056202', '04:54:14', '16:54:18');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `battery_monitor`
+-- ----------------------------
+DROP TABLE IF EXISTS `battery_monitor`;
+CREATE TABLE `battery_monitor` (
+  `batteryid` int(11) DEFAULT NULL,
+  `did` int(11) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `ABvoltage` varchar(255) DEFAULT NULL,
+  `BCvoltage` varchar(255) DEFAULT NULL,
+  `CAvoltage` varchar(255) DEFAULT NULL,
+  `Avoltage` varchar(255) DEFAULT NULL,
+  `Bvoltage` varchar(255) DEFAULT NULL,
+  `Cvoltage` varchar(255) DEFAULT NULL,
+  `Acurrent` varchar(255) DEFAULT NULL,
+  `Bcurrent` varchar(255) DEFAULT NULL,
+  `Ccurrent` varchar(255) DEFAULT NULL,
+  `activepower` varchar(255) DEFAULT NULL,
+  `reactivepower` varchar(255) DEFAULT NULL,
+  `szpower` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `city_bank`
+-- ----------------------------
+DROP TABLE IF EXISTS `city_bank`;
+CREATE TABLE `city_bank` (
+  `cbid` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `cbname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `compRoom` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`cbid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `city_bank`
+-- ----------------------------
+BEGIN;
+INSERT INTO `city_bank` VALUES ('1001', '台湾分行', '1，2'), ('2001', '石家庄分行', '3'), ('2002', '廊坊分行', '4'), ('2003', '秦皇岛分行', '5');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `computerroom`
+-- ----------------------------
+DROP TABLE IF EXISTS `computerroom`;
+CREATE TABLE `computerroom` (
+  `rid` varchar(255) NOT NULL,
+  `rname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `temprature_main` float(255,0) DEFAULT NULL,
+  `temprature_support` float(255,0) DEFAULT NULL,
+  `temprature_assist` float(255,0) DEFAULT NULL,
+  `humidity_main` float(255,0) DEFAULT NULL,
+  `humidity_support` float(255,0) DEFAULT NULL,
+  `humidity_assist` float(255,0) DEFAULT NULL,
+  `upsset` varchar(255) DEFAULT NULL,
+  `idp` varchar(255) DEFAULT NULL,
+  `didset` varchar(255) DEFAULT NULL,
+  `mpidset` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`rid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `computerroom`
+-- ----------------------------
+BEGIN;
+INSERT INTO `computerroom` VALUES ('1', '1号机房', null, null, null, null, null, null, null, null, '1,2,3', '1'), ('2', '2号机房', null, null, null, null, null, null, null, null, '4', '2'), ('3', '3号机房', null, null, null, null, null, null, null, null, null, '3,4'), ('4', '4号机房', null, null, null, null, null, null, null, null, null, null), ('5', '5号机房', null, null, null, null, null, null, null, null, null, null);
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `devices`
+-- ----------------------------
+DROP TABLE IF EXISTS `devices`;
+CREATE TABLE `devices` (
+  `did` varchar(255) NOT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`did`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `devices`
+-- ----------------------------
+BEGIN;
+INSERT INTO `devices` VALUES ('1', 'UPS', '4F(UPS1)'), ('10', 'battery', 'UPS1-1-6'), ('11', 'battery', 'UPS1-1-7'), ('12', 'battery', 'UPS1-1-8'), ('13', 'battery', 'UPS1-1-9'), ('14', 'battery', 'UPS1-1-10'), ('15', 'battery', 'UPS1-1-11'), ('16', 'battery', 'UPS1-1-12'), ('17', 'battery', 'UPS1-1-13'), ('18', 'battery', 'UPS1-1-14'), ('19', 'battery', 'UPS1-1-15'), ('2', 'UPS', '4F(UPS2)'), ('20', 'battery', 'UPS1-1-16'), ('21', 'battery', 'UPS1-1-17'), ('22', 'battery', 'UPS1-1-18'), ('23', 'battery', 'UPS1-1-19'), ('24', 'battery', 'UPS1-1-20'), ('25', 'battery', 'UPS1-1-21'), ('26', 'battery', 'UPS1-1-22'), ('27', 'battery', 'UPS1-1-23'), ('28', 'battery', 'UPS1-1-24'), ('3', 'UPS', '4F(UPS3)'), ('4', 'UPS', '6F(UPS1)'), ('5', 'battery', 'UPS1-1-1'), ('6', 'battery', 'UPS1-1-2'), ('7', 'battery', 'UPS1-1-3'), ('8', 'battery', 'UPS1-1-4'), ('9', 'battery', 'UPS1-1-5');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `event_device`
+-- ----------------------------
+DROP TABLE IF EXISTS `event_device`;
+CREATE TABLE `event_device` (
+  `edid` int(11) NOT NULL,
+  `did` int(11) DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `location` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `occurtime` datetime DEFAULT NULL,
+  `signature` varchar(255) DEFAULT NULL,
+  `annotation` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`edid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `event_environment`
+-- ----------------------------
+DROP TABLE IF EXISTS `event_environment`;
+CREATE TABLE `event_environment` (
+  `eeid` int(11) NOT NULL,
+  `time` datetime DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `occurtime` datetime DEFAULT NULL,
+  `signature` varchar(255) DEFAULT NULL,
+  `annotation` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`eeid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `event_power`
+-- ----------------------------
+DROP TABLE IF EXISTS `event_power`;
+CREATE TABLE `event_power` (
+  `epid` int(11) NOT NULL,
+  `mpid` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `type` varchar(255) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `occurtime` datetime DEFAULT NULL,
+  `ppid` int(11) NOT NULL,
+  `signature` varchar(255) DEFAULT NULL,
+  `annotation` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`epid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `eventtype_device`
+-- ----------------------------
+DROP TABLE IF EXISTS `eventtype_device`;
+CREATE TABLE `eventtype_device` (
+  `eid` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `priorty` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`eid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `eventtype_device`
+-- ----------------------------
+BEGIN;
+INSERT INTO `eventtype_device` VALUES ('1', '过高报警', null), ('2', '过低报警', null), ('3', '报警(异常)', null), ('4', '恢复正常', null), ('5', '通讯中断', null), ('6', '异常数据', null), ('7', '市电故障', null), ('8', '旁路故障', null), ('9', '整流器故障', null), ('10', '逆变器故障', null);
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `eventtype_environment`
+-- ----------------------------
+DROP TABLE IF EXISTS `eventtype_environment`;
+CREATE TABLE `eventtype_environment` (
+  `eid` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `priorty` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`eid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `eventtype_environment`
+-- ----------------------------
+BEGIN;
+INSERT INTO `eventtype_environment` VALUES ('1', '温度', null), ('2', '湿度', null), ('3', '报警(异常)', null), ('4', '恢复正常', null), ('5', '通讯中断', null), ('6', '异常数据', null);
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `eventtype_power`
+-- ----------------------------
+DROP TABLE IF EXISTS `eventtype_power`;
+CREATE TABLE `eventtype_power` (
+  `eid` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `priorty` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`eid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `eventtype_power`
+-- ----------------------------
+BEGIN;
+INSERT INTO `eventtype_power` VALUES ('1', '过高报警', null), ('2', '过低报警', null), ('3', '报警(异常)', null), ('4', '恢复正常', null), ('5', '通讯中断', null), ('6', '异常数据', null), ('7', '市电故障', null), ('8', '旁路故障', null), ('9', '整流器故障', null), ('10', '逆变器故障', null), ('11', '浪涌塌陷', null), ('12', '谐波', null), ('13', '三相不平衡度', null), ('14', '瞬变', null), ('15', '闪变', null);
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `generator_monitor`
+-- ----------------------------
+DROP TABLE IF EXISTS `generator_monitor`;
+CREATE TABLE `generator_monitor` (
+  `generatorid` int(11) NOT NULL,
+  `did` int(11) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `Apower` float DEFAULT NULL,
+  `Bpower` float DEFAULT NULL,
+  `Ccpower` float DEFAULT NULL,
+  `totalpower` float DEFAULT NULL,
+  `generatorvoltage` float DEFAULT NULL,
+  `batteryvoltage` float DEFAULT NULL,
+  `watertemperature` float DEFAULT NULL,
+  `oilpressure` float DEFAULT NULL,
+  `speed` float DEFAULT NULL,
+  `frequency` float DEFAULT NULL,
+  `controlmode` double DEFAULT NULL,
+  PRIMARY KEY (`generatorid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `monitorpoints`
+-- ----------------------------
+DROP TABLE IF EXISTS `monitorpoints`;
+CREATE TABLE `monitorpoints` (
+  `mpid` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`mpid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `monitorpoints`
+-- ----------------------------
+BEGIN;
+INSERT INTO `monitorpoints` VALUES ('1', '电能监测点1'), ('2', '电能监测点2'), ('3', '电能监测点3'), ('4', '电能监测点4');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `permission`
+-- ----------------------------
+DROP TABLE IF EXISTS `permission`;
+CREATE TABLE `permission` (
+  `pid` int(11) NOT NULL,
+  `permisionname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `permission`
+-- ----------------------------
+BEGIN;
+INSERT INTO `permission` VALUES ('1', '集中监控'), ('2', '动力设施-UPS'), ('3', '动力设施-发电机'), ('4', '动力设施-蓄电池'), ('5', '动力设施-空调'), ('6', '动力设施-温湿度监测'), ('7', '动力设施-线缆管理'), ('8', '动力设施-空间管理'), ('9', '在线监测-趋势图'), ('10', '在线监测-谐波'), ('11', '在线监测-三相电压不平衡度'), ('12', '在线监测-参数值'), ('13', '在线监测-实时波形'), ('14', '在线监测-电能监测参数设定'), ('15', '动力分析-能效分析'), ('16', '动力分析-事件分析-电能质量类'), ('17', '动力分析-事件分析-设备类'), ('18', '动力分析-事件分析-环境类'), ('19', '动力评估'), ('20', '后台管理');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `powerparm_monitor`
+-- ----------------------------
+DROP TABLE IF EXISTS `powerparm_monitor`;
+CREATE TABLE `powerparm_monitor` (
+  `ppid` int(11) NOT NULL,
+  `mpid` int(11) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `U1` float(255,0) DEFAULT NULL,
+  `U2` float(255,0) DEFAULT NULL,
+  `U3` float(255,0) DEFAULT NULL,
+  `U4` float(255,0) DEFAULT NULL,
+  `I1` float(255,0) DEFAULT NULL,
+  `I2` float(255,0) DEFAULT NULL,
+  `I3` float(255,0) DEFAULT NULL,
+  `I4` float(255,0) DEFAULT NULL,
+  `P1` float(255,0) DEFAULT NULL,
+  `P2` float(255,0) DEFAULT NULL,
+  `P3` float(255,0) DEFAULT NULL,
+  `Q1` float(255,0) DEFAULT NULL,
+  `Q2` float(255,0) DEFAULT NULL,
+  `Q3` float(255,0) DEFAULT NULL,
+  `S1` float(255,0) DEFAULT NULL,
+  `S2` float(255,0) DEFAULT NULL,
+  `S3` float(255,0) DEFAULT NULL,
+  `PF1` float(255,0) DEFAULT NULL,
+  `PF2` float(255,0) DEFAULT NULL,
+  `PF3` float(255,0) DEFAULT NULL,
+  `CosPHI1` float(255,0) DEFAULT NULL,
+  `CosPHI2` float(255,0) DEFAULT NULL,
+  `CosPHI3` float DEFAULT NULL,
+  `Ifl_U1` float(255,0) DEFAULT NULL,
+  `Ifl_U2` float(255,0) DEFAULT NULL,
+  `Ifl_U3` float(255,0) DEFAULT NULL,
+  `Pst_U1` float(255,0) DEFAULT NULL,
+  `Pst_U2` float(255,0) DEFAULT NULL,
+  `Pst_U3` float(255,0) DEFAULT NULL,
+  `Plt_U1` float(255,0) DEFAULT NULL,
+  `Plt_U2` float(255,0) DEFAULT NULL,
+  `Plt_U3` float(255,0) DEFAULT NULL,
+  `shanbian` varchar(255) DEFAULT NULL,
+  `shunbian` float DEFAULT NULL,
+  `lytx` float DEFAULT NULL,
+  PRIMARY KEY (`ppid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `powerparm_monitor`
+-- ----------------------------
+BEGIN;
+INSERT INTO `powerparm_monitor` VALUES ('1', '1', '2018-07-03 17:48:55', '220', '221', '221', '0', '57', '64', '51', '2', '11', '12', '9', '6', '8', '7', '13', '14', '12', '1', '1', '1', '1', '1', '0.7969', '0', '0', '0', '0', '0', '0', '1', '1', '1', '100', '200', '300');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `powerparm_monitor_his`
+-- ----------------------------
+DROP TABLE IF EXISTS `powerparm_monitor_his`;
+CREATE TABLE `powerparm_monitor_his` (
+  `ppid` int(11) NOT NULL,
+  `mpid` int(11) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `U1` float(255,0) DEFAULT NULL,
+  `U2` float(255,0) DEFAULT NULL,
+  `U3` float(255,0) DEFAULT NULL,
+  `U4` float(255,0) DEFAULT NULL,
+  `I1` float(255,0) DEFAULT NULL,
+  `I2` float(255,0) DEFAULT NULL,
+  `I3` float(255,0) DEFAULT NULL,
+  `I4` float(255,0) DEFAULT NULL,
+  `P1` float(255,0) DEFAULT NULL,
+  `P2` float(255,0) DEFAULT NULL,
+  `P3` float(255,0) DEFAULT NULL,
+  `Q1` float(255,0) DEFAULT NULL,
+  `Q2` float(255,0) DEFAULT NULL,
+  `Q3` float(255,0) DEFAULT NULL,
+  `S1` float(255,0) DEFAULT NULL,
+  `S2` float(255,0) DEFAULT NULL,
+  `S3` float(255,0) DEFAULT NULL,
+  `PF1` float(255,0) DEFAULT NULL,
+  `PF2` float(255,0) DEFAULT NULL,
+  `PF3` float(255,0) DEFAULT NULL,
+  `CosPHI1` float(255,0) DEFAULT NULL,
+  `CosPHI2` float(255,0) DEFAULT NULL,
+  `CosPHI3` float DEFAULT NULL,
+  `Ifl_U1` float(255,0) DEFAULT NULL,
+  `Ifl_U2` float(255,0) DEFAULT NULL,
+  `Ifl_U3` float(255,0) DEFAULT NULL,
+  `Pst_U1` float(255,0) DEFAULT NULL,
+  `Pst_U2` float(255,0) DEFAULT NULL,
+  `Pst_U3` float(255,0) DEFAULT NULL,
+  `Plt_U1` float(255,0) DEFAULT NULL,
+  `Plt_U2` float(255,0) DEFAULT NULL,
+  `Plt_U3` float(255,0) DEFAULT NULL,
+  `shanbian` varchar(255) DEFAULT NULL,
+  `shunbian` float DEFAULT NULL,
+  `lytx` float DEFAULT NULL,
+  PRIMARY KEY (`ppid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `powerparm_monitor_his`
+-- ----------------------------
+BEGIN;
+INSERT INTO `powerparm_monitor_his` VALUES ('1', '1', '2018-07-03 17:48:55', '220', '221', '221', '0', '57', '64', '51', '2', '11', '12', '9', '6', '8', '7', '13', '14', '12', '1', '1', '1', '1', '1', '0.7969', '0', '0', '0', '0', '0', '0', '1', '1', '1', '100', '200', '300');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `powersxdy_monitor`
+-- ----------------------------
+DROP TABLE IF EXISTS `powersxdy_monitor`;
+CREATE TABLE `powersxdy_monitor` (
+  `sxid` varchar(255) NOT NULL,
+  `mpid` int(11) NOT NULL,
+  `time` datetime DEFAULT NULL,
+  `U1` float DEFAULT NULL,
+  `U2` float DEFAULT NULL,
+  `U3` float DEFAULT NULL,
+  `V1` float DEFAULT NULL,
+  `V2` float DEFAULT NULL,
+  `V3` float DEFAULT NULL,
+  `A1` float DEFAULT NULL,
+  `A2` float DEFAULT NULL,
+  `A3` float DEFAULT NULL,
+  `angle1` float DEFAULT NULL,
+  `angle2` float DEFAULT NULL,
+  `angle3` float DEFAULT NULL,
+  PRIMARY KEY (`sxid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `powersxdy_monitor`
+-- ----------------------------
+BEGIN;
+INSERT INTO `powersxdy_monitor` VALUES ('1', '1', '2018-07-04 08:44:41', '220.8', '220.4', '218.8', '220.8', '222', '219.9', '339', '389.1', '378', '126', '110', '124'), ('2', '1', '2018-07-04 08:44:46', '220.9', '221.4', '218.9', '220.8', '222', '219.9', '339', '389.1', '378', '125', '111', '124');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `powersxdy_monitor_his`
+-- ----------------------------
+DROP TABLE IF EXISTS `powersxdy_monitor_his`;
+CREATE TABLE `powersxdy_monitor_his` (
+  `sxid` varchar(255) DEFAULT NULL,
+  `mpid` int(11) NOT NULL,
+  `time` datetime DEFAULT NULL,
+  `U1` float DEFAULT NULL,
+  `U2` float DEFAULT NULL,
+  `U3` float DEFAULT NULL,
+  `V1` float DEFAULT NULL,
+  `V2` float DEFAULT NULL,
+  `V3` float DEFAULT NULL,
+  `A1` float DEFAULT NULL,
+  `A2` float DEFAULT NULL,
+  `A3` float DEFAULT NULL,
+  `angle1` float DEFAULT NULL,
+  `angle2` float DEFAULT NULL,
+  `angle3` float DEFAULT NULL,
+  PRIMARY KEY (`mpid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `powerxb_monitor`
+-- ----------------------------
+DROP TABLE IF EXISTS `powerxb_monitor`;
+CREATE TABLE `powerxb_monitor` (
+  `xbid` int(11) NOT NULL,
+  `mpid` int(11) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `U1xb` varchar(255) DEFAULT NULL,
+  `U2xb` varchar(255) DEFAULT NULL,
+  `U3xb` varchar(255) DEFAULT NULL,
+  `U4xb` varchar(255) DEFAULT NULL,
+  `I1xb` varchar(255) DEFAULT NULL,
+  `I2xb` varchar(255) DEFAULT NULL,
+  `I3xb` varchar(255) DEFAULT NULL,
+  `I4xb` varchar(255) DEFAULT NULL,
+  `cishu` varchar(2) NOT NULL,
+  PRIMARY KEY (`xbid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `powerxb_monitor`
+-- ----------------------------
+BEGIN;
+INSERT INTO `powerxb_monitor` VALUES ('1', '1', '2018-07-03 13:34:53', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '0'), ('2', '1', '2018-07-03 13:34:53', '220.6', '221.8', '229.0', '228.1', '109.2', '110.0', '113.5', '120.6', '1'), ('3', '1', '2018-07-03 13:34:53', '220.6', '221.8', '229.0', '228.1', '109.2', '110.0', '113.5', '120.6', '2'), ('4', '1', '2018-07-03 13:34:53', '220.1', '222.0', '229.1', '228.1', '109.0', '110.2', '113.1', '120.5', '3'), ('5', '1', '2018-07-03 13:34:53', '220.1', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '4'), ('6', '1', '2018-07-03 13:34:53', '221.4', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '5'), ('7', '1', '2018-07-03 13:34:53', '221.4', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '6'), ('8', '1', '2018-07-03 13:34:53', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '7'), ('9', '1', '2018-07-03 13:34:53', '221.4', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '8'), ('10', '1', '2018-07-03 13:34:53', '220.1', '222.0', '229.1', '228.1', '109.0', '110.2', '113.1', '120.5', '9'), ('11', '1', '2018-07-03 13:34:53', '221.4', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '10'), ('12', '1', '2018-07-03 13:34:53', '220.1', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '11'), ('13', '1', '2018-07-03 13:34:53', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '12'), ('14', '1', '2018-07-03 13:34:53', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '13'), ('15', '1', '2018-07-03 13:34:53', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '14'), ('16', '1', '2018-07-03 13:34:53', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '15'), ('17', '1', '2018-07-03 13:34:53', '220.6', '221.8', '229.0', '228.1', '109.2', '110.0', '113.5', '120.6', '16'), ('18', '1', '2018-07-03 13:34:53', '220.6', '221.8', '229.0', '228.1', '109.2', '110.0', '113.5', '120.6', '17'), ('19', '1', '2018-07-03 13:34:53', '220.1', '222.0', '229.1', '228.1', '109.0', '110.2', '113.1', '120.5', '18'), ('20', '1', '2018-07-03 13:34:53', '220.1', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '19'), ('21', '1', '2018-07-03 13:34:53', '221.4', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '20'), ('22', '1', '2018-07-03 13:34:53', '221.4', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '21'), ('23', '1', '2018-07-03 13:34:53', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '22'), ('24', '1', '2018-07-03 13:34:53', '221.4', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '23'), ('25', '1', '2018-07-03 13:34:53', '220.1', '222.0', '229.1', '228.1', '109.0', '110.2', '113.1', '120.5', '24'), ('26', '1', '2018-07-03 13:34:53', '221.4', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '25'), ('27', '1', '2018-07-03 13:34:53', '220.1', '222.0', '229.1', '228.1', '109.0', '109.0', '110.1', '100.5', '26'), ('28', '1', '2018-07-03 13:34:53', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '27'), ('29', '1', '2018-07-03 13:34:53', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '28'), ('30', '1', '2018-07-03 13:34:58', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '29');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `powerxb_monitor_his`
+-- ----------------------------
+DROP TABLE IF EXISTS `powerxb_monitor_his`;
+CREATE TABLE `powerxb_monitor_his` (
+  `xbid` int(11) NOT NULL,
+  `mpid` int(11) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `U1xb` varchar(255) DEFAULT NULL,
+  `U2xb` varchar(255) DEFAULT NULL,
+  `U3xb` varchar(255) DEFAULT NULL,
+  `U4xb` varchar(255) DEFAULT NULL,
+  `I1xb` varchar(255) DEFAULT NULL,
+  `I2xb` varchar(255) DEFAULT NULL,
+  `I3xb` varchar(255) DEFAULT NULL,
+  `I4xb` varchar(255) DEFAULT NULL,
+  `cishu` varchar(2) NOT NULL,
+  PRIMARY KEY (`xbid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `powerxb_monitor_his`
+-- ----------------------------
+BEGIN;
+INSERT INTO `powerxb_monitor_his` VALUES ('1', '1', '2018-07-03 13:34:53', '220.4', '221.9', '228.1', '228.0', '109.4', '110.5', '113.9', '120.9', '0'), ('2', '1', '2018-07-03 13:34:53', '220.6', '221.8', '229.0', '228.1', '109.2', '110.0', '113.5', '120.6', '1'), ('3', '1', '2018-07-03 13:34:53', '220.6', '221.8', '229.0', '228.1', '109.2', '110.0', '113.5', '120.6', '2'), ('4', '1', '2018-07-03 13:34:53', '220.1', '222.0', '229.1', '228.1', '109.0', '110.2', '113.1', '120.5', '3');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `province_bank`
+-- ----------------------------
+DROP TABLE IF EXISTS `province_bank`;
+CREATE TABLE `province_bank` (
+  `pbid` varchar(255) NOT NULL,
+  `pbname` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `cbidset` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`pbid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `province_bank`
+-- ----------------------------
+BEGIN;
+INSERT INTO `province_bank` VALUES ('100', '台湾分行', '1001'), ('110', '安徽分行', null), ('120', '福建分行', null), ('130', '江西分行', null), ('140', '山东分行', '1401'), ('150', '河南分行', '1501'), ('160', '湖北分行', null), ('170', '湖南分行', null), ('180', '广东分行', null), ('190', '广西分行', null), ('200', '河北分行', '2001，2002，2003'), ('210', '海南分行', null), ('220', '四川分行', null), ('230', '贵州分行', null), ('240', '云南分行', null), ('250', '西藏分行', null), ('260', '陕西分行', null), ('270', '甘肃分行', null), ('280', '青海分行', null), ('290', '宁夏分行', null), ('300', '山西分行', '3001，3002，3003'), ('310', '新疆分行', null), ('320', '北京分行', null), ('330', '天津分行', null), ('340', '上海分行', null), ('350', '重庆分行', null), ('360', '香港分行', null), ('370', '澳门分行', null), ('400', '内蒙古分行', '4001，'), ('500', '辽宁分行', null), ('600', '吉林分行', null), ('700', '黑龙江分行', null), ('800', '江苏分行', null), ('900', '浙江分行', null);
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `roles`
+-- ----------------------------
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles` (
+  `rid` varchar(255) NOT NULL,
+  `rolesname` varchar(255) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`rid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `roles`
+-- ----------------------------
+BEGIN;
+INSERT INTO `roles` VALUES ('1', '管理员'), ('2', '工程师'), ('3', '运维人员');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `roles_permission`
+-- ----------------------------
+DROP TABLE IF EXISTS `roles_permission`;
+CREATE TABLE `roles_permission` (
+  `id` int(11) NOT NULL,
+  `rid` varchar(255) DEFAULT NULL,
+  `pid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `roles_permission`
+-- ----------------------------
+BEGIN;
+INSERT INTO `roles_permission` VALUES ('1', '1', '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20'), ('2', '2', '1,14,15,16,17,18,19'), ('3', '3', '1,2,3,4,5,6,7,8,9,10,11,12,13');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `ups_monitor`
+-- ----------------------------
+DROP TABLE IF EXISTS `ups_monitor`;
+CREATE TABLE `ups_monitor` (
+  `upsid` int(11) NOT NULL,
+  `did` int(11) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `ABvoltage` varchar(255) DEFAULT NULL,
+  `BCvoltage` varchar(255) DEFAULT NULL,
+  `CAvoltage` varchar(255) DEFAULT NULL,
+  `Avoltage` varchar(255) DEFAULT NULL,
+  `Bvoltage` varchar(255) DEFAULT NULL,
+  `Cvoltage` varchar(255) DEFAULT NULL,
+  `Apower` varchar(255) DEFAULT NULL,
+  `Bpower` varchar(255) DEFAULT NULL,
+  `Cpower` varchar(255) DEFAULT NULL,
+  `loadA` varchar(255) DEFAULT NULL,
+  `loadB` varchar(255) DEFAULT NULL,
+  `loadC` varchar(255) DEFAULT NULL,
+  `hbtime` datetime DEFAULT NULL,
+  `batteryvoltage` varchar(255) DEFAULT NULL,
+  `bypasspowersupply` double DEFAULT NULL,
+  `UPSpowersupply` double DEFAULT NULL,
+  PRIMARY KEY (`upsid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `ups_monitor_benchmark`
+-- ----------------------------
+DROP TABLE IF EXISTS `ups_monitor_benchmark`;
+CREATE TABLE `ups_monitor_benchmark` (
+  `upsid` int(11) DEFAULT NULL,
+  `ABvoltage_min` varchar(255) DEFAULT NULL,
+  `ABvoltage_stand` varchar(255) DEFAULT NULL,
+  `ABvoltage_max` varchar(255) DEFAULT NULL,
+  `ABvoltage_alarm` double DEFAULT NULL,
+  `BCvoltage_min` varchar(255) DEFAULT NULL,
+  `BCvoltage_stand` varchar(255) DEFAULT NULL,
+  `BCvoltage_max` varchar(255) DEFAULT NULL,
+  `BCvoltage_alarm` double DEFAULT NULL,
+  `CAvoltage_min` varchar(255) DEFAULT NULL,
+  `CAvoltage_stand` varchar(255) DEFAULT NULL,
+  `CAvoltage_max` varchar(255) DEFAULT NULL,
+  `CAvoltage_alarm` double DEFAULT NULL,
+  `Avoltage_min` varchar(255) DEFAULT NULL,
+  `Avoltage_stand` varchar(255) DEFAULT NULL,
+  `Avoltage_max` varchar(255) DEFAULT NULL,
+  `Avoltage_alarm` double DEFAULT NULL,
+  `Bvoltage_min` varchar(255) DEFAULT NULL,
+  `Bvoltage_stand` varchar(255) DEFAULT NULL,
+  `Bvoltage_max` varchar(255) DEFAULT NULL,
+  `Bvoltage_alarm` double DEFAULT NULL,
+  `Cvoltage_min` varchar(255) DEFAULT NULL,
+  `Cvoltage_stand` varchar(255) DEFAULT NULL,
+  `Cvoltage_max` varchar(255) DEFAULT NULL,
+  `Cvoltage_alarm` double DEFAULT NULL,
+  `Apower_min` varchar(255) DEFAULT NULL,
+  `Apower_stand` varchar(255) DEFAULT NULL,
+  `Apower_max` varchar(255) DEFAULT NULL,
+  `Apower_alarm` double DEFAULT NULL,
+  `Bpower_min` varchar(255) DEFAULT NULL,
+  `Bpower_stand` varchar(255) DEFAULT NULL,
+  `Bpower_max` varchar(255) DEFAULT NULL,
+  `Bpower_alarm` double DEFAULT NULL,
+  `Cpower_min` varchar(255) DEFAULT NULL,
+  `Cpower_stand` varchar(255) DEFAULT NULL,
+  `Cpower_max` varchar(255) DEFAULT NULL,
+  `Cpower_alarm` double DEFAULT NULL,
+  `loadA` varchar(255) DEFAULT NULL,
+  `loadB` varchar(255) DEFAULT NULL,
+  `loadC` varchar(255) DEFAULT NULL,
+  `hbtime` datetime DEFAULT NULL,
+  `batteryvoltage` varchar(255) DEFAULT NULL,
+  `bypasspowersupply` double DEFAULT NULL,
+  `UPSpowersupply` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `upsbattery_analysis`
+-- ----------------------------
+DROP TABLE IF EXISTS `upsbattery_analysis`;
+CREATE TABLE `upsbattery_analysis` (
+  `xbid` int(11) NOT NULL,
+  `groupid` int(11) DEFAULT NULL,
+  `batteryno` int(11) DEFAULT NULL,
+  `voltage` varchar(255) DEFAULT NULL,
+  `oumiga` varchar(255) DEFAULT NULL,
+  `temperature` varchar(255) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `firstoumiga` varchar(255) DEFAULT NULL,
+  `biaspercent` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`xbid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `upsbattery_analysis_benchmark`
+-- ----------------------------
+DROP TABLE IF EXISTS `upsbattery_analysis_benchmark`;
+CREATE TABLE `upsbattery_analysis_benchmark` (
+  `xbid` int(11) NOT NULL,
+  `voltage_stand` int(11) DEFAULT NULL,
+  `voltage_min` int(11) DEFAULT NULL,
+  `voltage_max` varchar(255) DEFAULT NULL,
+  `temperature_min` varchar(255) DEFAULT NULL,
+  `temperature_stand` varchar(255) DEFAULT NULL,
+  `temperature_max` varchar(255) DEFAULT NULL,
+  `onevoltage_stand` datetime DEFAULT NULL,
+  `onevoltage_min` varchar(255) DEFAULT NULL,
+  `onevoltage_max` varchar(255) DEFAULT NULL,
+  `oneoumiga_stand` varchar(255) DEFAULT NULL,
+  `oneoumiga_min` varchar(255) DEFAULT NULL,
+  `oneoumiga_max` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`xbid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Table structure for `user`
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `uid` varchar(11) NOT NULL,
+  `uname` varchar(255) NOT NULL,
+  `chinesename` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `pbid` varchar(255) DEFAULT NULL,
+  `cbid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `user`
+-- ----------------------------
+BEGIN;
+INSERT INTO `user` VALUES ('1', 'admin', '周小川', '123456', null, null), ('2', 'test1', '张三', '123456', '200', null), ('3', 'test2', '王武', '123456', '200', '2001'), ('4', 'test4', '齐力', '123456', '200', '2002');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `user_permission`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_permission`;
+CREATE TABLE `user_permission` (
+  `uid` varchar(255) NOT NULL,
+  `pidset` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `user_permission`
+-- ----------------------------
+BEGIN;
+INSERT INTO `user_permission` VALUES ('1', '1，2，3，4，5'), ('2', '1，2，3，4，5');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `user_roles`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_roles`;
+CREATE TABLE `user_roles` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(255) DEFAULT NULL,
+  `rid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `user_roles`
+-- ----------------------------
+BEGIN;
+INSERT INTO `user_roles` VALUES ('1', '1', '1'), ('2', '2', '3'), ('3', '3', '3');
+COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;
