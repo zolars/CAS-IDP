@@ -175,6 +175,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </td>
                             <td><button id="test" onclick="test()">测试'谐波'</button></td>
                             <td><button id="test2" onclick="test2()">测试'参数值'</button></td>
+                            <td><button id="test3" onclick="test3()">测试'三相电压'</button></td>
                         </tr>
                 </div>
 
@@ -1546,6 +1547,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
+    <!-- test3-->
+    <script>
+        function test3(){
+            alert("三相电压");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getSXDY",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
 
 
 

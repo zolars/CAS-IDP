@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernatePOJO.PowersxdyMonitor" table="powersxdy_monitor" schema="Test">
+        <id name="sxid">
+            <column name="sxid" sql-type="varchar(255)"/>
+        </id>
+        <property name="mpid">
+            <column name="mpid" sql-type="int(11)"/>
+        </property>
+        <property name="time">
+            <column name="time" sql-type="datetime" not-null="true"/>
+        </property>
+        <property name="u1">
+            <column name="U1" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="u2">
+            <column name="U2" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="u3">
+            <column name="U3" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="v1">
+            <column name="V1" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="v2">
+            <column name="V2" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="v3">
+            <column name="V3" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="a1">
+            <column name="A1" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="a2">
+            <column name="A2" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="a3">
+            <column name="A3" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angle1">
+            <column name="angle1" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angle2">
+            <column name="angle2" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angle3">
+            <column name="angle3" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
