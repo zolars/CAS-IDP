@@ -176,6 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <td><button id="test" onclick="test()">测试'谐波'</button></td>
                             <td><button id="test2" onclick="test2()">测试'参数值'</button></td>
                             <td><button id="test3" onclick="test3()">测试'三相电压'</button></td>
+                            <td><button id="test4" onclick="test4()">测试"趋势图rms'</button></td>
                         </tr>
                 </div>
 
@@ -1236,14 +1237,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             xAxis:  {
                 type: 'category',
                 boundaryGap: false,
-                // data: ['周一','周二','周三','周四','周五','周六','周日']
-                data:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
-
+                data: ['周一','周二','周三','周四','周五','周六','周日']
             },
             yAxis: {
                 type: 'value',
                 axisLabel: {
-                    formatter: '{value}'
+                    formatter: '{value} °C'
                 }
             }
             // series: [
@@ -1490,6 +1489,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 ]
             });
         }
+
     </script>
 
     <!-- test-->
@@ -1557,6 +1557,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $.ajax({
                 type: "post",
                 url: "getSXDY",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
+    <!-- test4-->
+    <script>
+        function test4(){
+            alert("RMS");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getQstRMS",
                 data: {monitorpointid: monitorpoint},
                 dataType : "json",
                 success: function (data) {
