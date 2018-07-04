@@ -1245,7 +1245,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 axisLabel: {
                     formatter: '{value}'
                 }
-            },
+            }
             // series: [
             //     {
             //         name:'U1',
@@ -1414,81 +1414,82 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             // ]
         };
         // 3.使用刚指定的配置项和数据显示图表。
-        // 获取谐波数据并显示
-        //eventChart2.setOption(option2);
-        $.ajax({
-            type: "post",
-            url: "getXB",
-            data: {monitorpointid: 1},
-            dataType: "json",
-            success: function (data) {
+        // 3.创建空图表
+        eventChart2.setOption(option2);
+        getData_Xb(1);
 
-                eventChart2.setOption(option2);
-
-                // alert("加载谐波数据成功");
-                var series=["u1Xb","u2Vb","u3Xb","u4Xb","i1Xb","i2Xb","i3Xb","i4Xb"];
-                // var obj=eval("("+data+")");
-                var obj=JSON.parse(data);
-                // window.console.log(obj);
-                var res=[];
-                for(var i=0;i<series.length;i++){
-                    var temp=[];
-                    for(var j=0;j<obj.length;j++){
-                        temp.push(parseFloat(obj[j][series[i]]));
-                    }
-                    res.push(temp);
+        // 获取谐波数据
+        function getData_Xb(mpid) {
+            $.ajax({
+                type: "post",
+                url: "getXB",
+                data: {monitorpointid: mpid},
+                dataType: "json",
+                success: function (data) {
+                    updateXbt(data);
+                },
+                error: function(){
+                    alert("获取谐波数据失败");
                 }
-                // window.console.log(res);
-                eventChart2.setOption({
-                    series: [
-                        {
-                            name: "U1",
-                            type:'line',
-                            data: res[0]
-                        },
-                        {
-                            name: "U2",
-                            type:'line',
-                            data: res[1]
-                        },
-                        {
-                            name: "U3",
-                            type:'line',
-                            data: res[2]
-                        },
-                        {
-                            name: "U4",
-                            type:'line',
-                            data: res[3]
-                        },
-                        {
-                            name: "I1",
-                            type:'line',
-                            data: res[4]
-                        },
-                        {
-                            name: "I2",
-                            type:'line',
-                            data: res[5]
-                        },
-                        {
-                            name: "I3",
-                            type:'line',
-                            data: res[6]
-                        },
-                        {
-                            name: "I4",
-                            type:'line',
-                            data: res[7]
-                        }
-                    ]
-                });
-            },
-            error: function () {
-                alert("加载谐波数据失败");
+            });
+        }
+        // 更新谐波图
+        function updateXbt(data) {
+            var obj=JSON.parse(data);
+            var series=["u1Xb","u2Vb","u3Xb","u4Xb","i1Xb","i2Xb","i3Xb","i4Xb"];
+            var res=[];//二维数组
+            for(var i=0;i<series.length;i++){
+                var temp=[];    //一维数组
+                for(var j=0;j<obj.length;j++){
+                    temp.push(parseFloat(obj[j][series[i]]));
+                }
+                res.push(temp);
             }
-        });
-
+            eventChart2.setOption({
+                series: [
+                    {
+                        name: "U1",
+                        type: 'line',
+                        data: res[0]
+                    },
+                    {
+                        name: "U2",
+                        type: 'line',
+                        data: res[1]
+                    },
+                    {
+                        name: "U3",
+                        type: 'line',
+                        data: res[2]
+                    },
+                    {
+                        name: "U4",
+                        type: 'line',
+                        data: res[3]
+                    },
+                    {
+                        name: "I1",
+                        type: 'line',
+                        data: res[4]
+                    },
+                    {
+                        name: "I2",
+                        type: 'line',
+                        data: res[5]
+                    },
+                    {
+                        name: "I3",
+                        type: 'line',
+                        data: res[6]
+                    },
+                    {
+                        name: "I4",
+                        type: 'line',
+                        data: res[7]
+                    }
+                ]
+            });
+        }
     </script>
 
     <!-- test-->
