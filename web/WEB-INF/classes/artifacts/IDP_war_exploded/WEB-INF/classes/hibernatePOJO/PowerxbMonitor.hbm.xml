@@ -15,31 +15,31 @@
             <column name="time" sql-type="datetime" not-null="true"/>
         </property>
         <property name="u1Xb">
-            <column name="U1xb" sql-type="varchar(255)" not-null="true"/>
+            <column name="U1xb" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
-        <property name="u2Vb">
-            <column name="U2vb" sql-type="varchar(255)" not-null="true"/>
+        <property name="u2Xb">
+            <column name="U2xb" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="u3Xb">
-            <column name="U3xb" sql-type="varchar(255)" not-null="true"/>
+            <column name="U3xb" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="u4Xb">
-            <column name="U4xb" sql-type="varchar(255)" not-null="true"/>
+            <column name="U4xb" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="i1Xb">
-            <column name="I1xb" sql-type="varchar(255)" not-null="true"/>
+            <column name="I1xb" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="i2Xb">
-            <column name="I2xb" sql-type="varchar(255)" not-null="true"/>
+            <column name="I2xb" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="i3Xb">
-            <column name="I3xb" sql-type="varchar(255)" not-null="true"/>
+            <column name="I3xb" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="i4Xb">
-            <column name="I4xb" sql-type="varchar(255)" not-null="true"/>
+            <column name="I4xb" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="cishu">
-            <column name="cishu" sql-type="varchar(2)" length="2"/>
+            <column name="cishu" sql-type="float(2)" precision="2"/>
         </property>
     </class>
 </hibernate-mapping>

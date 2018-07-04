@@ -2,8 +2,10 @@ package onlineTest.action;
 
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
-import onlineTest.dao.XBDAO;
-import onlineTest.dao.impl.XBDAOImpl;
+import onlineTest.dao.RMSDAO;
+import onlineTest.dao.SXDYDAO;
+import onlineTest.dao.impl.RMSDAOImpl;
+import onlineTest.dao.impl.SXDYDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +17,7 @@ import java.util.List;
 //import net.sf.json.JSONArray;
 
 
-public class getXBaction extends ActionSupport {
+public class getQstRMSaction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -36,19 +38,19 @@ public class getXBaction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            System.out.println("111");
+            //System.out.println("111");
 
             //获取监测点
             //String computerroom = request.getParameter("computerroomid");
             String monitorpoint = request.getParameter("monitorpointid");
 
-            System.out.println("222");
+           // System.out.println("222");
 
-            XBDAO dao = new XBDAOImpl();
+            RMSDAO dao = new RMSDAOImpl();
 
             List xbdata = new ArrayList();
 
-            xbdata = dao.getCurrentXbData(monitorpoint);
+            xbdata = dao.getCurrentRMSData(monitorpoint);
 
             System.out.println("333");
 
