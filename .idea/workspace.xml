@@ -7,15 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5f57310-4c00-4b69-9ae2-1b8c75515011" name="Default" comment="xbt">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/onlineDetect.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/onlineDetect.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/onlineDetect.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/onlineDetect.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/onlineTest/dao/impl/PowerParameterDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/onlineTest/dao/impl/PowerParameterDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/onlineDetect.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/WEB-INF/classes/artifacts/IDP_war_exploded/onlineDetect.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/onlineDetect.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/classes/artifacts/IDP_war_exploded/onlineDetect.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/onlineDetect.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/onlineDetect.jsp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,11 +39,8 @@
       <file leaf-file-name="onlineDetect.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/onlineDetect.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="1480" column="40" selection-start-line="1480" selection-start-column="40" selection-end-line="1480" selection-end-column="40" />
-              <folding>
-                <element signature="n#script#26;n#body#0;n#html#0;n#!!top" />
-              </folding>
+            <state relative-caret-position="137">
+              <caret line="1256" column="38" selection-start-line="1256" selection-start-column="38" selection-end-line="1256" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -216,8 +205,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -230,6 +217,8 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -524,7 +513,8 @@
       <workItem from="1530537917717" duration="2985000" />
       <workItem from="1530578095685" duration="12944000" />
       <workItem from="1530617438738" duration="10504000" />
-      <workItem from="1530664021307" duration="5358000" />
+      <workItem from="1530664021307" duration="5599000" />
+      <workItem from="1530673367544" duration="3759000" />
     </task>
     <task id="LOCAL-00001" summary="first commit！">
       <created>1530523850769</created>
@@ -565,7 +555,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266689000" />
+    <option name="totallyTimeSpent" value="270689000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -578,10 +568,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50378215" side_tool="true" weight="0.13875598" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="9" sideWeight="0.5151286" side_tool="true" visible="true" weight="0.30622008" />
       <window_info anchor="bottom" id="Application Servers" order="7" sideWeight="0.4985694" weight="0.32854864" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
@@ -593,27 +582,27 @@
       <window_info id="UI Designer" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.60944206" weight="0.30070922" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4985694" weight="0.3286119" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.46924177" weight="0.12599681" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="7" />
       <window_info anchor="bottom" id="Java Enterprise" order="14" sideWeight="0.49928468" weight="0.32765958" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49621785" weight="0.13875598" />
+      <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49621785" weight="0.5677831" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.453505" weight="0.31738436" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.47567955" weight="0.1291866" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48487142" visible="true" weight="0.30622008" />
       <window_info id="Persistence" order="8" sideWeight="0.1323764" side_tool="true" weight="0.20196672" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8676236" visible="true" weight="0.14599092" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8676236" visible="true" weight="0.1482602" />
       <window_info id="Web" order="6" sideWeight="0.43259558" side_tool="true" weight="0.19456366" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.46924177" weight="0.12599681" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Database Console" order="13" sideWeight="0.4985694" visible="true" weight="0.16855524" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49284694" weight="0.22521247" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Coverage" order="9" sideWeight="0.5084986" side_tool="true" visible="true" weight="0.042203147" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49284694" weight="0.22521247" />
     </layout>
     <layout-to-restore>
       <window_info id="Persistence" order="8" side_tool="true" />
@@ -1198,11 +1187,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/onlineDetect.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="1480" column="40" selection-start-line="1480" selection-start-column="40" selection-end-line="1480" selection-end-column="40" />
-          <folding>
-            <element signature="n#script#26;n#body#0;n#html#0;n#!!top" />
-          </folding>
+        <state relative-caret-position="137">
+          <caret line="1256" column="38" selection-start-line="1256" selection-start-column="38" selection-end-line="1256" selection-end-column="38" />
         </state>
       </provider>
     </entry>
