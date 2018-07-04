@@ -37,6 +37,8 @@
         <mapping resource="hibernatePOJO/PowerxbMonitor.hbm.xml"/>
         <mapping class="hibernatePOJO.PowerparmMonitor"/>
         <mapping resource="hibernatePOJO/PowerparmMonitor.hbm.xml"/>
+        <mapping class="hibernatePOJO.PowersxdyMonitor"/>
+        <mapping resource="hibernatePOJO/PowersxdyMonitor.hbm.xml"/>
 
 
     </session-factory>
