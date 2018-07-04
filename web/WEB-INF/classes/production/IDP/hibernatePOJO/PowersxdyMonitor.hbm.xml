@@ -41,5 +41,14 @@
         <property name="a3">
             <column name="A3" sql-type="float" precision="-1" not-null="true"/>
         </property>
+        <property name="angle1">
+            <column name="angle1" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angle2">
+            <column name="angle2" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angle3">
+            <column name="angle3" sql-type="float" precision="-1" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

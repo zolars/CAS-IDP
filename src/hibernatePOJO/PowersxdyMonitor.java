@@ -19,6 +19,9 @@ public class PowersxdyMonitor {
     private Double a1;
     private Double a2;
     private Double a3;
+    private Double angle1;
+    private Double angle2;
+    private Double angle3;
 
     @Id
     @Column(name = "sxid", nullable = false, length = 255)
@@ -140,6 +143,36 @@ public class PowersxdyMonitor {
         this.a3 = a3;
     }
 
+    @Basic
+    @Column(name = "angle1", nullable = true, precision = 0)
+    public Double getAngle1() {
+        return angle1;
+    }
+
+    public void setAngle1(Double angle1) {
+        this.angle1 = angle1;
+    }
+
+    @Basic
+    @Column(name = "angle2", nullable = true, precision = 0)
+    public Double getAngle2() {
+        return angle2;
+    }
+
+    public void setAngle2(Double angle2) {
+        this.angle2 = angle2;
+    }
+
+    @Basic
+    @Column(name = "angle3", nullable = true, precision = 0)
+    public Double getAngle3() {
+        return angle3;
+    }
+
+    public void setAngle3(Double angle3) {
+        this.angle3 = angle3;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -156,12 +189,15 @@ public class PowersxdyMonitor {
                 Objects.equals(v3, that.v3) &&
                 Objects.equals(a1, that.a1) &&
                 Objects.equals(a2, that.a2) &&
-                Objects.equals(a3, that.a3);
+                Objects.equals(a3, that.a3) &&
+                Objects.equals(angle1, that.angle1) &&
+                Objects.equals(angle2, that.angle2) &&
+                Objects.equals(angle3, that.angle3);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(sxid, mpid, time, u1, u2, u3, v1, v2, v3, a1, a2, a3);
+        return Objects.hash(sxid, mpid, time, u1, u2, u3, v1, v2, v3, a1, a2, a3, angle1, angle2, angle3);
     }
 }
