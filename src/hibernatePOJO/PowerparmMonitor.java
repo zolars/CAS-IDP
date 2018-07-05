@@ -45,6 +45,8 @@ public class PowerparmMonitor {
     private String shanbian;
     private Double shunbian;
     private Double lytx;
+    private Double unb;
+    private Double hz;
 
     @Id
     @Column(name = "ppid", nullable = false)
@@ -426,6 +428,26 @@ public class PowerparmMonitor {
         this.lytx = lytx;
     }
 
+    @Basic
+    @Column(name = "unb", nullable = true, precision = 0)
+    public Double getUnb() {
+        return unb;
+    }
+
+    public void setUnb(Double unb) {
+        this.unb = unb;
+    }
+
+    @Basic
+    @Column(name = "Hz", nullable = true, precision = 0)
+    public Double getHz() {
+        return hz;
+    }
+
+    public void setHz(Double hz) {
+        this.hz = hz;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -468,12 +490,14 @@ public class PowerparmMonitor {
                 Objects.equals(pltU3, that.pltU3) &&
                 Objects.equals(shanbian, that.shanbian) &&
                 Objects.equals(shunbian, that.shunbian) &&
-                Objects.equals(lytx, that.lytx);
+                Objects.equals(lytx, that.lytx) &&
+                Objects.equals(unb, that.unb) &&
+                Objects.equals(hz, that.hz);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(ppid, mpid, time, u1, u2, u3, u4, i1, i2, i3, i4, p1, p2, p3, q1, q2, q3, s1, s2, s3, pf1, pf2, pf3, cosPhi1, cosPhi2, cosPhi3, iflU1, iflU2, iflU3, pstU1, pstU2, pstU3, pltU1, pltU2, pltU3, shanbian, shunbian, lytx);
+        return Objects.hash(ppid, mpid, time, u1, u2, u3, u4, i1, i2, i3, i4, p1, p2, p3, q1, q2, q3, s1, s2, s3, pf1, pf2, pf3, cosPhi1, cosPhi2, cosPhi3, iflU1, iflU2, iflU3, pstU1, pstU2, pstU3, pltU1, pltU2, pltU3, shanbian, shunbian, lytx, unb, hz);
     }
 }

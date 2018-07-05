@@ -114,10 +114,16 @@
             <column name="shanbian" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="shunbian">
-            <column name="shunbian" sql-type="float" precision="-1" not-null="true"/>
+            <column name="shunbian" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="lytx">
-            <column name="lytx" sql-type="float" precision="-1" not-null="true"/>
+            <column name="lytx" sql-type="float(255)" precision="255" not-null="true"/>
+        </property>
+        <property name="unb">
+            <column name="unb" sql-type="float(255)" precision="255" not-null="true"/>
+        </property>
+        <property name="hz">
+            <column name="Hz" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

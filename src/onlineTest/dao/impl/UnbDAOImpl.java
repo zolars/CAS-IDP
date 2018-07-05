@@ -1,8 +1,9 @@
 package onlineTest.dao.impl;
 
 import Util.HBSessionDaoImpl;
-import onlineTest.dao.SXDYDAO;
-import onlineTest.dao.XBDAO;
+import hibernatePOJO.PowerparmMonitor;
+import onlineTest.dao.HzDAO;
+import onlineTest.dao.UnbDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,18 +11,20 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SXDYDAOImpl implements SXDYDAO {
+public class UnbDAOImpl implements UnbDAO {
 
     private Session session;
     private Transaction transaction;
     private Query query;
 
-    public List<Object> getCurrentSXDYData(String monitorpoint){
+    public List<Object> getCurrentUnbData(String monitorpoint){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
-        crlist.add(hbsessionDao.getFirst(
-                "FROM PowersxdyMonitor where mpid = '" + monitorpoint+ "'"));
+        PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
+                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+
+        crlist.add(pm.getUnb());
 
         return crlist;
     }
