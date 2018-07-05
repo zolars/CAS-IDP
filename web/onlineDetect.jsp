@@ -289,7 +289,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             this is q2
                         </div>
-                        <div id = "item3" style="display:none;">
+                        <div id = "item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             this is q3
                         </div>
                         <div id = "item4" style="display:none;">
@@ -1084,8 +1084,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     </script>
 
-
+    <%--两个echarts版本 --%>
     <script src="js/echarts/echarts.min.js"></script>
+    <script src="js/echarts.js"></script>
 
     <%--趋势图 --%>
     <script type="text/javascript">
@@ -1211,7 +1212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         // 1.初始化
         var eventChart2 = echarts.init(document.getElementById('item2'));
         // 2.指定图表的配置项和数据
-        option2 = {
+        var option2 = {
             title: {
                 //text: '未来一周气温变化',
                 subtext: '传感器'
@@ -1237,7 +1238,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             xAxis:  {
                 type: 'category',
                 boundaryGap: false,
-                data: ['周一','周二','周三','周四','周五','周六','周日']
+                data: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,
+                       20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,
+                       37,38,39,40,41,42,43,44,45,46,47,48,49]
             },
             yAxis: {
                 type: 'value',
@@ -1490,6 +1493,264 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
         }
 
+    </script>
+    <%--三相不平衡度 --%>
+    <script type="text/javascript">
+        // 测试数据
+        var gaugePointerColor=["#ff0000","#0000ff","#ffff00"];
+        var date=new Date();
+        date=date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()+"\t"+date.getHours()+":"+
+            (date.getMinutes()>=10?(date.getMinutes()):("0"+date.getMinutes()));
+        // 1.初始化
+        var eventChart3 = echarts.init(document.getElementById('item3'));
+        // 2.指定图表的配置项
+        var option3 = {
+            //提示框
+            tooltip: {
+                formatter: "{a}<br>{c}"
+            },
+            //图例
+            legend: {
+                orient: "vertical",
+                right: "10%",
+                top: "middle",
+                data: ["U1","U2","U3"]
+            },
+            //绘制图中文字
+            graphic: [
+                //三相电压或电流的幅值
+                {
+                    type: "text",
+                    left: "10%",
+                    top: "25%",
+                    style: {
+                        text:"|A1|  339.3A\n\n"+
+                        "|A2|  389.1A\n\n"+
+                        "|A3|  315.5A\n\n",
+                        font: "bold 17px Microsoft YaHei"
+                    }
+                },
+                //三相电压或电流的相位差
+                {
+                    type: "text",
+                    left: "10%",
+                    bottom: "25%",
+                    style: {
+                        text:"|Φ12|  +126º\n\n"+
+                        "|Φ23|  +110º\n\n"+
+                        "|Φ31|  +124º\n\n",
+                        font: "bold 17px Microsoft YaHei"
+                    }
+                },
+                //三相电压或电流的不平衡度
+                {
+                    type: "text",
+                    left: "10%",
+                    bottom: "10%",
+                    style: {
+                        text: "Aunb\t8.1x",
+                        font: "bold 17px Microsoft YaHei"
+                    }
+                },
+                //底部时间和日期
+                // //底部条
+                // {
+                //     type: "rect",
+                //     right: "right",
+                //     bottom: "bottom",
+                //     shape: {
+                //         width: 4000,
+                //         height: 25
+                //     },
+                //     style: {
+                //         fill: 'rgba(208,208,208,0.3)'
+                //     }
+                // },
+                //日期时间
+                {
+                    type: "text",
+                    right: "0%",
+                    bottom: "2%",
+                    style: {
+                        text: date,
+                        font: "bold 17px",
+                        textAlign: "right",
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: "U1",
+                    type: "gauge",
+                    center: ["55%","50%"],
+                    radius: "80%",
+                    min: 0,
+                    max: 360,
+                    startAngle: 0,
+                    endAngle: 359.99,
+                    //分割段数
+                    splitNumber: 12,
+                    //分隔线
+                    splitLine: {
+                        show: true,
+                        length: "10%",
+                        lineStyle: {
+                            width: 4
+                        }
+                    },
+                    //仪表盘轴线
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: [[0.5,"#ccc"],[1,"#ccc"]],
+                            width: 10
+                        }
+                    },
+                    //刻度线
+                    axisTick: {
+                        show: true,
+                        splitNumber: 2,
+                        length: "5%",
+                        lineStyle: {
+                            width: 2
+                        }
+                    },
+                    //刻度标签
+                    axisLabel: {
+                        show: false,
+                    },
+                    //指针
+                    pointer: {
+                        length: "60%"
+                    },
+                    //指针样式
+                    itemStyle: {
+                        color: gaugePointerColor[0]
+                    },
+                    title: {
+                        show: false
+                    },
+                    detail: {
+                        show: false
+                    },
+                    data:[{value: 0, name: 'U1'}],
+                },
+                {
+                    name: "U2",
+                    type: "gauge",
+                    center: ["55%","50%"],
+                    radius: "80%",
+                    min: 0,
+                    max: 360,
+                    startAngle: 0,
+                    endAngle: 359.99,
+                    //分割段数
+                    splitNumber: 12,
+                    //分隔线
+                    splitLine: {
+                        show: true,
+                        length: "10%",
+                        lineStyle: {
+                            width: 4
+                        }
+                    },
+                    //仪表盘轴线
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: [[0.5,"#ccc"],[1,"#ccc"]],
+                            width: 10
+                        }
+                    },
+                    //刻度线
+                    axisTick: {
+                        show: true,
+                        splitNumber: 2,
+                        length: "5%",
+                        lineStyle: {
+                            width: 2
+                        }
+                    },
+                    //刻度标签
+                    axisLabel: {
+                        show: false,
+                    },
+                    //指针
+                    pointer: {
+                        length: "70%"
+                    },
+                    //指针样式
+                    itemStyle: {
+                        color: gaugePointerColor[1]
+                    },
+                    title: {
+                        show: false
+                    },
+                    detail: {
+                        show: false
+                    },
+                    data:[{value: 120, name: 'U2'}]
+                },
+                {
+                    name: "U3",
+                    type: "gauge",
+                    center: ["55%","50%"],
+                    radius: "80%",
+                    min: 0,
+                    max: 360,
+                    startAngle: 0,
+                    endAngle: 359.99,
+                    //分割段数
+                    splitNumber: 12,
+                    //分隔线
+                    splitLine: {
+                        show: true,
+                        length: "10%",
+                        lineStyle: {
+                            width: 4
+                        }
+                    },
+                    //仪表盘轴线
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: [[0.5,"#ccc"],[1,"#ccc"]],
+                            width: 10
+                        }
+                    },
+                    //刻度线
+                    axisTick: {
+                        show: true,
+                        splitNumber: 2,
+                        length: "5%",
+                        lineStyle: {
+                            width: 2
+                        }
+                    },
+                    //刻度标签
+                    axisLabel: {
+                        show: false,
+                    },
+                    //指针
+                    pointer: {
+                        length: "80%"
+                    },
+                    //指针样式
+                    itemStyle: {
+                        color: gaugePointerColor[2]
+                    },
+                    title: {
+                        show: false
+                    },
+                    detail: {
+                        show: false
+                    },
+                    data:[{value: 240, name: 'U3'}]
+                }
+            ]
+        };
+        // 3.使用指定的配置项显示图表
+        eventChart3.setOption(option3);
     </script>
 
     <!-- test-->
