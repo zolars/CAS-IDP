@@ -2,6 +2,7 @@ package Util;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -57,6 +58,21 @@ public class HBSessionDaoImpl implements HBSessionDao{
         //System.out.println("ttttttttt3");
         alist = session.createQuery(hql).list();
         // System.out.println("ttttttttt3");
+        session.close();
+        return alist;
+    }
+
+    @Override
+    public List searchWithNum(String hql, int num) {
+        //查询不用事务管理
+        Session session = null;
+        session = getSession();
+
+        Query query = session.createQuery(hql);
+        query.setMaxResults(num);
+
+        List alist = query.list();
+
         session.close();
         return alist;
     }

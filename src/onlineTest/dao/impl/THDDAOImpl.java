@@ -3,7 +3,7 @@ package onlineTest.dao.impl;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.PowerxbMonitor;
 import onlineTest.dao.RMSDAO;
-import onlineTest.dao.SXDYDAO;
+import onlineTest.dao.THDDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,13 +11,13 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RMSDAOImpl implements RMSDAO {
+public class THDDAOImpl implements THDDAO {
 
     private Session session;
     private Transaction transaction;
     private Query query;
 
-    public List<Object> getCurrentRMSData(String monitorpoint){
+    public List<Object> getCurrentTHDData(String monitorpoint){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
@@ -29,14 +29,8 @@ public class RMSDAOImpl implements RMSDAO {
         //(default time 3)(default time period = the latest 6 records,that is half a minute)
         //RMS_U1 = sqrt(U1^2+U2^2+U3^2+....+UN^2)
 
-        /*u1list = hbsessionDao.search(
-                "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "' and cishu = 3 order by time desc LIMIT 0,5");*/
         u1list = hbsessionDao.searchWithNum(
                 "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "' and cishu = 3 order by time desc", 5);
-
-        /*u1list = hbsessionDao.search(
-                "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "'" + " and cishu = 3 order by time desc limit 0,5");*/
-        //System.out.println(u1list.size());
 
         if(u1list.size() < 5){
             for(int i = 0; i < u1list.size(); i++){
@@ -61,19 +55,19 @@ public class RMSDAOImpl implements RMSDAO {
             }
         }
 
-        //add RMS -U1
-        crlist.add(Math.sqrt(u1));
-        //add RMS -U2
-        crlist.add(Math.sqrt(u2));
-        //add RMS -U3
-        crlist.add(Math.sqrt(u3));
+        //add THD -U1
+        crlist.add(Math.sqrt(u1)/u1list.get(0).getU1Xb());
+        //add THD -U2
+        crlist.add(Math.sqrt(u2)/u1list.get(0).getU2Xb());
+        //add THD -U3
+        crlist.add(Math.sqrt(u3)/u1list.get(0).getU3Xb());
 
-        //add RMS -I1
-        crlist.add(Math.sqrt(i1));
-        //add RMS -I2
-        crlist.add(Math.sqrt(i2));
-        //add RMS -I3
-        crlist.add(Math.sqrt(i3));
+        //add THD -I1
+        crlist.add(Math.sqrt(i1)/u1list.get(0).getI1Xb());
+        //add THD -I2
+        crlist.add(Math.sqrt(i2)/u1list.get(0).getI2Xb());
+        //add THD -I3
+        crlist.add(Math.sqrt(i3)/u1list.get(0).getI3Xb());
 
         //add RMS -V1
         //add RMS -V2

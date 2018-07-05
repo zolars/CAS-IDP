@@ -105,6 +105,14 @@
              </result>
          </action>
 
+         <action name="getQstTHD" class="onlineTest.action.getQstTHDaction">
+             <!--getQstTHD -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
 
     </package>
 

@@ -3,9 +3,9 @@ package onlineTest.action;
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 import onlineTest.dao.RMSDAO;
-import onlineTest.dao.SXDYDAO;
+import onlineTest.dao.THDDAO;
 import onlineTest.dao.impl.RMSDAOImpl;
-import onlineTest.dao.impl.SXDYDAOImpl;
+import onlineTest.dao.impl.THDDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ import java.util.List;
 //import net.sf.json.JSONArray;
 
 
-public class getQstRMSaction extends ActionSupport {
+public class getQstTHDaction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -42,17 +42,13 @@ public class getQstRMSaction extends ActionSupport {
             //String computerroom = request.getParameter("computerroomid");
             String monitorpoint = request.getParameter("monitorpointid");
 
-            RMSDAO dao = new RMSDAOImpl();
+            THDDAO dao = new THDDAOImpl();
 
             List xbdata = new ArrayList();
 
-            xbdata = dao.getCurrentRMSData(monitorpoint);
-
-            //System.out.println("333");
+            xbdata = dao.getCurrentTHDData(monitorpoint);
 
             result = JSON.toJSONString(xbdata); // List转json
-
-            //System.out.println(result);
 
         } catch (Exception e) {
             e.printStackTrace();
