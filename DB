@@ -7,11 +7,11 @@
  Source Host           : localhost
  Source Database       : Test
 
- Target Server Type    : MySQLa
+ Target Server Type    : MySQL
  Target Server Version : 50722
  File Encoding         : utf-8
 
- Date: 07/05/2018 09:14:30 AM
+ Date: 07/05/2018 15:00:37 PM
 */
 
 SET NAMES utf8;
@@ -325,8 +325,10 @@ CREATE TABLE `powerparm_monitor` (
   `Plt_U2` float(255,0) DEFAULT NULL,
   `Plt_U3` float(255,0) DEFAULT NULL,
   `shanbian` varchar(255) DEFAULT NULL,
-  `shunbian` float DEFAULT NULL,
-  `lytx` float DEFAULT NULL,
+  `shunbian` float(255,0) DEFAULT NULL,
+  `lytx` float(255,0) DEFAULT NULL,
+  `unb` float(255,0) DEFAULT NULL,
+  `Hz` float(255,0) DEFAULT NULL,
   PRIMARY KEY (`ppid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -334,7 +336,7 @@ CREATE TABLE `powerparm_monitor` (
 --  Records of `powerparm_monitor`
 -- ----------------------------
 BEGIN;
-INSERT INTO `powerparm_monitor` VALUES ('1', '1', '2018-07-03 17:48:55', '220', '221', '221', '0', '57', '64', '51', '2', '11', '12', '9', '6', '8', '7', '13', '14', '12', '1', '1', '1', '1', '1', '0.7969', '0', '0', '0', '0', '0', '0', '1', '1', '1', '100', '200', '300');
+INSERT INTO `powerparm_monitor` VALUES ('1', '1', '2018-07-03 17:48:55', '220', '221', '221', '0', '57', '64', '51', '2', '11', '12', '9', '6', '8', '7', '13', '14', '12', '1', '1', '1', '1', '1', '0.7969', '0', '0', '0', '0', '0', '0', '1', '1', '1', '100', '200', '300', '1', '50');
 COMMIT;
 
 -- ----------------------------
@@ -378,8 +380,10 @@ CREATE TABLE `powerparm_monitor_his` (
   `Plt_U2` float(255,0) DEFAULT NULL,
   `Plt_U3` float(255,0) DEFAULT NULL,
   `shanbian` varchar(255) DEFAULT NULL,
-  `shunbian` float DEFAULT NULL,
-  `lytx` float DEFAULT NULL,
+  `shunbian` float(255,0) DEFAULT NULL,
+  `lytx` float(255,0) DEFAULT NULL,
+  `unb` float(255,0) DEFAULT NULL,
+  `Hz` float(255,0) DEFAULT NULL,
   PRIMARY KEY (`ppid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -387,7 +391,7 @@ CREATE TABLE `powerparm_monitor_his` (
 --  Records of `powerparm_monitor_his`
 -- ----------------------------
 BEGIN;
-INSERT INTO `powerparm_monitor_his` VALUES ('1', '1', '2018-07-03 17:48:55', '220', '221', '221', '0', '57', '64', '51', '2', '11', '12', '9', '6', '8', '7', '13', '14', '12', '1', '1', '1', '1', '1', '0.7969', '0', '0', '0', '0', '0', '0', '1', '1', '1', '100', '200', '300');
+INSERT INTO `powerparm_monitor_his` VALUES ('1', '1', '2018-07-03 17:48:55', '220', '221', '221', '0', '57', '64', '51', '2', '11', '12', '9', '6', '8', '7', '13', '14', '12', '1', '1', '1', '1', '1', '0.7969', '0', '0', '0', '0', '0', '0', '1', '1', '1', '100', '200', '300', null, null);
 COMMIT;
 
 -- ----------------------------
