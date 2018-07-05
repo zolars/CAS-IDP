@@ -1242,7 +1242,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             yAxis: {
                 type: 'value',
                 axisLabel: {
-                    formatter: '{value} °C'
+                    formatter: '{value}'
                 }
             }
             // series: [
@@ -1435,7 +1435,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         // 更新谐波图
         function updateXbt(data) {
             var obj=JSON.parse(data);
-            var series=["u1Xb","u2Vb","u3Xb","u4Xb","i1Xb","i2Xb","i3Xb","i4Xb"];
+            var series=["u1Xb","u2Xb","u3Xb","u4Xb","i1Xb","i2Xb","i3Xb","i4Xb"];
             var res=[];//二维数组
             for(var i=0;i<series.length;i++){
                 var temp=[];    //一维数组
