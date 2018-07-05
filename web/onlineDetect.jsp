@@ -178,6 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <td><button id="test3" onclick="test3()">测试'三相电压'</button></td>
                             <td><button id="test4" onclick="test4()">测试"趋势图rms'</button></td>
                             <td><button id="test5" onclick="test5()">测试"趋势图thd'</button></td>
+                            <td><button id="test6" onclick="test6()">测试"趋势图cf'</button></td>
                         </tr>
                 </div>
 
@@ -1631,6 +1632,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
         }
     </script>
+
+    <!-- test6-->
+    <script>
+        function test6(){
+            alert("CF");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getQstCF",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
 
 
 

@@ -113,8 +113,17 @@
              </result>
          </action>
 
+         <action name="getQstCF" class="onlineTest.action.getQstCFaction">
+             <!--getQstCF -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
 
-    </package>
+
+
+     </package>
 
 
 
