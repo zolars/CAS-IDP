@@ -2,10 +2,8 @@ package onlineTest.action;
 
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
-import onlineTest.dao.RMSDAO;
-import onlineTest.dao.SXDYDAO;
-import onlineTest.dao.impl.RMSDAOImpl;
-import onlineTest.dao.impl.SXDYDAOImpl;
+import onlineTest.dao.PowerParameterDAO;
+import onlineTest.dao.impl.PowerParameterDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +15,7 @@ import java.util.List;
 //import net.sf.json.JSONArray;
 
 
-public class getQstRMSaction extends ActionSupport {
+public class getQstDPFaction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -42,11 +40,11 @@ public class getQstRMSaction extends ActionSupport {
             //String computerroom = request.getParameter("computerroomid");
             String monitorpoint = request.getParameter("monitorpointid");
 
-            RMSDAO dao = new RMSDAOImpl();
+            PowerParameterDAO dao = new PowerParameterDAOImpl();
 
             List qstdata = new ArrayList();
 
-            qstdata = dao.getCurrentRMSData(monitorpoint);
+            qstdata = dao.getCurrentDPFData(monitorpoint);
 
             result = JSON.toJSONString(qstdata); // List转json
 

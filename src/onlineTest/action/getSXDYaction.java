@@ -42,19 +42,13 @@ public class getSXDYaction extends ActionSupport {
             //String computerroom = request.getParameter("computerroomid");
             String monitorpoint = request.getParameter("monitorpointid");
 
-            System.out.println("222");
-
             SXDYDAO dao = new SXDYDAOImpl();
 
-            List xbdata = new ArrayList();
+            List sxdydata = new ArrayList();
 
-            xbdata = dao.getCurrentSXDYData(monitorpoint);
+            sxdydata = dao.getCurrentSXDYData(monitorpoint);
 
-            System.out.println("333");
-
-            result = JSON.toJSONString(xbdata); // List转json
-
-            System.out.println(result);
+            result = JSON.toJSONString(sxdydata); // List转json
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -20,12 +20,8 @@ public class SXDYDAOImpl implements SXDYDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
-        //System.out.println("tttttttttttt  "+monitorpoint);
-
         crlist.add(hbsessionDao.getFirst(
                 "FROM PowersxdyMonitor where mpid = '" + monitorpoint+ "'"));
-
-        //System.out.println("tttttttttttt  "+crlist.size());
 
         return crlist;
     }

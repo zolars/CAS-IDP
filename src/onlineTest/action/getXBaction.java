@@ -42,19 +42,13 @@ public class getXBaction extends ActionSupport {
             //String computerroom = request.getParameter("computerroomid");
             String monitorpoint = request.getParameter("monitorpointid");
 
-            System.out.println("222");
-
             XBDAO dao = new XBDAOImpl();
 
             List xbdata = new ArrayList();
 
             xbdata = dao.getCurrentXbData(monitorpoint);
 
-            System.out.println("333");
-
             result = JSON.toJSONString(xbdata); // List转json
-
-            System.out.println(result);
 
         } catch (Exception e) {
             e.printStackTrace();
