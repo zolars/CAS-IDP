@@ -44,11 +44,11 @@ public class getQstTHDaction extends ActionSupport {
 
             THDDAO dao = new THDDAOImpl();
 
-            List xbdata = new ArrayList();
+            List qstdata = new ArrayList();
 
-            xbdata = dao.getCurrentTHDData(monitorpoint);
+            qstdata = dao.getCurrentTHDData(monitorpoint);
 
-            result = JSON.toJSONString(xbdata); // List转json
+            result = JSON.toJSONString(qstdata); // List转json
 
         } catch (Exception e) {
             e.printStackTrace();

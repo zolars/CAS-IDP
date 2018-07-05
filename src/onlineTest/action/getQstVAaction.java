@@ -15,7 +15,7 @@ import java.util.List;
 //import net.sf.json.JSONArray;
 
 
-public class getQstHzaction extends ActionSupport {
+public class getQstVAaction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -44,7 +44,7 @@ public class getQstHzaction extends ActionSupport {
 
             List qstdata = new ArrayList();
 
-            qstdata = dao.getCurrentHzData(monitorpoint);
+            qstdata = dao.getCurrentVAData(monitorpoint);
 
             result = JSON.toJSONString(qstdata); // List转json
 

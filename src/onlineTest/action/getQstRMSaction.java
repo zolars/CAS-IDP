@@ -44,15 +44,11 @@ public class getQstRMSaction extends ActionSupport {
 
             RMSDAO dao = new RMSDAOImpl();
 
-            List xbdata = new ArrayList();
+            List qstdata = new ArrayList();
 
-            xbdata = dao.getCurrentRMSData(monitorpoint);
+            qstdata = dao.getCurrentRMSData(monitorpoint);
 
-            //System.out.println("333");
-
-            result = JSON.toJSONString(xbdata); // List转json
-
-            //System.out.println(result);
+            result = JSON.toJSONString(qstdata); // List转json
 
         } catch (Exception e) {
             e.printStackTrace();

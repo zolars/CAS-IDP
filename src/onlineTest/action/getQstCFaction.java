@@ -44,11 +44,11 @@ public class getQstCFaction extends ActionSupport {
 
             CFDAO dao = new CFDAOImpl();
 
-            List xbdata = new ArrayList();
+            List qstdata = new ArrayList();
 
-            xbdata = dao.getCurrentCFData(monitorpoint);
+            qstdata = dao.getCurrentCFData(monitorpoint);
 
-            result = JSON.toJSONString(xbdata); // List转json
+            result = JSON.toJSONString(qstdata); // List转json
 
         } catch (Exception e) {
             e.printStackTrace();

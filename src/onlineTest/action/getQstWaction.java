@@ -2,7 +2,9 @@ package onlineTest.action;
 
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
+import onlineTest.dao.CFDAO;
 import onlineTest.dao.PowerParameterDAO;
+import onlineTest.dao.impl.CFDAOImpl;
 import onlineTest.dao.impl.PowerParameterDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
@@ -15,7 +17,7 @@ import java.util.List;
 //import net.sf.json.JSONArray;
 
 
-public class getQstHzaction extends ActionSupport {
+public class getQstWaction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -44,7 +46,7 @@ public class getQstHzaction extends ActionSupport {
 
             List qstdata = new ArrayList();
 
-            qstdata = dao.getCurrentHzData(monitorpoint);
+            qstdata = dao.getCurrentWData(monitorpoint);
 
             result = JSON.toJSONString(qstdata); // List转json
 

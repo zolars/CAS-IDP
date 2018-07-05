@@ -181,6 +181,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <td><button id="test6" onclick="test6()">测试"趋势图cf'</button></td>
                             <td><button id="test7" onclick="test7()">测试"趋势图Hz'</button></td>
                             <td><button id="test8" onclick="test8()">测试"趋势图unb%'</button></td>
+
+                        <td><button id="test9" onclick="test9()">测试"趋势图W'</button></td>
+                        <td><button id="test10" onclick="test10()">测试"趋势图VA'</button></td>
+                        <td><button id="test11" onclick="test11()">测试"趋势图VAR'</button></td>
+                        <td><button id="test12" onclick="test12()">测试"趋势图PF'</button></td>
+                        <td><button id="test13" onclick="test13()">测试"趋势图DPF'</button></td>
+                        <td><button id="test14" onclick="test14()">测试"趋势图TAN'</button></td>
+                        <td><button id="test15" onclick="test15()">测试"趋势图PST'</button></td>
+                        <td><button id="test16" onclick="test16()">测试"趋势图PLT'</button></td>
+
                         </tr>
                 </div>
 
@@ -1718,6 +1728,232 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
         }
     </script>
+
+    <!-- test9-->
+    <script>
+        function test9(){
+            alert("W");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getQstW",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
+    <!-- test10-->
+    <script>
+        function test10(){
+            alert("VA");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getQstVA",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
+    <!-- test11-->
+    <script>
+        function test11(){
+            alert("Var");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getQstVar",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
+    <!-- test12-->
+    <script>
+        function test12(){
+            alert("PF");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getQstPF",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
+    <!-- test13-->
+    <script>
+        function test13(){
+            alert("DPF");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getQstDPF",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
+    <!-- test14-->
+    <script>
+        function test14(){
+            alert("Tan");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getQstTan",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
+    <!-- test15-->
+    <script>
+        function test15(){
+            alert("Pst");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getQstPst",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
+    <!-- test16-->
+    <script>
+        function test16(){
+            alert("Plt");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getQstPlt",
+                data: {monitorpointid: monitorpoint},
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }*/
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
+
 
 
 

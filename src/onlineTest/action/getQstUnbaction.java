@@ -2,8 +2,8 @@ package onlineTest.action;
 
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
-import onlineTest.dao.UnbDAO;
-import onlineTest.dao.impl.UnbDAOImpl;
+import onlineTest.dao.PowerParameterDAO;
+import onlineTest.dao.impl.PowerParameterDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,13 +37,13 @@ public class getQstUnbaction extends ActionSupport {
             //String computerroom = request.getParameter("computerroomid");
             String monitorpoint = request.getParameter("monitorpointid");
 
-            UnbDAO dao = new UnbDAOImpl();
+            PowerParameterDAO dao = new PowerParameterDAOImpl();
 
-            List xbdata = new ArrayList();
+            List qstdata = new ArrayList();
 
-            xbdata = dao.getCurrentUnbData(monitorpoint);
+            qstdata = dao.getCurrentUnbData(monitorpoint);
 
-            result = JSON.toJSONString(xbdata); // List转json
+            result = JSON.toJSONString(qstdata); // List转json
 
         } catch (Exception e) {
             e.printStackTrace();
