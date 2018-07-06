@@ -1,0 +1,61 @@
+#item3-text ol,#item3-toolbar ol{
+    list-style: none;
+}
+#item3-text ol{
+    position: absolute;
+    right: 0;
+    text-align: left;
+    font-size: 17px;
+    line-height: 30px;
+}
+#item3-text ol.value{
+    top: 30%;
+}
+#item3-text ol.angle{
+    bottom: 30%;
+}
+#item3-toolbar ol{
+    position: relative;
+    left: 0;
+    top: 25%;
+}
+#item3-toolbar ol.symbol{
+    position: relative;
+    left: -50px;
+    top: 20%;
+}
+#item3-toolbar ol.symbol li{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    float: left;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 17px;
+    line-height: 25px;
+}
+#item3-toolbar ol li button{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 1px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+#item3-realtime span{
+    float: right;
+}
