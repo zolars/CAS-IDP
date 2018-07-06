@@ -201,6 +201,15 @@
              </result>
          </action>
 
+         <action name="getParameterHis" class="onlineTest.action.getParameteractionHis">
+             <!--getParameter -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+
      </package>
 
 

@@ -170,4 +170,14 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
+    public List<Object> getHisParameterData(String monitorpoint, String stime, String etime){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        List<Object> crlist = new ArrayList<>();
+
+        crlist = hbsessionDao.search(
+                "FROM PowerparmMonitorHis where mpid = '" + monitorpoint+ "' and time>='" + stime + "' and time<=' " + etime + "'");
+
+        return crlist;
+    }
+
 }

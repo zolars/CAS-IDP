@@ -11,7 +11,7 @@
  Target Server Version : 50722
  File Encoding         : utf-8
 
- Date: 07/05/2018 15:00:37 PM
+ Date: 07/05/2018 17:59:33 PM
 */
 
 SET NAMES utf8;
@@ -281,7 +281,7 @@ CREATE TABLE `permission` (
 --  Records of `permission`
 -- ----------------------------
 BEGIN;
-INSERT INTO `permission` VALUES ('1', '集中监控'), ('2', '动力设施-UPS'), ('3', '动力设施-发电机'), ('4', '动力设施-蓄电池'), ('5', '动力设施-空调'), ('6', '动力设施-温湿度监测'), ('7', '动力设施-线缆管理'), ('8', '动力设施-空间管理'), ('9', '在线监测-趋势图'), ('10', '在线监测-谐波'), ('11', '在线监测-三相电压不平衡度'), ('12', '在线监测-参数值'), ('13', '在线监测-实时波形'), ('14', '在线监测-电能监测参数设定'), ('15', '动力分析-能效分析'), ('16', '动力分析-事件分析-电能质量类'), ('17', '动力分析-事件分析-设备类'), ('18', '动力分析-事件分析-环境类'), ('19', '动力评估'), ('20', '后台管理');
+INSERT INTO `permission` VALUES ('1', '基础信息配置'), ('2', '账号管理'), ('3', '限值管理'), ('4', '设备管理'), ('5', '查看检测数据及图表显示'), ('6', '组织管理'), ('7', '角色管理'), ('8', '功能管理');
 COMMIT;
 
 -- ----------------------------
@@ -411,9 +411,15 @@ CREATE TABLE `powersxdy_monitor` (
   `A1` float DEFAULT NULL,
   `A2` float DEFAULT NULL,
   `A3` float DEFAULT NULL,
-  `angle1` float DEFAULT NULL,
-  `angle2` float DEFAULT NULL,
-  `angle3` float DEFAULT NULL,
+  `angleU1` float DEFAULT NULL,
+  `angleU2` float DEFAULT NULL,
+  `angleU3` float DEFAULT NULL,
+  `angleV1` float DEFAULT NULL,
+  `angleV2` float DEFAULT NULL,
+  `angleV3` float DEFAULT NULL,
+  `angleA1` float DEFAULT NULL,
+  `angleA2` float DEFAULT NULL,
+  `angleA3` float DEFAULT NULL,
   PRIMARY KEY (`sxid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -421,7 +427,7 @@ CREATE TABLE `powersxdy_monitor` (
 --  Records of `powersxdy_monitor`
 -- ----------------------------
 BEGIN;
-INSERT INTO `powersxdy_monitor` VALUES ('1', '1', '2018-07-04 08:44:41', '220.8', '220.4', '218.8', '220.8', '222', '219.9', '339', '389.1', '378', '126', '110', '124'), ('2', '1', '2018-07-04 08:44:46', '220.9', '221.4', '218.9', '220.8', '222', '219.9', '339', '389.1', '378', '125', '111', '124');
+INSERT INTO `powersxdy_monitor` VALUES ('1', '1', '2018-07-04 08:44:41', '220.8', '220.4', '218.8', '220.8', '222', '219.9', '339', '389.1', '378', '126', '110', '124', '110', '120', '130', '130', '120', '110'), ('2', '1', '2018-07-04 08:44:46', '220.9', '221.4', '218.9', '220.8', '222', '219.9', '339', '389.1', '378', '125', '111', '124', '115', '115', '130', '120', '130', '110');
 COMMIT;
 
 -- ----------------------------
@@ -441,9 +447,15 @@ CREATE TABLE `powersxdy_monitor_his` (
   `A1` float DEFAULT NULL,
   `A2` float DEFAULT NULL,
   `A3` float DEFAULT NULL,
-  `angle1` float DEFAULT NULL,
-  `angle2` float DEFAULT NULL,
-  `angle3` float DEFAULT NULL,
+  `angleU1` float DEFAULT NULL,
+  `angleU2` float DEFAULT NULL,
+  `angleU3` float DEFAULT NULL,
+  `angleV1` float DEFAULT NULL,
+  `angleV2` float DEFAULT NULL,
+  `angleV3` float DEFAULT NULL,
+  `angleA1` float DEFAULT NULL,
+  `angleA2` float DEFAULT NULL,
+  `angleA3` float DEFAULT NULL,
   PRIMARY KEY (`mpid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -533,7 +545,7 @@ CREATE TABLE `roles` (
 --  Records of `roles`
 -- ----------------------------
 BEGIN;
-INSERT INTO `roles` VALUES ('1', '管理员'), ('2', '工程师'), ('3', '运维人员');
+INSERT INTO `roles` VALUES ('1', '管理员'), ('2', '技术人员'), ('3', '运维人员');
 COMMIT;
 
 -- ----------------------------
@@ -541,17 +553,17 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `roles_permission`;
 CREATE TABLE `roles_permission` (
-  `id` int(11) NOT NULL,
-  `rid` varchar(255) DEFAULT NULL,
+  `rid` varchar(255) NOT NULL,
   `pid` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  PRIMARY KEY (`rid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Records of `roles_permission`
 -- ----------------------------
 BEGIN;
-INSERT INTO `roles_permission` VALUES ('1', '1', '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20'), ('2', '2', '1,14,15,16,17,18,19'), ('3', '3', '1,2,3,4,5,6,7,8,9,10,11,12,13');
+INSERT INTO `roles_permission` VALUES ('1', '1,2,3,4,5,6,7,8', '0'), ('2', '3,5', '0'), ('3', '5', '0');
 COMMIT;
 
 -- ----------------------------
@@ -681,6 +693,8 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `pbid` varchar(255) DEFAULT NULL,
   `cbid` varchar(255) DEFAULT NULL,
+  `telephone` varchar(11) DEFAULT NULL,
+  `govtelephone` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -688,7 +702,7 @@ CREATE TABLE `user` (
 --  Records of `user`
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('1', 'admin', '周小川', '123456', null, null), ('2', 'test1', '张三', '123456', '200', null), ('3', 'test2', '王武', '123456', '200', '2001'), ('4', 'test4', '齐力', '123456', '200', '2002');
+INSERT INTO `user` VALUES ('1', 'admin', '周小川', '123456', null, null, '18500390011', '18612340000'), ('2', 'test1', '张三', '123456', '200', null, '18390011500', '18612340001'), ('3', 'test2', '王武', '123456', '200', '2001', '18115090003', '18612340002'), ('4', 'test4', '齐力', '123456', '200', '2002', '13900118500', '18612340003');
 COMMIT;
 
 -- ----------------------------
@@ -713,17 +727,17 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `user_roles`;
 CREATE TABLE `user_roles` (
-  `id` int(11) NOT NULL,
-  `uid` varchar(255) DEFAULT NULL,
+  `uid` varchar(255) NOT NULL,
   `rid` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL,
+  PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Records of `user_roles`
 -- ----------------------------
 BEGIN;
-INSERT INTO `user_roles` VALUES ('1', '1', '1'), ('2', '2', '3'), ('3', '3', '3');
+INSERT INTO `user_roles` VALUES ('1', '1', '0'), ('2', '3', '0'), ('3', '3', '0');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

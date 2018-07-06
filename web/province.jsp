@@ -201,62 +201,10 @@
     <section id="main" class="p-relative" role="main">
 
         <!-- Sidebar -->
+        <!-- 动态加载菜单项 -->
         <aside id="sidebar">
-            <ul class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
-
-
-                <li class="active">
-                    <a href="province.jsp" id='menuurl'>
-                        <i class="fa fa-calendar-o"></i>
-                        <span> 集中监控</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/deviceManager.jsp" id='menuurl'>
-                        <!-- 设备管理 -->
-                        <i class="fa fa-briefcase"></i>
-                        <span> 动力设施</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/onlineDetect.jsp" id='menuurl'>
-                        <i class="fa fa-bar-chart-o"></i>
-                        <span> 在线监测 </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/efficiencyAnalysis.jsp" id='menuurl'>
-                        <!-- 能耗统计 -->
-                        <i class="fa fa-sort-amount-asc"></i>
-                        <span> 动力分析 </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/mstp_map.jsp" id='menuurl'>
-                        <i class="fa fa-bar-chart-o"></i>
-                        <span> 动力评估</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/energy_consumption.jsp" id='menuurl'>
-                        <i class="fa fa-building-o"></i>
-                        <span> 报表功能</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/userMng.jsp" id='menuurl'>
-                        <i class="fa fa-users"></i>
-                        <span> 用户管理</span>
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="" id='menuurl'>
-                        <i class="fa fa-cogs"></i>
-                        <span> 系统设置</span>
-                    </a>
-                </li>
+            <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
             </ul>
-
         </aside>
 
 
@@ -1451,7 +1399,52 @@
         $("#lastDate").change(function() {
             $('.start_date_picker').datepicker('setEndDate', $(this).val());
         });
-</script>
+    </script>
+
+    <!-- 动态加载菜单项 -->
+    <script type="text/javascript">
+        var menulist="<%=session.getAttribute("menulist")%>";
+        var cbidstr = menulist.split(",");
+
+        //处理第一个和最后一个
+        cbidstr[0] = cbidstr[0].substring(1);
+        cbidstr[0] = " " + cbidstr[0];
+
+        var idx = cbidstr.length - 1;
+        var len = cbidstr[idx].length;
+        cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
+
+        for(var i = 0; i < cbidstr.length; i++){
+
+            var menuname = "";
+            if(cbidstr[i] == ' province.jsp')
+                menuname = "集中监控";
+
+            else if(cbidstr[i] == ' efficiencyDevice.jsp')
+                menuname = "动力设施";
+
+            else if(cbidstr[i] == ' onlineDetect.jsp')
+                menuname = "在线监测";
+
+            else if(cbidstr[i] == ' efficiencyAnalysis.jsp')
+                menuname = "动力分析";
+
+            else if(cbidstr[i] == ' efficiencyAssessment.jsp')
+                menuname = "动力评估";
+
+            else if(cbidstr[i] == ' reportChart.jsp')
+                menuname = "报表功能";
+
+            else if(cbidstr[i] == ' userMng.jsp')
+                menuname = "用户管理";
+
+            else if(cbidstr[i] == ' systemSetting.jsp')
+                menuname = "系统设置";
+
+            $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+        }
+    </script>
+
 
 
 

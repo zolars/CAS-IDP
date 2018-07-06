@@ -19,5 +19,11 @@ public interface UserDAO {
     public List<Object> getCityBank(int pbid);
     public List<Object> getComputerroom(String cbname);
 
+    /*
+    get user menu list
+    【'province.jsp'，'onlineDetect.jsp'，'failure.jsp'】
+     */
+    public List<Object>  getUserDynamicMenu(User user);
+
     public List getAllUserInfo();
 }

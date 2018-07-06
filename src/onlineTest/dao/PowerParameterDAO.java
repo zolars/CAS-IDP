@@ -27,4 +27,6 @@ public interface PowerParameterDAO {
 
     public List<Object> getCurrentUnbData(String monitorpoint);
 
+    public List<Object> getHisParameterData(String monitorpoint, String stime, String etime);
+
 }

@@ -2,10 +2,7 @@ package userManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
 
-import hibernatePOJO.CityBank;
-import hibernatePOJO.Computerroom;
-import hibernatePOJO.ProvinceBank;
-import hibernatePOJO.User;
+import hibernatePOJO.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -90,7 +87,7 @@ public class UserDAOImpl implements UserDAO {
         String[] cbidstr= cbidset.split("，");
         for(int i = 0; i < cbidstr.length; i++) {
             String cbid = cbidstr[i];
-            //System.out.println("cccccccccccccccccccccc"+cbid);
+
             CityBank cb = (CityBank)hbsessionDao.getFirst(
                     "FROM CityBank where cbid = '" + cbid + "'");
             //cblist.add(cb.getCbname());
@@ -104,7 +101,7 @@ public class UserDAOImpl implements UserDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
-        System.out.println("tttttttttttt  "+cbname);
+        //System.out.println("tttttttttttt  "+cbname);
 
         CityBank cb = (CityBank)hbsessionDao.getFirst(
                 "FROM CityBank where cbname = '" + cbname+ "'");
@@ -127,6 +124,23 @@ public class UserDAOImpl implements UserDAO {
 
         crlist = hbsessionDao.search( "select ta.uname as nuname,ta.chinesename as nchinesename,tc.rolesname as nrolename,ta.pbid as pbid,ta.cbid as cbid from User ta, UserRoles tb, Roles tc where ta.uid = tb.uid and tb.rid = tc.rid");
 
+        return crlist;
+    }
+
+    public List<Object> getUserDynamicMenu(User user){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Object> crlist = new ArrayList<>();
+
+        crlist = hbsessionDao.search(
+                "select tc.pid from User as ta, UserRoles as tb, RolesPermission as tc where ta.uid = tb.uid and tb.rid = tc.rid and ta.uid = "+ user.getUid());
+
+        String pidset = crlist.get(0).toString();
+        String[] pidstr= pidset.split(",");
+
+        for(int i = 0; i < pidstr.length; i++) {
+            crlist.add(pidstr[i]);
+        }
         return crlist;
     }
 

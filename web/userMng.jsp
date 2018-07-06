@@ -50,7 +50,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="media" id="top-menu">
 
                 <div class="pull-left">
-                    <ul id="treeDemo" class="ztree"></ul>
+                  <%--  <ul id="treeDemo" class="ztree"></ul>--%>
+                      <td>
+                          <select class="select" id="province_code" name="province_code" onchange="getCity()">
+                              <option value="">请选择</option>
+                          </select>
+
+                          <select class="select" id="city_code" name="city_code" onchange="getComproom()">
+                              <option value="">请选择</option>
+                          </select>
+
+                          <select class="select" id="comproom_code" name="comproom_code">
+                              <option value="">请选择</option>
+                          </select>
+                      </td>
                 </div>
 
                 <div class="pull-right">欢迎用户${username}登录</div>
@@ -66,62 +79,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <section id="main" class="p-relative" role="main">
 
         <!-- Sidebar -->
+        <!-- 动态加载菜单项 -->
         <aside id="sidebar">
-            <ul class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
-                <li>
-                    <a href="province.jsp" id='menuurl'>
-                        <i class="fa fa-calendar-o"></i>
-                        <span> 集中监控</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="deviceManager.jsp" id='menuurl'>
-                        <!-- 设备管理 -->
-                        <i class="fa fa-briefcase"></i>
-                        <span> 动力设施</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="onlineDetect.jsp" id='menuurl'>
-                        <i class="fa fa-bar-chart-o"></i>
-                        <span> 在线监测 </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="efficiencyAnalysis.jsp" id='menuurl'>
-                        <!-- 能耗统计 -->
-                        <i class="fa fa-sort-amount-asc"></i>
-                        <span>动力分析 </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="mstp_map.jsp" id='menuurl'>
-                        <i class="fa fa-bar-chart-o"></i>
-                        <span> 动力评估</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="energy_consumption.jsp" id='menuurl'>
-                        <i class="fa fa-building-o"></i>
-                        <span> 报表功能</span>
-                    </a>
-                </li>
-
-                <li class="active">
-                    <a href="userMng.jsp" id='menuurl'>
-                        <i class="fa fa-users"></i>
-                        <span> 用户管理</span>
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="" id='menuurl'>
-                        <i class="fa fa-cogs"></i>
-                        <span> 系统设置</span>
-                    </a>
-                </li>
+            <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
             </ul>
-
         </aside>
+
 
         <!-- Content -->
         <section id="content" class="container">
@@ -136,6 +99,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
                 <li class="active">用户管理</li>
             </ol>
+
+
+            <!-- Main Widgets -->
+            <div class="block-area">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs" id="ulItem">
+                            <li class="active" style="width:25%">
+                                <a data-toggle="tab" id="subItem1">•权限</a>
+                            </li>
+                            <li style="width:25%">
+                                <a data-toggle="tab" id="subItem2">•历史曲线</a>
+                            </li>
+                            <li style="width:25%">
+                                <a data-toggle="tab" id="subItem3">•知识库</a>
+                            </li>
+                        </ul>
+
+                        <td><button id="test" onclick="test()">测试'查看历史曲线'</button></td>
+
+                        <div id = "item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                            this is 权限
+                        </div>
+                        <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                            this is 历史曲线
+                        </div>
+                        <div id = "item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                            this is 知识库
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <h4 class="page-title">用户管理</h4>
 
@@ -262,7 +257,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
 
-    <script>
+   <%-- <script>
 
         var objprobank="<%=session.getAttribute("probank")%>";
         var objcitybank="<%=session.getAttribute("citybank")%>";
@@ -295,201 +290,164 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
         });
 
-    </script>
+    </script>--%>
 
-    
+    <!-- 省\市\机房下拉菜单-->
     <script>
+        var provinceid="<%=session.getAttribute("probank")%>";
 
-        function getProName(str) {
-                switch(str){
-                    case '100':
-                        return "台湾";
-                    case '110':
-                        return "安徽";
-                    case '120':
-                        return "福建";
-                    case '130':
-                        return "江西";
-                    case '140':
-                        return "山东";
-                    case '150':
-                        return "河南";
-                    case '160':
-                        return "湖北";
-                    case '170':
-                        return "湖南";
-                    case '180':
-                        return "广东";
-                    case '190':
-                        return "广西";
-                    case '200':
-                        return "河北";
-                    case '210':
-                        return "海南";
-                    case '220':
-                        return "四川";
-                    case '230':
-                        return "贵州";
-                    case '240':
-                        return "云南";
-                    case '250':
-                        return "西藏";
-                    case '260':
-                        return "陕西";
-                    case '270':
-                        return "甘肃";
-                    case '280':
-                        return "青海";
-                    case '290':
-                        return "宁夏";
-                    case '300':
-                        return "山西";
-                    case '310':
-                        return "新疆";
-                    case '320':
-                        return "北京";
-                    case '330':
-                        return "天津";
-                    case '340':
-                        return "上海";
-                    case '350':
-                        return "重庆" ;
-                    case '360':
-                        return "香港";
-                    case '370':
-                        return "澳门";
-                    case '400':
-                        return "内蒙古";
-                    case '500':
-                        return "辽宁";
-                    case '600':
-                        return "吉林";
-                    case '700':
-                        return "黑龙江";
-                    case '800':
-                        return "江苏";
-                    case '900':
-                        return "浙江";
-                    default:
-                        return "";
-            }
+        if(provinceid){//第一次进入这个页面，没有获取过
+            $("#province_code").empty();
+            $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
+        }
+        else{
         }
 
-        function getCityName(str) {
-            switch(str){
-                case '1001':
-                    return "基隆";
-                case '1002':
-                    return "新竹";
-                case '1003':
-                    return "嘉义";
-                case '1004':
-                    return "台南";
-                case '1005':
-                    return "台中";
-                case '1006':
-                    return "新北";
-                case '1007':
-                    return "高雄";
-                case '1008':
-                    return "桃园";
-                case '1009':
-                    return "中华台北";
+        /*加载市下拉选*/
+        function getCity() {
+            var pname = $("#province_code").val();
+            $("#city_code").empty();
+            $("#comproom_code").empty();
 
-                /*case '110':
-                    return "安徽";
-                case '120':
-                    return "福建";
-                case '130':
-                    return "江西";
-                case '140':
-                    return "山东";
-                case '150':
-                    return "河南";
-                case '160':
-                    return "湖北";
-                case '170':
-                    return "湖南";
-                case '180':
-                    return "广东";
-                case '190':
-                    return "广西";*/
-                case '2001':
-                    return "石家庄";
-                case '2002':
-                    return "廊坊";
-                case '2003':
-                    return "秦皇岛";
-                case '2004':
-                    return "唐山";
-                case '2005':
-                    return "邯郸";
-                case '2006':
-                    return "邢台";
-                case '2007':
-                    return "保定";
-                case '2008':
-                    return "张家口";
-                case '2009':
-                    return "承德";
-                case '2010':
-                    return "沧州";
-                case '2011':
-                    return "衡水";
-                /* case '210':
-                     return "海南";
-                 case '220':
-                     return "四川";
-                 case '230':
-                     return "贵州";
-                 case '240':
-                     return "云南";
-                 case '250':
-                     return "西藏";
-                 case '260':
-                     return "陕西";
-                 case '270':
-                     return "甘肃";
-                 case '280':
-                     return "青海";
-                 case '290':
-                     return "宁夏";
-                 case '300':
-                     return "山西";
-                 case '310':
-                     return "新疆";
-                 case '320':
-                     return "北京";
-                 case '330':
-                     return "天津";
-                 case '340':
-                     return "上海";
-                 case '350':
-                     return "重庆" ;
-                 case '360':
-                     return "香港";
-                 case '370':
-                     return "澳门";
-                 case '400':
-                     return "内蒙古";
-                 case '500':
-                     return "辽宁";
-                 case '600':
-                     return "吉林";
-                 case '700':
-                     return "黑龙江";
-                 case '800':
-                     return "江苏";
-                 case '900':
-                     return "浙江";*/
-                default:
-                    return "";
-            }
+            $.ajax({
+                type: "post",
+                url: "getCityTree",
+                data: {provinceid: pname},
+                dataType : "json",
+                success: function (data) {
+                    alert("33");
+                    $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    //alert(obj[0].cbname);
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
+                    }
+
+                },
+                error: function () {
+                    alert("加载市失败");
+                }
+            });
         }
 
+        /*加载机房下拉选*/
+        function getComproom() {
+            var cname = $("#city_code").val();
+            $("#comproom_code").empty();
+
+            $.ajax({
+                type: "post",
+                url: "getCompTree",
+                data: {cityid: cname},
+                dataType : "json",
+                success: function (data) {
+
+                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }
+                },
+                error: function () {
+                    alert("加载机房失败");
+                }
+            });
+        }
 
     </script>
 
+    <!-- 动态加载菜单项 -->
+    <script type="text/javascript">
+        var menulist="<%=session.getAttribute("menulist")%>";
+        var cbidstr = menulist.split(",");
+
+        //处理第一个和最后一个
+        cbidstr[0] = cbidstr[0].substring(1);
+        cbidstr[0] = " " + cbidstr[0];
+
+        var idx = cbidstr.length - 1;
+        var len = cbidstr[idx].length;
+        cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
+
+        for(var i = 0; i < cbidstr.length; i++){
+
+            var menuname = "";
+            if(cbidstr[i] == ' province.jsp')
+                menuname = "集中监控";
+
+            else if(cbidstr[i] == ' efficiencyDevice.jsp')
+                menuname = "动力设施";
+
+            else if(cbidstr[i] == ' onlineDetect.jsp')
+                menuname = "在线监测";
+
+            else if(cbidstr[i] == ' efficiencyAnalysis.jsp')
+                menuname = "动力分析";
+
+            else if(cbidstr[i] == ' efficiencyAssessment.jsp')
+                menuname = "动力评估";
+
+            else if(cbidstr[i] == ' reportChart.jsp')
+                menuname = "报表功能";
+
+            else if(cbidstr[i] == ' userMng.jsp')
+                menuname = "用户管理";
+
+            else if(cbidstr[i] == ' systemSetting.jsp')
+                menuname = "系统设置";
+
+            $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#subItem1").click(function(){
+                $("#item1").show();
+                $("#item2").hide();
+                $("#item3").hide();
+            });
+            $("#subItem2").click(function(){
+                $("#item1").hide();
+                $("#item2").show();
+                $("#item3").hide();
+            });
+            $("#subItem3").click(function(){
+                $("#item1").hide();
+                $("#item2").hide();
+                $("#item3").show();
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        function test(){
+            alert("根据类型、监测点、时间范围查看历史曲线");
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "getParameterHis",
+                data: {
+                    monitorpointid: monitorpoint,
+                    checktype: "电压/电流", //频率 功率 浪涌/塌陷
+                    starttime: "2018-2-1 10：00：00",  // 2018-2-1 10：00：00
+                    endtime: "2018-7-5 10：00：00"  // 2018-7-5 10：00：00
+                },
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
 
 </body>
 

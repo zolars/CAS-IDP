@@ -19,9 +19,15 @@ public class PowersxdyMonitor {
     private Double a1;
     private Double a2;
     private Double a3;
-    private Double angle1;
-    private Double angle2;
-    private Double angle3;
+    private Double angleU1;
+    private Double angleU2;
+    private Double angleU3;
+    private Double angleV1;
+    private Double angleV2;
+    private Double angleV3;
+    private Double angleA1;
+    private Double angleA2;
+    private Double angleA3;
 
     @Id
     @Column(name = "sxid", nullable = false, length = 255)
@@ -144,33 +150,93 @@ public class PowersxdyMonitor {
     }
 
     @Basic
-    @Column(name = "angle1", nullable = true, precision = 0)
-    public Double getAngle1() {
-        return angle1;
+    @Column(name = "angleU1", nullable = true, precision = 0)
+    public Double getAngleU1() {
+        return angleU1;
     }
 
-    public void setAngle1(Double angle1) {
-        this.angle1 = angle1;
-    }
-
-    @Basic
-    @Column(name = "angle2", nullable = true, precision = 0)
-    public Double getAngle2() {
-        return angle2;
-    }
-
-    public void setAngle2(Double angle2) {
-        this.angle2 = angle2;
+    public void setAngleU1(Double angleU1) {
+        this.angleU1 = angleU1;
     }
 
     @Basic
-    @Column(name = "angle3", nullable = true, precision = 0)
-    public Double getAngle3() {
-        return angle3;
+    @Column(name = "angleU2", nullable = true, precision = 0)
+    public Double getAngleU2() {
+        return angleU2;
     }
 
-    public void setAngle3(Double angle3) {
-        this.angle3 = angle3;
+    public void setAngleU2(Double angleU2) {
+        this.angleU2 = angleU2;
+    }
+
+    @Basic
+    @Column(name = "angleU3", nullable = true, precision = 0)
+    public Double getAngleU3() {
+        return angleU3;
+    }
+
+    public void setAngleU3(Double angleU3) {
+        this.angleU3 = angleU3;
+    }
+
+    @Basic
+    @Column(name = "angleV1", nullable = true, precision = 0)
+    public Double getAngleV1() {
+        return angleV1;
+    }
+
+    public void setAngleV1(Double angleV1) {
+        this.angleV1 = angleV1;
+    }
+
+    @Basic
+    @Column(name = "angleV2", nullable = true, precision = 0)
+    public Double getAngleV2() {
+        return angleV2;
+    }
+
+    public void setAngleV2(Double angleV2) {
+        this.angleV2 = angleV2;
+    }
+
+    @Basic
+    @Column(name = "angleV3", nullable = true, precision = 0)
+    public Double getAngleV3() {
+        return angleV3;
+    }
+
+    public void setAngleV3(Double angleV3) {
+        this.angleV3 = angleV3;
+    }
+
+    @Basic
+    @Column(name = "angleA1", nullable = true, precision = 0)
+    public Double getAngleA1() {
+        return angleA1;
+    }
+
+    public void setAngleA1(Double angleA1) {
+        this.angleA1 = angleA1;
+    }
+
+    @Basic
+    @Column(name = "angleA2", nullable = true, precision = 0)
+    public Double getAngleA2() {
+        return angleA2;
+    }
+
+    public void setAngleA2(Double angleA2) {
+        this.angleA2 = angleA2;
+    }
+
+    @Basic
+    @Column(name = "angleA3", nullable = true, precision = 0)
+    public Double getAngleA3() {
+        return angleA3;
+    }
+
+    public void setAngleA3(Double angleA3) {
+        this.angleA3 = angleA3;
     }
 
     @Override
@@ -190,14 +256,20 @@ public class PowersxdyMonitor {
                 Objects.equals(a1, that.a1) &&
                 Objects.equals(a2, that.a2) &&
                 Objects.equals(a3, that.a3) &&
-                Objects.equals(angle1, that.angle1) &&
-                Objects.equals(angle2, that.angle2) &&
-                Objects.equals(angle3, that.angle3);
+                Objects.equals(angleU1, that.angleU1) &&
+                Objects.equals(angleU2, that.angleU2) &&
+                Objects.equals(angleU3, that.angleU3) &&
+                Objects.equals(angleV1, that.angleV1) &&
+                Objects.equals(angleV2, that.angleV2) &&
+                Objects.equals(angleV3, that.angleV3) &&
+                Objects.equals(angleA1, that.angleA1) &&
+                Objects.equals(angleA2, that.angleA2) &&
+                Objects.equals(angleA3, that.angleA3);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(sxid, mpid, time, u1, u2, u3, v1, v2, v3, a1, a2, a3, angle1, angle2, angle3);
+        return Objects.hash(sxid, mpid, time, u1, u2, u3, v1, v2, v3, a1, a2, a3, angleU1, angleU2, angleU3, angleV1, angleV2, angleV3, angleA1, angleA2, angleA3);
     }
 }

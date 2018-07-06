@@ -49,20 +49,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="media" id="top-menu">
 
                 <div class="pull-left">
-                  <%--  <ul id="treeDemo" class="ztree"></ul>--%>
-                      <td>
-                          <select class="select" id="province_code" name="province_code" onchange="getCity()">
-                              <option value="">请选择</option>
-                          </select>
+              <%--      <ul id="treeDemo" class="ztree"></ul>--%>
+                  <td>
+                      <select class="select" id="province_code" name="province_code" onchange="getCity()">
+                          <option value="">请选择</option>
+                      </select>
 
-                          <select class="select" id="city_code" name="city_code" onchange="getComproom()">
-                              <option value="">请选择</option>
-                          </select>
+                      <select class="select" id="city_code" name="city_code" onchange="getComproom()">
+                          <option value="">请选择</option>
+                      </select>
 
-                          <select class="select" id="comproom_code" name="comproom_code">
-                              <option value="">请选择</option>
-                          </select>
-                      </td>
+                      <select class="select" id="comproom_code" name="comproom_code">
+                          <option value="">请选择</option>
+                      </select>
+                  </td>
                 </div>
 
                 <div class="pull-right">欢迎用户${username}登录</div>
@@ -273,154 +273,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- Breadcrumb -->
             <ol class="breadcrumb hidden-xs">
                 <li>
-                    <a href="#">主页</a>
+                    <a href="#">首页</a>
                 </li>
                 <li>
-                    <a href="#">管理</a>
+                    <a href="#">能耗统计</a>
                 </li>
-                <li class="active">用户管理</li>
+                <li class="active">能耗报表</li>
             </ol>
-
-            <h4 class="page-title">用户管理</h4>
-
-            <!-- Deafult Table -->
-            <div class="block-area" id="defaultStyle">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="tile">
-                            <h2 class="tile-title">所有用户</h2>
-                            <table class="table tile">
-                                <thead>
-                                    <tr>
-                                        <th>序号</th>
-                                        <th>用户名</th>
-                                        <th>姓名</th>
-                                        <th>所属公司</th>
-                                        <th>角色</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Jhon </td>
-                                        <td>张三 </td>
-                                        <td>青海移动</td>
-                                        <td>班长</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Admin </td>
-                                        <td>李四 </td>
-                                        <td>青海移动</td>
-                                        <td>系统管理员</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>super </td>
-                                        <td>王丽丽</td>
-                                        <td>青海移动</td>
-                                        <td>超级用户</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>duoduo </td>
-                                        <td>钱多多</td>
-                                        <td>山东移动</td>
-                                        <td>普通用户</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>super </td>
-                                        <td>小红</td>
-                                        <td>山东移动</td>
-                                        <td>普通用户</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>super </td>
-                                        <td>小明</td>
-                                        <td>山东移动</td>
-                                        <td>普通用户</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>super </td>
-                                        <td>张大千</td>
-                                        <td>青海移动</td>
-                                        <td>普通用户</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-alt">新增</button>
-                                <button type="button" class="btn btn-sm btn-alt">修改</button>
-                                <button type="button" class="btn btn-sm btn-alt">删除</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tile">
-                            <h2 class="tile-title">用户信息</h2>
-                            <table class="table tile">
-                                <thead>
-                                    <tr>
-                                        <th>属性名</th>
-                                        <th>属性值</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>用户名</td>
-                                        <td>Jhon </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>姓名</td>
-                                        <td>张三</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>所属公司</td>
-                                        <td>青海移动</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>角色</td>
-                                        <td>值班班长</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>邮箱</td>
-                                        <td>zhangsan@163.com</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>移动电话</td>
-                                        <td>15689567895</td>
-                                    </tr>
-                                    <tr>
-                                        <td>办公电话</td>
-                                        <td>564896</td>
-                                    </tr>
-                                    <tr>
-                                        <td>家庭电话</td>
-                                        <td>7899466</td>
-                                    </tr>
-                                    <tr>
-                                        <td>职务</td>
-                                        <td>班长</td>
-                                    </tr>
-                                    <tr>
-                                        <td>级别</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
         </section>
         <br/>
@@ -454,7 +313,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
 
-  <%--  <script>
+   <%-- <script>
 
         var objprobank="<%=session.getAttribute("probank")%>";
         var objcitybank="<%=session.getAttribute("citybank")%>";
@@ -487,8 +346,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
         });
 
-    </script>
---%>
+    </script>--%>
 
     <!-- 省\市\机房下拉菜单-->
     <script>
