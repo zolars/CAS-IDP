@@ -7,11 +7,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
 
+
 <!--<!DOCTYPE html>-->
 <!--[if IE 9 ]><!--<html class="ie9"><![endif]-->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta name="format-detection" content="telephone=no">
@@ -32,6 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/style.css" rel="stylesheet">
     <link href="css/icons.css" rel="stylesheet">
     <link href="css/generics.css" rel="stylesheet">
+    <link href="css/mstp_map.css" rel="stylesheet">
     <link href="css/menu.css" rel="stylesheet">
 
     <!-- Ztree -->
@@ -82,9 +85,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </ul>
         </aside>
 
-
         <!-- Content -->
         <section id="content" class="container">
+
             <!-- Messages Drawer -->
             <div id="messages" class="tile drawer animated">
                 <div class="listview narrow">
@@ -273,170 +276,284 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- Breadcrumb -->
             <ol class="breadcrumb hidden-xs">
                 <li>
-                    <a href="#">主页</a>
+                    <a href="#">首页</a>
                 </li>
-                <li>
-                    <a href="#">管理</a>
-                </li>
-                <li class="active">用户管理</li>
+                <li class="active">能耗全息图</li>
             </ol>
+            <h4 class="page-title">青海省全息图</h4>
 
-            <h4 class="page-title">用户管理</h4>
+            <div class="block-area">
 
-            <!-- Deafult Table -->
-            <div class="block-area" id="defaultStyle">
+                <div class="row">
+                    <!-- World Map -->
+                    <div class="col-md-12">
+                        <div class="tile">
+                            <h2 class="tile-title"></h2>
+                            <div class="tile-config dropdown">
+                                <a data-toggle="dropdown" href="" class="tooltips tile-menu" title="Options"></a>
+                                <ul class="dropdown-menu animated pull-right text-right">
+                                    <li>
+                                        <a href="">Refresh</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Settings</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <img style='height:100%;width:100%;' src="img/qinghai.jpg" />
+                            <div class='absolute-area'>
+                                <!-- 西宁、海东、黄南、果洛 -->
+                                <div id='ab-xining' title='西宁' data='xining' onclick="clk_map(this)" class='active'></div>
+                                <div id='ab-haibei' title='海北' data='haibei' onclick="clk_map(this)"></div>
+                                <div id='ab-haidong' title='海东' data='haidong' onclick="clk_map(this)"></div>
+                                <div id='ab-haixi' title='海西' data='haixi' onclick="clk_map(this)"></div>
+                                <div id='ab-hainan' title='海南' data='hainan' onclick="clk_map(this)"></div>
+                                <div id='ab-yushu' title='玉树' data='yushu' onclick="clk_map(this)"></div>
+                                <div id='ab-huangnan' title='黄南' data='huangnan' onclick="clk_map(this)"></div>
+                                <div id='ab-guoluo' title='果洛' data='guoluo' onclick="clk_map(this)"></div>
+                                <div id='ab-geermu' title='格尔木' data='geermu' onclick="clk_map(this)"></div>
+                            </div>
+                            <!--<div id="qinghai-map" style="height: 400px"></div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block-area">
+                <div class='row'>
+                    <div class="tile col-md-4">
+                        <h2 class="tile-title">
+                            <span class='area'>西宁</span> 总体用电量</h2>
+                        <div class="tile-config dropdown">
+                            <a data-toggle="dropdown" href="" class="tooltips tile-menu" title="Options"></a>
+                            <ul class="dropdown-menu pull-right text-right">
+                                <li>
+                                    <a href="">Refresh</a>
+                                </li>
+                                <li>
+                                    <a href="">Settings</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class='p-10 hide'>
+                            总体用电量是所有电能能耗的总和，包括照明能耗、空调能耗、负载能耗等。
+                        </div>
+                        <div class="p-10">
+                            <div id="bar-chart" class="main-chart" style="height: 250px"></div>
+                        </div>
+                    </div>
+                    <div class="tile col-md-4">
+                        <h2 class="tile-title">
+                            <span class='area'>西宁</span> 总体用油量</h2>
+                        <div class="tile-config dropdown">
+                            <a data-toggle="dropdown" href="" class="tooltips tile-menu" title="Options"></a>
+                            <ul class="dropdown-menu pull-right text-right">
+                                <li>
+                                    <a href="">Refresh</a>
+                                </li>
+                                <li>
+                                    <a href="">Settings</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class='p-10 hide'>
+                            请补充文字。请补充文字。请补充文字。请补充文字。请补充文字。请补充文字。请补充文字。请补充文字。请补充文字。
+                        </div>
+                        <div class="p-10">
+                            <div id="line-chart" class="main-chart" style="height: 250px"></div>
+                        </div>
+                    </div>
+                    <div class="tile col-md-4">
+                        <h2 class="tile-title">
+                            <span class='area'>西宁</span> 实时能耗</h2>
+                        <div class="tile-config dropdown">
+                            <a data-toggle="dropdown" href="" class="tooltips tile-menu" title="Options"></a>
+                            <ul class="dropdown-menu pull-right text-right">
+                                <li>
+                                    <a href="">Refresh</a>
+                                </li>
+                                <li>
+                                    <a href="">Settings</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class='p-10 hide'>
+                            请补充文字。请补充文字。请补充文字。请补充文字。请补充文字。请补充文字。请补充文字。请补充文字。
+                        </div>
+                        <div class="p-10">
+                            <div id="dynamic-chart" class="main-chart" style="height: 250px"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pies -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="tile">
-                            <h2 class="tile-title">所有用户</h2>
-                            <table class="table tile">
-                                <thead>
-                                    <tr>
-                                        <th>序号</th>
-                                        <th>用户名</th>
-                                        <th>姓名</th>
-                                        <th>所属公司</th>
-                                        <th>角色</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Jhon </td>
-                                        <td>张三 </td>
-                                        <td>青海移动</td>
-                                        <td>班长</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Admin </td>
-                                        <td>李四 </td>
-                                        <td>青海移动</td>
-                                        <td>系统管理员</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>super </td>
-                                        <td>王丽丽</td>
-                                        <td>青海移动</td>
-                                        <td>超级用户</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>duoduo </td>
-                                        <td>钱多多</td>
-                                        <td>山东移动</td>
-                                        <td>普通用户</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>super </td>
-                                        <td>小红</td>
-                                        <td>山东移动</td>
-                                        <td>普通用户</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>super </td>
-                                        <td>小明</td>
-                                        <td>山东移动</td>
-                                        <td>普通用户</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>super </td>
-                                        <td>张大千</td>
-                                        <td>青海移动</td>
-                                        <td>普通用户</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-alt">新增</button>
-                                <button type="button" class="btn btn-sm btn-alt">修改</button>
-                                <button type="button" class="btn btn-sm btn-alt">删除</button>
+                            <h2 class="tile-title">
+                                <span class='area'>西宁</span> 用电量占比分析</h2>
+                            <div class="tile-config dropdown">
+                                <a data-toggle="dropdown" href="" class="tooltips tile-menu" title="Options"></a>
+                                <ul class="dropdown-menu pull-right text-right">
+                                    <li>
+                                        <a href="">Refresh</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Settings</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p-10">
+                                <div id="pie-chart" class="main-chart" style="height: 300px"></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="tile">
-                            <h2 class="tile-title">用户信息</h2>
-                            <table class="table tile">
-                                <thead>
-                                    <tr>
-                                        <th>属性名</th>
-                                        <th>属性值</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>用户名</td>
-                                        <td>Jhon </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>姓名</td>
-                                        <td>张三</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>所属公司</td>
-                                        <td>青海移动</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>角色</td>
-                                        <td>值班班长</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>邮箱</td>
-                                        <td>zhangsan@163.com</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>移动电话</td>
-                                        <td>15689567895</td>
-                                    </tr>
-                                    <tr>
-                                        <td>办公电话</td>
-                                        <td>564896</td>
-                                    </tr>
-                                    <tr>
-                                        <td>家庭电话</td>
-                                        <td>7899466</td>
-                                    </tr>
-                                    <tr>
-                                        <td>职务</td>
-                                        <td>班长</td>
-                                    </tr>
-                                    <tr>
-                                        <td>级别</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <h2 class="tile-title">
+                                <span class='area'>西宁</span> 用油量占比分析</h2>
+                            <div class="tile-config dropdown">
+                                <a data-toggle="dropdown" href="" class="tooltips tile-menu" title="Options"></a>
+                                <ul class="dropdown-menu pull-right text-right">
+                                    <li>
+                                        <a href="">Refresh</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Settings</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p-10">
+                                <div id="donut-chart" class="main-chart" style="height: 300px"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="block-area">
+                <h3 class="block-title hide">
+                    <span class='area'>西宁</span> 节能同比</h3>
 
+                <!-- Easy Pie charts -->
+                <div class="tile text-center hide">
+                    <div class="tile-dark p-10">
+                        <div class="pie-chart-tiny" data-percent="13">
+                            <span class="percent"></span>
+                            <span class="pie-title">办公楼</span>
+                        </div>
+                        <div class="pie-chart-tiny" data-percent="25">
+                            <span class="percent"></span>
+                            <span class="pie-title">核心机房</span>
+                        </div>
+                        <div class="pie-chart-tiny" data-percent="45">
+                            <span class="percent"></span>
+                            <span class="pie-title">基站</span>
+                        </div>
+                        <div class="pie-chart-tiny" data-percent="5">
+                            <span class="percent"></span>
+                            <span class="pie-title">中移动网点</span>
+                        </div>
+                        <div class="pie-chart-tiny" data-percent="12">
+                            <span class="percent"></span>
+                            <span class="pie-title">其他</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sparkline -->
+                <h3 class="block-title">
+                    <span class='area'>西宁</span> 累计能耗</h3>
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <div class="tile quick-stats">
+                            <div id="stats-line-2" class="pull-left"></div>
+                            <div class="data">
+                                <h2 data-value="1">0</h2>
+                                <small>办公楼</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="tile quick-stats media">
+                            <div id="stats-line-3" class="pull-left"></div>
+                            <div class="media-body">
+                                <h2 data-value="3">0</h2>
+                                <small>核心机房</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="tile quick-stats media">
+
+                            <div id="stats-line-4" class="pull-left"></div>
+
+                            <div class="media-body">
+                                <h2 data-value="123">0</h2>
+                                <small>基站</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="tile quick-stats media">
+                            <div id="stats-line" class="pull-left"></div>
+                            <div class="media-body">
+                                <h2 data-value="23">0</h2>
+                                <small>中移动网点</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="whiter m-t-20 m-b-20" />
+
+            <br/>
+            <br/>
+            <br/>
         </section>
-        <br/>
-        <br/>
     </section>
 
     <!-- Javascript Libraries -->
     <!-- jQuery -->
     <script src="js/jquery-1.10.2.js"></script>
     <!-- jQuery Library -->
+    <script src="js/jquery-ui-1.11.0.js"></script>
+    <!-- jQuery UI -->
+    <script src="js/jquery.easing.1.3.js"></script>
+    <!-- jQuery Easing - Requirred for Lightbox -->
 
     <!-- Bootstrap -->
     <script src="js/bootstrap-3.3.4.js"></script>
+
+    <!-- Charts -->
+    <script src="js/charts/jquery.flot.js"></script>
+    <!-- Flot Main -->
+    <script src="js/charts/jquery.flot.time.js"></script>
+    <!-- Flot sub -->
+    <script src="js/charts/jquery.flot.animator.min.js"></script>
+    <!-- Flot sub -->
+    <script src="js/charts/jquery.flot.resize.min.js"></script>
+    <!-- Flot sub - for repaint when resizing the screen -->
+    <script src="js/charts/jquery.flot.orderBar.js"></script>
+    <!-- Flot Bar chart -->
+    <script src="js/charts/jquery.flot.pie.min.js"></script>
+    <!-- Flot Pie chart -->
+
+    <script src="js/sparkline.min.js"></script>
+    <!-- Sparkline - Tiny charts -->
+    <script src="js/easypiechart.js"></script>
+    <!-- EasyPieChart - Animated Pie Charts -->
+    <script src="js/mstp_map.js"></script>
+    <!-- All the above chart related functions -->
+
+    <!-- Map -->
+    <script src="js/maps/jvectormap.min.js"></script>
+    <!-- jVectorMap main library -->
     <!--Media Player-->
     <script src="js/media-player.min.js"></script>
     <!-- USA Map for jVectorMap -->
+
     <!-- UX -->
     <script src="js/scroll.min.js"></script>
     <!-- Custom Scrollbar -->
@@ -454,7 +571,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
 
-  <%--  <script>
+   <%-- <script>
 
         var objprobank="<%=session.getAttribute("probank")%>";
         var objcitybank="<%=session.getAttribute("citybank")%>";
@@ -487,8 +604,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
         });
 
-    </script>
---%>
+    </script>--%>
 
     <!-- 省\市\机房下拉菜单-->
     <script>

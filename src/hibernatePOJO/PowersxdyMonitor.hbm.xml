@@ -41,14 +41,32 @@
         <property name="a3">
             <column name="A3" sql-type="float" precision="-1" not-null="true"/>
         </property>
-        <property name="angle1">
-            <column name="angle1" sql-type="float" precision="-1" not-null="true"/>
+        <property name="angleU1">
+            <column name="angleU1" sql-type="float" precision="-1" not-null="true"/>
         </property>
-        <property name="angle2">
-            <column name="angle2" sql-type="float" precision="-1" not-null="true"/>
+        <property name="angleU2">
+            <column name="angleU2" sql-type="float" precision="-1" not-null="true"/>
         </property>
-        <property name="angle3">
-            <column name="angle3" sql-type="float" precision="-1" not-null="true"/>
+        <property name="angleU3">
+            <column name="angleU3" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angleV1">
+            <column name="angleV1" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angleV2">
+            <column name="angleV2" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angleV3">
+            <column name="angleV3" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angleA1">
+            <column name="angleA1" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angleA2">
+            <column name="angleA2" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="angleA3">
+            <column name="angleA3" sql-type="float" precision="-1" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>
