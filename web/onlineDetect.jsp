@@ -228,7 +228,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
             <!-- Main Widgets -->
-
             <div class="block-area">
                 <div class="row">
                     <div class="col-md-12">
@@ -259,10 +258,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div id = "item4" style="display:none;">
                             this is q4
                         </div>
-
                     </div>
                 </div>
-
             </div>
 
 
@@ -994,8 +991,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
 
     <script type="text/javascript">
-
-        //function jhjTabClick(name){
             $(document).ready(function(){
                 $("#subItem1").click(function(){
                     $("#item1").show();
@@ -1022,7 +1017,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").show();
                 });
             });
-        //}
     </script>
 
     <script>

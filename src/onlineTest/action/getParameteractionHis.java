@@ -3,9 +3,7 @@ package onlineTest.action;
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 import onlineTest.dao.PowerParameterDAO;
-import onlineTest.dao.XBDAO;
 import onlineTest.dao.impl.PowerParameterDAOImpl;
-import onlineTest.dao.impl.XBDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +15,7 @@ import java.util.List;
 //import net.sf.json.JSONArray;
 
 
-public class getParameteraction extends ActionSupport {
+public class getParameteractionHis extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -41,12 +39,14 @@ public class getParameteraction extends ActionSupport {
             //获取监测点
             //String computerroom = request.getParameter("computerroomid");
             String monitorpoint = request.getParameter("monitorpointid");
+            String starttime = request.getParameter("starttime");
+            String endtime = request.getParameter("endtime");
 
             PowerParameterDAO dao = new PowerParameterDAOImpl();
 
             List xbdata = new ArrayList();
 
-            xbdata = dao.getCurrentParameterData(monitorpoint);
+            xbdata = dao.getHisParameterData(monitorpoint, starttime, endtime);
 
             result = JSON.toJSONString(xbdata); // List转json
 
