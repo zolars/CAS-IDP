@@ -23,5 +23,11 @@
         <property name="cbid">
             <column name="cbid" sql-type="varchar(255)" not-null="true"/>
         </property>
+        <property name="telephone">
+            <column name="telephone" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
+        <property name="govtelephone">
+            <column name="govtelephone" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

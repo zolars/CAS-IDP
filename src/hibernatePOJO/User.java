@@ -10,10 +10,12 @@ import java.util.Objects;
 public class User {
     private String uid;
     private String uname;
+    private String chinesename;
     private String password;
     private String pbid;
     private String cbid;
-    private String chinesename;
+    private String telephone;
+    private String govtelephone;
 
     @Id
     @Column(name = "uid", nullable = false, length = 11)
@@ -33,6 +35,16 @@ public class User {
 
     public void setUname(String uname) {
         this.uname = uname;
+    }
+
+    @Basic
+    @Column(name = "chinesename", nullable = true, length = 255)
+    public String getChinesename() {
+        return chinesename;
+    }
+
+    public void setChinesename(String chinesename) {
+        this.chinesename = chinesename;
     }
 
     @Basic
@@ -65,6 +77,26 @@ public class User {
         this.cbid = cbid;
     }
 
+    @Basic
+    @Column(name = "telephone", nullable = true, length = 11)
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    @Basic
+    @Column(name = "govtelephone", nullable = true, length = 11)
+    public String getGovtelephone() {
+        return govtelephone;
+    }
+
+    public void setGovtelephone(String govtelephone) {
+        this.govtelephone = govtelephone;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,24 +104,17 @@ public class User {
         User user = (User) o;
         return Objects.equals(uid, user.uid) &&
                 Objects.equals(uname, user.uname) &&
+                Objects.equals(chinesename, user.chinesename) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(pbid, user.pbid) &&
-                Objects.equals(cbid, user.cbid);
+                Objects.equals(cbid, user.cbid) &&
+                Objects.equals(telephone, user.telephone) &&
+                Objects.equals(govtelephone, user.govtelephone);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(uid, uname, password, pbid, cbid);
-    }
-
-    @Basic
-    @Column(name = "chinesename", nullable = true, length = 255)
-    public String getChinesename() {
-        return chinesename;
-    }
-
-    public void setChinesename(String chinesename) {
-        this.chinesename = chinesename;
+        return Objects.hash(uid, uname, chinesename, password, pbid, cbid, telephone, govtelephone);
     }
 }

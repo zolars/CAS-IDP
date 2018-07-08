@@ -37,14 +37,10 @@
     <link href="css/menu.css" rel="stylesheet">
     <link rel="stylesheet" href="css/pick-pcc.min.1.0.1.css" />
 
-    <!-- Ztree -->
-    <%--<link rel="stylesheet" href="/css/zTree/demo.css" type="text/css">--%>
-    <link rel="stylesheet" href="/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
-
     <!-- bootstrap datepicker时间选择控件 -->
     <link rel="stylesheet" type="text/css" href="/assets/datepicker/css/bootstrap-datepicker.css">
 
-
+    <link href="css/mycss.css" rel="stylesheet">
 
 
 </head>
@@ -169,25 +165,18 @@
 
         <div class="media-body">
             <div class="media" id="top-menu">
+                <div class="pull-left location-select">
+                    <select class="form-control location-select-item" id="province_code" name="province_code" onchange="getCity()">
+                        <option value="">请选择</option>
+                    </select>
 
-                <div class="pull-left">
-                    <%-- <ul id="treeDemo" class="ztree"></ul>--%>
-                    <%-- </pre><pre name="code" class="html"><tr>--%>
-                        <td>
-                            <select class="select" id="province_code" name="province_code" onchange="getCity()">
-                                <option value="">请选择</option>
-                            </select>
+                    <select class="form-control location-select-item" id="city_code" name="city_code" onchange="getComproom()">
+                        <option value="">请选择</option>
+                    </select>
 
-                            <select class="select" id="city_code" name="city_code" onchange="getComproom()">
-                                <option value="">请选择</option>
-                            </select>
-
-                            <select class="select" id="comproom_code" name="comproom_code">
-                                <option value="">请选择</option>
-                            </select>
-                        </td>
-                        </tr>
-
+                    <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
+                        <option value="">请选择</option>
+                    </select>
                 </div>
 
                 <div class="pull-right">欢迎用户${username}登录</div>

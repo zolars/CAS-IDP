@@ -6,22 +6,12 @@ import java.util.Objects;
 @Entity
 @Table(name = "user_roles", schema = "Test", catalog = "")
 public class UserRoles {
-    private int id;
     private String uid;
     private String rid;
+    private int id;
 
     @Id
-    @Column(name = "id", nullable = false)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "uid", nullable = true, length = 255)
+    @Column(name = "uid", nullable = false, length = 255)
     public String getUid() {
         return uid;
     }
@@ -40,6 +30,16 @@ public class UserRoles {
         this.rid = rid;
     }
 
+    @Basic
+    @Column(name = "id", nullable = false)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +53,6 @@ public class UserRoles {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, uid, rid);
+        return Objects.hash(uid, rid, id);
     }
 }

@@ -34,10 +34,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/generics.css" rel="stylesheet">
     <link href="css/menu.css" rel="stylesheet">
 
-    <!-- Ztree -->
-    <%--<link rel="stylesheet" href="/css/zTree/demo.css" type="text/css">--%>
-    <link rel="stylesheet" href="/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link href="css/mycss.css" rel="stylesheet">
 
+   <%-- <style>
+        .add-user {
+            display: none;
+            width: 500px;
+            height: 440px;
+            background: rgba(0,0,0,.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: 2000;
+            border-radius: 20px;
+            padding: 30px;
+        }
+        .add-user-item {
+            flex: 1;
+        }
+        .add-user-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .add-user-input {
+            width: 80%;
+        }
+        .add-user-handle {
+            width: 100%;
+            display: flex;
+            height: 100px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .add-user-one-line{
+            display: flex;
+            margin-bottom: 20px;
+
+        }
+        .add-user-one-line:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* location-bar */
+        .location-select {
+            display: flex;
+        }
+
+        .location-select-item {
+            width: 90px;
+        }
+    </style>
+--%>
 
 </head>
 
@@ -48,27 +98,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         <div class="media-body">
             <div class="media" id="top-menu">
+                <div class="pull-left location-select">
+                      <select class="form-control location-select-item" id="province_code" name="province_code" onchange="getCity()">
+                          <option value="">请选择</option>
+                      </select>
 
-                <div class="pull-left">
-                  <%--  <ul id="treeDemo" class="ztree"></ul>--%>
-                      <td>
-                          <select class="select" id="province_code" name="province_code" onchange="getCity()">
-                              <option value="">请选择</option>
-                          </select>
+                      <select class="form-control location-select-item" id="city_code" name="city_code" onchange="getComproom()">
+                          <option value="">请选择</option>
+                      </select>
 
-                          <select class="select" id="city_code" name="city_code" onchange="getComproom()">
-                              <option value="">请选择</option>
-                          </select>
-
-                          <select class="select" id="comproom_code" name="comproom_code">
-                              <option value="">请选择</option>
-                          </select>
-                      </td>
+                      <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
+                          <option value="">请选择</option>
+                      </select>
                 </div>
 
                 <div class="pull-right">欢迎用户${username}登录</div>
-
-
 
             </div>
         </div>
@@ -132,98 +176,109 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
 
-            <h4 class="page-title">用户管理</h4>
-
             <!-- Deafult Table -->
             <div class="block-area" id="defaultStyle">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="tile">
-                            <h2 class="tile-title">所有用户</h2>
+                            <h2 class="tile-title">账号信息</h2>
                             <table id="userinfotablehead">
                                 <thead>
                                 <tr>
-                                    <th><div style="padding-left:20px;">序号</div></th>
-                                    <th><div style="padding-left:20px;">用户名</div></th>
+                                    <th><div style="padding-left:20px;">账号</div></th>
                                     <th><div style="padding-left:20px;">姓名</div></th>
-                                    <th><div style="padding-left:20px;">所属银行</div></th>
+                                    <th><div style="padding-left:20px;">组织</div></th>
                                     <th><div style="padding-left:20px;">角色</div></th>
+                                    <th><div style="padding-left:20px;">联系方式</div></th>
+                                    <th><div style="padding-left:20px;">公务手机</div></th>
                                 </tr>
                                 </thead>
                             </table>
-                            <table id="userinfotable">
-                            </table>
+                            <table id="userinfotable"></table>
+                           <%-- <table id="userinfotable" onmouseover="getrow(this)" onmouseout="backrow(this)" onclick="selectRow(this)"></table>
+--%>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-alt" onClick="getALLUserInfomation()" >查看所有用户</button>
-                                <button type="button" class="btn btn-sm btn-alt">新增</button>
-                                <button type="button" class="btn btn-sm btn-alt">修改</button>
-                                <button type="button" class="btn btn-sm btn-alt">删除</button>
+                                <button type="button" class="btn btn-sm btn-alt" onClick="getALLUserInfomation()" >查询</button>
+                                <button type="button" class="btn btn-sm btn-alt" onclick="showAddUserModal()">新增</button>
+                                <button type="button" class="btn btn-sm btn-alt" onClick="deleteUserInfomation()">删除</button>
+                                <button type="button" class="btn btn-sm btn-alt" onclick="showUpdateUserModal()">修改</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="tile">
-                            <h2 class="tile-title">用户信息</h2>
-                            <table class="table tile">
-                                <thead>
-                                    <tr>
-                                        <th>属性名</th>
-                                        <th>属性值</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>用户名</td>
-                                        <td>Jhon </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>姓名</td>
-                                        <td>张三</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>所属公司</td>
-                                        <td>青海移动</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>角色</td>
-                                        <td>值班班长</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>邮箱</td>
-                                        <td>zhangsan@163.com</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>移动电话</td>
-                                        <td>15689567895</td>
-                                    </tr>
-                                    <tr>
-                                        <td>办公电话</td>
-                                        <td>564896</td>
-                                    </tr>
-                                    <tr>
-                                        <td>家庭电话</td>
-                                        <td>7899466</td>
-                                    </tr>
-                                    <tr>
-                                        <td>职务</td>
-                                        <td>班长</td>
-                                    </tr>
-                                    <tr>
-                                        <td>级别</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <h2 class="tile-title">角色管理</h2>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- user model DIV-->
+            <div class="add-user" id="add-user-modal">
+                <div class="add-user-one-line">
+                    <div class="add-user-item">
+                        <div class="add-user-title">账号</div>
+                        <input id="useraccount" class="form-control add-user-input" type="text">
+                    </div>
+                    <div class="add-user-item">
+                        <div class="add-user-title">密码</div>
+                        <input id="userpassword" class="form-control add-user-input" type="text">
+                    </div>
+
+                </div>
+
+                <div class="add-user-one-line">
+                <div class="add-user-item">
+                    <div class="add-user-title">姓名</div>
+                    <input id="username" class="form-control add-user-input" type="text">
+                </div>
+                <div class="add-user-item">
+                    <div class="add-user-title">联系方式</div>
+                    <input id="usertelephone" class="form-control add-user-input" type="text">
+                </div>
+                </div>
+
+                <div class="add-user-one-line">
+                <div class="add-user-item">
+                    <div class="add-user-title">公务手机</div>
+                    <input id="usergovtelephone" class="form-control add-user-input" type="text">
+                </div>
+                <div class="add-user-item">
+                        <div class="add-user-title">角色</div>
+                        <select class="form-control location-select-item" id="userroles" name="userroles" onclick="getRoles()">
+                           <option value="">请选择</option>
+                        </select>
+                </div>
+                </div>
+
+
+                <div class="add-user-one-line">
+                <div class="add-user-item">
+                    <div class="add-user-title">省</div>
+                    <select class="form-control location-select-item" id="userorgnization-province" name="userorgnization-province" onclick="getProvince()">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+                <div class="add-user-item">
+                        <div class="add-user-title">市</div>
+                        <select class="form-control location-select-item" id="userorgnization-city" name="userorgnization-city" onclick="getCity()">
+                            <option value="">请选择</option>
+                        </select>
+                </div>
+                <div class="add-user-item">
+                        <div class="add-user-title">机房</div>
+                        <select class="form-control location-select-item" id="userorgnization-computerroom" name="userorgnization-computerroom" onclick="getComputerroom()">
+                            <option value="">请选择</option>
+                        </select>
+                </div>
+                </div>
+
+                <div class="add-user-handle">
+                    <button class="btn btn-default" onclick="hiddenUserModel()">取消</button>
+                    <button type="submit" class="btn btn-primary" onclick="submitAddUser()">确定</button>
+                </div>
+            </div>
+            <!-- user model DIV END-->
 
         </section>
         <br/>
@@ -232,11 +287,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- Javascript Libraries -->
     <!-- jQuery -->
-    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-1.4.4.min.js"></script>
     <!-- jQuery Library -->
 
     <!-- Bootstrap -->
-    <script src="js/bootstrap-3.3.4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <!--Media Player-->
     <script src="js/media-player.min.js"></script>
     <!-- USA Map for jVectorMap -->
@@ -250,114 +305,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/feeds.min.js"></script>
     <!-- News Feeds -->
 
-
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
 
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
-
-   <%-- <script>
-
-        var objprobank="<%=session.getAttribute("probank")%>";
-        var objcitybank="<%=session.getAttribute("citybank")%>";
-        var objcomputerroom="<%=session.getAttribute("computerroom")%>";
-
-        /*var objcitybank2 = objcitybank.list;
-        alert(objcitybank2);
-
-        for(var key=0; key<objcitybank2.length; key++) {
-            var temp = objcitybank2[key];
-            console.log(temp);
-        }
-        alert(objcitybank2);*/
-
-        var zTreeObj;
-        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-        var setting = {};
-        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-        var zNodes = [
-            {name:objprobank, open:true, children:[
-                    {name:objcitybank, open:true, children:[
-                            {name:objcomputerroom}
-                        ]
-                    }
-                ]
-            }
-        ];
-
-        $(document).ready(function(){
-            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-        });
-
-    </script>--%>
-
-    <!-- 省\市\机房下拉菜单-->
-    <script>
-        var provinceid="<%=session.getAttribute("probank")%>";
-
-        if(provinceid){//第一次进入这个页面，没有获取过
-            $("#province_code").empty();
-            $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
-        }
-        else{
-        }
-
-        /*加载市下拉选*/
-        function getCity() {
-            var pname = $("#province_code").val();
-            $("#city_code").empty();
-            $("#comproom_code").empty();
-
-            $.ajax({
-                type: "post",
-                url: "getCityTree",
-                data: {provinceid: pname},
-                dataType : "json",
-                success: function (data) {
-                    alert("33");
-                    $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
-                    //alert(obj[0].cbname);
-                    var obj = eval("(" + data + ")");
-                    for (var i = 0; i < obj.length; i++) {
-                        $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
-                    }
-
-                },
-                error: function () {
-                    alert("加载市失败");
-                }
-            });
-        }
-
-        /*加载机房下拉选*/
-        function getComproom() {
-            var cname = $("#city_code").val();
-            $("#comproom_code").empty();
-
-            $.ajax({
-                type: "post",
-                url: "getCompTree",
-                data: {cityid: cname},
-                dataType : "json",
-                success: function (data) {
-
-                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
-                    var obj = eval("(" + data + ")");
-                    for (var i = 0; i < obj.length; i++) {
-                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
-                    }
-                },
-                error: function () {
-                    alert("加载机房失败");
-                }
-            });
-        }
-
-    </script>
 
     <!-- 动态加载菜单项 -->
     <script type="text/javascript">
@@ -423,6 +375,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     </script>
 
+    <!-- 根据类型、监测点、时间范围查看历史曲线 -->
     <script type="text/javascript">
         function test(){
             alert("根据类型、监测点、时间范围查看历史曲线");
@@ -447,6 +400,246 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             });
         }
+    </script>
+
+    <script type="text/javascript">
+        <!--查询所有账号 -->
+        function getALLUserInfomation(){
+            var monitorpoint = 1;
+            $.ajax({
+                type: "post",
+                url: "getAllUserInfo",
+                data: {
+                    monitorpointid: monitorpoint
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj;
+                    var table = $("#userinfotable");
+                    table.empty();
+
+                    for(var key in list){
+                        var len = list[key].length;
+                        for(var i = 0; i < len; i++){
+                            var uid = list[key][i][0];
+                            var account = list[key][i][1];
+                            var name = list[key][i][2];
+                            var org = list[key][i][4] +""+ list[key][i][5];
+                            var role = list[key][i][3];
+                            var telephone = list[key][i][6];
+                            var govtelephone = list[key][i][7];
+                            table.append('<tr><td><input type="checkbox" name="userid" id="userid" value='+uid+'></td><td>' + account + '</td><td>' + name +  '</td><td>' + org + '</td><td>' + role + '</td><td>' + telephone +
+                                '</td><td>' + govtelephone + '</td></tr>');
+                        }
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+
+        <!--显示user model -->
+        function showAddUserModal() {
+            $('#add-user-modal').css('display', 'block');
+        }
+
+        <!--删除账号 -->
+        function deleteUserInfomation(){
+            var useridcheck = $("input[name='userid']:checked");
+            if (useridcheck.length == 0)
+                alert("请选择一条用户信息");
+            else if (useridcheck.length > 1)
+                alert("每次只能打开一条用户信息");
+            else{
+                var monitorpoint = 1;
+                var useridck = $("input[name='userid']:checked").serialize();
+                $.ajax({
+                    type: "post",
+                    url: "deleteUserInfo",
+                    data: {
+                        monitorpointid: monitorpoint,
+                        uid: useridck
+                    },
+                    dataType : "json",
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        var rt = obj.result;
+
+                        if(rt) {
+                            getALLUserInfomation();
+                        }
+                        else{
+                            alert("删除失败");
+                        }
+                    },
+                    error: function () {
+                        alert("失败");
+                    }
+                });
+            }
+        }
+
+        <!--修改账号 -->
+        function showUpdateUserModal() {
+            $('#add-user-modal').css('display', 'block');
+
+            //显示 用户信息到div
+            var useridcheck = $("input[name='userid']:checked");
+            alert(useridcheck);
+
+
+
+
+        }
+
+        <!--修改账号-确认修改 -->
+        function submitUpdateUser() {
+            //    success
+            //     $('#add-user-modal').css('display', 'none');
+        }
+
+        <!--隐藏uesr model div -->
+        function hiddenUserModel() {
+            $('#add-user-modal').css('display', 'none');
+        }
+
+        <!--添加账号-确认添加 -->
+        function submitAddUser() {
+            var uaccount = $("#useraccount").val();
+            var upassword = $("#userpassword").val();
+            var uname = $("#username").val();
+            var utelephone = $("#usertelephone").val();
+            var ugovtelephone = $("#usergovtelephone").val();
+            var uroles = $("#userroles").val();
+            var uprovince = $("#userorgnization-province").val();
+            var ucity = $("#userorgnization-city").val();
+            var ucomputerroom = $("#userorgnization-computerroom").val();
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "addUserInfo",
+                data: {
+                    uaccount: uaccount,
+                    upassword: upassword,
+                    uname: uname,
+                    utelephone: utelephone,
+                    ugovtelephone: ugovtelephone,
+                    uroles: uroles,
+                    uprovince: uprovince,
+                    ucity: ucity,
+                    ucomputerroom: ucomputerroom
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var rt = obj.result;
+
+                    if(rt) {
+                        hiddenUserModel();
+                        getALLUserInfomation();
+                    }
+                    else{
+                        alert("删除失败");
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+
+        /*加载角色下拉选*/
+        function getRoles() {
+            $.ajax({
+                type: "post",
+                url: "getAllRoles",
+                dataType : "json",
+                success: function (data) {
+                  //  $('#userroles').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = JSON.parse(data);
+                    var rt = obj.allroles;
+
+                    for (var i = 0; i < rt.length; i++) {
+                        $('#userroles').append("<option value='" + rt[i].rid + "' >" + rt[i].rolesname + "</option>");
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+
+        /*加载Province下拉选*/
+        function getProvince() {
+            $.ajax({
+                type: "post",
+                url: "getAllProvince",
+                dataType : "json",
+                success: function (data) {
+                   // $('#userorgnization-province').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = JSON.parse(data);
+                    var rt = obj.allprovince;
+
+                    for (var i = 0; i < rt.length; i++) {
+                        $('#userorgnization-province').append("<option value='" + rt[i].pbid + "' >" + rt[i].pbname + "</option>");
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+
+        /*加载City下拉选*/
+        function getCity() {
+            $.ajax({
+                type: "post",
+                url: "getAllCity",
+                dataType : "json",
+                success: function (data) {
+                 //   $('#userorgnization-city').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = JSON.parse(data);
+                    var rt = obj.allcity;
+
+                    for (var i = 0; i < rt.length; i++) {
+                        $('#userorgnization-city').append("<option value='" + rt[i].cbid + "' >" + rt[i].cbname + "</option>");
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+
+        /*加载Computerroom下拉选*/
+        function getComputerroom() {
+            $.ajax({
+                type: "post",
+                url: "getAllComputerroom",
+                dataType : "json",
+                success: function (data) {
+                   // $('#userorgnization-computerroom').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = JSON.parse(data);
+                    var rt = obj.allcomputerroom;
+
+                    for (var i = 0; i < rt.length; i++) {
+                        $('#userorgnization-computerroom').append("<option value='" + rt[i].rid + "' >" + rt[i].rname + "</option>");
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+
     </script>
 
 </body>

@@ -65,7 +65,7 @@ public class UserLoginAction extends ActionSupport{
                 List mlist = new ArrayList();
                 mlist = dao.getUserDynamicMenu(user);
 
-                for(int i = 1; i < mlist.size(); i++){
+                for(int i = 0; i < mlist.size(); i++){
                    // System.out.println("i："+mlist.get(i));
                     if(mlist.get(i).equals("5")){
                         menulist.add("province.jsp");

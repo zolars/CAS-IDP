@@ -5,7 +5,6 @@ import Util.ProvinceEnum;
 
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
-import hibernatePOJO.User;
 //import net.sf.json.JSON;
 //import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
