@@ -1,10 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!-- 引入struts的标签库-->
+<%@ taglib uri="/struts-tags" prefix="s"%>
 
 
 <!--<!DOCTYPE html>-->
@@ -35,60 +35,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/menu.css" rel="stylesheet">
 
     <link href="css/mycss.css" rel="stylesheet">
-
-   <%-- <style>
-        .add-user {
-            display: none;
-            width: 500px;
-            height: 440px;
-            background: rgba(0,0,0,.5);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;
-            z-index: 2000;
-            border-radius: 20px;
-            padding: 30px;
-        }
-        .add-user-item {
-            flex: 1;
-        }
-        .add-user-title {
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        .add-user-input {
-            width: 80%;
-        }
-        .add-user-handle {
-            width: 100%;
-            display: flex;
-            height: 100px;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .add-user-one-line{
-            display: flex;
-            margin-bottom: 20px;
-
-        }
-        .add-user-one-line:last-of-type {
-            margin-bottom: 0;
-        }
-
-        /* location-bar */
-        .location-select {
-            display: flex;
-        }
-
-        .location-select-item {
-            width: 90px;
-        }
-    </style>
---%>
-
 </head>
 
 <body id="skin-blur-blue">
@@ -99,17 +45,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="media-body">
             <div class="media" id="top-menu">
                 <div class="pull-left location-select">
-                      <select class="form-control location-select-item" id="province_code" name="province_code" onchange="getCity()">
-                          <option value="">请选择</option>
-                      </select>
+                    <select class="form-control location-select-item" id="province_code" name="province_code" onchange="getCity()">
+                        <option value="">请选择</option>
+                    </select>
 
-                      <select class="form-control location-select-item" id="city_code" name="city_code" onchange="getComproom()">
-                          <option value="">请选择</option>
-                      </select>
+                    <select class="form-control location-select-item" id="city_code" name="city_code" onchange="getComproom()">
+                        <option value="">请选择</option>
+                    </select>
 
-                      <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
-                          <option value="">请选择</option>
-                      </select>
+                    <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
+                        <option value="">请选择</option>
+                    </select>
                 </div>
 
                 <div class="pull-right">欢迎用户${username}登录</div>
@@ -132,6 +78,113 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         <!-- Content -->
         <section id="content" class="container">
+            <!-- Messages Drawer -->
+            <div id="messages" class="tile drawer animated">
+                <div class="listview narrow">
+                    <div class="media">
+                        <a href="">新消息</a>
+                        <span class="drawer-close">&times;</span>
+
+                    </div>
+                    <div class="overflow" style="height: 254px">
+                        <div class="media">
+                            <div class="pull-left">
+                                <img width="40" src="img/profile-pics/1.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">调度班长 - 2分钟前</small>
+                                <br>
+                                <a class="t-overflow" href="">空调系统数据采集异常，请工作人员检查。</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <img width="40" src="img/profile-pics/2.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">值班专员 - 15分钟前</small>
+                                <br>
+                                <a class="t-overflow" href="">办公室供暖系统出现异常，无法提供正常供暖，请排除故障!</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <img width="40" src="img/profile-pics/3.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">自动化班长 - 3小时前</small>
+                                <br>
+                                <a class="t-overflow" href="">能源费用分布图以及报表数据有误差，请核对</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <img width="40" src="img/profile-pics/4.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">值班人员 - 3小时前</small>
+                                <br>
+                                <a class="t-overflow" href="">锅炉房水温过高，告警系统启动，请及时查看.</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <img width="40" src="img/profile-pics/1.jpg" alt="">
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">办公室 - 4小时前</small>
+                                <br>
+                                <a class="t-overflow" href="">请各部门提供上周能耗统计数据，本周将针对关键能耗点进行技术优化</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <img width="40" src="img/profile-pics/2.jpg" alt="">
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">值班专员 - 5小时前</small>
+                                <br>
+                                <a class="t-overflow" href="">自动化班提供1#机房总耗电量远远超过预测值，请再次核对数据并及时告知！</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <img width="40" src="img/profile-pics/3.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">办公室 - 6小时前</small>
+                                <br>
+                                <a class="t-overflow" href="">请提供“人均空调系统能耗”和“制冷系统能效比”两组数据</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <img width="40" src="img/profile-pics/4.jpg" alt="">
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">办公室专责 - 6小时前</small>
+                                <br>
+                                <a class="t-overflow" href="">请调度班提供2#机房和3#基站的能耗统计数据.</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <img width="40" src="img/profile-pics/5.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">网管中心 - 7小时前</small>
+                                <br>
+                                <a class="t-overflow" href="">今天凌晨将进行断网检修，请各部门及时下载相关材料</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media text-center whiter l-100">
+                        <a href="">
+                            <small>查看所有</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb hidden-xs">
@@ -144,20 +197,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li class="active">用户管理</li>
             </ol>
 
-
             <!-- Main Widgets -->
             <div class="block-area">
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs" id="ulItem">
-                            <li class="active" style="width:25%">
-                                <a data-toggle="tab" id="subItem1">•权限</a>
+                            <li class="active" style="width:15%">
+                                <a data-toggle="tab" id="subItem1">•账号管理</a>
                             </li>
-                            <li style="width:25%">
-                                <a data-toggle="tab" id="subItem2">•历史曲线</a>
+                            <li style="width:15%">
+                                <a data-toggle="tab" id="subItem2">•角色管理</a>
                             </li>
-                            <li style="width:25%">
-                                <a data-toggle="tab" id="subItem3">•知识库</a>
+                            <li style="width:15%">
+                                <a data-toggle="tab" id="subItem3">•功能管理</a>
+                            </li>
+                            <li style="width:15%">
+                                <a data-toggle="tab" id="subItem4">•设备管理</a>
+                            </li>
+                            <li style="width:15%">
+                                <a data-toggle="tab" id="subItem5">•接口管理</a>
+                            </li>
+                            <li style="width:15%">
+                                <a data-toggle="tab" id="subItem6">•限值管理</a>
                             </li>
                         </ul>
 
@@ -189,38 +250,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-5">
-                                        <div class="tile">
-                                            <h2 class="tile-title">角色管理</h2>
-                                            <table id="rolesinfotablehead">
-                                                <thead>
-                                                <tr>
-                                                    <th><div style="padding-left:40px;">角色编码</div></th>
-                                                    <th><div style="padding-left:40px;">角色名称</div></th>
-                                                    <th><div style="padding-left:40px;">备注</div></th>
-                                                </tr>
-                                                </thead>
-                                            </table>
-                                            <table id="rolesinfotable"></table>
-
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-alt" onClick="getALLRolesInfomation()" >查询</button>
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="showAddRolesrModal()">新增</button>
-                                                <button type="button" class="btn btn-sm btn-alt" onClick="deleteRolesInfomation()">删除</button>
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="showUpdateRolesModal()">修改</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                            this is 历史曲线
-                            <button id="test" onclick="test()">测试'查看历史曲线'</button>
+                            <div class="block-area">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="tile">
+                                    <h2 class="tile-title">角色管理</h2>
+                                    <table id="rolesinfotablehead">
+                                        <thead>
+                                        <tr>
+                                            <th><div style="padding-left:40px;">角色编码</div></th>
+                                            <th><div style="padding-left:40px;">角色名称</div></th>
+                                            <th><div style="padding-left:40px;">备注</div></th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                    <table id="rolesinfotable"></table>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-alt" onClick="getALLRolesInfomation()" >查询</button>
+                                        <button type="button" class="btn btn-sm btn-alt" onclick="showAddRolesrModal()">新增</button>
+                                        <button type="button" class="btn btn-sm btn-alt" onClick="deleteRolesInfomation()">删除</button>
+                                        <button type="button" class="btn btn-sm btn-alt" onclick="showUpdateRolesModal()">修改</button>
+                                    </div>
+                                        </div>
+                                </div>
+                            </div>
                         </div>
                         <div id = "item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                            this is 知识库
+                            this is 功能管理
+                        </div>
+                        <div id = "item4" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                            this is 设备管理
+                        </div>
+                        <div id = "item5" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                            this is 接口管理
+                        </div>
+                        <div id = "item6" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                            this is 限值管理
                         </div>
                     </div>
                 </div>
@@ -241,49 +311,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
 
                 <div class="add-user-one-line">
-                <div class="add-user-item">
-                    <div class="add-user-title">姓名</div>
-                    <input id="username" class="form-control add-user-input" type="text">
-                </div>
-                <div class="add-user-item">
-                    <div class="add-user-title">联系方式</div>
-                    <input id="usertelephone" class="form-control add-user-input" type="text">
-                </div>
+                    <div class="add-user-item">
+                        <div class="add-user-title">姓名</div>
+                        <input id="username" class="form-control add-user-input" type="text">
+                    </div>
+                    <div class="add-user-item">
+                        <div class="add-user-title">联系方式</div>
+                        <input id="usertelephone" class="form-control add-user-input" type="text">
+                    </div>
                 </div>
 
                 <div class="add-user-one-line">
-                <div class="add-user-item">
-                    <div class="add-user-title">公务手机</div>
-                    <input id="usergovtelephone" class="form-control add-user-input" type="text">
-                </div>
-                <div class="add-user-item">
+                    <div class="add-user-item">
+                        <div class="add-user-title">公务手机</div>
+                        <input id="usergovtelephone" class="form-control add-user-input" type="text">
+                    </div>
+                    <div class="add-user-item">
                         <div class="add-user-title">角色</div>
                         <select class="form-control location-select-item" id="userroles" name="userroles" onclick="getRoles()">
-                           <option value="">请选择</option>
+                            <option value="">请选择</option>
                         </select>
-                </div>
+                    </div>
                 </div>
 
 
                 <div class="add-user-one-line">
-                <div class="add-user-item">
-                    <div class="add-user-title">省</div>
-                    <select class="form-control location-select-item" id="userorgnization-province" name="userorgnization-province" onclick="getProvince()">
-                        <option value="">请选择</option>
-                    </select>
-                </div>
-                <div class="add-user-item">
+                    <div class="add-user-item">
+                        <div class="add-user-title">省</div>
+                        <select class="form-control location-select-item" id="userorgnization-province" name="userorgnization-province" onclick="getProvince()">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="add-user-item">
                         <div class="add-user-title">市</div>
                         <select class="form-control location-select-item" id="userorgnization-city" name="userorgnization-city" onclick="getCity()">
                             <option value="">请选择</option>
                         </select>
-                </div>
-                <div class="add-user-item">
+                    </div>
+                    <div class="add-user-item">
                         <div class="add-user-title">机房</div>
                         <select class="form-control location-select-item" id="userorgnization-computerroom" name="userorgnization-computerroom" onclick="getComputerroom()">
                             <option value="">请选择</option>
                         </select>
-                </div>
+                    </div>
                 </div>
 
                 <div class="add-user-handle">
@@ -320,11 +390,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- Javascript Libraries -->
     <!-- jQuery -->
-    <script src="js/jquery-1.4.4.min.js"></script>
+    <script src="js/jquery-1.10.2.js"></script>
     <!-- jQuery Library -->
 
     <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-3.3.4.js"></script>
     <!--Media Player-->
     <script src="js/media-player.min.js"></script>
     <!-- USA Map for jVectorMap -->
@@ -338,11 +408,115 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/feeds.min.js"></script>
     <!-- News Feeds -->
 
+
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
 
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
+
+  <%--  <script>
+
+        var objprobank="<%=session.getAttribute("probank")%>";
+        var objcitybank="<%=session.getAttribute("citybank")%>";
+        var objcomputerroom="<%=session.getAttribute("computerroom")%>";
+
+        /*var objcitybank2 = objcitybank.list;
+        alert(objcitybank2);
+
+        for(var key=0; key<objcitybank2.length; key++) {
+            var temp = objcitybank2[key];
+            console.log(temp);
+        }
+        alert(objcitybank2);*/
+
+        var zTreeObj;
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+        var setting = {};
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes = [
+            {name:objprobank, open:true, children:[
+                    {name:objcitybank, open:true, children:[
+                            {name:objcomputerroom}
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        $(document).ready(function(){
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+
+    </script>
+--%>
+
+    <!-- 省\市\机房下拉菜单-->
+    <script>
+        var provinceid="<%=session.getAttribute("probank")%>";
+
+        if(provinceid){//第一次进入这个页面，没有获取过
+            $("#province_code").empty();
+            $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
+        }
+        else{
+        }
+
+        /*加载市下拉选*/
+        function getCity() {
+            var pname = $("#province_code").val();
+            $("#city_code").empty();
+            $("#comproom_code").empty();
+
+            $.ajax({
+                type: "post",
+                url: "getCityTree",
+                data: {provinceid: pname},
+                dataType : "json",
+                success: function (data) {
+                    alert("33");
+                    $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    //alert(obj[0].cbname);
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
+                    }
+
+                },
+                error: function () {
+                    alert("加载市失败");
+                }
+            });
+        }
+
+        /*加载机房下拉选*/
+        function getComproom() {
+            var cname = $("#city_code").val();
+            $("#comproom_code").empty();
+
+            $.ajax({
+                type: "post",
+                url: "getCompTree",
+                data: {cityid: cname},
+                dataType : "json",
+                success: function (data) {
+
+                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }
+                },
+                error: function () {
+                    alert("加载机房失败");
+                }
+            });
+        }
+
+    </script>
 
     <!-- 动态加载菜单项 -->
     <script type="text/javascript">
@@ -378,11 +552,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             else if(cbidstr[i] == ' reportChart.jsp')
                 menuname = "报表功能";
 
-            else if(cbidstr[i] == ' userMng.jsp')
-                menuname = "用户管理";
+            else if(cbidstr[i] == ' history.jsp') //userMng.jsp'
+                menuname = "历史曲线";
 
-            else if(cbidstr[i] == ' systemSetting.jsp')
-                menuname = "系统设置";
+            else if(cbidstr[i] == ' systemMng.jsp')
+                menuname = "系统管理";
 
             $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
         }
@@ -392,51 +566,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $("#item1").show();
         $("#item2").hide();
         $("#item3").hide();
+        $("#item4").hide();
+        $("#item5").hide();
+        $("#item6").hide();
 
         $(document).ready(function(){
             $("#subItem1").click(function(){
                 $("#item1").show();
                 $("#item2").hide();
                 $("#item3").hide();
+                $("#item4").hide();
+                $("#item5").hide();
+                $("#item6").hide();
             });
             $("#subItem2").click(function(){
                 $("#item1").hide();
                 $("#item2").show();
                 $("#item3").hide();
+                $("#item4").hide();
+                $("#item5").hide();
+                $("#item6").hide();
             });
             $("#subItem3").click(function(){
                 $("#item1").hide();
                 $("#item2").hide();
                 $("#item3").show();
+                $("#item4").hide();
+                $("#item5").hide();
+                $("#item6").hide();
+            });
+            $("#subItem4").click(function(){
+                $("#item1").hide();
+                $("#item2").hide();
+                $("#item3").hide();
+                $("#item4").show();
+                $("#item5").hide();
+                $("#item6").hide();
+            });
+            $("#subItem5").click(function(){
+                $("#item1").hide();
+                $("#item2").hide();
+                $("#item3").hide();
+                $("#item4").hide();
+                $("#item5").show();
+                $("#item6").hide();
+            });
+            $("#subItem6").click(function(){
+                $("#item1").hide();
+                $("#item2").hide();
+                $("#item3").hide();
+                $("#item4").hide();
+                $("#item5").hide();
+                $("#item6").show();
             });
         });
-    </script>
-
-    <!-- 根据类型、监测点、时间范围查看历史曲线 -->
-    <script type="text/javascript">
-        function test(){
-            alert("根据类型、监测点、时间范围查看历史曲线");
-
-            var monitorpoint = 1;
-
-            $.ajax({
-                type: "post",
-                url: "getParameterHis",
-                data: {
-                    monitorpointid: monitorpoint,
-                    checktype: "电压/电流", //频率 功率 浪涌/塌陷
-                    starttime: "2018-2-1 10：00：00",  // 2018-2-1 10：00：00
-                    endtime: "2018-7-5 10：00：00"  // 2018-7-5 10：00：00
-                },
-                dataType : "json",
-                success: function (data) {
-                    alert(data);
-                },
-                error: function () {
-                    alert("失败");
-                }
-            });
-        }
     </script>
 
     <!-- 账号信息 -->
@@ -614,7 +797,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 url: "getAllProvince",
                 dataType : "json",
                 success: function (data) {
-                   // $('#userorgnization-province').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                    // $('#userorgnization-province').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
                     var obj = JSON.parse(data);
                     var rt = obj.allprovince;
@@ -636,7 +819,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 url: "getAllCity",
                 dataType : "json",
                 success: function (data) {
-                 //   $('#userorgnization-city').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                    //   $('#userorgnization-city').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
                     var obj = JSON.parse(data);
                     var rt = obj.allcity;
@@ -658,7 +841,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 url: "getAllComputerroom",
                 dataType : "json",
                 success: function (data) {
-                   // $('#userorgnization-computerroom').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                    // $('#userorgnization-computerroom').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
                     var obj = JSON.parse(data);
                     var rt = obj.allcomputerroom;

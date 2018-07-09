@@ -666,11 +666,11 @@
             else if(cbidstr[i] == ' reportChart.jsp')
                 menuname = "报表功能";
 
-            else if(cbidstr[i] == ' userMng.jsp')
-                menuname = "用户管理";
+            else if(cbidstr[i] == ' history.jsp') //userMng.jsp'
+                menuname = "历史曲线";
 
-            else if(cbidstr[i] == ' systemSetting.jsp')
-                menuname = "系统设置";
+            else if(cbidstr[i] == ' systemMng.jsp')
+                menuname = "系统管理";
 
             $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
         }
