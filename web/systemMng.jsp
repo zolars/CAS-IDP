@@ -78,17 +78,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- Content -->
         <div id="content" class="container">
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb hidden-xs">
-                <li>
-                    <a href="#">主页</a>
-                </li>
-                <li>
-                    <a href="#">管理</a>
-                </li>
-                <li class="active">用户管理</li>
-            </ol>
-
             <!-- Main Widgets -->
             <div class="block-area">
                 <div class="row">

@@ -1278,7 +1278,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     </script>
 
-    <<!-- 动态加载菜单项 -->
+    <!-- 动态加载菜单项 -->
     <script type="text/javascript">
         var menulist="<%=session.getAttribute("menulist")%>";
         var cbidstr = menulist.split(",");
