@@ -310,14 +310,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="row">
                             <div id="item3-text" class="col-md-2" style="height: 580px;" >
                                 <ol class="value">
-                                    <li>|<span>A1</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span>222.2</span><span>A</span></li>
-                                    <li>|<span>A2</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span>222.2</span><span>A</span></li>
-                                    <li>|<span>A3</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span>222.2</span><span>A</span></li>
+                                    <li>|<span id="item3-text-name1">A1</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-value1">222.2</span><span>A</span></li>
+                                    <li>|<span id="item3-text-name2">A2</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-value2">222.2</span><span>A</span></li>
+                                    <li>|<span id="item3-text-name3">A3</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-value3">222.2</span><span>A</span></li>
                                 </ol>
-                                <ol class="angle">
-                                    <li>&Phi;<sub>12</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>126</span><sup>&nbsp;o</sup></li>
-                                    <li>&Phi;<sub>23</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>126</span><sup>&nbsp;o</sup></li>
-                                    <li>&Phi;<sub>31</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>126</span><sup>&nbsp;o</sup></li>
+                                <ol class="diff">
+                                    <li>&Phi;<sub>12</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-diff1">126</span><sup>&nbsp;o</sup></li>
+                                    <li>&Phi;<sub>23</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-diff2">126</span><sup>&nbsp;o</sup></li>
+                                    <li>&Phi;<sub>31</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-diff3">126</span><sup>&nbsp;o</sup></li>
                                 </ol>
                             </div>
                             <div id="item3-gauge" class="col-md-8" style="height: 580px;"></div>
@@ -330,7 +330,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="clearfix"></div>
                                 <ol>
                                     <li>
-                                        <button value="U" class="btn btn-default">3U</button>
+                                        <button value="U" class="btn btn-default active">3U</button>
                                     </li>
                                     <li>
                                         <button value="V" class="btn btn-default">3V</button>
@@ -1477,12 +1477,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             // ]
         };
         // 3.使用刚指定的配置项和数据显示图表。
-        // 3.创建空图表
+        // 配置option
         eventChart2.setOption(option2);
-        getData_Xb(1);
+        // 获取数据
+        getDataXb(1);
 
         // 获取谐波数据
-        function getData_Xb(mpid) {
+        function getDataXb(mpid) {
             $.ajax({
                 type: "post",
                 url: "getXB",
@@ -1560,13 +1561,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         // 测试数据
         var gaugePointerColor=["#ff0000","#0000ff","#ffff00"];
         var sxbphdlegend=["U1","U2","U3","V1","V2","V3","A1","A2","A3"];
-        var pointerLength=["10%","20%","30%","40%","50%","60%","70%","80%","90%"];
-        var pointerAngle=[0,30,60,90,120,150,180,210,240];
+        //幅值的最大值
+        var maxAmplitude=400;
+        // sxbphdData用来暂存三相不平衡度数据
+        var sxbphdData=null;
         var eventChart3=echarts.init($("#item3-gauge")[0]);
+        // 初始配置项
         var option3 = {
             //提示框
             tooltip: {
-                formatter: "{a}<br>{c}"
+                formatter: "{a}:{c}"
             },
             //图例
             legend: {
@@ -1613,9 +1617,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         show: false,
                     },
                     //指针
-                    pointer: {
-                        length: pointerLength[0]
-                    },
+                    // pointer: {
+                    //     length: ""
+                    // },
                     //指针样式
                     itemStyle: {
                         color: gaugePointerColor[0]
@@ -1625,8 +1629,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     },
                     detail: {
                         show: false
-                    },
-                    data:[{value: pointerAngle[0]}]
+                    }
+                    // data:[{value: pointerAngle[0]}]
                 },
                 {
                     name: "U2",
@@ -1667,9 +1671,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         show: false,
                     },
                     //指针
-                    pointer: {
-                        length: pointerLength[1]
-                    },
+                    // pointer: {
+                    //     length: pointerLength[1]
+                    // },
                     //指针样式
                     itemStyle: {
                         color: gaugePointerColor[1]
@@ -1679,8 +1683,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     },
                     detail: {
                         show: false
-                    },
-                    data:[{value: pointerAngle[1]}]
+                    }
+                    // data:[{value: pointerAngle[1]}]
                 },
                 {
                     name: "U3",
@@ -1721,9 +1725,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         show: false,
                     },
                     //指针
-                    pointer: {
-                        length: pointerLength[2]
-                    },
+                    // pointer: {
+                    //     length: pointerLength[2]
+                    // },
                     //指针样式
                     itemStyle: {
                         color: gaugePointerColor[2]
@@ -1733,8 +1737,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     },
                     detail: {
                         show: false
-                    },
-                    data:[{value: pointerAngle[2]}]
+                    }
+                    // data:[{value: pointerAngle[2]}]
                 },
                 {
                     name: "V1",
@@ -1775,9 +1779,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         show: false,
                     },
                     //指针
-                    pointer: {
-                        length: pointerLength[3]
-                    },
+                    // pointer: {
+                    //     length: pointerLength[3]
+                    // },
                     //指针样式
                     itemStyle: {
                         color: gaugePointerColor[0]
@@ -1787,8 +1791,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     },
                     detail: {
                         show: false
-                    },
-                    data:[{value: pointerAngle[3]}]
+                    }
+                    // data:[{value: pointerAngle[3]}]
                 },
                 {
                     name: "V2",
@@ -1829,9 +1833,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         show: false,
                     },
                     //指针
-                    pointer: {
-                        length: pointerLength[4]
-                    },
+                    // pointer: {
+                    //     length: pointerLength[4]
+                    // },
                     //指针样式
                     itemStyle: {
                         color: gaugePointerColor[1]
@@ -1841,8 +1845,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     },
                     detail: {
                         show: false
-                    },
-                    data:[{value: pointerAngle[4]}]
+                    }
+                    // data:[{value: pointerAngle[4]}]
                 },
                 {
                     name: "V3",
@@ -1883,9 +1887,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         show: false,
                     },
                     //指针
-                    pointer: {
-                        length: pointerLength[5]
-                    },
+                    // pointer: {
+                    //     length: pointerLength[5]
+                    // },
                     //指针样式
                     itemStyle: {
                         color: gaugePointerColor[2]
@@ -1895,8 +1899,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     },
                     detail: {
                         show: false
-                    },
-                    data:[{value: pointerAngle[5]}]
+                    }
+                    // data:[{value: pointerAngle[5]}]
                 },
                 {
                     name: "A1",
@@ -1937,9 +1941,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         show: false,
                     },
                     //指针
-                    pointer: {
-                        length: pointerLength[6]
-                    },
+                    // pointer: {
+                    //     length: pointerLength[6]
+                    // },
                     //指针样式
                     itemStyle: {
                         color: gaugePointerColor[0]
@@ -1949,8 +1953,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     },
                     detail: {
                         show: false
-                    },
-                    data:[{value: pointerAngle[6]}]
+                    }
+                    // data:[{value: pointerAngle[6]}]
                 },
                 {
                     name: "A2",
@@ -1991,9 +1995,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         show: false,
                     },
                     //指针
-                    pointer: {
-                        length: pointerLength[7]
-                    },
+                    // pointer: {
+                    //     length: pointerLength[7]
+                    // },
                     //指针样式
                     itemStyle: {
                         color: gaugePointerColor[1]
@@ -2003,8 +2007,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     },
                     detail: {
                         show: false
-                    },
-                    data:[{value: pointerAngle[7]}]
+                    }
+                    // data:[{value: pointerAngle[7]}]
                 },
                 {
                     name: "A3",
@@ -2045,9 +2049,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         show: false,
                     },
                     //指针
-                    pointer: {
-                        length: pointerLength[8]
-                    },
+                    // pointer: {
+                    //     length: pointerLength[8]
+                    // },
                     //指针样式
                     itemStyle: {
                         color: gaugePointerColor[2]
@@ -2057,36 +2061,187 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     },
                     detail: {
                         show: false
-                    },
-                    data:[{value: pointerAngle[8]}]
+                    }
+                    // data:[{value: pointerAngle[8]}]
                 }
             ]
         };
-        //配置option
-        eventChart3.setOption(option3);
-        //右侧按钮的事件绑定
+        // 右侧按钮的事件绑定
         $("#item3-toolbar ol li button").each(function(){
             $(this).click(function(){
                 $("#item3-toolbar ol li button").removeClass("active");
                 $(this).addClass("active");
                 for(var i=0;i<sxbphdlegend.length;i++){
                     if(sxbphdlegend[i].indexOf(this.value)>=0){
+                        // 显示对应的系列
                         eventChart3.dispatchAction({
                             type: "legendSelect",
                             name: sxbphdlegend[i]
                         });
                     }
                     else{
+                        // 隐藏其他系列
                         eventChart3.dispatchAction({
                             type: "legendUnSelect",
                             name: sxbphdlegend[i]
                         });
                     }
                 }
+                // 更新图左侧文字
+                updateSxdyt2(sxbphdData);
             });
         });
-        //设置初始显示的系列
-        $("#item3-toolbar ol li button:first").trigger("click");
+        // 配置option
+        eventChart3.setOption(option3);
+        // 模拟获取数据
+        getDataSxdy(1);
+        // 获取三相电压、电流数据
+        function getDataSxdy(mpid) {
+            $.ajax({
+                type: "post",
+                url: "getSXDY",
+                data: {monitorpointid: mpid},
+                dataType: "json",
+                success: function (data) {
+                    // 数据先暂存起来
+                    sxbphdData=JSON.parse(data);
+                    updateSxdyt(sxbphdData);
+                    // 设置显示的系列
+                    $("#item3-toolbar ol li button.active").trigger("click");
+                },
+                error: function(){
+                    alert("获取三相电压数据失败");
+                }
+            });
+        }
+        // 更新三相电压、电流图
+        function updateSxdyt(data) {
+            // 更新图左侧文字
+            updateSxdyt2(data);
+            // 计算指针长度，并用数组存起来
+            var pointerLength=[];
+            pointerLength.push(floatToPercent(data[0]["u1"]/maxAmplitude));
+            pointerLength.push(floatToPercent(data[0]["u2"]/maxAmplitude));
+            pointerLength.push(floatToPercent(data[0]["u3"]/maxAmplitude));
+            pointerLength.push(floatToPercent(data[0]["v1"]/maxAmplitude));
+            pointerLength.push(floatToPercent(data[0]["v2"]/maxAmplitude));
+            pointerLength.push(floatToPercent(data[0]["v3"]/maxAmplitude));
+            pointerLength.push(floatToPercent(data[0]["a1"]/maxAmplitude));
+            pointerLength.push(floatToPercent(data[0]["a2"]/maxAmplitude));
+            pointerLength.push(floatToPercent(data[0]["a3"]/maxAmplitude));
+            // 更新图
+            eventChart3.setOption({
+                series: [
+                    {
+                        name: "U1",
+                        pointer: {length: pointerLength[0]},
+                        data: [{value: data[0]["angleU1"]}]
+                    },
+                    {
+                        name: "U2",
+                        pointer: {length: pointerLength[1]},
+                        data: [{value: data[0]["angleU2"]}]
+                    },
+                    {
+                        name: "U3",
+                        pointer: {length: pointerLength[2]},
+                        data: [{value: data[0]["angleU3"]}]
+                    },
+                    {
+                        name: "V1",
+                        pointer: {length: pointerLength[3]},
+                        data: [{value: data[0]["angleV1"]}]
+                    },
+                    {
+                        name: "V2",
+                        pointer: {length: pointerLength[4]},
+                        data: [{value: data[0]["angleV2"]}]
+                    },
+                    {
+                        name: "V3",
+                        pointer: {length: pointerLength[5]},
+                        data: [{value: data[0]["angleV3"]}]
+                    },
+                    {
+                        name: "A1",
+                        pointer: {length: pointerLength[6]},
+                        data: [{value: data[0]["angleA1"]}]
+                    },
+                    {
+                        name: "A2",
+                        pointer: {length: pointerLength[7]},
+                        data: [{value: data[0]["angleA2"]}]
+                    },
+                    {
+                        name: "A3",
+                        pointer: {length: pointerLength[8]},
+                        data: [{value: data[0]["angleA3"]}]
+                    }
+                ]
+            });
+            // 更新时间
+            $("#item3-realtime span").html(dateFormat(new Date(data[0]["time"]),"yyyy-mm-dd  hh:MM:ss"));
+
+        }
+        // 更新三相电压、电流图左侧显示的文字
+        function updateSxdyt2(data){
+            // 获取被选中按钮的value值
+            var value = $("#item3-toolbar ol li button.active").attr("value");
+            // console.log(value);
+            switch (value){
+                case "U" :
+                case "V" :
+                case "A" : {
+                    // 更新幅值
+                    $("#item3-text-name1").html(value+"1");
+                    $("#item3-text-value1").html(data[0][value.toLowerCase()+"1"]);
+                    $("#item3-text-name2").html(value+"2");
+                    $("#item3-text-value2").html(data[0][value.toLowerCase()+"2"]);
+                    $("#item3-text-name3").html(value+"3");
+                    $("#item3-text-value3").html(data[0][value.toLowerCase()+"3"]);
+                    // 更新相位差
+                    $("#item3-text-diff1").html(data[0]["angle"+value+"2"] - data[0]["angle"+value+"1"]);
+                    $("#item3-text-diff2").html(data[0]["angle"+value+"3"] - data[0]["angle"+value+"2"]);
+                    $("#item3-text-diff3").html(data[0]["angle"+value+"1"] - data[0]["angle"+value+"3"]);
+                    break;
+                }
+                case "1" :
+                case "2" :
+                case "3" : {
+                    // 更新幅值
+                    $("#item3-text-name1").html("U"+value);
+                    $("#item3-text-value1").html(data[0]["u"+value]);
+                    $("#item3-text-name2").html("V"+value);
+                    $("#item3-text-value2").html(data[0]["v"+value]);
+                    $("#item3-text-name3").html("A"+value);
+                    $("#item3-text-value3").html(data[0]["a"+value]);
+                    // 隐藏相位差
+                    $("#item3-text ol.diff").hide();
+                    break;
+                }
+                default : {
+
+                }
+            }
+        }
+        // 浮点数转成百分比，保留一位小数，返回字符串
+        function floatToPercent(num){
+            return (new Number(num)*100).toFixed(1)+"%";
+        }
+        // 日期格式化
+        function dateFormat(date,fmt){
+            var o = {
+                "m+": date.getMonth() + 1, //月份
+                "d+": date.getDate(), //日
+                "h+": date.getHours(), //小时
+                "M+": date.getMinutes(), //分
+                "s+": date.getSeconds() //秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
     </script>
 
     <!-- test-->
@@ -2103,6 +2258,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             dataType : "json",
             success: function (data) {
                 alert(data);
+                // window.console.log(typeof data);
+                // window.console.log(data[0]);
                 /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
                 var obj = eval("(" + data + ")");
@@ -2157,6 +2314,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {monitorpointid: monitorpoint},
                 dataType : "json",
                 success: function (data) {
+                    window.console.log(typeof data);
                     alert(data);
                     /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
