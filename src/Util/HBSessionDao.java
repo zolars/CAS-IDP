@@ -13,5 +13,6 @@ public interface HBSessionDao {
     public List searchWithNum(String hql, int num);
     public Object getFirst(String hql);
     public boolean delete(String hql, String id);
-    public boolean insert(User user);
+   // public boolean insert(User user);
+    public boolean insert(Object obj);
 }

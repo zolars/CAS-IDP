@@ -4,20 +4,18 @@ package userManage.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import hibernatePOJO.Roles;
 import org.apache.struts2.ServletActionContext;
+import userManage.dao.RolesDAO;
 import userManage.dao.UserDAO;
+import userManage.dao.impl.RolesDAOImpl;
 import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
 
 
-public class deleteUserInfoAction extends ActionSupport {
+public class deleteRolesInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -39,11 +37,11 @@ public class deleteUserInfoAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             //String monitorpointid = request.getParameter("monitorpointid");
-            String uidstr = request.getParameter("uid");
-            String uid[] = uidstr.split("=");
+            String ridstr = request.getParameter("rid");
+            String rid[] = ridstr.split("=");
 
-            UserDAO dao = new UserDAOImpl();
-            Boolean rt = dao.deleteUserInfo(uid[1]);
+            RolesDAO dao = new RolesDAOImpl();
+            Boolean rt = dao.deleteRolesInfo(rid[1]);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("result", rt);

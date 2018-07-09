@@ -161,53 +161,66 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </li>
                         </ul>
 
-                        <td><button id="test" onclick="test()">测试'查看历史曲线'</button></td>
-
                         <div id = "item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                            this is 权限
+                            <div class="block-area" id="defaultStyle">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="tile">
+                                            <h2 class="tile-title">账号信息</h2>
+                                            <table id="userinfotablehead">
+                                                <thead>
+                                                <tr>
+                                                    <th><div style="padding-left:30px;">账号</div></th>
+                                                    <th><div style="padding-left:30px;">姓名</div></th>
+                                                    <th><div style="padding-left:40px;">组织</div></th>
+                                                    <th><div style="padding-left:40px;">角色</div></th>
+                                                    <th><div style="padding-left:50px;">联系方式</div></th>
+                                                    <th><div style="padding-left:50px;">公务手机</div></th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                            <table id="userinfotable"></table>
+
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-alt" onClick="getALLUserInfomation()" >查询</button>
+                                                <button type="button" class="btn btn-sm btn-alt" onclick="showAddUserModal()">新增</button>
+                                                <button type="button" class="btn btn-sm btn-alt" onClick="deleteUserInfomation()">删除</button>
+                                                <button type="button" class="btn btn-sm btn-alt" onclick="showUpdateUserModal()">修改</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="tile">
+                                            <h2 class="tile-title">角色管理</h2>
+                                            <table id="rolesinfotablehead">
+                                                <thead>
+                                                <tr>
+                                                    <th><div style="padding-left:40px;">角色编码</div></th>
+                                                    <th><div style="padding-left:40px;">角色名称</div></th>
+                                                    <th><div style="padding-left:40px;">备注</div></th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                            <table id="rolesinfotable"></table>
+
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-alt" onClick="getALLRolesInfomation()" >查询</button>
+                                                <button type="button" class="btn btn-sm btn-alt" onclick="showAddRolesrModal()">新增</button>
+                                                <button type="button" class="btn btn-sm btn-alt" onClick="deleteRolesInfomation()">删除</button>
+                                                <button type="button" class="btn btn-sm btn-alt" onclick="showUpdateRolesModal()">修改</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             this is 历史曲线
+                            <button id="test" onclick="test()">测试'查看历史曲线'</button>
                         </div>
                         <div id = "item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             this is 知识库
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Deafult Table -->
-            <div class="block-area" id="defaultStyle">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="tile">
-                            <h2 class="tile-title">账号信息</h2>
-                            <table id="userinfotablehead">
-                                <thead>
-                                <tr>
-                                    <th><div style="padding-left:20px;">账号</div></th>
-                                    <th><div style="padding-left:20px;">姓名</div></th>
-                                    <th><div style="padding-left:20px;">组织</div></th>
-                                    <th><div style="padding-left:20px;">角色</div></th>
-                                    <th><div style="padding-left:20px;">联系方式</div></th>
-                                    <th><div style="padding-left:20px;">公务手机</div></th>
-                                </tr>
-                                </thead>
-                            </table>
-                            <table id="userinfotable"></table>
-                           <%-- <table id="userinfotable" onmouseover="getrow(this)" onmouseout="backrow(this)" onclick="selectRow(this)"></table>
---%>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-alt" onClick="getALLUserInfomation()" >查询</button>
-                                <button type="button" class="btn btn-sm btn-alt" onclick="showAddUserModal()">新增</button>
-                                <button type="button" class="btn btn-sm btn-alt" onClick="deleteUserInfomation()">删除</button>
-                                <button type="button" class="btn btn-sm btn-alt" onclick="showUpdateUserModal()">修改</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tile">
-                            <h2 class="tile-title">角色管理</h2>
                         </div>
                     </div>
                 </div>
@@ -279,6 +292,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
             <!-- user model DIV END-->
+
+            <!-- roles model DIV-->
+            <div class="add-roles" id="add-roles-modal">
+                <div class="add-roles-one-line">
+                    <div class="add-roles-item">
+                        <div class="add-roles-title">角色名称</div>
+                        <input id="rolesname" class="form-control add-roles-input" type="text">
+                    </div>
+                    <div class="add-roles-item">
+                        <div class="add-roles-title">备注</div>
+                        <input id="rolesextra" class="form-control add-roles-input" type="text">
+                    </div>
+                </div>
+
+                <div class="add-roles-handle">
+                    <button class="btn btn-default" onclick="hiddenRolesModel()">取消</button>
+                    <button type="submit" class="btn btn-primary" onclick="submitAddRoles()">确定</button>
+                </div>
+            </div>
+            <!-- roles model DIV END-->
 
         </section>
         <br/>
@@ -356,6 +389,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
 
     <script type="text/javascript">
+        $("#item1").show();
+        $("#item2").hide();
+        $("#item3").hide();
+
         $(document).ready(function(){
             $("#subItem1").click(function(){
                 $("#item1").show();
@@ -402,6 +439,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
+    <!-- 账号信息 -->
     <script type="text/javascript">
         <!--查询所有账号 -->
         function getALLUserInfomation(){
@@ -429,8 +467,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             var role = list[key][i][3];
                             var telephone = list[key][i][6];
                             var govtelephone = list[key][i][7];
-                            table.append('<tr><td><input type="checkbox" name="userid" id="userid" value='+uid+'></td><td>' + account + '</td><td>' + name +  '</td><td>' + org + '</td><td>' + role + '</td><td>' + telephone +
-                                '</td><td>' + govtelephone + '</td></tr>');
+                            table.append('<tr><td><input type="checkbox" name="userid" id="userid" value='+uid+'></td><td style="padding-left:15px;">' + account +
+                                '</td><td style="padding-left:20px;">' + name +  '</td><td style="padding-left:20px;">' + org + '</td><td style="padding-left:20px;">'
+                                + role + '</td><td style="padding-left:20px;">' + telephone + '</td><td style="padding-left:20px;">' + govtelephone + '</td></tr>');
                         }
                     }
                 },
@@ -451,7 +490,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             if (useridcheck.length == 0)
                 alert("请选择一条用户信息");
             else if (useridcheck.length > 1)
-                alert("每次只能打开一条用户信息");
+                alert("每次只能删除一条用户信息");
             else{
                 var monitorpoint = 1;
                 var useridck = $("input[name='userid']:checked").serialize();
@@ -488,9 +527,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             //显示 用户信息到div
             var useridcheck = $("input[name='userid']:checked");
             alert(useridcheck);
-
-
-
 
         }
 
@@ -559,11 +595,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 url: "getAllRoles",
                 dataType : "json",
                 success: function (data) {
-                  //  $('#userroles').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
                     var obj = JSON.parse(data);
                     var rt = obj.allroles;
-
                     for (var i = 0; i < rt.length; i++) {
                         $('#userroles').append("<option value='" + rt[i].rid + "' >" + rt[i].rolesname + "</option>");
                     }
@@ -639,6 +672,130 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             });
         }
+
+    </script>
+
+    <!-- 角色管理 -->
+    <script type="text/javascript">
+        <!-- 查询所有角色 -->
+        function getALLRolesInfomation(){
+            var monitorpoint = 1;
+            $.ajax({
+                type: "post",
+                url: "getAllRoles",
+                data: {
+                    monitorpointid: monitorpoint
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj.allroles;
+                    var table = $("#rolesinfotable");
+                    table.empty();
+                    for (var i = 0; i < list.length; i++) {
+                        var rid = list[i].rid;
+                        var rname = list[i].rolesname;
+                        var rextra = list[i].extra;
+                        table.append('<tr><td><input type="checkbox" name="rid" id="rid" value='+rid+'></td><td style="padding-left:40px;">' + rid +
+                            '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+
+        <!-- 新增角色 -->
+        function showAddRolesrModal(){
+            $('#add-roles-modal').css('display', 'block');
+        }
+
+        <!-- 删除角色 -->
+        function deleteRolesInfomation(){
+
+            var ridcheck = $("input[name='rid']:checked");
+            if (ridcheck.length == 0)
+                alert("请选择一条角色信息");
+            else if (ridcheck.length > 1)
+                alert("每次只能删除一条角色信息");
+            else{
+                var monitorpoint = 1;
+                var ridck = $("input[name='rid']:checked").serialize();
+                $.ajax({
+                    type: "post",
+                    url: "deleteRolesInfo",
+                    data: {
+                        monitorpointid: monitorpoint,
+                        rid: ridck
+                    },
+                    dataType : "json",
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        var rt = obj.result;
+
+                        if(rt) {
+                            getALLRolesInfomation();
+                        }
+                        else{
+                            alert("删除失败");
+                        }
+                    },
+                    error: function () {
+                        alert("失败");
+                    }
+                });
+            }
+
+
+        }
+
+        <!-- 修改角色 -->
+        function showUpdateRolesModal(){
+
+
+        }
+
+        <!--隐藏roles model div -->
+        function hiddenRolesModel() {
+            $('#add-roles-modal').css('display', 'none');
+        }
+
+        <!--添加角色-确认添加 -->
+        function submitAddRoles() {
+            var rname = $("#rolesname").val();
+            var rextra = $("#rolesextra").val();
+
+            var monitorpoint = 1;
+
+            $.ajax({
+                type: "post",
+                url: "addRolesInfo",
+                data: {
+                    rname: rname,
+                    rextra: rextra
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var rt = obj.result;
+
+                    if(rt) {
+                        hiddenRolesModel();
+                        getALLRolesInfomation();
+                    }
+                    else{
+                        alert("添加失败");
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+
+
+
 
     </script>
 

@@ -1,12 +1,11 @@
 package userManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.Roles;
+import hibernatePOJO.ProvinceBank;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import userManage.dao.ProvinceDAO;
-import userManage.dao.RolesDAO;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class ProvinceDAOImpl implements ProvinceDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Roles> list = hbsessionDao.search(
+        List<ProvinceBank> list = hbsessionDao.search(
                 "FROM ProvinceBank");
 
         return list;

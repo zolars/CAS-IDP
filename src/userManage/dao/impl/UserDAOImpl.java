@@ -102,16 +102,7 @@ public class UserDAOImpl implements UserDAO {
 
         crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tc.rolesname as nrolename,ta.pbid as pbid,ta.cbid as cbid," +
                 " ta.telephone as telephone, ta.govtelephone as govtelephone from User ta, UserRoles tb, Roles tc where ta.uid = tb.uid and tb.rid = tc.rid");
-       /*  for (Object[] objects : crlist) {
-           System.out.println("nuid："+objects[0]); //在对象数组中的位置与选择属性顺序一致
-            System.out.println("nuname："+objects[1]); //在对象数组中的位置与选择属性顺序一致
-            System.out.println("nchinesename："+objects[2]);
-            System.out.println("nrolename:"+objects[3]);
-            System.out.println("pbid:"+objects[4]);
-            System.out.println("cbid:"+objects[5]);
-            System.out.println("telephone:"+objects[6]);
-            System.out.println("govtelephone:"+objects[7]);
-        }*/
+
         return crlist;
     }
 

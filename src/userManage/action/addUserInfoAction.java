@@ -49,8 +49,6 @@ public class addUserInfoAction extends ActionSupport {
             String city = request.getParameter("ucity");
            // String computerroom = request.getParameter("ucomputerroom");
 
-            System.out.println(account);
-
             UserDAO dao = new UserDAOImpl();
             Boolean rt = dao.addUserInfo(account, password, name, telephone, govtelephone, province, city);
 

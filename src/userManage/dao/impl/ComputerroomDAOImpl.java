@@ -5,7 +5,6 @@ import hibernatePOJO.Roles;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import userManage.dao.CityDAO;
 import userManage.dao.ComputerroomDAO;
 
 import java.util.List;
