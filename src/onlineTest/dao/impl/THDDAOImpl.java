@@ -20,6 +20,7 @@ public class THDDAOImpl implements THDDAO {
     public List<Object> getCurrentTHDData(String monitorpoint){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
+        PowerxbMonitor rtobj = new PowerxbMonitor();
 
         List<PowerxbMonitor> u1list = new ArrayList<>();
 
@@ -55,19 +56,17 @@ public class THDDAOImpl implements THDDAO {
             }
         }
 
-        //add THD -U1
-        crlist.add(Math.sqrt(u1)/u1list.get(0).getU1Xb());
-        //add THD -U2
-        crlist.add(Math.sqrt(u2)/u1list.get(0).getU2Xb());
-        //add THD -U3
-        crlist.add(Math.sqrt(u3)/u1list.get(0).getU3Xb());
+        rtobj.setU1Xb(Math.sqrt(u1)/u1list.get(0).getU1Xb());
+        rtobj.setU2Xb(Math.sqrt(u2)/u1list.get(0).getU2Xb());
+        rtobj.setU3Xb(Math.sqrt(u3)/u1list.get(0).getU3Xb());
 
-        //add THD -I1
-        crlist.add(Math.sqrt(i1)/u1list.get(0).getI1Xb());
-        //add THD -I2
-        crlist.add(Math.sqrt(i2)/u1list.get(0).getI2Xb());
-        //add THD -I3
-        crlist.add(Math.sqrt(i3)/u1list.get(0).getI3Xb());
+        rtobj.setI1Xb(Math.sqrt(i1)/u1list.get(0).getI1Xb());
+        rtobj.setI2Xb(Math.sqrt(i2)/u1list.get(0).getI2Xb());
+        rtobj.setI3Xb(Math.sqrt(i3)/u1list.get(0).getI3Xb());
+
+        rtobj.setTime(u1list.get(0).getTime());
+
+        crlist.add(rtobj);
 
         //add THD -V1
         //add THD -V2

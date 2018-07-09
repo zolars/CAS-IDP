@@ -20,6 +20,7 @@ public class CFDAOImpl implements CFDAO {
     public List<Object> getCurrentCFData(String monitorpoint){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
+        PowerxbMonitor rtobj = new PowerxbMonitor();
 
         List<PowerxbMonitor> u1list = new ArrayList<>();
 
@@ -74,19 +75,17 @@ public class CFDAOImpl implements CFDAO {
             }
         }
 
-        //add CF -U1
-        crlist.add(maxu1/Math.sqrt(u1));
-        //add CF -U2
-        crlist.add(maxu2/Math.sqrt(u2));
-        //add CF -U3
-        crlist.add(maxu3/Math.sqrt(u3));
+        rtobj.setU1Xb(maxu1/Math.sqrt(u1));
+        rtobj.setU2Xb(maxu2/Math.sqrt(u2));
+        rtobj.setU3Xb(maxu3/Math.sqrt(u3));
 
-        //add CF -I1
-        crlist.add(maxi1/Math.sqrt(i1));
-        //add CF -I2
-        crlist.add(maxi2/Math.sqrt(i2));
-        //add CF -I3
-        crlist.add(maxi3/Math.sqrt(i3));
+        rtobj.setI1Xb(maxi1/Math.sqrt(i1));
+        rtobj.setI2Xb(maxi2/Math.sqrt(i2));
+        rtobj.setI3Xb(maxi3/Math.sqrt(i3));
+
+        rtobj.setTime(u1list.get(0).getTime());
+
+        crlist.add(rtobj);
 
         //add CF -V1
         //add CF -V2
