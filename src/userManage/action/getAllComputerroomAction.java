@@ -5,8 +5,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
-import userManage.dao.UserDAO;
-import userManage.dao.impl.UserDAOImpl;
+import userManage.dao.ComputerroomDAO;
+import userManage.dao.RolesDAO;
+import userManage.dao.impl.ComputerroomDAOImpl;
+import userManage.dao.impl.RolesDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +19,7 @@ import java.util.List;
 //import net.sf.json.JSONObject;
 
 
-public class getUserInfoAction extends ActionSupport {
+public class getAllComputerroomAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -38,14 +40,13 @@ public class getUserInfoAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            UserDAO dao = new UserDAOImpl();
-            List alluser = dao.getAllUserInfo();
+            ComputerroomDAO dao = new ComputerroomDAOImpl();
+            List allcomputerroom = dao.getAllComputerroom();
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("alluser", alluser);
+            jsonObject.put("allcomputerroom", allcomputerroom);
 
             result = JSON.toJSONString(jsonObject);
-
 
         } catch (Exception e) {
             e.printStackTrace();

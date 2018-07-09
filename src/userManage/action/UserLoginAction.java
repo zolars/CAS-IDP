@@ -65,7 +65,7 @@ public class UserLoginAction extends ActionSupport{
                 List mlist = new ArrayList();
                 mlist = dao.getUserDynamicMenu(user);
 
-                for(int i = 1; i < mlist.size(); i++){
+                for(int i = 0; i < mlist.size(); i++){
                    // System.out.println("i："+mlist.get(i));
                     if(mlist.get(i).equals("5")){
                         menulist.add("province.jsp");
@@ -76,10 +76,10 @@ public class UserLoginAction extends ActionSupport{
                         menulist.add("reportChart.jsp");
                     }
                     else if((mlist.get(i).equals("2"))||(mlist.get(i).equals("6"))||(mlist.get(i).equals("7"))||(mlist.get(i).equals("8"))){
-                        menulist.add("userMng.jsp");
+                        menulist.add("history.jsp");
                     }
                     else if((mlist.get(i).equals("3"))||(mlist.get(i).equals("4"))){
-                        menulist.add("systemSetting.jsp");
+                        menulist.add("systemMng.jsp");
                     }
                 }
 

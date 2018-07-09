@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Roles {
     private String rid;
     private String rolesname;
+    private String extra;
 
     @Id
     @Column(name = "rid", nullable = false, length = 255)
@@ -31,18 +32,29 @@ public class Roles {
         this.rolesname = rolesname;
     }
 
+    @Basic
+    @Column(name = "extra", nullable = true, length = 255)
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Roles roles = (Roles) o;
         return Objects.equals(rid, roles.rid) &&
-                Objects.equals(rolesname, roles.rolesname);
+                Objects.equals(rolesname, roles.rolesname) &&
+                Objects.equals(extra, roles.extra);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(rid, rolesname);
+        return Objects.hash(rid, rolesname, extra);
     }
 }

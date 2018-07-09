@@ -156,46 +156,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         <div class="media-body">
             <div class="media" id="top-menu">
+                <div class="pull-left location-select">
+                    <select class="form-control location-select-item" id="province_code" name="province_code" onchange="getCity()">
+                        <option value="">请选择</option>
+                    </select>
 
-                <div class="pull-left">
-                    <%--<ul id="treeDemo" class="ztree"></ul>--%>
-                        <td>
-                            <select class="select" id="province_code" name="province_code" onchange="getCity()">
-                                <option value="">请选择</option>
-                            </select>
+                    <select class="form-control location-select-item" id="city_code" name="city_code" onchange="getComproom()">
+                        <option value="">请选择</option>
+                    </select>
 
-                            <select class="select" id="city_code" name="city_code" onchange="getComproom()">
-                                <option value="">请选择</option>
-                            </select>
-
-                            <select class="select" id="comproom_code" name="comproom_code">
-                                <option value="">请选择</option>
-                            </select>
-
-
-                            </td>
-                            <td><button id="test" onclick="test()">测试'谐波'</button></td>
-                            <td><button id="test2" onclick="test2()">测试'参数值'</button></td>
-                            <td><button id="test3" onclick="test3()">测试'三相电压'</button></td>
-                            <td><button id="test4" onclick="test4()">测试"趋势图rms'</button></td>
-                            <td><button id="test5" onclick="test5()">测试"趋势图thd'</button></td>
-                            <td><button id="test6" onclick="test6()">测试"趋势图cf'</button></td>
-                            <td><button id="test7" onclick="test7()">测试"趋势图Hz'</button></td>
-                            <td><button id="test8" onclick="test8()">测试"趋势图unb%'</button></td>
-
-                        <td><button id="test9" onclick="test9()">测试"趋势图W'</button></td>
-                        <td><button id="test10" onclick="test10()">测试"趋势图VA'</button></td>
-                        <td><button id="test11" onclick="test11()">测试"趋势图VAR'</button></td>
-                        <td><button id="test12" onclick="test12()">测试"趋势图PF'</button></td>
-                        <td><button id="test13" onclick="test13()">测试"趋势图DPF'</button></td>
-                        <td><button id="test14" onclick="test14()">测试"趋势图TAN'</button></td>
-                        <td><button id="test15" onclick="test15()">测试"趋势图PST'</button></td>
-                        <td><button id="test16" onclick="test16()">测试"趋势图PLT'</button></td>
-
-                        </tr>
+                    <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
+                        <option value="">请选择</option>
+                    </select>
                 </div>
 
                 <div class="pull-right">欢迎用户${username}登录</div>
+
+                <td><button id="test" onclick="test()">测试'谐波'</button></td>
+                <td><button id="test2" onclick="test2()">测试'参数值'</button></td>
+                <td><button id="test3" onclick="test3()">测试'三相电压'</button></td>
+                <td><button id="test4" onclick="test4()">测试"趋势图rms'</button></td>
+                <td><button id="test5" onclick="test5()">测试"趋势图thd'</button></td>
+                <td><button id="test6" onclick="test6()">测试"趋势图cf'</button></td>
+                <td><button id="test7" onclick="test7()">测试"趋势图Hz'</button></td>
+                <td><button id="test8" onclick="test8()">测试"趋势图unb%'</button></td>
+
+                <td><button id="test9" onclick="test9()">测试"趋势图W'</button></td>
+                <td><button id="test10" onclick="test10()">测试"趋势图VA'</button></td>
+                <td><button id="test11" onclick="test11()">测试"趋势图VAR'</button></td>
+                <td><button id="test12" onclick="test12()">测试"趋势图PF'</button></td>
+                <td><button id="test13" onclick="test13()">测试"趋势图DPF'</button></td>
+                <td><button id="test14" onclick="test14()">测试"趋势图TAN'</button></td>
+                <td><button id="test15" onclick="test15()">测试"趋势图PST'</button></td>
+                <td><button id="test16" onclick="test16()">测试"趋势图PLT'</button></td>
 
             </div>
         </div>
@@ -206,61 +199,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <section id="main" class="p-relative" role="main">
         <!-- Sidebar -->
+        <!-- 动态加载菜单项 -->
         <aside id="sidebar">
-            <ul class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
-                <li>
-                    <a href="province.jsp" id='menuurl'>
-                        <i class="fa fa-calendar-o"></i>
-                        <span> 集中监控</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="deviceManager.jsp" id='menuurl'>
-                        <!-- 设备管理 -->
-                        <i class="fa fa-briefcase"></i>
-                        <span> 动力设施</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="onlineDetect.jsp" id='menuurl'>
-                        <i class="fa fa-bar-chart-o"></i>
-                        <span> 在线监测 </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="efficiencyAnalysis.jsp" id='menuurl'>
-                        <!-- 能耗统计 -->
-                        <i class="fa fa-sort-amount-asc"></i>
-                        <span>动力分析 </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="mstp_map.jsp" id='menuurl'>
-                        <i class="fa fa-bar-chart-o"></i>
-                        <span> 动力评估</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="energy_consumption.jsp" id='menuurl'>
-                        <i class="fa fa-building-o"></i>
-                        <span> 报表功能</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="userMng.jsp" id='menuurl'>
-                        <i class="fa fa-users"></i>
-                        <span> 用户管理</span>
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a href="" id='menuurl'>
-                        <i class="fa fa-cogs"></i>
-                        <span> 系统设置</span>
-                    </a>
-                </li>
+            <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
             </ul>
-
         </aside>
 
         <!-- Content -->
@@ -1293,8 +1235,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
 
     <script type="text/javascript">
-
-        //function jhjTabClick(name){
             $(document).ready(function(){
                 $("#subItem1").click(function(){
                     $("#item1").show();
@@ -1321,7 +1261,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").show();
                 });
             });
-        //}
     </script>
 
     <script>
@@ -1338,8 +1277,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     </script>
 
-    <script>
+    <<!-- 动态加载菜单项 -->
+    <script type="text/javascript">
+        var menulist="<%=session.getAttribute("menulist")%>";
+        var cbidstr = menulist.split(",");
 
+        //处理第一个和最后一个
+        cbidstr[0] = cbidstr[0].substring(1);
+        cbidstr[0] = " " + cbidstr[0];
+
+        var idx = cbidstr.length - 1;
+        var len = cbidstr[idx].length;
+        cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
+
+        for(var i = 0; i < cbidstr.length; i++){
+
+            var menuname = "";
+            if(cbidstr[i] == ' province.jsp')
+                menuname = "集中监控";
+
+            else if(cbidstr[i] == ' efficiencyDevice.jsp')
+                menuname = "动力设施";
+
+            else if(cbidstr[i] == ' onlineDetect.jsp')
+                menuname = "在线监测";
+
+            else if(cbidstr[i] == ' efficiencyAnalysis.jsp')
+                menuname = "动力分析";
+
+            else if(cbidstr[i] == ' efficiencyAssessment.jsp')
+                menuname = "动力评估";
+
+            else if(cbidstr[i] == ' reportChart.jsp')
+                menuname = "报表功能";
+
+            else if(cbidstr[i] == ' history.jsp') //userMng.jsp'
+                menuname = "历史曲线";
+
+            else if(cbidstr[i] == ' systemMng.jsp')
+                menuname = "系统管理";
+
+            $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+        }
     </script>
 
     <%--两个echarts版本 --%>

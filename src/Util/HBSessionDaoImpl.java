@@ -2,6 +2,7 @@ package Util;
 
 import java.util.List;
 
+import hibernatePOJO.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,19 +16,15 @@ public class HBSessionDaoImpl implements HBSessionDao{
     private Session session;
     private Transaction transaction;
 
-
     private void init() {
-        //System.out.println("ttttttttt0");
         //创建配置对象
         Configuration cfg = new Configuration().configure();
-        //System.out.println("ttttttttt1");
         //创建服务注册对象
         StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(cfg.getProperties()).build();
 
         //创建会话工厂对象
         sessionFactory = cfg.buildSessionFactory(serviceRegistry);
-        //System.out.println("ttttttttt1");
         //会话对象
         session =sessionFactory.openSession();
         //开启事务
@@ -37,7 +34,6 @@ public class HBSessionDaoImpl implements HBSessionDao{
     @Override
     public Session getSession() {
         init();
-        //System.out.println("ttttttttt2");
         return session;
     }
 
@@ -52,12 +48,9 @@ public class HBSessionDaoImpl implements HBSessionDao{
     public List search(String hql) {
         //查询不用事务管理
         Session session = null;
-        //System.out.println("ttttttttt1");
         session = getSession();
         List alist = null;
-        //System.out.println("ttttttttt3");
         alist = session.createQuery(hql).list();
-        // System.out.println("ttttttttt3");
         session.close();
         return alist;
     }
@@ -67,12 +60,9 @@ public class HBSessionDaoImpl implements HBSessionDao{
         //查询不用事务管理
         Session session = null;
         session = getSession();
-
         Query query = session.createQuery(hql);
         query.setMaxResults(num);
-
         List alist = query.list();
-
         session.close();
         return alist;
     }
@@ -81,19 +71,66 @@ public class HBSessionDaoImpl implements HBSessionDao{
     public Object getFirst(String hql) {
         //查询不用事务管理
         Session session = null;
-        //System.out.println("ttttttttt1");
         session = getSession();
-        //System.out.println("ttttttttt2");
         List alist = null;
         Object aobject = null;
         alist = session.createQuery(hql).list();
         aobject = alist.get(0);
-        //System.out.println("ttttttttt3");
         session.close();
         return aobject;
     }
 
+    //使用HQL语句删除数据
+    @Override
+    public boolean delete(String hql, String id) {
+        try {
+            Session session = null;
+            session = getSession();
+            Query q = session.createQuery(hql);
+            q.setString(0, id);
+            q.executeUpdate();
+            session.getTransaction().commit();
+            session.close();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
+   /* //使用HQL语句插入数据
+    @Override
+    public boolean insert(User user) {
+        try {
+            Session session = null;
+            session = getSession();
+            session.save(user);
+            session.getTransaction().commit();
+            session.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+*/
+    //使用HQL语句插入数据
+    @Override
+    public boolean insert(Object obj) {
+        try {
+            Session session = null;
+            session = getSession();
+            session.save(obj);
+            session.getTransaction().commit();
+            session.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
 }

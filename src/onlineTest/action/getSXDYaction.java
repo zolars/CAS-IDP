@@ -36,8 +36,6 @@ public class getSXDYaction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            System.out.println("111");
-
             //获取监测点
             //String computerroom = request.getParameter("computerroomid");
             String monitorpoint = request.getParameter("monitorpointid");

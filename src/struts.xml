@@ -65,8 +65,80 @@
              </result>
          </action>
 
-         <action name="getUserInfo" class="userManage.action.getUserInfoAction">
+         <action name="getAllUserInfo" class="userManage.action.getUserInfoAction">
              <!--将getUserInfo映射到物理地址 -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="deleteUserInfo" class="userManage.action.deleteUserInfoAction">
+             <!--deleteUserInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="deleteRolesInfo" class="userManage.action.deleteRolesInfoAction">
+             <!--deleteUserInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="addUserInfo" class="userManage.action.addUserInfoAction">
+             <!--addUserInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="addRolesInfo" class="userManage.action.addRolesInfoAction">
+             <!--addRolesInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getAllRoles" class="userManage.action.getAllRolesAction">
+             <!--getAllRoles -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getAllProvince" class="userManage.action.getAllProvinceAction">
+             <!--getAllRoles -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getAllCity" class="userManage.action.getAllCityAction">
+             <!--getAllRoles -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getAllComputerroom" class="userManage.action.getAllComputerroomAction">
+             <!--getAllRoles -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getDeviceInfo" class="deviceManage.action.getDeviceInfoAction">
+             <!--getDeviceInfo -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>

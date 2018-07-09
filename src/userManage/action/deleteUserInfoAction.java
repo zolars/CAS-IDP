@@ -17,7 +17,7 @@ import java.util.List;
 //import net.sf.json.JSONObject;
 
 
-public class getUserInfoAction extends ActionSupport {
+public class deleteUserInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -38,14 +38,17 @@ public class getUserInfoAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
+            //String monitorpointid = request.getParameter("monitorpointid");
+            String uidstr = request.getParameter("uid");
+            String uid[] = uidstr.split("=");
+
             UserDAO dao = new UserDAOImpl();
-            List alluser = dao.getAllUserInfo();
+            Boolean rt = dao.deleteUserInfo(uid[1]);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("alluser", alluser);
+            jsonObject.put("result", rt);
 
             result = JSON.toJSONString(jsonObject);
-
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -38,10 +38,7 @@
     <link rel="stylesheet" type="text/css" href="css/deviceManager.css">
     <link href="css/menu.css" rel="stylesheet">
 
-    <!-- Ztree -->
-    <%--<link rel="stylesheet" href="/css/zTree/demo.css" type="text/css">--%>
-    <link rel="stylesheet" href="/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
-
+    <link href="css/mycss.css" rel="stylesheet">
 </head>
 <style type="text/css">
     .r_out {
@@ -136,26 +133,19 @@
 
         <div class="media-body">
             <div class="media" id="top-menu">
+                <div class="pull-left location-select">
+                        <select class="form-control location-select-item" id="province_code" name="province_code" onchange="getCity()">
+                            <option value="">请选择</option>
+                        </select>
 
-                <div class="pull-left">
-                    <%--<ul id="treeDemo" class="ztree"></ul>--%>
+                        <select class="form-control location-select-item" id="city_code" name="city_code" onchange="getComproom()">
+                            <option value="">请选择</option>
+                        </select>
 
-                        <td>
-                            <select class="select" id="province_code" name="province_code" onchange="getCity()">
-                                <option value="">请选择</option>
-                            </select>
-
-                            <select class="select" id="city_code" name="city_code" onchange="getComproom()">
-                                <option value="">请选择</option>
-                            </select>
-
-                            <select class="select" id="comproom_code" name="comproom_code">
-                                <option value="">请选择</option>
-                            </select>
-                        </td>
-
-                    <ul id="treeDemo" class="ztree"></ul>
-                </div>
+                        <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
 
                 <div class="pull-right">欢迎用户${username} 登录</div>
 
@@ -676,11 +666,11 @@
             else if(cbidstr[i] == ' reportChart.jsp')
                 menuname = "报表功能";
 
-            else if(cbidstr[i] == ' userMng.jsp')
-                menuname = "用户管理";
+            else if(cbidstr[i] == ' history.jsp') //userMng.jsp'
+                menuname = "历史曲线";
 
-            else if(cbidstr[i] == ' systemSetting.jsp')
-                menuname = "系统设置";
+            else if(cbidstr[i] == ' systemMng.jsp')
+                menuname = "系统管理";
 
             $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
         }

@@ -1,23 +1,23 @@
-package userManage.action;
-
+package deviceManage.action;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import deviceManage.dao.DeviceDAO;
+import deviceManage.dao.impl.DeviceDAOImpl;
+import onlineTest.dao.PowerParameterDAO;
+import onlineTest.dao.impl.PowerParameterDAOImpl;
 import org.apache.struts2.ServletActionContext;
-import userManage.dao.UserDAO;
-import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
-//import hibernatePOJO.UserPermission;
 //import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
+//import net.sf.json.JSONArray;
 
 
-public class getUserInfoAction extends ActionSupport {
+public class getDeviceInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -30,7 +30,7 @@ public class getUserInfoAction extends ActionSupport {
     }
 
 
-    /* 查询所有用户的基本信息、用户角色、用户权限
+    /* 根据设备名称查询设备其他信息
      */
     public String execute() throws Exception { //getUserTree() throws Exception{
         try {//获取数据
@@ -38,14 +38,17 @@ public class getUserInfoAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            UserDAO dao = new UserDAOImpl();
-            List alluser = dao.getAllUserInfo();
+            //获取监测点
+            //String computerroom = request.getParameter("computerroomid");
+            String devicename = request.getParameter("devicename");
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("alluser", alluser);
+            DeviceDAO dao = new DeviceDAOImpl();
 
-            result = JSON.toJSONString(jsonObject);
+            List qstdata = new ArrayList();
 
+            qstdata = dao.getDeviceDataByName(devicename);
+
+            result = JSON.toJSONString(qstdata); // List转json
 
         } catch (Exception e) {
             e.printStackTrace();
