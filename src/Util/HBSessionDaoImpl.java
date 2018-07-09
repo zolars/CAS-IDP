@@ -2,7 +2,6 @@ package Util;
 
 import java.util.List;
 
-import hibernatePOJO.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

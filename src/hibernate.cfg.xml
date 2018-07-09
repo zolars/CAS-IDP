@@ -17,7 +17,7 @@
         <property name="current_session_context_class">thread</property>
 
 
-        <mapping resource="/hibernatePOJO/User.hbm.xml"/>
+        <mapping resource="hibernatePOJO/User.hbm.xml"/>
         <mapping class="hibernatePOJO.User"/>
         <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>
         <mapping resource="hibernatePOJO/ProvinceBank.hbm.xml"/>
