@@ -36,59 +36,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <link href="css/mycss.css" rel="stylesheet">
 
-   <%-- <style>
-        .add-user {
-            display: none;
-            width: 500px;
-            height: 440px;
-            background: rgba(0,0,0,.5);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;
-            z-index: 2000;
-            border-radius: 20px;
-            padding: 30px;
-        }
-        .add-user-item {
-            flex: 1;
-        }
-        .add-user-title {
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        .add-user-input {
-            width: 80%;
-        }
-        .add-user-handle {
-            width: 100%;
-            display: flex;
-            height: 100px;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .add-user-one-line{
-            display: flex;
-            margin-bottom: 20px;
-
-        }
-        .add-user-one-line:last-of-type {
-            margin-bottom: 0;
-        }
-
-        /* location-bar */
-        .location-select {
-            display: flex;
-        }
-
-        .location-select-item {
-            width: 90px;
-        }
-    </style>
---%>
-
 </head>
 
 <body id="skin-blur-blue">

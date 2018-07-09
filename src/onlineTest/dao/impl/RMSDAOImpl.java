@@ -8,6 +8,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +20,10 @@ public class RMSDAOImpl implements RMSDAO {
     private Transaction transaction;
     private Query query;
 
-    public List<Object> getCurrentRMSData(String monitorpoint){
+    public List getCurrentRMSData(String monitorpoint){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<Object> crlist = new ArrayList<>();
+        List<PowerxbMonitor> rt = new ArrayList<>();
+        PowerxbMonitor rtobj = new PowerxbMonitor();
 
         List<PowerxbMonitor> u1list = new ArrayList<>();
 
@@ -29,14 +33,8 @@ public class RMSDAOImpl implements RMSDAO {
         //(default time 3)(default time period = the latest 6 records,that is half a minute)
         //RMS_U1 = sqrt(U1^2+U2^2+U3^2+....+UN^2)
 
-        /*u1list = hbsessionDao.search(
-                "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "' and cishu = 3 order by time desc LIMIT 0,5");*/
         u1list = hbsessionDao.searchWithNum(
                 "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "' and cishu = 3 order by time desc", 5);
-
-        /*u1list = hbsessionDao.search(
-                "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "'" + " and cishu = 3 order by time desc limit 0,5");*/
-        //System.out.println(u1list.size());
 
         if(u1list.size() < 5){
             for(int i = 0; i < u1list.size(); i++){
@@ -61,24 +59,35 @@ public class RMSDAOImpl implements RMSDAO {
             }
         }
 
+
+
         //add RMS -U1
-        crlist.add(Math.sqrt(u1));
+        rtobj.setU1Xb(Math.sqrt(u1));
         //add RMS -U2
-        crlist.add(Math.sqrt(u2));
+        rtobj.setU2Xb(Math.sqrt(u2));
         //add RMS -U3
-        crlist.add(Math.sqrt(u3));
+        rtobj.setU3Xb(Math.sqrt(u3));
 
         //add RMS -I1
-        crlist.add(Math.sqrt(i1));
+        rtobj.setI1Xb(Math.sqrt(i1));
         //add RMS -I2
-        crlist.add(Math.sqrt(i2));
+        rtobj.setI2Xb(Math.sqrt(i2));
         //add RMS -I3
-        crlist.add(Math.sqrt(i3));
+        rtobj.setI3Xb(Math.sqrt(i3));
+
+        //add time
+        /*Timestamp ts = new Timestamp(System.currentTimeMillis());
+        String date = "";
+        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        date = sdf.format(ts);*/
+        rtobj.setTime(u1list.get(0).getTime());
+
+        rt.add(rtobj);
 
         //add RMS -V1
         //add RMS -V2
         //add RMS -V3
-        return crlist;
+        return rt;
     }
 
 

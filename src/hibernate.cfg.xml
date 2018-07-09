@@ -10,6 +10,7 @@
         <property name="connection.username">root</property>
         <property name="connection.password">cjy123</property>
 
+
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
@@ -38,6 +39,8 @@
         <mapping resource="hibernatePOJO/PowersxdyMonitor.hbm.xml"/>
         <mapping class="hibernatePOJO.PowerparmMonitorHis"/>
         <mapping resource="hibernatePOJO/PowerparmMonitorHis.hbm.xml"/>
+        <mapping class="hibernatePOJO.Devices"/>
+        <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
 
 
     </session-factory>

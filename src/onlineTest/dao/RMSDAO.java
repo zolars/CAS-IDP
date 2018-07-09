@@ -1,6 +1,8 @@
 package onlineTest.dao;
 
 
+import hibernatePOJO.PowerxbMonitor;
+
 import java.util.List;
 
 public interface RMSDAO {
@@ -8,7 +10,7 @@ public interface RMSDAO {
     /*
     rms data order： u1、u2、u3、v1、v2、v3、i1、i2、i3
      */
-    public List<Object> getCurrentRMSData(String monitorpoint);
+    public List getCurrentRMSData(String monitorpoint);
 
     /*public List<Object> getCurrentRMSu2Data(String monitorpoint);
     public List<Object> getCurrentRMSu3Data(String monitorpoint);
