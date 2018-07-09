@@ -1,4 +1,25 @@
-#item3-text ol,#item3-toolbar ol{
+#item1 ol{
+    margin: 0;
+    padding: 0;
+}
+#item1-params-list ol{
+    list-style: none;
+    margin-top: 5px;
+}
+#item1-params-list ol li{
+    width: 60px;
+    float: left;
+}
+#item1-params-list ol li input[type="radio"],#item1-params-list ol li input[type="checkbox"]{
+    opacity: 1;
+}
+#item1-sidebar ol{
+    list-style: none;
+    position: absolute;
+    right: 0;
+    padding-right: 10px;
+}
+#item3-text ol,#item3-sidebar ol{
     list-style: none;
 }
 #item3-text ol{
@@ -14,17 +35,17 @@
 #item3-text ol.diff{
     bottom: 30%;
 }
-#item3-toolbar ol{
+#item3-sidebar ol{
     position: relative;
     left: 0;
     top: 25%;
 }
-#item3-toolbar ol.symbol{
+#item3-sidebar ol.symbol{
     position: relative;
     left: -50px;
     top: 20%;
 }
-#item3-toolbar ol.symbol li{
+#item3-sidebar ol.symbol li{
     display: inline-block;
     width: 25px;
     height: 25px;
@@ -35,7 +56,7 @@
     font-size: 17px;
     line-height: 25px;
 }
-#item3-toolbar ol li button{
+#item1-sidebar ol li button,#item3-sidebar ol li button{
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 1px;
@@ -58,4 +79,11 @@
 }
 #item3-realtime span{
     float: right;
+}
+#item4 table th{
+    text-align: center;
+    background: rgba(0,0,0,0.1);
+}
+#item4 table caption{
+    color: inherit;
 }

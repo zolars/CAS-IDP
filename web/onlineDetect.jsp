@@ -300,13 +300,82 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </div>
                 <div class="row">
-                    <div id = "item1" class="col-md-12" style="width:90%; height: 600px;">
-                        this is qushitu
+                    <div id = "item1" class="col-md-12" style="height: 600px;">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div id="item1-params-list" class="row">
+                                    <div class="col-md-7">
+                                        <ol>
+                                            <li><input type="radio" name="params" id="item1-rms">RMS</li>
+                                            <li><input type="radio" name="params" id="item1-thd">THD</li>
+                                            <li><input type="radio" name="params" id="item1-cf">CF</li>
+                                            <li><input type="radio" name="params" id="item1-hz">Hz</li>
+                                            <li><input type="radio" name="params" id="item1-w">W</li>
+                                            <li><input type="radio" name="params" id="item1-va">VA</li>
+                                            <li><input type="radio" name="params" id="item1-var">Var</li>
+                                            <li><input type="radio" name="params" id="item1-pf">PF</li>
+                                        </ol>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <ol>
+                                            <li><input type="radio" name="params" id="item1-unb">unb%</li>
+                                            <li><input type="radio" name="params" id="item1-pst">Pst</li>
+                                            <li><input type="radio" name="params" id="item1-plt">Plt</li>
+                                            <li><input type="radio" name="params" id="item1-Vh">Vh</li>
+                                            <li><input type="radio" name="params" id="item1-Ah">Ah</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="item1-params-text" class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                A1RMS<input type="checkbox">AVG=0 MIN=0 MAX=0
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                A2RMS<input type="checkbox">AVG=0 MIN=0 MAX=0
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                A3RMS<input type="checkbox">AVG=0 MIN=0 MAX=0
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="item1-graph" class="col-md-12" style="height: 550px;"></div>
+                                </div>
+                            </div>
+                            <div id="item1-sidebar" class="col-md-1">
+                                <ol>
+                                    <li>
+                                        <button class="btn btn-default">3U</button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-default">3V</button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-default">3A</button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-default">L1</button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-default">L2</button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-default">L3</button>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
-                    <div id = "item2" class="col-md-12" style="width:90%; height: 600px;">
-                        this is q2
+                    <div id = "item2" class="col-md-12" style="height: 600px;">
                     </div>
-                    <div id = "item3" class="col-md-12" style="width:90%; height: 600px;">
+                    <div id = "item3" class="col-md-12" style="height: 600px;">
                         <div class="row">
                             <div id="item3-text" class="col-md-2" style="height: 580px;" >
                                 <ol class="value">
@@ -320,8 +389,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <li>&Phi;<sub>31</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-diff3">126</span><sup>&nbsp;o</sup></li>
                                 </ol>
                             </div>
-                            <div id="item3-gauge" class="col-md-8" style="height: 580px;"></div>
-                            <div id="item3-toolbar" class="col-md-2" style="height: 580px;">
+                            <div id="item3-graph" class="col-md-8" style="height: 580px;"></div>
+                            <div id="item3-sidebar" class="col-md-2" style="height: 580px;">
                                 <ol class="symbol">
                                     <li style="border: 2px solid #f00;">1</li>
                                     <li style="border: 2px solid #00f;">2</li>
@@ -356,8 +425,136 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                         </div>
                     </div>
-                    <div id = "item4" style="display:none;">
-                        this is q4
+                    <div id = "item4" style="height: 600px;">
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-1 col-xs-12">
+                                <table class="table table-bordered">
+                                    <caption>基本参数</caption>
+                                    <tr>
+                                        <th>U1</th>
+                                        <td>222.65V</td>
+                                    </tr>
+                                    <tr>
+                                        <th>U2</th>
+                                        <td>225.99V</td>
+                                    </tr>
+                                    <tr>
+                                        <th>U3</th>
+                                        <td>226.59V</td>
+                                    </tr>
+                                    <tr>
+                                        <th>U4</th>
+                                        <td>0.4772V</td>
+                                    </tr>
+                                    <tr>
+                                        <th>I1</th>
+                                        <td>57.008A</td>
+                                    </tr>
+                                    <tr>
+                                        <th>I2</th>
+                                        <td>63.827A</td>
+                                    </tr>
+                                    <tr>
+                                        <th>I3</th>
+                                        <td>51.269A</td>
+                                    </tr>
+                                    <tr>
+                                        <th>I4</th>
+                                        <td>2.2547mA</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-7 col-xs-12">
+                                <table class="table table-bordered">
+                                    <caption>功率参数</caption>
+                                    <tr>
+                                        <th></th>
+                                        <th>相1</th>
+                                        <th>相2</th>
+                                        <th>相3</th>
+                                        <th>相4</th>
+                                    </tr>
+                                    <tr>
+                                        <th>P(W)</th>
+                                        <td>10.961kW</td>
+                                        <td>11.980kW</td>
+                                        <td>9.1567kW</td>
+                                        <td>32.099kW</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Q(Var)</th>
+                                        <td>6.2886Var</td>
+                                        <td>6.2886Var</td>
+                                        <td>6.2886Var</td>
+                                        <td>6.2886Var</td>
+                                    </tr>
+                                    <tr>
+                                        <th>S(VA)</th>
+                                        <td>12.687kVA</td>
+                                        <td>12.687kVA</td>
+                                        <td>12.687kVA</td>
+                                        <td>12.687kVA</td>
+                                    </tr>
+                                    <tr>
+                                        <th>PF</th>
+                                        <td>0.8640</td>
+                                        <td>0.8640</td>
+                                        <td>0.8640</td>
+                                        <td>0.8640</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cos PHI</th>
+                                        <td>0.8683</td>
+                                        <td>0.8683</td>
+                                        <td>0.8683</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-1 col-xs-12">
+                                <table class="table table-bordered">
+                                    <caption>&nbsp;</caption>
+                                    <tr>
+                                        <th>不平衡度</th>
+                                        <td>0.7301%</td>
+                                    </tr>
+                                    <tr>
+                                        <th>频率</th>
+                                        <td>49.984Hz</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-7 col-xs-12">
+                                <table class="table table-bordered">
+                                    <caption>闪变</caption>
+                                    <tr>
+                                        <th></th>
+                                        <th>U1</th>
+                                        <th>U2</th>
+                                        <th>U3</th>
+                                    </tr>
+                                    <tr>
+                                        <th>|f|</th>
+                                        <td>0.0856</td>
+                                        <td>0.0856</td>
+                                        <td>0.0856</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pst</th>
+                                        <td>0.3349</td>
+                                        <td>0.3349</td>
+                                        <td>0.3349</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Plt</th>
+                                        <td>0.4910</td>
+                                        <td>0.4910</td>
+                                        <td>0.4910</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1187,7 +1384,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
 
         // 1.初始化
-        var eventChart1 = echarts.init(document.getElementById('item1'));
+        var eventChart1 = echarts.init(document.getElementById('item1-graph'));
         // 2.指定图表的配置项和数据
         var option1 = {
             tooltip: {
@@ -1565,7 +1762,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var maxAmplitude=400;
         // sxbphdData用来暂存三相不平衡度数据
         var sxbphdData=null;
-        var eventChart3=echarts.init($("#item3-gauge")[0]);
+        var eventChart3=echarts.init($("#item3-graph")[0]);
         // 初始配置项
         var option3 = {
             //提示框
@@ -2067,9 +2264,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             ]
         };
         // 右侧按钮的事件绑定
-        $("#item3-toolbar ol li button").each(function(){
+        $("#item3-sidebar ol li button").each(function(){
             $(this).click(function(){
-                $("#item3-toolbar ol li button").removeClass("active");
+                $("#item3-sidebar ol li button").removeClass("active");
                 $(this).addClass("active");
                 for(var i=0;i<sxbphdlegend.length;i++){
                     if(sxbphdlegend[i].indexOf(this.value)>=0){
@@ -2107,7 +2304,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     sxbphdData=JSON.parse(data);
                     updateSxdyt(sxbphdData);
                     // 设置显示的系列
-                    $("#item3-toolbar ol li button.active").trigger("click");
+                    $("#item3-sidebar ol li button.active").trigger("click");
                 },
                 error: function(){
                     alert("获取三相电压数据失败");
@@ -2186,7 +2383,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         // 更新三相电压、电流图左侧显示的文字
         function updateSxdyt2(data){
             // 获取被选中按钮的value值
-            var value = $("#item3-toolbar ol li button.active").attr("value");
+            var value = $("#item3-sidebar ol li button.active").attr("value");
             // console.log(value);
             switch (value){
                 case "U" :
