@@ -382,13 +382,12 @@
             //return result[1];
         }
     </script>
+
     <script>
+        /*加载省下拉选*/
         var provinceid = getQueryString("prov");
         if(provinceid){//第一次进入这个页面，没有获取过
-            //alert(provinceid);
             $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
-        }
-        else{
         }
 
         /*加载市下拉选*/
@@ -408,7 +407,6 @@
                     $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
-                    //alert(obj[0].cbname);
                     var obj = eval("(" + data + ")");
                     for (var i = 0; i < obj.length; i++) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");

@@ -666,7 +666,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {provinceid: pname},
                 dataType : "json",
                 success: function (data) {
-                    alert("33");
+                   // alert("33");
                     $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 

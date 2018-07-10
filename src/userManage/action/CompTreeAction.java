@@ -53,8 +53,6 @@ public class CompTreeAction extends ActionSupport {
            /* JSONArray jsonArray = JSONArray.fromObject(citybank);
             result = jsonArray.toString();*/
 
-            System.out.println(result);
-
             //存到 session 中,方便后续重复使用
             session.setAttribute("computerroom", computerroom);
 
