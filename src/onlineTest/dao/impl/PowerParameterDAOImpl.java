@@ -20,8 +20,10 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
-        crlist = hbsessionDao.search(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "'");
+        PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
+                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc" );
+
+        crlist.add(pm);
 
         return crlist;
     }

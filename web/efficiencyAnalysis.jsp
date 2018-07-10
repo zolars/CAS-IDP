@@ -767,41 +767,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
 
-    <%--<script>
-
-        var objprobank="<%=session.getAttribute("probank")%>";
-        var objcitybank="<%=session.getAttribute("citybank")%>";
-        var objcomputerroom="<%=session.getAttribute("computerroom")%>";
-
-        /*var objcitybank2 = objcitybank.list;
-        alert(objcitybank2);
-
-        for(var key=0; key<objcitybank2.length; key++) {
-            var temp = objcitybank2[key];
-            console.log(temp);
-        }
-        alert(objcitybank2);*/
-
-        var zTreeObj;
-        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-        var setting = {};
-        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-        var zNodes = [
-            {name:objprobank, open:true, children:[
-                    {name:objcitybank, open:true, children:[
-                            {name:objcomputerroom}
-                        ]
-                    }
-                ]
-            }
-        ];
-
-        $(document).ready(function(){
-            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-        });
-
-    </script>--%>
-
     <!-- 省\市\机房下拉菜单-->
     <script>
         var provinceid="<%=session.getAttribute("probank")%>";

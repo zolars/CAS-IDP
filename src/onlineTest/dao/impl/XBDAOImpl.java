@@ -21,15 +21,10 @@ public class XBDAOImpl implements XBDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
-        //System.out.println("tttttttttttt  "+monitorpoint);
-
         crlist = hbsessionDao.search(
                 "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "'");
 
-        //System.out.println("tttttttttttt  "+crlist.size());
-
         return crlist;
     }
-
 
 }

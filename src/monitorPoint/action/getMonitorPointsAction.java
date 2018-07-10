@@ -1,9 +1,12 @@
-package onlineTest.action;
+package monitorPoint.action;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import onlineTest.dao.XBDAO;
-import onlineTest.dao.impl.XBDAOImpl;
+import deviceManage.dao.DeviceDAO;
+import deviceManage.dao.impl.DeviceDAOImpl;
+import monitorPoint.dao.MonitorPointDAO;
+import monitorPoint.dao.impl.MonitorPointDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,11 +14,8 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
 
-
-public class getXBaction extends ActionSupport {
+public class getMonitorPointsAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -28,25 +28,27 @@ public class getXBaction extends ActionSupport {
     }
 
 
-    /* 根据检测点实时监测点XB数据
+    /* 根据设备名称查询设备其他信息
      */
-    public String execute() throws Exception { //getUserTree() throws Exception{
+    public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
-            String monitorpoint = request.getParameter("monitorpointid");
+            String computerroom = request.getParameter("computerroom");
 
-            XBDAO dao = new XBDAOImpl();
+            MonitorPointDAO dao = new MonitorPointDAOImpl();
 
-            List xbdata = new ArrayList();
+            List mpdata = new ArrayList();
 
-            xbdata = dao.getCurrentXbData(monitorpoint);
+            mpdata = dao.getLocalAllMonitorPoint(computerroom);
 
-            result = JSON.toJSONString(xbdata); // List转json
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("allmpdata", mpdata);
+
+            result = JSON.toJSONString(jsonObject); // List转json
 
         } catch (Exception e) {
             e.printStackTrace();

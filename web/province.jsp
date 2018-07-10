@@ -196,207 +196,10 @@
             </ul>
         </aside>
 
-
         <!-- Content -->
         <section id="content" class="container">
 
-            <!-- Messages Drawer -->
-            <div id="messages" class="tile drawer animated">
-                <div class="listview narrow">
-                    <div class="media">
-                        <a href="">新消息</a>
-                        <span class="drawer-close">&times;</span>
-
-                    </div>
-                    <div class="overflow" style="height: 254px">
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/1.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">调度班长 - 2分钟前</small>
-                                <br>
-                                <a class="t-overflow" href="">空调系统数据采集异常，请工作人员检查。</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/2.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">值班专员 - 15分钟前</small>
-                                <br>
-                                <a class="t-overflow" href="">办公室供暖系统出现异常，无法提供正常供暖，请排除故障!</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/3.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">自动化班长 - 3小时前</small>
-                                <br>
-                                <a class="t-overflow" href="">能源费用分布图以及报表数据有误差，请核对</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/4.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">值班人员 - 3小时前</small>
-                                <br>
-                                <a class="t-overflow" href="">锅炉房水温过高，告警系统启动，请及时查看.</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/1.jpg" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">办公室 - 4小时前</small>
-                                <br>
-                                <a class="t-overflow" href="">请各部门提供上周能耗统计数据，本周将针对关键能耗点进行技术优化</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/2.jpg" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">值班专员 - 5小时前</small>
-                                <br>
-                                <a class="t-overflow" href="">自动化班提供1#机房总耗电量远远超过预测值，请再次核对数据并及时告知！</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/3.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">办公室 - 6小时前</small>
-                                <br>
-                                <a class="t-overflow" href="">请提供“人均空调系统能耗”和“制冷系统能效比”两组数据</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/4.jpg" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">办公室专责 - 6小时前</small>
-                                <br>
-                                <a class="t-overflow" href="">请调度班提供2#机房和3#基站的能耗统计数据.</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/5.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">网管中心 - 7小时前</small>
-                                <br>
-                                <a class="t-overflow" href="">今天凌晨将进行断网检修，请各部门及时下载相关材料</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="media text-center whiter l-100">
-                        <a href="">
-                            <small>查看所有</small>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Notification Drawer -->
-            <div id="notifications" class="tile drawer animated">
-                <div class="listview narrow">
-                    <div class="media">
-                        <a href="">实时告警</a>
-                        <span class="drawer-close">&times;</span>
-                    </div>
-                    <div class="overflow" style="height: 254px">
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/1.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">值班人员 - 35秒前</small>
-                                <br>
-                                <a class="t-overflow" href="">供暖系统能耗数据采集异常</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/3.jpg" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">调度值班室 - 1分钟前</small>
-                                <br>
-                                <a class="t-overflow" href="">办公照明系统出现故障，请立即检修！</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/3.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">办公室 - 2分钟前</small>
-                                <br>
-                                <a class="t-overflow" href="">办公区空调1#机组无法正常工作，异响</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/4.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">值班专责 - 3分钟前</small>
-                                <br>
-                                <a class="t-overflow" href="">1#制冷站中级故障告警，请立即前往查看</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/4.jpg" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">值班人员 - 4分钟前</small>
-                                <br>
-                                <a class="t-overflow" href="">冷机用电量突变，请查看是否故障</a>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/2.jpg" alt="">
-                            </div>
-                            <div class="media-body">
-                                <small class="text-muted">办公室专责 - 5分钟前</small>
-                                <br>
-                                <a class="t-overflow" href="">新风系统告警，无法正常工作</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="media text-center whiter l-100">
-                        <a href="">
-                            <small>查看所有</small>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb hidden-xs">
-                <li>
-                    <a href="#">主页</a>
-                </li>
-                <li>
-                    <a href="#">系统总览</a>
-                </li>
-                <li class="active">首页</li>
-            </ol>
-
-            <h4 class="page-title">实时能耗</h4>
+            <h4 class="page-title">关键信息集中监控</h4>
 
             <hr class="whiter" />
 
@@ -404,21 +207,23 @@
             <div class="block-area">
                 <!-- Time choose -->
                 <div class="row">
-                    <label for="firstDate">开始日期</label>
-                    <div class="input-group date start_date_picker">
-                        <input size="18" type="text" id="firstDate" name="queryStartDate" value="2017-7-8" class="form-control" readonly placeholder="开始日期">
-                        <span class="input-group-addon">
+                    <div class="col-md-4">
+                        <label for="firstDate">开始日期</label>
+                        <div class="input-group date start_date_picker">
+                            <input size="18" type="text" id="firstDate" name="queryStartDate" value="2017-7-8" class="form-control" readonly placeholder="开始日期">
+                            <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar">
                             </span>
                         </span>
-                    </div>
-                    <label for="lastDate">结束日期</label>
-                    <div class="input-group date end_date_picker">
-                        <input size="18" type="text" id="lastDate" name="queryEndDate" value="2017-7-10" class="form-control" readonly placeholder="结束日期">
-                        <span class="input-group-addon">
+                        </div>
+                        <label for="lastDate">结束日期</label>
+                        <div class="input-group date end_date_picker">
+                            <input size="18" type="text" id="lastDate" name="queryEndDate" value="2017-7-10" class="form-control" readonly placeholder="结束日期">
+                            <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar">
                             </span>
                         </span>
+                        </div>
                     </div>
                 </div>
 
@@ -456,579 +261,6 @@
 
             <hr class="whiter" />
 
-            <!-- Main Widgets -->
-
-            <div class="block-area">
-                <div class="row">
-                    <div class="col-md-8">
-                        <!-- Main Chart -->
-                        <div class="tile">
-                            <h2 class="tile-title">用电总量统计(kW·h)</h2>
-                            <div class="tile-config dropdown">
-                                <a data-toggle="dropdown" href="" class="tile-menu"></a>
-                                <ul class="dropdown-menu pull-right text-right">
-                                    <li>
-                                        <a class="tile-info-toggle" href="">Chart Information</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Refresh</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Settings</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="p-10">
-                                <div id="line-chart" class="main-chart" style="height: 250px"></div>
-
-                                <div class="chart-info">
-                                    <ul class="list-unstyled">
-                                        <li class="m-b-10">
-                                            今日用电总量(kW·h)
-                                            <span class="pull-right text-muted t-s-0">
-                                                <i class="fa fa-chevron-up"></i>
-                                                +12%
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <small>
-                                                空调系统用电 640(kW·h)
-                                                <span class="pull-right text-muted t-s-0">
-                                                    <i class="fa m-l-15 fa-chevron-down"></i> -8%</span>
-                                            </small>
-                                            <div class="progress progress-small">
-                                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 40%"></div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <small>
-                                                供暖系统用电 560(kW·h)
-                                                <span class="pull-right text-muted t-s-0">
-                                                    <i class="fa m-l-15 fa-chevron-up"></i>
-                                                    -3%
-                                                </span>
-                                            </small>
-                                            <div class="progress progress-small">
-                                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 60%"></div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pies -->
-                        <!--<div class="tile text-center">-->
-                        <!--<div class="tile-dark p-10">-->
-                        <!--<div class="pie-chart-tiny" data-percent="86,453">-->
-                        <!--<span class="percent"></span>-->
-                        <!--<span class="pie-title">访问用户 <i class="m-l-5 fa fa-retweet"></i></span>-->
-                        <!--</div>-->
-                        <!--<div class="pie-chart-tiny" data-percent="23">-->
-                        <!--<span class="percent"></span>-->
-                        <!--<span class="pie-title">能耗占用率<i class="m-l-5 fa fa-retweet"></i></span>-->
-                        <!--</div>-->
-                        <!--<div class="pie-chart-tiny" data-percent="57">-->
-                        <!--<span class="percent"></span>-->
-                        <!--<span class="pie-title">空调系统 <i class="m-l-5 fa fa-retweet"></i></span>-->
-                        <!--</div>-->
-                        <!--<div class="pie-chart-tiny" data-percent="34">-->
-                        <!--<span class="percent"></span>-->
-                        <!--<span class="pie-title">供暖系统 <i class="m-l-5 fa fa-retweet"></i></span>-->
-                        <!--</div>-->
-                        <!--<div class="pie-chart-tiny" data-percent="81">-->
-                        <!--<span class="percent"></span>-->
-                        <!--<span class="pie-title">用气量统计 <i class="m-l-5 fa fa-retweet"></i></span>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-
-                        <!--  Recent Postings -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="tile">
-                                    <h2 class="tile-title">重要通知</h2>
-                                    <div class="tile-config dropdown">
-                                        <a data-toggle="dropdown" href="" class="tile-menu"></a>
-                                        <ul class="dropdown-menu animated pull-right text-right">
-                                            <li>
-                                                <a href="">Refresh</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Settings</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="listview narrow">
-                                        <div class="media p-l-5">
-                                            <div class="pull-left">
-                                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/1.png" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <small class="text-muted">2小时前 来自 供暖调度班</small>
-                                                <br/>
-                                                <a class="t-overflow" href="">供暖系统故障已排除</a>
-
-                                            </div>
-                                        </div>
-                                        <div class="media p-l-5">
-                                            <div class="pull-left">
-                                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/2.png" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <small class="text-muted">5小时前 来自 办公室</small>
-                                                <br/>
-                                                <a class="t-overflow" href="">照明系统昨晚出现故障，请检修</a>
-
-                                            </div>
-                                        </div>
-                                        <div class="media p-l-5">
-                                            <div class="pull-left">
-                                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/3.png" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <small class="text-muted">25/02/2016 来自 办公室</small>
-                                                <br/>
-                                                <a class="t-overflow" href="">请各部门上传昨天的能耗统计报表</a>
-
-                                            </div>
-                                        </div>
-                                        <div class="media p-l-5">
-                                            <div class="pull-left">
-                                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/4.png" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <small class="text-muted">26/02/2016 来自 自动化班</small>
-                                                <br/>
-                                                <a class="t-overflow" href="">空调系统能耗报表上传</a>
-
-                                            </div>
-                                        </div>
-                                        <div class="media p-l-5">
-                                            <div class="pull-left">
-                                                <img width="40" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/5.png" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <small class="text-muted">26/02/2016 来自 调度班长</small>
-                                                <br/>
-                                                <a class="t-overflow" href="">请各单位检查新风系统运行状况并上报</a>
-
-                                            </div>
-                                        </div>
-                                        <div class="media p-5 text-center l-100">
-                                            <a href="">
-                                                <small>查看所有</small>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Tasks to do -->
-                            <div class="col-md-6">
-                                <div class="tile">
-                                    <h2 class="tile-title">待办事项</h2>
-                                    <div class="tile-config dropdown">
-                                        <a data-toggle="dropdown" href="" class="tile-menu"></a>
-                                        <ul class="dropdown-menu pull-right text-right">
-                                            <li id="todo-add">
-                                                <a href="">Add New</a>
-                                            </li>
-                                            <li id="todo-refresh">
-                                                <a href="">Refresh</a>
-                                            </li>
-                                            <li id="todo-clear">
-                                                <a href="">Clear All</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="listview todo-list sortable">
-                                        <div class="media">
-                                            <div class="checkbox m-0">
-                                                <label class="t-overflow">
-                                                    <input type="checkbox"> 检查办公楼新风系统机组运行状况
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="media">
-                                            <div class="checkbox m-0">
-                                                <label class="t-overflow">
-                                                    <input type="checkbox"> 空调系统能耗监测报告提交
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                        <div class="media">
-                                            <div class="checkbox m-0">
-                                                <label class="t-overflow">
-                                                    <input type="checkbox"> 处理办公楼照明系统告警
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                        <div class="media">
-                                            <div class="checkbox m-0">
-                                                <label class="t-overflow">
-                                                    <input type="checkbox"> 输出全面的能源审计报告
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <h2 class="tile-title">已完成</h2>
-
-                                    <div class="listview todo-list sortable">
-                                        <div class="media">
-                                            <div class="checkbox m-0">
-                                                <label class="t-overflow">
-                                                    <input type="checkbox" checked="checked"> 建筑总能耗报表生成
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                        <div class="media">
-                                            <div class="checkbox m-0">
-                                                <label class="t-overflow">
-                                                    <input type="checkbox" checked="checked"> 根据主管部门的能源数据监测要求，上报能耗数据。
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                        <div class="media">
-                                            <div class="checkbox m-0">
-                                                <label class="t-overflow">
-                                                    <input type="checkbox" checked="checked"> 能耗单元统计
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <!-- USA Map -->
-                        <div class="tile">
-                            <h2 class="tile-title">能耗热点图</h2>
-                            <div class="tile-config dropdown">
-                                <a data-toggle="dropdown" href="" class="tile-menu"></a>
-                                <ul class="dropdown-menu pull-right text-right">
-                                    <li>
-                                        <a href="">Refresh</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Settings</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="container" id="container1">
-                                <div class="popover right pop1" data-easein="cardInRight" data-easeout="cardOutRight" id="pop1">
-                                    <div class="arrow"></div>
-                                    <div class="popover-inner">
-                                        <h3 class="popover-title">
-                                            <a data-toggle="modal" href="#modalWider">1#基站能耗数据异常</a>
-                                        </h3>
-                                        <div class="popover-content">
-                                            <p>1#基站2机房温度过高.</p>
-                                            <p>请速派专人查看！</p>
-                                            <!--<img src="img/Nova4.png" alt="small" style="width: 1008px;height: 586px;"/>-->
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="popover top pop2" data-easein="cardInTop" data-easeout="cardOutTop" id="pop2">
-                                    <div class="arrow"></div>
-                                    <div class="popover-inner">
-                                        <h3 class="popover-title">
-                                            <a data-toggle="modal" href="#modalWider1">能耗采集异常</a>
-                                        </h3>
-                                        <div class="popover-content">
-                                            <p>基站办公大楼供暖系统出现异常数据.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="popover left pop3" data-easein="cardInLeft" data-easeout="cardOutLeft" id="pop3">
-                                    <div class="arrow"></div>
-                                    <div class="popover-inner">
-                                        <h3 class="popover-title">
-                                            <a data-toggle="modal" href="#modalWider2">营业厅供暖故障</a>
-                                        </h3>
-                                        <div class="popover-content">
-                                            <p>西宁市营业厅大厅新风系统故障，过温告警，请查看！.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="popover bottom pop4" data-easein="cardInBottom" data-easeout="cardOutBottom" id="pop4">
-                                    <div class="arrow"></div>
-                                    <div class="popover-inner">
-                                        <h3 class="popover-title">
-                                            <a data-toggle="modal" href="#modalWider3">空调系统告警</a>
-                                        </h3>
-                                        <div class="popover-content">
-                                            <p>办公室空调系统告警. 请关闭暂时无人办公场所的空调.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <img src="../../IDP数据中心动力管控系统/bank%20admin/img/mapmaker.png" alt="info" class="info-icon info-icon1" data-target="pop1" />
-                                <img src="../../IDP数据中心动力管控系统/bank%20admin/img/mapmaker.png" alt="info" class="info-icon info-icon2" data-target="pop2" />
-                                <img src="../../IDP数据中心动力管控系统/bank%20admin/img/mapmaker.png" alt="info" class="info-icon info-icon3" data-target="pop3" />
-                                <img src="../../IDP数据中心动力管控系统/bank%20admin/img/mapmaker.png" alt="info" class="info-icon info-icon4" data-target="pop4" />
-                                <!--<embed style="z-index: 9999;" class="info-icon info-icon5" align=center src=img/swf/Red_glow.swf type=application/x-shockwave-flash wmode="transparent" quality="high" ;> </embed>-->
-                                <img src="../../IDP数据中心动力管控系统/bank%20admin/img/qinghai.png" alt="" class="largeimage">
-
-                            </div>
-                        </div>
-
-                        <!-- Dynamic Chart -->
-                        <div class="tile">
-                            <h2 class="tile-title">照明系统能耗实时监测</h2>
-                            <div class="tile-config dropdown">
-                                <a data-toggle="dropdown" href="" class="tile-menu"></a>
-                                <ul class="dropdown-menu pull-right text-right">
-                                    <li>
-                                        <a href="">Refresh</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Settings</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="p-t-10 p-r-5 p-b-5">
-                                <div id="dynamic-chart" style="height: 200px"></div>
-                            </div>
-
-                        </div>
-
-                        <!-- Activity -->
-                        <div class="tile">
-                            <h2 class="tile-title">能耗实时排名</h2>
-                            <div class="tile-config dropdown">
-                                <a data-toggle="dropdown" href="" class="tile-menu"></a>
-                                <ul class="dropdown-menu pull-right text-right">
-                                    <li>
-                                        <a href="">Refresh</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Settings</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="listview narrow">
-
-                                <div class="media">
-                                    <div class="pull-right">
-                                        <div class="counts-lv1">785879</div>
-                                    </div>
-                                    <div class="media-body">
-                                        <h6>空调系统</h6>
-                                    </div>
-                                </div>
-
-                                <div class="media">
-                                    <div class="pull-right">
-                                        <div class="counts-lv2">56312</div>
-                                    </div>
-                                    <div class="media-body">
-                                        <h6>供暖系统</h6>
-                                    </div>
-                                </div>
-
-                                <div class="media">
-                                    <div class="pull-right">
-                                        <div class="counts-lv3">36312</div>
-                                    </div>
-                                    <div class="media-body">
-                                        <h6>照明系统</h6>
-                                    </div>
-                                </div>
-
-                                <div class="media">
-                                    <div class="pull-right">
-                                        <div class="counts-lv4">7832</div>
-                                    </div>
-                                    <div class="media-body">
-                                        <h6>办公设备</h6>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="pull-right">
-                                        <div class="counts-lv5">368</div>
-                                    </div>
-                                    <div class="media-body">
-                                        <h6>其他</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <!-- Modal Wider -->
-            <div class="modal fade" id="modalWider" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">1#基站2机房能耗数据采集异常</h4>
-                        </div>
-                        <img src="../../IDP数据中心动力管控系统/bank%20admin/img/Nova4.png" alt="" />
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="modalWider1" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">能耗采集异常</h4>
-                        </div>
-                        <img src="img/Nova3.png" alt="" />
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="modalWider2" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">营业厅供暖异常</h4>
-                        </div>
-                        <img src="img/Nova2.png" alt="" />
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="modalWider3" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">空调系统异常</h4>
-                        </div>
-                        <img src="img/Nova1.png" alt="" />
-
-                    </div>
-                </div>
-            </div>
-            <!-- Chat -->
-            <div class="chat">
-
-                <!-- Chat List -->
-                <div class="pull-left chat-list">
-                    <div class="listview narrow">
-                        <div class="media">
-                            <img class="pull-left" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/1.png" width="30" alt="">
-                            <div class="media-body p-t-5">
-                                调度班长
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="pull-left" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/2.png" width="30" alt="">
-                            <div class="media-body">
-                                <span class="t-overflow p-t-5">调度员</span>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="pull-left" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/3.png" width="30" alt="">
-                            <div class="media-body">
-                                <span class="t-overflow p-t-5">办公室值班员</span>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="pull-left" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/4.png" width="30" alt="">
-                            <div class="media-body">
-                                <span class="t-overflow p-t-5">网管员</span>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="pull-left" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/5.png" width="30" alt="">
-                            <div class="media-body">
-                                <span class="t-overflow p-t-5">值班专员</span>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="pull-left" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/6.png" width="30" alt="">
-                            <div class="media-body">
-                                <span class="t-overflow p-t-5">新风系统管理员</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Chat Area -->
-                <div class="media-body">
-                    <div class="chat-header">
-                        <a class="btn btn-sm" href="">
-                            <i class="fa fa-circle-o status m-r-5"></i> 实时聊天
-                        </a>
-                    </div>
-
-                    <div class="chat-body">
-                        <div class="media">
-                            <img class="pull-right" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/1.png" width="30" alt="" />
-                            <div class="media-body pull-right">
-                                你好，
-                                <br/> 请提供空调系统检查报表
-                                <small>我 - 10:20:45</small>
-                            </div>
-                        </div>
-
-                        <div class="media pull-left">
-                            <img class="pull-left" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/2.png" width="30" alt="" />
-                            <div class="media-body" style="background: #00CD00;">
-                                报表正在导出，稍后上传
-                                <br/>请注意查收
-                                <small>调度班长 - 10:21:13</small>
-                            </div>
-                        </div>
-
-                        <div class="media pull-right">
-                            <img class="pull-right" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/2.png" width="30" alt="" />
-                            <div class="media-body">
-                                供暖系统出现告警
-                                <br/>请安排相关人员去检查一下
-                                <small>我 - 10:23:11</small>
-                            </div>
-                        </div>
-
-                        <div class="media pull-right">
-                            <img class="pull-right" src="../../IDP数据中心动力管控系统/bank%20admin/img/profile-pics/2.jpg" width="30" alt="" />
-                            <div class="media-body">
-                                有人知道为什么空调系统不工作吗(┬＿┬)？
-                                <small>我 - 10:25:23</small>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="chat-footer media">
-                        <i class="chat-list-toggle pull-left fa fa-bars"></i>
-                        <i class="pull-right fa fa-picture-o"></i>
-                        <div class="media-body">
-                            <textarea class="form-control" placeholder="请输入..."></textarea>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </section>
 
         <!-- Older IE Message -->
@@ -1150,13 +382,12 @@
             //return result[1];
         }
     </script>
+
     <script>
+        /*加载省下拉选*/
         var provinceid = getQueryString("prov");
         if(provinceid){//第一次进入这个页面，没有获取过
-            //alert(provinceid);
             $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
-        }
-        else{
         }
 
         /*加载市下拉选*/
@@ -1176,7 +407,6 @@
                     $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
-                    //alert(obj[0].cbname);
                     var obj = eval("(" + data + ")");
                     for (var i = 0; i < obj.length; i++) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
@@ -1369,10 +599,6 @@
             format: "yyyy-mm-dd",
             autoclose: true,
             todayBtn: "linked",
-            language:'zh-CN',
-            <%--<c:if test="${!empty user.queryEndDate}">
-            endDate: "<fmt:formatDate pattern="yyyy-MM-dd" value="${user.queryEndDate}"/>",
-            </c:if>--%>
             pickerPosition: "bottom-left"
         });
         $(".end_date_picker").datepicker({
@@ -1388,6 +614,15 @@
         $("#lastDate").change(function() {
             $('.start_date_picker').datepicker('setEndDate', $(this).val());
         });
+    </script>
+
+    <!-- 根据时间范围 获得数据 -->
+    <script type="text/javascript">
+        var stime = $("#firstDate").val();
+        var etime = $("#lastDate").val();
+
+
+
     </script>
 
     <!-- 动态加载菜单项 -->
@@ -1433,9 +668,6 @@
             $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
         }
     </script>
-
-
-
 
 
 </body>

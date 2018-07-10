@@ -169,104 +169,8 @@
              </result>
          </action>
 
-         <action name="getQstRMS" class="onlineTest.action.getQstRMSaction">
-             <!--getQstRMS -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstTHD" class="onlineTest.action.getQstTHDaction">
-             <!--getQstTHD -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstCF" class="onlineTest.action.getQstCFaction">
-             <!--getQstCF -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstHz" class="onlineTest.action.getQstHzaction">
-             <!--getQstCF -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstUNB" class="onlineTest.action.getQstUnbaction">
-             <!--getQstUNB -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstW" class="onlineTest.action.getQstWaction">
-             <!--getQstW -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstVA" class="onlineTest.action.getQstVAaction">
-             <!--getQstVA -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstVar" class="onlineTest.action.getQstVaraction">
-             <!--getQstTan -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstPF" class="onlineTest.action.getQstPFaction">
-             <!--getQstPF -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstDPF" class="onlineTest.action.getQstDPFaction">
-             <!--getQstUNB -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstTan" class="onlineTest.action.getQstTanaction">
-             <!--getQstTan -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstPst" class="onlineTest.action.getQstPstaction">
-             <!--getQstPst -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQstPlt" class="onlineTest.action.getQstPltaction">
-             <!--getQstPlt -->
+         <action name="getQst" class="onlineTest.action.getQstaction">
+             <!--getQst -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>
@@ -276,6 +180,13 @@
          <action name="getParameterHis" class="onlineTest.action.getParameteractionHis">
              <!--getParameter -->
              <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getMonitorPoints" class="monitorPoint.action.getMonitorPointsAction">
+             <!--getMonitorPoints -->
              <result name="success" type="json">
                  <param name="root">result</param>
              </result>

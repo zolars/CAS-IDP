@@ -41,6 +41,8 @@
         <mapping resource="hibernatePOJO/PowerparmMonitorHis.hbm.xml"/>
         <mapping class="hibernatePOJO.Devices"/>
         <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
+        <mapping resource="hibernatePOJO/Monitorpoints.hbm.xml"/>
+        <mapping class="hibernatePOJO.Monitorpoints"/>
 
 
     </session-factory>

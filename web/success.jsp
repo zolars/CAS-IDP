@@ -129,17 +129,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 console.log(params);
             });
 
-
             myChart.on("click", function (param){
-
-                var province = param.name;
 				//if(province = "河南")
                 //   top.location.href = "province.jsp";
 				//else(province = "山东")
-
                 /*top.location.href = "/province.jsp";*/
-                top.location.href = "/province.jsp?prov="+province;
-
                 //var province = param.selected;
                 /*var urlArr = ['http://www.baidu.com','http://http://www.cnblogs.com/sapho'];
                 for (var p in province) {
@@ -157,7 +151,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     }
                 }*/
+
+                var province = param.name;
+                top.location.href = "/province.jsp?prov="+province;
+
+              /*
+                //获取动环设备列表
+                getDevicesPoints(province);*/
+
             });
+
+            /*
+            function getDevicesPoints(province){
+                alert("获取动环设备列表");
+			}*/
 
         </script>
 
