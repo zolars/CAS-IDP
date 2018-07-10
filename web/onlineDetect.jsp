@@ -370,130 +370,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div id = "item4" style="height: 600px;">
                         <div class="row">
                             <div class="col-md-3 col-md-offset-1 col-xs-12">
-                                <table class="table table-bordered">
+                                <table id="params-basic" class="table table-bordered">
                                     <caption>基本参数</caption>
-                                    <tr>
-                                        <th>U1</th>
-                                        <td>222.65V</td>
-                                    </tr>
-                                    <tr>
-                                        <th>U2</th>
-                                        <td>225.99V</td>
-                                    </tr>
-                                    <tr>
-                                        <th>U3</th>
-                                        <td>226.59V</td>
-                                    </tr>
-                                    <tr>
-                                        <th>U4</th>
-                                        <td>0.4772V</td>
-                                    </tr>
-                                    <tr>
-                                        <th>I1</th>
-                                        <td>57.008A</td>
-                                    </tr>
-                                    <tr>
-                                        <th>I2</th>
-                                        <td>63.827A</td>
-                                    </tr>
-                                    <tr>
-                                        <th>I3</th>
-                                        <td>51.269A</td>
-                                    </tr>
-                                    <tr>
-                                        <th>I4</th>
-                                        <td>2.2547mA</td>
-                                    </tr>
                                 </table>
                             </div>
                             <div class="col-md-7 col-xs-12">
-                                <table class="table table-bordered">
+                                <table id="params-power" class="table table-bordered">
                                     <caption>功率参数</caption>
-                                    <tr>
-                                        <th></th>
-                                        <th>相1</th>
-                                        <th>相2</th>
-                                        <th>相3</th>
-                                        <th>相4</th>
-                                    </tr>
-                                    <tr>
-                                        <th>P(W)</th>
-                                        <td>10.961kW</td>
-                                        <td>11.980kW</td>
-                                        <td>9.1567kW</td>
-                                        <td>32.099kW</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Q(Var)</th>
-                                        <td>6.2886Var</td>
-                                        <td>6.2886Var</td>
-                                        <td>6.2886Var</td>
-                                        <td>6.2886Var</td>
-                                    </tr>
-                                    <tr>
-                                        <th>S(VA)</th>
-                                        <td>12.687kVA</td>
-                                        <td>12.687kVA</td>
-                                        <td>12.687kVA</td>
-                                        <td>12.687kVA</td>
-                                    </tr>
-                                    <tr>
-                                        <th>PF</th>
-                                        <td>0.8640</td>
-                                        <td>0.8640</td>
-                                        <td>0.8640</td>
-                                        <td>0.8640</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Cos PHI</th>
-                                        <td>0.8683</td>
-                                        <td>0.8683</td>
-                                        <td>0.8683</td>
-                                    </tr>
                                 </table>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3 col-md-offset-1 col-xs-12">
-                                <table class="table table-bordered">
+                                <table id="params-unb" class="table table-bordered">
                                     <caption>&nbsp;</caption>
-                                    <tr>
-                                        <th>不平衡度</th>
-                                        <td>0.7301%</td>
-                                    </tr>
-                                    <tr>
-                                        <th>频率</th>
-                                        <td>49.984Hz</td>
-                                    </tr>
                                 </table>
                             </div>
                             <div class="col-md-7 col-xs-12">
-                                <table class="table table-bordered">
+                                <table id="params-shanbian" class="table table-bordered">
                                     <caption>闪变</caption>
-                                    <tr>
-                                        <th></th>
-                                        <th>U1</th>
-                                        <th>U2</th>
-                                        <th>U3</th>
-                                    </tr>
-                                    <tr>
-                                        <th>|f|</th>
-                                        <td>0.0856</td>
-                                        <td>0.0856</td>
-                                        <td>0.0856</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Pst</th>
-                                        <td>0.3349</td>
-                                        <td>0.3349</td>
-                                        <td>0.3349</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Plt</th>
-                                        <td>0.4910</td>
-                                        <td>0.4910</td>
-                                        <td>0.4910</td>
-                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-1 col-xs-12">
+                                <table id="params-shunbian" class="table table-bordered">
+                                </table>
+                            </div>
+                            <div class="col-md-7 col-xs-12">
+                                <table id="params-lytx" class="table table-bordered">
                                 </table>
                             </div>
                         </div>
@@ -1278,7 +1183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     </script>
 
-    <<!-- 动态加载菜单项 -->
+    <!-- 动态加载菜单项 -->
     <script type="text/javascript">
         var menulist="<%=session.getAttribute("menulist")%>";
         var cbidstr = menulist.split(",");
@@ -1328,59 +1233,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <%--趋势图 --%>
     <script type="text/javascript">
-        function randomData_rms() {
-            now = new Date(+now + oneDay);
-            value = value + Math.random() * 21 - 10;
-            return {
-                name: now.toString(),
-                value: [
-                    [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                    Math.round(value)
-                ]
-            }
-        }
-
-        function randomData_thd() {
-            now = new Date(+now + oneDay);
-            value = value + Math.random() * 21 - 10;
-            return {
-                name: now.toString(),
-                value: [
-                    [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                    0.8*Math.round(value)
-                ]
-            }
-        }
-
-        var data_rms = [];
-        var data_thd = [];
-        var now = +new Date(1997, 9, 3);
-        var oneDay = 24 * 3600 * 1000;
-        var value = Math.random() * 1000;
-        for (var i = 0; i < 1000; i++) {
-            data_rms.push(randomData_rms());
-            data_thd.push(randomData_thd());
-           // alert(datas);
-        }
-
+        var dataQstRMS = [];
+        var dataQstTHD = [];
         // 1.初始化
         var eventChart1 = echarts.init(document.getElementById('item1-graph'));
         // 2.指定图表的配置项和数据
         var option1 = {
-            tooltip: {
-                trigger: 'axis',
-                formatter: function (params) {
-                    params = params[0];
-                    var date = new Date(params.name);
-                    return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
-                },
-                axisPointer: {
-                    animation: false
-                }
-            },
-            legend: {
-                data:['RMS','THD']
-            },
+            legend:{},
             xAxis: {
                 type: 'time',
                 splitLine: {
@@ -1395,54 +1254,109 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             },
             series: [
+                // RMS
                 {
-                    name: 'RMS',
-                    type: 'line',
-                    showSymbol: false,
-                    hoverAnimation: false,
-                    data: data_rms
+                    name: "RMSU1", type: "line", smooth: true, showSymbol: true,hoverAnimation: false, datasetIndex: 0,
+                    encode: {x: "time", y: "u1Xb"}
                 },
                 {
-                    name: 'THD',
-                    type: 'line',
-                    showSymbol: false,
-                    hoverAnimation: false,
-                    data: data_thd
+                    name: "RMSU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 0,
+                    encode: {x: "time", y: "u2Xb"}
+                },
+                {
+                    name: "RMSU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 0,
+                    encode: {x: "time", y: "u3Xb"}
+                },
+                {
+                    name: "RMSI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 0,
+                    encode: {x: "time", y: "i1Xb"}
+                },
+                {
+                    name: "RMSI2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 0,
+                    encode: {x: "time", y: "i2Xb"}
+                },
+                {
+                    name: "RMSI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 0,
+                    encode: {x: "time", y: "i3Xb"}
+                },
+                // THD
+                {
+                    name: "THDU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 1,
+                    encode: {x: "time", y: "u1Xb"}
+                },
+                {
+                    name: "THDU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 1,
+                    encode: {x: "time", y: "u2Xb"}
+                },
+                {
+                    name: "THDU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 1,
+                    encode: {x: "time", y: "u3Xb"}
+                },
+                {
+                    name: "THDI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 1,
+                    encode: {x: "time", y: "i1Xb"}
+                },
+                {
+                    name: "THDI2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 1,
+                    encode: {x: "time", y: "i2Xb"}
+                },
+                {
+                    name: "THDI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false, datasetIndex: 1,
+                    encode: {x: "time", y: "i3Xb"}
                 }
+
             ]
         };
         // 3.使用刚指定的配置项和数据显示图表。
         eventChart1.setOption(option1);
+        getDataQst(1);
+        // 获取趋势图数据
+        function getDataQst(mpid) {
+            // 获取RMS数据
+            $.ajax({
+                type: "post",
+                url: "getQstRMS",
+                data: {monitorpointid: mpid},
+                dataType: "json",
+                success: function(data){
+                    addData(dataQstRMS,JSON.parse(data)[0]);
+                },
+                error: function () {
+                    alert("获取RMS数据失败");
+                }
+            });
+            // 获取THD数据
+            $.ajax({
+                type: "post",
+                url: "getQstTHD",
+                data: {monitorpointid: mpid},
+                dataType: "json",
+                success: function(data){
+                    addData(dataQstTHD,JSON.parse(data)[0]);
+                },
+                error: function () {
+                    alert("获取THD数据失败");
+                }
+            });
 
-        // 4.设置时间间隔（可选）
-        setInterval(function () {
-
-            for (var i = 0; i < 5; i++) {
-                data_rms.shift();
-                data_rms.push(randomData_rms());
-                data_thd.shift();
-                data_thd.push(randomData_thd());
-            }
-
+        }
+        // 更新趋势图
+        function updateQst() {
+            window.console.log(dataQstRMS);
             eventChart1.setOption({
-                series: [
-                    {
-                        name: 'RMS',
-                        type: 'line',
-                        showSymbol: false,
-                        hoverAnimation: false,
-                        data: data_rms
-                    },
-                    {
-                        name: 'THD',
-                        type: 'line',
-                        showSymbol: false,
-                        hoverAnimation: false,
-                        data: data_thd
-                    }
+                dataset: [
+                    {source: dataQstRMS},
+                    {source: dataQstTHD}
                 ]
             });
-        }, 1000);
+        }
+        // 添加数据
+        function addData(dataArr,dataNew){
+            if(dataArr.length>(60*12)){
+                dataArr.shift();
+            }
+            dataArr.push(dataNew);
+        }
 
     </script>
     <%--谐波 --%>
@@ -1740,8 +1654,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var sxbphdlegend=["U1","U2","U3","V1","V2","V3","A1","A2","A3"];
         //幅值的最大值
         var maxAmplitude=400;
-        // sxbphdData用来暂存三相不平衡度数据
-        var sxbphdData=null;
+        // dataSxbphd用来暂存三相不平衡度数据
+        var dataSxbphd=null;
         var eventChart3=echarts.init($("#item3-graph")[0]);
         // 初始配置项
         var option3 = {
@@ -2265,7 +2179,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
                 }
                 // 更新图左侧文字
-                updateSxdyt2(sxbphdData);
+                updateSxdyt2(dataSxbphd);
             });
         });
         // 配置option
@@ -2281,8 +2195,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 dataType: "json",
                 success: function (data) {
                     // 数据先暂存起来
-                    sxbphdData=JSON.parse(data);
-                    updateSxdyt(sxbphdData);
+                    dataSxbphd=JSON.parse(data);
+                    updateSxdyt(dataSxbphd);
                     // 设置显示的系列
                     $("#item3-sidebar ol li button.active").trigger("click");
                 },
@@ -2377,6 +2291,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3-text-name3").html(value+"3");
                     $("#item3-text-value3").html(data[0][value.toLowerCase()+"3"]);
                     // 更新相位差
+                    $("#item3-text ol.diff").show();
                     $("#item3-text-diff1").html(data[0]["angle"+value+"2"] - data[0]["angle"+value+"1"]);
                     $("#item3-text-diff2").html(data[0]["angle"+value+"3"] - data[0]["angle"+value+"2"]);
                     $("#item3-text-diff3").html(data[0]["angle"+value+"1"] - data[0]["angle"+value+"3"]);
@@ -2420,7 +2335,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             return fmt;
         }
     </script>
-
+    <%--参数值--%>
+    <script type="text/javascript">
+        getDataParams(1);
+        // 获取参数值
+        function getDataParams(mpid) {
+            $.ajax({
+                type: "post",
+                url: "getParameter",
+                data: {monitorpointid: mpid},
+                success: function(data){
+                    updateParams(JSON.parse(data)[0]);
+                },
+                error: function(){
+                    alert("获取参数值失败")
+                }
+            })
+        }
+        // 更新参数值表格
+        function updateParams(data) {
+            $("#params-basic").html(
+                "<caption>基本参数</caption>"+
+                "<tr><th>U1</th><td>"+data["u1"]+"</td></tr>"+
+                "<tr><th>U2</th><td>"+data["u2"]+"</td></tr>"+
+                "<tr><th>U3</th><td>"+data["u3"]+"</td></tr>"+
+                "<tr><th>U4</th><td>"+data["u4"]+"</td></tr>"+
+                "<tr><th>I1</th><td>"+data["i1"]+"</td></tr>"+
+                "<tr><th>I2</th><td>"+data["i2"]+"</td></tr>"+
+                "<tr><th>I3</th><td>"+data["i3"]+"</td></tr>"+
+                "<tr><th>I4</th><td>"+data["i4"]+"</td></tr>"
+            );
+            $("#params-power").html(
+                "<caption>功率参数</caption>"+
+                "<tr><th></th><th>相1</th><th>相2</th><th>相3</th><th>总和</th></tr>"+
+                "<tr><th>P(W)</th><td>"+data["p1"]+"</td><td>"+data["p2"]+"</td><td>"+data["p3"]+"</td><td></td></tr>"+
+                "<tr><th>Q(Var)</th><td>"+data["q1"]+"</td><td>"+data["q2"]+"</td><td>"+data["q3"]+"</td><td></td></tr>"+
+                "<tr><th>S(VA)</th><td>"+data["s1"]+"</td><td>"+data["s2"]+"</td><td>"+data["s3"]+"</td><td></td></tr>"+
+                "<tr><th>PF</th><td>"+data["pf1"]+"</td><td>"+data["pf2"]+"</td><td>"+data["pf3"]+"</td><td></td></tr>"+
+                "<tr><th>Cos PHI</th><td>"+data["cosPhi1"]+"</td><td>"+data["cosPhi2"]+"</td><td>"+data["cosPhi3"]+"</td><td></td></tr>"
+            );
+            $("#params-unb").html(
+                "<caption>&nbsp;</caption>"+
+                "<tr><th>不平衡度</th><td>"+data["unb"]+"</td></tr>"+
+                "<tr><th>频率</th><td>"+data["hz"]+"</td></tr>"
+            );
+            $("#params-shanbian").html(
+                "<caption>闪变</caption>"+
+                "<tr><th></th><th>U1</th><th>U2</th><th>U3</th></tr>"+
+                "<tr><th>|f|</th><td>"+data["iflU1"]+"</td><td>"+data["iflU2"]+"</td><td>"+data["iflU3"]+"</td></tr>"+
+                "<tr><th>Pst</th><td>"+data["pstU1"]+"</td><td>"+data["pstU2"]+"</td><td>"+data["pstU3"]+"</td></tr>"+
+                "<tr><th>Plt</th><td>"+data["pltU1"]+"</td><td>"+data["pltU2"]+"</td><td>"+data["pltU3"]+"</td></tr>"
+            );
+            $("#params-shunbian").html("<tr><th>瞬变</th><td>"+data["shunbian"]+"</td></tr>");
+            $("#params-lytx").html("<tr><th>浪涌/塌陷</th><td>"+data["lytx"]+"</td></tr>");
+        }
+    </script>
     <!-- test-->
     <script>
         function test(){
@@ -2464,6 +2433,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 dataType : "json",
                 success: function (data) {
                     alert(data);
+                    window.console.log(JSON.parse(data));
                     /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
                     var obj = eval("(" + data + ")");
