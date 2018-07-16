@@ -459,6 +459,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
 
+    <!-- 省、市、机房下拉框-->
     <script>
 
         var provinceid="<%=session.getAttribute("probank")%>";
@@ -533,24 +534,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item2").hide();
                     $("#item3").hide();
                     $("#item4").hide();
+                    //切换子菜单时，从后台读取数据
+                    var mpcname = $("#monitorpnt").val();
+                    if(mpcname) getDataQst(mpcname);
+
                 });
                 $("#subItem2").click(function(){
                     $("#item1").hide();
                     $("#item2").show();
                     $("#item3").hide();
                     $("#item4").hide();
+                    //切换子菜单时，从后台读取数据
+                    var mpcname = $("#monitorpnt").val();
+                    if(mpcname) getDataXb(mpcname);
+
                 });
                 $("#subItem3").click(function(){
                     $("#item1").hide();
                     $("#item2").hide();
                     $("#item3").show();
                     $("#item4").hide();
+                    //切换子菜单时，从后台读取数据
+                    var mpcname = $("#monitorpnt").val();
+                    if(mpcname) getDataSxdy(mpcname);
+
                 });
                 $("#subItem4").click(function(){
                     $("#item1").hide();
                     $("#item2").hide();
                     $("#item3").hide();
                     $("#item4").show();
+                    //切换子菜单时，从后台读取数据
+                    var mpcname = $("#monitorpnt").val();
+                    if(mpcname) getDataParams(mpcname);
+
                 });
                 $("#subItem1").trigger("click");
             });
@@ -641,7 +658,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 });
             }
         }
-
     </script>
 
     <%--两个echarts版本 --%>
@@ -1770,10 +1786,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $("#params-power").html(
                 "<caption>功率参数</caption>"+
                 "<tr><th></th><th>相1</th><th>相2</th><th>相3</th><th>总和</th></tr>"+
-                "<tr><th>P(W)</th><td>"+data["p1"]+"</td><td>"+data["p2"]+"</td><td>"+data["p3"]+"</td><td></td></tr>"+
-                "<tr><th>Q(Var)</th><td>"+data["q1"]+"</td><td>"+data["q2"]+"</td><td>"+data["q3"]+"</td><td></td></tr>"+
-                "<tr><th>S(VA)</th><td>"+data["s1"]+"</td><td>"+data["s2"]+"</td><td>"+data["s3"]+"</td><td></td></tr>"+
-                "<tr><th>PF</th><td>"+data["pf1"]+"</td><td>"+data["pf2"]+"</td><td>"+data["pf3"]+"</td><td></td></tr>"+
+                "<tr><th>P(W)</th><td>"+data["p1"]+"</td><td>"+data["p2"]+"</td><td>"+data["p3"]+"</td><td>"+Number(parseInt(data["p1"])+parseInt(data["p2"])+parseInt(data["p3"]))+"</td></tr>"+
+                "<tr><th>Q(Var)</th><td>"+data["q1"]+"</td><td>"+data["q2"]+"</td><td>"+data["q3"]+"</td><td>"+Number(parseInt(data["q1"])+parseInt(data["q2"])+parseInt(data["q3"]))+"</td></tr>"+
+                "<tr><th>S(VA)</th><td>"+data["s1"]+"</td><td>"+data["s2"]+"</td><td>"+data["s3"]+"</td><td>"+Number(parseInt(data["s1"])+parseInt(data["s2"])+parseInt(data["s3"]))+"</td></tr>"+
+                "<tr><th>PF</th><td>"+data["pf1"]+"</td><td>"+data["pf2"]+"</td><td>"+data["pf3"]+"</td><td>"+Number(parseInt(data["pf1"])+parseInt(data["pf2"])+parseInt(data["pf3"]))+"</td></tr>"+
                 "<tr><th>Cos PHI</th><td>"+data["cosPhi1"]+"</td><td>"+data["cosPhi2"]+"</td><td>"+data["cosPhi3"]+"</td><td></td></tr>"
             );
             $("#params-unb").html(
@@ -1832,6 +1848,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             //     getDataSxdy($("#monitorpnt").val());
             //     getDataParams($("#monitorpnt").val());
             // },5000);
+
+            //默认检测点初始值为1
+            $("select#monitorpnt").val("电能监测点1");
             getDataQst(1);
             getDataXb(1);
             getDataSxdy(1);
@@ -1840,115 +1859,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         chartsInit();
     </script>
 
-    <!-- test-->
-    <script>
-        function test(){
-            alert("谐波");
+    <%--选择监测点时，从后台读取相应数据--%>
+    <script type="text/javascript">
+    $("select#monitorpnt").change(function(){
+       var mpcname = $("#monitorpnt").val();
 
-        var monitorpoint = 1;
-
-        $.ajax({
-            type: "post",
-            url: "getXB",
-            data: {monitorpointid: monitorpoint},
-            dataType : "json",
-            success: function (data) {
-                alert(data);
-                // window.console.log(typeof data);
-                // window.console.log(data[0]);
-                /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
-                var obj = eval("(" + data + ")");
-                for (var i = 0; i < obj.length; i++) {
-                    $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
-                }*/
-            },
-            error: function () {
-                alert("失败");
-            }
-        });
-        }
-    </script>
-
-    <script>
-        function test2(){
-            alert("参数值");
-
-            var monitorpoint = 1;
-
-            $.ajax({
-                type: "post",
-                url: "getParameter",
-                data: {monitorpointid: monitorpoint},
-                dataType : "json",
-                success: function (data) {
-                    alert(data);
-                    window.console.log(JSON.parse(data));
-                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
-                    var obj = eval("(" + data + ")");
-                    for (var i = 0; i < obj.length; i++) {
-                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
-                    }*/
-                },
-                error: function () {
-                    alert("失败");
-                }
-            });
-        }
-    </script>
-
-    <!-- test3-->
-    <script>
-        function test3(){
-            alert("三相电压");
-
-            var monitorpoint = 1;
-
-            $.ajax({
-                type: "post",
-                url: "getSXDY",
-                data: {monitorpointid: monitorpoint},
-                dataType : "json",
-                success: function (data) {
-                    window.console.log(typeof data);
-                    alert(data);
-                    /*$('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
-                    var obj = eval("(" + data + ")");
-                    for (var i = 0; i < obj.length; i++) {
-                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
-                    }*/
-                },
-                error: function () {
-                    alert("失败");
-                }
-            });
-        }
-    </script>
-
-    <!-- test4-->
-    <script>
-        function test4(){
-            alert("Qst");
-            var mpid = $("#monitorpnt").val();
-
-            $.ajax({
-                type: "post",
-                url: "getQst",
-                data: {monitorpointid: mpid},
-                dataType : "json",
-                success: function (data) {
-                    alert(data);
-                    window.console.log(data);
-                },
-                error: function () {
-                    alert("失败");
-                }
-            });
-        }
-    </script>
-
+       if(mpcname) {
+           if ($("#subItem1").is(":visible"))
+               getDataQst(mpcname);
+           else if ($("#subItem2").is(":visible"))
+               getDataXb(mpcname);
+           else if ($("#subItem3").is(":visible"))
+               getDataSxdy(mpcname);
+           else if ($("#subItem4").is(":visible"))
+               getDataParams(mpcname);
+       }
+    });
+</script>
 
 </body>
 
