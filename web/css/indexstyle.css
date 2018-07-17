@@ -1,0 +1,71 @@
+@CHARSET "UTF-8";
+
+body {
+	margin-left: 5px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #F7FDFE;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #000000;
+}
+
+.firsttoolbar {
+	background-color: #C1E3ED;
+}
+
+.secondtoolbar {
+	background-color:#8DCDE9;
+}
+
+.leftline{
+	 border-left: 1px solid #C1E3ED;
+	 border-right: 3px solid #C1E3ED;
+}
+
+.rightline{
+	 border-right: 5px solid #C1E3ED;
+}
+
+.bottomline{
+	 border-bottom: 2px solid #000000;
+}
+.topline{
+	 border-top: 5px solid #E8EEF9;
+}
+.fontlogo{
+    font-family: "宋体";
+	font-size: 28px;
+	font-weight: bolder;
+	color: #000000;
+}
+
+.fontbottom{
+	font-size: 11px;
+}
+
+.loginout{
+	font-size: 12px;
+	color: #0000ff;
+	cursor: hand;
+}
+.query{
+	background-color: #D1E9E7;
+	font-weight: bolder;
+}
+.listtitle{
+	background-color: #D1E9E7;
+}
+.listcontent{
+	font-size: 13px;
+}
+
+.pagetitle{
+	height: 20;
+    font-family: "宋体";
+	font-size: 15px;
+	font-weight: bolder;
+	color: #000000;
+}
+
