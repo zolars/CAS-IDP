@@ -6,28 +6,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 引入struts的标签库-->
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
-
-
-<!--<!DOCTYPE html>-->
-<!--[if IE 9 ]><!--<html class="ie9"><![endif]-->
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
 <head>
+
+    <title>IDP数据中心动力管控系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta name="format-detection" content="telephone=no">
     <meta charset="UTF-8">
-
     <meta name="description" content="Violate Responsive Admin Template">
     <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
 
-    <title>移动能效管理平台</title>
-
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.4.css">
     <link href="css/animate.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="js/font-awesome.4.6.0.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.4.6.0.css">
     <link href="css/form.css" rel="stylesheet">
     <link href="css/calendar.css" rel="stylesheet">
     <link href="css/media-player.css" rel="stylesheet">
@@ -43,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body id="skin-blur-blue">
     <header id="header" class="media">
         <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">移动能效管理平台</a>
+        <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
 
         <div class="media-body">
             <div class="media" id="top-menu">
@@ -116,15 +110,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- Javascript Libraries -->
     <!-- jQuery -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <!-- jQuery Library -->
-    <script src="js/jquery-ui-1.11.0.js"></script>
-    <!-- jQuery UI -->
-    <script src="js/jquery.easing.1.3.js"></script>
-    <!-- jQuery Easing - Requirred for Lightbox -->
+    <script src="js/jquery-3.3.1.js"></script>
 
     <!-- Bootstrap -->
-    <script src="js/bootstrap-3.3.4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Charts -->
     <script src="js/charts/jquery.flot.js"></script>
@@ -168,10 +157,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
 
+   <%--
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
 
-   <%-- <script>
+   <script>
 
         var objprobank="<%=session.getAttribute("probank")%>";
         var objcitybank="<%=session.getAttribute("citybank")%>";
@@ -207,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>--%>
 
     <!-- 省\市\机房下拉菜单-->
-    <script>
+    <script type="text/javascript">
         var provinceid="<%=session.getAttribute("probank")%>";
 
         if(provinceid){//第一次进入这个页面，没有获取过

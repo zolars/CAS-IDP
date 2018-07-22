@@ -3,45 +3,38 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!-- 引入struts的标签库-->
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
-<!--[if IE 9 ]><!--<html class="ie9"><![endif]-->
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <meta name="format-detection" content="telephone=no">
-    <meta charset="UTF-8">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <base href="<%=basePath%>">
 
-    <meta name="description" content="Violate Responsive Admin Template">
-    <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
-
-    <title>移动能效管理平台</title>
+    <title>IDP数据中心动力管控系统</title>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="This is my page">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.4.css">
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="js/font-awesome.4.6.0.css">
-    <link href="css/form.css" rel="stylesheet">
-    <link href="css/media-player.css" rel="stylesheet">
-    <link href="css/calendar.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/icons.css" rel="stylesheet">
-    <link href="css/generics.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-3.3.4.css" type="text/css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/font-awesome.4.6.0.css" type="text/css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/media-player.css">
+    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/generics.css">
     <link rel="stylesheet" href="css/jquery.hotspot.css">
-    <link href="css/menu.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/pick-pcc.min.1.0.1.css" />
+    <link rel="stylesheet" href="css/mycss.css">
 
     <!-- bootstrap datepicker时间选择控件 -->
-    <link rel="stylesheet" type="text/css" href="/assets/datepicker/css/bootstrap-datepicker.css">
-
-    <link href="css/mycss.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="assets/datepicker/css/bootstrap-datepicker.css" type="text/css">
 
 </head>
 
@@ -161,7 +154,7 @@
 
     <header id="header" class="media">
         <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">移动能效管理平台</a>
+        <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
 
         <div class="media-body">
             <div class="media" id="top-menu">
@@ -259,119 +252,30 @@
 
             </div>
 
-            <hr class="whiter" />
+            <hr class="whiter"/>
 
         </section>
-
-        <!-- Older IE Message -->
-        <!--[if lt IE 9]>
-        <div class="ie-block">
-            <h1 class="Ops">Ooops!</h1>
-            <p>You are using an outdated version of Internet Explorer, upgrade to any of the following web browser in
-                order to access the maximum functionality of this website. </p>
-            <ul class="browsers">
-                <li>
-                    <a href="https://www.google.com/intl/en/chrome/browser/">
-                        <img src="../../IDP数据中心动力管控系统/bank%20admin/img/browsers/chrome.png" alt="">
-                        <div>Google Chrome</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.mozilla.org/en-US/firefox/new/">
-                        <img src="../../IDP数据中心动力管控系统/bank%20admin/img/browsers/firefox.png" alt="">
-                        <div>Mozilla Firefox</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.opera.com/computer/windows">
-                        <img src="../../IDP数据中心动力管控系统/bank%20admin/img/browsers/opera.png" alt="">
-                        <div>Opera</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://safari.en.softonic.com/">
-                        <img src="../../IDP数据中心动力管控系统/bank%20admin/img/browsers/safari.png" alt="">
-                        <div>Safari</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://windows.microsoft.com/en-us/internet-explorer/downloads/ie-10/worldwide-languages">
-                        <img src="../../IDP数据中心动力管控系统/bank%20admin/img/browsers/ie.png" alt="">
-                        <div>Internet Explorer(New)</div>
-                    </a>
-                </li>
-            </ul>
-            <p>Upgrade your browser for a Safer and Faster web experience. <br/>Thank you for your patience...</p>
-        </div>
-        <![endif]-->
     </section>
 
     <!-- Javascript Libraries -->
     <!-- jQuery -->
-    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-    <!-- jQuery Library -->
-    <script src="http://www.jq22.com/jquery/jquery-ui-1.11.0.js"></script>
-    <!-- jQuery UI -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/jquery.easing.1.3.js"></script>
-    <!-- jQuery Easing - Requirred for Lightbox + Pie Charts-->
+    <script src="js/jquery-3.3.1.js"></script>
 
-    <!-- Bootstrap -->
-    <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+   <%-- <!-- jQuery UI -->
+    <script src="js/jquery-ui.min.js"></script>--%>
 
-    <!-- Charts -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/charts/jquery.flot.js"></script>
-    <!-- Flot Main -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/charts/jquery.flot.time.js"></script>
-    <!-- Flot sub -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/charts/jquery.flot.animator.min.js"></script>
-    <!-- Flot sub -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/charts/jquery.flot.resize.min.js"></script>
-    <!-- Flot sub - for repaint when resizing the screen -->
+    <!-- echarts -->
+    <script src="js/echarts.js"></script>
 
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/sparkline.min.js"></script>
-    <!-- Sparkline - Tiny charts -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/easypiechart.js"></script>
-    <!-- EasyPieChart - Animated Pie Charts -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/charts.js"></script>
-    <!-- All the above chart related functions -->
+    <!-- bootstrap-datepicker -->
+    <script src="assets/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="assets/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 
-    <!-- Map -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/maps/jvectormap.min.js"></script>
-    <!-- jVectorMap main library -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/maps/usa.js"></script>
-    <!-- USA Map for jVectorMap -->
-
-    <!--Media Player-->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/media-player.min.js"></script>
-    <!-- USA Map for jVectorMap -->
-
-    <!--  Form Related -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/icheck.js"></script>
-    <!-- Custom Checkbox + Radio -->
-
-    <!-- UX -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/scroll.min.js"></script>
-    <!-- Custom Scrollbar -->
-
-    <!-- Other -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/calendar.min.js"></script>
-    <!-- Calendar -->
-    <!--<script src="js/feeds.min.js"></script> &lt;!&ndash; News Feeds &ndash;&gt;-->
-    <!--HotSpot of pic-->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/modernizr.custom.49511.js"></script>
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/jquery.hotspot.min.js"></script>
 
     <!-- All JS functions -->
-    <script src="../../IDP数据中心动力管控系统/bank%20admin/js/functions.js"></script>
+    <script src="js/functions.js"></script>
 
-    <!-- 加上这个实时消息无法显示，不知原因 -->
-    <script type="text/javascript" src="../../IDP数据中心动力管控系统/bank%20admin/js/pick-pcc.min.1.0.1.js"></script>
-
-
-   <%-- <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>--%>
-
-    <script>
+    <script type="text/javascript">
         function getQueryString(name) {
             var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
             if (result == null || result.length < 1) {
@@ -383,7 +287,8 @@
         }
     </script>
 
-    <script>
+    <!-- 省\市\机房下拉菜单-->
+    <script type="text/javascript">
         /*加载省下拉选*/
         var provinceid = getQueryString("prov");
         if(provinceid){//第一次进入这个页面，没有获取过
@@ -447,7 +352,7 @@
 
     </script>
 
-    <script src="js/echarts.js"></script>
+    <!-- 初始化工作-->
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var eventChart = echarts.init(document.getElementById('eventbar'));
@@ -592,13 +497,13 @@
 
     </script>
 
-    <script src="/assets/datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="/assets/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <!-- 时间选择器-->
     <script type="text/javascript">
         $(".start_date_picker").datepicker({
             format: "yyyy-mm-dd",
             autoclose: true,
             todayBtn: "linked",
+            language:'zh-CN',
             pickerPosition: "bottom-left"
         });
         $(".end_date_picker").datepicker({
@@ -620,9 +525,6 @@
     <script type="text/javascript">
         var stime = $("#firstDate").val();
         var etime = $("#lastDate").val();
-
-
-
     </script>
 
     <!-- 动态加载菜单项 -->

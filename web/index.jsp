@@ -82,15 +82,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </table>
 
-  <div id="loading">
+  <div id="loading" style="position:absolute;left:400px;top:400px">
       <img src="img/index/loading.gif">
   </div>
 
+  <!-- Javascript Libraries -->
+  <!-- jQuery -->
+  <script src="js/jquery-3.3.1.js"></script>
+
+  <!-- loading button hidden/show-->
   <script type="text/javascript">
-      $("loading").hide();
+     $("#loading").hide();
+     // $("#loading").show();
 
       $("#sublogin").click(function(){
-          $("loading").show();
+          $("#loading").show();
       })
   </script>
 

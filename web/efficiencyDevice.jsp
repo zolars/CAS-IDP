@@ -7,25 +7,21 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
 
-<!--<!DOCTYPE html>-->
-<!--[if IE 9 ]><!--<html class="ie9"><![endif]-->
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
 <head>
+    <title>IDP数据中心动力管控系统</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta name="format-detection" content="telephone=no">
     <meta charset="UTF-8">
-
     <meta name="description" content="Violate Responsive Admin Template">
     <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
 
-    <title>移动能效管理平台</title>
-
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.4.css">
-    <link rel="stylesheet" type="text/css" href="js/font-awesome.4.6.0.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.4.6.0.css">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/form.css" rel="stylesheet">
     <link href="css/calendar.css" rel="stylesheet">
@@ -129,7 +125,7 @@
 
     <header id="header" class="media">
         <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">移动能效管理平台</a>
+        <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
 
         <div class="media-body">
             <div class="media" id="top-menu">
@@ -156,68 +152,20 @@
     <div class="clearfix"></div>
 
     <section id="main" class="p-relative" role="main">
-
         <!-- Sidebar -->
         <!-- 动态加载菜单项 -->
         <aside id="sidebar">
             <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
             </ul>
         </aside>
-
-        <!-- Older IE Message -->
-        <!--[if lt IE 9]>
-                <div class="ie-block">
-                    <h1 class="Ops">Ooops!</h1>
-                    <p>You are using an outdated version of Internet Explorer, upgrade to any of the following web browser in order to access the maximum functionality of this website. </p>
-                    <ul class="browsers">
-                        <li>
-                            <a href="https://www.google.com/intl/en/chrome/browser/">
-                                <img src="img/browsers/chrome.png" alt="">
-                                <div>Google Chrome</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.mozilla.org/en-US/firefox/new/">
-                                <img src="img/browsers/firefox.png" alt="">
-                                <div>Mozilla Firefox</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.opera.com/computer/windows">
-                                <img src="img/browsers/opera.png" alt="">
-                                <div>Opera</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://safari.en.softonic.com/">
-                                <img src="img/browsers/safari.png" alt="">
-                                <div>Safari</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://windows.microsoft.com/en-us/internet-explorer/downloads/ie-10/worldwide-languages">
-                                <img src="img/browsers/ie.png" alt="">
-                                <div>Internet Explorer(New)</div>
-                            </a>
-                        </li>
-                    </ul>
-                    <p>Upgrade your browser for a Safer and Faster web experience. <br/>Thank you for your patience...</p>
-                </div>   
-            <![endif]-->
     </section>
 
     <!-- Javascript Libraries -->
-
     <!-- jQuery -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <!-- jQuery Library -->
-    <script src="js/jquery-ui-1.11.0.js"></script>
-    <!-- jQuery UI -->
-    <script src="js/jquery.easing.1.3.js"></script>
-    <!-- jQuery Easing - Requirred for Lightbox + Pie Charts-->
+    <script src="js/jquery-3.3.1.js"></script>
 
     <!-- Bootstrap -->
-    <script src="js/bootstrap-3.3.4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Charts -->
     <script src="js/charts/jquery.flot.js"></script>
@@ -265,9 +213,9 @@
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
     <script type="text/javascript" src="js/deviceManager.js"></script>
-
+<%--
     <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>--%>
 
     <!-- 省\市\机房下拉菜单-->
     <script>

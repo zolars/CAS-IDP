@@ -6,27 +6,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 引入struts的标签库-->
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
-
-
-<!--<!DOCTYPE html>-->
-<!--[if IE 9 ]><!--<html class="ie9"><![endif]-->
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+    <title>IDP数据中心动力管控系统</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta name="format-detection" content="telephone=no">
     <meta charset="UTF-8">
-
     <meta name="description" content="Violate Responsive Admin Template">
     <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
 
-    <title>移动能效管理平台</title>
-
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.4.css">
     <link href="css/animate.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="js/font-awesome.4.6.0.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.4.6.0.css">
     <link href="css/form.css" rel="stylesheet">
     <link href="css/media-player.css" rel="stylesheet">
     <link href="css/calendar.css" rel="stylesheet">
@@ -36,20 +30,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="css/jquery.hotspot.css">
     <link href="css/menu.css" rel="stylesheet">
     <link rel="stylesheet" href="css/custom-echart-toolbar.css">
+    <link href="css/mycss.css" rel="stylesheet">
 
     <!-- Ztree -->
     <%--<link rel="stylesheet" href="/css/zTree/demo.css" type="text/css">--%>
-    <link rel="stylesheet" href="/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
-
+   <%-- <link rel="stylesheet" href="/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">--%>
 
 </head>
-<%--<style>
-    .selected{font-weight:bold; background: #ff99cc; color:#fff;}
-    .active{font-weight:bold; background: #10212E; color:#0ff;}
-</style>--%>
 
-
-<style type="text/css">
+<%--<style type="text/css">
     .r_out {
         width: 120px;
         height: 120px;
@@ -147,12 +136,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         margin-bottom: -8px;
         font-size: 14px;
     }
-</style>
+</style>--%>
 
 <body id="skin-blur-blue">
     <header id="header" class="media">
         <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">移动能效管理平台</a>
+        <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
 
         <div class="media-body">
             <div class="media" id="top-menu">
@@ -169,14 +158,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <option value="">请选择</option>
                     </select>
                 </div>
-
                 <div class="pull-right">欢迎用户${username}登录</div>
-
-                <td><button id="test4" onclick="test4()">测试"趋势图'</button></td>
-
             </div>
         </div>
-
     </header>
 
     <div class="clearfix"></div>
@@ -192,20 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- Content -->
         <section id="content" class="container">
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb hidden-xs">
-                <li>
-                    <a href="#">首页</a>
-                </li>
-                <li>
-                    <a href="#">指标监控</a>
-                </li>
-                <li>关键指标</li>
-            </ol>
-
-
             <!-- Main Widgets -->
-
             <div class="block-area">
                 <div class="row">
                     <div class="col-md-12">
@@ -397,21 +368,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
 
-
         </section>
     </section>
 
     <!-- Javascript Libraries -->
     <!-- jQuery -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <!-- jQuery Library -->
-    <script src="js/jquery-ui-1.11.0.js"></script>
-    <!-- jQuery UI -->
-    <script src="js/jquery.easing.1.3.js"></script>
-    <!-- jQuery Easing - Requirred for Lightbox + Pie Charts-->
+    <script src="js/jquery-3.3.1.js"></script>
 
     <!-- Bootstrap -->
-    <script src="js/bootstrap-3.3.4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Charts -->
     <script src="js/charts/jquery.flot.js"></script>
@@ -452,26 +417,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/feeds.min.js"></script>
     <!-- News Feeds -->
 
-
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
-    <script type="text/javascript" src="js/echarts/echarts.min.js"></script>
-
-    <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
+    <script src="js/echarts/echarts.min.js"></script>
+    <script src="js/echarts.js"></script>
 
     <!-- 省、市、机房下拉框-->
-    <script>
-
+    <script type="text/javascript">
         var provinceid="<%=session.getAttribute("probank")%>";
 
         if(provinceid){//第一次进入这个页面，没有获取过
             $("#province_code").empty();
             $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
         }
+        else{
+        }
 
         /*加载市下拉选*/
         function getCity() {
-
             var pname = $("#province_code").val();
             $("#city_code").empty();
             $("#comproom_code").empty();
@@ -501,7 +464,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         /*加载机房下拉选*/
         function getComproom() {
             var cname = $("#city_code").val();
-
             $("#comproom_code").empty();
 
             $.ajax({
@@ -573,7 +535,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
     </script>
 
-    <script>
+    <!-- 切换子菜单subItem效果-->
+    <script type="text/javascript">
         $(function(){
 
             $("#ulItem li").click(function() {
@@ -659,10 +622,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         }
     </script>
-
-    <%--两个echarts版本 --%>
-    <script src="js/echarts/echarts.min.js"></script>
-    <script src="js/echarts.js"></script>
 
     <%--图表中使用到的变量声明--%>
     <script type="text/javascript">
@@ -883,10 +842,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             ]
         };
         var option2 = {
-            title: {
-                //text: '未来一周气温变化',
-                subtext: '传感器'
-            },
             tooltip: {
                 trigger: 'axis'
             },

@@ -4,28 +4,22 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!-- 引入struts的标签库-->
-
-
-<!--<!DOCTYPE html>-->
-<!--[if IE 9 ]><!--<html class="ie9"><![endif]-->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+    <title>IDP数据中心动力管控系统</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta name="format-detection" content="telephone=no">
     <meta charset="UTF-8">
-
     <meta name="description" content="Violate Responsive Admin Template">
     <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
 
-    <title>移动能效管理平台</title>
-
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.4.css">
     <link href="css/animate.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="js/font-awesome.4.6.0.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.4.6.0.css">
     <link href="css/form.css" rel="stylesheet">
     <link href="css/calendar.css" rel="stylesheet">
     <link href="css/media-player.css" rel="stylesheet">
@@ -33,7 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/icons.css" rel="stylesheet">
     <link href="css/generics.css" rel="stylesheet">
     <link href="css/menu.css" rel="stylesheet">
-
     <link href="css/mycss.css" rel="stylesheet">
 
 </head>
@@ -41,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body id="skin-blur-blue">
     <header id="header" class="media">
         <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">移动能效管理平台</a>
+        <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
 
         <div class="media-body">
             <div class="media" id="top-menu">
@@ -97,6 +90,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                         <div id = "item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             this is 知识库
+
+                            <!-- 动态加载知识库项 -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="tile">
+                                        <ul id="knowledgebar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class=="col-md-8" >
+                                    <textarea id='text' style="height: 400px;height: 600px;color: #1c2d3f">thisiscontent</textarea>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -106,7 +114,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- Javascript Libraries -->
     <!-- jQuery -->
-    <script src="js/jquery-1.4.4.min.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
     <!-- jQuery Library -->
 
     <!-- Bootstrap -->
@@ -174,6 +182,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
+    <!-- 切换子菜单-->
     <script type="text/javascript">
         $("#item2").show();
         $("#item3").hide();
@@ -187,6 +196,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $("#item2").hide();
                 $("#item3").show();
             });
+        });
+    </script>
+
+    <!-- 切换子菜单subItem效果-->
+    <script type="text/javascript">
+        $(function(){
+
+            $("#ulItem li").click(function() {
+
+                $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式selected
+
+                $(this).addClass('active');                            // 添加当前元素的样式
+
+            });
+
         });
     </script>
 
@@ -215,6 +239,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             });
         }
+    </script>
+
+    <!-- 动态加载菜单项 -->
+    <script type="text/javascript">
+
+        var kidstr = 1;
+
+        for(var i = 0; i < 6; i++){
+
+            var kname = "郭德纲";
+            var kcontent = "nishgewgweg";
+
+            $('#knowledgebar').append("<li><span>" + kname + "</span>" +
+                "<ul><li><span>\" + kcontent + \"</span></li>" +
+                "</ul>" +
+                "</li>");
+        }
+
+
     </script>
 
 

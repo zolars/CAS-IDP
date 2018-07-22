@@ -43,6 +43,8 @@
         <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
         <mapping resource="hibernatePOJO/Monitorpoints.hbm.xml"/>
         <mapping class="hibernatePOJO.Monitorpoints"/>
+        <mapping class="hibernatePOJO.EventPower"/>
+        <mapping resource="hibernatePOJO/EventPower.hbm.xml"/>
 
 
     </session-factory>

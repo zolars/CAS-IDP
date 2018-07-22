@@ -192,6 +192,14 @@
              </result>
          </action>
 
+         <action name="getPowerEvent" class="efficiencyAnalysis.action.getPowerEventAction">
+             <!--getPowerEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
 
      </package>
 

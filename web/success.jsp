@@ -9,22 +9,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 
-<title>Map</title>
+	<title>IDP数据中心动力管控系统</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE">  
-<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-<link rel="stylesheet" type="text/css" href="css/main.css"/>  
-<script src="js/jquery.js"></script>
-<script src="js/echarts.js"></script>
-<!-- <script src="echarts.min.js"></script> -->
-<script src="js/china.js"></script>
+
+
 <style>
 #china-map {
 	width: 1000px;
@@ -39,13 +32,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<div id="china-map"></div>
 
-	<script>  
+	<!-- Javascript Libraries -->
+	<!-- jQuery -->
+	<script src="js/jquery-3.3.1.js"></script>
+
+	<!-- echarts  -->
+	<script src="js/echarts.js"></script>
+
+	<!-- echarts.china  -->
+	<script src="js/china.js"></script>
+
+	<script type="text/javascript">
             var myChart = echarts.init(document.getElementById("china-map"));  
             var option = {
-                //title: {
-                   // text: "中国地图",
-                   // subtext: "开发中国地图",
-                //},
                 tooltip: {
 
                 },
@@ -126,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             myChart.setOption(option);
             myChart.on("mouseover", function (params) {
                 var dataIndex = params.dataIndex;
-                console.log(params);
+              //  console.log(params);
             });
 
             myChart.on("click", function (param){
@@ -167,7 +166,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}*/
 
         </script>
-
 
 </body>
 </html>
