@@ -649,6 +649,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         /*加载市下拉选*/
         function getCity() {
             var pname = $("#province_code").val();
+            //var pname="<%=session.getAttribute("probank")%>";
+            alert("city");
+            alert(pname);
+
             $("#city_code").empty();
             $("#comproom_code").empty();
 

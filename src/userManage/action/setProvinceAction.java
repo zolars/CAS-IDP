@@ -2,11 +2,8 @@ package userManage.action;
 
 
 import Util.ProvinceEnum;
-
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.UserDAO;
 import userManage.dao.impl.UserDAOImpl;
@@ -16,9 +13,11 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
+//import net.sf.json.JSON;
+//import net.sf.json.JSONArray;
 
 
-public class CityTreeAction extends ActionSupport {
+public class setProvinceAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -30,33 +29,20 @@ public class CityTreeAction extends ActionSupport {
         this.result = result;
     }
 
-
-    /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的行级结构树状串
-     */
     public String execute() throws Exception { //getUserTree() throws Exception{
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
-            request.setCharacterEncoding("utf-8");
+            //request.setCharacterEncoding("utf-8");
+            System.out.println("cccccccccccccc");
 
-            String province = request.getParameter("provinceid");
-            //String province = (String)session.getAttribute("probank");
+            String province = request.getParameter("provid");
+            //存到session中, 方便后续重复使用
 
-            System.out.println("cccccccccccccc=provinceid"+province);
+            session.setAttribute("probank", province);
+            System.out.println(province);
 
-            int pbid = ProvinceEnum.getNo(province);
-
-            UserDAO dao = new UserDAOImpl();
-
-            List citybank = new ArrayList();
-
-            citybank = dao.getCityBank(pbid);
-
-            result = JSON.toJSONString(citybank); // List转json
-
-            //存到 session 中,方便后续重复使用
-            //session.setAttribute("probank", province);
-            session.setAttribute("citybank", citybank);
+            //session.setAttribute("probank", "200");
 
         } catch (Exception e) {
             e.printStackTrace();

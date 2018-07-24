@@ -220,7 +220,6 @@
                     </div>
                 </div>
 
-
                 <div class="row">
                     <div id="eventbar" class="col-md-2 col-xs-6" style="width:30%; height: 200px;">
                     </div>
@@ -276,7 +275,7 @@
     <script src="js/functions.js"></script>
 
     <script type="text/javascript">
-        function getQueryString(name) {
+       /* function getQueryString(name) {
             var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
             if (result == null || result.length < 1) {
                 return "";
@@ -284,21 +283,45 @@
             //对第一个结果进行URI解码
             return decodeURI(result[1]);
             //return result[1];
-        }
+        }*/
     </script>
 
     <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
         /*加载省下拉选*/
-        var provinceid = getQueryString("prov");
+       /* var provinceid = request.getParameter("provinceid");
+        alert(provinceid);*/
+       // $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
+       /* var provinceid = getQueryString("prov");*/
+
+        var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
+        //对第一个结果进行URI解码
+        var provinceid_pre = decodeURI(provinceidc[1]);
+        alert(provinceid_pre);
+        $.ajax({
+            type: "post",
+            url: "setProvince",
+            data: {provid: provinceid_pre},
+            dataType : "json",
+            success: function (data) {
+              //  alert("加载省成功");
+            },
+            error: function () {
+                alert("加载省失败");
+            }
+        });
+
+       /* var provinceid = request.getParameter("provinceid");*/
         if(provinceid){//第一次进入这个页面，没有获取过
+            //$("#province_code").empty();
             $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
         }
 
         /*加载市下拉选*/
         function getCity() {
-            var pname = $("#province_code").val();
+            var pname="<%=session.getAttribute("probank")%>";
 
+            alert(pname);
             $("#city_code").empty();
             $("#comproom_code").empty();
 

@@ -135,8 +135,79 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
 
-    <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
+   <%-- <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
+--%>
+    <!-- 省\市\机房下拉菜单-->
+    <script type="text/javascript">
+        var provinceid="<%=session.getAttribute("probank")%>";
+
+        //alert(provinceid);
+
+        if(provinceid){//第一次进入这个页面，没有获取过
+            $("#province_code").empty();
+            $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
+        }
+        else{
+        }
+
+        /*加载市下拉选*/
+        function getCity() {
+            var pname="<%=session.getAttribute("probank")%>";
+            alert(pname);
+            //  var pname = $("#province_code").val();
+            $("#city_code").empty();
+            $("#comproom_code").empty();
+
+            $.ajax({
+                type: "post",
+                url: "getCityTree",
+                data: {provinceid: pname},
+                dataType : "json",
+                success: function (data) {
+                    // alert("33");
+                    $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    //alert(obj[0].cbname);
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
+                    }
+
+                },
+                error: function () {
+                    alert("加载市失败");
+                }
+            });
+        }
+
+        /*加载机房下拉选*/
+        function getComproom() {
+            var cname = $("#city_code").val();
+            $("#comproom_code").empty();
+
+            $.ajax({
+                type: "post",
+                url: "getCompTree",
+                data: {cityid: cname},
+                dataType : "json",
+                success: function (data) {
+
+                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                    var obj = eval("(" + data + ")");
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    }
+                },
+                error: function () {
+                    alert("加载机房失败");
+                }
+            });
+        }
+
+    </script>
 
     <!-- 动态加载菜单项 -->
     <script type="text/javascript">

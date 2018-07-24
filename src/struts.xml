@@ -12,7 +12,7 @@
     <package name="struts-interceptor" extends="struts-default"
              namespace="/">
         <!-- 拦截器配置开始 主要是对sessionID拦截 -->
-        <!--<interceptors>
+       <!-- <interceptors>
             <interceptor name="sessionIDInterceptor"
                          class="cn.com.ctsi.common.interceptor.SessionIDInterceptor"></interceptor>
             &lt;!&ndash; 定义一个包含sessionID检查的拦截器栈 &ndash;&gt;
@@ -22,13 +22,12 @@
                 &lt;!&ndash; 配置内建默认拦截器 &ndash;&gt;
                 <interceptor-ref name="defaultStack"></interceptor-ref>
             </interceptor-stack>
-        </interceptors>-->
-        <!-- 这句是设置所有Action自动调用的拦截器堆栈） -->
-        <!--<default-interceptor-ref name="sessionCheckInterceptor" />-->
-        <!-- <global-results>
+        </interceptors>
+        &lt;!&ndash; 这句是设置所有Action自动调用的拦截器堆栈）&ndash;&gt;
+        <default-interceptor-ref name="sessionCheckInterceptor" />
+         <global-results>
             <result name="login" type="redirect">/index.jsp</result>
-        </global-results> -->
-        <!--拦截器配置结束 -->
+        </global-results>-->
     </package>
     <!-- json包 -->
     <package name="json-interceptor" extends="struts-interceptor">
@@ -47,7 +46,12 @@
              <!-- 将login映射到物理地址 -->
             <result name="success">/success.jsp</result>
             <result name="failure">/failure.jsp</result>
-        </action>
+         </action>
+
+         <action name="setProvince" class="userManage.action.setProvinceAction">
+             <!--setProvince -->
+             <result name="failure">/failure.jsp</result>
+         </action>
 
          <action name="getCityTree" class="userManage.action.CityTreeAction">
              <!--将getUserTree映射到物理地址 -->
@@ -202,8 +206,6 @@
 
 
      </package>
-
-
 
 
 </struts>
