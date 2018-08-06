@@ -94,29 +94,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <!-- 动态加载知识库项 -->
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div id="jstree">
-                                        <!-- in this example the tree is populated from inline HTML -->
-                                      <%--  <ul>
-                                            <li>Root node 1
-                                                <ul>
-                                                    <li id="child_node_1">Child node 1</li>
-                                                    <li>Child node 2</li>
-                                                </ul>
-                                            </li>
-                                            <li>Root node 2</li>
-                                        </ul>--%>
-                                    </div>
-                                    <button>demo button</button>
+                                    <div id="jstree"></div>
+
+                                    <button id = "button-update-kl">修改知识</button>
+                                    <button>删除知识</button>
+                                    <button>添加知识</button>
+                                    <button>上传到总服务器</button>
+
+                                    <button>添加树节点</button>
                                 </div>
 
-                                <%--<div class="col-md-4">
-                                    <div class="tile">
-                                        <ul id="knowledgebar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
-                                        </ul>
-                                    </div>
-                                </div>--%>
                                 <div class=="col-md-8" >
-                                    <textarea id='text' style="height: 400px;height: 600px;color: #1c2d3f">thisiscontent</textarea>
+                                    <textarea id='content-text' style="height: 400px;height: 600px;color: #1c2d3f"></textarea>
                                 </div>
                             </div>
 
@@ -152,9 +141,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <script src="js/jstree.js"></script>
 
-   <%-- <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
---%>
     <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
         var provinceid="<%=session.getAttribute("probank")%>";
@@ -171,8 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         /*加载市下拉选*/
         function getCity() {
             var pname="<%=session.getAttribute("probank")%>";
-            alert(pname);
-            //  var pname = $("#province_code").val();
+
             $("#city_code").empty();
             $("#comproom_code").empty();
 
@@ -182,11 +167,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {provinceid: pname},
                 dataType : "json",
                 success: function (data) {
-                    // alert("33");
+
                     $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
-                    //alert(obj[0].cbname);
                     var obj = eval("(" + data + ")");
                     for (var i = 0; i < obj.length; i++) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
@@ -330,38 +314,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
 
     <!-- 动态加载菜单项 -->
-    <%-- <script type="text/javascript">
-
-        var kidstr = 1;
-
-        for(var i = 0; i < 6; i++){
-
-            var kname = "郭德纲";
-            var kcontent = "nishgewgweg";
-
-            $('#knowledgebar').append("<li><span>" + kname + "</span>" +
-                "<ul><li><span>\" + kcontent + \"</span></li>" +
-                "</ul>" +
-                "</li>");
-        }
-
-
-    </script>--%>
-
     <!-- jstree-->
     <script type="text/javascript">
 
         $(function () {
-
             $('#jstree').jstree({
-
                 "core": {
                     "themes": {
                         "responsive": false
                     },
-
                     "check_callback": true,
-
                     'data': function (obj, callback) {
                         var jsonstr = "[]";
                         var jsonarray = eval('(' + jsonstr + ')');
@@ -370,10 +332,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             dataType: "json",
                             async: false,
                             success: function (result) {
-
                                 var arrays = result.allkltree;
                                 for (var i = 0; i < arrays.length; i++) {
-
                                     var arr = {
                                         "id": arrays[i].kid,
                                         "parent": arrays[i].parentkid == "0" ? "#" : arrays[i].parentkid,
@@ -382,7 +342,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     jsonarray.push(arr);
                                 }
                             }
-
                         });
                         callback.call(this, jsonarray);
                     },
@@ -395,6 +354,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $('#jstree').jstree('select_node', 'child_node_1');
             $.jstree.reference('#jstree').select_node('child_node_1');
         });
+
+        // 事件处理-查看知识
+        $('#jstree').bind("activate_node.jstree", function (obj, e) {
+            // 获取当前节点，根据节点kid找到数据库中存储的内容
+            var currentNode = e.node;
+
+            $.ajax({
+                type: "post",
+                url: "getKnowledgeTreeNodeContent",
+                data: {kid: currentNode.id},
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var rt = obj.knowledgenode;
+                    $("#content-text").val("");
+                    $("#content-text").val(rt.content);
+                },
+            });
+
+            //console.log(currentNode);
+            //$("#content-text").val(currentNode.id);
+            //$("#content-text").val("");
+
+        });
+
+        // 事件处理-修改知识
+        $("button-update-kl").click(function(){
+        //$('button-update-kl').on('click', function () {
+            alert("success0");
+            var tmpcurrentNode=$("#content-text").val();
+
+            $.ajax({
+                type: "post",
+                url: "getKnowledgeTreeNodeContent",
+                data: {kid: tmpcurrentNode},
+                dataType : "json",
+                success: function (data) {
+                    alert("success");
+                },
+            });
+
+        });
+
+        // 事件处理-删除知识
+
+        // 事件处理-添加知识
+
+        // 事件处理-上传到总服务器
+
+        // 事件处理-添加树节点
 
     </script>
 

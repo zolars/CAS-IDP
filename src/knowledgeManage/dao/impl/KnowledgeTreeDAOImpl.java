@@ -28,5 +28,14 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         return list;
     }
 
+    public Knowledge getKnowledgeNode(String kid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        Knowledge kl = (Knowledge)hbsessionDao.getFirst(
+                "FROM Knowledge where kid = '" + kid + "'");
+
+        return kl;
+    }
+
 
 }

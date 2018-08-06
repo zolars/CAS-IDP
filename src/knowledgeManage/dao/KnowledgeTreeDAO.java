@@ -4,6 +4,7 @@ package knowledgeManage.dao;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import hibernatePOJO.Knowledge;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.ComputerroomDAO;
 import userManage.dao.impl.ComputerroomDAOImpl;
@@ -20,5 +21,7 @@ import java.util.List;
 public interface KnowledgeTreeDAO {
 
     public List getKnowledgeTree();
+
+    public Knowledge getKnowledgeNode(String kid);
 
 }

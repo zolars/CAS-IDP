@@ -8,51 +8,44 @@ import hibernatePOJO.Knowledge;
 import knowledgeManage.dao.KnowledgeTreeDAO;
 import knowledgeManage.dao.impl.KnowledgeTreeDAOImpl;
 import org.apache.struts2.ServletActionContext;
-import userManage.dao.ComputerroomDAO;
-import userManage.dao.impl.ComputerroomDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
 
-
-public class getKnowledgeTreeAction extends ActionSupport {
+public class getKnowledgeTreeNodeContentAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
-    private JSONObject result;
+    private String result;
 
-    public JSONObject getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(JSONObject result) {
+    public void setResult(String result) {
         this.result = result;
     }
 
 
-    /* 查询所有知识
+    /* 查询某个子节点知识
      */
-    public String execute() throws Exception { //getUserTree() throws Exception{
+    public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();
-            List kltree = dao.getKnowledgeTree();
+            //获取节点id
+            String kid = request.getParameter("kid");
 
-            for(int i = 0 ;i < kltree.size(); i++){
-                Knowledge k = (Knowledge)kltree.get(i);
-            }
+            KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();
+            Knowledge kltree = dao.getKnowledgeNode(kid);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("allkltree", kltree);
+            jsonObject.put("knowledgenode", kltree);
 
-            result = jsonObject;
-            //result = JSON.toJSONString(jsonObject);
+            // result = jsonObject;
+            result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();
