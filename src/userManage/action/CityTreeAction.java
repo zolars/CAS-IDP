@@ -42,7 +42,7 @@ public class CityTreeAction extends ActionSupport {
             String province = request.getParameter("provinceid");
             //String province = (String)session.getAttribute("probank");
 
-            System.out.println("cccccccccccccc=provinceid"+province);
+         //   System.out.println("cccccccccccccc=provinceid"+province);
 
             int pbid = ProvinceEnum.getNo(province);
 

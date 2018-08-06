@@ -28,6 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/generics.css" rel="stylesheet">
     <link href="css/menu.css" rel="stylesheet">
     <link href="css/mycss.css" rel="stylesheet">
+    <link href="css/jstree-default/style.css" rel="stylesheet"/>
 
 </head>
 
@@ -85,21 +86,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </ul>
 
                         <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                            this is 历史曲线
+                            历史曲线
                             <button id="test" onclick="test()">测试'查看历史曲线'</button>
                         </div>
                         <div id = "item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                            this is 知识库
-
+                            知识库
                             <!-- 动态加载知识库项 -->
                             <div class="row">
                                 <div class="col-md-4">
+                                    <div id="jstree">
+                                        <!-- in this example the tree is populated from inline HTML -->
+                                      <%--  <ul>
+                                            <li>Root node 1
+                                                <ul>
+                                                    <li id="child_node_1">Child node 1</li>
+                                                    <li>Child node 2</li>
+                                                </ul>
+                                            </li>
+                                            <li>Root node 2</li>
+                                        </ul>--%>
+                                    </div>
+                                    <button>demo button</button>
+                                </div>
+
+                                <%--<div class="col-md-4">
                                     <div class="tile">
                                         <ul id="knowledgebar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
                                         </ul>
                                     </div>
-                                </div>
-
+                                </div>--%>
                                 <div class=="col-md-8" >
                                     <textarea id='text' style="height: 400px;height: 600px;color: #1c2d3f">thisiscontent</textarea>
                                 </div>
@@ -134,6 +149,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
+
+    <script src="js/jstree.js"></script>
 
    <%-- <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
@@ -313,7 +330,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
 
     <!-- 动态加载菜单项 -->
-    <script type="text/javascript">
+    <%-- <script type="text/javascript">
 
         var kidstr = 1;
 
@@ -329,8 +346,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
 
 
-    </script>
+    </script>--%>
 
+    <!-- jstree-->
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#jstree').jstree({
+
+                "core": {
+                    "themes": {
+                        "responsive": false
+                    },
+
+                    "check_callback": true,
+
+                    'data': function (obj, callback) {
+                        var jsonstr = "[]";
+                        var jsonarray = eval('(' + jsonstr + ')');
+                        $.ajax({
+                            url: "getKnowledgeTree",
+                            dataType: "json",
+                            async: false,
+                            success: function (result) {
+
+                                var arrays = result.allkltree;
+                                for (var i = 0; i < arrays.length; i++) {
+
+                                    var arr = {
+                                        "id": arrays[i].kid,
+                                        "parent": arrays[i].parentkid == "0" ? "#" : arrays[i].parentkid,
+                                        "text": arrays[i].kname
+                                    }
+                                    jsonarray.push(arr);
+                                }
+                            }
+
+                        });
+                        callback.call(this, jsonarray);
+                    },
+                }
+            })
+        });
+
+        $('button').on('click', function () {
+            $('#jstree').jstree(true).select_node('child_node_1');
+            $('#jstree').jstree('select_node', 'child_node_1');
+            $.jstree.reference('#jstree').select_node('child_node_1');
+        });
+
+    </script>
 
 </body>
 

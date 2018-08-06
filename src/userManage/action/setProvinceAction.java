@@ -34,7 +34,7 @@ public class setProvinceAction extends ActionSupport {
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             //request.setCharacterEncoding("utf-8");
-            System.out.println("cccccccccccccc");
+            //System.out.println("cccccccccccccc");
 
             String province = request.getParameter("provid");
             //存到session中, 方便后续重复使用
