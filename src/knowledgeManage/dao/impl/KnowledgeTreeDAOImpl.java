@@ -48,5 +48,14 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         return rt;
     }
 
+    public boolean deleteKnowledgeNode(String kid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        rt = hbsessionDao.delete( "Delete FROM Knowledge Where kid=?", kid);
+
+        return rt;
+    }
+
 
 }

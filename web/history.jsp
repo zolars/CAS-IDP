@@ -98,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div id="nodeid" style="display: none"></div>
 
                                     <button id = "button-update-kl">修改知识</button>
-                                    <button>删除知识</button>
+                                    <button id = "button-delete-kl">删除知识</button>
                                     <button>添加知识</button>
                                     <button>上传到总服务器</button>
 
@@ -395,6 +395,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
 
         // 事件处理-删除知识
+        $('#button-delete-kl').click(function(){
+            var tmpNodeKid=$("#nodeid").val();
+
+            $.ajax({
+                type: "post",
+                url: "deleteKnowledgeTreeNodeContent",
+                data: {
+                    kid: tmpNodeKid,
+                },
+                dataType : "json",
+                success: function (data) {
+                    //刷新树
+                    $('#jstree').jstree(true).refresh();
+                },
+            });
+        });
 
         // 事件处理-添加知识
 

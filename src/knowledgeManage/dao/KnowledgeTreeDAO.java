@@ -26,4 +26,6 @@ public interface KnowledgeTreeDAO {
 
     public boolean updateKnowledgeNode(String kid, String content);
 
+    public boolean deleteKnowledgeNode(String kid);
+
 }
