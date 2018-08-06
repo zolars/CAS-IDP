@@ -98,23 +98,6 @@ public class HBSessionDaoImpl implements HBSessionDao{
         return true;
     }
 
-   /* //使用HQL语句插入数据
-    @Override
-    public boolean insert(User user) {
-        try {
-            Session session = null;
-            session = getSession();
-            session.save(user);
-            session.getTransaction().commit();
-            session.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-*/
     //使用HQL语句插入数据
     @Override
     public boolean insert(Object obj) {
@@ -131,5 +114,23 @@ public class HBSessionDaoImpl implements HBSessionDao{
         }
         return true;
     }
+
+    //使用HQL语句更新数据
+    public boolean update(Object obj, String hql) {
+        try {
+            Session session = null;
+            session = getSession();
+            Query q = session.createQuery(hql);
+            q.executeUpdate();
+            session.getTransaction().commit();
+            session.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
 
 }

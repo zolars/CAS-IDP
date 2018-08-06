@@ -95,6 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="row">
                                 <div class="col-md-4">
                                     <div id="jstree"></div>
+                                    <div id="nodeid" style="display: none"></div>
 
                                     <button id = "button-update-kl">修改知识</button>
                                     <button>删除知识</button>
@@ -372,27 +373,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#content-text").val(rt.content);
                 },
             });
-
-            //console.log(currentNode);
-            //$("#content-text").val(currentNode.id);
-            //$("#content-text").val("");
-
+            //当前点击的节点的id存到一个隐藏的div中
+            $("#nodeid").val(currentNode.id);
         });
 
         // 事件处理-修改知识
-        $("button-update-kl").click(function(){
-        //$('button-update-kl').on('click', function () {
-            alert("success0");
+        $('#button-update-kl').click(function(){
             var tmpcurrentNode=$("#content-text").val();
+            var tmpNodeKid=$("#nodeid").val();
 
             $.ajax({
                 type: "post",
-                url: "getKnowledgeTreeNodeContent",
-                data: {kid: tmpcurrentNode},
-                dataType : "json",
-                success: function (data) {
-                    alert("success");
+                url: "updateKnowledgeTreeNodeContent",
+                data: {
+                    kid: tmpNodeKid,
+                    tmpContent: tmpcurrentNode
                 },
+                dataType : "json"
             });
 
         });
