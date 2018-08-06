@@ -28,4 +28,8 @@ public interface KnowledgeTreeDAO {
 
     public boolean deleteKnowledgeNode(String kid);
 
+    public boolean addKnowledgeNode(String kid, String content);
+
+
+
 }

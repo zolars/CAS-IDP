@@ -57,5 +57,16 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         return rt;
     }
 
+    public boolean addKnowledgeNode(String kid, String content){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = false;
+        Knowledge kl = getKnowledgeNode(kid);
+        kl.setContent(content);
+        String hql = "update Knowledge kl set kl.content='" + content +"' where kl.kid='" + kid + "'";
+
+        rt = hbsessionDao.update(kl, hql);
+        return rt;
+    }
+
 
 }

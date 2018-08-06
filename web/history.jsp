@@ -99,10 +99,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                     <button id = "button-update-kl">修改知识</button>
                                     <button id = "button-delete-kl">删除知识</button>
-                                    <button>添加知识</button>
-                                    <button>上传到总服务器</button>
+                                    <button id = "button-add-kl">添加知识</button>
+                                    <button id = "button-upload-kl">上传到总服务器</button>
 
-                                    <button>添加树节点</button>
+                                    <button id = "button-addtreenode-kl">添加树节点</button>
                                 </div>
 
                                 <div class=="col-md-8" >
@@ -413,6 +413,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
 
         // 事件处理-添加知识
+        $('#button-add-kl').click(function(){
+            var tmpNodeKid=$("#nodeid").val();
+            var tmpcurrentNode=$("#content-text").val();
+
+            $.ajax({
+                type: "post",
+                url: "addKnowledgeTreeNodeContent",
+                data: {
+                    kid: tmpNodeKid,
+                    tmpcontent: tmpcurrentNode
+                },
+                dataType : "json",
+                success: function (data) {
+                    //刷新树
+                    $('#jstree').jstree(true).refresh();
+                },
+            });
+        });
 
         // 事件处理-上传到总服务器
 
