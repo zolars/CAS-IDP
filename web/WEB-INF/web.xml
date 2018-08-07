@@ -3,7 +3,8 @@
   <display-name></display-name>
   <filter>
     <filter-name>struts2</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  <!--  <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>-->   <!-- version《= 2.1-->
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>   <!-- version 》= 2.1-->
   </filter>
   <filter-mapping>
     <filter-name>struts2</filter-name>
