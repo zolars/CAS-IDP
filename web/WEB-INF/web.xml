@@ -13,4 +13,12 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+
+
+  <!-- get data thread-->
+  <listener>
+    <listener-class>grabData.MyListener</listener-class>
+  </listener>
+
+
 </web-app>
