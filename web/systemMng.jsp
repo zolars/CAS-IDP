@@ -768,6 +768,7 @@
                 $("#item4").hide();
                 $("#item5").hide();
                 $("#item6").hide();
+                getALLUserInfomation();
             });
             $("#subItem2").click(function(){
                 $("#item1").hide();
@@ -776,6 +777,7 @@
                 $("#item4").hide();
                 $("#item5").hide();
                 $("#item6").hide();
+                getALLRolesInfomation();
             });
             $("#subItem3").click(function(){
                 $("#item1").hide();

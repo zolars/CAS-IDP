@@ -97,12 +97,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div id="jstree"></div>
                                     <div id="nodeid" style="display: none"></div>
 
-                                    <button id = "button-update-kl">修改知识</button>
-                                    <button id = "button-delete-kl">删除知识</button>
-                                    <button id = "button-add-kl">添加知识</button>
-                                    <button id = "button-upload-kl">上传到总服务器</button>
+                                    <div class="btn-group">
+                                        <button id = "button-update-kl" type="button" class="btn btn-sm btn-alt">修改知识</button>
+                                        <button id = "button-delete-kl" type="button" class="btn btn-sm btn-alt">删除知识</button>
+                                        <button id = "button-add-kl" type="button" class="btn btn-sm btn-alt">添加知识</button>
+                                        <button id = "button-upload-kl" type="button" class="btn btn-sm btn-alt">上传到总服务器</button>
 
-                                    <button id = "button-addtreenode-kl">添加树节点</button>
+                                        <button id = "button-addtreenode-kl"  type="button" class="btn btn-sm btn-alt">添加树节点</button>
+                                    </div>
                                 </div>
 
                                 <div class=="col-md-8" >
