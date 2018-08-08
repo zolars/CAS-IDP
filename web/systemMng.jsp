@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!-- 引入struts的标签库-->
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -10,6 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+    <base href="<%=basePath%>">
+
     <title>IDP数据中心动力管控系统</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -34,31 +36,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body id="skin-blur-blue">
-    <header id="header" class="media">
-        <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
+<header id="header" class="media">
+    <a href="" id="menu-toggle"></a>
+    <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
 
-        <div class="media-body">
-            <div class="media" id="top-menu">
-                <div class="pull-left location-select">
-                    <select class="form-control location-select-item" id="province_code" name="province_code" onchange="getCity()">
-                        <option value="">请选择</option>
-                    </select>
+    <div class="media-body">
+        <div class="media" id="top-menu">
+            <div class="pull-left location-select">
+                <select class="form-control location-select-item" id="province_code" name="province_code" onchange="getCity()">
+                    <option value="">请选择</option>
+                </select>
 
-                    <select class="form-control location-select-item" id="city_code" name="city_code" onchange="getComproom()">
-                        <option value="">请选择</option>
-                    </select>
+                <select class="form-control location-select-item" id="city_code" name="city_code" onchange="getComproom()">
+                    <option value="">请选择</option>
+                </select>
 
-                    <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
-                        <option value="">请选择</option>
-                    </select>
-                </div>
-
-                <div class="pull-right">欢迎用户${username}登录</div>
-
+                <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
+                    <option value="">请选择</option>
+                </select>
             </div>
+
+            <div class="pull-right">欢迎用户${username}登录</div>
+
         </div>
-    </header>
+    </div>
+</header>
 
     <div class="clearfix"></div>
 
@@ -456,7 +458,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                         <div id = "item6" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
 
-                            <div class="row"> </div>
+                            <div class="row"></div>
                             <ul class="nav nav-tabs" id="tridulItem">
                                 <li class="active" style="width:15%">
                                     <a data-toggle="tab" id="tridsubItem1">•电压</a>
@@ -479,7 +481,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 电压
                                 <label class="t-overflow">
                                     <input type="text" class="form-control setting-input" id="">
-                                    <button class="btn btn-default" onclick="()">查询</button>
+                                    <button class="btn btn-default" onclick="testVolume()">查询</button>
                                 </label>
                                 <table id="threadinfotablehead">
                                     <thead>
@@ -631,27 +633,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/feeds.min.js"></script>
     <!-- News Feeds -->
 
-
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
 
     <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
+        /*加载省下拉选*/
         var provinceid="<%=session.getAttribute("probank")%>";
-
-        if(provinceid){//第一次进入这个页面，没有获取过
-            $("#province_code").empty();
+        if(provinceid){
             $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
-        }
-        else{
         }
 
         /*加载市下拉选*/
         function getCity() {
-            var pname = $("#province_code").val();
-            //var pname="<%=session.getAttribute("probank")%>";
-            alert("city");
-            alert(pname);
+            var pname="<%=session.getAttribute("probank")%>";
 
             $("#city_code").empty();
             $("#comproom_code").empty();
@@ -662,19 +657,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {provinceid: pname},
                 dataType : "json",
                 success: function (data) {
-                   // alert("33");
+
                     $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
-                    //alert(obj[0].cbname);
                     var obj = eval("(" + data + ")");
                     for (var i = 0; i < obj.length; i++) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
                     }
-
-                },
-                error: function () {
-                    alert("加载市失败");
                 }
             });
         }
@@ -682,6 +672,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         /*加载机房下拉选*/
         function getComproom() {
             var cname = $("#city_code").val();
+
             $("#comproom_code").empty();
 
             $.ajax({
@@ -697,9 +688,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     for (var i = 0; i < obj.length; i++) {
                         $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
                     }
-                },
-                error: function () {
-                    alert("加载机房失败");
                 }
             });
         }
@@ -1418,6 +1406,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     alert("失败");
                 }
             });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function testVolume(){
+
         }
     </script>
 

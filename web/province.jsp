@@ -260,9 +260,6 @@
     <!-- jQuery -->
     <script src="js/jquery-3.3.1.js"></script>
 
-   <%-- <!-- jQuery UI -->
-    <script src="js/jquery-ui.min.js"></script>--%>
-
     <!-- echarts -->
     <script src="js/echarts.js"></script>
 
@@ -288,40 +285,36 @@
 
     <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
+
         /*加载省下拉选*/
-       /* var provinceid = request.getParameter("provinceid");
-        alert(provinceid);*/
-       // $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
-       /* var provinceid = getQueryString("prov");*/
-
-        var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
-        //对第一个结果进行URI解码
-        var provinceid_pre = decodeURI(provinceidc[1]);
-        alert(provinceid_pre);
-        $.ajax({
-            type: "post",
-            url: "setProvince",
-            data: {provid: provinceid_pre},
-            dataType : "json",
-            success: function (data) {
-              //  alert("加载省成功");
-            },
-            error: function () {
-                alert("加载省失败");
-            }
-        });
-
-       /* var provinceid = request.getParameter("provinceid");*/
-        if(provinceid){//第一次进入这个页面，没有获取过
-            //$("#province_code").empty();
+        var provinceid = "<%=session.getAttribute("probank")%>";
+        if(provinceid == "null"){
+            //第一次进入这个页面，未获取过province
+            var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
+            //对第一个结果进行URI解码
+            var provinceid_pre = decodeURI(provinceidc[1]);
+            $.ajax({
+                type: "post",
+                url: "setProvince",
+                data: {provid: provinceid_pre},
+                dataType : "json",
+                success: function (data) {
+                    $('#province_code').append("<option value='" + provinceid_pre + "' >" + provinceid_pre + "</option>");
+                },
+                error: function () {
+                    $('#province_code').append("<option value='" + provinceid_pre + "' >" + provinceid_pre + "</option>");
+                }
+            });
+        }
+        else{
+            //非第一次进入这个页面，获取过province
             $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
         }
 
         /*加载市下拉选*/
         function getCity() {
-            var pname="<%=session.getAttribute("probank")%>";
+            var pname = $("#province_code").val();
 
-            alert(pname);
             $("#city_code").empty();
             $("#comproom_code").empty();
 
@@ -339,10 +332,6 @@
                     for (var i = 0; i < obj.length; i++) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
                     }
-
-                },
-                error: function () {
-                    alert("加载市失败");
                 }
             });
         }
@@ -359,16 +348,12 @@
                 data: {cityid: cname},
                 dataType : "json",
                 success: function (data) {
-
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
 
                     var obj = eval("(" + data + ")");
                     for (var i = 0; i < obj.length; i++) {
                         $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
                     }
-                },
-                error: function () {
-                    alert("加载机房失败");
                 }
             });
         }

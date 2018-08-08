@@ -154,16 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 var province = param.name;
                 top.location.href = "/province.jsp?prov="+province;
 
-              /*
-                //获取动环设备列表
-                getDevicesPoints(province);*/
-
             });
-
-            /*
-            function getDevicesPoints(province){
-                alert("获取动环设备列表");
-			}*/
 
         </script>
 

@@ -32,111 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="css/custom-echart-toolbar.css">
     <link href="css/mycss.css" rel="stylesheet">
 
-    <!-- Ztree -->
-    <%--<link rel="stylesheet" href="/css/zTree/demo.css" type="text/css">--%>
-   <%-- <link rel="stylesheet" href="/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">--%>
-
 </head>
-
-<%--<style type="text/css">
-    .r_out {
-        width: 120px;
-        height: 120px;
-        border: 2px solid #d9d9d9;
-        background: #fff;
-        box-shadow: 3px 3px 5px #bfbfbf;
-        -webkit-box-shadow: 3px 3px 5px #bfbfbf;
-        -moz-box-shadow: 3px 3px 5px #bfbfbf;
-        -ms-box-shadow: 3px 3px 5px #bfbfbf;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms_border-radius: 50%;
-        display: inline-block;
-        margin-right: 90px;
-        position: relative;
-    }
-
-    .r_out p {
-        position: absolute;
-        /**bottom:-50px;*/
-        color: #fff;
-        text-align: center;
-        margin: 0 auto;
-        width: 100%;
-        font-size: 14px;
-        line-height: 1.5;
-        font-weight: bold;
-    }
-
-    .r_in {
-        width: 120px;
-        height: 120px;
-        border: 10px solid #fff;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms_border-radius: 50%;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .r_c {
-        width: 120px;
-        height: 120px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 0;
-    }
-
-    .c1 {
-        background: #fbad4c;
-    }
-
-    .c2 {
-        background: #fff143;
-    }
-
-    .c3 {
-        background: #c9dd22;
-    }
-
-    .c4 {
-        background: #00e079;
-    }
-
-    .c5 {
-        background: #0eb83a;
-    }
-
-    .r_num {
-        color: #404040;
-        font-size: 23px;
-        line-height: 1.5;
-        font-weight: bold;
-        position: absolute;
-        top: 50%;
-        margin-top: -25px;
-        text-align: center;
-        width: 100%;
-    }
-
-    #triangle-right {
-        width: 0;
-        height: 0;
-        border-top: 15px solid transparent;
-        border-left: 15px solid #DB241C;
-        border-bottom: 15px solid transparent;
-    }
-
-    .alert-lost {
-        padding: 5px;
-        margin-top: 10px;
-        margin-bottom: -8px;
-        font-size: 14px;
-    }
-</style>--%>
 
 <body id="skin-blur-blue">
     <header id="header" class="media">
@@ -422,21 +318,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/echarts/echarts.min.js"></script>
     <script src="js/echarts.js"></script>
 
-    <!-- 省、市、机房下拉框-->
+    <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
+        /*加载省下拉选*/
         var provinceid="<%=session.getAttribute("probank")%>";
-
-        if(provinceid){//第一次进入这个页面，没有获取过
-            $("#province_code").empty();
+        if(provinceid){
             $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
-        }
-        else{
         }
 
         /*加载市下拉选*/
         function getCity() {
             var pname="<%=session.getAttribute("probank")%>";
-          //  var pname = $("#province_code").val();
+
             $("#city_code").empty();
             $("#comproom_code").empty();
 
@@ -454,10 +347,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     for (var i = 0; i < obj.length; i++) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
                     }
-
-                },
-                error: function () {
-                    alert("加载市失败");
                 }
             });
         }
@@ -465,6 +354,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         /*加载机房下拉选*/
         function getComproom() {
             var cname = $("#city_code").val();
+
             $("#comproom_code").empty();
 
             $.ajax({
@@ -480,9 +370,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     for (var i = 0; i < obj.length; i++) {
                         $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
                     }
-                },
-                error: function () {
-                    alert("加载机房失败");
                 }
             });
         }
