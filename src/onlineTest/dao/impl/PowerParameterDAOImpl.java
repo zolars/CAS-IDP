@@ -243,7 +243,7 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
 
         crlist = hbsessionDao.search(
-                "FROM PowerparmMonitorHis where mpid = '" + monitorpoint+ "' and time>='" + stime + "' and time<=' " + etime + "'");
+                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' and time>='" + stime + "' and time<=' " + etime + "'");
 
         return crlist;
     }

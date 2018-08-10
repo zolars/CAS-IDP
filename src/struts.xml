@@ -49,7 +49,6 @@
          </action>
 
          <action name="setProvince" class="userManage.action.setProvinceAction">
-             <!--setProvince -->
              <result name="failure">/failure.jsp</result>
          </action>
 

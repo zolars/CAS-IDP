@@ -19,7 +19,7 @@
     <meta http-equiv="description" content="This is my page">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/bootstrap-3.3.4.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap-3.3.4.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/font-awesome.4.6.0.css" type="text/css">
     <link rel="stylesheet" href="css/form.css">
@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="css/mycss.css">
 
     <!-- bootstrap datepicker时间选择控件 -->
-    <link rel="stylesheet" href="assets/datepicker/css/bootstrap-datepicker.css" type="text/css">
+    <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
 </head>
 
@@ -194,28 +194,35 @@
 
             <h4 class="page-title">关键信息集中监控</h4>
 
-            <hr class="whiter" />
-
             <!-- Quick Stats -->
             <div class="block-area">
                 <!-- Time choose -->
                 <div class="row">
+
                     <div class="col-md-4">
-                        <label for="firstDate">开始日期</label>
-                        <div class="input-group date start_date_picker">
-                            <input size="18" type="text" id="firstDate" name="queryStartDate" value="2017-7-8" class="form-control" readonly placeholder="开始日期">
-                            <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar">
-                            </span>
-                        </span>
-                        </div>
-                        <label for="lastDate">结束日期</label>
-                        <div class="input-group date end_date_picker">
-                            <input size="18" type="text" id="lastDate" name="queryEndDate" value="2017-7-10" class="form-control" readonly placeholder="结束日期">
-                            <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar">
-                            </span>
-                        </span>
+                        <div class="container">
+                            <form action="" class="form-horizontal"  role="form">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label for="dtp_input1" class="col-md-2 control-label">开始日期</label>
+                                        <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dtp_input2" class="col-md-2 control-label">结束日期</label>
+                                        <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input2" value="" /><br/>
+                                    </div>
+
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -257,16 +264,9 @@
     </section>
 
     <!-- Javascript Libraries -->
-    <!-- jQuery -->
-    <script src="js/jquery-3.3.1.js"></script>
 
     <!-- echarts -->
     <script src="js/echarts.js"></script>
-
-    <!-- bootstrap-datepicker -->
-    <script src="assets/datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="assets/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
-
 
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
@@ -288,6 +288,7 @@
 
         /*加载省下拉选*/
         var provinceid = "<%=session.getAttribute("probank")%>";
+        console.log(provinceid);
         if(provinceid == "null"){
             //第一次进入这个页面，未获取过province
             var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
@@ -506,8 +507,25 @@
     </script>
 
     <!-- 时间选择器-->
+    <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
     <script type="text/javascript">
-        $(".start_date_picker").datepicker({
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
+    </script>
+
+    <script type="text/javascript">
+      /*  $(".start_date_picker").datepicker({
             format: "yyyy-mm-dd",
             autoclose: true,
             todayBtn: "linked",
@@ -526,7 +544,7 @@
         });
         $("#lastDate").change(function() {
             $('.start_date_picker').datepicker('setEndDate', $(this).val());
-        });
+        });*/
     </script>
 
     <!-- 根据时间范围 获得数据 -->

@@ -1,10 +1,16 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
+import hibernatePOJO.Dictionary;
+import hibernatePOJO.DictionaryPlus;
 import hibernatePOJO.Roles;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MyListener implements ServletContextListener {
     private MyThread myThread;
@@ -31,7 +37,7 @@ class MyThread extends Thread {
     public void run() {
         while (!this.isInterrupted()) {// 线程未中断执行循环
             try {
-                Thread.sleep(2000); //每隔2000ms执行一次
+                Thread.sleep(20000); //每隔20000ms执行一次
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -40,10 +46,39 @@ class MyThread extends Thread {
             System.out.println("____________________TIME:" + System.currentTimeMillis());
 
             //1.取数据,解析
+            //从数据库中读取字典，list<map<String, Int>>类型
+            //diclist为第一个字典，dicpluslist为第二个索引字典
+            HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+            List<Dictionary> list = hbsessionDao.search(
+                    "FROM Dictionary");
+            List<Map<String, Integer>> diclist = new ArrayList<>();
+
+            for(int i = 0; i < list.size(); i++){
+                System.out.println(list.get(i).getItem()+" "+list.get(i).getCoefficient());
+                Map<String, Integer> map = new HashMap<>();
+                map.put(list.get(i).getItem(), list.get(i).getCoefficient());
+                diclist.add(map);
+            }
+
+            List<DictionaryPlus> dicpluslist = hbsessionDao.search(
+                    "FROM DictionaryPlus");
+
+            System.out.println(dicpluslist.get(0).getPart1Slaveid());
+            System.out.println(dicpluslist.get(0).getPart2Slaveid());
+            System.out.println(dicpluslist.get(0).getPart3Slaveid());
+            System.out.println(dicpluslist.get(0).getPart4Slaveid());
+
+            System.out.println(dicpluslist.get(0).getPart1Functioncode());
+
+            System.out.println(dicpluslist.get(0).getPart1Length());
+
+            System.out.println(dicpluslist.get(0).getPart1Start());
+
 
             //2.存数据库
             //将取到的数据分别按照实体类型存入表中
-            HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+            //HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
             boolean rt = false;
             Roles role = new Roles();
             role.setRid(String.valueOf(System.currentTimeMillis()));
