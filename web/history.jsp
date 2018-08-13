@@ -362,7 +362,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var rt = obj.knowledgenode;
                     $("#content-text").val("");
                     $("#content-text").val(rt.content);
-                },
+                }
             });
             //当前点击的节点的id存到一个隐藏的div中
             $("#nodeid").val(currentNode.id);
@@ -380,7 +380,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     kid: tmpNodeKid,
                     tmpContent: tmpcurrentNode
                 },
-                dataType : "json"
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    //刷新树
+                    $('#jstree').jstree(true).refresh();
+                }
             });
 
         });
@@ -397,9 +402,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 },
                 dataType : "json",
                 success: function (data) {
+                    alert(data);
                     //刷新树
                     $('#jstree').jstree(true).refresh();
-                },
+                }
             });
         });
 
@@ -417,9 +423,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 },
                 dataType : "json",
                 success: function (data) {
+                    alert(data);
                     //刷新树
                     $('#jstree').jstree(true).refresh();
-                },
+                }
             });
         });
 
@@ -437,9 +444,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 },
                 dataType : "json",
                 success: function (data) {
+                    alert(data);
                     //刷新树
                     $('#jstree').jstree(true).refresh();
-                    alert("sucss");
                 },
             });
         });

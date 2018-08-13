@@ -1,19 +1,23 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
+import com.opensymphony.xwork2.ActionContext;
 import hibernatePOJO.Dictionary;
 import hibernatePOJO.DictionaryPlus;
 import hibernatePOJO.Roles;
+import org.apache.struts2.ServletActionContext;
 
+//import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSessionContext;
+import java.util.*;
 
 public class MyListener implements ServletContextListener {
     private MyThread myThread;
+
 
     public void contextDestroyed(ServletContextEvent e) {
         if (myThread != null && myThread.isInterrupted()) {
@@ -90,7 +94,7 @@ class MyThread extends Thread {
                 System.out.println("存取成功");
             else  System.out.println("存取失败");
 
-            //3.实时读取
+            //3.实时存入，方便后续读取
 
 
 

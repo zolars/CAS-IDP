@@ -25,7 +25,7 @@ public class uploadKnowledgeTreeAction extends ActionSupport {
     }
 
 
-    /* 上传某个子节点知识到总服务器
+    /* 管理员和作者用户可以上传某个子节点知识到总服务器
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -38,10 +38,23 @@ public class uploadKnowledgeTreeAction extends ActionSupport {
             String tmpContent = request.getParameter("tmpContent");
 
             KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();
-            Boolean rt = dao.uploadKnowledgeNode(kid, tmpContent);
 
+            //判断是否为管理员和作者用户
+            String userid = (String)session.getAttribute("userid");
+
+            Boolean isValid = dao.isUserOrAdmin(kid, userid);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("boolvalue", rt);
+
+            if(isValid){
+                Boolean rt = dao.uploadKnowledgeNode(kid, tmpContent);
+
+                if(rt)
+                    jsonObject.put("提示", "上传成功！");
+                else
+                    jsonObject.put("提示", "上传失败，请重试！");
+            }
+            else
+                jsonObject.put("提示", "上传失败，没有上传权限！");
 
             result = JSON.toJSONString(jsonObject);
 

@@ -4,6 +4,7 @@ import Util.HBSessionCenterDaoImpl;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.CityBank;
 import hibernatePOJO.Knowledge;
+import hibernatePOJO.UserRoles;
 import knowledgeManage.dao.KnowledgeTreeDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -76,8 +77,47 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         kl.setContent(content);
         String hql = "update Knowledge kl set kl.content='" + content +"' where kl.kid='" + kid + "'";
 
+        //远程数据库的hbsession
         rt = hbsessioncenterDao.update(kl, hql);
         return rt;
+    }
+
+    /*
+    根据kid查询uid 若uid与传入的uid一样，则为用户本身，返回true；若不一样，查询uid的角色是否为管理员，若是，则返回true；否则，返回false
+     */
+    public boolean isUserOrAdmin(String kid, String uid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        Knowledge kl = (Knowledge)hbsessionDao.getFirst(
+                "FROM Knowledge where kid = '" + kid + "'");
+
+        if(kl.getUid().equals(uid))
+            return true; //若uid与传入的uid一样，则为用户本身
+        else{
+            UserRoles ur = (UserRoles)hbsessionDao.getFirst(
+                    "FROM UserRoles where uid = '" + uid + "'");
+
+            if(ur.getRid() == "1")
+                return true;
+
+            else return false;
+        }
+
+    }
+
+    /*
+    根据kid查询uid 若uid与传入的uid一样，则为用户本身，返回true；否则，返回false
+     */
+    public boolean isUser(String kid, String uid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        Knowledge kl = (Knowledge)hbsessionDao.getFirst(
+                "FROM Knowledge where kid = '" + kid + "'");
+
+        if(kl.getUid().equals(uid))
+            return true; //若uid与传入的uid一样，则为用户本身
+        else return false;
+
     }
 
 

@@ -1718,7 +1718,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                getDataParams(mpcname);
        }
     });
-</script>
+    </script>
+
 
 </body>
 

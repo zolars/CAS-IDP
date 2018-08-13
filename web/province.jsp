@@ -571,7 +571,7 @@
             else if(cbidstr[i] == ' reportChart.jsp')
                 menuname = "报表功能";
 
-            else if(cbidstr[i] == ' history.jsp') //userMng.jsp'
+            else if(cbidstr[i] == ' history.jsp')
                 menuname = "历史曲线";
 
             else if(cbidstr[i] == ' systemMng.jsp')

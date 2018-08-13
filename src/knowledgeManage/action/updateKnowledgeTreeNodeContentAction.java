@@ -37,12 +37,24 @@ public class updateKnowledgeTreeNodeContentAction extends ActionSupport {
             //获取节点id
             String kid = request.getParameter("kid");
             String tmpContent = request.getParameter("tmpContent");
+            String userid = (String)session.getAttribute("userid");
 
             KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();
-            Boolean rt = dao.updateKnowledgeNode(kid, tmpContent);
 
+            //判断是否为作者用户
+            Boolean isValid = dao.isUser(kid, userid);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("boolvalue", rt);
+
+            if(isValid){
+                Boolean rt = dao.updateKnowledgeNode(kid, tmpContent);
+
+                if(rt)
+                    jsonObject.put("提示", "修改成功！");
+                else
+                    jsonObject.put("提示", "修改失败，请重试！");
+            }
+            else
+                jsonObject.put("提示", "修改失败，没有修改权限！");
 
             result = JSON.toJSONString(jsonObject);
 

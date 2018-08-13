@@ -32,6 +32,7 @@ public interface KnowledgeTreeDAO {
 
     public boolean uploadKnowledgeNode(String kid, String content);
 
+    public boolean isUserOrAdmin(String kid, String uid);
 
-
+    public boolean isUser(String kid, String uid);
 }
