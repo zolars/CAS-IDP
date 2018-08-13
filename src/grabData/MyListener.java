@@ -37,7 +37,7 @@ class MyThread extends Thread {
     public void run() {
         while (!this.isInterrupted()) {// 线程未中断执行循环
             try {
-                Thread.sleep(20000); //每隔20000ms执行一次
+                Thread.sleep(200000); //每隔200000ms执行一次
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -84,7 +84,7 @@ class MyThread extends Thread {
             role.setRid(String.valueOf(System.currentTimeMillis()));
             role.setRolesname("name");
             role.setExtra("extra");
-            rt = hbsessionDao.insert(role);
+            //rt = hbsessionDao.insert(role);
 
             if(rt)
                 System.out.println("存取成功");

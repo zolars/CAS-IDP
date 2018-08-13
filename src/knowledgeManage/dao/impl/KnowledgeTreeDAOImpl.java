@@ -1,5 +1,6 @@
 package knowledgeManage.dao.impl;
 
+import Util.HBSessionCenterDaoImpl;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.CityBank;
 import hibernatePOJO.Knowledge;
@@ -65,6 +66,17 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         String hql = "update Knowledge kl set kl.content='" + content +"' where kl.kid='" + kid + "'";
 
         rt = hbsessionDao.update(kl, hql);
+        return rt;
+    }
+
+    public boolean uploadKnowledgeNode(String kid, String content){
+        HBSessionCenterDaoImpl hbsessioncenterDao = new HBSessionCenterDaoImpl();
+        Boolean rt = false;
+        Knowledge kl = getKnowledgeNode(kid);
+        kl.setContent(content);
+        String hql = "update Knowledge kl set kl.content='" + content +"' where kl.kid='" + kid + "'";
+
+        rt = hbsessioncenterDao.update(kl, hql);
         return rt;
     }
 

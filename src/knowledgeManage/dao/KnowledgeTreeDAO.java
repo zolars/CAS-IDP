@@ -30,6 +30,8 @@ public interface KnowledgeTreeDAO {
 
     public boolean addKnowledgeNode(String kid, String content);
 
+    public boolean uploadKnowledgeNode(String kid, String content);
+
 
 
 }

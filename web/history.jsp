@@ -424,6 +424,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
 
         // 事件处理-上传到总服务器
+        $('#button-upload-kl').click(function(){
+            var tmpNodeKid=$("#nodeid").val();
+            var tmpcurrentNode=$("#content-text").val();
+
+            $.ajax({
+                type: "post",
+                url: "uploadKnowledgeTree",
+                data: {
+                    kid: tmpNodeKid,
+                    tmpContent: tmpcurrentNode
+                },
+                dataType : "json",
+                success: function (data) {
+                    //刷新树
+                    $('#jstree').jstree(true).refresh();
+                    alert("sucss");
+                },
+            });
+        });
 
         // 事件处理-添加树节点
 

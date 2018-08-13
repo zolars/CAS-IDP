@@ -243,6 +243,15 @@
              </result>
          </action>
 
+         <action name="uploadKnowledgeTree" class="knowledgeManage.action.uploadKnowledgeTreeAction">
+             <!--uploadKnowledgeTree -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+
      </package>
 
 

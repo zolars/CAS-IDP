@@ -36,6 +36,9 @@
     <!-- bootstrap datepicker时间选择控件 -->
     <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
+    <!-- jquery -->
+    <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+
 </head>
 
 <style type="text/css">
@@ -206,7 +209,7 @@
                                     <div class="form-group">
                                         <label for="dtp_input1" class="col-md-2 control-label">开始日期</label>
                                         <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                            <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
                                         <input type="hidden" id="dtp_input1" value="" /><br/>
@@ -215,7 +218,7 @@
                                     <div class="form-group">
                                         <label for="dtp_input2" class="col-md-2 control-label">结束日期</label>
                                         <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                            <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
                                         <input type="hidden" id="dtp_input2" value="" /><br/>
@@ -288,12 +291,13 @@
 
         /*加载省下拉选*/
         var provinceid = "<%=session.getAttribute("probank")%>";
-        console.log(provinceid);
+        //console.log("provinceid "+provinceid);
         if(provinceid == "null"){
             //第一次进入这个页面，未获取过province
             var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
             //对第一个结果进行URI解码
             var provinceid_pre = decodeURI(provinceidc[1]);
+           // console.log("provinceid_pre "+provinceid_pre);
             $.ajax({
                 type: "post",
                 url: "setProvince",
@@ -507,7 +511,7 @@
     </script>
 
     <!-- 时间选择器-->
-    <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+
     <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
     <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
@@ -522,35 +526,15 @@
             forceParse: 0,
             showMeridian: 1
         });
-    </script>
 
-    <script type="text/javascript">
-      /*  $(".start_date_picker").datepicker({
-            format: "yyyy-mm-dd",
-            autoclose: true,
-            todayBtn: "linked",
-            language:'zh-CN',
-            pickerPosition: "bottom-left"
-        });
-        $(".end_date_picker").datepicker({
-            format: "yyyy-mm-dd",
-            autoclose: true,
-            todayBtn: "linked",
-            language:'zh-CN',
-            pickerPosition: "bottom-left"
-        });
         $("#firstDate").change(function() {
-            $('.end_date_picker').datepicker('setStartDate', $(this).val());
+            $('.firstDate').datetimepicker('setStartDate', $(this).val());
+            alert("starttime:"+$(this).val());
         });
         $("#lastDate").change(function() {
-            $('.start_date_picker').datepicker('setEndDate', $(this).val());
-        });*/
-    </script>
-
-    <!-- 根据时间范围 获得数据 -->
-    <script type="text/javascript">
-        var stime = $("#firstDate").val();
-        var etime = $("#lastDate").val();
+            $('.lastDate').datetimepicker('setEndDate', $(this).val());
+            alert("endtime:"+$(this).val());
+        });
     </script>
 
     <!-- 动态加载菜单项 -->
