@@ -260,7 +260,7 @@
              </result>
          </action>
 
-         <action name="updateKnowledgeTreeNodeStruct" class="knowledgeManage.action.KnowledgeTreeNodeStructAction">
+         <action name="updateKnowledgeTreeNodeStruct" class="knowledgeManage.action.updateKnowledgeTreeNodeStructAction">
              <!--updateKnowledgeTreeNodeStruct -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
@@ -268,13 +268,13 @@
              </result>
          </action>
 
-         <action name="deleteKnowledgeTreeNodeStruct" class="knowledgeManage.action.deleteKnowledgeTreeNodeStructAction">
-             <!--deleteKnowledgeTreeNodeStruct -->
+       <!--  <action name="deleteKnowledgeTreeNodeStruct" class="knowledgeManage.action.deleteKnowledgeTreeNodeStructAction">
+             &lt;!&ndash;deleteKnowledgeTreeNodeStruct &ndash;&gt;
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>
              </result>
-         </action>
+         </action>-->
 
 
      </package>

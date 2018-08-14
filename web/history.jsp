@@ -466,7 +466,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             $.ajax({
                 type: "post",
-                url: "addKnowledgeTreeNodeStruct", //"getNewKnowledgeTreeNodeKid",
+                url: "addKnowledgeTreeNodeStruct",
                 data: {
                     kid: tmpNodeKid,
                     kname: tmpcurrentNodeTitle,
@@ -484,16 +484,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         // 事件处理-修改树节点
         $('#button-treenode-kl').click(function(){
-           /* var tmpNodeKid=$("#nodeid").val();
-            var tmpcurrentNode=$("#content-text").val();
+            var tmpNodeKid=$("#nodeid").val();
+            var tmpcurrentNodeTitle=$("#node-tilte-text").val();
 
             $.ajax({
                 type: "post",
-                url: "getNewKnowledgeTreeNodeKid",
+                url: "updateKnowledgeTreeNodeStruct",
                 data: {
                     kid: tmpNodeKid,
-                    kname: "新节点",
-                    kcontent: tmpcurrentNode
+                    kname: tmpcurrentNodeTitle
                 },
                 dataType : "json",
                 success: function (data) {
@@ -501,7 +500,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     //刷新树
                     $('#jstree').jstree(true).refresh();
                 }
-            });*/
+            });
         });
 
         // 事件处理-删除树节点

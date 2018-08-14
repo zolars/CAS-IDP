@@ -151,5 +151,16 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         return rt;
     }
 
+    public boolean updateKnowledgeTreeNodeStruct(String kid, String kname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = false;
+        Knowledge kl = getKnowledgeNode(kid);
+        kl.setKname(kname);
+        String hql = "update Knowledge kl set kl.kname='" + kname +"' where kl.kid='" + kid + "'";
+
+        rt = hbsessionDao.update(kl, hql);
+        return rt;
+    }
+
 
 }
