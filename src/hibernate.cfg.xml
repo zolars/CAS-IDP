@@ -53,6 +53,7 @@
         <mapping class="hibernatePOJO.Dictionary"/>
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
+        <mapping resource="hibernatePOJO/Permission.hbm.xml"/>
 
 
     </session-factory>

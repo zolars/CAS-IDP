@@ -32,6 +32,7 @@
     <link href="css/generics.css" rel="stylesheet">
     <link href="css/menu.css" rel="stylesheet">
     <link href="css/mycss.css" rel="stylesheet">
+    <link href="css/jstree-default/style.css" rel="stylesheet"/>
 
 </head>
 
@@ -98,6 +99,10 @@
                             </li>
                             <li style="width:15%">
                                 <a data-toggle="tab" id="subItem6">•限值管理</a>
+                            </li>
+
+                            <li style="width:15%">
+                                <a data-toggle="tab" id="subItem7">•预警管理</a>
                             </li>
                         </ul>
 
@@ -185,6 +190,10 @@
                                 <div class="col-md-7">
                                     <div class="tile">
                                         <h2 class="tile-title">功能</h2>
+
+                                        <div id="jstree"></div>
+                                        <div id="nodeid" style="display: none"></div>
+
 
                                     </div>
                                 </div>
@@ -519,6 +528,9 @@
                             </div>
 
                         </div>
+                        <div id = "item7" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                            this is 预警理
+                        </div>
                     </div>
                 </div>
             </div>
@@ -636,6 +648,8 @@
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
 
+    <script src="js/jstree.js"></script>
+
     <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
         /*加载省下拉选*/
@@ -746,6 +760,7 @@
         $("#item4").hide();
         $("#item5").hide();
         $("#item6").hide();
+        $("#item7").hide();
 
         $("#secItem1").hide();
         $("#secItem2").hide();
@@ -753,6 +768,7 @@
         $("#secItem4").hide();
         $("#secItem5").hide();
         $("#secItem6").hide();
+        $("#secItem7").hide();
 
         $("#tridItem1").hide();
         $("#tridItem2").hide();
@@ -768,6 +784,7 @@
                 $("#item4").hide();
                 $("#item5").hide();
                 $("#item6").hide();
+                $("#item7").hide();
                 getALLUserInfomation();
             });
             $("#subItem2").click(function(){
@@ -777,6 +794,7 @@
                 $("#item4").hide();
                 $("#item5").hide();
                 $("#item6").hide();
+                $("#item7").hide();
                 getALLRolesInfomation();
             });
             $("#subItem3").click(function(){
@@ -786,8 +804,11 @@
                 $("#item4").hide();
                 $("#item5").hide();
                 $("#item6").hide();
+                $("#item7").hide();
 
                 var monitorpoint = 1;
+
+                //左侧角色表的初始化渲染
                 $.ajax({
                     type: "post",
                     url: "getAllRoles",
@@ -813,6 +834,44 @@
                     }
                 });
 
+                //右侧功能权限树的初始化渲染
+                $(function () {
+                    $('#jstree').jstree({
+                        "core": {
+                            "themes": {
+                                "responsive": false
+                            },
+                            "check_callback": true,
+                            'data': function (obj, callback) {
+                                var jsonstr = "[]";
+                                var jsonarray = eval('(' + jsonstr + ')');
+                                $.ajax({
+                                    url: "getPermissionTree",
+                                    dataType: "json",
+                                    async: false,
+                                    success: function (result) {
+                                        alert(result);
+                                        var arrays = result.allptree;
+                                        for (var i = 0; i < arrays.length; i++) {
+                                            var arr = {
+                                                "id": arrays[i].pid,
+                                                "parent": arrays[i].parentpid == "0" ? "#" : arrays[i].parentpid,
+                                                "text": arrays[i].permissionname
+                                            }
+                                            jsonarray.push(arr);
+                                        }
+                                    },
+                                    error: function (result) {
+                                        alert("error"+result);
+                                    }
+                                });
+                                callback.call(this, jsonarray);
+                            },
+                        }
+                    })
+                });
+
+
             });
             $("#subItem4").click(function(){
                 $("#item1").hide();
@@ -821,6 +880,7 @@
                 $("#item4").show();
                 $("#item5").hide();
                 $("#item6").hide();
+                $("#item7").hide();
 
                 $("#secItem1").show();
                 $("#secItem2").hide();
@@ -887,6 +947,7 @@
                 $("#item4").hide();
                 $("#item5").show();
                 $("#item6").hide();
+                $("#item7").hide();
             });
             $("#subItem6").click(function(){
                 $("#item1").hide();
@@ -895,6 +956,7 @@
                 $("#item4").hide();
                 $("#item5").hide();
                 $("#item6").show();
+                $("#item7").hide();
 
                 $("#tridItem1").show();
                 $("#tridItem2").hide();
@@ -940,6 +1002,15 @@
                     });
                 });
 
+            });
+            $("#subItem7").click(function(){
+                $("#item1").hide();
+                $("#item2").hide();
+                $("#item3").hide();
+                $("#item4").hide();
+                $("#item5").hide();
+                $("#item6").hide();
+                $("#item7").show();
             });
         });
     </script>
@@ -1416,6 +1487,41 @@
 
         }
     </script>
+
+    <!-- jstree-->
+    <script type="text/javascript">
+
+
+    $('button').on('click', function () {
+        $('#jstree').jstree(true).select_node('child_node_1');
+        $('#jstree').jstree('select_node', 'child_node_1');
+        $.jstree.reference('#jstree').select_node('child_node_1');
+    });
+
+    // 事件处理-点击就是拥有 权限树
+    /* $('#jstree').bind("activate_node.jstree", function (obj, e) {
+         // 获取当前节点，根据节点kid找到数据库中存储的内容
+         var currentNode = e.node;
+
+         $.ajax({
+             type: "post",
+            // url: "getPermissionTreeNodeContent",
+             data: {kid: currentNode.id},
+             dataType : "json",
+             success: function (data) {
+                // var obj = JSON.parse(data);
+                // var rt = obj.knowledgenode;
+               //  $("#content-text").val("");
+                // $("#content-text").val(rt.content);
+             }
+         });
+         //当前点击的节点的id存到一个隐藏的div中
+         $("#nodeid").val(currentNode.id);
+     });*/
+
+</script>
+
+
 
 </body>
 

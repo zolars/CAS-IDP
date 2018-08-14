@@ -40,9 +40,6 @@ public class CityTreeAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             String province = request.getParameter("provinceid");
-            //String province = (String)session.getAttribute("probank");
-
-         //   System.out.println("cccccccccccccc=provinceid"+province);
 
             int pbid = ProvinceEnum.getNo(province);
 
@@ -55,7 +52,6 @@ public class CityTreeAction extends ActionSupport {
             result = JSON.toJSONString(citybank); // List转json
 
             //存到 session 中,方便后续重复使用
-            //session.setAttribute("probank", province);
             session.setAttribute("citybank", citybank);
 
         } catch (Exception e) {

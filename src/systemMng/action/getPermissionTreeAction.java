@@ -1,12 +1,11 @@
-package knowledgeManage.action;
+package systemMng.action;
 
 
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import hibernatePOJO.Knowledge;
-import knowledgeManage.dao.KnowledgeTreeDAO;
-import knowledgeManage.dao.impl.KnowledgeTreeDAOImpl;
 import org.apache.struts2.ServletActionContext;
+import systemMng.dao.PermissionDAO;
+import systemMng.dao.impl.PermissionDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,8 +16,8 @@ import java.util.List;
 //import net.sf.json.JSONObject;
 
 
-public class getKnowledgeTreeAction extends ActionSupport {
-    private static final long serialVersionUID = 13L;
+public class getPermissionTreeAction extends ActionSupport {
+    //private static final long serialVersionUID = 13L;
     private JSONObject result;
 
     public JSONObject getResult() {
@@ -29,8 +28,7 @@ public class getKnowledgeTreeAction extends ActionSupport {
         this.result = result;
     }
 
-
-    /* 查询所有知识
+    /* 查询所有功能权限
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -38,11 +36,11 @@ public class getKnowledgeTreeAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();
-            List kltree = dao.getKnowledgeTree();
+            PermissionDAO dao = new PermissionDAOImpl();
+            List ptree = dao.getPermissionTree();
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("allkltree", kltree);
+            jsonObject.put("allptree", ptree);
 
             result = jsonObject;
             //result = JSON.toJSONString(jsonObject);
