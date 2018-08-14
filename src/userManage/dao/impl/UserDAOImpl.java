@@ -106,6 +106,15 @@ public class UserDAOImpl implements UserDAO {
         return crlist;
     }
 
+    public User getOneUserInfo(String uid){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        User ur = (User)hbsessionDao.getFirst("FROM User where uid = '" + uid+ "'");
+
+        return ur;
+    }
+
     public boolean deleteUserInfo(String uid){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;

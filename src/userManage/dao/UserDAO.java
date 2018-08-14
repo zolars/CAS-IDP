@@ -21,6 +21,8 @@ public interface UserDAO {
 
     public List<Object[]> getAllUserInfo();
 
+    public User getOneUserInfo(String uid);
+
     public boolean deleteUserInfo(String uid);
 
     public boolean addUserInfo(String account,String password,String name,String telephone,String govtelephone, String province, String city);

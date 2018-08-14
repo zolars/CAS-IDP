@@ -1058,12 +1058,16 @@
                             var role = list[key][i][3];
                             var telephone = list[key][i][6];
                             var govtelephone = list[key][i][7];
-                           /* table.append('<tr><td><input type="checkbox" name="userid" id="userid" value='+uid+'></td><td style="padding-left:15px;">' + account +
-                                '</td><td style="padding-left:20px;">' + name +  '</td><td style="padding-left:20px;">' + org + '</td><td style="padding-left:20px;">'
-                                + role + '</td><td style="padding-left:20px;">' + telephone + '</td><td style="padding-left:20px;">' + govtelephone + '</td></tr>');*/
-                            table.append('<tr><td><input type="checkbox" name="userid" id="userid" value='+uid+'></td><td style="padding-left:15px;" name="td-account" id="td-account" >' + account +
-                                '</td><td style="padding-left:20px;">' + name +  '</td><td style="padding-left:20px;">' + org + '</td><td style="padding-left:20px;">'
-                                + role + '</td><td style="padding-left:20px;">' + telephone + '</td><td style="padding-left:20px;">' + govtelephone + '</td></tr>');
+
+                            table.append('<tr>' +
+                                '<td><input type="checkbox" name="userid" id="userid" value='+uid+'></td>' +
+                                '<td style="padding-left:15px;">' + account + '</td>' +
+                                '<td style="padding-left:20px;">' + name +  '</td>' +
+                                '<td style="padding-left:20px;">' + org + '</td>' +
+                                '<td style="padding-left:20px;">' + role + '</td>' +
+                                '<td style="padding-left:20px;">' + telephone + '</td>' +
+                                '<td style="padding-left:20px;">' + govtelephone + '</td>' +
+                                '</tr>');
                         }
                     }
                 },
@@ -1120,13 +1124,35 @@
 
             //显示 用户信息到div
             var useridcheck = $("input[name='userid']:checked").serialize();
-            var tdaccount = $("#td-account").serialize();
 
-            alert(useridcheck + tdaccount);
+            $.ajax({
+                type: "post",
+                url: "getUserInfo",
+                data: {
+                   uid: useridcheck
+                },
+                dataType : "json",
+                success: function (data) {
+                    var list = JSON.parse(data);
+                    for(var key in list) {
+                        var len = list[key];
 
+                        $("#useraccount").val(len.uid);
+                        $("#userpassword").val(len.password);
+                        $("#username").val(len.uname);
+                        $("#usertelephone").val(len.telephone);
+                        $("#usergovtelephone").val(len.govtelephone);
 
-
-
+                        $("#userroles").val();
+                        $("#userorgnization-province").val();
+                        $("#userorgnization-city").val();
+                        $("#userorgnization-computerroom").val();
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
 
 
 

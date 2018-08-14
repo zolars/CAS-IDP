@@ -77,6 +77,14 @@
              </result>
          </action>
 
+         <action name="getUserInfo" class="userManage.action.getOneUserInfoAction">
+             <!--getUserInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="deleteUserInfo" class="userManage.action.deleteUserInfoAction">
              <!--deleteUserInfo -->
              <result name="failure">/failure.jsp</result>
