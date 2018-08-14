@@ -75,9 +75,14 @@ public class HBSessionDaoImpl implements HBSessionDao{
         List alist = null;
         Object aobject = null;
         alist = session.createQuery(hql).list();
-        aobject = alist.get(0);
-        session.close();
-        return aobject;
+
+        if(alist.size() == 0)
+            return null;
+        else{
+            aobject = alist.get(0);
+            session.close();
+            return aobject;
+        }
     }
 
     //使用HQL语句删除数据

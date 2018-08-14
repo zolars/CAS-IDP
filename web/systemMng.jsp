@@ -181,9 +181,11 @@
                                             </table>
                                         <table id="rolesinfotable-functionmng"></table>
 
+                                        <div id="roleid" style="display: none"></div>
+
                                         <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="allocateRolesFunction()">分配功能</button>
-                                            </div>
+                                            <button type="button" class="btn btn-sm btn-alt" onclick="allocateRoles()">分配功能</button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -825,7 +827,7 @@
                             var rid = list[i].rid;
                             var rname = list[i].rolesname;
                             var rextra = list[i].extra;
-                            table.append('<tr><td><input type="checkbox" name="rid" id="rid" value='+rid+'></td><td style="padding-left:40px;">' + rid +
+                            table.append('<tr><td><input type="checkbox" id="cbox-rid" name="cbox-rid" value='+rid+'></td><td style="padding-left:40px;">' + rid +
                                 '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
                         }
                     },
@@ -850,7 +852,6 @@
                                     dataType: "json",
                                     async: false,
                                     success: function (result) {
-                                        alert(result);
                                         var arrays = result.allptree;
                                         for (var i = 0; i < arrays.length; i++) {
                                             var arr = {
@@ -870,7 +871,6 @@
                         }
                     })
                 });
-
 
             });
             $("#subItem4").click(function(){
@@ -1058,7 +1058,10 @@
                             var role = list[key][i][3];
                             var telephone = list[key][i][6];
                             var govtelephone = list[key][i][7];
-                            table.append('<tr><td><input type="checkbox" name="userid" id="userid" value='+uid+'></td><td style="padding-left:15px;">' + account +
+                           /* table.append('<tr><td><input type="checkbox" name="userid" id="userid" value='+uid+'></td><td style="padding-left:15px;">' + account +
+                                '</td><td style="padding-left:20px;">' + name +  '</td><td style="padding-left:20px;">' + org + '</td><td style="padding-left:20px;">'
+                                + role + '</td><td style="padding-left:20px;">' + telephone + '</td><td style="padding-left:20px;">' + govtelephone + '</td></tr>');*/
+                            table.append('<tr><td><input type="checkbox" name="userid" id="userid" value='+uid+'></td><td style="padding-left:15px;" name="td-account" id="td-account" >' + account +
                                 '</td><td style="padding-left:20px;">' + name +  '</td><td style="padding-left:20px;">' + org + '</td><td style="padding-left:20px;">'
                                 + role + '</td><td style="padding-left:20px;">' + telephone + '</td><td style="padding-left:20px;">' + govtelephone + '</td></tr>');
                         }
@@ -1116,8 +1119,16 @@
             $('#add-user-modal').css('display', 'block');
 
             //显示 用户信息到div
-            var useridcheck = $("input[name='userid']:checked");
-            alert(useridcheck);
+            var useridcheck = $("input[name='userid']:checked").serialize();
+            var tdaccount = $("#td-account").serialize();
+
+            alert(useridcheck + tdaccount);
+
+
+
+
+
+
 
         }
 
@@ -1488,38 +1499,38 @@
         }
     </script>
 
-    <!-- jstree-->
+    <!-- 功能管理-->
     <script type="text/javascript">
 
-
-    $('button').on('click', function () {
-        $('#jstree').jstree(true).select_node('child_node_1');
-        $('#jstree').jstree('select_node', 'child_node_1');
-        $.jstree.reference('#jstree').select_node('child_node_1');
-    });
-
-    // 事件处理-点击就是拥有 权限树
-    /* $('#jstree').bind("activate_node.jstree", function (obj, e) {
-         // 获取当前节点，根据节点kid找到数据库中存储的内容
-         var currentNode = e.node;
-
-         $.ajax({
-             type: "post",
-            // url: "getPermissionTreeNodeContent",
-             data: {kid: currentNode.id},
-             dataType : "json",
-             success: function (data) {
-                // var obj = JSON.parse(data);
-                // var rt = obj.knowledgenode;
-               //  $("#content-text").val("");
-                // $("#content-text").val(rt.content);
-             }
+         // 点击树的某个节点，存当前节点id到nodeid中
+         $('#jstree').bind("activate_node.jstree", function (obj, e) {
+             var currentNode = e.node;
+             //当前点击的节点的id存到一个隐藏的div中
+             $("#nodeid").val(currentNode.id);
          });
-         //当前点击的节点的id存到一个隐藏的div中
-         $("#nodeid").val(currentNode.id);
-     });*/
 
-</script>
+        // 分配角色权限
+        function allocateRoles(){
+            //当前点击的角色id存到一个隐藏的div中
+            $("#roleid").val($("input[name='cbox-rid']:checked").serialize());
+
+            var tmpNodePid=$("#nodeid").val();
+            var tmpRid=$("#roleid").val();
+
+            $.ajax({
+                type: "post",
+                url: "allocRolesPermission",
+                data: {
+                    pid: tmpNodePid,
+                    rid: tmpRid
+                },
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        };
+    </script>
 
 
 

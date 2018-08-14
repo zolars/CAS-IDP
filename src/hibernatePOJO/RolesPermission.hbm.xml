@@ -4,13 +4,10 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="hibernatePOJO.RolesPermission" table="roles_permission" schema="Test">
-        <id name="id">
-            <column name="id" sql-type="int(11)"/>
+    <class name="hibernatePOJO.RolesPermission" table="roles_permission" schema="test">
+        <id name="rid">
+            <column name="rid" sql-type="varchar(255)"/>
         </id>
-        <property name="rid">
-            <column name="rid" sql-type="varchar(255)" not-null="true"/>
-        </property>
         <property name="pid">
             <column name="pid" sql-type="varchar(255)" not-null="true"/>
         </property>

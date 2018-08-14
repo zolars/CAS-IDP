@@ -284,6 +284,14 @@
              </result>
          </action>
 
+         <action name="allocRolesPermission" class="systemMng.action.allocRolesPermissionAction">
+             <!--allocRolesPermission -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
 
      </package>
 
