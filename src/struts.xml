@@ -268,13 +268,13 @@
              </result>
          </action>
 
-       <!--  <action name="deleteKnowledgeTreeNodeStruct" class="knowledgeManage.action.deleteKnowledgeTreeNodeStructAction">
-             &lt;!&ndash;deleteKnowledgeTreeNodeStruct &ndash;&gt;
+         <action name="deleteKnowledgeTreeNodeStruct" class="knowledgeManage.action.deleteKnowledgeTreeNodeStructAction">
+             <!--deleteKnowledgeTreeNodeStruct -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>
              </result>
-         </action>-->
+         </action>
 
 
      </package>

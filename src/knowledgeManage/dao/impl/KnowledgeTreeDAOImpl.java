@@ -50,10 +50,12 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
 
     public boolean deleteKnowledgeNode(String kid){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        boolean rt;
+        Boolean rt = false;
+        Knowledge kl = getKnowledgeNode(kid);
+        kl.setContent("");
+        String hql = "update Knowledge kl set kl.content='" + "" +"' where kl.kid='" + kid + "'";
 
-        rt = hbsessionDao.delete( "Delete FROM Knowledge Where kid=?", kid);
-
+        rt = hbsessionDao.update(kl, hql);
         return rt;
     }
 
@@ -159,6 +161,15 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         String hql = "update Knowledge kl set kl.kname='" + kname +"' where kl.kid='" + kid + "'";
 
         rt = hbsessionDao.update(kl, hql);
+        return rt;
+    }
+
+    public boolean deleteKnowledgeTreeNodeStruct(String kid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        rt = hbsessionDao.delete( "Delete FROM Knowledge Where kid=?", kid);
+
         return rt;
     }
 

@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="btn-group">
                                         <button id = "button-addtreenode-kl"  type="button" class="btn btn-sm btn-alt">添加树节点</button>
                                         <button id = "button-treenode-kl"  type="button" class="btn btn-sm btn-alt">修改树节点</button>
-                                        <button id = "button-deleteetreenode-kl"  type="button" class="btn btn-sm btn-alt">删除树节点</button>
+                                        <button id = "button-deletetreenode-kl"  type="button" class="btn btn-sm btn-alt">删除树节点</button>
                                     </div>
                                 </div>
 
@@ -505,16 +505,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         // 事件处理-删除树节点
         $('#button-deletetreenode-kl').click(function(){
-           /* var tmpNodeKid=$("#nodeid").val();
-            var tmpcurrentNode=$("#content-text").val();
+            var tmpNodeKid=$("#nodeid").val();
 
             $.ajax({
                 type: "post",
-                url: "getNewKnowledgeTreeNodeKid",
+                url: "deleteKnowledgeTreeNodeStruct",
                 data: {
-                    kid: tmpNodeKid,
-                    kname: "新节点",
-                    kcontent: tmpcurrentNode
+                    kid: tmpNodeKid
                 },
                 dataType : "json",
                 success: function (data) {
@@ -522,7 +519,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     //刷新树
                     $('#jstree').jstree(true).refresh();
                 }
-            });*/
+            });
         });
     </script>
 

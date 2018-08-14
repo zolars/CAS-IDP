@@ -34,5 +34,5 @@ public interface KnowledgeTreeDAO {
 
     public boolean updateKnowledgeTreeNodeStruct(String kid, String kname);
 
-   // public boolean addKnowledgeTreeNodeStruct(Integer kid, String parentkid, String kname, String kcontent);
+    public boolean deleteKnowledgeTreeNodeStruct(String kid);
 }
