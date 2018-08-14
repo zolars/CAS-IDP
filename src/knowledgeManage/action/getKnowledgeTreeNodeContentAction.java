@@ -11,7 +11,6 @@ import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 
 public class getKnowledgeTreeNodeContentAction extends ActionSupport {

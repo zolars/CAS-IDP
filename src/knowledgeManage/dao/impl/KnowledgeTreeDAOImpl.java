@@ -2,14 +2,12 @@ package knowledgeManage.dao.impl;
 
 import Util.HBSessionCenterDaoImpl;
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.CityBank;
 import hibernatePOJO.Knowledge;
 import hibernatePOJO.UserRoles;
 import knowledgeManage.dao.KnowledgeTreeDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import userManage.dao.CityDAO;
 
 import java.util.List;
 
@@ -118,6 +116,39 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
             return true; //若uid与传入的uid一样，则为用户本身
         else return false;
 
+    }
+
+    public Integer getMaxKid(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        Knowledge kl = (Knowledge)hbsessionDao.getFirst(
+                "FROM Knowledge order by kid desc");
+
+        return kl.getKid();
+    }
+
+    /*
+    判断是否为管理员，若是可以进行添加树结构的操作；否则，不可以
+    */
+    public boolean addKnowledgeTreeNodeStruct(Integer kid, String parentkid, String kname, String kcontent){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        Knowledge kluid = (Knowledge)hbsessionDao.getFirst(
+                "FROM Knowledge where kid = '" + parentkid + "'");
+
+        String uid = kluid.getUid();
+        Integer pkid = Integer.parseInt(parentkid);
+
+        Knowledge kl = new Knowledge();
+        kl.setKid(kid);
+        kl.setUid(uid);
+        kl.setParentkid(pkid);
+        kl.setKname(kname);
+        kl.setContent(kcontent);
+
+        rt = hbsessionDao.insert(kl);
+        return rt;
     }
 
 

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class updateKnowledgeTreeNodeContentAction extends ActionSupport {
+public class addKnowledgeTreeNodeStructAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -25,7 +25,7 @@ public class updateKnowledgeTreeNodeContentAction extends ActionSupport {
     }
 
 
-    /* 更新\修改某个子节点知识
+    /* 分配新插入的子节点kid
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -35,26 +35,22 @@ public class updateKnowledgeTreeNodeContentAction extends ActionSupport {
 
             //获取节点id
             String kid = request.getParameter("kid");
-            String tmpContent = request.getParameter("tmpContent");
-            String userid = (String)session.getAttribute("userid");
+            String kname = request.getParameter("kname");
+            String kcontent = request.getParameter("kcontent");
 
             KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();
+            Integer maxkid = dao.getMaxKid();
 
-            //判断是否为作者用户
-            Boolean isValid = dao.isUser(kid, userid);
             JSONObject jsonObject = new JSONObject();
 
-            if(isValid){
-                Boolean rt = dao.updateKnowledgeNode(kid, tmpContent);
+            Boolean rt = dao.addKnowledgeTreeNodeStruct(maxkid+1, kid, kname, kcontent);
 
-                if(rt)
-                    jsonObject.put("提示", "修改成功！");
-                else
-                    jsonObject.put("提示", "修改失败，请重试！");
-            }
+            if(rt)
+                jsonObject.put("提示", "添加成功！");
             else
-                jsonObject.put("提示", "修改失败，没有修改权限！");
+                jsonObject.put("提示", "添加失败，请重试！");
 
+            // result = jsonObject;
             result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {

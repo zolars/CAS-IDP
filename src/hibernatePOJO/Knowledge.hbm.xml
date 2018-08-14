@@ -4,15 +4,12 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="hibernatePOJO.Knowledge" table="knowledge" schema="Test">
+    <class name="hibernatePOJO.Knowledge" table="knowledge" schema="test">
         <id name="kid">
             <column name="kid" sql-type="int(11)"/>
         </id>
         <property name="uid">
             <column name="uid" sql-type="varchar(11)" length="11" not-null="true"/>
-        </property>
-        <property name="type">
-            <column name="type" sql-type="varchar(11)" length="11" not-null="true"/>
         </property>
         <property name="parentkid">
             <column name="parentkid" sql-type="int(11)" not-null="true"/>

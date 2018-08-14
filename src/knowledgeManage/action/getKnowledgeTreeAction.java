@@ -1,15 +1,12 @@
 package knowledgeManage.action;
 
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import hibernatePOJO.Knowledge;
 import knowledgeManage.dao.KnowledgeTreeDAO;
 import knowledgeManage.dao.impl.KnowledgeTreeDAOImpl;
 import org.apache.struts2.ServletActionContext;
-import userManage.dao.ComputerroomDAO;
-import userManage.dao.impl.ComputerroomDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

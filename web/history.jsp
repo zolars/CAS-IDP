@@ -102,13 +102,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <button id = "button-delete-kl" type="button" class="btn btn-sm btn-alt">删除知识</button>
                                         <button id = "button-add-kl" type="button" class="btn btn-sm btn-alt">添加知识</button>
                                         <button id = "button-upload-kl" type="button" class="btn btn-sm btn-alt">上传到总服务器</button>
-
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="btn-group">
                                         <button id = "button-addtreenode-kl"  type="button" class="btn btn-sm btn-alt">添加树节点</button>
+                                        <button id = "button-treenode-kl"  type="button" class="btn btn-sm btn-alt">修改树节点</button>
+                                        <button id = "button-deleteetreenode-kl"  type="button" class="btn btn-sm btn-alt">删除树节点</button>
                                     </div>
                                 </div>
 
                                 <div class=="col-md-8" >
-                                    <textarea id='content-text' style="height: 400px;height: 600px;color: #1c2d3f"></textarea>
+                                    标题<textarea id='node-tilte-text' style="height: 50px;color: #1c2d3f"></textarea>
+                                </div>
+                                <div class=="col-md-8" >
+                                    内容<textarea id='content-text' style="height: 120px;color: #1c2d3f"></textarea>
                                 </div>
                             </div>
 
@@ -451,8 +458,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
         });
 
-        // 事件处理-添加树节点
+        // 事件处理-添加树节点,所选节点下尾部追加
+        $('#button-addtreenode-kl').click(function(){
+            var tmpNodeKid=$("#nodeid").val();
+            var tmpcurrentNodeTitle=$("#node-tilte-text").val();
+            var tmpcurrentNode=$("#content-text").val();
 
+            $.ajax({
+                type: "post",
+                url: "addKnowledgeTreeNodeStruct", //"getNewKnowledgeTreeNodeKid",
+                data: {
+                    kid: tmpNodeKid,
+                    kname: tmpcurrentNodeTitle,
+                    kcontent: tmpcurrentNode
+
+                },
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    //刷新树
+                    $('#jstree').jstree(true).refresh();
+                }
+             });
+        });
+
+        // 事件处理-修改树节点
+        $('#button-treenode-kl').click(function(){
+           /* var tmpNodeKid=$("#nodeid").val();
+            var tmpcurrentNode=$("#content-text").val();
+
+            $.ajax({
+                type: "post",
+                url: "getNewKnowledgeTreeNodeKid",
+                data: {
+                    kid: tmpNodeKid,
+                    kname: "新节点",
+                    kcontent: tmpcurrentNode
+                },
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    //刷新树
+                    $('#jstree').jstree(true).refresh();
+                }
+            });*/
+        });
+
+        // 事件处理-删除树节点
+        $('#button-deletetreenode-kl').click(function(){
+           /* var tmpNodeKid=$("#nodeid").val();
+            var tmpcurrentNode=$("#content-text").val();
+
+            $.ajax({
+                type: "post",
+                url: "getNewKnowledgeTreeNodeKid",
+                data: {
+                    kid: tmpNodeKid,
+                    kname: "新节点",
+                    kcontent: tmpcurrentNode
+                },
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                    //刷新树
+                    $('#jstree').jstree(true).refresh();
+                }
+            });*/
+        });
     </script>
 
 </body>

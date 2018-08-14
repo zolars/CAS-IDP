@@ -1,16 +1,8 @@
 package knowledgeManage.dao;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.opensymphony.xwork2.ActionSupport;
 import hibernatePOJO.Knowledge;
-import org.apache.struts2.ServletActionContext;
-import userManage.dao.ComputerroomDAO;
-import userManage.dao.impl.ComputerroomDAOImpl;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 //import hibernatePOJO.UserPermission;
@@ -35,4 +27,8 @@ public interface KnowledgeTreeDAO {
     public boolean isUserOrAdmin(String kid, String uid);
 
     public boolean isUser(String kid, String uid);
+
+    public Integer getMaxKid();
+
+    public boolean addKnowledgeTreeNodeStruct(Integer kid, String parentkid, String kname, String kcontent);
 }

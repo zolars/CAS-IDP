@@ -1,22 +1,14 @@
 package hibernatePOJO;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.Objects;
 
-@Entity
 public class Knowledge {
     private int kid;
     private String uid;
-    private String type;
     private Integer parentkid;
     private String kname;
     private String content;
 
-    @Id
-    @Column(name = "kid", nullable = false)
     public int getKid() {
         return kid;
     }
@@ -25,8 +17,6 @@ public class Knowledge {
         this.kid = kid;
     }
 
-    @Basic
-    @Column(name = "uid", nullable = true, length = 11)
     public String getUid() {
         return uid;
     }
@@ -35,18 +25,6 @@ public class Knowledge {
         this.uid = uid;
     }
 
-    @Basic
-    @Column(name = "type", nullable = true, length = 11)
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Basic
-    @Column(name = "parentkid", nullable = true)
     public Integer getParentkid() {
         return parentkid;
     }
@@ -55,8 +33,6 @@ public class Knowledge {
         this.parentkid = parentkid;
     }
 
-    @Basic
-    @Column(name = "kname", nullable = true, length = 255)
     public String getKname() {
         return kname;
     }
@@ -65,8 +41,6 @@ public class Knowledge {
         this.kname = kname;
     }
 
-    @Basic
-    @Column(name = "content", nullable = true, length = 255)
     public String getContent() {
         return content;
     }
@@ -82,7 +56,6 @@ public class Knowledge {
         Knowledge knowledge = (Knowledge) o;
         return kid == knowledge.kid &&
                 Objects.equals(uid, knowledge.uid) &&
-                Objects.equals(type, knowledge.type) &&
                 Objects.equals(parentkid, knowledge.parentkid) &&
                 Objects.equals(kname, knowledge.kname) &&
                 Objects.equals(content, knowledge.content);
@@ -91,6 +64,6 @@ public class Knowledge {
     @Override
     public int hashCode() {
 
-        return Objects.hash(kid, uid, type, parentkid, kname, content);
+        return Objects.hash(kid, uid, parentkid, kname, content);
     }
 }
