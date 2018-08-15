@@ -4,15 +4,12 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="hibernatePOJO.UserRoles" table="user_roles" schema="Test">
+    <class name="hibernatePOJO.UserRoles" table="user_roles" schema="test">
         <id name="uid">
             <column name="uid" sql-type="varchar(255)"/>
         </id>
         <property name="rid">
             <column name="rid" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="id">
-            <column name="id" sql-type="int(11)"/>
         </property>
     </class>
 </hibernate-mapping>

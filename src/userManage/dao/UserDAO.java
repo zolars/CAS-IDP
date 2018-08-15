@@ -2,6 +2,7 @@ package userManage.dao;
 
 
 import hibernatePOJO.User;
+import hibernatePOJO.UserRoles;
 
 import java.util.List;
 
@@ -26,5 +27,9 @@ public interface UserDAO {
     public boolean deleteUserInfo(String uid);
 
     public boolean addUserInfo(String account,String password,String name,String telephone,String govtelephone, String province, String city);
+
+    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom);
+
+    public UserRoles getUserRolesByUid(String uid);
 
 }

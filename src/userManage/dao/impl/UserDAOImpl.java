@@ -40,6 +40,15 @@ public class UserDAOImpl implements UserDAO {
         return uid;
     }
 
+    public UserRoles getUserRolesByUid(String uid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        UserRoles usr = (UserRoles)hbsessionDao.getFirst(
+                "FROM UserRoles where uid = '" + uid + "'");
+
+        return usr;
+    }
+
     /*
     json [省级，[市级，机房]] 只显示所属的市级银行
     先通过pbid、cbid是否为空判断属于哪类用户（admin账户(2) 省级账户(1) 市级账户(0)）
@@ -142,6 +151,45 @@ public class UserDAOImpl implements UserDAO {
         rt = hbsessionDao.insert(user);
         return rt;
     }
+
+    /* 1.user表修改
+       2.userroles表修改
+     */
+    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+
+        User newur = new User();
+        newur.setUid(uid);
+        newur.setUname(name);
+        newur.setChinesename(chinesename);
+        newur.setPassword(password);
+        newur.setTelephone(telephone);
+        newur.setGovtelephone(govtelephone);
+
+        newur.setPbid(province);
+        newur.setCbid(city);
+        //.(computerroom);
+
+        String hql = "update User newur set newur.uname='" + name +"', newur.chinesename='" + chinesename +"', newur.password='" + password +"'," +
+                "newur.telephone='" + telephone +"', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
+                "newur.cbid='" + city + "'" + "', newur.rid='" + computerroom + "'"+
+                " where newur.uid='" + uid + "'";
+
+        rt = hbsessionDao.update(newur, hql);
+
+        UserRoles newurole = new UserRoles();
+        newurole.setRid(roles);
+
+        String hql2 = "update UserRoles newurole set newurole.rid='" + roles +
+                "' where newurole.uid='" + uid + "'";
+
+        rt = hbsessionDao.update(newurole, hql2);
+
+        return rt;
+    }
+
+
 
     public List<Object> getUserDynamicMenu(User user){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();

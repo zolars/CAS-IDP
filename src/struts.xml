@@ -101,6 +101,14 @@
              </result>
          </action>
 
+         <action name="updateUserInfo" class="userManage.action.updateUserInfoAction">
+             <!--updateUserInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="addUserInfo" class="userManage.action.addUserInfoAction">
              <!--addUserInfo -->
              <result name="failure">/failure.jsp</result>

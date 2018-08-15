@@ -4,8 +4,6 @@ package userManage.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import hibernatePOJO.User;
-import hibernatePOJO.UserRoles;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.UserDAO;
 import userManage.dao.impl.UserDAOImpl;
@@ -18,7 +16,7 @@ import javax.servlet.http.HttpSession;
 //import net.sf.json.JSONObject;
 
 
-public class getOneUserInfoAction extends ActionSupport {
+public class updateUserInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -39,18 +37,30 @@ public class getOneUserInfoAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String uidStr = request.getParameter("uid");
-            String uidstr[] = uidStr.split("=");
-            String uid = uidstr[1];
+            //String monitorpointid = request.getParameter("monitorpointid");
+            String uid = request.getParameter("uid");
+            String name = request.getParameter("uname");
+            String password = request.getParameter("password");
+            String chinesename = request.getParameter("chinesename");
+            String telephone = request.getParameter("telephone");
+            String govtelephone = request.getParameter("govtelephone");
+
+            String roles = request.getParameter("rid");
+            String province = request.getParameter("pbid");
+            String city = request.getParameter("cbid");
+            String computerroom = request.getParameter("ccid");
+
+            System.out.println("ttttttttt"+ uid+password+name+telephone+govtelephone+roles+province+city+computerroom);
 
             UserDAO dao = new UserDAOImpl();
-            User user = dao.getOneUserInfo(uid);
-
-            UserRoles ur = dao.getUserRolesByUid(uid);
+            Boolean rt = dao.updateUserInfo(uid, password, name, chinesename, telephone, govtelephone, roles, province, city, computerroom);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("user", user);
-            jsonObject.put("userrole", ur);
+
+            if(rt)
+                jsonObject.put("提示", "修改成功！");
+            else
+                jsonObject.put("提示", "修改失败，请重试！");
 
             result = JSON.toJSONString(jsonObject);
 

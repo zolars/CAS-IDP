@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernatePOJO.User" table="user" schema="test">
+        <id name="uid">
+            <column name="uid" sql-type="varchar(11)" length="11"/>
+        </id>
+        <property name="uname">
+            <column name="uname" sql-type="varchar(255)"/>
+        </property>
+        <property name="chinesename">
+            <column name="chinesename" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="password">
+            <column name="password" sql-type="varchar(255)"/>
+        </property>
+        <property name="telephone">
+            <column name="telephone" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
+        <property name="govtelephone">
+            <column name="govtelephone" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
+        <property name="pbid">
+            <column name="pbid" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="cbid">
+            <column name="cbid" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="rid">
+            <column name="rid" sql-type="varchar(255)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
