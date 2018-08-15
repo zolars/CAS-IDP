@@ -1,5 +1,6 @@
 package userManage.dao.impl;
 
+import Util.DBConnect;
 import Util.HBSessionDaoImpl;
 
 import hibernatePOJO.*;
@@ -8,6 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import userManage.dao.UserDAO;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,19 +108,97 @@ public class UserDAOImpl implements UserDAO {
         return crlist;
     }
 
-   // public List<Object[]>  getAllUserInfo(){
-   public List getAllUserInfo(){
+    public String getProBankName(String pbid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        ProvinceBank prov = (ProvinceBank) hbsessionDao.getFirst(
+                "FROM ProvinceBank where pbid = '" + pbid + "'");
+
+        return prov.getPbname();
+    }
+
+
+    public String getCityBankName(String cbid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        CityBank prov = (CityBank) hbsessionDao.getFirst(
+                "FROM CityBank where cbid = '" + cbid + "'");
+
+        return prov.getCbname();
+    }
+
+
+    public String getComputerroomName(String rid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        Computerroom prov = (Computerroom) hbsessionDao.getFirst(
+                "FROM Computerroom where rid = '" + rid + "'");
+
+        return prov.getRname();
+    }
+
+    public String getRoleName(String rid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        Roles prov = (Roles) hbsessionDao.getFirst(
+                "FROM Roles where rid = '" + rid + "'");
+
+        return prov.getRolesname();
+    }
+
+    public List<List>  getAllUserInfo(){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        //List<Object[]> crlist = new ArrayList<>();
 
-       /* crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tc.rolesname as nrolename,ta.pbid as pbid,ta.cbid as cbid," +
+        /*crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tc.rolesname as nrolename,ta.pbid as pbid,ta.cbid as cbid," +
                 " ta.telephone as telephone, ta.govtelephone as govtelephone from User ta, UserRoles tb, Roles tc where ta.uid = tb.uid and tb.rid = tc.rid");
        */
+       /* crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tb.rid as nrolename,ta.pbid as pbid, " +
+                " ta.cbid as cbid,ta.telephone as telephone, ta.govtelephone as govtelephone from User ta left outer join UserRoles tb with ta.uid = tb.uid");*/
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        boolean result = false;
 
-        List<User> crlist = hbsessionDao.search( "FROM User");
 
-        return crlist;
+        db = new DBConnect();
+        String sql = "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,ta.password as npassword,ta.pbid as pbid, ta.cbid as cbid,ta.rid as comprid,tb.rid as nrolename,ta.telephone as telephone, ta.govtelephone as govtelephone from user ta left outer join user_roles tb on ta.uid = tb.uid";
+        try {
+            List<List> crlist = new ArrayList<>();
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("nuid"));
+                list.add(rs.getString("nuname"));
+                list.add(rs.getString("nchinesename"));
+                //list.add(rs.getString("npassword"));
+
+                list.add(rs.getString("pbid"));
+                list.add(rs.getString("cbid"));
+                list.add(rs.getString("comprid"));
+
+                list.add(rs.getString("nrolename"));
+
+                list.add(rs.getString("telephone"));
+                list.add(rs.getString("govtelephone"));
+
+                crlist.add((List)list);
+            }
+            return crlist;
+
+        }catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return  new ArrayList<>();
     }
 
     public User getOneUserInfo(String uid){

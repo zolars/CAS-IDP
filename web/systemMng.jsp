@@ -1034,7 +1034,7 @@
 
     <!-- 账号信息 -->
     <script type="text/javascript">
-        <!--查询所有账号 -->
+        /*<!--查询所有账号 -->
         function getALLUserInfomation(){
             var monitorpoint = 1;
             $.ajax({
@@ -1061,6 +1061,44 @@
                             '<td style="padding-left:20px;">' + userdata[i].telephone + '</td>' +
                             '<td style="padding-left:20px;">' + userdata[i].govtelephone + '</td>' +
                             '</tr>');
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }*/
+
+        <!--查询所有账号 -->
+        function getALLUserInfomation(){
+            var monitorpoint = 1;
+            $.ajax({
+                type: "post",
+                url: "getAllUserInfo",
+                data: {
+                    monitorpointid: monitorpoint
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj;
+                    var table = $("#userinfotable");
+                    table.empty();
+
+                    for(var key in list){
+                        var len = list[key].length;
+                        for(var i = 0; i < len; i++){
+                            var uid = list[key][i][0];
+                            var account = list[key][i][1];
+                            var name = list[key][i][2];
+                            var org = list[key][i][3] +""+ list[key][i][4]+list[key][i][5];
+                            var role = list[key][i][6];
+                            var telephone = list[key][i][7];
+                            var govtelephone = list[key][i][8];
+                            table.append('<tr><td><input type="checkbox" name="userid" id="userid" value='+uid+'></td><td style="padding-left:15px;">' + account +
+                                '</td><td style="padding-left:20px;">' + name +  '</td><td style="padding-left:20px;">' + org + '</td><td style="padding-left:20px;">'
+                                + role + '</td><td style="padding-left:20px;">' + telephone + '</td><td style="padding-left:20px;">' + govtelephone + '</td></tr>');
+                        }
                     }
                 },
                 error: function () {
@@ -1147,8 +1185,6 @@
 
                     $("#userroles").val(userroledata.rid);
 
-                    alert($("#userroles").val());
-                    alert($("#userorgnization-province").val());
 
 
                   /*  for(var key in list) {

@@ -18,10 +18,17 @@ public interface UserDAO {
 
     public List<Object> getComputerroom(String cbname);
 
+    public String getProBankName(String pbid);
+
+    public String getCityBankName(String pbid);
+
+    public String getComputerroomName(String cbname);
+
+    public String getRoleName(String rid);
+
     public List<Object> getUserDynamicMenu(User user);
 
-   // public List<Object[]> getAllUserInfo();
-    public List getAllUserInfo();
+    public List<List> getAllUserInfo();
 
     //public List getAllUserRolesInfo();
 

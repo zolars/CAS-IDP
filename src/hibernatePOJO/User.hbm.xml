@@ -6,7 +6,7 @@
 
     <class name="hibernatePOJO.User" table="user" schema="test">
         <id name="uid">
-            <column name="uid" sql-type="varchar(11)" length="11"/>
+            <column name="uid" sql-type="varchar(255)" length="255"/>
         </id>
         <property name="uname">
             <column name="uname" sql-type="varchar(255)"/>
@@ -32,5 +32,7 @@
         <property name="rid">
             <column name="rid" sql-type="varchar(255)" not-null="true"/>
         </property>
+
+
     </class>
 </hibernate-mapping>
