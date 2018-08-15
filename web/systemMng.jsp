@@ -539,6 +539,7 @@
 
             <!-- user model DIV-->
             <div class="add-user" id="add-user-modal">
+                <div id="uid" style="display: none"> </div>
                 <div class="add-user-one-line">
                     <div class="add-user-item">
                         <div class="add-user-title">账号</div>
@@ -597,9 +598,10 @@
                     </div>
                 </div>
 
-                <div class="add-user-handle">
+                <div class="add-roles-handle">
+                    <button type="submit" class="btn btn-primary" id="add-user-handle" onclick="submitAddUser()">确定</button>
+                    <button type="submit" class="btn btn-primary" id="update-user-handle" onclick="submitUpdateUser()">确定</button>
                     <button class="btn btn-default" onclick="hiddenUserModel()">取消</button>
-                    <button type="submit" class="btn btn-primary" onclick="submitAddUser()">确定</button>
                 </div>
             </div>
             <!-- user model DIV END-->
@@ -1043,32 +1045,22 @@
                 },
                 dataType : "json",
                 success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj;
+                    var list =  JSON.parse(data);
+                    var userdata = list['alluser'];
+
                     var table = $("#userinfotable");
                     table.empty();
 
-                    for(var key in list){
-                        var len = list[key].length;
-                        for(var i = 0; i < len; i++){
-                            var uid = list[key][i][0];
-                            var account = list[key][i][1];
-                            var name = list[key][i][2];
-                            var org = list[key][i][4] +""+ list[key][i][5];
-                            var role = list[key][i][3];
-                            var telephone = list[key][i][6];
-                            var govtelephone = list[key][i][7];
-
-                            table.append('<tr>' +
-                                '<td><input type="checkbox" name="userid" id="userid" value='+uid+'></td>' +
-                                '<td style="padding-left:15px;">' + account + '</td>' +
-                                '<td style="padding-left:20px;">' + name +  '</td>' +
-                                '<td style="padding-left:20px;">' + org + '</td>' +
-                                '<td style="padding-left:20px;">' + role + '</td>' +
-                                '<td style="padding-left:20px;">' + telephone + '</td>' +
-                                '<td style="padding-left:20px;">' + govtelephone + '</td>' +
-                                '</tr>');
-                        }
+                    for(var i = 0; i < userdata.length; i++){
+                        table.append('<tr>' +
+                            '<td><input type="checkbox" name="userid" id="userid" value='+userdata[i].uid+'></td>' +
+                            '<td style="padding-left:15px;">' + userdata[i].uname + '</td>' +
+                            '<td style="padding-left:20px;">' + userdata[i].chinesename +  '</td>' +
+                            '<td style="padding-left:20px;">' + userdata[i].pbid+ userdata[i].cbid + userdata[i].rid + '</td>' +
+                            '<td style="padding-left:20px;">' + userdata[i].rid + '</td>' +
+                            '<td style="padding-left:20px;">' + userdata[i].telephone + '</td>' +
+                            '<td style="padding-left:20px;">' + userdata[i].govtelephone + '</td>' +
+                            '</tr>');
                     }
                 },
                 error: function () {
@@ -1080,6 +1072,8 @@
         <!--显示user model -->
         function showAddUserModal() {
             $('#add-user-modal').css('display', 'block');
+            $('#add-user-handle').css('display', 'block');
+            $('#update-user-handle').css('display', 'none');
         }
 
         <!--删除账号 -->
@@ -1121,6 +1115,8 @@
         <!--修改账号 -->
         function showUpdateUserModal() {
             $('#add-user-modal').css('display', 'block');
+            $('#add-user-handle').css('display', 'none');
+            $('#update-user-handle').css('display', 'block');
 
             //显示 用户信息到div
             var useridcheck = $("input[name='userid']:checked").serialize();
@@ -1134,34 +1130,89 @@
                 dataType : "json",
                 success: function (data) {
                     var list = JSON.parse(data);
-                    for(var key in list) {
+
+                    var userdata = list['user'];
+                    var userroledata = list['userrole'];
+
+                    $("#uid").val(userdata.uid);
+                    $("#useraccount").val(userdata.uname);
+                    $("#userpassword").val(userdata.password);
+                    $("#username").val(userdata.chinesename);
+                    $("#usertelephone").val(userdata.telephone);
+                    $("#usergovtelephone").val(userdata.govtelephone);
+
+                    $("#userorgnization-province").val(userdata.pbid);
+                    $("#userorgnization-city").val(userdata.cbid);
+                    $("#userorgnization-computerroom").val(userdata.rid);
+
+                    $("#userroles").val(userroledata.rid);
+
+                    alert($("#userroles").val());
+                    alert($("#userorgnization-province").val());
+
+
+                  /*  for(var key in list) {
                         var len = list[key];
 
-                        $("#useraccount").val(len.uid);
+                        $("#uid").val(len.uid);
+                        $("#useraccount").val(len.uname);
                         $("#userpassword").val(len.password);
-                        $("#username").val(len.uname);
+                        $("#username").val(len.chinesename);
                         $("#usertelephone").val(len.telephone);
                         $("#usergovtelephone").val(len.govtelephone);
 
+                        //下拉框的渲染
                         $("#userroles").val();
-                        $("#userorgnization-province").val();
-                        $("#userorgnization-city").val();
-                        $("#userorgnization-computerroom").val();
-                    }
+                        $("#userorgnization-province").val(len.pbid);
+                        $("#userorgnization-city").val(len.cbid);
+                        $("#userorgnization-computerroom").val(len.rid);
+                    }*/
                 },
                 error: function () {
                     alert("失败");
                 }
             });
 
-
-
         }
 
         <!--修改账号-确认修改 -->
         function submitUpdateUser() {
-            //    success
-            //     $('#add-user-modal').css('display', 'none');
+            var uid = $("#uid").val();
+            var uname = $("#useraccount").val();
+            var password = $("#userpassword").val();
+            var chinesename = $("#username").val();
+            var telephone = $("#usertelephone").val();
+            var govtelephone = $("#usergovtelephone").val();
+
+            var rid = $("#userroles").val();
+            var pbid = $("#userorgnization-province").val();
+            var cbid = $("#userorgnization-city").val();
+            var ccid = $("#userorgnization-computerroom").val();
+
+            $.ajax({
+                type: "post",
+                url: "updateUserInfo",
+                data: {
+                    uid: uid,
+                    uname: uname,
+                    password: password,
+                    chinesename: chinesename,
+                    telephone: telephone,
+                    govtelephone: govtelephone,
+                    rid: rid,
+                    pbid: pbid,
+                    cbid: cbid,
+                    ccid: ccid
+                },
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+
         }
 
         <!--隐藏uesr model div -->
