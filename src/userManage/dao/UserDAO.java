@@ -20,7 +20,10 @@ public interface UserDAO {
 
     public List<Object> getUserDynamicMenu(User user);
 
-    public List<Object[]> getAllUserInfo();
+   // public List<Object[]> getAllUserInfo();
+    public List getAllUserInfo();
+
+    //public List getAllUserRolesInfo();
 
     public User getOneUserInfo(String uid);
 

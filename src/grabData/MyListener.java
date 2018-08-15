@@ -1,17 +1,13 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
-import com.opensymphony.xwork2.ActionContext;
 import hibernatePOJO.Dictionary;
 import hibernatePOJO.DictionaryPlus;
 import hibernatePOJO.Roles;
-import org.apache.struts2.ServletActionContext;
 
 //import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 //import javax.servlet.http.HttpSessionContext;
 import java.util.*;
 

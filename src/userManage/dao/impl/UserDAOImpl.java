@@ -104,13 +104,17 @@ public class UserDAOImpl implements UserDAO {
         return crlist;
     }
 
-    public List<Object[]>  getAllUserInfo(){
+   // public List<Object[]>  getAllUserInfo(){
+   public List getAllUserInfo(){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<Object[]> crlist = new ArrayList<>();
+        //List<Object[]> crlist = new ArrayList<>();
 
-        crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tc.rolesname as nrolename,ta.pbid as pbid,ta.cbid as cbid," +
+       /* crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tc.rolesname as nrolename,ta.pbid as pbid,ta.cbid as cbid," +
                 " ta.telephone as telephone, ta.govtelephone as govtelephone from User ta, UserRoles tb, Roles tc where ta.uid = tb.uid and tb.rid = tc.rid");
+       */
+
+        List<User> crlist = hbsessionDao.search( "FROM User");
 
         return crlist;
     }
