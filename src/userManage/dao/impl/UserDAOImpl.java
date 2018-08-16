@@ -219,12 +219,21 @@ public class UserDAOImpl implements UserDAO {
         return rt;
     }
 
-    public boolean addUserInfo(String account,String password,String name,String telephone,String govtelephone, String province, String city){
+    public boolean deleteUserRoles(String uid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        rt = hbsessionDao.delete( "Delete FROM UserRoles Where uid=?", uid);
+
+        return rt;
+    }
+
+    public boolean addUserInfo(String uid,String account,String password,String name,String telephone,String govtelephone, String province, String city, String computerroom){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
 
         User user = new User();
-        user.setUid("3");
+        user.setUid(uid);
         user.setUname(account);
         user.setChinesename(name);
         user.setPassword(password);
@@ -233,8 +242,21 @@ public class UserDAOImpl implements UserDAO {
 
         user.setCbid(city);
         user.setPbid(province);
+        user.setRid(computerroom);
 
         rt = hbsessionDao.insert(user);
+        return rt;
+    }
+
+    public boolean addUserRolesInfo(String uid, String roles){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        UserRoles userrole = new UserRoles();
+        userrole.setUid(uid);
+        userrole.setRid(roles);
+
+        rt = hbsessionDao.insert(userrole);
         return rt;
     }
 
@@ -255,16 +277,17 @@ public class UserDAOImpl implements UserDAO {
 
         newur.setPbid(province);
         newur.setCbid(city);
-        //.(computerroom);
+        newur.setRid(computerroom);
 
         String hql = "update User newur set newur.uname='" + name +"', newur.chinesename='" + chinesename +"', newur.password='" + password +"'," +
                 "newur.telephone='" + telephone +"', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
-                "newur.cbid='" + city + "'" + "', newur.rid='" + computerroom + "'"+
+                ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
                 " where newur.uid='" + uid + "'";
 
         rt = hbsessionDao.update(newur, hql);
 
         UserRoles newurole = new UserRoles();
+        newurole.setUid(uid);
         newurole.setRid(roles);
 
         String hql2 = "update UserRoles newurole set newurole.rid='" + roles +
@@ -295,4 +318,13 @@ public class UserDAOImpl implements UserDAO {
         return crlist;
     }
 
+    public String getMaxUserId(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        User ur = (User) hbsessionDao.getFirst(
+                "FROM User order by uid desc");
+
+        return ur.getUid();
+
+    }
 }

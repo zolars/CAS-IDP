@@ -34,9 +34,15 @@ public interface UserDAO {
 
     public User getOneUserInfo(String uid);
 
+    public String getMaxUserId();
+
     public boolean deleteUserInfo(String uid);
 
-    public boolean addUserInfo(String account,String password,String name,String telephone,String govtelephone, String province, String city);
+    public boolean deleteUserRoles(String uid);
+
+    public boolean addUserInfo(String uid,String account,String password,String name,String telephone,String govtelephone, String province, String city, String computerroom);
+
+    public boolean addUserRolesInfo(String uid, String roles);
 
     public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom);
 

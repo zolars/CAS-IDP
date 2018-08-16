@@ -3,7 +3,7 @@ package grabData;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.Dictionary;
 import hibernatePOJO.DictionaryPlus;
-import hibernatePOJO.Roles;
+import hibernatePOJO.PowerxbMonitor;
 
 //import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -79,12 +79,17 @@ class MyThread extends Thread {
             //2.存数据库
             //将取到的数据分别按照实体类型存入表中
             //HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+            Map map = new HashMap<Object, Object>();
+
+
             boolean rt = false;
-            Roles role = new Roles();
-            role.setRid(String.valueOf(System.currentTimeMillis()));
-            role.setRolesname("name");
-            role.setExtra("extra");
-            //rt = hbsessionDao.insert(role);
+            PowerxbMonitor xb = new PowerxbMonitor();
+            //xb.setU1Xb(map.get("U1xb"));
+
+
+
+
+            rt = hbsessionDao.insert(xb);
 
             if(rt)
                 System.out.println("存取成功");

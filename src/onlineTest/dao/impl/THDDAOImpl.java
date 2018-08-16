@@ -1,8 +1,6 @@
 package onlineTest.dao.impl;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.PowerxbMonitor;
-import onlineTest.dao.RMSDAO;
 import onlineTest.dao.THDDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -18,7 +16,10 @@ public class THDDAOImpl implements THDDAO {
     private Query query;
 
     public List<Object> getCurrentTHDData(String monitorpoint){
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        List<Object> crlist = new ArrayList<>();
+        return crlist;
+
+        /*HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         PowerxbMonitor rtobj = new PowerxbMonitor();
 
@@ -71,7 +72,7 @@ public class THDDAOImpl implements THDDAO {
         //add THD -V1
         //add THD -V2
         //add THD -V3
-        return crlist;
+        return crlist;*/
     }
 
 

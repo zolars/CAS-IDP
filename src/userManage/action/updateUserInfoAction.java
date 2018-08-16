@@ -50,8 +50,6 @@ public class updateUserInfoAction extends ActionSupport {
             String city = request.getParameter("cbid");
             String computerroom = request.getParameter("ccid");
 
-            System.out.println("ttttttttt"+ uid+password+name+telephone+govtelephone+roles+province+city+computerroom);
-
             UserDAO dao = new UserDAOImpl();
             Boolean rt = dao.updateUserInfo(uid, password, name, chinesename, telephone, govtelephone, roles, province, city, computerroom);
 

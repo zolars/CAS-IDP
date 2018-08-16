@@ -3,13 +3,10 @@ package deviceManage.dao.impl;
 import Util.HBSessionDaoImpl;
 import deviceManage.dao.DeviceDAO;
 import hibernatePOJO.Devices;
-import hibernatePOJO.PowerxbMonitor;
-import onlineTest.dao.CFDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DeviceDAOImpl implements DeviceDAO {

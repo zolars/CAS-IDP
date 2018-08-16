@@ -52,19 +52,19 @@ public class getUserInfoAction extends ActionSupport {
                     String computerrom = "";
                     String role = "";
 
-                    if (tmpur.get(3) == null)
+                    if (tmpur.get(3) == null || tmpur.get(3) == "" || "".equals(tmpur.get(3)))
                         prob = "";
                     else
                         prob = dao.getProBankName(tmpur.get(3).toString());
-                    if (tmpur.get(4) == null)
+                    if (tmpur.get(4) == null || tmpur.get(4) == "" || "".equals(tmpur.get(4)))
                         cityb = "";
                     else
                         cityb = dao.getCityBankName(tmpur.get(4).toString());
-                    if (tmpur.get(5) == null)
+                    if (tmpur.get(5) == null || tmpur.get(5) == "" || "".equals(tmpur.get(5)))
                         computerrom = "";
                     else
                         computerrom = dao.getComputerroomName(tmpur.get(5).toString());
-                    if (tmpur.get(6) == null || tmpur.get(6) == " ")
+                    if (tmpur.get(6) == null || tmpur.get(6) == " "|| "".equals(tmpur.get(6)))
                         role = "";
                     else
                         role = dao.getRoleName(tmpur.get(6).toString());

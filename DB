@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50560
 File Encoding         : 65001
 
-Date: 2018-08-15 20:08:09
+Date: 2018-08-16 10:06:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1078,17 +1078,13 @@ INSERT INTO `knowledge` VALUES ('9', '1', '7', 'A1', '');
 DROP TABLE IF EXISTS `monitorpoints`;
 CREATE TABLE `monitorpoints` (
   `mpid` varchar(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`mpid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of monitorpoints
 -- ----------------------------
-INSERT INTO `monitorpoints` VALUES ('1', '电能监测点1');
-INSERT INTO `monitorpoints` VALUES ('2', '电能监测点2');
-INSERT INTO `monitorpoints` VALUES ('3', '电能监测点3');
-INSERT INTO `monitorpoints` VALUES ('4', '电能监测点4');
 
 -- ----------------------------
 -- Table structure for permission
@@ -2208,7 +2204,8 @@ CREATE TABLE `user` (
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'admin', '周小川', '123456', '18500390011', '18612340008', null, null, '1');
 INSERT INTO `user` VALUES ('2', 'test1', '张三', '123456', '18390011500', '18612340001', '200', null, '1');
-INSERT INTO `user` VALUES ('44', 'good', '4让tadminer', '12345324234236', '33333333333', '11111111111', '300', '3001', '2');
+INSERT INTO `user` VALUES ('3', 'good', '王伟', '123456', '12345678912', '18611111111', '200', '2001', '2');
+INSERT INTO `user` VALUES ('31', 'TEST2', 'LIULIU', '123456', '13900003939', '13888001919', '200', '2001', '1');
 
 -- ----------------------------
 -- Table structure for user_permission

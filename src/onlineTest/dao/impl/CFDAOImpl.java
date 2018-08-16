@@ -1,9 +1,7 @@
 package onlineTest.dao.impl;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.PowerxbMonitor;
 import onlineTest.dao.CFDAO;
-import onlineTest.dao.THDDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,6 +16,10 @@ public class CFDAOImpl implements CFDAO {
     private Query query;
 
     public List<Object> getCurrentCFData(String monitorpoint){
+        List<Object> crlist = new ArrayList<>();
+        return crlist;
+    }
+    /*public List<Object> getCurrentCFData(String monitorpoint){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         PowerxbMonitor rtobj = new PowerxbMonitor();
@@ -92,6 +94,6 @@ public class CFDAOImpl implements CFDAO {
         //add CF -V3
         return crlist;
     }
-
+*/
 
 }

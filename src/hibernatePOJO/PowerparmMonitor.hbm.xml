@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="hibernatePOJO.PowerparmMonitor" table="powerparm_monitor" schema="Test">
+    <class name="hibernatePOJO.PowerparmMonitor" table="powerparm_monitor" schema="test">
         <id name="ppid">
             <column name="ppid" sql-type="int(11)"/>
         </id>
@@ -47,6 +47,9 @@
         <property name="p3">
             <column name="P3" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
+        <property name="psum">
+            <column name="Psum" sql-type="float(255)" precision="255" not-null="true"/>
+        </property>
         <property name="q1">
             <column name="Q1" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
@@ -55,6 +58,9 @@
         </property>
         <property name="q3">
             <column name="Q3" sql-type="float(255)" precision="255" not-null="true"/>
+        </property>
+        <property name="qsum">
+            <column name="Qsum" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="s1">
             <column name="S1" sql-type="float(255)" precision="255" not-null="true"/>
@@ -65,6 +71,9 @@
         <property name="s3">
             <column name="S3" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
+        <property name="ssum">
+            <column name="Ssum" sql-type="float(255)" precision="255" not-null="true"/>
+        </property>
         <property name="pf1">
             <column name="PF1" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
@@ -74,6 +83,9 @@
         <property name="pf3">
             <column name="PF3" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
+        <property name="pFsum">
+            <column name="PFsum" sql-type="float(255)" precision="255" not-null="true"/>
+        </property>
         <property name="cosPhi1">
             <column name="CosPHI1" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
@@ -81,7 +93,7 @@
             <column name="CosPHI2" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="cosPhi3">
-            <column name="CosPHI3" sql-type="float" precision="-1" not-null="true"/>
+            <column name="CosPHI3" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
         <property name="iflU1">
             <column name="Ifl_U1" sql-type="float(255)" precision="255" not-null="true"/>
@@ -110,20 +122,11 @@
         <property name="pltU3">
             <column name="Plt_U3" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
-        <property name="shanbian">
-            <column name="shanbian" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="shunbian">
-            <column name="shunbian" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="lytx">
-            <column name="lytx" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="unb">
-            <column name="unb" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
         <property name="hz">
             <column name="Hz" sql-type="float(255)" precision="255" not-null="true"/>
+        </property>
+        <property name="shanbian">
+            <column name="shanbian" sql-type="varchar(255)"/>
         </property>
     </class>
 </hibernate-mapping>

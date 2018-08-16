@@ -1,11 +1,8 @@
 package hibernatePOJO;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-@Entity
-@Table(name = "powerparm_monitor", schema = "Test", catalog = "")
 public class PowerparmMonitor {
     private int ppid;
     private Integer mpid;
@@ -21,15 +18,19 @@ public class PowerparmMonitor {
     private Double p1;
     private Double p2;
     private Double p3;
+    private Double psum;
     private Double q1;
     private Double q2;
     private Double q3;
+    private Double qsum;
     private Double s1;
     private Double s2;
     private Double s3;
+    private Double ssum;
     private Double pf1;
     private Double pf2;
     private Double pf3;
+    private Double pFsum;
     private Double cosPhi1;
     private Double cosPhi2;
     private Double cosPhi3;
@@ -42,14 +43,9 @@ public class PowerparmMonitor {
     private Double pltU1;
     private Double pltU2;
     private Double pltU3;
-    private String shanbian;
-    private Double shunbian;
-    private Double lytx;
-    private Double unb;
     private Double hz;
+    private String shanbian;
 
-    @Id
-    @Column(name = "ppid", nullable = false)
     public int getPpid() {
         return ppid;
     }
@@ -58,8 +54,6 @@ public class PowerparmMonitor {
         this.ppid = ppid;
     }
 
-    @Basic
-    @Column(name = "mpid", nullable = true)
     public Integer getMpid() {
         return mpid;
     }
@@ -68,8 +62,6 @@ public class PowerparmMonitor {
         this.mpid = mpid;
     }
 
-    @Basic
-    @Column(name = "time", nullable = true)
     public Timestamp getTime() {
         return time;
     }
@@ -78,8 +70,6 @@ public class PowerparmMonitor {
         this.time = time;
     }
 
-    @Basic
-    @Column(name = "U1", nullable = true, precision = 0)
     public Double getU1() {
         return u1;
     }
@@ -88,8 +78,6 @@ public class PowerparmMonitor {
         this.u1 = u1;
     }
 
-    @Basic
-    @Column(name = "U2", nullable = true, precision = 0)
     public Double getU2() {
         return u2;
     }
@@ -98,8 +86,6 @@ public class PowerparmMonitor {
         this.u2 = u2;
     }
 
-    @Basic
-    @Column(name = "U3", nullable = true, precision = 0)
     public Double getU3() {
         return u3;
     }
@@ -108,8 +94,6 @@ public class PowerparmMonitor {
         this.u3 = u3;
     }
 
-    @Basic
-    @Column(name = "U4", nullable = true, precision = 0)
     public Double getU4() {
         return u4;
     }
@@ -118,8 +102,6 @@ public class PowerparmMonitor {
         this.u4 = u4;
     }
 
-    @Basic
-    @Column(name = "I1", nullable = true, precision = 0)
     public Double getI1() {
         return i1;
     }
@@ -128,8 +110,6 @@ public class PowerparmMonitor {
         this.i1 = i1;
     }
 
-    @Basic
-    @Column(name = "I2", nullable = true, precision = 0)
     public Double getI2() {
         return i2;
     }
@@ -138,8 +118,6 @@ public class PowerparmMonitor {
         this.i2 = i2;
     }
 
-    @Basic
-    @Column(name = "I3", nullable = true, precision = 0)
     public Double getI3() {
         return i3;
     }
@@ -148,8 +126,6 @@ public class PowerparmMonitor {
         this.i3 = i3;
     }
 
-    @Basic
-    @Column(name = "I4", nullable = true, precision = 0)
     public Double getI4() {
         return i4;
     }
@@ -158,8 +134,6 @@ public class PowerparmMonitor {
         this.i4 = i4;
     }
 
-    @Basic
-    @Column(name = "P1", nullable = true, precision = 0)
     public Double getP1() {
         return p1;
     }
@@ -168,8 +142,6 @@ public class PowerparmMonitor {
         this.p1 = p1;
     }
 
-    @Basic
-    @Column(name = "P2", nullable = true, precision = 0)
     public Double getP2() {
         return p2;
     }
@@ -178,8 +150,6 @@ public class PowerparmMonitor {
         this.p2 = p2;
     }
 
-    @Basic
-    @Column(name = "P3", nullable = true, precision = 0)
     public Double getP3() {
         return p3;
     }
@@ -188,8 +158,14 @@ public class PowerparmMonitor {
         this.p3 = p3;
     }
 
-    @Basic
-    @Column(name = "Q1", nullable = true, precision = 0)
+    public Double getPsum() {
+        return psum;
+    }
+
+    public void setPsum(Double psum) {
+        this.psum = psum;
+    }
+
     public Double getQ1() {
         return q1;
     }
@@ -198,8 +174,6 @@ public class PowerparmMonitor {
         this.q1 = q1;
     }
 
-    @Basic
-    @Column(name = "Q2", nullable = true, precision = 0)
     public Double getQ2() {
         return q2;
     }
@@ -208,8 +182,6 @@ public class PowerparmMonitor {
         this.q2 = q2;
     }
 
-    @Basic
-    @Column(name = "Q3", nullable = true, precision = 0)
     public Double getQ3() {
         return q3;
     }
@@ -218,8 +190,14 @@ public class PowerparmMonitor {
         this.q3 = q3;
     }
 
-    @Basic
-    @Column(name = "S1", nullable = true, precision = 0)
+    public Double getQsum() {
+        return qsum;
+    }
+
+    public void setQsum(Double qsum) {
+        this.qsum = qsum;
+    }
+
     public Double getS1() {
         return s1;
     }
@@ -228,8 +206,6 @@ public class PowerparmMonitor {
         this.s1 = s1;
     }
 
-    @Basic
-    @Column(name = "S2", nullable = true, precision = 0)
     public Double getS2() {
         return s2;
     }
@@ -238,8 +214,6 @@ public class PowerparmMonitor {
         this.s2 = s2;
     }
 
-    @Basic
-    @Column(name = "S3", nullable = true, precision = 0)
     public Double getS3() {
         return s3;
     }
@@ -248,8 +222,14 @@ public class PowerparmMonitor {
         this.s3 = s3;
     }
 
-    @Basic
-    @Column(name = "PF1", nullable = true, precision = 0)
+    public Double getSsum() {
+        return ssum;
+    }
+
+    public void setSsum(Double ssum) {
+        this.ssum = ssum;
+    }
+
     public Double getPf1() {
         return pf1;
     }
@@ -258,8 +238,6 @@ public class PowerparmMonitor {
         this.pf1 = pf1;
     }
 
-    @Basic
-    @Column(name = "PF2", nullable = true, precision = 0)
     public Double getPf2() {
         return pf2;
     }
@@ -268,8 +246,6 @@ public class PowerparmMonitor {
         this.pf2 = pf2;
     }
 
-    @Basic
-    @Column(name = "PF3", nullable = true, precision = 0)
     public Double getPf3() {
         return pf3;
     }
@@ -278,8 +254,14 @@ public class PowerparmMonitor {
         this.pf3 = pf3;
     }
 
-    @Basic
-    @Column(name = "CosPHI1", nullable = true, precision = 0)
+    public Double getpFsum() {
+        return pFsum;
+    }
+
+    public void setpFsum(Double pFsum) {
+        this.pFsum = pFsum;
+    }
+
     public Double getCosPhi1() {
         return cosPhi1;
     }
@@ -288,8 +270,6 @@ public class PowerparmMonitor {
         this.cosPhi1 = cosPhi1;
     }
 
-    @Basic
-    @Column(name = "CosPHI2", nullable = true, precision = 0)
     public Double getCosPhi2() {
         return cosPhi2;
     }
@@ -298,8 +278,6 @@ public class PowerparmMonitor {
         this.cosPhi2 = cosPhi2;
     }
 
-    @Basic
-    @Column(name = "CosPHI3", nullable = true, precision = 0)
     public Double getCosPhi3() {
         return cosPhi3;
     }
@@ -308,8 +286,6 @@ public class PowerparmMonitor {
         this.cosPhi3 = cosPhi3;
     }
 
-    @Basic
-    @Column(name = "Ifl_U1", nullable = true, precision = 0)
     public Double getIflU1() {
         return iflU1;
     }
@@ -318,8 +294,6 @@ public class PowerparmMonitor {
         this.iflU1 = iflU1;
     }
 
-    @Basic
-    @Column(name = "Ifl_U2", nullable = true, precision = 0)
     public Double getIflU2() {
         return iflU2;
     }
@@ -328,8 +302,6 @@ public class PowerparmMonitor {
         this.iflU2 = iflU2;
     }
 
-    @Basic
-    @Column(name = "Ifl_U3", nullable = true, precision = 0)
     public Double getIflU3() {
         return iflU3;
     }
@@ -338,8 +310,6 @@ public class PowerparmMonitor {
         this.iflU3 = iflU3;
     }
 
-    @Basic
-    @Column(name = "Pst_U1", nullable = true, precision = 0)
     public Double getPstU1() {
         return pstU1;
     }
@@ -348,8 +318,6 @@ public class PowerparmMonitor {
         this.pstU1 = pstU1;
     }
 
-    @Basic
-    @Column(name = "Pst_U2", nullable = true, precision = 0)
     public Double getPstU2() {
         return pstU2;
     }
@@ -358,8 +326,6 @@ public class PowerparmMonitor {
         this.pstU2 = pstU2;
     }
 
-    @Basic
-    @Column(name = "Pst_U3", nullable = true, precision = 0)
     public Double getPstU3() {
         return pstU3;
     }
@@ -368,8 +334,6 @@ public class PowerparmMonitor {
         this.pstU3 = pstU3;
     }
 
-    @Basic
-    @Column(name = "Plt_U1", nullable = true, precision = 0)
     public Double getPltU1() {
         return pltU1;
     }
@@ -378,8 +342,6 @@ public class PowerparmMonitor {
         this.pltU1 = pltU1;
     }
 
-    @Basic
-    @Column(name = "Plt_U2", nullable = true, precision = 0)
     public Double getPltU2() {
         return pltU2;
     }
@@ -388,8 +350,6 @@ public class PowerparmMonitor {
         this.pltU2 = pltU2;
     }
 
-    @Basic
-    @Column(name = "Plt_U3", nullable = true, precision = 0)
     public Double getPltU3() {
         return pltU3;
     }
@@ -398,54 +358,20 @@ public class PowerparmMonitor {
         this.pltU3 = pltU3;
     }
 
-    @Basic
-    @Column(name = "shanbian", nullable = true, length = 255)
-    public String getShanbian() {
-        return shanbian;
-    }
-
-    public void setShanbian(String shanbian) {
-        this.shanbian = shanbian;
-    }
-
-    @Basic
-    @Column(name = "shunbian", nullable = true, precision = 0)
-    public Double getShunbian() {
-        return shunbian;
-    }
-
-    public void setShunbian(Double shunbian) {
-        this.shunbian = shunbian;
-    }
-
-    @Basic
-    @Column(name = "lytx", nullable = true, precision = 0)
-    public Double getLytx() {
-        return lytx;
-    }
-
-    public void setLytx(Double lytx) {
-        this.lytx = lytx;
-    }
-
-    @Basic
-    @Column(name = "unb", nullable = true, precision = 0)
-    public Double getUnb() {
-        return unb;
-    }
-
-    public void setUnb(Double unb) {
-        this.unb = unb;
-    }
-
-    @Basic
-    @Column(name = "Hz", nullable = true, precision = 0)
     public Double getHz() {
         return hz;
     }
 
     public void setHz(Double hz) {
         this.hz = hz;
+    }
+
+    public String getShanbian() {
+        return shanbian;
+    }
+
+    public void setShanbian(String shanbian) {
+        this.shanbian = shanbian;
     }
 
     @Override
@@ -467,15 +393,19 @@ public class PowerparmMonitor {
                 Objects.equals(p1, that.p1) &&
                 Objects.equals(p2, that.p2) &&
                 Objects.equals(p3, that.p3) &&
+                Objects.equals(psum, that.psum) &&
                 Objects.equals(q1, that.q1) &&
                 Objects.equals(q2, that.q2) &&
                 Objects.equals(q3, that.q3) &&
+                Objects.equals(qsum, that.qsum) &&
                 Objects.equals(s1, that.s1) &&
                 Objects.equals(s2, that.s2) &&
                 Objects.equals(s3, that.s3) &&
+                Objects.equals(ssum, that.ssum) &&
                 Objects.equals(pf1, that.pf1) &&
                 Objects.equals(pf2, that.pf2) &&
                 Objects.equals(pf3, that.pf3) &&
+                Objects.equals(pFsum, that.pFsum) &&
                 Objects.equals(cosPhi1, that.cosPhi1) &&
                 Objects.equals(cosPhi2, that.cosPhi2) &&
                 Objects.equals(cosPhi3, that.cosPhi3) &&
@@ -488,16 +418,13 @@ public class PowerparmMonitor {
                 Objects.equals(pltU1, that.pltU1) &&
                 Objects.equals(pltU2, that.pltU2) &&
                 Objects.equals(pltU3, that.pltU3) &&
-                Objects.equals(shanbian, that.shanbian) &&
-                Objects.equals(shunbian, that.shunbian) &&
-                Objects.equals(lytx, that.lytx) &&
-                Objects.equals(unb, that.unb) &&
-                Objects.equals(hz, that.hz);
+                Objects.equals(hz, that.hz) &&
+                Objects.equals(shanbian, that.shanbian);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(ppid, mpid, time, u1, u2, u3, u4, i1, i2, i3, i4, p1, p2, p3, q1, q2, q3, s1, s2, s3, pf1, pf2, pf3, cosPhi1, cosPhi2, cosPhi3, iflU1, iflU2, iflU3, pstU1, pstU2, pstU3, pltU1, pltU2, pltU3, shanbian, shunbian, lytx, unb, hz);
+        return Objects.hash(ppid, mpid, time, u1, u2, u3, u4, i1, i2, i3, i4, p1, p2, p3, psum, q1, q2, q3, qsum, s1, s2, s3, ssum, pf1, pf2, pf3, pFsum, cosPhi1, cosPhi2, cosPhi3, iflU1, iflU2, iflU3, pstU1, pstU2, pstU3, pltU1, pltU2, pltU3, hz, shanbian);
     }
 }

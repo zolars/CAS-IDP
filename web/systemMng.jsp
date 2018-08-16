@@ -1034,49 +1034,14 @@
 
     <!-- 账号信息 -->
     <script type="text/javascript">
-        /*<!--查询所有账号 -->
-        function getALLUserInfomation(){
-            var monitorpoint = 1;
-            $.ajax({
-                type: "post",
-                url: "getAllUserInfo",
-                data: {
-                    monitorpointid: monitorpoint
-                },
-                dataType : "json",
-                success: function (data) {
-                    var list =  JSON.parse(data);
-                    var userdata = list['alluser'];
-
-                    var table = $("#userinfotable");
-                    table.empty();
-
-                    for(var i = 0; i < userdata.length; i++){
-                        table.append('<tr>' +
-                            '<td><input type="checkbox" name="userid" id="userid" value='+userdata[i].uid+'></td>' +
-                            '<td style="padding-left:15px;">' + userdata[i].uname + '</td>' +
-                            '<td style="padding-left:20px;">' + userdata[i].chinesename +  '</td>' +
-                            '<td style="padding-left:20px;">' + userdata[i].pbid+ userdata[i].cbid + userdata[i].rid + '</td>' +
-                            '<td style="padding-left:20px;">' + userdata[i].rid + '</td>' +
-                            '<td style="padding-left:20px;">' + userdata[i].telephone + '</td>' +
-                            '<td style="padding-left:20px;">' + userdata[i].govtelephone + '</td>' +
-                            '</tr>');
-                    }
-                },
-                error: function () {
-                    alert("失败");
-                }
-            });
-        }*/
-
         <!--查询所有账号 -->
         function getALLUserInfomation(){
-            var monitorpoint = 1;
+            //var monitorpoint = 1;
             $.ajax({
                 type: "post",
                 url: "getAllUserInfo",
                 data: {
-                    monitorpointid: monitorpoint
+                 //   monitorpointid: monitorpoint
                 },
                 dataType : "json",
                 success: function (data) {
@@ -1122,26 +1087,19 @@
             else if (useridcheck.length > 1)
                 alert("每次只能删除一条用户信息");
             else{
-                var monitorpoint = 1;
+               // var monitorpoint = 1;
                 var useridck = $("input[name='userid']:checked").serialize();
                 $.ajax({
                     type: "post",
                     url: "deleteUserInfo",
                     data: {
-                        monitorpointid: monitorpoint,
+                       // monitorpointid: monitorpoint,
                         uid: useridck
                     },
                     dataType : "json",
                     success: function (data) {
-                        var obj = JSON.parse(data);
-                        var rt = obj.result;
-
-                        if(rt) {
-                            getALLUserInfomation();
-                        }
-                        else{
-                            alert("删除失败");
-                        }
+                        alert(data);
+                        getALLUserInfomation();
                     },
                     error: function () {
                         alert("失败");
@@ -1185,24 +1143,7 @@
 
                     $("#userroles").val(userroledata.rid);
 
-
-
-                  /*  for(var key in list) {
-                        var len = list[key];
-
-                        $("#uid").val(len.uid);
-                        $("#useraccount").val(len.uname);
-                        $("#userpassword").val(len.password);
-                        $("#username").val(len.chinesename);
-                        $("#usertelephone").val(len.telephone);
-                        $("#usergovtelephone").val(len.govtelephone);
-
-                        //下拉框的渲染
-                        $("#userroles").val();
-                        $("#userorgnization-province").val(len.pbid);
-                        $("#userorgnization-city").val(len.cbid);
-                        $("#userorgnization-computerroom").val(len.rid);
-                    }*/
+                    hiddenUserModel();
                 },
                 error: function () {
                     alert("失败");
@@ -1225,30 +1166,34 @@
             var cbid = $("#userorgnization-city").val();
             var ccid = $("#userorgnization-computerroom").val();
 
-            $.ajax({
-                type: "post",
-                url: "updateUserInfo",
-                data: {
-                    uid: uid,
-                    uname: uname,
-                    password: password,
-                    chinesename: chinesename,
-                    telephone: telephone,
-                    govtelephone: govtelephone,
-                    rid: rid,
-                    pbid: pbid,
-                    cbid: cbid,
-                    ccid: ccid
-                },
-                dataType : "json",
-                success: function (data) {
-                    alert(data);
-                },
-                error: function () {
-                    alert("失败");
-                }
-            });
-
+            if(testTelephone(telephone) && testTelephone(govtelephone))
+            {
+                $.ajax({
+                    type: "post",
+                    url: "updateUserInfo",
+                    data: {
+                        uid: uid,
+                        uname: uname,
+                        password: password,
+                        chinesename: chinesename,
+                        telephone: telephone,
+                        govtelephone: govtelephone,
+                        rid: rid,
+                        pbid: pbid,
+                        cbid: cbid,
+                        ccid: ccid
+                    },
+                    dataType : "json",
+                    success: function (data) {
+                        alert(data);
+                        hiddenUserModel();
+                        //getALLUserInfomation();
+                    },
+                    error: function () {
+                        alert("失败");
+                    }
+                });
+            }
         }
 
         <!--隐藏uesr model div -->
@@ -1268,39 +1213,32 @@
             var ucity = $("#userorgnization-city").val();
             var ucomputerroom = $("#userorgnization-computerroom").val();
 
-            var monitorpoint = 1;
-
-            $.ajax({
-                type: "post",
-                url: "addUserInfo",
-                data: {
-                    uaccount: uaccount,
-                    upassword: upassword,
-                    uname: uname,
-                    utelephone: utelephone,
-                    ugovtelephone: ugovtelephone,
-                    uroles: uroles,
-                    uprovince: uprovince,
-                    ucity: ucity,
-                    ucomputerroom: ucomputerroom
-                },
-                dataType : "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var rt = obj.result;
-
-                    if(rt) {
+            if(testTelephone(utelephone) && testTelephone(ugovtelephone)) {
+                $.ajax({
+                    type: "post",
+                    url: "addUserInfo",
+                    data: {
+                        uaccount: uaccount,
+                        upassword: upassword,
+                        uname: uname,
+                        utelephone: utelephone,
+                        ugovtelephone: ugovtelephone,
+                        uroles: uroles,
+                        uprovince: uprovince,
+                        ucity: ucity,
+                        ucomputerroom: ucomputerroom
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data);
                         hiddenUserModel();
-                        getALLUserInfomation();
+                        //getALLUserInfomation();
+                    },
+                    error: function () {
+                        alert("新增失败");
                     }
-                    else{
-                        alert("删除失败");
-                    }
-                },
-                error: function () {
-                    alert("失败");
-                }
-            });
+                });
+            }
         }
 
         /*加载角色下拉选*/
@@ -1643,6 +1581,20 @@
                 }
             });
         };
+    </script>
+
+    <!-- 正则表达式-->
+    <script type="text/javascript">
+    function testTelephone(str) {
+        var  re = /^1\d{10}$/    //正则表达式
+        if (re.test(str)) {      //判断字符是否是11位数字
+            return true;
+        }
+        else {
+            alert(str+"请输入11位手机号码");
+            return false;
+        }
+    }
     </script>
 
 

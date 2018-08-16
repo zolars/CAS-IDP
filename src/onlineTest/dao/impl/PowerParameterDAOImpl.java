@@ -2,6 +2,7 @@ package onlineTest.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.PowerparmMonitor;
+import hibernatePOJO.PowersxdyMonitor;
 import onlineTest.dao.PowerParameterDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -225,15 +226,15 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
     public List<Object> getCurrentUnbData(String monitorpoint){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
-        PowerparmMonitor rtobj = new PowerparmMonitor();
+        //PowerparmMonitor rtobj = new PowerparmMonitor();
 
-        PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+        PowersxdyMonitor pm = (PowersxdyMonitor)hbsessionDao.getFirst(
+                "FROM PowersxdyMonitor where mpid = '" + monitorpoint+ "' order by time desc");
 
-        rtobj.setUnb(pm.getUnb());
-        rtobj.setTime(pm.getTime());
+       // rtobj.setUnb(pm.getUnb());
+        //rtobj.setTime(pm.getTime());
 
-        crlist.add(rtobj);
+        crlist.add(pm);
 
         return crlist;
     }
