@@ -6,18 +6,19 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.RolesDAO;
+import userManage.dao.UserDAO;
 import userManage.dao.impl.RolesDAOImpl;
+import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 //import hibernatePOJO.UserPermission;
 //import net.sf.json.JSON;
 //import net.sf.json.JSONObject;
 
 
-public class getAllRolesAction extends ActionSupport {
+public class updateRoleInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -30,7 +31,7 @@ public class getAllRolesAction extends ActionSupport {
     }
 
 
-    /* 查询所有角色的信息
+    /* 更新角色
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -38,11 +39,20 @@ public class getAllRolesAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
+            //String monitorpointid = request.getParameter("monitorpointid");
+            String rid = request.getParameter("rid");
+            String rname = request.getParameter("rname");
+            String rextra = request.getParameter("rextra");
+
             RolesDAO dao = new RolesDAOImpl();
-            List allroles = dao.getAllRoles();
+            Boolean rt = dao.updateRoleInfo(rid, rname, rextra);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("allroles", allroles);
+
+            if(rt)
+                jsonObject.put("提示", "修改成功！");
+            else
+                jsonObject.put("提示", "修改失败，请重试！");
 
             result = JSON.toJSONString(jsonObject);
 

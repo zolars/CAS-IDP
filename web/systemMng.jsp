@@ -609,6 +609,7 @@
             <!-- roles model DIV-->
             <div class="add-roles" id="add-roles-modal">
                 <div class="add-roles-one-line">
+                    <div id="rid" style="display: none"> </div>
                     <div class="add-roles-item">
                         <div class="add-roles-title">角色名称</div>
                         <input id="rolesname" class="form-control add-roles-input" type="text">
@@ -620,8 +621,9 @@
                 </div>
 
                 <div class="add-roles-handle">
+                    <button type="submit" class="btn btn-primary" id="add-roles-handle" onclick="submitAddRoles()">确定</button>
+                    <button type="submit" class="btn btn-primary" id="update-roles-handle" onclick="submitUpdateRoles()">确定</button>
                     <button class="btn btn-default" onclick="hiddenRolesModel()">取消</button>
-                    <button type="submit" class="btn btn-primary" onclick="submitAddRoles()">确定</button>
                 </div>
             </div>
             <!-- roles model DIV END-->
@@ -1203,6 +1205,10 @@
 
         <!--添加账号-确认添加 -->
         function submitAddUser() {
+            $('#add-user-modal').css('display', 'block');
+            $('#add-user-handle').css('display', 'block');
+            $('#update-user-handle').css('display', 'none');
+
             var uaccount = $("#useraccount").val();
             var upassword = $("#userpassword").val();
             var uname = $("#username").val();
@@ -1332,12 +1338,12 @@
     <script type="text/javascript">
         <!-- 查询所有角色 -->
         function getALLRolesInfomation(){
-            var monitorpoint = 1;
+            //var monitorpoint = 1;
             $.ajax({
                 type: "post",
                 url: "getAllRoles",
                 data: {
-                    monitorpointid: monitorpoint
+                 //   monitorpointid: monitorpoint
                 },
                 dataType : "json",
                 success: function (data) {
@@ -1345,11 +1351,12 @@
                     var list = obj.allroles;
                     var table = $("#rolesinfotable");
                     table.empty();
+
                     for (var i = 0; i < list.length; i++) {
                         var rid = list[i].rid;
                         var rname = list[i].rolesname;
                         var rextra = list[i].extra;
-                        table.append('<tr><td><input type="checkbox" name="rid" id="rid" value='+rid+'></td><td style="padding-left:40px;">' + rid +
+                        table.append('<tr><td><input type="checkbox" name="rolesid" id="rolesid" value='+rid+'></td><td style="padding-left:40px;">' + rid +
                             '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
                     }
                 },
@@ -1359,27 +1366,29 @@
             });
         }
 
-        <!-- 新增角色 -->
+        <!-- 显示roles model  -->
         function showAddRolesrModal(){
             $('#add-roles-modal').css('display', 'block');
+            $('#add-roles-handle').css('display', 'block');
+            $('#update-roles-handle').css('display', 'none');
         }
 
         <!-- 删除角色 -->
         function deleteRolesInfomation(){
 
-            var ridcheck = $("input[name='rid']:checked");
+            var ridcheck = $("input[name='rolesid']:checked");
             if (ridcheck.length == 0)
                 alert("请选择一条角色信息");
             else if (ridcheck.length > 1)
                 alert("每次只能删除一条角色信息");
             else{
-                var monitorpoint = 1;
-                var ridck = $("input[name='rid']:checked").serialize();
+                //var monitorpoint = 1;
+                var ridck = $("input[name='rolesid']:checked").serialize();
                 $.ajax({
                     type: "post",
                     url: "deleteRolesInfo",
                     data: {
-                        monitorpointid: monitorpoint,
+                        //monitorpointid: monitorpoint,
                         rid: ridck
                     },
                     dataType : "json",
@@ -1399,14 +1408,63 @@
                     }
                 });
             }
-
-
         }
 
         <!-- 修改角色 -->
         function showUpdateRolesModal(){
+            $('#add-roles-modal').css('display', 'block');
+            $('#add-roles-handle').css('display', 'none');
+            $('#update-roles-handle').css('display', 'block');
 
+            //显示信息到div
+            var rolesidcheck = $("input[name='rolesid']:checked").serialize();
 
+            $.ajax({
+                type: "post",
+                url: "getRolesInfo",
+                data: {
+                    rid: rolesidcheck
+                },
+                dataType : "json",
+                success: function (data) {
+                    var list = JSON.parse(data);
+
+                    var rolesdata = list['roles'];
+
+                    $("#rid").val(rolesdata.rid);
+                    $("#rolesname").val(rolesdata.rolesname);
+                    $("#rolesextra").val(rolesdata.extra);
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+
+        <!-- 修改角色 -确认修改 -->
+        function submitUpdateRoles() {
+            var rid = $("#rid").val();
+            var rname = $("#rolesname").val();
+            var rextra = $("#rolesextra").val();
+
+            $.ajax({
+                    type: "post",
+                    url: "updateRolesInfo",
+                    data: {
+                        rid: rid,
+                        rname: rname,
+                        rextra: rextra
+                    },
+                    dataType : "json",
+                    success: function (data) {
+                        alert(data);
+                        hiddenRolesModel();
+                        //getALLUserInfomation();
+                    },
+                    error: function () {
+                        alert("失败");
+                    }
+            });
         }
 
         <!--隐藏roles model div -->
@@ -1416,10 +1474,14 @@
 
         <!--添加角色-确认添加 -->
         function submitAddRoles() {
+            $('#add-roles-modal').css('display', 'block');
+            $('#add-roles-handle').css('display', 'block');
+            $('#update-roles-handle').css('display', 'none');
+
             var rname = $("#rolesname").val();
             var rextra = $("#rolesextra").val();
 
-            var monitorpoint = 1;
+           // var monitorpoint = 1;
 
             $.ajax({
                 type: "post",

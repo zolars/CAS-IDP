@@ -85,6 +85,14 @@
              </result>
          </action>
 
+         <action name="updateRolesInfo" class="userManage.action.updateRoleInfoAction">
+             <!--updateRolesInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="deleteUserInfo" class="userManage.action.deleteUserInfoAction">
              <!--deleteUserInfo -->
              <result name="failure">/failure.jsp</result>
@@ -127,6 +135,14 @@
 
          <action name="getAllRoles" class="userManage.action.getAllRolesAction">
              <!--getAllRoles -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getRolesInfo" class="userManage.action.getOneRolesAction">
+             <!--getRolesInfo -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>

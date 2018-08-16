@@ -4,20 +4,24 @@ package userManage.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import hibernatePOJO.Roles;
+import hibernatePOJO.User;
+import hibernatePOJO.UserRoles;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.RolesDAO;
+import userManage.dao.UserDAO;
 import userManage.dao.impl.RolesDAOImpl;
+import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 //import hibernatePOJO.UserPermission;
 //import net.sf.json.JSON;
 //import net.sf.json.JSONObject;
 
 
-public class getAllRolesAction extends ActionSupport {
+public class getOneRolesAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -30,7 +34,7 @@ public class getAllRolesAction extends ActionSupport {
     }
 
 
-    /* 查询所有角色的信息
+    /* 查询1个角色
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -38,11 +42,15 @@ public class getAllRolesAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
+            String ridStr = request.getParameter("rid");
+            String ridstr[] = ridStr.split("=");
+            String rid = ridstr[1];
+
             RolesDAO dao = new RolesDAOImpl();
-            List allroles = dao.getAllRoles();
+            Roles roles = dao.getOneRolesInfo(rid);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("allroles", allroles);
+            jsonObject.put("roles", roles);
 
             result = JSON.toJSONString(jsonObject);
 
@@ -50,7 +58,7 @@ public class getAllRolesAction extends ActionSupport {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }
