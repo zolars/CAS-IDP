@@ -324,6 +324,21 @@
              </result>
          </action>
 
+         <action name="getAllAlarmUser" class="deviceManage.action.getAllAlarmUserAction">
+             <!--getAllAlarmUser -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="deleteDeviceAlarmRoles" class="deviceManage.action.deleteDeviceAlarmRolesAction">
+             <!--deleteDeviceAlarmRoles -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
 
      </package>
 

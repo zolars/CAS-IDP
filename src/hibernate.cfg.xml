@@ -55,6 +55,7 @@
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
         <mapping resource="hibernatePOJO/Permission.hbm.xml"/>
+        <mapping resource="hibernatePOJO/DeviceAlarmUser.hbm.xml"/>
 
 
     </session-factory>

@@ -329,16 +329,18 @@
                                                 <div class="tile-config dropdown">
                                                     <a data-toggle="dropdown"></a>
                                                 </div>
-                                                <table>
-                                                    <tr>
-                                                        <td>开始时间</td><td>结束时间</td><td>账号</td>
-                                                    </tr>
+                                                <table id="alarm-user-table" class="alarm-user-table">
                                                 </table>
                                             </div>
+
+                                    <div>
+                                        <button class="btn btn-default" onclick="addDeviceAlarmUser()">添加</button>
+                                        <button class="btn btn-default" onclick="deleteDeviceAlarmUser()">取消</button>
+                                    </div>
                                 </div>
                             </div>
                             <div id = "secItem2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                <label class="t-overflow">
+                                <%--<label class="t-overflow">
                                     <input type="text" class="form-control setting-input" id="get-devicename2">
                                     <button class="btn btn-default" onclick="checkDevice2()">查询</button>
                                 </label>
@@ -448,7 +450,7 @@
                                             </tr>
                                         </table>
                                     </div>
-                                </div>
+                                </div>--%>
                             </div>
                             <div id = "secItem3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                                 this is 蓄电池
@@ -465,7 +467,7 @@
 
                         </div>
                         <div id = "item5" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                            this is 接口管理
+                            接口管理
                         </div>
                         <div id = "item6" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
 
@@ -813,6 +815,8 @@
                 $("#item7").hide();
 
                 var monitorpoint = 1;
+
+                //功能管理
 
                 //左侧角色表的初始化渲染
                 $.ajax({
@@ -1512,7 +1516,7 @@
 
     <!-- 查询设备 -->
     <script type="text/javascript">
-        <!-- 查询IPD设备 -->
+        <!-- 查询设备 -->
         function checkDevice(){
             var devicename = $("#get-devicename").val();
 
@@ -1552,6 +1556,8 @@
 
                     //预警方式
                     //预警人员
+                    //预警人员
+                    checkDeviceAlarmUser();
                 },
                 error: function () {
                     alert("失败");
@@ -1559,57 +1565,80 @@
             });
         }
 
-        <!-- 查询UPS设备 -->
-        function checkDevice2(){
-            var devicename = $("#get-devicename2").val();
-            var monitorpoint = 1;
+        <!-- 查询预警人员 -->
+        function checkDeviceAlarmUser(){
+
+            var devicename = $("#get-devicename").val();
 
             $.ajax({
                 type: "post",
-                url: "getDeviceInfo",
+                url: "getAllAlarmUser",
                 data: {
                     devicename: devicename
+                    //   monitorpointid: monitorpoint
                 },
                 dataType : "json",
                 success: function (data) {
-                    var obj = JSON.parse(data);
-                    $("#devname2").val(obj[0].name);
-                    $("#devtype2").val(obj[0].type);
-                    $("#serialno2").val(obj[0].serialno);
-                    $("#IPaddress2").val(obj[0].iPaddress);
-                    $("#port2").val(obj[0].port);
-                    $("#extra2").val(obj[0].extra);
+                    var list = data.alarmusers;
+                    var listname = data.alarmusersname;
+                    var table = $("#alarm-user-table");
+                    table.empty();
+                    table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">开始时间</td><td style="padding-left:80px;">结束时间</td><td style="padding-left:40px;">账号</td></tr>');
 
-                    if(obj[0].devicetype == "以太网"){
-                        $("#radio-Ethernet-2").attr("checked","checked");
-                        $("#radio-R5485-2").removeAttr("checked");
-                        $("#radio-RS232-2").removeAttr("checked");
-                    }
-                    if(obj[0].devicetype == "RS485"){
-                        $("#radio-Ethernet-2").removeAttr("checked");
-                        $("#radio-R5485-2").attr("checked","checked");
-                        $("#radio-RS232-2").removeAttr("checked");
-                    }
-                    if(obj[0].devicetype == "RS232"){
-                        $("#radio-Ethernet-2").removeAttr("checked");
-                        $("#radio-R5485-2").removeAttr("checked");
-                        $("#radio-RS232-2").attr("checked","checked");
-                    }
+                    for (var i = 0; i < list.length; i++) {
+                        var id = list[i].id;
+                        var stime = list[i].stime;
+                        var etime = list[i].etime;
+                        var uname = listname[i];
 
-                    //预警方式
-                    //预警人员
+                        table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="auid" id="auid" value='+id+'></td>' +
+                            '<td style="padding-left:80px;">' + stime + '</td><td style="padding-left:80px;">' + etime + '</td>' +
+                            '<td style="padding-left:40px;">' + uname + '</td></tr>');
+                    }
                 },
                 error: function () {
                     alert("失败");
                 }
             });
         }
-    </script>
 
-    <script type="text/javascript">
-        function testVolume(){
+        <!-- 添加预警人员 -->
+        function addDeviceAlarmUser(){
+            alert("添加预警人员");
 
         }
+
+        <!-- 取消（删除）预警人员 -->
+        function deleteDeviceAlarmUser(){
+
+            var auidcheck = $("input[name='auid']:checked");
+            if (auidcheck.length == 0)
+                alert("请选择一条预警人员信息");
+            else if (auidcheck.length > 1)
+                alert("每次只能删除一条预警人员信息");
+            else{
+                //var monitorpoint = 1;
+                var auidck = $("input[name='auid']:checked").serialize();
+                $.ajax({
+                    type: "post",
+                    url: "deleteDeviceAlarmRoles",
+                    data: {
+                        //monitorpointid: monitorpoint,
+                        auid: auidck
+                    },
+                    dataType : "json",
+                    success: function (data) {
+                       alert(data);
+                    },
+                    error: function () {
+                        alert("失败");
+                    }
+                });
+            }
+
+
+        }
+
     </script>
 
     <!-- 功能管理-->
@@ -1659,6 +1688,11 @@
     }
     </script>
 
+    <script type="text/javascript">
+    function testVolume(){
+
+    }
+</script>
 
 
 </body>

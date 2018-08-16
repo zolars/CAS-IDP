@@ -7,4 +7,7 @@ public interface DeviceDAO {
 
     public List getDeviceDataByName(String name);
 
+    public List getDeviceAlarmUserDataByName(String name);
+
+    public Boolean deleteDeviceAlarmUser(String did);
 }
