@@ -10,4 +10,6 @@ public interface DeviceDAO {
     public List getDeviceAlarmUserDataByName(String name);
 
     public Boolean deleteDeviceAlarmUser(String did);
+
+    public List getDeviceThresholdInfoByType(String type);
 }

@@ -4,6 +4,7 @@ import Util.HBSessionDaoImpl;
 import deviceManage.dao.DeviceDAO;
 import hibernatePOJO.DeviceAlarmUser;
 import hibernatePOJO.Devices;
+import hibernatePOJO.DevicesThreshold;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -47,6 +48,15 @@ public class DeviceDAOImpl implements DeviceDAO {
                 "FROM DeviceAlarmUser where did = '" + dv.getDid() + "'");
 
         return list;
+    }
+
+    public List getDeviceThresholdInfoByType(String type){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<DevicesThreshold> dtlist = hbsessionDao.search(
+                "FROM DevicesThreshold where type = '" + type+ "'");
+
+        return dtlist;
     }
 
     public Boolean deleteDeviceAlarmUser(String id){

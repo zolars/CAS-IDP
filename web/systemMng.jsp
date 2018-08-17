@@ -478,9 +478,6 @@
 
                             </div>
 
-
-
-
                         </div>
                         <div id = "item5" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             接口管理
@@ -507,9 +504,9 @@
                             </ul>
 
                             <div id = "tridItem1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                电压
+
                                 <label class="t-overflow">
-                                    <input type="text" class="form-control setting-input" id="">
+                                    <input type="text" class="form-control setting-input" id="get-device-threshold-name">
                                     <button class="btn btn-default" onclick="testVolume()">查询</button>
                                 </label>
                                 <table id="threadinfotablehead">
@@ -531,7 +528,7 @@
                                 <button type="submit" class="btn btn-primary" onclick="">添加</button>
                                 <button class="btn btn-default" onclick="">修改</button>
                                 <button class="btn btn-default" onclick="">删除</button>
-                                <button class="btn btn-default" onclick="">插入</button>
+                                <button class="btn btn-default" onclick="">导入</button>
 
                             </div>
                             <div id = "tridItem2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
@@ -1879,6 +1876,56 @@
         };
     </script>
 
+    <!-- 限值管理-->
+    <script type="text/javascript">
+        function testVolume(){
+            alert("限值管理");
+            var devicename = $("#get-device-threshold-name").val();
+
+            $.ajax({
+                type: "post",
+                url: "getDeviceThreshold",
+                data: {
+                    devicename: devicename
+                    //   monitorpointid: monitorpoint
+                },
+                dataType : "json",
+                success: function (data) {
+                    var list = data.alldtlist;
+
+                    var table = $("#threadinfotablehead");
+                    table.empty();
+                    table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:20px;">参数名称</td><td style="padding-left:20px;">参数分类</td><td style="padding-left:20px;">' +
+                        '单位</td><td style="padding-left:20px;">标准值</td><td style="padding-left:20px;">上限值</td><td style="padding-left:20px;">下限值</td><td style="padding-left:20px;">' +
+                        '启用标识</td><td style="padding-left:20px;">预警内容</td></tr>');
+
+                    for (var i = 0; i < list.length; i++) {
+                        var dtid = list[i].dtid;
+                        var name = list[i].name;
+                        var type = list[i].type;
+                        var unit = list[i].unit;
+                        var standardval = list[i].standardval;
+                        var cellval = list[i].cellval;
+                        var floorval = list[i].floorval;
+                        var isMark = list[i].isMark;
+                        var alarmcontent = list[i].alarmcontent;
+
+
+                        table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="dtid" id="dtid" value='+dtid+'></td>' +
+                            '<td style="padding-left:20px;">' + name + '</td><td style="padding-left:20px;">' + type + '</td>' +
+                            '<td style="padding-left:20px;">' + unit + '</td><td style="padding-left:20px;">' + standardval + '</td>' +
+                            '<td style="padding-left:20px;">' + cellval + '</td><td style="padding-left:20px;">' + floorval + '</td>' +
+                            '<td style="padding-left:20px;">' + isMark + '</td><td style="padding-left:20px;">' + alarmcontent + '</td>' +
+                            '</td></tr>');
+                    }
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
+
     <!-- 正则表达式-->
     <script type="text/javascript">
     function testTelephone(str) {
@@ -1893,11 +1940,7 @@
     }
     </script>
 
-    <script type="text/javascript">
-    function testVolume(){
 
-    }
-</script>
 
 
 </body>

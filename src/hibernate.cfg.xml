@@ -16,6 +16,7 @@
         <property name="connection.password">cjy123</property>
 
 
+
         <!-- true表示程序运行时，在控制台显示SQL语句，false表示不显示SQL语句 -->
         <property name="show_sql">false</property>
         <property name="format_sql">true</property>
@@ -56,6 +57,7 @@
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
         <mapping resource="hibernatePOJO/Permission.hbm.xml"/>
         <mapping resource="hibernatePOJO/DeviceAlarmUser.hbm.xml"/>
+        <mapping resource="hibernatePOJO/DevicesThreshold.hbm.xml"/>
 
 
     </session-factory>
