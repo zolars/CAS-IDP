@@ -224,7 +224,26 @@
                                 </li>
                             </ul>
 
-                            <div id = "secItem1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                            <div id = "secItem1" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+                            <div id = "secItem2" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+                            <div id = "secItem3" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+                            <div id = "secItem4" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+                            <div id = "secItem5" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+                            <div id = "secItem6" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+
+                            <div id="TCP-device" style="display: none">
                                 <label class="t-overflow">
                                     <input type="text" class="form-control setting-input" id = "get-devicename">
                                     <button class="btn btn-default" onclick="checkDevice()">查询</button>
@@ -263,75 +282,75 @@
                                         </div>
 
                                         <div class="tile">
-                                                <h2 class="tile-title">预警方式</h2>
-                                                <div class="tile-config dropdown">
-                                                    <a data-toggle="dropdown"></a>
-                                                </div>
+                                            <h2 class="tile-title">预警方式</h2>
+                                            <div class="tile-config dropdown">
+                                                <a data-toggle="dropdown"></a>
+                                            </div>
 
-                                                <div class="listview todo-list sortable">
-                                                    <div class="media">
-                                                        <div class="checkbox m-0">
-                                                            <label class="t-overflow">
-                                                                <input type="checkbox"> 短信
-                                                            </label>
-                                                        </div>
+                                            <div class="listview todo-list sortable">
+                                                <div class="media">
+                                                    <div class="checkbox m-0">
+                                                        <label class="t-overflow">
+                                                            <input type="checkbox"> 短信
+                                                        </label>
                                                     </div>
-                                                    <div class="media">
-                                                        <div class="checkbox m-0">
-                                                            <label class="t-overflow">
-                                                                <input type="checkbox"> 弹窗
-                                                            </label>
-                                                        </div>
+                                                </div>
+                                                <div class="media">
+                                                    <div class="checkbox m-0">
+                                                        <label class="t-overflow">
+                                                            <input type="checkbox"> 弹窗
+                                                        </label>
                                                     </div>
-                                                    <div class="media">
-                                                        <div class="checkbox m-0">
-                                                            <label class="t-overflow">
-                                                                <input type="checkbox"> 语音
-                                                            </label>
-                                                        </div>
+                                                </div>
+                                                <div class="media">
+                                                    <div class="checkbox m-0">
+                                                        <label class="t-overflow">
+                                                            <input type="checkbox"> 语音
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="tile">
-                                                <h2 class="tile-title">设置</h2>
-                                                <div class="tile-config dropdown">
-                                                    <a data-toggle="dropdown"></a>
-                                                </div>
-
-                                                <div>
-                                                    <label class="t-overflow">
-                                                        设备名称<input id="devname" type="text" class="form-control setting-input">
-                                                    </label>
-                                                    <label class="t-overflow">
-                                                        设备类型 <input id="devtype" type="text" class="form-control setting-input">
-                                                    </label>
-                                                    <label class="t-overflow">
-                                                        序列号 <input id="serialno" type="text" class="form-control setting-input">
-                                                    </label>
-                                                    <label class="t-overflow">
-                                                        IP地址 <input id="IPaddress" type="text" class="form-control setting-input">
-                                                    </label>
-                                                    <label class="t-overflow">
-                                                        端口号 <input id="port" type="text" class="form-control setting-input">
-                                                    </label>
-                                                    <label class="t-overflow">
-                                                        备注 <input id="extra" type="text" class="form-control setting-input">
-                                                    </label>
-                                                </div>
+                                            <h2 class="tile-title">设置</h2>
+                                            <div class="tile-config dropdown">
+                                                <a data-toggle="dropdown"></a>
                                             </div>
+
+                                            <div>
+                                                <label class="t-overflow">
+                                                    设备名称<input id="devname" type="text" class="form-control setting-input">
+                                                </label>
+                                                <label class="t-overflow">
+                                                    设备类型 <input id="devtype" type="text" class="form-control setting-input">
+                                                </label>
+                                                <label class="t-overflow">
+                                                    序列号 <input id="serialno" type="text" class="form-control setting-input">
+                                                </label>
+                                                <label class="t-overflow">
+                                                    IP地址 <input id="IPaddress" type="text" class="form-control setting-input">
+                                                </label>
+                                                <label class="t-overflow">
+                                                    端口号 <input id="port" type="text" class="form-control setting-input">
+                                                </label>
+                                                <label class="t-overflow">
+                                                    备注 <input id="extra" type="text" class="form-control setting-input">
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-10">
-                                            <div class="tile">
-                                                <h2 class="tile-title">预警人员</h2>
-                                                <div class="tile-config dropdown">
-                                                    <a data-toggle="dropdown"></a>
-                                                </div>
-                                                <table id="alarm-user-table" class="alarm-user-table">
-                                                </table>
-                                            </div>
+                                    <div class="tile">
+                                        <h2 class="tile-title">预警人员</h2>
+                                        <div class="tile-config dropdown">
+                                            <a data-toggle="dropdown"></a>
+                                        </div>
+                                        <table id="alarm-user-table" class="alarm-user-table">
+                                        </table>
+                                    </div>
 
                                     <div>
                                         <button class="btn btn-default" onclick="addDeviceAlarmUser()">添加</button>
@@ -339,9 +358,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id = "secItem2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                <%--<label class="t-overflow">
-                                    <input type="text" class="form-control setting-input" id="get-devicename2">
+
+                            <div id="485-serialno-device" style="display: none">
+                                <label class="t-overflow">
+                                    <input type="text" class="form-control setting-input" id = "get-devicename2">
                                     <button class="btn btn-default" onclick="checkDevice2()">查询</button>
                                 </label>
                                 <div class="row">
@@ -356,21 +376,21 @@
                                                 <div class="media">
                                                     <div class="checkbox m-0">
                                                         <label class="t-overflow">
-                                                            <input id="radio-Ethernet-2" type="radio"> 以太网
+                                                            <input id="radio-Ethernet2" type="radio"> 以太网
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="media">
                                                     <div class="checkbox m-0">
                                                         <label class="t-overflow">
-                                                            <input id="radio-R5485-2" type="radio"> R5485
+                                                            <input id="radio-R54852" type="radio"> R5485
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="media">
                                                     <div class="checkbox m-0">
                                                         <label class="t-overflow">
-                                                            <input id="radio-RS232-2" type="radio"> RS232
+                                                            <input id="radio-RS2322" type="radio"> RS232
                                                         </label>
                                                     </div>
                                                 </div>
@@ -426,10 +446,10 @@
                                                     序列号 <input id="serialno2" type="text" class="form-control setting-input">
                                                 </label>
                                                 <label class="t-overflow">
-                                                    IP地址 <input id="IPaddress2" type="text" class="form-control setting-input">
+                                                    485地址 <input id="IPaddress2" type="text" class="form-control setting-input">
                                                 </label>
                                                 <label class="t-overflow">
-                                                    端口号 <input id="port2" type="text" class="form-control setting-input">
+                                                    通信串口 <input id="port2" type="text" class="form-control setting-input">
                                                 </label>
                                                 <label class="t-overflow">
                                                     备注 <input id="extra2" type="text" class="form-control setting-input">
@@ -444,26 +464,22 @@
                                         <div class="tile-config dropdown">
                                             <a data-toggle="dropdown"></a>
                                         </div>
-                                        <table>
-                                            <tr>
-                                                <td>开始时间</td><td>结束时间</td><td>账号</td>
-                                            </tr>
+                                        <table id="alarm-user-table2" class="alarm-user-table">
                                         </table>
                                     </div>
-                                </div>--%>
+
+                                    <div>
+                                        <button class="btn btn-default" onclick="addDeviceAlarmUser2()">添加</button>
+                                        <button class="btn btn-default" onclick="deleteDeviceAlarmUser2()">取消</button>
+                                    </div>
+                                </div>
+
+
+
                             </div>
-                            <div id = "secItem3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                this is 蓄电池
-                            </div>
-                            <div id = "secItem4" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                this is 柴油发电机
-                            </div>
-                            <div id = "secItem5" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                this is 空调
-                            </div>
-                            <div id = "secItem6" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                this is 其他传感器
-                            </div>
+
+
+
 
                         </div>
                         <div id = "item5" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
@@ -905,6 +921,11 @@
                         $("#secItem4").hide();
                         $("#secItem5").hide();
                         $("#secItem6").hide();
+
+                        $('#TCP-device').css('display', 'block');
+                        $('#485-serialno-device').css('display', 'none');
+
+                        clearDeviceDiv();
                     });
                     $("#secsubItem2").click(function () {
                         $("#secItem1").hide();
@@ -913,6 +934,11 @@
                         $("#secItem4").hide();
                         $("#secItem5").hide();
                         $("#secItem6").hide();
+
+                        $('#TCP-device').css('display', 'block');
+                        $('#485-serialno-device').css('display', 'none');
+
+                        clearDeviceDiv();
                     });
                     $("#secsubItem3").click(function () {
                         $("#secItem1").hide();
@@ -921,6 +947,11 @@
                         $("#secItem4").hide();
                         $("#secItem5").hide();
                         $("#secItem6").hide();
+
+                        $('#TCP-device').css('display', 'none');
+                        $('#485-serialno-device').css('display', 'block');
+
+                        clearDeviceDiv2();
                     });
                     $("#secsubItem4").click(function () {
                         $("#secItem1").hide();
@@ -929,6 +960,11 @@
                         $("#secItem4").show();
                         $("#secItem5").hide();
                         $("#secItem6").hide();
+
+                        $('#TCP-device').css('display', 'none');
+                        $('#485-serialno-device').css('display', 'block');
+
+                        clearDeviceDiv2();
                     });
                     $("#secsubItem5").click(function () {
                         $("#secItem1").hide();
@@ -937,6 +973,11 @@
                         $("#secItem4").hide();
                         $("#secItem5").show();
                         $("#secItem6").hide();
+
+                        $('#TCP-device').css('display', 'none');
+                        $('#485-serialno-device').css('display', 'block');
+
+                        clearDeviceDiv2();
                     });
                     $("#secsubItem6").click(function () {
                         $("#secItem1").hide();
@@ -945,6 +986,11 @@
                         $("#secItem4").hide();
                         $("#secItem5").hide();
                         $("#secItem6").show();
+
+                        $('#TCP-device').css('display', 'none');
+                        $('#485-serialno-device').css('display', 'block');
+
+                        clearDeviceDiv2();
                     });
                 });
             });
@@ -1514,7 +1560,7 @@
         }
     </script>
 
-    <!-- 查询设备 -->
+    <!-- 查询设备--IDP\UPS -->
     <script type="text/javascript">
         <!-- 查询设备 -->
         function checkDevice(){
@@ -1639,7 +1685,166 @@
 
         }
 
+        <!-- 清空设备div -->
+        function clearDeviceDiv(){
+            $("#get-devicename").val("");
+
+            $("#devname").val("");
+            $("#devtype").val("");
+            $("#serialno").val("");
+            $("#IPaddress").val("");
+            $("#port").val("");
+            $("#extra").val("");
+
+            $("#radio-Ethernet").removeAttr("checked");
+            $("#radio-R5485").removeAttr("checked");
+            $("#radio-RS232").removeAttr("checked");
+
+            $("#alarm-user-table").empty();
+        }
+
     </script>
+
+    <!-- 查询设备2 --蓄电池\发电机\空调\其他-->
+    <script type="text/javascript">
+         <!-- 查询设备 -->
+         function checkDevice2(){
+             var devicename = $("#get-devicename2").val();
+
+             var monitorpoint = 1;
+
+             $.ajax({
+                 type: "post",
+                 url: "getDeviceInfo",
+                 data: {
+                     devicename: devicename
+                 },
+                 dataType : "json",
+                 success: function (data) {
+                     var obj = JSON.parse(data);
+                     $("#devname2").val(obj[0].name);
+                     $("#devtype2").val(obj[0].type);
+                     $("#serialno2").val(obj[0].serialno);
+                     $("#IPaddress2").val(obj[0].iPaddress);
+                     $("#port2").val(obj[0].port);
+                     $("#extra2").val(obj[0].extra);
+
+                     if(obj[0].devicetype == "以太网"){
+                         $("#radio-Ethernet2").attr("checked","checked");
+                         $("#radio-R54852").removeAttr("checked");
+                         $("#radio-RS2322").removeAttr("checked");
+                     }
+                     if(obj[0].devicetype == "RS485"){
+                         $("#radio-Ethernet2").removeAttr("checked");
+                         $("#radio-R54852").attr("checked","checked");
+                         $("#radio-RS2322").removeAttr("checked");
+                     }
+                     if(obj[0].devicetype == "RS232"){
+                         $("#radio-Ethernet2").removeAttr("checked");
+                         $("#radio-R54852").removeAttr("checked");
+                         $("#radio-RS2322").attr("checked","checked");
+                     }
+
+                     //预警方式
+                     //预警人员
+                     //预警人员
+                     checkDeviceAlarmUser2();
+                 },
+                 error: function () {
+                     alert("失败");
+                 }
+             });
+         }
+
+         <!-- 查询预警人员 -->
+         function checkDeviceAlarmUser2(){
+
+             var devicename = $("#get-devicename2").val();
+
+             $.ajax({
+                 type: "post",
+                 url: "getAllAlarmUser",
+                 data: {
+                     devicename: devicename
+                     //   monitorpointid: monitorpoint
+                 },
+                 dataType : "json",
+                 success: function (data) {
+                     var list = data.alarmusers;
+                     var listname = data.alarmusersname;
+                     var table = $("#alarm-user-table2");
+                     table.empty();
+                     table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">开始时间</td><td style="padding-left:80px;">结束时间</td><td style="padding-left:40px;">账号</td></tr>');
+
+                     for (var i = 0; i < list.length; i++) {
+                         var id = list[i].id;
+                         var stime = list[i].stime;
+                         var etime = list[i].etime;
+                         var uname = listname[i];
+
+                         table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="auid" id="auid" value='+id+'></td>' +
+                             '<td style="padding-left:80px;">' + stime + '</td><td style="padding-left:80px;">' + etime + '</td>' +
+                             '<td style="padding-left:40px;">' + uname + '</td></tr>');
+                     }
+                 },
+                 error: function () {
+                     alert("失败");
+                 }
+             });
+         }
+
+         <!-- 添加预警人员 -->
+         function addDeviceAlarmUser2(){
+             alert("添加预警人员");
+         }
+
+         <!-- 取消（删除）预警人员 -->
+         function deleteDeviceAlarmUser2(){
+
+             var auidcheck = $("input[name='auid']:checked");
+             if (auidcheck.length == 0)
+                 alert("请选择一条预警人员信息");
+             else if (auidcheck.length > 1)
+                 alert("每次只能删除一条预警人员信息");
+             else {
+                 //var monitorpoint = 1;
+                 var auidck = $("input[name='auid']:checked").serialize();
+                 $.ajax({
+                     type: "post",
+                     url: "deleteDeviceAlarmRoles",
+                     data: {
+                         //monitorpointid: monitorpoint,
+                         auid: auidck
+                     },
+                     dataType: "json",
+                     success: function (data) {
+                         alert(data);
+                     },
+                     error: function () {
+                         alert("失败");
+                     }
+                 });
+             }
+         }
+
+         <!-- 清空设备div2 -->
+         function clearDeviceDiv2(){
+             $("#get-devicename2").val("");
+
+             $("#devname2").val("");
+             $("#devtype2").val("");
+             $("#serialno2").val("");
+             $("#IPaddress2").val("");
+             $("#port2").val("");
+             $("#extra2").val("");
+
+             $("#radio-Ethernet2").removeAttr("checked");
+             $("#radio-R54852").removeAttr("checked");
+             $("#radio-RS2322").removeAttr("checked");
+
+             $("#alarm-user-table2").empty();
+         }
+     </script>
 
     <!-- 功能管理-->
     <script type="text/javascript">
