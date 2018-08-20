@@ -28,7 +28,7 @@ public class getMonitorPointsAction extends ActionSupport {
     }
 
 
-    /* 根据设备名称查询设备其他信息
+    /* 根据机房名称查询检测点设备
      */
     public String execute() throws Exception {
         try {//获取数据

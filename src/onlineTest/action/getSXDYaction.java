@@ -11,9 +11,6 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
-
 
 public class getSXDYaction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -28,16 +25,15 @@ public class getSXDYaction extends ActionSupport {
     }
 
 
-    /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的行级结构树状串
+    /* 根据监测点设备获取SXDY数据
      */
-    public String execute() throws Exception { //getUserTree() throws Exception{
+    public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
             String monitorpoint = request.getParameter("monitorpointid");
 
             SXDYDAO dao = new SXDYDAOImpl();

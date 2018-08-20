@@ -2,6 +2,7 @@ package onlineTest.action;
 
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
+import hibernatePOJO.PowerxbMonitor;
 import onlineTest.dao.XBDAO;
 import onlineTest.dao.impl.XBDAOImpl;
 import org.apache.struts2.ServletActionContext;
@@ -42,9 +43,7 @@ public class getXBaction extends ActionSupport {
 
             XBDAO dao = new XBDAOImpl();
 
-            List xbdata = new ArrayList();
-
-            xbdata = dao.getCurrentXbData(monitorpoint);
+            PowerxbMonitor xbdata = dao.getCurrentXbData(monitorpoint);
 
             result = JSON.toJSONString(xbdata); // List转json
 

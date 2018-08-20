@@ -297,7 +297,7 @@
             var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
             //对第一个结果进行URI解码
             var provinceid_pre = decodeURI(provinceidc[1]);
-           // console.log("provinceid_pre "+provinceid_pre);
+
             $.ajax({
                 type: "post",
                 url: "setProvince",

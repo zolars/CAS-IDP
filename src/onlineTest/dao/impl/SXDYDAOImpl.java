@@ -1,8 +1,8 @@
 package onlineTest.dao.impl;
 
 import Util.HBSessionDaoImpl;
+import hibernatePOJO.PowersxdyMonitor;
 import onlineTest.dao.SXDYDAO;
-import onlineTest.dao.XBDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,12 +16,14 @@ public class SXDYDAOImpl implements SXDYDAO {
     private Transaction transaction;
     private Query query;
 
-    public List<Object> getCurrentSXDYData(String monitorpoint){
+    public List getCurrentSXDYData(String monitorpoint){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<Object> crlist = new ArrayList<>();
+        List<PowersxdyMonitor> crlist = new ArrayList<>();
 
-        crlist.add(hbsessionDao.getFirst(
-                "FROM PowersxdyMonitor where mpid = '" + monitorpoint+ "'"));
+        PowersxdyMonitor ob = (PowersxdyMonitor)hbsessionDao.getFirst(
+                "FROM PowersxdyMonitor where mpid = '" + monitorpoint+ "' order by time Desc");
+
+        crlist.add(ob);
 
         return crlist;
     }

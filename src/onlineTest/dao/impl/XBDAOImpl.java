@@ -17,14 +17,13 @@ public class XBDAOImpl implements XBDAO {
     private Transaction transaction;
     private Query query;
 
-    public List<Object> getCurrentXbData(String monitorpoint){
+    public PowerxbMonitor getCurrentXbData(String monitorpoint){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<Object> crlist = new ArrayList<>();
 
-        crlist = hbsessionDao.search(
-                "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "'");
+        PowerxbMonitor powerxbMonitor = (PowerxbMonitor)hbsessionDao.getFirst(
+                "FROM PowerxbMonitor where mpid = '" + monitorpoint+ "' order by time desc");
 
-        return crlist;
+        return powerxbMonitor;
     }
 
 }
