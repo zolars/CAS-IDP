@@ -125,8 +125,5 @@
         <property name="hz">
             <column name="Hz" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
-        <property name="shanbian">
-            <column name="shanbian" sql-type="varchar(255)"/>
-        </property>
     </class>
 </hibernate-mapping>

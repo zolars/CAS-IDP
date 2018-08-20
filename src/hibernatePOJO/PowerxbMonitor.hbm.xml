@@ -1814,8 +1814,5 @@
         <property name="i3Va50">
             <column name="I3va_50" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
-        <property name="cishu">
-            <column name="cishu" sql-type="float" precision="-1" not-null="true"/>
-        </property>
     </class>
 </hibernate-mapping>

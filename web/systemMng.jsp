@@ -525,10 +525,10 @@
                                 </table>
                                 <table id="infotable"></table>
 
-                                <button type="submit" class="btn btn-primary" onclick="">添加</button>
-                                <button class="btn btn-default" onclick="">修改</button>
-                                <button class="btn btn-default" onclick="">删除</button>
-                                <button class="btn btn-default" onclick="">导入</button>
+                                <button type="submit" class="btn btn-primary" onclick="AddThresholdModal()">添加</button>
+                                <button class="btn btn-default" onclick="updateThresholdModal()">修改</button>
+                                <button class="btn btn-default" onclick="deleteThresholdModal()">删除</button>
+                                <button class="btn btn-default" onclick="importThresholdModal()">导入</button>
 
                             </div>
                             <div id = "tridItem2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
@@ -642,6 +642,69 @@
                 </div>
             </div>
             <!-- roles model DIV END-->
+
+            <!-- threshold model DIV-->
+            <div class="add-threshold" id="add-threshold-modal">
+                <div id="dtid" style="display: none"> </div>
+                <div class="add-threshold-one-line">
+                    <div class="add-threshold-item">
+                        <div class="add-threshold-title">参数名称</div>
+                        <input id="thresholdname" class="form-control add-threshold-input" type="text">
+                    </div>
+
+                    <div class="add-threshold-item">
+                        <div class="add-threshold-title">参数分类</div>
+                        <select class="form-control location-select-item" id="thresholdtype" name="thresholdtype" onclick="">
+                            <option value="IDP">IDP</option>
+                            <option value="UPS">UPS</option>
+                            <option value="蓄电池">蓄电池</option>
+                            <option value="柴油发电机">柴油发电机</option>
+                            <option value="空调">空调</option>
+                            <option value="其他传感器">其他传感器</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="add-threshold-one-line">
+                    <div class="add-threshold-item">
+                        <div class="add-threshold-title">单位</div>
+                        <input id="thresholdunit" class="form-control add-threshold-input" type="text">
+                    </div>
+                    <div class="add-threshold-item">
+                        <div class="add-threshold-title">标准值</div>
+                        <input id="thresholdstandval" class="form-control add-threshold-input" type="text">
+                    </div>
+                    <div class="add-threshold-item">
+                        <div class="add-threshold-title">上限值</div>
+                        <input id="thresholdcellval" class="form-control add-threshold-input" type="text">
+                    </div>
+                    <div class="add-threshold-item">
+                        <div class="add-threshold-title">下限值</div>
+                        <input id="thresholdfloorval" class="form-control add-threshold-input" type="text">
+                    </div>
+                </div>
+                <div class="add-threshold-one-line">
+                    <div class="add-threshold-item">
+                        <div class="add-threshold-title">启用标识</div>
+                        <select class="form-control location-select-item" id="thresholdismark" name="thresholdismark" onclick="">
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </div>
+
+                    <div class="add-threshold-item">
+                        <div class="add-threshold-title">预警内容</div>
+                        <input id="thresholdalarmcontent" class="form-control add-threshold-input" type="text">
+                    </div>
+                </div>
+
+                <div class="add-threshold-handle">
+                    <button type="submit" class="btn btn-primary" id="add-threshold-handle" onclick="submitAddThreshold()">确定</button>
+                    <button type="submit" class="btn btn-primary" id="update-threshold-handle" onclick="submitUpdateThreshold()">确定</button>
+                    <button class="btn btn-default" onclick="hiddenThresholdModel()">取消</button>
+                </div>
+            </div>
+            <!-- threshold model DIV END-->
         </div>
 
     </section>
@@ -1014,6 +1077,8 @@
                 $("#tridItem3").hide();
                 $("#tridItem4").hide();
                 $("#tridItem5").hide();
+
+                hiddenThresholdModel();
 
                 $(document).ready(function() {
                     $("#tridsubItem1").click(function () {
@@ -1878,8 +1943,8 @@
 
     <!-- 限值管理-->
     <script type="text/javascript">
+        <!-- 查询限值 -->
         function testVolume(){
-            alert("限值管理");
             var devicename = $("#get-device-threshold-name").val();
 
             $.ajax({
@@ -1924,6 +1989,154 @@
                 }
             });
         }
+
+        <!-- 显示添加限值 model  -->
+        function AddThresholdModal(){
+            $('#add-threshold-modal').css('display', 'block');
+            $('#add-threshold-handle').css('display', 'block');
+            $('#update-threshold-handle').css('display', 'none');
+        }
+
+        <!-- 显示修改限值 model  -->
+        function updateThresholdModal(){
+            $('#add-threshold-modal').css('display', 'block');
+            $('#add-threshold-handle').css('display', 'none');
+            $('#update-threshold-handle').css('display', 'block');
+
+            //显示信息到div
+            var dtidck = $("input[name='dtid']:checked").serialize();
+
+            $.ajax({
+                type: "post",
+                url: "getOneDeviceThreshold",
+                data: {
+                    dtid: dtidck
+                },
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+
+                    var list = JSON.parse(data);
+                    var userdata = list['devicesThreshold'];
+
+                    $("#thresholdname").val(userdata.name);
+                    $("#thresholdtype").val(userdata.type);
+                    $("#thresholdunit").val(userdata.unit);
+                    $("#thresholdcellval").val(userdata.cellval);
+                    $("#thresholdfloorval").val(userdata.floorval);
+                    $("#thresholdismark").val(userdata.ismark);
+                    $("#thresholdalarmcontent").val(userdata.alarmcontent);
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+
+        }
+
+        <!-- 隐藏限值 model  -->
+        function hiddenThresholdModel(){
+            $('#add-threshold-modal').css('display', 'none');
+            $('#add-threshold-handle').css('display', 'none');
+            $('#update-threshold-handle').css('display', 'none');
+        }
+
+        <!-- 提交添加限值 model  -->
+        function submitAddThreshold(){
+
+            var name = $("#thresholdname").val();
+            var type = $("#thresholdtype").val();
+            var unit = $("#thresholdunit").val();
+            var standval = $("#thresholdstandval").val();
+            var cellval = $("#thresholdcellval").val();
+            var floorval = $("#thresholdfloorval").val();
+            var ismark = $("#thresholdismark").val();
+            var alarmcontent = $("#thresholdalarmcontent").val();
+
+            $.ajax({
+                    type: "post",
+                    url: "addThresholdInfo",
+                    data: {
+                        name: name,
+                        type: type,
+                        unit: unit,
+                        standval: standval,
+                        cellval: cellval,
+                        floorval: floorval,
+                        ismark: ismark,
+                        alarmcontent: alarmcontent
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data);
+                        hiddenThresholdModel();
+                        //getALLUserInfomation();
+                    },
+                    error: function () {
+                        alert("新增失败");
+                    }
+                });
+        }
+
+        <!-- 提交修改限值 model  -->
+        function submitUpdateThreshold(){
+            var dtid=$("#dtid").val();
+            var name=$("#name").val();
+            var type=$("#type").val();
+            var unit=$("#unit").val();
+            var standval=$("#standval").val();
+            var cellval=$("#cellval").val();
+            var floorval=$("#floorval").val();
+            var ismark=$("#ismark").val();
+            var alarmcontent=$("#alarmcontent").val();
+
+            $.ajax({
+                type: "post",
+                url: "updateOneDeviceThreshold",
+                data: {
+                    dtid: dtidck,
+                    name: name,
+                    type: type,
+                    unit: unit,
+                    standval: standval,
+                    cellval: cellval,
+                    floorval: floorval,
+                    ismark: ismark,
+                    alarmcontent: alarmcontent
+                },
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+
+                    var list = JSON.parse(data);
+                    var userdata = list['devicesThreshold'];
+
+                    $("#thresholdname").val(userdata.name);
+                    $("#thresholdtype").val(userdata.type);
+                    $("#thresholdunit").val(userdata.unit);
+                    $("#thresholdcellval").val(userdata.cellval);
+                    $("#thresholdfloorval").val(userdata.floorval);
+                    $("#thresholdismark").val(userdata.ismark);
+                    $("#thresholdalarmcontent").val(userdata.alarmcontent);
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+
+        }
+
+        <!-- 删除限值 model  -->
+        function deleteThresholdModal(){
+
+        }
+
+        <!-- 导入限值 model  -->
+        function importThresholdModal(){
+
+        }
+
+
     </script>
 
     <!-- 正则表达式-->

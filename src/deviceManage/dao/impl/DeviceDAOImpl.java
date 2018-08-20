@@ -68,4 +68,63 @@ public class DeviceDAOImpl implements DeviceDAO {
         return rt;
     }
 
+    public Integer getMaxThresholdId(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        DevicesThreshold kl = (DevicesThreshold)hbsessionDao.getFirst(
+                "FROM DevicesThreshold order by dtid desc");
+
+        return kl.getDtid();
+    }
+
+    public Boolean addThresholdInfo(Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark,String alarmcontent){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        DevicesThreshold dt = new DevicesThreshold();
+        dt.setDtid(dtid);
+        dt.setName(name);
+        dt.setType(type);
+        dt.setUnit(unit);
+        dt.setStandardval(standval);
+        dt.setCellval(cellval);
+        dt.setFloorval(floorval);
+        dt.setIsMark(ismark);
+        dt.setAlarmcontent(alarmcontent);
+
+        rt = hbsessionDao.insert(dt);
+        return rt;
+    }
+
+    public DevicesThreshold getDeviceThreshold(String dtid){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        DevicesThreshold dt = (DevicesThreshold)hbsessionDao.getFirst(
+                "FROM DevicesThreshold where dtid='"+ dtid +"'");
+
+        return dt;
+    }
+
+    public Boolean updateDeviceThreshold(String dtid,String name,String type,String unit, Double standval, Double cellval, Double floorval, Integer ismark, String alarmcontent){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = false;
+        DevicesThreshold kl = getDeviceThreshold(dtid);
+
+        kl.setName(name);
+        kl.setType(type);
+        kl.setUnit(unit);
+        kl.setStandardval(standval);
+        kl.setCellval(cellval);
+        kl.setFloorval(floorval);
+        kl.setIsMark(ismark);
+        kl.setAlarmcontent(alarmcontent);
+
+        String hql = "update DevicesThreshold kl set kl.name='" + name + "' where kl.dtid='" + dtid + "'";
+
+        rt = hbsessionDao.update(kl, hql);
+        return rt;
+    }
+
+
 }

@@ -6,7 +6,7 @@
 
     <class name="hibernatePOJO.PowersxdyMonitor" table="powersxdy_monitor" schema="test">
         <id name="sxid">
-            <column name="sxid" sql-type="varchar(255)"/>
+            <column name="sxid" sql-type="int(11)"/>
         </id>
         <property name="mpid">
             <column name="mpid" sql-type="int(11)"/>
@@ -76,42 +76,6 @@
         </property>
         <property name="vunb">
             <column name="Vunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
-        </property>
-        <property name="a1">
-            <column name="A1" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="a2">
-            <column name="A2" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="a3">
-            <column name="A3" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="angleA1">
-            <column name="angleA1" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="angleA2">
-            <column name="angleA2" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="angleA3">
-            <column name="angleA3" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="phiU1">
-            <column name="PhiU1" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="phiU2">
-            <column name="PhiU2" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="phiU3">
-            <column name="PhiU3" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="phiI1">
-            <column name="PhiI1" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="phiI2">
-            <column name="PhiI2" sql-type="float(255)" precision="255" not-null="true"/>
-        </property>
-        <property name="phiI3">
-            <column name="PhiI3" sql-type="float(255)" precision="255" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

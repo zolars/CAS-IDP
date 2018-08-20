@@ -5,152 +5,20 @@
 <hibernate-mapping>
 
     <class name="hibernatePOJO.DictionaryPlus" table="dictionary_plus" schema="test">
-        <id name="part1Slaveid">
-            <column name="part1_slaveid" sql-type="int(255)"/>
+        <id name="part">
+            <column name="part" sql-type="int(255)"/>
         </id>
-        <property name="part1Functioncode">
-            <column name="part1_functioncode" sql-type="int(255)" not-null="true"/>
+        <property name="slaveid">
+            <column name="slaveid" sql-type="int(255)" not-null="true"/>
         </property>
-        <property name="part1Start">
-            <column name="part1_start" sql-type="int(255)" not-null="true"/>
+        <property name="functioncode">
+            <column name="functioncode" sql-type="int(255)" not-null="true"/>
         </property>
-        <property name="part1Length">
-            <column name="part1_length" sql-type="int(255)" not-null="true"/>
+        <property name="start">
+            <column name="start" sql-type="int(255)" not-null="true"/>
         </property>
-        <property name="part2Slaveid">
-            <column name="part2_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part2Functioncode">
-            <column name="part2_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part2Start">
-            <column name="part2_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part2Length">
-            <column name="part2_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part3Slaveid">
-            <column name="part3_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part3Functioncode">
-            <column name="part3_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part3Start">
-            <column name="part3_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part3Length">
-            <column name="part3_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part4Slaveid">
-            <column name="part4_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part4Functioncode">
-            <column name="part4_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part4Start">
-            <column name="part4_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part4Length">
-            <column name="part4_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part5Slaveid">
-            <column name="part5_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part5Functioncode">
-            <column name="part5_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part5Start">
-            <column name="part5_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part5Length">
-            <column name="part5_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part6Slaveid">
-            <column name="part6_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part6Functioncode">
-            <column name="part6_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part6Start">
-            <column name="part6_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part6Length">
-            <column name="part6_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part7Slaveid">
-            <column name="part7_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part7Functioncode">
-            <column name="part7_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part7Start">
-            <column name="part7_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part7Length">
-            <column name="part7_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part8Slaveid">
-            <column name="part8_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part8Functioncode">
-            <column name="part8_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part8Start">
-            <column name="part8_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part8Length">
-            <column name="part8_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part9Slaveid">
-            <column name="part9_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part9Functioncode">
-            <column name="part9_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part9Start">
-            <column name="part9_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part9Length">
-            <column name="part9_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part10Slaveid">
-            <column name="part10_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part10Functioncode">
-            <column name="part10_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part10Start">
-            <column name="part10_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part10Length">
-            <column name="part10_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part11Slaveid">
-            <column name="part11_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part11Functioncode">
-            <column name="part11_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part11Start">
-            <column name="part11_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part11Length">
-            <column name="part11_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part12Slaveid">
-            <column name="part12_slaveid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part12Functioncode">
-            <column name="part12_functioncode" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part12Start">
-            <column name="part12_start" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part12Length">
-            <column name="part12_length" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="part2Funtioncode">
-            <column name="part2_funtioncode" sql-type="varchar(255)"/>
+        <property name="length">
+            <column name="length" sql-type="int(255)" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

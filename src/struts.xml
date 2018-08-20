@@ -348,6 +348,30 @@
              </result>
          </action>
 
+         <action name="addThresholdInfo" class="deviceManage.action.addThresholdInfoAction">
+             <!--addThresholdInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getOneDeviceThreshold" class="deviceManage.action.getOneDeviceThresholdAction">
+             <!--getOneDeviceThreshold -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="updateOneDeviceThreshold" class="deviceManage.action.updateOneDeviceThresholdAction">
+             <!--updateOneDeviceThreshold -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
      </package>
 
 

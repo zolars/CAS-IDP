@@ -1,12 +1,20 @@
 package hibernatePOJO;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class Dictionary {
     private int id;
     private String item;
     private Integer coefficient;
     private String description;
+
+    @Id
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -15,6 +23,8 @@ public class Dictionary {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "item", nullable = true, length = 255)
     public String getItem() {
         return item;
     }
@@ -23,6 +33,8 @@ public class Dictionary {
         this.item = item;
     }
 
+    @Basic
+    @Column(name = "coefficient", nullable = true)
     public Integer getCoefficient() {
         return coefficient;
     }
@@ -31,6 +43,8 @@ public class Dictionary {
         this.coefficient = coefficient;
     }
 
+    @Basic
+    @Column(name = "description", nullable = true, length = 255)
     public String getDescription() {
         return description;
     }
