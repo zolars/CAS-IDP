@@ -91,7 +91,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>--%>
 
                         <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                            <button id="test" onclick="test()">测试'查看历史曲线'</button>
+
+                            <button id="test1" onclick="test1()">测试'电流电压历史曲线'</button>
+                            <button id="test2" onclick="test2()">测试'频率历史曲线'</button>
+                            <button id="test3" onclick="test3()">测试'功率历史曲线'</button>
+                            <button id="test4" onclick="test4()">测试'浪涌塌陷历史曲线'</button>
+
+
                             <div class="col-md-2">
                                 <select id='item2-menu' class="form-control">
                                     <option value="item2-1">电压/电流</option>
@@ -376,7 +382,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     </script>
 
-    <!-- 根据类型、监测点、时间范围查看历史曲线 -->
+   <%-- <!-- 根据类型、监测点、时间范围查看历史曲线 -->
     <script type="text/javascript">
         function test(){
             alert("根据类型、监测点、时间范围查看历史曲线");
@@ -401,7 +407,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             });
         }
-    </script>
+    </script>--%>
 
     <!-- 动态加载菜单项 -->
     <!-- jstree-->
@@ -1035,6 +1041,97 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             getData();
         })();
     </script>
+
+    <!-- test-->
+    <script type="text/javascript">
+        var mpid = 1;
+
+        function test1() {
+            $.ajax({
+                type: "post",
+                url: "getHisUI",
+                data: {
+                    starttime: "2018-2-1 10：00：00",  // 2018-2-1 10：00：00
+                    endtime: "2018-10-5 10：00：00",  // 2018-7-5 10：00：00
+                    monitorpointid: mpid
+                },
+                dataType: "json",
+                success: function (data) {
+                    var listu = data.allhisU;
+                    alert("电压数据:"+listu);
+                    var listi = data.allhisI;
+                    alert("电流数据:"+listi);
+
+                },
+                error: function () {
+                    alert("获取电压电流数据失败");
+                }
+            });
+        }
+
+        function test2() {
+            $.ajax({
+                type: "post",
+                url: "getHisHz",
+                data: {
+                    starttime: "2018-2-1 10：00：00",  // 2018-2-1 10：00：00
+                    endtime: "2018-10-5 10：00：00",  // 2018-7-5 10：00：00
+                    monitorpointid: mpid
+                },
+                dataType: "json",
+                success: function (data) {
+                    var listhz = data.allhisHz;
+                    alert("频率数据:"+listhz);
+                },
+                error: function () {
+                    alert("获取频率数据失败");
+                }
+            });
+        }
+
+        function test3() {
+            $.ajax({
+                type: "post",
+                url: "getHisGL",
+                data: {
+                    starttime: "2018-2-1 10：00：00",  // 2018-2-1 10：00：00
+                    endtime: "2018-10-5 10：00：00",  // 2018-7-5 10：00：00
+                    monitorpointid: mpid
+                },
+                dataType: "json",
+                success: function (data) {
+                    var listgl = data.allhisGL;
+                    alert("功率数据:"+listgl);
+                },
+                error: function () {
+                    alert("获取功率数据失败");
+                }
+            });
+        }
+
+        function test4() {
+            $.ajax({
+                type: "post",
+                url: "getHisLYTX",
+                data: {
+                    starttime: "2018-2-1 10：00：00",  // 2018-2-1 10：00：00
+                    endtime: "2018-10-5 10：00：00",  // 2018-7-5 10：00：00
+                    monitorpointid: mpid
+                },
+                dataType: "json",
+                success: function (data) {
+                    alert("浪涌塌陷数据"+data);
+                },
+                error: function () {
+                    alert("获取浪涌塌陷数据失败");
+                }
+            });
+        }
+
+
+
+    </script>
+
 </body>
 
 </html>
