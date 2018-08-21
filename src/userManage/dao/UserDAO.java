@@ -16,7 +16,7 @@ public interface UserDAO {
 
     public List<Object> getCityBank(int pbid);
 
-    public List<Object> getComputerroom(String cbname);
+    public List getComputerroom(String cbname);
 
     public String getProBankName(String pbid);
 

@@ -90,19 +90,19 @@ public class UserDAOImpl implements UserDAO {
         return cblist;
     }
 
-    public List<Object> getComputerroom(String cbname){
+    public List getComputerroom(String cbname){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<Object> crlist = new ArrayList<>();
+        List<Computerroom> crlist = new ArrayList<>();
 
         CityBank cb = (CityBank)hbsessionDao.getFirst(
                 "FROM CityBank where cbname = '" + cbname+ "'");
 
         String comroomset = cb.getCompRoom();
-        String[] coroomstr= comroomset.split(",");
+        String[] coroomstr= comroomset.split("，");
         for(int i = 0; i < coroomstr.length; i++) {
             Computerroom cp = (Computerroom)hbsessionDao.getFirst(
                     "FROM Computerroom where rid = '" + coroomstr[i] + "'");
-            crlist.add((Object)cp);
+            crlist.add(cp);
         }
 
         return crlist;

@@ -108,7 +108,7 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
 
                     DataOutput.setDataset(map);
 
-                    if(cishu % 10 == 0) {
+                    if(cishu % 12 == 0) {
                         DataOutput.savedata();
                     }
                 }

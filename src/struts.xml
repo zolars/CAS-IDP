@@ -374,38 +374,13 @@
 
 
          <!--获取历史数据开始-->
-         <action name="getHisUI" class="historyData.action.getHisUIAction">
-             <!--getHisUI -->
+         <action name="getHisData" class="historyData.action.getHisAction">
+             <!--getHisData -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>
              </result>
          </action>
-
-         <action name="getHisHz" class="historyData.action.getHisHzAction">
-             <!--getHisHz -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getHisGL" class="historyData.action.getHisGLAction">
-             <!--getHisGL -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getHisLYTX" class="historyData.action.getHisLYTXAction">
-             <!--getHisLYTX -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
          <!--获取历史数据结束-->
 
 
