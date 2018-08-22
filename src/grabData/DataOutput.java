@@ -1,6 +1,8 @@
 package grabData;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,14 +15,17 @@ import hibernatePOJO.PowerxbMonitor;
 public class DataOutput {
     public static Map<String,Float> dataset=null;
     private static List<Dictionary> dic=DataOnline.dic;
+
+    public static PowerparmMonitor var = new PowerparmMonitor();
+    public static PowerxbMonitor varxb = new PowerxbMonitor();
+    public static PowersxdyMonitor varsxdy = new PowersxdyMonitor();
+
     public static void setDataset(Map<String, Float> dataset) {
         DataOutput.dataset = dataset;
     }
 
-    public static void savedata(){
-        PowerparmMonitor var = new PowerparmMonitor();
-        PowerxbMonitor varxb = new PowerxbMonitor();
-        PowersxdyMonitor varsxdy = new PowersxdyMonitor();
+    public static void setdata(){
+
         int count =0;
 
         //基本参量
@@ -764,28 +769,39 @@ public class DataOutput {
         varsxdy.setAngleV2(defzero);
         varsxdy.setAngleV3(defzero);
         varsxdy.setVunb(defzero);
-
-        boolean rt = false;
-        rt = hbsessionDao.insert(var);
-
-        boolean xbrt = false;
-        xbrt = hbsessionDao.insert(varxb);
-
-        boolean sxdyrt = false;
-        sxdyrt = hbsessionDao.insert(varsxdy);
-
-        if(rt)
-            System.out.println("存取parm数据成功");
-        else  System.out.println("存取parm数据失败");
-
-        if(xbrt)
-            System.out.println("存取xb数据成功");
-        else  System.out.println("存取xb数据失败");
-
-        if(sxdyrt)
-            System.out.println("存取sxdy数据成功");
-        else  System.out.println("存取sxdy数据失败");
-
     }
 
+    public static void savedata(){
+            System.out.println("++++++++++++++++++++++TIME:" + new Date().getTime());
+
+            HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+            boolean rt = false;
+            rt = hbsessionDao.insert(var);
+
+            boolean xbrt = false;
+            xbrt = hbsessionDao.insert(varxb);
+
+            boolean sxdyrt = false;
+            sxdyrt = hbsessionDao.insert(varsxdy);
+
+            if(rt)
+                System.out.println("存取parm数据成功");
+            else  System.out.println("存取parm数据失败");
+
+            if(xbrt)
+                System.out.println("存取xb数据成功");
+            else  System.out.println("存取xb数据失败");
+
+            if(sxdyrt)
+                System.out.println("存取sxdy数据成功");
+            else  System.out.println("存取sxdy数据失败");
+
+     ////   } catch (InterruptedException e) {
+     //       e.printStackTrace();
+      //  }
+
+
+
+    }
 }

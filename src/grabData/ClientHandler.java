@@ -30,6 +30,10 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
     private static int part=0;
     private static int count=0;
     private static int cishu=0;
+
+    private static boolean aaa = true;
+
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
        // System.out.println("正在连接");
@@ -63,8 +67,6 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
 //                System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));
             }
         });
-
-
     }
 
 
@@ -91,7 +93,6 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
 //                System.out.println("可读字节数@@@@@@@："+recMsg.readableBytes());
 //                return;
 
-
               //  System.out.println("已接收：part:" + part + "start:" + addr[part] + "length" + len[part]);
               //  System.out.println("接收长度" + recMsg.capacity());
               //  System.out.println("rec:" + ByteBufUtil.hexDump(recMsg));//打印接收数据
@@ -108,10 +109,21 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
 
                     DataOutput.setDataset(map);
 
-                    if(cishu % 12 == 0) {
-                        DataOutput.savedata();
+                    DataOutput.setdata();
+
+                    if(cishu % 6 == 0) {
+                        DataOutput.savedata();//DataOnline.time);
                     }
+
+                    /*while(aaa){
+                        saveDataToMysql(time);
+                    }*/
+                    //if(cishu % 12 == 0) {
+                      //  DataOutput.savedata();
+
+                  //  }
                 }
+
                 //System.out.println("开始请求：part:" + part + "start:" + addr[part] + "length" + len[part]);
                 ByteBuf sendMsg = ctx.alloc().buffer(12);
                 sendMsg.writeBytes(createMsg(slaveId[part], fCode[part], addr[part], len[part]));
@@ -125,6 +137,8 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
                     }
                 });
             }
+
+
     }
 
     @Override
@@ -151,11 +165,9 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
     }
     public void dataResolve(ByteBuf buf,int addr,int len){
 
-
         //System.out.println("可读字节数："+buf.readableBytes());
        // System.out.printf("map size:"+map.size());
        // System.out.println(addr+"______"+len);
-
 
         float temp=0;
         buf.skipBytes(9);//跳过前9个字节，与数据无关
@@ -166,7 +178,22 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
         }
         //System.out.println("map:"+map.toString());
         DataOnline.setData(map);
-       // System.out.println("##################################################");
-       // System.out.println(DataOnline.getData());
+        System.out.println("##################################################");
+        System.out.println(DataOnline.getData());
     }
+
+   /* public static void saveDataToMysql(Long time){
+
+        try {
+            Thread.sleep(time);
+            DataOutput.savedata();
+            System.out.println("##################################################" + DataOutput.dataset);
+            aaa = false;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }*/
+
+
 }

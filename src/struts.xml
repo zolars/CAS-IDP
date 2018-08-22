@@ -383,7 +383,13 @@
          </action>
          <!--获取历史数据结束-->
 
-
+         <action name="test1" class="onlineTest.test1">
+             <!--test1 -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
 
      </package>
 

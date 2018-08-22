@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="grabData.DataOnline" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -262,6 +263,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </section>
@@ -396,6 +398,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
+                    mpcname = 1;
                     if(mpcname) getDataXb(mpcname);
 
                 });
@@ -1462,10 +1465,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {monitorpointid: mpid},
                 dataType: "json",
                 success: function (data) {
-                    console.log("获取三相电压数据"+data);
-                    // 数据先暂存起来
-                    dataSxbphd = JSON.parse(data);
-                    //updateSxdyt(dataSxbphd);
+                    var obj = JSON.parse(data);
+                    dataSxbphd = obj.nowpowersxdy;
+                    updateSxdyt(dataSxbphd);
                     // 设置显示的系列
                     $("#item3-sidebar ol li button.active").trigger("click");
                 },
@@ -1481,67 +1483,67 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             updateSxdyt2(data);
             // 计算指针长度，并用数组存起来
             var pointerLength = [];
-            pointerLength.push(floatToPercent(data[0]["u1"] / maxAmplitude));
-            pointerLength.push(floatToPercent(data[0]["u2"] / maxAmplitude));
-            pointerLength.push(floatToPercent(data[0]["u3"] / maxAmplitude));
-            pointerLength.push(floatToPercent(data[0]["v1"] / maxAmplitude));
-            pointerLength.push(floatToPercent(data[0]["v2"] / maxAmplitude));
-            pointerLength.push(floatToPercent(data[0]["v3"] / maxAmplitude));
-            pointerLength.push(floatToPercent(data[0]["a1"] / maxAmplitude));
-            pointerLength.push(floatToPercent(data[0]["a2"] / maxAmplitude));
-            pointerLength.push(floatToPercent(data[0]["a3"] / maxAmplitude));
+            pointerLength.push(floatToPercent(data["u1"] / maxAmplitude));
+            pointerLength.push(floatToPercent(data["u2"] / maxAmplitude));
+            pointerLength.push(floatToPercent(data["u3"] / maxAmplitude));
+            pointerLength.push(floatToPercent(data["v1"] / maxAmplitude));
+            pointerLength.push(floatToPercent(data["v2"] / maxAmplitude));
+            pointerLength.push(floatToPercent(data["v3"] / maxAmplitude));
+            pointerLength.push(floatToPercent(data["a1"] / maxAmplitude));
+            pointerLength.push(floatToPercent(data["a2"] / maxAmplitude));
+            pointerLength.push(floatToPercent(data["a3"] / maxAmplitude));
             // 更新图
             eventChart3.setOption({
                 series: [
                     {
                         name: "U1",
                         pointer: {length: pointerLength[0]},
-                        data: [{value: data[0]["angleU1"]}]
+                        data: [{value: data["angleU1"]}]
                     },
                     {
                         name: "U2",
                         pointer: {length: pointerLength[1]},
-                        data: [{value: data[0]["angleU2"]}]
+                        data: [{value: data["angleU2"]}]
                     },
                     {
                         name: "U3",
                         pointer: {length: pointerLength[2]},
-                        data: [{value: data[0]["angleU3"]}]
+                        data: [{value: data["angleU3"]}]
                     },
                     {
                         name: "V1",
                         pointer: {length: pointerLength[3]},
-                        data: [{value: data[0]["angleV1"]}]
+                        data: [{value: data["angleV1"]}]
                     },
                     {
                         name: "V2",
                         pointer: {length: pointerLength[4]},
-                        data: [{value: data[0]["angleV2"]}]
+                        data: [{value: data["angleV2"]}]
                     },
                     {
                         name: "V3",
                         pointer: {length: pointerLength[5]},
-                        data: [{value: data[0]["angleV3"]}]
+                        data: [{value: data["angleV3"]}]
                     },
                     {
                         name: "A1",
                         pointer: {length: pointerLength[6]},
-                        data: [{value: data[0]["angleA1"]}]
+                        data: [{value: data["angleA1"]}]
                     },
                     {
                         name: "A2",
                         pointer: {length: pointerLength[7]},
-                        data: [{value: data[0]["angleA2"]}]
+                        data: [{value: data["angleA2"]}]
                     },
                     {
                         name: "A3",
                         pointer: {length: pointerLength[8]},
-                        data: [{value: data[0]["angleA3"]}]
+                        data: [{value: data["angleA3"]}]
                     }
                 ]
             });
             // 更新时间
-            $("#item3-realtime span").html(dateFormat(new Date(data[0]["time"]), "yyyy-mm-dd  hh:MM:ss"));
+            $("#item3-realtime span").html(dateFormat(new Date(data["time"]), "yyyy-mm-dd  hh:MM:ss"));
 
         }
         // 更新三相电压、电流图左侧显示的文字
@@ -1555,16 +1557,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 case "A" : {
                     // 更新幅值
                     $("#item3-text-name1").html(value + "1");
-                    $("#item3-text-value1").html(data[0][value.toLowerCase() + "1"]);
+                    $("#item3-text-value1").html(data[value.toLowerCase() + "1"]);
                     $("#item3-text-name2").html(value + "2");
-                    $("#item3-text-value2").html(data[0][value.toLowerCase() + "2"]);
+                    $("#item3-text-value2").html(data[value.toLowerCase() + "2"]);
                     $("#item3-text-name3").html(value + "3");
-                    $("#item3-text-value3").html(data[0][value.toLowerCase() + "3"]);
+                    $("#item3-text-value3").html(data[value.toLowerCase() + "3"]);
                     // 更新相位差
                     $("#item3-text ol.diff").show();
-                    $("#item3-text-diff1").html(data[0]["angle" + value + "2"] - data[0]["angle" + value + "1"]);
-                    $("#item3-text-diff2").html(data[0]["angle" + value + "3"] - data[0]["angle" + value + "2"]);
-                    $("#item3-text-diff3").html(data[0]["angle" + value + "1"] - data[0]["angle" + value + "3"]);
+                    $("#item3-text-diff1").html(data["angle" + value + "2"] - data["angle" + value + "1"]);
+                    $("#item3-text-diff2").html(data["angle" + value + "3"] - data["angle" + value + "2"]);
+                    $("#item3-text-diff3").html(data["angle" + value + "1"] - data["angle" + value + "3"]);
                     break;
                 }
                 case "1" :
@@ -1572,11 +1574,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 case "3" : {
                     // 更新幅值
                     $("#item3-text-name1").html("U" + value);
-                    $("#item3-text-value1").html(data[0]["u" + value]);
+                    $("#item3-text-value1").html(data["u" + value]);
                     $("#item3-text-name2").html("V" + value);
-                    $("#item3-text-value2").html(data[0]["v" + value]);
+                    $("#item3-text-value2").html(data["v" + value]);
                     $("#item3-text-name3").html("A" + value);
-                    $("#item3-text-value3").html(data[0]["a" + value]);
+                    $("#item3-text-value3").html(data["a" + value]);
                     // 隐藏相位差
                     $("#item3-text ol.diff").hide();
                     break;
@@ -1610,12 +1612,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         // 获取参数值
         function getDataParams(mpid) {
+            alert("ggg");
             $.ajax({
                 type: "post",
                 url: "getParameter",
                 data: {monitorpointid: mpid},
                 success: function(data){
-                    updateParams((JSON.parse(data))[0]);
+                    //console.log("getparameter: "+data);
+                    var obj = JSON.parse(data);
+                    var rt = obj.nowpowerparm;
+                    //updateParams((JSON.parse(data))[0]);
+                    updateParams(rt);
                 },
                 error: function(){
                     alert("获取参数值失败")
@@ -1726,6 +1733,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 getDataParams(opt);
         }
     });
+    </script>
+    <script type="text/javascript">
+            $.ajax({
+                type: "post",
+                url: "test1",
+                data: {monitorpointid: 1},
+                success: function(data){
+                    alert("succcc"+data);
+                },
+                error: function(){
+                    alert("失败")
+                }
+            });
     </script>
 
 

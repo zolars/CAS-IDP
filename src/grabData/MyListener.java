@@ -27,7 +27,7 @@ public class MyListener implements ServletContextListener {
                 public void run() {
                     while (!this.isInterrupted()) {// 线程未中断执行循环
                         try {
-                            Thread.sleep(50000); //每隔50000ms执行一次
+                            Thread.sleep(1000); //每隔50000ms执行一次
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

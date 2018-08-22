@@ -12,6 +12,9 @@ public class DataOnline {
     public static List<Dictionary> dic=null;
     public static List<DictionaryPlus> dicPlus=null;
 
+    //public static Long time = new Long(5000); //default 5000ms
+    //public static Integer time = 6;
+
     public static String getData() {
         return data;
     }
