@@ -111,7 +111,7 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
 
                     DataOutput.setdata();
 
-                    if(cishu % 6 == 0) {
+                    if(cishu % 12 == 0) {
                         DataOutput.savedata();//DataOnline.time);
                     }
 

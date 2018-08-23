@@ -20,6 +20,8 @@ public class DataOutput {
     public static PowerxbMonitor varxb = new PowerxbMonitor();
     public static PowersxdyMonitor varsxdy = new PowersxdyMonitor();
 
+    public static HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
     public static void setDataset(Map<String, Float> dataset) {
         DataOutput.dataset = dataset;
     }
@@ -712,7 +714,6 @@ public class DataOutput {
         varxb.setI3Va49(dataset.get("I3va_49"));
         varxb.setI3Va50(dataset.get("I3va_50"));
 
-
         //当前时间、检测设备id、maxID
         Timestamp currenttime = new Timestamp(System.currentTimeMillis());
 
@@ -723,8 +724,6 @@ public class DataOutput {
         var.setMpid(1);
         varxb.setMpid(1);
         varsxdy.setMpid(1);
-
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PowerparmMonitor pp = (PowerparmMonitor)hbsessionDao.getFirst(
                 "FROM PowerparmMonitor order by ppid desc");

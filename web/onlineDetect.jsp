@@ -105,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="row">
                             <div class="col-md-11">
                                 <div id="item1-params-list" class="row">
-                                    <div class="col-md-7">
+                                    <%--//<div class="col-md-7">--%>
                                         <ol>
                                             <li><input type="radio" name="params" id="item1-rms">RMS</li>
                                             <li><input type="radio" name="params" id="item1-thd">THD</li>
@@ -116,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <li><input type="radio" name="params" id="item1-var">Var</li>
                                             <li><input type="radio" name="params" id="item1-pf">PF</li>
                                         </ol>
-                                    </div>
+                                  <%-- // </div>--%>
                                     <div class="col-md-5">
                                         <ol>
                                             <li><input type="radio" name="params" id="item1-unb">unb%</li>
@@ -129,21 +129,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                                 <div class="row">
                                     <div id="item1-params-text" class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                A1RMS<input type="checkbox">AVG=0 MIN=0 MAX=0
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                A2RMS<input type="checkbox">AVG=0 MIN=0 MAX=0
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                A3RMS<input type="checkbox">AVG=0 MIN=0 MAX=0
-                                            </div>
-                                        </div>
+                                        <ul>
+                                            <li>
+                                                <input type="checkbox" value='max'>AVG=0 MIN=0 MAX=0
+                                                <input type="checkbox" value='min'>AVG=0 MIN=0 MAX=0
+                                                <input type="checkbox" value='average'>AVG=0 MIN=0 MAX=0
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -151,24 +143,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
                             <div id="item1-sidebar" class="col-md-1">
+                                <div class="clearfix"></div>
                                 <ol>
                                     <li>
-                                        <button class="btn btn-default">3U</button>
+                                        <button value="U" class="btn btn-default active">3U</button>
                                     </li>
                                     <li>
-                                        <button class="btn btn-default">3V</button>
+                                        <button value="V" class="btn btn-default">3V</button>
                                     </li>
                                     <li>
-                                        <button class="btn btn-default">3A</button>
+                                        <button value="A" class="btn btn-default">3A</button>
                                     </li>
                                     <li>
-                                        <button class="btn btn-default">L1</button>
+                                        <button value="1" class="btn btn-default">L1</button>
                                     </li>
                                     <li>
-                                        <button class="btn btn-default">L2</button>
+                                        <button value="2" class="btn btn-default">L2</button>
                                     </li>
                                     <li>
-                                        <button class="btn btn-default">L3</button>
+                                        <button value="3" class="btn btn-default">L3</button>
                                     </li>
                                 </ol>
                             </div>
@@ -388,8 +381,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
+                    mpcname = 1;
                     if(mpcname) getDataQst(mpcname);
-
                 });
                 $("#subItem2").click(function(){
                     $("#item1").hide();
@@ -400,7 +393,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var mpcname = $("#monitorpnt").val();
                     mpcname = 1;
                     if(mpcname) getDataXb(mpcname);
-
                 });
                 $("#subItem3").click(function(){
                     $("#item1").hide();
@@ -409,10 +401,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
+                    mpcname = 1;
                     if(mpcname) //1.在别的子菜单已选mp
                         getDataSxdy(mpcname);
-                    else //2.在别的子菜单未选mp
-                        alert("choose monitor point!");
                 });
                 $("#subItem4").click(function(){
                     $("#item1").hide();
@@ -421,8 +412,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").show();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
+                    mpcname = 1;
                     if(mpcname) getDataParams(mpcname);
-
                 });
                 $("#subItem1").trigger("click");
             });
@@ -525,6 +516,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var sxbphdlegend = ["U1", "U2", "U3", "V1", "V2", "V3", "A1", "A2", "A3"]; // 三相不平衡度表的图例
         var maxAmplitude = 400; // 三相不平衡度表中幅值的最大值，用来计算指针长度
         var dataSxbphd = null; // 暂存三相不平衡度表中的数据
+
+        var markPointRMS={//rms最大值、最小值标注点
+            label: {formatter: '{a}{b}:{c}'},
+            data: []
+        };
+        var markLineRMS={//RMS平均值标注线
+            label: {formatter: '{a}{b}:{c}'},
+            data: []
+        };
+
+
         // 各个图的配置项
         var option1 = {
             legend: {
@@ -538,6 +540,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             },
             yAxis: {
                 type: 'value',
+                scale: true,
                 boundaryGap: [0, '100%'],
                 splitLine: {
                     show: false
@@ -547,26 +550,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 // RMS
                 {
                     name: "rmsU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                   // markPoint: markPointRMS, markLine: markLineRMS,
                     encode: {x: "time", y: "rmsU1"}
                 },
                 {
                     name: "rmsU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                  // markPoint: markPointRMS, markLine: markLineRMS,
                     encode: {x: "time", y: "rmsU3"}
                 },
                 {
                     name: "rmsU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                   // markPoint: markPointRMS, markLine: markLineRMS,
                     encode: {x: "time", y: "rmsU3"}
                 },
                 {
                     name: "rmsI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                  //  markPoint: markPointRMS, markLine: markLineRMS,
                     encode: {x: "time", y: "rmsI1"}
                 },
                 {
                     name: "rmsI2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                  //  markPoint: markPointRMS, markLine: markLineRMS,
                     encode: {x: "time", y: "rmsI2"}
                 },
                 {
                     name: "rmsI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                //    markPoint: markPointRMS, markLine: markLineRMS,
                     encode: {x: "time", y: "rmsI3"}
                 },
                 // THD
@@ -1271,6 +1280,72 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var eventChart1 = echarts.init(document.getElementById('item1-graph'));
         var eventChart2 = echarts.init(document.getElementById('item2'));
         var eventChart3 = echarts.init(document.getElementById('item3-graph'));
+
+        //事件绑定函数
+        function eventBanding(){
+            // 三相不平衡度表右侧按钮事件绑定
+            $("#item3-sidebar ol li button").each(function () {
+                $(this).click(function () {
+                    $("#item3-sidebar ol li button").removeClass("active");
+                    $(this).addClass("active");
+                    for (var i = 0; i < sxbphdlegend.length; i++) {
+                        if (sxbphdlegend[i].indexOf(this.value) >= 0) {
+                            // 显示对应的系列
+                            eventChart3.dispatchAction({
+                                type: "legendSelect",
+                                name: sxbphdlegend[i]
+                            });
+                        }
+                        else {
+                            // 隐藏其他系列
+                            eventChart3.dispatchAction({
+                                type: "legendUnSelect",
+                                name: sxbphdlegend[i]
+                            });
+                        }
+                    }
+                    // 更新图左侧文字
+                    updateSxdyt2(dataSxbphd);
+                });
+            });
+
+            // 趋势图右侧U\V\A选择栏事件
+            $("#item1-sidebar ol li button").each(function () {
+                $(this).click(function () {
+                    $("#item1-sidebar ol li button").removeClass("active");
+                    $(this).addClass("active");
+
+                    /*for (var i = 0; i < sxbphdlegend.length; i++) {
+                        if (sxbphdlegend[i].indexOf(this.value) >= 0) {
+                            // 显示对应的系列
+                            eventChart3.dispatchAction({
+                                type: "legendSelect",
+                                name: sxbphdlegend[i]
+                            });
+                        }
+                        else {
+                            // 隐藏其他系列
+                            eventChart3.dispatchAction({
+                                type: "legendUnSelect",
+                                name: sxbphdlegend[i]
+                            });
+                        }
+                    }*/
+                    // 更新图左侧文字
+                    //updateSxdyt2(dataSxbphd);
+                });
+            });
+
+
+            //绑定RMS图checkbox点击事件
+            $("#item1-params-text ul li input:checkbox").each(function(){
+                $(this).click(function () {
+                    alert("ddd...");
+                });
+            });
+
+        }
+
     </script>
 
     <%--趋势图相关函数 --%>
@@ -1283,7 +1358,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {monitorpointid: mpid},
                 dataType: "json",
                 success: function (data) {
+                   // console.log("QST： "+data);
+                    //console.log("JSON（QST）： "+JSON.parse(data));
                     addData(qstRecords, JSON.parse(data));
+                    //addData(qstRecords, data);
                     updateQst(qstRecords);
                 },
                 error: function () {
@@ -1293,7 +1371,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         // 更新趋势图
         function updateQst(data) {
-            window.console.log(data);
             eventChart1.setOption({
                 dataset: {
                     source: data
@@ -1302,74 +1379,80 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         // 添加数据
         function addData(qstRecords, newRecord) {
-            window.console.log(qstRecords);
+            //window.console.log(qstRecords);
+            //window.console.log(newRecord);
+            //window.console.log(newRecord["allHZ"]);
+            //alert(newRecord["allHZ"][0]["time"]);
+
             if (qstRecords.length > (60 * 12)) {
                 qstRecords.shift();
             }
             // 构造一条记录
-            var oneRecord = {
-                time: newRecord["allHZ"][0]["time"],
-                // RMS
-                rmsU1: newRecord["allRMS"][0]["u1Xb"],
-                rmsU2: newRecord["allRMS"][0]["u2Xb"],
-                rmsU3: newRecord["allRMS"][0]["u3Xb"],
-                rmsI1: newRecord["allRMS"][0]["i1Xb"],
-                rmsI2: newRecord["allRMS"][0]["i2Xb"],
-                rmsI3: newRecord["allRMS"][0]["i3Xb"],
-                // THD
-                thdU1: newRecord["allTHD"][0]["u1Xb"],
-                thdU2: newRecord["allTHD"][0]["u2Xb"],
-                thdU3: newRecord["allTHD"][0]["u3Xb"],
-                thdI1: newRecord["allTHD"][0]["i1Xb"],
-                thdI2: newRecord["allTHD"][0]["i2Xb"],
-                thdI3: newRecord["allTHD"][0]["i3Xb"],
-                // CF
-                cfU1: newRecord["allCF"][0]["u1Xb"],
-                cfU2: newRecord["allCF"][0]["u2Xb"],
-                cfU3: newRecord["allCF"][0]["u3Xb"],
-                cfI1: newRecord["allCF"][0]["i1Xb"],
-                cfI2: newRecord["allCF"][0]["i2Xb"],
-                cfI3: newRecord["allCF"][0]["i3Xb"],
-                // Hz
-                hz: newRecord["allHZ"][0]["hz"],
-                // W
-                p1: newRecord["allW"][0]["p1"],
-                p2: newRecord["allW"][0]["p2"],
-                p3: newRecord["allW"][0]["p3"],
-                // VA
-                s1: newRecord["allVA"][0]["s1"],
-                s2: newRecord["allVA"][0]["s2"],
-                s3: newRecord["allVA"][0]["s3"],
-                // Var
-                q1: newRecord["allVAR"][0]["q1"],
-                q2: newRecord["allVAR"][0]["q2"],
-                q3: newRecord["allVAR"][0]["q3"],
-                // PF
-                pf1: newRecord["allPF"][0]["pf1"],
-                pf2: newRecord["allPF"][0]["pf2"],
-                pf3: newRecord["allPF"][0]["pf3"],
-                // DPF
-                dpf1: newRecord["allDPF"][0]["cosPhi1"],
-                dpf2: newRecord["allDPF"][0]["cosPhi2"],
-                dpf3: newRecord["allDPF"][0]["cosPhi3"],
-                // Tan
-                tan1: newRecord["allTAN"][0],
-                tan2: newRecord["allTAN"][1],
-                tan3: newRecord["allTAN"][2],
-                // unb
-                unb: newRecord["allUNB"][0]["unb"],
-                // Pst
-                pstU1: newRecord["allPST"][0]["pstU1"],
-                pstU2: newRecord["allPST"][0]["pstU2"],
-                pstU3: newRecord["allPST"][0]["pstU3"],
-                // Plt
-                pltU1: newRecord["allPLT"][0]["pltU1"],
-                pltU2: newRecord["allPLT"][0]["pltU2"],
-                pltU3: newRecord["allPLT"][0]["pltU3"]
-                // vh
-                // Ah
-            };
-            qstRecords.push(oneRecord);
+            for(var i = 0; i < 3; i++){
+                var oneRecord = {
+                    time: newRecord["allHZ"][i]["time"],
+                    // RMS
+                    rmsU1: newRecord["allRMS"][i]["u1Xb"],
+                    rmsU2: newRecord["allRMS"][i]["u2Xb"],
+                    rmsU3: newRecord["allRMS"][i]["u3Xb"],
+                    rmsI1: newRecord["allRMS"][i]["i1Xb"],
+                    rmsI2: newRecord["allRMS"][i]["i2Xb"],
+                    rmsI3: newRecord["allRMS"][i]["i3Xb"],
+                    // THD
+                    thdU1: newRecord["allTHD"][i]["u1Xb"],
+                    thdU2: newRecord["allTHD"][i]["u2Xb"],
+                    thdU3: newRecord["allTHD"][i]["u3Xb"],
+                    thdI1: newRecord["allTHD"][i]["i1Xb"],
+                    thdI2: newRecord["allTHD"][i]["i2Xb"],
+                    thdI3: newRecord["allTHD"][i]["i3Xb"],
+                    // CF
+                    cfU1: newRecord["allCF"][i]["u1Xb"],
+                    cfU2: newRecord["allCF"][i]["u2Xb"],
+                    cfU3: newRecord["allCF"][i]["u3Xb"],
+                    cfI1: newRecord["allCF"][i]["i1Xb"],
+                    cfI2: newRecord["allCF"][i]["i2Xb"],
+                    cfI3: newRecord["allCF"][i]["i3Xb"],
+                    // Hz
+                    hz: newRecord["allHZ"][i]["hz"],
+                    // W
+                    p1: newRecord["allW"][i]["p1"],
+                    p2: newRecord["allW"][i]["p2"],
+                    p3: newRecord["allW"][i]["p3"],
+                    // VA
+                    s1: newRecord["allVA"][i]["s1"],
+                    s2: newRecord["allVA"][i]["s2"],
+                    s3: newRecord["allVA"][i]["s3"],
+                    // Var
+                    q1: newRecord["allVAR"][i]["q1"],
+                    q2: newRecord["allVAR"][i]["q2"],
+                    q3: newRecord["allVAR"][i]["q3"],
+                    // PF
+                    pf1: newRecord["allPF"][i]["pf1"],
+                    pf2: newRecord["allPF"][i]["pf2"],
+                    pf3: newRecord["allPF"][i]["pf3"],
+                    // DPF
+                    dpf1: newRecord["allDPF"][i]["cosPhi1"],
+                    dpf2: newRecord["allDPF"][i]["cosPhi2"],
+                    dpf3: newRecord["allDPF"][i]["cosPhi3"],
+                    // Tan
+                    tan1: newRecord["allTAN"][i]["tan1"],
+                    tan2: newRecord["allTAN"][i]["tan2"],
+                    tan3: newRecord["allTAN"][i]["tan3"],
+                    // unb
+                    unb: newRecord["allUNB"][i]["unb"],
+                    // Pst
+                    pstU1: newRecord["allPST"][i]["pstU1"],
+                    pstU2: newRecord["allPST"][i]["pstU2"],
+                    pstU3: newRecord["allPST"][i]["pstU3"],
+                    // Plt
+                    pltU1: newRecord["allPLT"][i]["pltU1"],
+                    pltU2: newRecord["allPLT"][i]["pltU2"],
+                    pltU3: newRecord["allPLT"][i]["pltU3"]
+                    // vh
+                    // Ah
+                };
+                qstRecords.push(oneRecord);
+            }
         }
     </script>
 
@@ -1385,7 +1468,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 },
                 dataType: "json",
                 success: function (data) {
-                    updateXbt(data);
+                    var obj = JSON.parse(data);
+                    var ndata = obj.nowpowerxb;
+
+                    updateXbt(ndata);
                 },
                 error: function(){
                     alert("获取谐波数据失败");
@@ -1393,9 +1479,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
         }
         // 更新谐波图
-        function updateXbt(data) {
-            //var obj=JSON.parse(data);
-            var obj = eval("(" + data + ")");
+        function updateXbt(obj) {
 
             var series=["u1Xb","u2Xb","u3Xb","u4Xb","i1Xb","i2Xb","i3Xb","i4Xb"];
             var res=[];//二维数组
@@ -1612,7 +1696,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         // 获取参数值
         function getDataParams(mpid) {
-            alert("ggg");
             $.ajax({
                 type: "post",
                 url: "getParameter",
@@ -1668,6 +1751,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
+
+
+
     <%--在线监测模块各个图表初始化--%>
     <script type="text/javascript">
         function chartsInit(){
@@ -1675,31 +1761,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             eventChart1.setOption(option1);
             eventChart2.setOption(option2);
             eventChart3.setOption(option3);
-            // 三相不平衡度表右侧按钮事件绑定
-            $("#item3-sidebar ol li button").each(function () {
-                $(this).click(function () {
-                    $("#item3-sidebar ol li button").removeClass("active");
-                    $(this).addClass("active");
-                    for (var i = 0; i < sxbphdlegend.length; i++) {
-                        if (sxbphdlegend[i].indexOf(this.value) >= 0) {
-                            // 显示对应的系列
-                            eventChart3.dispatchAction({
-                                type: "legendSelect",
-                                name: sxbphdlegend[i]
-                            });
-                        }
-                        else {
-                            // 隐藏其他系列
-                            eventChart3.dispatchAction({
-                                type: "legendUnSelect",
-                                name: sxbphdlegend[i]
-                            });
-                        }
-                    }
-                    // 更新图左侧文字
-                    updateSxdyt2(dataSxbphd);
-                });
-            });
+
+            eventBanding();
+
+
             // 按指定时间间隔更新图表
             // setInterval(function () {
             //     getDataQst($("#monitorpnt").val());
@@ -1733,19 +1798,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 getDataParams(opt);
         }
     });
-    </script>
-    <script type="text/javascript">
-            $.ajax({
-                type: "post",
-                url: "test1",
-                data: {monitorpointid: 1},
-                success: function(data){
-                    alert("succcc"+data);
-                },
-                error: function(){
-                    alert("失败")
-                }
-            });
     </script>
 
 

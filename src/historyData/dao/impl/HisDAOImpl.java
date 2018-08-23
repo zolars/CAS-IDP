@@ -3,7 +3,6 @@ package historyData.dao.impl;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.PowerparmMonitor;
 import historyData.dao.HisDAO;
-import onlineTest.dao.CFDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

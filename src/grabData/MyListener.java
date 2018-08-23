@@ -12,6 +12,12 @@ import java.util.List;
 
 public class MyListener implements ServletContextListener {
     private Thread myThread;
+    HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+    List<Dictionary> list = hbsessionDao.search(
+            "FROM Dictionary");
+    List<DictionaryPlus> dicpluslist = hbsessionDao.search(
+            "FROM DictionaryPlus");
+
 
     public void contextDestroyed(ServletContextEvent e) {
         if (myThread != null && myThread.isInterrupted()) {
@@ -27,7 +33,7 @@ public class MyListener implements ServletContextListener {
                 public void run() {
                     while (!this.isInterrupted()) {// 线程未中断执行循环
                         try {
-                            Thread.sleep(1000); //每隔50000ms执行一次
+                            Thread.sleep(10000); //每隔50000ms执行一次
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -38,12 +44,6 @@ public class MyListener implements ServletContextListener {
                         //取数据,解析
                         //从数据库中读取字典，list<map<String, Int>>类型
                         //diclist为第一个字典，dicpluslist为第二个索引字典
-                        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-                        List<Dictionary> list = hbsessionDao.search(
-                                "FROM Dictionary");
-                        List<DictionaryPlus> dicpluslist = hbsessionDao.search(
-                                "FROM DictionaryPlus");
                         DataOnline.dic=list;
                         DataOnline.dicPlus=dicpluslist;
 

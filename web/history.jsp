@@ -1038,7 +1038,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {
                     starttime: starttime, // "2018-2-1 10：00：00",
                     endtime: endtime, //"2018-10-5 10：00：00",
-                    monitorpointid: mpid
+                    monitorpointid: 1//mpid
                 },
                 dataType : "json",
                 success: function (result) {
