@@ -136,4 +136,58 @@ public class DeviceDAOImpl implements DeviceDAO {
         return list;
     }
 
+    public List getAllUPSDevice(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices where type = 'UPS'");
+
+        return list;
+    }
+
+    public List getAllxdcDevice(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices where type = 'battery'");
+
+        return list;
+    }
+
+    public List getAllfdjDevice(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices where type = 'generator'");
+
+        return list;
+    }
+
+    public List getAllktDevice(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices where type = 'air conditioner'");
+
+        return list;
+    }
+
+    public List getAllotherDevice(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices where type = 'other'");
+
+        return list;
+    }
+
+    public List searchFuzzyDevice(String name){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices where name like '" + name + "%'");
+
+        return list;
+    }
+
 }

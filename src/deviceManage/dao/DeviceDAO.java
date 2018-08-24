@@ -25,4 +25,16 @@ public interface DeviceDAO {
 
     public List getAllIDPDevice();
 
+    public List getAllUPSDevice();
+
+    public List getAllxdcDevice();
+
+    public List getAllfdjDevice();
+
+    public List getAllktDevice();
+
+    public List getAllotherDevice();
+
+    public List searchFuzzyDevice(String name);
+
 }

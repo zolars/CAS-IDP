@@ -247,7 +247,7 @@
                                 <label class="t-overflow">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <select class="form-control location-select-item-w" id="get-devicename" onclick="onclickSearchItem()">
+                                            <select class="form-control location-select-item-w" id="get-devicename" onclick="fuzzySearch()">
                                                 <option value="">请选择或输入待查询的设备名称</option>
                                             </select>
                                         </div>
@@ -1647,9 +1647,27 @@
             }
         });
 
-        <!-- 点击搜索框显示所有设备 -->
-        function onclickSearchItem() {
+        <!-- 搜索框数据变化时，显示模糊搜索结果 -->
+        function fuzzySearch() {
+            var name = "U";
 
+            $.ajax({
+                type: "post",
+                url: "fuzzySearchDevice",
+                data: {
+                     name: name
+                },
+                dataType: "json",
+                success: function (data) {
+                    //clear items
+                    $('#get-devicename').clean();
+
+                    var list = data.alldlist;
+                    for (var i = 0; i < list.length; i++) {
+                        $('#get-devicename').append("<option value='"+list[i].name+"'>"+ list[i].name +"</option>");
+                    }
+                }
+            });
         }
 
         <!-- 查询设备 -->

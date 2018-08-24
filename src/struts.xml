@@ -390,6 +390,53 @@
              </result>
          </action>
 
+         <action name="getAllUPSDevice" class="deviceManage.action.getAllUPSDeviceAction">
+             <!--getAllUPSDevice -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getAllxdcDevice" class="deviceManage.action.getAllxdcDeviceAction">
+             <!--getAllxdcDevice -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getAllfdjDevice" class="deviceManage.action.getAllfdjDeviceAction">
+             <!--getAllfdjDevice -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getAllktDevice" class="deviceManage.action.getAllktDeviceAction">
+             <!--getAllktDevice -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getAllotherDevice" class="deviceManage.action.getAllotherDeviceAction">
+             <!--getAllotherDevice -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="fuzzySearchDevice" class="deviceManage.action.fuzzySearchDeviceAction">
+             <!--fuzzySearchDevice -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
 
      </package>
 
