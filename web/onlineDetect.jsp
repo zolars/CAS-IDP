@@ -105,35 +105,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="row">
                             <div class="col-md-11">
                                 <div id="item1-params-list" class="row">
-                                    <%--//<div class="col-md-7">--%>
-                                        <ol>
-                                            <li><input type="radio" name="params" id="item1-rms">RMS</li>
-                                            <li><input type="radio" name="params" id="item1-thd">THD</li>
-                                            <li><input type="radio" name="params" id="item1-cf">CF</li>
-                                            <li><input type="radio" name="params" id="item1-hz">Hz</li>
-                                            <li><input type="radio" name="params" id="item1-w">W</li>
-                                            <li><input type="radio" name="params" id="item1-va">VA</li>
-                                            <li><input type="radio" name="params" id="item1-var">Var</li>
-                                            <li><input type="radio" name="params" id="item1-pf">PF</li>
-                                        </ol>
-                                  <%-- // </div>--%>
-                                    <div class="col-md-5">
-                                        <ol>
-                                            <li><input type="radio" name="params" id="item1-unb">unb%</li>
-                                            <li><input type="radio" name="params" id="item1-pst">Pst</li>
-                                            <li><input type="radio" name="params" id="item1-plt">Plt</li>
-                                            <li><input type="radio" name="params" id="item1-Vh">Vh</li>
-                                            <li><input type="radio" name="params" id="item1-Ah">Ah</li>
-                                        </ol>
-                                    </div>
+                                    <div class="clearfix"></div>
+                                    <ol>
+                                        <li><input type="radio" name="params" id="item1-rms" value="RMS" checked>RMS</li>
+                                        <li><input type="radio" name="params" id="item1-thd" value="THD" >THD</li>
+                                        <li><input type="radio" name="params" id="item1-cf" value="CF">CF</li>
+                                        <li><input type="radio" name="params" id="item1-hz" value="Hz">Hz</li>
+                                        <li><input type="radio" name="params" id="item1-w" value="W">W</li>
+                                        <li><input type="radio" name="params" id="item1-va" value="VA">VA</li>
+                                        <li><input type="radio" name="params" id="item1-var" value="Var">Var</li>
+                                        <li><input type="radio" name="params" id="item1-pf" value="PF">PF</li>
+                                        <li><input type="radio" name="params" id="item1-unb" value="unb%">unb%</li>
+                                        <li><input type="radio" name="params" id="item1-pst" value="Pst">Pst</li>
+                                        <li><input type="radio" name="params" id="item1-plt" value="Plt">Plt</li>
+                                        <li><input type="radio" name="params" id="item1-Vh" value="Vh">Vh</li>
+                                        <li><input type="radio" name="params" id="item1-Ah" value="Ah">Ah</li>
+
+                                    <%--    <li><button value="RMS" class="btn btn-default active">RMS</button></li>
+                                        <li><button value="THD" class="btn btn-default">THD</button></li>
+                                        <li><button value="CF" class="btn btn-default">CF</button></li>
+                                        <li><button value="Hz" class="btn btn-default">Hz</button></li>
+                                        <li><button value="W" class="btn btn-default">W</button></li>
+                                        <li><button value="VA" class="btn btn-default">VA</button></li>
+                                        <li><button value="Var" class="btn btn-default">Var</button></li>
+                                        <li><button value="PF" class="btn btn-default">PF</button></li>
+                                        <li><button value="unb%" class="btn btn-default">unb%</button></li>
+                                        <li><button value="Pst" class="btn btn-default">Pst</button></li>
+                                        <li><button value="Plt" class="btn btn-default">Plt</button></li>
+                                        <li><button value="Vh" class="btn btn-default">Vh</button></li>
+                                        <li><button value="Ah" class="btn btn-default">Ah</button></li>--%>
+                                    </ol>
                                 </div>
                                 <div class="row">
                                     <div id="item1-params-text" class="col-md-12">
                                         <ul>
                                             <li>
-                                                <input type="checkbox" value='max'>AVG=0 MIN=0 MAX=0
-                                                <input type="checkbox" value='min'>AVG=0 MIN=0 MAX=0
-                                                <input type="checkbox" value='average'>AVG=0 MIN=0 MAX=0
+                                                <input type="checkbox" name="param-check" value='max'>AVG=0 MIN=0 MAX=0
+                                                <input type="checkbox" name="params-check" value='min'>AVG=0 MIN=0 MAX=0
+                                                <input type="checkbox" name="params-check" value='average'>AVG=0 MIN=0 MAX=0
                                             </li>
                                         </ul>
                                     </div>
@@ -358,12 +367,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {cityid: cname},
                 dataType : "json",
                 success: function (data) {
+                    var list = data.allcomputerroom;
 
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
-                    var obj = eval("(" + data + ")");
-                    for (var i = 0; i < obj.length; i++) {
-                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    for (var i = 0; i < list.length; i++) {
+                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                     }
                 }
             });
@@ -516,16 +524,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var sxbphdlegend = ["U1", "U2", "U3", "V1", "V2", "V3", "A1", "A2", "A3"]; // 三相不平衡度表的图例
         var maxAmplitude = 400; // 三相不平衡度表中幅值的最大值，用来计算指针长度
         var dataSxbphd = null; // 暂存三相不平衡度表中的数据
-
-        var markPointRMS={//rms最大值、最小值标注点
-            label: {formatter: '{a}{b}:{c}'},
-            data: []
-        };
-        var markLineRMS={//RMS平均值标注线
-            label: {formatter: '{a}{b}:{c}'},
-            data: []
-        };
-
 
         // 各个图的配置项
         var option1 = {
@@ -772,6 +770,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             },
             yAxis: {
                 type: 'value',
+                scale: true,
                 axisLabel: {
                     formatter: '{value}'
                 }
@@ -1309,43 +1308,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 });
             });
 
-            // 趋势图右侧U\V\A选择栏事件
+            // 绑定趋势图 右侧U\V\A button选择栏事件
             $("#item1-sidebar ol li button").each(function () {
                 $(this).click(function () {
                     $("#item1-sidebar ol li button").removeClass("active");
                     $(this).addClass("active");
 
-                    /*for (var i = 0; i < sxbphdlegend.length; i++) {
-                        if (sxbphdlegend[i].indexOf(this.value) >= 0) {
-                            // 显示对应的系列
-                            eventChart3.dispatchAction({
-                                type: "legendSelect",
-                                name: sxbphdlegend[i]
-                            });
-                        }
-                        else {
-                            // 隐藏其他系列
-                            eventChart3.dispatchAction({
-                                type: "legendUnSelect",
-                                name: sxbphdlegend[i]
-                            });
-                        }
-                    }*/
-                    // 更新图左侧文字
-                    //updateSxdyt2(dataSxbphd);
+                    alert($('input:radio[name="params"]:checked').val());
+                    alert($('input:checkbox[name="params-check"]:checked').val());
                 });
             });
-
-
-            //绑定RMS图checkbox点击事件
-            $("#item1-params-text ul li input:checkbox").each(function(){
-                $(this).click(function () {
-                    alert("ddd...");
-                });
-            });
-
         }
-
     </script>
 
     <%--趋势图相关函数 --%>
@@ -1358,10 +1331,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {monitorpointid: mpid},
                 dataType: "json",
                 success: function (data) {
-                   // console.log("QST： "+data);
-                    //console.log("JSON（QST）： "+JSON.parse(data));
                     addData(qstRecords, JSON.parse(data));
-                    //addData(qstRecords, data);
                     updateQst(qstRecords);
                 },
                 error: function () {
@@ -1379,11 +1349,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         // 添加数据
         function addData(qstRecords, newRecord) {
-            //window.console.log(qstRecords);
-            //window.console.log(newRecord);
-            //window.console.log(newRecord["allHZ"]);
-            //alert(newRecord["allHZ"][0]["time"]);
-
             if (qstRecords.length > (60 * 12)) {
                 qstRecords.shift();
             }
@@ -1763,15 +1728,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             eventChart3.setOption(option3);
 
             eventBanding();
-
-
-            // 按指定时间间隔更新图表
-            // setInterval(function () {
-            //     getDataQst($("#monitorpnt").val());
-            //     getDataXb($("#monitorpnt").val());
-            //     getDataSxdy($("#monitorpnt").val());
-            //     getDataParams($("#monitorpnt").val());
-            // },5000);
+            // 按指定时间间隔10s 更新图表
+             setInterval(function () {
+                 getDataQst($("#monitorpnt").val());
+                 getDataXb($("#monitorpnt").val());
+                 getDataSxdy($("#monitorpnt").val());
+                 getDataParams($("#monitorpnt").val());
+             },10000);
 
             //默认检测点初始值为1
             //$("select#monitorpnt").val("1");

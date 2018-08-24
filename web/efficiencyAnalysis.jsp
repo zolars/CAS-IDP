@@ -601,12 +601,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {cityid: cname},
                 dataType : "json",
                 success: function (data) {
+                    var list = data.allcomputerroom;
 
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
-                    var obj = eval("(" + data + ")");
-                    for (var i = 0; i < obj.length; i++) {
-                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    for (var i = 0; i < list.length; i++) {
+                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                     }
                 }
             });
