@@ -245,8 +245,16 @@
 
                             <div id="TCP-device" style="display: none">
                                 <label class="t-overflow">
-                                    <input type="text" class="form-control setting-input" id = "get-devicename">
-                                    <button class="btn btn-default" onclick="checkDevice()">查询</button>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select class="form-control location-select-item-w" id="get-devicename" onclick="onclickSearchItem()">
+                                                <option value="">请选择或输入待查询的设备名称</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-default" onclick="checkDevice()">查询</button>
+                                        </div>
+                                    </div>
                                 </label>
                                 <div class="row">
                                     <div class="col-md-4">
@@ -1623,6 +1631,27 @@
 
     <!-- 查询设备--IDP\UPS -->
     <script type="text/javascript">
+        <!-- 初始化-->
+        $.ajax({
+            type: "post",
+            url: "getAllIDPDevice",
+            data: {
+                // devicename: devicename
+            },
+            dataType: "json",
+            success: function (data) {
+                var list = data.alldlist;
+                for (var i = 0; i < list.length; i++) {
+                    $('#get-devicename').append("<option value='"+list[i].name+"'>"+ list[i].name +"</option>");
+                }
+            }
+        });
+
+        <!-- 点击搜索框显示所有设备 -->
+        function onclickSearchItem() {
+
+        }
+
         <!-- 查询设备 -->
         function checkDevice(){
             var devicename = $("#get-devicename").val();

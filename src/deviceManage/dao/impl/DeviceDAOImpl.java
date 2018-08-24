@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeviceDAOImpl implements DeviceDAO {
@@ -126,5 +127,13 @@ public class DeviceDAOImpl implements DeviceDAO {
         return rt;
     }
 
+    public List getAllIDPDevice(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices where type = 'IDP'");
+
+        return list;
+    }
 
 }

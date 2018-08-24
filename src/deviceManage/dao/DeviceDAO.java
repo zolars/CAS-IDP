@@ -23,4 +23,6 @@ public interface DeviceDAO {
 
     public DevicesThreshold getDeviceThreshold(String dtid);
 
+    public List getAllIDPDevice();
+
 }
