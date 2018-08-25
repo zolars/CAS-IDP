@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="hibernatePOJO.Dictionary" table="dictionary" schema="Test">
+    <class name="hibernatePOJO.Dictionary" table="dictionary" schema="test">
         <id name="id">
             <column name="id" sql-type="int(255)"/>
         </id>

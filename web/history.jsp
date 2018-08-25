@@ -86,7 +86,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </ul>
 
                         <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                            <button id="test" onclick="test()">测试'查看历史曲线'</button>
                             <div class="col-md-2">
                                 <select id='item2-menu' class="form-control">
                                     <option value="item2-1">电压/电流</option>
@@ -94,12 +93,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <option value="item2-3">功率</option>
                                     <option value="item2-4">浪涌/塌陷</option>
                                 </select>
-                            </div> 
+                            </div>
                             <div class="col-md-2">
-                                <select  class="form-control" name="" id="">
-                                    <option value="">监测点1</option>
+                                <select  class="form-control" name="his-mpid-select" id="his-mpid-select" onclick="getMonitorPoints()">
+                                    <option value="">1</option>
                                 </select>
                             </div>
+                            <div class="col-md-4">
+                                <div class="container">
+                                    <form action="" class="form-horizontal"  role="form">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label for="dtp_input1" class="col-md-2 control-label">开始日期</label>
+                                                <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                    <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                </div>
+                                                <input type="hidden" id="dtp_input1" value="" /><br/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="dtp_input2" class="col-md-2 control-label">结束日期</label>
+                                                <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                    <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                </div>
+                                                <input type="hidden" id="dtp_input2" value="" /><br/>
+                                            </div>
+
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                            <div>
+                                <button id="serch-his-button" onclick="searchHis()">查询</button>
+                            </div>
+                     <%--   </div>--%>
                             <div class="clearfix"></div>
                             <ul>
                                 <li id='item2-1'>
@@ -121,7 +150,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <input type="checkbox" name="" value="i4">I4
                                                 <input type="checkbox" name="" value="i">I
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                     <div id='item2-UI' style='width: 100%;height: 500px;'></div>
@@ -131,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <input type="checkbox" name="" id="" value='max'>最大值
                                         <input type="checkbox" name="" id="" value='min'>最小值
                                         <input type="checkbox" name="" id="" value='average'>平均值
-                                    </div>                                    
+                                    </div>
                                     <div id='item2-HZ' style='width: 100%;height: 500px;'></div>
                                 </li>
                                 <li id='item2-3'>
@@ -164,7 +193,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <input type="checkbox" name="" id="" value='dpf3'>DPF3
                                                 <input type="checkbox" name="" id="" value='dpf'>DPF
                                             </li>
-                                        </ul>                                            
+                                        </ul>
                                     </div>
                                     <div id='item2-P' style='width: 100%;height: 500px;'></div>
                                 </li>
@@ -174,6 +203,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </li>
                             </ul>
                         </div>
+
                         <div id = "item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             知识库
                             <!-- 动态加载知识库项 -->
@@ -281,17 +311,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {cityid: cname},
                 dataType : "json",
                 success: function (data) {
+                    var list = data.allcomputerroom;
 
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
-                    var obj = eval("(" + data + ")");
-                    for (var i = 0; i < obj.length; i++) {
-                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    for (var i = 0; i < list.length; i++) {
+                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                     }
                 }
             });
         }
-
     </script>
 
     <!-- 动态加载菜单项 -->
@@ -338,6 +366,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
+    <!-- 动态加载检测点(设备)列表 -->
+    <script type="text/javascript">
+        //获取检测点列表
+        function getMonitorPoints(){
+
+            var computerroom = $("#comproom_code").val();
+            var mpcname = $("#his-mpid-select").val();
+            console.log(" ....mpcaname" + mpcname);
+
+            if(!mpcname) { //若没有获取过，获取
+                $.ajax({
+                    type: "post",
+                    url: "getMonitorPoints",
+                    data: {computerroom: computerroom},
+                    dataType : "json",
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        var rt = obj.allmpdata;
+                        for (var i = 0; i < rt.length; i++) {
+                            $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+                        }
+                    },
+                    error: function () {
+                        alert("加载监测点失败");
+                    }
+                });
+            }
+        }
+    </script>
+
     <!-- 切换子菜单-->
     <script type="text/javascript">
         $("#item2").show();
@@ -368,33 +426,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
 
         });
-    </script>
-
-    <!-- 根据类型、监测点、时间范围查看历史曲线 -->
-    <script type="text/javascript">
-        function test(){
-            alert("根据类型、监测点、时间范围查看历史曲线");
-
-            var monitorpoint = 1;
-
-            $.ajax({
-                type: "post",
-                url: "getParameterHis",
-                data: {
-                    monitorpointid: monitorpoint,
-                    checktype: "电压/电流", //频率 功率 浪涌/塌陷
-                    starttime: "2018-2-1 10：00：00",  // 2018-2-1 10：00：00
-                    endtime: "2018-7-5 10：00：00"  // 2018-7-5 10：00：00
-                },
-                dataType : "json",
-                success: function (data) {
-                    alert(data);
-                },
-                error: function () {
-                    alert("失败");
-                }
-            });
-        }
     </script>
 
     <!-- 动态加载菜单项 -->
@@ -607,427 +638,462 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
         });
     </script>
+
     <!-- echarts图表绘制 -->
+    <!-- 时间选择器-->
+    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+
     <script src="js/echarts.js"></script>
     <script>
-        (function(){
-            //绘制图表需要的全局变量声明
-            var eventChart1 = echarts.init(document.getElementById('item2-UI'));
-            var eventChart2 = echarts.init(document.getElementById('item2-HZ'));
-            var eventChart3 = echarts.init(document.getElementById('item2-P'));
-            var chart1Legend=['u1','u2','u3','u4','i1','i2','i3','i4','i'];
-            var chart3Legend=['p1','p2','p3','p','s1','s2','s3','s','q1','q2','q3','q',
-                'pf1','pf2','pf3','pf','dpf1','dpf2','dpf3','dpf'];
-            var markPointUI={//电压\电流图最大值、最小值标注点
-                label: {formatter: '{a}{b}:{c}'},
-                data: []
-            };
-            var markLineUI={//电压\电流图平均值标注线
-                label: {formatter: '{a}{b}:{c}'},
-                data: []
-            };
-            var markPointHZ={//频率图最大值、最小值标注点
-                label: {formatter: '{a}{b}:{c}'},
-                data: []
-            };
-            var markLineHZ={//频率图平均值标注线
-                label: {formatter: '{a}{b}:{c}'},
-                data: []
-            };
-            var markPointP={//功率图最大值、最小值标注点
-                label: {formatter: '{a}{b}:{c}'},
-                data: []
-            };
-            var markLineP={//功率图平均值标注线
-                label: {formatter: '{a}{b}:{c}'},
-                data: []
-            };
-            var option1 = {
-                legend: {
-                    show: false,
-                    data: chart1Legend
-                },
-                xAxis: {
-                    type: 'time',
-                    splitLine: {
-                        show: false
-                    }
-                },
-                yAxis: {
-                    type: 'value',
-                    boundaryGap: [0, '100%'],
-                    splitLine: {
-                        show: false
-                    }
-                },
-                series: [
-                    //电压U
-                    {
-                        name: "u1", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointUI, markLine: markLineUI,
-                        encode: {x: "time", y: "u1"}
-                    },
-                    {
-                        name: "u2", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointUI, markLine: markLineUI,
-                        encode: {x: "time", y: "u2"}
-                    },
-                    {
-                        name: "u3", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointUI, markLine: markLineUI,
-                        encode: {x: "time", y: "u3"}
-                    },
-                    {
-                        name: "u4", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointUI, markLine: markLineUI,
-                        encode: {x: "time", y: "u4"}
-                    },
-                    //电流I
-                    {
-                        name: "i1", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointUI, markLine: markLineUI,
-                        encode: {x: "time", y: "i1"}
-                    },
-                    {
-                        name: "i2", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointUI, markLine: markLineUI,
-                        encode: {x: "time", y: "i2"}
-                    },
-                    {
-                        name: "i3", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointUI, markLine: markLineUI,
-                        encode: {x: "time", y: "i3"}
-                    },
-                    {
-                        name: "i4", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointUI, markLine: markLineUI,
-                        encode: {x: "time", y: "i4"}
-                    },
-                    {
-                        name: "i", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointUI, markLine: markLineUI,
-                        encode: {x: "time", y: "i"}
-                    }
-                ]
-            };
-            var option2 = {
-                legend: {
+        //绘制图表需要的全局变量声明
+        var eventChart1 = echarts.init(document.getElementById('item2-UI'));
+        var eventChart2 = echarts.init(document.getElementById('item2-HZ'));
+        var eventChart3 = echarts.init(document.getElementById('item2-P'));
+        var chart1Legend=['u1','u2','u3','u4','i1','i2','i3','i4','i'];
+        var chart3Legend=['p1','p2','p3','p','s1','s2','s3','s','q1','q2','q3','q',
+            'pf1','pf2','pf3','pf','dpf1','dpf2','dpf3','dpf'];
+        var markPointUI={//电压\电流图最大值、最小值标注点
+            label: {formatter: '{a}{b}:{c}'},
+            data: []
+        };
+        var markLineUI={//电压\电流图平均值标注线
+            label: {formatter: '{a}{b}:{c}'},
+            data: []
+        };
+        var markPointHZ={//频率图最大值、最小值标注点
+            label: {formatter: '{a}{b}:{c}'},
+            data: []
+        };
+        var markLineHZ={//频率图平均值标注线
+            label: {formatter: '{a}{b}:{c}'},
+            data: []
+        };
+        var markPointP={//功率图最大值、最小值标注点
+            label: {formatter: '{a}{b}:{c}'},
+            data: []
+        };
+        var markLineP={//功率图平均值标注线
+            label: {formatter: '{a}{b}:{c}'},
+            data: []
+        };
+        var option1 = {
+            legend: {
+                show: false,
+                data: chart1Legend
+            },
+            xAxis: {
+                type: 'time',
+                splitLine: {
                     show: false
+                }
+            },
+            yAxis: {
+                type: 'value',
+                scale: true,
+                splitLine: {
+                    show: false
+                }
+            },
+            series: [
+                //电压U
+                {
+                    name: "u1", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointUI, markLine: markLineUI,
+                    encode: {x: "time", y: "u1"}
                 },
-                xAxis: {
-                    type: 'time',
-                    splitLine: {
-                        show: false
-                    }
+                {
+                    name: "u2", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointUI, markLine: markLineUI,
+                    encode: {x: "time", y: "u2"}
                 },
-                yAxis: {
-                    type: 'value',
-                    boundaryGap: [0, '100%'],
-                    splitLine: {
-                        show: false
-                    }
+                {
+                    name: "u3", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointUI, markLine: markLineUI,
+                    encode: {x: "time", y: "u3"}
                 },
-                series: [
-                    //频率hz
-                    {
-                        name: 'hz',type: 'bar',
-                        markPoint: markPointHZ, markLine: markLineHZ,
-                        encode: {x: 'time',y:'hz'}
-                    }
-                ]
-            };
-            var option3 = {
-                legend: {
-                    show: false,
-                    data: chart3Legend
+                {
+                    name: "u4", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointUI, markLine: markLineUI,
+                    encode: {x: "time", y: "u4"}
                 },
-                xAxis: {
-                    type: 'time',
-                    splitLine: {
-                        show: false
-                    }
+                //电流I
+                {
+                    name: "i1", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointUI, markLine: markLineUI,
+                    encode: {x: "time", y: "i1"}
                 },
-                yAxis: {
-                    type: 'value',
-                    boundaryGap: [0, '100%'],
-                    splitLine: {
-                        show: false
-                    }
+                {
+                    name: "i2", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointUI, markLine: markLineUI,
+                    encode: {x: "time", y: "i2"}
                 },
-                series: [
-                    //功率P
-                    {
-                        name: "p1", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "p1"}
-                    },
-                    {
-                        name: "p2", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "p2"}
-                    },
-                    {
-                        name: "p3", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "p3"}
-                    },
-                    {
-                        name: "p", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "p"}
-                    },
-                    //功率S
-                    {
-                        name: "s1", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "s1"}
-                    },
-                    {
-                        name: "s2", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "s2"}
-                    },
-                    {
-                        name: "s3", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "s3"}
-                    },
-                    {
-                        name: "s", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "s"}
-                    },
-                    //功率Q
-                    {
-                        name: "q1", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "q1"}
-                    },
-                    {
-                        name: "q2", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "q2"}
-                    },
-                    {
-                        name: "q3", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "q3"}
-                    },
-                    {
-                        name: "q", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "q"}
-                    },
-                    //功率PF
-                    {
-                        name: "pf1", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "pf1"}
-                    },
-                    {
-                        name: "pf2", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "pf2"}
-                    },
-                    {
-                        name: "pf3", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "pf3"}
-                    },
-                    {
-                        name: "pf", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "pf"}
-                    },
-                    //功率DPF
-                    {
-                        name: "dpf1", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "dpf1"}
-                    },
-                    {
-                        name: "dpf2", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "dpf2"}
-                    },
-                    {
-                        name: "dpf3", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "dpf3"}
-                    },
-                    {
-                        name: "dpf", type: "line", smooth: true, showSymbol: false,
-                        markPoint: markPointP, markLine: markLineP,
-                        encode: {x: "time", y: "dpf"}
+                {
+                    name: "i3", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointUI, markLine: markLineUI,
+                    encode: {x: "time", y: "i3"}
+                },
+                {
+                    name: "i4", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointUI, markLine: markLineUI,
+                    encode: {x: "time", y: "i4"}
+                },
+                {
+                    name: "i", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointUI, markLine: markLineUI,
+                    encode: {x: "time", y: "i"}
+                }
+            ]
+        };
+        var option2 = {
+            legend: {
+                show: false
+            },
+            xAxis: {
+                type: 'time',
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+                type: 'value',
+                scale: true,
+                splitLine: {
+                    show: false
+                }
+            },
+            series: [
+                //频率hz
+                {
+                    name: 'hz',type: 'bar',
+                    markPoint: markPointHZ, markLine: markLineHZ,
+                    encode: {x: 'time',y:'hz'}
+                }
+            ]
+        };
+        var option3 = {
+            legend: {
+                show: false,
+                data: chart3Legend
+            },
+            xAxis: {
+                type: 'time',
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+                type: 'value',
+                scale: true,
+                splitLine: {
+                    show: false
+                }
+            },
+            series: [
+                //功率P
+                {
+                    name: "p1", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "p1"}
+                },
+                {
+                    name: "p2", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "p2"}
+                },
+                {
+                    name: "p3", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "p3"}
+                },
+                {
+                    name: "p", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "p"}
+                },
+                //功率S
+                {
+                    name: "s1", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "s1"}
+                },
+                {
+                    name: "s2", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "s2"}
+                },
+                {
+                    name: "s3", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "s3"}
+                },
+                {
+                    name: "s", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "s"}
+                },
+                //功率Q
+                {
+                    name: "q1", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "q1"}
+                },
+                {
+                    name: "q2", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "q2"}
+                },
+                {
+                    name: "q3", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "q3"}
+                },
+                {
+                    name: "q", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "q"}
+                },
+                //功率PF
+                {
+                    name: "pf1", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "pf1"}
+                },
+                {
+                    name: "pf2", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "pf2"}
+                },
+                {
+                    name: "pf3", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "pf3"}
+                },
+                {
+                    name: "pf", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "pf"}
+                },
+                //功率DPF
+                {
+                    name: "dpf1", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "dpf1"}
+                },
+                {
+                    name: "dpf2", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "dpf2"}
+                },
+                {
+                    name: "dpf3", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "dpf3"}
+                },
+                {
+                    name: "dpf", type: "line", smooth: true, showSymbol: false,
+                    markPoint: markPointP, markLine: markLineP,
+                    encode: {x: "time", y: "dpf"}
+                }
+            ]
+        };
+        //事件绑定函数
+        function eventBanding(){
+            //绑定历史曲线菜单切换事件
+            $('#item2-menu').change(function(){
+                $('#item2>ul>li').hide();
+                $('#'+$(this).val()).show();
+            });
+            //触发历史曲线菜单切换事件
+            $('#item2-menu').trigger('change');
+            //绑定UI图电压U、电流Icheckbox点击事件
+            $('#item2-UI-ctrl ul li.series-ctrl input:checkbox').each(function(){
+                $(this).click(function () {
+                    if(this.checked){
+                        eventChart1.dispatchAction({
+                            type: "legendSelect",
+                            name: this.value
+                        });
                     }
-                ]
-            };
-            //事件绑定函数
-            function eventBanding(){
-                //绑定历史曲线菜单切换事件
-                $('#item2-menu').change(function(){
-                    $('#item2>ul>li').hide();
-                    $('#'+$(this).val()).show();
+                    else{
+                        eventChart1.dispatchAction({
+                            type: "legendUnSelect",
+                            name: this.value
+                        });
+                    }
                 });
-                //触发历史曲线菜单切换事件
-                $('#item2-menu').trigger('change');
-                //绑定UI图电压U、电流Icheckbox点击事件
-                $('#item2-UI-ctrl ul li.series-ctrl input:checkbox').each(function(){
-                    $(this).click(function () {
-                        if(this.checked){
-                            eventChart1.dispatchAction({
-                                type: "legendSelect",
-                                name: this.value
-                            });
+            });
+            //绑定UI图最大值、最小值、平均值checkbox点击事件
+            $('#item2-UI-ctrl ul li.mark-ctrl input:checkbox').each(function(){
+                $(this).click(function(){
+                    if(this.checked){
+                        switch(this.value){
+                            case 'max':markPointUI.data.unshift({name:'最大值',type: 'max'});break;//最大值标注配置项添加在数组头
+                            case 'min':markPointUI.data.push({name:'最小值',type: 'min'});break;//最小值标注配置项添加在数组尾
+                            case 'average':markLineUI.data.push({name:'平均值',type: 'average'});break;//平均值标注配置项添加
+                            default: break;
                         }
-                        else{
-                            eventChart1.dispatchAction({
-                                type: "legendUnSelect",
-                                name: this.value
-                            });
+                    }
+                    else{
+                        switch(this.value){
+                            case 'max':markPointUI.data.shift();break;//移除最大值标注配置项
+                            case 'min':markPointUI.data.pop();break;//移除最小值标注配置项
+                            case 'average':markLineUI.data.pop();break;//移除平均值标注配置项
+                            default: break;
                         }
+                    }
+                    eventChart1.setOption(option1);
+                });
+            });
+            //绑定评率图最大值、最小值、平均值checkbox点击事件
+            $('#item2-HZ-ctrl input:checkbox').each(function(){
+                $(this).click(function(){
+                    if(this.checked){
+                        switch(this.value){
+                            case 'max':markPointHZ.data.unshift({name:'最大值',type: 'max'});break;//最大值标注配置项添加在数组头
+                            case 'min':markPointHZ.data.push({name:'最小值',type: 'min'});break;//最小值标注配置项添加在数组尾
+                            case 'average':markLineHZ.data.push({name:'平均值',type: 'average'});break;//平均值标注配置项添加
+                            default: break;
+                        }
+                    }
+                    else{
+                        switch(this.value){
+                            case 'max':markPointHZ.data.shift();break;//移除最大值标注配置项
+                            case 'min':markPointHZ.data.pop();break;//移除最小值标注配置项
+                            case 'average':markLineHZ.data.pop();break;//移除平均值标注配置项
+                            default: break;
+                        }
+                    }
+                    eventChart2.setOption(option2);
+                });
+            });
+            //绑定功率图各种功率P的checkbox点击事件
+            $('#item2-P-ctrl ul li.series-ctrl input:checkbox').each(function(){
+                $(this).click(function () {
+                    if(this.checked){
+                        eventChart3.dispatchAction({
+                            type: "legendSelect",
+                            name: this.value
+                        });
+                    }
+                    else{
+                        eventChart3.dispatchAction({
+                            type: "legendUnSelect",
+                            name: this.value
+                        });
+                    }
+                });
+            });
+            //绑定功率图最大值、最小值、平均值checkbox点击事件
+            $('#item2-P-ctrl ul li.mark-ctrl input:checkbox').each(function(){
+                $(this).click(function(){
+                    if(this.checked){
+                        switch(this.value){
+                            case 'max':markPointP.data.unshift({name:'最大值',type: 'max'});break;//最大值标注配置项添加在数组头
+                            case 'min':markPointP.data.push({name:'最小值',type: 'min'});break;//最小值标注配置项添加在数组尾
+                            case 'average':markLineP.data.push({name:'平均值',type: 'average'});break;//平均值标注配置项添加
+                            default: break;
+                        }
+                    }
+                    else{
+                        switch(this.value){
+                            case 'max':markPointP.data.shift();break;//移除最大值标注配置项
+                            case 'min':markPointP.data.pop();break;//移除最小值标注配置项
+                            case 'average':markLineP.data.pop();break;//移除平均值标注配置项
+                            default: break;
+                        }
+                    }
+                    eventChart3.setOption(option3);
+                });
+            });
+        }
+
+        //绘制图表
+        function drawCharts(){
+            //设置初始配置项
+            eventChart1.setOption(option1);
+            eventChart2.setOption(option2);
+            eventChart3.setOption(option3);
+            //设置曲线图初始不显示
+            chart1Legend.forEach(function(item){
+                eventChart1.dispatchAction({
+                    type: "legendUnSelect",
+                    name: item
+                });
+            });
+            chart3Legend.forEach(function(item){
+                eventChart3.dispatchAction({
+                    type: "legendUnSelect",
+                    name: item
+                });
+            });
+        }
+
+        //获取数据，并更新图
+        function getData(starttime, endtime, mpid){
+            $.ajax({
+                type: "post",
+                url: "getHisData",
+                data: {
+                    starttime: starttime, // "2018-2-1 10：00：00",
+                    endtime: endtime, //"2018-10-5 10：00：00",
+                    monitorpointid: 1//mpid
+                },
+                dataType : "json",
+                success: function (result) {
+                    var data = JSON.parse(result);
+
+                    /*UI图表部分*/
+                    eventChart1.setOption({dataset: {source: data}});
+                    $('#item2-UI-ctrl input.default-show').each(function(){//显示默认的曲线系列
+                        $(this).trigger('click');
                     });
-                });
-                //绑定UI图最大值、最小值、平均值checkbox点击事件
-                $('#item2-UI-ctrl ul li.mark-ctrl input:checkbox').each(function(){
-                    $(this).click(function(){
-                        if(this.checked){
-                            switch(this.value){
-                                case 'max':markPointUI.data.unshift({name:'最大值',type: 'max'});break;//最大值标注配置项添加在数组头
-                                case 'min':markPointUI.data.push({name:'最小值',type: 'min'});break;//最小值标注配置项添加在数组尾
-                                case 'average':markLineUI.data.push({name:'平均值',type: 'average'});break;//平均值标注配置项添加
-                                default: break;
-                            }
-                        }
-                        else{
-                            switch(this.value){
-                                case 'max':markPointUI.data.shift();break;//移除最大值标注配置项
-                                case 'min':markPointUI.data.pop();break;//移除最小值标注配置项
-                                case 'average':markLineUI.data.pop();break;//移除平均值标注配置项
-                                default: break;
-                            }
-                        }
-                        eventChart1.setOption(option1);
-                    });                
-                });
-                //绑定评率图最大值、最小值、平均值checkbox点击事件
-                $('#item2-HZ-ctrl input:checkbox').each(function(){
-                    $(this).click(function(){
-                        if(this.checked){
-                            switch(this.value){
-                                case 'max':markPointHZ.data.unshift({name:'最大值',type: 'max'});break;//最大值标注配置项添加在数组头
-                                case 'min':markPointHZ.data.push({name:'最小值',type: 'min'});break;//最小值标注配置项添加在数组尾
-                                case 'average':markLineHZ.data.push({name:'平均值',type: 'average'});break;//平均值标注配置项添加
-                                default: break;
-                            }
-                        }
-                        else{
-                            switch(this.value){
-                                case 'max':markPointHZ.data.shift();break;//移除最大值标注配置项
-                                case 'min':markPointHZ.data.pop();break;//移除最小值标注配置项
-                                case 'average':markLineHZ.data.pop();break;//移除平均值标注配置项
-                                default: break;
-                            }
-                        }
-                        eventChart2.setOption(option2);
-                    });                
-                });
-                //绑定功率图各种功率P的checkbox点击事件
-                $('#item2-P-ctrl ul li.series-ctrl input:checkbox').each(function(){
-                    $(this).click(function () {
-                        if(this.checked){
-                            eventChart3.dispatchAction({
-                                type: "legendSelect",
-                                name: this.value
-                            });
-                        }
-                        else{
-                            eventChart3.dispatchAction({
-                                type: "legendUnSelect",
-                                name: this.value
-                            });
-                        }
+                    /*频率HZ图表部分*/
+                    eventChart2.setOption({dataset: {source: data}});
+                    /*功率P图表部分*/
+                    eventChart3.setOption({dataset: {source: data}});
+                    $('#item2-P-ctrl input.default-show').each(function(){//显示默认的曲线系列
+                        $(this).trigger('click');
                     });
-                });
-                //绑定功率图最大值、最小值、平均值checkbox点击事件
-                $('#item2-P-ctrl ul li.mark-ctrl input:checkbox').each(function(){
-                    $(this).click(function(){
-                        if(this.checked){
-                            switch(this.value){
-                                case 'max':markPointP.data.unshift({name:'最大值',type: 'max'});break;//最大值标注配置项添加在数组头
-                                case 'min':markPointP.data.push({name:'最小值',type: 'min'});break;//最小值标注配置项添加在数组尾
-                                case 'average':markLineP.data.push({name:'平均值',type: 'average'});break;//平均值标注配置项添加
-                                default: break;
-                            }
-                        }
-                        else{
-                            switch(this.value){
-                                case 'max':markPointP.data.shift();break;//移除最大值标注配置项
-                                case 'min':markPointP.data.pop();break;//移除最小值标注配置项
-                                case 'average':markLineP.data.pop();break;//移除平均值标注配置项
-                                default: break;
-                            }
-                        }
-                        eventChart3.setOption(option3);
-                    });                
-                });
-            }
-            //绘制图表
-            function drawCharts(){
-                //设置初始配置项
-                eventChart1.setOption(option1);
-                eventChart2.setOption(option2);
-                eventChart3.setOption(option3);
-                //设置曲线图初始不显示
-                chart1Legend.forEach(function(item){
-                    eventChart1.dispatchAction({
-                        type: "legendUnSelect",
-                        name: item
-                    });
-                });
-                chart3Legend.forEach(function(item){
-                    eventChart3.dispatchAction({
-                        type: "legendUnSelect",
-                        name: item
-                    });
-                });
-            }
-            //获取数据，并更新图
-            function getData(rawData){
-                var data=[
-                    {'time' :'2018-08-15','u1': 23,'u2': 24,'u3' :25,'u4': 26,'i1': 100,'i2': 300,'i3': 400,'i4' :500,'i' :250,'hz': 220,'p1': 100,'p2': 200,'p3': 300,'p': 400,'s1': 500,
-                        's2': 600,'s3': 700,'s': 800, 'q1': 900,'q2': 1000,'q3': 1100, 'q': 1200,
-                        'pf1': 1300,'pf2': 1400, 'pf3': 1500, 'pf': 1600, 'dpf1': 1700,'dpf2': 1800,'dpf3':1900,'dpf': 2000},
-                    {'time' :'2018-08-16','u1': 50,'u2': 24,'u3' :55,'u4': 26,'i1': 200,'i2': 300,'i3': 400,'i4' :700,'i' :250,'hz': 440,'p1': 200,'p2': 200,'p3': 300,'p': 400,'s1': 500,
-                        's2': 600,'s3': 700,'s': 800, 'q1': 900,'q2': 1000,'q3': 1100, 'q': 1200,
-                        'pf1': 1300,'pf2': 1400, 'pf3': 1500, 'pf': 1600, 'dpf1': 1700,'dpf2': 1800,'dpf3':1900,'dpf': 2000},
-                    {'time' :'2018-08-17','u1': 99,'u2': 24,'u3' :300,'u4': 26,'i1': 300,'i2': 300,'i3': 400,'i4' :900,'i' :250,'hz': 330,'p1': 300,'p2': 200,'p3': 300,'p': 400,'s1': 500,
-                        's2': 600,'s3': 700,'s': 800, 'q1': 900,'q2': 1000,'q3': 1100, 'q': 1200,
-                        'pf1': 1300,'pf2': 1400, 'pf3': 1500, 'pf': 1600, 'dpf1': 1700,'dpf2': 1800,'dpf3':1900,'dpf': 2000},
-                    {'time' :'2018-08-18','u1': 20,'u2': 24,'u3' :200,'u4': 26,'i1': 400,'i2': 300,'i3': 400,'i4' :1000,'i':250,'hz': 220,'p1': 400,'p2': 200,'p3': 300,'p': 400,'s1': 500,
-                        's2': 600,'s3': 700,'s': 800, 'q1': 900,'q2': 1000,'q3': 1100, 'q': 1200,
-                        'pf1': 1300,'pf2': 1400, 'pf3': 1500, 'pf': 1600, 'dpf1': 1700,'dpf2': 1800,'dpf3':1900,'dpf': 2000}
-                ];
-                /*UI图表部分*/
-                eventChart1.setOption({dataset: {source: data}});
-                $('#item2-UI-ctrl input.default-show').each(function(){//显示默认的曲线系列
-                    $(this).trigger('click');
-                });
-                /*频率HZ图表部分*/
-                eventChart2.setOption({dataset: {source: data}});
-                /*功率P图表部分*/
-                eventChart3.setOption({dataset: {source: data}});
-                $('#item2-P-ctrl input.default-show').each(function(){//显示默认的曲线系列
-                    $(this).trigger('click');
-                });
-            }
-            //为item2下所有的ul赋予样式list-style:none
-            $('#item2 ul').css('list-style', 'none');
-            eventBanding();
-            drawCharts();
-            getData();
-        })();
+
+                }
+            });
+        }
+
+        <!-- 时间选择器-->
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
+
+        //页面初始化工作...
+        //为item2下所有的ul赋予样式list-style:none
+        $('#item2 ul').css('list-style', 'none');
+        eventBanding();
+        drawCharts();
+
+        //当时间选择器变化时
+        $("#firstDate").change(function() {
+            $('.firstDate').datetimepicker('setStartDate', $(this).val());
+        });
+        $("#lastDate").change(function() {
+            $('.lastDate').datetimepicker('setEndDate', $(this).val());
+        });
+
+        function searchHis(){
+            getData($("#firstDate").val(), $("#lastDate").val(), $('#his-mpid-select').val());
+        }
+
     </script>
+
 
 </body>
 

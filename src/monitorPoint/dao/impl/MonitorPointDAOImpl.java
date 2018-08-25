@@ -2,6 +2,7 @@ package monitorPoint.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.Computerroom;
+import hibernatePOJO.Devices;
 import hibernatePOJO.Monitorpoints;
 import monitorPoint.dao.MonitorPointDAO;
 import org.hibernate.Query;
@@ -20,18 +21,19 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
     public List getLocalAllMonitorPoint(String computerroom){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Computerroom cp = new Computerroom();
-        List<Monitorpoints> list = new ArrayList<>();
+       /* List<Monitorpoints> list = new ArrayList<>();*/
+        List<Devices> list = new ArrayList<>();
 
         cp = (Computerroom)hbsessionDao.getFirst(
                 "FROM Computerroom where rid = '" + computerroom+ "'");
 
-        String mpidset = cp.getMpidset();
-        String mpid[] = mpidset.split(",");
+        String didset = cp.getDidset();
+        String did[] = didset.split(",");
 
-        for(int i= 0; i < mpid.length; i++){
-            Monitorpoints mp = (Monitorpoints)hbsessionDao.getFirst(
-                    "FROM Monitorpoints where mpid = '" + mpid[i]+ "'");
-            list.add(mp);
+        for(int i= 0; i < did.length; i++){
+            Devices dv = (Devices)hbsessionDao.getFirst(
+                    "FROM Devices where did = '" + did[i]+ "'");
+            list.add(dv);
         }
 
         return list;

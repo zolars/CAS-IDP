@@ -1,5 +1,6 @@
 package userManage.dao.impl;
 
+import Util.DBConnect;
 import Util.HBSessionDaoImpl;
 
 import hibernatePOJO.*;
@@ -8,6 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import userManage.dao.UserDAO;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,37 +90,115 @@ public class UserDAOImpl implements UserDAO {
         return cblist;
     }
 
-    public List<Object> getComputerroom(String cbname){
+    public List getComputerroom(String cbname){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<Object> crlist = new ArrayList<>();
+        List<Computerroom> crlist = new ArrayList<>();
 
         CityBank cb = (CityBank)hbsessionDao.getFirst(
                 "FROM CityBank where cbname = '" + cbname+ "'");
 
         String comroomset = cb.getCompRoom();
-        String[] coroomstr= comroomset.split(",");
+        String[] coroomstr= comroomset.split("，");
         for(int i = 0; i < coroomstr.length; i++) {
             Computerroom cp = (Computerroom)hbsessionDao.getFirst(
                     "FROM Computerroom where rid = '" + coroomstr[i] + "'");
-            crlist.add((Object)cp);
+            crlist.add(cp);
         }
 
         return crlist;
     }
 
-   // public List<Object[]>  getAllUserInfo(){
-   public List getAllUserInfo(){
+    public String getProBankName(String pbid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        ProvinceBank prov = (ProvinceBank) hbsessionDao.getFirst(
+                "FROM ProvinceBank where pbid = '" + pbid + "'");
+
+        return prov.getPbname();
+    }
+
+
+    public String getCityBankName(String cbid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        CityBank prov = (CityBank) hbsessionDao.getFirst(
+                "FROM CityBank where cbid = '" + cbid + "'");
+
+        return prov.getCbname();
+    }
+
+
+    public String getComputerroomName(String rid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        Computerroom prov = (Computerroom) hbsessionDao.getFirst(
+                "FROM Computerroom where rid = '" + rid + "'");
+
+        return prov.getRname();
+    }
+
+    public String getRoleName(String rid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        Roles prov = (Roles) hbsessionDao.getFirst(
+                "FROM Roles where rid = '" + rid + "'");
+
+        return prov.getRolesname();
+    }
+
+    public List<List>  getAllUserInfo(){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        //List<Object[]> crlist = new ArrayList<>();
 
-       /* crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tc.rolesname as nrolename,ta.pbid as pbid,ta.cbid as cbid," +
+        /*crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tc.rolesname as nrolename,ta.pbid as pbid,ta.cbid as cbid," +
                 " ta.telephone as telephone, ta.govtelephone as govtelephone from User ta, UserRoles tb, Roles tc where ta.uid = tb.uid and tb.rid = tc.rid");
        */
+       /* crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tb.rid as nrolename,ta.pbid as pbid, " +
+                " ta.cbid as cbid,ta.telephone as telephone, ta.govtelephone as govtelephone from User ta left outer join UserRoles tb with ta.uid = tb.uid");*/
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        boolean result = false;
 
-        List<User> crlist = hbsessionDao.search( "FROM User");
 
-        return crlist;
+        db = new DBConnect();
+        String sql = "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,ta.password as npassword,ta.pbid as pbid, ta.cbid as cbid,ta.rid as comprid,tb.rid as nrolename,ta.telephone as telephone, ta.govtelephone as govtelephone from user ta left outer join user_roles tb on ta.uid = tb.uid";
+        try {
+            List<List> crlist = new ArrayList<>();
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("nuid"));
+                list.add(rs.getString("nuname"));
+                list.add(rs.getString("nchinesename"));
+                //list.add(rs.getString("npassword"));
+
+                list.add(rs.getString("pbid"));
+                list.add(rs.getString("cbid"));
+                list.add(rs.getString("comprid"));
+
+                list.add(rs.getString("nrolename"));
+
+                list.add(rs.getString("telephone"));
+                list.add(rs.getString("govtelephone"));
+
+                crlist.add((List)list);
+            }
+            return crlist;
+
+        }catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return  new ArrayList<>();
     }
 
     public User getOneUserInfo(String uid){
@@ -137,12 +219,21 @@ public class UserDAOImpl implements UserDAO {
         return rt;
     }
 
-    public boolean addUserInfo(String account,String password,String name,String telephone,String govtelephone, String province, String city){
+    public boolean deleteUserRoles(String uid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        rt = hbsessionDao.delete( "Delete FROM UserRoles Where uid=?", uid);
+
+        return rt;
+    }
+
+    public boolean addUserInfo(String uid,String account,String password,String name,String telephone,String govtelephone, String province, String city, String computerroom){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
 
         User user = new User();
-        user.setUid("3");
+        user.setUid(uid);
         user.setUname(account);
         user.setChinesename(name);
         user.setPassword(password);
@@ -151,8 +242,21 @@ public class UserDAOImpl implements UserDAO {
 
         user.setCbid(city);
         user.setPbid(province);
+        user.setRid(computerroom);
 
         rt = hbsessionDao.insert(user);
+        return rt;
+    }
+
+    public boolean addUserRolesInfo(String uid, String roles){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        UserRoles userrole = new UserRoles();
+        userrole.setUid(uid);
+        userrole.setRid(roles);
+
+        rt = hbsessionDao.insert(userrole);
         return rt;
     }
 
@@ -173,16 +277,17 @@ public class UserDAOImpl implements UserDAO {
 
         newur.setPbid(province);
         newur.setCbid(city);
-        //.(computerroom);
+        newur.setRid(computerroom);
 
         String hql = "update User newur set newur.uname='" + name +"', newur.chinesename='" + chinesename +"', newur.password='" + password +"'," +
                 "newur.telephone='" + telephone +"', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
-                "newur.cbid='" + city + "'" + "', newur.rid='" + computerroom + "'"+
+                ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
                 " where newur.uid='" + uid + "'";
 
         rt = hbsessionDao.update(newur, hql);
 
         UserRoles newurole = new UserRoles();
+        newurole.setUid(uid);
         newurole.setRid(roles);
 
         String hql2 = "update UserRoles newurole set newurole.rid='" + roles +
@@ -213,4 +318,13 @@ public class UserDAOImpl implements UserDAO {
         return crlist;
     }
 
+    public String getMaxUserId(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        User ur = (User) hbsessionDao.getFirst(
+                "FROM User order by uid desc");
+
+        return ur.getUid();
+
+    }
 }

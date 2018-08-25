@@ -29,7 +29,8 @@ public class addUserInfoAction extends ActionSupport {
     }
 
 
-    /* 查询所有用户的基本信息、用户角色、用户权限
+    /* 添加所有用户的基本信息
+                   用户角色
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -47,21 +48,30 @@ public class addUserInfoAction extends ActionSupport {
             String roles = request.getParameter("uroles");
             String province = request.getParameter("uprovince");
             String city = request.getParameter("ucity");
-           // String computerroom = request.getParameter("ucomputerroom");
+            String computerroom = request.getParameter("ucomputerroom");
 
             UserDAO dao = new UserDAOImpl();
-            Boolean rt = dao.addUserInfo(account, password, name, telephone, govtelephone, province, city);
+            String uid = dao.getMaxUserId();
+            Integer maxuid = Integer.parseInt(uid)+1;
+
+            Boolean rt = dao.addUserInfo(maxuid.toString(), account, password, name, telephone, govtelephone, province, city, computerroom);
+            Boolean rt2 = dao.addUserRolesInfo(maxuid.toString(), roles);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("result", rt);
+
+            if(rt&&rt2)
+                jsonObject.put("提示", "添加成功！");
+            else
+                jsonObject.put("提示", "添加失败，请重试！");
 
             result = JSON.toJSONString(jsonObject);
+
 
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }

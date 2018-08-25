@@ -41,28 +41,42 @@ public class getUserInfoAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             UserDAO dao = new UserDAOImpl();
-            List<User> alluserraw = dao.getAllUserInfo();
-            List<User> alluser = dao.getAllUserInfo();
+            List<List> alluser = dao.getAllUserInfo();
 
             //处理 ：undefined 转为 空
             //      组织转为组织名称
-            for(int i = 0; i < alluserraw.size(); i++){
-                User tmpur = alluserraw.get(i);
+            for(int i = 0; i < alluser.size(); i++){
+                    List tmpur = alluser.get(i);
+                    String prob = "";
+                    String cityb = "";
+                    String computerrom = "";
+                    String role = "";
 
-                if(tmpur.getPbid() == null)
-                    tmpur.setPbid(" ");
-                if(tmpur.getCbid() == null)
-                    tmpur.setCbid(" ");
-                if(tmpur.getRid() == null)
-                    tmpur.setRid(" ");
-                alluser.add(tmpur);
+                    if (tmpur.get(3) == null || tmpur.get(3) == "" || "".equals(tmpur.get(3)))
+                        prob = "";
+                    else
+                        prob = dao.getProBankName(tmpur.get(3).toString());
+                    if (tmpur.get(4) == null || tmpur.get(4) == "" || "".equals(tmpur.get(4)))
+                        cityb = "";
+                    else
+                        cityb = dao.getCityBankName(tmpur.get(4).toString());
+                    if (tmpur.get(5) == null || tmpur.get(5) == "" || "".equals(tmpur.get(5)))
+                        computerrom = "";
+                    else
+                        computerrom = dao.getComputerroomName(tmpur.get(5).toString());
+                    if (tmpur.get(6) == null || tmpur.get(6) == " "|| "".equals(tmpur.get(6)))
+                        role = "";
+                    else
+                        role = dao.getRoleName(tmpur.get(6).toString());
+
+                    tmpur.set(3, prob);
+                    tmpur.set(4, cityb);
+                    tmpur.set(5, computerrom);
+                    tmpur.set(6, role);
             }
-
-
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("alluser", alluser);
-            //jsonObject.put("alluserrole", alluserrole);
 
             result = JSON.toJSONString(jsonObject);
 

@@ -3,23 +3,14 @@ package onlineTest.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import onlineTest.dao.CFDAO;
-import onlineTest.dao.PowerParameterDAO;
 import onlineTest.dao.RMSDAO;
-import onlineTest.dao.THDDAO;
-import onlineTest.dao.impl.CFDAOImpl;
-import onlineTest.dao.impl.PowerParameterDAOImpl;
 import onlineTest.dao.impl.RMSDAOImpl;
-import onlineTest.dao.impl.THDDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
 
 
 public class getQstaction extends ActionSupport {
@@ -35,9 +26,9 @@ public class getQstaction extends ActionSupport {
     }
 
 
-    /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的行级结构树状串
+    /* 根据监测点获取所有的趋势图数据
      */
-    public String execute() throws Exception { //getUserTree() throws Exception{
+    public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
@@ -48,51 +39,37 @@ public class getQstaction extends ActionSupport {
             String monitorpoint = request.getParameter("monitorpointid");
 
             RMSDAO rmsdao = new RMSDAOImpl();
-            THDDAO thddao = new THDDAOImpl();
-            CFDAO cfdao = new CFDAOImpl();
-            PowerParameterDAO ppdao = new PowerParameterDAOImpl();
 
             JSONObject jsonObject = new JSONObject();
 
+            // 5 records
+            ((RMSDAOImpl) rmsdao).getCurrentData(monitorpoint);
             //getQstRMS
-            List qstdata = new ArrayList();
-            qstdata = rmsdao.getCurrentRMSData(monitorpoint);
+            List qstdata = rmsdao.getCurrentRMSData();
             //getQstTHD
-            List thddata = new ArrayList();
-            thddata = thddao.getCurrentTHDData(monitorpoint);
+            List thddata = rmsdao.getCurrentTHDData();
             //getQstCF
-            List cfdata = new ArrayList();
-            cfdata = cfdao.getCurrentCFData(monitorpoint);
+            List cfdata = rmsdao.getCurrentCFData();
             //getQstHZ
-            List hzdata = new ArrayList();
-            hzdata = ppdao.getCurrentHzData(monitorpoint);
+            List hzdata = rmsdao.getCurrentHzData(monitorpoint);
             //getQstUNB%
-            List unbdata = new ArrayList();
-            unbdata = ppdao.getCurrentUnbData(monitorpoint);
+            List unbdata = rmsdao.getCurrentUnbData(monitorpoint);
             //getQstW
-            List wdata = new ArrayList();
-            wdata = ppdao.getCurrentWData(monitorpoint);
+            List wdata = rmsdao.getCurrentWData(monitorpoint);
             //getQstVA
-            List vadata = new ArrayList();
-            vadata = ppdao.getCurrentVAData(monitorpoint);
+            List vadata = rmsdao.getCurrentVAData(monitorpoint);
             //getQstVar
-            List vardata = new ArrayList();
-            vardata = ppdao.getCurrentVarData(monitorpoint);
+            List vardata = rmsdao.getCurrentVarData(monitorpoint);
             //getQstPF
-            List pfdata = new ArrayList();
-            pfdata = ppdao.getCurrentPFData(monitorpoint);
+            List pfdata = rmsdao.getCurrentPFData(monitorpoint);
             //getQstDPF
-            List dpfdata = new ArrayList();
-            dpfdata = ppdao.getCurrentDPFData(monitorpoint);
+            List dpfdata = rmsdao.getCurrentDPFData(monitorpoint);
             //getQstTAN
-            List tandata = new ArrayList();
-            tandata = ppdao.getCurrentTanData(monitorpoint);
+            List tandata = rmsdao.getCurrentTanData(monitorpoint);
             //getQstPST
-            List pstdata = new ArrayList();
-            pstdata = ppdao.getCurrentPstData(monitorpoint);
+            List pstdata = rmsdao.getCurrentPstData(monitorpoint);
             //getQstPLT
-            List pltdata = new ArrayList();
-            pltdata = ppdao.getCurrentPltData(monitorpoint);
+            List pltdata = rmsdao.getCurrentPltData(monitorpoint);
 
             jsonObject.put("allRMS", qstdata);
             jsonObject.put("allTHD", thddata);
@@ -114,7 +91,7 @@ public class getQstaction extends ActionSupport {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }

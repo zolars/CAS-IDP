@@ -4,9 +4,10 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="hibernatePOJO.PowersxdyMonitor" table="powersxdy_monitor" schema="Test">
+    <class name="hibernatePOJO.PowersxdyMonitor" table="powersxdy_monitor" schema="test">
         <id name="sxid">
-            <column name="sxid" sql-type="varchar(255)"/>
+            <column name="sxid" sql-type="int(11)"/>
+            <generator class="increment"></generator>
         </id>
         <property name="mpid">
             <column name="mpid" sql-type="int(11)"/>
@@ -15,58 +16,67 @@
             <column name="time" sql-type="datetime" not-null="true"/>
         </property>
         <property name="u1">
-            <column name="U1" sql-type="float" precision="-1" not-null="true"/>
+            <column name="U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="u2">
-            <column name="U2" sql-type="float" precision="-1" not-null="true"/>
+            <column name="U2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="u3">
-            <column name="U3" sql-type="float" precision="-1" not-null="true"/>
+            <column name="U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="v1">
-            <column name="V1" sql-type="float" precision="-1" not-null="true"/>
+            <column name="V1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="v2">
-            <column name="V2" sql-type="float" precision="-1" not-null="true"/>
+            <column name="V2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="v3">
-            <column name="V3" sql-type="float" precision="-1" not-null="true"/>
+            <column name="V3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
-        <property name="a1">
-            <column name="A1" sql-type="float" precision="-1" not-null="true"/>
+        <property name="i1">
+            <column name="I1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
-        <property name="a2">
-            <column name="A2" sql-type="float" precision="-1" not-null="true"/>
+        <property name="i2">
+            <column name="I2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
-        <property name="a3">
-            <column name="A3" sql-type="float" precision="-1" not-null="true"/>
+        <property name="i3">
+            <column name="I3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="angleU1">
-            <column name="angleU1" sql-type="float" precision="-1" not-null="true"/>
+            <column name="angleU1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="angleU2">
-            <column name="angleU2" sql-type="float" precision="-1" not-null="true"/>
+            <column name="angleU2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="angleU3">
-            <column name="angleU3" sql-type="float" precision="-1" not-null="true"/>
+            <column name="angleU3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="angleV1">
-            <column name="angleV1" sql-type="float" precision="-1" not-null="true"/>
+            <column name="angleV1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="angleV2">
-            <column name="angleV2" sql-type="float" precision="-1" not-null="true"/>
+            <column name="angleV2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="angleV3">
-            <column name="angleV3" sql-type="float" precision="-1" not-null="true"/>
+            <column name="angleV3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
-        <property name="angleA1">
-            <column name="angleA1" sql-type="float" precision="-1" not-null="true"/>
+        <property name="angleI1">
+            <column name="angleI1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
-        <property name="angleA2">
-            <column name="angleA2" sql-type="float" precision="-1" not-null="true"/>
+        <property name="angleI2">
+            <column name="angleI2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
-        <property name="angleA3">
-            <column name="angleA3" sql-type="float" precision="-1" not-null="true"/>
+        <property name="angleI3">
+            <column name="angleI3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="aunb">
+            <column name="Aunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="uunb">
+            <column name="Uunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="vunb">
+            <column name="Vunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

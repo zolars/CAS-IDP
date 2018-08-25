@@ -12,10 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
-
 
 public class allocRolesPermissionAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -29,7 +25,7 @@ public class allocRolesPermissionAction extends ActionSupport {
         this.result = result;
     }
 
-    /* 查询所有功能权限
+    /* 分配给角色功能权限
      */
     public String execute() throws Exception {
         try {//获取数据

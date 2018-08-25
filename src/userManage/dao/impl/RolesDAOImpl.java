@@ -56,5 +56,27 @@ public class RolesDAOImpl implements RolesDAO {
         return rt;
     }
 
+    public Roles getOneRolesInfo(String rid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Roles role = (Roles)hbsessionDao.getFirst(
+                "FROM Roles order where rid = '"+ rid +"'");
+        return role;
+    }
+
+    public boolean updateRoleInfo(String rid, String name, String extra){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+        String hql = "update Roles role set role.rolesname='" + name +
+                "', role.extra='"+ extra +"' where role.rid='" + rid + "'";
+
+        Roles role = new Roles();
+        role.setRid(rid);
+        role.setRolesname(name);
+        role.setExtra(extra);
+
+        rt = hbsessionDao.update(role, hql);
+        return rt;
+    }
+
 
 }

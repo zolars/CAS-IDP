@@ -1,23 +1,35 @@
 package onlineTest.dao;
 
 
-import hibernatePOJO.PowerxbMonitor;
-
 import java.util.List;
 
 public interface RMSDAO {
 
-    /*
-    rms data order： u1、u2、u3、v1、v2、v3、i1、i2、i3
-     */
-    public List getCurrentRMSData(String monitorpoint);
+    public void getCurrentData(String monitorpoint);
 
-    /*public List<Object> getCurrentRMSu2Data(String monitorpoint);
-    public List<Object> getCurrentRMSu3Data(String monitorpoint);
-    public List<Object> getCurrentRMSv1Data(String monitorpoint);
-    public List<Object> getCurrentRMSv2Data(String monitorpoint);
-    public List<Object> getCurrentRMSv3Data(String monitorpoint);
-    public List<Object> getCurrentRMSi1Data(String monitorpoint);
-    public List<Object> getCurrentRMSi2Data(String monitorpoint);
-    public List<Object> getCurrentRMSi3Data(String monitorpoint);*/
+    public List getCurrentRMSData();
+
+    public List getCurrentTHDData();
+
+    public List getCurrentCFData();
+
+    public List getCurrentHzData(String monitorpoint);
+
+    public List getCurrentUnbData(String monitorpoint);
+
+    public List getCurrentWData(String monitorpoint);
+
+    public List getCurrentVAData(String monitorpoint);
+
+    public List getCurrentVarData(String monitorpoint);
+
+    public List getCurrentPFData(String monitorpoint);
+
+    public List getCurrentDPFData(String monitorpoint);
+
+    public List getCurrentTanData(String monitorpoint);
+
+    public List getCurrentPstData(String monitorpoint);
+
+    public List getCurrentPltData(String monitorpoint);
 }

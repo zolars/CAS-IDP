@@ -1,10 +1,10 @@
 package onlineTest.dao;
 
 
-import java.util.List;
+import hibernatePOJO.PowerxbMonitor;
 
 public interface XBDAO {
 
-    public List<Object> getCurrentXbData(String monitorpoint);
+    public PowerxbMonitor getCurrentXbData(String monitorpoint);
 
 }

@@ -1,21 +1,16 @@
-package onlineTest.action;
+package deviceManage.action;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import onlineTest.dao.PowerParameterDAO;
-import onlineTest.dao.impl.PowerParameterDAOImpl;
+import deviceManage.dao.DeviceDAO;
+import deviceManage.dao.impl.DeviceDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
-
-
-public class getQstHzaction extends ActionSupport {
+public class deleteDeviceAlarmRolesAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -28,9 +23,9 @@ public class getQstHzaction extends ActionSupport {
     }
 
 
-    /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的行级结构树状串
+    /* 根据设备名称删除告警人员
      */
-    public String execute() throws Exception { //getUserTree() throws Exception{
+    public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
@@ -38,21 +33,26 @@ public class getQstHzaction extends ActionSupport {
 
             //获取监测点
             //String computerroom = request.getParameter("computerroomid");
-            String monitorpoint = request.getParameter("monitorpointid");
+            String auid = request.getParameter("auid");
 
-            PowerParameterDAO dao = new PowerParameterDAOImpl();
+            DeviceDAO dao = new DeviceDAOImpl();
 
-            List qstdata = new ArrayList();
+            //判断是否删除成功
+            Boolean rt = dao.deleteDeviceAlarmUser(auid);
+            JSONObject jsonObject = new JSONObject();
 
-            qstdata = dao.getCurrentHzData(monitorpoint);
+            if(rt)
+                jsonObject.put("提示", "删除成功！");
+            else
+                jsonObject.put("提示", "删除失败，请重试！");
 
-            result = JSON.toJSONString(qstdata); // List转json
+            result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }

@@ -1,99 +1,94 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.Dictionary;
-import hibernatePOJO.DictionaryPlus;
-import hibernatePOJO.Roles;
+import hibernatePOJO.CaptureSetting;
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.impl.StdSchedulerFactory;
 
-//import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-//import javax.servlet.http.HttpSessionContext;
-import java.util.*;
+import java.util.List;
+
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
+
 
 public class MyListener implements ServletContextListener {
-    private MyThread myThread;
-
-
     public void contextDestroyed(ServletContextEvent e) {
-        if (myThread != null && myThread.isInterrupted()) {
-            myThread.interrupt();
-        }
+//        if (myThread != null && myThread.isInterrupted()) {
+//            myThread.interrupt();
+//        }
     }
 
     public void contextInitialized(ServletContextEvent e) {
-        String str = null;
-        if (str == null && myThread == null) {
-            myThread = new MyThread();
-            myThread.start(); // servlet 上下文初始化时启动 socket
-        }
-    }
-}
+        Thread dataThread = new Thread(){
+            @Override
+            public void run() {
+                /*
+                    从数据库取配置数据
+                */
+                HBSessionDaoImpl hbSessionDao=new HBSessionDaoImpl();
+                //取监测点的配置信息(IP,port等)
+                List<CaptureSetting> list=hbSessionDao.search("FROM CaptureSetting");
+                //从数据库中读取字典，list<map<String, Int>>类型
+                //diclist为第一个字典，dicpluslist为第二个索引字典
+                DataOnline.setDic(hbSessionDao.search("FROM Dictionary"));
+                DataOnline.setDicPlus(hbSessionDao.search("FROM DictionaryPlus"));
+                //创建取实时数据和暂态数据的client
+                if(null!=list){
+                    //创建客户端连接
+                    for(CaptureSetting c:list){
+                        try {
+                            System.out.println("创建取实时数据连接："+c.getIp()+":"+c.getPort1());
+                            new DataOnlineClient(c.getIp(),c.getPort1(),c.getMpid()).start();
+                            System.out.println("创建取暂态事件连接："+c.getIp()+":"+c.getPort2());
+                            new TransientClient(c.getIp(),c.getPort2(),c.getMpid()).start();
+                        }
+                        catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                    //创建任务调度
+                    try{
+                        Scheduler scheduler=StdSchedulerFactory.getDefaultScheduler();
+                        //设置任务，每5s存一次实时数据
+                        Trigger trigger1=newTrigger()
+                                .withIdentity("DataOnlineSaveTrigger","DataOnlineSaveTriggerGroup")
+                                .startNow()
+                                .withSchedule(simpleSchedule()
+                                        .withIntervalInSeconds(list.get(0).getOnlineinterval())
+                                        .repeatForever())
+                                .build();
+                        JobDetail job1=newJob(DataOnlineSaveJob.class)
+                                .withIdentity("DataOnlineSaveJob","DataOnlineSaveGroup")
+                                .build();
+                        scheduler.scheduleJob(job1,trigger1);
 
-/**
- * 自定义一个 Class 线程类继承自线程类，重写 run() 方法，用于从后台获取并处理数据
- */
-class MyThread extends Thread {
-    public void run() {
-        while (!this.isInterrupted()) {// 线程未中断执行循环
-            try {
-                Thread.sleep(200000); //每隔200000ms执行一次
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                        //设置任务，每30分钟发一次暂态事件请求
+                        Trigger trigger2=newTrigger()
+                                .withIdentity("transientRequestTrigger","transientRequestTriggerGroup")
+                                .startNow()
+                                .withSchedule(simpleSchedule()
+                                        .withIntervalInMinutes(list.get(0).getThansentinterval())
+                                        .repeatForever())
+                                .build();
+                        JobDetail job2=newJob(TransientRequestJob.class)
+                                .withIdentity("transientRequestJob","transientRequestJobGroup")
+                                .build();
+                        scheduler.scheduleJob(job2,trigger2);
+                        scheduler.start();
+                    }
+                    catch (SchedulerException e){
+                        e.printStackTrace();
+                    }
+
+                }
             }
-
-//           ------------------ 开始执行 ---------------------------
-            System.out.println("____________________TIME:" + System.currentTimeMillis());
-
-            //1.取数据,解析
-            //从数据库中读取字典，list<map<String, Int>>类型
-            //diclist为第一个字典，dicpluslist为第二个索引字典
-            HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-            List<Dictionary> list = hbsessionDao.search(
-                    "FROM Dictionary");
-            List<Map<String, Integer>> diclist = new ArrayList<>();
-
-            for(int i = 0; i < list.size(); i++){
-                System.out.println(list.get(i).getItem()+" "+list.get(i).getCoefficient());
-                Map<String, Integer> map = new HashMap<>();
-                map.put(list.get(i).getItem(), list.get(i).getCoefficient());
-                diclist.add(map);
-            }
-
-            List<DictionaryPlus> dicpluslist = hbsessionDao.search(
-                    "FROM DictionaryPlus");
-
-            System.out.println(dicpluslist.get(0).getPart1Slaveid());
-            System.out.println(dicpluslist.get(0).getPart2Slaveid());
-            System.out.println(dicpluslist.get(0).getPart3Slaveid());
-            System.out.println(dicpluslist.get(0).getPart4Slaveid());
-
-            System.out.println(dicpluslist.get(0).getPart1Functioncode());
-
-            System.out.println(dicpluslist.get(0).getPart1Length());
-
-            System.out.println(dicpluslist.get(0).getPart1Start());
-
-
-            //2.存数据库
-            //将取到的数据分别按照实体类型存入表中
-            //HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-            boolean rt = false;
-            Roles role = new Roles();
-            role.setRid(String.valueOf(System.currentTimeMillis()));
-            role.setRolesname("name");
-            role.setExtra("extra");
-            //rt = hbsessionDao.insert(role);
-
-            if(rt)
-                System.out.println("存取成功");
-            else  System.out.println("存取失败");
-
-            //3.实时存入，方便后续读取
-
-
-
-        }
+        };
+        dataThread.start(); // servlet 上下文初始化时启动线程
     }
 }

@@ -30,7 +30,7 @@ public class deleteUserInfoAction extends ActionSupport {
     }
 
 
-    /* 查询所有用户的基本信息、用户角色、用户权限
+    /* 删除一条用户信息、用户角色记录
      */
     public String execute() throws Exception { //getUserTree() throws Exception{
         try {//获取数据
@@ -38,15 +38,19 @@ public class deleteUserInfoAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //String monitorpointid = request.getParameter("monitorpointid");
             String uidstr = request.getParameter("uid");
             String uid[] = uidstr.split("=");
 
             UserDAO dao = new UserDAOImpl();
             Boolean rt = dao.deleteUserInfo(uid[1]);
+            Boolean rt2 = dao.deleteUserRoles(uid[1]);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("result", rt);
+
+            if(rt&&rt2)
+                jsonObject.put("提示", "删除成功！");
+            else
+                jsonObject.put("提示", "删除失败，请重试！");
 
             result = JSON.toJSONString(jsonObject);
 

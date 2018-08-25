@@ -297,7 +297,7 @@
             var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
             //对第一个结果进行URI解码
             var provinceid_pre = decodeURI(provinceidc[1]);
-           // console.log("provinceid_pre "+provinceid_pre);
+
             $.ajax({
                 type: "post",
                 url: "setProvince",
@@ -353,11 +353,11 @@
                 data: {cityid: cname},
                 dataType : "json",
                 success: function (data) {
-                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                    var list = data.allcomputerroom;
 
-                    var obj = eval("(" + data + ")");
-                    for (var i = 0; i < obj.length; i++) {
-                        $('#comproom_code').append("<option value='" + obj[i].rname + "' >" + obj[i].rname + "</option>");
+                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                    for (var i = 0; i < list.length; i++) {
+                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                     }
                 }
             });
