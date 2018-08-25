@@ -246,14 +246,30 @@
                             <div id="TCP-device" style="display: none">
                                 <label class="t-overflow">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <%--<div class="col-md-6">
                                             <select class="form-control location-select-item-w" id="get-devicename" onclick="fuzzySearch()">
                                                 <option value="">请选择或输入待查询的设备名称</option>
                                             </select>
+                                        </div>--%>
+
+                                        <%--<div id="search-div-1" class="form-control setting-input">
+                                            <label class="t-overflow">
+                                            <input type="text">请选择或输入待查询的设备名称
+                                            </label>
                                         </div>
-                                        <div class="col-md-2">
-                                            <button class="btn btn-default" onclick="checkDevice()">查询</button>
-                                        </div>
+                                           <div id="search-div-2" class="form-control">
+                                           </div>--%>
+
+                                            <div class="col-md-2">
+                                                <label class="t-overflow">
+                                                    <input id="get-devicename" type="text" class="form-control setting-input">
+                                                </label>
+                                                <div id="item-devicename" style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">
+                                                    <ul id="device-name-Item">
+                                                    </ul>
+                                                </div>
+                                                <button class="btn btn-default" onclick="checkDevice()">查询</button>
+                                            </div>
                                     </div>
                                 </label>
                                 <div class="row">
@@ -1631,8 +1647,23 @@
 
     <!-- 查询设备--IDP\UPS -->
     <script type="text/javascript">
-        <!-- 初始化-->
+        // 初始化
         $.ajax({
+            type: "post",
+            url: "getAllIDPDevice",
+            /*data: {
+                // devicename: devicename
+            },*/
+            dataType: "json",
+            success: function (data) {
+                var list = data.alldlist;
+                for (var i = 0; i < list.length; i++) {
+                    // $('#get-devicename').append("<option value='"+list[i].name+"'>"+ list[i].name +"</option>");
+                    $('#device-name-Item').append("<li value='"+list[i].name+"'>"+ list[i].name +"</li>");
+                }
+            }
+        });
+      /*  $.ajax({
             type: "post",
             url: "getAllIDPDevice",
             data: {
@@ -1645,22 +1676,32 @@
                     $('#get-devicename').append("<option value='"+list[i].name+"'>"+ list[i].name +"</option>");
                 }
             }
+        });*/
+
+        //点击
+        $("#get-devicename").bind("click",function(){
+            $("#item-devicename").css('display','block');//显示
         });
 
-        <!-- 搜索框数据变化时，显示模糊搜索结果 -->
-        function fuzzySearch() {
-            var name = "U";
+
+        // 搜索框数据变化时 显示模糊搜索结果
+        $("input:text").bind("input propertychange",function(){
+
+            var name = $(this).val();
+
+            console.log(name);//打印输入框字符
 
             $.ajax({
                 type: "post",
                 url: "fuzzySearchDevice",
                 data: {
-                     name: name
+                    name: name
                 },
                 dataType: "json",
                 success: function (data) {
+                    console.log(data);
                     //clear items
-                    $('#get-devicename').clean();
+                    $('#get-devicename').empty();
 
                     var list = data.alldlist;
                     for (var i = 0; i < list.length; i++) {
@@ -1668,7 +1709,8 @@
                     }
                 }
             });
-        }
+
+        });
 
         <!-- 查询设备 -->
         function checkDevice(){
@@ -2077,7 +2119,6 @@
                     alert("失败");
                 }
             });
-
         }
 
         <!-- 隐藏限值 model  -->

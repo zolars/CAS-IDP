@@ -725,7 +725,7 @@ public class DataOutput {
         varxb.setMpid(1);
         varsxdy.setMpid(1);
 
-        PowerparmMonitor pp = (PowerparmMonitor)hbsessionDao.getFirst(
+        /*PowerparmMonitor pp = (PowerparmMonitor)hbsessionDao.getFirst(
                 "FROM PowerparmMonitor order by ppid desc");
 
         PowerxbMonitor pxb = (PowerxbMonitor)hbsessionDao.getFirst(
@@ -745,7 +745,7 @@ public class DataOutput {
         if(pxb==null)
             varxb.setXbid(1);
         else
-            varxb.setXbid(pxb.getXbid() + 1);
+            varxb.setXbid(pxb.getXbid() + 1);*/
 
         Float defzero = new Float(0);
         var.setU4(defzero);
@@ -771,36 +771,51 @@ public class DataOutput {
     }
 
     public static void savedata(){
-            System.out.println("++++++++++++++++++++++TIME:" + new Date().getTime());
+        //System.out.println("++++++++++++++++++++++TIME:" + new Date().getTime());
+        //HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        //hbsessionDao.init();
 
-            HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        PowerparmMonitor pp = (PowerparmMonitor)hbsessionDao.getFirst(
+                "FROM PowerparmMonitor order by ppid desc");
 
-            boolean rt = false;
-            rt = hbsessionDao.insert(var);
+        PowerxbMonitor pxb = (PowerxbMonitor)hbsessionDao.getFirst(
+                "FROM PowerxbMonitor order by xbid desc");
 
-            boolean xbrt = false;
-            xbrt = hbsessionDao.insert(varxb);
+        PowersxdyMonitor psxdy = (PowersxdyMonitor)hbsessionDao.getFirst(
+                "FROM PowersxdyMonitor order by sxid desc");
 
-            boolean sxdyrt = false;
-            sxdyrt = hbsessionDao.insert(varsxdy);
+        if(psxdy==null)
+            varsxdy.setSxid(1);
+        else
+            varsxdy.setSxid(psxdy.getSxid() + 1);
+        if(pp==null)
+            var.setPpid(1);
+        else
+            var.setPpid(pp.getPpid() + 1);
+        if(pxb==null)
+            varxb.setXbid(1);
+        else
+            varxb.setXbid(pxb.getXbid() + 1);
 
-            if(rt)
-                System.out.println("存取parm数据成功");
-            else  System.out.println("存取parm数据失败");
+       /* boolean rt = false;
+        rt = hbsessionDao.insert(var);
+        boolean xbrt = false;
+        xbrt = hbsessionDao.insert(varxb);
+        boolean sxdyrt = false;
+        sxdyrt = hbsessionDao.insert(varsxdy);*/
 
-            if(xbrt)
-                System.out.println("存取xb数据成功");
-            else  System.out.println("存取xb数据失败");
+        if(hbsessionDao.insert(var))
+            System.out.println("存取parm数据成功");
+        else  System.out.println("存取parm数据失败");
 
-            if(sxdyrt)
-                System.out.println("存取sxdy数据成功");
-            else  System.out.println("存取sxdy数据失败");
+        if(hbsessionDao.insert(varxb))
+            System.out.println("存取xb数据成功");
+        else  System.out.println("存取xb数据失败");
 
-     ////   } catch (InterruptedException e) {
-     //       e.printStackTrace();
-      //  }
+        if(hbsessionDao.insert(varsxdy))
+            System.out.println("存取sxdy数据成功");
+        else  System.out.println("存取sxdy数据失败");
 
-
-
+        //hbsessionDao.closeSession();
     }
 }

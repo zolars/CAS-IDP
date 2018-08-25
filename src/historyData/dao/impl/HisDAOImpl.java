@@ -11,12 +11,15 @@ import java.util.*;
 
 public class HisDAOImpl implements HisDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
+    /*  private Session session;
+  private Transaction transaction;
+    private Query query;*/
 
     public  List getHisData(String monitorpoint, String starttime, String endtime){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        //hbsessionDao.init();
+
         List<PowerparmMonitor> crlist = new ArrayList<>();
 
         List rtlist = new ArrayList<>();
@@ -67,6 +70,9 @@ public class HisDAOImpl implements HisDAO {
             map.put("dpf", temp.getpFsum());//
             rtlist.add((Object) map);
         }
+
+        //hbsessionDao.closeSession();
+
         return rtlist;
     }
 

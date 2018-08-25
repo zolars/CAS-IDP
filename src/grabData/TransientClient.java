@@ -9,14 +9,15 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-
-
-public class Client {
-
-    public static void dataGet() throws Exception{
-        String host="192.168.1.240";
-        int port=502;
-
+public class TransientClient {
+    public static void main(String[] args) {
+        try {
+            new TransientClient().run("192.168.1.240",6000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void run(String host,int port) throws Exception{
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try{
             Bootstrap b = new Bootstrap();
@@ -28,10 +29,7 @@ public class Client {
                 public void initChannel(SocketChannel ch)
                         throws Exception
                 {
-
-                    ch.pipeline().addLast(new ClientHandler());
-                    System.out.println("HANDLER-BUILT#####################################");
-
+                    ch.pipeline().addLast(new TransientClientHandler());
                 }
             });
             ChannelFuture f = b.connect(host, port).sync();
@@ -42,5 +40,4 @@ public class Client {
             workerGroup.shutdownGracefully();
         }
     }
-
 }

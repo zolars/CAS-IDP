@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-class ClientHandler extends ChannelInboundHandlerAdapter {
+class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     private Map<String,Float> map=new HashMap<String, Float>();
-    public static List<Dictionary> dic=null;
-    public static List<DictionaryPlus> dicPlus=null;
-    private static ByteBuf recMsg=null;
+    public List<Dictionary> dic=null;
+    public List<DictionaryPlus> dicPlus=null;
+    private ByteBuf recMsg=null;
 
-    private static int []slaveId= new int[22];
+    private int []slaveId= new int[22];
     private static int []fCode=new int[22];
     private static int []addr=new int[22];
     private static int []len=new int [22];
@@ -32,6 +32,8 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
     private static int cishu=0;
 
     private static boolean aaa = true;
+
+    private static DataOutput dataoutput = new DataOutput();
 
 
     @Override
@@ -92,13 +94,11 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
             if (recMsg.readableBytes()>=len[part]*2+9) {
 //                System.out.println("可读字节数@@@@@@@："+recMsg.readableBytes());
 //                return;
-
               //  System.out.println("已接收：part:" + part + "start:" + addr[part] + "length" + len[part]);
               //  System.out.println("接收长度" + recMsg.capacity());
               //  System.out.println("rec:" + ByteBufUtil.hexDump(recMsg));//打印接收数据
                 dataResolve(recMsg, addr[part], len[part]);
                 recMsg.clear();
-
               //  System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"+DataOnline.getData());
                 if (part < 21) {
                     part++;
@@ -106,22 +106,18 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
                     part = 0;
                     count = 0;
                 //    System.out.println(++cishu + "every 10 times:"); //每取10次实时数据存数据库一次
-
-                    DataOutput.setDataset(map);
-
+                    /*DataOutput.setDataset(map);
                     DataOutput.setdata();
-
                     if(cishu % 12 == 0) {
                         DataOutput.savedata();//DataOnline.time);
-                    }
-
-                    /*while(aaa){
-                        saveDataToMysql(time);
                     }*/
-                    //if(cishu % 12 == 0) {
-                      //  DataOutput.savedata();
+                    dataoutput.setDataset(map);
+                    dataoutput.setdata();
 
-                  //  }
+                    if(cishu % 12 == 0)
+                        dataoutput.savedata();
+
+                    //sleep(1000);
                 }
 
                 //System.out.println("开始请求：part:" + part + "start:" + addr[part] + "length" + len[part]);

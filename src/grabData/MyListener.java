@@ -3,7 +3,6 @@ package grabData;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.Dictionary;
 import hibernatePOJO.DictionaryPlus;
-import hibernatePOJO.Roles;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -48,7 +47,7 @@ public class MyListener implements ServletContextListener {
                         DataOnline.dicPlus=dicpluslist;
 
                         try {
-                            Client.dataGet();
+                            DataOnlineClient.dataGet();
                         } catch (Exception e1) {
                             e1.printStackTrace();
                         }
