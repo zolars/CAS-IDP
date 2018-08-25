@@ -133,7 +133,13 @@ public class DeviceDAOImpl implements DeviceDAO {
         List<Devices> list = hbsessionDao.search(
                 "FROM Devices where type = 'IDP'");
 
-        return list;
+        if(list.size() > 10){
+            List<Devices> rtlist = new ArrayList<>();
+            for(int i = 0; i< 10; i++)
+                rtlist.add(list.get(i));
+            return rtlist;
+        }
+        else return list;
     }
 
     public List getAllUPSDevice(){
@@ -142,7 +148,13 @@ public class DeviceDAOImpl implements DeviceDAO {
         List<Devices> list = hbsessionDao.search(
                 "FROM Devices where type = 'UPS'");
 
-        return list;
+        if(list.size() > 10){
+            List<Devices> rtlist = new ArrayList<>();
+            for(int i = 0; i< 10; i++)
+                rtlist.add(list.get(i));
+            return rtlist;
+        }
+        else return list;
     }
 
     public List getAllxdcDevice(){
@@ -151,7 +163,13 @@ public class DeviceDAOImpl implements DeviceDAO {
         List<Devices> list = hbsessionDao.search(
                 "FROM Devices where type = 'battery'");
 
-        return list;
+        if(list.size() > 10){
+            List<Devices> rtlist = new ArrayList<>();
+            for(int i = 0; i< 10; i++)
+                rtlist.add(list.get(i));
+            return rtlist;
+        }
+        else return list;
     }
 
     public List getAllfdjDevice(){
@@ -160,7 +178,13 @@ public class DeviceDAOImpl implements DeviceDAO {
         List<Devices> list = hbsessionDao.search(
                 "FROM Devices where type = 'generator'");
 
-        return list;
+        if(list.size() > 10){
+            List<Devices> rtlist = new ArrayList<>();
+            for(int i = 0; i< 10; i++)
+                rtlist.add(list.get(i));
+            return rtlist;
+        }
+        else return list;
     }
 
     public List getAllktDevice(){
@@ -169,7 +193,13 @@ public class DeviceDAOImpl implements DeviceDAO {
         List<Devices> list = hbsessionDao.search(
                 "FROM Devices where type = 'air conditioner'");
 
-        return list;
+        if(list.size() > 10){
+            List<Devices> rtlist = new ArrayList<>();
+            for(int i = 0; i< 10; i++)
+                rtlist.add(list.get(i));
+            return rtlist;
+        }
+        else return list;
     }
 
     public List getAllotherDevice(){
@@ -178,7 +208,13 @@ public class DeviceDAOImpl implements DeviceDAO {
         List<Devices> list = hbsessionDao.search(
                 "FROM Devices where type = 'other'");
 
-        return list;
+        if(list.size() > 10){
+            List<Devices> rtlist = new ArrayList<>();
+            for(int i = 0; i< 10; i++)
+                rtlist.add(list.get(i));
+            return rtlist;
+        }
+        else return list;
     }
 
     public List searchFuzzyDevice(String name){
