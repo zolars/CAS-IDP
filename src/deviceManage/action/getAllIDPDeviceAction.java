@@ -30,7 +30,7 @@ public class getAllIDPDeviceAction extends ActionSupport {
     }
 
 
-    /*获取所有IDP类型的设备名称
+    /*获取--10 IDP类型的设备名称
      */
     public String execute() throws Exception {
         try {//获取数据

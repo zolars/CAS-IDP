@@ -34,6 +34,30 @@
     <link href="css/mycss.css" rel="stylesheet">
     <link href="css/jstree-default/style.css" rel="stylesheet"/>
 
+    <style>
+        .outer {
+            width: 200px;
+            height: 120px;
+            position: relative;
+        }
+        .searchInput {
+            box-sizing: border-box;
+            width: 200px;
+            height: 25px;
+        }
+        .tips {
+            position: absolute;
+            top: 25px;
+            left: 0;
+            width: 200px;
+            height: 120px;
+            overflow: scroll;
+            border: 1px solid #cccccc;
+        }
+        .tips-item:hover {
+            background: #4e7bff;
+        }
+    </style>
 </head>
 
 <body id="skin-blur-blue">
@@ -100,9 +124,11 @@
                             <li style="width:15%">
                                 <a data-toggle="tab" id="subItem6">•限值管理</a>
                             </li>
-
                             <li style="width:15%">
                                 <a data-toggle="tab" id="subItem7">•预警管理</a>
+                            </li>
+                            <li style="width:15%">
+                                <a data-toggle="tab" id="subItem8">•连接配置</a>
                             </li>
                         </ul>
 
@@ -261,14 +287,28 @@
                                            </div>--%>
 
                                             <div class="col-md-2">
-                                                <label class="t-overflow">
+                                               <%-- <label class="t-overflow">
                                                     <input id="get-devicename" type="text" class="form-control setting-input">
-                                                </label>
-                                                <div id="item-devicename" style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">
-                                                    <ul id="device-name-Item">
-                                                    </ul>
-                                                </div>
-                                                <button class="btn btn-default" onclick="checkDevice()">查询</button>
+                                                </label>--%>
+
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <div id="outer" class="outer">
+                                                                <input id="searchInput" class="searchInput form-control" type="text">
+                                                                <div id="searchTips" class="tips" style="display: none">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div id="item-devicename" style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">
+                                                                <ul id="device-name-Item">
+                                                                </ul>
+                                                            </div>
+                                                            <button class="btn btn-default" onclick="checkDevice()">查询</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                     </div>
                                 </label>
@@ -572,6 +612,64 @@
                         <div id = "item7" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             this is 预警理
                         </div>
+                        <div id = "item8" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                            <div class="col-md-5">
+                                <table>
+                                    <tr>
+                                        <td>设备名称</td>
+                                     <%--   <td>设备名称</td>
+                                        <td>设备名称</td>
+                                        <td>设备名称</td>
+                                        <td>设备名称</td>
+                                        <td>设备名称</td>
+                                        <td>设备名称</td>--%>
+                                    </tr>
+
+                                </table>
+
+
+                                <table>
+                                    <tr>
+                                        <td>实时数据采集频率：</td>
+                                        <td><input type="text" class="form-control setting-input"> </td>
+                                        <td>单位（秒）</td>
+                                    </tr>
+                                    <tr>
+                                        <td>暂态事件存储频率：</td>
+                                        <td><input type="text" class="form-control setting-input"></td>
+                                        <td>单位（分钟）</td>
+                                    </tr>
+                                    <tr>
+                                        <td>数据上传时效：</td>
+                                        <td><input type="text" class="form-control setting-input"></td>
+                                        <td>单位（小时）</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>实时数据IP地址</td>
+                                        <td><input type="text" class="form-control setting-input"></td>
+                                        <td><input type="text" class="form-control setting-input"></td>
+                                        <td><input type="text" class="form-control setting-input"></td>
+                                        <td><input type="text" class="form-control setting-input"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>实时数据端口号</td>
+                                        <td><input type="text" class="form-control setting-input"></td>
+                                        <td>暂态事件端口号</td>
+                                        <td><input type="text" class="form-control setting-input"></td>
+                                    </tr>
+
+                                    <button onclick="captureSettingOk()">确定</button>
+                                    <button onclick="cancle()">取消</button>
+
+                                </table>
+
+
+
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -868,6 +966,7 @@
         $("#item5").hide();
         $("#item6").hide();
         $("#item7").hide();
+        $("#item8").hide();
 
         $("#secItem1").hide();
         $("#secItem2").hide();
@@ -876,6 +975,7 @@
         $("#secItem5").hide();
         $("#secItem6").hide();
         $("#secItem7").hide();
+        $("#secItem8").hide();
 
         $("#tridItem1").hide();
         $("#tridItem2").hide();
@@ -892,6 +992,8 @@
                 $("#item5").hide();
                 $("#item6").hide();
                 $("#item7").hide();
+                $("#item8").hide();
+
                 getALLUserInfomation();
             });
             $("#subItem2").click(function(){
@@ -902,6 +1004,8 @@
                 $("#item5").hide();
                 $("#item6").hide();
                 $("#item7").hide();
+                $("#item8").hide();
+
                 getALLRolesInfomation();
             });
             $("#subItem3").click(function(){
@@ -912,6 +1016,7 @@
                 $("#item5").hide();
                 $("#item6").hide();
                 $("#item7").hide();
+                $("#item8").hide();
 
                 var monitorpoint = 1;
 
@@ -988,6 +1093,7 @@
                 $("#item5").hide();
                 $("#item6").hide();
                 $("#item7").hide();
+                $("#item8").hide();
 
                 $("#secItem1").show();
                 $("#secItem2").hide();
@@ -1085,6 +1191,7 @@
                 $("#item5").show();
                 $("#item6").hide();
                 $("#item7").hide();
+                $("#item8").hide();
             });
             $("#subItem6").click(function(){
                 $("#item1").hide();
@@ -1094,6 +1201,7 @@
                 $("#item5").hide();
                 $("#item6").show();
                 $("#item7").hide();
+                $("#item8").hide();
 
                 $("#tridItem1").show();
                 $("#tridItem2").hide();
@@ -1150,6 +1258,17 @@
                 $("#item5").hide();
                 $("#item6").hide();
                 $("#item7").show();
+                $("#item8").hide();
+            });
+            $("#subItem8").click(function(){
+                $("#item1").hide();
+                $("#item2").hide();
+                $("#item3").hide();
+                $("#item4").hide();
+                $("#item5").hide();
+                $("#item6").hide();
+                $("#item7").hide();
+                $("#item8").show();
             });
         });
     </script>
@@ -1663,20 +1782,8 @@
                 }
             }
         });
-      /*  $.ajax({
-            type: "post",
-            url: "getAllIDPDevice",
-            data: {
-                // devicename: devicename
-            },
-            dataType: "json",
-            success: function (data) {
-                var list = data.alldlist;
-                for (var i = 0; i < list.length; i++) {
-                    $('#get-devicename').append("<option value='"+list[i].name+"'>"+ list[i].name +"</option>");
-                }
-            }
-        });*/
+
+
 
         //点击
         $("#get-devicename").bind("click",function(){
@@ -1684,7 +1791,7 @@
         });
 
 
-        // 搜索框数据变化时 显示模糊搜索结果
+        /*// 搜索框数据变化时 显示模糊搜索结果
         $("input:text").bind("input propertychange",function(){
 
             var name = $(this).val();
@@ -1710,7 +1817,105 @@
                 }
             });
 
+        });*/
+
+        /////////////////////////WWW
+        function fakeApi(str) {
+           /* switch (str) {
+                case 'a':
+                    return ['a1', 'a2', 'a3']
+                case 'ab':
+                    return ['ab1', 'ab2', 'ab3','ab4', 'ab5', 'ab6']
+                default:
+                    return []
+            }*/
+
+            // $("input:text").bind("input propertychange",function(){
+
+           var name = str;//$(this).val();
+           var rt = new Array(3);
+
+            if(name != ""){
+                $.ajax({
+                    type: "post",
+                    url: "fuzzySearchDevice",
+                    data: {
+                        name: name
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        //clear items
+                       // $('#get-devicename').empty();
+                        var list = data.alldlist;
+
+                        for (var i = 0; i < list.length; i++) {
+                            //   $('#get-devicename').append("<option value='"+list[i].name+"'>"+ list[i].name +"</option>");
+                            rt[i] = list[i].name;
+                        }
+                    }
+                });
+                console.log("rtarray"+rt[0]+ rt[1] + rt[2]);
+
+            }
+            return rt;
+        }
+
+        var searchInput = document.getElementById("searchInput");
+        var tips = document.getElementById("searchTips");
+
+        function debounce(func, interval) {
+            if(!interval) interval = 100;
+            var timer;
+            return function () {
+                var context = this,
+                    args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    func.apply(context, args);
+                }, interval);
+            }
+        };
+
+        function appendData(data) {
+            for(var i = 0, len = data.length; i < len; i++) {
+                var item = document.createElement("div");
+                item.innerText = data[i];
+                item.addEventListener("click", function (event) {
+                    searchInput.value = event.target.innerText;
+                    tips.style.display = 'none';
+                });
+                item.setAttribute("class", "tips-item");
+                tips.appendChild(item);
+            };
+        };
+
+        function insertData(value) {
+            tips.style.display = 'none';
+            tips.innerHTML = '';
+            var result = fakeApi(value);
+            if(result && result.length > 0) {
+                tips.style.display = 'block'
+            };
+            appendData(result);
+        };
+
+        searchInput.addEventListener('blur', function () {
+            setTimeout(function () {
+                tips.style.display = 'none'
+            }, 150);
         });
+
+        searchInput.addEventListener('focus', function () {
+            insertData(searchInput.value);
+        });
+
+        searchInput.addEventListener("input", debounce(function (event) {
+            insertData(event.target.value);
+        }, 100));
+
+        //////////////////////////////////////////WWW
+
+
 
         <!-- 查询设备 -->
         function checkDevice(){
