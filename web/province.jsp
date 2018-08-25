@@ -550,16 +550,19 @@
         var len = cbidstr[idx].length;
         cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
 
+        //alert(cbidstr.length);
+
         for(var i = 0; i < cbidstr.length; i++){
+            // alert(cbidstr[i]);
 
             var menuname = "";
-            if(cbidstr[i] == ' province.jsp')
+            if(cbidstr[i] == " province.jsp")
                 menuname = "集中监控";
 
-            else if(cbidstr[i] == ' efficiencyDevice.jsp')
+            else if(cbidstr[i] == " efficiencyDevice.jsp")
                 menuname = "动力设施";
 
-            else if(cbidstr[i] == ' onlineDetect.jsp')
+            else if(cbidstr[i] == " onlineDetect.jsp")
                 menuname = "在线监测";
 
             else if(cbidstr[i] == ' efficiencyAnalysis.jsp')
