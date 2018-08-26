@@ -10,6 +10,7 @@ public class EventTransient {
     private Integer duration;
     private Double value;
     private Integer subtype;
+    private String discription;
 
     public int getTeid() {
         return teid;
@@ -67,6 +68,14 @@ public class EventTransient {
         this.subtype = subtype;
     }
 
+    public String getDiscription() {
+        return discription;
+    }
+
+    public void setDiscription(String discription) {
+        this.discription = discription;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,12 +87,13 @@ public class EventTransient {
                 Objects.equals(type, that.type) &&
                 Objects.equals(duration, that.duration) &&
                 Objects.equals(value, that.value) &&
-                Objects.equals(subtype, that.subtype);
+                Objects.equals(subtype, that.subtype) &&
+                Objects.equals(discription, that.discription);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(teid, mpid, time, type, duration, value, subtype);
+        return Objects.hash(teid, mpid, time, type, duration, value, subtype, discription);
     }
 }

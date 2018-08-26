@@ -28,11 +28,8 @@ public class MyListener implements ServletContextListener {
         Thread dataThread = new Thread(){
             @Override
             public void run() {
-                /*
-                    从数据库取配置数据
-                */
                 HBSessionDaoImpl hbSessionDao=new HBSessionDaoImpl();
-                //取监测点的配置信息(IP,port等)
+                //从数据库取监测点的配置信息(IP,port等)
                 List<CaptureSetting> list=hbSessionDao.search("FROM CaptureSetting");
                 //从数据库中读取字典，list<map<String, Int>>类型
                 //diclist为第一个字典，dicpluslist为第二个索引字典
@@ -40,12 +37,11 @@ public class MyListener implements ServletContextListener {
                 DataOnline.setDicPlus(hbSessionDao.search("FROM DictionaryPlus"));
                 //创建取实时数据和暂态数据的client
                 if(null!=list){
-                    //创建客户端连接
                     for(CaptureSetting c:list){
                         try {
-                            System.out.println("创建取实时数据连接："+c.getIp()+":"+c.getPort1());
+                            System.out.println("创建取实时数据连接 "+"监测点("+c.getMpid()+") "+c.getIp()+":"+c.getPort1());
                             new DataOnlineClient(c.getIp(),c.getPort1(),c.getMpid()).start();
-                            System.out.println("创建取暂态事件连接："+c.getIp()+":"+c.getPort2());
+                            System.out.println("创建取暂态事件连接 "+"监测点("+c.getMpid()+") "+c.getIp()+":"+c.getPort2());
                             new TransientClient(c.getIp(),c.getPort2(),c.getMpid()).start();
                         }
                         catch (Exception e){
@@ -69,6 +65,7 @@ public class MyListener implements ServletContextListener {
                         scheduler.scheduleJob(job1,trigger1);
 
                         //设置任务，每30分钟发一次暂态事件请求
+                        TransientUtil.setInterval(list.get(0).getThansentinterval());
                         Trigger trigger2=newTrigger()
                                 .withIdentity("transientRequestTrigger","transientRequestTriggerGroup")
                                 .startNow()

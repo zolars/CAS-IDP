@@ -15,8 +15,9 @@ import java.util.List;
 
 public class TransientUtil {
     private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    public static String code="0001";
-    public static String checkCode="wizpower";
+    private static String code="0001";
+    private static String checkCode="wizpower";
+    private static int interval=30;//默认一次取30分钟内的暂态事件
 
     /*
       根据请求体创建请求帧，返回类型为List,
@@ -73,7 +74,7 @@ public class TransientUtil {
         Calendar c=Calendar.getInstance();
         c.setTime(new Date());
         tr.setEndtime(sdf.format(c.getTime()));
-        c.add(Calendar.MINUTE,-30);//减去0.5小时
+        c.add(Calendar.MINUTE,-interval);//默认减去30分钟
         tr.setStarttime(sdf.format(c.getTime()));
         return tr;
     }
@@ -99,4 +100,27 @@ public class TransientUtil {
          return null;
     }
 
+    public static String getCode() {
+        return code;
+    }
+
+    public static void setCode(String code) {
+        TransientUtil.code = code;
+    }
+
+    public static String getCheckCode() {
+        return checkCode;
+    }
+
+    public static void setCheckCode(String checkCode) {
+        TransientUtil.checkCode = checkCode;
+    }
+
+    public static int getInterval() {
+        return interval;
+    }
+
+    public static void setInterval(int interval) {
+        TransientUtil.interval = interval;
+    }
 }
