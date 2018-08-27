@@ -77,6 +77,21 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("transientRequestJob","transientRequestJobGroup")
                                 .build();
                         scheduler.scheduleJob(job2,trigger2);
+
+                        //设置任务，每1h上传一次远程数据库
+                        Trigger trigger3=newTrigger()
+                                .withIdentity("uploadDataTrigger","uploadDataTriggerGroup")
+                                .startNow()
+                                .withSchedule(simpleSchedule()
+                                        .withIntervalInMinutes(list.get(0).getUploadinterval())
+                                        .repeatForever())
+                                .build();
+                        JobDetail job3=newJob(uploadDataToCenterSvrJob.class)
+                                .withIdentity("uploadDataToCenterSvrJob","uploadDataToCenterSvrJobGroup")
+                                .build();
+                        scheduler.scheduleJob(job3,trigger3);
+
+                        ///////////////////////////
                         scheduler.start();
                     }
                     catch (SchedulerException e){

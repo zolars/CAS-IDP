@@ -3,19 +3,21 @@ package hibernatePOJO;
 import java.util.Objects;
 
 public class CaptureSetting {
-    private int mpid;
+    private int id;
     private String ip;
     private Integer port1;
     private Integer port2;
     private Integer onlineinterval;
     private Integer thansentinterval;
+    private Integer uploadinterval;
+    private int mpid;
 
-    public int getMpid() {
-        return mpid;
+    public int getId() {
+        return id;
     }
 
-    public void setMpid(int mpid) {
-        this.mpid = mpid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getIp() {
@@ -58,22 +60,40 @@ public class CaptureSetting {
         this.thansentinterval = thansentinterval;
     }
 
+    public Integer getUploadinterval() {
+        return uploadinterval;
+    }
+
+    public void setUploadinterval(Integer uploadinterval) {
+        this.uploadinterval = uploadinterval;
+    }
+
+    public int getMpid() {
+        return mpid;
+    }
+
+    public void setMpid(int mpid) {
+        this.mpid = mpid;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CaptureSetting that = (CaptureSetting) o;
-        return mpid == that.mpid &&
+        return id == that.id &&
+                mpid == that.mpid &&
                 Objects.equals(ip, that.ip) &&
                 Objects.equals(port1, that.port1) &&
                 Objects.equals(port2, that.port2) &&
                 Objects.equals(onlineinterval, that.onlineinterval) &&
-                Objects.equals(thansentinterval, that.thansentinterval);
+                Objects.equals(thansentinterval, that.thansentinterval) &&
+                Objects.equals(uploadinterval, that.uploadinterval);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(mpid, ip, port1, port2, onlineinterval, thansentinterval);
+        return Objects.hash(id, ip, port1, port2, onlineinterval, thansentinterval, uploadinterval, mpid);
     }
 }

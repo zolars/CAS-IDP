@@ -550,6 +550,9 @@
                         </div>
                         <div id = "item5" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             接口管理
+
+
+
                         </div>
                         <div id = "item6" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
 
@@ -618,6 +621,8 @@
                         </div>
                         <div id = "item7" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             this is 预警理
+
+
                         </div>
                         <div id = "item8" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             <div class="col-md-5">
@@ -1935,7 +1940,7 @@
                 success: function (data) {
                     var list = data.alarmusers;
                     var listname = data.alarmusersname;
-                    var table = $("#alarm-user-table");
+                    var table = $("#eventalarm-user-table");
                     table.empty();
                     table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">开始时间</td><td style="padding-left:80px;">结束时间</td><td style="padding-left:40px;">账号</td></tr>');
 
@@ -2007,7 +2012,7 @@
             $("#radio-R5485").removeAttr("checked");
             $("#radio-RS232").removeAttr("checked");
 
-            $("#alarm-user-table").empty();
+            $("#eventalarm-user-table").empty();
         }
 
     </script>
@@ -2177,7 +2182,7 @@
                  success: function (data) {
                      var list = data.alarmusers;
                      var listname = data.alarmusersname;
-                     var table = $("#alarm-user-table2");
+                     var table = $("#eventalarm-user-table2");
                      table.empty();
                      table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">开始时间</td><td style="padding-left:80px;">结束时间</td><td style="padding-left:40px;">账号</td></tr>');
 
@@ -2247,7 +2252,7 @@
              $("#radio-R54852").removeAttr("checked");
              $("#radio-RS2322").removeAttr("checked");
 
-             $("#alarm-user-table2").empty();
+             $("#eventalarm-user-table2").empty();
          }
      </script>
 

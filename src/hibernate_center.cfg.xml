@@ -11,7 +11,10 @@
         <!-- 指定数据库使用的SQL方言 -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- 指定连接数据库的用户名，这里远程集中库允许连接的用户名 -->
+        <property name="connection.username">user1</property>
         <!-- 指定连接数据库的口令 -->
+        <property name="connection.password">123456</property>
+
 
         <!-- true表示程序运行时，在控制台显示SQL语句，false表示不显示SQL语句 -->
         <property name="show_sql">false</property>
