@@ -2,8 +2,8 @@ package deviceManage.action;
 
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import deviceManage.dao.DeviceDAO;
-import deviceManage.dao.impl.DeviceDAOImpl;
+import deviceManage.dao.DeviceThresholdDAO;
+import deviceManage.dao.impl.DeviceThresholdDAOImpl;
 import hibernatePOJO.Devices;
 import org.apache.struts2.ServletActionContext;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class fuzzySearchDeviceAction extends ActionSupport {
+public class fuzzySearchDeviceThresoldAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private JSONObject result;
 
@@ -25,7 +25,7 @@ public class fuzzySearchDeviceAction extends ActionSupport {
         this.result = result;
     }
 
-    /*获取模糊查询的设备
+    /*获取模糊查询的设备阈值
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -37,11 +37,11 @@ public class fuzzySearchDeviceAction extends ActionSupport {
             //String computerroom = request.getParameter("computerroomid");
             String name = request.getParameter("name");
 
-            DeviceDAO dao = new DeviceDAOImpl();
+            DeviceThresholdDAO dao = new DeviceThresholdDAOImpl();
 
             List<Devices> dlist = new ArrayList();
 
-            dlist = dao.searchFuzzyDevice(name);
+            dlist = dao.searchFuzzyDeviceThreshold(name);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("alldlist", dlist);

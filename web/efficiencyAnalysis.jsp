@@ -193,10 +193,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
 
                     <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        事件分析
-                        <button type="button" class="btn btn-sm btn-alt" onClick="getDeviceEvent()" >测试"设备事件"</button>
-                        <button type="button" class="btn btn-sm btn-alt" onClick="getPowerEvent()" >测试"电能质量事件"</button>
-                        <button type="button" class="btn btn-sm btn-alt" onClick="getEvironmentEvent()" >测试"环境事件"</button>
+
+                        <button type="button" class="btn btn-sm btn-alt" onClick="getDeviceEvent()" >设备事件</button>
+                        <button type="button" class="btn btn-sm btn-alt" onClick="getPowerEvent()" >电能质量事件</button>
+                        <button type="button" class="btn btn-sm btn-alt" onClick="getEvironmentEvent()" >环境事件</button>
 
                         <div class="block-area">
                             <div class="row">
@@ -219,13 +219,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <thead>
                                                 <tr>
                                                     <th><div style="padding-left:40px;">事件名称</div></th>
-                                                    <th><div style="padding-left:40px;">位置</div></th>
+                                                    <th><div style="padding-left:20px;">位置</div></th>
                                                     <th><div style="padding-left:40px;">事件类型</div></th>
                                                     <th><div style="padding-left:40px;">事件描述</div></th>
                                                     <th><div style="padding-left:40px;">事件发生时间</div></th>
                                                 </tr>
                                                 </thead>
                                             </table>
+                                            <table id="event-table-body"></table>
                                         </h2>
 
                                         <table id="event-table-1"></table>
@@ -700,6 +701,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         function getDeviceEvent(){
 
+            var stime = "2018-08-22 08:00:00";
+            var etime = "2018-08-29 08:00:00";
+            var rid = "1";
+
+            $.ajax({
+                type: "post",
+                url: "getDeviceEvent",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    rid: rid
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['alldelist'];
+                    var table = $("#event-table-body");
+                    table.empty();
+
+                    for (var i = 0; i < list.length; i++) {
+                        var name = list[i].type;
+                        var location = list[i].mpid;
+                        var type = list[i].subtype;
+                        var description = list[i].discription;
+                        var time = list[i].time;
+
+                        table.append('<tr>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
+                }
+            });
         }
     </script>
 
@@ -707,42 +741,78 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         function getPowerEvent(){
 
-            alert("电能事件");
-
-            var monitorpoint = 1;
-            var stime = "2018-01-01";
-            var etime = "2018-09-01";
+            var stime = "2018-08-22 08:00:00";
+            var etime = "2018-08-29 08:00:00";
+            var rid = "1";
 
             $.ajax({
                 type: "post",
                 url: "getPowerEvent",
                 data: {
-                    monitorpoint: monitorpoint,
-                    starttime: stime,
-                    endtime: etime
+                    stime: stime,
+                    etime: etime,
+                    rid: rid
                 },
                 dataType : "json",
                 success: function (data) {
-                    alert(data);
                     var obj = JSON.parse(data);
-                    /*  var rt = obj.allmpdata;
-                      for (var i = 0; i < rt.length; i++) {
-                          $('#monitorpnt').append("<option value='" + rt[i].mpid + "' >" + rt[i].name + "</option>");
-                      }*/
+                    var list = obj['allpelist'];
+                    var table = $("#event-table-body");
+                    table.empty();
 
-                },
-                error: function () {
-                    alert("加载事件失败");
+                    for (var i = 0; i < list.length; i++) {
+                        var name = list[i].type;
+                        var location = list[i].mpid;
+                        var type = list[i].subtype;
+                        var description = list[i].discription;
+                        var time = list[i].time;
+
+                        table.append('<tr>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
             });
-
         }
     </script>
 
     <!-- 测试 环境事件-->
     <script type="text/javascript">
         function getEvironmentEvent(){
+            var stime = "2018-08-22 08:00:00";
+            var etime = "2018-08-29 08:00:00";
+            var rid = "1";
 
+            $.ajax({
+                type: "post",
+                url: "getEnvironmentEvent",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    rid: rid
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['alleelist'];
+                    var table = $("#event-table-body");
+                    table.empty();
+
+                    for (var i = 0; i < list.length; i++) {
+                        var name = list[i].type;
+                        var location = list[i].mpid;
+                        var type = list[i].subtype;
+                        var description = list[i].discription;
+                        var time = list[i].time;
+
+                        table.append('<tr>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
+                }
+            });
         }
     </script>
 

@@ -17,9 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
-
 
 public class getDeviceThresholdAction extends ActionSupport {
     private static final long serialVersionUID = 13L;

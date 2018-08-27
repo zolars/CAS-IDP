@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class getPowerEventAction extends ActionSupport {
+public class getEnvironmentEventAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -43,10 +43,10 @@ public class getPowerEventAction extends ActionSupport {
 
             List<EventTransient> pedata = new ArrayList();
 
-            pedata = dao.getLocalAllPowerEvent(rid, starttime, endtime);
+            pedata = dao.getLocalAllEnvironmentEvent(rid, starttime, endtime);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("allpelist", pedata);
+            jsonObject.put("alleelist", pedata);
 
             result = JSON.toJSONString(jsonObject); // List转json
 

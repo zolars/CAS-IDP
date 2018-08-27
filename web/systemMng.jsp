@@ -272,44 +272,26 @@
                             <div id="TCP-device" style="display: none">
                                 <label class="t-overflow">
                                     <div class="row">
-                                        <%--<div class="col-md-6">
-                                            <select class="form-control location-select-item-w" id="get-devicename" onclick="fuzzySearch()">
-                                                <option value="">请选择或输入待查询的设备名称</option>
-                                            </select>
-                                        </div>--%>
-
-                                        <%--<div id="search-div-1" class="form-control setting-input">
-                                            <label class="t-overflow">
-                                            <input type="text">请选择或输入待查询的设备名称
-                                            </label>
+                                        <div class="col-md-2">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div id="outer" class="outer">
+                                                            <input id="searchInput" class="searchInput form-control" type="text">
+                                                            <div id="searchTips" class="tips" style="display: none">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div id="item-devicename" style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">
+                                                            <ul id="device-name-Item">
+                                                            </ul>
+                                                        </div>
+                                                        <button class="btn btn-default" onclick="checkDevice()">查询</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
-                                           <div id="search-div-2" class="form-control">
-                                           </div>--%>
-
-                                            <div class="col-md-2">
-                                               <%-- <label class="t-overflow">
-                                                    <input id="get-devicename" type="text" class="form-control setting-input">
-                                                </label>--%>
-
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                            <div id="outer" class="outer">
-                                                                <input id="searchInput" class="searchInput form-control" type="text">
-                                                                <div id="searchTips" class="tips" style="display: none">
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div id="item-devicename" style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">
-                                                                <ul id="device-name-Item">
-                                                                </ul>
-                                                            </div>
-                                                            <button class="btn btn-default" onclick="checkDevice()">查询</button>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
                                     </div>
                                 </label>
                                 <div class="row">
@@ -425,8 +407,31 @@
 
                             <div id="485-serialno-device" style="display: none">
                                 <label class="t-overflow">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div class="outer">
+                                                            <input id="searchInput2" class="searchInput form-control" type="text">
+                                                            <div id="searchTips2" class="tips" style="display: none">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">
+                                                            <ul>
+                                                            </ul>
+                                                        </div>
+                                                        <button class="btn btn-default" onclick="checkDevice2()">查询</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                   <%--
                                     <input type="text" class="form-control setting-input" id = "get-devicename2">
-                                    <button class="btn btn-default" onclick="checkDevice2()">查询</button>
+                                    <button class="btn btn-default" onclick="checkDevice2()">查询</button>--%>
                                 </label>
                                 <div class="row">
                                     <div class="col-md-4">
@@ -568,11 +573,13 @@
                             </ul>
 
                             <div id = "tridItem1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                                <div class="outer">
+                                    <input id="device-threshold-name" class="searchInput form-control" type="text">
+                                    <div id="device-threshold-Tips" class="tips" style="display: none">
+                                    </div>
+                                    <button class="btn btn-default" onclick="getOneDeviceThreshold()">查询</button>
+                                </div>
 
-                                <label class="t-overflow">
-                                    <input type="text" class="form-control setting-input" id="get-device-threshold-name">
-                                    <button class="btn btn-default" onclick="testVolume()">查询</button>
-                                </label>
                                 <table id="threadinfotablehead">
                                     <thead>
                                     <tr>
@@ -1766,73 +1773,10 @@
 
     <!-- 查询设备--IDP\UPS -->
     <script type="text/javascript">
-        // 初始化
-        $.ajax({
-            type: "post",
-            url: "getAllIDPDevice",
-            /*data: {
-                // devicename: devicename
-            },*/
-            dataType: "json",
-            success: function (data) {
-                var list = data.alldlist;
-                for (var i = 0; i < list.length; i++) {
-                    // $('#get-devicename').append("<option value='"+list[i].name+"'>"+ list[i].name +"</option>");
-                    $('#device-name-Item').append("<li value='"+list[i].name+"'>"+ list[i].name +"</li>");
-                }
-            }
-        });
 
-
-
-        //点击
-        $("#get-devicename").bind("click",function(){
-            $("#item-devicename").css('display','block');//显示
-        });
-
-
-        /*// 搜索框数据变化时 显示模糊搜索结果
-        $("input:text").bind("input propertychange",function(){
-
-            var name = $(this).val();
-
-            console.log(name);//打印输入框字符
-
-            $.ajax({
-                type: "post",
-                url: "fuzzySearchDevice",
-                data: {
-                    name: name
-                },
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
-                    //clear items
-                    $('#get-devicename').empty();
-
-                    var list = data.alldlist;
-                    for (var i = 0; i < list.length; i++) {
-                        $('#get-devicename').append("<option value='"+list[i].name+"'>"+ list[i].name +"</option>");
-                    }
-                }
-            });
-
-        });*/
-
-        /////////////////////////WWW
+        ////模糊查询下拉框
         function fakeApi(str) {
-           /* switch (str) {
-                case 'a':
-                    return ['a1', 'a2', 'a3']
-                case 'ab':
-                    return ['ab1', 'ab2', 'ab3','ab4', 'ab5', 'ab6']
-                default:
-                    return []
-            }*/
-
-            // $("input:text").bind("input propertychange",function(){
-
-           var name = str;//$(this).val();
+           var name = str;
            var rt = new Array(3);
 
             if(name != ""){
@@ -1844,20 +1788,32 @@
                     },
                     dataType: "json",
                     success: function (data) {
-                        //clear items
-                       // $('#get-devicename').empty();
-                        var list = data.alldlist;
 
+                        var list = data.alldlist;
                         for (var i = 0; i < list.length; i++) {
-                            //   $('#get-devicename').append("<option value='"+list[i].name+"'>"+ list[i].name +"</option>");
                             rt[i] = list[i].name;
                         }
+
+                        var result;
+
+                        if(rt[2] == undefined){
+                            if(rt[1] == undefined){
+                                if(rt[0] == undefined){
+                                    result = [];
+                                }
+                                else  result = [rt[0]];
+                            }
+                            else  result = [rt[0], rt[1]];
+                        }
+                        else result = [rt[0], rt[1], rt[2]];
+
+                        if(result && result.length > 0) {
+                            tips.style.display = 'block';
+                        }
+                        appendData(result);
                     }
                 });
-                console.log("rtarray"+rt[0]+ rt[1] + rt[2]);
-
             }
-            return rt;
         }
 
         var searchInput = document.getElementById("searchInput");
@@ -1911,15 +1867,13 @@
 
         searchInput.addEventListener("input", debounce(function (event) {
             insertData(event.target.value);
-        }, 100));
+        }, 150));
 
-        //////////////////////////////////////////WWW
-
-
+        ////////模糊查询下拉框
 
         <!-- 查询设备 -->
         function checkDevice(){
-            var devicename = $("#get-devicename").val();
+            var devicename = $("#searchInput").val();
 
             var monitorpoint = 1;
 
@@ -1968,8 +1922,7 @@
 
         <!-- 查询预警人员 -->
         function checkDeviceAlarmUser(){
-
-            var devicename = $("#get-devicename").val();
+            var devicename = $("#searchInput").val();
 
             $.ajax({
                 type: "post",
@@ -2036,13 +1989,12 @@
                     }
                 });
             }
-
-
         }
 
         <!-- 清空设备div -->
         function clearDeviceDiv(){
-            $("#get-devicename").val("");
+            //$("#get-devicename").val("");
+            $("#searchInput").val("");
 
             $("#devname").val("");
             $("#devtype").val("");
@@ -2062,9 +2014,107 @@
 
     <!-- 查询设备2 --蓄电池\发电机\空调\其他-->
     <script type="text/javascript">
-         <!-- 查询设备 -->
+        ////模糊查询下拉框
+        function fakeApi2(str) {
+            var name = str;
+            var rt = new Array(3);
+
+            if(name != ""){
+                $.ajax({
+                    type: "post",
+                    url: "fuzzySearchDevice",
+                    data: {
+                        name: name
+                    },
+                    dataType: "json",
+                    success: function (data) {
+
+                        var list = data.alldlist;
+                        for (var i = 0; i < list.length; i++) {
+                            rt[i] = list[i].name;
+                        }
+
+                        var result;
+
+                        if(rt[2] == undefined){
+                            if(rt[1] == undefined){
+                                if(rt[0] == undefined){
+                                    result = [];
+                                }
+                                else  result = [rt[0]];
+                            }
+                            else  result = [rt[0], rt[1]];
+                        }
+                        else result = [rt[0], rt[1], rt[2]];
+
+                        if(result && result.length > 0) {
+                            tips.style.display = 'block';
+                        }
+                        appendData2(result);
+                    }
+                });
+            }
+        }
+
+        var searchInput2 = document.getElementById("searchInput2");
+        var tips2 = document.getElementById("searchTips2");
+
+        function debounce2(func, interval) {
+            if(!interval) interval = 100;
+            var timer;
+            return function () {
+                var context = this,
+                    args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    func.apply(context, args);
+                }, interval);
+            }
+        };
+
+        function appendData2(data) {
+            for(var i = 0, len = data.length; i < len; i++) {
+                var item = document.createElement("div");
+                item.innerText = data[i];
+                item.addEventListener("click", function (event) {
+                    searchInput2.value = event.target.innerText;
+                    tips2.style.display = 'none';
+                });
+                item.setAttribute("class", "tips-item");
+                tips2.appendChild2(item);
+            };
+        };
+
+        function insertData2(value) {
+            tips2.style.display = 'none';
+            tips2.innerHTML = '';
+            var result = fakeApi2(value);
+            if(result && result.length > 0) {
+                tips2.style.display = 'block'
+            };
+            appendData2(result);
+        };
+
+        searchInput2.addEventListener('blur', function () {
+            setTimeout(function () {
+                tips2.style.display = 'none'
+            }, 150);
+        });
+
+        searchInput2.addEventListener('focus', function () {
+            insertData2(searchInput2.value);
+        });
+
+        searchInput2.addEventListener("input", debounce2(function (event) {
+            insertData2(event.target.value);
+        }, 150));
+
+        ////////模糊查询下拉框
+
+
+        <!-- 查询设备 -->
          function checkDevice2(){
-             var devicename = $("#get-devicename2").val();
+             var devicename = $("#searchInput2").val();
 
              var monitorpoint = 1;
 
@@ -2114,7 +2164,7 @@
          <!-- 查询预警人员 -->
          function checkDeviceAlarmUser2(){
 
-             var devicename = $("#get-devicename2").val();
+             var devicename = $("#searchInput2").val();
 
              $.ajax({
                  type: "post",
@@ -2184,7 +2234,7 @@
 
          <!-- 清空设备div2 -->
          function clearDeviceDiv2(){
-             $("#get-devicename2").val("");
+             $("#searchInput2").val("");
 
              $("#devname2").val("");
              $("#devtype2").val("");
@@ -2236,15 +2286,112 @@
 
     <!-- 限值管理-->
     <script type="text/javascript">
+        ////模糊查询下拉框
+        function devthdfakeApi(str) {
+            var name = str;
+            var rt = new Array(3);
+
+            if(name != ""){
+                $.ajax({
+                    type: "post",
+                    url: "fuzzySearchDevice",
+                    data: {
+                        name: name
+                    },
+                    dataType: "json",
+                    success: function (data) {
+
+                        var list = data.alldlist;
+                        for (var i = 0; i < list.length; i++) {
+                            rt[i] = list[i].name;
+                        }
+
+                        var result;
+
+                        if(rt[2] == undefined){
+                            if(rt[1] == undefined){
+                                if(rt[0] == undefined){
+                                    result = [];
+                                }
+                                else  result = [rt[0]];
+                            }
+                            else  result = [rt[0], rt[1]];
+                        }
+                        else result = [rt[0], rt[1], rt[2]];
+
+                        if(result && result.length > 0) {
+                            devthdtips.style.display = 'block';
+                        }
+                        devthdappendData(result);
+                    }
+                });
+            }
+        }
+
+        var devthdsearchInput = document.getElementById("device-threshold-name");
+        var devthdtips = document.getElementById("device-threshold-Tips");
+
+        function devthddebounce(func, interval) {
+            if(!interval) interval = 100;
+            var timer;
+            return function () {
+                var context = this,
+                    args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    func.apply(context, args);
+                }, interval);
+            }
+        };
+
+        function devthdappendData(data) {
+            for(var i = 0, len = data.length; i < len; i++) {
+                var item = document.createElement("div");
+                item.innerText = data[i];
+                item.addEventListener("click", function (event) {
+                    devthdsearchInput.value = event.target.innerText;
+                    tips.style.display = 'none';
+                });
+                item.setAttribute("class", "tips-item");
+                devthdtips.appendChild(item);
+            };
+        };
+
+        function devthdinsertData(value) {
+            tips.style.display = 'none';
+            tips.innerHTML = '';
+            var result = devthdfakeApi(value);
+            if(result && result.length > 0) {
+                devthdtips.style.display = 'block'
+            };
+            devthdappendData(result);
+        };
+
+        devthdsearchInput.addEventListener('blur', function () {
+            setTimeout(function () {
+                devthdtips.style.display = 'none'
+            }, 150);
+        });
+
+        devthdsearchInput.addEventListener('focus', function () {
+            devthdinsertData(devthdsearchInput.value);
+        });
+
+        devthdsearchInput.addEventListener("input", devthddebounce(function (event) {
+            devthdinsertData(event.target.value);
+        }, 150));
+
+        ////////模糊查询下拉框
+
         <!-- 查询限值 -->
-        function testVolume(){
-            var devicename = $("#get-device-threshold-name").val();
+        function getOneDeviceThreshold(){
+            var dname = $("#device-threshold-name").val();
 
             $.ajax({
                 type: "post",
-                url: "getDeviceThreshold",
+                url: "getOneDeviceThreshold",
                 data: {
-                    devicename: devicename
+                    dname: dname
                     //   monitorpointid: monitorpoint
                 },
                 dataType : "json",

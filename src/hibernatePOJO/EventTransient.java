@@ -4,13 +4,14 @@ import java.util.Objects;
 
 public class EventTransient {
     private int teid;
-    private int mpid;
+    private Integer mpid;
     private String time;
-    private Integer type;
-    private Integer duration;
-    private Double value;
-    private Integer subtype;
+    private int type;
+    private int duration;
+    private double value;
+    private int subtype;
     private String discription;
+    private Integer eventtype;
 
     public int getTeid() {
         return teid;
@@ -20,11 +21,11 @@ public class EventTransient {
         this.teid = teid;
     }
 
-    public int getMpid() {
+    public Integer getMpid() {
         return mpid;
     }
 
-    public void setMpid(int mpid) {
+    public void setMpid(Integer mpid) {
         this.mpid = mpid;
     }
 
@@ -36,35 +37,35 @@ public class EventTransient {
         this.time = time;
     }
 
-    public Integer getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(int type) {
         this.type = type;
     }
 
-    public Integer getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(Integer duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    public Double getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
-    public Integer getSubtype() {
+    public int getSubtype() {
         return subtype;
     }
 
-    public void setSubtype(Integer subtype) {
+    public void setSubtype(int subtype) {
         this.subtype = subtype;
     }
 
@@ -76,24 +77,33 @@ public class EventTransient {
         this.discription = discription;
     }
 
+    public Integer getEventtype() {
+        return eventtype;
+    }
+
+    public void setEventtype(Integer eventtype) {
+        this.eventtype = eventtype;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventTransient that = (EventTransient) o;
         return teid == that.teid &&
-                mpid == that.mpid &&
+                type == that.type &&
+                duration == that.duration &&
+                Double.compare(that.value, value) == 0 &&
+                subtype == that.subtype &&
+                Objects.equals(mpid, that.mpid) &&
                 Objects.equals(time, that.time) &&
-                Objects.equals(type, that.type) &&
-                Objects.equals(duration, that.duration) &&
-                Objects.equals(value, that.value) &&
-                Objects.equals(subtype, that.subtype) &&
-                Objects.equals(discription, that.discription);
+                Objects.equals(discription, that.discription) &&
+                Objects.equals(eventtype, that.eventtype);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(teid, mpid, time, type, duration, value, subtype, discription);
+        return Objects.hash(teid, mpid, time, type, duration, value, subtype, discription, eventtype);
     }
 }

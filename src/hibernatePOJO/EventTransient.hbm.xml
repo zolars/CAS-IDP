@@ -7,28 +7,30 @@
     <class name="hibernatePOJO.EventTransient" table="event_transient" schema="test">
         <id name="teid">
             <column name="teid" sql-type="int(11)"/>
-            <generator class="increment"></generator>
         </id>
         <property name="mpid">
-            <column name="mpid" sql-type="int(11)"/>
+            <column name="mpid" sql-type="int(11)" not-null="true"/>
         </property>
         <property name="time">
-            <column name="time" sql-type="varchar(255)" not-null="true"/>
+            <column name="time" sql-type="varchar(255)"/>
         </property>
         <property name="type">
-            <column name="type" sql-type="int(11)" not-null="true"/>
+            <column name="type" sql-type="int(11)"/>
         </property>
         <property name="duration">
-            <column name="duration" sql-type="int(11)" not-null="true"/>
+            <column name="duration" sql-type="int(11)"/>
         </property>
         <property name="value">
-            <column name="value" sql-type="double" precision="-1" not-null="true"/>
+            <column name="value" sql-type="double" precision="-1"/>
         </property>
         <property name="subtype">
-            <column name="subtype" sql-type="int(11)" not-null="true"/>
+            <column name="subtype" sql-type="int(11)"/>
         </property>
         <property name="discription">
-            <column name="discription" sql-type="varchar(255)" not-null="true"/>
+            <column name="discription" sql-type="varchar(255)"/>
+        </property>
+        <property name="eventtype">
+            <column name="eventtype" sql-type="int(11)" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

@@ -228,14 +228,6 @@
              </result>
          </action>
 
-         <action name="getPowerEvent" class="efficiencyAnalysis.action.getPowerEventAction">
-             <!--getPowerEvent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
          <action name="getKnowledgeTree" class="knowledgeManage.action.getKnowledgeTreeAction">
              <!--getKnowledgeTree -->
              <result name="failure">/failure.jsp</result>
@@ -437,6 +429,40 @@
                  <param name="root">result</param>
              </result>
          </action>
+
+         <action name="fuzzySearchDeviceThresold" class="deviceManage.action.fuzzySearchDeviceThresoldAction">
+             <!--fuzzySearchDeviceThresold -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getDeviceEvent" class="efficiencyAnalysis.action.getDeviceEventAction">
+             <!--getDeviceEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getPowerEvent" class="efficiencyAnalysis.action.getPowerEventAction">
+             <!--getDeviceEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getEnvironmentEvent" class="efficiencyAnalysis.action.getEnvironmentEventAction">
+             <!--getEnvironmentEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+
 
      </package>
 
