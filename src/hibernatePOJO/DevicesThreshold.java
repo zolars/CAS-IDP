@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class DevicesThreshold {
     private int dtid;
+    private String did;
     private String name;
     private String type;
     private String unit;
@@ -19,6 +20,14 @@ public class DevicesThreshold {
 
     public void setDtid(int dtid) {
         this.dtid = dtid;
+    }
+
+    public String getDid() {
+        return did;
+    }
+
+    public void setDid(String did) {
+        this.did = did;
     }
 
     public String getName() {
@@ -91,6 +100,7 @@ public class DevicesThreshold {
         if (o == null || getClass() != o.getClass()) return false;
         DevicesThreshold that = (DevicesThreshold) o;
         return dtid == that.dtid &&
+                Objects.equals(did, that.did) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(type, that.type) &&
                 Objects.equals(unit, that.unit) &&
@@ -104,6 +114,6 @@ public class DevicesThreshold {
     @Override
     public int hashCode() {
 
-        return Objects.hash(dtid, name, type, unit, standardval, cellval, floorval, isMark, alarmcontent);
+        return Objects.hash(dtid, did, name, type, unit, standardval, cellval, floorval, isMark, alarmcontent);
     }
 }

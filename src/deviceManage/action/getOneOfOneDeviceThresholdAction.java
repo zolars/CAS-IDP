@@ -2,19 +2,17 @@ package deviceManage.action;
 
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import deviceManage.dao.DeviceDAO;
-import deviceManage.dao.impl.DeviceDAOImpl;
-import hibernatePOJO.Devices;
+import deviceManage.dao.DeviceThresholdDAO;
+import deviceManage.dao.impl.DeviceThresholdDAOImpl;
 import hibernatePOJO.DevicesThreshold;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class getDeviceThresholdAction extends ActionSupport {
+public class getOneOfOneDeviceThresholdAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private JSONObject result;
 
@@ -26,9 +24,7 @@ public class getDeviceThresholdAction extends ActionSupport {
         this.result = result;
     }
 
-
-    /* 根据设备名称查询设备类型
-       根据设备类型查找设备告警阈值信息
+    /*根据阈值id找到其阈值信息
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -38,21 +34,15 @@ public class getDeviceThresholdAction extends ActionSupport {
 
             //获取监测点
             //String computerroom = request.getParameter("computerroomid");
-            String dtid = request.getParameter("dtid");
+            String dtidstr = request.getParameter("dtid");
+            Integer dtid = Integer.parseInt(dtidstr);
 
-            DeviceDAO dao = new DeviceDAOImpl();
+            DeviceThresholdDAO dtdao = new DeviceThresholdDAOImpl();
 
-            List<Devices> devcielist = new ArrayList();
-            List<DevicesThreshold> dtlist = new ArrayList();
-
-            devcielist = dao.getDeviceDataByName(dtid);
-
-            String type = devcielist.get(0).getType();
-
-            dtlist = dao.getDeviceThresholdInfoByType(type);
+            List<DevicesThreshold> dt = dtdao.getOneofOneDeviceThreshold(dtid);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("alldtlist", dtlist);
+            jsonObject.put("devicesThreshold", dt);
 
             result = jsonObject;
 

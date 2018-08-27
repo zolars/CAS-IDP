@@ -1,6 +1,5 @@
 package deviceManage.action;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceDAO;
@@ -49,8 +48,6 @@ public class getOneDeviceThresholdAction extends ActionSupport {
             String did = device.get(0).getDid();
 
             List<DevicesThreshold> dt = dtdao.getOneDeviceThreshold(did);
-
-            System.out.println("dddddddd"+dt.get(0).getName());
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("alldtlist", dt);

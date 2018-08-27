@@ -308,6 +308,14 @@
              </result>
          </action>
 
+         <action name="getOneRolesFunctions" class="systemMng.action.getOneRolesFunctionsAction">
+             <!--getOneRolesFunctions -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="allocRolesPermission" class="systemMng.action.allocRolesPermissionAction">
              <!--allocRolesPermission -->
              <result name="failure">/failure.jsp</result>
@@ -356,6 +364,14 @@
              </result>
          </action>
 
+         <action name="getOneofOneDeviceThreshold" class="deviceManage.action.getOneOfOneDeviceThresholdAction">
+             <!--getOneDeviceThreshold -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="updateOneDeviceThreshold" class="deviceManage.action.updateOneDeviceThresholdAction">
              <!--updateOneDeviceThreshold -->
              <result name="failure">/failure.jsp</result>
@@ -363,6 +379,15 @@
                  <param name="root">result</param>
              </result>
          </action>
+
+         <action name="deleteOneDeviceThreshold" class="deviceManage.action.deleteOneDeviceThresholdAction">
+             <!--deleteOneDeviceThreshold -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
 
          <!--获取历史数据开始-->
          <action name="getHisData" class="historyData.action.getHisAction">

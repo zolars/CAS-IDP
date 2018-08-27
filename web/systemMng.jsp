@@ -211,6 +211,7 @@
 
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-alt" onclick="allocateRoles()">分配功能</button>
+                                            <button type="button" class="btn btn-sm btn-alt" onclick="getOneRolesFunctions()">查看角色功能</button>
                                         </div>
                                     </div>
                                 </div>
@@ -2287,6 +2288,35 @@
                 }
             });
         };
+
+        //点击左侧某个角色，右侧jstree显示角色的功能
+         function getOneRolesFunctions(){
+
+             var rid = $('input[name=cbox-rid]:checked').val();
+
+             $.ajax({
+                 type: "post",
+                 url: "getOneRolesFunctions",
+                 data: {
+                     rid: rid
+                 },
+                 dataType : "json",
+                 success: function (data) {
+                     var arrays = data.allrptree;
+                     for (var i = 0; i < arrays.length; i++) {
+                         console.log(arrays[i]); //pid：3
+
+                     }
+                 }
+             });
+
+             //,"type":arrays[i].permissionname,
+             //   "state": {"opened" : true,"selected":true}
+
+         }
+
+
+
     </script>
 
     <!-- 限值管理-->
@@ -2420,6 +2450,8 @@
                         var isMark = list[i].isMark;
                         var alarmcontent = list[i].alarmcontent;
 
+                        console.log("dtid:"+ dtid);
+
 
                         table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="dtid" id="dtid" value='+dtid+'></td>' +
                             '<td style="padding-left:20px;">' + name + '</td><td style="padding-left:20px;">' + type + '</td>' +
@@ -2449,28 +2481,26 @@
             $('#update-threshold-handle').css('display', 'block');
 
             //显示信息到div
-            var dtidck = $("input[name='dtid']:checked").serialize();
+            var dtidck = $("input[name='dtid']:checked").val();
 
             $.ajax({
                 type: "post",
-                url: "getOneDeviceThreshold",
+                url: "getOneofOneDeviceThreshold",
                 data: {
                     dtid: dtidck
                 },
                 dataType : "json",
                 success: function (data) {
-                    alert(data);
+                    var list = data.devicesThreshold;
 
-                    var list = JSON.parse(data);
-                    var userdata = list['devicesThreshold'];
-
-                    $("#thresholdname").val(userdata.name);
-                    $("#thresholdtype").val(userdata.type);
-                    $("#thresholdunit").val(userdata.unit);
-                    $("#thresholdcellval").val(userdata.cellval);
-                    $("#thresholdfloorval").val(userdata.floorval);
-                    $("#thresholdismark").val(userdata.ismark);
-                    $("#thresholdalarmcontent").val(userdata.alarmcontent);
+                    $("#thresholdname").val(list[0].name);
+                    $("#thresholdtype").val(list[0].type);
+                    $("#thresholdunit").val(list[0].unit);
+                    $("#thresholdcellval").val(list[0].cellval);
+                    $("#thresholdstandval").val(list[0].standardval);
+                    $("#thresholdfloorval").val(list[0].floorval);
+                    $("#thresholdismark").val(list[0].ismark);
+                    $("#thresholdalarmcontent").val(list[0].alarmcontent);
                 },
                 error: function () {
                     alert("失败");
@@ -2524,21 +2554,21 @@
 
         <!-- 提交修改限值 model  -->
         function submitUpdateThreshold(){
-            var dtid=$("#dtid").val();
-            var name=$("#name").val();
-            var type=$("#type").val();
-            var unit=$("#unit").val();
-            var standval=$("#standval").val();
-            var cellval=$("#cellval").val();
-            var floorval=$("#floorval").val();
-            var ismark=$("#ismark").val();
-            var alarmcontent=$("#alarmcontent").val();
+            var dtid = $("input[name='dtid']:checked").val();
+            var name=$("#thresholdname").val();
+            var type=$("#thresholdtype").val();
+            var unit=$("#thresholdunit").val();
+            var standval=$("#thresholdstandval").val();
+            var cellval=$("#thresholdcellval").val();
+            var floorval=$("#thresholdfloorval").val();
+            var ismark=$("#thresholdismark").val();
+            var alarmcontent=$("#thresholdalarmcontent").val();
 
             $.ajax({
                 type: "post",
                 url: "updateOneDeviceThreshold",
                 data: {
-                    dtid: dtidck,
+                    dtid: dtid,
                     name: name,
                     type: type,
                     unit: unit,
@@ -2551,17 +2581,7 @@
                 dataType : "json",
                 success: function (data) {
                     alert(data);
-
-                    var list = JSON.parse(data);
-                    var userdata = list['devicesThreshold'];
-
-                    $("#thresholdname").val(userdata.name);
-                    $("#thresholdtype").val(userdata.type);
-                    $("#thresholdunit").val(userdata.unit);
-                    $("#thresholdcellval").val(userdata.cellval);
-                    $("#thresholdfloorval").val(userdata.floorval);
-                    $("#thresholdismark").val(userdata.ismark);
-                    $("#thresholdalarmcontent").val(userdata.alarmcontent);
+                    hiddenThresholdModel();
                 },
                 error: function () {
                     alert("失败");
@@ -2572,7 +2592,23 @@
 
         <!-- 删除限值 model  -->
         function deleteThresholdModal(){
+            var dtid = $("input[name='dtid']:checked").val();
+            console.log("dtid:"+ dtid);
 
+            $.ajax({
+                type: "post",
+                url: "deleteOneDeviceThreshold",
+                data: {
+                    dtid: dtid
+                },
+                dataType : "json",
+                success: function (data) {
+                    alert(data);
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
         }
 
         <!-- 导入限值 model  -->

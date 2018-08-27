@@ -60,6 +60,15 @@ public class DeviceDAOImpl implements DeviceDAO {
         return dtlist;
     }
 
+    public Boolean deleteDeviceThreshold(String dtid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        rt = hbsessionDao.delete( "Delete FROM DevicesThreshold Where id=?", dtid);
+
+        return rt;
+    }
+
     public Boolean deleteDeviceAlarmUser(String id){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
@@ -121,7 +130,8 @@ public class DeviceDAOImpl implements DeviceDAO {
         kl.setIsMark(ismark);
         kl.setAlarmcontent(alarmcontent);
 
-        String hql = "update DevicesThreshold kl set kl.name='" + name + "' where kl.dtid='" + dtid + "'";
+        String hql = "update DevicesThreshold kl set kl.name='" + name + "', kl.type='" + type +  "', kl.unit='" + unit +  "', kl.standardval='" + standval +
+                "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.isMark='" + ismark +  "', kl.alarmcontent='" + alarmcontent +  "' where kl.dtid='" + dtid + "'";
 
         rt = hbsessionDao.update(kl, hql);
         return rt;

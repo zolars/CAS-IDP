@@ -2,7 +2,6 @@ package deviceManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import deviceManage.dao.DeviceThresholdDAO;
-import hibernatePOJO.Devices;
 import hibernatePOJO.DevicesThreshold;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -34,6 +33,15 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
 
         return list;
 
+    }
+
+    public List getOneofOneDeviceThreshold(Integer dtid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<DevicesThreshold> list = hbsessionDao.search(
+                "FROM DevicesThreshold where dtid=" + dtid + "");
+
+        return list;
     }
 
 }

@@ -16,6 +16,8 @@ public interface DeviceDAO {
 
     public Boolean deleteDeviceAlarmUser(String id);
 
+    public Boolean deleteDeviceThreshold(String dtid);
+
     public Integer getMaxThresholdId();
 
     public Boolean addThresholdInfo(Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark,String alarmcontent);

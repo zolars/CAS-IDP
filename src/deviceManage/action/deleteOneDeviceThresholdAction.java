@@ -1,34 +1,30 @@
 package deviceManage.action;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
-import hibernatePOJO.Devices;
-import hibernatePOJO.DevicesThreshold;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class getDeviceThresholdAction extends ActionSupport {
+public class deleteOneDeviceThresholdAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
-    private JSONObject result;
+    private String result;
 
-    public JSONObject getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(JSONObject result) {
+    public void setResult(String result) {
         this.result = result;
     }
 
 
-    /* 根据设备名称查询设备类型
-       根据设备类型查找设备告警阈值信息
+    /*
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -42,19 +38,16 @@ public class getDeviceThresholdAction extends ActionSupport {
 
             DeviceDAO dao = new DeviceDAOImpl();
 
-            List<Devices> devcielist = new ArrayList();
-            List<DevicesThreshold> dtlist = new ArrayList();
-
-            devcielist = dao.getDeviceDataByName(dtid);
-
-            String type = devcielist.get(0).getType();
-
-            dtlist = dao.getDeviceThresholdInfoByType(type);
+            Boolean rt = dao.deleteDeviceThreshold(dtid);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("alldtlist", dtlist);
 
-            result = jsonObject;
+            if(rt)
+                jsonObject.put("提示", "删除成功！");
+            else
+                jsonObject.put("提示", "删除失败，请重试！");
+
+            result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();
