@@ -223,7 +223,6 @@
                                         <div id="jstree"></div>
                                         <div id="nodeid" style="display: none"></div>
 
-
                                     </div>
                                 </div>
                             </div>
@@ -430,9 +429,6 @@
                                             </table>
                                         </div>
                                     </div>
-                                   <%--
-                                    <input type="text" class="form-control setting-input" id = "get-devicename2">
-                                    <button class="btn btn-default" onclick="checkDevice2()">查询</button>--%>
                                 </label>
                                 <div class="row">
                                     <div class="col-md-4">
@@ -560,30 +556,36 @@
                             <div class="row"></div>
                             <ul class="nav nav-tabs" id="tridulItem">
                                 <li class="active" style="width:15%">
-                                    <a data-toggle="tab" id="tridsubItem1">•电压</a>
+                                    <a data-toggle="tab" id="tridsubItem1">•电能质量</a>
                                 </li>
                                 <li style="width:15%">
-                                    <a data-toggle="tab" id="tridsubItem2">•电流</a>
+                                    <a data-toggle="tab" id="tridsubItem2">•动力环境</a>
                                 </li>
                                 <li style="width:15%">
-                                    <a data-toggle="tab" id="tridsubItem3">•谐波</a>
-                                </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="tridsubItem4">•动力环境</a>
-                                </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="tridsubItem5">•预警管理</a>
+                                    <a data-toggle="tab" id="tridsubItem3">•其他传感器</a>
                                 </li>
                             </ul>
 
                             <div id = "tridItem1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                <div class="outer">
-                                    <input id="device-threshold-name" class="searchInput form-control" type="text">
-                                    <div id="device-threshold-Tips" class="tips" style="display: none">
-                                    </div>
-                                    <button class="btn btn-default" onclick="getOneDeviceThreshold()">查询</button>
+
+                                <div class="col-md-2">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div class="outer">
+                                                    <input id="device-threshold-name" class="searchInput form-control" type="text">
+                                                    <div id="device-threshold-Tips" class="tips" style="display: none">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-default" onclick="getOneDeviceThreshold()">查询</button>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
 
+                                <div class="col-md-8">
                                 <table id="threadinfotablehead">
                                     <thead>
                                     <tr>
@@ -604,42 +606,23 @@
                                 <button class="btn btn-default" onclick="updateThresholdModal()">修改</button>
                                 <button class="btn btn-default" onclick="deleteThresholdModal()">删除</button>
                                 <button class="btn btn-default" onclick="importThresholdModal()">导入</button>
-
+                                </div>
                             </div>
                             <div id = "tridItem2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                电流
                             </div>
                             <div id = "tridItem3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                谐波
                             </div>
-                            <div id = "tridItem4" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                动力环境
-                            </div>
-                            <div id = "tridItem5" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                                预警管理
-                            </div>
-
                         </div>
                         <div id = "item7" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                            this is 预警理
-
-
+                            预警理
                         </div>
                         <div id = "item8" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                             <div class="col-md-5">
                                 <table>
                                     <tr>
                                         <td>设备名称</td>
-                                     <%--   <td>设备名称</td>
-                                        <td>设备名称</td>
-                                        <td>设备名称</td>
-                                        <td>设备名称</td>
-                                        <td>设备名称</td>
-                                        <td>设备名称</td>--%>
                                     </tr>
-
                                 </table>
-
 
                                 <table>
                                     <tr>
@@ -1219,8 +1202,6 @@
                 $("#tridItem1").show();
                 $("#tridItem2").hide();
                 $("#tridItem3").hide();
-                $("#tridItem4").hide();
-                $("#tridItem5").hide();
 
                 hiddenThresholdModel();
 
@@ -1229,36 +1210,16 @@
                         $("#tridItem1").show();
                         $("#tridItem2").hide();
                         $("#tridItem3").hide();
-                        $("#tridItem4").hide();
-                        $("#tridItem5").hide();
                     });
                     $("#tridsubItem2").click(function () {
                         $("#tridItem1").hide();
                         $("#tridItem2").show();
                         $("#tridItem3").hide();
-                        $("#tridItem4").hide();
-                        $("#tridItem5").hide();
                     });
                     $("#tridsubItem3").click(function () {
                         $("#tridItem1").hide();
                         $("#tridItem2").hide();
                         $("#tridItem3").show();
-                        $("#tridItem4").hide();
-                        $("#tridItem5").hide();
-                    });
-                    $("#tridsubItem4").click(function () {
-                        $("#tridItem1").hide();
-                        $("#tridItem2").hide();
-                        $("#tridItem3").hide();
-                        $("#tridItem4").show();
-                        $("#tridItem5").hide();
-                    });
-                    $("#tridsubItem5").click(function () {
-                        $("#tridItem1").hide();
-                        $("#tridItem2").hide();
-                        $("#tridItem3").hide();
-                        $("#tridItem4").hide();
-                        $("#tridItem5").show();
                     });
                 });
 
