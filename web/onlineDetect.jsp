@@ -107,49 +107,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div id="item1-params-list" class="row">
                                     <div class="clearfix"></div>
                                     <ol>
-                                        <li><input type="radio" name="params" id="item1-rms" value="RMS" checked>RMS</li>
-                                        <li><input type="radio" name="params" id="item1-thd" value="THD" >THD</li>
-                                        <li><input type="radio" name="params" id="item1-cf" value="CF">CF</li>
-                                        <li><input type="radio" name="params" id="item1-hz" value="Hz">Hz</li>
-                                        <li><input type="radio" name="params" id="item1-w" value="W">W</li>
-                                        <li><input type="radio" name="params" id="item1-va" value="VA">VA</li>
-                                        <li><input type="radio" name="params" id="item1-var" value="Var">Var</li>
-                                        <li><input type="radio" name="params" id="item1-pf" value="PF">PF</li>
-                                        <li><input type="radio" name="params" id="item1-unb" value="unb%">unb%</li>
-                                        <li><input type="radio" name="params" id="item1-pst" value="Pst">Pst</li>
-                                        <li><input type="radio" name="params" id="item1-plt" value="Plt">Plt</li>
-                                        <li><input type="radio" name="params" id="item1-Vh" value="Vh">Vh</li>
-                                        <li><input type="radio" name="params" id="item1-Ah" value="Ah">Ah</li>
-
-                                    <%--    <li><button value="RMS" class="btn btn-default active">RMS</button></li>
-                                        <li><button value="THD" class="btn btn-default">THD</button></li>
-                                        <li><button value="CF" class="btn btn-default">CF</button></li>
-                                        <li><button value="Hz" class="btn btn-default">Hz</button></li>
-                                        <li><button value="W" class="btn btn-default">W</button></li>
-                                        <li><button value="VA" class="btn btn-default">VA</button></li>
-                                        <li><button value="Var" class="btn btn-default">Var</button></li>
-                                        <li><button value="PF" class="btn btn-default">PF</button></li>
-                                        <li><button value="unb%" class="btn btn-default">unb%</button></li>
-                                        <li><button value="Pst" class="btn btn-default">Pst</button></li>
-                                        <li><button value="Plt" class="btn btn-default">Plt</button></li>
-                                        <li><button value="Vh" class="btn btn-default">Vh</button></li>
-                                        <li><button value="Ah" class="btn btn-default">Ah</button></li>--%>
+                                        <li><button class="btn btn-default active" value="rms">RMS</button></li>
+                                        <li><button class="btn btn-default" value="thd">THD</button></li>
+                                        <li><button class="btn btn-default" value="cf">CF</button></li>
+                                        <li><button class="btn btn-default" value="hz">Hz</button></li>
+                                        <li><button class="btn btn-default" value="p">W</button></li>
+                                        <li><button class="btn btn-default" value="s">VA</button></li>
+                                        <li><button class="btn btn-default" value="q">Var</button></li>
+                                        <li><button class="btn btn-default" value="pf">PF</button></li>
+                                        <li><button class="btn btn-default" value="unb">unb</button></li>
+                                        <li><button class="btn btn-default" value="pst">Pst</button></li>
+                                        <li><button class="btn btn-default" value="plt">Plt</button></li>
+                                        <li><button class="btn btn-default" value="vh">Vh</button></li>
+                                        <li><button class="btn btn-default" value="ah">Ah</button></li>
                                     </ol>
                                 </div>
-                                <div class="row">
-                                    <div id="item1-params-text" class="col-md-12">
-                                        <ul>
-                                            <li>
-                                                <input type="checkbox" name="param-check" value='max'>AVG=0 MIN=0 MAX=0
-                                                <input type="checkbox" name="params-check" value='min'>AVG=0 MIN=0 MAX=0
-                                                <input type="checkbox" name="params-check" value='average'>AVG=0 MIN=0 MAX=0
-                                            </li>
-                                        </ul>
-                                    </div>
+                                <div id="item1-params-text" class="row">
+                                        <div class="clearfix"></div>
+                                        <ol>
+                                            <li><button class="btn btn-default" value="average">AVG</button></li>
+                                            <li><button class="btn btn-default" value="min">MIN</button></li>
+                                            <li><button class="btn btn-default" value="max">MAX</button></li>
+                                        </ol>
                                 </div>
-                                <div class="row">
-                                    <div id="item1-graph" class="col-md-12" style="height: 550px;"></div>
-                                </div>
+                                <div class="row" id="item1-graph" style="height: 550px;"></div>
                             </div>
                             <div id="item1-sidebar" class="col-md-1">
                                 <div class="clearfix"></div>
@@ -161,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <button value="V" class="btn btn-default">3V</button>
                                     </li>
                                     <li>
-                                        <button value="A" class="btn btn-default">3A</button>
+                                        <button value="I" class="btn btn-default">3A</button>
                                     </li>
                                     <li>
                                         <button value="1" class="btn btn-default">L1</button>
@@ -506,6 +487,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         for (var i = 0; i < rt.length; i++) {
                             $('#monitorpnt').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
                         }
+                        //$('#monitorpnt option:nth-child(1)').
 
                     },
                     error: function () {
@@ -520,15 +502,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         // 全局变量、暂存数据的变量、配置项变量
         var qstRecords = []; // 暂存趋势图数据
+        var qstLegend=[
+            "rmsU1","rmsU2","rmsU3","rmsI1","rmsI2","rmsI3",
+            "thdU1","thdU2","thdU3","thdI1","thdI2","thdI3",
+            "cfU1","cfU2","cfU3","cfI1","cfI2","cfI3",
+            "hz",
+            "p1","p2","p3", "s1","s2","s3", "q1","q2","q3",
+            "pf1","pf2","pf3",
+            "dpf1","dpf2","dpf3",
+            "tan1","tan2","tan3",
+            "unb",
+            "pstU1","pstU2","pstU3",
+            "pltU1","pltU2","pltU3"
+            ];//趋势图图例
         var gaugePointerColor = ["#ff0000", "#0000ff", "#ffff00"]; // 三相不平衡度表的指针颜色
         var sxbphdlegend = ["U1", "U2", "U3", "V1", "V2", "V3", "A1", "A2", "A3"]; // 三相不平衡度表的图例
         var maxAmplitude = 400; // 三相不平衡度表中幅值的最大值，用来计算指针长度
         var dataSxbphd = null; // 暂存三相不平衡度表中的数据
-
+        var markPoint={//趋势图最大值、最小值标注
+            label: {formatter: '{a}{b}:{c}'},
+            data: []
+        };
+        var markLine={//趋势图平均值标注
+            label: {formatter: '{a}{b}:{c}'},
+            data: []
+        };
         // 各个图的配置项
         var option1 = {
             legend: {
-                show: false
+                show: false,
+                data: qstLegend
             },
             xAxis: {
                 type: 'time',
@@ -548,196 +551,234 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 // RMS
                 {
                     name: "rmsU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                   // markPoint: markPointRMS, markLine: markLineRMS,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsU1"}
                 },
                 {
                     name: "rmsU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                  // markPoint: markPointRMS, markLine: markLineRMS,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsU3"}
                 },
                 {
                     name: "rmsU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                   // markPoint: markPointRMS, markLine: markLineRMS,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsU3"}
                 },
                 {
                     name: "rmsI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                  //  markPoint: markPointRMS, markLine: markLineRMS,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsI1"}
                 },
                 {
                     name: "rmsI2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                  //  markPoint: markPointRMS, markLine: markLineRMS,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsI2"}
                 },
                 {
                     name: "rmsI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                //    markPoint: markPointRMS, markLine: markLineRMS,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsI3"}
                 },
                 // THD
                 {
                     name: "thdU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdU1"}
                 },
                 {
                     name: "thdU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdU3"}
                 },
                 {
                     name: "thdU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdU3"}
                 },
                 {
                     name: "thdI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdI1"}
                 },
                 {
                     name: "thdI2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdI2"}
                 },
                 {
                     name: "thdI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdI3"}
                 },
                 // CF
                 {
                     name: "cfU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "cfU1"}
                 },
                 {
                     name: "cfU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "cfU3"}
                 },
                 {
                     name: "cfU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "cfU3"}
                 },
                 {
                     name: "cfI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "cfI1"}
                 },
                 {
                     name: "cfI2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "cfI2"}
                 },
                 {
                     name: "cfI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "cfI3"}
                 },
                 // Hz
                 {
                     name: "hz", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "hz"}
                 },
                 // W
                 {
                     name: "p1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "p1"}
                 },
                 {
                     name: "p2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "p2"}
                 },
                 {
                     name: "p3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "p3"}
                 },
                 // VA
                 {
                     name: "s1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "s1"}
                 },
                 {
                     name: "s2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "s2"}
                 },
                 {
                     name: "s3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "s3"}
                 },
                 // Var
                 {
                     name: "q1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "q1"}
                 },
                 {
                     name: "q2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "q2"}
                 },
                 {
                     name: "q3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "q3"}
                 },
                 // PF
                 {
                     name: "pf1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pf1"}
                 },
                 {
                     name: "pf2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pf2"}
                 },
                 {
                     name: "pf3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pf3"}
                 },
                 // DPF
                 {
                     name: "dpf1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "dpf1"}
                 },
                 {
                     name: "dpf2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "dpf2"}
                 },
                 {
                     name: "dpf3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "dpf3"}
                 },
                 // Tan
                 {
                     name: "tan1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "tan1"}
                 },
                 {
                     name: "tan2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "tan2"}
                 },
                 {
                     name: "tan3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "tan3"}
                 },
                 // unb
                 {
                     name: "unb", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "unb"}
                 },
                 // Pst
                 {
                     name: "pstU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pstU1"}
                 },
                 {
                     name: "pstU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pstU2"}
                 },
                 {
                     name: "pstU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pstU3"}
                 },
                 // Plt
                 {
                     name: "pltU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pltU1"}
                 },
                 {
                     name: "pltU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pltU2"}
                 },
                 {
                     name: "pltU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pltU3"}
                 }
             ]
@@ -1307,17 +1348,80 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     updateSxdyt2(dataSxbphd);
                 });
             });
-
+            // 绑定趋势图上方button点击事件
+            $("#item1-params-list ol li button").click(function(){
+                //console.log(this.value);
+                var self=this;
+                $("#item1-params-list ol li button").removeClass("active");
+                $(this).addClass("active");
+                qstLegend.forEach(function(item){
+                    if(0===item.indexOf(self.value)){
+                        eventChart1.dispatchAction({
+                            type: "legendSelect",
+                            name: item
+                        });
+                    }
+                    else{
+                        eventChart1.dispatchAction({
+                            type: "legendUnSelect",
+                            name: item
+                        });
+                    }
+                });
+            });
+            $("#item1-params-text ol li button").click(function () {
+                $(this).toggleClass("active");
+                if($(this).hasClass("active")){
+                    switch(this.value){
+                        case 'max':markPoint.data.unshift({name:'最大值',type: 'max'});break;//最大值标注配置项添加在数组头
+                        case 'min':markPoint.data.push({name:'最小值',type: 'min'});break;//最小值标注配置项添加在数组尾
+                        case 'average':markLine.data.push({name:'平均值',type: 'average'});break;//平均值标注配置项添加
+                        default: break;
+                    }
+                }
+                else{
+                    switch(this.value){
+                        case 'max':markPoint.data.shift();break;//移除最大值标注配置项
+                        case 'min':markPoint.data.pop();break;//移除最小值标注配置项
+                        case 'average':markLine.data.pop();break;//移除平均值标注配置项
+                        default: break;
+                    }
+                }
+                eventChart1.setOption(option1);
+            });
             // 绑定趋势图 右侧U\V\A button选择栏事件
             $("#item1-sidebar ol li button").each(function () {
                 $(this).click(function () {
+                    var currentLegend,self=this;
                     $("#item1-sidebar ol li button").removeClass("active");
                     $(this).addClass("active");
-
-                    alert($('input:radio[name="params"]:checked').val());
-                    alert($('input:checkbox[name="params-check"]:checked').val());
+                    $('#item1-params-list ol li button').each(function(){
+                        if($(this).hasClass("active")){
+                            currentLegend=this.value;
+                            return false;
+                        }
+                    });
+                    //console.log(currentLegend,this.value);
+                    qstLegend.forEach(function(item){
+                        if(0===item.indexOf(currentLegend) && item.indexOf(self.value)>=0){
+                            eventChart1.dispatchAction({
+                                type: "legendSelect",
+                                name: item
+                            });
+                        }
+                        else{
+                            eventChart1.dispatchAction({
+                                type: "legendUnSelect",
+                                name: item
+                            })
+                        }
+                    });
+                    //alert($('input:radio[name="params"]:checked').val());
+                    //alert($('input:checkbox[name="params-check"]:checked').val());
                 });
             });
+            $("#item1-params-list ol li button.active").trigger("click");//默认显示rms数据
+            $("#item1-sidebar ol li button.active").trigger("click");
         }
     </script>
 
@@ -1335,7 +1439,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     updateQst(qstRecords);
                 },
                 error: function () {
-                    alert("获取Qst数据失败");
+                    console.log("获取Qst数据失败");
                 }
             });
         }
@@ -1349,34 +1453,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         // 添加数据
         function addData(qstRecords, newRecord) {
+            //console.log(newRecord);
             if (qstRecords.length > (60 * 12)) {
                 qstRecords.shift();
+                qstRecords.shift();
+                qstRecords.shift();
             }
-            // 构造一条记录
+            // 构造3条记录
             for(var i = 0; i < 3; i++){
                 var oneRecord = {
                     time: newRecord["allHZ"][i]["time"],
                     // RMS
-                    rmsU1: newRecord["allRMS"][i]["u1Xb"],
-                    rmsU2: newRecord["allRMS"][i]["u2Xb"],
-                    rmsU3: newRecord["allRMS"][i]["u3Xb"],
-                    rmsI1: newRecord["allRMS"][i]["i1Xb"],
-                    rmsI2: newRecord["allRMS"][i]["i2Xb"],
-                    rmsI3: newRecord["allRMS"][i]["i3Xb"],
+                    rmsU1: newRecord["allRMS"][i]["u1"],
+                    rmsU2: newRecord["allRMS"][i]["u2"],
+                    rmsU3: newRecord["allRMS"][i]["u3"],
+                    rmsI1: newRecord["allRMS"][i]["i1"],
+                    rmsI2: newRecord["allRMS"][i]["i2"],
+                    rmsI3: newRecord["allRMS"][i]["i3"],
                     // THD
-                    thdU1: newRecord["allTHD"][i]["u1Xb"],
-                    thdU2: newRecord["allTHD"][i]["u2Xb"],
-                    thdU3: newRecord["allTHD"][i]["u3Xb"],
-                    thdI1: newRecord["allTHD"][i]["i1Xb"],
-                    thdI2: newRecord["allTHD"][i]["i2Xb"],
-                    thdI3: newRecord["allTHD"][i]["i3Xb"],
+                    thdU1: newRecord["allTHD"][i]["u1"],
+                    thdU2: newRecord["allTHD"][i]["u2"],
+                    thdU3: newRecord["allTHD"][i]["u3"],
+                    thdI1: newRecord["allTHD"][i]["i1"],
+                    thdI2: newRecord["allTHD"][i]["i2"],
+                    thdI3: newRecord["allTHD"][i]["i3"],
                     // CF
-                    cfU1: newRecord["allCF"][i]["u1Xb"],
-                    cfU2: newRecord["allCF"][i]["u2Xb"],
-                    cfU3: newRecord["allCF"][i]["u3Xb"],
-                    cfI1: newRecord["allCF"][i]["i1Xb"],
-                    cfI2: newRecord["allCF"][i]["i2Xb"],
-                    cfI3: newRecord["allCF"][i]["i3Xb"],
+                    cfU1: newRecord["allCF"][i]["u1"],
+                    cfU2: newRecord["allCF"][i]["u2"],
+                    cfU3: newRecord["allCF"][i]["u3"],
+                    cfI1: newRecord["allCF"][i]["i1"],
+                    cfI2: newRecord["allCF"][i]["i2"],
+                    cfI3: newRecord["allCF"][i]["i3"],
                     // Hz
                     hz: newRecord["allHZ"][i]["hz"],
                     // W
@@ -1418,6 +1525,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 };
                 qstRecords.push(oneRecord);
             }
+            //console.log(qstRecords);
         }
     </script>
 
@@ -1439,7 +1547,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     updateXbt(ndata);
                 },
                 error: function(){
-                    alert("获取谐波数据失败");
+                    console.log("获取谐波数据失败");
                 }
             });
         }
@@ -1521,7 +1629,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3-sidebar ol li button.active").trigger("click");
                 },
                 error: function () {
-                    alert("获取三相电压数据失败");
+                    console.log("获取三相电压数据失败");
                 }
             });
         }
@@ -1673,7 +1781,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     updateParams(rt);
                 },
                 error: function(){
-                    alert("获取参数值失败")
+                    console.log("获取参数值失败");
                 }
             })
         }
@@ -1747,7 +1855,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
 
     <%--选择监测点时，从后台读取相应数据--%>
-    <script type="text/javascript">
+    <script type="text/javascript"f>
     $("#monitorpnt").change(function(){
         var opt=$("#monitorpnt").val();
         if(opt) {

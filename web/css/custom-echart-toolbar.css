@@ -2,16 +2,15 @@
     margin: 0;
     padding: 0;
 }
-#item1-params-list ol{
+#item1-params-list ol,#item1-params-text ol{
     list-style: none;
     margin-top: 5px;
+    /*align-items: center;*/
 }
-#item1-params-list ol li{
+#item1-params-list ol li,#item1-params-text ol li{
+    display: inline-block;
     width: 60px;
     float: left;
-}
-#item1-params-list ol li input[type="radio"],#item1-params-list ol li input[type="checkbox"]{
-    opacity: 1;
 }
 #item1-sidebar ol{
     list-style: none;
@@ -56,7 +55,7 @@
     font-size: 17px;
     line-height: 25px;
 }
-#item1-sidebar ol li button,#item3-sidebar ol li button{
+#item1 ol li button,#item3-sidebar ol li button{
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 1px;
