@@ -13,22 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
-
-
 public class getHisAction extends ActionSupport {
-    /*private static final long serialVersionUID = 13L;
-    private JSONObject result;
 
-    public JSONObject getResult() {
-        return result;
-    }
-
-    public void setResult(JSONObject result) {
-        this.result = result;
-    }
-*/
     private static final long serialVersionUID = 13L;
     private String result;
 

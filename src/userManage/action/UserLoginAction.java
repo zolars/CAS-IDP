@@ -64,7 +64,7 @@ public class UserLoginAction extends ActionSupport{
                 List menulist = new ArrayList();
                 List mlist = new ArrayList();
                 mlist = dao.getUserDynamicMenu(user);
-
+/*
                 for(int i = 0; i < mlist.size(); i++){
                    // System.out.println("i："+mlist.get(i));
                     if(mlist.get(i).equals("5")){
@@ -81,6 +81,41 @@ public class UserLoginAction extends ActionSupport{
                     else if((mlist.get(i).equals("3"))||(mlist.get(i).equals("4"))){
                         menulist.add("systemMng.jsp");
                     }
+                }*/
+
+                for(int i = 0; i < mlist.size(); i++){
+
+                    String s = (String) mlist.get(i);
+
+                    switch (s){
+                        case "2":  menulist.add("systemMng.jsp/item1");break;
+                        case "3":  menulist.add("systemMng.jsp/item6");break;
+                        case "4":  menulist.add("systemMng.jsp/item4");break;
+                        case "5":
+                            menulist.add("province.jsp");
+                            menulist.add("efficiencyDevice.jsp");
+                            menulist.add("onlineDetect.jsp");
+                            menulist.add("history.jsp");
+                            menulist.add("efficiencyAnalysis.jsp");
+                            menulist.add("efficiencyAssessment.jsp");
+                            menulist.add("reportChart.jsp");
+                            break;
+                        case "6":  menulist.add("systemMng.jsp/item9");break;
+                        case "7":  menulist.add("systemMng.jsp/item2");break;
+                        case "8":  menulist.add("systemMng.jsp/item3");break;
+                        case "9":  menulist.add("systemMng.jsp/item7");break;
+                        case "10":  menulist.add("systemMng.jsp/item4/secsubItem1");break;
+                        case "11":  menulist.add("systemMng.jsp/item4/secsubItem2");break;
+                        case "12":  menulist.add("systemMng.jsp/item4/secsubItem3");break;
+                        case "13":  menulist.add("systemMng.jsp/item4/secsubItem4");break;
+                        case "14":  menulist.add("systemMng.jsp/item4/secsubItem5");break;
+                        case "15":  menulist.add("systemMng.jsp/item4/secsubItem6");break;
+                        case "16":  menulist.add("systemMng.jsp/item6/trisubItem1");break;
+                        case "17":  menulist.add("systemMng.jsp/item6/trisubItem2");break;
+                        case "18":  menulist.add("systemMng.jsp/item6/trisubItem3");break;
+                        default: break;
+                    }
+
                 }
 
                 //remove deplicate url
