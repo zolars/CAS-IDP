@@ -183,7 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     <div class="col-md-12">
                         <ul class="nav nav-tabs" id="ulItem">
-                            <li style="width:15%">
+                            <li class="active"  style="width:15%">
                                 <a data-toggle="tab" id="subItem2">•事件分析</a>
                             </li>
                             <li style="width:15%">
@@ -205,17 +205,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <table id="event-table-head1">
                                         <thead>
                                         <tr>
-                                            <th><img src="/img/setting.jpg" alt=""></th>
-                                            <th><img src="/img/refresh.jpg" alt=""></th>
+                                            <th><img src="/img/setting.jpg" alt="" onClick="settingIcon()" ></th>
+                                            <th><img src="/img/refresh.jpg" alt="" onClick="refreshIcon()" ></th>
                                             <th><button type="button" class="btn btn-sm btn-alt" onClick="exportTable()" >导出</button></th>
                                             <th><button type="button" class="btn btn-sm btn-alt" onClick="printTable()" >打印</button></th>
                                         </tr>
                                         </thead>
                                     </table>
 
+                                    <!--startprint-->
+
                                     <div class="tile">
                                         <h2 class="tile-title">
-                                            <table id="event-table-head2">
+                                           <%-- <table id="event-table-head2">
                                                 <thead>
                                                 <tr>
                                                     <th><div style="padding-left:40px;">事件名称</div></th>
@@ -225,14 +227,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     <th><div style="padding-left:40px;">事件发生时间</div></th>
                                                 </tr>
                                                 </thead>
+                                            </table>--%>
+                                            <table id="event-table-body">
+                                                <tr>
+                                                    <th><div style="padding-left:60px;">事件名称</div></th>
+                                                    <th><div style="padding-left:60px;">位置</div></th>
+                                                    <th><div style="padding-left:60px;">事件类型</div></th>
+                                                    <th><div style="padding-left:60px;">事件描述</div></th>
+                                                    <th><div style="padding-left:60px;">事件发生时间</div></th>
+                                                </tr>
                                             </table>
-                                            <table id="event-table-body"></table>
                                         </h2>
 
                                         <table id="event-table-1"></table>
                                         <table id="event-table-2"></table>
                                         <table id="event-table-3"></table>
                                     </div>
+
+                                    <!--endprint-->
+
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -243,259 +259,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     <div id = "item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                         能效分析
-                        <div class="col-md-12">
-                            <!-- Main Chart -->
-                            <div class="tile" style="height: 350px">
-                                <h2 class="tile-title" style="font-size: 20px">能耗统计</h2>
-                                <div class="tile-config dropdown">
-                                    <a data-toggle="dropdown" href="" class="tile-menu"></a>
-                                    <ul class="dropdown-menu pull-right text-right">
-                                        <li>
-                                            <a class="tile-info-toggle" href="">Chart Information</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Refresh</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Settings</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <ul class="nav nav-tabs col-md-12" style="margin: 0px;padding: 0px">
-                                    <li class=" col-md-3" style="margin: 0px;padding: 0px">
-                                        <a data-toggle="tab">●办公楼</a>
-                                    </li>
-                                    <li class="col-md-3" style="margin: 0px;padding: 0px">
-                                        <a data-toggle="tab">●机房</a>
-                                    </li>
-                                    <li class="col-md-2" style="margin: 0px;padding: 0px">
-                                        <a data-toggle="tab">●基站</a>
-                                    </li>
-                                    <li class="active col-md-2" style="margin: 0px;padding: 0px">
-                                        <a data-toggle="tab">●营业厅</a>
-                                    </li>
-                                </ul>
-                                <div class="col-md-12" style="margin: 0px;padding: 0px">
-                                    <div class="col-md-1" style="margin: 0px;padding: 0px">
-                                        <ul class="nav nav-tabs col-md-12" style="margin: 0px;padding: 0px;height: 283px">
-                                            <li class="active col-md-12" style="margin: 0px;padding: 0px">
-                                                <a data-toggle="tab">能耗统计</a>
-                                            </li>
-                                            <li class="col-md-12" style="margin: 0px;padding: 0px">
-                                                <a data-toggle="tab">费用统计</a>
-                                            </li>
-                                            <li class="col-md-12" style="margin: 0px;padding: 0px">
-                                                <a data-toggle="tab">节能减排</a>
-                                            </li>
-                                            <li class="col-md-12" style="margin: 0px;padding: 0px">
-                                                <a data-toggle="tab">对标统计</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-8" style=" height: 270px;">
-                                        <div class="row " style="margin-top:15px;">
-                                            <div class='col-md-4 hide'>
-                                                <div class='col-md-4'>
-                                                    <button class="btn btn-default">机构:</button>
-                                                </div>
-                                                <div class='col-md-8'>
-                                                    <input id='123' class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class='col-md-6'>
-                                                <div class='col-md-4'>
-                                                    <button class="btn btn-default pull-right">站房:</button>
-                                                </div>
-                                                <div class='col-md-8'>
-                                                    <select class="select">
-                                                        <option>基站A</option>
-                                                        <option>基站B</option>
-                                                        <option>基站C</option>
-                                                        <option>基站D</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class='col-md-5'>
-                                                <div class='col-md-5'>
-                                                    <button class="btn btn-default pull-right">加入对比时间:</button>
-                                                </div>
-                                                <div class='col-md-7'>
-                                                    <input id='consumptionDate' class="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="consumptiondiv" class="col-md-12" style=" height: 250px;"></div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label style="height: 30px"></label>
-                                        <h3>单位面积总能耗</h3>
-                                        <span>分时间尺度展示当前建筑单位面积总能耗。同</span>
-                                        <span>时通过下拉时间列表自由比对历史单位面积总</span>
-                                        <span>能耗值。</span>
-                                        <br>
-                                        <div class="col-md-6">
-                                            <span style="font-size: 23px">0.65</span>
-                                            <span>kwh/(m²天)</span>
-                                            <br>
-                                            <span>本月平均单位面积总能耗</span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <span style="font-size: 23px">↑10</span>
-                                            <span>%</span>
-                                            <br>
-                                            <span>与同类建筑相比</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!--  Recent Postings -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="tile">
-                                        <h2 class="tile-title" style="font-size: 20px">建筑系统能效指标</h2>
-                                        <div class="col-md-4" style="padding-left: 0px;">
-                                            <div class="tile" style="height: 480px">
-                                                <h3 class="tile-title" style="font-size: 17px">人均空调系统能耗</h3>
-                                                <div class="tile-config dropdown">
-                                                    <a data-toggle="dropdown" href="" class="tile-menu"></a>
-                                                    <ul class="dropdown-menu animated pull-right text-right">
-                                                        <li>
-                                                            <a href="">Refresh</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">Settings</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="p-10">
-                                                    <span class="col-md-11" style="padding-left: 20px">分时间尺度的展示当前却水泵用电量，同时通过下拉时间列表自由对比历史冷却水泵用电量数据。</span>
-                                                    <div id="conditionerdiv" style="width: 100%; height: 300px;"></div>
-                                                    <div class="col-md-12">
-                                                        <ul class="nav nav-tabs" style="margin: 0px;padding: 0px;">
-                                                            <li class="active col-md-3" style="margin: 0px;padding: 0px">
-                                                                <a data-toggle="tab">日视图</a>
-                                                            </li>
-                                                            <li class="col-md-3">
-                                                                <a data-toggle="tab">周视图</a>
-                                                            </li>
-                                                            <li class="col-md-3">
-                                                                <a data-toggle="tab">月视图</a>
-                                                            </li>
-                                                            <li class="col-md-3">
-                                                                <a data-toggle="tab">年视图</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <input id='conditionerDate' type="text" style="margin-top: 10px; width: 200px;display: inline!important;" class="form-control"
-                                                        />
-                                                        <input type="button" class="btn btn-default" value="加入对比时间">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Tasks to do -->
-                                        <div class="col-md-4">
-                                            <div class="tile" style="height: 480px">
-                                                <h2 class="tile-title" style="font-size: 17px">照明系统能效比</h2>
-                                                <div class="tile-config dropdown">
-                                                    <a data-toggle="dropdown" href="" class="tile-menu"></a>
-                                                    <ul class="dropdown-menu pull-right text-right">
-                                                    </ul>
-                                                </div>
-                                                <div class="p-10">
-                                                    <span class="col-md-11" style="padding-left: 20px">分时间尺度的展示当前建筑空调系统用电，同时通过下拉时间列表自由对比历史空调用电数据。</span>
-                                                    <div id="line-chart" class="main-chart" style="height: 300px;margin-top: 59px;"></div>
-                                                    <div class="col-md-12">
-                                                        <ul class="nav nav-tabs" style="margin: 0px;padding: 0px;">
-                                                            <li class="active col-md-3" style="margin: 0px;padding: 0px">
-                                                                <a data-toggle="tab">日视图</a>
-                                                            </li>
-                                                            <li class="col-md-3">
-                                                                <a data-toggle="tab">周视图</a>
-                                                            </li>
-                                                            <li class="col-md-3">
-                                                                <a data-toggle="tab">月视图</a>
-                                                            </li>
-                                                            <li class="col-md-3">
-                                                                <a data-toggle="tab">年视图</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <input id='lineDate' type="text" style="margin-top: 10px; width: 200px;display: inline!important;" class="form-control" />
-                                                        <input type="button" class="btn btn-default" value="加入对比时间">
-                                                    </div>
-                                                    <!--<div class="col-md-12" style="text-align: right;">-->
-                                                    <!--<a><span style="font-style:italic;">查看冷机制冷量</span></a>-->
-                                                    <!--</div>-->
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <!-- Tasks to do -->
-                                        <div class="col-md-4" style="padding-right: 0px">
-                                            <div class="tile" style="height: 480px">
-                                                <h2 class="tile-title" style="font-size: 17px">空调系统能效比</h2>
-                                                <div class="tile-config dropdown">
-                                                    <a data-toggle="dropdown" href="" class="tile-menu"></a>
-                                                    <ul class="dropdown-menu pull-right text-right">
-                                                        <li id="todo-add">
-                                                            <a href="">Add New</a>
-                                                        </li>
-                                                        <li id="todo-refresh">
-                                                            <a href="">Refresh</a>
-                                                        </li>
-                                                        <li id="todo-clear">
-                                                            <a href="">Clear All</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                                <div class="p-10">
-                                                    <span class="col-md-11" style="padding-left: 20px">分时间尺度的展示当前数据中心用电，同时通过下拉时间列表自由对比历史数据中心用电数据。</span>
-                                                    <div id="EERdiv" style="width: 100%; height: 300px;"></div>
-                                                    <div class="col-md-12">
-                                                        <ul class="nav nav-tabs" style="margin: 0px;padding: 0px;">
-                                                            <li class="col-md-3" style="margin: 0px;padding: 0px">
-                                                                <a data-toggle="tab">日视图</a>
-                                                            </li>
-                                                            <li class="col-md-3">
-                                                                <a data-toggle="tab">周视图</a>
-                                                            </li>
-                                                            <li class="active col-md-3">
-                                                                <a data-toggle="tab">月视图</a>
-                                                            </li>
-                                                            <li class="col-md-3">
-                                                                <a data-toggle="tab">年视图</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <input id='EERDate' type="text" style="margin-top: 10px; width: 200px;display: inline!important;" class="form-control" />
-                                                        <input type="button" class="btn btn-default" value="加入对比时间">
-                                                    </div>
-                                                    <!--<div class="col-md-12">-->
-                                                    <!--<div class="col-md-5">-->
-                                                    <!--<a><span style="font-style:italic;">查看建筑用电分析</span></a>-->
-                                                    <!--</div>-->
-                                                    <!--<div class="col-md-7">-->
-                                                    <!--<a><span style="font-style:italic;">查看单位建筑面积总能耗</span></a>-->
-                                                    <!--</div>-->
-                                                    <!--</div>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="clearfix"></div>
-                        </div>
-
                     </div>
 
 
@@ -736,6 +499,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var list = obj['alldelist'];
                     var table = $("#event-table-body");
                     table.empty();
+                    table.append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
 
                     for (var i = 0; i < list.length; i++) {
                         var name = list[i].type;
@@ -776,6 +540,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var list = obj['allpelist'];
                     var table = $("#event-table-body");
                     table.empty();
+                    table.append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
 
                     for (var i = 0; i < list.length; i++) {
                         var name = list[i].type;
@@ -815,6 +580,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var list = obj['alleelist'];
                     var table = $("#event-table-body");
                     table.empty();
+                    table.append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
 
                     for (var i = 0; i < list.length; i++) {
                         var name = list[i].type;
@@ -833,18 +599,152 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
+    <!-- 设置icon-->
+    <script type="text/javascript">
+        function settingIcon(){
+            alert("设置icon");
+        }
+    </script>
+
+    <!-- 刷新icon-->
+    <script type="text/javascript">
+        function refreshIcon(){
+            alert("刷新icon");
+        }
+    </script>
+
     <!-- 导出-->
     <script type="text/javascript">
-        function exportTable(){
 
+        function exportTable(){
+            alert("导出");
+            var tableid = "event-table-body";
+            exportToExcel(tableid);
         }
+
+        var idTmr;
+        function getExplorer() {
+            var explorer = window.navigator.userAgent ;
+            //ie
+            if (explorer.indexOf("MSIE") >= 0) {
+                return 'ie';
+            }
+            //firefox
+            else if (explorer.indexOf("Firefox") >= 0) {
+                return 'Firefox';
+            }
+            //Chrome
+            else if(explorer.indexOf("Chrome") >= 0){
+                return 'Chrome';
+            }
+            //Opera
+            else if(explorer.indexOf("Opera") >= 0){
+                return 'Opera';
+            }
+            //Safari
+            else if(explorer.indexOf("Safari") >= 0){
+                return 'Safari';
+            }
+        }
+
+        function exportToExcel(tableid ) {//整个表格拷贝到EXCEL中
+            if(getExplorer()=='ie'){
+                var curTbl = document.getElementById(tableid);
+                var oXL = new ActiveXObject("Excel.Application");
+
+                //创建AX对象excel
+                var oWB = oXL.Workbooks.Add();
+                //获取workbook对象
+                var xlsheet = oWB.Worksheets(1);
+                //激活当前sheet
+                var sel = document.body.createTextRange();
+                sel.moveToElementText(curTbl);
+                //把表格中的内容移到TextRange中
+                sel.select;
+                //全选TextRange中内容
+                sel.execCommand("Copy");
+                //复制TextRange中内容
+                xlsheet.Paste();
+                //粘贴到活动的EXCEL中
+                oXL.Visible = true;
+                //设置excel可见属性
+
+                try {
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+                } catch (e) {
+                    print("Nested catch caught " + e);
+                } finally {
+                    oWB.SaveAs(fname);
+                    oWB.Close(savechanges = false);
+                    //xls.visible = false;
+                    oXL.Quit();
+                    oXL = null;
+                    //结束excel进程，退出完成
+                    //window.setInterval("Cleanup();",1);
+                    idTmr = window.setInterval("Cleanup();", 1);
+                }
+            }else{
+                tableToExcel(tableid)
+            }
+        }
+
+        function Cleanup() {
+            window.clearInterval(idTmr);
+            CollectGarbage();
+        }
+
+        var tableToExcel = (function() {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" '
+                    +'xmlns:x="urn:schemas-microsoft-com:office:excel" '
+                    +'xmlns="http://www.w3.org/TR/REC-html40">'
+                    +'<head>'
+                    +'<!--[if gte mso 9]>'
+                    +'<xml>'
+                    +'<x:ExcelWorkbook>'
+                    +'<x:ExcelWorksheets>'
+                    +'<x:ExcelWorksheet>'
+                    +'<x:Name>{worksheet}</x:Name>'
+                    +'<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>'
+                    +'</x:ExcelWorksheet>'
+                    +'</x:ExcelWorksheets>'
+                    +'</x:ExcelWorkbook>'
+                    +'</xml>'
+                    +'<![endif]-->'
+                    +'</head>'
+                    +'<body><table>{table}</table></body>'
+                    +'</html>',
+
+                base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
+                format = function(s, c) {
+                    return s.replace(/{(\w+)}/g,
+                        function(m, p) { return c[p]; }) }
+
+            return function(table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+
     </script>
 
     <!-- 打印-->
     <script type="text/javascript">
         function printTable(){
+            window.document.title = "";
+            window.document.URL = "";
 
+            bdhtml = window.document.body.innerHTML;
+            sprnstr = "<!--startprint-->";
+            eprnstr = "<!--endprint-->";
+            prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17);
+            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+            window.document.body.innerHTML = prnhtml;
+            window.print();
+            setTimeout(location.reload(), 3000);
         }
+
     </script>
 
 </body>
