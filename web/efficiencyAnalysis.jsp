@@ -184,15 +184,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-md-12">
                         <ul class="nav nav-tabs" id="ulItem">
                             <li class="active"  style="width:15%">
-                                <a data-toggle="tab" id="subItem2">•事件分析</a>
+                                <a data-toggle="tab" id="subItem1">•事件分析</a>
                             </li>
                             <li style="width:15%">
-                                <a data-toggle="tab" id="subItem3">•能效分析</a>
+                                <a data-toggle="tab" id="subItem2">•能效分析</a>
                             </li>
                         </ul>
                     </div>
 
-                    <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                    <div id = "item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
 
                         <button type="button" class="btn btn-sm btn-alt" onClick="getDeviceEvent()" >设备事件</button>
                         <button type="button" class="btn btn-sm btn-alt" onClick="getPowerEvent()" >电能质量事件</button>
@@ -214,50 +214,136 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </table>
 
                                     <!--startprint-->
+                                    <div class="row-fluid">
 
-                                    <div class="tile">
-                                        <h2 class="tile-title">
-                                           <%-- <table id="event-table-head2">
-                                                <thead>
-                                                <tr>
-                                                    <th><div style="padding-left:40px;">事件名称</div></th>
-                                                    <th><div style="padding-left:20px;">位置</div></th>
-                                                    <th><div style="padding-left:40px;">事件类型</div></th>
-                                                    <th><div style="padding-left:40px;">事件描述</div></th>
-                                                    <th><div style="padding-left:40px;">事件发生时间</div></th>
-                                                </tr>
-                                                </thead>
-                                            </table>--%>
-                                            <table id="event-table-body">
-                                                <tr>
-                                                    <th><div style="padding-left:60px;">事件名称</div></th>
-                                                    <th><div style="padding-left:60px;">位置</div></th>
-                                                    <th><div style="padding-left:60px;">事件类型</div></th>
-                                                    <th><div style="padding-left:60px;">事件描述</div></th>
-                                                    <th><div style="padding-left:60px;">事件发生时间</div></th>
-                                                </tr>
-                                            </table>
-                                        </h2>
-
-                                        <table id="event-table-1"></table>
-                                        <table id="event-table-2"></table>
-                                        <table id="event-table-3"></table>
+                                    <div class="col-md-7">
+                                        <div class="tile">
+                                            <h2 class="tile-title">
+                                                <table id="event-table-body">
+                                                    <tr>
+                                                        <th><div style="padding-left:60px;">事件名称</div></th>
+                                                        <th><div style="padding-left:60px;">位置</div></th>
+                                                        <th><div style="padding-left:60px;">事件类型</div></th>
+                                                        <th><div style="padding-left:60px;">事件描述</div></th>
+                                                        <th><div style="padding-left:60px;">事件发生时间</div></th>
+                                                    </tr>
+                                                </table>
+                                            </h2>
+                                        </div>
                                     </div>
-
                                     <!--endprint-->
 
+                                    <div class="col-md-4">
 
+                                        <ul class="nav nav-tabs" id="seculItem">
+                                            <li class="active" style="width:15%">
+                                                <a data-toggle="tab" id="leftsubItem1">•时间地点</a>
+                                            </li>
+                                            <li style="width:15%">
+                                                <a data-toggle="tab" id="leftsubItem2">•列</a>
+                                            </li>
+                                            <li style="width:15%">
+                                                <a data-toggle="tab" id="leftsubItem3">•图形</a>
+                                            </li>
+                                        </ul>
 
+                                        <div id="leftItem1" style="width: 100%;">
+                                            <table>
+                                                <tr><td>日期时间</td></tr>
+                                                <tr><td><input id="radio-last-7day-event" type="radio">观看最后的事件</td></tr>
+                                                <tr><td><input id="radio-from-to-event" type="radio">从</td></tr>
+                                                <tr><td>到</td></tr>
+                                                <tr><td>时间段控制</td></tr>
+                                                <tr><td><input id="radio-diy-event" type="radio">定制</td></tr>
+                                                <tr><td><input id="radio-day-event" type="radio">天</td></tr>
+                                                <tr><td><input id="radio-week-event" type="radio">周</td></tr>
+                                                <tr><td><input id="radio-month-event" type="radio">月</td></tr>
 
+                                                <tr>
+                                                    <td><button id="today-button" type="button" class="btn btn-sm btn-alt" onclick="getTodayEvent()">今天</button></td>
+                                                    <td><button id="data-button" type="button" class="btn btn-sm btn-alt" onclick="getDataEvent()">Data?</button></td>
+                                                </tr>
+                                                <tr><td><button id="latestweek-button" type="button" class="btn btn-sm btn-alt" onclick="getLatestWeekEvent()">最新的week</button></td></tr>
+
+                                                <tr><td>测量地点</td></tr>
+
+                                                <tr>
+                                                    <td><button id="add-button" type="button" class="btn btn-sm btn-alt"  onclick="addMonitorPoint()">添加</button></td>
+                                                    <td><button id="delete-button" type="button" class="btn btn-sm btn-alt"  onclick="deleteMonitorPoint()">删除</button></td>
+                                                </tr>
+
+                                                <tr><td>自动更新间隔
+                                                    <select class="form-control location-select-item" id="auto-update-interval">
+                                                        <option value="null">无</option>
+                                                        <option value="1">1分</option>
+                                                        <option value="10">10分</option>
+                                                        <option value="60">60分</option>
+                                                    </select>
+                                                </td></tr>
+                                            </table>
+                                        </div>
+
+                                        <div id="leftItem2" style="width: 100%;">
+                                            <table>
+                                                <tr>
+                                                    <td>可见的列</td>
+                                                </tr>
+                                                <tr>
+                                                    <table>
+                                                        <tr><td>名字</td><td>宽度</td></tr>
+                                                        <tr><td>测量名称</td><td>100</td></tr>
+                                                    </table>
+                                                </tr>
+                                                <tr>
+                                                    <img src="/img/uparray.jpg" alt="" onClick="upcol()" >
+                                                    <img src="/img/deletearray.jpg" alt="" onClick="deletecol()" >
+                                                    <img src="/img/downarray.jpg" alt="" onClick="downcol()" >
+                                                </tr>
+
+                                                <tr>
+                                                    <td>可用的列</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <select class="form-control location-select-item" id="useful-col">
+                                                            <option value="1">测量名称</option>
+                                                            <option value="2">时间</option>
+                                                            <option value="3">测量名称</option>
+                                                            <option value="4">类型</option>
+                                                            <option value="5">触发相位</option>
+                                                            <option value="6">时间长短</option>
+                                                            <option value="7">深度</option>
+                                                            <option value="8">方向</option>
+                                                            <option value="9">触发相位数</option>
+                                                            <option value="10">评论</option>
+                                                            <option value="11">签名</option>
+                                                            <option value="12">触发水平</option>
+                                                            <option value="13">中有波形数据</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><button id="add-col-button" type="button" class="btn btn-sm btn-alt" onclick="getTodayEvent()">添加</button></td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+
+                                        <div id="leftItem3" style="width: 100%;">
+                                            浪涌塌陷曲线
+                                            U电压
+
+                                            I电流
+                                        </div>
+
+                                    </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-
-
                     </div>
 
-                    <div id = "item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                    <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                         能效分析
                     </div>
 
@@ -440,44 +526,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 切换子菜单-->
     <script type="text/javascript">
-       // $("#item1").show();
-        $("#item2").show();
-        $("#item3").hide();
+        $("#item1").show();
+        $("#item2").hide();
+
+        $("#leftItem1").show();
+        $("#leftItem2").hide();
+        $("#leftItem3").hide();
+
         $(document).ready(function() {
-           /* $("#subItem1").click(function () {
-               // $("#item1").show();
+
+            $("#subItem1").click(function () {
+                $("#item1").show();
                 $("#item2").hide();
-                $("#item3").hide();
-            });*/
-            $("#subItem2").click(function () {
-              //  $("#item1").hide();
-                $("#item2").show();
-                $("#item3").hide();
+
+                $(document).ready(function () {
+                    $("#leftsubItem1").click(function () {
+                        $("#leftItem1").show();
+                        $("#leftItem2").hide();
+                        $("#leftItem3").hide();
+                    });
+                    $("#leftsubItem2").click(function () {
+                        $("#leftItem1").hide();
+                        $("#leftItem2").show();
+                        $("#leftItem3").hide();
+                    });
+                    $("#leftsubItem3").click(function () {
+                        $("#leftItem1").hide();
+                        $("#leftItem2").hide();
+                        $("#leftItem3").show();
+                    });
+                });
             });
-            $("#subItem3").click(function () {
-             //   $("#item1").hide();
-                $("#item2").hide();
-                $("#item3").show();
+            $("#subItem2").click(function () {
+                $("#item1").hide();
+                $("#item2").show();
             });
         });
+
     </script>
 
     <!-- 切换子菜单subItem效果-->
     <script type="text/javascript">
         $(function(){
-
             $("#ulItem li").click(function() {
-
                 $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式selected
-
                 $(this).addClass('active');                            // 添加当前元素的样式
-
             });
-
         });
     </script>
 
-    <!-- 测试 设备事件-->
+    <!-- 设备事件-->
     <script type="text/javascript">
         function getDeviceEvent(){
 
@@ -518,7 +616,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
-    <!-- 测试 电能事件-->
+    <!-- 电能事件-->
     <script type="text/javascript">
         function getPowerEvent(){
 
@@ -559,7 +657,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
-    <!-- 测试 环境事件-->
+    <!-- 环境事件-->
     <script type="text/javascript">
         function getEvironmentEvent(){
             var stime = "2018-08-22 08:00:00";
@@ -599,6 +697,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
+    <!-- 日期选择-->
+    <script type="text/javascript">
+        //获得今天的事件
+        function getTodayEvent(){
+            alert("today");
+
+        }
+
+        //获得Data？的事件
+        function getDataEvent(){
+            alert("data?");
+        }
+
+        //获得最近一周的事件
+        function getLatestWeekEvent(){
+            alert("LatestWeek");
+        }
+
+    </script>
+
+    <!-- 观测地点-->
+    <script type="text/javascript">
+        //添加监测点
+        function addMonitorPoint(){
+            alert("addMonitorPoint");
+        }
+
+        //删除检测点
+        function deleteMonitorPoint(){
+            alert("deleteMonitorPoint");
+        }
+
+    </script>
+
+    <!-- 自动更新-->
+    <script type="text/javascript">
+
+    </script>
+
+    <!-- 右侧界面 第二个子菜单 列 -->
+    <script type="text/javascript">
+        function upcol(){
+            alert("up");
+        }
+        function downcol(){
+            alert("down");
+        }
+        function deletecol(){
+            alert("del");
+        }
+    </script>
+
     <!-- 设置icon-->
     <script type="text/javascript">
         function settingIcon(){
@@ -609,13 +759,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 刷新icon-->
     <script type="text/javascript">
         function refreshIcon(){
-            alert("刷新icon");
+            $("#event-table-body").empty();
+            $("#event-table-body").append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
         }
     </script>
 
     <!-- 导出-->
     <script type="text/javascript">
-
         function exportTable(){
             alert("导出");
             var tableid = "event-table-body";
@@ -726,7 +876,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 window.location.href = uri + base64(format(template, ctx))
             }
         })()
-
     </script>
 
     <!-- 打印-->
@@ -744,7 +893,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             window.print();
             setTimeout(location.reload(), 3000);
         }
-
     </script>
 
 </body>
