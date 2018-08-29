@@ -153,48 +153,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/feeds.min.js"></script>
     <!-- News Feeds -->
 
-
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
-
-   <%--
-    <script type="text/javascript" src="/js/zTree/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript" src="/js/zTree/jquery.ztree.core.js"></script>
-
-   <script>
-
-        var objprobank="<%=session.getAttribute("probank")%>";
-        var objcitybank="<%=session.getAttribute("citybank")%>";
-        var objcomputerroom="<%=session.getAttribute("computerroom")%>";
-
-        /*var objcitybank2 = objcitybank.list;
-        alert(objcitybank2);
-
-        for(var key=0; key<objcitybank2.length; key++) {
-            var temp = objcitybank2[key];
-            console.log(temp);
-        }
-        alert(objcitybank2);*/
-
-        var zTreeObj;
-        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-        var setting = {};
-        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-        var zNodes = [
-            {name:objprobank, open:true, children:[
-                    {name:objcitybank, open:true, children:[
-                            {name:objcomputerroom}
-                        ]
-                    }
-                ]
-            }
-        ];
-
-        $(document).ready(function(){
-            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-        });
-
-    </script>--%>
 
     <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
@@ -257,6 +217,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         var menulist="<%=session.getAttribute("menulist")%>";
         var cbidstr = menulist.split(",");
+        var isSystemMng = false;
+        var isNewSystemMng = false;
 
         //处理第一个和最后一个
         cbidstr[0] = cbidstr[0].substring(1);
@@ -269,31 +231,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         for(var i = 0; i < cbidstr.length; i++){
 
             var menuname = "";
-            if(cbidstr[i] == ' province.jsp')
+            if(cbidstr[i] == " province.jsp"){
+                isSystemMng = false;
                 menuname = "集中监控";
-
-            else if(cbidstr[i] == ' efficiencyDevice.jsp')
+            }
+            else if(cbidstr[i] == " efficiencyDevice.jsp"){
+                isSystemMng = false;
                 menuname = "动力设施";
-
-            else if(cbidstr[i] == ' onlineDetect.jsp')
+            }
+            else if(cbidstr[i] == " onlineDetect.jsp"){
+                isSystemMng = false;
                 menuname = "在线监测";
-
-            else if(cbidstr[i] == ' efficiencyAnalysis.jsp')
+            }
+            else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
+                isSystemMng = false;
                 menuname = "动力分析";
-
-            else if(cbidstr[i] == ' efficiencyAssessment.jsp')
+            }
+            else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
+                isSystemMng = false;
                 menuname = "动力评估";
-
-            else if(cbidstr[i] == ' reportChart.jsp')
+            }
+            else if(cbidstr[i] == ' reportChart.jsp'){
+                isSystemMng = false;
                 menuname = "报表功能";
-
-            else if(cbidstr[i] == ' history.jsp') //userMng.jsp'
+            }
+            else if(cbidstr[i] == ' history.jsp'){
+                isSystemMng = false;
                 menuname = "历史曲线";
+            }
+            else if(cbidstr[i].search('systemMng.jsp')){
 
-            else if(cbidstr[i] == ' systemMng.jsp')
-                menuname = "系统管理";
+                if(!isNewSystemMng)
+                {//第一条systemMng的
+                    isNewSystemMng = true;
+                    menuname = "系统管理";
+                    $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+                }
+                isSystemMng = true;
+            }
 
-            $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+            if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
         }
     </script>
 

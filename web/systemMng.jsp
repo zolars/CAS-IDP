@@ -1036,6 +1036,9 @@
     var cbidstr = menulist.split(",");
     var isSystemMng = false;
     var isNewSystemMng = false;
+    var ulist = new Array();
+    var u2list = new Array();
+  //  var utridlist = new Array();
 
     //处理第一个和最后一个
     cbidstr[0] = cbidstr[0].substring(1);
@@ -1078,23 +1081,69 @@
         }
         else if(cbidstr[i].search('systemMng.jsp')){
 
-            if(isNewSystemMng){//非第一条
+            //对字符串分段处理（2或3段）
+            var substr = cbidstr[i].split("/");
+
+            if(substr.length == 2){
+                ulist.push(substr[1]);
             }
-            else{//第一条systemMng的
+
+            else
+            {
+                console.log("3"+ substr[1] + substr[2]);
+
+                ulist.push(substr[1]);
+                u2list.push(substr[2]);
+
+            }
+
+
+            if(!isNewSystemMng)
+            {//第一条systemMng的
                 isNewSystemMng = true;
                 menuname = "系统管理";
                 $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
             }
             isSystemMng = true;
         }
-
         if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
     }
+
+   for(var i = 1; i <= 8; i++){
+        var ustr = "item" + i;
+
+        for(var j = 0; j < ulist.length; j++){
+            if(ustr == ulist[j]){
+                break;
+            }
+            if(j == ulist.length - 1){
+                $("#"+ustr+"").remove();
+            }
+        }
+    }
+
+    for(var i = 1; i <= 9; i++){
+        var ustr;
+        if(i < 7)
+            ustr = "secsubItem" + i;
+        else
+            ustr = "tridsubItem" + i;
+
+        for(var j = 0; j < u2list.length; j++){
+            if(ustr == u2list[j]){
+                break;
+            }
+            if(j == u2list.length - 1){
+                $("#"+ustr+"").remove();
+            }
+        }
+    }
+
 </script>
 
 <!-- 切换子菜单-->
 <script type="text/javascript">
-    $("#item1").show();
+    $("#item1").hide();
     $("#item2").hide();
     $("#item3").hide();
     $("#item4").hide();
@@ -1420,8 +1469,7 @@
 
 <!-- 账号信息 -->
 <script type="text/javascript">
-    <!--
-    查询所有账号 -->
+    //查询所有账号
     function getALLUserInfomation() {
         //var monitorpoint = 1;
         $.ajax({
@@ -1712,8 +1760,7 @@
 
 <!-- 角色管理 -->
 <script type="text/javascript">
-    <!--
-    查询所有角色 -->
+    //查询所有角色
     function getALLRolesInfomation() {
         //var monitorpoint = 1;
         $.ajax({

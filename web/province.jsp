@@ -585,9 +585,8 @@
             }
             else if(cbidstr[i].search('systemMng.jsp')){
 
-                if(isNewSystemMng){//非第一条
-                }
-                else{//第一条systemMng的
+                if(!isNewSystemMng)
+                {//第一条systemMng的
                     isNewSystemMng = true;
                     menuname = "系统管理";
                     $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");

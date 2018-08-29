@@ -336,8 +336,10 @@
 
 <!-- 动态加载菜单项 -->
 <script type="text/javascript">
-    var menulist = "<%=session.getAttribute("menulist")%>";
+    var menulist="<%=session.getAttribute("menulist")%>";
     var cbidstr = menulist.split(",");
+    var isSystemMng = false;
+    var isNewSystemMng = false;
 
     //处理第一个和最后一个
     cbidstr[0] = cbidstr[0].substring(1);
@@ -347,34 +349,49 @@
     var len = cbidstr[idx].length;
     cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
 
-    for (var i = 0; i < cbidstr.length; i++) {
+    for(var i = 0; i < cbidstr.length; i++){
 
         var menuname = "";
-        if (cbidstr[i] == ' province.jsp')
+        if(cbidstr[i] == " province.jsp"){
+            isSystemMng = false;
             menuname = "集中监控";
-
-        else if (cbidstr[i] == ' efficiencyDevice.jsp')
+        }
+        else if(cbidstr[i] == " efficiencyDevice.jsp"){
+            isSystemMng = false;
             menuname = "动力设施";
-
-        else if (cbidstr[i] == ' onlineDetect.jsp')
+        }
+        else if(cbidstr[i] == " onlineDetect.jsp"){
+            isSystemMng = false;
             menuname = "在线监测";
-
-        else if (cbidstr[i] == ' efficiencyAnalysis.jsp')
+        }
+        else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
+            isSystemMng = false;
             menuname = "动力分析";
-
-        else if (cbidstr[i] == ' efficiencyAssessment.jsp')
+        }
+        else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
+            isSystemMng = false;
             menuname = "动力评估";
-
-        else if (cbidstr[i] == ' reportChart.jsp')
+        }
+        else if(cbidstr[i] == ' reportChart.jsp'){
+            isSystemMng = false;
             menuname = "报表功能";
-
-        else if (cbidstr[i] == ' history.jsp') //userMng.jsp'
+        }
+        else if(cbidstr[i] == ' history.jsp'){
+            isSystemMng = false;
             menuname = "历史曲线";
+        }
+        else if(cbidstr[i].search('systemMng.jsp')){
 
-        else if (cbidstr[i] == ' systemMng.jsp')
-            menuname = "系统管理";
+            if(!isNewSystemMng)
+            {//第一条systemMng的
+                isNewSystemMng = true;
+                menuname = "系统管理";
+                $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+            }
+            isSystemMng = true;
+        }
 
-        $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
     }
 </script>
 
