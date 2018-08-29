@@ -1,9 +1,11 @@
 package efficiencyAnalysis.dao.impl;
 
 import Util.HBSessionDaoImpl;
-import efficiencyAnalysis.dao.PowerEventDAO;
+import efficiencyAnalysis.dao.EventDAO;
 import hibernatePOJO.Computerroom;
+import hibernatePOJO.EventDevice;
 import hibernatePOJO.EventTransient;
+import hibernatePOJO.EventtypeEnvironment;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,7 +13,7 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PowerEventDAOImpl implements PowerEventDAO {
+public class EventDAOImpl implements EventDAO {
 
     private Session session;
     private Transaction transaction;
@@ -34,7 +36,7 @@ public class PowerEventDAOImpl implements PowerEventDAO {
         for(int i = 0; i < didset.length; i++ ){
             List<EventTransient> list = hbsessionDao.search(
                     "FROM EventTransient where mpid = '" + didset[i]+ "'" + " and time > '" + starttime +
-                            "' and time < '" + endtime + "' and eventtype='2'");
+                            "' and time < '" + endtime + "'"); // and eventtype='2'");
 
             rtlist.addAll(list);
         }
@@ -46,7 +48,7 @@ public class PowerEventDAOImpl implements PowerEventDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Computerroom> didlist = new ArrayList<>();
-        List<EventTransient> rtlist = new ArrayList<>();
+        List<EventDevice> rtlist = new ArrayList<>();
 
 
         didlist = hbsessionDao.search(
@@ -57,9 +59,9 @@ public class PowerEventDAOImpl implements PowerEventDAO {
         String didset[] = didstr.split(",");
 
         for(int i = 0; i < didset.length; i++ ){
-            List<EventTransient> list = hbsessionDao.search(
-                    "FROM EventTransient where mpid = '" + didset[i]+ "'" + " and time > '" + starttime +
-                            "' and time < '" + endtime + "' and eventtype='1'");
+            List<EventDevice> list = hbsessionDao.search(
+                    "FROM EventDevice where mpid = '" + didset[i]+ "'" + " and time > '" + starttime +
+                            "' and time < '" + endtime + "'"); // and eventtype='1'");
 
             rtlist.addAll(list);
         }
@@ -71,7 +73,7 @@ public class PowerEventDAOImpl implements PowerEventDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Computerroom> didlist = new ArrayList<>();
-        List<EventTransient> rtlist = new ArrayList<>();
+        List<EventtypeEnvironment> rtlist = new ArrayList<>();
 
 
         didlist = hbsessionDao.search(
@@ -82,9 +84,9 @@ public class PowerEventDAOImpl implements PowerEventDAO {
         String didset[] = didstr.split(",");
 
         for(int i = 0; i < didset.length; i++ ){
-            List<EventTransient> list = hbsessionDao.search(
-                    "FROM EventTransient where mpid = '" + didset[i]+ "'" + " and time > '" + starttime +
-                            "' and time < '" + endtime + "' and eventtype='3'");
+            List<EventtypeEnvironment> list = hbsessionDao.search(
+                    "FROM EventtypeEnvironment where mpid = '" + didset[i]+ "'" + " and time > '" + starttime +
+                            "' and time < '" + endtime + "'"); //and eventtype='3'");
 
             rtlist.addAll(list);
         }

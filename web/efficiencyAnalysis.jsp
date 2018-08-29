@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" href="css/bootstrap-3.3.4.css" type="text/css" media="screen">
     <link href="css/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.4.6.0.css">
     <link href="css/form.css" rel="stylesheet">
@@ -32,6 +32,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/menu.css" rel="stylesheet">
     <link href="css/mycss.css" rel="stylesheet">
     <link href="css/jstree-default/style.css" rel="stylesheet"/>
+
+    <!-- bootstrap datepicker时间选择控件 -->
+    <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+    <!-- jquery -->
+    <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+
 
 </head>
 <style type="text/css">
@@ -206,8 +213,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <table id="event-table-head1">
                                         <thead>
                                         <tr>
-                                            <th><img src="/img/setting.jpg" alt="" onClick="settingIcon()" ></th>
-                                            <th><img src="/img/refresh.jpg" alt="" onClick="refreshIcon()" ></th>
+                                            <th><img src="/img/setting.png" alt="" onClick="settingIcon()" ></th>
+                                            <th><img src="/img/refresh.png" alt="" onClick="refreshIcon()" ></th>
                                             <th><button type="button" class="btn btn-sm btn-alt" onClick="exportTable()" >导出</button></th>
                                             <th><button type="button" class="btn btn-sm btn-alt" onClick="printTable()" >打印</button></th>
                                         </tr>
@@ -252,8 +259,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <table>
                                                 <tr><td>日期时间</td></tr>
                                                 <tr><td><input id="radio-last-7day-event" type="radio">观看最后的事件</td></tr>
-                                                <tr><td><input id="radio-from-to-event" type="radio">从</td></tr>
-                                                <tr><td>到</td></tr>
+                                                <tr><td><input id="radio-from-to-event" type="radio">从
+                                                    <div class="form-group">
+                                                        <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                            <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                                                    </div>
+                                                </td></tr>
+                                                <tr><td>到
+                                                    <div class="form-group">
+                                                        <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                            <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                        <input type="hidden" id="dtp_input2" value="" /><br/>
+                                                    </div>
+                                                </td></tr>
+
+
+
+
+
+
                                                 <tr><td>时间段控制</td></tr>
                                                 <tr><td><input id="radio-diy-event" type="radio">定制</td></tr>
                                                 <tr><td><input id="radio-day-event" type="radio">天</td></tr>
@@ -296,9 +325,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     </table>
                                                 </tr>
                                                 <tr>
-                                                    <img src="/img/uparray.jpg" alt="" onClick="upcol()" >
-                                                    <img src="/img/deletearray.jpg" alt="" onClick="deletecol()" >
-                                                    <img src="/img/downarray.jpg" alt="" onClick="downcol()" >
+                                                    <img src="/img/uparray.png" alt="" onClick="upcol()" >
+                                                    <img src="/img/deletearray.png" alt="" onClick="deletecol()" >
+                                                    <img src="/img/downarray.png" alt="" onClick="downcol()" >
                                                 </tr>
 
                                                 <tr>
@@ -420,6 +449,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/echarts.js"></script>
 
     <script src="js/jstree.js"></script>
+
+    <!-- 时间选择器-->
+
+    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
+
+        $("#firstDate").change(function() {
+            $('.firstDate').datetimepicker('setStartDate', $(this).val());
+        });
+        $("#lastDate").change(function() {
+            $('.lastDate').datetimepicker('setEndDate', $(this).val());
+        });
+    </script>
 
     <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
@@ -594,8 +648,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         function getDeviceEvent(){
 
-            var stime = "2018-08-22 08:00:00";
-            var etime = "2018-08-29 08:00:00";
+            var stime = $("#firstDate").val();//"2018-08-22 08:00:00";
+            var etime = $("#lastDate").val();//"2018-08-29 08:00:00";
             var rid = "1";
 
             $.ajax({
@@ -635,8 +689,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         function getPowerEvent(){
 
-            var stime = "2018-08-22 08:00:00";
-            var etime = "2018-08-29 08:00:00";
+            var stime = $("#firstDate").val();//"2018-08-22 08:00:00";
+            var etime = $("#lastDate").val();//"2018-08-29 08:00:00";
             var rid = "1";
 
             $.ajax({
@@ -675,8 +729,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 环境事件-->
     <script type="text/javascript">
         function getEvironmentEvent(){
-            var stime = "2018-08-22 08:00:00";
-            var etime = "2018-08-29 08:00:00";
+            var stime = $("#firstDate").val();//"2018-08-22 08:00:00";
+            var etime = $("#lastDate").val();//"2018-08-29 08:00:00";
             var rid = "1";
 
             $.ajax({
@@ -803,15 +857,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 },
                 "plugins": ["checkbox"]
             })
-
         }
 
         function AllSelected() {
-
+            $('#jstree').jstree('select_all');
         }
 
         function AllDisSelected() {
-
+            $('#jstree').jstree('deselect_all');
         }
 
         function HideDisSelected() {
@@ -843,7 +896,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 导出-->
     <script type="text/javascript">
         function exportTable(){
-            alert("导出");
             var tableid = "event-table-body";
             exportToExcel(tableid);
         }

@@ -3,8 +3,8 @@ package efficiencyAnalysis.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import efficiencyAnalysis.dao.PowerEventDAO;
-import efficiencyAnalysis.dao.impl.PowerEventDAOImpl;
+import efficiencyAnalysis.dao.EventDAO;
+import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import hibernatePOJO.EventTransient;
 import org.apache.struts2.ServletActionContext;
 
@@ -39,7 +39,7 @@ public class getPowerEventAction extends ActionSupport {
             String starttime = request.getParameter("stime");
             String endtime = request.getParameter("etime");
 
-            PowerEventDAO dao = new PowerEventDAOImpl();
+            EventDAO dao = new EventDAOImpl();
 
             List<EventTransient> pedata = new ArrayList();
 

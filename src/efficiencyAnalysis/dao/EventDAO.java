@@ -3,7 +3,7 @@ package efficiencyAnalysis.dao;
 
 import java.util.List;
 
-public interface PowerEventDAO {
+public interface EventDAO {
 
     /*
     获取本地机房中所有的检测点
