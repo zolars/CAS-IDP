@@ -31,6 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="css/jquery.hotspot.css">
     <link href="css/menu.css" rel="stylesheet">
     <link href="css/mycss.css" rel="stylesheet">
+    <link href="css/jstree-default/style.css" rel="stylesheet"/>
 
 </head>
 <style type="text/css">
@@ -347,6 +348,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         能效分析
                     </div>
 
+                    <!-- settingmodel DIV-->
+                    <div class="setting-class" id="setting-modal">
+                        <div id="jstree"></div>
+                        <button onclick="AllSelected()" type="button" class="btn btn-sm btn-alt">全选</button>
+                        <button onclick="AllDisSelected()" type="button" class="btn btn-sm btn-alt">全不选</button>
+                        <button onclick="HideDisSelected()" type="button" class="btn btn-sm btn-alt">隐藏未选中</button>
+                        <button onclick="AllShow()" type="button" class="btn btn-sm btn-alt">全部显示</button>
+                        <button onclick="OK()" type="button" class="btn btn-sm btn-alt">确定</button>
+                        <button onclick="cancle()" type="button" class="btn btn-sm btn-alt">取消</button>
+                    </div>
+                    <!-- settingmodel DIV END-->
 
                 </div>
             </div>
@@ -404,7 +416,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--  		 <script src="js/feeds.min.js"></script> News Feeds -->
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
+
     <script src="js/echarts.js"></script>
+
+    <script src="js/jstree.js"></script>
 
     <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
@@ -752,8 +767,69 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 设置icon-->
     <script type="text/javascript">
         function settingIcon(){
-            alert("设置icon");
+
+            $('#setting-modal').css('display', 'block');
+
+            $('#jstree').jstree({
+                "core": {
+                    "themes": {
+                        "responsive": false
+                    },
+                    "check_callback": true,
+                    'data': function (obj, callback) {
+                        var jsonstr = "[]";
+                        var jsonarray = eval('(' + jsonstr + ')');
+                        $.ajax({
+                            url: "getPermissionTree",
+                            dataType: "json",
+                            async: false,
+                            success: function (result) {
+                                var arrays = result.allptree;
+                                for (var i = 0; i < arrays.length; i++) {
+                                    var arr = {
+                                        "id": arrays[i].pid,
+                                        "parent": arrays[i].parentpid == "0" ? "#" : arrays[i].parentpid,
+                                        "text": arrays[i].permissionname
+                                    }
+                                    jsonarray.push(arr);
+                                }
+                            },
+                            error: function (result) {
+                                alert("error" + result);
+                            }
+                        });
+                        callback.call(this, jsonarray);
+                    },
+                },
+                "plugins": ["checkbox"]
+            })
+
         }
+
+        function AllSelected() {
+
+        }
+
+        function AllDisSelected() {
+
+        }
+
+        function HideDisSelected() {
+
+        }
+
+        function AllShow() {
+
+        }
+
+        function OK() {
+            $('#setting-modal').css('display', 'none');
+        }
+
+        function cancle() {
+            $('#setting-modal').css('display', 'none');
+        }
+
     </script>
 
     <!-- 刷新icon-->

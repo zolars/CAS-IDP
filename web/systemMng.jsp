@@ -1038,7 +1038,6 @@
     var isNewSystemMng = false;
     var ulist = new Array();
     var u2list = new Array();
-  //  var utridlist = new Array();
 
     //处理第一个和最后一个
     cbidstr[0] = cbidstr[0].substring(1);
@@ -1090,13 +1089,9 @@
 
             else
             {
-                console.log("3"+ substr[1] + substr[2]);
-
                 ulist.push(substr[1]);
                 u2list.push(substr[2]);
-
             }
-
 
             if(!isNewSystemMng)
             {//第一条systemMng的
