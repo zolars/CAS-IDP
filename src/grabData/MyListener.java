@@ -52,6 +52,7 @@ public class MyListener implements ServletContextListener {
                     try{
                         Scheduler scheduler=StdSchedulerFactory.getDefaultScheduler();
                         //设置任务，每5s存一次实时数据
+                        //设置任务，检测告警（越线）事件
                         Trigger trigger1=newTrigger()
                                 .withIdentity("DataOnlineSaveTrigger","DataOnlineSaveTriggerGroup")
                                 .startNow()

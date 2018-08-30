@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user_permission", schema = "Test", catalog = "")
+@Table(name = "user_permission", schema = "test", catalog = "")
 public class UserPermission {
     private String uid;
     private String pidset;

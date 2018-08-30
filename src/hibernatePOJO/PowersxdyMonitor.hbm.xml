@@ -7,7 +7,6 @@
     <class name="hibernatePOJO.PowersxdyMonitor" table="powersxdy_monitor" schema="test">
         <id name="sxid">
             <column name="sxid" sql-type="int(11)"/>
-            <generator class="increment"></generator>
         </id>
         <property name="mpid">
             <column name="mpid" sql-type="int(11)"/>

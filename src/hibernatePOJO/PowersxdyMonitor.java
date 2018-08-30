@@ -1,8 +1,11 @@
 package hibernatePOJO;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+@Entity
+@Table(name = "powersxdy_monitor", schema = "test", catalog = "")
 public class PowersxdyMonitor {
     private int sxid;
     private int mpid;
@@ -29,6 +32,8 @@ public class PowersxdyMonitor {
     private Float uunb;
     private Float vunb;
 
+    @Id
+    @Column(name = "sxid", nullable = false)
     public int getSxid() {
         return sxid;
     }
@@ -37,6 +42,8 @@ public class PowersxdyMonitor {
         this.sxid = sxid;
     }
 
+    @Basic
+    @Column(name = "mpid", nullable = false)
     public int getMpid() {
         return mpid;
     }
@@ -45,6 +52,8 @@ public class PowersxdyMonitor {
         this.mpid = mpid;
     }
 
+    @Basic
+    @Column(name = "time", nullable = true)
     public Timestamp getTime() {
         return time;
     }
@@ -53,6 +62,8 @@ public class PowersxdyMonitor {
         this.time = time;
     }
 
+    @Basic
+    @Column(name = "U1", nullable = true, precision = 2)
     public Float getU1() {
         return u1;
     }
@@ -61,6 +72,8 @@ public class PowersxdyMonitor {
         this.u1 = u1;
     }
 
+    @Basic
+    @Column(name = "U2", nullable = true, precision = 2)
     public Float getU2() {
         return u2;
     }
@@ -69,6 +82,8 @@ public class PowersxdyMonitor {
         this.u2 = u2;
     }
 
+    @Basic
+    @Column(name = "U3", nullable = true, precision = 2)
     public Float getU3() {
         return u3;
     }
@@ -77,6 +92,8 @@ public class PowersxdyMonitor {
         this.u3 = u3;
     }
 
+    @Basic
+    @Column(name = "V1", nullable = true, precision = 2)
     public Float getV1() {
         return v1;
     }
@@ -85,6 +102,8 @@ public class PowersxdyMonitor {
         this.v1 = v1;
     }
 
+    @Basic
+    @Column(name = "V2", nullable = true, precision = 2)
     public Float getV2() {
         return v2;
     }
@@ -93,6 +112,8 @@ public class PowersxdyMonitor {
         this.v2 = v2;
     }
 
+    @Basic
+    @Column(name = "V3", nullable = true, precision = 2)
     public Float getV3() {
         return v3;
     }
@@ -101,6 +122,8 @@ public class PowersxdyMonitor {
         this.v3 = v3;
     }
 
+    @Basic
+    @Column(name = "I1", nullable = true, precision = 2)
     public Float getI1() {
         return i1;
     }
@@ -109,6 +132,8 @@ public class PowersxdyMonitor {
         this.i1 = i1;
     }
 
+    @Basic
+    @Column(name = "I2", nullable = true, precision = 2)
     public Float getI2() {
         return i2;
     }
@@ -117,6 +142,8 @@ public class PowersxdyMonitor {
         this.i2 = i2;
     }
 
+    @Basic
+    @Column(name = "I3", nullable = true, precision = 2)
     public Float getI3() {
         return i3;
     }
@@ -125,6 +152,8 @@ public class PowersxdyMonitor {
         this.i3 = i3;
     }
 
+    @Basic
+    @Column(name = "angleU1", nullable = true, precision = 2)
     public Float getAngleU1() {
         return angleU1;
     }
@@ -133,6 +162,8 @@ public class PowersxdyMonitor {
         this.angleU1 = angleU1;
     }
 
+    @Basic
+    @Column(name = "angleU2", nullable = true, precision = 2)
     public Float getAngleU2() {
         return angleU2;
     }
@@ -141,6 +172,8 @@ public class PowersxdyMonitor {
         this.angleU2 = angleU2;
     }
 
+    @Basic
+    @Column(name = "angleU3", nullable = true, precision = 2)
     public Float getAngleU3() {
         return angleU3;
     }
@@ -149,6 +182,8 @@ public class PowersxdyMonitor {
         this.angleU3 = angleU3;
     }
 
+    @Basic
+    @Column(name = "angleV1", nullable = true, precision = 2)
     public Float getAngleV1() {
         return angleV1;
     }
@@ -157,6 +192,8 @@ public class PowersxdyMonitor {
         this.angleV1 = angleV1;
     }
 
+    @Basic
+    @Column(name = "angleV2", nullable = true, precision = 2)
     public Float getAngleV2() {
         return angleV2;
     }
@@ -165,6 +202,8 @@ public class PowersxdyMonitor {
         this.angleV2 = angleV2;
     }
 
+    @Basic
+    @Column(name = "angleV3", nullable = true, precision = 2)
     public Float getAngleV3() {
         return angleV3;
     }
@@ -173,6 +212,8 @@ public class PowersxdyMonitor {
         this.angleV3 = angleV3;
     }
 
+    @Basic
+    @Column(name = "angleI1", nullable = true, precision = 2)
     public Float getAngleI1() {
         return angleI1;
     }
@@ -181,6 +222,8 @@ public class PowersxdyMonitor {
         this.angleI1 = angleI1;
     }
 
+    @Basic
+    @Column(name = "angleI2", nullable = true, precision = 2)
     public Float getAngleI2() {
         return angleI2;
     }
@@ -189,6 +232,8 @@ public class PowersxdyMonitor {
         this.angleI2 = angleI2;
     }
 
+    @Basic
+    @Column(name = "angleI3", nullable = true, precision = 2)
     public Float getAngleI3() {
         return angleI3;
     }
@@ -197,6 +242,8 @@ public class PowersxdyMonitor {
         this.angleI3 = angleI3;
     }
 
+    @Basic
+    @Column(name = "Aunb", nullable = true, precision = 2)
     public Float getAunb() {
         return aunb;
     }
@@ -205,6 +252,8 @@ public class PowersxdyMonitor {
         this.aunb = aunb;
     }
 
+    @Basic
+    @Column(name = "Uunb", nullable = true, precision = 2)
     public Float getUunb() {
         return uunb;
     }
@@ -213,6 +262,8 @@ public class PowersxdyMonitor {
         this.uunb = uunb;
     }
 
+    @Basic
+    @Column(name = "Vunb", nullable = true, precision = 2)
     public Float getVunb() {
         return vunb;
     }

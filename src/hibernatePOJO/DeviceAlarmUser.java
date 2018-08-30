@@ -1,15 +1,16 @@
 package hibernatePOJO;
 
+import javax.persistence.Entity;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+@Entity
+@javax.persistence.Table(name = "device_alarm_user", schema = "test", catalog = "")
 public class DeviceAlarmUser {
     private String id;
-    private String did;
-    private String uid;
-    private Timestamp stime;
-    private Timestamp etime;
 
+    @javax.persistence.Id
+    @javax.persistence.Column(name = "id", nullable = false, length = 255)
     public String getId() {
         return id;
     }
@@ -18,6 +19,10 @@ public class DeviceAlarmUser {
         this.id = id;
     }
 
+    private String did;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "did", nullable = true, length = 255)
     public String getDid() {
         return did;
     }
@@ -26,6 +31,10 @@ public class DeviceAlarmUser {
         this.did = did;
     }
 
+    private String uid;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "uid", nullable = true, length = 255)
     public String getUid() {
         return uid;
     }
@@ -34,6 +43,10 @@ public class DeviceAlarmUser {
         this.uid = uid;
     }
 
+    private Timestamp stime;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "stime", nullable = true)
     public Timestamp getStime() {
         return stime;
     }
@@ -42,6 +55,10 @@ public class DeviceAlarmUser {
         this.stime = stime;
     }
 
+    private Timestamp etime;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "etime", nullable = true)
     public Timestamp getEtime() {
         return etime;
     }

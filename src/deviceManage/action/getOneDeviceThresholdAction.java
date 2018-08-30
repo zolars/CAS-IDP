@@ -27,25 +27,26 @@ public class getOneDeviceThresholdAction extends ActionSupport {
         this.result = result;
     }
 
-    /*根据设备的名称找到设备id
+    /*根据电能质量设备的名称找到设备id
     再根据设备id找到该设备下所有的设备阈值信息
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try {
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
-
-            //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
+            //获取数据
             String dname = request.getParameter("dname");
 
             DeviceDAO dao = new DeviceDAOImpl();
             DeviceThresholdDAO dtdao = new DeviceThresholdDAOImpl();
 
             List<Devices> device = dao.getDeviceDataByName(dname);
+            String did;
 
-            String did = device.get(0).getDid();
+            if(device.size() == 0)
+                return "error";
+            else did = device.get(0).getDid();
 
             List<DevicesThreshold> dt = dtdao.getOneDeviceThreshold(did);
 

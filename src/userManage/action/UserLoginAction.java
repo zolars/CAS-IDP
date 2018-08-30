@@ -1,5 +1,6 @@
 package userManage.action;
 
+import Util.ToHex;
 import com.opensymphony.xwork2.ActionSupport;
 import hibernatePOJO.User;
 import org.apache.struts2.ServletActionContext;
@@ -8,6 +9,7 @@ import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,14 @@ public class UserLoginAction extends ActionSupport{
 
 
     public void setPassword(String password) {
-        this.password = password;
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] bytes = md.digest(password.getBytes("utf-8"));
+            String passwd = ToHex.toHex(bytes);
+            this.password = passwd;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /*
@@ -54,7 +63,7 @@ public class UserLoginAction extends ActionSupport{
 
         if(dao.login(user)){
             String userid = dao.getUserId(user);
-            //int userid = integer.intValue();
+
             if(userid != "") {
                 session.setAttribute("userid", userid);
                 session.setAttribute("username", username);
@@ -64,29 +73,9 @@ public class UserLoginAction extends ActionSupport{
                 List menulist = new ArrayList();
                 List mlist = new ArrayList();
                 mlist = dao.getUserDynamicMenu(user);
-/*
-                for(int i = 0; i < mlist.size(); i++){
-                   // System.out.println("i："+mlist.get(i));
-                    if(mlist.get(i).equals("5")){
-                        menulist.add("province.jsp");
-                        menulist.add("efficiencyDevice.jsp");
-                        menulist.add("onlineDetect.jsp");
-                        menulist.add("efficiencyAnalysis.jsp");
-                        menulist.add("efficiencyAssessment.jsp");
-                        menulist.add("reportChart.jsp");
-                    }
-                    else if((mlist.get(i).equals("2"))||(mlist.get(i).equals("6"))||(mlist.get(i).equals("7"))||(mlist.get(i).equals("8"))){
-                        menulist.add("history.jsp");
-                    }
-                    else if((mlist.get(i).equals("3"))||(mlist.get(i).equals("4"))){
-                        menulist.add("systemMng.jsp");
-                    }
-                }*/
 
                 for(int i = 0; i < mlist.size(); i++){
-
                     String s = (String) mlist.get(i);
-
                     switch (s){
                         case "2":  menulist.add("systemMng.jsp/item1");break;
                         case "3":  menulist.add("systemMng.jsp/item6");break;
@@ -115,7 +104,6 @@ public class UserLoginAction extends ActionSupport{
                         case "18":  menulist.add("systemMng.jsp/item6/trisubItem3");break;
                         default: break;
                     }
-
                 }
 
                 //remove deplicate url
@@ -126,7 +114,6 @@ public class UserLoginAction extends ActionSupport{
                         }
                     }
                 }
-
                 session.setAttribute("menulist", menulist);
             }
             return "success";

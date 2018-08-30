@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="hibernatePOJO.Roles" table="roles" schema="Test">
+    <class name="hibernatePOJO.Roles" table="roles" schema="test">
         <id name="rid">
             <column name="rid" sql-type="varchar(255)"/>
         </id>

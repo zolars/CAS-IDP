@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="hibernatePOJO.CityBank" table="city_bank" schema="Test">
+    <class name="hibernatePOJO.CityBank" table="city_bank" schema="test">
         <id name="cbid">
             <column name="cbid" sql-type="varchar(255)"/>
         </id>

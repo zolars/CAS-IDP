@@ -1466,13 +1466,10 @@
 <script type="text/javascript">
     //查询所有账号
     function getALLUserInfomation() {
-        //var monitorpoint = 1;
+
         $.ajax({
             type: "post",
             url: "getAllUserInfo",
-            data: {
-                //   monitorpointid: monitorpoint
-            },
             dataType: "json",
             success: function (data) {
                 var obj = JSON.parse(data);
@@ -1495,11 +1492,9 @@
                             + role + '</td><td style="padding-left:20px;">' + telephone + '</td><td style="padding-left:20px;">' + govtelephone + '</td></tr>');
                     }
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
+
     }
 
     <!--显示user model -->
@@ -2579,7 +2574,6 @@
             url: "getOneDeviceThreshold",
             data: {
                 dname: dname
-                //   monitorpointid: monitorpoint
             },
             dataType: "json",
             success: function (data) {

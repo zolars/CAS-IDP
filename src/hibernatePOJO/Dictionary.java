@@ -66,6 +66,7 @@ public class Dictionary {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id, item, coefficient, description);
     }
 }

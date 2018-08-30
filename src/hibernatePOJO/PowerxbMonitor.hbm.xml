@@ -7,7 +7,6 @@
     <class name="hibernatePOJO.PowerxbMonitor" table="powerxb_monitor" schema="test">
         <id name="xbid">
             <column name="xbid" sql-type="int(11)"/>
-            <generator class="increment"></generator>
         </id>
         <property name="mpid">
             <column name="mpid" sql-type="int(11)" not-null="true"/>

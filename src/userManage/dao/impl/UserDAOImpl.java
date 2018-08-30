@@ -148,18 +148,10 @@ public class UserDAOImpl implements UserDAO {
 
     public List<List>  getAllUserInfo(){
 
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-        /*crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tc.rolesname as nrolename,ta.pbid as pbid,ta.cbid as cbid," +
-                " ta.telephone as telephone, ta.govtelephone as govtelephone from User ta, UserRoles tb, Roles tc where ta.uid = tb.uid and tb.rid = tc.rid");
-       */
-       /* crlist = hbsessionDao.search( "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,tb.rid as nrolename,ta.pbid as pbid, " +
-                " ta.cbid as cbid,ta.telephone as telephone, ta.govtelephone as govtelephone from User ta left outer join UserRoles tb with ta.uid = tb.uid");*/
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
         boolean result = false;
-
 
         db = new DBConnect();
         String sql = "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,ta.password as npassword,ta.pbid as pbid, ta.cbid as cbid,ta.rid as comprid,tb.rid as nrolename,ta.telephone as telephone, ta.govtelephone as govtelephone from user ta left outer join user_roles tb on ta.uid = tb.uid";
@@ -298,8 +290,6 @@ public class UserDAOImpl implements UserDAO {
         return rt;
     }
 
-
-
     public List<Object> getUserDynamicMenu(User user){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
@@ -308,13 +298,16 @@ public class UserDAOImpl implements UserDAO {
         crlist = hbsessionDao.search(
                 "select tc.pid from User as ta, UserRoles as tb, RolesPermission as tc where ta.uid = tb.uid and tb.rid = tc.rid and ta.uid = "+ user.getUid());
 
-        String pidset = crlist.get(0).toString();
-        String[] pidstr= pidset.split(",");
-        crlist.clear();
+        if(crlist.size() > 0){
+            String pidset = crlist.get(0).toString();
+            String[] pidstr= pidset.split(",");
+            crlist.clear();
 
-        for(int i = 0; i < pidstr.length; i++) {
-            crlist.add(pidstr[i]);
+            for(int i = 0; i < pidstr.length; i++) {
+                crlist.add(pidstr[i]);
+            }
         }
+
         return crlist;
     }
 
@@ -325,6 +318,5 @@ public class UserDAOImpl implements UserDAO {
                 "FROM User order by uid desc");
 
         return ur.getUid();
-
     }
 }

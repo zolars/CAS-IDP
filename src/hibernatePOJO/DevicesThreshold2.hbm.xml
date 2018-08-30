@@ -1,0 +1,480 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernatePOJO.DevicesThreshold2" table="devices_threshold2" schema="test">
+        <id name="dtid">
+            <column name="dtid" sql-type="int(11)"/>
+        </id>
+        <property name="did">
+            <column name="did" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="type">
+            <column name="type" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameFU1">
+            <column name="name_|f|U1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitFU1">
+            <column name="unit_|f|U1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalFU1">
+            <column name="standardval_|f|U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalFU1">
+            <column name="cellval_|f|U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalFU1">
+            <column name="floorval_|f|U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkFU1">
+            <column name="isMark_|f|U1" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentFU1">
+            <column name="alarmcontent_|f|U1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameFU2">
+            <column name="name_|f|U2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitFU2">
+            <column name="unit_|f|U2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalFU2">
+            <column name="standardval_|f|U2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalFU2">
+            <column name="cellval_|f|U2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalFU2">
+            <column name="floorval_|f|U2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkFU2">
+            <column name="isMark_|f|U2" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentFU2">
+            <column name="alarmcontent_|f|U2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameFU3">
+            <column name="name_|f|U3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitFU3">
+            <column name="unit_|f|U3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalFU3">
+            <column name="standardval_|f|U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalFU3">
+            <column name="cellval_|f|U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalFU3">
+            <column name="floorval_|f|U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkFU3">
+            <column name="isMark_|f|U3" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentFU3">
+            <column name="alarmcontent_|f|U3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="namePstU1">
+            <column name="name_Pst_U1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitPstU1">
+            <column name="unit_Pst_U1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalPstU1">
+            <column name="standardval_Pst_U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalPstU1">
+            <column name="cellval_Pst_U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalPstU1">
+            <column name="floorval_Pst_U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkPstU1">
+            <column name="isMark_Pst_U1" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentPstU1">
+            <column name="alarmcontent_Pst_U1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="namePstU2">
+            <column name="name_Pst_U2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitPstU2">
+            <column name="unit_Pst_U2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalPstU2">
+            <column name="standardval_Pst_U2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalPstU2">
+            <column name="cellval_Pst_U2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalPstU2">
+            <column name="floorval_Pst_U2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkPstU2">
+            <column name="isMark_Pst_U2" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentPstU2">
+            <column name="alarmcontent_Pst_U2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="namePstU3">
+            <column name="name_Pst_U3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitPstU3">
+            <column name="unit_Pst_U3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalPstU3">
+            <column name="standardval_Pst_U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalPstU3">
+            <column name="cellval_Pst_U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalPstU3">
+            <column name="floorval_Pst_U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkPstU3">
+            <column name="isMark_Pst_U3" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentPstU3">
+            <column name="alarmcontent_Pst_U3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="namePltU1">
+            <column name="name_Plt_U1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitPltU1">
+            <column name="unit_Plt_U1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalPltU1">
+            <column name="standardval_Plt_U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalPltU1">
+            <column name="cellval_Plt_U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalPltU1">
+            <column name="floorval_Plt_U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkPltU1">
+            <column name="isMark_Plt_U1" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentPltU1">
+            <column name="alarmcontent_Plt_U1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="namePltU2">
+            <column name="name_Plt_U2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitPltU2">
+            <column name="unit_Plt_U2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalPltU2">
+            <column name="standardval_Plt_U2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalPltU2">
+            <column name="cellval_Plt_U2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalPltU2">
+            <column name="floorval_Plt_U2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkPltU2">
+            <column name="isMark_Plt_U2" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentPltU2">
+            <column name="alarmcontent_Plt_U2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="namePltU3">
+            <column name="name_Plt_U3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitPltU3">
+            <column name="unit_Plt_U3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalPltU3">
+            <column name="standardval_Plt_U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalPltU3">
+            <column name="cellval_Plt_U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalPltU3">
+            <column name="floorval_Plt_U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkPltU3">
+            <column name="isMark_Plt_U3" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentPltU3">
+            <column name="alarmcontent_Plt_U3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameHz">
+            <column name="name_Hz" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitHz">
+            <column name="unit_Hz" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalHz">
+            <column name="standardval_Hz" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalHz">
+            <column name="cellval_Hz" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalHz">
+            <column name="floorval_Hz" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkHz">
+            <column name="isMark_Hz" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentHz">
+            <column name="alarmcontent_Hz" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameAngleU1">
+            <column name="name_angleU1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitAngleU1">
+            <column name="unit_angleU1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalAngleU1">
+            <column name="standardval_angleU1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalAngleU1">
+            <column name="cellval_angleU1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalAngleU1">
+            <column name="floorval_angleU1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkAngleU1">
+            <column name="isMark_angleU1" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentAngleU1">
+            <column name="alarmcontent_angleU1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameAngleU2">
+            <column name="name_angleU2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitAngleU2">
+            <column name="unit_angleU2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalAngleU2">
+            <column name="standardval_angleU2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalAngleU2">
+            <column name="cellval_angleU2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalAngleU2">
+            <column name="floorval_angleU2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkAngleU2">
+            <column name="isMark_angleU2" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentAngleU2">
+            <column name="alarmcontent_angleU2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameAngleU3">
+            <column name="name_angleU3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitAngleU3">
+            <column name="unit_angleU3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalAngleU3">
+            <column name="standardval_angleU3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalAngleU3">
+            <column name="cellval_angleU3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalAngleU3">
+            <column name="floorval_angleU3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkAngleU3">
+            <column name="isMark_angleU3" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentAngleU3">
+            <column name="alarmcontent_angleU3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameAngleV1">
+            <column name="name_angleV1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitAngleV1">
+            <column name="unit_angleV1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalAngleV1">
+            <column name="standardval_angleV1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalAngleV1">
+            <column name="cellval_angleV1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalAngleV1">
+            <column name="floorval_angleV1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkAngleV1">
+            <column name="isMark_angleV1" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentAngleV1">
+            <column name="alarmcontent_angleV1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameAngleV2">
+            <column name="name_angleV2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitAngleV2">
+            <column name="unit_angleV2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalAngleV2">
+            <column name="standardval_angleV2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalAngleV2">
+            <column name="cellval_angleV2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalAngleV2">
+            <column name="floorval_angleV2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkAngleV2">
+            <column name="isMark_angleV2" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentAngleV2">
+            <column name="alarmcontent_angleV2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameAngleV3">
+            <column name="name_angleV3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitAngleV3">
+            <column name="unit_angleV3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalAngleV3">
+            <column name="standardval_angleV3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalAngleV3">
+            <column name="cellval_angleV3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalAngleV3">
+            <column name="floorval_angleV3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkAngleV3">
+            <column name="isMark_angleV3" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentAngleV3">
+            <column name="alarmcontent_angleV3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameAngleI1">
+            <column name="name_angleI1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitAngleI1">
+            <column name="unit_angleI1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalAngleI1">
+            <column name="standardval_angleI1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalAngleI1">
+            <column name="cellval_angleI1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalAngleI1">
+            <column name="floorval_angleI1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkAngleI1">
+            <column name="isMark_angleI1" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentAngleI1">
+            <column name="alarmcontent_angleI1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameAngleI2">
+            <column name="name_angleI2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitAngleI2">
+            <column name="unit_angleI2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalAngleI2">
+            <column name="standardval_angleI2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalAngleI2">
+            <column name="cellval_angleI2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalAngleI2">
+            <column name="floorval_angleI2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkAngleI2">
+            <column name="isMark_angleI2" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentAngleI2">
+            <column name="alarmcontent_angleI2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameAngleI3">
+            <column name="name_angleI3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitAngleI3">
+            <column name="unit_angleI3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalAngleI3">
+            <column name="standardval_angleI3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalAngleI3">
+            <column name="cellval_angleI3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalAngleI3">
+            <column name="floorval_angleI3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkAngleI3">
+            <column name="isMark_angleI3" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentAngleI3">
+            <column name="alarmcontent_angleI3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameAunb">
+            <column name="name_Aunb" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitAunb">
+            <column name="unit_Aunb" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalAunb">
+            <column name="standardval_Aunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalAunb">
+            <column name="cellval_Aunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalAunb">
+            <column name="floorval_Aunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkAunb">
+            <column name="isMark_Aunb" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentAunb">
+            <column name="alarmcontent_Aunb" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameUunb">
+            <column name="name_Uunb" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitUunb">
+            <column name="unit_Uunb" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalUunb">
+            <column name="standardval_Uunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalUunb">
+            <column name="cellval_Uunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalUunb">
+            <column name="floorval_Uunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkUunb">
+            <column name="isMark_Uunb" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentUunb">
+            <column name="alarmcontent_Uunb" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="nameVunb">
+            <column name="name_Vunb" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="unitVunb">
+            <column name="unit_Vunb" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="standardvalVunb">
+            <column name="standardval_Vunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="cellvalVunb">
+            <column name="cellval_Vunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="floorvalVunb">
+            <column name="floorval_Vunb" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
+        <property name="isMarkVunb">
+            <column name="isMark_Vunb" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="alarmcontentVunb">
+            <column name="alarmcontent_Vunb" sql-type="varchar(255)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

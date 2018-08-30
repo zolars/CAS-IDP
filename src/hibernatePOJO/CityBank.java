@@ -1,17 +1,15 @@
 package hibernatePOJO;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.Objects;
 
 @Entity
-@Table(name = "city_bank", schema = "Test", catalog = "")
+@javax.persistence.Table(name = "city_bank", schema = "test", catalog = "")
 public class CityBank {
     private String cbid;
-    private String cbname;
-    private String compRoom;
 
-    @Id
-    @Column(name = "cbid", nullable = false, length = 255)
+    @javax.persistence.Id
+    @javax.persistence.Column(name = "cbid", nullable = false, length = 255)
     public String getCbid() {
         return cbid;
     }
@@ -20,8 +18,10 @@ public class CityBank {
         this.cbid = cbid;
     }
 
-    @Basic
-    @Column(name = "cbname", nullable = true, length = 255)
+    private String cbname;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "cbname", nullable = true, length = 255)
     public String getCbname() {
         return cbname;
     }
@@ -30,8 +30,10 @@ public class CityBank {
         this.cbname = cbname;
     }
 
-    @Basic
-    @Column(name = "compRoom", nullable = true, length = 255)
+    private String compRoom;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "compRoom", nullable = true, length = 255)
     public String getCompRoom() {
         return compRoom;
     }

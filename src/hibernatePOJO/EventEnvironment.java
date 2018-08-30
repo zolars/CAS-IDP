@@ -5,42 +5,40 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "event_power", schema = "test", catalog = "")
-public class EventPower {
-    private int epid;
-    private Integer mpid;
+@Table(name = "event_environment", schema = "test", catalog = "")
+public class EventEnvironment {
+    private int eeid;
+    private Timestamp time;
     private String name;
     private String location;
-    private String etype;
+    private String type;
     private String content;
     private Timestamp occurtime;
-    private int ppid;
     private String signature;
     private String annotation;
-    private Integer type;
 
     @Id
-    @Column(name = "epid", nullable = false)
-    public int getEpid() {
-        return epid;
+    @Column(name = "eeid", nullable = false)
+    public int getEeid() {
+        return eeid;
     }
 
-    public void setEpid(int epid) {
-        this.epid = epid;
-    }
-
-    @Basic
-    @Column(name = "mpid", nullable = true)
-    public Integer getMpid() {
-        return mpid;
-    }
-
-    public void setMpid(Integer mpid) {
-        this.mpid = mpid;
+    public void setEeid(int eeid) {
+        this.eeid = eeid;
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 255)
+    @Column(name = "time", nullable = true)
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
+    @Basic
+    @Column(name = "name", nullable = true, length = 255)
     public String getName() {
         return name;
     }
@@ -60,13 +58,13 @@ public class EventPower {
     }
 
     @Basic
-    @Column(name = "etype", nullable = false, length = 255)
-    public String getEtype() {
-        return etype;
+    @Column(name = "type", nullable = true, length = 255)
+    public String getType() {
+        return type;
     }
 
-    public void setEtype(String etype) {
-        this.etype = etype;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Basic
@@ -90,16 +88,6 @@ public class EventPower {
     }
 
     @Basic
-    @Column(name = "ppid", nullable = false)
-    public int getPpid() {
-        return ppid;
-    }
-
-    public void setPpid(int ppid) {
-        this.ppid = ppid;
-    }
-
-    @Basic
     @Column(name = "signature", nullable = true, length = 255)
     public String getSignature() {
         return signature;
@@ -119,37 +107,25 @@ public class EventPower {
         this.annotation = annotation;
     }
 
-    @Basic
-    @Column(name = "type", nullable = true)
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EventPower that = (EventPower) o;
-        return epid == that.epid &&
-                ppid == that.ppid &&
-                Objects.equals(mpid, that.mpid) &&
+        EventEnvironment that = (EventEnvironment) o;
+        return eeid == that.eeid &&
+                Objects.equals(time, that.time) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(location, that.location) &&
-                Objects.equals(etype, that.etype) &&
+                Objects.equals(type, that.type) &&
                 Objects.equals(content, that.content) &&
                 Objects.equals(occurtime, that.occurtime) &&
                 Objects.equals(signature, that.signature) &&
-                Objects.equals(annotation, that.annotation) &&
-                Objects.equals(type, that.type);
+                Objects.equals(annotation, that.annotation);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(epid, mpid, name, location, etype, content, occurtime, ppid, signature, annotation, type);
+        return Objects.hash(eeid, time, name, location, type, content, occurtime, signature, annotation);
     }
 }

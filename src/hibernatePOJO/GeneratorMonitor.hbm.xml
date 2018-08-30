@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernatePOJO.GeneratorMonitor" table="generator_monitor" schema="test">
+        <id name="generatorid">
+            <column name="generatorid" sql-type="int(11)"/>
+        </id>
+        <property name="did">
+            <column name="did" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="time">
+            <column name="time" sql-type="datetime" not-null="true"/>
+        </property>
+        <property name="apower">
+            <column name="Apower" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="bpower">
+            <column name="Bpower" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="ccpower">
+            <column name="Ccpower" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="totalpower">
+            <column name="totalpower" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="generatorvoltage">
+            <column name="generatorvoltage" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="batteryvoltage">
+            <column name="batteryvoltage" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="watertemperature">
+            <column name="watertemperature" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="oilpressure">
+            <column name="oilpressure" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="speed">
+            <column name="speed" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="frequency">
+            <column name="frequency" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="controlmode">
+            <column name="controlmode" sql-type="double" precision="-1" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,28 +1,14 @@
 package hibernatePOJO;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
 public class Computerroom {
     private String rid;
-    private String rname;
-    private Double tempratureMain;
-    private Double tempratureSupport;
-    private Double tempratureAssist;
-    private Double humidityMain;
-    private Double humiditySupport;
-    private Double humidityAssist;
-    private String upsset;
-    private String idp;
-    private String didset;
-    private String mpidset;
 
-    @Id
-    @Column(name = "rid", nullable = false, length = 255)
+    @javax.persistence.Id
+    @javax.persistence.Column(name = "rid", nullable = false, length = 255)
     public String getRid() {
         return rid;
     }
@@ -31,8 +17,10 @@ public class Computerroom {
         this.rid = rid;
     }
 
-    @Basic
-    @Column(name = "rname", nullable = true, length = 255)
+    private String rname;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "rname", nullable = true, length = 255)
     public String getRname() {
         return rname;
     }
@@ -41,8 +29,10 @@ public class Computerroom {
         this.rname = rname;
     }
 
-    @Basic
-    @Column(name = "temprature_main", nullable = true, precision = 0)
+    private Double tempratureMain;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "temprature_main", nullable = true, precision = 0)
     public Double getTempratureMain() {
         return tempratureMain;
     }
@@ -51,8 +41,10 @@ public class Computerroom {
         this.tempratureMain = tempratureMain;
     }
 
-    @Basic
-    @Column(name = "temprature_support", nullable = true, precision = 0)
+    private Double tempratureSupport;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "temprature_support", nullable = true, precision = 0)
     public Double getTempratureSupport() {
         return tempratureSupport;
     }
@@ -61,8 +53,10 @@ public class Computerroom {
         this.tempratureSupport = tempratureSupport;
     }
 
-    @Basic
-    @Column(name = "temprature_assist", nullable = true, precision = 0)
+    private Double tempratureAssist;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "temprature_assist", nullable = true, precision = 0)
     public Double getTempratureAssist() {
         return tempratureAssist;
     }
@@ -71,8 +65,10 @@ public class Computerroom {
         this.tempratureAssist = tempratureAssist;
     }
 
-    @Basic
-    @Column(name = "humidity_main", nullable = true, precision = 0)
+    private Double humidityMain;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "humidity_main", nullable = true, precision = 0)
     public Double getHumidityMain() {
         return humidityMain;
     }
@@ -81,8 +77,10 @@ public class Computerroom {
         this.humidityMain = humidityMain;
     }
 
-    @Basic
-    @Column(name = "humidity_support", nullable = true, precision = 0)
+    private Double humiditySupport;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "humidity_support", nullable = true, precision = 0)
     public Double getHumiditySupport() {
         return humiditySupport;
     }
@@ -91,8 +89,10 @@ public class Computerroom {
         this.humiditySupport = humiditySupport;
     }
 
-    @Basic
-    @Column(name = "humidity_assist", nullable = true, precision = 0)
+    private Double humidityAssist;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "humidity_assist", nullable = true, precision = 0)
     public Double getHumidityAssist() {
         return humidityAssist;
     }
@@ -101,8 +101,10 @@ public class Computerroom {
         this.humidityAssist = humidityAssist;
     }
 
-    @Basic
-    @Column(name = "upsset", nullable = true, length = 255)
+    private String upsset;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "upsset", nullable = true, length = 255)
     public String getUpsset() {
         return upsset;
     }
@@ -111,8 +113,10 @@ public class Computerroom {
         this.upsset = upsset;
     }
 
-    @Basic
-    @Column(name = "idp", nullable = true, length = 255)
+    private String idp;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "idp", nullable = true, length = 255)
     public String getIdp() {
         return idp;
     }
@@ -121,8 +125,10 @@ public class Computerroom {
         this.idp = idp;
     }
 
-    @Basic
-    @Column(name = "didset", nullable = true, length = 255)
+    private String didset;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "didset", nullable = true, length = 255)
     public String getDidset() {
         return didset;
     }
@@ -131,8 +137,10 @@ public class Computerroom {
         this.didset = didset;
     }
 
-    @Basic
-    @Column(name = "mpidset", nullable = true, length = 255)
+    private String mpidset;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "mpidset", nullable = true, length = 255)
     public String getMpidset() {
         return mpidset;
     }

@@ -76,6 +76,7 @@ public class DictionaryPlus {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(part, slaveid, functioncode, start, length);
     }
 }

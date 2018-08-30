@@ -89,9 +89,11 @@ public class DeviceDAOImpl implements DeviceDAO {
 
     public Boolean addThresholdInfo(Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark,String alarmcontent){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        boolean rt;
+        boolean rt = false;
+       // hbsessionDao.getFirst("FROM DevicesThreshold WHERE");
 
-        DevicesThreshold dt = new DevicesThreshold();
+
+      /*  DevicesThreshold dt = new DevicesThreshold();
         dt.setDtid(dtid);
         dt.setName(name);
         dt.setType(type);
@@ -102,7 +104,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         dt.setIsMark(ismark);
         dt.setAlarmcontent(alarmcontent);
 
-        rt = hbsessionDao.insert(dt);
+        rt = hbsessionDao.insert(dt);*/
         return rt;
     }
 
@@ -121,14 +123,14 @@ public class DeviceDAOImpl implements DeviceDAO {
         Boolean rt = false;
         DevicesThreshold kl = getDeviceThreshold(dtid);
 
-        kl.setName(name);
+       /* kl.setName(name);
         kl.setType(type);
         kl.setUnit(unit);
         kl.setStandardval(standval);
         kl.setCellval(cellval);
         kl.setFloorval(floorval);
         kl.setIsMark(ismark);
-        kl.setAlarmcontent(alarmcontent);
+        kl.setAlarmcontent(alarmcontent);*/
 
         String hql = "update DevicesThreshold kl set kl.name='" + name + "', kl.type='" + type +  "', kl.unit='" + unit +  "', kl.standardval='" + standval +
                 "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.isMark='" + ismark +  "', kl.alarmcontent='" + alarmcontent +  "' where kl.dtid='" + dtid + "'";

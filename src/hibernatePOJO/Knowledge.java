@@ -1,7 +1,12 @@
 package hibernatePOJO;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class Knowledge {
     private int kid;
     private String uid;
@@ -9,6 +14,8 @@ public class Knowledge {
     private String kname;
     private String content;
 
+    @Id
+    @Column(name = "kid", nullable = false)
     public int getKid() {
         return kid;
     }
@@ -17,6 +24,8 @@ public class Knowledge {
         this.kid = kid;
     }
 
+    @Basic
+    @Column(name = "uid", nullable = true, length = 11)
     public String getUid() {
         return uid;
     }
@@ -25,6 +34,8 @@ public class Knowledge {
         this.uid = uid;
     }
 
+    @Basic
+    @Column(name = "parentkid", nullable = true)
     public Integer getParentkid() {
         return parentkid;
     }
@@ -33,6 +44,8 @@ public class Knowledge {
         this.parentkid = parentkid;
     }
 
+    @Basic
+    @Column(name = "kname", nullable = true, length = 255)
     public String getKname() {
         return kname;
     }
@@ -41,6 +54,8 @@ public class Knowledge {
         this.kname = kname;
     }
 
+    @Basic
+    @Column(name = "content", nullable = true, length = 255)
     public String getContent() {
         return content;
     }

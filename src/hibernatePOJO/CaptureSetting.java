@@ -1,17 +1,15 @@
 package hibernatePOJO;
 
+import javax.persistence.Entity;
 import java.util.Objects;
 
+@Entity
+@javax.persistence.Table(name = "capture_setting", schema = "test", catalog = "")
 public class CaptureSetting {
     private int id;
-    private String ip;
-    private Integer port1;
-    private Integer port2;
-    private Integer onlineinterval;
-    private Integer thansentinterval;
-    private Integer uploadinterval;
-    private int mpid;
 
+    @javax.persistence.Id
+    @javax.persistence.Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -20,6 +18,10 @@ public class CaptureSetting {
         this.id = id;
     }
 
+    private String ip;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "ip", nullable = true, length = 255)
     public String getIp() {
         return ip;
     }
@@ -28,6 +30,10 @@ public class CaptureSetting {
         this.ip = ip;
     }
 
+    private Integer port1;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "port1", nullable = true)
     public Integer getPort1() {
         return port1;
     }
@@ -36,6 +42,10 @@ public class CaptureSetting {
         this.port1 = port1;
     }
 
+    private Integer port2;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "port2", nullable = true)
     public Integer getPort2() {
         return port2;
     }
@@ -44,6 +54,10 @@ public class CaptureSetting {
         this.port2 = port2;
     }
 
+    private Integer onlineinterval;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "onlineinterval", nullable = true)
     public Integer getOnlineinterval() {
         return onlineinterval;
     }
@@ -52,6 +66,10 @@ public class CaptureSetting {
         this.onlineinterval = onlineinterval;
     }
 
+    private Integer thansentinterval;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "thansentinterval", nullable = true)
     public Integer getThansentinterval() {
         return thansentinterval;
     }
@@ -60,6 +78,10 @@ public class CaptureSetting {
         this.thansentinterval = thansentinterval;
     }
 
+    private Integer uploadinterval;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "uploadinterval", nullable = true)
     public Integer getUploadinterval() {
         return uploadinterval;
     }
@@ -68,6 +90,10 @@ public class CaptureSetting {
         this.uploadinterval = uploadinterval;
     }
 
+    private int mpid;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "mpid", nullable = false)
     public int getMpid() {
         return mpid;
     }

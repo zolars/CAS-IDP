@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernatePOJO.BatteryMonitor" table="battery_monitor" schema="test">
+        <property name="batteryid">
+            <column name="batteryid" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="did">
+            <column name="did" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="time">
+            <column name="time" sql-type="datetime" not-null="true"/>
+        </property>
+        <property name="aBvoltage">
+            <column name="ABvoltage" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="bCvoltage">
+            <column name="BCvoltage" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="cAvoltage">
+            <column name="CAvoltage" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="avoltage">
+            <column name="Avoltage" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="bvoltage">
+            <column name="Bvoltage" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="cvoltage">
+            <column name="Cvoltage" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="acurrent">
+            <column name="Acurrent" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="bcurrent">
+            <column name="Bcurrent" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="ccurrent">
+            <column name="Ccurrent" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="activepower">
+            <column name="activepower" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="reactivepower">
+            <column name="reactivepower" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="szpower">
+            <column name="szpower" sql-type="varchar(255)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

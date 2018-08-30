@@ -1,6 +1,7 @@
 package userManage.action;
 
 
+import Util.ToHex;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
@@ -10,10 +11,7 @@ import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
+import java.security.MessageDigest;
 
 
 public class addUserInfoAction extends ActionSupport {
@@ -28,7 +26,6 @@ public class addUserInfoAction extends ActionSupport {
         this.result = result;
     }
 
-
     /* 添加所有用户的基本信息
                    用户角色
      */
@@ -38,7 +35,6 @@ public class addUserInfoAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //String monitorpointid = request.getParameter("monitorpointid");
             String account = request.getParameter("uaccount");
             String password = request.getParameter("upassword");
             String name = request.getParameter("uname");
@@ -54,7 +50,11 @@ public class addUserInfoAction extends ActionSupport {
             String uid = dao.getMaxUserId();
             Integer maxuid = Integer.parseInt(uid)+1;
 
-            Boolean rt = dao.addUserInfo(maxuid.toString(), account, password, name, telephone, govtelephone, province, city, computerroom);
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] bytes = md.digest(password.getBytes("utf-8"));
+            String passwd = ToHex.toHex(bytes);
+
+            Boolean rt = dao.addUserInfo(maxuid.toString(), account, passwd, name, telephone, govtelephone, province, city, computerroom);
             Boolean rt2 = dao.addUserRolesInfo(maxuid.toString(), roles);
 
             JSONObject jsonObject = new JSONObject();

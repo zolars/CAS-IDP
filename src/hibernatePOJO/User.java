@@ -1,7 +1,12 @@
 package hibernatePOJO;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class User {
     private String uid;
     private String uname;
@@ -13,6 +18,8 @@ public class User {
     private String cbid;
     private String rid;
 
+    @Id
+    @Column(name = "uid", nullable = false, length = 255)
     public String getUid() {
         return uid;
     }
@@ -21,6 +28,8 @@ public class User {
         this.uid = uid;
     }
 
+    @Basic
+    @Column(name = "uname", nullable = false, length = 255)
     public String getUname() {
         return uname;
     }
@@ -29,6 +38,8 @@ public class User {
         this.uname = uname;
     }
 
+    @Basic
+    @Column(name = "chinesename", nullable = true, length = 255)
     public String getChinesename() {
         return chinesename;
     }
@@ -37,6 +48,8 @@ public class User {
         this.chinesename = chinesename;
     }
 
+    @Basic
+    @Column(name = "password", nullable = false, length = 255)
     public String getPassword() {
         return password;
     }
@@ -45,6 +58,8 @@ public class User {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "telephone", nullable = true, length = 11)
     public String getTelephone() {
         return telephone;
     }
@@ -53,6 +68,8 @@ public class User {
         this.telephone = telephone;
     }
 
+    @Basic
+    @Column(name = "govtelephone", nullable = true, length = 11)
     public String getGovtelephone() {
         return govtelephone;
     }
@@ -61,6 +78,8 @@ public class User {
         this.govtelephone = govtelephone;
     }
 
+    @Basic
+    @Column(name = "pbid", nullable = true, length = 255)
     public String getPbid() {
         return pbid;
     }
@@ -69,6 +88,8 @@ public class User {
         this.pbid = pbid;
     }
 
+    @Basic
+    @Column(name = "cbid", nullable = true, length = 255)
     public String getCbid() {
         return cbid;
     }
@@ -77,6 +98,8 @@ public class User {
         this.cbid = cbid;
     }
 
+    @Basic
+    @Column(name = "rid", nullable = true, length = 255)
     public String getRid() {
         return rid;
     }

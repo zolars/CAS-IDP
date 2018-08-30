@@ -1,12 +1,19 @@
 package hibernatePOJO;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class Permission {
     private int pid;
     private Integer parentpid;
     private String permissionname;
 
+    @Id
+    @Column(name = "pid", nullable = false)
     public int getPid() {
         return pid;
     }
@@ -15,6 +22,8 @@ public class Permission {
         this.pid = pid;
     }
 
+    @Basic
+    @Column(name = "parentpid", nullable = true)
     public Integer getParentpid() {
         return parentpid;
     }
@@ -23,6 +32,8 @@ public class Permission {
         this.parentpid = parentpid;
     }
 
+    @Basic
+    @Column(name = "permissionname", nullable = true, length = 255)
     public String getPermissionname() {
         return permissionname;
     }

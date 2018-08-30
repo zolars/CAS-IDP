@@ -1,7 +1,6 @@
 package hibernatePOJO;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
@@ -9,17 +8,9 @@ import java.util.Objects;
 @Entity
 public class Devices {
     private String did;
-    private String name;
-    private String devicetype;
-    private String type;
-    private String serialno;
-    private String iPaddress;
-    private String port;
-    private String extra;
-    private String location;
 
     @Id
-    @Column(name = "did", nullable = false, length = 255)
+    @javax.persistence.Column(name = "did", nullable = false, length = 255)
     public String getDid() {
         return did;
     }
@@ -28,8 +19,10 @@ public class Devices {
         this.did = did;
     }
 
+    private String name;
+
     @Basic
-    @Column(name = "name", nullable = true, length = 255)
+    @javax.persistence.Column(name = "name", nullable = true, length = 255)
     public String getName() {
         return name;
     }
@@ -38,8 +31,10 @@ public class Devices {
         this.name = name;
     }
 
+    private String devicetype;
+
     @Basic
-    @Column(name = "devicetype", nullable = true, length = 255)
+    @javax.persistence.Column(name = "devicetype", nullable = true, length = 255)
     public String getDevicetype() {
         return devicetype;
     }
@@ -48,8 +43,10 @@ public class Devices {
         this.devicetype = devicetype;
     }
 
+    private String type;
+
     @Basic
-    @Column(name = "type", nullable = true, length = 255)
+    @javax.persistence.Column(name = "type", nullable = true, length = 255)
     public String getType() {
         return type;
     }
@@ -58,8 +55,10 @@ public class Devices {
         this.type = type;
     }
 
+    private String serialno;
+
     @Basic
-    @Column(name = "serialno", nullable = true, length = 255)
+    @javax.persistence.Column(name = "serialno", nullable = true, length = 255)
     public String getSerialno() {
         return serialno;
     }
@@ -68,8 +67,10 @@ public class Devices {
         this.serialno = serialno;
     }
 
+    private String iPaddress;
+
     @Basic
-    @Column(name = "IPaddress", nullable = true, length = 255)
+    @javax.persistence.Column(name = "IPaddress", nullable = true, length = 255)
     public String getiPaddress() {
         return iPaddress;
     }
@@ -78,8 +79,10 @@ public class Devices {
         this.iPaddress = iPaddress;
     }
 
+    private String port;
+
     @Basic
-    @Column(name = "port", nullable = true, length = 255)
+    @javax.persistence.Column(name = "port", nullable = true, length = 255)
     public String getPort() {
         return port;
     }
@@ -88,8 +91,10 @@ public class Devices {
         this.port = port;
     }
 
+    private String extra;
+
     @Basic
-    @Column(name = "extra", nullable = true, length = 255)
+    @javax.persistence.Column(name = "extra", nullable = true, length = 255)
     public String getExtra() {
         return extra;
     }
@@ -98,8 +103,10 @@ public class Devices {
         this.extra = extra;
     }
 
+    private String location;
+
     @Basic
-    @Column(name = "location", nullable = true, length = 255)
+    @javax.persistence.Column(name = "location", nullable = true, length = 255)
     public String getLocation() {
         return location;
     }

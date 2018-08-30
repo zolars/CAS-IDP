@@ -13,9 +13,6 @@ import userManage.dao.impl.UserDAOImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
 
 
 public class getOneUserInfoAction extends ActionSupport {

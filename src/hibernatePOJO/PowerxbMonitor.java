@@ -1,8 +1,11 @@
 package hibernatePOJO;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+@Entity
+@Table(name = "powerxb_monitor", schema = "test", catalog = "")
 public class PowerxbMonitor {
     private int xbid;
     private Integer mpid;
@@ -608,6 +611,8 @@ public class PowerxbMonitor {
     private Float i2Va50;
     private Float i3Va50;
 
+    @Id
+    @Column(name = "xbid", nullable = false)
     public int getXbid() {
         return xbid;
     }
@@ -616,6 +621,8 @@ public class PowerxbMonitor {
         this.xbid = xbid;
     }
 
+    @Basic
+    @Column(name = "mpid", nullable = true)
     public Integer getMpid() {
         return mpid;
     }
@@ -624,6 +631,8 @@ public class PowerxbMonitor {
         this.mpid = mpid;
     }
 
+    @Basic
+    @Column(name = "time", nullable = true)
     public Timestamp getTime() {
         return time;
     }
@@ -632,6 +641,8 @@ public class PowerxbMonitor {
         this.time = time;
     }
 
+    @Basic
+    @Column(name = "U1xb_1", nullable = true, precision = 2)
     public Float getU1Xb1() {
         return u1Xb1;
     }
@@ -640,6 +651,8 @@ public class PowerxbMonitor {
         this.u1Xb1 = u1Xb1;
     }
 
+    @Basic
+    @Column(name = "U2xb_1", nullable = true, precision = 2)
     public Float getU2Xb1() {
         return u2Xb1;
     }
@@ -648,6 +661,8 @@ public class PowerxbMonitor {
         this.u2Xb1 = u2Xb1;
     }
 
+    @Basic
+    @Column(name = "U3xb_1", nullable = true, precision = 2)
     public Float getU3Xb1() {
         return u3Xb1;
     }
@@ -656,6 +671,8 @@ public class PowerxbMonitor {
         this.u3Xb1 = u3Xb1;
     }
 
+    @Basic
+    @Column(name = "U1va_1", nullable = true, precision = 2)
     public Float getU1Va1() {
         return u1Va1;
     }
@@ -664,6 +681,8 @@ public class PowerxbMonitor {
         this.u1Va1 = u1Va1;
     }
 
+    @Basic
+    @Column(name = "U2va_1", nullable = true, precision = 2)
     public Float getU2Va1() {
         return u2Va1;
     }
@@ -672,6 +691,8 @@ public class PowerxbMonitor {
         this.u2Va1 = u2Va1;
     }
 
+    @Basic
+    @Column(name = "U3va_1", nullable = true, precision = 2)
     public Float getU3Va1() {
         return u3Va1;
     }
@@ -680,6 +701,8 @@ public class PowerxbMonitor {
         this.u3Va1 = u3Va1;
     }
 
+    @Basic
+    @Column(name = "I1xb_1", nullable = true, precision = 2)
     public Float getI1Xb1() {
         return i1Xb1;
     }
@@ -688,6 +711,8 @@ public class PowerxbMonitor {
         this.i1Xb1 = i1Xb1;
     }
 
+    @Basic
+    @Column(name = "I2xb_1", nullable = true, precision = 2)
     public Float getI2Xb1() {
         return i2Xb1;
     }
@@ -696,6 +721,8 @@ public class PowerxbMonitor {
         this.i2Xb1 = i2Xb1;
     }
 
+    @Basic
+    @Column(name = "I3xb_1", nullable = true, precision = 2)
     public Float getI3Xb1() {
         return i3Xb1;
     }
@@ -704,6 +731,8 @@ public class PowerxbMonitor {
         this.i3Xb1 = i3Xb1;
     }
 
+    @Basic
+    @Column(name = "I1va_1", nullable = true, precision = 2)
     public Float getI1Va1() {
         return i1Va1;
     }
@@ -712,6 +741,8 @@ public class PowerxbMonitor {
         this.i1Va1 = i1Va1;
     }
 
+    @Basic
+    @Column(name = "I2va_1", nullable = true, precision = 2)
     public Float getI2Va1() {
         return i2Va1;
     }
@@ -720,6 +751,8 @@ public class PowerxbMonitor {
         this.i2Va1 = i2Va1;
     }
 
+    @Basic
+    @Column(name = "I3va_1", nullable = true, precision = 2)
     public Float getI3Va1() {
         return i3Va1;
     }
@@ -728,6 +761,8 @@ public class PowerxbMonitor {
         this.i3Va1 = i3Va1;
     }
 
+    @Basic
+    @Column(name = "U1xb_2", nullable = true, precision = 2)
     public Float getU1Xb2() {
         return u1Xb2;
     }
@@ -736,6 +771,8 @@ public class PowerxbMonitor {
         this.u1Xb2 = u1Xb2;
     }
 
+    @Basic
+    @Column(name = "U2xb_2", nullable = true, precision = 2)
     public Float getU2Xb2() {
         return u2Xb2;
     }
@@ -744,6 +781,8 @@ public class PowerxbMonitor {
         this.u2Xb2 = u2Xb2;
     }
 
+    @Basic
+    @Column(name = "U3xb_2", nullable = true, precision = 2)
     public Float getU3Xb2() {
         return u3Xb2;
     }
@@ -752,6 +791,8 @@ public class PowerxbMonitor {
         this.u3Xb2 = u3Xb2;
     }
 
+    @Basic
+    @Column(name = "U1va_2", nullable = true, precision = 2)
     public Float getU1Va2() {
         return u1Va2;
     }
@@ -760,6 +801,8 @@ public class PowerxbMonitor {
         this.u1Va2 = u1Va2;
     }
 
+    @Basic
+    @Column(name = "U2va_2", nullable = true, precision = 2)
     public Float getU2Va2() {
         return u2Va2;
     }
@@ -768,6 +811,8 @@ public class PowerxbMonitor {
         this.u2Va2 = u2Va2;
     }
 
+    @Basic
+    @Column(name = "U3va_2", nullable = true, precision = 2)
     public Float getU3Va2() {
         return u3Va2;
     }
@@ -776,6 +821,8 @@ public class PowerxbMonitor {
         this.u3Va2 = u3Va2;
     }
 
+    @Basic
+    @Column(name = "I1xb_2", nullable = true, precision = 2)
     public Float getI1Xb2() {
         return i1Xb2;
     }
@@ -784,6 +831,8 @@ public class PowerxbMonitor {
         this.i1Xb2 = i1Xb2;
     }
 
+    @Basic
+    @Column(name = "I2xb_2", nullable = true, precision = 2)
     public Float getI2Xb2() {
         return i2Xb2;
     }
@@ -792,6 +841,8 @@ public class PowerxbMonitor {
         this.i2Xb2 = i2Xb2;
     }
 
+    @Basic
+    @Column(name = "I3xb_2", nullable = true, precision = 2)
     public Float getI3Xb2() {
         return i3Xb2;
     }
@@ -800,6 +851,8 @@ public class PowerxbMonitor {
         this.i3Xb2 = i3Xb2;
     }
 
+    @Basic
+    @Column(name = "I1va_2", nullable = true, precision = 2)
     public Float getI1Va2() {
         return i1Va2;
     }
@@ -808,6 +861,8 @@ public class PowerxbMonitor {
         this.i1Va2 = i1Va2;
     }
 
+    @Basic
+    @Column(name = "I2va_2", nullable = true, precision = 2)
     public Float getI2Va2() {
         return i2Va2;
     }
@@ -816,6 +871,8 @@ public class PowerxbMonitor {
         this.i2Va2 = i2Va2;
     }
 
+    @Basic
+    @Column(name = "I3va_2", nullable = true, precision = 2)
     public Float getI3Va2() {
         return i3Va2;
     }
@@ -824,6 +881,8 @@ public class PowerxbMonitor {
         this.i3Va2 = i3Va2;
     }
 
+    @Basic
+    @Column(name = "U1xb_3", nullable = true, precision = 2)
     public Float getU1Xb3() {
         return u1Xb3;
     }
@@ -832,6 +891,8 @@ public class PowerxbMonitor {
         this.u1Xb3 = u1Xb3;
     }
 
+    @Basic
+    @Column(name = "U2xb_3", nullable = true, precision = 2)
     public Float getU2Xb3() {
         return u2Xb3;
     }
@@ -840,6 +901,8 @@ public class PowerxbMonitor {
         this.u2Xb3 = u2Xb3;
     }
 
+    @Basic
+    @Column(name = "U3xb_3", nullable = true, precision = 2)
     public Float getU3Xb3() {
         return u3Xb3;
     }
@@ -848,6 +911,8 @@ public class PowerxbMonitor {
         this.u3Xb3 = u3Xb3;
     }
 
+    @Basic
+    @Column(name = "U1va_3", nullable = true, precision = 2)
     public Float getU1Va3() {
         return u1Va3;
     }
@@ -856,6 +921,8 @@ public class PowerxbMonitor {
         this.u1Va3 = u1Va3;
     }
 
+    @Basic
+    @Column(name = "U2va_3", nullable = true, precision = 2)
     public Float getU2Va3() {
         return u2Va3;
     }
@@ -864,6 +931,8 @@ public class PowerxbMonitor {
         this.u2Va3 = u2Va3;
     }
 
+    @Basic
+    @Column(name = "U3va_3", nullable = true, precision = 2)
     public Float getU3Va3() {
         return u3Va3;
     }
@@ -872,6 +941,8 @@ public class PowerxbMonitor {
         this.u3Va3 = u3Va3;
     }
 
+    @Basic
+    @Column(name = "I1xb_3", nullable = true, precision = 2)
     public Float getI1Xb3() {
         return i1Xb3;
     }
@@ -880,6 +951,8 @@ public class PowerxbMonitor {
         this.i1Xb3 = i1Xb3;
     }
 
+    @Basic
+    @Column(name = "I2xb_3", nullable = true, precision = 2)
     public Float getI2Xb3() {
         return i2Xb3;
     }
@@ -888,6 +961,8 @@ public class PowerxbMonitor {
         this.i2Xb3 = i2Xb3;
     }
 
+    @Basic
+    @Column(name = "I3xb_3", nullable = true, precision = 2)
     public Float getI3Xb3() {
         return i3Xb3;
     }
@@ -896,6 +971,8 @@ public class PowerxbMonitor {
         this.i3Xb3 = i3Xb3;
     }
 
+    @Basic
+    @Column(name = "I1va_3", nullable = true, precision = 2)
     public Float getI1Va3() {
         return i1Va3;
     }
@@ -904,6 +981,8 @@ public class PowerxbMonitor {
         this.i1Va3 = i1Va3;
     }
 
+    @Basic
+    @Column(name = "I2va_3", nullable = true, precision = 2)
     public Float getI2Va3() {
         return i2Va3;
     }
@@ -912,6 +991,8 @@ public class PowerxbMonitor {
         this.i2Va3 = i2Va3;
     }
 
+    @Basic
+    @Column(name = "I3va_3", nullable = true, precision = 2)
     public Float getI3Va3() {
         return i3Va3;
     }
@@ -920,6 +1001,8 @@ public class PowerxbMonitor {
         this.i3Va3 = i3Va3;
     }
 
+    @Basic
+    @Column(name = "U1xb_4", nullable = true, precision = 2)
     public Float getU1Xb4() {
         return u1Xb4;
     }
@@ -928,6 +1011,8 @@ public class PowerxbMonitor {
         this.u1Xb4 = u1Xb4;
     }
 
+    @Basic
+    @Column(name = "U2xb_4", nullable = true, precision = 2)
     public Float getU2Xb4() {
         return u2Xb4;
     }
@@ -936,6 +1021,8 @@ public class PowerxbMonitor {
         this.u2Xb4 = u2Xb4;
     }
 
+    @Basic
+    @Column(name = "U3xb_4", nullable = true, precision = 2)
     public Float getU3Xb4() {
         return u3Xb4;
     }
@@ -944,6 +1031,8 @@ public class PowerxbMonitor {
         this.u3Xb4 = u3Xb4;
     }
 
+    @Basic
+    @Column(name = "U1va_4", nullable = true, precision = 2)
     public Float getU1Va4() {
         return u1Va4;
     }
@@ -952,6 +1041,8 @@ public class PowerxbMonitor {
         this.u1Va4 = u1Va4;
     }
 
+    @Basic
+    @Column(name = "U2va_4", nullable = true, precision = 2)
     public Float getU2Va4() {
         return u2Va4;
     }
@@ -960,6 +1051,8 @@ public class PowerxbMonitor {
         this.u2Va4 = u2Va4;
     }
 
+    @Basic
+    @Column(name = "U3va_4", nullable = true, precision = 2)
     public Float getU3Va4() {
         return u3Va4;
     }
@@ -968,6 +1061,8 @@ public class PowerxbMonitor {
         this.u3Va4 = u3Va4;
     }
 
+    @Basic
+    @Column(name = "I1xb_4", nullable = true, precision = 2)
     public Float getI1Xb4() {
         return i1Xb4;
     }
@@ -976,6 +1071,8 @@ public class PowerxbMonitor {
         this.i1Xb4 = i1Xb4;
     }
 
+    @Basic
+    @Column(name = "I2xb_4", nullable = true, precision = 2)
     public Float getI2Xb4() {
         return i2Xb4;
     }
@@ -984,6 +1081,8 @@ public class PowerxbMonitor {
         this.i2Xb4 = i2Xb4;
     }
 
+    @Basic
+    @Column(name = "I3xb_4", nullable = true, precision = 2)
     public Float getI3Xb4() {
         return i3Xb4;
     }
@@ -992,6 +1091,8 @@ public class PowerxbMonitor {
         this.i3Xb4 = i3Xb4;
     }
 
+    @Basic
+    @Column(name = "I1va_4", nullable = true, precision = 2)
     public Float getI1Va4() {
         return i1Va4;
     }
@@ -1000,6 +1101,8 @@ public class PowerxbMonitor {
         this.i1Va4 = i1Va4;
     }
 
+    @Basic
+    @Column(name = "I2va_4", nullable = true, precision = 2)
     public Float getI2Va4() {
         return i2Va4;
     }
@@ -1008,6 +1111,8 @@ public class PowerxbMonitor {
         this.i2Va4 = i2Va4;
     }
 
+    @Basic
+    @Column(name = "I3va_4", nullable = true, precision = 2)
     public Float getI3Va4() {
         return i3Va4;
     }
@@ -1016,6 +1121,8 @@ public class PowerxbMonitor {
         this.i3Va4 = i3Va4;
     }
 
+    @Basic
+    @Column(name = "U1xb_5", nullable = true, precision = 2)
     public Float getU1Xb5() {
         return u1Xb5;
     }
@@ -1024,6 +1131,8 @@ public class PowerxbMonitor {
         this.u1Xb5 = u1Xb5;
     }
 
+    @Basic
+    @Column(name = "U2xb_5", nullable = true, precision = 2)
     public Float getU2Xb5() {
         return u2Xb5;
     }
@@ -1032,6 +1141,8 @@ public class PowerxbMonitor {
         this.u2Xb5 = u2Xb5;
     }
 
+    @Basic
+    @Column(name = "U3xb_5", nullable = true, precision = 2)
     public Float getU3Xb5() {
         return u3Xb5;
     }
@@ -1040,6 +1151,8 @@ public class PowerxbMonitor {
         this.u3Xb5 = u3Xb5;
     }
 
+    @Basic
+    @Column(name = "U1va_5", nullable = true, precision = 2)
     public Float getU1Va5() {
         return u1Va5;
     }
@@ -1048,6 +1161,8 @@ public class PowerxbMonitor {
         this.u1Va5 = u1Va5;
     }
 
+    @Basic
+    @Column(name = "U2va_5", nullable = true, precision = 2)
     public Float getU2Va5() {
         return u2Va5;
     }
@@ -1056,6 +1171,8 @@ public class PowerxbMonitor {
         this.u2Va5 = u2Va5;
     }
 
+    @Basic
+    @Column(name = "U3va_5", nullable = true, precision = 2)
     public Float getU3Va5() {
         return u3Va5;
     }
@@ -1064,6 +1181,8 @@ public class PowerxbMonitor {
         this.u3Va5 = u3Va5;
     }
 
+    @Basic
+    @Column(name = "I1xb_5", nullable = true, precision = 2)
     public Float getI1Xb5() {
         return i1Xb5;
     }
@@ -1072,6 +1191,8 @@ public class PowerxbMonitor {
         this.i1Xb5 = i1Xb5;
     }
 
+    @Basic
+    @Column(name = "I2xb_5", nullable = true, precision = 2)
     public Float getI2Xb5() {
         return i2Xb5;
     }
@@ -1080,6 +1201,8 @@ public class PowerxbMonitor {
         this.i2Xb5 = i2Xb5;
     }
 
+    @Basic
+    @Column(name = "I3xb_5", nullable = true, precision = 2)
     public Float getI3Xb5() {
         return i3Xb5;
     }
@@ -1088,6 +1211,8 @@ public class PowerxbMonitor {
         this.i3Xb5 = i3Xb5;
     }
 
+    @Basic
+    @Column(name = "I1va_5", nullable = true, precision = 2)
     public Float getI1Va5() {
         return i1Va5;
     }
@@ -1096,6 +1221,8 @@ public class PowerxbMonitor {
         this.i1Va5 = i1Va5;
     }
 
+    @Basic
+    @Column(name = "I2va_5", nullable = true, precision = 2)
     public Float getI2Va5() {
         return i2Va5;
     }
@@ -1104,6 +1231,8 @@ public class PowerxbMonitor {
         this.i2Va5 = i2Va5;
     }
 
+    @Basic
+    @Column(name = "I3va_5", nullable = true, precision = 2)
     public Float getI3Va5() {
         return i3Va5;
     }
@@ -1112,6 +1241,8 @@ public class PowerxbMonitor {
         this.i3Va5 = i3Va5;
     }
 
+    @Basic
+    @Column(name = "U1xb_6", nullable = true, precision = 2)
     public Float getU1Xb6() {
         return u1Xb6;
     }
@@ -1120,6 +1251,8 @@ public class PowerxbMonitor {
         this.u1Xb6 = u1Xb6;
     }
 
+    @Basic
+    @Column(name = "U2xb_6", nullable = true, precision = 2)
     public Float getU2Xb6() {
         return u2Xb6;
     }
@@ -1128,6 +1261,8 @@ public class PowerxbMonitor {
         this.u2Xb6 = u2Xb6;
     }
 
+    @Basic
+    @Column(name = "U3xb_6", nullable = true, precision = 2)
     public Float getU3Xb6() {
         return u3Xb6;
     }
@@ -1136,6 +1271,8 @@ public class PowerxbMonitor {
         this.u3Xb6 = u3Xb6;
     }
 
+    @Basic
+    @Column(name = "U1va_6", nullable = true, precision = 2)
     public Float getU1Va6() {
         return u1Va6;
     }
@@ -1144,6 +1281,8 @@ public class PowerxbMonitor {
         this.u1Va6 = u1Va6;
     }
 
+    @Basic
+    @Column(name = "U2va_6", nullable = true, precision = 2)
     public Float getU2Va6() {
         return u2Va6;
     }
@@ -1152,6 +1291,8 @@ public class PowerxbMonitor {
         this.u2Va6 = u2Va6;
     }
 
+    @Basic
+    @Column(name = "U3va_6", nullable = true, precision = 2)
     public Float getU3Va6() {
         return u3Va6;
     }
@@ -1160,6 +1301,8 @@ public class PowerxbMonitor {
         this.u3Va6 = u3Va6;
     }
 
+    @Basic
+    @Column(name = "I1xb_6", nullable = true, precision = 2)
     public Float getI1Xb6() {
         return i1Xb6;
     }
@@ -1168,6 +1311,8 @@ public class PowerxbMonitor {
         this.i1Xb6 = i1Xb6;
     }
 
+    @Basic
+    @Column(name = "I2xb_6", nullable = true, precision = 2)
     public Float getI2Xb6() {
         return i2Xb6;
     }
@@ -1176,6 +1321,8 @@ public class PowerxbMonitor {
         this.i2Xb6 = i2Xb6;
     }
 
+    @Basic
+    @Column(name = "I3xb_6", nullable = true, precision = 2)
     public Float getI3Xb6() {
         return i3Xb6;
     }
@@ -1184,6 +1331,8 @@ public class PowerxbMonitor {
         this.i3Xb6 = i3Xb6;
     }
 
+    @Basic
+    @Column(name = "I1va_6", nullable = true, precision = 2)
     public Float getI1Va6() {
         return i1Va6;
     }
@@ -1192,6 +1341,8 @@ public class PowerxbMonitor {
         this.i1Va6 = i1Va6;
     }
 
+    @Basic
+    @Column(name = "I2va_6", nullable = true, precision = 2)
     public Float getI2Va6() {
         return i2Va6;
     }
@@ -1200,6 +1351,8 @@ public class PowerxbMonitor {
         this.i2Va6 = i2Va6;
     }
 
+    @Basic
+    @Column(name = "I3va_6", nullable = true, precision = 2)
     public Float getI3Va6() {
         return i3Va6;
     }
@@ -1208,6 +1361,8 @@ public class PowerxbMonitor {
         this.i3Va6 = i3Va6;
     }
 
+    @Basic
+    @Column(name = "U1xb_7", nullable = true, precision = 2)
     public Float getU1Xb7() {
         return u1Xb7;
     }
@@ -1216,6 +1371,8 @@ public class PowerxbMonitor {
         this.u1Xb7 = u1Xb7;
     }
 
+    @Basic
+    @Column(name = "U2xb_7", nullable = true, precision = 2)
     public Float getU2Xb7() {
         return u2Xb7;
     }
@@ -1224,6 +1381,8 @@ public class PowerxbMonitor {
         this.u2Xb7 = u2Xb7;
     }
 
+    @Basic
+    @Column(name = "U3xb_7", nullable = true, precision = 2)
     public Float getU3Xb7() {
         return u3Xb7;
     }
@@ -1232,6 +1391,8 @@ public class PowerxbMonitor {
         this.u3Xb7 = u3Xb7;
     }
 
+    @Basic
+    @Column(name = "U1va_7", nullable = true, precision = 2)
     public Float getU1Va7() {
         return u1Va7;
     }
@@ -1240,6 +1401,8 @@ public class PowerxbMonitor {
         this.u1Va7 = u1Va7;
     }
 
+    @Basic
+    @Column(name = "U2va_7", nullable = true, precision = 2)
     public Float getU2Va7() {
         return u2Va7;
     }
@@ -1248,6 +1411,8 @@ public class PowerxbMonitor {
         this.u2Va7 = u2Va7;
     }
 
+    @Basic
+    @Column(name = "U3va_7", nullable = true, precision = 2)
     public Float getU3Va7() {
         return u3Va7;
     }
@@ -1256,6 +1421,8 @@ public class PowerxbMonitor {
         this.u3Va7 = u3Va7;
     }
 
+    @Basic
+    @Column(name = "I1xb_7", nullable = true, precision = 2)
     public Float getI1Xb7() {
         return i1Xb7;
     }
@@ -1264,6 +1431,8 @@ public class PowerxbMonitor {
         this.i1Xb7 = i1Xb7;
     }
 
+    @Basic
+    @Column(name = "I2xb_7", nullable = true, precision = 2)
     public Float getI2Xb7() {
         return i2Xb7;
     }
@@ -1272,6 +1441,8 @@ public class PowerxbMonitor {
         this.i2Xb7 = i2Xb7;
     }
 
+    @Basic
+    @Column(name = "I3xb_7", nullable = true, precision = 2)
     public Float getI3Xb7() {
         return i3Xb7;
     }
@@ -1280,6 +1451,8 @@ public class PowerxbMonitor {
         this.i3Xb7 = i3Xb7;
     }
 
+    @Basic
+    @Column(name = "I1va_7", nullable = true, precision = 2)
     public Float getI1Va7() {
         return i1Va7;
     }
@@ -1288,6 +1461,8 @@ public class PowerxbMonitor {
         this.i1Va7 = i1Va7;
     }
 
+    @Basic
+    @Column(name = "I2va_7", nullable = true, precision = 2)
     public Float getI2Va7() {
         return i2Va7;
     }
@@ -1296,6 +1471,8 @@ public class PowerxbMonitor {
         this.i2Va7 = i2Va7;
     }
 
+    @Basic
+    @Column(name = "I3va_7", nullable = true, precision = 2)
     public Float getI3Va7() {
         return i3Va7;
     }
@@ -1304,6 +1481,8 @@ public class PowerxbMonitor {
         this.i3Va7 = i3Va7;
     }
 
+    @Basic
+    @Column(name = "U1xb_8", nullable = true, precision = 2)
     public Float getU1Xb8() {
         return u1Xb8;
     }
@@ -1312,6 +1491,8 @@ public class PowerxbMonitor {
         this.u1Xb8 = u1Xb8;
     }
 
+    @Basic
+    @Column(name = "U2xb_8", nullable = true, precision = 2)
     public Float getU2Xb8() {
         return u2Xb8;
     }
@@ -1320,6 +1501,8 @@ public class PowerxbMonitor {
         this.u2Xb8 = u2Xb8;
     }
 
+    @Basic
+    @Column(name = "U3xb_8", nullable = true, precision = 2)
     public Float getU3Xb8() {
         return u3Xb8;
     }
@@ -1328,6 +1511,8 @@ public class PowerxbMonitor {
         this.u3Xb8 = u3Xb8;
     }
 
+    @Basic
+    @Column(name = "U1va_8", nullable = true, precision = 2)
     public Float getU1Va8() {
         return u1Va8;
     }
@@ -1336,6 +1521,8 @@ public class PowerxbMonitor {
         this.u1Va8 = u1Va8;
     }
 
+    @Basic
+    @Column(name = "U2va_8", nullable = true, precision = 2)
     public Float getU2Va8() {
         return u2Va8;
     }
@@ -1344,6 +1531,8 @@ public class PowerxbMonitor {
         this.u2Va8 = u2Va8;
     }
 
+    @Basic
+    @Column(name = "U3va_8", nullable = true, precision = 2)
     public Float getU3Va8() {
         return u3Va8;
     }
@@ -1352,6 +1541,8 @@ public class PowerxbMonitor {
         this.u3Va8 = u3Va8;
     }
 
+    @Basic
+    @Column(name = "I1xb_8", nullable = true, precision = 2)
     public Float getI1Xb8() {
         return i1Xb8;
     }
@@ -1360,6 +1551,8 @@ public class PowerxbMonitor {
         this.i1Xb8 = i1Xb8;
     }
 
+    @Basic
+    @Column(name = "I2xb_8", nullable = true, precision = 2)
     public Float getI2Xb8() {
         return i2Xb8;
     }
@@ -1368,6 +1561,8 @@ public class PowerxbMonitor {
         this.i2Xb8 = i2Xb8;
     }
 
+    @Basic
+    @Column(name = "I3xb_8", nullable = true, precision = 2)
     public Float getI3Xb8() {
         return i3Xb8;
     }
@@ -1376,6 +1571,8 @@ public class PowerxbMonitor {
         this.i3Xb8 = i3Xb8;
     }
 
+    @Basic
+    @Column(name = "I1va_8", nullable = true, precision = 2)
     public Float getI1Va8() {
         return i1Va8;
     }
@@ -1384,6 +1581,8 @@ public class PowerxbMonitor {
         this.i1Va8 = i1Va8;
     }
 
+    @Basic
+    @Column(name = "I2va_8", nullable = true, precision = 2)
     public Float getI2Va8() {
         return i2Va8;
     }
@@ -1392,6 +1591,8 @@ public class PowerxbMonitor {
         this.i2Va8 = i2Va8;
     }
 
+    @Basic
+    @Column(name = "I3va_8", nullable = true, precision = 2)
     public Float getI3Va8() {
         return i3Va8;
     }
@@ -1400,6 +1601,8 @@ public class PowerxbMonitor {
         this.i3Va8 = i3Va8;
     }
 
+    @Basic
+    @Column(name = "U1xb_9", nullable = true, precision = 2)
     public Float getU1Xb9() {
         return u1Xb9;
     }
@@ -1408,6 +1611,8 @@ public class PowerxbMonitor {
         this.u1Xb9 = u1Xb9;
     }
 
+    @Basic
+    @Column(name = "U2xb_9", nullable = true, precision = 2)
     public Float getU2Xb9() {
         return u2Xb9;
     }
@@ -1416,6 +1621,8 @@ public class PowerxbMonitor {
         this.u2Xb9 = u2Xb9;
     }
 
+    @Basic
+    @Column(name = "U3xb_9", nullable = true, precision = 2)
     public Float getU3Xb9() {
         return u3Xb9;
     }
@@ -1424,6 +1631,8 @@ public class PowerxbMonitor {
         this.u3Xb9 = u3Xb9;
     }
 
+    @Basic
+    @Column(name = "U1va_9", nullable = true, precision = 2)
     public Float getU1Va9() {
         return u1Va9;
     }
@@ -1432,6 +1641,8 @@ public class PowerxbMonitor {
         this.u1Va9 = u1Va9;
     }
 
+    @Basic
+    @Column(name = "U2va_9", nullable = true, precision = 2)
     public Float getU2Va9() {
         return u2Va9;
     }
@@ -1440,6 +1651,8 @@ public class PowerxbMonitor {
         this.u2Va9 = u2Va9;
     }
 
+    @Basic
+    @Column(name = "U3va_9", nullable = true, precision = 2)
     public Float getU3Va9() {
         return u3Va9;
     }
@@ -1448,6 +1661,8 @@ public class PowerxbMonitor {
         this.u3Va9 = u3Va9;
     }
 
+    @Basic
+    @Column(name = "I1xb_9", nullable = true, precision = 2)
     public Float getI1Xb9() {
         return i1Xb9;
     }
@@ -1456,6 +1671,8 @@ public class PowerxbMonitor {
         this.i1Xb9 = i1Xb9;
     }
 
+    @Basic
+    @Column(name = "I2xb_9", nullable = true, precision = 2)
     public Float getI2Xb9() {
         return i2Xb9;
     }
@@ -1464,6 +1681,8 @@ public class PowerxbMonitor {
         this.i2Xb9 = i2Xb9;
     }
 
+    @Basic
+    @Column(name = "I3xb_9", nullable = true, precision = 2)
     public Float getI3Xb9() {
         return i3Xb9;
     }
@@ -1472,6 +1691,8 @@ public class PowerxbMonitor {
         this.i3Xb9 = i3Xb9;
     }
 
+    @Basic
+    @Column(name = "I1va_9", nullable = true, precision = 2)
     public Float getI1Va9() {
         return i1Va9;
     }
@@ -1480,6 +1701,8 @@ public class PowerxbMonitor {
         this.i1Va9 = i1Va9;
     }
 
+    @Basic
+    @Column(name = "I2va_9", nullable = true, precision = 2)
     public Float getI2Va9() {
         return i2Va9;
     }
@@ -1488,6 +1711,8 @@ public class PowerxbMonitor {
         this.i2Va9 = i2Va9;
     }
 
+    @Basic
+    @Column(name = "I3va_9", nullable = true, precision = 2)
     public Float getI3Va9() {
         return i3Va9;
     }
@@ -1496,6 +1721,8 @@ public class PowerxbMonitor {
         this.i3Va9 = i3Va9;
     }
 
+    @Basic
+    @Column(name = "U1xb_10", nullable = true, precision = 2)
     public Float getU1Xb10() {
         return u1Xb10;
     }
@@ -1504,6 +1731,8 @@ public class PowerxbMonitor {
         this.u1Xb10 = u1Xb10;
     }
 
+    @Basic
+    @Column(name = "U2xb_10", nullable = true, precision = 2)
     public Float getU2Xb10() {
         return u2Xb10;
     }
@@ -1512,6 +1741,8 @@ public class PowerxbMonitor {
         this.u2Xb10 = u2Xb10;
     }
 
+    @Basic
+    @Column(name = "U3xb_10", nullable = true, precision = 2)
     public Float getU3Xb10() {
         return u3Xb10;
     }
@@ -1520,6 +1751,8 @@ public class PowerxbMonitor {
         this.u3Xb10 = u3Xb10;
     }
 
+    @Basic
+    @Column(name = "U1va_10", nullable = true, precision = 2)
     public Float getU1Va10() {
         return u1Va10;
     }
@@ -1528,6 +1761,8 @@ public class PowerxbMonitor {
         this.u1Va10 = u1Va10;
     }
 
+    @Basic
+    @Column(name = "U2va_10", nullable = true, precision = 2)
     public Float getU2Va10() {
         return u2Va10;
     }
@@ -1536,6 +1771,8 @@ public class PowerxbMonitor {
         this.u2Va10 = u2Va10;
     }
 
+    @Basic
+    @Column(name = "U3va_10", nullable = true, precision = 2)
     public Float getU3Va10() {
         return u3Va10;
     }
@@ -1544,6 +1781,8 @@ public class PowerxbMonitor {
         this.u3Va10 = u3Va10;
     }
 
+    @Basic
+    @Column(name = "I1xb_10", nullable = true, precision = 2)
     public Float getI1Xb10() {
         return i1Xb10;
     }
@@ -1552,6 +1791,8 @@ public class PowerxbMonitor {
         this.i1Xb10 = i1Xb10;
     }
 
+    @Basic
+    @Column(name = "I2xb_10", nullable = true, precision = 2)
     public Float getI2Xb10() {
         return i2Xb10;
     }
@@ -1560,6 +1801,8 @@ public class PowerxbMonitor {
         this.i2Xb10 = i2Xb10;
     }
 
+    @Basic
+    @Column(name = "I3xb_10", nullable = true, precision = 2)
     public Float getI3Xb10() {
         return i3Xb10;
     }
@@ -1568,6 +1811,8 @@ public class PowerxbMonitor {
         this.i3Xb10 = i3Xb10;
     }
 
+    @Basic
+    @Column(name = "I1va_10", nullable = true, precision = 2)
     public Float getI1Va10() {
         return i1Va10;
     }
@@ -1576,6 +1821,8 @@ public class PowerxbMonitor {
         this.i1Va10 = i1Va10;
     }
 
+    @Basic
+    @Column(name = "I2va_10", nullable = true, precision = 2)
     public Float getI2Va10() {
         return i2Va10;
     }
@@ -1584,6 +1831,8 @@ public class PowerxbMonitor {
         this.i2Va10 = i2Va10;
     }
 
+    @Basic
+    @Column(name = "I3va_10", nullable = true, precision = 2)
     public Float getI3Va10() {
         return i3Va10;
     }
@@ -1592,6 +1841,8 @@ public class PowerxbMonitor {
         this.i3Va10 = i3Va10;
     }
 
+    @Basic
+    @Column(name = "U1xb_11", nullable = true, precision = 2)
     public Float getU1Xb11() {
         return u1Xb11;
     }
@@ -1600,6 +1851,8 @@ public class PowerxbMonitor {
         this.u1Xb11 = u1Xb11;
     }
 
+    @Basic
+    @Column(name = "U2xb_11", nullable = true, precision = 2)
     public Float getU2Xb11() {
         return u2Xb11;
     }
@@ -1608,6 +1861,8 @@ public class PowerxbMonitor {
         this.u2Xb11 = u2Xb11;
     }
 
+    @Basic
+    @Column(name = "U3xb_11", nullable = true, precision = 2)
     public Float getU3Xb11() {
         return u3Xb11;
     }
@@ -1616,6 +1871,8 @@ public class PowerxbMonitor {
         this.u3Xb11 = u3Xb11;
     }
 
+    @Basic
+    @Column(name = "U1va_11", nullable = true, precision = 2)
     public Float getU1Va11() {
         return u1Va11;
     }
@@ -1624,6 +1881,8 @@ public class PowerxbMonitor {
         this.u1Va11 = u1Va11;
     }
 
+    @Basic
+    @Column(name = "U2va_11", nullable = true, precision = 2)
     public Float getU2Va11() {
         return u2Va11;
     }
@@ -1632,6 +1891,8 @@ public class PowerxbMonitor {
         this.u2Va11 = u2Va11;
     }
 
+    @Basic
+    @Column(name = "U3va_11", nullable = true, precision = 2)
     public Float getU3Va11() {
         return u3Va11;
     }
@@ -1640,6 +1901,8 @@ public class PowerxbMonitor {
         this.u3Va11 = u3Va11;
     }
 
+    @Basic
+    @Column(name = "I1xb_11", nullable = true, precision = 2)
     public Float getI1Xb11() {
         return i1Xb11;
     }
@@ -1648,6 +1911,8 @@ public class PowerxbMonitor {
         this.i1Xb11 = i1Xb11;
     }
 
+    @Basic
+    @Column(name = "I2xb_11", nullable = true, precision = 2)
     public Float getI2Xb11() {
         return i2Xb11;
     }
@@ -1656,6 +1921,8 @@ public class PowerxbMonitor {
         this.i2Xb11 = i2Xb11;
     }
 
+    @Basic
+    @Column(name = "I3xb_11", nullable = true, precision = 2)
     public Float getI3Xb11() {
         return i3Xb11;
     }
@@ -1664,6 +1931,8 @@ public class PowerxbMonitor {
         this.i3Xb11 = i3Xb11;
     }
 
+    @Basic
+    @Column(name = "I1va_11", nullable = true, precision = 2)
     public Float getI1Va11() {
         return i1Va11;
     }
@@ -1672,6 +1941,8 @@ public class PowerxbMonitor {
         this.i1Va11 = i1Va11;
     }
 
+    @Basic
+    @Column(name = "I2va_11", nullable = true, precision = 2)
     public Float getI2Va11() {
         return i2Va11;
     }
@@ -1680,6 +1951,8 @@ public class PowerxbMonitor {
         this.i2Va11 = i2Va11;
     }
 
+    @Basic
+    @Column(name = "I3va_11", nullable = true, precision = 2)
     public Float getI3Va11() {
         return i3Va11;
     }
@@ -1688,6 +1961,8 @@ public class PowerxbMonitor {
         this.i3Va11 = i3Va11;
     }
 
+    @Basic
+    @Column(name = "U1xb_12", nullable = true, precision = 2)
     public Float getU1Xb12() {
         return u1Xb12;
     }
@@ -1696,6 +1971,8 @@ public class PowerxbMonitor {
         this.u1Xb12 = u1Xb12;
     }
 
+    @Basic
+    @Column(name = "U2xb_12", nullable = true, precision = 2)
     public Float getU2Xb12() {
         return u2Xb12;
     }
@@ -1704,6 +1981,8 @@ public class PowerxbMonitor {
         this.u2Xb12 = u2Xb12;
     }
 
+    @Basic
+    @Column(name = "U3xb_12", nullable = true, precision = 2)
     public Float getU3Xb12() {
         return u3Xb12;
     }
@@ -1712,6 +1991,8 @@ public class PowerxbMonitor {
         this.u3Xb12 = u3Xb12;
     }
 
+    @Basic
+    @Column(name = "U1va_12", nullable = true, precision = 2)
     public Float getU1Va12() {
         return u1Va12;
     }
@@ -1720,6 +2001,8 @@ public class PowerxbMonitor {
         this.u1Va12 = u1Va12;
     }
 
+    @Basic
+    @Column(name = "U2va_12", nullable = true, precision = 2)
     public Float getU2Va12() {
         return u2Va12;
     }
@@ -1728,6 +2011,8 @@ public class PowerxbMonitor {
         this.u2Va12 = u2Va12;
     }
 
+    @Basic
+    @Column(name = "U3va_12", nullable = true, precision = 2)
     public Float getU3Va12() {
         return u3Va12;
     }
@@ -1736,6 +2021,8 @@ public class PowerxbMonitor {
         this.u3Va12 = u3Va12;
     }
 
+    @Basic
+    @Column(name = "I1xb_12", nullable = true, precision = 2)
     public Float getI1Xb12() {
         return i1Xb12;
     }
@@ -1744,6 +2031,8 @@ public class PowerxbMonitor {
         this.i1Xb12 = i1Xb12;
     }
 
+    @Basic
+    @Column(name = "I2xb_12", nullable = true, precision = 2)
     public Float getI2Xb12() {
         return i2Xb12;
     }
@@ -1752,6 +2041,8 @@ public class PowerxbMonitor {
         this.i2Xb12 = i2Xb12;
     }
 
+    @Basic
+    @Column(name = "I3xb_12", nullable = true, precision = 2)
     public Float getI3Xb12() {
         return i3Xb12;
     }
@@ -1760,6 +2051,8 @@ public class PowerxbMonitor {
         this.i3Xb12 = i3Xb12;
     }
 
+    @Basic
+    @Column(name = "I1va_12", nullable = true, precision = 2)
     public Float getI1Va12() {
         return i1Va12;
     }
@@ -1768,6 +2061,8 @@ public class PowerxbMonitor {
         this.i1Va12 = i1Va12;
     }
 
+    @Basic
+    @Column(name = "I2va_12", nullable = true, precision = 2)
     public Float getI2Va12() {
         return i2Va12;
     }
@@ -1776,6 +2071,8 @@ public class PowerxbMonitor {
         this.i2Va12 = i2Va12;
     }
 
+    @Basic
+    @Column(name = "I3va_12", nullable = true, precision = 2)
     public Float getI3Va12() {
         return i3Va12;
     }
@@ -1784,6 +2081,8 @@ public class PowerxbMonitor {
         this.i3Va12 = i3Va12;
     }
 
+    @Basic
+    @Column(name = "U1xb_13", nullable = true, precision = 2)
     public Float getU1Xb13() {
         return u1Xb13;
     }
@@ -1792,6 +2091,8 @@ public class PowerxbMonitor {
         this.u1Xb13 = u1Xb13;
     }
 
+    @Basic
+    @Column(name = "U2xb_13", nullable = true, precision = 2)
     public Float getU2Xb13() {
         return u2Xb13;
     }
@@ -1800,6 +2101,8 @@ public class PowerxbMonitor {
         this.u2Xb13 = u2Xb13;
     }
 
+    @Basic
+    @Column(name = "U3xb_13", nullable = true, precision = 2)
     public Float getU3Xb13() {
         return u3Xb13;
     }
@@ -1808,6 +2111,8 @@ public class PowerxbMonitor {
         this.u3Xb13 = u3Xb13;
     }
 
+    @Basic
+    @Column(name = "U1va_13", nullable = true, precision = 2)
     public Float getU1Va13() {
         return u1Va13;
     }
@@ -1816,6 +2121,8 @@ public class PowerxbMonitor {
         this.u1Va13 = u1Va13;
     }
 
+    @Basic
+    @Column(name = "U2va_13", nullable = true, precision = 2)
     public Float getU2Va13() {
         return u2Va13;
     }
@@ -1824,6 +2131,8 @@ public class PowerxbMonitor {
         this.u2Va13 = u2Va13;
     }
 
+    @Basic
+    @Column(name = "U3va_13", nullable = true, precision = 2)
     public Float getU3Va13() {
         return u3Va13;
     }
@@ -1832,6 +2141,8 @@ public class PowerxbMonitor {
         this.u3Va13 = u3Va13;
     }
 
+    @Basic
+    @Column(name = "I1xb_13", nullable = true, precision = 2)
     public Float getI1Xb13() {
         return i1Xb13;
     }
@@ -1840,6 +2151,8 @@ public class PowerxbMonitor {
         this.i1Xb13 = i1Xb13;
     }
 
+    @Basic
+    @Column(name = "I2xb_13", nullable = true, precision = 2)
     public Float getI2Xb13() {
         return i2Xb13;
     }
@@ -1848,6 +2161,8 @@ public class PowerxbMonitor {
         this.i2Xb13 = i2Xb13;
     }
 
+    @Basic
+    @Column(name = "I3xb_13", nullable = true, precision = 2)
     public Float getI3Xb13() {
         return i3Xb13;
     }
@@ -1856,6 +2171,8 @@ public class PowerxbMonitor {
         this.i3Xb13 = i3Xb13;
     }
 
+    @Basic
+    @Column(name = "I1va_13", nullable = true, precision = 2)
     public Float getI1Va13() {
         return i1Va13;
     }
@@ -1864,6 +2181,8 @@ public class PowerxbMonitor {
         this.i1Va13 = i1Va13;
     }
 
+    @Basic
+    @Column(name = "I2va_13", nullable = true, precision = 2)
     public Float getI2Va13() {
         return i2Va13;
     }
@@ -1872,6 +2191,8 @@ public class PowerxbMonitor {
         this.i2Va13 = i2Va13;
     }
 
+    @Basic
+    @Column(name = "I3va_13", nullable = true, precision = 2)
     public Float getI3Va13() {
         return i3Va13;
     }
@@ -1880,6 +2201,8 @@ public class PowerxbMonitor {
         this.i3Va13 = i3Va13;
     }
 
+    @Basic
+    @Column(name = "U1xb_14", nullable = true, precision = 2)
     public Float getU1Xb14() {
         return u1Xb14;
     }
@@ -1888,6 +2211,8 @@ public class PowerxbMonitor {
         this.u1Xb14 = u1Xb14;
     }
 
+    @Basic
+    @Column(name = "U2xb_14", nullable = true, precision = 2)
     public Float getU2Xb14() {
         return u2Xb14;
     }
@@ -1896,6 +2221,8 @@ public class PowerxbMonitor {
         this.u2Xb14 = u2Xb14;
     }
 
+    @Basic
+    @Column(name = "U3xb_14", nullable = true, precision = 2)
     public Float getU3Xb14() {
         return u3Xb14;
     }
@@ -1904,6 +2231,8 @@ public class PowerxbMonitor {
         this.u3Xb14 = u3Xb14;
     }
 
+    @Basic
+    @Column(name = "U1va_14", nullable = true, precision = 2)
     public Float getU1Va14() {
         return u1Va14;
     }
@@ -1912,6 +2241,8 @@ public class PowerxbMonitor {
         this.u1Va14 = u1Va14;
     }
 
+    @Basic
+    @Column(name = "U2va_14", nullable = true, precision = 2)
     public Float getU2Va14() {
         return u2Va14;
     }
@@ -1920,6 +2251,8 @@ public class PowerxbMonitor {
         this.u2Va14 = u2Va14;
     }
 
+    @Basic
+    @Column(name = "U3va_14", nullable = true, precision = 2)
     public Float getU3Va14() {
         return u3Va14;
     }
@@ -1928,6 +2261,8 @@ public class PowerxbMonitor {
         this.u3Va14 = u3Va14;
     }
 
+    @Basic
+    @Column(name = "I1xb_14", nullable = true, precision = 2)
     public Float getI1Xb14() {
         return i1Xb14;
     }
@@ -1936,6 +2271,8 @@ public class PowerxbMonitor {
         this.i1Xb14 = i1Xb14;
     }
 
+    @Basic
+    @Column(name = "I2xb_14", nullable = true, precision = 2)
     public Float getI2Xb14() {
         return i2Xb14;
     }
@@ -1944,6 +2281,8 @@ public class PowerxbMonitor {
         this.i2Xb14 = i2Xb14;
     }
 
+    @Basic
+    @Column(name = "I3xb_14", nullable = true, precision = 2)
     public Float getI3Xb14() {
         return i3Xb14;
     }
@@ -1952,6 +2291,8 @@ public class PowerxbMonitor {
         this.i3Xb14 = i3Xb14;
     }
 
+    @Basic
+    @Column(name = "I1va_14", nullable = true, precision = 2)
     public Float getI1Va14() {
         return i1Va14;
     }
@@ -1960,6 +2301,8 @@ public class PowerxbMonitor {
         this.i1Va14 = i1Va14;
     }
 
+    @Basic
+    @Column(name = "I2va_14", nullable = true, precision = 2)
     public Float getI2Va14() {
         return i2Va14;
     }
@@ -1968,6 +2311,8 @@ public class PowerxbMonitor {
         this.i2Va14 = i2Va14;
     }
 
+    @Basic
+    @Column(name = "I3va_14", nullable = true, precision = 2)
     public Float getI3Va14() {
         return i3Va14;
     }
@@ -1976,6 +2321,8 @@ public class PowerxbMonitor {
         this.i3Va14 = i3Va14;
     }
 
+    @Basic
+    @Column(name = "U1xb_15", nullable = true, precision = 2)
     public Float getU1Xb15() {
         return u1Xb15;
     }
@@ -1984,6 +2331,8 @@ public class PowerxbMonitor {
         this.u1Xb15 = u1Xb15;
     }
 
+    @Basic
+    @Column(name = "U2xb_15", nullable = true, precision = 2)
     public Float getU2Xb15() {
         return u2Xb15;
     }
@@ -1992,6 +2341,8 @@ public class PowerxbMonitor {
         this.u2Xb15 = u2Xb15;
     }
 
+    @Basic
+    @Column(name = "U3xb_15", nullable = true, precision = 2)
     public Float getU3Xb15() {
         return u3Xb15;
     }
@@ -2000,6 +2351,8 @@ public class PowerxbMonitor {
         this.u3Xb15 = u3Xb15;
     }
 
+    @Basic
+    @Column(name = "U1va_15", nullable = true, precision = 2)
     public Float getU1Va15() {
         return u1Va15;
     }
@@ -2008,6 +2361,8 @@ public class PowerxbMonitor {
         this.u1Va15 = u1Va15;
     }
 
+    @Basic
+    @Column(name = "U2va_15", nullable = true, precision = 2)
     public Float getU2Va15() {
         return u2Va15;
     }
@@ -2016,6 +2371,8 @@ public class PowerxbMonitor {
         this.u2Va15 = u2Va15;
     }
 
+    @Basic
+    @Column(name = "U3va_15", nullable = true, precision = 2)
     public Float getU3Va15() {
         return u3Va15;
     }
@@ -2024,6 +2381,8 @@ public class PowerxbMonitor {
         this.u3Va15 = u3Va15;
     }
 
+    @Basic
+    @Column(name = "I1xb_15", nullable = true, precision = 2)
     public Float getI1Xb15() {
         return i1Xb15;
     }
@@ -2032,6 +2391,8 @@ public class PowerxbMonitor {
         this.i1Xb15 = i1Xb15;
     }
 
+    @Basic
+    @Column(name = "I2xb_15", nullable = true, precision = 2)
     public Float getI2Xb15() {
         return i2Xb15;
     }
@@ -2040,6 +2401,8 @@ public class PowerxbMonitor {
         this.i2Xb15 = i2Xb15;
     }
 
+    @Basic
+    @Column(name = "I3xb_15", nullable = true, precision = 2)
     public Float getI3Xb15() {
         return i3Xb15;
     }
@@ -2048,6 +2411,8 @@ public class PowerxbMonitor {
         this.i3Xb15 = i3Xb15;
     }
 
+    @Basic
+    @Column(name = "I1va_15", nullable = true, precision = 2)
     public Float getI1Va15() {
         return i1Va15;
     }
@@ -2056,6 +2421,8 @@ public class PowerxbMonitor {
         this.i1Va15 = i1Va15;
     }
 
+    @Basic
+    @Column(name = "I2va_15", nullable = true, precision = 2)
     public Float getI2Va15() {
         return i2Va15;
     }
@@ -2064,6 +2431,8 @@ public class PowerxbMonitor {
         this.i2Va15 = i2Va15;
     }
 
+    @Basic
+    @Column(name = "I3va_15", nullable = true, precision = 2)
     public Float getI3Va15() {
         return i3Va15;
     }
@@ -2072,6 +2441,8 @@ public class PowerxbMonitor {
         this.i3Va15 = i3Va15;
     }
 
+    @Basic
+    @Column(name = "U1xb_16", nullable = true, precision = 2)
     public Float getU1Xb16() {
         return u1Xb16;
     }
@@ -2080,6 +2451,8 @@ public class PowerxbMonitor {
         this.u1Xb16 = u1Xb16;
     }
 
+    @Basic
+    @Column(name = "U2xb_16", nullable = true, precision = 2)
     public Float getU2Xb16() {
         return u2Xb16;
     }
@@ -2088,6 +2461,8 @@ public class PowerxbMonitor {
         this.u2Xb16 = u2Xb16;
     }
 
+    @Basic
+    @Column(name = "U3xb_16", nullable = true, precision = 2)
     public Float getU3Xb16() {
         return u3Xb16;
     }
@@ -2096,6 +2471,8 @@ public class PowerxbMonitor {
         this.u3Xb16 = u3Xb16;
     }
 
+    @Basic
+    @Column(name = "U1va_16", nullable = true, precision = 2)
     public Float getU1Va16() {
         return u1Va16;
     }
@@ -2104,6 +2481,8 @@ public class PowerxbMonitor {
         this.u1Va16 = u1Va16;
     }
 
+    @Basic
+    @Column(name = "U2va_16", nullable = true, precision = 2)
     public Float getU2Va16() {
         return u2Va16;
     }
@@ -2112,6 +2491,8 @@ public class PowerxbMonitor {
         this.u2Va16 = u2Va16;
     }
 
+    @Basic
+    @Column(name = "U3va_16", nullable = true, precision = 2)
     public Float getU3Va16() {
         return u3Va16;
     }
@@ -2120,6 +2501,8 @@ public class PowerxbMonitor {
         this.u3Va16 = u3Va16;
     }
 
+    @Basic
+    @Column(name = "I1xb_16", nullable = true, precision = 2)
     public Float getI1Xb16() {
         return i1Xb16;
     }
@@ -2128,6 +2511,8 @@ public class PowerxbMonitor {
         this.i1Xb16 = i1Xb16;
     }
 
+    @Basic
+    @Column(name = "I2xb_16", nullable = true, precision = 2)
     public Float getI2Xb16() {
         return i2Xb16;
     }
@@ -2136,6 +2521,8 @@ public class PowerxbMonitor {
         this.i2Xb16 = i2Xb16;
     }
 
+    @Basic
+    @Column(name = "I3xb_16", nullable = true, precision = 2)
     public Float getI3Xb16() {
         return i3Xb16;
     }
@@ -2144,6 +2531,8 @@ public class PowerxbMonitor {
         this.i3Xb16 = i3Xb16;
     }
 
+    @Basic
+    @Column(name = "I1va_16", nullable = true, precision = 2)
     public Float getI1Va16() {
         return i1Va16;
     }
@@ -2152,6 +2541,8 @@ public class PowerxbMonitor {
         this.i1Va16 = i1Va16;
     }
 
+    @Basic
+    @Column(name = "I2va_16", nullable = true, precision = 2)
     public Float getI2Va16() {
         return i2Va16;
     }
@@ -2160,6 +2551,8 @@ public class PowerxbMonitor {
         this.i2Va16 = i2Va16;
     }
 
+    @Basic
+    @Column(name = "I3va_16", nullable = true, precision = 2)
     public Float getI3Va16() {
         return i3Va16;
     }
@@ -2168,6 +2561,8 @@ public class PowerxbMonitor {
         this.i3Va16 = i3Va16;
     }
 
+    @Basic
+    @Column(name = "U1xb_17", nullable = true, precision = 2)
     public Float getU1Xb17() {
         return u1Xb17;
     }
@@ -2176,6 +2571,8 @@ public class PowerxbMonitor {
         this.u1Xb17 = u1Xb17;
     }
 
+    @Basic
+    @Column(name = "U2xb_17", nullable = true, precision = 2)
     public Float getU2Xb17() {
         return u2Xb17;
     }
@@ -2184,6 +2581,8 @@ public class PowerxbMonitor {
         this.u2Xb17 = u2Xb17;
     }
 
+    @Basic
+    @Column(name = "U3xb_17", nullable = true, precision = 2)
     public Float getU3Xb17() {
         return u3Xb17;
     }
@@ -2192,6 +2591,8 @@ public class PowerxbMonitor {
         this.u3Xb17 = u3Xb17;
     }
 
+    @Basic
+    @Column(name = "U1va_17", nullable = true, precision = 2)
     public Float getU1Va17() {
         return u1Va17;
     }
@@ -2200,6 +2601,8 @@ public class PowerxbMonitor {
         this.u1Va17 = u1Va17;
     }
 
+    @Basic
+    @Column(name = "U2va_17", nullable = true, precision = 2)
     public Float getU2Va17() {
         return u2Va17;
     }
@@ -2208,6 +2611,8 @@ public class PowerxbMonitor {
         this.u2Va17 = u2Va17;
     }
 
+    @Basic
+    @Column(name = "U3va_17", nullable = true, precision = 2)
     public Float getU3Va17() {
         return u3Va17;
     }
@@ -2216,6 +2621,8 @@ public class PowerxbMonitor {
         this.u3Va17 = u3Va17;
     }
 
+    @Basic
+    @Column(name = "I1xb_17", nullable = true, precision = 2)
     public Float getI1Xb17() {
         return i1Xb17;
     }
@@ -2224,6 +2631,8 @@ public class PowerxbMonitor {
         this.i1Xb17 = i1Xb17;
     }
 
+    @Basic
+    @Column(name = "I2xb_17", nullable = true, precision = 2)
     public Float getI2Xb17() {
         return i2Xb17;
     }
@@ -2232,6 +2641,8 @@ public class PowerxbMonitor {
         this.i2Xb17 = i2Xb17;
     }
 
+    @Basic
+    @Column(name = "I3xb_17", nullable = true, precision = 2)
     public Float getI3Xb17() {
         return i3Xb17;
     }
@@ -2240,6 +2651,8 @@ public class PowerxbMonitor {
         this.i3Xb17 = i3Xb17;
     }
 
+    @Basic
+    @Column(name = "I1va_17", nullable = true, precision = 2)
     public Float getI1Va17() {
         return i1Va17;
     }
@@ -2248,6 +2661,8 @@ public class PowerxbMonitor {
         this.i1Va17 = i1Va17;
     }
 
+    @Basic
+    @Column(name = "I2va_17", nullable = true, precision = 2)
     public Float getI2Va17() {
         return i2Va17;
     }
@@ -2256,6 +2671,8 @@ public class PowerxbMonitor {
         this.i2Va17 = i2Va17;
     }
 
+    @Basic
+    @Column(name = "I3va_17", nullable = true, precision = 2)
     public Float getI3Va17() {
         return i3Va17;
     }
@@ -2264,6 +2681,8 @@ public class PowerxbMonitor {
         this.i3Va17 = i3Va17;
     }
 
+    @Basic
+    @Column(name = "U1xb_18", nullable = true, precision = 2)
     public Float getU1Xb18() {
         return u1Xb18;
     }
@@ -2272,6 +2691,8 @@ public class PowerxbMonitor {
         this.u1Xb18 = u1Xb18;
     }
 
+    @Basic
+    @Column(name = "U2xb_18", nullable = true, precision = 2)
     public Float getU2Xb18() {
         return u2Xb18;
     }
@@ -2280,6 +2701,8 @@ public class PowerxbMonitor {
         this.u2Xb18 = u2Xb18;
     }
 
+    @Basic
+    @Column(name = "U3xb_18", nullable = true, precision = 2)
     public Float getU3Xb18() {
         return u3Xb18;
     }
@@ -2288,6 +2711,8 @@ public class PowerxbMonitor {
         this.u3Xb18 = u3Xb18;
     }
 
+    @Basic
+    @Column(name = "U1va_18", nullable = true, precision = 2)
     public Float getU1Va18() {
         return u1Va18;
     }
@@ -2296,6 +2721,8 @@ public class PowerxbMonitor {
         this.u1Va18 = u1Va18;
     }
 
+    @Basic
+    @Column(name = "U2va_18", nullable = true, precision = 2)
     public Float getU2Va18() {
         return u2Va18;
     }
@@ -2304,6 +2731,8 @@ public class PowerxbMonitor {
         this.u2Va18 = u2Va18;
     }
 
+    @Basic
+    @Column(name = "U3va_18", nullable = true, precision = 2)
     public Float getU3Va18() {
         return u3Va18;
     }
@@ -2312,6 +2741,8 @@ public class PowerxbMonitor {
         this.u3Va18 = u3Va18;
     }
 
+    @Basic
+    @Column(name = "I1xb_18", nullable = true, precision = 2)
     public Float getI1Xb18() {
         return i1Xb18;
     }
@@ -2320,6 +2751,8 @@ public class PowerxbMonitor {
         this.i1Xb18 = i1Xb18;
     }
 
+    @Basic
+    @Column(name = "I2xb_18", nullable = true, precision = 2)
     public Float getI2Xb18() {
         return i2Xb18;
     }
@@ -2328,6 +2761,8 @@ public class PowerxbMonitor {
         this.i2Xb18 = i2Xb18;
     }
 
+    @Basic
+    @Column(name = "I3xb_18", nullable = true, precision = 2)
     public Float getI3Xb18() {
         return i3Xb18;
     }
@@ -2336,6 +2771,8 @@ public class PowerxbMonitor {
         this.i3Xb18 = i3Xb18;
     }
 
+    @Basic
+    @Column(name = "I1va_18", nullable = true, precision = 2)
     public Float getI1Va18() {
         return i1Va18;
     }
@@ -2344,6 +2781,8 @@ public class PowerxbMonitor {
         this.i1Va18 = i1Va18;
     }
 
+    @Basic
+    @Column(name = "I2va_18", nullable = true, precision = 2)
     public Float getI2Va18() {
         return i2Va18;
     }
@@ -2352,6 +2791,8 @@ public class PowerxbMonitor {
         this.i2Va18 = i2Va18;
     }
 
+    @Basic
+    @Column(name = "I3va_18", nullable = true, precision = 2)
     public Float getI3Va18() {
         return i3Va18;
     }
@@ -2360,6 +2801,8 @@ public class PowerxbMonitor {
         this.i3Va18 = i3Va18;
     }
 
+    @Basic
+    @Column(name = "U1xb_19", nullable = true, precision = 2)
     public Float getU1Xb19() {
         return u1Xb19;
     }
@@ -2368,6 +2811,8 @@ public class PowerxbMonitor {
         this.u1Xb19 = u1Xb19;
     }
 
+    @Basic
+    @Column(name = "U2xb_19", nullable = true, precision = 2)
     public Float getU2Xb19() {
         return u2Xb19;
     }
@@ -2376,6 +2821,8 @@ public class PowerxbMonitor {
         this.u2Xb19 = u2Xb19;
     }
 
+    @Basic
+    @Column(name = "U3xb_19", nullable = true, precision = 2)
     public Float getU3Xb19() {
         return u3Xb19;
     }
@@ -2384,6 +2831,8 @@ public class PowerxbMonitor {
         this.u3Xb19 = u3Xb19;
     }
 
+    @Basic
+    @Column(name = "U1va_19", nullable = true, precision = 2)
     public Float getU1Va19() {
         return u1Va19;
     }
@@ -2392,6 +2841,8 @@ public class PowerxbMonitor {
         this.u1Va19 = u1Va19;
     }
 
+    @Basic
+    @Column(name = "U2va_19", nullable = true, precision = 2)
     public Float getU2Va19() {
         return u2Va19;
     }
@@ -2400,6 +2851,8 @@ public class PowerxbMonitor {
         this.u2Va19 = u2Va19;
     }
 
+    @Basic
+    @Column(name = "U3va_19", nullable = true, precision = 2)
     public Float getU3Va19() {
         return u3Va19;
     }
@@ -2408,6 +2861,8 @@ public class PowerxbMonitor {
         this.u3Va19 = u3Va19;
     }
 
+    @Basic
+    @Column(name = "I1xb_19", nullable = true, precision = 2)
     public Float getI1Xb19() {
         return i1Xb19;
     }
@@ -2416,6 +2871,8 @@ public class PowerxbMonitor {
         this.i1Xb19 = i1Xb19;
     }
 
+    @Basic
+    @Column(name = "I2xb_19", nullable = true, precision = 2)
     public Float getI2Xb19() {
         return i2Xb19;
     }
@@ -2424,6 +2881,8 @@ public class PowerxbMonitor {
         this.i2Xb19 = i2Xb19;
     }
 
+    @Basic
+    @Column(name = "I3xb_19", nullable = true, precision = 2)
     public Float getI3Xb19() {
         return i3Xb19;
     }
@@ -2432,6 +2891,8 @@ public class PowerxbMonitor {
         this.i3Xb19 = i3Xb19;
     }
 
+    @Basic
+    @Column(name = "I1va_19", nullable = true, precision = 2)
     public Float getI1Va19() {
         return i1Va19;
     }
@@ -2440,6 +2901,8 @@ public class PowerxbMonitor {
         this.i1Va19 = i1Va19;
     }
 
+    @Basic
+    @Column(name = "I2va_19", nullable = true, precision = 2)
     public Float getI2Va19() {
         return i2Va19;
     }
@@ -2448,6 +2911,8 @@ public class PowerxbMonitor {
         this.i2Va19 = i2Va19;
     }
 
+    @Basic
+    @Column(name = "I3va_19", nullable = true, precision = 2)
     public Float getI3Va19() {
         return i3Va19;
     }
@@ -2456,6 +2921,8 @@ public class PowerxbMonitor {
         this.i3Va19 = i3Va19;
     }
 
+    @Basic
+    @Column(name = "U1xb_20", nullable = true, precision = 2)
     public Float getU1Xb20() {
         return u1Xb20;
     }
@@ -2464,6 +2931,8 @@ public class PowerxbMonitor {
         this.u1Xb20 = u1Xb20;
     }
 
+    @Basic
+    @Column(name = "U2xb_20", nullable = true, precision = 2)
     public Float getU2Xb20() {
         return u2Xb20;
     }
@@ -2472,6 +2941,8 @@ public class PowerxbMonitor {
         this.u2Xb20 = u2Xb20;
     }
 
+    @Basic
+    @Column(name = "U3xb_20", nullable = true, precision = 2)
     public Float getU3Xb20() {
         return u3Xb20;
     }
@@ -2480,6 +2951,8 @@ public class PowerxbMonitor {
         this.u3Xb20 = u3Xb20;
     }
 
+    @Basic
+    @Column(name = "U1va_20", nullable = true, precision = 2)
     public Float getU1Va20() {
         return u1Va20;
     }
@@ -2488,6 +2961,8 @@ public class PowerxbMonitor {
         this.u1Va20 = u1Va20;
     }
 
+    @Basic
+    @Column(name = "U2va_20", nullable = true, precision = 2)
     public Float getU2Va20() {
         return u2Va20;
     }
@@ -2496,6 +2971,8 @@ public class PowerxbMonitor {
         this.u2Va20 = u2Va20;
     }
 
+    @Basic
+    @Column(name = "U3va_20", nullable = true, precision = 2)
     public Float getU3Va20() {
         return u3Va20;
     }
@@ -2504,6 +2981,8 @@ public class PowerxbMonitor {
         this.u3Va20 = u3Va20;
     }
 
+    @Basic
+    @Column(name = "I1xb_20", nullable = true, precision = 2)
     public Float getI1Xb20() {
         return i1Xb20;
     }
@@ -2512,6 +2991,8 @@ public class PowerxbMonitor {
         this.i1Xb20 = i1Xb20;
     }
 
+    @Basic
+    @Column(name = "I2xb_20", nullable = true, precision = 2)
     public Float getI2Xb20() {
         return i2Xb20;
     }
@@ -2520,6 +3001,8 @@ public class PowerxbMonitor {
         this.i2Xb20 = i2Xb20;
     }
 
+    @Basic
+    @Column(name = "I3xb_20", nullable = true, precision = 2)
     public Float getI3Xb20() {
         return i3Xb20;
     }
@@ -2528,6 +3011,8 @@ public class PowerxbMonitor {
         this.i3Xb20 = i3Xb20;
     }
 
+    @Basic
+    @Column(name = "I1va_20", nullable = true, precision = 2)
     public Float getI1Va20() {
         return i1Va20;
     }
@@ -2536,6 +3021,8 @@ public class PowerxbMonitor {
         this.i1Va20 = i1Va20;
     }
 
+    @Basic
+    @Column(name = "I2va_20", nullable = true, precision = 2)
     public Float getI2Va20() {
         return i2Va20;
     }
@@ -2544,6 +3031,8 @@ public class PowerxbMonitor {
         this.i2Va20 = i2Va20;
     }
 
+    @Basic
+    @Column(name = "I3va_20", nullable = true, precision = 2)
     public Float getI3Va20() {
         return i3Va20;
     }
@@ -2552,6 +3041,8 @@ public class PowerxbMonitor {
         this.i3Va20 = i3Va20;
     }
 
+    @Basic
+    @Column(name = "U1xb_21", nullable = true, precision = 2)
     public Float getU1Xb21() {
         return u1Xb21;
     }
@@ -2560,6 +3051,8 @@ public class PowerxbMonitor {
         this.u1Xb21 = u1Xb21;
     }
 
+    @Basic
+    @Column(name = "U2xb_21", nullable = true, precision = 2)
     public Float getU2Xb21() {
         return u2Xb21;
     }
@@ -2568,6 +3061,8 @@ public class PowerxbMonitor {
         this.u2Xb21 = u2Xb21;
     }
 
+    @Basic
+    @Column(name = "U3xb_21", nullable = true, precision = 2)
     public Float getU3Xb21() {
         return u3Xb21;
     }
@@ -2576,6 +3071,8 @@ public class PowerxbMonitor {
         this.u3Xb21 = u3Xb21;
     }
 
+    @Basic
+    @Column(name = "U1va_21", nullable = true, precision = 2)
     public Float getU1Va21() {
         return u1Va21;
     }
@@ -2584,6 +3081,8 @@ public class PowerxbMonitor {
         this.u1Va21 = u1Va21;
     }
 
+    @Basic
+    @Column(name = "U2va_21", nullable = true, precision = 2)
     public Float getU2Va21() {
         return u2Va21;
     }
@@ -2592,6 +3091,8 @@ public class PowerxbMonitor {
         this.u2Va21 = u2Va21;
     }
 
+    @Basic
+    @Column(name = "U3va_21", nullable = true, precision = 2)
     public Float getU3Va21() {
         return u3Va21;
     }
@@ -2600,6 +3101,8 @@ public class PowerxbMonitor {
         this.u3Va21 = u3Va21;
     }
 
+    @Basic
+    @Column(name = "I1xb_21", nullable = true, precision = 2)
     public Float getI1Xb21() {
         return i1Xb21;
     }
@@ -2608,6 +3111,8 @@ public class PowerxbMonitor {
         this.i1Xb21 = i1Xb21;
     }
 
+    @Basic
+    @Column(name = "I2xb_21", nullable = true, precision = 2)
     public Float getI2Xb21() {
         return i2Xb21;
     }
@@ -2616,6 +3121,8 @@ public class PowerxbMonitor {
         this.i2Xb21 = i2Xb21;
     }
 
+    @Basic
+    @Column(name = "I3xb_21", nullable = true, precision = 2)
     public Float getI3Xb21() {
         return i3Xb21;
     }
@@ -2624,6 +3131,8 @@ public class PowerxbMonitor {
         this.i3Xb21 = i3Xb21;
     }
 
+    @Basic
+    @Column(name = "I1va_21", nullable = true, precision = 2)
     public Float getI1Va21() {
         return i1Va21;
     }
@@ -2632,6 +3141,8 @@ public class PowerxbMonitor {
         this.i1Va21 = i1Va21;
     }
 
+    @Basic
+    @Column(name = "I2va_21", nullable = true, precision = 2)
     public Float getI2Va21() {
         return i2Va21;
     }
@@ -2640,6 +3151,8 @@ public class PowerxbMonitor {
         this.i2Va21 = i2Va21;
     }
 
+    @Basic
+    @Column(name = "I3va_21", nullable = true, precision = 2)
     public Float getI3Va21() {
         return i3Va21;
     }
@@ -2648,6 +3161,8 @@ public class PowerxbMonitor {
         this.i3Va21 = i3Va21;
     }
 
+    @Basic
+    @Column(name = "U1xb_22", nullable = true, precision = 2)
     public Float getU1Xb22() {
         return u1Xb22;
     }
@@ -2656,6 +3171,8 @@ public class PowerxbMonitor {
         this.u1Xb22 = u1Xb22;
     }
 
+    @Basic
+    @Column(name = "U2xb_22", nullable = true, precision = 2)
     public Float getU2Xb22() {
         return u2Xb22;
     }
@@ -2664,6 +3181,8 @@ public class PowerxbMonitor {
         this.u2Xb22 = u2Xb22;
     }
 
+    @Basic
+    @Column(name = "U3xb_22", nullable = true, precision = 2)
     public Float getU3Xb22() {
         return u3Xb22;
     }
@@ -2672,6 +3191,8 @@ public class PowerxbMonitor {
         this.u3Xb22 = u3Xb22;
     }
 
+    @Basic
+    @Column(name = "U1va_22", nullable = true, precision = 2)
     public Float getU1Va22() {
         return u1Va22;
     }
@@ -2680,6 +3201,8 @@ public class PowerxbMonitor {
         this.u1Va22 = u1Va22;
     }
 
+    @Basic
+    @Column(name = "U2va_22", nullable = true, precision = 2)
     public Float getU2Va22() {
         return u2Va22;
     }
@@ -2688,6 +3211,8 @@ public class PowerxbMonitor {
         this.u2Va22 = u2Va22;
     }
 
+    @Basic
+    @Column(name = "U3va_22", nullable = true, precision = 2)
     public Float getU3Va22() {
         return u3Va22;
     }
@@ -2696,6 +3221,8 @@ public class PowerxbMonitor {
         this.u3Va22 = u3Va22;
     }
 
+    @Basic
+    @Column(name = "I1xb_22", nullable = true, precision = 2)
     public Float getI1Xb22() {
         return i1Xb22;
     }
@@ -2704,6 +3231,8 @@ public class PowerxbMonitor {
         this.i1Xb22 = i1Xb22;
     }
 
+    @Basic
+    @Column(name = "I2xb_22", nullable = true, precision = 2)
     public Float getI2Xb22() {
         return i2Xb22;
     }
@@ -2712,6 +3241,8 @@ public class PowerxbMonitor {
         this.i2Xb22 = i2Xb22;
     }
 
+    @Basic
+    @Column(name = "I3xb_22", nullable = true, precision = 2)
     public Float getI3Xb22() {
         return i3Xb22;
     }
@@ -2720,6 +3251,8 @@ public class PowerxbMonitor {
         this.i3Xb22 = i3Xb22;
     }
 
+    @Basic
+    @Column(name = "I1va_22", nullable = true, precision = 2)
     public Float getI1Va22() {
         return i1Va22;
     }
@@ -2728,6 +3261,8 @@ public class PowerxbMonitor {
         this.i1Va22 = i1Va22;
     }
 
+    @Basic
+    @Column(name = "I2va_22", nullable = true, precision = 2)
     public Float getI2Va22() {
         return i2Va22;
     }
@@ -2736,6 +3271,8 @@ public class PowerxbMonitor {
         this.i2Va22 = i2Va22;
     }
 
+    @Basic
+    @Column(name = "I3va_22", nullable = true, precision = 2)
     public Float getI3Va22() {
         return i3Va22;
     }
@@ -2744,6 +3281,8 @@ public class PowerxbMonitor {
         this.i3Va22 = i3Va22;
     }
 
+    @Basic
+    @Column(name = "U1xb_23", nullable = true, precision = 2)
     public Float getU1Xb23() {
         return u1Xb23;
     }
@@ -2752,6 +3291,8 @@ public class PowerxbMonitor {
         this.u1Xb23 = u1Xb23;
     }
 
+    @Basic
+    @Column(name = "U2xb_23", nullable = true, precision = 2)
     public Float getU2Xb23() {
         return u2Xb23;
     }
@@ -2760,6 +3301,8 @@ public class PowerxbMonitor {
         this.u2Xb23 = u2Xb23;
     }
 
+    @Basic
+    @Column(name = "U3xb_23", nullable = true, precision = 2)
     public Float getU3Xb23() {
         return u3Xb23;
     }
@@ -2768,6 +3311,8 @@ public class PowerxbMonitor {
         this.u3Xb23 = u3Xb23;
     }
 
+    @Basic
+    @Column(name = "U1va_23", nullable = true, precision = 2)
     public Float getU1Va23() {
         return u1Va23;
     }
@@ -2776,6 +3321,8 @@ public class PowerxbMonitor {
         this.u1Va23 = u1Va23;
     }
 
+    @Basic
+    @Column(name = "U2va_23", nullable = true, precision = 2)
     public Float getU2Va23() {
         return u2Va23;
     }
@@ -2784,6 +3331,8 @@ public class PowerxbMonitor {
         this.u2Va23 = u2Va23;
     }
 
+    @Basic
+    @Column(name = "U3va_23", nullable = true, precision = 2)
     public Float getU3Va23() {
         return u3Va23;
     }
@@ -2792,6 +3341,8 @@ public class PowerxbMonitor {
         this.u3Va23 = u3Va23;
     }
 
+    @Basic
+    @Column(name = "I1xb_23", nullable = true, precision = 2)
     public Float getI1Xb23() {
         return i1Xb23;
     }
@@ -2800,6 +3351,8 @@ public class PowerxbMonitor {
         this.i1Xb23 = i1Xb23;
     }
 
+    @Basic
+    @Column(name = "I2xb_23", nullable = true, precision = 2)
     public Float getI2Xb23() {
         return i2Xb23;
     }
@@ -2808,6 +3361,8 @@ public class PowerxbMonitor {
         this.i2Xb23 = i2Xb23;
     }
 
+    @Basic
+    @Column(name = "I3xb_23", nullable = true, precision = 2)
     public Float getI3Xb23() {
         return i3Xb23;
     }
@@ -2816,6 +3371,8 @@ public class PowerxbMonitor {
         this.i3Xb23 = i3Xb23;
     }
 
+    @Basic
+    @Column(name = "I1va_23", nullable = true, precision = 2)
     public Float getI1Va23() {
         return i1Va23;
     }
@@ -2824,6 +3381,8 @@ public class PowerxbMonitor {
         this.i1Va23 = i1Va23;
     }
 
+    @Basic
+    @Column(name = "I2va_23", nullable = true, precision = 2)
     public Float getI2Va23() {
         return i2Va23;
     }
@@ -2832,6 +3391,8 @@ public class PowerxbMonitor {
         this.i2Va23 = i2Va23;
     }
 
+    @Basic
+    @Column(name = "I3va_23", nullable = true, precision = 2)
     public Float getI3Va23() {
         return i3Va23;
     }
@@ -2840,6 +3401,8 @@ public class PowerxbMonitor {
         this.i3Va23 = i3Va23;
     }
 
+    @Basic
+    @Column(name = "U1xb_24", nullable = true, precision = 2)
     public Float getU1Xb24() {
         return u1Xb24;
     }
@@ -2848,6 +3411,8 @@ public class PowerxbMonitor {
         this.u1Xb24 = u1Xb24;
     }
 
+    @Basic
+    @Column(name = "U2xb_24", nullable = true, precision = 2)
     public Float getU2Xb24() {
         return u2Xb24;
     }
@@ -2856,6 +3421,8 @@ public class PowerxbMonitor {
         this.u2Xb24 = u2Xb24;
     }
 
+    @Basic
+    @Column(name = "U3xb_24", nullable = true, precision = 2)
     public Float getU3Xb24() {
         return u3Xb24;
     }
@@ -2864,6 +3431,8 @@ public class PowerxbMonitor {
         this.u3Xb24 = u3Xb24;
     }
 
+    @Basic
+    @Column(name = "U1va_24", nullable = true, precision = 2)
     public Float getU1Va24() {
         return u1Va24;
     }
@@ -2872,6 +3441,8 @@ public class PowerxbMonitor {
         this.u1Va24 = u1Va24;
     }
 
+    @Basic
+    @Column(name = "U2va_24", nullable = true, precision = 2)
     public Float getU2Va24() {
         return u2Va24;
     }
@@ -2880,6 +3451,8 @@ public class PowerxbMonitor {
         this.u2Va24 = u2Va24;
     }
 
+    @Basic
+    @Column(name = "U3va_24", nullable = true, precision = 2)
     public Float getU3Va24() {
         return u3Va24;
     }
@@ -2888,6 +3461,8 @@ public class PowerxbMonitor {
         this.u3Va24 = u3Va24;
     }
 
+    @Basic
+    @Column(name = "I1xb_24", nullable = true, precision = 2)
     public Float getI1Xb24() {
         return i1Xb24;
     }
@@ -2896,6 +3471,8 @@ public class PowerxbMonitor {
         this.i1Xb24 = i1Xb24;
     }
 
+    @Basic
+    @Column(name = "I2xb_24", nullable = true, precision = 2)
     public Float getI2Xb24() {
         return i2Xb24;
     }
@@ -2904,6 +3481,8 @@ public class PowerxbMonitor {
         this.i2Xb24 = i2Xb24;
     }
 
+    @Basic
+    @Column(name = "I3xb_24", nullable = true, precision = 2)
     public Float getI3Xb24() {
         return i3Xb24;
     }
@@ -2912,6 +3491,8 @@ public class PowerxbMonitor {
         this.i3Xb24 = i3Xb24;
     }
 
+    @Basic
+    @Column(name = "I1va_24", nullable = true, precision = 2)
     public Float getI1Va24() {
         return i1Va24;
     }
@@ -2920,6 +3501,8 @@ public class PowerxbMonitor {
         this.i1Va24 = i1Va24;
     }
 
+    @Basic
+    @Column(name = "I2va_24", nullable = true, precision = 2)
     public Float getI2Va24() {
         return i2Va24;
     }
@@ -2928,6 +3511,8 @@ public class PowerxbMonitor {
         this.i2Va24 = i2Va24;
     }
 
+    @Basic
+    @Column(name = "I3va_24", nullable = true, precision = 2)
     public Float getI3Va24() {
         return i3Va24;
     }
@@ -2936,6 +3521,8 @@ public class PowerxbMonitor {
         this.i3Va24 = i3Va24;
     }
 
+    @Basic
+    @Column(name = "U1xb_25", nullable = true, precision = 2)
     public Float getU1Xb25() {
         return u1Xb25;
     }
@@ -2944,6 +3531,8 @@ public class PowerxbMonitor {
         this.u1Xb25 = u1Xb25;
     }
 
+    @Basic
+    @Column(name = "U2xb_25", nullable = true, precision = 2)
     public Float getU2Xb25() {
         return u2Xb25;
     }
@@ -2952,6 +3541,8 @@ public class PowerxbMonitor {
         this.u2Xb25 = u2Xb25;
     }
 
+    @Basic
+    @Column(name = "U3xb_25", nullable = true, precision = 2)
     public Float getU3Xb25() {
         return u3Xb25;
     }
@@ -2960,6 +3551,8 @@ public class PowerxbMonitor {
         this.u3Xb25 = u3Xb25;
     }
 
+    @Basic
+    @Column(name = "U1va_25", nullable = true, precision = 2)
     public Float getU1Va25() {
         return u1Va25;
     }
@@ -2968,6 +3561,8 @@ public class PowerxbMonitor {
         this.u1Va25 = u1Va25;
     }
 
+    @Basic
+    @Column(name = "U2va_25", nullable = true, precision = 2)
     public Float getU2Va25() {
         return u2Va25;
     }
@@ -2976,6 +3571,8 @@ public class PowerxbMonitor {
         this.u2Va25 = u2Va25;
     }
 
+    @Basic
+    @Column(name = "U3va_25", nullable = true, precision = 2)
     public Float getU3Va25() {
         return u3Va25;
     }
@@ -2984,6 +3581,8 @@ public class PowerxbMonitor {
         this.u3Va25 = u3Va25;
     }
 
+    @Basic
+    @Column(name = "I1xb_25", nullable = true, precision = 2)
     public Float getI1Xb25() {
         return i1Xb25;
     }
@@ -2992,6 +3591,8 @@ public class PowerxbMonitor {
         this.i1Xb25 = i1Xb25;
     }
 
+    @Basic
+    @Column(name = "I2xb_25", nullable = true, precision = 2)
     public Float getI2Xb25() {
         return i2Xb25;
     }
@@ -3000,6 +3601,8 @@ public class PowerxbMonitor {
         this.i2Xb25 = i2Xb25;
     }
 
+    @Basic
+    @Column(name = "I3xb_25", nullable = true, precision = 2)
     public Float getI3Xb25() {
         return i3Xb25;
     }
@@ -3008,6 +3611,8 @@ public class PowerxbMonitor {
         this.i3Xb25 = i3Xb25;
     }
 
+    @Basic
+    @Column(name = "I1va_25", nullable = true, precision = 2)
     public Float getI1Va25() {
         return i1Va25;
     }
@@ -3016,6 +3621,8 @@ public class PowerxbMonitor {
         this.i1Va25 = i1Va25;
     }
 
+    @Basic
+    @Column(name = "I2va_25", nullable = true, precision = 2)
     public Float getI2Va25() {
         return i2Va25;
     }
@@ -3024,6 +3631,8 @@ public class PowerxbMonitor {
         this.i2Va25 = i2Va25;
     }
 
+    @Basic
+    @Column(name = "I3va_25", nullable = true, precision = 2)
     public Float getI3Va25() {
         return i3Va25;
     }
@@ -3032,6 +3641,8 @@ public class PowerxbMonitor {
         this.i3Va25 = i3Va25;
     }
 
+    @Basic
+    @Column(name = "U1xb_26", nullable = true, precision = 2)
     public Float getU1Xb26() {
         return u1Xb26;
     }
@@ -3040,6 +3651,8 @@ public class PowerxbMonitor {
         this.u1Xb26 = u1Xb26;
     }
 
+    @Basic
+    @Column(name = "U2xb_26", nullable = true, precision = 2)
     public Float getU2Xb26() {
         return u2Xb26;
     }
@@ -3048,6 +3661,8 @@ public class PowerxbMonitor {
         this.u2Xb26 = u2Xb26;
     }
 
+    @Basic
+    @Column(name = "U3xb_26", nullable = true, precision = 2)
     public Float getU3Xb26() {
         return u3Xb26;
     }
@@ -3056,6 +3671,8 @@ public class PowerxbMonitor {
         this.u3Xb26 = u3Xb26;
     }
 
+    @Basic
+    @Column(name = "U1va_26", nullable = true, precision = 2)
     public Float getU1Va26() {
         return u1Va26;
     }
@@ -3064,6 +3681,8 @@ public class PowerxbMonitor {
         this.u1Va26 = u1Va26;
     }
 
+    @Basic
+    @Column(name = "U2va_26", nullable = true, precision = 2)
     public Float getU2Va26() {
         return u2Va26;
     }
@@ -3072,6 +3691,8 @@ public class PowerxbMonitor {
         this.u2Va26 = u2Va26;
     }
 
+    @Basic
+    @Column(name = "U3va_26", nullable = true, precision = 2)
     public Float getU3Va26() {
         return u3Va26;
     }
@@ -3080,6 +3701,8 @@ public class PowerxbMonitor {
         this.u3Va26 = u3Va26;
     }
 
+    @Basic
+    @Column(name = "I1xb_26", nullable = true, precision = 2)
     public Float getI1Xb26() {
         return i1Xb26;
     }
@@ -3088,6 +3711,8 @@ public class PowerxbMonitor {
         this.i1Xb26 = i1Xb26;
     }
 
+    @Basic
+    @Column(name = "I2xb_26", nullable = true, precision = 2)
     public Float getI2Xb26() {
         return i2Xb26;
     }
@@ -3096,6 +3721,8 @@ public class PowerxbMonitor {
         this.i2Xb26 = i2Xb26;
     }
 
+    @Basic
+    @Column(name = "I3xb_26", nullable = true, precision = 2)
     public Float getI3Xb26() {
         return i3Xb26;
     }
@@ -3104,6 +3731,8 @@ public class PowerxbMonitor {
         this.i3Xb26 = i3Xb26;
     }
 
+    @Basic
+    @Column(name = "I1va_26", nullable = true, precision = 2)
     public Float getI1Va26() {
         return i1Va26;
     }
@@ -3112,6 +3741,8 @@ public class PowerxbMonitor {
         this.i1Va26 = i1Va26;
     }
 
+    @Basic
+    @Column(name = "I2va_26", nullable = true, precision = 2)
     public Float getI2Va26() {
         return i2Va26;
     }
@@ -3120,6 +3751,8 @@ public class PowerxbMonitor {
         this.i2Va26 = i2Va26;
     }
 
+    @Basic
+    @Column(name = "I3va_26", nullable = true, precision = 2)
     public Float getI3Va26() {
         return i3Va26;
     }
@@ -3128,6 +3761,8 @@ public class PowerxbMonitor {
         this.i3Va26 = i3Va26;
     }
 
+    @Basic
+    @Column(name = "U1xb_27", nullable = true, precision = 2)
     public Float getU1Xb27() {
         return u1Xb27;
     }
@@ -3136,6 +3771,8 @@ public class PowerxbMonitor {
         this.u1Xb27 = u1Xb27;
     }
 
+    @Basic
+    @Column(name = "U2xb_27", nullable = true, precision = 2)
     public Float getU2Xb27() {
         return u2Xb27;
     }
@@ -3144,6 +3781,8 @@ public class PowerxbMonitor {
         this.u2Xb27 = u2Xb27;
     }
 
+    @Basic
+    @Column(name = "U3xb_27", nullable = true, precision = 2)
     public Float getU3Xb27() {
         return u3Xb27;
     }
@@ -3152,6 +3791,8 @@ public class PowerxbMonitor {
         this.u3Xb27 = u3Xb27;
     }
 
+    @Basic
+    @Column(name = "U1va_27", nullable = true, precision = 2)
     public Float getU1Va27() {
         return u1Va27;
     }
@@ -3160,6 +3801,8 @@ public class PowerxbMonitor {
         this.u1Va27 = u1Va27;
     }
 
+    @Basic
+    @Column(name = "U2va_27", nullable = true, precision = 2)
     public Float getU2Va27() {
         return u2Va27;
     }
@@ -3168,6 +3811,8 @@ public class PowerxbMonitor {
         this.u2Va27 = u2Va27;
     }
 
+    @Basic
+    @Column(name = "U3va_27", nullable = true, precision = 2)
     public Float getU3Va27() {
         return u3Va27;
     }
@@ -3176,6 +3821,8 @@ public class PowerxbMonitor {
         this.u3Va27 = u3Va27;
     }
 
+    @Basic
+    @Column(name = "I1xb_27", nullable = true, precision = 2)
     public Float getI1Xb27() {
         return i1Xb27;
     }
@@ -3184,6 +3831,8 @@ public class PowerxbMonitor {
         this.i1Xb27 = i1Xb27;
     }
 
+    @Basic
+    @Column(name = "I2xb_27", nullable = true, precision = 2)
     public Float getI2Xb27() {
         return i2Xb27;
     }
@@ -3192,6 +3841,8 @@ public class PowerxbMonitor {
         this.i2Xb27 = i2Xb27;
     }
 
+    @Basic
+    @Column(name = "I3xb_27", nullable = true, precision = 2)
     public Float getI3Xb27() {
         return i3Xb27;
     }
@@ -3200,6 +3851,8 @@ public class PowerxbMonitor {
         this.i3Xb27 = i3Xb27;
     }
 
+    @Basic
+    @Column(name = "I1va_27", nullable = true, precision = 2)
     public Float getI1Va27() {
         return i1Va27;
     }
@@ -3208,6 +3861,8 @@ public class PowerxbMonitor {
         this.i1Va27 = i1Va27;
     }
 
+    @Basic
+    @Column(name = "I2va_27", nullable = true, precision = 2)
     public Float getI2Va27() {
         return i2Va27;
     }
@@ -3216,6 +3871,8 @@ public class PowerxbMonitor {
         this.i2Va27 = i2Va27;
     }
 
+    @Basic
+    @Column(name = "I3va_27", nullable = true, precision = 2)
     public Float getI3Va27() {
         return i3Va27;
     }
@@ -3224,6 +3881,8 @@ public class PowerxbMonitor {
         this.i3Va27 = i3Va27;
     }
 
+    @Basic
+    @Column(name = "U1xb_28", nullable = true, precision = 2)
     public Float getU1Xb28() {
         return u1Xb28;
     }
@@ -3232,6 +3891,8 @@ public class PowerxbMonitor {
         this.u1Xb28 = u1Xb28;
     }
 
+    @Basic
+    @Column(name = "U2xb_28", nullable = true, precision = 2)
     public Float getU2Xb28() {
         return u2Xb28;
     }
@@ -3240,6 +3901,8 @@ public class PowerxbMonitor {
         this.u2Xb28 = u2Xb28;
     }
 
+    @Basic
+    @Column(name = "U3xb_28", nullable = true, precision = 2)
     public Float getU3Xb28() {
         return u3Xb28;
     }
@@ -3248,6 +3911,8 @@ public class PowerxbMonitor {
         this.u3Xb28 = u3Xb28;
     }
 
+    @Basic
+    @Column(name = "U1va_28", nullable = true, precision = 2)
     public Float getU1Va28() {
         return u1Va28;
     }
@@ -3256,6 +3921,8 @@ public class PowerxbMonitor {
         this.u1Va28 = u1Va28;
     }
 
+    @Basic
+    @Column(name = "U2va_28", nullable = true, precision = 2)
     public Float getU2Va28() {
         return u2Va28;
     }
@@ -3264,6 +3931,8 @@ public class PowerxbMonitor {
         this.u2Va28 = u2Va28;
     }
 
+    @Basic
+    @Column(name = "U3va_28", nullable = true, precision = 2)
     public Float getU3Va28() {
         return u3Va28;
     }
@@ -3272,6 +3941,8 @@ public class PowerxbMonitor {
         this.u3Va28 = u3Va28;
     }
 
+    @Basic
+    @Column(name = "I1xb_28", nullable = true, precision = 2)
     public Float getI1Xb28() {
         return i1Xb28;
     }
@@ -3280,6 +3951,8 @@ public class PowerxbMonitor {
         this.i1Xb28 = i1Xb28;
     }
 
+    @Basic
+    @Column(name = "I2xb_28", nullable = true, precision = 2)
     public Float getI2Xb28() {
         return i2Xb28;
     }
@@ -3288,6 +3961,8 @@ public class PowerxbMonitor {
         this.i2Xb28 = i2Xb28;
     }
 
+    @Basic
+    @Column(name = "I3xb_28", nullable = true, precision = 2)
     public Float getI3Xb28() {
         return i3Xb28;
     }
@@ -3296,6 +3971,8 @@ public class PowerxbMonitor {
         this.i3Xb28 = i3Xb28;
     }
 
+    @Basic
+    @Column(name = "I1va_28", nullable = true, precision = 2)
     public Float getI1Va28() {
         return i1Va28;
     }
@@ -3304,6 +3981,8 @@ public class PowerxbMonitor {
         this.i1Va28 = i1Va28;
     }
 
+    @Basic
+    @Column(name = "I2va_28", nullable = true, precision = 2)
     public Float getI2Va28() {
         return i2Va28;
     }
@@ -3312,6 +3991,8 @@ public class PowerxbMonitor {
         this.i2Va28 = i2Va28;
     }
 
+    @Basic
+    @Column(name = "I3va_28", nullable = true, precision = 2)
     public Float getI3Va28() {
         return i3Va28;
     }
@@ -3320,6 +4001,8 @@ public class PowerxbMonitor {
         this.i3Va28 = i3Va28;
     }
 
+    @Basic
+    @Column(name = "U1xb_29", nullable = true, precision = 2)
     public Float getU1Xb29() {
         return u1Xb29;
     }
@@ -3328,6 +4011,8 @@ public class PowerxbMonitor {
         this.u1Xb29 = u1Xb29;
     }
 
+    @Basic
+    @Column(name = "U2xb_29", nullable = true, precision = 2)
     public Float getU2Xb29() {
         return u2Xb29;
     }
@@ -3336,6 +4021,8 @@ public class PowerxbMonitor {
         this.u2Xb29 = u2Xb29;
     }
 
+    @Basic
+    @Column(name = "U3xb_29", nullable = true, precision = 2)
     public Float getU3Xb29() {
         return u3Xb29;
     }
@@ -3344,6 +4031,8 @@ public class PowerxbMonitor {
         this.u3Xb29 = u3Xb29;
     }
 
+    @Basic
+    @Column(name = "U1va_29", nullable = true, precision = 2)
     public Float getU1Va29() {
         return u1Va29;
     }
@@ -3352,6 +4041,8 @@ public class PowerxbMonitor {
         this.u1Va29 = u1Va29;
     }
 
+    @Basic
+    @Column(name = "U2va_29", nullable = true, precision = 2)
     public Float getU2Va29() {
         return u2Va29;
     }
@@ -3360,6 +4051,8 @@ public class PowerxbMonitor {
         this.u2Va29 = u2Va29;
     }
 
+    @Basic
+    @Column(name = "U3va_29", nullable = true, precision = 2)
     public Float getU3Va29() {
         return u3Va29;
     }
@@ -3368,6 +4061,8 @@ public class PowerxbMonitor {
         this.u3Va29 = u3Va29;
     }
 
+    @Basic
+    @Column(name = "I1xb_29", nullable = true, precision = 2)
     public Float getI1Xb29() {
         return i1Xb29;
     }
@@ -3376,6 +4071,8 @@ public class PowerxbMonitor {
         this.i1Xb29 = i1Xb29;
     }
 
+    @Basic
+    @Column(name = "I2xb_29", nullable = true, precision = 2)
     public Float getI2Xb29() {
         return i2Xb29;
     }
@@ -3384,6 +4081,8 @@ public class PowerxbMonitor {
         this.i2Xb29 = i2Xb29;
     }
 
+    @Basic
+    @Column(name = "I3xb_29", nullable = true, precision = 2)
     public Float getI3Xb29() {
         return i3Xb29;
     }
@@ -3392,6 +4091,8 @@ public class PowerxbMonitor {
         this.i3Xb29 = i3Xb29;
     }
 
+    @Basic
+    @Column(name = "I1va_29", nullable = true, precision = 2)
     public Float getI1Va29() {
         return i1Va29;
     }
@@ -3400,6 +4101,8 @@ public class PowerxbMonitor {
         this.i1Va29 = i1Va29;
     }
 
+    @Basic
+    @Column(name = "I2va_29", nullable = true, precision = 2)
     public Float getI2Va29() {
         return i2Va29;
     }
@@ -3408,6 +4111,8 @@ public class PowerxbMonitor {
         this.i2Va29 = i2Va29;
     }
 
+    @Basic
+    @Column(name = "I3va_29", nullable = true, precision = 2)
     public Float getI3Va29() {
         return i3Va29;
     }
@@ -3416,6 +4121,8 @@ public class PowerxbMonitor {
         this.i3Va29 = i3Va29;
     }
 
+    @Basic
+    @Column(name = "U1xb_30", nullable = true, precision = 2)
     public Float getU1Xb30() {
         return u1Xb30;
     }
@@ -3424,6 +4131,8 @@ public class PowerxbMonitor {
         this.u1Xb30 = u1Xb30;
     }
 
+    @Basic
+    @Column(name = "U2xb_30", nullable = true, precision = 2)
     public Float getU2Xb30() {
         return u2Xb30;
     }
@@ -3432,6 +4141,8 @@ public class PowerxbMonitor {
         this.u2Xb30 = u2Xb30;
     }
 
+    @Basic
+    @Column(name = "U3xb_30", nullable = true, precision = 2)
     public Float getU3Xb30() {
         return u3Xb30;
     }
@@ -3440,6 +4151,8 @@ public class PowerxbMonitor {
         this.u3Xb30 = u3Xb30;
     }
 
+    @Basic
+    @Column(name = "U1va_30", nullable = true, precision = 2)
     public Float getU1Va30() {
         return u1Va30;
     }
@@ -3448,6 +4161,8 @@ public class PowerxbMonitor {
         this.u1Va30 = u1Va30;
     }
 
+    @Basic
+    @Column(name = "U2va_30", nullable = true, precision = 2)
     public Float getU2Va30() {
         return u2Va30;
     }
@@ -3456,6 +4171,8 @@ public class PowerxbMonitor {
         this.u2Va30 = u2Va30;
     }
 
+    @Basic
+    @Column(name = "U3va_30", nullable = true, precision = 2)
     public Float getU3Va30() {
         return u3Va30;
     }
@@ -3464,6 +4181,8 @@ public class PowerxbMonitor {
         this.u3Va30 = u3Va30;
     }
 
+    @Basic
+    @Column(name = "I1xb_30", nullable = true, precision = 2)
     public Float getI1Xb30() {
         return i1Xb30;
     }
@@ -3472,6 +4191,8 @@ public class PowerxbMonitor {
         this.i1Xb30 = i1Xb30;
     }
 
+    @Basic
+    @Column(name = "I2xb_30", nullable = true, precision = 2)
     public Float getI2Xb30() {
         return i2Xb30;
     }
@@ -3480,6 +4201,8 @@ public class PowerxbMonitor {
         this.i2Xb30 = i2Xb30;
     }
 
+    @Basic
+    @Column(name = "I3xb_30", nullable = true, precision = 2)
     public Float getI3Xb30() {
         return i3Xb30;
     }
@@ -3488,6 +4211,8 @@ public class PowerxbMonitor {
         this.i3Xb30 = i3Xb30;
     }
 
+    @Basic
+    @Column(name = "I1va_30", nullable = true, precision = 2)
     public Float getI1Va30() {
         return i1Va30;
     }
@@ -3496,6 +4221,8 @@ public class PowerxbMonitor {
         this.i1Va30 = i1Va30;
     }
 
+    @Basic
+    @Column(name = "I2va_30", nullable = true, precision = 2)
     public Float getI2Va30() {
         return i2Va30;
     }
@@ -3504,6 +4231,8 @@ public class PowerxbMonitor {
         this.i2Va30 = i2Va30;
     }
 
+    @Basic
+    @Column(name = "I3va_30", nullable = true, precision = 2)
     public Float getI3Va30() {
         return i3Va30;
     }
@@ -3512,6 +4241,8 @@ public class PowerxbMonitor {
         this.i3Va30 = i3Va30;
     }
 
+    @Basic
+    @Column(name = "U1xb_31", nullable = true, precision = 2)
     public Float getU1Xb31() {
         return u1Xb31;
     }
@@ -3520,6 +4251,8 @@ public class PowerxbMonitor {
         this.u1Xb31 = u1Xb31;
     }
 
+    @Basic
+    @Column(name = "U2xb_31", nullable = true, precision = 2)
     public Float getU2Xb31() {
         return u2Xb31;
     }
@@ -3528,6 +4261,8 @@ public class PowerxbMonitor {
         this.u2Xb31 = u2Xb31;
     }
 
+    @Basic
+    @Column(name = "U3xb_31", nullable = true, precision = 2)
     public Float getU3Xb31() {
         return u3Xb31;
     }
@@ -3536,6 +4271,8 @@ public class PowerxbMonitor {
         this.u3Xb31 = u3Xb31;
     }
 
+    @Basic
+    @Column(name = "U1va_31", nullable = true, precision = 2)
     public Float getU1Va31() {
         return u1Va31;
     }
@@ -3544,6 +4281,8 @@ public class PowerxbMonitor {
         this.u1Va31 = u1Va31;
     }
 
+    @Basic
+    @Column(name = "U2va_31", nullable = true, precision = 2)
     public Float getU2Va31() {
         return u2Va31;
     }
@@ -3552,6 +4291,8 @@ public class PowerxbMonitor {
         this.u2Va31 = u2Va31;
     }
 
+    @Basic
+    @Column(name = "U3va_31", nullable = true, precision = 2)
     public Float getU3Va31() {
         return u3Va31;
     }
@@ -3560,6 +4301,8 @@ public class PowerxbMonitor {
         this.u3Va31 = u3Va31;
     }
 
+    @Basic
+    @Column(name = "I1xb_31", nullable = true, precision = 2)
     public Float getI1Xb31() {
         return i1Xb31;
     }
@@ -3568,6 +4311,8 @@ public class PowerxbMonitor {
         this.i1Xb31 = i1Xb31;
     }
 
+    @Basic
+    @Column(name = "I2xb_31", nullable = true, precision = 2)
     public Float getI2Xb31() {
         return i2Xb31;
     }
@@ -3576,6 +4321,8 @@ public class PowerxbMonitor {
         this.i2Xb31 = i2Xb31;
     }
 
+    @Basic
+    @Column(name = "I3xb_31", nullable = true, precision = 2)
     public Float getI3Xb31() {
         return i3Xb31;
     }
@@ -3584,6 +4331,8 @@ public class PowerxbMonitor {
         this.i3Xb31 = i3Xb31;
     }
 
+    @Basic
+    @Column(name = "I1va_31", nullable = true, precision = 2)
     public Float getI1Va31() {
         return i1Va31;
     }
@@ -3592,6 +4341,8 @@ public class PowerxbMonitor {
         this.i1Va31 = i1Va31;
     }
 
+    @Basic
+    @Column(name = "I2va_31", nullable = true, precision = 2)
     public Float getI2Va31() {
         return i2Va31;
     }
@@ -3600,6 +4351,8 @@ public class PowerxbMonitor {
         this.i2Va31 = i2Va31;
     }
 
+    @Basic
+    @Column(name = "I3va_31", nullable = true, precision = 2)
     public Float getI3Va31() {
         return i3Va31;
     }
@@ -3608,6 +4361,8 @@ public class PowerxbMonitor {
         this.i3Va31 = i3Va31;
     }
 
+    @Basic
+    @Column(name = "U1xb_32", nullable = true, precision = 2)
     public Float getU1Xb32() {
         return u1Xb32;
     }
@@ -3616,6 +4371,8 @@ public class PowerxbMonitor {
         this.u1Xb32 = u1Xb32;
     }
 
+    @Basic
+    @Column(name = "U2xb_32", nullable = true, precision = 2)
     public Float getU2Xb32() {
         return u2Xb32;
     }
@@ -3624,6 +4381,8 @@ public class PowerxbMonitor {
         this.u2Xb32 = u2Xb32;
     }
 
+    @Basic
+    @Column(name = "U3xb_32", nullable = true, precision = 2)
     public Float getU3Xb32() {
         return u3Xb32;
     }
@@ -3632,6 +4391,8 @@ public class PowerxbMonitor {
         this.u3Xb32 = u3Xb32;
     }
 
+    @Basic
+    @Column(name = "U1va_32", nullable = true, precision = 2)
     public Float getU1Va32() {
         return u1Va32;
     }
@@ -3640,6 +4401,8 @@ public class PowerxbMonitor {
         this.u1Va32 = u1Va32;
     }
 
+    @Basic
+    @Column(name = "U2va_32", nullable = true, precision = 2)
     public Float getU2Va32() {
         return u2Va32;
     }
@@ -3648,6 +4411,8 @@ public class PowerxbMonitor {
         this.u2Va32 = u2Va32;
     }
 
+    @Basic
+    @Column(name = "U3va_32", nullable = true, precision = 2)
     public Float getU3Va32() {
         return u3Va32;
     }
@@ -3656,6 +4421,8 @@ public class PowerxbMonitor {
         this.u3Va32 = u3Va32;
     }
 
+    @Basic
+    @Column(name = "I1xb_32", nullable = true, precision = 2)
     public Float getI1Xb32() {
         return i1Xb32;
     }
@@ -3664,6 +4431,8 @@ public class PowerxbMonitor {
         this.i1Xb32 = i1Xb32;
     }
 
+    @Basic
+    @Column(name = "I2xb_32", nullable = true, precision = 2)
     public Float getI2Xb32() {
         return i2Xb32;
     }
@@ -3672,6 +4441,8 @@ public class PowerxbMonitor {
         this.i2Xb32 = i2Xb32;
     }
 
+    @Basic
+    @Column(name = "I3xb_32", nullable = true, precision = 2)
     public Float getI3Xb32() {
         return i3Xb32;
     }
@@ -3680,6 +4451,8 @@ public class PowerxbMonitor {
         this.i3Xb32 = i3Xb32;
     }
 
+    @Basic
+    @Column(name = "I1va_32", nullable = true, precision = 2)
     public Float getI1Va32() {
         return i1Va32;
     }
@@ -3688,6 +4461,8 @@ public class PowerxbMonitor {
         this.i1Va32 = i1Va32;
     }
 
+    @Basic
+    @Column(name = "I2va_32", nullable = true, precision = 2)
     public Float getI2Va32() {
         return i2Va32;
     }
@@ -3696,6 +4471,8 @@ public class PowerxbMonitor {
         this.i2Va32 = i2Va32;
     }
 
+    @Basic
+    @Column(name = "I3va_32", nullable = true, precision = 2)
     public Float getI3Va32() {
         return i3Va32;
     }
@@ -3704,6 +4481,8 @@ public class PowerxbMonitor {
         this.i3Va32 = i3Va32;
     }
 
+    @Basic
+    @Column(name = "U1xb_33", nullable = true, precision = 2)
     public Float getU1Xb33() {
         return u1Xb33;
     }
@@ -3712,6 +4491,8 @@ public class PowerxbMonitor {
         this.u1Xb33 = u1Xb33;
     }
 
+    @Basic
+    @Column(name = "U2xb_33", nullable = true, precision = 2)
     public Float getU2Xb33() {
         return u2Xb33;
     }
@@ -3720,6 +4501,8 @@ public class PowerxbMonitor {
         this.u2Xb33 = u2Xb33;
     }
 
+    @Basic
+    @Column(name = "U3xb_33", nullable = true, precision = 2)
     public Float getU3Xb33() {
         return u3Xb33;
     }
@@ -3728,6 +4511,8 @@ public class PowerxbMonitor {
         this.u3Xb33 = u3Xb33;
     }
 
+    @Basic
+    @Column(name = "U1va_33", nullable = true, precision = 2)
     public Float getU1Va33() {
         return u1Va33;
     }
@@ -3736,6 +4521,8 @@ public class PowerxbMonitor {
         this.u1Va33 = u1Va33;
     }
 
+    @Basic
+    @Column(name = "U2va_33", nullable = true, precision = 2)
     public Float getU2Va33() {
         return u2Va33;
     }
@@ -3744,6 +4531,8 @@ public class PowerxbMonitor {
         this.u2Va33 = u2Va33;
     }
 
+    @Basic
+    @Column(name = "U3va_33", nullable = true, precision = 2)
     public Float getU3Va33() {
         return u3Va33;
     }
@@ -3752,6 +4541,8 @@ public class PowerxbMonitor {
         this.u3Va33 = u3Va33;
     }
 
+    @Basic
+    @Column(name = "I1xb_33", nullable = true, precision = 2)
     public Float getI1Xb33() {
         return i1Xb33;
     }
@@ -3760,6 +4551,8 @@ public class PowerxbMonitor {
         this.i1Xb33 = i1Xb33;
     }
 
+    @Basic
+    @Column(name = "I2xb_33", nullable = true, precision = 2)
     public Float getI2Xb33() {
         return i2Xb33;
     }
@@ -3768,6 +4561,8 @@ public class PowerxbMonitor {
         this.i2Xb33 = i2Xb33;
     }
 
+    @Basic
+    @Column(name = "I3xb_33", nullable = true, precision = 2)
     public Float getI3Xb33() {
         return i3Xb33;
     }
@@ -3776,6 +4571,8 @@ public class PowerxbMonitor {
         this.i3Xb33 = i3Xb33;
     }
 
+    @Basic
+    @Column(name = "I1va_33", nullable = true, precision = 2)
     public Float getI1Va33() {
         return i1Va33;
     }
@@ -3784,6 +4581,8 @@ public class PowerxbMonitor {
         this.i1Va33 = i1Va33;
     }
 
+    @Basic
+    @Column(name = "I2va_33", nullable = true, precision = 2)
     public Float getI2Va33() {
         return i2Va33;
     }
@@ -3792,6 +4591,8 @@ public class PowerxbMonitor {
         this.i2Va33 = i2Va33;
     }
 
+    @Basic
+    @Column(name = "I3va_33", nullable = true, precision = 2)
     public Float getI3Va33() {
         return i3Va33;
     }
@@ -3800,6 +4601,8 @@ public class PowerxbMonitor {
         this.i3Va33 = i3Va33;
     }
 
+    @Basic
+    @Column(name = "U1xb_34", nullable = true, precision = 2)
     public Float getU1Xb34() {
         return u1Xb34;
     }
@@ -3808,6 +4611,8 @@ public class PowerxbMonitor {
         this.u1Xb34 = u1Xb34;
     }
 
+    @Basic
+    @Column(name = "U2xb_34", nullable = true, precision = 2)
     public Float getU2Xb34() {
         return u2Xb34;
     }
@@ -3816,6 +4621,8 @@ public class PowerxbMonitor {
         this.u2Xb34 = u2Xb34;
     }
 
+    @Basic
+    @Column(name = "U3xb_34", nullable = true, precision = 2)
     public Float getU3Xb34() {
         return u3Xb34;
     }
@@ -3824,6 +4631,8 @@ public class PowerxbMonitor {
         this.u3Xb34 = u3Xb34;
     }
 
+    @Basic
+    @Column(name = "U1va_34", nullable = true, precision = 2)
     public Float getU1Va34() {
         return u1Va34;
     }
@@ -3832,6 +4641,8 @@ public class PowerxbMonitor {
         this.u1Va34 = u1Va34;
     }
 
+    @Basic
+    @Column(name = "U2va_34", nullable = true, precision = 2)
     public Float getU2Va34() {
         return u2Va34;
     }
@@ -3840,6 +4651,8 @@ public class PowerxbMonitor {
         this.u2Va34 = u2Va34;
     }
 
+    @Basic
+    @Column(name = "U3va_34", nullable = true, precision = 2)
     public Float getU3Va34() {
         return u3Va34;
     }
@@ -3848,6 +4661,8 @@ public class PowerxbMonitor {
         this.u3Va34 = u3Va34;
     }
 
+    @Basic
+    @Column(name = "I1xb_34", nullable = true, precision = 2)
     public Float getI1Xb34() {
         return i1Xb34;
     }
@@ -3856,6 +4671,8 @@ public class PowerxbMonitor {
         this.i1Xb34 = i1Xb34;
     }
 
+    @Basic
+    @Column(name = "I2xb_34", nullable = true, precision = 2)
     public Float getI2Xb34() {
         return i2Xb34;
     }
@@ -3864,6 +4681,8 @@ public class PowerxbMonitor {
         this.i2Xb34 = i2Xb34;
     }
 
+    @Basic
+    @Column(name = "I3xb_34", nullable = true, precision = 2)
     public Float getI3Xb34() {
         return i3Xb34;
     }
@@ -3872,6 +4691,8 @@ public class PowerxbMonitor {
         this.i3Xb34 = i3Xb34;
     }
 
+    @Basic
+    @Column(name = "I1va_34", nullable = true, precision = 2)
     public Float getI1Va34() {
         return i1Va34;
     }
@@ -3880,6 +4701,8 @@ public class PowerxbMonitor {
         this.i1Va34 = i1Va34;
     }
 
+    @Basic
+    @Column(name = "I2va_34", nullable = true, precision = 2)
     public Float getI2Va34() {
         return i2Va34;
     }
@@ -3888,6 +4711,8 @@ public class PowerxbMonitor {
         this.i2Va34 = i2Va34;
     }
 
+    @Basic
+    @Column(name = "I3va_34", nullable = true, precision = 2)
     public Float getI3Va34() {
         return i3Va34;
     }
@@ -3896,6 +4721,8 @@ public class PowerxbMonitor {
         this.i3Va34 = i3Va34;
     }
 
+    @Basic
+    @Column(name = "U1xb_35", nullable = true, precision = 2)
     public Float getU1Xb35() {
         return u1Xb35;
     }
@@ -3904,6 +4731,8 @@ public class PowerxbMonitor {
         this.u1Xb35 = u1Xb35;
     }
 
+    @Basic
+    @Column(name = "U2xb_35", nullable = true, precision = 2)
     public Float getU2Xb35() {
         return u2Xb35;
     }
@@ -3912,6 +4741,8 @@ public class PowerxbMonitor {
         this.u2Xb35 = u2Xb35;
     }
 
+    @Basic
+    @Column(name = "U3xb_35", nullable = true, precision = 2)
     public Float getU3Xb35() {
         return u3Xb35;
     }
@@ -3920,6 +4751,8 @@ public class PowerxbMonitor {
         this.u3Xb35 = u3Xb35;
     }
 
+    @Basic
+    @Column(name = "U1va_35", nullable = true, precision = 2)
     public Float getU1Va35() {
         return u1Va35;
     }
@@ -3928,6 +4761,8 @@ public class PowerxbMonitor {
         this.u1Va35 = u1Va35;
     }
 
+    @Basic
+    @Column(name = "U2va_35", nullable = true, precision = 2)
     public Float getU2Va35() {
         return u2Va35;
     }
@@ -3936,6 +4771,8 @@ public class PowerxbMonitor {
         this.u2Va35 = u2Va35;
     }
 
+    @Basic
+    @Column(name = "U3va_35", nullable = true, precision = 2)
     public Float getU3Va35() {
         return u3Va35;
     }
@@ -3944,6 +4781,8 @@ public class PowerxbMonitor {
         this.u3Va35 = u3Va35;
     }
 
+    @Basic
+    @Column(name = "I1xb_35", nullable = true, precision = 2)
     public Float getI1Xb35() {
         return i1Xb35;
     }
@@ -3952,6 +4791,8 @@ public class PowerxbMonitor {
         this.i1Xb35 = i1Xb35;
     }
 
+    @Basic
+    @Column(name = "I2xb_35", nullable = true, precision = 2)
     public Float getI2Xb35() {
         return i2Xb35;
     }
@@ -3960,6 +4801,8 @@ public class PowerxbMonitor {
         this.i2Xb35 = i2Xb35;
     }
 
+    @Basic
+    @Column(name = "I3xb_35", nullable = true, precision = 2)
     public Float getI3Xb35() {
         return i3Xb35;
     }
@@ -3968,6 +4811,8 @@ public class PowerxbMonitor {
         this.i3Xb35 = i3Xb35;
     }
 
+    @Basic
+    @Column(name = "I1va_35", nullable = true, precision = 2)
     public Float getI1Va35() {
         return i1Va35;
     }
@@ -3976,6 +4821,8 @@ public class PowerxbMonitor {
         this.i1Va35 = i1Va35;
     }
 
+    @Basic
+    @Column(name = "I2va_35", nullable = true, precision = 2)
     public Float getI2Va35() {
         return i2Va35;
     }
@@ -3984,6 +4831,8 @@ public class PowerxbMonitor {
         this.i2Va35 = i2Va35;
     }
 
+    @Basic
+    @Column(name = "I3va_35", nullable = true, precision = 2)
     public Float getI3Va35() {
         return i3Va35;
     }
@@ -3992,6 +4841,8 @@ public class PowerxbMonitor {
         this.i3Va35 = i3Va35;
     }
 
+    @Basic
+    @Column(name = "U1xb_36", nullable = true, precision = 2)
     public Float getU1Xb36() {
         return u1Xb36;
     }
@@ -4000,6 +4851,8 @@ public class PowerxbMonitor {
         this.u1Xb36 = u1Xb36;
     }
 
+    @Basic
+    @Column(name = "U2xb_36", nullable = true, precision = 2)
     public Float getU2Xb36() {
         return u2Xb36;
     }
@@ -4008,6 +4861,8 @@ public class PowerxbMonitor {
         this.u2Xb36 = u2Xb36;
     }
 
+    @Basic
+    @Column(name = "U3xb_36", nullable = true, precision = 2)
     public Float getU3Xb36() {
         return u3Xb36;
     }
@@ -4016,6 +4871,8 @@ public class PowerxbMonitor {
         this.u3Xb36 = u3Xb36;
     }
 
+    @Basic
+    @Column(name = "U1va_36", nullable = true, precision = 2)
     public Float getU1Va36() {
         return u1Va36;
     }
@@ -4024,6 +4881,8 @@ public class PowerxbMonitor {
         this.u1Va36 = u1Va36;
     }
 
+    @Basic
+    @Column(name = "U2va_36", nullable = true, precision = 2)
     public Float getU2Va36() {
         return u2Va36;
     }
@@ -4032,6 +4891,8 @@ public class PowerxbMonitor {
         this.u2Va36 = u2Va36;
     }
 
+    @Basic
+    @Column(name = "U3va_36", nullable = true, precision = 2)
     public Float getU3Va36() {
         return u3Va36;
     }
@@ -4040,6 +4901,8 @@ public class PowerxbMonitor {
         this.u3Va36 = u3Va36;
     }
 
+    @Basic
+    @Column(name = "I1xb_36", nullable = true, precision = 2)
     public Float getI1Xb36() {
         return i1Xb36;
     }
@@ -4048,6 +4911,8 @@ public class PowerxbMonitor {
         this.i1Xb36 = i1Xb36;
     }
 
+    @Basic
+    @Column(name = "I2xb_36", nullable = true, precision = 2)
     public Float getI2Xb36() {
         return i2Xb36;
     }
@@ -4056,6 +4921,8 @@ public class PowerxbMonitor {
         this.i2Xb36 = i2Xb36;
     }
 
+    @Basic
+    @Column(name = "I3xb_36", nullable = true, precision = 2)
     public Float getI3Xb36() {
         return i3Xb36;
     }
@@ -4064,6 +4931,8 @@ public class PowerxbMonitor {
         this.i3Xb36 = i3Xb36;
     }
 
+    @Basic
+    @Column(name = "I1va_36", nullable = true, precision = 2)
     public Float getI1Va36() {
         return i1Va36;
     }
@@ -4072,6 +4941,8 @@ public class PowerxbMonitor {
         this.i1Va36 = i1Va36;
     }
 
+    @Basic
+    @Column(name = "I2va_36", nullable = true, precision = 2)
     public Float getI2Va36() {
         return i2Va36;
     }
@@ -4080,6 +4951,8 @@ public class PowerxbMonitor {
         this.i2Va36 = i2Va36;
     }
 
+    @Basic
+    @Column(name = "I3va_36", nullable = true, precision = 2)
     public Float getI3Va36() {
         return i3Va36;
     }
@@ -4088,6 +4961,8 @@ public class PowerxbMonitor {
         this.i3Va36 = i3Va36;
     }
 
+    @Basic
+    @Column(name = "U1xb_37", nullable = true, precision = 2)
     public Float getU1Xb37() {
         return u1Xb37;
     }
@@ -4096,6 +4971,8 @@ public class PowerxbMonitor {
         this.u1Xb37 = u1Xb37;
     }
 
+    @Basic
+    @Column(name = "U2xb_37", nullable = true, precision = 2)
     public Float getU2Xb37() {
         return u2Xb37;
     }
@@ -4104,6 +4981,8 @@ public class PowerxbMonitor {
         this.u2Xb37 = u2Xb37;
     }
 
+    @Basic
+    @Column(name = "U3xb_37", nullable = true, precision = 2)
     public Float getU3Xb37() {
         return u3Xb37;
     }
@@ -4112,6 +4991,8 @@ public class PowerxbMonitor {
         this.u3Xb37 = u3Xb37;
     }
 
+    @Basic
+    @Column(name = "U1va_37", nullable = true, precision = 2)
     public Float getU1Va37() {
         return u1Va37;
     }
@@ -4120,6 +5001,8 @@ public class PowerxbMonitor {
         this.u1Va37 = u1Va37;
     }
 
+    @Basic
+    @Column(name = "U2va_37", nullable = true, precision = 2)
     public Float getU2Va37() {
         return u2Va37;
     }
@@ -4128,6 +5011,8 @@ public class PowerxbMonitor {
         this.u2Va37 = u2Va37;
     }
 
+    @Basic
+    @Column(name = "U3va_37", nullable = true, precision = 2)
     public Float getU3Va37() {
         return u3Va37;
     }
@@ -4136,6 +5021,8 @@ public class PowerxbMonitor {
         this.u3Va37 = u3Va37;
     }
 
+    @Basic
+    @Column(name = "I1xb_37", nullable = true, precision = 2)
     public Float getI1Xb37() {
         return i1Xb37;
     }
@@ -4144,6 +5031,8 @@ public class PowerxbMonitor {
         this.i1Xb37 = i1Xb37;
     }
 
+    @Basic
+    @Column(name = "I2xb_37", nullable = true, precision = 2)
     public Float getI2Xb37() {
         return i2Xb37;
     }
@@ -4152,6 +5041,8 @@ public class PowerxbMonitor {
         this.i2Xb37 = i2Xb37;
     }
 
+    @Basic
+    @Column(name = "I3xb_37", nullable = true, precision = 2)
     public Float getI3Xb37() {
         return i3Xb37;
     }
@@ -4160,6 +5051,8 @@ public class PowerxbMonitor {
         this.i3Xb37 = i3Xb37;
     }
 
+    @Basic
+    @Column(name = "I1va_37", nullable = true, precision = 2)
     public Float getI1Va37() {
         return i1Va37;
     }
@@ -4168,6 +5061,8 @@ public class PowerxbMonitor {
         this.i1Va37 = i1Va37;
     }
 
+    @Basic
+    @Column(name = "I2va_37", nullable = true, precision = 2)
     public Float getI2Va37() {
         return i2Va37;
     }
@@ -4176,6 +5071,8 @@ public class PowerxbMonitor {
         this.i2Va37 = i2Va37;
     }
 
+    @Basic
+    @Column(name = "I3va_37", nullable = true, precision = 2)
     public Float getI3Va37() {
         return i3Va37;
     }
@@ -4184,6 +5081,8 @@ public class PowerxbMonitor {
         this.i3Va37 = i3Va37;
     }
 
+    @Basic
+    @Column(name = "U1xb_38", nullable = true, precision = 2)
     public Float getU1Xb38() {
         return u1Xb38;
     }
@@ -4192,6 +5091,8 @@ public class PowerxbMonitor {
         this.u1Xb38 = u1Xb38;
     }
 
+    @Basic
+    @Column(name = "U2xb_38", nullable = true, precision = 2)
     public Float getU2Xb38() {
         return u2Xb38;
     }
@@ -4200,6 +5101,8 @@ public class PowerxbMonitor {
         this.u2Xb38 = u2Xb38;
     }
 
+    @Basic
+    @Column(name = "U3xb_38", nullable = true, precision = 2)
     public Float getU3Xb38() {
         return u3Xb38;
     }
@@ -4208,6 +5111,8 @@ public class PowerxbMonitor {
         this.u3Xb38 = u3Xb38;
     }
 
+    @Basic
+    @Column(name = "U1va_38", nullable = true, precision = 2)
     public Float getU1Va38() {
         return u1Va38;
     }
@@ -4216,6 +5121,8 @@ public class PowerxbMonitor {
         this.u1Va38 = u1Va38;
     }
 
+    @Basic
+    @Column(name = "U2va_38", nullable = true, precision = 2)
     public Float getU2Va38() {
         return u2Va38;
     }
@@ -4224,6 +5131,8 @@ public class PowerxbMonitor {
         this.u2Va38 = u2Va38;
     }
 
+    @Basic
+    @Column(name = "U3va_38", nullable = true, precision = 2)
     public Float getU3Va38() {
         return u3Va38;
     }
@@ -4232,6 +5141,8 @@ public class PowerxbMonitor {
         this.u3Va38 = u3Va38;
     }
 
+    @Basic
+    @Column(name = "I1xb_38", nullable = true, precision = 2)
     public Float getI1Xb38() {
         return i1Xb38;
     }
@@ -4240,6 +5151,8 @@ public class PowerxbMonitor {
         this.i1Xb38 = i1Xb38;
     }
 
+    @Basic
+    @Column(name = "I2xb_38", nullable = true, precision = 2)
     public Float getI2Xb38() {
         return i2Xb38;
     }
@@ -4248,6 +5161,8 @@ public class PowerxbMonitor {
         this.i2Xb38 = i2Xb38;
     }
 
+    @Basic
+    @Column(name = "I3xb_38", nullable = true, precision = 2)
     public Float getI3Xb38() {
         return i3Xb38;
     }
@@ -4256,6 +5171,8 @@ public class PowerxbMonitor {
         this.i3Xb38 = i3Xb38;
     }
 
+    @Basic
+    @Column(name = "I1va_38", nullable = true, precision = 2)
     public Float getI1Va38() {
         return i1Va38;
     }
@@ -4264,6 +5181,8 @@ public class PowerxbMonitor {
         this.i1Va38 = i1Va38;
     }
 
+    @Basic
+    @Column(name = "I2va_38", nullable = true, precision = 2)
     public Float getI2Va38() {
         return i2Va38;
     }
@@ -4272,6 +5191,8 @@ public class PowerxbMonitor {
         this.i2Va38 = i2Va38;
     }
 
+    @Basic
+    @Column(name = "I3va_38", nullable = true, precision = 2)
     public Float getI3Va38() {
         return i3Va38;
     }
@@ -4280,6 +5201,8 @@ public class PowerxbMonitor {
         this.i3Va38 = i3Va38;
     }
 
+    @Basic
+    @Column(name = "U1xb_39", nullable = true, precision = 2)
     public Float getU1Xb39() {
         return u1Xb39;
     }
@@ -4288,6 +5211,8 @@ public class PowerxbMonitor {
         this.u1Xb39 = u1Xb39;
     }
 
+    @Basic
+    @Column(name = "U2xb_39", nullable = true, precision = 2)
     public Float getU2Xb39() {
         return u2Xb39;
     }
@@ -4296,6 +5221,8 @@ public class PowerxbMonitor {
         this.u2Xb39 = u2Xb39;
     }
 
+    @Basic
+    @Column(name = "U3xb_39", nullable = true, precision = 2)
     public Float getU3Xb39() {
         return u3Xb39;
     }
@@ -4304,6 +5231,8 @@ public class PowerxbMonitor {
         this.u3Xb39 = u3Xb39;
     }
 
+    @Basic
+    @Column(name = "U1va_39", nullable = true, precision = 2)
     public Float getU1Va39() {
         return u1Va39;
     }
@@ -4312,6 +5241,8 @@ public class PowerxbMonitor {
         this.u1Va39 = u1Va39;
     }
 
+    @Basic
+    @Column(name = "U2va_39", nullable = true, precision = 2)
     public Float getU2Va39() {
         return u2Va39;
     }
@@ -4320,6 +5251,8 @@ public class PowerxbMonitor {
         this.u2Va39 = u2Va39;
     }
 
+    @Basic
+    @Column(name = "U3va_39", nullable = true, precision = 2)
     public Float getU3Va39() {
         return u3Va39;
     }
@@ -4328,6 +5261,8 @@ public class PowerxbMonitor {
         this.u3Va39 = u3Va39;
     }
 
+    @Basic
+    @Column(name = "I1xb_39", nullable = true, precision = 2)
     public Float getI1Xb39() {
         return i1Xb39;
     }
@@ -4336,6 +5271,8 @@ public class PowerxbMonitor {
         this.i1Xb39 = i1Xb39;
     }
 
+    @Basic
+    @Column(name = "I2xb_39", nullable = true, precision = 2)
     public Float getI2Xb39() {
         return i2Xb39;
     }
@@ -4344,6 +5281,8 @@ public class PowerxbMonitor {
         this.i2Xb39 = i2Xb39;
     }
 
+    @Basic
+    @Column(name = "I3xb_39", nullable = true, precision = 2)
     public Float getI3Xb39() {
         return i3Xb39;
     }
@@ -4352,6 +5291,8 @@ public class PowerxbMonitor {
         this.i3Xb39 = i3Xb39;
     }
 
+    @Basic
+    @Column(name = "I1va_39", nullable = true, precision = 2)
     public Float getI1Va39() {
         return i1Va39;
     }
@@ -4360,6 +5301,8 @@ public class PowerxbMonitor {
         this.i1Va39 = i1Va39;
     }
 
+    @Basic
+    @Column(name = "I2va_39", nullable = true, precision = 2)
     public Float getI2Va39() {
         return i2Va39;
     }
@@ -4368,6 +5311,8 @@ public class PowerxbMonitor {
         this.i2Va39 = i2Va39;
     }
 
+    @Basic
+    @Column(name = "I3va_39", nullable = true, precision = 2)
     public Float getI3Va39() {
         return i3Va39;
     }
@@ -4376,6 +5321,8 @@ public class PowerxbMonitor {
         this.i3Va39 = i3Va39;
     }
 
+    @Basic
+    @Column(name = "U1xb_40", nullable = true, precision = 2)
     public Float getU1Xb40() {
         return u1Xb40;
     }
@@ -4384,6 +5331,8 @@ public class PowerxbMonitor {
         this.u1Xb40 = u1Xb40;
     }
 
+    @Basic
+    @Column(name = "U2xb_40", nullable = true, precision = 2)
     public Float getU2Xb40() {
         return u2Xb40;
     }
@@ -4392,6 +5341,8 @@ public class PowerxbMonitor {
         this.u2Xb40 = u2Xb40;
     }
 
+    @Basic
+    @Column(name = "U3xb_40", nullable = true, precision = 2)
     public Float getU3Xb40() {
         return u3Xb40;
     }
@@ -4400,6 +5351,8 @@ public class PowerxbMonitor {
         this.u3Xb40 = u3Xb40;
     }
 
+    @Basic
+    @Column(name = "U1va_40", nullable = true, precision = 2)
     public Float getU1Va40() {
         return u1Va40;
     }
@@ -4408,6 +5361,8 @@ public class PowerxbMonitor {
         this.u1Va40 = u1Va40;
     }
 
+    @Basic
+    @Column(name = "U2va_40", nullable = true, precision = 2)
     public Float getU2Va40() {
         return u2Va40;
     }
@@ -4416,6 +5371,8 @@ public class PowerxbMonitor {
         this.u2Va40 = u2Va40;
     }
 
+    @Basic
+    @Column(name = "U3va_40", nullable = true, precision = 2)
     public Float getU3Va40() {
         return u3Va40;
     }
@@ -4424,6 +5381,8 @@ public class PowerxbMonitor {
         this.u3Va40 = u3Va40;
     }
 
+    @Basic
+    @Column(name = "I1xb_40", nullable = true, precision = 2)
     public Float getI1Xb40() {
         return i1Xb40;
     }
@@ -4432,6 +5391,8 @@ public class PowerxbMonitor {
         this.i1Xb40 = i1Xb40;
     }
 
+    @Basic
+    @Column(name = "I2xb_40", nullable = true, precision = 2)
     public Float getI2Xb40() {
         return i2Xb40;
     }
@@ -4440,6 +5401,8 @@ public class PowerxbMonitor {
         this.i2Xb40 = i2Xb40;
     }
 
+    @Basic
+    @Column(name = "I3xb_40", nullable = true, precision = 2)
     public Float getI3Xb40() {
         return i3Xb40;
     }
@@ -4448,6 +5411,8 @@ public class PowerxbMonitor {
         this.i3Xb40 = i3Xb40;
     }
 
+    @Basic
+    @Column(name = "I1va_40", nullable = true, precision = 2)
     public Float getI1Va40() {
         return i1Va40;
     }
@@ -4456,6 +5421,8 @@ public class PowerxbMonitor {
         this.i1Va40 = i1Va40;
     }
 
+    @Basic
+    @Column(name = "I2va_40", nullable = true, precision = 2)
     public Float getI2Va40() {
         return i2Va40;
     }
@@ -4464,6 +5431,8 @@ public class PowerxbMonitor {
         this.i2Va40 = i2Va40;
     }
 
+    @Basic
+    @Column(name = "I3va_40", nullable = true, precision = 2)
     public Float getI3Va40() {
         return i3Va40;
     }
@@ -4472,6 +5441,8 @@ public class PowerxbMonitor {
         this.i3Va40 = i3Va40;
     }
 
+    @Basic
+    @Column(name = "U1xb_41", nullable = true, precision = 2)
     public Float getU1Xb41() {
         return u1Xb41;
     }
@@ -4480,6 +5451,8 @@ public class PowerxbMonitor {
         this.u1Xb41 = u1Xb41;
     }
 
+    @Basic
+    @Column(name = "U2xb_41", nullable = true, precision = 2)
     public Float getU2Xb41() {
         return u2Xb41;
     }
@@ -4488,6 +5461,8 @@ public class PowerxbMonitor {
         this.u2Xb41 = u2Xb41;
     }
 
+    @Basic
+    @Column(name = "U3xb_41", nullable = true, precision = 2)
     public Float getU3Xb41() {
         return u3Xb41;
     }
@@ -4496,6 +5471,8 @@ public class PowerxbMonitor {
         this.u3Xb41 = u3Xb41;
     }
 
+    @Basic
+    @Column(name = "U1va_41", nullable = true, precision = 2)
     public Float getU1Va41() {
         return u1Va41;
     }
@@ -4504,6 +5481,8 @@ public class PowerxbMonitor {
         this.u1Va41 = u1Va41;
     }
 
+    @Basic
+    @Column(name = "U2va_41", nullable = true, precision = 2)
     public Float getU2Va41() {
         return u2Va41;
     }
@@ -4512,6 +5491,8 @@ public class PowerxbMonitor {
         this.u2Va41 = u2Va41;
     }
 
+    @Basic
+    @Column(name = "U3va_41", nullable = true, precision = 2)
     public Float getU3Va41() {
         return u3Va41;
     }
@@ -4520,6 +5501,8 @@ public class PowerxbMonitor {
         this.u3Va41 = u3Va41;
     }
 
+    @Basic
+    @Column(name = "I1xb_41", nullable = true, precision = 2)
     public Float getI1Xb41() {
         return i1Xb41;
     }
@@ -4528,6 +5511,8 @@ public class PowerxbMonitor {
         this.i1Xb41 = i1Xb41;
     }
 
+    @Basic
+    @Column(name = "I2xb_41", nullable = true, precision = 2)
     public Float getI2Xb41() {
         return i2Xb41;
     }
@@ -4536,6 +5521,8 @@ public class PowerxbMonitor {
         this.i2Xb41 = i2Xb41;
     }
 
+    @Basic
+    @Column(name = "I3xb_41", nullable = true, precision = 2)
     public Float getI3Xb41() {
         return i3Xb41;
     }
@@ -4544,6 +5531,8 @@ public class PowerxbMonitor {
         this.i3Xb41 = i3Xb41;
     }
 
+    @Basic
+    @Column(name = "I1va_41", nullable = true, precision = 2)
     public Float getI1Va41() {
         return i1Va41;
     }
@@ -4552,6 +5541,8 @@ public class PowerxbMonitor {
         this.i1Va41 = i1Va41;
     }
 
+    @Basic
+    @Column(name = "I2va_41", nullable = true, precision = 2)
     public Float getI2Va41() {
         return i2Va41;
     }
@@ -4560,6 +5551,8 @@ public class PowerxbMonitor {
         this.i2Va41 = i2Va41;
     }
 
+    @Basic
+    @Column(name = "I3va_41", nullable = true, precision = 2)
     public Float getI3Va41() {
         return i3Va41;
     }
@@ -4568,6 +5561,8 @@ public class PowerxbMonitor {
         this.i3Va41 = i3Va41;
     }
 
+    @Basic
+    @Column(name = "U1xb_42", nullable = true, precision = 2)
     public Float getU1Xb42() {
         return u1Xb42;
     }
@@ -4576,6 +5571,8 @@ public class PowerxbMonitor {
         this.u1Xb42 = u1Xb42;
     }
 
+    @Basic
+    @Column(name = "U2xb_42", nullable = true, precision = 2)
     public Float getU2Xb42() {
         return u2Xb42;
     }
@@ -4584,6 +5581,8 @@ public class PowerxbMonitor {
         this.u2Xb42 = u2Xb42;
     }
 
+    @Basic
+    @Column(name = "U3xb_42", nullable = true, precision = 2)
     public Float getU3Xb42() {
         return u3Xb42;
     }
@@ -4592,6 +5591,8 @@ public class PowerxbMonitor {
         this.u3Xb42 = u3Xb42;
     }
 
+    @Basic
+    @Column(name = "U1va_42", nullable = true, precision = 2)
     public Float getU1Va42() {
         return u1Va42;
     }
@@ -4600,6 +5601,8 @@ public class PowerxbMonitor {
         this.u1Va42 = u1Va42;
     }
 
+    @Basic
+    @Column(name = "U2va_42", nullable = true, precision = 2)
     public Float getU2Va42() {
         return u2Va42;
     }
@@ -4608,6 +5611,8 @@ public class PowerxbMonitor {
         this.u2Va42 = u2Va42;
     }
 
+    @Basic
+    @Column(name = "U3va_42", nullable = true, precision = 2)
     public Float getU3Va42() {
         return u3Va42;
     }
@@ -4616,6 +5621,8 @@ public class PowerxbMonitor {
         this.u3Va42 = u3Va42;
     }
 
+    @Basic
+    @Column(name = "I1xb_42", nullable = true, precision = 2)
     public Float getI1Xb42() {
         return i1Xb42;
     }
@@ -4624,6 +5631,8 @@ public class PowerxbMonitor {
         this.i1Xb42 = i1Xb42;
     }
 
+    @Basic
+    @Column(name = "I2xb_42", nullable = true, precision = 2)
     public Float getI2Xb42() {
         return i2Xb42;
     }
@@ -4632,6 +5641,8 @@ public class PowerxbMonitor {
         this.i2Xb42 = i2Xb42;
     }
 
+    @Basic
+    @Column(name = "I3xb_42", nullable = true, precision = 2)
     public Float getI3Xb42() {
         return i3Xb42;
     }
@@ -4640,6 +5651,8 @@ public class PowerxbMonitor {
         this.i3Xb42 = i3Xb42;
     }
 
+    @Basic
+    @Column(name = "I1va_42", nullable = true, precision = 2)
     public Float getI1Va42() {
         return i1Va42;
     }
@@ -4648,6 +5661,8 @@ public class PowerxbMonitor {
         this.i1Va42 = i1Va42;
     }
 
+    @Basic
+    @Column(name = "I2va_42", nullable = true, precision = 2)
     public Float getI2Va42() {
         return i2Va42;
     }
@@ -4656,6 +5671,8 @@ public class PowerxbMonitor {
         this.i2Va42 = i2Va42;
     }
 
+    @Basic
+    @Column(name = "I3va_42", nullable = true, precision = 2)
     public Float getI3Va42() {
         return i3Va42;
     }
@@ -4664,6 +5681,8 @@ public class PowerxbMonitor {
         this.i3Va42 = i3Va42;
     }
 
+    @Basic
+    @Column(name = "U1xb_43", nullable = true, precision = 2)
     public Float getU1Xb43() {
         return u1Xb43;
     }
@@ -4672,6 +5691,8 @@ public class PowerxbMonitor {
         this.u1Xb43 = u1Xb43;
     }
 
+    @Basic
+    @Column(name = "U2xb_43", nullable = true, precision = 2)
     public Float getU2Xb43() {
         return u2Xb43;
     }
@@ -4680,6 +5701,8 @@ public class PowerxbMonitor {
         this.u2Xb43 = u2Xb43;
     }
 
+    @Basic
+    @Column(name = "U3xb_43", nullable = true, precision = 2)
     public Float getU3Xb43() {
         return u3Xb43;
     }
@@ -4688,6 +5711,8 @@ public class PowerxbMonitor {
         this.u3Xb43 = u3Xb43;
     }
 
+    @Basic
+    @Column(name = "U1va_43", nullable = true, precision = 2)
     public Float getU1Va43() {
         return u1Va43;
     }
@@ -4696,6 +5721,8 @@ public class PowerxbMonitor {
         this.u1Va43 = u1Va43;
     }
 
+    @Basic
+    @Column(name = "U2va_43", nullable = true, precision = 2)
     public Float getU2Va43() {
         return u2Va43;
     }
@@ -4704,6 +5731,8 @@ public class PowerxbMonitor {
         this.u2Va43 = u2Va43;
     }
 
+    @Basic
+    @Column(name = "U3va_43", nullable = true, precision = 2)
     public Float getU3Va43() {
         return u3Va43;
     }
@@ -4712,6 +5741,8 @@ public class PowerxbMonitor {
         this.u3Va43 = u3Va43;
     }
 
+    @Basic
+    @Column(name = "I1xb_43", nullable = true, precision = 2)
     public Float getI1Xb43() {
         return i1Xb43;
     }
@@ -4720,6 +5751,8 @@ public class PowerxbMonitor {
         this.i1Xb43 = i1Xb43;
     }
 
+    @Basic
+    @Column(name = "I2xb_43", nullable = true, precision = 2)
     public Float getI2Xb43() {
         return i2Xb43;
     }
@@ -4728,6 +5761,8 @@ public class PowerxbMonitor {
         this.i2Xb43 = i2Xb43;
     }
 
+    @Basic
+    @Column(name = "I3xb_43", nullable = true, precision = 2)
     public Float getI3Xb43() {
         return i3Xb43;
     }
@@ -4736,6 +5771,8 @@ public class PowerxbMonitor {
         this.i3Xb43 = i3Xb43;
     }
 
+    @Basic
+    @Column(name = "I1va_43", nullable = true, precision = 2)
     public Float getI1Va43() {
         return i1Va43;
     }
@@ -4744,6 +5781,8 @@ public class PowerxbMonitor {
         this.i1Va43 = i1Va43;
     }
 
+    @Basic
+    @Column(name = "I2va_43", nullable = true, precision = 2)
     public Float getI2Va43() {
         return i2Va43;
     }
@@ -4752,6 +5791,8 @@ public class PowerxbMonitor {
         this.i2Va43 = i2Va43;
     }
 
+    @Basic
+    @Column(name = "I3va_43", nullable = true, precision = 2)
     public Float getI3Va43() {
         return i3Va43;
     }
@@ -4760,6 +5801,8 @@ public class PowerxbMonitor {
         this.i3Va43 = i3Va43;
     }
 
+    @Basic
+    @Column(name = "U1xb_44", nullable = true, precision = 2)
     public Float getU1Xb44() {
         return u1Xb44;
     }
@@ -4768,6 +5811,8 @@ public class PowerxbMonitor {
         this.u1Xb44 = u1Xb44;
     }
 
+    @Basic
+    @Column(name = "U2xb_44", nullable = true, precision = 2)
     public Float getU2Xb44() {
         return u2Xb44;
     }
@@ -4776,6 +5821,8 @@ public class PowerxbMonitor {
         this.u2Xb44 = u2Xb44;
     }
 
+    @Basic
+    @Column(name = "U3xb_44", nullable = true, precision = 2)
     public Float getU3Xb44() {
         return u3Xb44;
     }
@@ -4784,6 +5831,8 @@ public class PowerxbMonitor {
         this.u3Xb44 = u3Xb44;
     }
 
+    @Basic
+    @Column(name = "U1va_44", nullable = true, precision = 2)
     public Float getU1Va44() {
         return u1Va44;
     }
@@ -4792,6 +5841,8 @@ public class PowerxbMonitor {
         this.u1Va44 = u1Va44;
     }
 
+    @Basic
+    @Column(name = "U2va_44", nullable = true, precision = 2)
     public Float getU2Va44() {
         return u2Va44;
     }
@@ -4800,6 +5851,8 @@ public class PowerxbMonitor {
         this.u2Va44 = u2Va44;
     }
 
+    @Basic
+    @Column(name = "U3va_44", nullable = true, precision = 2)
     public Float getU3Va44() {
         return u3Va44;
     }
@@ -4808,6 +5861,8 @@ public class PowerxbMonitor {
         this.u3Va44 = u3Va44;
     }
 
+    @Basic
+    @Column(name = "I1xb_44", nullable = true, precision = 2)
     public Float getI1Xb44() {
         return i1Xb44;
     }
@@ -4816,6 +5871,8 @@ public class PowerxbMonitor {
         this.i1Xb44 = i1Xb44;
     }
 
+    @Basic
+    @Column(name = "I2xb_44", nullable = true, precision = 2)
     public Float getI2Xb44() {
         return i2Xb44;
     }
@@ -4824,6 +5881,8 @@ public class PowerxbMonitor {
         this.i2Xb44 = i2Xb44;
     }
 
+    @Basic
+    @Column(name = "I3xb_44", nullable = true, precision = 2)
     public Float getI3Xb44() {
         return i3Xb44;
     }
@@ -4832,6 +5891,8 @@ public class PowerxbMonitor {
         this.i3Xb44 = i3Xb44;
     }
 
+    @Basic
+    @Column(name = "I1va_44", nullable = true, precision = 2)
     public Float getI1Va44() {
         return i1Va44;
     }
@@ -4840,6 +5901,8 @@ public class PowerxbMonitor {
         this.i1Va44 = i1Va44;
     }
 
+    @Basic
+    @Column(name = "I2va_44", nullable = true, precision = 2)
     public Float getI2Va44() {
         return i2Va44;
     }
@@ -4848,6 +5911,8 @@ public class PowerxbMonitor {
         this.i2Va44 = i2Va44;
     }
 
+    @Basic
+    @Column(name = "I3va_44", nullable = true, precision = 2)
     public Float getI3Va44() {
         return i3Va44;
     }
@@ -4856,6 +5921,8 @@ public class PowerxbMonitor {
         this.i3Va44 = i3Va44;
     }
 
+    @Basic
+    @Column(name = "U1xb_45", nullable = true, precision = 2)
     public Float getU1Xb45() {
         return u1Xb45;
     }
@@ -4864,6 +5931,8 @@ public class PowerxbMonitor {
         this.u1Xb45 = u1Xb45;
     }
 
+    @Basic
+    @Column(name = "U2xb_45", nullable = true, precision = 2)
     public Float getU2Xb45() {
         return u2Xb45;
     }
@@ -4872,6 +5941,8 @@ public class PowerxbMonitor {
         this.u2Xb45 = u2Xb45;
     }
 
+    @Basic
+    @Column(name = "U3xb_45", nullable = true, precision = 2)
     public Float getU3Xb45() {
         return u3Xb45;
     }
@@ -4880,6 +5951,8 @@ public class PowerxbMonitor {
         this.u3Xb45 = u3Xb45;
     }
 
+    @Basic
+    @Column(name = "U1va_45", nullable = true, precision = 2)
     public Float getU1Va45() {
         return u1Va45;
     }
@@ -4888,6 +5961,8 @@ public class PowerxbMonitor {
         this.u1Va45 = u1Va45;
     }
 
+    @Basic
+    @Column(name = "U2va_45", nullable = true, precision = 2)
     public Float getU2Va45() {
         return u2Va45;
     }
@@ -4896,6 +5971,8 @@ public class PowerxbMonitor {
         this.u2Va45 = u2Va45;
     }
 
+    @Basic
+    @Column(name = "U3va_45", nullable = true, precision = 2)
     public Float getU3Va45() {
         return u3Va45;
     }
@@ -4904,6 +5981,8 @@ public class PowerxbMonitor {
         this.u3Va45 = u3Va45;
     }
 
+    @Basic
+    @Column(name = "I1xb_45", nullable = true, precision = 2)
     public Float getI1Xb45() {
         return i1Xb45;
     }
@@ -4912,6 +5991,8 @@ public class PowerxbMonitor {
         this.i1Xb45 = i1Xb45;
     }
 
+    @Basic
+    @Column(name = "I2xb_45", nullable = true, precision = 2)
     public Float getI2Xb45() {
         return i2Xb45;
     }
@@ -4920,6 +6001,8 @@ public class PowerxbMonitor {
         this.i2Xb45 = i2Xb45;
     }
 
+    @Basic
+    @Column(name = "I3xb_45", nullable = true, precision = 2)
     public Float getI3Xb45() {
         return i3Xb45;
     }
@@ -4928,6 +6011,8 @@ public class PowerxbMonitor {
         this.i3Xb45 = i3Xb45;
     }
 
+    @Basic
+    @Column(name = "I1va_45", nullable = true, precision = 2)
     public Float getI1Va45() {
         return i1Va45;
     }
@@ -4936,6 +6021,8 @@ public class PowerxbMonitor {
         this.i1Va45 = i1Va45;
     }
 
+    @Basic
+    @Column(name = "I2va_45", nullable = true, precision = 2)
     public Float getI2Va45() {
         return i2Va45;
     }
@@ -4944,6 +6031,8 @@ public class PowerxbMonitor {
         this.i2Va45 = i2Va45;
     }
 
+    @Basic
+    @Column(name = "I3va_45", nullable = true, precision = 2)
     public Float getI3Va45() {
         return i3Va45;
     }
@@ -4952,6 +6041,8 @@ public class PowerxbMonitor {
         this.i3Va45 = i3Va45;
     }
 
+    @Basic
+    @Column(name = "U1xb_46", nullable = true, precision = 2)
     public Float getU1Xb46() {
         return u1Xb46;
     }
@@ -4960,6 +6051,8 @@ public class PowerxbMonitor {
         this.u1Xb46 = u1Xb46;
     }
 
+    @Basic
+    @Column(name = "U2xb_46", nullable = true, precision = 2)
     public Float getU2Xb46() {
         return u2Xb46;
     }
@@ -4968,6 +6061,8 @@ public class PowerxbMonitor {
         this.u2Xb46 = u2Xb46;
     }
 
+    @Basic
+    @Column(name = "U3xb_46", nullable = true, precision = 2)
     public Float getU3Xb46() {
         return u3Xb46;
     }
@@ -4976,6 +6071,8 @@ public class PowerxbMonitor {
         this.u3Xb46 = u3Xb46;
     }
 
+    @Basic
+    @Column(name = "U1va_46", nullable = true, precision = 2)
     public Float getU1Va46() {
         return u1Va46;
     }
@@ -4984,6 +6081,8 @@ public class PowerxbMonitor {
         this.u1Va46 = u1Va46;
     }
 
+    @Basic
+    @Column(name = "U2va_46", nullable = true, precision = 2)
     public Float getU2Va46() {
         return u2Va46;
     }
@@ -4992,6 +6091,8 @@ public class PowerxbMonitor {
         this.u2Va46 = u2Va46;
     }
 
+    @Basic
+    @Column(name = "U3va_46", nullable = true, precision = 2)
     public Float getU3Va46() {
         return u3Va46;
     }
@@ -5000,6 +6101,8 @@ public class PowerxbMonitor {
         this.u3Va46 = u3Va46;
     }
 
+    @Basic
+    @Column(name = "I1xb_46", nullable = true, precision = 2)
     public Float getI1Xb46() {
         return i1Xb46;
     }
@@ -5008,6 +6111,8 @@ public class PowerxbMonitor {
         this.i1Xb46 = i1Xb46;
     }
 
+    @Basic
+    @Column(name = "I2xb_46", nullable = true, precision = 2)
     public Float getI2Xb46() {
         return i2Xb46;
     }
@@ -5016,6 +6121,8 @@ public class PowerxbMonitor {
         this.i2Xb46 = i2Xb46;
     }
 
+    @Basic
+    @Column(name = "I3xb_46", nullable = true, precision = 2)
     public Float getI3Xb46() {
         return i3Xb46;
     }
@@ -5024,6 +6131,8 @@ public class PowerxbMonitor {
         this.i3Xb46 = i3Xb46;
     }
 
+    @Basic
+    @Column(name = "I1va_46", nullable = true, precision = 2)
     public Float getI1Va46() {
         return i1Va46;
     }
@@ -5032,6 +6141,8 @@ public class PowerxbMonitor {
         this.i1Va46 = i1Va46;
     }
 
+    @Basic
+    @Column(name = "I2va_46", nullable = true, precision = 2)
     public Float getI2Va46() {
         return i2Va46;
     }
@@ -5040,6 +6151,8 @@ public class PowerxbMonitor {
         this.i2Va46 = i2Va46;
     }
 
+    @Basic
+    @Column(name = "I3va_46", nullable = true, precision = 2)
     public Float getI3Va46() {
         return i3Va46;
     }
@@ -5048,6 +6161,8 @@ public class PowerxbMonitor {
         this.i3Va46 = i3Va46;
     }
 
+    @Basic
+    @Column(name = "U1xb_47", nullable = true, precision = 2)
     public Float getU1Xb47() {
         return u1Xb47;
     }
@@ -5056,6 +6171,8 @@ public class PowerxbMonitor {
         this.u1Xb47 = u1Xb47;
     }
 
+    @Basic
+    @Column(name = "U2xb_47", nullable = true, precision = 2)
     public Float getU2Xb47() {
         return u2Xb47;
     }
@@ -5064,6 +6181,8 @@ public class PowerxbMonitor {
         this.u2Xb47 = u2Xb47;
     }
 
+    @Basic
+    @Column(name = "U3xb_47", nullable = true, precision = 2)
     public Float getU3Xb47() {
         return u3Xb47;
     }
@@ -5072,6 +6191,8 @@ public class PowerxbMonitor {
         this.u3Xb47 = u3Xb47;
     }
 
+    @Basic
+    @Column(name = "U1va_47", nullable = true, precision = 2)
     public Float getU1Va47() {
         return u1Va47;
     }
@@ -5080,6 +6201,8 @@ public class PowerxbMonitor {
         this.u1Va47 = u1Va47;
     }
 
+    @Basic
+    @Column(name = "U2va_47", nullable = true, precision = 2)
     public Float getU2Va47() {
         return u2Va47;
     }
@@ -5088,6 +6211,8 @@ public class PowerxbMonitor {
         this.u2Va47 = u2Va47;
     }
 
+    @Basic
+    @Column(name = "U3va_47", nullable = true, precision = 2)
     public Float getU3Va47() {
         return u3Va47;
     }
@@ -5096,6 +6221,8 @@ public class PowerxbMonitor {
         this.u3Va47 = u3Va47;
     }
 
+    @Basic
+    @Column(name = "I1xb_47", nullable = true, precision = 2)
     public Float getI1Xb47() {
         return i1Xb47;
     }
@@ -5104,6 +6231,8 @@ public class PowerxbMonitor {
         this.i1Xb47 = i1Xb47;
     }
 
+    @Basic
+    @Column(name = "I2xb_47", nullable = true, precision = 2)
     public Float getI2Xb47() {
         return i2Xb47;
     }
@@ -5112,6 +6241,8 @@ public class PowerxbMonitor {
         this.i2Xb47 = i2Xb47;
     }
 
+    @Basic
+    @Column(name = "I3xb_47", nullable = true, precision = 2)
     public Float getI3Xb47() {
         return i3Xb47;
     }
@@ -5120,6 +6251,8 @@ public class PowerxbMonitor {
         this.i3Xb47 = i3Xb47;
     }
 
+    @Basic
+    @Column(name = "I1va_47", nullable = true, precision = 2)
     public Float getI1Va47() {
         return i1Va47;
     }
@@ -5128,6 +6261,8 @@ public class PowerxbMonitor {
         this.i1Va47 = i1Va47;
     }
 
+    @Basic
+    @Column(name = "I2va_47", nullable = true, precision = 2)
     public Float getI2Va47() {
         return i2Va47;
     }
@@ -5136,6 +6271,8 @@ public class PowerxbMonitor {
         this.i2Va47 = i2Va47;
     }
 
+    @Basic
+    @Column(name = "I3va_47", nullable = true, precision = 2)
     public Float getI3Va47() {
         return i3Va47;
     }
@@ -5144,6 +6281,8 @@ public class PowerxbMonitor {
         this.i3Va47 = i3Va47;
     }
 
+    @Basic
+    @Column(name = "U1xb_48", nullable = true, precision = 2)
     public Float getU1Xb48() {
         return u1Xb48;
     }
@@ -5152,6 +6291,8 @@ public class PowerxbMonitor {
         this.u1Xb48 = u1Xb48;
     }
 
+    @Basic
+    @Column(name = "U2xb_48", nullable = true, precision = 2)
     public Float getU2Xb48() {
         return u2Xb48;
     }
@@ -5160,6 +6301,8 @@ public class PowerxbMonitor {
         this.u2Xb48 = u2Xb48;
     }
 
+    @Basic
+    @Column(name = "U3xb_48", nullable = true, precision = 2)
     public Float getU3Xb48() {
         return u3Xb48;
     }
@@ -5168,6 +6311,8 @@ public class PowerxbMonitor {
         this.u3Xb48 = u3Xb48;
     }
 
+    @Basic
+    @Column(name = "U1va_48", nullable = true, precision = 2)
     public Float getU1Va48() {
         return u1Va48;
     }
@@ -5176,6 +6321,8 @@ public class PowerxbMonitor {
         this.u1Va48 = u1Va48;
     }
 
+    @Basic
+    @Column(name = "U2va_48", nullable = true, precision = 2)
     public Float getU2Va48() {
         return u2Va48;
     }
@@ -5184,6 +6331,8 @@ public class PowerxbMonitor {
         this.u2Va48 = u2Va48;
     }
 
+    @Basic
+    @Column(name = "U3va_48", nullable = true, precision = 2)
     public Float getU3Va48() {
         return u3Va48;
     }
@@ -5192,6 +6341,8 @@ public class PowerxbMonitor {
         this.u3Va48 = u3Va48;
     }
 
+    @Basic
+    @Column(name = "I1xb_48", nullable = true, precision = 2)
     public Float getI1Xb48() {
         return i1Xb48;
     }
@@ -5200,6 +6351,8 @@ public class PowerxbMonitor {
         this.i1Xb48 = i1Xb48;
     }
 
+    @Basic
+    @Column(name = "I2xb_48", nullable = true, precision = 2)
     public Float getI2Xb48() {
         return i2Xb48;
     }
@@ -5208,6 +6361,8 @@ public class PowerxbMonitor {
         this.i2Xb48 = i2Xb48;
     }
 
+    @Basic
+    @Column(name = "I3xb_48", nullable = true, precision = 2)
     public Float getI3Xb48() {
         return i3Xb48;
     }
@@ -5216,6 +6371,8 @@ public class PowerxbMonitor {
         this.i3Xb48 = i3Xb48;
     }
 
+    @Basic
+    @Column(name = "I1va_48", nullable = true, precision = 2)
     public Float getI1Va48() {
         return i1Va48;
     }
@@ -5224,6 +6381,8 @@ public class PowerxbMonitor {
         this.i1Va48 = i1Va48;
     }
 
+    @Basic
+    @Column(name = "I2va_48", nullable = true, precision = 2)
     public Float getI2Va48() {
         return i2Va48;
     }
@@ -5232,6 +6391,8 @@ public class PowerxbMonitor {
         this.i2Va48 = i2Va48;
     }
 
+    @Basic
+    @Column(name = "I3va_48", nullable = true, precision = 2)
     public Float getI3Va48() {
         return i3Va48;
     }
@@ -5240,6 +6401,8 @@ public class PowerxbMonitor {
         this.i3Va48 = i3Va48;
     }
 
+    @Basic
+    @Column(name = "U1xb_49", nullable = true, precision = 2)
     public Float getU1Xb49() {
         return u1Xb49;
     }
@@ -5248,6 +6411,8 @@ public class PowerxbMonitor {
         this.u1Xb49 = u1Xb49;
     }
 
+    @Basic
+    @Column(name = "U2xb_49", nullable = true, precision = 2)
     public Float getU2Xb49() {
         return u2Xb49;
     }
@@ -5256,6 +6421,8 @@ public class PowerxbMonitor {
         this.u2Xb49 = u2Xb49;
     }
 
+    @Basic
+    @Column(name = "U3xb_49", nullable = true, precision = 2)
     public Float getU3Xb49() {
         return u3Xb49;
     }
@@ -5264,6 +6431,8 @@ public class PowerxbMonitor {
         this.u3Xb49 = u3Xb49;
     }
 
+    @Basic
+    @Column(name = "U1va_49", nullable = true, precision = 2)
     public Float getU1Va49() {
         return u1Va49;
     }
@@ -5272,6 +6441,8 @@ public class PowerxbMonitor {
         this.u1Va49 = u1Va49;
     }
 
+    @Basic
+    @Column(name = "U2va_49", nullable = true, precision = 2)
     public Float getU2Va49() {
         return u2Va49;
     }
@@ -5280,6 +6451,8 @@ public class PowerxbMonitor {
         this.u2Va49 = u2Va49;
     }
 
+    @Basic
+    @Column(name = "U3va_49", nullable = true, precision = 2)
     public Float getU3Va49() {
         return u3Va49;
     }
@@ -5288,6 +6461,8 @@ public class PowerxbMonitor {
         this.u3Va49 = u3Va49;
     }
 
+    @Basic
+    @Column(name = "I1xb_49", nullable = true, precision = 2)
     public Float getI1Xb49() {
         return i1Xb49;
     }
@@ -5296,6 +6471,8 @@ public class PowerxbMonitor {
         this.i1Xb49 = i1Xb49;
     }
 
+    @Basic
+    @Column(name = "I2xb_49", nullable = true, precision = 2)
     public Float getI2Xb49() {
         return i2Xb49;
     }
@@ -5304,6 +6481,8 @@ public class PowerxbMonitor {
         this.i2Xb49 = i2Xb49;
     }
 
+    @Basic
+    @Column(name = "I3xb_49", nullable = true, precision = 2)
     public Float getI3Xb49() {
         return i3Xb49;
     }
@@ -5312,6 +6491,8 @@ public class PowerxbMonitor {
         this.i3Xb49 = i3Xb49;
     }
 
+    @Basic
+    @Column(name = "I1va_49", nullable = true, precision = 2)
     public Float getI1Va49() {
         return i1Va49;
     }
@@ -5320,6 +6501,8 @@ public class PowerxbMonitor {
         this.i1Va49 = i1Va49;
     }
 
+    @Basic
+    @Column(name = "I2va_49", nullable = true, precision = 2)
     public Float getI2Va49() {
         return i2Va49;
     }
@@ -5328,6 +6511,8 @@ public class PowerxbMonitor {
         this.i2Va49 = i2Va49;
     }
 
+    @Basic
+    @Column(name = "I3va_49", nullable = true, precision = 2)
     public Float getI3Va49() {
         return i3Va49;
     }
@@ -5336,6 +6521,8 @@ public class PowerxbMonitor {
         this.i3Va49 = i3Va49;
     }
 
+    @Basic
+    @Column(name = "U1xb_50", nullable = true, precision = 2)
     public Float getU1Xb50() {
         return u1Xb50;
     }
@@ -5344,6 +6531,8 @@ public class PowerxbMonitor {
         this.u1Xb50 = u1Xb50;
     }
 
+    @Basic
+    @Column(name = "U2xb_50", nullable = true, precision = 2)
     public Float getU2Xb50() {
         return u2Xb50;
     }
@@ -5352,6 +6541,8 @@ public class PowerxbMonitor {
         this.u2Xb50 = u2Xb50;
     }
 
+    @Basic
+    @Column(name = "U3xb_50", nullable = true, precision = 2)
     public Float getU3Xb50() {
         return u3Xb50;
     }
@@ -5360,6 +6551,8 @@ public class PowerxbMonitor {
         this.u3Xb50 = u3Xb50;
     }
 
+    @Basic
+    @Column(name = "U1va_50", nullable = true, precision = 2)
     public Float getU1Va50() {
         return u1Va50;
     }
@@ -5368,6 +6561,8 @@ public class PowerxbMonitor {
         this.u1Va50 = u1Va50;
     }
 
+    @Basic
+    @Column(name = "U2va_50", nullable = true, precision = 2)
     public Float getU2Va50() {
         return u2Va50;
     }
@@ -5376,6 +6571,8 @@ public class PowerxbMonitor {
         this.u2Va50 = u2Va50;
     }
 
+    @Basic
+    @Column(name = "U3va_50", nullable = true, precision = 2)
     public Float getU3Va50() {
         return u3Va50;
     }
@@ -5384,6 +6581,8 @@ public class PowerxbMonitor {
         this.u3Va50 = u3Va50;
     }
 
+    @Basic
+    @Column(name = "I1xb_50", nullable = true, precision = 2)
     public Float getI1Xb50() {
         return i1Xb50;
     }
@@ -5392,6 +6591,8 @@ public class PowerxbMonitor {
         this.i1Xb50 = i1Xb50;
     }
 
+    @Basic
+    @Column(name = "I2xb_50", nullable = true, precision = 2)
     public Float getI2Xb50() {
         return i2Xb50;
     }
@@ -5400,6 +6601,8 @@ public class PowerxbMonitor {
         this.i2Xb50 = i2Xb50;
     }
 
+    @Basic
+    @Column(name = "I3xb_50", nullable = true, precision = 2)
     public Float getI3Xb50() {
         return i3Xb50;
     }
@@ -5408,6 +6611,8 @@ public class PowerxbMonitor {
         this.i3Xb50 = i3Xb50;
     }
 
+    @Basic
+    @Column(name = "I1va_50", nullable = true, precision = 2)
     public Float getI1Va50() {
         return i1Va50;
     }
@@ -5416,6 +6621,8 @@ public class PowerxbMonitor {
         this.i1Va50 = i1Va50;
     }
 
+    @Basic
+    @Column(name = "I2va_50", nullable = true, precision = 2)
     public Float getI2Va50() {
         return i2Va50;
     }
@@ -5424,6 +6631,8 @@ public class PowerxbMonitor {
         this.i2Va50 = i2Va50;
     }
 
+    @Basic
+    @Column(name = "I3va_50", nullable = true, precision = 2)
     public Float getI3Va50() {
         return i3Va50;
     }

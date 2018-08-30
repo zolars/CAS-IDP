@@ -7,7 +7,7 @@
         <!-- 指定连接数据库的驱动程序 -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <!-- 指定连接数据库的URL -->
-        <property name="connection.url">jdbc:mysql://localhost:3306/test</property>
+        <property name="connection.url">jdbc:mysql://192.168.0.137:3306/Test?useUnicode=true&amp;characterEncoding=UTF8</property>
         <!-- 指定数据库使用的SQL方言 -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- 指定连接数据库的用户名，这里远程集中库允许连接的用户名 -->
@@ -54,6 +54,8 @@
         <mapping class="hibernatePOJO.Dictionary"/>
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
+        <mapping resource="hibernatePOJO/DevicesThreshold.hbm.xml"/>
+        <mapping class="hibernatePOJO.DevicesThreshold"/>
 
 
     </session-factory>

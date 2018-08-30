@@ -8,8 +8,25 @@ import java.util.List;
 
 public interface UserDAO {
 
-    public boolean login(User user);
+    /////增
+    //新建用户
+    public boolean addUserInfo(String uid,String account,String password,String name,String telephone,String govtelephone, String province, String city, String computerroom);
+    //新建一条用户和角色的对应记录
+    public boolean addUserRolesInfo(String uid, String roles);
 
+    /////删
+    public boolean deleteUserInfo(String uid);
+
+    public boolean deleteUserRoles(String uid);
+    /////改
+    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom);
+
+    /////查
+    //登录验证
+    public boolean login(User user);
+    //查询所有用户的账号信息，包括暂时未分配角色的用户的账号信息
+    public List<List> getAllUserInfo();
+    //根据用户名获取用户ID
     public String getUserId(User user);
 
     public String getProBank(int pbid);
@@ -28,23 +45,9 @@ public interface UserDAO {
 
     public List<Object> getUserDynamicMenu(User user);
 
-    public List<List> getAllUserInfo();
-
-    //public List getAllUserRolesInfo();
-
     public User getOneUserInfo(String uid);
 
     public String getMaxUserId();
-
-    public boolean deleteUserInfo(String uid);
-
-    public boolean deleteUserRoles(String uid);
-
-    public boolean addUserInfo(String uid,String account,String password,String name,String telephone,String govtelephone, String province, String city, String computerroom);
-
-    public boolean addUserRolesInfo(String uid, String roles);
-
-    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom);
 
     public UserRoles getUserRolesByUid(String uid);
 

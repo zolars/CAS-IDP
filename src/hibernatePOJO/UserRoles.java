@@ -1,11 +1,16 @@
 package hibernatePOJO;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "user_roles", schema = "test", catalog = "")
 public class UserRoles {
     private String uid;
     private String rid;
 
+    @Id
+    @Column(name = "uid", nullable = false, length = 255)
     public String getUid() {
         return uid;
     }
@@ -14,6 +19,8 @@ public class UserRoles {
         this.uid = uid;
     }
 
+    @Basic
+    @Column(name = "rid", nullable = true, length = 255)
     public String getRid() {
         return rid;
     }

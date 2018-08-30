@@ -1,8 +1,11 @@
 package hibernatePOJO;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+@Entity
+@Table(name = "powerparm_monitor", schema = "test", catalog = "")
 public class PowerparmMonitor {
     private int ppid;
     private Integer mpid;
@@ -45,6 +48,8 @@ public class PowerparmMonitor {
     private Float pltU3;
     private Float hz;
 
+    @Id
+    @Column(name = "ppid", nullable = false)
     public int getPpid() {
         return ppid;
     }
@@ -53,6 +58,8 @@ public class PowerparmMonitor {
         this.ppid = ppid;
     }
 
+    @Basic
+    @Column(name = "mpid", nullable = true)
     public Integer getMpid() {
         return mpid;
     }
@@ -61,6 +68,8 @@ public class PowerparmMonitor {
         this.mpid = mpid;
     }
 
+    @Basic
+    @Column(name = "time", nullable = true)
     public Timestamp getTime() {
         return time;
     }
@@ -69,6 +78,8 @@ public class PowerparmMonitor {
         this.time = time;
     }
 
+    @Basic
+    @Column(name = "U1", nullable = true, precision = 2)
     public Float getU1() {
         return u1;
     }
@@ -77,6 +88,8 @@ public class PowerparmMonitor {
         this.u1 = u1;
     }
 
+    @Basic
+    @Column(name = "U2", nullable = true, precision = 2)
     public Float getU2() {
         return u2;
     }
@@ -85,6 +98,8 @@ public class PowerparmMonitor {
         this.u2 = u2;
     }
 
+    @Basic
+    @Column(name = "U3", nullable = true, precision = 2)
     public Float getU3() {
         return u3;
     }
@@ -93,6 +108,8 @@ public class PowerparmMonitor {
         this.u3 = u3;
     }
 
+    @Basic
+    @Column(name = "U4", nullable = true, precision = 2)
     public Float getU4() {
         return u4;
     }
@@ -101,6 +118,8 @@ public class PowerparmMonitor {
         this.u4 = u4;
     }
 
+    @Basic
+    @Column(name = "I1", nullable = true, precision = 2)
     public Float getI1() {
         return i1;
     }
@@ -109,6 +128,8 @@ public class PowerparmMonitor {
         this.i1 = i1;
     }
 
+    @Basic
+    @Column(name = "I2", nullable = true, precision = 2)
     public Float getI2() {
         return i2;
     }
@@ -117,6 +138,8 @@ public class PowerparmMonitor {
         this.i2 = i2;
     }
 
+    @Basic
+    @Column(name = "I3", nullable = true, precision = 2)
     public Float getI3() {
         return i3;
     }
@@ -125,6 +148,8 @@ public class PowerparmMonitor {
         this.i3 = i3;
     }
 
+    @Basic
+    @Column(name = "I4", nullable = true, precision = 2)
     public Float getI4() {
         return i4;
     }
@@ -133,6 +158,8 @@ public class PowerparmMonitor {
         this.i4 = i4;
     }
 
+    @Basic
+    @Column(name = "P1", nullable = true, precision = 2)
     public Float getP1() {
         return p1;
     }
@@ -141,6 +168,8 @@ public class PowerparmMonitor {
         this.p1 = p1;
     }
 
+    @Basic
+    @Column(name = "P2", nullable = true, precision = 2)
     public Float getP2() {
         return p2;
     }
@@ -149,6 +178,8 @@ public class PowerparmMonitor {
         this.p2 = p2;
     }
 
+    @Basic
+    @Column(name = "P3", nullable = true, precision = 2)
     public Float getP3() {
         return p3;
     }
@@ -157,6 +188,8 @@ public class PowerparmMonitor {
         this.p3 = p3;
     }
 
+    @Basic
+    @Column(name = "Psum", nullable = true, precision = 2)
     public Float getPsum() {
         return psum;
     }
@@ -165,6 +198,8 @@ public class PowerparmMonitor {
         this.psum = psum;
     }
 
+    @Basic
+    @Column(name = "Q1", nullable = true, precision = 2)
     public Float getQ1() {
         return q1;
     }
@@ -173,6 +208,8 @@ public class PowerparmMonitor {
         this.q1 = q1;
     }
 
+    @Basic
+    @Column(name = "Q2", nullable = true, precision = 2)
     public Float getQ2() {
         return q2;
     }
@@ -181,6 +218,8 @@ public class PowerparmMonitor {
         this.q2 = q2;
     }
 
+    @Basic
+    @Column(name = "Q3", nullable = true, precision = 2)
     public Float getQ3() {
         return q3;
     }
@@ -189,6 +228,8 @@ public class PowerparmMonitor {
         this.q3 = q3;
     }
 
+    @Basic
+    @Column(name = "Qsum", nullable = true, precision = 2)
     public Float getQsum() {
         return qsum;
     }
@@ -197,6 +238,8 @@ public class PowerparmMonitor {
         this.qsum = qsum;
     }
 
+    @Basic
+    @Column(name = "S1", nullable = true, precision = 2)
     public Float getS1() {
         return s1;
     }
@@ -205,6 +248,8 @@ public class PowerparmMonitor {
         this.s1 = s1;
     }
 
+    @Basic
+    @Column(name = "S2", nullable = true, precision = 2)
     public Float getS2() {
         return s2;
     }
@@ -213,6 +258,8 @@ public class PowerparmMonitor {
         this.s2 = s2;
     }
 
+    @Basic
+    @Column(name = "S3", nullable = true, precision = 2)
     public Float getS3() {
         return s3;
     }
@@ -221,6 +268,8 @@ public class PowerparmMonitor {
         this.s3 = s3;
     }
 
+    @Basic
+    @Column(name = "Ssum", nullable = true, precision = 2)
     public Float getSsum() {
         return ssum;
     }
@@ -229,6 +278,8 @@ public class PowerparmMonitor {
         this.ssum = ssum;
     }
 
+    @Basic
+    @Column(name = "PF1", nullable = true, precision = 2)
     public Float getPf1() {
         return pf1;
     }
@@ -237,6 +288,8 @@ public class PowerparmMonitor {
         this.pf1 = pf1;
     }
 
+    @Basic
+    @Column(name = "PF2", nullable = true, precision = 2)
     public Float getPf2() {
         return pf2;
     }
@@ -245,6 +298,8 @@ public class PowerparmMonitor {
         this.pf2 = pf2;
     }
 
+    @Basic
+    @Column(name = "PF3", nullable = true, precision = 2)
     public Float getPf3() {
         return pf3;
     }
@@ -253,6 +308,8 @@ public class PowerparmMonitor {
         this.pf3 = pf3;
     }
 
+    @Basic
+    @Column(name = "PFsum", nullable = true, precision = 2)
     public Float getpFsum() {
         return pFsum;
     }
@@ -261,6 +318,8 @@ public class PowerparmMonitor {
         this.pFsum = pFsum;
     }
 
+    @Basic
+    @Column(name = "CosPHI1", nullable = true, precision = 2)
     public Float getCosPhi1() {
         return cosPhi1;
     }
@@ -269,6 +328,8 @@ public class PowerparmMonitor {
         this.cosPhi1 = cosPhi1;
     }
 
+    @Basic
+    @Column(name = "CosPHI2", nullable = true, precision = 2)
     public Float getCosPhi2() {
         return cosPhi2;
     }
@@ -277,6 +338,8 @@ public class PowerparmMonitor {
         this.cosPhi2 = cosPhi2;
     }
 
+    @Basic
+    @Column(name = "CosPHI3", nullable = true, precision = 2)
     public Float getCosPhi3() {
         return cosPhi3;
     }
@@ -285,6 +348,8 @@ public class PowerparmMonitor {
         this.cosPhi3 = cosPhi3;
     }
 
+    @Basic
+    @Column(name = "Ifl_U1", nullable = true, precision = 2)
     public Float getIflU1() {
         return iflU1;
     }
@@ -293,6 +358,8 @@ public class PowerparmMonitor {
         this.iflU1 = iflU1;
     }
 
+    @Basic
+    @Column(name = "Ifl_U2", nullable = true, precision = 2)
     public Float getIflU2() {
         return iflU2;
     }
@@ -301,6 +368,8 @@ public class PowerparmMonitor {
         this.iflU2 = iflU2;
     }
 
+    @Basic
+    @Column(name = "Ifl_U3", nullable = true, precision = 2)
     public Float getIflU3() {
         return iflU3;
     }
@@ -309,6 +378,8 @@ public class PowerparmMonitor {
         this.iflU3 = iflU3;
     }
 
+    @Basic
+    @Column(name = "Pst_U1", nullable = true, precision = 2)
     public Float getPstU1() {
         return pstU1;
     }
@@ -317,6 +388,8 @@ public class PowerparmMonitor {
         this.pstU1 = pstU1;
     }
 
+    @Basic
+    @Column(name = "Pst_U2", nullable = true, precision = 2)
     public Float getPstU2() {
         return pstU2;
     }
@@ -325,6 +398,8 @@ public class PowerparmMonitor {
         this.pstU2 = pstU2;
     }
 
+    @Basic
+    @Column(name = "Pst_U3", nullable = true, precision = 2)
     public Float getPstU3() {
         return pstU3;
     }
@@ -333,6 +408,8 @@ public class PowerparmMonitor {
         this.pstU3 = pstU3;
     }
 
+    @Basic
+    @Column(name = "Plt_U1", nullable = true, precision = 2)
     public Float getPltU1() {
         return pltU1;
     }
@@ -341,6 +418,8 @@ public class PowerparmMonitor {
         this.pltU1 = pltU1;
     }
 
+    @Basic
+    @Column(name = "Plt_U2", nullable = true, precision = 2)
     public Float getPltU2() {
         return pltU2;
     }
@@ -349,6 +428,8 @@ public class PowerparmMonitor {
         this.pltU2 = pltU2;
     }
 
+    @Basic
+    @Column(name = "Plt_U3", nullable = true, precision = 2)
     public Float getPltU3() {
         return pltU3;
     }
@@ -357,6 +438,8 @@ public class PowerparmMonitor {
         this.pltU3 = pltU3;
     }
 
+    @Basic
+    @Column(name = "Hz", nullable = true, precision = 2)
     public Float getHz() {
         return hz;
     }
