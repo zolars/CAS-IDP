@@ -2,7 +2,7 @@ package hibernatePOJO;
 
 import java.util.Objects;
 
-public class DevicesThreshold {
+public class DevicesThresholdV2 {
     private int dtid;
     private String did;
     private String type;
@@ -98,7 +98,7 @@ public class DevicesThreshold {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DevicesThreshold that = (DevicesThreshold) o;
+        DevicesThresholdV2 that = (DevicesThresholdV2) o;
         return dtid == that.dtid &&
                 Objects.equals(did, that.did) &&
                 Objects.equals(type, that.type) &&

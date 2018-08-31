@@ -1,26 +1,19 @@
 package hibernatePOJO;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-@Entity
-@Table(name = "event_power", schema = "test", catalog = "")
 public class EventPower {
     private int epid;
     private Integer mpid;
-    private String name;
-    private String location;
-    private String etype;
+    private String type;
     private String content;
     private Timestamp occurtime;
-    private int ppid;
     private String signature;
     private String annotation;
-    private Integer type;
+    private String etype;
+    private Integer isMark;
 
-    @Id
-    @Column(name = "epid", nullable = false)
     public int getEpid() {
         return epid;
     }
@@ -29,8 +22,6 @@ public class EventPower {
         this.epid = epid;
     }
 
-    @Basic
-    @Column(name = "mpid", nullable = true)
     public Integer getMpid() {
         return mpid;
     }
@@ -39,38 +30,14 @@ public class EventPower {
         this.mpid = mpid;
     }
 
-    @Basic
-    @Column(name = "name", nullable = false, length = 255)
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    @Basic
-    @Column(name = "location", nullable = true, length = 255)
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    @Basic
-    @Column(name = "etype", nullable = false, length = 255)
-    public String getEtype() {
-        return etype;
-    }
-
-    public void setEtype(String etype) {
-        this.etype = etype;
-    }
-
-    @Basic
-    @Column(name = "content", nullable = true, length = 255)
     public String getContent() {
         return content;
     }
@@ -79,8 +46,6 @@ public class EventPower {
         this.content = content;
     }
 
-    @Basic
-    @Column(name = "occurtime", nullable = true)
     public Timestamp getOccurtime() {
         return occurtime;
     }
@@ -89,18 +54,6 @@ public class EventPower {
         this.occurtime = occurtime;
     }
 
-    @Basic
-    @Column(name = "ppid", nullable = false)
-    public int getPpid() {
-        return ppid;
-    }
-
-    public void setPpid(int ppid) {
-        this.ppid = ppid;
-    }
-
-    @Basic
-    @Column(name = "signature", nullable = true, length = 255)
     public String getSignature() {
         return signature;
     }
@@ -109,8 +62,6 @@ public class EventPower {
         this.signature = signature;
     }
 
-    @Basic
-    @Column(name = "annotation", nullable = true, length = 255)
     public String getAnnotation() {
         return annotation;
     }
@@ -119,14 +70,20 @@ public class EventPower {
         this.annotation = annotation;
     }
 
-    @Basic
-    @Column(name = "type", nullable = true)
-    public Integer getType() {
-        return type;
+    public String getEtype() {
+        return etype;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setEtype(String etype) {
+        this.etype = etype;
+    }
+
+    public Integer getIsMark() {
+        return isMark;
+    }
+
+    public void setIsMark(Integer isMark) {
+        this.isMark = isMark;
     }
 
     @Override
@@ -135,21 +92,19 @@ public class EventPower {
         if (o == null || getClass() != o.getClass()) return false;
         EventPower that = (EventPower) o;
         return epid == that.epid &&
-                ppid == that.ppid &&
                 Objects.equals(mpid, that.mpid) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(location, that.location) &&
-                Objects.equals(etype, that.etype) &&
+                Objects.equals(type, that.type) &&
                 Objects.equals(content, that.content) &&
                 Objects.equals(occurtime, that.occurtime) &&
                 Objects.equals(signature, that.signature) &&
                 Objects.equals(annotation, that.annotation) &&
-                Objects.equals(type, that.type);
+                Objects.equals(etype, that.etype) &&
+                Objects.equals(isMark, that.isMark);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(epid, mpid, name, location, etype, content, occurtime, ppid, signature, annotation, type);
+        return Objects.hash(epid, mpid, type, content, occurtime, signature, annotation, etype, isMark);
     }
 }

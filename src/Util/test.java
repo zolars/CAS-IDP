@@ -6,7 +6,7 @@ public class test
 {
     public static void main(String[] args){
         try{
-            String password = "test";
+            String password = "123456";
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] bytes = md.digest(password.getBytes("utf-8"));
             String passwd = ToHex.toHex(bytes);

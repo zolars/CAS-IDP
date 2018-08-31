@@ -79,7 +79,7 @@ public class MyListener implements ServletContextListener {
                                 .build();
                         scheduler.scheduleJob(job2,trigger2);
 
-                        //设置任务，每1h上传一次事件数据到远程数据库
+                        //设置任务，每1h上传一次本地事件数据到远程数据库
                         Trigger trigger3=newTrigger()
                                 .withIdentity("uploadDataTrigger","uploadDataTriggerGroup")
                                 .startNow()
@@ -91,6 +91,19 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("uploadDataToCenterSvrJob","uploadDataToCenterSvrJobGroup")
                                 .build();
                         scheduler.scheduleJob(job3,trigger3);
+
+                        //设置任务，每1天执行一次效能评估，记录在
+                        Trigger trigger4=newTrigger()
+                                .withIdentity("assessModelTrigger","assessModelTriggerGroup")
+                                .startNow()
+                                .withSchedule(simpleSchedule()
+                                        .withIntervalInHours(24)
+                                        .repeatForever())
+                                .build();
+                        JobDetail job4=newJob(assessModelJob.class)
+                                .withIdentity("assessModelJob","assessModelGroup")
+                                .build();
+                        scheduler.scheduleJob(job4,trigger4);
 
 
                         ///////////////////////////

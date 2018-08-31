@@ -78,33 +78,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="block-area">
 
                 <div class="row">
-                    <!-- World Map -->
-                    <div class="col-md-12">
-                        <div class="tile">
-                            <h2 class="tile-title"></h2>
-                            <div class="tile-config dropdown">
-                                <a data-toggle="dropdown" href="" class="tooltips tile-menu" title="Options"></a>
-                                <ul class="dropdown-menu animated pull-right text-right">
-                                    <li>
-                                        <a href="">Refresh</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Settings</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <img style='height:100%;width:100%;' src="img/qinghai.jpg" />
+                    <table>
+                        <tr>
+                            <td>红色</td> <td>大于</td>
+                            <select class="form-control location-select-item" id="red_yellow" name="red_yellow">
+                                <option value="90">90</option>
+                                <option value="80">80</option>
+                                <option value="70">70</option>
+                                <option value="60">60</option>
+                                <option value="50">50</option>
+                            </select>
+                        </tr>
 
-                        </div>
+                        <tr>
+                            <td>黄色</td>
+                        </tr>
+
+                        <tr>
+                            <td>绿色</td> <td>小于</td>
+
+                            <select class="form-control location-select-item" id="yellow_green" name="yellow_green">
+                                <option value="60">60</option>
+                                <option value="50">50</option>
+                                <option value="40">40</option>
+                                <option value="30">30</option>
+                                <option value="20">20</option>
+                                <option value="10">10</option>
+                            </select>
+
+                        </tr>
+
+                        <tr>
+                            <td>时间：一天内</td>
+                        </tr>
+
+
+                    </table>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-alt"
+                                onClick="setAssessment()">确定
+                        </button>
                     </div>
+
                 </div>
             </div>
 
-            <hr class="whiter m-t-20 m-b-20" />
 
-            <br/>
-            <br/>
-            <br/>
+
         </section>
     </section>
 
@@ -271,6 +292,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
 
             if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+        }
+    </script>
+
+    <!-- 设定评估值-->
+    <script type="text/javascript">
+        function setAssessment(){
+
+            var red_yellow = $("#red_yellow").val();
+            var yellow_green = $("#yellow_green").val();
+
+            $.ajax({
+                type: "post",
+                url: "setAssessmentInfo",
+                data: {
+                    red_yellow: red_yellow,
+                    yellow_green: yellow_green,
+                    time: 1
+                },
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                }
+            });
         }
     </script>
 

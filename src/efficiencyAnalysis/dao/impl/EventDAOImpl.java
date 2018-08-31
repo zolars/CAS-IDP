@@ -2,10 +2,7 @@ package efficiencyAnalysis.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import efficiencyAnalysis.dao.EventDAO;
-import hibernatePOJO.Computerroom;
-import hibernatePOJO.EventDevice;
-import hibernatePOJO.EventTransient;
-import hibernatePOJO.EventtypeEnvironment;
+import hibernatePOJO.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -92,6 +89,24 @@ public class EventDAOImpl implements EventDAO {
         }
 
         return rtlist;
+    }
+
+    public boolean setAssessInfo(Integer red_yellow, Integer yellow_green){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        AssessmentSetting assess = new AssessmentSetting();
+        assess.setRedyellow(red_yellow);
+        assess.setYellowgreen(yellow_green);
+
+        String hql = "update AssessmentSetting assess set assess.redyellow='" + red_yellow +
+                "', assess.yellowgreen ='" + yellow_green + "' where assess.aid='" + 1 + "'";
+
+        rt = hbsessionDao.update(assess, hql);
+
+        return rt;
+
     }
 
 }

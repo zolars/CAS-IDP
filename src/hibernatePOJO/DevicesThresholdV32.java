@@ -1,11 +1,8 @@
 package hibernatePOJO;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "devices_threshold2", schema = "test", catalog = "")
-public class DevicesThreshold2 {
+public class DevicesThresholdV32 {
     private int dtid;
     private String did;
     private String type;
@@ -164,8 +161,6 @@ public class DevicesThreshold2 {
     private Integer isMarkVunb;
     private String alarmcontentVunb;
 
-    @Id
-    @Column(name = "dtid", nullable = false)
     public int getDtid() {
         return dtid;
     }
@@ -174,8 +169,6 @@ public class DevicesThreshold2 {
         this.dtid = dtid;
     }
 
-    @Basic
-    @Column(name = "did", nullable = true, length = 255)
     public String getDid() {
         return did;
     }
@@ -184,8 +177,6 @@ public class DevicesThreshold2 {
         this.did = did;
     }
 
-    @Basic
-    @Column(name = "type", nullable = true, length = 255)
     public String getType() {
         return type;
     }
@@ -194,8 +185,6 @@ public class DevicesThreshold2 {
         this.type = type;
     }
 
-    @Basic
-    @Column(name = "name_|f|U1", nullable = true, length = 255)
     public String getNameFU1() {
         return nameFU1;
     }
@@ -204,8 +193,6 @@ public class DevicesThreshold2 {
         this.nameFU1 = nameFU1;
     }
 
-    @Basic
-    @Column(name = "unit_|f|U1", nullable = true, length = 255)
     public String getUnitFU1() {
         return unitFU1;
     }
@@ -214,8 +201,6 @@ public class DevicesThreshold2 {
         this.unitFU1 = unitFU1;
     }
 
-    @Basic
-    @Column(name = "standardval_|f|U1", nullable = true, precision = 2)
     public Double getStandardvalFU1() {
         return standardvalFU1;
     }
@@ -224,8 +209,6 @@ public class DevicesThreshold2 {
         this.standardvalFU1 = standardvalFU1;
     }
 
-    @Basic
-    @Column(name = "cellval_|f|U1", nullable = true, precision = 2)
     public Double getCellvalFU1() {
         return cellvalFU1;
     }
@@ -234,8 +217,6 @@ public class DevicesThreshold2 {
         this.cellvalFU1 = cellvalFU1;
     }
 
-    @Basic
-    @Column(name = "floorval_|f|U1", nullable = true, precision = 2)
     public Double getFloorvalFU1() {
         return floorvalFU1;
     }
@@ -244,8 +225,6 @@ public class DevicesThreshold2 {
         this.floorvalFU1 = floorvalFU1;
     }
 
-    @Basic
-    @Column(name = "isMark_|f|U1", nullable = true)
     public Integer getIsMarkFU1() {
         return isMarkFU1;
     }
@@ -254,8 +233,6 @@ public class DevicesThreshold2 {
         this.isMarkFU1 = isMarkFU1;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_|f|U1", nullable = true, length = 255)
     public String getAlarmcontentFU1() {
         return alarmcontentFU1;
     }
@@ -264,8 +241,6 @@ public class DevicesThreshold2 {
         this.alarmcontentFU1 = alarmcontentFU1;
     }
 
-    @Basic
-    @Column(name = "name_|f|U2", nullable = true, length = 255)
     public String getNameFU2() {
         return nameFU2;
     }
@@ -274,8 +249,6 @@ public class DevicesThreshold2 {
         this.nameFU2 = nameFU2;
     }
 
-    @Basic
-    @Column(name = "unit_|f|U2", nullable = true, length = 255)
     public String getUnitFU2() {
         return unitFU2;
     }
@@ -284,8 +257,6 @@ public class DevicesThreshold2 {
         this.unitFU2 = unitFU2;
     }
 
-    @Basic
-    @Column(name = "standardval_|f|U2", nullable = true, precision = 2)
     public Double getStandardvalFU2() {
         return standardvalFU2;
     }
@@ -294,8 +265,6 @@ public class DevicesThreshold2 {
         this.standardvalFU2 = standardvalFU2;
     }
 
-    @Basic
-    @Column(name = "cellval_|f|U2", nullable = true, precision = 2)
     public Double getCellvalFU2() {
         return cellvalFU2;
     }
@@ -304,8 +273,6 @@ public class DevicesThreshold2 {
         this.cellvalFU2 = cellvalFU2;
     }
 
-    @Basic
-    @Column(name = "floorval_|f|U2", nullable = true, precision = 2)
     public Double getFloorvalFU2() {
         return floorvalFU2;
     }
@@ -314,8 +281,6 @@ public class DevicesThreshold2 {
         this.floorvalFU2 = floorvalFU2;
     }
 
-    @Basic
-    @Column(name = "isMark_|f|U2", nullable = true)
     public Integer getIsMarkFU2() {
         return isMarkFU2;
     }
@@ -324,8 +289,6 @@ public class DevicesThreshold2 {
         this.isMarkFU2 = isMarkFU2;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_|f|U2", nullable = true, length = 255)
     public String getAlarmcontentFU2() {
         return alarmcontentFU2;
     }
@@ -334,8 +297,6 @@ public class DevicesThreshold2 {
         this.alarmcontentFU2 = alarmcontentFU2;
     }
 
-    @Basic
-    @Column(name = "name_|f|U3", nullable = true, length = 255)
     public String getNameFU3() {
         return nameFU3;
     }
@@ -344,8 +305,6 @@ public class DevicesThreshold2 {
         this.nameFU3 = nameFU3;
     }
 
-    @Basic
-    @Column(name = "unit_|f|U3", nullable = true, length = 255)
     public String getUnitFU3() {
         return unitFU3;
     }
@@ -354,8 +313,6 @@ public class DevicesThreshold2 {
         this.unitFU3 = unitFU3;
     }
 
-    @Basic
-    @Column(name = "standardval_|f|U3", nullable = true, precision = 2)
     public Double getStandardvalFU3() {
         return standardvalFU3;
     }
@@ -364,8 +321,6 @@ public class DevicesThreshold2 {
         this.standardvalFU3 = standardvalFU3;
     }
 
-    @Basic
-    @Column(name = "cellval_|f|U3", nullable = true, precision = 2)
     public Double getCellvalFU3() {
         return cellvalFU3;
     }
@@ -374,8 +329,6 @@ public class DevicesThreshold2 {
         this.cellvalFU3 = cellvalFU3;
     }
 
-    @Basic
-    @Column(name = "floorval_|f|U3", nullable = true, precision = 2)
     public Double getFloorvalFU3() {
         return floorvalFU3;
     }
@@ -384,8 +337,6 @@ public class DevicesThreshold2 {
         this.floorvalFU3 = floorvalFU3;
     }
 
-    @Basic
-    @Column(name = "isMark_|f|U3", nullable = true)
     public Integer getIsMarkFU3() {
         return isMarkFU3;
     }
@@ -394,8 +345,6 @@ public class DevicesThreshold2 {
         this.isMarkFU3 = isMarkFU3;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_|f|U3", nullable = true, length = 255)
     public String getAlarmcontentFU3() {
         return alarmcontentFU3;
     }
@@ -404,8 +353,6 @@ public class DevicesThreshold2 {
         this.alarmcontentFU3 = alarmcontentFU3;
     }
 
-    @Basic
-    @Column(name = "name_Pst_U1", nullable = true, length = 255)
     public String getNamePstU1() {
         return namePstU1;
     }
@@ -414,8 +361,6 @@ public class DevicesThreshold2 {
         this.namePstU1 = namePstU1;
     }
 
-    @Basic
-    @Column(name = "unit_Pst_U1", nullable = true, length = 255)
     public String getUnitPstU1() {
         return unitPstU1;
     }
@@ -424,8 +369,6 @@ public class DevicesThreshold2 {
         this.unitPstU1 = unitPstU1;
     }
 
-    @Basic
-    @Column(name = "standardval_Pst_U1", nullable = true, precision = 2)
     public Double getStandardvalPstU1() {
         return standardvalPstU1;
     }
@@ -434,8 +377,6 @@ public class DevicesThreshold2 {
         this.standardvalPstU1 = standardvalPstU1;
     }
 
-    @Basic
-    @Column(name = "cellval_Pst_U1", nullable = true, precision = 2)
     public Double getCellvalPstU1() {
         return cellvalPstU1;
     }
@@ -444,8 +385,6 @@ public class DevicesThreshold2 {
         this.cellvalPstU1 = cellvalPstU1;
     }
 
-    @Basic
-    @Column(name = "floorval_Pst_U1", nullable = true, precision = 2)
     public Double getFloorvalPstU1() {
         return floorvalPstU1;
     }
@@ -454,8 +393,6 @@ public class DevicesThreshold2 {
         this.floorvalPstU1 = floorvalPstU1;
     }
 
-    @Basic
-    @Column(name = "isMark_Pst_U1", nullable = true)
     public Integer getIsMarkPstU1() {
         return isMarkPstU1;
     }
@@ -464,8 +401,6 @@ public class DevicesThreshold2 {
         this.isMarkPstU1 = isMarkPstU1;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_Pst_U1", nullable = true, length = 255)
     public String getAlarmcontentPstU1() {
         return alarmcontentPstU1;
     }
@@ -474,8 +409,6 @@ public class DevicesThreshold2 {
         this.alarmcontentPstU1 = alarmcontentPstU1;
     }
 
-    @Basic
-    @Column(name = "name_Pst_U2", nullable = true, length = 255)
     public String getNamePstU2() {
         return namePstU2;
     }
@@ -484,8 +417,6 @@ public class DevicesThreshold2 {
         this.namePstU2 = namePstU2;
     }
 
-    @Basic
-    @Column(name = "unit_Pst_U2", nullable = true, length = 255)
     public String getUnitPstU2() {
         return unitPstU2;
     }
@@ -494,8 +425,6 @@ public class DevicesThreshold2 {
         this.unitPstU2 = unitPstU2;
     }
 
-    @Basic
-    @Column(name = "standardval_Pst_U2", nullable = true, precision = 2)
     public Double getStandardvalPstU2() {
         return standardvalPstU2;
     }
@@ -504,8 +433,6 @@ public class DevicesThreshold2 {
         this.standardvalPstU2 = standardvalPstU2;
     }
 
-    @Basic
-    @Column(name = "cellval_Pst_U2", nullable = true, precision = 2)
     public Double getCellvalPstU2() {
         return cellvalPstU2;
     }
@@ -514,8 +441,6 @@ public class DevicesThreshold2 {
         this.cellvalPstU2 = cellvalPstU2;
     }
 
-    @Basic
-    @Column(name = "floorval_Pst_U2", nullable = true, precision = 2)
     public Double getFloorvalPstU2() {
         return floorvalPstU2;
     }
@@ -524,8 +449,6 @@ public class DevicesThreshold2 {
         this.floorvalPstU2 = floorvalPstU2;
     }
 
-    @Basic
-    @Column(name = "isMark_Pst_U2", nullable = true)
     public Integer getIsMarkPstU2() {
         return isMarkPstU2;
     }
@@ -534,8 +457,6 @@ public class DevicesThreshold2 {
         this.isMarkPstU2 = isMarkPstU2;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_Pst_U2", nullable = true, length = 255)
     public String getAlarmcontentPstU2() {
         return alarmcontentPstU2;
     }
@@ -544,8 +465,6 @@ public class DevicesThreshold2 {
         this.alarmcontentPstU2 = alarmcontentPstU2;
     }
 
-    @Basic
-    @Column(name = "name_Pst_U3", nullable = true, length = 255)
     public String getNamePstU3() {
         return namePstU3;
     }
@@ -554,8 +473,6 @@ public class DevicesThreshold2 {
         this.namePstU3 = namePstU3;
     }
 
-    @Basic
-    @Column(name = "unit_Pst_U3", nullable = true, length = 255)
     public String getUnitPstU3() {
         return unitPstU3;
     }
@@ -564,8 +481,6 @@ public class DevicesThreshold2 {
         this.unitPstU3 = unitPstU3;
     }
 
-    @Basic
-    @Column(name = "standardval_Pst_U3", nullable = true, precision = 2)
     public Double getStandardvalPstU3() {
         return standardvalPstU3;
     }
@@ -574,8 +489,6 @@ public class DevicesThreshold2 {
         this.standardvalPstU3 = standardvalPstU3;
     }
 
-    @Basic
-    @Column(name = "cellval_Pst_U3", nullable = true, precision = 2)
     public Double getCellvalPstU3() {
         return cellvalPstU3;
     }
@@ -584,8 +497,6 @@ public class DevicesThreshold2 {
         this.cellvalPstU3 = cellvalPstU3;
     }
 
-    @Basic
-    @Column(name = "floorval_Pst_U3", nullable = true, precision = 2)
     public Double getFloorvalPstU3() {
         return floorvalPstU3;
     }
@@ -594,8 +505,6 @@ public class DevicesThreshold2 {
         this.floorvalPstU3 = floorvalPstU3;
     }
 
-    @Basic
-    @Column(name = "isMark_Pst_U3", nullable = true)
     public Integer getIsMarkPstU3() {
         return isMarkPstU3;
     }
@@ -604,8 +513,6 @@ public class DevicesThreshold2 {
         this.isMarkPstU3 = isMarkPstU3;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_Pst_U3", nullable = true, length = 255)
     public String getAlarmcontentPstU3() {
         return alarmcontentPstU3;
     }
@@ -614,8 +521,6 @@ public class DevicesThreshold2 {
         this.alarmcontentPstU3 = alarmcontentPstU3;
     }
 
-    @Basic
-    @Column(name = "name_Plt_U1", nullable = true, length = 255)
     public String getNamePltU1() {
         return namePltU1;
     }
@@ -624,8 +529,6 @@ public class DevicesThreshold2 {
         this.namePltU1 = namePltU1;
     }
 
-    @Basic
-    @Column(name = "unit_Plt_U1", nullable = true, length = 255)
     public String getUnitPltU1() {
         return unitPltU1;
     }
@@ -634,8 +537,6 @@ public class DevicesThreshold2 {
         this.unitPltU1 = unitPltU1;
     }
 
-    @Basic
-    @Column(name = "standardval_Plt_U1", nullable = true, precision = 2)
     public Double getStandardvalPltU1() {
         return standardvalPltU1;
     }
@@ -644,8 +545,6 @@ public class DevicesThreshold2 {
         this.standardvalPltU1 = standardvalPltU1;
     }
 
-    @Basic
-    @Column(name = "cellval_Plt_U1", nullable = true, precision = 2)
     public Double getCellvalPltU1() {
         return cellvalPltU1;
     }
@@ -654,8 +553,6 @@ public class DevicesThreshold2 {
         this.cellvalPltU1 = cellvalPltU1;
     }
 
-    @Basic
-    @Column(name = "floorval_Plt_U1", nullable = true, precision = 2)
     public Double getFloorvalPltU1() {
         return floorvalPltU1;
     }
@@ -664,8 +561,6 @@ public class DevicesThreshold2 {
         this.floorvalPltU1 = floorvalPltU1;
     }
 
-    @Basic
-    @Column(name = "isMark_Plt_U1", nullable = true)
     public Integer getIsMarkPltU1() {
         return isMarkPltU1;
     }
@@ -674,8 +569,6 @@ public class DevicesThreshold2 {
         this.isMarkPltU1 = isMarkPltU1;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_Plt_U1", nullable = true, length = 255)
     public String getAlarmcontentPltU1() {
         return alarmcontentPltU1;
     }
@@ -684,8 +577,6 @@ public class DevicesThreshold2 {
         this.alarmcontentPltU1 = alarmcontentPltU1;
     }
 
-    @Basic
-    @Column(name = "name_Plt_U2", nullable = true, length = 255)
     public String getNamePltU2() {
         return namePltU2;
     }
@@ -694,8 +585,6 @@ public class DevicesThreshold2 {
         this.namePltU2 = namePltU2;
     }
 
-    @Basic
-    @Column(name = "unit_Plt_U2", nullable = true, length = 255)
     public String getUnitPltU2() {
         return unitPltU2;
     }
@@ -704,8 +593,6 @@ public class DevicesThreshold2 {
         this.unitPltU2 = unitPltU2;
     }
 
-    @Basic
-    @Column(name = "standardval_Plt_U2", nullable = true, precision = 2)
     public Double getStandardvalPltU2() {
         return standardvalPltU2;
     }
@@ -714,8 +601,6 @@ public class DevicesThreshold2 {
         this.standardvalPltU2 = standardvalPltU2;
     }
 
-    @Basic
-    @Column(name = "cellval_Plt_U2", nullable = true, precision = 2)
     public Double getCellvalPltU2() {
         return cellvalPltU2;
     }
@@ -724,8 +609,6 @@ public class DevicesThreshold2 {
         this.cellvalPltU2 = cellvalPltU2;
     }
 
-    @Basic
-    @Column(name = "floorval_Plt_U2", nullable = true, precision = 2)
     public Double getFloorvalPltU2() {
         return floorvalPltU2;
     }
@@ -734,8 +617,6 @@ public class DevicesThreshold2 {
         this.floorvalPltU2 = floorvalPltU2;
     }
 
-    @Basic
-    @Column(name = "isMark_Plt_U2", nullable = true)
     public Integer getIsMarkPltU2() {
         return isMarkPltU2;
     }
@@ -744,8 +625,6 @@ public class DevicesThreshold2 {
         this.isMarkPltU2 = isMarkPltU2;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_Plt_U2", nullable = true, length = 255)
     public String getAlarmcontentPltU2() {
         return alarmcontentPltU2;
     }
@@ -754,8 +633,6 @@ public class DevicesThreshold2 {
         this.alarmcontentPltU2 = alarmcontentPltU2;
     }
 
-    @Basic
-    @Column(name = "name_Plt_U3", nullable = true, length = 255)
     public String getNamePltU3() {
         return namePltU3;
     }
@@ -764,8 +641,6 @@ public class DevicesThreshold2 {
         this.namePltU3 = namePltU3;
     }
 
-    @Basic
-    @Column(name = "unit_Plt_U3", nullable = true, length = 255)
     public String getUnitPltU3() {
         return unitPltU3;
     }
@@ -774,8 +649,6 @@ public class DevicesThreshold2 {
         this.unitPltU3 = unitPltU3;
     }
 
-    @Basic
-    @Column(name = "standardval_Plt_U3", nullable = true, precision = 2)
     public Double getStandardvalPltU3() {
         return standardvalPltU3;
     }
@@ -784,8 +657,6 @@ public class DevicesThreshold2 {
         this.standardvalPltU3 = standardvalPltU3;
     }
 
-    @Basic
-    @Column(name = "cellval_Plt_U3", nullable = true, precision = 2)
     public Double getCellvalPltU3() {
         return cellvalPltU3;
     }
@@ -794,8 +665,6 @@ public class DevicesThreshold2 {
         this.cellvalPltU3 = cellvalPltU3;
     }
 
-    @Basic
-    @Column(name = "floorval_Plt_U3", nullable = true, precision = 2)
     public Double getFloorvalPltU3() {
         return floorvalPltU3;
     }
@@ -804,8 +673,6 @@ public class DevicesThreshold2 {
         this.floorvalPltU3 = floorvalPltU3;
     }
 
-    @Basic
-    @Column(name = "isMark_Plt_U3", nullable = true)
     public Integer getIsMarkPltU3() {
         return isMarkPltU3;
     }
@@ -814,8 +681,6 @@ public class DevicesThreshold2 {
         this.isMarkPltU3 = isMarkPltU3;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_Plt_U3", nullable = true, length = 255)
     public String getAlarmcontentPltU3() {
         return alarmcontentPltU3;
     }
@@ -824,8 +689,6 @@ public class DevicesThreshold2 {
         this.alarmcontentPltU3 = alarmcontentPltU3;
     }
 
-    @Basic
-    @Column(name = "name_Hz", nullable = true, length = 255)
     public String getNameHz() {
         return nameHz;
     }
@@ -834,8 +697,6 @@ public class DevicesThreshold2 {
         this.nameHz = nameHz;
     }
 
-    @Basic
-    @Column(name = "unit_Hz", nullable = true, length = 255)
     public String getUnitHz() {
         return unitHz;
     }
@@ -844,8 +705,6 @@ public class DevicesThreshold2 {
         this.unitHz = unitHz;
     }
 
-    @Basic
-    @Column(name = "standardval_Hz", nullable = true, precision = 2)
     public Double getStandardvalHz() {
         return standardvalHz;
     }
@@ -854,8 +713,6 @@ public class DevicesThreshold2 {
         this.standardvalHz = standardvalHz;
     }
 
-    @Basic
-    @Column(name = "cellval_Hz", nullable = true, precision = 2)
     public Double getCellvalHz() {
         return cellvalHz;
     }
@@ -864,8 +721,6 @@ public class DevicesThreshold2 {
         this.cellvalHz = cellvalHz;
     }
 
-    @Basic
-    @Column(name = "floorval_Hz", nullable = true, precision = 2)
     public Double getFloorvalHz() {
         return floorvalHz;
     }
@@ -874,8 +729,6 @@ public class DevicesThreshold2 {
         this.floorvalHz = floorvalHz;
     }
 
-    @Basic
-    @Column(name = "isMark_Hz", nullable = true)
     public Integer getIsMarkHz() {
         return isMarkHz;
     }
@@ -884,8 +737,6 @@ public class DevicesThreshold2 {
         this.isMarkHz = isMarkHz;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_Hz", nullable = true, length = 255)
     public String getAlarmcontentHz() {
         return alarmcontentHz;
     }
@@ -894,8 +745,6 @@ public class DevicesThreshold2 {
         this.alarmcontentHz = alarmcontentHz;
     }
 
-    @Basic
-    @Column(name = "name_angleU1", nullable = true, length = 255)
     public String getNameAngleU1() {
         return nameAngleU1;
     }
@@ -904,8 +753,6 @@ public class DevicesThreshold2 {
         this.nameAngleU1 = nameAngleU1;
     }
 
-    @Basic
-    @Column(name = "unit_angleU1", nullable = true, length = 255)
     public String getUnitAngleU1() {
         return unitAngleU1;
     }
@@ -914,8 +761,6 @@ public class DevicesThreshold2 {
         this.unitAngleU1 = unitAngleU1;
     }
 
-    @Basic
-    @Column(name = "standardval_angleU1", nullable = true, precision = 2)
     public Double getStandardvalAngleU1() {
         return standardvalAngleU1;
     }
@@ -924,8 +769,6 @@ public class DevicesThreshold2 {
         this.standardvalAngleU1 = standardvalAngleU1;
     }
 
-    @Basic
-    @Column(name = "cellval_angleU1", nullable = true, precision = 2)
     public Double getCellvalAngleU1() {
         return cellvalAngleU1;
     }
@@ -934,8 +777,6 @@ public class DevicesThreshold2 {
         this.cellvalAngleU1 = cellvalAngleU1;
     }
 
-    @Basic
-    @Column(name = "floorval_angleU1", nullable = true, precision = 2)
     public Double getFloorvalAngleU1() {
         return floorvalAngleU1;
     }
@@ -944,8 +785,6 @@ public class DevicesThreshold2 {
         this.floorvalAngleU1 = floorvalAngleU1;
     }
 
-    @Basic
-    @Column(name = "isMark_angleU1", nullable = true)
     public Integer getIsMarkAngleU1() {
         return isMarkAngleU1;
     }
@@ -954,8 +793,6 @@ public class DevicesThreshold2 {
         this.isMarkAngleU1 = isMarkAngleU1;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_angleU1", nullable = true, length = 255)
     public String getAlarmcontentAngleU1() {
         return alarmcontentAngleU1;
     }
@@ -964,8 +801,6 @@ public class DevicesThreshold2 {
         this.alarmcontentAngleU1 = alarmcontentAngleU1;
     }
 
-    @Basic
-    @Column(name = "name_angleU2", nullable = true, length = 255)
     public String getNameAngleU2() {
         return nameAngleU2;
     }
@@ -974,8 +809,6 @@ public class DevicesThreshold2 {
         this.nameAngleU2 = nameAngleU2;
     }
 
-    @Basic
-    @Column(name = "unit_angleU2", nullable = true, length = 255)
     public String getUnitAngleU2() {
         return unitAngleU2;
     }
@@ -984,8 +817,6 @@ public class DevicesThreshold2 {
         this.unitAngleU2 = unitAngleU2;
     }
 
-    @Basic
-    @Column(name = "standardval_angleU2", nullable = true, precision = 2)
     public Double getStandardvalAngleU2() {
         return standardvalAngleU2;
     }
@@ -994,8 +825,6 @@ public class DevicesThreshold2 {
         this.standardvalAngleU2 = standardvalAngleU2;
     }
 
-    @Basic
-    @Column(name = "cellval_angleU2", nullable = true, precision = 2)
     public Double getCellvalAngleU2() {
         return cellvalAngleU2;
     }
@@ -1004,8 +833,6 @@ public class DevicesThreshold2 {
         this.cellvalAngleU2 = cellvalAngleU2;
     }
 
-    @Basic
-    @Column(name = "floorval_angleU2", nullable = true, precision = 2)
     public Double getFloorvalAngleU2() {
         return floorvalAngleU2;
     }
@@ -1014,8 +841,6 @@ public class DevicesThreshold2 {
         this.floorvalAngleU2 = floorvalAngleU2;
     }
 
-    @Basic
-    @Column(name = "isMark_angleU2", nullable = true)
     public Integer getIsMarkAngleU2() {
         return isMarkAngleU2;
     }
@@ -1024,8 +849,6 @@ public class DevicesThreshold2 {
         this.isMarkAngleU2 = isMarkAngleU2;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_angleU2", nullable = true, length = 255)
     public String getAlarmcontentAngleU2() {
         return alarmcontentAngleU2;
     }
@@ -1034,8 +857,6 @@ public class DevicesThreshold2 {
         this.alarmcontentAngleU2 = alarmcontentAngleU2;
     }
 
-    @Basic
-    @Column(name = "name_angleU3", nullable = true, length = 255)
     public String getNameAngleU3() {
         return nameAngleU3;
     }
@@ -1044,8 +865,6 @@ public class DevicesThreshold2 {
         this.nameAngleU3 = nameAngleU3;
     }
 
-    @Basic
-    @Column(name = "unit_angleU3", nullable = true, length = 255)
     public String getUnitAngleU3() {
         return unitAngleU3;
     }
@@ -1054,8 +873,6 @@ public class DevicesThreshold2 {
         this.unitAngleU3 = unitAngleU3;
     }
 
-    @Basic
-    @Column(name = "standardval_angleU3", nullable = true, precision = 2)
     public Double getStandardvalAngleU3() {
         return standardvalAngleU3;
     }
@@ -1064,8 +881,6 @@ public class DevicesThreshold2 {
         this.standardvalAngleU3 = standardvalAngleU3;
     }
 
-    @Basic
-    @Column(name = "cellval_angleU3", nullable = true, precision = 2)
     public Double getCellvalAngleU3() {
         return cellvalAngleU3;
     }
@@ -1074,8 +889,6 @@ public class DevicesThreshold2 {
         this.cellvalAngleU3 = cellvalAngleU3;
     }
 
-    @Basic
-    @Column(name = "floorval_angleU3", nullable = true, precision = 2)
     public Double getFloorvalAngleU3() {
         return floorvalAngleU3;
     }
@@ -1084,8 +897,6 @@ public class DevicesThreshold2 {
         this.floorvalAngleU3 = floorvalAngleU3;
     }
 
-    @Basic
-    @Column(name = "isMark_angleU3", nullable = true)
     public Integer getIsMarkAngleU3() {
         return isMarkAngleU3;
     }
@@ -1094,8 +905,6 @@ public class DevicesThreshold2 {
         this.isMarkAngleU3 = isMarkAngleU3;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_angleU3", nullable = true, length = 255)
     public String getAlarmcontentAngleU3() {
         return alarmcontentAngleU3;
     }
@@ -1104,8 +913,6 @@ public class DevicesThreshold2 {
         this.alarmcontentAngleU3 = alarmcontentAngleU3;
     }
 
-    @Basic
-    @Column(name = "name_angleV1", nullable = true, length = 255)
     public String getNameAngleV1() {
         return nameAngleV1;
     }
@@ -1114,8 +921,6 @@ public class DevicesThreshold2 {
         this.nameAngleV1 = nameAngleV1;
     }
 
-    @Basic
-    @Column(name = "unit_angleV1", nullable = true, length = 255)
     public String getUnitAngleV1() {
         return unitAngleV1;
     }
@@ -1124,8 +929,6 @@ public class DevicesThreshold2 {
         this.unitAngleV1 = unitAngleV1;
     }
 
-    @Basic
-    @Column(name = "standardval_angleV1", nullable = true, precision = 2)
     public Double getStandardvalAngleV1() {
         return standardvalAngleV1;
     }
@@ -1134,8 +937,6 @@ public class DevicesThreshold2 {
         this.standardvalAngleV1 = standardvalAngleV1;
     }
 
-    @Basic
-    @Column(name = "cellval_angleV1", nullable = true, precision = 2)
     public Double getCellvalAngleV1() {
         return cellvalAngleV1;
     }
@@ -1144,8 +945,6 @@ public class DevicesThreshold2 {
         this.cellvalAngleV1 = cellvalAngleV1;
     }
 
-    @Basic
-    @Column(name = "floorval_angleV1", nullable = true, precision = 2)
     public Double getFloorvalAngleV1() {
         return floorvalAngleV1;
     }
@@ -1154,8 +953,6 @@ public class DevicesThreshold2 {
         this.floorvalAngleV1 = floorvalAngleV1;
     }
 
-    @Basic
-    @Column(name = "isMark_angleV1", nullable = true)
     public Integer getIsMarkAngleV1() {
         return isMarkAngleV1;
     }
@@ -1164,8 +961,6 @@ public class DevicesThreshold2 {
         this.isMarkAngleV1 = isMarkAngleV1;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_angleV1", nullable = true, length = 255)
     public String getAlarmcontentAngleV1() {
         return alarmcontentAngleV1;
     }
@@ -1174,8 +969,6 @@ public class DevicesThreshold2 {
         this.alarmcontentAngleV1 = alarmcontentAngleV1;
     }
 
-    @Basic
-    @Column(name = "name_angleV2", nullable = true, length = 255)
     public String getNameAngleV2() {
         return nameAngleV2;
     }
@@ -1184,8 +977,6 @@ public class DevicesThreshold2 {
         this.nameAngleV2 = nameAngleV2;
     }
 
-    @Basic
-    @Column(name = "unit_angleV2", nullable = true, length = 255)
     public String getUnitAngleV2() {
         return unitAngleV2;
     }
@@ -1194,8 +985,6 @@ public class DevicesThreshold2 {
         this.unitAngleV2 = unitAngleV2;
     }
 
-    @Basic
-    @Column(name = "standardval_angleV2", nullable = true, precision = 2)
     public Double getStandardvalAngleV2() {
         return standardvalAngleV2;
     }
@@ -1204,8 +993,6 @@ public class DevicesThreshold2 {
         this.standardvalAngleV2 = standardvalAngleV2;
     }
 
-    @Basic
-    @Column(name = "cellval_angleV2", nullable = true, precision = 2)
     public Double getCellvalAngleV2() {
         return cellvalAngleV2;
     }
@@ -1214,8 +1001,6 @@ public class DevicesThreshold2 {
         this.cellvalAngleV2 = cellvalAngleV2;
     }
 
-    @Basic
-    @Column(name = "floorval_angleV2", nullable = true, precision = 2)
     public Double getFloorvalAngleV2() {
         return floorvalAngleV2;
     }
@@ -1224,8 +1009,6 @@ public class DevicesThreshold2 {
         this.floorvalAngleV2 = floorvalAngleV2;
     }
 
-    @Basic
-    @Column(name = "isMark_angleV2", nullable = true)
     public Integer getIsMarkAngleV2() {
         return isMarkAngleV2;
     }
@@ -1234,8 +1017,6 @@ public class DevicesThreshold2 {
         this.isMarkAngleV2 = isMarkAngleV2;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_angleV2", nullable = true, length = 255)
     public String getAlarmcontentAngleV2() {
         return alarmcontentAngleV2;
     }
@@ -1244,8 +1025,6 @@ public class DevicesThreshold2 {
         this.alarmcontentAngleV2 = alarmcontentAngleV2;
     }
 
-    @Basic
-    @Column(name = "name_angleV3", nullable = true, length = 255)
     public String getNameAngleV3() {
         return nameAngleV3;
     }
@@ -1254,8 +1033,6 @@ public class DevicesThreshold2 {
         this.nameAngleV3 = nameAngleV3;
     }
 
-    @Basic
-    @Column(name = "unit_angleV3", nullable = true, length = 255)
     public String getUnitAngleV3() {
         return unitAngleV3;
     }
@@ -1264,8 +1041,6 @@ public class DevicesThreshold2 {
         this.unitAngleV3 = unitAngleV3;
     }
 
-    @Basic
-    @Column(name = "standardval_angleV3", nullable = true, precision = 2)
     public Double getStandardvalAngleV3() {
         return standardvalAngleV3;
     }
@@ -1274,8 +1049,6 @@ public class DevicesThreshold2 {
         this.standardvalAngleV3 = standardvalAngleV3;
     }
 
-    @Basic
-    @Column(name = "cellval_angleV3", nullable = true, precision = 2)
     public Double getCellvalAngleV3() {
         return cellvalAngleV3;
     }
@@ -1284,8 +1057,6 @@ public class DevicesThreshold2 {
         this.cellvalAngleV3 = cellvalAngleV3;
     }
 
-    @Basic
-    @Column(name = "floorval_angleV3", nullable = true, precision = 2)
     public Double getFloorvalAngleV3() {
         return floorvalAngleV3;
     }
@@ -1294,8 +1065,6 @@ public class DevicesThreshold2 {
         this.floorvalAngleV3 = floorvalAngleV3;
     }
 
-    @Basic
-    @Column(name = "isMark_angleV3", nullable = true)
     public Integer getIsMarkAngleV3() {
         return isMarkAngleV3;
     }
@@ -1304,8 +1073,6 @@ public class DevicesThreshold2 {
         this.isMarkAngleV3 = isMarkAngleV3;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_angleV3", nullable = true, length = 255)
     public String getAlarmcontentAngleV3() {
         return alarmcontentAngleV3;
     }
@@ -1314,8 +1081,6 @@ public class DevicesThreshold2 {
         this.alarmcontentAngleV3 = alarmcontentAngleV3;
     }
 
-    @Basic
-    @Column(name = "name_angleI1", nullable = true, length = 255)
     public String getNameAngleI1() {
         return nameAngleI1;
     }
@@ -1324,8 +1089,6 @@ public class DevicesThreshold2 {
         this.nameAngleI1 = nameAngleI1;
     }
 
-    @Basic
-    @Column(name = "unit_angleI1", nullable = true, length = 255)
     public String getUnitAngleI1() {
         return unitAngleI1;
     }
@@ -1334,8 +1097,6 @@ public class DevicesThreshold2 {
         this.unitAngleI1 = unitAngleI1;
     }
 
-    @Basic
-    @Column(name = "standardval_angleI1", nullable = true, precision = 2)
     public Double getStandardvalAngleI1() {
         return standardvalAngleI1;
     }
@@ -1344,8 +1105,6 @@ public class DevicesThreshold2 {
         this.standardvalAngleI1 = standardvalAngleI1;
     }
 
-    @Basic
-    @Column(name = "cellval_angleI1", nullable = true, precision = 2)
     public Double getCellvalAngleI1() {
         return cellvalAngleI1;
     }
@@ -1354,8 +1113,6 @@ public class DevicesThreshold2 {
         this.cellvalAngleI1 = cellvalAngleI1;
     }
 
-    @Basic
-    @Column(name = "floorval_angleI1", nullable = true, precision = 2)
     public Double getFloorvalAngleI1() {
         return floorvalAngleI1;
     }
@@ -1364,8 +1121,6 @@ public class DevicesThreshold2 {
         this.floorvalAngleI1 = floorvalAngleI1;
     }
 
-    @Basic
-    @Column(name = "isMark_angleI1", nullable = true)
     public Integer getIsMarkAngleI1() {
         return isMarkAngleI1;
     }
@@ -1374,8 +1129,6 @@ public class DevicesThreshold2 {
         this.isMarkAngleI1 = isMarkAngleI1;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_angleI1", nullable = true, length = 255)
     public String getAlarmcontentAngleI1() {
         return alarmcontentAngleI1;
     }
@@ -1384,8 +1137,6 @@ public class DevicesThreshold2 {
         this.alarmcontentAngleI1 = alarmcontentAngleI1;
     }
 
-    @Basic
-    @Column(name = "name_angleI2", nullable = true, length = 255)
     public String getNameAngleI2() {
         return nameAngleI2;
     }
@@ -1394,8 +1145,6 @@ public class DevicesThreshold2 {
         this.nameAngleI2 = nameAngleI2;
     }
 
-    @Basic
-    @Column(name = "unit_angleI2", nullable = true, length = 255)
     public String getUnitAngleI2() {
         return unitAngleI2;
     }
@@ -1404,8 +1153,6 @@ public class DevicesThreshold2 {
         this.unitAngleI2 = unitAngleI2;
     }
 
-    @Basic
-    @Column(name = "standardval_angleI2", nullable = true, precision = 2)
     public Double getStandardvalAngleI2() {
         return standardvalAngleI2;
     }
@@ -1414,8 +1161,6 @@ public class DevicesThreshold2 {
         this.standardvalAngleI2 = standardvalAngleI2;
     }
 
-    @Basic
-    @Column(name = "cellval_angleI2", nullable = true, precision = 2)
     public Double getCellvalAngleI2() {
         return cellvalAngleI2;
     }
@@ -1424,8 +1169,6 @@ public class DevicesThreshold2 {
         this.cellvalAngleI2 = cellvalAngleI2;
     }
 
-    @Basic
-    @Column(name = "floorval_angleI2", nullable = true, precision = 2)
     public Double getFloorvalAngleI2() {
         return floorvalAngleI2;
     }
@@ -1434,8 +1177,6 @@ public class DevicesThreshold2 {
         this.floorvalAngleI2 = floorvalAngleI2;
     }
 
-    @Basic
-    @Column(name = "isMark_angleI2", nullable = true)
     public Integer getIsMarkAngleI2() {
         return isMarkAngleI2;
     }
@@ -1444,8 +1185,6 @@ public class DevicesThreshold2 {
         this.isMarkAngleI2 = isMarkAngleI2;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_angleI2", nullable = true, length = 255)
     public String getAlarmcontentAngleI2() {
         return alarmcontentAngleI2;
     }
@@ -1454,8 +1193,6 @@ public class DevicesThreshold2 {
         this.alarmcontentAngleI2 = alarmcontentAngleI2;
     }
 
-    @Basic
-    @Column(name = "name_angleI3", nullable = true, length = 255)
     public String getNameAngleI3() {
         return nameAngleI3;
     }
@@ -1464,8 +1201,6 @@ public class DevicesThreshold2 {
         this.nameAngleI3 = nameAngleI3;
     }
 
-    @Basic
-    @Column(name = "unit_angleI3", nullable = true, length = 255)
     public String getUnitAngleI3() {
         return unitAngleI3;
     }
@@ -1474,8 +1209,6 @@ public class DevicesThreshold2 {
         this.unitAngleI3 = unitAngleI3;
     }
 
-    @Basic
-    @Column(name = "standardval_angleI3", nullable = true, precision = 2)
     public Double getStandardvalAngleI3() {
         return standardvalAngleI3;
     }
@@ -1484,8 +1217,6 @@ public class DevicesThreshold2 {
         this.standardvalAngleI3 = standardvalAngleI3;
     }
 
-    @Basic
-    @Column(name = "cellval_angleI3", nullable = true, precision = 2)
     public Double getCellvalAngleI3() {
         return cellvalAngleI3;
     }
@@ -1494,8 +1225,6 @@ public class DevicesThreshold2 {
         this.cellvalAngleI3 = cellvalAngleI3;
     }
 
-    @Basic
-    @Column(name = "floorval_angleI3", nullable = true, precision = 2)
     public Double getFloorvalAngleI3() {
         return floorvalAngleI3;
     }
@@ -1504,8 +1233,6 @@ public class DevicesThreshold2 {
         this.floorvalAngleI3 = floorvalAngleI3;
     }
 
-    @Basic
-    @Column(name = "isMark_angleI3", nullable = true)
     public Integer getIsMarkAngleI3() {
         return isMarkAngleI3;
     }
@@ -1514,8 +1241,6 @@ public class DevicesThreshold2 {
         this.isMarkAngleI3 = isMarkAngleI3;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_angleI3", nullable = true, length = 255)
     public String getAlarmcontentAngleI3() {
         return alarmcontentAngleI3;
     }
@@ -1524,8 +1249,6 @@ public class DevicesThreshold2 {
         this.alarmcontentAngleI3 = alarmcontentAngleI3;
     }
 
-    @Basic
-    @Column(name = "name_Aunb", nullable = true, length = 255)
     public String getNameAunb() {
         return nameAunb;
     }
@@ -1534,8 +1257,6 @@ public class DevicesThreshold2 {
         this.nameAunb = nameAunb;
     }
 
-    @Basic
-    @Column(name = "unit_Aunb", nullable = true, length = 255)
     public String getUnitAunb() {
         return unitAunb;
     }
@@ -1544,8 +1265,6 @@ public class DevicesThreshold2 {
         this.unitAunb = unitAunb;
     }
 
-    @Basic
-    @Column(name = "standardval_Aunb", nullable = true, precision = 2)
     public Double getStandardvalAunb() {
         return standardvalAunb;
     }
@@ -1554,8 +1273,6 @@ public class DevicesThreshold2 {
         this.standardvalAunb = standardvalAunb;
     }
 
-    @Basic
-    @Column(name = "cellval_Aunb", nullable = true, precision = 2)
     public Double getCellvalAunb() {
         return cellvalAunb;
     }
@@ -1564,8 +1281,6 @@ public class DevicesThreshold2 {
         this.cellvalAunb = cellvalAunb;
     }
 
-    @Basic
-    @Column(name = "floorval_Aunb", nullable = true, precision = 2)
     public Double getFloorvalAunb() {
         return floorvalAunb;
     }
@@ -1574,8 +1289,6 @@ public class DevicesThreshold2 {
         this.floorvalAunb = floorvalAunb;
     }
 
-    @Basic
-    @Column(name = "isMark_Aunb", nullable = true)
     public Integer getIsMarkAunb() {
         return isMarkAunb;
     }
@@ -1584,8 +1297,6 @@ public class DevicesThreshold2 {
         this.isMarkAunb = isMarkAunb;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_Aunb", nullable = true, length = 255)
     public String getAlarmcontentAunb() {
         return alarmcontentAunb;
     }
@@ -1594,8 +1305,6 @@ public class DevicesThreshold2 {
         this.alarmcontentAunb = alarmcontentAunb;
     }
 
-    @Basic
-    @Column(name = "name_Uunb", nullable = true, length = 255)
     public String getNameUunb() {
         return nameUunb;
     }
@@ -1604,8 +1313,6 @@ public class DevicesThreshold2 {
         this.nameUunb = nameUunb;
     }
 
-    @Basic
-    @Column(name = "unit_Uunb", nullable = true, length = 255)
     public String getUnitUunb() {
         return unitUunb;
     }
@@ -1614,8 +1321,6 @@ public class DevicesThreshold2 {
         this.unitUunb = unitUunb;
     }
 
-    @Basic
-    @Column(name = "standardval_Uunb", nullable = true, precision = 2)
     public Double getStandardvalUunb() {
         return standardvalUunb;
     }
@@ -1624,8 +1329,6 @@ public class DevicesThreshold2 {
         this.standardvalUunb = standardvalUunb;
     }
 
-    @Basic
-    @Column(name = "cellval_Uunb", nullable = true, precision = 2)
     public Double getCellvalUunb() {
         return cellvalUunb;
     }
@@ -1634,8 +1337,6 @@ public class DevicesThreshold2 {
         this.cellvalUunb = cellvalUunb;
     }
 
-    @Basic
-    @Column(name = "floorval_Uunb", nullable = true, precision = 2)
     public Double getFloorvalUunb() {
         return floorvalUunb;
     }
@@ -1644,8 +1345,6 @@ public class DevicesThreshold2 {
         this.floorvalUunb = floorvalUunb;
     }
 
-    @Basic
-    @Column(name = "isMark_Uunb", nullable = true)
     public Integer getIsMarkUunb() {
         return isMarkUunb;
     }
@@ -1654,8 +1353,6 @@ public class DevicesThreshold2 {
         this.isMarkUunb = isMarkUunb;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_Uunb", nullable = true, length = 255)
     public String getAlarmcontentUunb() {
         return alarmcontentUunb;
     }
@@ -1664,8 +1361,6 @@ public class DevicesThreshold2 {
         this.alarmcontentUunb = alarmcontentUunb;
     }
 
-    @Basic
-    @Column(name = "name_Vunb", nullable = true, length = 255)
     public String getNameVunb() {
         return nameVunb;
     }
@@ -1674,8 +1369,6 @@ public class DevicesThreshold2 {
         this.nameVunb = nameVunb;
     }
 
-    @Basic
-    @Column(name = "unit_Vunb", nullable = true, length = 255)
     public String getUnitVunb() {
         return unitVunb;
     }
@@ -1684,8 +1377,6 @@ public class DevicesThreshold2 {
         this.unitVunb = unitVunb;
     }
 
-    @Basic
-    @Column(name = "standardval_Vunb", nullable = true, precision = 2)
     public Double getStandardvalVunb() {
         return standardvalVunb;
     }
@@ -1694,8 +1385,6 @@ public class DevicesThreshold2 {
         this.standardvalVunb = standardvalVunb;
     }
 
-    @Basic
-    @Column(name = "cellval_Vunb", nullable = true, precision = 2)
     public Double getCellvalVunb() {
         return cellvalVunb;
     }
@@ -1704,8 +1393,6 @@ public class DevicesThreshold2 {
         this.cellvalVunb = cellvalVunb;
     }
 
-    @Basic
-    @Column(name = "floorval_Vunb", nullable = true, precision = 2)
     public Double getFloorvalVunb() {
         return floorvalVunb;
     }
@@ -1714,8 +1401,6 @@ public class DevicesThreshold2 {
         this.floorvalVunb = floorvalVunb;
     }
 
-    @Basic
-    @Column(name = "isMark_Vunb", nullable = true)
     public Integer getIsMarkVunb() {
         return isMarkVunb;
     }
@@ -1724,8 +1409,6 @@ public class DevicesThreshold2 {
         this.isMarkVunb = isMarkVunb;
     }
 
-    @Basic
-    @Column(name = "alarmcontent_Vunb", nullable = true, length = 255)
     public String getAlarmcontentVunb() {
         return alarmcontentVunb;
     }
@@ -1738,7 +1421,7 @@ public class DevicesThreshold2 {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DevicesThreshold2 that = (DevicesThreshold2) o;
+        DevicesThresholdV32 that = (DevicesThresholdV32) o;
         return dtid == that.dtid &&
                 Objects.equals(did, that.did) &&
                 Objects.equals(type, that.type) &&

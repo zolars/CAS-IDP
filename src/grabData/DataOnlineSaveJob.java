@@ -32,7 +32,109 @@ public class DataOnlineSaveJob implements Job {
                 hbsessionDao.insert(varsxdy);
 
                 // 检测告警（越线）事件
-                DevicesThreshold dt1 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where did='"+1+"'");
+                Timestamp date = new Timestamp(System.currentTimeMillis());
+                EventPower ep = new EventPower();
+                ep.setMpid(1);  //根据实际修改
+                ep.setOccurtime(date);
+
+                List<DevicesThreshold> dtlist =  hbsessionDao.search("FROM DevicesThreshold where did='"+1+"'");
+
+                for(DevicesThreshold dt:dtlist){
+                    String str = dt.getName();
+
+                    if(str.equals("U1"))
+                    {
+                        if(var.getU1() < dt.getFloorval()){
+                            ep.setContent("电压过低报警，当前值为" + var.getU1());
+                            ep.setType("3");
+                            ep.setEtype("2");
+                            ep.setAnnotation("");
+                            ep.setSignature("");
+
+                            if(dt.getIsMark()==1)
+                                ep.setIsMark(1);
+                            else  ep.setIsMark(0);
+
+                            hbsessionDao.insert(ep);
+                        }
+                        if(var.getU1() > dt.getCellval()){
+                            ep.setContent("电压过高报警，当前值为" + var.getU1());
+                            ep.setType("3");
+                            ep.setEtype("1");
+                            ep.setAnnotation("");
+                            ep.setSignature("");
+
+                            if(dt.getIsMark()==1)
+                                ep.setIsMark(1);
+                            else  ep.setIsMark(0);
+
+                            hbsessionDao.insert(ep);
+                        }
+                    }
+                    if(str.equals("U2"))
+                    {
+                        if(var.getU2() < dt.getFloorval()){
+                            ep.setContent("电压过低报警，当前值为" + var.getU2());
+                            ep.setType("3");
+                            ep.setEtype("2");
+                            ep.setAnnotation("");
+                            ep.setSignature("");
+
+                            if(dt.getIsMark()==1)
+                                ep.setIsMark(1);
+                            else  ep.setIsMark(0);
+
+                            hbsessionDao.insert(ep);
+                        }
+                        if(var.getU2() > dt.getCellval()){
+                            ep.setContent("电压过高报警，当前值为" + var.getU2());
+                            ep.setType("3");
+                            ep.setEtype("1");
+                            ep.setAnnotation("");
+                            ep.setSignature("");
+
+                            if(dt.getIsMark()==1)
+                                ep.setIsMark(1);
+                            else  ep.setIsMark(0);
+
+                            hbsessionDao.insert(ep);
+                        }
+                    }
+                    if(str.equals("U3"))
+                    {
+                        if(var.getU3() < dt.getFloorval()){
+                            ep.setContent("电压过低报警，当前值为" + var.getU3());
+                            ep.setType("3");
+                            ep.setEtype("2");
+                            ep.setAnnotation("");
+                            ep.setSignature("");
+
+                            if(dt.getIsMark()==1)
+                                ep.setIsMark(1);
+                            else  ep.setIsMark(0);
+
+                            hbsessionDao.insert(ep);
+                        }
+                        if(var.getU3() > dt.getCellval()){
+                            ep.setContent("电压过高报警，当前值为" + var.getU3());
+                            ep.setType("3");
+                            ep.setEtype("1");
+                            ep.setAnnotation("");
+                            ep.setSignature("");
+
+                            if(dt.getIsMark()==1)
+                                ep.setIsMark(1);
+                            else  ep.setIsMark(0);
+
+                            hbsessionDao.insert(ep);
+                        }
+                    }
+
+
+                }
+
+
+               /* DevicesThreshold dt1 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where did='"+1+"'");
                 DevicesThreshold2 dt2 = (DevicesThreshold2)hbsessionDao.getFirst("FROM DevicesThreshold2 where did='"+1+"'");
 
                 Timestamp date = new Timestamp(System.currentTimeMillis());
@@ -378,7 +480,7 @@ public class DataOnlineSaveJob implements Job {
                     hbsessionDao.insert(ep);
                 }
 
-
+*/
 
 
             }

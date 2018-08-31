@@ -487,6 +487,13 @@
              </result>
          </action>
 
+         <action name="setAssessmentInfo" class="efficiencyAnalysis.action.setAssessmentInfoAction">
+             <!--getEnvironmentEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
 
 
      </package>

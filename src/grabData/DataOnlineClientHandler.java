@@ -28,7 +28,8 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     private int count=0;
 
     //监测点id
-    private int mpid=0;
+    private int mpid = 0;
+
     public DataOnlineClientHandler(int mpid) {
         this.mpid=mpid;
         this.map = new HashMap<String, Float>();

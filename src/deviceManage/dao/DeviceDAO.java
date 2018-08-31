@@ -8,6 +8,8 @@ public interface DeviceDAO {
 
     public List getDeviceDataByName(String name);
 
+    public String getDeviceIDByName(String name);
+
     public List getDeviceAlarmUserDataByName(String name);
 
     public List getDeviceAlarmUserNameDataByName(String name);
@@ -20,7 +22,7 @@ public interface DeviceDAO {
 
     public Integer getMaxThresholdId();
 
-    public Boolean addThresholdInfo(Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark,String alarmcontent);
+    public Boolean addThresholdInfo(String did, Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark,String alarmcontent);
 
     public DevicesThreshold getDeviceThreshold(String dtid);
 

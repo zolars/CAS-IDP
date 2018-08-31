@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernatePOJO.AssessRecord" table="assess_record" schema="test">
+        <id name="aid">
+            <column name="aid" sql-type="int(11)"/>
+        </id>
+        <property name="cbid">
+            <column name="cbid" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="degree">
+            <column name="degree" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="powernum">
+            <column name="powernum" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="tempreturenum">
+            <column name="tempreturenum" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="wetnum">
+            <column name="wetnum" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="devicenum">
+            <column name="devicenum" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="apowernum">
+            <column name="apowernum" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="atempreturenum">
+            <column name="atempreturenum" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="awetnum">
+            <column name="awetnum" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="adevicenum">
+            <column name="adevicenum" sql-type="int(11)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

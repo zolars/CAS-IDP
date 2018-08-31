@@ -884,7 +884,48 @@
             <div class="add-threshold-one-line">
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数名称</div>
-                    <input id="thresholdname" class="form-control add-threshold-input" type="text">
+                   <%-- <input id="thresholdname" class="form-control add-threshold-input" type="text">--%>
+                   <%-- <input id="thresholdname" class="form-control add-threshold-input" type="text">--%>
+                    <select class="form-control location-select-item" id="thresholdname" name="thresholdname"
+                            onclick="">
+                        <option value="U1">U1</option>
+                        <option value="U2">U2</option>
+                        <option value="U3">U3</option>
+                        <option value="U4">U4</option>
+
+                        <option value="I1">I1</option>
+                        <option value="I2">I2</option>
+                        <option value="I3">I3</option>
+                        <option value="I4">I4</option>
+
+                        <option value="P1">P1</option>
+                        <option value="P2">P2</option>
+                        <option value="P3">P3</option>
+                        <option value="Psum">Psum</option>
+
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Qsum">Qsum</option>
+
+                        <option value="S1">S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                        <option value="Ssum">Ssum</option>
+
+                        <option value="PF1">PF1</option>
+                        <option value="PF2">PF2</option>
+                        <option value="PF3">PF3</option>
+                        <option value="PFsum">PFsum</option>
+
+                        <option value="CosPH1">CosPH1</option>
+                        <option value="CosPH2">CosPH2</option>
+                        <option value="CosPH3">CosPH3</option>
+
+
+                    </select>
+
+
                 </div>
 
                 <div class="add-threshold-item">
@@ -2663,7 +2704,8 @@
 
     <!-- 提交添加限值 model  -->
     function submitAddThreshold() {
-
+        var dname = $("#device-threshold-name").val();
+        var did = $("#dtid").val();
         var name = $("#thresholdname").val();
         var type = $("#thresholdtype").val();
         var unit = $("#thresholdunit").val();
@@ -2677,6 +2719,7 @@
             type: "post",
             url: "addThresholdInfo",
             data: {
+                dname: dname,
                 name: name,
                 type: type,
                 unit: unit,

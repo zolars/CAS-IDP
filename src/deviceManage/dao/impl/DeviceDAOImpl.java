@@ -5,6 +5,7 @@ import deviceManage.dao.DeviceDAO;
 import hibernatePOJO.DeviceAlarmUser;
 import hibernatePOJO.Devices;
 import hibernatePOJO.DevicesThreshold;
+import hibernatePOJO.DevicesThresholdV2;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -25,6 +26,15 @@ public class DeviceDAOImpl implements DeviceDAO {
                 "FROM Devices where name = '" + name+ "'");
 
         return list;
+    }
+
+    public String getDeviceIDByName(String name){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        Devices dv = (Devices)hbsessionDao.getFirst(
+                "FROM Devices where name = '" + name+ "'");
+
+        return dv.getDid();
     }
 
     public List getDeviceAlarmUserDataByName(String name){
@@ -54,7 +64,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getDeviceThresholdInfoByType(String type){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<DevicesThreshold> dtlist = hbsessionDao.search(
+        List<DevicesThresholdV2> dtlist = hbsessionDao.search(
                 "FROM DevicesThreshold where type = '" + type+ "'");
 
         return dtlist;
@@ -84,16 +94,18 @@ public class DeviceDAOImpl implements DeviceDAO {
         DevicesThreshold kl = (DevicesThreshold)hbsessionDao.getFirst(
                 "FROM DevicesThreshold order by dtid desc");
 
-        return kl.getDtid();
+        if(kl == null)
+            return 1;
+        else
+            return kl.getDtid();
     }
 
-    public Boolean addThresholdInfo(Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark,String alarmcontent){
+    public Boolean addThresholdInfo(String did, Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark,String alarmcontent){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
-       // hbsessionDao.getFirst("FROM DevicesThreshold WHERE");
 
-
-      /*  DevicesThreshold dt = new DevicesThreshold();
+        DevicesThreshold dt = new DevicesThreshold();
+        dt.setDid(did);
         dt.setDtid(dtid);
         dt.setName(name);
         dt.setType(type);
@@ -104,7 +116,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         dt.setIsMark(ismark);
         dt.setAlarmcontent(alarmcontent);
 
-        rt = hbsessionDao.insert(dt);*/
+        rt = hbsessionDao.insert(dt);
         return rt;
     }
 
@@ -112,7 +124,7 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        DevicesThreshold dt = (DevicesThreshold)hbsessionDao.getFirst(
+        DevicesThreshold dt = (DevicesThreshold) hbsessionDao.getFirst(
                 "FROM DevicesThreshold where dtid='"+ dtid +"'");
 
         return dt;

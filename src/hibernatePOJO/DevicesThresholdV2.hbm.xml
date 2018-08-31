@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="hibernatePOJO.DevicesThreshold" table="devices_threshold" schema="test">
+    <class name="hibernatePOJO.DevicesThresholdV2" table="devices_threshold_v2" schema="test">
         <id name="dtid">
             <column name="dtid" sql-type="int(11)"/>
         </id>

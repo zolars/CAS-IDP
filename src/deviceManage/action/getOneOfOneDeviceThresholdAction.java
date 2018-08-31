@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceThresholdDAO;
 import deviceManage.dao.impl.DeviceThresholdDAOImpl;
-import hibernatePOJO.DevicesThreshold;
+import hibernatePOJO.DevicesThresholdV2;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +39,7 @@ public class getOneOfOneDeviceThresholdAction extends ActionSupport {
 
             DeviceThresholdDAO dtdao = new DeviceThresholdDAOImpl();
 
-            List<DevicesThreshold> dt = dtdao.getOneofOneDeviceThreshold(dtid);
+            List<DevicesThresholdV2> dt = dtdao.getOneofOneDeviceThreshold(dtid);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("devicesThreshold", dt);

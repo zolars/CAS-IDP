@@ -7,7 +7,7 @@ import deviceManage.dao.DeviceThresholdDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
 import deviceManage.dao.impl.DeviceThresholdDAOImpl;
 import hibernatePOJO.Devices;
-import hibernatePOJO.DevicesThreshold;
+import hibernatePOJO.DevicesThresholdV2;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +48,7 @@ public class getOneDeviceThresholdAction extends ActionSupport {
                 return "error";
             else did = device.get(0).getDid();
 
-            List<DevicesThreshold> dt = dtdao.getOneDeviceThreshold(did);
+            List<DevicesThresholdV2> dt = dtdao.getOneDeviceThreshold(did);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("alldtlist", dt);

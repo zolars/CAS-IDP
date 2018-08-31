@@ -31,7 +31,7 @@ public class addThresholdInfoAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //String computerroom = request.getParameter("computerroomid");
+            String dname = request.getParameter("dname");
             String name = request.getParameter("name");
             String type = request.getParameter("type");
             String unit = request.getParameter("unit");
@@ -48,8 +48,9 @@ public class addThresholdInfoAction extends ActionSupport {
             Double dcellval = Double.valueOf(cellval);
             Double dfloorval = Double.valueOf(floorval);
             Integer iismark = Integer.valueOf(ismark);
+            String did = dao.getDeviceIDByName(dname);
 
-            Boolean rt = dao.addThresholdInfo(maxdtid+1, name, type, unit, dstandval, dcellval, dfloorval, iismark, alarmcontent);
+            Boolean rt = dao.addThresholdInfo(did,maxdtid+1, name, type, unit, dstandval, dcellval, dfloorval, iismark, alarmcontent);
             JSONObject jsonObject = new JSONObject();
 
             if(rt)

@@ -14,4 +14,6 @@ public interface EventDAO {
 
     public List getLocalAllEnvironmentEvent(String rid, String starttime, String endtime);
 
+    public boolean setAssessInfo(Integer red_yellow, Integer yellow_green);
+
 }
