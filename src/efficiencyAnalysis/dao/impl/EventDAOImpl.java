@@ -44,6 +44,7 @@ public class EventDAOImpl implements EventDAO {
         return rtlist;
     }
 
+
     public List getLocalLastPowerEvent(String rid){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
@@ -199,6 +200,8 @@ public class EventDAOImpl implements EventDAO {
         return rtlist;
     }
 
+
+
     public Map getAllProvinceEvent(){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
@@ -269,4 +272,51 @@ public class EventDAOImpl implements EventDAO {
         return rtmap;
     }
 
+
+    public List getOneProvinceEvent(String pid, String stime, String etime){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<List<Integer>> rtlist = new ArrayList<>();
+
+        ProvinceBank provb = (ProvinceBank)hbsessionDao.getFirst(
+                "FROM ProvinceBank where pbid='" + pid + "'");
+
+        Integer evnum1 = 0, evnum2 = 0, evnum3 = 0, evnum4 = 0;
+        Integer anum1 = 0, anum2 = 0, anum3 = 0, anum4 = 0;
+        Integer degreeR = 0, degreeY = 0, degreeG = 0;
+
+        String cbidset = provb.getCbidset();
+
+        if(cbidset == null){
+
+        }
+
+        else{
+            String cbidstr[] = cbidset.split("，");
+
+            for(int i = 0 ; i < cbidstr.length; i++){
+                AssessRecord record = (AssessRecord)hbsessionDao.getFirst(
+                        "FROM AssessRecord where cbid='" + cbidstr[i] +"'");
+                if(record != null){
+
+                    List<Integer> nlist = new ArrayList();
+                    nlist.add(record.getPowernum());
+                    nlist.add(record.getTempreturenum());
+                    nlist.add(record.getWetnum());
+                    nlist.add(record.getDevicenum());
+                    nlist.add(record.getApowernum());
+                    nlist.add(record.getAtempreturenum());
+                    nlist.add(record.getAwetnum());
+                    nlist.add(record.getAdevicenum());
+                    nlist.add(record.getDegree());
+                    nlist.add(record.getCbid());
+
+                    rtlist.add(nlist);
+                }
+            }
+        }
+
+        return rtlist;
+    }
 }

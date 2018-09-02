@@ -503,6 +503,14 @@
              </result>
          </action>
 
+         <action name="getOneProvinceMapData" class="efficiencyAnalysis.action.getOneProvinceMapDataAction">
+             <!--getOneProvinceMapData -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
      </package>
 
 </struts>

@@ -27,4 +27,6 @@ public interface EventDAO {
 
     public Map getAllProvinceEvent();
 
+    public List getOneProvinceEvent(String pid, String stime, String etime);
+
 }

@@ -7,4 +7,6 @@ public interface ProvinceDAO {
 
     public List getAllProvince();
 
+    public String getProvinceIdByName(String name);
+
 }

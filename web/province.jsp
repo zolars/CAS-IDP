@@ -209,7 +209,7 @@
                                     <div class="form-group">
                                         <label for="dtp_input1" class="col-md-2 control-label">开始日期</label>
                                         <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                                            <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
+                                            <input id="firstDate" class="form-control" size="16" type="text" value="2018-01-01 00:00:00" readonly>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
                                         <input type="hidden" id="dtp_input1" value="" /><br/>
@@ -218,7 +218,7 @@
                                     <div class="form-group">
                                         <label for="dtp_input2" class="col-md-2 control-label">结束日期</label>
                                         <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                                            <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
+                                            <input id="lastDate" class="form-control" size="16" type="text" value="2018-12-01 00:00:00" readonly>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
                                         <input type="hidden" id="dtp_input2" value="" /><br/>
@@ -238,12 +238,8 @@
                     </div>
 
                     <div id="assessbar" class="col-md-2 col-xs-6" style="width:30%; height: 200px;text-align:center">
-                        <table id="assesstable"  cellspacing="0" cellpadding="0" >
-                            <tr><td>评估结果</td></tr>
-                            <tr><td>1</td><td></td><td>2</td><td></td><td>3</td><td></td><td>4</td></tr>
-                            <tr><td>1</td><td></td><td>2</td><td></td><td>3</td><td></td><td>4</td></tr>
-                            <tr><td>1</td><td></td><td>2</td><td></td><td>3</td><td></td><td>4</td></tr>
-                            <tr><td>1</td><td></td><td>2</td><td></td><td>3</td><td></td><td>4</td></tr>
+                        <h>评估结果</h>
+                        <table id="assesstable" name="assesstable"  cellspacing="0" cellpadding="0" >
                         </table>
                     </div>
                 </div>
@@ -373,140 +369,143 @@
         var nxChart = echarts.init(document.getElementById('nxbar'));
         var nhChart = echarts.init(document.getElementById('nhbar'));
 
-        // 指定图表的配置项和数据
-        var eventoption = {
-            title: {
-                text: '事件'
+        var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
+        var pname = decodeURI(provinceidc[1]);
+        var stime = $("#firstDate").val();
+        var etime = $("#lastDate").val();
+
+        $.ajax({
+            type: "post",
+            url: "getOneProvinceMapData",
+            data: {
+                pname: pname,
+                stime: stime,
+                etime: etime
             },
-            tooltip: {},
-            xAxis: {
-                data: ["石家庄","保定","廊坊","唐山"]
-            },
-            yAxis: {},
-            series: [{
-                name: '个数',
-                type: 'bar',
-                itemStyle:{
-                    normal:{
-                        color:'#3EA3D8'
-                    }
-                },
-                data: [5, 20, 36, 10]
-            }]
-        };
+            dataType : "json",
+            success: function (data) {
+                //[1,2,3,4,1,1,1,1,3,2001]: event1, event2,event3, event4, alarm1, alram2, alarm3, alartm4, degree(R:1,Y:2,G:3)，cbid
 
-        // 指定图表的配置项和数据
-        var alarmoption = {
-            title: {
-                text: '告警'
-            },
-            tooltip: {},
-            xAxis: {
-                data: ["石家庄","保定","廊坊","唐山"]
-            },
-            yAxis: {},
-            series: [{
-                name: '个数',
-                type: 'bar',
-                data: [5, 20, 36, 10]
-            }]
-        };
+                var obj = eval('(' + data + ')');
+                var list = obj.oplist;
 
-        // 指定图表的配置项和数据
-        var nxoption = {
-            title: {
-                text: '能效'
-            },
-            tooltip: {},
-            xAxis: {
-                data: ["石家庄","保定","廊坊","唐山"]
-            },
-            yAxis: {},
-            series: [{
-                name: '个数',
-                type: 'bar',
-                itemStyle:{
-                    normal:{
-                        color:'#44764B'
-                    }
-                },
-                data: [5, 20, 36, 10]
-            }]
-        };
+                var xdata = [];
+                var eventdata = [];
+                var alarmdata = [];
+                var degree = [];
 
-        // 指定图表的配置项和数据
-        var nhoption = {
-            title: {
-                text: '能耗'
-            },
-            tooltip: {},
-            xAxis: {
-                data: ["石家庄","保定","廊坊","唐山"]
-            },
-            yAxis: {},
-            series: [{
-                name: '个数',
-                type: 'bar',
-                itemStyle:{
-                    normal:{
-                        color:'#9F842F'
-                    }
-                },
-                data: [5, 20, 36, 10]
-            }]
-        };
+                for(var i = 0; i < list.length; i++){
+                    xdata[i] = list[i][9];
 
-        // 使用刚指定的配置项和数据显示图表。
-        eventChart.setOption(eventoption);
-        alarmChart.setOption(alarmoption);
-        nxChart.setOption(nxoption);
-        nhChart.setOption(nhoption);
+                    eventdata[i] = list[i][0] +list[i][1] +list[i][2] +list[i][3];
+                    alarmdata[i] = list[i][4] +list[i][5] +list[i][6] +list[i][7];
 
-        //评估数据
-        var tb = document.getElementById("assesstable");
-        var td11 = tb.rows[1].cells[0];
-        var td12 = tb.rows[1].cells[2];
-        var td13 = tb.rows[1].cells[4];
-        var td14 = tb.rows[1].cells[6];
+                    degree[i] = list[i][8];
+                }
 
-        var td31 = tb.rows[3].cells[0];
-        var td32 = tb.rows[3].cells[2];
-        var td33 = tb.rows[3].cells[4];
-        var td34 = tb.rows[3].cells[6];
+                // 指定图表的配置项和数据
+                var eventoption = {
+                    title: {
+                        text: '事件'
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        itemStyle:{
+                            normal:{
+                                color:'#3EA3D8'
+                            }
+                        },
+                        data: eventdata
+                    }]
+                };
 
-        var td21 = tb.rows[2].cells[0];
-        var td22 = tb.rows[2].cells[2];
-        var td23 = tb.rows[2].cells[4];
-        var td24 = tb.rows[2].cells[6];
+                // 指定图表的配置项和数据
+                var alarmoption = {
+                    title: {
+                        text: '告警'
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        data: alarmdata
+                    }]
+                };
 
-        var td41 = tb.rows[4].cells[0];
-        var td42 = tb.rows[4].cells[2];
-        var td43 = tb.rows[4].cells[4];
-        var td44 = tb.rows[4].cells[6];
+                // 指定图表的配置项和数据
+                var nxoption = {
+                    title: {
+                        text: '能效'
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        itemStyle:{
+                            normal:{
+                                color:'#44764B'
+                            }
+                        },
+                        data: [0, 0, 0, 0]
+                    }]
+                };
 
+                // 指定图表的配置项和数据
+                var nhoption = {
+                    title: {
+                        text: '能耗'
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        itemStyle:{
+                            normal:{
+                                color:'#9F842F'
+                            }
+                        },
+                        data: [0, 0, 0, 0]
+                    }]
+                };
 
-        // 直接innerHTML
-        td11.innerHTML = '<img src="/img/icon/GOOD.jpeg" />';
-        td12.innerHTML = '<img src="/img/icon/GOOD.jpeg" />';
-        td13.innerHTML = '<img src="/img/icon/BAD.jpeg" />';
-        td14.innerHTML = '<img src="/img/icon/BAD.jpeg" />';
+                // 使用刚指定的配置项和数据显示图表。
+                eventChart.setOption(eventoption);
+                alarmChart.setOption(alarmoption);
+                nxChart.setOption(nxoption);
+                nhChart.setOption(nhoption);
 
-        td31.innerHTML = '<img src="/img/icon/BAD.jpeg" />';
-        td32.innerHTML = '<img src="/img/icon/GOOD.jpeg" />';
-        td33.innerHTML = '<img src="/img/icon/GOOD.jpeg" />';
-        td34.innerHTML = '<img src="/img/icon/GOOD.jpeg" />';
+                // 显示评估等级
+                var table = $("#assesstable");
+                table.empty();
+                for (var i = 0; i < degree.length; i++) {
+                    if(degree[i] == 1)
+                        table.append('<tr><td><img src="/img/icon/BAD.jpeg"/></td></tr>');
+                    if(degree[i] == 2)
+                        table.append('<tr><td><img src="/img/icon/NORMAL.jpg"/></td></tr>');
+                    if(degree[i] == 3)
+                        table.append('<tr><td><img src="/img/icon/GOOD.jpeg"/></td></tr>');
+                }
 
-        td21.innerHTML = '石家庄';
-        td22.innerHTML = '保定';
-        td23.innerHTML = '廊坊';
-        td24.innerHTML = '唐山';
-
-        td41.innerHTML = '邢台';
-        td42.innerHTML = '沧州';
-        td43.innerHTML = '秦皇岛';
-        td44.innerHTML = '邯郸';
-
-        document.getElementById("assesstable").style.color='#333333'; //table中所有字体颜色设为"#333333"
+            }
+        });
 
     </script>
 

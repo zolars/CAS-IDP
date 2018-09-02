@@ -26,5 +26,15 @@ public class ProvinceDAOImpl implements ProvinceDAO {
         return list;
     }
 
+    public String getProvinceIdByName(String name){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        ProvinceBank pb = (ProvinceBank)hbsessionDao.getFirst(
+                "FROM ProvinceBank where pbname='"+ name + "'");
+
+        return pb.getPbid();
+    }
+
 
 }
