@@ -66,7 +66,7 @@ public class RolesPermissionDAOImpl implements RolesPermissionDAO {
 
                     String hql = "update RolesPermission newrp2 set newrp2.pid='" + npid +"' where newrp2.rid='" + rid + "'";
 
-                    rt = hbsessionDao.update(newrp2, hql);
+                    rt = hbsessionDao.update(hql); //newrp2,
                 }
             }
         }

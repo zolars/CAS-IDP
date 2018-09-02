@@ -43,6 +43,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="js/china.js"></script>
 
 	<script type="text/javascript">
+
+        var m = new Map();
+       // m.set("台湾分行", [1,2,3,4,1,1,1,1]);
+       // m.set("河北分行", 0);
+
+
+        //获取各个省的评估等级+电能质量事件数量
+        $.ajax({
+            type: "post",
+            url: "getChinaMapData",
+            dataType: "json",
+            success: function (data) {
+                alert(data);
+
+
+
+                m.set("台湾分行", [1,2,3,4,1,1,1,1]);
+                m.set("河北分行", 0);
+
+
+            }
+        });
+
+
             var myChart = echarts.init(document.getElementById("china-map"));  
             var option = {
                 tooltip: {
@@ -83,6 +107,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             Alaska: [20, -20]
                         },
                         data:[
+                            {name: "台湾", value: m.get("台湾分行")},
+                            {name: "河北", value: m.get("河北分行")},
+                            {name: "山西", value: 3},
+                            {name: "内蒙古", value: 40}, //400
+                            {name: "辽宁", value: 41430}, //
+                            {name: "吉林", value: 5187582}, //
+                            {name: "黑龙江", value: 3590347}, //
+                            {name: "江苏", value: 917092}, //
+                            {name: "浙江", value: 632323}, //
+                            {name: "安徽", value: 19317568}, //
+                            {name: "福建", value: 9919945}, //
+                            {name: "江西", value: 1392313}, //
+                            {name: "山东", value: 1595728}, //
+                            {name: "河南", value: 12875255}, //
+                            {name: "湖北", value: 6537334}, //
+                            {name: "湖南", value: 3074186}, //
+                            {name: "广东", value: 2885905}, //
+                            {name: "广西", value: 3380415}, //
+                            {name: "海南", value: 4380415}, //
+                            {name: "四川", value: 4601893}, //
+                            {name: "贵州", value: 1329192}, //
+                            {name: "云南", value: 5884563}, //
+                            {name: "西藏", value: 6646144}, //
+                            {name: "陕西", value: 9883360}, //
+                            {name: "甘肃", value: 5379139}, //
+                            {name: "青海", value: 2984926}, //
+                            {name: "宁夏", value: 6021988}, //
+                            {name: "新疆", value: 1005141}, //
+                            {name: "北京", value: 1855525}, //
+                            {name: "天津", value: 2758931}, //
+                            {name: "上海", value: 1320718}, //
+                            {name: "重庆", value: 8864590}, //
+                            {name: "香港", value: 2085538}, //
+                            {name: "澳门", value: 19570261} //
+                        ]
+
+                    /*    data:[
                             {name: "台湾", value: 10}, //
                             {name: "河北", value: 20}, //
                             {name: "山西", value: 30}, //
@@ -117,7 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             {name: "重庆", value: 8864590}, //
                             {name: "香港", value: 2085538}, //
                             {name: "澳门", value: 19570261} //
-                        ]
+                        ]*/
                     }
                 ],
             };

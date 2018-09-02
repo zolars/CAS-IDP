@@ -2,6 +2,7 @@ package efficiencyAnalysis.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 public interface EventDAO {
 
@@ -15,5 +16,9 @@ public interface EventDAO {
     public List getLocalAllEnvironmentEvent(String rid, String starttime, String endtime);
 
     public boolean setAssessInfo(Integer red_yellow, Integer yellow_green);
+
+    public List getAllCityEvent();
+
+    public Map getAllProvinceEvent();
 
 }

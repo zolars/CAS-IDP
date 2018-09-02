@@ -44,7 +44,7 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         kl.setContent(content);
         String hql = "update Knowledge kl set kl.content='" + content +"' where kl.kid='" + kid + "'";
 
-        rt = hbsessionDao.update(kl, hql);
+        rt = hbsessionDao.update(hql); //kl,
         return rt;
     }
 
@@ -55,7 +55,7 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         kl.setContent("");
         String hql = "update Knowledge kl set kl.content='" + "" +"' where kl.kid='" + kid + "'";
 
-        rt = hbsessionDao.update(kl, hql);
+        rt = hbsessionDao.update(hql); //kl,
         return rt;
     }
 
@@ -66,7 +66,7 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         kl.setContent(content);
         String hql = "update Knowledge kl set kl.content='" + content +"' where kl.kid='" + kid + "'";
 
-        rt = hbsessionDao.update(kl, hql);
+        rt = hbsessionDao.update(hql); //kl,
         return rt;
     }
 
@@ -160,7 +160,7 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         kl.setKname(kname);
         String hql = "update Knowledge kl set kl.kname='" + kname +"' where kl.kid='" + kid + "'";
 
-        rt = hbsessionDao.update(kl, hql);
+        rt = hbsessionDao.update(hql); //kl,
         return rt;
     }
 

@@ -147,7 +147,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         String hql = "update DevicesThreshold kl set kl.name='" + name + "', kl.type='" + type +  "', kl.unit='" + unit +  "', kl.standardval='" + standval +
                 "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.isMark='" + ismark +  "', kl.alarmcontent='" + alarmcontent +  "' where kl.dtid='" + dtid + "'";
 
-        rt = hbsessionDao.update(kl, hql);
+        rt = hbsessionDao.update(hql);  //kl,
         return rt;
     }
 

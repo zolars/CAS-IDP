@@ -71,17 +71,22 @@ public class assessModelJob implements Job {
 
         AssessmentSetting setting = (AssessmentSetting)hbsessionDao.getFirst(
                 "FROM AssessmentSetting");
-        AssessRecord ar = new AssessRecord();
+       // AssessRecord ar = new AssessRecord();
 
+
+        int degree=3;
 
         if(ratio > setting.getRedyellow())
-            ar.setDegree(1);
+            degree = 1;
+        //    ar.setDegree(1);
         else if(ratio > setting.getYellowgreen())
-            ar.setDegree(2);
+            degree = 2;
+          //  ar.setDegree(2);
         else if(ratio < setting.getYellowgreen())
-            ar.setDegree(3);
+            degree = 3;
+          //  ar.setDegree(3);
 
-        ar.setPowernum(eenum + epnum);
+      /*  ar.setPowernum(eenum + epnum);
         ar.setTempreturenum(tempreturenum);
         ar.setWetnum(wetnum);
         ar.setDevicenum(devicenum);
@@ -91,9 +96,16 @@ public class assessModelJob implements Job {
         ar.setAwetnum(awetnum);
         ar.setAdevicenum(adevicenum);
 
-        ar.setCbid(1);
+        ar.setCbid(1);*/
 
-        Boolean rt = hbsessionDao.insert(ar);
+        String hql = "update AssessRecord assess set assess.degree='" + degree +
+                "', assess.powernum='" + eenum + epnum + "', assess.tempreturenum='"+ tempreturenum +
+                "', assess.wetnum='" + wetnum + "', assess.devicenum='" + devicenum + "', assess.apowernum='"+
+                aeenum + aepnum + "', assess.atempreturenum='" + atempreturenum + "', assess.awetnum='"+
+                awetnum + "', assess.adevicenum='" + adevicenum + "' where assess.cbid='" + 1 + "'";
+
+        Boolean rt = hbsessionDao.update(hql);
+        //Boolean rt = hbsessionDao.insert(ar);
 
         System.out.println("完成执行评估模块:" + System.currentTimeMillis());
 

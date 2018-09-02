@@ -132,8 +132,8 @@ public class HBSessionDaoImpl implements HBSessionDao{
         return true;
     }
 
-    //使用HQL语句更新数据
-    public boolean update(Object obj, String hql) {
+    //使用HQL语句更新数据Object obj,
+    public boolean update(String hql) {
         try {
        //   Session session = null;
        //     session = getSession();

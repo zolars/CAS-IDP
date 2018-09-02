@@ -74,7 +74,7 @@ public class RolesDAOImpl implements RolesDAO {
         role.setRolesname(name);
         role.setExtra(extra);
 
-        rt = hbsessionDao.update(role, hql);
+        rt = hbsessionDao.update(hql);  //role,
         return rt;
     }
 

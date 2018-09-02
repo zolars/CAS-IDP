@@ -276,7 +276,7 @@ public class UserDAOImpl implements UserDAO {
                 ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
                 " where newur.uid='" + uid + "'";
 
-        rt = hbsessionDao.update(newur, hql);
+        rt = hbsessionDao.update(hql);  //newur,
 
         UserRoles newurole = new UserRoles();
         newurole.setUid(uid);
@@ -285,7 +285,7 @@ public class UserDAOImpl implements UserDAO {
         String hql2 = "update UserRoles newurole set newurole.rid='" + roles +
                 "' where newurole.uid='" + uid + "'";
 
-        rt = hbsessionDao.update(newurole, hql2);
+        rt = hbsessionDao.update(hql2); //newurole,
 
         return rt;
     }
