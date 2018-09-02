@@ -258,8 +258,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <div id="leftItem1" style="width: 100%;">
                                             <table>
                                                 <tr><td>日期时间</td></tr>
-                                                <tr><td><input id="radio-last-7day-event" type="radio">观看最后的事件</td></tr>
-                                                <tr><td><input id="radio-from-to-event" type="radio">从
+                                                <tr><td><input id="radio-last-day-event" type="radio" name="event-data-peroid" value="lastone">观看最后的事件</td></tr>
+                                                <tr><td><input id="radio-from-to-event" type="radio" name="event-data-peroid" value="fromto">从
                                                     <div class="form-group">
                                                         <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
                                                             <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
@@ -279,15 +279,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 </td></tr>
 
 
-
-
-
-
                                                 <tr><td>时间段控制</td></tr>
-                                                <tr><td><input id="radio-diy-event" type="radio">定制</td></tr>
-                                                <tr><td><input id="radio-day-event" type="radio">天</td></tr>
-                                                <tr><td><input id="radio-week-event" type="radio">周</td></tr>
-                                                <tr><td><input id="radio-month-event" type="radio">月</td></tr>
+                                              <%--  <tr><td><input id="radio-diy-event" type="radio">定制</td></tr>--%>
+                                                <tr><td><input id="radio-day-event" type="radio" name="event-data-peroid" value="day">天</td></tr>
+                                                <tr><td><input id="radio-week-event" type="radio" name="event-data-peroid" value="week">周</td></tr>
+                                                <tr><td><input id="radio-month-event" type="radio" name="event-data-peroid" value="month">月</td></tr>
 
                                                 <tr>
                                                     <td><button id="today-button" type="button" class="btn btn-sm btn-alt" onclick="getTodayEvent()">今天</button></td>
@@ -648,9 +644,70 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         function getDeviceEvent(){
 
-            var stime = $("#firstDate").val();//"2018-08-22 08:00:00";
-            var etime = $("#lastDate").val();//"2018-08-29 08:00:00";
+            var edate = $("input[name='event-data-peroid']:checked").val();
+
             var rid = "1";
+            var stime ;//"2018-08-22 08:00:00";
+            var etime ;//"2018-08-29 08:00:00";
+            var nowtime = getNowFormatDate();
+
+            if(edate == "lastone"){
+                stime = " ";
+                etime = " ";
+            }
+            else  if(edate == "fromto"){
+                stime = $("#firstDate").val();
+                etime = $("#lastDate").val();
+            }
+            else  if(edate == "day"){
+
+                //昨天的时间
+                var now = new Date();
+                var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+                stime = starttime;
+                etime = nowtime;
+            }
+            else  if(edate == "week"){
+
+                // 获取一星期前的时间：
+                var now = new Date();
+                var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+                stime = starttime;
+                etime = nowtime;
+            }
+            else  if(edate == "month"){
+
+                // 获取一星期前的时间：
+                var now = new Date();
+                var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+                stime = starttime;
+                etime = nowtime;
+            }
+
 
             $.ajax({
                 type: "post",
@@ -688,10 +745,69 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 电能事件-->
     <script type="text/javascript">
         function getPowerEvent(){
+            var edate = $("input[name='event-data-peroid']:checked").val();
 
-            var stime = $("#firstDate").val();//"2018-08-22 08:00:00";
-            var etime = $("#lastDate").val();//"2018-08-29 08:00:00";
             var rid = "1";
+            var stime ;//"2018-08-22 08:00:00";
+            var etime ;//"2018-08-29 08:00:00";
+            var nowtime = getNowFormatDate();
+
+            if(edate == "lastone"){
+                stime = " ";
+                etime = " ";
+            }
+            else  if(edate == "fromto"){
+                stime = $("#firstDate").val();
+                etime = $("#lastDate").val();
+            }
+            else  if(edate == "day"){
+
+                //昨天的时间
+                var now = new Date();
+                var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+                stime = starttime;
+                etime = nowtime;
+            }
+            else  if(edate == "week"){
+
+                // 获取一星期前的时间：
+                var now = new Date();
+                var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+                stime = starttime;
+                etime = nowtime;
+            }
+            else  if(edate == "month"){
+
+                // 获取一星期前的时间：
+                var now = new Date();
+                var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+                stime = starttime;
+                etime = nowtime;
+            }
 
             $.ajax({
                 type: "post",
@@ -729,9 +845,70 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 环境事件-->
     <script type="text/javascript">
         function getEvironmentEvent(){
-            var stime = $("#firstDate").val();//"2018-08-22 08:00:00";
-            var etime = $("#lastDate").val();//"2018-08-29 08:00:00";
+            var edate = $("input[name='event-data-peroid']:checked").val();
+
             var rid = "1";
+            var stime ;//"2018-08-22 08:00:00";
+            var etime ;//"2018-08-29 08:00:00";
+            var nowtime = getNowFormatDate();
+
+            if(edate == "lastone"){
+                stime = " ";
+                etime = " ";
+            }
+            else  if(edate == "fromto"){
+                stime = $("#firstDate").val();
+                etime = $("#lastDate").val();
+            }
+            else  if(edate == "day"){
+
+                //昨天的时间
+                var now = new Date();
+                var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+                stime = starttime;
+                etime = nowtime;
+            }
+            else  if(edate == "week"){
+
+                // 获取一星期前的时间：
+                var now = new Date();
+                var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+                stime = starttime;
+                etime = nowtime;
+            }
+            else  if(edate == "month"){
+
+                // 获取一星期前的时间：
+                var now = new Date();
+                var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+                stime = starttime;
+                etime = nowtime;
+            }
+
 
             $.ajax({
                 type: "post",
@@ -1020,6 +1197,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             window.document.body.innerHTML = prnhtml;
             window.print();
             setTimeout(location.reload(), 3000);
+        }
+    </script>
+
+    <!-- 获取当前日期时间-->
+    <script type="text/javascript">
+        function getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "-";
+            var seperator2 = ":";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                + " " + date.getHours() + seperator2 + date.getMinutes()
+                + seperator2 + date.getSeconds();
+            return currentdate;
         }
     </script>
 

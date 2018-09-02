@@ -1,14 +1,12 @@
 package hibernatePOJO;
 
-import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
-@Entity
-@Table(name = "event_transient", schema = "test", catalog = "")
 public class EventTransient {
     private int teid;
     private Integer mpid;
-    private String time;
+    private Timestamp time;
     private int eventtype;
     private int type;
     private int subtype;
@@ -16,8 +14,6 @@ public class EventTransient {
     private double value;
     private String discription;
 
-    @Id
-    @Column(name = "teid", nullable = false)
     public int getTeid() {
         return teid;
     }
@@ -26,8 +22,6 @@ public class EventTransient {
         this.teid = teid;
     }
 
-    @Basic
-    @Column(name = "mpid", nullable = true)
     public Integer getMpid() {
         return mpid;
     }
@@ -36,18 +30,14 @@ public class EventTransient {
         this.mpid = mpid;
     }
 
-    @Basic
-    @Column(name = "time", nullable = false, length = 255)
-    public String getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 
-    @Basic
-    @Column(name = "eventtype", nullable = false)
     public int getEventtype() {
         return eventtype;
     }
@@ -56,8 +46,6 @@ public class EventTransient {
         this.eventtype = eventtype;
     }
 
-    @Basic
-    @Column(name = "type", nullable = false)
     public int getType() {
         return type;
     }
@@ -66,8 +54,6 @@ public class EventTransient {
         this.type = type;
     }
 
-    @Basic
-    @Column(name = "subtype", nullable = false)
     public int getSubtype() {
         return subtype;
     }
@@ -76,8 +62,6 @@ public class EventTransient {
         this.subtype = subtype;
     }
 
-    @Basic
-    @Column(name = "duration", nullable = false)
     public int getDuration() {
         return duration;
     }
@@ -86,8 +70,6 @@ public class EventTransient {
         this.duration = duration;
     }
 
-    @Basic
-    @Column(name = "value", nullable = false, precision = 0)
     public double getValue() {
         return value;
     }
@@ -96,8 +78,6 @@ public class EventTransient {
         this.value = value;
     }
 
-    @Basic
-    @Column(name = "discription", nullable = true, length = 255)
     public String getDiscription() {
         return discription;
     }

@@ -1,7 +1,6 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.AssessRecord;
 import hibernatePOJO.AssessmentSetting;
 import hibernatePOJO.EventPower;
 import hibernatePOJO.EventTransient;
@@ -67,12 +66,13 @@ public class assessModelJob implements Job {
 
         Integer alarmsumevent = aeenum + aepnum + atempreturenum + awetnum + adevicenum;
 
-        double ratio = (double)alarmsumevent/sumevent;
+        double ratio;
+        if(sumevent == 0)
+            ratio = 0.00;
+        else ratio = (double)alarmsumevent/sumevent;
 
         AssessmentSetting setting = (AssessmentSetting)hbsessionDao.getFirst(
                 "FROM AssessmentSetting");
-       // AssessRecord ar = new AssessRecord();
-
 
         int degree=3;
 

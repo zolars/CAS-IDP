@@ -54,8 +54,15 @@ public class HBSessionDaoImpl implements HBSessionDao{
         Session session=sessionFactory.openSession();
         List alist = null;
         alist = session.createQuery(hql).list();
-        session.close();
-        return alist;
+
+        if(alist.size() == 0){
+            session.close();
+            return null;
+        }
+        else {
+            session.close();
+            return alist;
+        }
     }
 
     @Override

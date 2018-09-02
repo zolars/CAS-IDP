@@ -12,7 +12,7 @@
             <column name="mpid" sql-type="int(11)" not-null="true"/>
         </property>
         <property name="time">
-            <column name="time" sql-type="varchar(255)"/>
+            <column name="time" sql-type="datetime"/>
         </property>
         <property name="eventtype">
             <column name="eventtype" sql-type="int(11)"/>

@@ -43,7 +43,11 @@ public class getPowerEventAction extends ActionSupport {
 
             List<EventTransient> pedata = new ArrayList();
 
-            pedata = dao.getLocalAllPowerEvent(rid, starttime, endtime);
+            if(starttime == " " && endtime == " ")
+                pedata = dao.getLocalLastPowerEvent(rid);
+
+            else
+                pedata = dao.getLocalAllPowerEvent(rid, starttime, endtime);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allpelist", pedata);

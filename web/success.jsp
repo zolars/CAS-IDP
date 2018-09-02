@@ -45,9 +45,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 
         var m = new Map();
-       // m.set("台湾分行", [1,2,3,4,1,1,1,1]);
-       // m.set("河北分行", 0);
-
 
         //获取各个省的评估等级+电能质量事件数量
         $.ajax({
@@ -57,10 +54,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             success: function (data) {
                 alert(data);
 
+                m.set("台湾分行", 3); //[1,2,3,4,1,1,1,1,3]:event1, event2,event3, event4, alarm1, alram2, alarm3, alartm4, degree(R:1,Y:2,G:3)
+                m.set("河北分行", 1);
+                m.set("山西分行", 2);
 
-
-                m.set("台湾分行", [1,2,3,4,1,1,1,1]);
-                m.set("河北分行", 0);
+                console.log("hh"+m.get("河北分行")+"hh");
 
 
             }
@@ -107,9 +105,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             Alaska: [20, -20]
                         },
                         data:[
-                            {name: "台湾", value: m.get("台湾分行")},
+                            {name: "台湾", value: "3"},
                             {name: "河北", value: m.get("河北分行")},
-                            {name: "山西", value: 3},
+                            {name: "山西", value: m.get("山西分行")},
                             {name: "内蒙古", value: 40}, //400
                             {name: "辽宁", value: 41430}, //
                             {name: "吉林", value: 5187582}, //

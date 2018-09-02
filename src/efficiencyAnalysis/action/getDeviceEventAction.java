@@ -43,7 +43,10 @@ public class getDeviceEventAction extends ActionSupport {
 
             List<EventTransient> pedata = new ArrayList();
 
-            pedata = dao.getLocalAllDeviceEvent(rid, starttime, endtime);
+            if(starttime == " " && endtime == " ")
+                pedata = dao.getLocalLastDeviceEvent(rid);
+
+            else pedata = dao.getLocalAllDeviceEvent(rid, starttime, endtime);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("alldelist", pedata);

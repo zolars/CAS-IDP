@@ -37,7 +37,33 @@ public class EventDAOImpl implements EventDAO {
                     "FROM EventTransient where mpid = '" + didset[i]+ "'" + " and time > '" + starttime +
                             "' and time < '" + endtime + "'"); // and eventtype='2'");
 
-            rtlist.addAll(list);
+            if(list != null)
+                rtlist.addAll(list);
+        }
+
+        return rtlist;
+    }
+
+    public List getLocalLastPowerEvent(String rid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List<EventTransient> rtlist = new ArrayList<>();
+
+
+        didlist = hbsessionDao.search(
+                "FROM Computerroom where rid = '" + rid+ "'");
+
+        String didstr = didlist.get(0).getDidset();
+
+        String didset[] = didstr.split(",");
+
+        for(int i = 0; i < didset.length; i++ ){
+            List<EventTransient> list = hbsessionDao.search(
+                    "FROM EventTransient where mpid = '" + didset[i]+ "'" + " order by occurtime desc");
+
+            if(list != null)
+                rtlist.addAll(list);
         }
 
         return rtlist;
@@ -59,10 +85,36 @@ public class EventDAOImpl implements EventDAO {
 
         for(int i = 0; i < didset.length; i++ ){
             List<EventDevice> list = hbsessionDao.search(
-                    "FROM EventDevice where mpid = '" + didset[i]+ "'" + " and time > '" + starttime +
-                            "' and time < '" + endtime + "'"); // and eventtype='1'");
+                    "FROM EventDevice where did = '" + didset[i]+ "'" + " and occurtime > '" + starttime +
+                            "' and occurtime < '" + endtime + "'");
 
-            rtlist.addAll(list);
+            if(list != null)
+                rtlist.addAll(list);
+        }
+
+        return rtlist;
+    }
+
+    public List getLocalLastDeviceEvent(String rid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List<EventDevice> rtlist = new ArrayList<>();
+
+
+        didlist = hbsessionDao.search(
+                "FROM Computerroom where rid = '" + rid+ "'");
+
+        String didstr = didlist.get(0).getDidset();
+
+        String didset[] = didstr.split(",");
+
+        for(int i = 0; i < didset.length; i++ ){
+            List<EventDevice> list = hbsessionDao.search(
+                    "FROM EventDevice where did = '" + didset[i]+ "'" + " order by occurtime desc");
+
+            if(list != null)
+                rtlist.addAll(list);
         }
 
         return rtlist;
@@ -87,7 +139,33 @@ public class EventDAOImpl implements EventDAO {
                     "FROM EventtypeEnvironment where mpid = '" + didset[i]+ "'" + " and time > '" + starttime +
                             "' and time < '" + endtime + "'"); //and eventtype='3'");
 
-            rtlist.addAll(list);
+            if(list != null)
+                rtlist.addAll(list);
+        }
+
+        return rtlist;
+    }
+
+    public List getLocalLastEnvironmentEvent(String rid){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List<EventtypeEnvironment> rtlist = new ArrayList<>();
+
+
+        didlist = hbsessionDao.search(
+                "FROM Computerroom where rid = '" + rid+ "'");
+
+        String didstr = didlist.get(0).getDidset();
+
+        String didset[] = didstr.split(",");
+
+        for(int i = 0; i < didset.length; i++ ){
+            List<EventtypeEnvironment> list = hbsessionDao.search(
+                    "FROM EventtypeEnvironment where did = '" + didset[i]+ "'" + " order by occurtime desc");
+
+            if(list != null)
+                rtlist.addAll(list);
         }
 
         return rtlist;
@@ -132,12 +210,11 @@ public class EventDAOImpl implements EventDAO {
         List<ProvinceBank> provblist = hbsessionDao.search(
                 "FROM ProvinceBank");
 
-      //  System.out.println(provblist.size());
-
         for(int j = 0; j < provblist.size(); j++) {
 
             Integer evnum1 = 0, evnum2 = 0, evnum3 = 0, evnum4 = 0;
             Integer anum1 = 0, anum2 = 0, anum3 = 0, anum4 = 0;
+            Integer degreeR = 0, degreeY = 0, degreeG = 0;
 
             String cbidset = provblist.get(j).getCbidset();
 
@@ -161,6 +238,12 @@ public class EventDAOImpl implements EventDAO {
                         anum2 += record.getAtempreturenum();
                         anum3 += record.getAwetnum();
                         anum4 += record.getAdevicenum();
+                        if(record.getDegree() == 1)
+                            degreeR += record.getPowernum();
+                        if(record.getDegree() == 2)
+                            degreeY += record.getPowernum();
+                        if(record.getDegree() == 3)
+                            degreeG += record.getPowernum();
                     }
                 }
             }
@@ -174,6 +257,14 @@ public class EventDAOImpl implements EventDAO {
             nlist.add(anum2);
             nlist.add(anum3);
             nlist.add(anum4);
+
+
+            if(degreeR >= 1)
+                nlist.add(1);
+            else if((double)degreeY/(degreeR + degreeY + degreeG) > 0.50)
+                nlist.add(2);
+            else
+                nlist.add(3);
 
             rtmap.put(provblist.get(j).getPbname(), nlist);
         }

@@ -42,7 +42,10 @@ public class getEnvironmentEventAction extends ActionSupport {
             EventDAO dao = new EventDAOImpl();
 
             List<EventtypeEnvironment> pedata = new ArrayList();
+            if(starttime == " " && endtime == " ")
+                pedata = dao.getLocalLastEnvironmentEvent(rid);
 
+            else
             pedata = dao.getLocalAllEnvironmentEvent(rid, starttime, endtime);
 
             JSONObject jsonObject = new JSONObject();
