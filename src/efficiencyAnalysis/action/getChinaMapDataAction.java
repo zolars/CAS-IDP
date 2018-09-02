@@ -27,7 +27,7 @@ public class getChinaMapDataAction extends ActionSupport {
     }
 
 
-    /*
+    /* 获取按照省为单位的每个省所有时间范围内的等级+各类事件+各类告警个数
      */
     public String execute() throws Exception {
         try {

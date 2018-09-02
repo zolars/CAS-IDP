@@ -196,8 +196,6 @@ public class EventDAOImpl implements EventDAO {
         List<AssessRecord> rtlist = hbsessionDao.search(
                 "FROM AssessRecord");
 
-        System.out.println(rtlist.get(0).getAid());
-
         return rtlist;
     }
 
