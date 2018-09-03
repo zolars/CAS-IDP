@@ -5,7 +5,6 @@ import deviceManage.dao.DeviceDAO;
 import hibernatePOJO.DeviceAlarmUser;
 import hibernatePOJO.Devices;
 import hibernatePOJO.DevicesThreshold;
-import hibernatePOJO.DevicesThresholdV2;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -64,7 +63,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getDeviceThresholdInfoByType(String type){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<DevicesThresholdV2> dtlist = hbsessionDao.search(
+        List<DevicesThreshold> dtlist = hbsessionDao.search(
                 "FROM DevicesThreshold where type = '" + type+ "'");
 
         return dtlist;

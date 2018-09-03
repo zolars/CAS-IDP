@@ -44,7 +44,6 @@ public class EventDAOImpl implements EventDAO {
         return rtlist;
     }
 
-
     public List getLocalLastPowerEvent(String rid){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
@@ -62,108 +61,6 @@ public class EventDAOImpl implements EventDAO {
         for(int i = 0; i < didset.length; i++ ){
             List<EventTransient> list = hbsessionDao.search(
                     "FROM EventTransient where mpid = '" + didset[i]+ "'" + " order by occurtime desc");
-
-            if(list != null)
-                rtlist.addAll(list);
-        }
-
-        return rtlist;
-    }
-
-    public List getLocalAllDeviceEvent(String rid, String starttime, String endtime){
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-        List<Computerroom> didlist = new ArrayList<>();
-        List<EventDevice> rtlist = new ArrayList<>();
-
-
-        didlist = hbsessionDao.search(
-                "FROM Computerroom where rid = '" + rid+ "'");
-
-        String didstr = didlist.get(0).getDidset();
-
-        String didset[] = didstr.split(",");
-
-        for(int i = 0; i < didset.length; i++ ){
-            List<EventDevice> list = hbsessionDao.search(
-                    "FROM EventDevice where did = '" + didset[i]+ "'" + " and occurtime > '" + starttime +
-                            "' and occurtime < '" + endtime + "'");
-
-            if(list != null)
-                rtlist.addAll(list);
-        }
-
-        return rtlist;
-    }
-
-    public List getLocalLastDeviceEvent(String rid){
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-        List<Computerroom> didlist = new ArrayList<>();
-        List<EventDevice> rtlist = new ArrayList<>();
-
-
-        didlist = hbsessionDao.search(
-                "FROM Computerroom where rid = '" + rid+ "'");
-
-        String didstr = didlist.get(0).getDidset();
-
-        String didset[] = didstr.split(",");
-
-        for(int i = 0; i < didset.length; i++ ){
-            List<EventDevice> list = hbsessionDao.search(
-                    "FROM EventDevice where did = '" + didset[i]+ "'" + " order by occurtime desc");
-
-            if(list != null)
-                rtlist.addAll(list);
-        }
-
-        return rtlist;
-    }
-
-    public List getLocalAllEnvironmentEvent(String rid, String starttime, String endtime){
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-        List<Computerroom> didlist = new ArrayList<>();
-        List<EventtypeEnvironment> rtlist = new ArrayList<>();
-
-
-        didlist = hbsessionDao.search(
-                "FROM Computerroom where rid = '" + rid+ "'");
-
-        String didstr = didlist.get(0).getDidset();
-
-        String didset[] = didstr.split(",");
-
-        for(int i = 0; i < didset.length; i++ ){
-            List<EventtypeEnvironment> list = hbsessionDao.search(
-                    "FROM EventtypeEnvironment where mpid = '" + didset[i]+ "'" + " and time > '" + starttime +
-                            "' and time < '" + endtime + "'"); //and eventtype='3'");
-
-            if(list != null)
-                rtlist.addAll(list);
-        }
-
-        return rtlist;
-    }
-
-    public List getLocalLastEnvironmentEvent(String rid){
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-        List<Computerroom> didlist = new ArrayList<>();
-        List<EventtypeEnvironment> rtlist = new ArrayList<>();
-
-
-        didlist = hbsessionDao.search(
-                "FROM Computerroom where rid = '" + rid+ "'");
-
-        String didstr = didlist.get(0).getDidset();
-
-        String didset[] = didstr.split(",");
-
-        for(int i = 0; i < didset.length; i++ ){
-            List<EventtypeEnvironment> list = hbsessionDao.search(
-                    "FROM EventtypeEnvironment where did = '" + didset[i]+ "'" + " order by occurtime desc");
 
             if(list != null)
                 rtlist.addAll(list);
@@ -199,8 +96,6 @@ public class EventDAOImpl implements EventDAO {
 
         return rtlist;
     }
-
-
 
     public Map getAllProvinceEvent(){
 
@@ -271,7 +166,6 @@ public class EventDAOImpl implements EventDAO {
         }
         return rtmap;
     }
-
 
     public List getOneProvinceEvent(String pid, String stime, String etime){
 

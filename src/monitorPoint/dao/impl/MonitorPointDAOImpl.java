@@ -3,7 +3,6 @@ package monitorPoint.dao.impl;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.Computerroom;
 import hibernatePOJO.Devices;
-import hibernatePOJO.Monitorpoints;
 import monitorPoint.dao.MonitorPointDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;

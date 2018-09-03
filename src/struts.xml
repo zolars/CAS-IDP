@@ -463,24 +463,8 @@
              </result>
          </action>
 
-         <action name="getDeviceEvent" class="efficiencyAnalysis.action.getDeviceEventAction">
-             <!--getDeviceEvent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
          <action name="getPowerEvent" class="efficiencyAnalysis.action.getPowerEventAction">
              <!--getDeviceEvent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getEnvironmentEvent" class="efficiencyAnalysis.action.getEnvironmentEventAction">
-             <!--getEnvironmentEvent -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>

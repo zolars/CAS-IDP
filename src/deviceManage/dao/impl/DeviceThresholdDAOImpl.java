@@ -2,7 +2,7 @@ package deviceManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import deviceManage.dao.DeviceThresholdDAO;
-import hibernatePOJO.DevicesThresholdV2;
+import hibernatePOJO.DevicesThreshold;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,7 +19,7 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
     public List searchFuzzyDeviceThreshold(String name){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<DevicesThresholdV2> list = hbsessionDao.search(
+        List<DevicesThreshold> list = hbsessionDao.search(
                 "FROM DevicesThreshold where name like '" + name + "%'");
 
         return list;
@@ -28,7 +28,7 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
     public List getOneDeviceThreshold(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<DevicesThresholdV2> list = hbsessionDao.search(
+        List<DevicesThreshold> list = hbsessionDao.search(
                 "FROM DevicesThreshold where did='" + did + "'");
 
         return list;
@@ -38,7 +38,7 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
     public List getOneofOneDeviceThreshold(Integer dtid){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<DevicesThresholdV2> list = hbsessionDao.search(
+        List<DevicesThreshold> list = hbsessionDao.search(
                 "FROM DevicesThreshold where dtid=" + dtid + "");
 
         return list;

@@ -15,8 +15,6 @@
         <!-- 指定连接数据库的口令 -->
         <property name="connection.password">cjy123</property>
 
-
-
         <!-- true表示程序运行时，在控制台显示SQL语句，false表示不显示SQL语句 -->
         <property name="show_sql">false</property>
         <property name="format_sql">true</property>
@@ -24,53 +22,59 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- 持久化类所对应的映射文件 -->
-        <mapping resource="hibernatePOJO/EventTransient.hbm.xml"/>
-        <mapping class="hibernatePOJO.EventTransient"/>
-        <mapping resource="hibernatePOJO/CaptureSetting.hbm.xml"/>
+        <mapping class="hibernatePOJO.AlarmSetting"/>
+        <mapping class="hibernatePOJO.AssessmentSetting"/>
+        <mapping class="hibernatePOJO.AssessRecord"/>
         <mapping class="hibernatePOJO.CaptureSetting"/>
-        <mapping resource="hibernatePOJO/User.hbm.xml"/>
-        <mapping class="hibernatePOJO.User"/>
-        <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>
-        <mapping resource="hibernatePOJO/ProvinceBank.hbm.xml"/>
         <mapping class="hibernatePOJO.CityBank"/>
-        <mapping resource="hibernatePOJO/Computerroom.hbm.xml"/>
-        <mapping class="hibernatePOJO.ProvinceBank"/>
-        <mapping resource="hibernatePOJO/Roles.hbm.xml"/>
-        <mapping class="hibernatePOJO.Roles"/>
-        <mapping resource="hibernatePOJO/RolesPermission.hbm.xml"/>
-        <mapping class="hibernatePOJO.RolesPermission"/>
-        <mapping resource="hibernatePOJO/UserRoles.hbm.xml"/>
-        <mapping class="hibernatePOJO.UserRoles"/>
         <mapping class="hibernatePOJO.Computerroom"/>
-        <mapping class="hibernatePOJO.PowerxbMonitor"/>
-        <mapping resource="hibernatePOJO/PowerxbMonitor.hbm.xml"/>
-        <mapping class="hibernatePOJO.PowerparmMonitor"/>
-        <mapping resource="hibernatePOJO/PowerparmMonitor.hbm.xml"/>
-        <mapping class="hibernatePOJO.PowersxdyMonitor"/>
-        <mapping resource="hibernatePOJO/PowersxdyMonitor.hbm.xml"/>
         <mapping class="hibernatePOJO.Devices"/>
-        <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
-        <mapping resource="hibernatePOJO/Monitorpoints.hbm.xml"/>
-        <mapping class="hibernatePOJO.Monitorpoints"/>
-        <mapping class="hibernatePOJO.EventDevice"/>
-        <mapping resource="hibernatePOJO/EventDevice.hbm.xml"/>
-        <mapping class="hibernatePOJO.EventPower"/>
-        <mapping resource="hibernatePOJO/EventPower.hbm.xml"/>
-        <mapping resource="hibernatePOJO/Knowledge.hbm.xml"/>
-        <mapping class="hibernatePOJO.Knowledge"/>
+        <mapping class="hibernatePOJO.DeviceAlarmUser"/>
+        <mapping class="hibernatePOJO.DevicesThreshold"/>
         <mapping class="hibernatePOJO.Dictionary"/>
+        <mapping class="hibernatePOJO.DictionaryPlus"/>
+        <mapping class="hibernatePOJO.EventPower"/>
+        <mapping class="hibernatePOJO.EventTransient"/>
+        <mapping class="hibernatePOJO.EventtypeDevice"/>
+        <mapping class="hibernatePOJO.EventtypeEnvironment"/>
+        <mapping class="hibernatePOJO.EventtypePower"/>
+        <mapping class="hibernatePOJO.Knowledge"/>
+        <mapping class="hibernatePOJO.Permission"/>
+        <mapping class="hibernatePOJO.PowerparmMonitor"/>
+        <mapping class="hibernatePOJO.PowersxdyMonitor"/>
+        <mapping class="hibernatePOJO.PowerxbMonitor"/>
+        <mapping class="hibernatePOJO.ProvinceBank"/>
+        <mapping class="hibernatePOJO.Roles"/>
+        <mapping class="hibernatePOJO.RolesPermission"/>
+        <mapping class="hibernatePOJO.User"/>
+        <mapping class="hibernatePOJO.UserRoles"/>
+
+        <mapping resource="hibernatePOJO/AlarmSetting.hbm.xml"/>
+        <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
+        <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
+        <mapping resource="hibernatePOJO/CaptureSetting.hbm.xml"/>
+        <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>
+        <mapping resource="hibernatePOJO/Computerroom.hbm.xml"/>
+        <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
+        <mapping resource="hibernatePOJO/DeviceAlarmUser.hbm.xml"/>
+        <mapping resource="hibernatePOJO/DevicesThreshold.hbm.xml"/>
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
-        <mapping resource="hibernatePOJO/DevicesThresholdV1.hbm.xml"/>
-        <mapping resource="hibernatePOJO/DevicesThresholdV2.hbm.xml"/>
-        <mapping resource="hibernatePOJO/DevicesThresholdV3.hbm.xml"/>
-        <mapping resource="hibernatePOJO/DevicesThresholdV32.hbm.xml"/>
-        <mapping class="hibernatePOJO.DevicesThreshold"/>
-        <mapping resource="hibernatePOJO/DevicesThreshold.hbm.xml"/>
-        <mapping resource="hibernatePOJO/DevicesThresholdV2Copy.hbm.xml"/>
-        <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
-        <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
-
+        <mapping resource="hibernatePOJO/EventPower.hbm.xml"/>
+        <mapping resource="hibernatePOJO/EventTransient.hbm.xml"/>
+        <mapping resource="hibernatePOJO/EventtypeDevice.hbm.xml"/>
+        <mapping resource="hibernatePOJO/EventtypeEnvironment.hbm.xml"/>
+        <mapping resource="hibernatePOJO/EventtypePower.hbm.xml"/>
+        <mapping resource="hibernatePOJO/Knowledge.hbm.xml"/>
+        <mapping resource="hibernatePOJO/Permission.hbm.xml"/>
+        <mapping resource="hibernatePOJO/PowerparmMonitor.hbm.xml"/>
+        <mapping resource="hibernatePOJO/PowersxdyMonitor.hbm.xml"/>
+        <mapping resource="hibernatePOJO/PowerxbMonitor.hbm.xml"/>
+        <mapping resource="hibernatePOJO/ProvinceBank.hbm.xml"/>
+        <mapping resource="hibernatePOJO/Roles.hbm.xml"/>
+        <mapping resource="hibernatePOJO/RolesPermission.hbm.xml"/>
+        <mapping resource="hibernatePOJO/User.hbm.xml"/>
+        <mapping resource="hibernatePOJO/UserRoles.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

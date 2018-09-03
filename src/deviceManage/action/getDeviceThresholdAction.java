@@ -5,7 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
 import hibernatePOJO.Devices;
-import hibernatePOJO.DevicesThresholdV2;
+import hibernatePOJO.DevicesThreshold;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +43,7 @@ public class getDeviceThresholdAction extends ActionSupport {
             DeviceDAO dao = new DeviceDAOImpl();
 
             List<Devices> devcielist = new ArrayList();
-            List<DevicesThresholdV2> dtlist = new ArrayList();
+            List<DevicesThreshold> dtlist = new ArrayList();
 
             devcielist = dao.getDeviceDataByName(dtid);
 
