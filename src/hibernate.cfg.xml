@@ -51,7 +51,7 @@
 
         <mapping resource="hibernatePOJO/AlarmSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
-        <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
+        <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
         <mapping resource="hibernatePOJO/CaptureSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>
         <mapping resource="hibernatePOJO/Computerroom.hbm.xml"/>

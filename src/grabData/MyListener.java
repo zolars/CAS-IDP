@@ -19,9 +19,6 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 public class MyListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent e) {
-//        if (myThread != null && myThread.isInterrupted()) {
-//            myThread.interrupt();
-//        }
     }
 
     public void contextInitialized(ServletContextEvent e) {

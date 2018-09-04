@@ -33,14 +33,18 @@ public class assessModelJob implements Job {
         List<EventPower> eventpowerlist = hbsessionDao.search(
                 "FROM EventPower where occurtime >'"+ date +"'");
 
-        Integer eenum = eventtranslist.size();
+        Integer eenum = 0;
+        Integer epnum = 0;
+        Integer aeenum = 0;
+        Integer aepnum = 0;
 
-        Integer epnum = eventpowerlist.size();
+        if(eventtranslist != null)
+            eenum = eventtranslist.size();
+        if(eventpowerlist != null)
+            epnum = eventpowerlist.size();
 
         Integer tempreturenum = 0;
-
         Integer wetnum = 0;
-
         Integer devicenum = 0;
 
         //2. 获得当前市行的1天内的告警（分为四类：）
@@ -50,20 +54,19 @@ public class assessModelJob implements Job {
         List<EventPower> alrmpowerlist = hbsessionDao.search(
                 "FROM EventPower where occurtime >'"+ date +"' and isMark = 1");
 
-        Integer aeenum = alrmtranslist.size();
+        if(alrmtranslist != null)
+            aeenum = alrmtranslist.size();
 
-        Integer aepnum = alrmpowerlist.size();
+        if(alrmpowerlist != null)
+            aepnum = alrmpowerlist.size();
 
         Integer atempreturenum = 0;
-
         Integer awetnum = 0;
-
         Integer adevicenum = 0;
 
         //计算总体类别的告警数/事件数，得到评估等级，写入assess_record表
 
         Integer sumevent = eenum + epnum + tempreturenum + wetnum + devicenum;
-
         Integer alarmsumevent = aeenum + aepnum + atempreturenum + awetnum + adevicenum;
 
         double ratio;
@@ -78,25 +81,10 @@ public class assessModelJob implements Job {
 
         if(ratio > setting.getRedyellow())
             degree = 1;
-        //    ar.setDegree(1);
         else if(ratio > setting.getYellowgreen())
             degree = 2;
-          //  ar.setDegree(2);
         else if(ratio < setting.getYellowgreen())
             degree = 3;
-          //  ar.setDegree(3);
-
-      /*  ar.setPowernum(eenum + epnum);
-        ar.setTempreturenum(tempreturenum);
-        ar.setWetnum(wetnum);
-        ar.setDevicenum(devicenum);
-
-        ar.setApowernum(aeenum + aepnum);
-        ar.setAtempreturenum(atempreturenum);
-        ar.setAwetnum(awetnum);
-        ar.setAdevicenum(adevicenum);
-
-        ar.setCbid(1);*/
 
         String hql = "update AssessRecord assess set assess.degree='" + degree +
                 "', assess.powernum='" + eenum + epnum + "', assess.tempreturenum='"+ tempreturenum +
@@ -105,9 +93,7 @@ public class assessModelJob implements Job {
                 awetnum + "', assess.adevicenum='" + adevicenum + "' where assess.cbid='" + 1 + "'";
 
         Boolean rt = hbsessionDao.update(hql);
-        //Boolean rt = hbsessionDao.insert(ar);
 
         System.out.println("完成执行评估模块:" + System.currentTimeMillis());
-
     }
 }

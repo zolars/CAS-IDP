@@ -29,14 +29,14 @@ public class uploadDataToCenterSvrJob implements Job {
 
         HBSessionCenterDaoImpl hbsessioncenterDao = new HBSessionCenterDaoImpl();
 
-        for(int i = 0; i < eventlist.size(); i++){
-            EventTransient et = eventlist.get(i);
-            hbsessioncenterDao.insert(et);
+        if(eventlist != null){
+            for(int i = 0; i < eventlist.size(); i++){
+                EventTransient et = eventlist.get(i);
+                hbsessioncenterDao.insert(et);
+            }
         }
 
         //2.上传越限事件到总服务器
-
-
 
         System.out.println("完成上传事件到总服务器:" + System.currentTimeMillis());
 
