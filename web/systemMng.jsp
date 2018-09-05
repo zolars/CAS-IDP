@@ -363,21 +363,21 @@
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input id="radio-Ethernet" type="radio"> 以太网
+                                                        <input id="radio-Ethernet" name="radio-Ethernet" type="radio"> 以太网
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input id="radio-R5485" type="radio"> R5485
+                                                        <input id="radio-R5485" name="radio-R5485" type="radio"> R5485
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input id="radio-RS232" type="radio"> RS232
+                                                        <input id="radio-RS232" name="radio-RS232" type="radio"> RS232
                                                     </label>
                                                 </div>
                                             </div>
@@ -394,21 +394,21 @@
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input type="checkbox"> 短信
+                                                        <input type="checkbox" id="checkbox-sms" name="checkbox-sms"> 短信
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input type="checkbox"> 弹窗
+                                                        <input type="checkbox" id="checkbox-alert" name="checkbox-alert"> 弹窗
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input type="checkbox"> 语音
+                                                        <input type="checkbox" id="checkbox-plantform" name="checkbox-plantform"> 平台
                                                     </label>
                                                 </div>
                                             </div>
@@ -423,6 +423,7 @@
                                         </div>
 
                                         <div>
+                                            <div class="did" id="did"></div>
                                             <label class="t-overflow">
                                                 设备名称<input id="devname" type="text" class="form-control setting-input">
                                             </label>
@@ -457,8 +458,12 @@
                                 </div>
 
                                 <div>
-                                    <button class="btn btn-default" onclick="addDeviceAlarmUser()">添加</button>
-                                    <button class="btn btn-default" onclick="deleteDeviceAlarmUser()">取消</button>
+                                    <button class="btn btn-default" onclick="addDeviceAlarmUser()">添加预警人员</button>
+                                    <button class="btn btn-default" onclick="deleteDeviceAlarmUser()">取消预警人员</button>
+                                </div>
+
+                                <div>
+                                    <button class="btn btn-default" onclick="addOneDevice()">添加设备</button>
                                 </div>
                             </div>
                         </div>
@@ -899,8 +904,6 @@
             <div class="add-threshold-one-line">
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数名称</div>
-                   <%-- <input id="thresholdname" class="form-control add-threshold-input" type="text">--%>
-                   <%-- <input id="thresholdname" class="form-control add-threshold-input" type="text">--%>
                     <select class="form-control location-select-item" id="thresholdname" name="thresholdname"
                             onclick="">
                         <option value="U1">U1</option>
@@ -937,9 +940,7 @@
                         <option value="CosPH2">CosPH2</option>
                         <option value="CosPH3">CosPH3</option>
 
-
                     </select>
-
 
                 </div>
 
@@ -1002,13 +1003,23 @@
         <!-- threshold model DIV END-->
 
         <!-- alarm user model DIV-->
-      <%--  <div class="add-alarm-user" id="add-alarm-user-modal">
-            <div id="aauid" style="display: none"></div>
-            <div class="add-threshold-one-line">
-                <div class="add-threshold-item">
-                    <div class="add-threshold-title">开始时间</div>
-                    <div class="add-threshold-title">结束时间</div>
-                    <div class="add-threshold-title">预警人员</div>
+        <div class="add-alarm-user" id="add-alarm-user-modal" style="display: none">
+
+            预警人员
+            <select class="form-control location-select-item" id="alarm-user"
+                    name="alarm-user" onclick="getALLUserInfoSimple()">
+                <option value="">请选择</option>
+            </select>
+
+            <div class="add-roles-one-line">
+                <div id="aauid" style="display: none"></div>
+                <div class="add-roles-item">
+                    <div class="add-roles-title">开始时间</div>
+                    <input id="alarm-stime" class="form-control add-roles-input" type="text">
+                </div>
+                <div class="add-roles-item">
+                    <div class="add-roles-title">结束时间</div>
+                    <input id="alarm-etime" class="form-control add-roles-input" type="text">
                 </div>
             </div>
 
@@ -1018,10 +1029,9 @@
                 </button>
                 <button class="btn btn-default" onclick="cancle()">取消</button>
             </div>
-        </div>--%>
+        </div>
         <!-- alarm user model DIV END-->
     </div>
-
 </section>
 
 
@@ -1364,6 +1374,8 @@
             $("#secItem5").hide();
             $("#secItem6").hide();
 
+            hiddenThresholdModel();
+
             $(document).ready(function () {
                 $("#secsubItem1").click(function () {
                     $("#secItem1").show();
@@ -1570,7 +1582,6 @@
                 }
             }
         });
-
     }
 
     <!--显示user model -->
@@ -2106,8 +2117,6 @@
     function checkDevice() {
         var devicename = $("#searchInput").val();
 
-        var monitorpoint = 1;
-
         $.ajax({
             type: "post",
             url: "getDeviceInfo",
@@ -2117,6 +2126,7 @@
             dataType: "json",
             success: function (data) {
                 var obj = JSON.parse(data);
+                $("#did").val(obj[0].did);
                 $("#devname").val(obj[0].name);
                 $("#devtype").val(obj[0].type);
                 $("#serialno").val(obj[0].serialno);
@@ -2141,14 +2151,72 @@
                 }
 
                 //预警方式
-                //预警人员
+                if (obj[0].isSMS == "1") {
+                    $("#checkbox-sms").attr("checked", "checked");
+                }
+                if (obj[0].isAlart == "1") {
+                    $("#checkbox-alert").attr("checked", "checked");
+                }
+                if (obj[0].isPlartform == "1") {
+                    $("#checkbox-plantform").attr("checked", "checked");
+                }
+
                 //预警人员
                 checkDeviceAlarmUser();
-            },
-            error: function () {
-                alert("失败");
             }
         });
+    }
+
+    <!-- 添加设备 -->
+    function addOneDevice(){
+
+        var radioEthernet = $('input[name="radio-Ethernet"]:checked').val();
+        var radioR5485 = $('input[name="radio-R5485"]:checked').val();
+        var radioRS232 = $('input[name="radio-RS232"]:checked').val();
+        var checkboxsms = $('input:checkbox[name="checkbox-sms"]:checked').val();
+        var checkboxalert = $('input:checkbox[name="checkbox-alert"]:checked').val();
+        var checkboxplantform = $('input:checkbox[name="checkbox-plantform"]:checked').val();
+
+        var devname = $("#devname").val();
+        var devtype = $("#devtype").val();
+        var serialno = $("#serialno").val();
+        var IPaddress = $("#IPaddress").val();
+        var port = $("#port").val();
+        var extra = $("#extra").val();
+
+        if(radioEthernet == "on" && radioR5485 == "on" && radioRS232 == "on")
+            alert("只能选择一种类型");
+        else if(radioEthernet == "on" && radioR5485 == "on")
+            alert("只能选择一种类型");
+        else if(radioEthernet == "on"&& radioRS232 == "on")
+            alert("只能选择一种类型");
+        else if(radioR5485 == "on" && radioRS232 == "on")
+            alert("只能选择一种类型");
+        else if(radioR5485 != "on" && radioR5485 != "on" && radioRS232 != "on")
+            alert("请选择一种类型");
+        else  $.ajax({
+                type: "post",
+                url: "addOneDevice",
+                data: {
+                    radioEthernet: radioEthernet,
+                    radioR5485: radioR5485,
+                    radioRS232: radioRS232,
+                    checkboxsms: checkboxsms,
+                    checkboxalert: checkboxalert,
+                    checkboxplantform: checkboxplantform,
+                    check: checkboxsms,
+                    devname: devname,
+                    devtype: devtype,
+                    serialno: serialno,
+                    IPaddress: IPaddress,
+                    port: port,
+                    extra: extra
+                },
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                }
+            });
     }
 
     <!-- 查询预警人员 -->
@@ -2160,14 +2228,13 @@
             url: "getAllAlarmUser",
             data: {
                 devicename: devicename
-                //   monitorpointid: monitorpoint
             },
             dataType: "json",
             success: function (data) {
                 var list = data.alarmusers;
                 var listname = data.alarmusersname;
                 var table = $("#alarm-user-table");
-//                var table = $("#eventalarm-user-table");
+
                 table.empty();
                 table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">开始时间</td><td style="padding-left:80px;">结束时间</td><td style="padding-left:40px;">账号</td></tr>');
 
@@ -2181,35 +2248,68 @@
                         '<td style="padding-left:80px;">' + stime + '</td><td style="padding-left:80px;">' + etime + '</td>' +
                         '<td style="padding-left:40px;">' + uname + '</td></tr>');
                 }
-            },
-            error: function () {
-                alert("失败");
+            }
+        });
+    }
+
+    //查询所有账号
+    function getALLUserInfoSimple() {
+
+        $("#alarm-user").empty();
+
+        $.ajax({
+            type: "post",
+            url: "getAllUserInfo",
+            dataType: "json",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                var list = obj;
+
+                for (var key in list) {
+                    var len = list[key].length;
+                    for (var i = 0; i < len; i++) {
+                        var uid = list[key][i][0];
+                        var account = list[key][i][1];
+
+                        $('#alarm-user').append("<option value='" + uid + "' >" + account + "</option>");
+
+                    }
+                }
             }
         });
     }
 
     <!-- 添加预警人员 -->
     function addDeviceAlarmUser() {
-        alert("添加预警人员");
+        $('#add-alarm-user-modal').css('display', 'block');
+    }
 
-        var auidck = $("input[name='auid']:checked").serialize();
+    <!-- 确认添加预警人员 -->
+    function addAlarmUser() {
+        var did = $("#did").val();
+        var astime = $("#alarm-stime").val();
+        var aetime = $("#alarm-etime").val();
+        var auser = $("#alarm-user").val();
+
         $.ajax({
             type: "post",
-            url: "deleteDeviceAlarmRoles",
+            url: "addDeviceAlarmUser",
             data: {
-                //monitorpointid: monitorpoint,
-                auid: auidck
+                did: did,
+                stime: astime,
+                etime: aetime,
+                uid: auser
             },
             dataType: "json",
             success: function (data) {
                 alert(data);
-            },
-            error: function () {
-                alert("失败");
+                $('#add-alarm-user-modal').css('display', 'none');
             }
         });
+    }
 
-
+    function cancle() {
+        $('#add-alarm-user-modal').css('display', 'none');
     }
 
     <!-- 取消（删除）预警人员 -->
@@ -2752,9 +2852,10 @@
         });
     }
 
-    <!-- 隐藏限值 model  -->
+    <!-- 隐藏 model  -->
     function hiddenThresholdModel() {
         $('#add-threshold-modal').css('display', 'none');
+        $('#add-alarm-user-modal').css('display', 'none');
         $('#add-threshold-handle').css('display', 'none');
         $('#update-threshold-handle').css('display', 'none');
     }

@@ -1,16 +1,20 @@
 package hibernatePOJO;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.Objects;
 
-@Entity
 public class Devices {
     private String did;
+    private String name;
+    private String devicetype;
+    private String type;
+    private String serialno;
+    private String iPaddress;
+    private String port;
+    private String extra;
+    private Integer isSms;
+    private Integer isAlart;
+    private Integer isPlartform;
 
-    @Id
-    @javax.persistence.Column(name = "did", nullable = false, length = 255)
     public String getDid() {
         return did;
     }
@@ -19,10 +23,6 @@ public class Devices {
         this.did = did;
     }
 
-    private String name;
-
-    @Basic
-    @javax.persistence.Column(name = "name", nullable = true, length = 255)
     public String getName() {
         return name;
     }
@@ -31,10 +31,6 @@ public class Devices {
         this.name = name;
     }
 
-    private String devicetype;
-
-    @Basic
-    @javax.persistence.Column(name = "devicetype", nullable = true, length = 255)
     public String getDevicetype() {
         return devicetype;
     }
@@ -43,10 +39,6 @@ public class Devices {
         this.devicetype = devicetype;
     }
 
-    private String type;
-
-    @Basic
-    @javax.persistence.Column(name = "type", nullable = true, length = 255)
     public String getType() {
         return type;
     }
@@ -55,10 +47,6 @@ public class Devices {
         this.type = type;
     }
 
-    private String serialno;
-
-    @Basic
-    @javax.persistence.Column(name = "serialno", nullable = true, length = 255)
     public String getSerialno() {
         return serialno;
     }
@@ -67,10 +55,6 @@ public class Devices {
         this.serialno = serialno;
     }
 
-    private String iPaddress;
-
-    @Basic
-    @javax.persistence.Column(name = "IPaddress", nullable = true, length = 255)
     public String getiPaddress() {
         return iPaddress;
     }
@@ -79,10 +63,6 @@ public class Devices {
         this.iPaddress = iPaddress;
     }
 
-    private String port;
-
-    @Basic
-    @javax.persistence.Column(name = "port", nullable = true, length = 255)
     public String getPort() {
         return port;
     }
@@ -91,10 +71,6 @@ public class Devices {
         this.port = port;
     }
 
-    private String extra;
-
-    @Basic
-    @javax.persistence.Column(name = "extra", nullable = true, length = 255)
     public String getExtra() {
         return extra;
     }
@@ -103,16 +79,28 @@ public class Devices {
         this.extra = extra;
     }
 
-    private String location;
-
-    @Basic
-    @javax.persistence.Column(name = "location", nullable = true, length = 255)
-    public String getLocation() {
-        return location;
+    public Integer getIsSms() {
+        return isSms;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setIsSms(Integer isSms) {
+        this.isSms = isSms;
+    }
+
+    public Integer getIsAlart() {
+        return isAlart;
+    }
+
+    public void setIsAlart(Integer isAlart) {
+        this.isAlart = isAlart;
+    }
+
+    public Integer getIsPlartform() {
+        return isPlartform;
+    }
+
+    public void setIsPlartform(Integer isPlartform) {
+        this.isPlartform = isPlartform;
     }
 
     @Override
@@ -128,12 +116,14 @@ public class Devices {
                 Objects.equals(iPaddress, devices.iPaddress) &&
                 Objects.equals(port, devices.port) &&
                 Objects.equals(extra, devices.extra) &&
-                Objects.equals(location, devices.location);
+                Objects.equals(isSms, devices.isSms) &&
+                Objects.equals(isAlart, devices.isAlart) &&
+                Objects.equals(isPlartform, devices.isPlartform);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(did, name, devicetype, type, serialno, iPaddress, port, extra, location);
+        return Objects.hash(did, name, devicetype, type, serialno, iPaddress, port, extra, isSms, isAlart, isPlartform);
     }
 }

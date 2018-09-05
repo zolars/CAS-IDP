@@ -62,6 +62,22 @@
     padding: 30px;
 }
 
+add-alarm-user{
+    display: none;
+    width: 500px;
+    height: 440px;
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2000;
+    border-radius: 20px;
+    padding: 30px;
+}
+
 .setting-class {
     display: none;
     width: 500px;

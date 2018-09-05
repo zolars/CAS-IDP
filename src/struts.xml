@@ -8,7 +8,6 @@
 	<constant name="struts.devMode" value="true"></constant>
     <constant name="struts.i18n.encoding" value="utf-8"></constant>
 
-
     <package name="struts-interceptor" extends="struts-default"
              namespace="/">
         <!-- 拦截器配置开始 主要是对sessionID拦截 -->
@@ -175,6 +174,22 @@
 
          <action name="getDeviceInfo" class="deviceManage.action.getDeviceInfoAction">
              <!--getDeviceInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="addDeviceAlarmUser" class="deviceManage.action.addDeviceAlarmUserAction">
+             <!--addDeviceAlarmUser -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="addOneDevice" class="deviceManage.action.addOneDeviceAction">
+             <!--addOneDevice -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>
@@ -494,6 +509,9 @@
                  <param name="root">result</param>
              </result>
          </action>
+
+
+
 
      </package>
 

@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,6 +100,30 @@ public class DeviceDAOImpl implements DeviceDAO {
             return kl.getDtid();
     }
 
+    public String getMaxDeviceId(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        Devices kl = (Devices)hbsessionDao.getFirst(
+                "FROM Devices order by did desc");
+
+        if(kl == null)
+            return "0";
+        else
+            return kl.getDid();
+    }
+
+    public String getMaxDeviceAlarmId(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        DeviceAlarmUser kl = (DeviceAlarmUser)hbsessionDao.getFirst(
+                "FROM DeviceAlarmUser order by id desc");
+
+        if(kl == null)
+            return "0";
+        else
+            return kl.getId();
+    }
+
     public Boolean addThresholdInfo(String did, Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark,String alarmcontent){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
@@ -114,6 +139,51 @@ public class DeviceDAOImpl implements DeviceDAO {
         dt.setFloorval(floorval);
         dt.setIsMark(ismark);
         dt.setAlarmcontent(alarmcontent);
+
+        rt = hbsessionDao.insert(dt);
+        return rt;
+    }
+
+    public Boolean  addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port,
+                                     String extra, Integer sms, Integer alert, Integer plantform){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+
+        Devices dt = new Devices();
+        String maxdid = getMaxDeviceId();
+        Integer imaxid = Integer.parseInt(maxdid) + 1;
+
+        dt.setDid(imaxid.toString());
+        dt.setDevicetype(deviceType);
+        dt.setName(devname);
+        dt.setType(devtype);
+        dt.setSerialno(serialno);
+        dt.setiPaddress(IPaddress);
+        dt.setPort(port);
+        dt.setExtra(extra);
+        dt.setIsSms(sms);
+        dt.setIsAlart(alert);
+        dt.setIsPlartform(plantform);
+
+        rt = hbsessionDao.insert(dt);
+        return rt;
+    }
+
+    public Boolean addOneDeviceAlarmUser(String did, String uid, String stime, String etime){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+
+        DeviceAlarmUser dt = new DeviceAlarmUser();
+        String maxid = getMaxDeviceAlarmId();
+        Integer imaxid = Integer.parseInt(maxid) + 1;
+        Timestamp tstime = Timestamp.valueOf(stime);
+        Timestamp tetime = Timestamp.valueOf(etime);
+
+        dt.setId(imaxid.toString());
+        dt.setDid(did);
+        dt.setUid(uid);
+        dt.setStime(tstime);
+        dt.setEtime(tetime);
 
         rt = hbsessionDao.insert(dt);
         return rt;

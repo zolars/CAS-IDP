@@ -13,9 +13,6 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
-
 
 public class getDeviceInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -32,14 +29,12 @@ public class getDeviceInfoAction extends ActionSupport {
 
     /* 根据设备名称查询设备其他信息
      */
-    public String execute() throws Exception { //getUserTree() throws Exception{
-        try {//获取数据
+    public String execute() throws Exception {
+        try {
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
             String devicename = request.getParameter("devicename");
 
             DeviceDAO dao = new DeviceDAOImpl();
@@ -54,7 +49,7 @@ public class getDeviceInfoAction extends ActionSupport {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }
