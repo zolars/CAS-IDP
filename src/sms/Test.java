@@ -13,7 +13,6 @@ public class Test {
             Sms.sendSms("18511587339", "test18511587339", comstr);
         }
 
-
 //		new Thread(new Runnable() {
 //
 //			@Override

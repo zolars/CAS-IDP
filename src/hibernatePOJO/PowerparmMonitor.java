@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name = "powerparm_monitor", schema = "test", catalog = "")
 public class PowerparmMonitor {
     private int ppid;
-    private Integer mpid;
+    private String did;
     private Timestamp time;
     private Float u1;
     private Float u2;
@@ -59,13 +59,13 @@ public class PowerparmMonitor {
     }
 
     @Basic
-    @Column(name = "mpid", nullable = true)
-    public Integer getMpid() {
-        return mpid;
+    @Column(name = "did", nullable = true)
+    public String getDid() {
+        return did;
     }
 
-    public void setMpid(Integer mpid) {
-        this.mpid = mpid;
+    public void setDid(String did) {
+        this.did = did;
     }
 
     @Basic
@@ -454,7 +454,7 @@ public class PowerparmMonitor {
         if (o == null || getClass() != o.getClass()) return false;
         PowerparmMonitor that = (PowerparmMonitor) o;
         return ppid == that.ppid &&
-                Objects.equals(mpid, that.mpid) &&
+                Objects.equals(did, that.did) &&
                 Objects.equals(time, that.time) &&
                 Objects.equals(u1, that.u1) &&
                 Objects.equals(u2, that.u2) &&
@@ -498,6 +498,6 @@ public class PowerparmMonitor {
     @Override
     public int hashCode() {
 
-        return Objects.hash(ppid, mpid, time, u1, u2, u3, u4, i1, i2, i3, i4, p1, p2, p3, psum, q1, q2, q3, qsum, s1, s2, s3, ssum, pf1, pf2, pf3, pFsum, cosPhi1, cosPhi2, cosPhi3, iflU1, iflU2, iflU3, pstU1, pstU2, pstU3, pltU1, pltU2, pltU3, hz);
+        return Objects.hash(ppid, did, time, u1, u2, u3, u4, i1, i2, i3, i4, p1, p2, p3, psum, q1, q2, q3, qsum, s1, s2, s3, ssum, pf1, pf2, pf3, pFsum, cosPhi1, cosPhi2, cosPhi3, iflU1, iflU2, iflU3, pstU1, pstU2, pstU3, pltU1, pltU2, pltU3, hz);
     }
 }

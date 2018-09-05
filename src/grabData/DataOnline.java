@@ -13,21 +13,21 @@ public class DataOnline {
     private static List<Dictionary> dic=null;
     private static List<DictionaryPlus> dicPlus=null;
     //存各个监测点的实时数据String
-    private static Map<Integer,String> onlineDataStrings=new HashMap<>();
+    private static Map<String,String> onlineDataStrings=new HashMap<>();
     //存各个监测点parm
-    private static Map<Integer,PowerparmMonitor> parmMap=new HashMap<>();
+    private static Map<String,PowerparmMonitor> parmMap=new HashMap<>();
     //存各个监测点xb
-    private static Map<Integer, PowerxbMonitor> xbMap=new HashMap<>();
+    private static Map<String, PowerxbMonitor> xbMap=new HashMap<>();
     //存各个监测点sxdy
-    private static Map<Integer, PowersxdyMonitor> sxdyMap=new HashMap<>();
+    private static Map<String, PowersxdyMonitor> sxdyMap=new HashMap<>();
     //存各个监测点的实时数据map的引用
-    private static Map<Integer,Map<String,Float>> onlineDataMap=new HashMap<>();
+    private static Map<String,Map<String,Float>> onlineDataMap=new HashMap<>();
     //存各个监测点的暂态连接
-    private static Map<Integer,Channel> transientChannelMap=new HashMap<>();
+    private static Map<String,Channel> transientChannelMap=new HashMap<>();
     //public static Long time = new Long(5000); //default 5000ms
     //public static Integer time = 6;
 
-    public static void tempSave(Integer mpid, Map<String, Float> dataset) {
+    public static void tempSave(String mpid, Map<String, Float> dataset) {
         onlineDataStrings.put(mpid,JSON.toJSONString(dataset));//存成字符串
 
         PowerparmMonitor var=parmMap.get(mpid);
@@ -40,9 +40,9 @@ public class DataOnline {
         varxb.setTime(currenttime);
         varsxdy.setTime(currenttime);
 
-        var.setMpid(mpid);
-        varxb.setMpid(mpid);
-        varsxdy.setMpid(mpid);
+        var.setDid(mpid);
+        varxb.setDid(mpid);
+        varsxdy.setDid(mpid);
 
         //基本参量
         var.setU1(dataset.get("U1"));
@@ -771,7 +771,7 @@ public class DataOnline {
         varsxdy.setVunb(defzero);
     }
 
-    public static Map<Integer, Channel> getTransientChannelMap() {
+    public static Map<String, Channel> getTransientChannelMap() {
         return transientChannelMap;
     }
     public static List<Dictionary> getDic() {
@@ -790,19 +790,19 @@ public class DataOnline {
         DataOnline.dicPlus = dicPlus;
     }
 
-    public static Map<Integer, Map<String, Float>> getOnlineDataMap() {
+    public static Map<String, Map<String, Float>> getOnlineDataMap() {
         return onlineDataMap;
     }
 
-    public static Map<Integer, PowerparmMonitor> getParmMap() {
+    public static Map<String, PowerparmMonitor> getParmMap() {
         return parmMap;
     }
 
-    public static Map<Integer, PowerxbMonitor> getXbMap() {
+    public static Map<String, PowerxbMonitor> getXbMap() {
         return xbMap;
     }
 
-    public static Map<Integer, PowersxdyMonitor> getSxdyMap() {
+    public static Map<String, PowersxdyMonitor> getSxdyMap() {
         return sxdyMap;
     }
 }

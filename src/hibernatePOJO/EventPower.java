@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class EventPower {
     private int epid;
-    private Integer mpid;
+    private String did;
     private String type;
     private String content;
     private Timestamp occurtime;
@@ -22,12 +22,12 @@ public class EventPower {
         this.epid = epid;
     }
 
-    public Integer getMpid() {
-        return mpid;
+    public String getDid() {
+        return did;
     }
 
-    public void setMpid(Integer mpid) {
-        this.mpid = mpid;
+    public void setDid(String mpid) {
+        this.did = did;
     }
 
     public String getType() {
@@ -92,7 +92,7 @@ public class EventPower {
         if (o == null || getClass() != o.getClass()) return false;
         EventPower that = (EventPower) o;
         return epid == that.epid &&
-                Objects.equals(mpid, that.mpid) &&
+                Objects.equals(did, that.did) &&
                 Objects.equals(type, that.type) &&
                 Objects.equals(content, that.content) &&
                 Objects.equals(occurtime, that.occurtime) &&
@@ -105,6 +105,6 @@ public class EventPower {
     @Override
     public int hashCode() {
 
-        return Objects.hash(epid, mpid, type, content, occurtime, signature, annotation, etype, isMark);
+        return Objects.hash(epid, did, type, content, occurtime, signature, annotation, etype, isMark);
     }
 }

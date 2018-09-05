@@ -36,10 +36,10 @@ public class MyListener implements ServletContextListener {
                 if(null!=list){
                     for(CaptureSetting c:list){
                         try {
-                            System.out.println("创建取实时数据连接 "+"监测点("+c.getMpid()+") "+c.getIp()+":"+c.getPort1());
-                            new DataOnlineClient(c.getIp(),c.getPort1(),c.getMpid()).start();
-                            System.out.println("创建取暂态事件连接 "+"监测点("+c.getMpid()+") "+c.getIp()+":"+c.getPort2());
-                            new TransientClient(c.getIp(),c.getPort2(),c.getMpid()).start();
+                            System.out.println("创建取实时数据连接 "+"监测点("+c.getDid()+") "+c.getIp()+":"+c.getPort1());
+                            new DataOnlineClient(c.getIp(),c.getPort1(),c.getDid()).start();
+                            System.out.println("创建取暂态事件连接 "+"监测点("+c.getDid()+") "+c.getIp()+":"+c.getPort2());
+                            new TransientClient(c.getIp(),c.getPort2(),c.getDid()).start();
                         }
                         catch (Exception e){
                             e.printStackTrace();

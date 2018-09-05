@@ -17,14 +17,14 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
     private boolean newResponse=true;
     private short resLength=0;
     private ByteBuf tempBuf;
-    private int mpid=0;
+    private String did="1";
 
-    public TransientClientHandler(int mpid) {
-       // this.mpid=mpid;
+    public TransientClientHandler(String did) {
+       // this.did=did;
 
         HBSessionDaoImpl hbSessionDao=new HBSessionDaoImpl();
         List<CaptureSetting> list=hbSessionDao.search("FROM CaptureSetting");
-        this.mpid = list.get(0).getMpid();
+        this.did = list.get(0).getDid();
 
     }
 
@@ -76,7 +76,7 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //System.out.println("建立连接");
         //把channel存入map,用于发送transientRequest
-        DataOnline.getTransientChannelMap().put(this.mpid,ctx.channel());
+        DataOnline.getTransientChannelMap().put(this.did,ctx.channel());
     }
 
     @Override

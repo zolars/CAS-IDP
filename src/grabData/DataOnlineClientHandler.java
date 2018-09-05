@@ -28,15 +28,15 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     private int count=0;
 
     //监测点id
-    private int mpid = 0;
+    private String did = "1";
 
-    public DataOnlineClientHandler(int mpid) {
-        this.mpid=mpid;
+    public DataOnlineClientHandler(String did) {
+        this.did=did;
         this.map = new HashMap<String, Float>();
-        DataOnline.getParmMap().put(mpid,new PowerparmMonitor());//把实时数据对象的引用暂存起来
-        DataOnline.getXbMap().put(mpid,new PowerxbMonitor());
-        DataOnline.getSxdyMap().put(mpid,new PowersxdyMonitor());
-        DataOnline.getOnlineDataMap().put(mpid,this.map);//把实时数据map的引用存起来
+        DataOnline.getParmMap().put(did,new PowerparmMonitor());//把实时数据对象的引用暂存起来
+        DataOnline.getXbMap().put(did,new PowerxbMonitor());
+        DataOnline.getSxdyMap().put(did,new PowersxdyMonitor());
+        DataOnline.getOnlineDataMap().put(did,this.map);//把实时数据map的引用存起来
     }
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -99,7 +99,7 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
             part = 0;
             count = 0;
             //取到一次完整的实时数据，暂存起来
-            DataOnline.tempSave(mpid,map);
+            DataOnline.tempSave(did,map);
         }
         //System.out.println("开始请求：part:" + part + "start:" + addr[part] + "length" + len[part]);
         ByteBuf sendMsg = ctx.alloc().buffer(12);

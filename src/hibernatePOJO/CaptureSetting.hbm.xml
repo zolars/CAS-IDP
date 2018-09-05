@@ -26,8 +26,8 @@
         <property name="uploadinterval">
             <column name="uploadinterval" sql-type="int(11)" not-null="true"/>
         </property>
-        <property name="mpid">
-            <column name="mpid" sql-type="int(11)"/>
+        <property name="did">
+            <column name="did" sql-type="varchar(255)"/>
         </property>
     </class>
 </hibernate-mapping>

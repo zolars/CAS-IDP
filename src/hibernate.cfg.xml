@@ -22,7 +22,6 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- 持久化类所对应的映射文件 -->
-        <mapping class="hibernatePOJO.AlarmSetting"/>
         <mapping class="hibernatePOJO.AssessmentSetting"/>
         <mapping class="hibernatePOJO.AssessRecord"/>
         <mapping class="hibernatePOJO.CaptureSetting"/>
@@ -49,7 +48,6 @@
         <mapping class="hibernatePOJO.User"/>
         <mapping class="hibernatePOJO.UserRoles"/>
 
-        <mapping resource="hibernatePOJO/AlarmSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
         <mapping resource="hibernatePOJO/CaptureSetting.hbm.xml"/>

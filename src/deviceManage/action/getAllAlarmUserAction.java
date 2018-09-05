@@ -15,8 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
 
 
 public class getAllAlarmUserAction extends ActionSupport {

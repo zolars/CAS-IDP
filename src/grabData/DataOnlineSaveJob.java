@@ -15,14 +15,14 @@ public class DataOnlineSaveJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        Map<Integer, PowerparmMonitor> parmMap=DataOnline.getParmMap();
-        Map<Integer, PowerxbMonitor> xbMap=DataOnline.getXbMap();
-        Map<Integer, PowersxdyMonitor> sxdyMap=DataOnline.getSxdyMap();
+        Map<String, PowerparmMonitor> parmMap=DataOnline.getParmMap();
+        Map<String, PowerxbMonitor> xbMap=DataOnline.getXbMap();
+        Map<String, PowersxdyMonitor> sxdyMap=DataOnline.getSxdyMap();
         if(null!=parmMap && null!=xbMap && null!=sxdyMap){
-            Set<Integer> mpidSet = parmMap.keySet();
-            Iterator<Integer> iterator = mpidSet.iterator();
+            Set<String> mpidSet = parmMap.keySet();
+            Iterator<String> iterator = mpidSet.iterator();
             while (iterator.hasNext()) {
-                Integer mpid = iterator.next();//监测点id
+                String mpid = iterator.next();//监测点id
                 PowerparmMonitor var = parmMap.get(mpid);
                 PowerxbMonitor varxb = xbMap.get(mpid);
                 PowersxdyMonitor varsxdy = sxdyMap.get(mpid);
@@ -32,7 +32,7 @@ public class DataOnlineSaveJob implements Job {
                 hbsessionDao.insert(varsxdy);
 
                 // 检测告警（越线）事件
-                Timestamp date = new Timestamp(System.currentTimeMillis());
+             /*   Timestamp date = new Timestamp(System.currentTimeMillis());
                 EventPower ep = new EventPower();
                 ep.setMpid(1);  //根据实际修改
                 ep.setOccurtime(date);
@@ -131,7 +131,7 @@ public class DataOnlineSaveJob implements Job {
                             }
                         }
                     }
-                }
+                }*/
 
             }
         }

@@ -14,12 +14,12 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 public class DataOnlineClient extends Thread{
     private String host;
     private int port;
-    private int mpid;
+    private String did;
 
-    public DataOnlineClient(String host,int port, int mpid){
+    public DataOnlineClient(String host,int port, String did){
         this.host=host;
         this.port=port;
-        this.mpid=mpid;
+        this.did=did;
     }
     @Override
     public void run(){
@@ -35,7 +35,7 @@ public class DataOnlineClient extends Thread{
                         throws Exception
                 {
 
-                    ch.pipeline().addLast(new DataOnlineClientHandler(mpid));
+                    ch.pipeline().addLast(new DataOnlineClientHandler(did));
                     //System.out.println("HANDLER-BUILT#####################################");
 
                 }

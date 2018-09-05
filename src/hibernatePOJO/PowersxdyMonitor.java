@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name = "powersxdy_monitor", schema = "test", catalog = "")
 public class PowersxdyMonitor {
     private int sxid;
-    private int mpid;
+    private String did;
     private Timestamp time;
     private Float u1;
     private Float u2;
@@ -43,13 +43,13 @@ public class PowersxdyMonitor {
     }
 
     @Basic
-    @Column(name = "mpid", nullable = false)
-    public int getMpid() {
-        return mpid;
+    @Column(name = "did", nullable = false)
+    public String getDid() {
+        return did;
     }
 
-    public void setMpid(int mpid) {
-        this.mpid = mpid;
+    public void setDid(String did) {
+        this.did = did;
     }
 
     @Basic
@@ -278,7 +278,7 @@ public class PowersxdyMonitor {
         if (o == null || getClass() != o.getClass()) return false;
         PowersxdyMonitor that = (PowersxdyMonitor) o;
         return sxid == that.sxid &&
-                mpid == that.mpid &&
+                did == that.did &&
                 Objects.equals(time, that.time) &&
                 Objects.equals(u1, that.u1) &&
                 Objects.equals(u2, that.u2) &&
@@ -306,6 +306,6 @@ public class PowersxdyMonitor {
     @Override
     public int hashCode() {
 
-        return Objects.hash(sxid, mpid, time, u1, u2, u3, v1, v2, v3, i1, i2, i3, angleU1, angleU2, angleU3, angleV1, angleV2, angleV3, angleI1, angleI2, angleI3, aunb, uunb, vunb);
+        return Objects.hash(sxid, did, time, u1, u2, u3, v1, v2, v3, i1, i2, i3, angleU1, angleU2, angleU3, angleV1, angleV2, angleV3, angleI1, angleI2, angleI3, aunb, uunb, vunb);
     }
 }

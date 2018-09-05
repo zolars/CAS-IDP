@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class EventTransient {
     private int teid;
-    private Integer mpid;
+    private String did;
     private Timestamp time;
     private int eventtype;
     private int type;
@@ -22,12 +22,12 @@ public class EventTransient {
         this.teid = teid;
     }
 
-    public Integer getMpid() {
-        return mpid;
+    public String getDid() {
+        return did;
     }
 
-    public void setMpid(Integer mpid) {
-        this.mpid = mpid;
+    public void setDid(String did) {
+        this.did = did;
     }
 
     public Timestamp getTime() {
@@ -97,7 +97,7 @@ public class EventTransient {
                 subtype == that.subtype &&
                 duration == that.duration &&
                 Double.compare(that.value, value) == 0 &&
-                Objects.equals(mpid, that.mpid) &&
+                Objects.equals(did, that.did) &&
                 Objects.equals(time, that.time) &&
                 Objects.equals(discription, that.discription);
     }
@@ -105,6 +105,6 @@ public class EventTransient {
     @Override
     public int hashCode() {
 
-        return Objects.hash(teid, mpid, time, eventtype, type, subtype, duration, value, discription);
+        return Objects.hash(teid, did, time, eventtype, type, subtype, duration, value, discription);
     }
 }

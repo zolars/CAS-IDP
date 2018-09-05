@@ -8,8 +8,8 @@
         <id name="teid">
             <column name="teid" sql-type="int(11)"/>
         </id>
-        <property name="mpid">
-            <column name="mpid" sql-type="int(11)" not-null="true"/>
+        <property name="did">
+            <column name="did" sql-type="varchar(255)"  not-null="true"/>
         </property>
         <property name="time">
             <column name="time" sql-type="datetime"/>

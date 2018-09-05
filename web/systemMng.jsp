@@ -731,7 +731,22 @@
                         </div>
                     </div>
                     <div id="item7" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        预警管理
+
+                        <div class="add-user-title">预警方式</div>
+                        <select class="form-control location-select-item" id=""
+                                name="">
+                            <option value="">短信</option>
+                            <option value="">弹窗</option>
+                            <option value="">平台</option>
+                        </select>
+
+
+                        <div class="add-user-title">执行类</div>
+
+                        <button class="btn btn-default" onclick="addAlarm()">添加</button>
+                        <button class="btn btn-default" onclick="deleterAlarm()">删除</button>
+
+
                     </div>
                     <div id="item8" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                         <div class="col-md-5">
@@ -985,6 +1000,26 @@
             </div>
         </div>
         <!-- threshold model DIV END-->
+
+        <!-- alarm user model DIV-->
+      <%--  <div class="add-alarm-user" id="add-alarm-user-modal">
+            <div id="aauid" style="display: none"></div>
+            <div class="add-threshold-one-line">
+                <div class="add-threshold-item">
+                    <div class="add-threshold-title">开始时间</div>
+                    <div class="add-threshold-title">结束时间</div>
+                    <div class="add-threshold-title">预警人员</div>
+                </div>
+            </div>
+
+            <div class="add-threshold-handle">
+                <button type="submit" class="btn btn-primary" id="add-alarm-user-handle"
+                        onclick="addAlarmUser()">确定
+                </button>
+                <button class="btn btn-default" onclick="cancle()">取消</button>
+            </div>
+        </div>--%>
+        <!-- alarm user model DIV END-->
     </div>
 
 </section>
@@ -1606,7 +1641,7 @@
                 $("#userorgnization-computerroom").val(userdata.rid);
                 $("#userroles").val(userroledata.rid);
 
-                hiddenUserModel();
+                //hiddenUserModel();
             },
             error: function () {
                 alert("失败");
@@ -2131,7 +2166,8 @@
             success: function (data) {
                 var list = data.alarmusers;
                 var listname = data.alarmusersname;
-                var table = $("#eventalarm-user-table");
+                var table = $("#alarm-user-table");
+//                var table = $("#eventalarm-user-table");
                 table.empty();
                 table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">开始时间</td><td style="padding-left:80px;">结束时间</td><td style="padding-left:40px;">账号</td></tr>');
 
@@ -2155,6 +2191,24 @@
     <!-- 添加预警人员 -->
     function addDeviceAlarmUser() {
         alert("添加预警人员");
+
+        var auidck = $("input[name='auid']:checked").serialize();
+        $.ajax({
+            type: "post",
+            url: "deleteDeviceAlarmRoles",
+            data: {
+                //monitorpointid: monitorpoint,
+                auid: auidck
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data);
+            },
+            error: function () {
+                alert("失败");
+            }
+        });
+
 
     }
 
@@ -2203,7 +2257,8 @@
         $("#radio-R5485").removeAttr("checked");
         $("#radio-RS232").removeAttr("checked");
 
-        $("#eventalarm-user-table").empty();
+        $("#alarm-user-table").empty();
+//        $("#eventalarm-user-table").empty();
     }
 
 </script>
@@ -2372,7 +2427,8 @@
             success: function (data) {
                 var list = data.alarmusers;
                 var listname = data.alarmusersname;
-                var table = $("#eventalarm-user-table2");
+                var table = $("#alarm-user-table2");
+               // var table = $("#eventalarm-user-table2");
                 table.empty();
                 table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">开始时间</td><td style="padding-left:80px;">结束时间</td><td style="padding-left:40px;">账号</td></tr>');
 
@@ -2442,7 +2498,8 @@
         $("#radio-R54852").removeAttr("checked");
         $("#radio-RS2322").removeAttr("checked");
 
-        $("#eventalarm-user-table2").empty();
+        $("#alarm-user-table2").empty();
+      //  $("#eventalarm-user-table2").empty();
     }
 </script>
 
@@ -2817,6 +2874,17 @@
             alert(str + "请输入11位手机号码");
             return false;
         }
+    }
+</script>
+
+<!-- 告警配置-->
+<script type="text/javascript">
+    function addAlarm(){
+        alert("add alarm");
+    }
+
+    function deleterAlarm(){
+        alert("add alarm");
     }
 </script>
 

@@ -90,16 +90,16 @@ public class CaptureSetting {
         this.uploadinterval = uploadinterval;
     }
 
-    private int mpid;
+    private String did;
 
     @javax.persistence.Basic
-    @javax.persistence.Column(name = "mpid", nullable = false)
-    public int getMpid() {
-        return mpid;
+    @javax.persistence.Column(name = "did", nullable = false)
+    public String getDid() {
+        return did;
     }
 
-    public void setMpid(int mpid) {
-        this.mpid = mpid;
+    public void setDid(String did) {
+        this.did = did;
     }
 
     @Override
@@ -108,7 +108,7 @@ public class CaptureSetting {
         if (o == null || getClass() != o.getClass()) return false;
         CaptureSetting that = (CaptureSetting) o;
         return id == that.id &&
-                mpid == that.mpid &&
+                did == that.did &&
                 Objects.equals(ip, that.ip) &&
                 Objects.equals(port1, that.port1) &&
                 Objects.equals(port2, that.port2) &&
@@ -120,6 +120,6 @@ public class CaptureSetting {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, ip, port1, port2, onlineinterval, thansentinterval, uploadinterval, mpid);
+        return Objects.hash(id, ip, port1, port2, onlineinterval, thansentinterval, uploadinterval, did);
     }
 }
