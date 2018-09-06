@@ -370,7 +370,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
-                    console.log(mpcname);
                     if(mpcname) getDataQst(mpcname);
                 });
                 $("#subItem2").click(function(){
@@ -380,7 +379,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
-                    console.log(mpcname);
                     if(mpcname) getDataXb(mpcname);
                 });
                 $("#subItem3").click(function(){
@@ -390,9 +388,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
-                    console.log(mpcname);
-                    if(mpcname) //1.在别的子菜单已选mp
-                        getDataSxdy(mpcname);
+                    if(mpcname) getDataSxdy(mpcname);
                 });
                 $("#subItem4").click(function(){
                     $("#item1").hide();
@@ -401,7 +397,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").show();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
-                    console.log(mpcname);
                     if(mpcname) getDataParams(mpcname);
                 });
                 $("#subItem1").trigger("click");
@@ -484,7 +479,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         //获取检测点列表
         function getMonitorPoints(){
 
-            var computerroom = $("#computerroom").val();
+            var computerroom = $("#comproom_code option:selected").val();
             var mpcname = $("#monitorpnt").val();
 
             if(!mpcname) { //若没有获取过，获取
@@ -1625,9 +1620,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     updateSxdyt(dataSxbphd);
                     // 设置显示的系列
                     $("#item3-sidebar ol li button.active").trigger("click");
-                },
-                error: function () {
-                    console.log("获取三相电压数据失败");
                 }
             });
         }
@@ -1699,7 +1691,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
             // 更新时间
             $("#item3-realtime span").html(dateFormat(new Date(data["time"]), "yyyy-mm-dd  hh:MM:ss"));
-
         }
         // 更新三相电压、电流图左侧显示的文字
         function updateSxdyt2(data) {

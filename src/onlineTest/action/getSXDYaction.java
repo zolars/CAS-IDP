@@ -33,7 +33,7 @@ public class getSXDYaction extends ActionSupport {
 
             String did = request.getParameter("did");
 
-            if(Integer.parseInt(did) != 0) {
+            if(did != "") {
                 PowersxdyMonitor pp = DataOnline.getSxdyMap().get(did);
 
                 JSONObject jsonObject = new JSONObject();

@@ -29,12 +29,11 @@ public class getMonitorPointsAction extends ActionSupport {
     /* 根据机房名称查询检测点设备
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try {
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //获取监测点
             String computerroom = request.getParameter("computerroom");
 
             MonitorPointDAO dao = new MonitorPointDAOImpl();

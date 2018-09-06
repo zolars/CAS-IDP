@@ -35,7 +35,7 @@ public class getParameteraction extends ActionSupport {
             //获取监测点
             String did = request.getParameter("did");
 
-            if(Integer.parseInt(did) != 0) {
+            if(did != "") {
                 PowerparmMonitor pp = DataOnline.getParmMap().get(did);
 
                 JSONObject jsonObject = new JSONObject();

@@ -20,7 +20,7 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
     public List getLocalAllMonitorPoint(String computerroom){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Computerroom cp = new Computerroom();
-       /* List<Monitorpoints> list = new ArrayList<>();*/
+
         List<Devices> list = new ArrayList<>();
 
         cp = (Computerroom)hbsessionDao.getFirst(
@@ -37,6 +37,5 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
 
         return list;
     }
-
 
 }

@@ -33,7 +33,7 @@ public class getXBaction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             String did = request.getParameter("did");
-            if(Integer.parseInt(did) != 0) {
+            if(did != "") {
                 PowerxbMonitor pp = DataOnline.getXbMap().get(did);
 
                 JSONObject jsonObject = new JSONObject();
