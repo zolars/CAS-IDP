@@ -113,18 +113,6 @@ public class Computerroom {
         this.upsset = upsset;
     }
 
-    private String idp;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "idp", nullable = true, length = 255)
-    public String getIdp() {
-        return idp;
-    }
-
-    public void setIdp(String idp) {
-        this.idp = idp;
-    }
-
     private String didset;
 
     @javax.persistence.Basic
@@ -137,17 +125,6 @@ public class Computerroom {
         this.didset = didset;
     }
 
-    private String mpidset;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "mpidset", nullable = true, length = 255)
-    public String getMpidset() {
-        return mpidset;
-    }
-
-    public void setMpidset(String mpidset) {
-        this.mpidset = mpidset;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -163,14 +140,12 @@ public class Computerroom {
                 Objects.equals(humiditySupport, that.humiditySupport) &&
                 Objects.equals(humidityAssist, that.humidityAssist) &&
                 Objects.equals(upsset, that.upsset) &&
-                Objects.equals(idp, that.idp) &&
-                Objects.equals(didset, that.didset) &&
-                Objects.equals(mpidset, that.mpidset);
+                Objects.equals(didset, that.didset);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(rid, rname, tempratureMain, tempratureSupport, tempratureAssist, humidityMain, humiditySupport, humidityAssist, upsset, idp, didset, mpidset);
+        return Objects.hash(rid, rname, tempratureMain, tempratureSupport, tempratureAssist, humidityMain, humiditySupport, humidityAssist, upsset, didset);
     }
 }

@@ -11,8 +11,6 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
 
 
 public class getParameteractionHis extends ActionSupport {
@@ -30,14 +28,12 @@ public class getParameteractionHis extends ActionSupport {
 
     /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的行级结构树状串
      */
-    public String execute() throws Exception { //getUserTree() throws Exception{
-        try {//获取数据
+    public String execute() throws Exception {
+        try {
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
             String monitorpoint = request.getParameter("monitorpointid");
             String starttime = request.getParameter("starttime");
             String endtime = request.getParameter("endtime");
@@ -54,7 +50,7 @@ public class getParameteractionHis extends ActionSupport {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }

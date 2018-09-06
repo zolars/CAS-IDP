@@ -26,7 +26,7 @@ public class getQstaction extends ActionSupport {
     }
 
 
-    /* 根据监测点获取所有的趋势图数据
+    /* 根据监测点获取趋势图数据
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -34,16 +34,15 @@ public class getQstaction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
-            String monitorpoint = request.getParameter("monitorpointid");
+            //获取监测点,即设备ID
+            String did = request.getParameter("did");
 
             RMSDAO rmsdao = new RMSDAOImpl();
 
             JSONObject jsonObject = new JSONObject();
 
             // 5 records
-            ((RMSDAOImpl) rmsdao).getCurrentData(monitorpoint);
+            ((RMSDAOImpl) rmsdao).getCurrentData(did);
             //getQstRMS
             List qstdata = rmsdao.getCurrentRMSData();
             //getQstTHD
@@ -51,25 +50,25 @@ public class getQstaction extends ActionSupport {
             //getQstCF
             List cfdata = rmsdao.getCurrentCFData();
             //getQstHZ
-            List hzdata = rmsdao.getCurrentHzData(monitorpoint);
+            List hzdata = rmsdao.getCurrentHzData(did);
             //getQstUNB%
-            List unbdata = rmsdao.getCurrentUnbData(monitorpoint);
+            List unbdata = rmsdao.getCurrentUnbData(did);
             //getQstW
-            List wdata = rmsdao.getCurrentWData(monitorpoint);
+            List wdata = rmsdao.getCurrentWData(did);
             //getQstVA
-            List vadata = rmsdao.getCurrentVAData(monitorpoint);
+            List vadata = rmsdao.getCurrentVAData(did);
             //getQstVar
-            List vardata = rmsdao.getCurrentVarData(monitorpoint);
+            List vardata = rmsdao.getCurrentVarData(did);
             //getQstPF
-            List pfdata = rmsdao.getCurrentPFData(monitorpoint);
+            List pfdata = rmsdao.getCurrentPFData(did);
             //getQstDPF
-            List dpfdata = rmsdao.getCurrentDPFData(monitorpoint);
+            List dpfdata = rmsdao.getCurrentDPFData(did);
             //getQstTAN
-            List tandata = rmsdao.getCurrentTanData(monitorpoint);
+            List tandata = rmsdao.getCurrentTanData(did);
             //getQstPST
-            List pstdata = rmsdao.getCurrentPstData(monitorpoint);
+            List pstdata = rmsdao.getCurrentPstData(did);
             //getQstPLT
-            List pltdata = rmsdao.getCurrentPltData(monitorpoint);
+            List pltdata = rmsdao.getCurrentPltData(did);
 
             jsonObject.put("allRMS", qstdata);
             jsonObject.put("allTHD", thddata);

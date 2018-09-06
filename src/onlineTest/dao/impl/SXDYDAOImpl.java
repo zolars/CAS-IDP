@@ -16,12 +16,12 @@ public class SXDYDAOImpl implements SXDYDAO {
     private Transaction transaction;
     private Query query;
 
-    public List getCurrentSXDYData(String monitorpoint){
+    public List getCurrentSXDYData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<PowersxdyMonitor> crlist = new ArrayList<>();
 
         PowersxdyMonitor ob = (PowersxdyMonitor)hbsessionDao.getFirst(
-                "FROM PowersxdyMonitor where mpid = '" + monitorpoint+ "' order by time Desc");
+                "FROM PowersxdyMonitor where did = '" + did+ "' order by time Desc");
 
         crlist.add(ob);
 

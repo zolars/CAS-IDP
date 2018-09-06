@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface RMSDAO {
 
-    public void getCurrentData(String monitorpoint);
+    public void getCurrentData(String did);
 
     public List getCurrentRMSData();
 
@@ -13,23 +13,23 @@ public interface RMSDAO {
 
     public List getCurrentCFData();
 
-    public List getCurrentHzData(String monitorpoint);
+    public List getCurrentHzData(String did);
 
-    public List getCurrentUnbData(String monitorpoint);
+    public List getCurrentUnbData(String did);
 
-    public List getCurrentWData(String monitorpoint);
+    public List getCurrentWData(String did);
 
-    public List getCurrentVAData(String monitorpoint);
+    public List getCurrentVAData(String did);
 
-    public List getCurrentVarData(String monitorpoint);
+    public List getCurrentVarData(String did);
 
-    public List getCurrentPFData(String monitorpoint);
+    public List getCurrentPFData(String did);
 
-    public List getCurrentDPFData(String monitorpoint);
+    public List getCurrentDPFData(String did);
 
-    public List getCurrentTanData(String monitorpoint);
+    public List getCurrentTanData(String did);
 
-    public List getCurrentPstData(String monitorpoint);
+    public List getCurrentPstData(String did);
 
-    public List getCurrentPltData(String monitorpoint);
+    public List getCurrentPltData(String did);
 }

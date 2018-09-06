@@ -17,25 +17,25 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
     private Transaction transaction;
     private Query query;
 
-    public List<Object> getCurrentParameterData(String monitorpoint){
+    public List<Object> getCurrentParameterData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
         PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc" );
+                "FROM PowerparmMonitor where did = '" + did+ "' order by time desc" );
 
         crlist.add(pm);
 
         return crlist;
     }
 
-    public List<Object> getCurrentWData(String monitorpoint){
+    public List<Object> getCurrentWData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
         PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+                "FROM PowerparmMonitor where did = '" + did+ "' order by time desc");
 
         /*crlist.add(pm.getP1());
         crlist.add(pm.getP2());
@@ -52,13 +52,13 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
-    public List<Object> getCurrentVAData(String monitorpoint){
+    public List<Object> getCurrentVAData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
         PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+                "FROM PowerparmMonitor where did = '" + did+ "' order by time desc");
 
         /*crlist.add(pm.getS1());
         crlist.add(pm.getS2());
@@ -75,13 +75,13 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
-    public List<Object> getCurrentVarData(String monitorpoint){
+    public List<Object> getCurrentVarData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
         PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+                "FROM PowerparmMonitor where did = '" + did+ "' order by time desc");
 
        /* crlist.add(pm.getQ1());
         crlist.add(pm.getQ2());
@@ -98,13 +98,13 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
-    public List<Object> getCurrentPFData(String monitorpoint){
+    public List<Object> getCurrentPFData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
         PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+                "FROM PowerparmMonitor where did = '" + did+ "' order by time desc");
 
        /* crlist.add(pm.getPf1());
         crlist.add(pm.getPf2());
@@ -121,13 +121,13 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
-    public List<Object> getCurrentDPFData(String monitorpoint){
+    public List<Object> getCurrentDPFData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
         PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+                "FROM PowerparmMonitor where did = '" + did+ "' order by time desc");
 
         /*crlist.add(pm.getCosPhi1());
         crlist.add(pm.getCosPhi2());
@@ -144,12 +144,12 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
-    public List<Object> getCurrentTanData(String monitorpoint){
+    public List<Object> getCurrentTanData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
         PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+                "FROM PowerparmMonitor where did = '" + did+ "' order by time desc");
 
         crlist.add(pm.getQ1()/pm.getP1());
         crlist.add(pm.getQ2()/pm.getP2());
@@ -161,13 +161,13 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
-    public List<Object> getCurrentPstData(String monitorpoint){
+    public List<Object> getCurrentPstData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
         PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+                "FROM PowerparmMonitor where did = '" + did+ "' order by time desc");
 
      /*   crlist.add(pm.getPstU1());
         crlist.add(pm.getPstU2());
@@ -184,13 +184,13 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
-    public List<Object> getCurrentPltData(String monitorpoint){
+    public List<Object> getCurrentPltData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
         PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+                "FROM PowerparmMonitor where did = '" + did+ "' order by time desc");
 
        /* crlist.add(pm.getPltU1());
         crlist.add(pm.getPltU2());
@@ -207,13 +207,13 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
-    public List<Object> getCurrentHzData(String monitorpoint){
+    public List<Object> getCurrentHzData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
         PowerparmMonitor pm = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+                "FROM PowerparmMonitor where did = '" + did+ "' order by time desc");
 
         rtobj.setHz(pm.getHz());
         rtobj.setTime(pm.getTime());
@@ -223,13 +223,13 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
-    public List<Object> getCurrentUnbData(String monitorpoint){
+    public List<Object> getCurrentUnbData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
         //PowerparmMonitor rtobj = new PowerparmMonitor();
 
         PowersxdyMonitor pm = (PowersxdyMonitor)hbsessionDao.getFirst(
-                "FROM PowersxdyMonitor where mpid = '" + monitorpoint+ "' order by time desc");
+                "FROM PowersxdyMonitor where did = '" + did+ "' order by time desc");
 
        // rtobj.setUnb(pm.getUnb());
         //rtobj.setTime(pm.getTime());
@@ -239,12 +239,12 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         return crlist;
     }
 
-    public List<Object> getHisParameterData(String monitorpoint, String stime, String etime){
+    public List<Object> getHisParameterData(String did, String stime, String etime){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
         crlist = hbsessionDao.search(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' and time>='" + stime + "' and time<=' " + etime + "'");
+                "FROM PowerparmMonitor where did = '" + did+ "' and time>='" + stime + "' and time<=' " + etime + "'");
 
         return crlist;
     }

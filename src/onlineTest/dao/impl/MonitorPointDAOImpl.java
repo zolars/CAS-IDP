@@ -1,9 +1,9 @@
-package monitorPoint.dao.impl;
+package onlineTest.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.Computerroom;
 import hibernatePOJO.Devices;
-import monitorPoint.dao.MonitorPointDAO;
+import onlineTest.dao.MonitorPointDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

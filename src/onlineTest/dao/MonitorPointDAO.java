@@ -1,4 +1,4 @@
-package monitorPoint.dao;
+package onlineTest.dao;
 
 
 import java.util.List;

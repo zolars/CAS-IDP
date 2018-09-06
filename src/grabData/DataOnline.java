@@ -27,12 +27,12 @@ public class DataOnline {
     //public static Long time = new Long(5000); //default 5000ms
     //public static Integer time = 6;
 
-    public static void tempSave(String mpid, Map<String, Float> dataset) {
-        onlineDataStrings.put(mpid,JSON.toJSONString(dataset));//存成字符串
+    public static void tempSave(String did, Map<String, Float> dataset) {
+        onlineDataStrings.put(did,JSON.toJSONString(dataset));//存成字符串
 
-        PowerparmMonitor var=parmMap.get(mpid);
-        PowerxbMonitor varxb=xbMap.get(mpid);
-        PowersxdyMonitor varsxdy=sxdyMap.get(mpid);
+        PowerparmMonitor var=parmMap.get(did);
+        PowerxbMonitor varxb=xbMap.get(did);
+        PowersxdyMonitor varsxdy=sxdyMap.get(did);
 
         //当前时间、检测设备id、maxID
         Timestamp currenttime = new Timestamp(System.currentTimeMillis());
@@ -40,9 +40,9 @@ public class DataOnline {
         varxb.setTime(currenttime);
         varsxdy.setTime(currenttime);
 
-        var.setDid(mpid);
-        varxb.setDid(mpid);
-        varsxdy.setDid(mpid);
+        var.setDid(did);
+        varxb.setDid(did);
+        varsxdy.setDid(did);
 
         //基本参量
         var.setU1(dataset.get("U1"));
@@ -393,9 +393,6 @@ public class DataOnline {
         /*326-331六个字段为电压电流谐波畸变率，暂时未定
          */
 
-//        System.out.println("fffffffffff u1"+dataset.get("|f|_sum"));
-
-
         //输入频率相关
         var.setHz(dataset.get("Hz"));
         var.setIflU1(dataset.get("|f|_U1"));
@@ -726,28 +723,8 @@ public class DataOnline {
         varxb.setI3Va48(dataset.get("I3va_48"));
         varxb.setI3Va49(dataset.get("I3va_49"));
         varxb.setI3Va50(dataset.get("I3va_50"));
-        /*PowerparmMonitor pp = (PowerparmMonitor)hbsessionDao.getFirst(
-                "FROM PowerparmMonitor order by ppid desc");
 
-        PowerxbMonitor pxb = (PowerxbMonitor)hbsessionDao.getFirst(
-                "FROM PowerxbMonitor order by xbid desc");
-
-        PowersxdyMonitor psxdy = (PowersxdyMonitor)hbsessionDao.getFirst(
-                "FROM PowersxdyMonitor order by sxid desc");
-
-        if(psxdy==null)
-            varsxdy.setSxid(1);
-        else
-            varsxdy.setSxid(psxdy.getSxid() + 1);
-        if(pp==null)
-            var.setPpid(1);
-        else
-            var.setPpid(pp.getPpid() + 1);
-        if(pxb==null)
-            varxb.setXbid(1);
-        else
-            varxb.setXbid(pxb.getXbid() + 1);*/
-
+        //U4\I4等数据暂时没有，赋值0
         Float defzero = new Float(0);
         var.setU4(defzero);
         var.setI4(defzero);

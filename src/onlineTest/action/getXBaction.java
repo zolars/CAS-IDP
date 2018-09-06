@@ -24,7 +24,7 @@ public class getXBaction extends ActionSupport {
     }
 
 
-    /* 根据检测点实时监测点XB数据
+    /* 根据检测点实时监测点谐波数据
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -32,14 +32,14 @@ public class getXBaction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String monitorpoint = request.getParameter("monitorpointid");
+            String did = request.getParameter("did");
+            if(Integer.parseInt(did) != 0) {
+                PowerxbMonitor pp = DataOnline.getXbMap().get(did);
 
-            PowerxbMonitor pp = DataOnline.getXbMap().get(Integer.parseInt(monitorpoint));
-
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("nowpowerxb", pp);
-            result = JSON.toJSONString(jsonObject); // List转json
-
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("nowpowerxb", pp);
+                result = JSON.toJSONString(jsonObject); // List转json
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

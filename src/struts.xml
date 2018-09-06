@@ -236,7 +236,7 @@
              </result>
          </action>
 
-         <action name="getMonitorPoints" class="monitorPoint.action.getMonitorPointsAction">
+         <action name="getMonitorPoints" class="onlineTest.action.getMonitorPointsAction">
              <!--getMonitorPoints -->
              <result name="success" type="json">
                  <param name="root">result</param>

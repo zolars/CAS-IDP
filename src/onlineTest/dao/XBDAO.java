@@ -5,6 +5,6 @@ import hibernatePOJO.PowerxbMonitor;
 
 public interface XBDAO {
 
-    public PowerxbMonitor getCurrentXbData(String monitorpoint);
+    public PowerxbMonitor getCurrentXbData(String did);
 
 }

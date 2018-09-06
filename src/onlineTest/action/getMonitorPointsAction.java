@@ -1,12 +1,10 @@
-package monitorPoint.action;
+package onlineTest.action;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import deviceManage.dao.DeviceDAO;
-import deviceManage.dao.impl.DeviceDAOImpl;
-import monitorPoint.dao.MonitorPointDAO;
-import monitorPoint.dao.impl.MonitorPointDAOImpl;
+import onlineTest.dao.MonitorPointDAO;
+import onlineTest.dao.impl.MonitorPointDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +52,7 @@ public class getMonitorPointsAction extends ActionSupport {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }

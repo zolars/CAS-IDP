@@ -28,7 +28,7 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     private int count=0;
 
     //监测点id
-    private String did = "1";
+    private String did = "";
 
     public DataOnlineClientHandler(String did) {
         this.did=did;

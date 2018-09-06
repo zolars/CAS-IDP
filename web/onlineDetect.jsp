@@ -352,7 +352,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                     for (var i = 0; i < list.length; i++) {
-                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
+                        $('#comproom_code').append("<option id=computerroom name=computerroom value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                     }
                 }
             });
@@ -370,7 +370,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
-                    mpcname = 1;
+                    console.log(mpcname);
                     if(mpcname) getDataQst(mpcname);
                 });
                 $("#subItem2").click(function(){
@@ -380,7 +380,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
-                    mpcname = 1;
+                    console.log(mpcname);
                     if(mpcname) getDataXb(mpcname);
                 });
                 $("#subItem3").click(function(){
@@ -390,7 +390,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
-                    mpcname = 1;
+                    console.log(mpcname);
                     if(mpcname) //1.在别的子菜单已选mp
                         getDataSxdy(mpcname);
                 });
@@ -401,7 +401,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item4").show();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
-                    mpcname = 1;
+                    console.log(mpcname);
                     if(mpcname) getDataParams(mpcname);
                 });
                 $("#subItem1").trigger("click");
@@ -411,15 +411,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 切换子菜单subItem效果-->
     <script type="text/javascript">
         $(function(){
-
             $("#ulItem li").click(function() {
-
                 $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式selected
-
                 $(this).addClass('active');                            // 添加当前元素的样式
-
             });
-
         });
     </script>
 
@@ -489,7 +484,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         //获取检测点列表
         function getMonitorPoints(){
 
-            var computerroom = 1;
+            var computerroom = $("#computerroom").val();
             var mpcname = $("#monitorpnt").val();
 
             if(!mpcname) { //若没有获取过，获取
@@ -504,11 +499,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         for (var i = 0; i < rt.length; i++) {
                             $('#monitorpnt').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
                         }
-                        //$('#monitorpnt option:nth-child(1)').
-
-                    },
-                    error: function () {
-                        alert("加载监测点失败");
                     }
                 });
             }
@@ -1418,7 +1408,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             return false;
                         }
                     });
-                    //console.log(currentLegend,this.value);
+
                     qstLegend.forEach(function(item){
                         if(0===item.indexOf(currentLegend) && item.indexOf(self.value)>=0){
                             eventChart1.dispatchAction({
@@ -1433,8 +1423,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             })
                         }
                     });
-                    //alert($('input:radio[name="params"]:checked').val());
-                    //alert($('input:checkbox[name="params-check"]:checked').val());
                 });
             });
             $("#item1-params-list ol li button.active").trigger("click");//默认显示rms数据
@@ -1445,18 +1433,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%--趋势图相关函数 --%>
     <script type="text/javascript">
         // 获取趋势图数据
-        function getDataQst(mpid) {
+        function getDataQst(did) {
             $.ajax({
                 type: "post",
                 url: "getQst",
-                data: {monitorpointid: mpid},
+                data: {did: did},
                 dataType: "json",
                 success: function (data) {
                     addData(qstRecords, JSON.parse(data));
                     updateQst(qstRecords);
-                },
-                error: function () {
-                    console.log("获取Qst数据失败");
                 }
             });
         }
@@ -1542,19 +1527,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 };
                 qstRecords.push(oneRecord);
             }
-            //console.log(qstRecords);
         }
     </script>
 
     <%--谐波图相关函数 --%>
     <script type="text/javascript">
         // 获取谐波数据
-        function getDataXb(mpid) {
+        function getDataXb(did) {
             $.ajax({
                 type: "post",
                 url: "getXB",
                 data: {
-                    monitorpointid: mpid,
+                    did: did,
                 },
                 dataType: "json",
                 success: function (data) {
@@ -1562,9 +1546,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var ndata = obj.nowpowerxb;
 
                     updateXbt(ndata);
-                },
-                error: function(){
-                    console.log("获取谐波数据失败");
                 }
             });
         }
@@ -1632,11 +1613,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%--三相不平衡度表相关函数 --%>
     <script type="text/javascript">
         // 获取三相电压、电流数据
-        function getDataSxdy(mpid) {
+        function getDataSxdy(did) {
             $.ajax({
                 type: "post",
                 url: "getSXDY",
-                data: {monitorpointid: mpid},
+                data: {did: did},
                 dataType: "json",
                 success: function (data) {
                     var obj = JSON.parse(data);
@@ -1758,7 +1739,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     break;
                 }
                 default : {
-
                 }
             }
         }
@@ -1785,20 +1765,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%--参数值表格相关函数--%>
     <script type="text/javascript">
         // 获取参数值
-        function getDataParams(mpid) {
+        function getDataParams(did) {
             $.ajax({
                 type: "post",
                 url: "getParameter",
-                data: {monitorpointid: mpid},
+                data: {did: did},
                 success: function(data){
-                    //console.log("getparameter: "+data);
                     var obj = JSON.parse(data);
                     var rt = obj.nowpowerparm;
-                    //updateParams((JSON.parse(data))[0]);
                     updateParams(rt);
-                },
-                error: function(){
-                    console.log("获取参数值失败");
                 }
             })
         }
@@ -1836,13 +1811,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 "<tr><th>Pst</th><td>"+data["pstU1"]+"</td><td>"+data["pstU2"]+"</td><td>"+data["pstU3"]+"</td></tr>"+
                 "<tr><th>Plt</th><td>"+data["pltU1"]+"</td><td>"+data["pltU2"]+"</td><td>"+data["pltU3"]+"</td></tr>"
             );
-          /*  $("#params-shunbian").html("<tr><th>瞬变</th><td>"+data["shunbian"]+"</td></tr>");
-            $("#params-lytx").html("<tr><th>浪涌/塌陷</th><td>"+data["lytx"]+"</td></tr>");*/
         }
     </script>
-
-
-
 
     <%--在线监测模块各个图表初始化--%>
     <script type="text/javascript">
@@ -1854,19 +1824,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             eventBanding();
             // 按指定时间间隔10s 更新图表
-             setInterval(function () {
-                 getDataQst($("#monitorpnt").val());
-                 getDataXb($("#monitorpnt").val());
-                 getDataSxdy($("#monitorpnt").val());
-                 getDataParams($("#monitorpnt").val());
-             },10000);
-
-            //默认检测点初始值为1
-            //$("select#monitorpnt").val("1");
-           /* getDataQst(1);
-            getDataXb(1);
-            getDataSxdy(1);
-            getDataParams(1);*/
+            setInterval(function () {
+                getDataQst($("#monitorpnt").val());
+                getDataXb($("#monitorpnt").val());
+                getDataSxdy($("#monitorpnt").val());
+                getDataParams($("#monitorpnt").val());
+            },10000);
         }
         chartsInit();
     </script>

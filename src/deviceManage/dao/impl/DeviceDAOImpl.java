@@ -204,19 +204,10 @@ public class DeviceDAOImpl implements DeviceDAO {
         Boolean rt = false;
         DevicesThreshold kl = getDeviceThreshold(dtid);
 
-       /* kl.setName(name);
-        kl.setType(type);
-        kl.setUnit(unit);
-        kl.setStandardval(standval);
-        kl.setCellval(cellval);
-        kl.setFloorval(floorval);
-        kl.setIsMark(ismark);
-        kl.setAlarmcontent(alarmcontent);*/
-
         String hql = "update DevicesThreshold kl set kl.name='" + name + "', kl.type='" + type +  "', kl.unit='" + unit +  "', kl.standardval='" + standval +
                 "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.isMark='" + ismark +  "', kl.alarmcontent='" + alarmcontent +  "' where kl.dtid='" + dtid + "'";
 
-        rt = hbsessionDao.update(hql);  //kl,
+        rt = hbsessionDao.update(hql);
         return rt;
     }
 
