@@ -510,7 +510,6 @@
     </script>
 
     <!-- 时间选择器-->
-
     <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
     <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
