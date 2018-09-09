@@ -27,7 +27,7 @@ public class getPowerEventAction extends ActionSupport {
     }
 
 
-    /* 根据
+    /* 根据测量地点（机房id）获取设备事件
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -43,7 +43,7 @@ public class getPowerEventAction extends ActionSupport {
 
             List<EventTransient> pedata = new ArrayList();
 
-            if(starttime == " " && endtime == " ")
+            if((starttime == " " && endtime == " ") || (starttime == null && endtime == null))
                 pedata = dao.getLocalLastPowerEvent(rid);
 
             else

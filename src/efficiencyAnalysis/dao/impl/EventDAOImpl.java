@@ -24,23 +24,20 @@ public class EventDAOImpl implements EventDAO {
         List<Computerroom> didlist = new ArrayList<>();
         List<EventTransient> rtlist = new ArrayList<>();
 
-
         didlist = hbsessionDao.search(
                 "FROM Computerroom where rid = '" + rid+ "'");
 
         String didstr = didlist.get(0).getDidset();
-
         String didset[] = didstr.split(",");
 
         for(int i = 0; i < didset.length; i++ ){
             List<EventTransient> list = hbsessionDao.search(
-                    "FROM EventTransient where mpid = '" + didset[i]+ "'" + " and time > '" + starttime +
-                            "' and time < '" + endtime + "'"); // and eventtype='2'");
+                    "FROM EventTransient where did = '" + didset[i]+ "'" + " and time > '" + starttime +
+                            "' and time < '" + endtime + "'");
 
             if(list != null)
                 rtlist.addAll(list);
         }
-
         return rtlist;
     }
 
@@ -50,7 +47,6 @@ public class EventDAOImpl implements EventDAO {
         List<Computerroom> didlist = new ArrayList<>();
         List<EventTransient> rtlist = new ArrayList<>();
 
-
         didlist = hbsessionDao.search(
                 "FROM Computerroom where rid = '" + rid+ "'");
 
@@ -60,7 +56,7 @@ public class EventDAOImpl implements EventDAO {
 
         for(int i = 0; i < didset.length; i++ ){
             List<EventTransient> list = hbsessionDao.search(
-                    "FROM EventTransient where mpid = '" + didset[i]+ "'" + " order by occurtime desc");
+                    "FROM EventTransient where did = '" + didset[i]+ "'" + " order by time desc");
 
             if(list != null)
                 rtlist.addAll(list);
@@ -81,7 +77,7 @@ public class EventDAOImpl implements EventDAO {
         String hql = "update AssessmentSetting assess set assess.redyellow='" + red_yellow +
                 "', assess.yellowgreen ='" + yellow_green + "' where assess.aid='" + 1 + "'";
 
-        rt = hbsessionDao.update(hql);  //assess,
+        rt = hbsessionDao.update(hql);
 
         return rt;
 

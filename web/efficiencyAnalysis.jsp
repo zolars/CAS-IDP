@@ -643,6 +643,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 设备事件-->
     <script type="text/javascript">
+        function getDeviceEvent(){}
+            /*var edate = $("input[name='event-data-peroid']:checked").val();
         function getDeviceEvent(){
 
             var edate = $("input[name='event-data-peroid']:checked").val();
@@ -694,7 +696,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
             else  if(edate == "month"){
 
-                // 获取一月前的时间：
+                // 获取一星期前的时间：
                 var now = new Date();
                 var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
                 var year = date.getFullYear();
@@ -708,6 +710,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 stime = starttime;
                 etime = nowtime;
             }
+
 
             $.ajax({
                 type: "post",
@@ -739,6 +742,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
                 }
             });
+        }*/
         }
     </script>
 
@@ -845,6 +849,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 环境事件-->
     <script type="text/javascript">
         function getEvironmentEvent(){
+          /*  var edate = $("input[name='event-data-peroid']:checked").val();
             var edate = $("input[name='event-data-peroid']:checked").val();
 
             var rid = "1";
@@ -948,6 +953,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         //获得今天的事件
         function getTodayEvent(){
             alert("today");
+
         }
 
         //获得Data？的事件

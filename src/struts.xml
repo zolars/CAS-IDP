@@ -180,6 +180,15 @@
              </result>
          </action>
 
+         <!--wsy2018.9.6 -->
+         <action name="getProBankInfo" class="orgnizationManage.action.getProBankInfoAction">
+             <!--getProBankInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="addDeviceAlarmUser" class="deviceManage.action.addDeviceAlarmUserAction">
              <!--addDeviceAlarmUser -->
              <result name="failure">/failure.jsp</result>
@@ -479,7 +488,7 @@
          </action>
 
          <action name="getPowerEvent" class="efficiencyAnalysis.action.getPowerEventAction">
-             <!--getDeviceEvent -->
+             <!--getPowerEvent -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>

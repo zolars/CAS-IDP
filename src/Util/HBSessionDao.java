@@ -5,11 +5,8 @@ import java.util.List;
 import org.hibernate.Session;
 
 public interface HBSessionDao {
-   // public void init();
 
     public  Session getOnlineSession();
-
-    //public void closeSession();
 
     public List search(String hql);
 
