@@ -32,6 +32,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/menu.css" rel="stylesheet">
     <link rel="stylesheet" href="css/custom-echart-toolbar.css">
     <link href="css/mycss.css" rel="stylesheet">
+    <style>
+        #myDropDown {
+            color: black;
+            width: 40px;
+        }
+    </style>
 
 </head>
 
@@ -122,18 +128,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <li><button class="btn btn-default" value="ah">Ah</button></li>
                                     </ol>
                                 </div>
-                                <div class="dropdown" id="myDropDown" style="display: none">
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        次数<span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li>
-                                        <li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li>
-                                        <li>21</li><li>22</li><li>23</li><li>24</li><li>25</li><li>26</li><li>27</li><li>28</li><li>29</li><li>30</li>
-                                        <li>31</li><li>32</li><li>33</li><li>34</li><li>35</li><li>36</li><li>37</li><li>38</li><li>39</li><li>40</li>
-                                        <li>41</li><li>42</li><li>43</li><li>44</li><li>45</li><li>46</li><li>47</li><li>48</li><li>49</li><li>50</li>
-                                    </ul>
-                                </div>
+                                <select id="myDropDown" style="display: none">
+                                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+                                    <option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+                                    <option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option>
+                                    <option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option>
+                                    <option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option>
+                                </select>
                                 <div id="item1-params-text" class="row">
                                         <div class="clearfix"></div>
                                         <ol>
@@ -261,7 +262,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </section>
@@ -530,7 +530,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             "tan1","tan2","tan3",
             "unb",
             "pstU1","pstU2","pstU3",
-            "pltU1","pltU2","pltU3"
+            "pltU1","pltU2","pltU3",
+            "vh1", "vh2", "vh3", "vh4", "vh5", "vh6", "vh7", "vh8", "vh9", "vh10",
+            "vh11", "vh12", "vh13", "vh14", "vh15", "vh16", "vh17", "vh18", "vh19", "vh20",
+            "vh21", "vh22", "vh23", "vh24", "vh25", "vh26", "vh27", "vh28", "vh29", "vh30",
+            "vh31", "vh32", "vh33", "vh34", "vh35", "vh36", "vh37", "vh38", "vh39", "vh40",
+            "vh41", "vh42", "vh43", "vh44", "vh45", "vh46", "vh47", "vh48", "vh49", "vh50"
             ];//趋势图图例
         var gaugePointerColor = ["#ff0000", "#0000ff", "#ffff00"]; // 三相不平衡度表的指针颜色
         var sxbphdlegend = ["U1", "U2", "U3", "V1", "V2", "V3", "A1", "A2", "A3"]; // 三相不平衡度表的图例
@@ -797,7 +802,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     name: "pltU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pltU3"}
-                }
+                },
+                //Vh
+                {name: "vh1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh4", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh5", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh6", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh7", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh8", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh9", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh10", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh11", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh12", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh13", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh14", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh15", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh16", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh17", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh18", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh19", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh20", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh21", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh22", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh23", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh24", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh25", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh26", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh27", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh28", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh29", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh30", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh31", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh32", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh33", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh34", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh35", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh36", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh37", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh38", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh39", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh40", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh41", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh42", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh43", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh44", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh45", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh46", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh47", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh48", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh49", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
+                {name: "vh50", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,}
             ]
         };
         var option2 = {
@@ -1367,11 +1423,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
             // 绑定趋势图上方button点击事件
             $("#item1-params-list ol li button").click(function(){
-                //console.log(this.value);
                 var self=this;
                 $("#item1-params-list ol li button").removeClass("active");
                 $(this).addClass("active");
-                console.log('this.value',this.value)
                 if(this.value === "ah" || this.value === "vh") {
                     $("#myDropDown")[0].style.display = "block";
                 } else {
@@ -1443,11 +1497,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
             $("#item1-params-list ol li button.active").trigger("click");//默认显示rms数据
             $("#item1-sidebar ol li button.active").trigger("click");
-        }
+        };
+
     </script>
 
     <%--趋势图相关函数 --%>
     <script type="text/javascript">
+
+        var dataSource1 = new Array(3);// = [820, 932, 901, 934, 1290, 1330, 1320];
+        var dataSource2 = new Array(3);
+        var dataSource3 = new Array(3);
+
         // 获取趋势图数据
         function getDataQst(did) {
             $.ajax({
@@ -1458,20 +1518,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 success: function (data) {
                     addData(qstRecords, JSON.parse(data));
                     updateQst(qstRecords);
+
+                    //更新数据
+                    var nRecord = JSON.parse(data);
+                    var vb = nRecord["allVh"];
+
+                    dataSource1[0] = vb[0][0];
+                    dataSource1[1] = vb[0][1];
+                    dataSource1[2] = vb[0][2];
+
+                    dataSource2[0] = vb[1][0];
+                    dataSource2[1] = vb[1][1];
+                    dataSource2[2] = vb[1][2];
+
+                    dataSource3[0] = vb[2][0];
+                    dataSource3[1] = vb[2][1];
+                    dataSource3[2] = vb[2][2];
                 }
             });
         }
+
+        //选择1~50次中的某一次，echarts显示相应的折线
+        $("#myDropDown").change(function(){
+            var opt=$("#myDropDown").val();
+            var selectValue = 'vh' + opt;
+            var myOption = eventChart1.getOption();
+            //var dataSource = [820, 932, 901, 934, 1290, 1330, 1320];
+            alert("datascr1"+dataSource1);
+            alert("datascr2"+dataSource2);
+            alert("datascr3"+dataSource3);
+            myOption.series.forEach(function (item, index) {
+                if(item.name === selectValue) {
+                    console.log(myOption.series[index]);
+                    console.log(myOption.series[index].data);
+                    myOption.series[index].data = dataSource1;
+                    eventChart1.setOption(myOption);
+                }
+            })
+        });
+
         // 更新趋势图
         function updateQst(data) {
             eventChart1.setOption({
-                dataset: {
-                    source: data
-                }
+                dataset: {source: data}
             });
         }
         // 添加数据
         function addData(qstRecords, newRecord) {
-            //console.log(newRecord);
             if (qstRecords.length > (60 * 12)) {
                 qstRecords.shift();
                 qstRecords.shift();
@@ -1537,8 +1630,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     // Plt
                     pltU1: newRecord["allPLT"][i]["pltU1"],
                     pltU2: newRecord["allPLT"][i]["pltU2"],
-                    pltU3: newRecord["allPLT"][i]["pltU3"]
+                    pltU3: newRecord["allPLT"][i]["pltU3"],
                     // vh
+                    vh1: newRecord["allVh"][i][0],
+                    vh2: newRecord["allVh"][i][1],
+                    vh3: newRecord["allVh"][i][2],
+                    vh4: newRecord["allVh"][i][3],
+                    vh5: newRecord["allVh"][i][4],
+                    vh6: newRecord["allVh"][i][5],
+                    vh7: newRecord["allVh"][i][6]// ,
+                   /* vh8: newRecord["allVh"][i]["vh8"],
+                    vh9: newRecord["allVh"][i]["vh9"],
+                    vh10: newRecord["allVh"][i]["vh10"],
+                    vh11: newRecord["allVh"][i]["vh11"],
+                    vh12: newRecord["allVh"][i]["vh12"],
+                    vh13: newRecord["allVh"][i]["vh13"],
+                    vh14: newRecord["allVh"][i]["vh14"],
+                    vh15: newRecord["allVh"][i]["vh15"],
+                    vh16: newRecord["allVh"][i]["vh16"],
+                    vh17: newRecord["allVh"][i]["vh17"],
+                    vh18: newRecord["allVh"][i]["vh18"],
+                    vh19: newRecord["allVh"][i]["vh19"],
+                    vh20: newRecord["allVh"][i]["vh20"],
+                    vh21: newRecord["allVh"][i]["vh21"],
+                    vh22: newRecord["allVh"][i]["vh22"],
+                    vh23: newRecord["allVh"][i]["vh23"],
+                    vh24: newRecord["allVh"][i]["vh24"],
+                    vh25: newRecord["allVh"][i]["vh25"],
+                    vh26: newRecord["allVh"][i]["vh26"],
+                    vh27: newRecord["allVh"][i]["vh27"],
+                    vh28: newRecord["allVh"][i]["vh28"],
+                    vh29: newRecord["allVh"][i]["vh29"],
+                    vh30: newRecord["allVh"][i]["vh30"],
+                    vh31: newRecord["allVh"][i]["vh31"],
+                    vh32: newRecord["allVh"][i]["vh32"],
+                    vh33: newRecord["allVh"][i]["vh33"],
+                    vh34: newRecord["allVh"][i]["vh34"],
+                    vh35: newRecord["allVh"][i]["vh35"],
+                    vh36: newRecord["allVh"][i]["vh36"],
+                    vh37: newRecord["allVh"][i]["vh37"],
+                    vh38: newRecord["allVh"][i]["vh38"],
+                    vh39: newRecord["allVh"][i]["vh39"],
+                    vh40: newRecord["allVh"][i]["vh40"],
+                    vh41: newRecord["allVh"][i]["vh41"],
+                    vh42: newRecord["allVh"][i]["vh42"],
+                    vh43: newRecord["allVh"][i]["vh43"],
+                    vh44: newRecord["allVh"][i]["vh44"],
+                    vh45: newRecord["allVh"][i]["vh45"],
+                    vh46: newRecord["allVh"][i]["vh46"],
+                    vh47: newRecord["allVh"][i]["vh47"],
+                    vh48: newRecord["allVh"][i]["vh48"],
+                    vh49: newRecord["allVh"][i]["vh49"],
+                    vh50: newRecord["allVh"][i]["vh50"]*/
                     // Ah
                 };
                 qstRecords.push(oneRecord);
@@ -1580,17 +1723,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     res.push(temp);
             }
             eventChart2.setOption({
-                series: [
-                    {
-                        name: "U1",
-                        type: 'line',
-                        data: res[0]
-                    },
-                    {
-                        name: "U2",
-                        type: 'line',
-                        data: res[1]
-                    },
+                series: [{name: "U1", type: 'line', data: res[0]}, {name: "U2", type: 'line', data: res[1]},
                     {
                         name: "U3",
                         type: 'line',
