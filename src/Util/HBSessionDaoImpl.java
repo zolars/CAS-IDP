@@ -101,6 +101,7 @@ public class HBSessionDaoImpl implements HBSessionDao{
         try {
             Session session=sessionFactory.openSession();
             Transaction transaction=session.beginTransaction();
+            System.out.println("didddddddddd:"+ obj);
             session.save(obj);
             transaction.commit();
             session.close();

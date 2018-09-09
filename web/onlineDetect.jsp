@@ -122,6 +122,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <li><button class="btn btn-default" value="ah">Ah</button></li>
                                     </ol>
                                 </div>
+                                <div class="dropdown" id="myDropDown" style="display: none">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        次数<span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li>
+                                        <li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li>
+                                        <li>21</li><li>22</li><li>23</li><li>24</li><li>25</li><li>26</li><li>27</li><li>28</li><li>29</li><li>30</li>
+                                        <li>31</li><li>32</li><li>33</li><li>34</li><li>35</li><li>36</li><li>37</li><li>38</li><li>39</li><li>40</li>
+                                        <li>41</li><li>42</li><li>43</li><li>44</li><li>45</li><li>46</li><li>47</li><li>48</li><li>49</li><li>50</li>
+                                    </ul>
+                                </div>
                                 <div id="item1-params-text" class="row">
                                         <div class="clearfix"></div>
                                         <ol>
@@ -171,6 +183,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <li>&Phi;<sub>12</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-diff1">126</span><sup>&nbsp;o</sup></li>
                                     <li>&Phi;<sub>23</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-diff2">126</span><sup>&nbsp;o</sup></li>
                                     <li>&Phi;<sub>31</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-diff3">126</span><sup>&nbsp;o</sup></li>
+                                </ol>
+                                <ol class="unb">
+                                    <li><span id="item3-text-nameunb">Uunb</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-valueunb"></span><span>%</span></li>
                                 </ol>
                             </div>
                             <div id="item3-graph" class="col-md-8" style="height: 580px;"></div>
@@ -1356,6 +1371,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 var self=this;
                 $("#item1-params-list ol li button").removeClass("active");
                 $(this).addClass("active");
+                console.log('this.value',this.value)
+                if(this.value === "ah" || this.value === "vh") {
+                    $("#myDropDown")[0].style.display = "block";
+                } else {
+                    $("#myDropDown")[0].style.display = "none";
+                }
                 qstLegend.forEach(function(item){
                     if(0===item.indexOf(self.value)){
                         eventChart1.dispatchAction({
@@ -1689,8 +1710,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
                 ]
             });
-            // 更新时间
-            $("#item3-realtime span").html(dateFormat(new Date(data["time"]), "yyyy-mm-dd  hh:MM:ss"));
         }
         // 更新三相电压、电流图左侧显示的文字
         function updateSxdyt2(data) {
@@ -1708,6 +1727,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3-text-value2").html(data[value.toLowerCase() + "2"]);
                     $("#item3-text-name3").html(value + "3");
                     $("#item3-text-value3").html(data[value.toLowerCase() + "3"]);
+                    $("#item3-text-nameunb").html(value + "unb");
+                    $("#item3-text-valueunb").html(data[value.toLowerCase() + "unb"]);
                     // 更新相位差
                     $("#item3-text ol.diff").show();
                     $("#item3-text-diff1").html(data["angle" + value + "2"] - data["angle" + value + "1"]);
@@ -1736,20 +1757,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         // 浮点数转成百分比，保留一位小数，返回字符串
         function floatToPercent(num) {
             return (new Number(num) * 100).toFixed(1) + "%";
-        }
-        // 日期格式化
-        function dateFormat(date, fmt) {
-            var o = {
-                "m+": date.getMonth() + 1, //月份
-                "d+": date.getDate(), //日
-                "h+": date.getHours(), //小时
-                "M+": date.getMinutes(), //分
-                "s+": date.getSeconds() //秒
-            };
-            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
-            for (var k in o)
-                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            return fmt;
         }
     </script>
 
@@ -1807,6 +1814,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <%--在线监测模块各个图表初始化--%>
     <script type="text/javascript">
+        function getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "-";
+            var seperator2 = ":";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                + " " + date.getHours() + seperator2 + date.getMinutes()
+                + seperator2 + date.getSeconds();
+            return currentdate;
+        }
+
         function chartsInit(){
             // 初始化图表
             eventChart1.setOption(option1);
@@ -1821,6 +1846,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 getDataSxdy($("#monitorpnt").val());
                 getDataParams($("#monitorpnt").val());
             },10000);
+
+            // 更新时间 每2s
+            setInterval(function () {
+                $("#item3-realtime span").html(getNowFormatDate());
+            },2000);
         }
         chartsInit();
     </script>

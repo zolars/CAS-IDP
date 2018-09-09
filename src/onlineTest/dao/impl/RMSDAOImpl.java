@@ -766,5 +766,43 @@ public class RMSDAOImpl implements RMSDAO {
         return crlist;
     }
 
+    //Vh
+    public List getCurrentVhData(String did){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        List<Object> crlist = new ArrayList<>();
+
+        for(int i = 0; i <3; i++){
+           // PowerparmMonitor rtobj = new PowerparmMonitor();
+           // crlist.add(rtobj);
+            Vh vh1 = new Vh();
+            vh1.setU1_1(1.0);
+            vh1.setU1_2(2.0);
+            vh1.setU1_3(3.0);
+            vh1.setU1_4(4.0);
+            vh1.setU1_5(5.0);
+            vh1.setU1_6(6.0);
+            vh1.setU1_7(7.0);
+
+            vh1.setU2_1(1.0);
+            vh1.setU2_2(2.0);
+            vh1.setU2_3(3.0);
+            vh1.setU2_4(4.0);
+            vh1.setU2_5(5.0);
+            vh1.setU2_6(6.0);
+            vh1.setU2_7(7.0);
+
+            vh1.setU3_1(1.0);
+            vh1.setU3_2(2.0);
+            vh1.setU3_3(3.0);
+            vh1.setU3_4(4.0);
+            vh1.setU3_5(5.0);
+            vh1.setU3_6(6.0);
+            vh1.setU3_7(7.0);
+
+            crlist.add(vh1);
+        }
+        return crlist;
+    }
+
 
 }

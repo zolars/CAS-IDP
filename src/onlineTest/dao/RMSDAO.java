@@ -32,4 +32,6 @@ public interface RMSDAO {
     public List getCurrentPstData(String did);
 
     public List getCurrentPltData(String did);
+
+    public List getCurrentVhData(String did);
 }

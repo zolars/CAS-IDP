@@ -626,6 +626,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $("#item1").hide();
                 $("#item2").show();
             });
+            $("#subItem1").click();
         });
 
     </script>

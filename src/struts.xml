@@ -510,6 +510,14 @@
              </result>
          </action>
 
+         <action name="getAlert" class="sms.getAlert">
+             <!--getAlert -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
 
 
 

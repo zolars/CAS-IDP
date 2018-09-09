@@ -23,13 +23,15 @@ public class DataOnlineSaveJob implements Job {
             Iterator<String> iterator = didSet.iterator();
             while (iterator.hasNext()) {
                 String did = iterator.next();  //监测点id
+
                 PowerparmMonitor var = parmMap.get(did);
                 PowerxbMonitor varxb = xbMap.get(did);
                 PowersxdyMonitor varsxdy = sxdyMap.get(did);
+
                 //实时数据存入数据库
-                hbsessionDao.insert(var);
-                hbsessionDao.insert(varxb);
-                hbsessionDao.insert(varsxdy);
+                if(var.getDid() !=  null)  hbsessionDao.insert(var);
+                if(varxb.getDid() !=  null) hbsessionDao.insert(varxb);
+                if(varsxdy.getDid() !=  null) hbsessionDao.insert(varsxdy);
 
                 // 检测告警（越线）事件
              /*   Timestamp date = new Timestamp(System.currentTimeMillis());
