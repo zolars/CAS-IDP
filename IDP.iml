@@ -9,9 +9,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/web" relative="/" />
         </webroots>
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/src" />
-        </sourceRoots>
       </configuration>
       <facet type="Struts2" name="Struts 2">
         <configuration>
@@ -27,23 +24,22 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="eb253fd1-ac3b-4741-b2fa-f1b6b9f49f31" />
+          <unit-entry name="db_center" value="fd23946d-45d7-42fd-9ebb-72cf6b6c32a1" />
+          <unit-entry name="db_local" value="500befbc-f4c6-42a4-bbd6-cc1c661aebb4" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/hibernate.cfg.xml" />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/hibernate_center.cfg.xml" />
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$" type="java-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/web/WEB-INF/lib" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.90" level="application_server_libraries" />
-    <orderEntry type="library" name="commons-lang" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
