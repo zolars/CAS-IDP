@@ -23,6 +23,16 @@
 </head>
 
 <body>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/jquery.cookie.js"></script>
+
+<script>
+    $.cookie('login', false, {expires: -1, path: '/'});
+    $.cookie('province_name', false, {expires: -1, path: '/'});
+    $.cookie('JSESSIONID', false, {expires: -1, path: '/'});
+</script>
+
 <table width="900" height="400" border="0" align="center">
     <tr>
         <td width="100%" height="120">

@@ -65,6 +65,16 @@
 
 <body id="skin-blur-blue">
 
+<!--登陆认证拦截-->
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script>
+    if(!$. cookie('login')){
+        alert('您还未登录或您的认证已过期, 请先登陆.');
+        window.location.href = 'http://localhost:8082/';
+    }
+</script>
+
 <script Language="JavaScript" src="js/onlineDataInterface.js"></script>
 
 <header id="header" class="media">
