@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RMSDAOImpl implements RMSDAO {
@@ -161,136 +162,139 @@ public class RMSDAOImpl implements RMSDAO {
     public List getCurrentRMSData(){
         List<RMS> rt = new ArrayList<>();
 
-        if(u1list.size() < 3){
-            RMS rtobj = new RMS();
-            for(int i = 0; i < u1list.size(); i++){
-                u1_1 += Math.pow(u1list.get(i).getU1Xb3(), 2);
-                u2_1 += Math.pow(u1list.get(i).getU2Xb3(), 2);
-                u3_1 += Math.pow(u1list.get(i).getU3Xb3(), 2);
+        if(u1list.size() > 0){
+            if(u1list.size() < 3){
+                RMS rtobj = new RMS();
+                for(int i = 0; i < u1list.size(); i++){
+                    u1_1 += Math.pow(u1list.get(i).getU1Xb3(), 2);
+                    u2_1 += Math.pow(u1list.get(i).getU2Xb3(), 2);
+                    u3_1 += Math.pow(u1list.get(i).getU3Xb3(), 2);
 
               /*  v1_1 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_1 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_1 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
 
-                i1_1 += Math.pow(u1list.get(i).getI1Xb3(), 2);
-                i2_1 += Math.pow(u1list.get(i).getI2Xb3(), 2);
-                i3_1 += Math.pow(u1list.get(i).getI3Xb3(), 2);
+                    i1_1 += Math.pow(u1list.get(i).getI1Xb3(), 2);
+                    i2_1 += Math.pow(u1list.get(i).getI2Xb3(), 2);
+                    i3_1 += Math.pow(u1list.get(i).getI3Xb3(), 2);
+                }
+                rtobj.setU1(Math.sqrt(u1_1));
+                rtobj.setU2(Math.sqrt(u2_1));
+                rtobj.setU3(Math.sqrt(u3_1));
+                rtobj.setI1(Math.sqrt(i1_1));
+                rtobj.setI2(Math.sqrt(i2_1));
+                rtobj.setI3(Math.sqrt(i3_1));
+                rtobj.setV1(Math.sqrt(v1_1));
+                rtobj.setV2(Math.sqrt(v2_1));
+                rtobj.setV3(Math.sqrt(v3_1));
+
+                Timestamp ts = new Timestamp(System.currentTimeMillis());
+                String date = "";
+                DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                date = sdf.format(ts);
+                rtobj.setTime(u1list.get(0).getTime());
+
+                rt.add(rtobj);
             }
-            rtobj.setU1(Math.sqrt(u1_1));
-            rtobj.setU2(Math.sqrt(u2_1));
-            rtobj.setU3(Math.sqrt(u3_1));
-            rtobj.setI1(Math.sqrt(i1_1));
-            rtobj.setI2(Math.sqrt(i2_1));
-            rtobj.setI3(Math.sqrt(i3_1));
-            rtobj.setV1(Math.sqrt(v1_1));
-            rtobj.setV2(Math.sqrt(v2_1));
-            rtobj.setV3(Math.sqrt(v3_1));
-
-            Timestamp ts = new Timestamp(System.currentTimeMillis());
-            String date = "";
-            DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            date = sdf.format(ts);
-            rtobj.setTime(u1list.get(0).getTime());
-
-            rt.add(rtobj);
-        }
-        else{
-            for(int j = 0; j < 3; j++) {
-                if(j == 0){
-                    RMS rtobj = new RMS();
-                    for (int i = 0; i < 3; i++) {
-                        u1_1 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
-                        u2_1 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
-                        u3_1 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
+            else{
+                for(int j = 0; j < 3; j++) {
+                    if(j == 0){
+                        RMS rtobj = new RMS();
+                        for (int i = 0; i < 3; i++) {
+                            u1_1 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
+                            u2_1 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
+                            u3_1 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
              /*   v1_1 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_1 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_1 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
-                        i1_1 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
-                        i2_1 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
-                        i3_1 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                            i1_1 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
+                            i2_1 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
+                            i3_1 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                        }
+                        rtobj.setU1(Math.sqrt(u1_1));
+                        rtobj.setU2(Math.sqrt(u2_1));
+                        rtobj.setU3(Math.sqrt(u3_1));
+                        rtobj.setI1(Math.sqrt(i1_1));
+                        rtobj.setI2(Math.sqrt(i2_1));
+                        rtobj.setI3(Math.sqrt(i3_1));
+                        rtobj.setV1(Math.sqrt(v1_1));
+                        rtobj.setV2(Math.sqrt(v2_1));
+                        rtobj.setV3(Math.sqrt(v3_1));
+
+                        Timestamp ts = new Timestamp(System.currentTimeMillis());
+                        String date = "";
+                        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        date = sdf.format(ts);
+                        rtobj.setTime(u1list.get(0).getTime());
+
+                        rt.add(rtobj);
                     }
-                    rtobj.setU1(Math.sqrt(u1_1));
-                    rtobj.setU2(Math.sqrt(u2_1));
-                    rtobj.setU3(Math.sqrt(u3_1));
-                    rtobj.setI1(Math.sqrt(i1_1));
-                    rtobj.setI2(Math.sqrt(i2_1));
-                    rtobj.setI3(Math.sqrt(i3_1));
-                    rtobj.setV1(Math.sqrt(v1_1));
-                    rtobj.setV2(Math.sqrt(v2_1));
-                    rtobj.setV3(Math.sqrt(v3_1));
-
-                    Timestamp ts = new Timestamp(System.currentTimeMillis());
-                    String date = "";
-                    DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    date = sdf.format(ts);
-                    rtobj.setTime(u1list.get(0).getTime());
-
-                    rt.add(rtobj);
-                }
-                else if(j == 1){
-                    RMS rtobj = new RMS();
-                    for (int i = 0; i < 3; i++) {
-                        u1_2 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
-                        u2_2 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
-                        u3_2 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
+                    else if(j == 1){
+                        RMS rtobj = new RMS();
+                        for (int i = 0; i < 3; i++) {
+                            u1_2 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
+                            u2_2 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
+                            u3_2 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
              /*   v1_2 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_2 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_2 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
-                        i1_2 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
-                        i2_2 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
-                        i3_2 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                            i1_2 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
+                            i2_2 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
+                            i3_2 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                        }
+                        rtobj.setU1(Math.sqrt(u1_2));
+                        rtobj.setU2(Math.sqrt(u2_2));
+                        rtobj.setU3(Math.sqrt(u3_2));
+                        rtobj.setI1(Math.sqrt(i1_2));
+                        rtobj.setI2(Math.sqrt(i2_2));
+                        rtobj.setI3(Math.sqrt(i3_2));
+                        rtobj.setV1(Math.sqrt(v1_2));
+                        rtobj.setV2(Math.sqrt(v2_2));
+                        rtobj.setV3(Math.sqrt(v3_2));
+
+                        Timestamp ts = new Timestamp(System.currentTimeMillis());
+                        String date = "";
+                        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        date = sdf.format(ts);
+                        rtobj.setTime(u1list.get(0).getTime());
+
+                        rt.add(rtobj);
                     }
-                    rtobj.setU1(Math.sqrt(u1_2));
-                    rtobj.setU2(Math.sqrt(u2_2));
-                    rtobj.setU3(Math.sqrt(u3_2));
-                    rtobj.setI1(Math.sqrt(i1_2));
-                    rtobj.setI2(Math.sqrt(i2_2));
-                    rtobj.setI3(Math.sqrt(i3_2));
-                    rtobj.setV1(Math.sqrt(v1_2));
-                    rtobj.setV2(Math.sqrt(v2_2));
-                    rtobj.setV3(Math.sqrt(v3_2));
-
-                    Timestamp ts = new Timestamp(System.currentTimeMillis());
-                    String date = "";
-                    DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    date = sdf.format(ts);
-                    rtobj.setTime(u1list.get(0).getTime());
-
-                    rt.add(rtobj);
-                }
-                else if(j == 2){
-                    RMS rtobj = new RMS();
-                    for (int i = 0; i < 3; i++) {
-                        u1_3 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
-                        u2_3 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
-                        u3_3 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
+                    else if(j == 2){
+                        RMS rtobj = new RMS();
+                        for (int i = 0; i < 3; i++) {
+                            u1_3 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
+                            u2_3 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
+                            u3_3 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
                           /*   v1_3 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_3 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_3 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
-                        i1_3 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
-                        i2_3 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
-                        i3_3 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                            i1_3 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
+                            i2_3 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
+                            i3_3 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                        }
+                        rtobj.setU1(Math.sqrt(u1_3));
+                        rtobj.setU2(Math.sqrt(u2_3));
+                        rtobj.setU3(Math.sqrt(u3_3));
+                        rtobj.setI1(Math.sqrt(i1_3));
+                        rtobj.setI2(Math.sqrt(i2_3));
+                        rtobj.setI3(Math.sqrt(i3_3));
+                        rtobj.setV1(Math.sqrt(v1_3));
+                        rtobj.setV2(Math.sqrt(v2_3));
+                        rtobj.setV3(Math.sqrt(v3_3));
+
+                        Timestamp ts = new Timestamp(System.currentTimeMillis());
+                        String date = "";
+                        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        date = sdf.format(ts);
+                        rtobj.setTime(u1list.get(0).getTime());
+
+                        rt.add(rtobj);
                     }
-                    rtobj.setU1(Math.sqrt(u1_3));
-                    rtobj.setU2(Math.sqrt(u2_3));
-                    rtobj.setU3(Math.sqrt(u3_3));
-                    rtobj.setI1(Math.sqrt(i1_3));
-                    rtobj.setI2(Math.sqrt(i2_3));
-                    rtobj.setI3(Math.sqrt(i3_3));
-                    rtobj.setV1(Math.sqrt(v1_3));
-                    rtobj.setV2(Math.sqrt(v2_3));
-                    rtobj.setV3(Math.sqrt(v3_3));
-
-                    Timestamp ts = new Timestamp(System.currentTimeMillis());
-                    String date = "";
-                    DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    date = sdf.format(ts);
-                    rtobj.setTime(u1list.get(0).getTime());
-
-                    rt.add(rtobj);
                 }
             }
         }
+
         return rt;
     }
 
@@ -299,133 +303,135 @@ public class RMSDAOImpl implements RMSDAO {
     public List getCurrentTHDData(){
         List<THD> rt = new ArrayList<>();
 
-        if(u1list.size() < 3){
-            THD rtobj = new THD();
-            for(int i = 0; i < u1list.size(); i++){
-                u1_1 += Math.pow(u1list.get(i).getU1Xb3(), 2);
-                u2_1 += Math.pow(u1list.get(i).getU2Xb3(), 2);
-                u3_1 += Math.pow(u1list.get(i).getU3Xb3(), 2);
+        if(u1list.size() > 0){
+            if(u1list.size() < 3){
+                THD rtobj = new THD();
+                for(int i = 0; i < u1list.size(); i++){
+                    u1_1 += Math.pow(u1list.get(i).getU1Xb3(), 2);
+                    u2_1 += Math.pow(u1list.get(i).getU2Xb3(), 2);
+                    u3_1 += Math.pow(u1list.get(i).getU3Xb3(), 2);
 
               /*  v1_1 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_1 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_1 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
 
-                i1_1 += Math.pow(u1list.get(i).getI1Xb3(), 2);
-                i2_1 += Math.pow(u1list.get(i).getI2Xb3(), 2);
-                i3_1 += Math.pow(u1list.get(i).getI3Xb3(), 2);
-            }
-            rtobj.setU1(Math.sqrt(u1_1)/u1list.get(0).getU1Xb3());
-            rtobj.setU2(Math.sqrt(u2_1)/u1list.get(0).getU2Xb3());
-            rtobj.setU3(Math.sqrt(u3_1)/u1list.get(0).getU3Xb3());
-            rtobj.setI1(Math.sqrt(i1_1)/u1list.get(0).getI1Xb3());
-            rtobj.setI2(Math.sqrt(i2_1)/u1list.get(0).getI2Xb3());
-            rtobj.setI3(Math.sqrt(i3_1)/u1list.get(0).getI3Xb3());
+                    i1_1 += Math.pow(u1list.get(i).getI1Xb3(), 2);
+                    i2_1 += Math.pow(u1list.get(i).getI2Xb3(), 2);
+                    i3_1 += Math.pow(u1list.get(i).getI3Xb3(), 2);
+                }
+                rtobj.setU1(Math.sqrt(u1_1)/u1list.get(0).getU1Xb3());
+                rtobj.setU2(Math.sqrt(u2_1)/u1list.get(0).getU2Xb3());
+                rtobj.setU3(Math.sqrt(u3_1)/u1list.get(0).getU3Xb3());
+                rtobj.setI1(Math.sqrt(i1_1)/u1list.get(0).getI1Xb3());
+                rtobj.setI2(Math.sqrt(i2_1)/u1list.get(0).getI2Xb3());
+                rtobj.setI3(Math.sqrt(i3_1)/u1list.get(0).getI3Xb3());
             /*rtobj.setV1(Math.sqrt(v1_1)/u1list.get(0).getV1Xb3());
             rtobj.setV2(Math.sqrt(v2_1)/u1list.get(0).getV2Xb3());
             rtobj.setV3(Math.sqrt(v3_1)/u1list.get(0).getV3Xb3());*/
 
-            Timestamp ts = new Timestamp(System.currentTimeMillis());
-            String date = "";
-            DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            date = sdf.format(ts);
-            rtobj.setTime(u1list.get(0).getTime());
+                Timestamp ts = new Timestamp(System.currentTimeMillis());
+                String date = "";
+                DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                date = sdf.format(ts);
+                rtobj.setTime(u1list.get(0).getTime());
 
-            rt.add(rtobj);
-        }
-        else{
-            for(int j = 0; j < 3; j++) {
-                if(j == 0){
-                    THD rtobj = new THD();
-                    for (int i = 0; i < 3; i++) {
-                        u1_1 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
-                        u2_1 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
-                        u3_1 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
+                rt.add(rtobj);
+            }
+            else{
+                for(int j = 0; j < 3; j++) {
+                    if(j == 0){
+                        THD rtobj = new THD();
+                        for (int i = 0; i < 3; i++) {
+                            u1_1 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
+                            u2_1 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
+                            u3_1 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
              /*   v1_1 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_1 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_1 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
-                        i1_1 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
-                        i2_1 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
-                        i3_1 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
-                    }
-                    rtobj.setU1(Math.sqrt(u1_1)/u1list.get(0).getU1Xb3());
-                    rtobj.setU2(Math.sqrt(u2_1)/u1list.get(0).getU2Xb3());
-                    rtobj.setU3(Math.sqrt(u3_1)/u1list.get(0).getU3Xb3());
-                    rtobj.setI1(Math.sqrt(i1_1)/u1list.get(0).getI1Xb3());
-                    rtobj.setI2(Math.sqrt(i2_1)/u1list.get(0).getI2Xb3());
-                    rtobj.setI3(Math.sqrt(i3_1)/u1list.get(0).getI3Xb3());
+                            i1_1 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
+                            i2_1 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
+                            i3_1 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                        }
+                        rtobj.setU1(Math.sqrt(u1_1)/u1list.get(0).getU1Xb3());
+                        rtobj.setU2(Math.sqrt(u2_1)/u1list.get(0).getU2Xb3());
+                        rtobj.setU3(Math.sqrt(u3_1)/u1list.get(0).getU3Xb3());
+                        rtobj.setI1(Math.sqrt(i1_1)/u1list.get(0).getI1Xb3());
+                        rtobj.setI2(Math.sqrt(i2_1)/u1list.get(0).getI2Xb3());
+                        rtobj.setI3(Math.sqrt(i3_1)/u1list.get(0).getI3Xb3());
                     /*rtobj.setV1(Math.sqrt(v1_1)/u1list.get(0).getV1Xb3());
                     rtobj.setV2(Math.sqrt(v2_1)/u1list.get(0).getV2Xb3());
                     rtobj.setV3(Math.sqrt(v3_1)/u1list.get(0).getV3Xb3());*/
 
-                    Timestamp ts = new Timestamp(System.currentTimeMillis());
-                    String date = "";
-                    DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    date = sdf.format(ts);
-                    rtobj.setTime(u1list.get(0).getTime());
+                        Timestamp ts = new Timestamp(System.currentTimeMillis());
+                        String date = "";
+                        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        date = sdf.format(ts);
+                        rtobj.setTime(u1list.get(0).getTime());
 
-                    rt.add(rtobj);
-                }
-                else if(j == 1){
-                    THD rtobj = new THD();
-                    for (int i = 0; i < 3; i++) {
-                        u1_2 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
-                        u2_2 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
-                        u3_2 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
+                        rt.add(rtobj);
+                    }
+                    else if(j == 1){
+                        THD rtobj = new THD();
+                        for (int i = 0; i < 3; i++) {
+                            u1_2 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
+                            u2_2 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
+                            u3_2 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
              /*   v1_2 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_2 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_2 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
-                        i1_2 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
-                        i2_2 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
-                        i3_2 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
-                    }
-                    rtobj.setU1(Math.sqrt(u1_2)/u1list.get(1).getU1Xb3());
-                    rtobj.setU2(Math.sqrt(u2_2)/u1list.get(1).getU2Xb3());
-                    rtobj.setU3(Math.sqrt(u3_2)/u1list.get(1).getU3Xb3());
-                    rtobj.setI1(Math.sqrt(i1_2)/u1list.get(1).getI1Xb3());
-                    rtobj.setI2(Math.sqrt(i2_2)/u1list.get(1).getI2Xb3());
-                    rtobj.setI3(Math.sqrt(i3_2)/u1list.get(1).getI3Xb3());
+                            i1_2 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
+                            i2_2 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
+                            i3_2 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                        }
+                        rtobj.setU1(Math.sqrt(u1_2)/u1list.get(1).getU1Xb3());
+                        rtobj.setU2(Math.sqrt(u2_2)/u1list.get(1).getU2Xb3());
+                        rtobj.setU3(Math.sqrt(u3_2)/u1list.get(1).getU3Xb3());
+                        rtobj.setI1(Math.sqrt(i1_2)/u1list.get(1).getI1Xb3());
+                        rtobj.setI2(Math.sqrt(i2_2)/u1list.get(1).getI2Xb3());
+                        rtobj.setI3(Math.sqrt(i3_2)/u1list.get(1).getI3Xb3());
                  /*   rtobj.setV1(Math.sqrt(v1_2)/u1list.get(1).getV1Xb3());
                     rtobj.setV2(Math.sqrt(v2_2)/u1list.get(1).getV2Xb3());
                     rtobj.setV3(Math.sqrt(v3_2)/u1list.get(1).getV3Xb3());
 */
-                    Timestamp ts = new Timestamp(System.currentTimeMillis());
-                    String date = "";
-                    DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    date = sdf.format(ts);
-                    rtobj.setTime(u1list.get(0).getTime());
+                        Timestamp ts = new Timestamp(System.currentTimeMillis());
+                        String date = "";
+                        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        date = sdf.format(ts);
+                        rtobj.setTime(u1list.get(0).getTime());
 
-                    rt.add(rtobj);
-                }
-                else if(j == 2){
-                    THD rtobj = new THD();
-                    for (int i = 0; i < 3; i++) {
-                        u1_3 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
-                        u2_3 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
-                        u3_3 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
+                        rt.add(rtobj);
+                    }
+                    else if(j == 2){
+                        THD rtobj = new THD();
+                        for (int i = 0; i < 3; i++) {
+                            u1_3 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
+                            u2_3 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
+                            u3_3 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
                           /*   v1_3 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_3 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_3 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
-                        i1_3 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
-                        i2_3 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
-                        i3_3 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
-                    }
-                    rtobj.setU1(Math.sqrt(u1_3)/u1list.get(2).getU1Xb3());
-                    rtobj.setU2(Math.sqrt(u2_3)/u1list.get(2).getU2Xb3());
-                    rtobj.setU3(Math.sqrt(u3_3)/u1list.get(2).getU3Xb3());
-                    rtobj.setI1(Math.sqrt(i1_3)/u1list.get(2).getI1Xb3());
-                    rtobj.setI2(Math.sqrt(i2_3)/u1list.get(2).getI2Xb3());
-                    rtobj.setI3(Math.sqrt(i3_3)/u1list.get(2).getI3Xb3());
+                            i1_3 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
+                            i2_3 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
+                            i3_3 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                        }
+                        rtobj.setU1(Math.sqrt(u1_3)/u1list.get(2).getU1Xb3());
+                        rtobj.setU2(Math.sqrt(u2_3)/u1list.get(2).getU2Xb3());
+                        rtobj.setU3(Math.sqrt(u3_3)/u1list.get(2).getU3Xb3());
+                        rtobj.setI1(Math.sqrt(i1_3)/u1list.get(2).getI1Xb3());
+                        rtobj.setI2(Math.sqrt(i2_3)/u1list.get(2).getI2Xb3());
+                        rtobj.setI3(Math.sqrt(i3_3)/u1list.get(2).getI3Xb3());
                 /*    rtobj.setV1(Math.sqrt(v1_3)/u1list.get(2).getV1Xb3());
                     rtobj.setV2(Math.sqrt(v2_3)/u1list.get(2).getV2Xb3());
                     rtobj.setV3(Math.sqrt(v3_3)/u1list.get(2).getV3Xb3());*/
 
-                    Timestamp ts = new Timestamp(System.currentTimeMillis());
-                    String date = "";
-                    DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    date = sdf.format(ts);
-                    rtobj.setTime(u1list.get(0).getTime());
+                        Timestamp ts = new Timestamp(System.currentTimeMillis());
+                        String date = "";
+                        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        date = sdf.format(ts);
+                        rtobj.setTime(u1list.get(0).getTime());
 
-                    rt.add(rtobj);
+                        rt.add(rtobj);
+                    }
                 }
             }
         }
@@ -437,133 +443,135 @@ public class RMSDAOImpl implements RMSDAO {
     public List getCurrentCFData(){
         List<CF> rt = new ArrayList<>();
 
-        if(u1list.size() < 3){
-            CF rtobj = new CF();
-            for(int i = 0; i < u1list.size(); i++){
-                u1_1 += Math.pow(u1list.get(i).getU1Xb3(), 2);
-                u2_1 += Math.pow(u1list.get(i).getU2Xb3(), 2);
-                u3_1 += Math.pow(u1list.get(i).getU3Xb3(), 2);
+        if(u1list.size() > 0){
+            if(u1list.size() < 3){
+                CF rtobj = new CF();
+                for(int i = 0; i < u1list.size(); i++){
+                    u1_1 += Math.pow(u1list.get(i).getU1Xb3(), 2);
+                    u2_1 += Math.pow(u1list.get(i).getU2Xb3(), 2);
+                    u3_1 += Math.pow(u1list.get(i).getU3Xb3(), 2);
 
               /*  v1_1 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_1 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_1 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
 
-                i1_1 += Math.pow(u1list.get(i).getI1Xb3(), 2);
-                i2_1 += Math.pow(u1list.get(i).getI2Xb3(), 2);
-                i3_1 += Math.pow(u1list.get(i).getI3Xb3(), 2);
-            }
-            rtobj.setU1(Math.sqrt(u1_1)/u1list.get(0).getU1Xb3());
-            rtobj.setU2(Math.sqrt(u2_1)/u1list.get(0).getU2Xb3());
-            rtobj.setU3(Math.sqrt(u3_1)/u1list.get(0).getU3Xb3());
-            rtobj.setI1(Math.sqrt(i1_1)/u1list.get(0).getI1Xb3());
-            rtobj.setI2(Math.sqrt(i2_1)/u1list.get(0).getI2Xb3());
-            rtobj.setI3(Math.sqrt(i3_1)/u1list.get(0).getI3Xb3());
+                    i1_1 += Math.pow(u1list.get(i).getI1Xb3(), 2);
+                    i2_1 += Math.pow(u1list.get(i).getI2Xb3(), 2);
+                    i3_1 += Math.pow(u1list.get(i).getI3Xb3(), 2);
+                }
+                rtobj.setU1(Math.sqrt(u1_1)/u1list.get(0).getU1Xb3());
+                rtobj.setU2(Math.sqrt(u2_1)/u1list.get(0).getU2Xb3());
+                rtobj.setU3(Math.sqrt(u3_1)/u1list.get(0).getU3Xb3());
+                rtobj.setI1(Math.sqrt(i1_1)/u1list.get(0).getI1Xb3());
+                rtobj.setI2(Math.sqrt(i2_1)/u1list.get(0).getI2Xb3());
+                rtobj.setI3(Math.sqrt(i3_1)/u1list.get(0).getI3Xb3());
             /*rtobj.setV1(Math.sqrt(v1_1)/u1list.get(0).getV1Xb3());
             rtobj.setV2(Math.sqrt(v2_1)/u1list.get(0).getV2Xb3());
             rtobj.setV3(Math.sqrt(v3_1)/u1list.get(0).getV3Xb3());*/
 
-            Timestamp ts = new Timestamp(System.currentTimeMillis());
-            String date = "";
-            DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            date = sdf.format(ts);
-            rtobj.setTime(u1list.get(0).getTime());
+                Timestamp ts = new Timestamp(System.currentTimeMillis());
+                String date = "";
+                DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                date = sdf.format(ts);
+                rtobj.setTime(u1list.get(0).getTime());
 
-            rt.add(rtobj);
-        }
-        else{
-            for(int j = 0; j < 3; j++) {
-                if(j == 0){
-                    CF rtobj = new CF();
-                    for (int i = 0; i < 3; i++) {
-                        u1_1 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
-                        u2_1 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
-                        u3_1 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
+                rt.add(rtobj);
+            }
+            else{
+                for(int j = 0; j < 3; j++) {
+                    if(j == 0){
+                        CF rtobj = new CF();
+                        for (int i = 0; i < 3; i++) {
+                            u1_1 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
+                            u2_1 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
+                            u3_1 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
              /*   v1_1 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_1 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_1 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
-                        i1_1 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
-                        i2_1 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
-                        i3_1 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
-                    }
-                    rtobj.setU1(Math.sqrt(u1_1)/u1list.get(0).getU1Xb3());
-                    rtobj.setU2(Math.sqrt(u2_1)/u1list.get(0).getU2Xb3());
-                    rtobj.setU3(Math.sqrt(u3_1)/u1list.get(0).getU3Xb3());
-                    rtobj.setI1(Math.sqrt(i1_1)/u1list.get(0).getI1Xb3());
-                    rtobj.setI2(Math.sqrt(i2_1)/u1list.get(0).getI2Xb3());
-                    rtobj.setI3(Math.sqrt(i3_1)/u1list.get(0).getI3Xb3());
+                            i1_1 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
+                            i2_1 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
+                            i3_1 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                        }
+                        rtobj.setU1(Math.sqrt(u1_1)/u1list.get(0).getU1Xb3());
+                        rtobj.setU2(Math.sqrt(u2_1)/u1list.get(0).getU2Xb3());
+                        rtobj.setU3(Math.sqrt(u3_1)/u1list.get(0).getU3Xb3());
+                        rtobj.setI1(Math.sqrt(i1_1)/u1list.get(0).getI1Xb3());
+                        rtobj.setI2(Math.sqrt(i2_1)/u1list.get(0).getI2Xb3());
+                        rtobj.setI3(Math.sqrt(i3_1)/u1list.get(0).getI3Xb3());
                     /*rtobj.setV1(Math.sqrt(v1_1)/u1list.get(0).getV1Xb3());
                     rtobj.setV2(Math.sqrt(v2_1)/u1list.get(0).getV2Xb3());
                     rtobj.setV3(Math.sqrt(v3_1)/u1list.get(0).getV3Xb3());*/
 
-                    Timestamp ts = new Timestamp(System.currentTimeMillis());
-                    String date = "";
-                    DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    date = sdf.format(ts);
-                    rtobj.setTime(u1list.get(0).getTime());
+                        Timestamp ts = new Timestamp(System.currentTimeMillis());
+                        String date = "";
+                        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        date = sdf.format(ts);
+                        rtobj.setTime(u1list.get(0).getTime());
 
-                    rt.add(rtobj);
-                }
-                else if(j == 1){
-                    CF rtobj = new CF();
-                    for (int i = 0; i < 3; i++) {
-                        u1_2 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
-                        u2_2 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
-                        u3_2 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
+                        rt.add(rtobj);
+                    }
+                    else if(j == 1){
+                        CF rtobj = new CF();
+                        for (int i = 0; i < 3; i++) {
+                            u1_2 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
+                            u2_2 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
+                            u3_2 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
              /*   v1_2 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_2 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_2 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
-                        i1_2 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
-                        i2_2 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
-                        i3_2 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
-                    }
-                    rtobj.setU1(Math.sqrt(u1_2)/u1list.get(1).getU1Xb3());
-                    rtobj.setU2(Math.sqrt(u2_2)/u1list.get(1).getU2Xb3());
-                    rtobj.setU3(Math.sqrt(u3_2)/u1list.get(1).getU3Xb3());
-                    rtobj.setI1(Math.sqrt(i1_2)/u1list.get(1).getI1Xb3());
-                    rtobj.setI2(Math.sqrt(i2_2)/u1list.get(1).getI2Xb3());
-                    rtobj.setI3(Math.sqrt(i3_2)/u1list.get(1).getI3Xb3());
+                            i1_2 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
+                            i2_2 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
+                            i3_2 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                        }
+                        rtobj.setU1(Math.sqrt(u1_2)/u1list.get(1).getU1Xb3());
+                        rtobj.setU2(Math.sqrt(u2_2)/u1list.get(1).getU2Xb3());
+                        rtobj.setU3(Math.sqrt(u3_2)/u1list.get(1).getU3Xb3());
+                        rtobj.setI1(Math.sqrt(i1_2)/u1list.get(1).getI1Xb3());
+                        rtobj.setI2(Math.sqrt(i2_2)/u1list.get(1).getI2Xb3());
+                        rtobj.setI3(Math.sqrt(i3_2)/u1list.get(1).getI3Xb3());
                  /*   rtobj.setV1(Math.sqrt(v1_2)/u1list.get(1).getV1Xb3());
                     rtobj.setV2(Math.sqrt(v2_2)/u1list.get(1).getV2Xb3());
                     rtobj.setV3(Math.sqrt(v3_2)/u1list.get(1).getV3Xb3());
 */
-                    Timestamp ts = new Timestamp(System.currentTimeMillis());
-                    String date = "";
-                    DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    date = sdf.format(ts);
-                    rtobj.setTime(u1list.get(0).getTime());
+                        Timestamp ts = new Timestamp(System.currentTimeMillis());
+                        String date = "";
+                        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        date = sdf.format(ts);
+                        rtobj.setTime(u1list.get(0).getTime());
 
-                    rt.add(rtobj);
-                }
-                else if(j == 2){
-                    CF rtobj = new CF();
-                    for (int i = 0; i < 3; i++) {
-                        u1_3 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
-                        u2_3 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
-                        u3_3 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
+                        rt.add(rtobj);
+                    }
+                    else if(j == 2){
+                        CF rtobj = new CF();
+                        for (int i = 0; i < 3; i++) {
+                            u1_3 += Math.pow(u1list.get(i+j).getU1Xb3(), 2);
+                            u2_3 += Math.pow(u1list.get(i+j).getU2Xb3(), 2);
+                            u3_3 += Math.pow(u1list.get(i+j).getU3Xb3(), 2);
                           /*   v1_3 += Math.pow(u1list.get(i).getV1Xb3(), 2);
                 v2_3 += Math.pow(u1list.get(i).getV2Xb3(), 2);
                 v3_3 += Math.pow(u1list.get(i).getV3Xb3(), 2);*/
-                        i1_3 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
-                        i2_3 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
-                        i3_3 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
-                    }
-                    rtobj.setU1(Math.sqrt(u1_3)/u1list.get(2).getU1Xb3());
-                    rtobj.setU2(Math.sqrt(u2_3)/u1list.get(2).getU2Xb3());
-                    rtobj.setU3(Math.sqrt(u3_3)/u1list.get(2).getU3Xb3());
-                    rtobj.setI1(Math.sqrt(i1_3)/u1list.get(2).getI1Xb3());
-                    rtobj.setI2(Math.sqrt(i2_3)/u1list.get(2).getI2Xb3());
-                    rtobj.setI3(Math.sqrt(i3_3)/u1list.get(2).getI3Xb3());
+                            i1_3 += Math.pow(u1list.get(i+j).getI1Xb3(), 2);
+                            i2_3 += Math.pow(u1list.get(i+j).getI2Xb3(), 2);
+                            i3_3 += Math.pow(u1list.get(i+j).getI3Xb3(), 2);
+                        }
+                        rtobj.setU1(Math.sqrt(u1_3)/u1list.get(2).getU1Xb3());
+                        rtobj.setU2(Math.sqrt(u2_3)/u1list.get(2).getU2Xb3());
+                        rtobj.setU3(Math.sqrt(u3_3)/u1list.get(2).getU3Xb3());
+                        rtobj.setI1(Math.sqrt(i1_3)/u1list.get(2).getI1Xb3());
+                        rtobj.setI2(Math.sqrt(i2_3)/u1list.get(2).getI2Xb3());
+                        rtobj.setI3(Math.sqrt(i3_3)/u1list.get(2).getI3Xb3());
                 /*    rtobj.setV1(Math.sqrt(v1_3)/u1list.get(2).getV1Xb3());
                     rtobj.setV2(Math.sqrt(v2_3)/u1list.get(2).getV2Xb3());
                     rtobj.setV3(Math.sqrt(v3_3)/u1list.get(2).getV3Xb3());*/
 
-                    Timestamp ts = new Timestamp(System.currentTimeMillis());
-                    String date = "";
-                    DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    date = sdf.format(ts);
-                    rtobj.setTime(u1list.get(0).getTime());
+                        Timestamp ts = new Timestamp(System.currentTimeMillis());
+                        String date = "";
+                        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        date = sdf.format(ts);
+                        rtobj.setTime(u1list.get(0).getTime());
 
-                    rt.add(rtobj);
+                        rt.add(rtobj);
+                    }
                 }
             }
         }
@@ -762,6 +770,23 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
+        }
+        return crlist;
+    }
+
+    //Vh
+    public List getCurrentVhData(String did){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        List<List<String>> crlist = new ArrayList<>();
+
+        for(int i = 0; i <3; i++){
+
+            List<String> list = new ArrayList<>();
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+
+            crlist.add(list);
         }
         return crlist;
     }

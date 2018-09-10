@@ -626,6 +626,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $("#item1").hide();
                 $("#item2").show();
             });
+            $("#subItem1").click();
         });
 
     </script>
@@ -662,6 +663,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 etime = $("#lastDate").val();
             }
             else  if(edate == "day"){
+
                 //昨天的时间
                 var now = new Date();
                 var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
@@ -677,6 +679,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 etime = nowtime;
             }
             else  if(edate == "week"){
+
                 // 获取一星期前的时间：
                 var now = new Date();
                 var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
@@ -692,6 +695,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 etime = nowtime;
             }
             else  if(edate == "month"){
+
                 // 获取一星期前的时间：
                 var now = new Date();
                 var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
@@ -707,9 +711,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 etime = nowtime;
             }
 
+
             $.ajax({
                 type: "post",
-                url: "getPowerEvent",
+                url: "getDeviceEvent",
                 data: {
                     stime: stime,
                     etime: etime,
@@ -723,27 +728,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     table.empty();
                     table.append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
 
-                    for (var i = 0; i < list.length(); i++) {
-                        var name = list[i].eventtype;
-
-                        console.log(name);
-
-                        var location = list[i].did;
-                        console.log(location);
-
-                        var type = list[i].type;
-
-                        console.log(type);
                     for (var i = 0; i < list.length; i++) {
                         var name = list[i].type;
                         var location = list[i].mpid;
                         var type = list[i].subtype;
                         var description = list[i].discription;
-                        console.log(description);
                         var time = list[i].time;
-                        console.log(time);
-
-
 
                         table.append('<tr>' +
                             '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
@@ -954,7 +944,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
                     }
                 }
-            });*/
             });
         }
     </script>

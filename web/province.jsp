@@ -270,18 +270,6 @@
     <!-- All JS functions -->
     <script src="js/functions.js"></script>
 
-    <script type="text/javascript">
-       /* function getQueryString(name) {
-            var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
-            if (result == null || result.length < 1) {
-                return "";
-            }
-            //对第一个结果进行URI解码
-            return decodeURI(result[1]);
-            //return result[1];
-        }*/
-    </script>
-
     <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
 
@@ -506,7 +494,6 @@
 
             }
         });
-
     </script>
 
     <!-- 时间选择器-->
@@ -594,6 +581,32 @@
 
             if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
         }
+    </script>
+
+    <script type="text/javascript">
+
+        /*function asyncRequest() {
+            var alertmsg = "<%=session.getAttribute("alert")%>";
+            if(alertmsg != "null") {
+                alert("if"+alertmsg);
+            }
+        }*/
+        function asyncRequest() {
+            $.ajax({
+                type: "post",
+                url: "getAlert",
+                data: {},
+                dataType: "json",
+                success: function (data) {
+                   alert(data);
+                }
+            });
+        }
+
+        var intervalTimer = window.setInterval(asyncRequest, 1500000);
+
+        // clearInterval(intervalTimer)
+
     </script>
 
 
