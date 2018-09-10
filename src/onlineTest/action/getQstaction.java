@@ -3,12 +3,17 @@ package onlineTest.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import grabData.DataOnline;
+import hibernatePOJO.PowerparmMonitor;
+import hibernatePOJO.PowerxbMonitor;
 import onlineTest.dao.RMSDAO;
+import onlineTest.dao.Vh;
 import onlineTest.dao.impl.RMSDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -69,6 +74,12 @@ public class getQstaction extends ActionSupport {
             List pstdata = rmsdao.getCurrentPstData(did);
             //getQstPLT
             List pltdata = rmsdao.getCurrentPltData(did);
+            //getQstVh
+            List Vhdata = rmsdao.getCurrentVhData(did);
+
+            //getQstAh
+            // PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+           // PowerxbMonitor pxb = DataOnline.getXbMap().get(did);
 
             jsonObject.put("allRMS", qstdata);
             jsonObject.put("allTHD", thddata);
@@ -83,6 +94,8 @@ public class getQstaction extends ActionSupport {
             jsonObject.put("allTAN", tandata);
             jsonObject.put("allPST", pstdata);
             jsonObject.put("allPLT", pltdata);
+            jsonObject.put("allVh", Vhdata);
+            //jsonObject.put("allAh", Vhdata);
 
             result = JSON.toJSONString(jsonObject); // List转json
 

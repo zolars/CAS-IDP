@@ -34,10 +34,6 @@ public class getAllIDPDeviceAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
-           // String devicename = request.getParameter("devicename");
-
             DeviceDAO dao = new DeviceDAOImpl();
 
             List<Devices> dlist = new ArrayList();

@@ -102,6 +102,18 @@ public class MyListener implements ServletContextListener {
                                 .build();
                         scheduler.scheduleJob(job4,trigger4);
 
+                        //设置任务，每15分钟执行一次告警
+                        Trigger trigger5=newTrigger()
+                                .withIdentity("alarmModelTrigger","alarmModelTriggerGroup")
+                                .startNow()
+                                .withSchedule(simpleSchedule()
+                                        .withIntervalInMinutes(1500)
+                                        .repeatForever())
+                                .build();
+                        JobDetail job5=newJob(alarmModelJob.class)
+                                .withIdentity("alarmModelJob","alarmModelGroup")
+                                .build();
+                        scheduler.scheduleJob(job5,trigger5);
 
                         ///////////////////////////
                         scheduler.start();
