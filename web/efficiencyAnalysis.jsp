@@ -163,6 +163,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </select>
                 </div>
 
+                <!-- 注销按钮 -->
+                <div class="pull-right">
+                    <li><a href="index.jsp">注销</a></li>
+                </div>
+
                 <div class="pull-right">欢迎用户${username}登录</div>
 
             </div>

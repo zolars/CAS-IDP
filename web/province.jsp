@@ -175,6 +175,12 @@
                     </select>
                 </div>
 
+
+                <!-- 注销按钮 -->
+                <div class="pull-right">
+                    <li><a href="index.jsp">注销</a></li>
+                </div>
+
                 <div class="pull-right">欢迎用户${username}登录</div>
 
             </div>
@@ -225,6 +231,25 @@
                                     </div>
 
                                 </fieldset>
+
+                                <!-- 刷新按钮 -->
+                                <div class="row" >
+                                    <button id="refresh-btn" class="btn btn-primary" data-loading-text="Loading..."
+                                            type="button"> 刷新
+                                    </button>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#refresh-btn").click(function() {
+                                                $(this).button('loading').delay(500).queue(function() {
+                                                    alert("刷新成功!");
+                                                    $(this).button('reset');
+                                                    $(this).dequeue();
+                                                });
+                                            });
+                                        });
+                                    </script>
+                                </div>
+
                             </form>
                         </div>
                     </div>
