@@ -123,6 +123,16 @@
 
 <body id="skin-blur-blue">
 
+<!--登陆认证拦截-->
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script>
+    if(!$. cookie('login')){
+        alert('您还未登录或您的认证已过期, 请先登陆.');
+        window.location.href = 'http://localhost:8082/';
+    }
+</script>
+
     <header id="header" class="media">
         <a href="" id="menu-toggle"></a>
         <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
@@ -142,6 +152,11 @@
                             <option value="">请选择</option>
                         </select>
                     </div>
+
+                <!-- 注销按钮 -->
+                <div class="pull-right">
+                    <li><a href="index.jsp">注销</a></li>
+                </div>
 
                 <div class="pull-right">欢迎用户${username} 登录</div>
 
