@@ -181,7 +181,7 @@
          </action>
 
          <!--wsy2018.9.6 -->
-         <action name="getProBankInfo" class="deviceManage.action.getDeviceInfoAction">
+         <action name="getProBankInfo" class="orgnizationManage.action.getProBankInfoAction">
              <!--getProBankInfo -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">

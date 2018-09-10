@@ -1,7 +1,9 @@
 package orgnizationManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
-import deviceManage.dao.DeviceDAO;
+import orgnizationManage.dao.ProBankDAO;
+import hibernatePOJO.ProvinceBank;
+import hibernatePOJO.CityBank;
 import hibernatePOJO.DeviceAlarmUser;
 import hibernatePOJO.Devices;
 import hibernatePOJO.DevicesThreshold;
@@ -12,20 +14,33 @@ import org.hibernate.Transaction;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
 
-public class ProBankDAOImpl implements DeviceDAO {
+public class ProBankDAOImpl implements ProBankDAO {
 
     private Session session;
     private Transaction transaction;
     private Query query;
 
-    public List getDeviceDataByName(String name){
+    public List getProBankDataByName(String name){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where name = '" + name+ "'");
+        System.out.println(name);
+        List<ProvinceBank> pblist = hbsessionDao.search(
+                "FROM ProvinceBank where pbname = '" + name+ "'");
 
-        return list;
+        System.out.println("here:"+pblist.get(0).getCbidset());
+        String cbidset=pblist.get(0).getCbidset();
+        String[] cbid=cbidset.split("，");
+
+        List<String> cbname = new ArrayList();
+        for(String s:cbid){
+            List<CityBank> cblist = hbsessionDao.search(
+                    "FROM CityBank where cbid = '" + s + "'");
+            cbname.add(cblist.get(0).getCbname());
+        }
+
+        return cbname;
     }
 
     public String getDeviceIDByName(String name){

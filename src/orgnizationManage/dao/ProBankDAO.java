@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProBankDAO {
 
-    public List getDeviceDataByName(String name);
+    public List getProBankDataByName(String name);
 
     public String getDeviceIDByName(String name);
 

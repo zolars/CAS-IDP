@@ -708,7 +708,7 @@
                                             <tr>
                                                 <td>
                                                     <div id="outer" class="outer">
-                                                        <input id="searchInput" class="searchInput form-control"
+                                                        <input id="searchInput2" class="searchInput form-control"
                                                                type="text" placeholder="请输入省行名称">
                                                         <div id="searchTips" class="tips" style="display: none">
                                                         </div>
@@ -753,13 +753,13 @@
                                         <div>
                                             <div class="pbid" id="pbid"></div>
                                             <label class="t-overflow">
-                                                市行名称1<input id="cbidset" type="text" class="form-control setting-input">
+                                                市行名称1<input id="cbname1" type="text" class="form-control setting-input">
                                             </label>
                                             <label class="t-overflow">
-                                                市行名称2<input id="cbidset" type="text" class="form-control setting-input">
+                                                市行名称2<input id="cbname2" type="text" class="form-control setting-input">
                                             </label>
                                             <label class="t-overflow">
-                                                市行名称3<input id="cbidset" type="text" class="form-control setting-input">
+                                                市行名称3<input id="cbname3" type="text" class="form-control setting-input">
                                             </label>
                                         </div>
                                     </div>
@@ -2854,7 +2854,7 @@
 
     <!-- 查询省行 -->
     function checkProBank() {
-        var probankname = $("#searchInput").val();
+        var probankname = $("#searchInput2").val();
 
         $.ajax({
             type: "post",
@@ -2865,10 +2865,13 @@
             dataType: "json",
             success: function (data) {
                 var obj = JSON.parse(data);
-                $("#pbid").val(obj[0].pbid);
-                $("#pbname").val(obj[0].pbname);
-                $("#cbidset").val(obj[0].cbidset);
-
+                $("#pbname").val(probankname);
+                for(var i=0;i<obj.length;i++)
+                {
+                    console.log(obj[i]);
+                    j=i+1;
+                    $("#cbname"+j).val(obj[i]);
+                }
             }
         });
     }

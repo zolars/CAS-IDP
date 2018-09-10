@@ -2,8 +2,8 @@ package orgnizationManage.action;
 
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
-import deviceManage.dao.DeviceDAO;
-import deviceManage.dao.impl.DeviceDAOImpl;
+import orgnizationManage.dao.ProBankDAO;
+import orgnizationManage.dao.impl.ProBankDAOImpl;
 import onlineTest.dao.PowerParameterDAO;
 import onlineTest.dao.impl.PowerParameterDAOImpl;
 import org.apache.struts2.ServletActionContext;
@@ -26,7 +26,7 @@ public class getProBankInfoAction extends ActionSupport {
     }
 
 
-    /* 根据省行名称查询设备其他信息
+    /* 根据省行名称查询市行信息
      */
     public String execute() throws Exception {
         try {
@@ -34,13 +34,13 @@ public class getProBankInfoAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String devicename = request.getParameter("probankname");
+            String probankname = request.getParameter("probankname");
 
-            ProBank dao = new ProBankDAOImpl();
+            ProBankDAO dao = new ProBankDAOImpl();
 
             List qstdata = new ArrayList();
 
-            qstdata = dao.getProBankDataByName(proBankname);
+            qstdata = dao.getProBankDataByName(probankname);
 
             result = JSON.toJSONString(qstdata); // List转json
 
