@@ -36,9 +36,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- bootstrap datepicker时间选择控件 -->
     <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
-    <!-- jquery -->
-    <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+    <!-- datatables plugsin css and js-->
+    <link href="css/datatables.min.css" rel="stylesheet"/>
 
+    <!-- js-->
+    <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/datatables.min.js"></script>
 
 </head>
 <style type="text/css">
@@ -142,16 +147,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </style>
 
 <body id="skin-blur-blue">
-
-<!--登陆认证拦截-->
-<script src="js/jquery-3.3.1.js"></script>
-<script src="js/jquery.cookie.js"></script>
-<script>
-    if(!$. cookie('login')){
-        alert('您还未登录或您的认证已过期, 请先登陆.');
-        window.location.href = 'http://localhost:8082/';
-    }
-</script>
+     <!--登陆认证拦截-->
+     <script>
+         if(!$. cookie('login')){
+             alert('您还未登录或您的认证已过期, 请先登陆.');
+             window.location.href = 'http://localhost:8082/';
+         }
+     </script>
 
     <header id="header" class="media">
         <a href="" id="menu-toggle"></a>
@@ -222,9 +224,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <section id="content" class="container">
 
             <!-- Breadcrumb -->
-
             <!-- Main Widgets -->
-
             <div class="block-area">
                 <div class="row">
 
@@ -264,19 +264,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="row-fluid">
 
                                     <div class="col-md-7">
-                                        <div class="tile">
-                                            <h2 class="tile-title">
-                                                <table id="event-table-body">
-                                                    <tr>
-                                                        <th><div style="padding-left:60px;">事件名称</div></th>
-                                                        <th><div style="padding-left:60px;">位置</div></th>
-                                                        <th><div style="padding-left:60px;">事件类型</div></th>
-                                                        <th><div style="padding-left:60px;">事件描述</div></th>
-                                                        <th><div style="padding-left:60px;">事件发生时间</div></th>
-                                                    </tr>
-                                                </table>
-                                            </h2>
-                                        </div>
+                                        <table class="display" id="device-event" style="width:100%">
+                                            <thead>
+                                            <tr>
+                                                <th>事件名称</th>
+                                                <th>位置</th>
+                                                <th>事件类型</th>
+                                                <th>事件描述</th>
+                                                <th>事件发生时间</th>
+                                                <th>Salary</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        <table class="display" id="power-event" style="width:100%">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        <table class="display" id="environment-event" style="width:100%">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <!--endprint-->
 
@@ -319,7 +348,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
                                                 <tr><td>时间段控制</td></tr>
-                                              <%--  <tr><td><input id="radio-diy-event" type="radio">定制</td></tr>--%>
+
                                                 <tr><td><input id="radio-day-event" type="radio" name="event-data-peroid" value="day">天</td></tr>
                                                 <tr><td><input id="radio-week-event" type="radio" name="event-data-peroid" value="week">周</td></tr>
                                                 <tr><td><input id="radio-month-event" type="radio" name="event-data-peroid" value="month">月</td></tr>
@@ -330,7 +359,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 </tr>
                                                 <tr><td><button id="latestweek-button" type="button" class="btn btn-sm btn-alt" onclick="getLatestWeekEvent()">最新的week</button></td></tr>
 
-                                                <tr><td>测量地点</td></tr>
+
+                                                <table class="display" id="place-event" style="width:100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>测量地点</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                    <button id="button2" type="button">bbbb</button>
+                                                </table>
 
                                                 <tr>
                                                     <td><button id="add-button" type="button" class="btn btn-sm btn-alt"  onclick="addMonitorPoint()">添加</button></td>
@@ -423,6 +463,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <button onclick="cancle()" type="button" class="btn btn-sm btn-alt">取消</button>
                     </div>
                     <!-- settingmodel DIV END-->
+
+                    <!-- addEventMonitorPoint DIV-->
+                    <div class="setting-class" id="addEventMonitorPoint-modal" style="display: none;">
+                        <div id="citybank-jstree"></div>
+                        <button onclick="addCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">确定</button>
+                        <button onclick="cancleCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">取消</button>
+                    </div>
+                    <!-- addEventMonitorPoint DIV END-->
 
                 </div>
             </div>
@@ -712,113 +760,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 设备事件-->
     <script type="text/javascript">
         function getDeviceEvent(){}
-            /*var edate = $("input[name='event-data-peroid']:checked").val();
-        function getDeviceEvent(){
-
-            var edate = $("input[name='event-data-peroid']:checked").val();
-
-            var rid = "1";
-            var stime ;//"2018-08-22 08:00:00";
-            var etime ;//"2018-08-29 08:00:00";
-            var nowtime = getNowFormatDate();
-
-            if(edate == "lastone"){
-                stime = " ";
-                etime = " ";
-            }
-            else  if(edate == "fromto"){
-                stime = $("#firstDate").val();
-                etime = $("#lastDate").val();
-            }
-            else  if(edate == "day"){
-
-                //昨天的时间
-                var now = new Date();
-                var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate();
-                var hour = date.getHours();
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-                stime = starttime;
-                etime = nowtime;
-            }
-            else  if(edate == "week"){
-
-                // 获取一星期前的时间：
-                var now = new Date();
-                var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate();
-                var hour = date.getHours();
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-                stime = starttime;
-                etime = nowtime;
-            }
-            else  if(edate == "month"){
-
-                // 获取一月前的时间：
-                var now = new Date();
-                var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate();
-                var hour = date.getHours();
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-                stime = starttime;
-                etime = nowtime;
-            }
-
-
-            $.ajax({
-                type: "post",
-                url: "getDeviceEvent",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    rid: rid
-                },
-                dataType : "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['alldelist'];
-                    var table = $("#event-table-body");
-                    table.empty();
-                    table.append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
-
-                    for (var i = 0; i < list.length; i++) {
-                        var name = list[i].type;
-                        var location = list[i].mpid;
-                        var type = list[i].subtype;
-                        var description = list[i].discription;
-                        var time = list[i].time;
-
-                        table.append('<tr>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
-                    }
-                }
-            });
-        }
     </script>
 
     <!-- 电能事件-->
     <script type="text/javascript">
+
         function getPowerEvent(){
             var edate = $("input[name='event-data-peroid']:checked").val();
 
-            var rid = "1";
+            var cbname = $("#city_code option:selected").val();
             var stime ;//"2018-08-22 08:00:00";
             var etime ;//"2018-08-29 08:00:00";
             var nowtime = getNowFormatDate();
@@ -886,15 +836,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: {
                     stime: stime,
                     etime: etime,
-                    rid: rid
+                    cbname: cbname
                 },
                 dataType : "json",
                 success: function (data) {
                     var obj = JSON.parse(data);
                     var list = obj['allpelist'];
-                    var table = $("#event-table-body");
+
+                    var table = $("#power-event");
                     table.empty();
-                    table.append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
 
                     for (var i = 0; i < list.length; i++) {
                         var name = list[i].type;
@@ -908,9 +858,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
                             '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
                     }
+
+
                 }
             });
         }
+
+        $(document).ready(function(){
+            getPowerEvent();
+        });
     </script>
 
     <!-- 环境事件-->
@@ -1038,12 +994,76 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         //添加监测点
         function addMonitorPoint(){
-            alert("addMonitorPoint");
+
+            var pbname = $("#province_code option:selected").val();
+            $('#addEventMonitorPoint-modal').css('display', 'block');
+
+            $('#citybank-jstree').jstree({
+                "core": {
+                    "themes": {
+                        "responsive": false
+                    },
+                    "check_callback": true,
+                    'data': function (obj, callback) {
+                        var jsonstr = "[]";
+                        var jsonarray = eval('(' + jsonstr + ')');
+                        $.ajax({
+                            type: "post",
+                            url: "getOnlyCityBankTree",
+                            data: {
+                                pbname: pbname
+                            },
+                            dataType: "json",
+                            async: false,
+                            success: function (data) {
+
+                                var jdata = JSON.parse(data);
+                                var arrays = jdata.allcbtree;
+
+                                for (var i = 0; i < arrays.length; i++) {
+                                    var arr = {
+                                        "id": arrays[i].cbid,
+                                        "parent": "#",
+                                        "text": arrays[i].cbname
+                                    };
+                                    jsonarray.push(arr);
+                                }
+                            }
+                        });
+                        callback.call(this, jsonarray);
+                    },
+                },
+                "plugins": ["checkbox"]
+            });
+        }
+
+        function addCityBankAsMonitorPoint(){
+
+            //取得所有选中的节点，返回节点对象的集合
+            var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
+            var nodes2 = nodes.toString();
+
+            var nodeset = new Array();
+            nodeset = nodes2.split(",");
+
+            var ptable = $("#place-event");
+            for (var i = 0 ;i < nodeset.length; i++)
+            {
+                ptable.append('<tr><td>' + nodeset[i] + '</td></tr>');
+            }
+
+            cancleCityBankAsMonitorPoint();
+        }
+
+        function cancleCityBankAsMonitorPoint(){
+            $('#addEventMonitorPoint-modal').css('display', 'none');
         }
 
         //删除检测点
         function deleteMonitorPoint(){
-            alert("deleteMonitorPoint");
+            alert("delete");
+
+
         }
 
     </script>
@@ -1093,6 +1113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         "parent": arrays[i].parentpid == "0" ? "#" : arrays[i].parentpid,
                                         "text": arrays[i].permissionname
                                     }
+
                                     jsonarray.push(arr);
                                 }
                             },
@@ -1291,6 +1312,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             return currentdate;
         }
     </script>
+
+
+     <script type="text/javascript">
+         $(document).ready(function() {
+             $('#device-event').DataTable( {
+                 "scrollY":        "200px",
+                 "scrollCollapse": true,
+                 "paging":         false
+             } );
+         } );
+
+         $(document).ready(function() {
+            /* $('#power-event').DataTable( {
+                 "scrollY":        "200px",
+                 "scrollCollapse": true,
+                 "paging":         false
+             } );*/
+
+             var tablepower = $('#power-event').DataTable( {
+                 "scrollY":        "200px",
+                 "scrollCollapse": true,
+                 "paging":         false
+             } );
+
+             $('#power-event tbody').on( 'click', 'tr', function () {
+                 $(this).toggleClass('selected');
+             } );
+
+             $('#button2').click( function () {
+                 alert( tablepower.rows('.selected').data().length +' row(s) selected' );
+
+                 alert( tablepower.rows('.selected').data().val +' value' );
+             } );
+
+         } );
+
+         $(document).ready(function() {
+             $('#environment-event').DataTable( {
+                 "scrollY":        "200px",
+                 "scrollCollapse": true,
+                 "paging":         false
+             } );
+         } );
+
+         $(document).ready(function() {
+             $('#place-event').DataTable( {
+                 "scrollY":        "50px",
+                 "scrollCollapse": true,
+                 "paging":         false
+             } );
+         } );
+
+     </script>
 
 </body>
 

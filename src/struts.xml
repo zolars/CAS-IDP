@@ -6,7 +6,7 @@
 <struts>
     <constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
 	<constant name="struts.devMode" value="true"></constant>
-    <constant name="struts.i18n.encoding" value="utf-8"></constant>
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
 
     <package name="struts-interceptor" extends="struts-default"
              namespace="/">
@@ -527,8 +527,21 @@
              </result>
          </action>
 
+         <action name="addDeviceAlarmInfo" class="deviceManage.action.addDeviceAlarmPreContentAction">
+             <!--addDeviceAlarmInfo -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
 
-
+         <action name="getOnlyCityBankTree" class="efficiencyAnalysis.action.getOnlyCityBankTreeAction">
+             <!--getOnlyCityBankTree -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
 
      </package>
 

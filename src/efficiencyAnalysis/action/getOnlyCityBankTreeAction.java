@@ -5,16 +5,17 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
-import hibernatePOJO.EventTransient;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
-public class getPowerEventAction extends ActionSupport {
+public class getOnlyCityBankTreeAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -27,32 +28,27 @@ public class getPowerEventAction extends ActionSupport {
     }
 
 
-    /* 根据测量地点（市行名称）获取设备事件
+    /* 获取市级的jstree
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try {
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String cbname = request.getParameter("cbname");
-            String starttime = request.getParameter("stime");
-            String endtime = request.getParameter("etime");
+            String pbname = request.getParameter("pbname");
+            pbname += "分行";
 
             EventDAO dao = new EventDAOImpl();
 
-            List<EventTransient> pedata = new ArrayList();
+            List<Integer> plist = new ArrayList<>();
 
-            if((starttime == " " && endtime == " ") || (starttime == null && endtime == null))
-                pedata = dao.getLocalLastPowerEvent(cbname);
-
-            else
-                pedata = dao.getLocalAllPowerEvent(cbname, starttime, endtime);
+            plist = dao.getAllCityBankEvent(pbname);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("allpelist", pedata);
+            jsonObject.put("allcbtree", plist);
 
-            result = JSON.toJSONString(jsonObject); // List转json
+            result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();

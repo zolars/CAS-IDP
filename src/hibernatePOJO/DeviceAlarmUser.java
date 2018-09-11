@@ -67,6 +67,19 @@ public class DeviceAlarmUser {
         this.etime = etime;
     }
 
+    private String precontent;
+
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "precontent", nullable = true, length = 255)
+    public String getPrecontent() {
+        return precontent;
+    }
+
+    public void setPrecontent(String precontent) {
+        this.precontent = precontent;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,12 +89,13 @@ public class DeviceAlarmUser {
                 Objects.equals(did, that.did) &&
                 Objects.equals(uid, that.uid) &&
                 Objects.equals(stime, that.stime) &&
-                Objects.equals(etime, that.etime);
+                Objects.equals(etime, that.etime) &&
+                Objects.equals(precontent, that.precontent);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, did, uid, stime, etime);
+        return Objects.hash(id, did, uid, stime, etime, precontent);
     }
 }

@@ -774,7 +774,7 @@ public class RMSDAOImpl implements RMSDAO {
         return crlist;
     }
 
-    //Vh
+    //Vh 3组数据，每组数据包括50次
     public List getCurrentVhData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<List<String>> crlist = new ArrayList<>();
@@ -782,9 +782,173 @@ public class RMSDAOImpl implements RMSDAO {
         for(int i = 0; i <3; i++){
 
             List<String> list = new ArrayList<>();
+            //u1 1~50
+            list.add("0.1");
+            list.add("0.2");
+            list.add("0.3");
+            list.add("0.4");
+            list.add("0.5");
+            list.add("0.6");
+            list.add("0.7");
+            list.add("0.8");
+            list.add("0.9");
+            list.add("1.0");
+
+            list.add("1.1");
+            list.add("1.2");
+            list.add("1.3");
+            list.add("1.4");
+            list.add("0.1");
+            list.add("1.6");
+            list.add("1.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            list.add("2.8");
+            list.add("2.1");
+            list.add("2.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("2.6");
+            list.add("0.8");
+            list.add("2.1");
+            list.add("0.6");
+            list.add("0.8");
+
             list.add("0.8");
             list.add("0.1");
             list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            list.add("0.4");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            //u2 1~50
+            list.add("2.8");
+            list.add("2.2");
+            list.add("2.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            list.add("2.8");
+            list.add("1.1");
+            list.add("1.6");
+            list.add("1.8");
+            list.add("0.1");
+            list.add("1.6");
+            list.add("1.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            list.add("2.8");
+            list.add("2.1");
+            list.add("2.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("2.6");
+            list.add("0.8");
+            list.add("2.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            list.add("0.4");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            //u3 1~50
+            list.add("3.8");
+            list.add("3.2");
+            list.add("3.6");
+            list.add("3.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            list.add("1.8");
+            list.add("1.1");
+            list.add("1.6");
+            list.add("1.8");
+            list.add("0.1");
+            list.add("1.6");
+            list.add("1.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            list.add("2.8");
+            list.add("2.1");
+            list.add("2.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("2.6");
+            list.add("0.8");
+            list.add("2.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+
+            list.add("0.4");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
+            list.add("0.1");
+            list.add("0.6");
+            list.add("0.8");
 
             crlist.add(list);
         }
