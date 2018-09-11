@@ -289,7 +289,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <th></th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="power-event-tbody">
                                             </tbody>
                                         </table>
                                         <table class="display" id="environment-event" style="width:100%">
@@ -844,8 +844,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var list = obj['allpelist'];
 
                     var table = $("#power-event");
-                    table.empty();
-
+                    var tbody = $("#power-event-tbody")[0];
+                    tbody.innerHTML = ""
+                    // table.empty();
+                    console.log('tbody',tbody,list)
                     for (var i = 0; i < list.length; i++) {
                         var name = list[i].type;
                         var location = list[i].mpid;
@@ -853,7 +855,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         var description = list[i].discription;
                         var time = list[i].time;
 
-                        table.append('<tr>' +
+                        tbody.innerHTML += ('<tr>' +
                             '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
                             '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
                             '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
@@ -1337,6 +1339,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              } );
 
              $('#power-event tbody').on( 'click', 'tr', function () {
+                 console.log('111111',this);
                  $(this).toggleClass('selected');
              } );
 
