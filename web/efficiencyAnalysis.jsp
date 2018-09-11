@@ -143,6 +143,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body id="skin-blur-blue">
 
+<!--登陆认证拦截-->
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script>
+    if(!$. cookie('login')){
+        alert('您还未登录或您的认证已过期, 请先登陆.');
+        window.location.href = 'http://localhost:8082/';
+    }
+</script>
+
     <header id="header" class="media">
         <a href="" id="menu-toggle"></a>
         <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
@@ -150,17 +160,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="media-body">
             <div class="media" id="top-menu">
                 <div class="pull-left location-select">
-                    <select class="form-control location-select-item" id="province_code" name="province_code" onchange="getCity()">
+                    <select class="form-control location-select-item" id="province_code" name="province_code"
+                            onchange="getCity()">
                         <option value="">请选择</option>
                     </select>
 
-                    <select class="form-control location-select-item" id="city_code" name="city_code" onchange="getComproom()">
+                    <script>
+                        $("#province_code").change(function(){
+                            var options = $("#province_code option:selected");
+                            $. cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                        })
+                    </script>
+
+                    <select class="form-control location-select-item" id="city_code" name="city_code"
+                            onchange="getComproom()">
                         <option value="">请选择</option>
                     </select>
+
+                    <script>
+                        $("#city_code").change(function(){
+                            var options = $("#city_code option:selected");
+                            $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                        })
+
+                    </script>
 
                     <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
                         <option value="">请选择</option>
                     </select>
+
+                    <script>
+                        $("#comproom_code").change(function(){
+                            var options = $("#comproom_code option:selected");
+                            $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
+                        })
+                    </script>
+
+                </div>
+                <!-- 注销按钮 -->
+                <div class="pull-right">
+                    <li><a href="index.jsp">注销</a></li>
                 </div>
 
                 <div class="pull-right">欢迎用户${username}登录</div>
@@ -393,7 +432,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- Javascript Libraries -->
     <!-- jQuery -->
-    <script src="js/jquery-3.3.1.js"></script>
+    <!-- <script src="js/jquery-3.3.1.js"></script> -->
 
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
@@ -474,14 +513,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 省\市\机房下拉菜单-->
     <script type="text/javascript">
         /*加载省下拉选*/
-        var provinceid="<%=session.getAttribute("probank")%>";
-        if(provinceid){
-            $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
-        }
+
+        //读取cookie中已存的机房配置
+        var opinion1 = $. cookie('province_name');
+
+        $.ajax({
+            type: "post",
+            url: "setProvince",
+            data: {provid: opinion1},
+            dataType: "json",
+            success: function (data) {
+                $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
+                getCity();
+            },
+            error: function () {
+                $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
+                getCity();
+            }
+        });
 
         /*加载市下拉选*/
         function getCity() {
-            var pname="<%=session.getAttribute("probank")%>";
+            var pname = $("#province_code").val();
+
+            //读取cookie中已存的机房配置
+            var opinion2 = $. cookie('opinion2');
 
             $("#city_code").empty();
             $("#comproom_code").empty();
@@ -490,7 +546,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 type: "post",
                 url: "getCityTree",
                 data: {provinceid: pname},
-                dataType : "json",
+                dataType: "json",
                 success: function (data) {
 
                     $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
@@ -498,7 +554,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     var obj = eval("(" + data + ")");
                     for (var i = 0; i < obj.length; i++) {
-                        $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
+                        if(obj[i].cbname == opinion2) {
+                            $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
+                            getComproom();
+                        }
+                        else
+                            $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
+
                     }
                 }
             });
@@ -508,19 +570,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         function getComproom() {
             var cname = $("#city_code").val();
 
+            //读取cookie中已存的机房配置
+            var opinion3 = $. cookie('opinion3');
+
             $("#comproom_code").empty();
 
             $.ajax({
                 type: "post",
                 url: "getCompTree",
                 data: {cityid: cname},
-                dataType : "json",
+                dataType: "json",
                 success: function (data) {
                     var list = data.allcomputerroom;
 
                     $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                     for (var i = 0; i < list.length; i++) {
-                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
+                        if(list[i].rname == opinion3)
+                            $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
+                        else
+                            $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                     }
                 }
             });
@@ -696,7 +764,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
             else  if(edate == "month"){
 
-                // 获取一星期前的时间：
+                // 获取一月前的时间：
                 var now = new Date();
                 var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
                 var year = date.getFullYear();
@@ -742,7 +810,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
                 }
             });
-        }*/
         }
     </script>
 
@@ -849,7 +916,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 环境事件-->
     <script type="text/javascript">
         function getEvironmentEvent(){
-          /*  var edate = $("input[name='event-data-peroid']:checked").val();
             var edate = $("input[name='event-data-peroid']:checked").val();
 
             var rid = "1";

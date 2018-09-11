@@ -33,6 +33,17 @@
 </head>
 
 <body id="skin-blur-blue">
+
+<!--登陆认证拦截-->
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script>
+    if(!$. cookie('login')){
+        alert('您还未登录或您的认证已过期, 请先登陆.');
+        window.location.href = 'http://localhost:8082/';
+    }
+</script>
+
 <header id="header" class="media">
     <a href="" id="menu-toggle"></a>
     <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
@@ -45,14 +56,43 @@
                     <option value="">请选择</option>
                 </select>
 
+                <script>
+                    $("#province_code").change(function(){
+                        var options = $("#province_code option:selected");
+                        $. cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                    })
+                </script>
+
                 <select class="form-control location-select-item" id="city_code" name="city_code"
                         onchange="getComproom()">
                     <option value="">请选择</option>
                 </select>
 
+                <script>
+                    $("#city_code").change(function(){
+                        var options = $("#city_code option:selected");
+                        $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                    })
+
+                </script>
+
                 <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
                     <option value="">请选择</option>
                 </select>
+
+                <script>
+                    $("#comproom_code").change(function(){
+                        var options = $("#comproom_code option:selected");
+                        $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
+                    })
+                </script>
+
+            </div>
+
+
+            <!-- 注销按钮 -->
+            <div class="pull-right">
+                <li><a href="index.jsp">注销</a></li>
             </div>
 
             <div class="pull-right">欢迎用户${username}登录</div>
@@ -255,7 +295,7 @@
 
 <!-- Javascript Libraries -->
 <!-- jQuery -->
-<script src="js/jquery-3.3.1.js"></script>
+<!--<script src="js/jquery-3.3.1.js"></script>-->
 <!-- jQuery Library -->
 
 <!-- Bootstrap -->
@@ -280,15 +320,33 @@
 
 <!-- 省\市\机房下拉菜单-->
 <script type="text/javascript">
+
     /*加载省下拉选*/
-    var provinceid = "<%=session.getAttribute("probank")%>";
-    if (provinceid) {
-        $('#province_code').append("<option value='" + provinceid + "' >" + provinceid + "</option>");
-    }
+
+    //读取cookie中已存的机房配置
+    var opinion1 = $. cookie('province_name');
+
+    $.ajax({
+        type: "post",
+        url: "setProvince",
+        data: {provid: opinion1},
+        dataType: "json",
+        success: function (data) {
+            $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
+            getCity();
+        },
+        error: function () {
+            $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
+            getCity();
+        }
+    });
 
     /*加载市下拉选*/
     function getCity() {
-        var pname = "<%=session.getAttribute("probank")%>";
+        var pname = $("#province_code").val();
+
+        //读取cookie中已存的机房配置
+        var opinion2 = $. cookie('opinion2');
 
         $("#city_code").empty();
         $("#comproom_code").empty();
@@ -305,7 +363,13 @@
 
                 var obj = eval("(" + data + ")");
                 for (var i = 0; i < obj.length; i++) {
-                    $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
+                    if(obj[i].cbname == opinion2) {
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
+                        getComproom();
+                    }
+                    else
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
+
                 }
             }
         });
@@ -314,6 +378,9 @@
     /*加载机房下拉选*/
     function getComproom() {
         var cname = $("#city_code").val();
+
+        //读取cookie中已存的机房配置
+        var opinion3 = $. cookie('opinion3');
 
         $("#comproom_code").empty();
 
@@ -327,11 +394,15 @@
 
                 $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                 for (var i = 0; i < list.length; i++) {
-                    $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
+                    if(list[i].rname == opinion3)
+                        $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
+                    else
+                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                 }
             }
         });
     }
+
 </script>
 
 <!-- 动态加载菜单项 -->
