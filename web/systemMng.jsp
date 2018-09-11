@@ -68,12 +68,17 @@
 <!--登陆认证拦截-->
 <script src="js/jquery-3.3.1.js"></script>
 <script src="js/jquery.cookie.js"></script>
+<%
+    String userid = (String)session.getAttribute("userid");
+    if(userid == null) {
+%>
 <script>
-    if(!$. cookie('login')){
-        alert('您还未登录或您的认证已过期, 请先登陆.');
-        window.location.href = 'http://localhost:8082/';
-    }
+    alert('您还未登录或您的认证已过期, 请先登陆.');
+    window.location.href = 'http://localhost:8082/index.jsp';
 </script>
+<%
+    }
+%>
 
 <script Language="JavaScript" src="js/onlineDataInterface.js"></script>
 

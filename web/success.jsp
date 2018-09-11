@@ -30,16 +30,26 @@
 
 <body>
 
-<div id="china-map"></div>
-
-<!-- Javascript Libraries -->
-<!-- jQuery -->
+<!--登陆认证拦截-->
 <script src="js/jquery-3.3.1.js"></script>
 <script src="js/jquery.cookie.js"></script>
 
+<!--登陆认证拦截-->
+<%
+    String userid = (String)session.getAttribute("userid");
+    if(userid == null) {
+%>
 <script>
-    $.cookie('login', true, {expires: 1, path: '/'});
+    alert('您还未登录或您的认证已过期, 请先登陆.');
+    window.location.href = 'http://localhost:8082/index.jsp';
 </script>
+<%
+    }
+%>
+
+<div id="china-map"></div>
+
+<!-- Javascript Libraries -->
 
 <!-- echarts  -->
 <script src="js/echarts.js"></script>
@@ -169,7 +179,6 @@
                 var province = param.name;
 
                 $.cookie('province_name', province, {expires: 1, path: '/'});
-
                 top.location.href = "/province.jsp?prov=" + province;
 
             });
