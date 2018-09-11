@@ -24,6 +24,10 @@
 
 <body>
 
+<%
+    session.invalidate(); //注销
+%>
+
 <script src="js/jquery-3.3.1.js"></script>
 <script src="js/jquery.cookie.js"></script>
 
