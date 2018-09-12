@@ -1,23 +1,13 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import hibernatePOJO.AssessmentSetting;
-import hibernatePOJO.Devices;
 import hibernatePOJO.EventPower;
 import hibernatePOJO.EventTransient;
-import org.apache.struts2.ServletActionContext;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import sms.SmsAlarm;
-import sms.getAlert;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthDesktopIconUI;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

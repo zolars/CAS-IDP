@@ -13,6 +13,8 @@ public class EventTransient {
     private int duration;
     private double value;
     private String discription;
+    private String signature;
+    private String annotation;
 
     public int getTeid() {
         return teid;
@@ -86,6 +88,22 @@ public class EventTransient {
         this.discription = discription;
     }
 
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getAnnotation() {
+        return annotation;
+    }
+
+    public void setAnnotation(String annotation) {
+        this.annotation = annotation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,12 +117,14 @@ public class EventTransient {
                 Double.compare(that.value, value) == 0 &&
                 Objects.equals(did, that.did) &&
                 Objects.equals(time, that.time) &&
-                Objects.equals(discription, that.discription);
+                Objects.equals(discription, that.discription) &&
+                Objects.equals(signature, that.signature) &&
+                Objects.equals(annotation, that.annotation);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(teid, did, time, eventtype, type, subtype, duration, value, discription);
+        return Objects.hash(teid, did, time, eventtype, type, subtype, duration, value, discription, signature, annotation);
     }
 }

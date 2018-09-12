@@ -6,6 +6,8 @@ import java.util.Map;
 
 public interface EventDAO {
 
+    public boolean addSignAndAnnotEvent(String teid, String sign, String annot);
+
     public List getLocalAllPowerEvent(String cbname, String starttime, String endtime);
 
     public List getLocalLastPowerEvent(String cbname);

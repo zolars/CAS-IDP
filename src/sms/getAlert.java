@@ -1,17 +1,11 @@
 package sms;
 
 import Util.HBSessionDaoImpl;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import efficiencyAnalysis.dao.EventDAO;
-import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import hibernatePOJO.EventPower;
 import hibernatePOJO.EventTransient;
-import hibernatePOJO.User;
 import org.apache.struts2.ServletActionContext;
-import userManage.dao.UserDAO;
-import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

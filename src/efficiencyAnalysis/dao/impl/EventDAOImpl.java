@@ -18,6 +18,11 @@ public class EventDAOImpl implements EventDAO {
     private Transaction transaction;
     private Query query;
 
+    public boolean addSignAndAnnotEvent(String teid, String sign, String annot){
+        Boolean rt = true;
+        return  rt;
+    }
+
     public List getLocalAllPowerEvent(String cbname, String starttime, String endtime){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
