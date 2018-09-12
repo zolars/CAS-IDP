@@ -19,8 +19,13 @@ public class EventDAOImpl implements EventDAO {
     private Query query;
 
     public boolean addSignAndAnnotEvent(String teid, String sign, String annot){
-        Boolean rt = true;
-        return  rt;
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+        String hql = "update EventTransient etrans set etrans.signature='" + sign +
+                "', etrans.annotation='"+ annot +"' where etrans.teid='" + teid + "'";
+
+        rt = hbsessionDao.update(hql);
+        return rt;
     }
 
     public List getLocalAllPowerEvent(String cbname, String starttime, String endtime){

@@ -226,7 +226,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- Breadcrumb -->
             <!-- Main Widgets -->
             <div class="block-area">
-                <div class="row">
+                   <%-- <div class="row">--%>
 
                     <div class="col-md-12">
                         <ul class="nav nav-tabs" id="ulItem">
@@ -240,14 +240,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
 
                     <div id = "item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-
-                        <button type="button" class="btn btn-sm btn-alt" onClick="getDeviceEvent()" >设备事件</button>
-                        <button type="button" class="btn btn-sm btn-alt" onClick="getPowerEvent()">电能质量事件</button>
-                        <button type="button" class="btn btn-sm btn-alt" onClick="getEvironmentEvent()" >环境事件</button>
-
                         <div class="block-area">
                             <div class="row">
-                                <div class="col-md-10">
+                                <div class="col-md-12">
 
                                     <table id="event-table-head1">
                                         <thead>
@@ -261,7 +256,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </table>
 
                                     <!--startprint-->
-                                    <div class="row-fluid">
+                                    <div class="row-fluid"></div>
+                                    <div class="col-md-1">
+                                        <button type="button" style="width:100px;height:40px;" ></button>
+                                        <button type="button" onClick="getDeviceEvent()" style="width:100px;height:260px;" >设备事件</button>
+                                        <button type="button" onClick="getPowerEvent()"style="width:100px;height:260px;" >电能质量事件</button>
+                                        <button type="button" onClick="getEvironmentEvent()" style="width:100px;height:260px;" >环境事件</button>
+                                    </div>
 
                                     <div class="col-md-7">
                                         <table class="display" id="device-event" style="width:100%">
@@ -449,8 +450,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                         </div>
 
-                    </div>
-
                     <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                         能效分析
                     </div>
@@ -509,14 +508,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <!-- conformEventRow DIV END-->
 
                     <!-- some hidden div-->
-                    <div>
-                        <div id="select-teid" style="display: none"></div>
-                    </div>
-
-                </div>
+                    <div id="select-teid" style="display: none"></div>
+                    <!-- some hidden div END-->
             </div>
         </section>
-
     </section>
 
     <!-- Javascript Libraries -->
@@ -1165,11 +1160,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     </script>
 
-    <!-- 自动更新-->
-    <script type="text/javascript">
-
-    </script>
-
     <!-- 右侧界面 第二个子菜单 列 -->
     <script type="text/javascript">
         function upcol(){
@@ -1257,12 +1247,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         function confirmEvent(){
             $('#conformEventRow-modal').css('display', 'block');
             $('#clickEventRow-modal').css('display', 'none');
+        }
 
+        //点击单条事件-删除事件（假删除，只是前端不显示）
+        function deleteEvent(){
+            var teid = $('#select-teid').val();
+
+
+        }
+
+        //点击单条事件-签名确认事件-确认
+        function confirmOKEvent(){
+            alert("rgr");
+            //添加该事件的签名和注释到数据库
             var teid = $('#select-teid').val();
             var sign = $('#signature').val();
             var annot = $('#annotation').val();
-
-            alert(teid+ sign + annot);
 
             $.ajax({
                 url: "addSignatureAndAnnotation",
@@ -1271,29 +1271,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     teid: teid,
                     sign: sign,
                     annot: annot
-                },
-                success: function (data) {
-                    alert(data);
                 }
             });
-
-        }
-
-        //点击单条事件-删除事件
-        function deleteEvent(){
-            alert("delete");
-
-            //删除数据库中的该事件
-
-
-        }
-
-        //点击单条事件-签名确认事件-确认
-        function confirmOKEvent(){
-            alert("confirmOKEvent");
-
-            //添加该事件的签名和注释到数据库
-
+            $('#conformEventRow-modal').css('display', 'none');
         }
 
         //点击单条事件-签名确认事件-取消
@@ -1306,8 +1286,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 刷新icon-->
     <script type="text/javascript">
         function refreshIcon(){
-            $("#event-table-body").empty();
-            $("#event-table-body").append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
+            alert("refresh");
+           // $("#event-table-body").empty();
+           // $("#event-table-body").append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
         }
     </script>
 
@@ -1445,6 +1426,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <script type="text/javascript">
          $(document).ready(function() {
              $('#device-event').DataTable( {
+                 "info":         false,
                  "scrollY":        "200px",
                  "scrollCollapse": true,
                  "paging":         false,
@@ -1455,6 +1437,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          $(document).ready(function() {
 
              var tablepower = $('#power-event').DataTable( {
+                 "info":         false,
                  "scrollY":        "200px",
                  "scrollCollapse": true,
                  "paging":         false,
@@ -1471,6 +1454,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
          $(document).ready(function() {
              $('#environment-event').DataTable( {
+                 "info":         false,
                  "scrollY":        "200px",
                  "scrollCollapse": true,
                  "paging":         false,
@@ -1480,6 +1464,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
          $(document).ready(function() {
              $('#place-event').DataTable( {
+                 "info":         false,
                  "scrollY":        "50px",
                  "scrollCollapse": true,
                  "paging":         false,
@@ -1487,18 +1472,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              } );
          } );
 
+         //获取某一行选择的行，将该行的id放入某个隐藏的div中
          function selectOneRowEvent(rowdata){
-
              $('#clickEventRow-modal').css('display', 'block');
-
              var row = rowdata;
              var cols = row.childNodes;
              var teid = cols[0].innerText;
-
              $('#select-teid').val(teid);
-
-
-
          }
 
      </script>
