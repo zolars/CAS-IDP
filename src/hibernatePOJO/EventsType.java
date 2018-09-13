@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class EventsType {
     private int type;
+    private int pid;
     private String name;
     private String subtypeset;
     private Integer prior;
@@ -14,6 +15,14 @@ public class EventsType {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
     }
 
     public String getName() {

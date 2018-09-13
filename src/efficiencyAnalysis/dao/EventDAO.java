@@ -12,14 +12,18 @@ public interface EventDAO {
 
     public List getLocalLastPowerEvent(String cbname);
 
-    public boolean setAssessInfo(Integer red_yellow, Integer yellow_green);
-
     public List getAllCityEvent();
 
     public Map getAllProvinceEvent();
 
+    public List getAllEventTypeTree();
+
     public List getOneProvinceEvent(String pid, String stime, String etime);
 
     public List getAllCityBankEvent(String pbname);
+
+    public boolean setAssessInfo(Integer red_yellow, Integer yellow_green);
+
+    public boolean setAllEventtypePriorty(String[] eventtypelist, String[] priortylist);
 
 }

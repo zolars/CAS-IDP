@@ -1,20 +1,22 @@
-package systemMng.action;
+package efficiencyAnalysis.action;
 
-
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import efficiencyAnalysis.dao.EventDAO;
+import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import org.apache.struts2.ServletActionContext;
-import systemMng.dao.PermissionDAO;
-import systemMng.dao.impl.PermissionDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
-
-public class getPermissionTreeAction extends ActionSupport {
-    //private static final long serialVersionUID = 13L;
+public class getSettingTreeAction extends ActionSupport {
+    private static final long serialVersionUID = 13L;
     private JSONObject result;
 
     public JSONObject getResult() {
@@ -25,22 +27,23 @@ public class getPermissionTreeAction extends ActionSupport {
         this.result = result;
     }
 
-    /* 查询所有功能权限
+
+    /* 获取事件类型树
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try {
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            PermissionDAO dao = new PermissionDAOImpl();
-            List ptree = dao.getPermissionTree();
+            EventDAO dao = new EventDAOImpl();
+
+            List plist = dao.getAllEventTypeTree();
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("allptree", ptree);
+            jsonObject.put("allptree", plist);
 
             result = jsonObject;
-            //result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();

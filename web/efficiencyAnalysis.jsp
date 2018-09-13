@@ -924,14 +924,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     tbody.innerHTML = ""
 
                     for (var i = 0; i < list.length; i++) {
-                        var teid = list[i].teid;
-                        var name = list[i].type;
-                        var location = list[i].mpid;
-                        var type = list[i].subtype;
-                        var description = list[i].discription;
-                        var time = formatTime(list[i].time);
 
-                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid + '</td>' +
+                        var liststr = list[i].split(",");
+
+                        var teid = liststr[0].split("["); //.teid;
+                        var name = liststr[1]; //.name;
+                        var location = liststr[2]; //.location;
+                        var type = liststr[3]; //.type;
+                        var description = liststr[4]; //.discription;
+                        var rawtime = liststr[5].split("]");
+                        var time = formatTime(rawtime[1]); //.time);
+
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
                             '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
                             '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
                             '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
@@ -939,21 +943,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             });
         }
-
-
-        //监听时间的radio被选中
-        //$(".event-data-peroid").change(function(){
-       // $("input[name='event-data-peroid']").change(function(){
-      //$("input[type=radio][name=eventDataPeriod]").on('change', function(){
-
-
-      //  var edate = $("input[name='event-data-peroid']:checked").val();
-
-        //var value = $("input[name='radio']:checked").val();
-        // alert(value);
-
-
-
 
         $(document).ready(function(){
             var cbn = $("#city_code option:selected").val();
@@ -1031,7 +1020,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 stime = starttime;
                 etime = nowtime;
             }
-
 
             $.ajax({
                 type: "post",
@@ -1195,23 +1183,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         var jsonstr = "[]";
                         var jsonarray = eval('(' + jsonstr + ')');
                         $.ajax({
-                            url: "getPermissionTree",
+                            url: "getSettingTree",
                             dataType: "json",
                             async: false,
                             success: function (result) {
                                 var arrays = result.allptree;
-                                for (var i = 0; i < arrays.length; i++) {
+
+                                for (var i = arrays.length -1; i > 0; i--) {
                                     var arr = {
-                                        "id": arrays[i].pid,
-                                        "parent": arrays[i].parentpid == "0" ? "#" : arrays[i].parentpid,
-                                        "text": arrays[i].permissionname
-                                    }
+                                        "id": arrays[i].type,
+                                        "parent": arrays[i].pid == "0" ? "#" : arrays[i].pid,
+                                        "text": arrays[i].name
+                                    };
 
                                     jsonarray.push(arr);
                                 }
-                            },
-                            error: function (result) {
-                                alert("error" + result);
                             }
                         });
                         callback.call(this, jsonarray);
@@ -1230,17 +1216,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
 
         function HideDisSelected() {
-
         }
 
         function AllShow() {
-
+            var tree = $('#jstree');
+            tree.jstree(true).refresh();  //刷新树
         }
+
         //设置按钮界面 OK
         function OK() {
-            $('#setting-modal').css('display', 'none');
 
-            //内容
+            //获取树每一行的优先级下拉框，节点id和将下拉框的值传入数据库
+            var priortylist = "1,2,3,4,5,6,7,8,9,10";
+            var eventtypelist = "1,2,3,4,5,6,7,8,9,10";
+
+            $.ajax({
+                type: "post",
+                url: "setAllEventtypePriorty",
+                data:{
+                    priortylist: priortylist,
+                    eventtypelist: eventtypelist
+                },
+                success: function (data) {
+                    $('#setting-modal').css('display', 'none');
+                }
+            });
 
         }
 
@@ -1258,7 +1258,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         //点击单条事件-删除事件（假删除，只是前端不显示）
         function deleteEvent(){
             var teid = $('#select-teid').val();
-
             $('#clickEventRow-modal').css('display', 'none');
         }
 
@@ -1292,9 +1291,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 刷新icon-->
     <script type="text/javascript">
         function refreshIcon(){
-            alert("refresh");
-           // $("#event-table-body").empty();
-           // $("#event-table-body").append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
+            getPowerEvent();
+            //刷新设备类型事件的
+            //刷新环境类型事件的
         }
     </script>
 

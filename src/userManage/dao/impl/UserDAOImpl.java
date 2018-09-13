@@ -156,8 +156,6 @@ public class UserDAOImpl implements UserDAO {
         db = new DBConnect();
         String sql = "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,ta.password as npassword,ta.pbid as pbid, ta.cbid as cbid,ta.rid as comprid,tb.rid as nrolename,ta.telephone as telephone, ta.govtelephone as govtelephone from user ta left outer join user_roles tb on ta.uid = tb.uid";
 
-        //System.out.println(sql);
-
         try {
             List<List> crlist = new ArrayList<>();
 
