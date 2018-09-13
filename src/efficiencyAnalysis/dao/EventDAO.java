@@ -12,6 +12,10 @@ public interface EventDAO {
 
     public List getLocalLastPowerEvent(String cbname);
 
+    public List getLocalAllDetailPowerEvent(String cbname, String starttime, String endtime);
+
+    public List getLocalLastDetailPowerEvent(String cbname);
+
     public List getAllCityEvent();
 
     public Map getAllProvinceEvent();
