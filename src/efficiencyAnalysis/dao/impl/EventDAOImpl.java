@@ -18,45 +18,96 @@ public class EventDAOImpl implements EventDAO {
     private Transaction transaction;
     private Query query;
 
-    public List getLocalAllPowerEvent(String rid, String starttime, String endtime){
+    public boolean addSignAndAnnotEvent(String teid, String sign, String annot){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+        String hql = "update EventPower ep set ep.signature='" + sign +
+                "', ep.annotation='"+ annot +"' where ep.teid='" + teid + "'";
+
+        rt = hbsessionDao.update(hql);
+        return rt;
+    }
+
+    public List getLocalAllPowerEvent(String cbname, String starttime, String endtime){
+
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Computerroom> didlist = new ArrayList<>();
-        List<EventTransient> rtlist = new ArrayList<>();
+        List<EventPower> rtlist = new ArrayList<>();
 
-        didlist = hbsessionDao.search(
-                "FROM Computerroom where rid = '" + rid+ "'");
+        String didstr = "";
 
-        String didstr = didlist.get(0).getDidset();
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split(",");
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            didstr += ","+ cp.getDidset();
+        }
+
+        //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
         for(int i = 0; i < didset.length; i++ ){
-            List<EventTransient> list = hbsessionDao.search(
-                    "FROM EventTransient where did = '" + didset[i]+ "'" + " and time > '" + starttime +
+            List<EventPower> list = hbsessionDao.search(
+                    "FROM EventPower where did = '" + didset[i]+ "'" + " and time > '" + starttime +
                             "' and time < '" + endtime + "'");
 
             if(list != null)
                 rtlist.addAll(list);
         }
+
         return rtlist;
     }
 
-    public List getLocalLastPowerEvent(String rid){
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件
+    public List getLocalLastPowerEvent(String cbname){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Computerroom> didlist = new ArrayList<>();
-        List<EventTransient> rtlist = new ArrayList<>();
+        List<EventPower> rtlist = new ArrayList<>();
 
-        didlist = hbsessionDao.search(
-                "FROM Computerroom where rid = '" + rid+ "'");
+        String didstr = "";
 
-        String didstr = didlist.get(0).getDidset();
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
 
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+
+       // String didstr = didlist.get(0).getDidset();
         String didset[] = didstr.split(",");
 
         for(int i = 0; i < didset.length; i++ ){
-            List<EventTransient> list = hbsessionDao.search(
-                    "FROM EventTransient where did = '" + didset[i]+ "'" + " order by time desc");
+            List<EventPower> list = hbsessionDao.search(
+                    "FROM EventPower where did = '" + didset[i]+ "'");
 
             if(list != null)
                 rtlist.addAll(list);
@@ -208,5 +259,26 @@ public class EventDAOImpl implements EventDAO {
         }
 
         return rtlist;
+    }
+
+    public List getAllCityBankEvent(String pbname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<CityBank> list = new ArrayList<>();
+
+        ProvinceBank pb = (ProvinceBank)hbsessionDao.getFirst(
+                "FROM ProvinceBank where pbname='"+ pbname + "'");
+
+        String cbistr = pb.getCbidset();
+        String cbidset[] = cbistr.split("，");
+
+        for(int i = 0; i < cbidset.length; i++){
+            CityBank cb = (CityBank)hbsessionDao.getFirst(
+                    "FROM CityBank where cbid='"+ cbidset[i] + "'");
+
+            list.add(cb);
+        }
+
+        return list;
     }
 }

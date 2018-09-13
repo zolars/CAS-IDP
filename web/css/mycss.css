@@ -82,7 +82,40 @@ add-alarm-user{
     display: none;
     width: 500px;
     height: 440px;
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2000;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+
+.clickEventRow-class {
+    display: block;
+    width: 100px;
+    height: 100px;
+    background: rgba(0,0,0,.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2000;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.conformEventRow-class {
+    display: block;
+    width: 500px;
+    height: 400px;
+    background: rgba(0,0,0,.7);
     position: fixed;
     top: 0;
     left: 0;
