@@ -13,7 +13,8 @@
         <!-- 指定连接数据库的用户名 -->
         <property name="connection.username">root</property>
         <!-- 指定连接数据库的口令 -->
-        <property name="connection.password">root</property>
+        <property name="connection.password">cjy123</property>
+
 
 
         <!-- true表示程序运行时，在控制台显示SQL语句，false表示不显示SQL语句 -->
@@ -34,7 +35,7 @@
         <mapping class="hibernatePOJO.Dictionary"/>
         <mapping class="hibernatePOJO.DictionaryPlus"/>
         <mapping class="hibernatePOJO.EventPower"/>
-        <mapping class="hibernatePOJO.EventTransient"/>
+        <mapping class="hibernatePOJO.EventsType"/>
         <mapping class="hibernatePOJO.EventtypeDevice"/>
         <mapping class="hibernatePOJO.EventtypeEnvironment"/>
         <mapping class="hibernatePOJO.EventtypePower"/>
@@ -60,7 +61,7 @@
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventPower.hbm.xml"/>
-        <mapping resource="hibernatePOJO/EventTransient.hbm.xml"/>
+        <mapping resource="hibernatePOJO/EventsType.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventtypeDevice.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventtypeEnvironment.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventtypePower.hbm.xml"/>

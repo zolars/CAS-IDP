@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
-import hibernatePOJO.EventTransient;
+import hibernatePOJO.EventPower;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +41,7 @@ public class getPowerEventAction extends ActionSupport {
 
             EventDAO dao = new EventDAOImpl();
 
-            List<EventTransient> pedata = new ArrayList();
+            List<EventPower> pedata = new ArrayList();
 
             if((starttime == " " && endtime == " ") || (starttime == null && endtime == null))
                 pedata = dao.getLocalLastPowerEvent(cbname);

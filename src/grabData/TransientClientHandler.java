@@ -3,7 +3,7 @@ package grabData;
 import Util.HBSessionDaoImpl;
 import com.alibaba.fastjson.JSON;
 import hibernatePOJO.CaptureSetting;
-import hibernatePOJO.EventTransient;
+import hibernatePOJO.EventPower;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -57,10 +57,10 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
                 //System.out.println("响应消息体: "+res);
                 //数据存入数据库
                 TransientResponse tr=JSON.parseObject(res, TransientResponse.class);//反序列化
-                List<EventTransient> events=tr.getResult();
+                List<EventPower> events=tr.getResult();
                 if(null!=events){
                     HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-                    for(EventTransient e:events){
+                    for(EventPower e:events){
                         dataResolve(e);
                         hbsessionDao.insert(e);
                     }
@@ -85,7 +85,7 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
-    public void dataResolve(EventTransient e){
+    public void dataResolve(EventPower e){
         switch (e.getSubtype()){
             case 0:e.setDiscription("未知类型");break;
             case 1:e.setDiscription("Ua 暂降");break;

@@ -33,7 +33,7 @@
         <mapping class="hibernatePOJO.Dictionary"/>
         <mapping class="hibernatePOJO.DictionaryPlus"/>
         <mapping class="hibernatePOJO.EventPower"/>
-        <mapping class="hibernatePOJO.EventTransient"/>
+        <mapping class="hibernatePOJO.EventsType"/>
         <mapping class="hibernatePOJO.EventtypeDevice"/>
         <mapping class="hibernatePOJO.EventtypeEnvironment"/>
         <mapping class="hibernatePOJO.EventtypePower"/>
@@ -59,7 +59,7 @@
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventPower.hbm.xml"/>
-        <mapping resource="hibernatePOJO/EventTransient.hbm.xml"/>
+        <mapping resource="hibernatePOJO/EventsType.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventtypeDevice.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventtypeEnvironment.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventtypePower.hbm.xml"/>

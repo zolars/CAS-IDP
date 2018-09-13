@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
-import hibernatePOJO.EventTransient;
+import hibernatePOJO.EventPower;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +41,7 @@ public class setAssessmentInfoAction extends ActionSupport {
 
             EventDAO dao = new EventDAOImpl();
 
-            List<EventTransient> pedata = new ArrayList();
+            List<EventPower> pedata = new ArrayList();
 
             boolean rt = dao.setAssessInfo(Integer.parseInt(red_yellow), Integer.parseInt(yellow_green));
             JSONObject jsonObject = new JSONObject();

@@ -21,8 +21,8 @@ public class EventDAOImpl implements EventDAO {
     public boolean addSignAndAnnotEvent(String teid, String sign, String annot){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
-        String hql = "update EventTransient etrans set etrans.signature='" + sign +
-                "', etrans.annotation='"+ annot +"' where etrans.teid='" + teid + "'";
+        String hql = "update EventPower ep set ep.signature='" + sign +
+                "', ep.annotation='"+ annot +"' where ep.teid='" + teid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -33,7 +33,7 @@ public class EventDAOImpl implements EventDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Computerroom> didlist = new ArrayList<>();
-        List<EventTransient> rtlist = new ArrayList<>();
+        List<EventPower> rtlist = new ArrayList<>();
 
         String didstr = "";
 
@@ -59,8 +59,8 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split(",");
 
         for(int i = 0; i < didset.length; i++ ){
-            List<EventTransient> list = hbsessionDao.search(
-                    "FROM EventTransient where did = '" + didset[i]+ "'" + " and time > '" + starttime +
+            List<EventPower> list = hbsessionDao.search(
+                    "FROM EventPower where did = '" + didset[i]+ "'" + " and time > '" + starttime +
                             "' and time < '" + endtime + "'");
 
             if(list != null)
@@ -75,7 +75,7 @@ public class EventDAOImpl implements EventDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Computerroom> didlist = new ArrayList<>();
-        List<EventTransient> rtlist = new ArrayList<>();
+        List<EventPower> rtlist = new ArrayList<>();
 
         String didstr = "";
 
@@ -106,8 +106,8 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split(",");
 
         for(int i = 0; i < didset.length; i++ ){
-            List<EventTransient> list = hbsessionDao.search(
-                    "FROM EventTransient where did = '" + didset[i]+ "'");
+            List<EventPower> list = hbsessionDao.search(
+                    "FROM EventPower where did = '" + didset[i]+ "'");
 
             if(list != null)
                 rtlist.addAll(list);
@@ -273,7 +273,6 @@ public class EventDAOImpl implements EventDAO {
         String cbidset[] = cbistr.split("，");
 
         for(int i = 0; i < cbidset.length; i++){
-            System.out.println(cbidset[i]);
             CityBank cb = (CityBank)hbsessionDao.getFirst(
                     "FROM CityBank where cbid='"+ cbidset[i] + "'");
 

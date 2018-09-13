@@ -2,7 +2,6 @@ package grabData;
 
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.EventPower;
-import hibernatePOJO.EventTransient;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -32,11 +31,9 @@ public class alarmModelJob implements Job {
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
         //1.获得当前市行的15分钟内的告警事件（分为四类：）
-        List<EventTransient> alrmtranslist = hbsessionDao.search(
-                "FROM EventTransient where time >'"+ date +"'");
+        List<EventPower> alrmtranslist = hbsessionDao.search(
+                "FROM EventPower where time >'"+ date +"'");
 
-        List<EventPower> alrmpowerlist = hbsessionDao.search(
-                "FROM EventPower where occurtime >'"+ date +"' and isMark = 1");
 
         //2.查询各个事件的告警方式、告警用户、告警时间范围
         if(alrmtranslist != null){
@@ -73,9 +70,6 @@ public class alarmModelJob implements Job {
             }
         }
 
-        if(alrmpowerlist != null){
-
-        }
 
         System.out.println("完成告警模块:" + System.currentTimeMillis());
     }
