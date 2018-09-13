@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import com.alibaba.fastjson.JSONObject;
 
 public class getProBankInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -38,11 +39,17 @@ public class getProBankInfoAction extends ActionSupport {
 
             ProBankDAO dao = new ProBankDAOImpl();
 
-            List qstdata = new ArrayList();
+            List cbdata = new ArrayList();
+            List crdata = new ArrayList();
 
-            qstdata = dao.getProBankDataByName(probankname);
+            cbdata = dao.getCityBankDataByName(probankname);
+            crdata = dao.getCompRoomDataByName(probankname);
 
-            result = JSON.toJSONString(qstdata); // List转json
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("CityBank",cbdata);
+            jsonObject.put("CompRoom",crdata);
+
+            result = JSON.toJSONString(jsonObject); // List转json
 
         } catch (Exception e) {
             e.printStackTrace();
