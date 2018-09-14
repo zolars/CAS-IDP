@@ -4,6 +4,7 @@ import Util.HBSessionDaoImpl;
 import orgnizationManage.dao.ProBankDAO;
 import hibernatePOJO.ProvinceBank;
 import hibernatePOJO.CityBank;
+import hibernatePOJO.Computerroom;
 import hibernatePOJO.DeviceAlarmUser;
 import hibernatePOJO.Devices;
 import hibernatePOJO.DevicesThreshold;
@@ -22,7 +23,7 @@ public class ProBankDAOImpl implements ProBankDAO {
     private Transaction transaction;
     private Query query;
 
-    public List getProBankDataByName(String name){
+        public List getCityBankDataByName(String name){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         System.out.println(name);
@@ -41,6 +42,38 @@ public class ProBankDAOImpl implements ProBankDAO {
         }
 
         return cbname;
+    }
+
+        public List getCompRoomDataByName(String name){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        System.out.println(name);
+        List<ProvinceBank> pblist = hbsessionDao.search(
+                "FROM ProvinceBank where pbname = '" + name+ "'");
+
+        String cbidset=pblist.get(0).getCbidset();
+        String[] cbid=cbidset.split("，");
+
+        List<String> compRoom = new ArrayList();
+        for(String s:cbid){
+            List<CityBank> cblist = hbsessionDao.search(
+                    "FROM CityBank where cbid = '" + s + "'");
+            compRoom.add(cblist.get(0).getCompRoom());
+        }
+
+        List<String> rname = new ArrayList();
+        for(int i=0;i<compRoom.size();i++){
+            String[] cbroom = compRoom.get(i).split("，");
+            String s = "1";
+            for(String r:cbroom){
+                List<Computerroom> roomlist = hbsessionDao.search(
+                        "FROM Computerroom where rid = '" + r + "'");
+                s += roomlist.get(0).getRname()+"，";
+            }
+            rname.add(s.substring(1,s.length()-1));
+        }
+
+        return rname;
     }
 
     public String getDeviceIDByName(String name){

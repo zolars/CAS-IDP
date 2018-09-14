@@ -20,7 +20,7 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
     private String did="1";
 
     public TransientClientHandler(String did) {
-      //  this.did=did;
+       // this.did=did;
 
         HBSessionDaoImpl hbSessionDao=new HBSessionDaoImpl();
         List<CaptureSetting> list=hbSessionDao.search("FROM CaptureSetting");
