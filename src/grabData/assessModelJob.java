@@ -3,7 +3,6 @@ package grabData;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.AssessmentSetting;
 import hibernatePOJO.EventPower;
-import hibernatePOJO.EventTransient;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -27,19 +26,15 @@ public class assessModelJob implements Job {
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
         //1.获得当前市行的1天内的事件（分为四类：）
-        List<EventTransient> eventtranslist = hbsessionDao.search(
-                "FROM EventTransient where time >'"+ date +"'");
-
         List<EventPower> eventpowerlist = hbsessionDao.search(
-                "FROM EventPower where occurtime >'"+ date +"'");
+                "FROM EventPower where time >'"+ date +"'");
+
 
         Integer eenum = 0;
         Integer epnum = 0;
         Integer aeenum = 0;
         Integer aepnum = 0;
 
-        if(eventtranslist != null)
-            eenum = eventtranslist.size();
         if(eventpowerlist != null)
             epnum = eventpowerlist.size();
 
@@ -48,14 +43,8 @@ public class assessModelJob implements Job {
         Integer devicenum = 0;
 
         //2. 获得当前市行的1天内的告警（分为四类：）
-        List<EventTransient> alrmtranslist = hbsessionDao.search(
-                "FROM EventTransient where time >'"+ date +"'");
-
         List<EventPower> alrmpowerlist = hbsessionDao.search(
-                "FROM EventPower where occurtime >'"+ date +"' and isMark = 1");
-
-        if(alrmtranslist != null)
-            aeenum = alrmtranslist.size();
+                "FROM EventPower where time >'"+ date +"'");
 
         if(alrmpowerlist != null)
             aepnum = alrmpowerlist.size();

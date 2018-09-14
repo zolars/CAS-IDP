@@ -2,7 +2,7 @@ package grabData;
 
 import Util.HBSessionCenterDaoImpl;
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.EventTransient;
+import hibernatePOJO.EventPower;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -24,14 +24,14 @@ public class uploadDataToCenterSvrJob implements Job {
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
         //1.上传暂态事件到总服务器
-        List<EventTransient> eventlist = hbsessionDao.search(
-                "FROM EventTransient where time >'"+ date +"'");
+        List<EventPower> eventlist = hbsessionDao.search(
+                "FROM EventPower where time >'"+ date +"'");
 
         HBSessionCenterDaoImpl hbsessioncenterDao = new HBSessionCenterDaoImpl();
 
         if(eventlist != null){
             for(int i = 0; i < eventlist.size(); i++){
-                EventTransient et = eventlist.get(i);
+                EventPower et = eventlist.get(i);
                 hbsessioncenterDao.insert(et);
             }
         }

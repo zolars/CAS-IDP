@@ -1,17 +1,10 @@
 package sms;
 
 import Util.HBSessionDaoImpl;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import efficiencyAnalysis.dao.EventDAO;
-import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import hibernatePOJO.EventPower;
-import hibernatePOJO.EventTransient;
-import hibernatePOJO.User;
 import org.apache.struts2.ServletActionContext;
-import userManage.dao.UserDAO;
-import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -50,11 +43,9 @@ public class getAlert extends ActionSupport {
             String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
             //1.获得当前市行的15分钟内的告警事件（分为四类：）
-            List<EventTransient> alrmtranslist = hbsessionDao.search(
+            List<EventPower> alrmtranslist = hbsessionDao.search(
                     "FROM EventTransient where time >'"+ date +"'");
 
-            List<EventPower> alrmpowerlist = hbsessionDao.search(
-                    "FROM EventPower where occurtime >'"+ date +"' and isMark = 1");
 
             //2.查询各个事件的告警方式、告警用户、告警时间范围
             if(alrmtranslist != null){
@@ -84,9 +75,6 @@ public class getAlert extends ActionSupport {
                 }
             }
 
-            if(alrmpowerlist != null){
-
-            }
 
             System.out.println("完成告警(弹窗)模块:" + System.currentTimeMillis());
             JSONObject jsonObject = new JSONObject();

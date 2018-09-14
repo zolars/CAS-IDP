@@ -1,23 +1,12 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import hibernatePOJO.AssessmentSetting;
-import hibernatePOJO.Devices;
 import hibernatePOJO.EventPower;
-import hibernatePOJO.EventTransient;
-import org.apache.struts2.ServletActionContext;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import sms.SmsAlarm;
-import sms.getAlert;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthDesktopIconUI;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,11 +31,9 @@ public class alarmModelJob implements Job {
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
         //1.获得当前市行的15分钟内的告警事件（分为四类：）
-        List<EventTransient> alrmtranslist = hbsessionDao.search(
-                "FROM EventTransient where time >'"+ date +"'");
+        List<EventPower> alrmtranslist = hbsessionDao.search(
+                "FROM EventPower where time >'"+ date +"'");
 
-        List<EventPower> alrmpowerlist = hbsessionDao.search(
-                "FROM EventPower where occurtime >'"+ date +"' and isMark = 1");
 
         //2.查询各个事件的告警方式、告警用户、告警时间范围
         if(alrmtranslist != null){
@@ -83,9 +70,6 @@ public class alarmModelJob implements Job {
             }
         }
 
-        if(alrmpowerlist != null){
-
-        }
 
         System.out.println("完成告警模块:" + System.currentTimeMillis());
     }

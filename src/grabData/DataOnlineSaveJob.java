@@ -29,9 +29,12 @@ public class DataOnlineSaveJob implements Job {
                 PowersxdyMonitor varsxdy = sxdyMap.get(did);
 
                 //实时数据存入数据库
-                if(var.getDid() !=  null)  hbsessionDao.insert(var);
-                if(varxb.getDid() !=  null) hbsessionDao.insert(varxb);
-                if(varsxdy.getDid() !=  null) hbsessionDao.insert(varsxdy);
+                if(var.getDid() !=  null)
+                    hbsessionDao.insert(var);
+                if(varxb.getDid() !=  null)
+                    hbsessionDao.insert(varxb);
+                if(varsxdy.getDid() !=  null)
+                    hbsessionDao.insert(varsxdy);
 
                 // 检测告警（越线）事件
              /*   Timestamp date = new Timestamp(System.currentTimeMillis());

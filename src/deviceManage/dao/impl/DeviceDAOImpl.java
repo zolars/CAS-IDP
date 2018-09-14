@@ -189,6 +189,16 @@ public class DeviceDAOImpl implements DeviceDAO {
         return rt;
     }
 
+    public Boolean addOneDeviceAlarmInfo(String precontent){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = false;
+
+        String hql = "update DeviceAlarmUser kl set kl.precontent='" + precontent + "'";
+
+        rt = hbsessionDao.update(hql);
+        return rt;
+    }
+
     public DevicesThreshold getDeviceThreshold(String dtid){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();

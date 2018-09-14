@@ -30,6 +30,8 @@ public interface DeviceDAO {
 
     public Boolean addOneDeviceAlarmUser(String did, String uid, String stime, String etime);
 
+    public Boolean addOneDeviceAlarmInfo(String etime);
+
     public DevicesThreshold getDeviceThreshold(String dtid);
 
     public Boolean updateDeviceThreshold(String dtid,String name,String type,String unit, Double standval, Double cellval, Double floorval, Integer ismark, String alarmcontent);

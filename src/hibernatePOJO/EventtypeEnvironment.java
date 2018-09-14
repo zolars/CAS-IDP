@@ -1,17 +1,11 @@
 package hibernatePOJO;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "eventtype_environment", schema = "test", catalog = "")
 public class EventtypeEnvironment {
     private int eid;
     private String name;
-    private String priorty;
 
-    @Id
-    @Column(name = "eid", nullable = false)
     public int getEid() {
         return eid;
     }
@@ -20,8 +14,6 @@ public class EventtypeEnvironment {
         this.eid = eid;
     }
 
-    @Basic
-    @Column(name = "name", nullable = true, length = 255)
     public String getName() {
         return name;
     }
@@ -30,29 +22,18 @@ public class EventtypeEnvironment {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "priorty", nullable = true, length = 255)
-    public String getPriorty() {
-        return priorty;
-    }
-
-    public void setPriorty(String priorty) {
-        this.priorty = priorty;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventtypeEnvironment that = (EventtypeEnvironment) o;
         return eid == that.eid &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(priorty, that.priorty);
+                Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(eid, name, priorty);
+        return Objects.hash(eid, name);
     }
 }

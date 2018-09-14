@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
-import hibernatePOJO.EventTransient;
+import hibernatePOJO.EventPower;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ public class getPowerEventAction extends ActionSupport {
     }
 
 
-    /* 根据测量地点（机房id）获取设备事件
+    /* 根据测量地点（市行名称）获取设备事件
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -35,19 +35,19 @@ public class getPowerEventAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String rid = request.getParameter("rid");
+            String cbname = request.getParameter("cbname");
             String starttime = request.getParameter("stime");
             String endtime = request.getParameter("etime");
 
             EventDAO dao = new EventDAOImpl();
 
-            List<EventTransient> pedata = new ArrayList();
+            List<EventPower> pedata = new ArrayList();
 
             if((starttime == " " && endtime == " ") || (starttime == null && endtime == null))
-                pedata = dao.getLocalLastPowerEvent(rid);
+                pedata = dao.getLocalLastPowerEvent(cbname);
 
             else
-                pedata = dao.getLocalAllPowerEvent(rid, starttime, endtime);
+                pedata = dao.getLocalAllPowerEvent(cbname, starttime, endtime);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allpelist", pedata);
