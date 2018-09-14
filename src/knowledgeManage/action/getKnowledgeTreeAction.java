@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
 
 
 public class getKnowledgeTreeAction extends ActionSupport {
@@ -45,7 +42,6 @@ public class getKnowledgeTreeAction extends ActionSupport {
             jsonObject.put("allkltree", kltree);
 
             result = jsonObject;
-            //result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();

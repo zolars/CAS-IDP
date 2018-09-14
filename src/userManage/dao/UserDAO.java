@@ -19,7 +19,7 @@ public interface UserDAO {
 
     public boolean deleteUserRoles(String uid);
     /////改
-    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom);
+    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser);
 
     /////查
     //登录验证

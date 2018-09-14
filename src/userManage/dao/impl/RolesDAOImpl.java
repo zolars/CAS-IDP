@@ -69,12 +69,7 @@ public class RolesDAOImpl implements RolesDAO {
         String hql = "update Roles role set role.rolesname='" + name +
                 "', role.extra='"+ extra +"' where role.rid='" + rid + "'";
 
-       /* Roles role = new Roles();
-        role.setRid(rid);
-        role.setRolesname(name);
-        role.setExtra(extra);*/
-
-        rt = hbsessionDao.update(hql);  //role,
+        rt = hbsessionDao.update(hql);
         return rt;
     }
 

@@ -1329,16 +1329,13 @@
             $("#item8").hide();
             $("#item9").hide();
 
-            var monitorpoint = 1;
 
             //功能管理
-
             //左侧角色表的初始化渲染
             $.ajax({
                 type: "post",
                 url: "getAllRoles",
                 data: {
-                    monitorpointid: monitorpoint
                 },
                 dataType: "json",
                 success: function (data) {
@@ -1349,13 +1346,13 @@
                     for (var i = 0; i < list.length; i++) {
                         var rid = list[i].rid;
                         var rname = list[i].rolesname;
-                        var rextra = list[i].extra;
+                        var rextra;
+                        if(list[i].extra != undefined) rextra = list[i].extra;
+                        else rextra = " ";
+
                         table.append('<tr><td><input type="checkbox" id="cbox-rid" name="cbox-rid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
                             '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
                     }
-                },
-                error: function () {
-                    alert("失败");
                 }
             });
 
@@ -1644,10 +1641,21 @@
                         var uid = list[key][i][0];
                         var account = list[key][i][1];
                         var name = list[key][i][2];
-                        var org = list[key][i][3] + "" + list[key][i][4] + list[key][i][5];
-                        var role = list[key][i][6];
-                        var telephone = list[key][i][7];
-                        var govtelephone = list[key][i][8];
+                        var org = list[key][i][3] + list[key][i][4] + list[key][i][5];
+
+                        var role;
+                        if(list[key][i][6] != undefined) role = list[key][i][6];
+                        else role += " ";
+
+                        var telephone;
+                        if(list[key][i][7] != undefined) telephone = list[key][i][7];
+                        else telephone += " ";
+
+                        var govtelephone;
+                        if(list[key][i][8] != undefined) govtelephone = list[key][i][8];
+                        else govtelephone += " ";
+
+
                         table.append('<tr><td><input type="checkbox" name="userid" id="userid" value=' + uid + '></td><td style="padding-left:15px;">' + account +
                             '</td><td style="padding-left:20px;">' + name + '</td><td style="padding-left:20px;">' + org + '</td><td style="padding-left:20px;">'
                             + role + '</td><td style="padding-left:20px;">' + telephone + '</td><td style="padding-left:20px;">' + govtelephone + '</td></tr>');
@@ -1716,7 +1724,7 @@
 
                 $("#uid").val(userdata.uid);
                 $("#useraccount").val(userdata.uname);
-                $("#userpassword").val(userdata.password);
+                $("#userpassword").val();
                 $("#username").val(userdata.chinesename);
                 $("#usertelephone").val(userdata.telephone);
                 $("#usergovtelephone").val(userdata.govtelephone);
@@ -1725,10 +1733,6 @@
                 $("#userorgnization-computerroom").val(userdata.rid);
                 $("#userroles").val(userroledata.rid);
 
-                //hiddenUserModel();
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -1747,6 +1751,8 @@
         var cbid = $("#userorgnization-city").val();
         var ccid = $("#userorgnization-computerroom").val();
 
+        var temuser = "<%=session.getAttribute("userid")%>"; //用于验证当前账户的是否具有修改用户信息的权限
+
         if (testTelephone(telephone) && testTelephone(govtelephone)) {
             $.ajax({
                 type: "post",
@@ -1761,16 +1767,13 @@
                     rid: rid,
                     pbid: pbid,
                     cbid: cbid,
-                    ccid: ccid
+                    ccid: ccid,
+                    temuser: temuser
                 },
                 dataType: "json",
                 success: function (data) {
                     alert(data);
                     hiddenUserModel();
-                    //getALLUserInfomation();
-                },
-                error: function () {
-                    alert("失败");
                 }
             });
         }
@@ -1837,9 +1840,6 @@
                 for (var i = 0; i < rt.length; i++) {
                     $('#userroles').append("<option value='" + rt[i].rid + "' >" + rt[i].rolesname + "</option>");
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -1851,15 +1851,11 @@
             url: "getAllProvince",
             dataType: "json",
             success: function (data) {
-                // $('#userorgnization-province').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                 var obj = JSON.parse(data);
                 var rt = obj.allprovince;
                 for (var i = 0; i < rt.length; i++) {
                     $('#userorgnization-province').append("<option value='" + rt[i].pbid + "' >" + rt[i].pbname + "</option>");
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -1871,16 +1867,12 @@
             url: "getAllCity",
             dataType: "json",
             success: function (data) {
-                //   $('#userorgnization-city').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                 var obj = JSON.parse(data);
                 var rt = obj.allcity;
 
                 for (var i = 0; i < rt.length; i++) {
                     $('#userorgnization-city').append("<option value='" + rt[i].cbid + "' >" + rt[i].cbname + "</option>");
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -1892,16 +1884,12 @@
             url: "getAllComputerroom",
             dataType: "json",
             success: function (data) {
-                // $('#userorgnization-computerroom').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                 var obj = JSON.parse(data);
                 var rt = obj.allcomputerroom;
 
                 for (var i = 0; i < rt.length; i++) {
                     $('#userorgnization-computerroom').append("<option value='" + rt[i].rid + "' >" + rt[i].rname + "</option>");
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -1912,12 +1900,11 @@
 <script type="text/javascript">
     //查询所有角色
     function getALLRolesInfomation() {
-        //var monitorpoint = 1;
+
         $.ajax({
             type: "post",
             url: "getAllRoles",
             data: {
-                //   monitorpointid: monitorpoint
             },
             dataType: "json",
             success: function (data) {
@@ -1927,15 +1914,17 @@
                 table.empty();
 
                 for (var i = 0; i < list.length; i++) {
+
                     var rid = list[i].rid;
-                    var rname = list[i].rolesname;
-                    var rextra = list[i].extra;
+                    var  rname = list[i].rolesname;
+
+                    var rextra;
+                    if(list[i].extra != undefined) rextra = list[i].extra;
+                    else rextra = " ";
+
                     table.append('<tr><td><input type="checkbox" name="rolesid" id="rolesid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
                         '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -2463,8 +2452,10 @@
         });
     };
 
-    //点击左侧某个角色，右侧jstree显示角色的功能
+    //点击左侧某个角色，右侧jstree显示角色的功能，先清理一下右侧树的选中状态
     function getOneRolesFunctions() {
+        $('#jstree').jstree('deselect_all');
+
         var rid = $('input[name=cbox-rid]:checked').val();
         $.ajax({
             type: "post",

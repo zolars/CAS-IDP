@@ -1649,18 +1649,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
          $(document).ready(function() {
              $('#place-event').DataTable( {
-                 "info":         false,
-                 "scrollY":        "50px",
+                 "info":           false,
+                 "scrollY":        "120px",
                  "scrollCollapse": true,
                  "paging":         false,
+                 "ordering":       false,
                  "dom":             "lBrtip"
              } );
 
              //点击table中的某一行
              $('#place-event tbody').on( 'change', 'tr', function () {
                  alert("mp:"+ this);
-                // $(this).toggleClass('selected');
-                // selectOneRowEvent(this);
+
              } );
          } );
 

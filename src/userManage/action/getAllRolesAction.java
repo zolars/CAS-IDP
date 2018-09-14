@@ -47,7 +47,7 @@ public class getAllRolesAction extends ActionSupport {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }
