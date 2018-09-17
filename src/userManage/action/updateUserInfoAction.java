@@ -11,10 +11,6 @@ import userManage.dao.impl.UserDAOImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
-
 
 public class updateUserInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -29,7 +25,8 @@ public class updateUserInfoAction extends ActionSupport {
     }
 
 
-    /* 查询所有用户的基本信息、用户角色、用户权限
+    /* 更新某个用户的基本信息、用户角色、用户权限
+       修改密码：只有管理员账号或账号本人可以修改密码
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -37,7 +34,6 @@ public class updateUserInfoAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //String monitorpointid = request.getParameter("monitorpointid");
             String uid = request.getParameter("uid");
             String name = request.getParameter("uname");
             String password = request.getParameter("password");
@@ -50,15 +46,17 @@ public class updateUserInfoAction extends ActionSupport {
             String city = request.getParameter("cbid");
             String computerroom = request.getParameter("ccid");
 
+            String temuser = request.getParameter("temuser");
+
             UserDAO dao = new UserDAOImpl();
-            Boolean rt = dao.updateUserInfo(uid, password, name, chinesename, telephone, govtelephone, roles, province, city, computerroom);
+            Boolean rt = dao.updateUserInfo(uid, password, name, chinesename, telephone, govtelephone, roles, province, city, computerroom, temuser);
 
             JSONObject jsonObject = new JSONObject();
 
             if(rt)
                 jsonObject.put("提示", "修改成功！");
             else
-                jsonObject.put("提示", "修改失败，请重试！");
+                jsonObject.put("提示", "修改失败，请联系管理员或者重试");
 
             result = JSON.toJSONString(jsonObject);
 
@@ -66,7 +64,7 @@ public class updateUserInfoAction extends ActionSupport {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }

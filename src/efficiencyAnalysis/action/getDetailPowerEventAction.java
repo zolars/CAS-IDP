@@ -1,20 +1,20 @@
-package orgnizationManage.action;
+package efficiencyAnalysis.action;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import orgnizationManage.dao.ProBankDAO;
-import orgnizationManage.dao.impl.ProBankDAOImpl;
-import onlineTest.dao.PowerParameterDAO;
-import onlineTest.dao.impl.PowerParameterDAOImpl;
+import efficiencyAnalysis.dao.EventDAO;
+import efficiencyAnalysis.dao.impl.EventDAOImpl;
+import hibernatePOJO.EventPower;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import com.alibaba.fastjson.JSONObject;
 
-public class getProBankInfoAction extends ActionSupport {
+
+public class getDetailPowerEventAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -27,27 +27,30 @@ public class getProBankInfoAction extends ActionSupport {
     }
 
 
-    /* 根据省行名称查询市行信息
+    /* 根据测量地点（市行名称）获取详细的 第二页设备事件
      */
     public String execute() throws Exception {
-        try {
+        try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String probankname = request.getParameter("probankname");
+            String cbname = request.getParameter("cbname");
+            String starttime = request.getParameter("stime");
+            String endtime = request.getParameter("etime");
 
-            ProBankDAO dao = new ProBankDAOImpl();
+            EventDAO dao = new EventDAOImpl();
 
-            List cbdata = new ArrayList();
-            List crdata = new ArrayList();
+            List<EventPower> pedata = new ArrayList();
 
-            cbdata = dao.getCityBankDataByName(probankname);
-            crdata = dao.getCompRoomDataByName(probankname);
+            if((starttime == " " && endtime == " ") || (starttime == null && endtime == null))
+                pedata = dao.getLocalLastDetailPowerEvent(cbname);
+
+            else
+                pedata = dao.getLocalAllDetailPowerEvent(cbname, starttime, endtime);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("CityBank",cbdata);
-            jsonObject.put("CompRoom",crdata);
+            jsonObject.put("allpelist", pedata);
 
             result = JSON.toJSONString(jsonObject); // List转json
 
@@ -57,4 +60,5 @@ public class getProBankInfoAction extends ActionSupport {
         }
         return "success";
     }
+
 }

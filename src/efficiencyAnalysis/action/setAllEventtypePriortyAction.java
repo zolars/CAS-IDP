@@ -1,20 +1,20 @@
-package orgnizationManage.action;
+package efficiencyAnalysis.action;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import orgnizationManage.dao.ProBankDAO;
-import orgnizationManage.dao.impl.ProBankDAOImpl;
-import onlineTest.dao.PowerParameterDAO;
-import onlineTest.dao.impl.PowerParameterDAOImpl;
+import efficiencyAnalysis.dao.EventDAO;
+import efficiencyAnalysis.dao.impl.EventDAOImpl;
+import hibernatePOJO.EventPower;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import com.alibaba.fastjson.JSONObject;
 
-public class getProBankInfoAction extends ActionSupport {
+
+public class setAllEventtypePriortyAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -27,27 +27,28 @@ public class getProBankInfoAction extends ActionSupport {
     }
 
 
-    /* 根据省行名称查询市行信息
+    /* 循环设置每个事件类型的优先级
      */
     public String execute() throws Exception {
-        try {
+        try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String probankname = request.getParameter("probankname");
+            String priortystr = request.getParameter("priortylist");
+            String eventtypestr = request.getParameter("eventtypelist");
 
-            ProBankDAO dao = new ProBankDAOImpl();
+            String priortylist[] = priortystr.split(",");
+            String eventtypelist[] = eventtypestr.split(",");
 
-            List cbdata = new ArrayList();
-            List crdata = new ArrayList();
+            EventDAO dao = new EventDAOImpl();
+            Boolean rt = false;
 
-            cbdata = dao.getCityBankDataByName(probankname);
-            crdata = dao.getCompRoomDataByName(probankname);
+            if((priortylist.length == eventtypelist.length)&&(priortylist.length > 0)&&(priortylist.length > 0))
+                 rt = dao.setAllEventtypePriorty(eventtypelist, priortylist);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("CityBank",cbdata);
-            jsonObject.put("CompRoom",crdata);
+            jsonObject.put("", rt);
 
             result = JSON.toJSONString(jsonObject); // List转json
 
@@ -57,4 +58,5 @@ public class getProBankInfoAction extends ActionSupport {
         }
         return "success";
     }
+
 }

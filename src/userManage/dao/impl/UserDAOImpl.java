@@ -156,8 +156,6 @@ public class UserDAOImpl implements UserDAO {
         db = new DBConnect();
         String sql = "select ta.uid as nuid, ta.uname as nuname,ta.chinesename as nchinesename,ta.password as npassword,ta.pbid as pbid, ta.cbid as cbid,ta.rid as comprid,tb.rid as nrolename,ta.telephone as telephone, ta.govtelephone as govtelephone from user ta left outer join user_roles tb on ta.uid = tb.uid";
 
-        //System.out.println(sql);
-
         try {
             List<List> crlist = new ArrayList<>();
 
@@ -257,38 +255,45 @@ public class UserDAOImpl implements UserDAO {
 
     /* 1.user表修改
        2.userroles表修改
+       注意：需要验证是否为管理员或者用户自己
      */
-    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom){
+    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
-        User newur = new User();
-        newur.setUid(uid);
-        newur.setUname(name);
-        newur.setChinesename(chinesename);
-        newur.setPassword(password);
-        newur.setTelephone(telephone);
-        newur.setGovtelephone(govtelephone);
+        //获取当前用户，判断是否可以更改信息
+        User ur = (User)hbsessionDao.getFirst("FROM User where uid = '" + temuser+ "'");
+        if((uid.equals(temuser)) || (ur.getRid().equals("1"))){ //可以修改
 
-        newur.setPbid(province);
-        newur.setCbid(city);
-        newur.setRid(computerroom);
+            User newur = new User();
+            newur.setUid(uid);
+            newur.setUname(name);
+            newur.setChinesename(chinesename);
+            newur.setPassword(password);
+            newur.setTelephone(telephone);
+            newur.setGovtelephone(govtelephone);
 
-        String hql = "update User newur set newur.uname='" + name +"', newur.chinesename='" + chinesename +"', newur.password='" + password +"'," +
-                "newur.telephone='" + telephone +"', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
-                ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
-                " where newur.uid='" + uid + "'";
+            newur.setPbid(province);
+            newur.setCbid(city);
+            newur.setRid(computerroom);
 
-        rt = hbsessionDao.update(hql);  //newur,
+            String hql = "update User newur set newur.uname='" + name +"', newur.chinesename='" + chinesename +"', newur.password='" + password +"'," +
+                    "newur.telephone='" + telephone +"', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
+                    ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
+                    " where newur.uid='" + uid + "'";
 
-        UserRoles newurole = new UserRoles();
-        newurole.setUid(uid);
-        newurole.setRid(roles);
+            rt = hbsessionDao.update(hql);
 
-        String hql2 = "update UserRoles newurole set newurole.rid='" + roles +
-                "' where newurole.uid='" + uid + "'";
+            UserRoles newurole = new UserRoles();
+            newurole.setUid(uid);
+            newurole.setRid(roles);
 
-        rt = hbsessionDao.update(hql2); //newurole,
+            String hql2 = "update UserRoles newurole set newurole.rid='" + roles +
+                    "' where newurole.uid='" + uid + "'";
+
+            rt = hbsessionDao.update(hql2);
+
+        }
 
         return rt;
     }

@@ -1,12 +1,17 @@
 package efficiencyAnalysis.dao.impl;
 
+import Util.DBConnect;
 import Util.HBSessionDaoImpl;
 import efficiencyAnalysis.dao.EventDAO;
 import hibernatePOJO.*;
+import javafx.event.EventType;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,12 +33,14 @@ public class EventDAOImpl implements EventDAO {
         return rt;
     }
 
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件
+    //带有时间范围
     public List getLocalAllPowerEvent(String cbname, String starttime, String endtime){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Computerroom> didlist = new ArrayList<>();
-        List<EventPower> rtlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
 
         String didstr = "";
 
@@ -58,24 +65,53 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        for(int i = 0; i < didset.length; i++ ){
-            List<EventPower> list = hbsessionDao.search(
-                    "FROM EventPower where did = '" + didset[i]+ "'" + " and time > '" + starttime +
-                            "' and time < '" + endtime + "'");
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
 
-            if(list != null)
-                rtlist.addAll(list);
+        for(int i = 0; i < didset.length; i++ ){
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and time >"+ starttime + " and time <" + endtime;
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                db.free();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
 
         return rtlist;
     }
 
     //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件
+    //无时间范围
     public List getLocalLastPowerEvent(String cbname){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Computerroom> didlist = new ArrayList<>();
-        List<EventPower> rtlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
 
         String didstr = "";
 
@@ -101,37 +137,194 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //再根据设备id查询事件
-
-       // String didstr = didlist.get(0).getDidset();
         String didset[] = didstr.split(",");
 
-        for(int i = 0; i < didset.length; i++ ){
-            List<EventPower> list = hbsessionDao.search(
-                    "FROM EventPower where did = '" + didset[i]+ "'");
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
 
-            if(list != null)
-                rtlist.addAll(list);
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "'";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                db.free();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
 
         return rtlist;
     }
 
-    public boolean setAssessInfo(Integer red_yellow, Integer yellow_green){
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件
+    //带有时间范围
+    public List getLocalAllDetailPowerEvent(String cbname, String starttime, String endtime){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        boolean rt;
 
-        AssessmentSetting assess = new AssessmentSetting();
-        assess.setRedyellow(red_yellow);
-        assess.setYellowgreen(yellow_green);
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
 
-        String hql = "update AssessmentSetting assess set assess.redyellow='" + red_yellow +
-                "', assess.yellowgreen ='" + yellow_green + "' where assess.aid='" + 1 + "'";
+        String didstr = "";
 
-        rt = hbsessionDao.update(hql);
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
 
-        return rt;
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split(",");
 
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            didstr += ","+ cp.getDidset();
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and time >"+ starttime + " and time <" + endtime;
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                db.free();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件
+    //无时间范围
+    public List getLocalLastDetailPowerEvent(String cbname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "'";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                db.free();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        return rtlist;
     }
 
     public List getAllCityEvent(){
@@ -214,6 +407,16 @@ public class EventDAOImpl implements EventDAO {
         return rtmap;
     }
 
+    public List getAllEventTypeTree(){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<EventsType> rtlist = hbsessionDao.search(
+                "FROM EventsType");
+
+        return rtlist;
+    }
+
     public List getOneProvinceEvent(String pid, String stime, String etime){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
@@ -281,4 +484,36 @@ public class EventDAOImpl implements EventDAO {
 
         return list;
     }
+
+    public boolean setAssessInfo(Integer red_yellow, Integer yellow_green){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        String hql = "update AssessmentSetting assess set assess.redyellow='" + red_yellow +
+                "', assess.yellowgreen ='" + yellow_green + "' where assess.aid='" + 1 + "'";
+
+        rt = hbsessionDao.update(hql);
+
+        return rt;
+    }
+
+    public boolean setAllEventtypePriorty(String[] eventtypelist, String[] priortylist){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+
+        for(int i = 0; i < eventtypelist.length; i++){
+            String hql = "update EventsType et set et.prior='" + priortylist[i] +
+                   "' where et.type='" + eventtypelist[i] + "'";
+
+             rt = hbsessionDao.update(hql);
+
+             if(rt == false) return rt;
+        }
+
+        return rt;
+    }
+
+
 }

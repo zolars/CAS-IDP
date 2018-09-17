@@ -495,6 +495,14 @@
              </result>
          </action>
 
+         <action name="getDetailPowerEvent" class="efficiencyAnalysis.action.getDetailPowerEventAction">
+             <!--getDetailPowerEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="setAssessmentInfo" class="efficiencyAnalysis.action.setAssessmentInfoAction">
              <!--getEnvironmentEvent -->
              <result name="failure">/failure.jsp</result>
@@ -545,6 +553,22 @@
 
          <action name="addSignatureAndAnnotation" class="efficiencyAnalysis.action.addSignatureAndAnnotationAction">
              <!--addSignatureAndAnnotation -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getSettingTree" class="efficiencyAnalysis.action.getSettingTreeAction">
+             <!--getSettingTree -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="setAllEventtypePriorty" class="efficiencyAnalysis.action.setAllEventtypePriortyAction">
+             <!--setAllEventtypePriorty -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>

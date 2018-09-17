@@ -672,6 +672,7 @@
 
                         </div>
                         <!-- plantform div end -->
+                        <div class="add-user-title">执行类</div>
 
                         <button class="btn btn-default" onclick="addAlarm()">添加</button>
                         <button class="btn btn-default" onclick="deleterAlarm()">删除</button>
@@ -724,24 +725,23 @@
                         <div class="row"></div>
                         <ul class="nav nav-tabs" id="seculItem">
                             <li class="active" style="width:15%">
-                                <a data-toggle="tab" id="secsubItem7">•省行管理</a>
+                                <a data-toggle="tab" id="secsubItem7">•查询</a>
                             </li>
                             <li style="width:15%">
-                                <a data-toggle="tab" id="secsubItem8">•市行管理</a>
+                                <a data-toggle="tab" id="secsubItem8">•添加</a>
                             </li>
                             <li style="width:15%">
-                                <a data-toggle="tab" id="secsubItem9">•机房管理</a>
+                                <a data-toggle="tab" id="secsubItem9">•修改</a>
+                            </li>
+                            <li style="width:15%">
+                                <a data-toggle="tab" id="secsubItem10">•删除</a>
                             </li>
                         </ul>
-
                         <div id="secItem7" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
                         </div>
                         <div id="secItem8" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
                         </div>
                         <div id="secItem9" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
                         </div>
                         <div id="proBankInfo" style="display: none">
                             <label class="t-overflow">
@@ -750,19 +750,10 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <div id="outer" class="outer">
-                                                        <input id="searchInput2" class="searchInput form-control"
-                                                               type="text" placeholder="请输入省行名称">
-                                                        <div id="searchTips" class="tips" style="display: none">
-                                                        </div>
-                                                    </div>
+                                                    <input id="searchInput2" class="searchInput form-control"
+                                                           type="text" placeholder="请输入省行名称">
                                                 </td>
                                                 <td>
-                                                    <div id="item-devicename"
-                                                         style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">
-                                                        <ul id="device-name-Item">
-                                                        </ul>
-                                                    </div>
                                                     <button class="btn btn-default" onclick="checkProBank()">查询省行</button>
                                                 </td>
                                             </tr>
@@ -774,44 +765,92 @@
                                 <div class="col-md-12">
                                     <div class="tile">
                                         <h2 class="tile-title">省行信息</h2>
-                                        <div class="tile-config dropdown">
-                                            <a data-toggle="dropdown"></a>
-                                        </div>
-
                                         <div>
-                                            <div class="pbid" id="pbid"></div>
                                             <label class="t-overflow">
-                                                省行名称<input id="pbname" type="text" class="form-control setting-input">
+                                                省行名称<input id="pbname" type="text" class="form-control setting-input" disabled="disabled">
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="tile">
-                                        <h2 class="tile-title">省行下属市行</h2>
-                                        <div class="tile-config dropdown">
-                                            <a data-toggle="dropdown"></a>
-                                        </div>
-
+                                        <h2 class="tile-title">所属市行及机房信息</h2>
                                         <div>
-                                            <div class="pbid" id="pbid"></div>
-                                            <label class="t-overflow">
-                                                市行名称1<input id="cbname1" type="text" class="form-control setting-input">
-                                            </label>
-                                            <label class="t-overflow">
-                                                市行名称2<input id="cbname2" type="text" class="form-control setting-input">
-                                            </label>
-                                            <label class="t-overflow">
-                                                市行名称3<input id="cbname3" type="text" class="form-control setting-input">
-                                            </label>
+                                            <table width="98%">
+                                                <tr>
+                                                    <label class="t-overflow" id="cb1">
+                                                        市行名称1<input id="cbname1" type="text" class="form-control setting-input" disabled="disabled">
+                                                    </label>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:433.133px">
+                                                        <label class="t-overflow" id="cr1">
+                                                            市行1机房1<input id="rname1" type="text" class="form-control setting-input" disabled="disabled">
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:433.133px">
+                                                        <label class="t-overflow" id="cr2">
+                                                            市行1机房2<input id="rname2" type="text" class="form-control setting-input" disabled="disabled">
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:433.133px">
+                                                        <label class="t-overflow" id="cr3">
+                                                            市行1机房3<input id="rname3" type="text" class="form-control setting-input" disabled="disabled">
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table width="98%">
+                                                <tr>
+                                                    <label class="t-overflow" id="cb2">
+                                                        市行名称2<input id="cbname2" type="text" class="form-control setting-input" disabled="disabled">
+                                                    </label>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:433.133px">
+                                                        <label class="t-overflow" id="cr4">
+                                                            市行2机房1<input id="rname4" type="text" class="form-control setting-input" disabled="disabled">
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:433.133px">
+                                                        <label class="t-overflow" id="cr5">
+                                                            市行2机房2<input id="rname5" type="text" class="form-control setting-input" disabled="disabled">
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:433.133px">
+                                                        <label class="t-overflow" id="cr6">
+                                                            市行2机房3<input id="rname6" type="text" class="form-control setting-input" disabled="disabled">
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table width="98%">
+                                                <tr>
+                                                    <label class="t-overflow" id="cb3">
+                                                        市行名称3<input id="cbname3" type="text" class="form-control setting-input" disabled="disabled">
+                                                    </label>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:433.133px">
+                                                        <label class="t-overflow" id="cr7">
+                                                            市行3机房1<input id="rname7" type="text" class="form-control setting-input" disabled="disabled">
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:433.133px">
+                                                        <label class="t-overflow" id="cr8">
+                                                            市行3机房2<input id="rname8" type="text" class="form-control setting-input" disabled="disabled">
+                                                        </label>
+                                                    </td>
+                                                    <td style="width:433.133px">
+                                                        <label class="t-overflow" id="cr9">
+                                                            市行3机房3<input id="rname9" type="text" class="form-control setting-input" disabled="disabled">
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <button class="btn btn-default" onclick="addProBankAlarmUser()">添加省行</button>
-                                <button class="btn btn-default" onclick="changeProBankAlarmUser()">修改省行</button>
-                                <button class="btn btn-default" onclick="deleteProBankAlarmUser()" style="background-color:red">删除省行</button>
                             </div>
                         </div>
                     </div>
@@ -1334,16 +1373,13 @@
             $("#item8").hide();
             $("#item9").hide();
 
-            var monitorpoint = 1;
 
             //功能管理
-
             //左侧角色表的初始化渲染
             $.ajax({
                 type: "post",
                 url: "getAllRoles",
                 data: {
-                    monitorpointid: monitorpoint
                 },
                 dataType: "json",
                 success: function (data) {
@@ -1354,13 +1390,13 @@
                     for (var i = 0; i < list.length; i++) {
                         var rid = list[i].rid;
                         var rname = list[i].rolesname;
-                        var rextra = list[i].extra;
+                        var rextra;
+                        if(list[i].extra != undefined) rextra = list[i].extra;
+                        else rextra = " ";
+
                         table.append('<tr><td><input type="checkbox" id="cbox-rid" name="cbox-rid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
                             '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
                     }
-                },
-                error: function () {
-                    alert("失败");
                 }
             });
 
@@ -1596,6 +1632,7 @@
                     $("#secItem7").show();
                     $("#secItem8").hide();
                     $("#secItem9").hide();
+                    $("#secItem10").hide();
 
                     $('#proBankInfo').css('display', 'block');
                 });
@@ -1603,13 +1640,23 @@
                     $("#secItem7").hide();
                     $("#secItem8").show();
                     $("#secItem9").hide();
+                    $("#secItem10").hide();
 
-                    $('#proBankInfo').css('display', 'block');
+                    $('#proBankInfo').css('display', 'none');
                 });
                 $("#secsubItem9").click(function () {
                     $("#secItem7").hide();
                     $("#secItem8").hide();
                     $("#secItem9").show();
+                    $("#secItem10").hide();
+
+                    $('#proBankInfo').css('display', 'none');
+                });
+                $("#secsubItem10").click(function () {
+                    $("#secItem7").hide();
+                    $("#secItem8").hide();
+                    $("#secItem9").hide();
+                    $("#secItem10").show();
 
                     $('#proBankInfo').css('display', 'none');
                 });
@@ -1649,10 +1696,21 @@
                         var uid = list[key][i][0];
                         var account = list[key][i][1];
                         var name = list[key][i][2];
-                        var org = list[key][i][3] + "" + list[key][i][4] + list[key][i][5];
-                        var role = list[key][i][6];
-                        var telephone = list[key][i][7];
-                        var govtelephone = list[key][i][8];
+                        var org = list[key][i][3] + list[key][i][4] + list[key][i][5];
+
+                        var role;
+                        if(list[key][i][6] != undefined) role = list[key][i][6];
+                        else role += " ";
+
+                        var telephone;
+                        if(list[key][i][7] != undefined) telephone = list[key][i][7];
+                        else telephone += " ";
+
+                        var govtelephone;
+                        if(list[key][i][8] != undefined) govtelephone = list[key][i][8];
+                        else govtelephone += " ";
+
+
                         table.append('<tr><td><input type="checkbox" name="userid" id="userid" value=' + uid + '></td><td style="padding-left:15px;">' + account +
                             '</td><td style="padding-left:20px;">' + name + '</td><td style="padding-left:20px;">' + org + '</td><td style="padding-left:20px;">'
                             + role + '</td><td style="padding-left:20px;">' + telephone + '</td><td style="padding-left:20px;">' + govtelephone + '</td></tr>');
@@ -1721,7 +1779,7 @@
 
                 $("#uid").val(userdata.uid);
                 $("#useraccount").val(userdata.uname);
-                $("#userpassword").val(userdata.password);
+                $("#userpassword").val();
                 $("#username").val(userdata.chinesename);
                 $("#usertelephone").val(userdata.telephone);
                 $("#usergovtelephone").val(userdata.govtelephone);
@@ -1730,10 +1788,6 @@
                 $("#userorgnization-computerroom").val(userdata.rid);
                 $("#userroles").val(userroledata.rid);
 
-                //hiddenUserModel();
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -1752,6 +1806,8 @@
         var cbid = $("#userorgnization-city").val();
         var ccid = $("#userorgnization-computerroom").val();
 
+        var temuser = "<%=session.getAttribute("userid")%>"; //用于验证当前账户的是否具有修改用户信息的权限
+
         if (testTelephone(telephone) && testTelephone(govtelephone)) {
             $.ajax({
                 type: "post",
@@ -1766,16 +1822,13 @@
                     rid: rid,
                     pbid: pbid,
                     cbid: cbid,
-                    ccid: ccid
+                    ccid: ccid,
+                    temuser: temuser
                 },
                 dataType: "json",
                 success: function (data) {
                     alert(data);
                     hiddenUserModel();
-                    //getALLUserInfomation();
-                },
-                error: function () {
-                    alert("失败");
                 }
             });
         }
@@ -1842,9 +1895,6 @@
                 for (var i = 0; i < rt.length; i++) {
                     $('#userroles').append("<option value='" + rt[i].rid + "' >" + rt[i].rolesname + "</option>");
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -1856,15 +1906,11 @@
             url: "getAllProvince",
             dataType: "json",
             success: function (data) {
-                // $('#userorgnization-province').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                 var obj = JSON.parse(data);
                 var rt = obj.allprovince;
                 for (var i = 0; i < rt.length; i++) {
                     $('#userorgnization-province').append("<option value='" + rt[i].pbid + "' >" + rt[i].pbname + "</option>");
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -1876,16 +1922,12 @@
             url: "getAllCity",
             dataType: "json",
             success: function (data) {
-                //   $('#userorgnization-city').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                 var obj = JSON.parse(data);
                 var rt = obj.allcity;
 
                 for (var i = 0; i < rt.length; i++) {
                     $('#userorgnization-city').append("<option value='" + rt[i].cbid + "' >" + rt[i].cbname + "</option>");
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -1897,16 +1939,12 @@
             url: "getAllComputerroom",
             dataType: "json",
             success: function (data) {
-                // $('#userorgnization-computerroom').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                 var obj = JSON.parse(data);
                 var rt = obj.allcomputerroom;
 
                 for (var i = 0; i < rt.length; i++) {
                     $('#userorgnization-computerroom').append("<option value='" + rt[i].rid + "' >" + rt[i].rname + "</option>");
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -1917,12 +1955,11 @@
 <script type="text/javascript">
     //查询所有角色
     function getALLRolesInfomation() {
-        //var monitorpoint = 1;
+
         $.ajax({
             type: "post",
             url: "getAllRoles",
             data: {
-                //   monitorpointid: monitorpoint
             },
             dataType: "json",
             success: function (data) {
@@ -1932,15 +1969,17 @@
                 table.empty();
 
                 for (var i = 0; i < list.length; i++) {
+
                     var rid = list[i].rid;
-                    var rname = list[i].rolesname;
-                    var rextra = list[i].extra;
+                    var  rname = list[i].rolesname;
+
+                    var rextra;
+                    if(list[i].extra != undefined) rextra = list[i].extra;
+                    else rextra = " ";
+
                     table.append('<tr><td><input type="checkbox" name="rolesid" id="rolesid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
                         '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
                 }
-            },
-            error: function () {
-                alert("失败");
             }
         });
     }
@@ -2468,8 +2507,10 @@
         });
     };
 
-    //点击左侧某个角色，右侧jstree显示角色的功能
+    //点击左侧某个角色，右侧jstree显示角色的功能，先清理一下右侧树的选中状态
     function getOneRolesFunctions() {
+        $('#jstree').jstree('deselect_all');
+
         var rid = $('input[name=cbox-rid]:checked').val();
         $.ajax({
             type: "post",
@@ -2825,108 +2866,21 @@
 <!-- 查询组织--省行管理/市行管理/机房管理--wsy2018.9.6 -->
 <script type="text/javascript">
 
-    ////模糊查询下拉框
-    function fakeApi(str) {
-        var name = str;
-        var rt = new Array(3);
-
-        if (name != "") {
-            $.ajax({
-                type: "post",
-                url: "fuzzySearchDevice",
-                data: {
-                    name: name
-                },
-                dataType: "json",
-                success: function (data) {
-
-                    var list = data.alldlist;
-                    for (var i = 0; i < list.length; i++) {
-                        rt[i] = list[i].name;
-                    }
-
-                    var result;
-
-                    if (rt[2] == undefined) {
-                        if (rt[1] == undefined) {
-                            if (rt[0] == undefined) {
-                                result = [];
-                            }
-                            else result = [rt[0]];
-                        }
-                        else result = [rt[0], rt[1]];
-                    }
-                    else result = [rt[0], rt[1], rt[2]];
-
-                    if (result && result.length > 0) {
-                        tips.style.display = 'block';
-                    }
-                    appendData(result);
-                }
-            });
-        }
-    }
-
-    var searchInput = document.getElementById("searchInput");
-    var tips = document.getElementById("searchTips");
-
-    function debounce(func, interval) {
-        if (!interval) interval = 100;
-        var timer;
-        return function () {
-            var context = this,
-                args = arguments;
-            clearTimeout(timer);
-            timer = setTimeout(function () {
-                func.apply(context, args);
-            }, interval);
-        }
-    };
-
-    function appendData(data) {
-        for (var i = 0, len = data.length; i < len; i++) {
-            var item = document.createElement("div");
-            item.innerText = data[i];
-            item.addEventListener("click", function (event) {
-                searchInput.value = event.target.innerText;
-                tips.style.display = 'none';
-            });
-            item.setAttribute("class", "tips-item");
-            tips.appendChild(item);
-        }
-        ;
-    };
-
-    function insertData(value) {
-        tips.style.display = 'none';
-        tips.innerHTML = '';
-        var result = fakeApi(value);
-        if (result && result.length > 0) {
-            tips.style.display = 'block'
-        }
-        ;
-        appendData(result);
-    };
-
-    searchInput.addEventListener('blur', function () {
-        setTimeout(function () {
-            tips.style.display = 'none'
-        }, 150);
-    });
-
-    searchInput.addEventListener('focus', function () {
-        insertData(searchInput.value);
-    });
-
-    searchInput.addEventListener("input", debounce(function (event) {
-        insertData(event.target.value);
-    }, 150));
-
-    ////////模糊查询下拉框
-
     <!-- 查询省行 -->
     function checkProBank() {
         var probankname = $("#searchInput2").val();
+        $("#pbname").val(probankname);
+
+        for(var q=0;q<3;q++)
+        {
+            $("#cbname"+(q+1)).val("");
+            $("#cb"+(q+1)).show();
+        }
+
+        for(var w=0;w<9;w++){
+            $("#rname"+(w+1)).val("");
+            $("#cr"+(w+1)).show();
+        }
 
         $.ajax({
             type: "post",
@@ -2936,210 +2890,39 @@
             },
             dataType: "json",
             success: function (data) {
-                var obj = JSON.parse(data);
-                $("#pbname").val(probankname);
-                for(var i=0;i<obj.length;i++)
+                var list = JSON.parse(data);
+                var cblist = list['CityBank'];
+                var crlist = list['CompRoom'];
+
+                for(var i=0;i<cblist.length;i++)
                 {
-                    console.log(obj[i]);
-                    j=i+1;
-                    $("#cbname"+j).val(obj[i]);
+                    console.log(cblist[i]);
+                    $("#cbname"+(i+1)).val(cblist[i]);
                 }
-            }
-        });
-    }
 
-    <!-- 添加设备 -->
-    function addOneDevice(){
-
-        var radioEthernet = $('input[name="radio-Ethernet"]:checked').val();
-        var radioR5485 = $('input[name="radio-R5485"]:checked').val();
-        var radioRS232 = $('input[name="radio-RS232"]:checked').val();
-        var checkboxsms = $('input:checkbox[name="checkbox-sms"]:checked').val();
-        var checkboxalert = $('input:checkbox[name="checkbox-alert"]:checked').val();
-        var checkboxplantform = $('input:checkbox[name="checkbox-plantform"]:checked').val();
-
-        var devname = $("#devname").val();
-        var devtype = $("#devtype").val();
-        var serialno = $("#serialno").val();
-        var IPaddress = $("#IPaddress").val();
-        var port = $("#port").val();
-        var extra = $("#extra").val();
-
-        if(radioEthernet == "on" && radioR5485 == "on" && radioRS232 == "on")
-            alert("只能选择一种类型");
-        else if(radioEthernet == "on" && radioR5485 == "on")
-            alert("只能选择一种类型");
-        else if(radioEthernet == "on"&& radioRS232 == "on")
-            alert("只能选择一种类型");
-        else if(radioR5485 == "on" && radioRS232 == "on")
-            alert("只能选择一种类型");
-        else if(radioR5485 != "on" && radioR5485 != "on" && radioRS232 != "on")
-            alert("请选择一种类型");
-        else  $.ajax({
-                type: "post",
-                url: "addOneDevice",
-                data: {
-                    radioEthernet: radioEthernet,
-                    radioR5485: radioR5485,
-                    radioRS232: radioRS232,
-                    checkboxsms: checkboxsms,
-                    checkboxalert: checkboxalert,
-                    checkboxplantform: checkboxplantform,
-                    check: checkboxsms,
-                    devname: devname,
-                    devtype: devtype,
-                    serialno: serialno,
-                    IPaddress: IPaddress,
-                    port: port,
-                    extra: extra
-                },
-                dataType: "json",
-                success: function (data) {
-                    alert(data);
-                }
-            });
-    }
-
-    <!-- 查询预警人员 -->
-    function checkDeviceAlarmUser() {
-        var devicename = $("#searchInput").val();
-
-        $.ajax({
-            type: "post",
-            url: "getAllAlarmUser",
-            data: {
-                devicename: devicename
-            },
-            dataType: "json",
-            success: function (data) {
-                var list = data.alarmusers;
-                var listname = data.alarmusersname;
-                var table = $("#alarm-user-table");
-
-                table.empty();
-                table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">开始时间</td><td style="padding-left:80px;">结束时间</td><td style="padding-left:40px;">账号</td></tr>');
-
-                for (var i = 0; i < list.length; i++) {
-                    var id = list[i].id;
-                    var stime = list[i].stime;
-                    var etime = list[i].etime;
-                    var uname = listname[i];
-
-                    table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="auid" id="auid" value=' + id + '></td>' +
-                        '<td style="padding-left:80px;">' + stime + '</td><td style="padding-left:80px;">' + etime + '</td>' +
-                        '<td style="padding-left:40px;">' + uname + '</td></tr>');
-                }
-            }
-        });
-    }
-
-    //查询所有账号
-    function getALLUserInfoSimple() {
-
-        $("#alarm-user").empty();
-
-        $.ajax({
-            type: "post",
-            url: "getAllUserInfo",
-            dataType: "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj;
-
-                for (var key in list) {
-                    var len = list[key].length;
-                    for (var i = 0; i < len; i++) {
-                        var uid = list[key][i][0];
-                        var account = list[key][i][1];
-
-                        $('#alarm-user').append("<option value='" + uid + "' >" + account + "</option>");
-
+                for(var j=0;j<crlist.length;j++){
+                    var room = crlist[j].split("，");
+                    for(var k=0;k<room.length;k++){
+                        $("#rname"+(3*j+k+1)).val(room[k]);
                     }
                 }
-            }
-        });
-    }
 
-    <!-- 添加预警人员 -->
-    function addDeviceAlarmUser() {
-        $('#add-alarm-user-modal').css('display', 'block');
-    }
-
-    <!-- 确认添加预警人员 -->
-    function addAlarmUser() {
-        var did = $("#did").val();
-        var astime = $("#alarm-stime").val();
-        var aetime = $("#alarm-etime").val();
-        var auser = $("#alarm-user").val();
-
-        $.ajax({
-            type: "post",
-            url: "addDeviceAlarmUser",
-            data: {
-                did: did,
-                stime: astime,
-                etime: aetime,
-                uid: auser
-            },
-            dataType: "json",
-            success: function (data) {
-                alert(data);
-                $('#add-alarm-user-modal').css('display', 'none');
-            }
-        });
-    }
-
-    function cancle() {
-        $('#add-alarm-user-modal').css('display', 'none');
-    }
-
-    <!-- 取消（删除）预警人员 -->
-    function deleteDeviceAlarmUser() {
-
-        var auidcheck = $("input[name='auid']:checked");
-        if (auidcheck.length == 0)
-            alert("请选择一条预警人员信息");
-        else if (auidcheck.length > 1)
-            alert("每次只能删除一条预警人员信息");
-        else {
-            //var monitorpoint = 1;
-            var auidck = $("input[name='auid']:checked").serialize();
-            $.ajax({
-                type: "post",
-                url: "deleteDeviceAlarmRoles",
-                data: {
-                    //monitorpointid: monitorpoint,
-                    auid: auidck
-                },
-                dataType: "json",
-                success: function (data) {
-                    alert(data);
-                },
-                error: function () {
-                    alert("失败");
+                for(var m=0;m<3;m++)
+                {
+                    if($("#cbname"+(m+1)).val() == "")
+                        $("#cb"+(m+1)).hide();
                 }
-            });
-        }
-    }
 
-    <!-- 清空设备div -->
-    function clearDeviceDiv() {
-
-        $("#searchInput").val("");
-        $("#devname").val("");
-        $("#devtype").val("");
-        $("#serialno").val("");
-        $("#IPaddress").val("");
-        $("#port").val("");
-        $("#extra").val("");
-        $("#radio-Ethernet").removeAttr("checked");
-        $("#radio-R5485").removeAttr("checked");
-        $("#radio-RS232").removeAttr("checked");
-        $("#alarm-user-table").empty();
+                for(var n=0;n<9;n++){
+                    if($("#rname"+(n+1)).val() == "")
+                        $("#cr"+(n+1)).hide();
+                }
+            }
+        });
     }
 
     <!-- 添加省行div--wsy2018.9.7 -->
-    function addProBankAlarmUser() {
+    function addOrganization() {
 
         del=window.confirm("确定添加该省行信息？")
         if(del){

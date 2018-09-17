@@ -29,7 +29,7 @@
         <datasource-map>
           <unit-entry name="a.xml" value="1ecb4362-1495-4547-a652-2f68ab666262" />
           <unit-entry name="db_center" />
-          <unit-entry name="db_local" />
+          <unit-entry name="db_local" value="1ecb4362-1495-4547-a652-2f68ab666262" />
           <unit-entry name="hibernate.cfg.xml" value="eb253fd1-ac3b-4741-b2fa-f1b6b9f49f31" />
         </datasource-map>
         <naming-strategy-map />
