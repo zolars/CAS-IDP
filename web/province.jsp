@@ -41,118 +41,6 @@
 
 </head>
 
-<style type="text/css">
-    .r_out {
-        width: 120px;
-        height: 120px;
-        border: 2px solid #d9d9d9;
-        background: #fff;
-        box-shadow: 3px 3px 5px #bfbfbf;
-        -webkit-box-shadow: 3px 3px 5px #bfbfbf;
-        -moz-box-shadow: 3px 3px 5px #bfbfbf;
-        -ms-box-shadow: 3px 3px 5px #bfbfbf;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms_border-radius: 50%;
-        display: inline-block;
-        margin-right: 90px;
-        position: relative;
-    }
-
-    .r_out p {
-        position: absolute;
-        /**bottom:-50px;*/
-        color: #fff;
-        text-align: center;
-        margin: 0 auto;
-        width: 100%;
-        font-size: 14px;
-        line-height: 1.5;
-        font-weight: bold;
-    }
-
-    .r_in {
-        width: 120px;
-        height: 120px;
-        border: 10px solid #fff;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms_border-radius: 50%;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .r_c {
-        width: 120px;
-        height: 120px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 0;
-    }
-
-    .c1 {
-        background: #fbad4c;
-    }
-
-    .c2 {
-        background: #fff143;
-    }
-
-    .c3 {
-        background: #c9dd22;
-    }
-
-    .c4 {
-        background: #00e079;
-    }
-
-    .c5 {
-        background: #0eb83a;
-    }
-
-    .r_num {
-        color: #404040;
-        font-size: 23px;
-        line-height: 1.5;
-        font-weight: bold;
-        position: absolute;
-        top: 50%;
-        margin-top: -25px;
-        text-align: center;
-        width: 100%;
-    }
-
-    #triangle-right {
-        width: 0;
-        height: 0;
-        border-top: 15px solid transparent;
-        border-left: 15px solid #DB241C;
-        border-bottom: 15px solid transparent;
-    }
-
-    .alert-lost {
-        padding: 5px;
-        margin-top: 10px;
-        margin-bottom: -8px;
-        font-size: 14px;
-    }
-</style>
-
-<style>
-    #Layer1 {
-        font-size: 13px;
-        position: absolute;
-        left: 925px;
-        top: 45px;
-        width: 95px;
-        height: 16px;
-        z-index: 1;
-    }
-</style>
-
 <body id="skin-blur-blue">
 
 <!--登陆认证拦截-->
@@ -179,7 +67,7 @@
     <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
 
     <div class="media-body">
-        <div class="media" id="top-menu">zh
+        <div class="media" id="top-menu">
             <div class="pull-left location-select">
                 <select class="form-control location-select-item" id="province_code" name="province_code"
                         onchange="getCity()">
@@ -248,10 +136,10 @@
         <h4 class="page-title">关键信息集中监控</h4>
 
         <!-- Quick Stats -->
-        <div class="block-area">
+        <div id="first-page" class="block-area">
+
             <!-- Time choose -->
             <div class="row">
-
                 <div class="col-md-4">
                     <div class="container">
                         <form action="" class="form-horizontal" role="form">
@@ -308,6 +196,7 @@
             </div>
 
             <div class="row">
+
                 <div id="eventbar" class="col-md-2 col-xs-6" style="width:30%; height: 200px;">
                 </div>
 
@@ -332,6 +221,21 @@
                 </div>
             </div>
 
+        </div>
+
+        <div id="second-page" style="display: none;">
+            <table style="width: 80%; height: 60%">
+                <tr style="width: 80%; height: 50%">
+                    <td style="width: 33%; height: 100%;"><button onclick="openPowerImg()">打开一张配电系统图</button></td>
+                    <td style="width: 33%; height: 100%"></td>
+                    <td style="width: 33%; height: 100%"></td>
+                </tr>
+                <tr style="width: 80%; height: 50%">
+                    <td style="width: 33%; height: 100%">温度</td>
+                    <td style="width: 33%; height: 100%">湿度</td>
+                    <td style="width: 33%; height: 100%">电能质量评估</td>
+                </tr>
+            </table>
         </div>
 
         <hr class="whiter"/>
@@ -478,7 +382,8 @@
             // 指定图表的配置项和数据
             var eventoption = {
                 title: {
-                    text: '事件'
+                    text: '事件',
+                    subtext: '威胁分布',
                 },
                 tooltip: {},
                 xAxis: {
@@ -500,7 +405,8 @@
             // 指定图表的配置项和数据
             var alarmoption = {
                 title: {
-                    text: '告警'
+                    text: '告警',
+                    subtext: '风险',
                 },
                 tooltip: {},
                 xAxis: {
@@ -517,7 +423,8 @@
             // 指定图表的配置项和数据
             var nxoption = {
                 title: {
-                    text: '能效'
+                    text: '能效',
+                    subtext: 'PUE统计',
                 },
                 tooltip: {},
                 xAxis: {
@@ -539,7 +446,8 @@
             // 指定图表的配置项和数据
             var nhoption = {
                 title: {
-                    text: '能耗'
+                    text: '能耗',
+                    subtext: '用电统计',
                 },
                 tooltip: {},
                 xAxis: {
@@ -578,6 +486,14 @@
 
         }
     });
+
+    //点击某个柱状图，进入该分行的页面
+    eventChart.on('click', function(){
+        $('#second-page').css('display', 'block');
+        $('#first-page').css('display', 'none');
+
+    });
+
 </script>
 
 <!-- 时间选择器-->
@@ -668,12 +584,6 @@
 
 <script type="text/javascript">
 
-    /*function asyncRequest() {
-        var alertmsg = "<%=session.getAttribute("alert")%>";
-            if(alertmsg != "null") {
-                alert("if"+alertmsg);
-            }
-        }*/
     function asyncRequest() {
         $.ajax({
             type: "post",
@@ -688,8 +598,13 @@
 
     var intervalTimer = window.setInterval(asyncRequest, 1500000);
 
-    // clearInterval(intervalTimer)
+</script>
 
+<script type="text/javascript">
+    function openPowerImg(){
+        alert("请选择一张图片");
+
+    }
 </script>
 
 

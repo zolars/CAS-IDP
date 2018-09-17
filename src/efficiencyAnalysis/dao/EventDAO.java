@@ -30,4 +30,6 @@ public interface EventDAO {
 
     public boolean setAllEventtypePriorty(String[] eventtypelist, String[] priortylist);
 
+    public boolean setCaptrueSettingInfo(String onlineinterval, String tansentinterval, String upload, String ip, String onlineport, String tansentport, String did);
+
 }
