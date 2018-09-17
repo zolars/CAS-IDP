@@ -7,12 +7,14 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import sms.SmsAlarm;
 
+import javax.swing.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 
 public class alarmModelJob implements Job {
     @Override
@@ -55,11 +57,10 @@ public class alarmModelJob implements Job {
                     Timestamp starttime =  (Timestamp)objects[4];
                     Timestamp endtime =  (Timestamp)objects[5];
 
-                    /* if(isAlart== 1){ //执行弹窗报警
-                        System.out.println("执行弹窗报警");
-                    }*/
+                     if(isAlart== 1){ //执行弹窗报警
+                        JOptionPane.showMessageDialog(null,"请注意：告警信息！\r\n"+ "时间：" + alrmtranslist.get(i).getTime() + "\r\n信息：" +  msgstr);
+                    }
                     if(isSms == 1){ //执行短信报警
-                        System.out.println("执行短信报警"+isSms);
                         SmsAlarm s = new SmsAlarm();
                         s.excuteSmsAlarm(telephone, msgstr);
                     }
@@ -69,7 +70,6 @@ public class alarmModelJob implements Job {
                 }
             }
         }
-
 
         System.out.println("完成告警模块:" + System.currentTimeMillis());
     }

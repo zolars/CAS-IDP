@@ -25,7 +25,7 @@ public class addKnowledgeTreeNodeContentAction extends ActionSupport {
     }
 
 
-    /*删除某个子节点知识
+    /*添加某个子节点知识
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -33,16 +33,15 @@ public class addKnowledgeTreeNodeContentAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //获取节点id
             String kid = request.getParameter("kid");
+            String tmpTitle = request.getParameter("tmpTitle");
             String content = request.getParameter("tmpcontent");
 
-
             KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();
-            Boolean rt = dao.addKnowledgeNode(kid, content);
+            Boolean rt = dao.addKnowledgeNode(kid, tmpTitle, content);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("boolvalue", rt);
+            jsonObject.put("", rt);
 
             result = JSON.toJSONString(jsonObject);
 
