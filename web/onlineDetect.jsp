@@ -132,17 +132,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs" id="ulItem">
-                            <li class="active" style="width:25%">
+                            <li class="active" style="width:20%">
                                 <a data-toggle="tab" id="subItem1">•趋势图</a>
                             </li>
-                            <li style="width:25%">
+                            <li style="width:20%">
                                 <a data-toggle="tab" id="subItem2">•谐波</a>
                             </li>
-                            <li style="width:25%">
+                            <li style="width:20%">
                                 <a data-toggle="tab" id="subItem3">•三相电压不平衡度</a>
                             </li>
-                            <li style="width:25%">
+                            <li style="width:20%">
                                 <a data-toggle="tab" id="subItem4">•参数值</a>
+                            </li>
+                            <li style="width:20%">
+                                <a data-toggle="tab" id="subItem5">•实时图形</a>
                             </li>
                         </ul>
                     </div>
@@ -309,6 +312,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                         </div>
                     </div>
+                    <div id = "item5" class="col-md-12" style="height: 600px;width: 800px;">
+                        <div class="row">
+                            通道选择
+                            <div class="row" id="item4-graph" style="height: 550px;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -460,6 +469,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item2").hide();
                     $("#item3").hide();
                     $("#item4").hide();
+                    $("#item5").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
                     if(mpcname) getDataQst(mpcname);
@@ -469,6 +479,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item2").show();
                     $("#item3").hide();
                     $("#item4").hide();
+                    $("#item5").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
                     if(mpcname) getDataXb(mpcname);
@@ -478,6 +489,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item2").hide();
                     $("#item3").show();
                     $("#item4").hide();
+                    $("#item5").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
                     if(mpcname) getDataSxdy(mpcname);
@@ -487,9 +499,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item2").hide();
                     $("#item3").hide();
                     $("#item4").show();
+                    $("#item5").hide();
                     //切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
                     if(mpcname) getDataParams(mpcname);
+                });
+                $("#subItem5").click(function(){
+                    $("#item1").hide();
+                    $("#item2").hide();
+                    $("#item3").hide();
+                    $("#item4").hide();
+                    $("#item5").show();
+                    //切换子菜单时，从后台读取数据
+                    var mpcname = $("#monitorpnt").val();
+                    if(mpcname) getOnlineWave(mpcname);
                 });
                 $("#subItem1").trigger("click");
             });
@@ -626,6 +649,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             label: {formatter: '{a}{b}:{c}'},
             data: []
         };
+
         // 各个图的配置项
         var option1 = {
             legend: {
@@ -978,498 +1002,284 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: sxbphdlegend
             },
             series: [
-                {
-                    name: "U1",
-                    type: "gauge",
-                    min: 0,
-                    max: 360,
-                    startAngle: 0,
-                    endAngle: 359.99,
-                    //分割段数
-                    splitNumber: 12,
-                    //分隔线
-                    splitLine: {
-                        show: true,
-                        length: "10%",
-                        lineStyle: {
-                            width: 4
-                        }
-                    },
-                    //仪表盘轴线
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: [[0.5, "#ccc"], [1, "#ccc"]],
-                            width: 10
-                        }
-                    },
-                    //刻度线
-                    axisTick: {
-                        show: true,
-                        splitNumber: 2,
-                        length: "5%",
-                        lineStyle: {
-                            width: 2
-                        }
-                    },
-                    //刻度标签
-                    axisLabel: {
-                        show: false,
-                    },
-                    //指针
-                    // pointer: {
-                    //     length: ""
-                    // },
-                    //指针样式
-                    itemStyle: {
-                        color: gaugePointerColor[0]
-                    },
-                    title: {
-                        show: false
-                    },
-                    detail: {
-                        show: false
-                    }
-                    // data:[{value: pointerAngle[0]}]
+                {name: "U1", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
+                    splitLine: {show: true, length: "10%", lineStyle: {width: 4}},
+                    axisLine: {show: true, lineStyle: {color: [[0.5, "#ccc"], [1, "#ccc"]], width: 10}},
+                    axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
+                    axisLabel: {show: false,},
+                    itemStyle: {color: gaugePointerColor[0]},
+                    title: {show: false},
+                    detail: {show: false}
                 },
-                {
-                    name: "U2",
-                    type: "gauge",
-                    min: 0,
-                    max: 360,
-                    startAngle: 0,
-                    endAngle: 359.99,
-                    //分割段数
-                    splitNumber: 12,
+                {name: "U2", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
-                    splitLine: {
-                        show: true,
-                        length: "10%",
-                        lineStyle: {
-                            width: 4
-                        }
-                    },
+                    splitLine: {show: true, length: "10%", lineStyle: {width: 4}},
                     //仪表盘轴线
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: [[0.5, "#ccc"], [1, "#ccc"]],
-                            width: 10
-                        }
-                    },
+                    axisLine: {show: true, lineStyle: {color: [[0.5, "#ccc"], [1, "#ccc"]], width: 10}},
                     //刻度线
-                    axisTick: {
-                        show: true,
-                        splitNumber: 2,
-                        length: "5%",
-                        lineStyle: {
-                            width: 2
-                        }
-                    },
+                    axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
-                    axisLabel: {
-                        show: false,
-                    },
+                    axisLabel: {show: false,},
                     //指针
-                    // pointer: {
-                    //     length: pointerLength[1]
-                    // },
+                    // pointer: {length: pointerLength[1]},
                     //指针样式
-                    itemStyle: {
-                        color: gaugePointerColor[1]
-                    },
-                    title: {
-                        show: false
-                    },
-                    detail: {
-                        show: false
-                    }
+                    itemStyle: {color: gaugePointerColor[1]},
+                    title: {show: false},
+                    detail: {show: false}
                     // data:[{value: pointerAngle[1]}]
                 },
-                {
-                    name: "U3",
-                    type: "gauge",
-                    min: 0,
-                    max: 360,
-                    startAngle: 0,
-                    endAngle: 359.99,
-                    //分割段数
-                    splitNumber: 12,
+                {name: "U3", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
-                    splitLine: {
-                        show: true,
-                        length: "10%",
-                        lineStyle: {
-                            width: 4
-                        }
-                    },
+                    splitLine: {show: true, length: "10%", lineStyle: {width: 4}},
                     //仪表盘轴线
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: [[0.5, "#ccc"], [1, "#ccc"]],
-                            width: 10
-                        }
-                    },
+                    axisLine: {show: true, lineStyle: {color: [[0.5, "#ccc"], [1, "#ccc"]], width: 10}},
                     //刻度线
-                    axisTick: {
-                        show: true,
-                        splitNumber: 2,
-                        length: "5%",
-                        lineStyle: {
-                            width: 2
-                        }
-                    },
+                    axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
-                    axisLabel: {
-                        show: false,
-                    },
+                    axisLabel: {show: false,},
                     //指针
-                    // pointer: {
-                    //     length: pointerLength[2]
-                    // },
+                    // pointer: {length: pointerLength[2] },
                     //指针样式
-                    itemStyle: {
-                        color: gaugePointerColor[2]
-                    },
-                    title: {
-                        show: false
-                    },
-                    detail: {
-                        show: false
-                    }
+                    itemStyle: {color: gaugePointerColor[2]},
+                    title: {show: false},
+                    detail: {show: false}
                     // data:[{value: pointerAngle[2]}]
                 },
                 {
-                    name: "V1",
-                    type: "gauge",
-                    min: 0,
-                    max: 360,
-                    startAngle: 0,
-                    endAngle: 359.99,
-                    //分割段数
-                    splitNumber: 12,
+                    name: "V1", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
-                    splitLine: {
-                        show: true,
-                        length: "10%",
-                        lineStyle: {
-                            width: 4
-                        }
-                    },
+                    splitLine: {show: true, length: "10%", lineStyle: {width: 4}},
                     //仪表盘轴线
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: [[0.5, "#ccc"], [1, "#ccc"]],
-                            width: 10
-                        }
-                    },
+                    axisLine: {show: true, lineStyle: {color: [[0.5, "#ccc"], [1, "#ccc"]], width: 10}},
                     //刻度线
-                    axisTick: {
-                        show: true,
-                        splitNumber: 2,
-                        length: "5%",
-                        lineStyle: {
-                            width: 2
-                        }
-                    },
+                    axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
-                    axisLabel: {
-                        show: false,
-                    },
+                    axisLabel: {show: false,},
                     //指针
-                    // pointer: {
-                    //     length: pointerLength[3]
-                    // },
+                    // pointer: { length: pointerLength[3] },
                     //指针样式
-                    itemStyle: {
-                        color: gaugePointerColor[0]
-                    },
-                    title: {
-                        show: false
-                    },
-                    detail: {
-                        show: false
-                    }
+                    itemStyle: {color: gaugePointerColor[0]},
+                    title: {show: false},
+                    detail: {show: false}
                     // data:[{value: pointerAngle[3]}]
                 },
-                {
-                    name: "V2",
-                    type: "gauge",
-                    min: 0,
-                    max: 360,
-                    startAngle: 0,
-                    endAngle: 359.99,
-                    //分割段数
-                    splitNumber: 12,
+                {name: "V2", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
-                    splitLine: {
-                        show: true,
-                        length: "10%",
-                        lineStyle: {
-                            width: 4
-                        }
-                    },
+                    splitLine: {show: true, length: "10%", lineStyle: {width: 4}},
                     //仪表盘轴线
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: [[0.5, "#ccc"], [1, "#ccc"]],
-                            width: 10
-                        }
-                    },
+                    axisLine: {show: true, lineStyle: {color: [[0.5, "#ccc"], [1, "#ccc"]], width: 10}},
                     //刻度线
-                    axisTick: {
-                        show: true,
-                        splitNumber: 2,
-                        length: "5%",
-                        lineStyle: {
-                            width: 2
-                        }
-                    },
+                    axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
-                    axisLabel: {
-                        show: false,
-                    },
+                    axisLabel: {show: false,},
                     //指针
-                    // pointer: {
-                    //     length: pointerLength[4]
-                    // },
+                    // pointer: {length: pointerLength[4]},
                     //指针样式
-                    itemStyle: {
-                        color: gaugePointerColor[1]
-                    },
-                    title: {
-                        show: false
-                    },
-                    detail: {
-                        show: false
-                    }
+                    itemStyle: {color: gaugePointerColor[1]},
+                    title: {show: false},
+                    detail: {show: false}
                     // data:[{value: pointerAngle[4]}]
                 },
-                {
-                    name: "V3",
-                    type: "gauge",
-                    min: 0,
-                    max: 360,
-                    startAngle: 0,
-                    endAngle: 359.99,
-                    //分割段数
-                    splitNumber: 12,
+                {name: "V3", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
-                    splitLine: {
-                        show: true,
-                        length: "10%",
-                        lineStyle: {
-                            width: 4
-                        }
-                    },
+                    splitLine: {show: true, length: "10%", lineStyle: {width: 4}},
                     //仪表盘轴线
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: [[0.5, "#ccc"], [1, "#ccc"]],
-                            width: 10
-                        }
-                    },
+                    axisLine: {show: true, lineStyle: {color: [[0.5, "#ccc"], [1, "#ccc"]], width: 10}},
                     //刻度线
-                    axisTick: {
-                        show: true,
-                        splitNumber: 2,
-                        length: "5%",
-                        lineStyle: {
-                            width: 2
-                        }
-                    },
+                    axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
-                    axisLabel: {
-                        show: false,
-                    },
+                    axisLabel: {show: false,},
                     //指针
-                    // pointer: {
-                    //     length: pointerLength[5]
-                    // },
+                    // pointer: {   length: pointerLength[5]},
                     //指针样式
-                    itemStyle: {
-                        color: gaugePointerColor[2]
-                    },
-                    title: {
-                        show: false
-                    },
-                    detail: {
-                        show: false
-                    }
+                    itemStyle: {color: gaugePointerColor[2]},
+                    title: {show: false},
+                    detail: {show: false}
                     // data:[{value: pointerAngle[5]}]
                 },
-                {
-                    name: "A1",
-                    type: "gauge",
-                    min: 0,
-                    max: 360,
-                    startAngle: 0,
-                    endAngle: 359.99,
-                    //分割段数
-                    splitNumber: 12,
+                {name: "A1", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
-                    splitLine: {
-                        show: true,
-                        length: "10%",
-                        lineStyle: {
-                            width: 4
-                        }
-                    },
+                    splitLine: {show: true, length: "10%", lineStyle: {width: 4}},
                     //仪表盘轴线
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: [[0.5, "#ccc"], [1, "#ccc"]],
-                            width: 10
-                        }
-                    },
+                    axisLine: {show: true, lineStyle: {color: [[0.5, "#ccc"], [1, "#ccc"]], width: 10}},
                     //刻度线
-                    axisTick: {
-                        show: true,
-                        splitNumber: 2,
-                        length: "5%",
-                        lineStyle: {
-                            width: 2
-                        }
-                    },
+                    axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
-                    axisLabel: {
-                        show: false,
-                    },
+                    axisLabel: {show: false,},
                     //指针
-                    // pointer: {
-                    //     length: pointerLength[6]
-                    // },
+                    // pointer: {     length: pointerLength[6] },
                     //指针样式
-                    itemStyle: {
-                        color: gaugePointerColor[0]
-                    },
-                    title: {
-                        show: false
-                    },
-                    detail: {
-                        show: false
-                    }
+                    itemStyle: {color: gaugePointerColor[0]},
+                    title: {show: false},
+                    detail: {show: false}
                     // data:[{value: pointerAngle[6]}]
                 },
-                {
-                    name: "A2",
-                    type: "gauge",
-                    min: 0,
-                    max: 360,
-                    startAngle: 0,
-                    endAngle: 359.99,
-                    //分割段数
-                    splitNumber: 12,
+                {name: "A2", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
-                    splitLine: {
-                        show: true,
-                        length: "10%",
-                        lineStyle: {
-                            width: 4
-                        }
+                    splitLine: {show: true, length: "10%", lineStyle: {width: 4}
                     },
                     //仪表盘轴线
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: [[0.5, "#ccc"], [1, "#ccc"]],
-                            width: 10
-                        }
-                    },
+                    axisLine: {show: true, lineStyle: {color: [[0.5, "#ccc"], [1, "#ccc"]], width: 10}},
                     //刻度线
-                    axisTick: {
-                        show: true,
-                        splitNumber: 2,
-                        length: "5%",
-                        lineStyle: {
-                            width: 2
-                        }
-                    },
+                    axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
-                    axisLabel: {
-                        show: false,
-                    },
+                    axisLabel: {show: false,},
                     //指针
                     // pointer: {
                     //     length: pointerLength[7]
                     // },
                     //指针样式
-                    itemStyle: {
-                        color: gaugePointerColor[1]
-                    },
-                    title: {
-                        show: false
-                    },
-                    detail: {
-                        show: false
-                    }
+                    itemStyle: {color: gaugePointerColor[1]},
+                    title: {show: false},
+                    detail: {show: false}
                     // data:[{value: pointerAngle[7]}]
                 },
-                {
-                    name: "A3",
-                    type: "gauge",
-                    min: 0,
-                    max: 360,
-                    startAngle: 0,
-                    endAngle: 359.99,
+                {name: "A3", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99,
                     //分割段数
                     splitNumber: 12,
                     //分隔线
-                    splitLine: {
-                        show: true,
-                        length: "10%",
-                        lineStyle: {
-                            width: 4
-                        }
-                    },
+                    splitLine: {show: true, length: "10%", lineStyle: {width: 4}},
                     //仪表盘轴线
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: [[0.5, "#ccc"], [1, "#ccc"]],
-                            width: 10
-                        }
-                    },
+                    axisLine: {show: true, lineStyle: {color: [[0.5, "#ccc"], [1, "#ccc"]], width: 10}},
                     //刻度线
-                    axisTick: {
-                        show: true,
-                        splitNumber: 2,
-                        length: "5%",
-                        lineStyle: {
-                            width: 2
-                        }
-                    },
+                    axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
-                    axisLabel: {
-                        show: false,
-                    },
+                    axisLabel: {show: false,},
                     //指针
-                    // pointer: {
-                    //     length: pointerLength[8]
-                    // },
+                    // pointer: { length: pointerLength[8]},
                     //指针样式
-                    itemStyle: {
-                        color: gaugePointerColor[2]
-                    },
-                    title: {
-                        show: false
-                    },
-                    detail: {
-                        show: false
-                    }
+                    itemStyle: {color: gaugePointerColor[2]},
+                    title: {show: false},
+                    detail: {show: false}
                     // data:[{value: pointerAngle[8]}]
                 }
             ]
         };
+
+        var option4 = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#283b56'
+                    }
+                }
+            },
+            legend: {
+                data:['U1', 'U2', 'U3', 'U4', 'I1', 'I2', 'I3', 'I4']
+            },
+            dataZoom: {
+                show: false,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: (function (){
+                        var now = new Date();
+                        var res = [];
+                        var len = 10;
+                        while (len--) {
+                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                            now = new Date(now - 2000);
+                        }
+                        return res;
+                    })()
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: true,
+                    max: 300,
+                    min: -300,
+                    boundaryGap: [0.2, 0.2]
+                }
+            ],
+            series: [
+                {
+                    name:'U1',
+                    type:'line',
+                    smooth: 'true',
+                    data:(function (){
+                        var res = [0,0,0,0,0,0,0,0,0,0];
+                        return res;
+                    })()
+                },
+                {
+                    name:'U2',
+                    type:'line',
+                    smooth: 'true',
+                    data:(function (){
+                        var res = [0,0,0,0,0,0,0,0,0,0];
+                        return res;
+                    })()
+                },
+                {
+                    name:'U3',
+                    type:'line',
+                    smooth: 'true',
+                    data:(function (){
+                        var res = [0,0,0,0,0,0,0,0,0,0];
+                        return res;
+                    })()
+                },
+                {
+                    name:'U4',
+                    type:'line',
+                    smooth: 'true',
+                    data:(function (){
+                        var res = [0,0,0,0,0,0,0,0,0,0];
+                        return res;
+                    })()
+                },
+                {
+                    name:'I1',
+                    type:'line',
+                    smooth: 'true',
+                    data:(function (){
+                        var res = [0,0,0,0,0,0,0,0,0,0];
+                        return res;
+                    })()
+                },
+                {
+                    name:'I2',
+                    type:'line',
+                    smooth: 'true',
+                    data:(function (){
+                        var res = [0,0,0,0,0,0,0,0,0,0];
+                        return res;
+                    })()
+                },
+                {
+                    name:'I3',
+                    type:'line',
+                    smooth: 'true',
+                    data:(function (){
+                        var res = [0,0,0,0,0,0,0,0,0,0];
+                        return res;
+                    })()
+                },
+                {
+                    name:'I4',
+                    type:'line',
+                    smooth: 'true',
+                    data:(function (){
+                        var res = [0,0,0,0,0,0,0,0,0,0];
+                        return res;
+                    })()
+                }
+            ]
+        };
+
         // echarts图表容器
         var eventChart1 = echarts.init(document.getElementById('item1-graph'));
         var eventChart2 = echarts.init(document.getElementById('item2'));
         var eventChart3 = echarts.init(document.getElementById('item3-graph'));
+        var eventChart4 = echarts.init(document.getElementById('item4-graph'));
 
         //事件绑定函数
         function eventBanding(){
@@ -1575,7 +1385,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $("#item1-params-list ol li button.active").trigger("click");//默认显示rms数据
             $("#item1-sidebar ol li button.active").trigger("click");
         };
-
     </script>
 
     <%--趋势图相关函数 --%>
@@ -1626,8 +1435,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             alert("datascr3"+dataSource3);
             myOption.series.forEach(function (item, index) {
                 if(item.name === selectValue) {
-                    console.log(myOption.series[index]);
-                    console.log(myOption.series[index].data);
                     myOption.series[index].data = dataSource1;
                     eventChart1.setOption(myOption);
                 }
@@ -1800,37 +1607,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     res.push(temp);
             }
             eventChart2.setOption({
-                series: [{name: "U1", type: 'line', data: res[0]}, {name: "U2", type: 'line', data: res[1]},
-                    {
-                        name: "U3",
-                        type: 'line',
-                        data: res[2]
-                    },
-                    {
-                        name: "U4",
-                        type: 'line',
-                        data: res[3]
-                    },
-                    {
-                        name: "I1",
-                        type: 'line',
-                        data: res[4]
-                    },
-                    {
-                        name: "I2",
-                        type: 'line',
-                        data: res[5]
-                    },
-                    {
-                        name: "I3",
-                        type: 'line',
-                        data: res[6]
-                    },
-                    {
-                        name: "I4",
-                        type: 'line',
-                        data: res[7]
-                    }
+                series: [{name: "U1", type: 'line', data: res[0]},
+                    {name: "U2", type: 'line', data: res[1]},
+                    {name: "U3", type: 'line', data: res[2]},
+                    {name: "U4", type: 'line', data: res[3]},
+                    {name: "I1", type: 'line', data: res[4]},
+                    {name: "I2", type: 'line', data: res[5]},
+                    {name: "I3", type: 'line', data: res[6]},
+                    {name: "I4", type: 'line', data: res[7]}
                 ]
             });
         }
@@ -1932,18 +1716,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 case "A" : {
                     // 更新幅值
                     $("#item3-text-name1").html(value + "1");
-                    $("#item3-text-value1").html(data[value.toLowerCase() + "1"]);
+                    $("#item3-text-value1").html(data[value.toLowerCase() + "1"].toFixed(2));
                     $("#item3-text-name2").html(value + "2");
-                    $("#item3-text-value2").html(data[value.toLowerCase() + "2"]);
+                    $("#item3-text-value2").html(data[value.toLowerCase() + "2"].toFixed(2));
                     $("#item3-text-name3").html(value + "3");
-                    $("#item3-text-value3").html(data[value.toLowerCase() + "3"]);
+                    $("#item3-text-value3").html(data[value.toLowerCase() + "3"].toFixed(2));
                     $("#item3-text-nameunb").html(value + "unb");
-                    $("#item3-text-valueunb").html(data[value.toLowerCase() + "unb"]);
+                    $("#item3-text-valueunb").html(data[value.toLowerCase() + "unb"].toFixed(2));
                     // 更新相位差
                     $("#item3-text ol.diff").show();
-                    $("#item3-text-diff1").html(data["angle" + value + "2"] - data["angle" + value + "1"]);
-                    $("#item3-text-diff2").html(data["angle" + value + "3"] - data["angle" + value + "2"]);
-                    $("#item3-text-diff3").html(data["angle" + value + "1"] - data["angle" + value + "3"]);
+                    $("#item3-text-diff1").html((data["angle" + value + "2"] - data["angle" + value + "1"]).toFixed(2));
+                    $("#item3-text-diff2").html((data["angle" + value + "3"] - data["angle" + value + "2"]).toFixed(2));
+                    $("#item3-text-diff3").html((data["angle" + value + "1"] - data["angle" + value + "3"]).toFixed(2));
                     break;
                 }
                 case "1" :
@@ -1951,11 +1735,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 case "3" : {
                     // 更新幅值
                     $("#item3-text-name1").html("U" + value);
-                    $("#item3-text-value1").html(data["u" + value]);
+                    $("#item3-text-value1").html(data["u" + value].toFixed(2));
                     $("#item3-text-name2").html("V" + value);
-                    $("#item3-text-value2").html(data["v" + value]);
+                    $("#item3-text-value2").html(data["v" + value].toFixed(2));
                     $("#item3-text-name3").html("A" + value);
-                    $("#item3-text-value3").html(data["a" + value]);
+                    $("#item3-text-value3").html(data["a" + value].toFixed(2));
                     // 隐藏相位差
                     $("#item3-text ol.diff").hide();
                     break;
@@ -1987,37 +1771,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         // 更新参数值表格
         function updateParams(data) {
+
             $("#params-basic").html(
                 "<caption>基本参数</caption>"+
-                "<tr><th>U1</th><td>"+data["u1"]+"</td></tr>"+
-                "<tr><th>U2</th><td>"+data["u2"]+"</td></tr>"+
-                "<tr><th>U3</th><td>"+data["u3"]+"</td></tr>"+
-                "<tr><th>U4</th><td>"+data["u4"]+"</td></tr>"+
-                "<tr><th>I1</th><td>"+data["i1"]+"</td></tr>"+
-                "<tr><th>I2</th><td>"+data["i2"]+"</td></tr>"+
-                "<tr><th>I3</th><td>"+data["i3"]+"</td></tr>"+
-                "<tr><th>I4</th><td>"+data["i4"]+"</td></tr>"
+                "<tr><th>U1</th><td>"+data["u1"].toFixed(2)+"</td></tr>"+
+                "<tr><th>U2</th><td>"+data["u2"].toFixed(2)+"</td></tr>"+
+                "<tr><th>U3</th><td>"+data["u3"].toFixed(2)+"</td></tr>"+
+                "<tr><th>U4</th><td>"+data["u4"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I1</th><td>"+data["i1"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I2</th><td>"+data["i2"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I3</th><td>"+data["i3"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I4</th><td>"+data["i4"].toFixed(2)+"</td></tr>"
             );
             $("#params-power").html(
                 "<caption>功率参数</caption>"+
                 "<tr><th></th><th>相1</th><th>相2</th><th>相3</th><th>总和</th></tr>"+
-                "<tr><th>P(W)</th><td>"+data["p1"]+"</td><td>"+data["p2"]+"</td><td>"+data["p3"]+"</td><td>"+Number(parseInt(data["p1"])+parseInt(data["p2"])+parseInt(data["p3"]))+"</td></tr>"+
-                "<tr><th>Q(Var)</th><td>"+data["q1"]+"</td><td>"+data["q2"]+"</td><td>"+data["q3"]+"</td><td>"+Number(parseInt(data["q1"])+parseInt(data["q2"])+parseInt(data["q3"]))+"</td></tr>"+
-                "<tr><th>S(VA)</th><td>"+data["s1"]+"</td><td>"+data["s2"]+"</td><td>"+data["s3"]+"</td><td>"+Number(parseInt(data["s1"])+parseInt(data["s2"])+parseInt(data["s3"]))+"</td></tr>"+
-                "<tr><th>PF</th><td>"+data["pf1"]+"</td><td>"+data["pf2"]+"</td><td>"+data["pf3"]+"</td><td>"+Number(parseInt(data["pf1"])+parseInt(data["pf2"])+parseInt(data["pf3"]))+"</td></tr>"+
-                "<tr><th>Cos PHI</th><td>"+data["cosPhi1"]+"</td><td>"+data["cosPhi2"]+"</td><td>"+data["cosPhi3"]+"</td><td></td></tr>"
+                "<tr><th>P(W)</th><td>"+data["p1"].toFixed(2)+"</td><td>"+data["p2"].toFixed(2)+"</td><td>"+data["p3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["p1"])+parseFloat(data["p2"])+parseFloat(data["p3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>Q(Var)</th><td>"+data["q1"].toFixed(2)+"</td><td>"+data["q2"].toFixed(2)+"</td><td>"+data["q3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["q1"])+parseFloat(data["q2"])+parseFloat(data["q3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>S(VA)</th><td>"+data["s1"].toFixed(2)+"</td><td>"+data["s2"].toFixed(2)+"</td><td>"+data["s3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["s1"])+parseFloat(data["s2"])+parseFloat(data["s3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>PF</th><td>"+data["pf1"].toFixed(2)+"</td><td>"+data["pf2"].toFixed(2)+"</td><td>"+data["pf3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["pf1"])+parseFloat(data["pf2"])+parseFloat(data["pf3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>Cos PHI</th><td>"+data["cosPhi1"].toFixed(2)+"</td><td>"+data["cosPhi2"].toFixed(2)+"</td><td>"+data["cosPhi3"].toFixed(2)+"</td><td></td></tr>"
             );
             $("#params-unb").html(
                 "<caption>&nbsp;</caption>"+
-                "<tr><th>不平衡度</th><td>"+data["unb"]+"</td></tr>"+
-                "<tr><th>频率</th><td>"+data["hz"]+"</td></tr>"
+               /* "<tr><th>不平衡度</th><td>"+data["unb"].toFixed(2)+"</td></tr>"+*/
+                "<tr><th>频率</th><td>"+data["hz"].toFixed(2)+"</td></tr>"
             );
             $("#params-shanbian").html(
                 "<caption>闪变</caption>"+
                 "<tr><th></th><th>U1</th><th>U2</th><th>U3</th></tr>"+
-                "<tr><th>|f|</th><td>"+data["iflU1"]+"</td><td>"+data["iflU2"]+"</td><td>"+data["iflU3"]+"</td></tr>"+
-                "<tr><th>Pst</th><td>"+data["pstU1"]+"</td><td>"+data["pstU2"]+"</td><td>"+data["pstU3"]+"</td></tr>"+
-                "<tr><th>Plt</th><td>"+data["pltU1"]+"</td><td>"+data["pltU2"]+"</td><td>"+data["pltU3"]+"</td></tr>"
+                "<tr><th>|f|</th><td>"+data["iflU1"].toFixed(2)+"</td><td>"+data["iflU2"].toFixed(2)+"</td><td>"+data["iflU3"].toFixed(2)+"</td></tr>"+
+                "<tr><th>Pst</th><td>"+data["pstU1"].toFixed(2)+"</td><td>"+data["pstU2"].toFixed(2)+"</td><td>"+data["pstU3"].toFixed(2)+"</td></tr>"+
+                "<tr><th>Plt</th><td>"+data["pltU1"].toFixed(2)+"</td><td>"+data["pltU2"].toFixed(2)+"</td><td>"+data["pltU3"].toFixed(2)+"</td></tr>"
             );
         }
     </script>
@@ -2047,15 +1832,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             eventChart1.setOption(option1);
             eventChart2.setOption(option2);
             eventChart3.setOption(option3);
+            eventChart4.setOption(option4);
 
             eventBanding();
-            // 按指定时间间隔10s 更新图表
+            // 按指定时间间隔5s 更新图表
             setInterval(function () {
                 getDataQst($("#monitorpnt").val());
                 getDataXb($("#monitorpnt").val());
                 getDataSxdy($("#monitorpnt").val());
                 getDataParams($("#monitorpnt").val());
-            },10000);
+                getOnlineWave($("#monitorpnt").val());
+            },5000);
+
 
             // 更新时间 每2s
             setInterval(function () {
@@ -2063,7 +1851,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             },2000);
         }
         chartsInit();
+
     </script>
+
+    <%--实时图形--%>
+    <script type="text/javascript">
+        function getOnlineWave(did){
+
+            var data0 = 0;
+            var data1 = 0;
+            var data2 = 0;
+            var data3 = 0;
+            var data4 = 0;
+            var data5 = 0;
+            var data6 = 0;
+            var data7 = 0;
+
+            $.ajax({
+                type: "post",
+                url: "getXBwave",
+                data: {
+                    did: did,
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    data0 = obj.nowpowerxb['u1Xb3'];
+                    data1 = obj.nowpowerxb['u2Xb3'];
+                    data2 = obj.nowpowerxb['u3Xb3'];
+                    data3 = obj.nowpowerxb['u4Xb3'];
+                    data4 = obj.nowpowerxb['i1Xb3'];
+                    data5 = obj.nowpowerxb['i2Xb3'];
+                    data6 = obj.nowpowerxb['i3Xb3'];
+                    data7 = obj.nowpowerxb['i4Xb3'];
+                }
+            });
+
+            axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+
+            var odata0 = option4.series[0].data;
+            var odata1 = option4.series[1].data;
+            var odata2 = option4.series[2].data;
+            var odata3 = option4.series[3].data;
+            var odata4 = option4.series[4].data;
+            var odata5 = option4.series[5].data;
+            var odata6 = option4.series[6].data;
+            var odata7 = option4.series[7].data;
+
+            odata0.shift();
+            odata0.push(data0);
+            odata1.shift();
+            odata1.push(data1);
+            odata2.shift();
+            odata2.push(data2);
+            odata3.shift();
+            odata3.push(data3);
+            odata4.shift();
+            odata4.push(data4);
+            odata5.shift();
+            odata5.push(data5);
+            odata6.shift();
+            odata6.push(data6);
+            odata7.shift();
+            odata7.push(data7);
+
+            option4.xAxis[0].data.shift();
+            option4.xAxis[0].data.push(axisData);
+
+            eventChart4.setOption(option4);
+        }
+    </script>
+
 
     <%--选择监测点时，从后台读取相应数据--%>
     <script type="text/javascript"f>
@@ -2078,6 +1936,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 getDataSxdy(opt);
             else if ($("#item4").is(":visible"))
                 getDataParams(opt);
+            else if ($("#item5").is(":visible"))
+                getOnlineWave(opt);
         }
     });
     </script>

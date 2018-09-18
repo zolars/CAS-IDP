@@ -51,7 +51,7 @@ public class EventDAOImpl implements EventDAO {
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
-        String comidset[] = comstr.split(",");
+        String comidset[] = comstr.split("，");
 
         for(int i = 0; i < comidset.length; i++){
 
@@ -59,7 +59,9 @@ public class EventDAOImpl implements EventDAO {
             cp = (Computerroom)hbsessionDao.getFirst(
                     "FROM Computerroom where rid = '" + comidset[i]+ "'");
 
-            didstr += ","+ cp.getDidset();
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
         }
 
         //再根据设备id查询事件
@@ -73,7 +75,7 @@ public class EventDAOImpl implements EventDAO {
         for(int i = 0; i < didset.length; i++ ){
             String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
                     "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
-                    + "' and ta.did ='" + didset[i] + "' and time >"+ starttime + " and time <" + endtime;
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"'";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -106,7 +108,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件
-    //无时间范围
+    //返回最近一条事件记录
     public List getLocalLastPowerEvent(String cbname){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
@@ -144,6 +146,8 @@ public class EventDAOImpl implements EventDAO {
         PreparedStatement ps = null;
         db = new DBConnect();
 
+        String maxtime = "0000-00-00 00:00:00.0";
+
         for(int i = 0; i < didset.length; i++ ){
 
             String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
@@ -158,13 +162,15 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-
                     list.add(rs.getString("discription"));
                     list.add(rs.getString("time"));
 
-                    rtlist.add(list.toString());
+                    if(maxtime.compareTo(rs.getString("time")) < 0){ //若当前取的数据时间更新
+                        maxtime = rs.getString("time");
+                        rtlist.clear();
+                        rtlist.add(list.toString());
+                    }
                 }
-
             }catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -176,7 +182,6 @@ public class EventDAOImpl implements EventDAO {
                 e.printStackTrace();
             }
         }
-
         return rtlist;
     }
 
@@ -512,6 +517,41 @@ public class EventDAOImpl implements EventDAO {
              if(rt == false) return rt;
         }
 
+        return rt;
+    }
+
+    public boolean setCaptrueSettingInfo(String onlineinterval, String tansentinterval, String upload, String ip, String onlineport, String tansentport, String did){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+
+        //若是已设置过的did的记录，则更新这条记录；否则，插入一条记录
+        CaptureSetting caps = (CaptureSetting)hbsessionDao.getFirst(
+                "FROM CaptureSetting where did='"+ did + "'");
+
+        if(caps != null){
+            String hql = "update CaptureSetting cs set cs.onlineinterval='" + onlineinterval + ",' cs.tansentinterval='" + tansentinterval +
+                    ",' cs.upload='" + upload + ",' cs.ip='" + ip +  ",' cs.onlineport='" + onlineport +  ",' cs.tansentport='" + tansentport +
+                    "' where cs.did='" + did + "'";
+
+            rt = hbsessionDao.update(hql);
+        }
+
+        else {
+            CaptureSetting cs = new CaptureSetting();
+            cs.setIp(ip);
+            cs.setPort1(Integer.parseInt(onlineport));
+            cs.setPort2(Integer.parseInt(tansentport));
+
+            cs.setOnlineinterval(Integer.parseInt(onlineinterval));
+            cs.setThansentinterval(Integer.parseInt(tansentinterval));
+            cs.setUploadinterval(Integer.parseInt(upload));
+
+            cs.setDid(did);
+
+            rt = hbsessionDao.insert(cs);
+
+        }
         return rt;
     }
 

@@ -593,6 +593,8 @@
 
     // 事件处理-修改知识
     $('#button-update-kl').click(function () {
+
+        var tmpcurrentTitle = $("#node-tilte-text").val();
         var tmpcurrentNode = $("#content-text").val();
         var tmpNodeKid = $("#nodeid").val();
 
@@ -601,11 +603,11 @@
             url: "updateKnowledgeTreeNodeContent",
             data: {
                 kid: tmpNodeKid,
+                tmpTitle: tmpcurrentTitle,
                 tmpContent: tmpcurrentNode
             },
             dataType: "json",
             success: function (data) {
-                alert(data);
                 //刷新树
                 $('#jstree').jstree(true).refresh();
             }
@@ -624,7 +626,6 @@
             },
             dataType: "json",
             success: function (data) {
-                alert(data);
                 //刷新树
                 $('#jstree').jstree(true).refresh();
             }
@@ -633,6 +634,7 @@
 
     // 事件处理-添加知识
     $('#button-add-kl').click(function () {
+        var tmpcurrentTitle = $("#node-tilte-text").val();
         var tmpNodeKid = $("#nodeid").val();
         var tmpcurrentNode = $("#content-text").val();
 
@@ -641,11 +643,11 @@
             url: "addKnowledgeTreeNodeContent",
             data: {
                 kid: tmpNodeKid,
-                tmpcontent: tmpcurrentNode
+                tmpTitle: tmpcurrentTitle,
+                tmpContent: tmpcurrentNode
             },
             dataType: "json",
             success: function (data) {
-                alert(data);
                 //刷新树
                 $('#jstree').jstree(true).refresh();
             }

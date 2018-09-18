@@ -179,7 +179,7 @@
                             <a data-toggle="tab" id="subItem7">•预警管理</a>
                         </li>
                         <li style="width:15%">
-                            <a data-toggle="tab" id="subItem8">•连接配置</a>
+                            <a data-toggle="tab" id="subItem8">•基础信息配置</a>
                         </li>
                         <li style="width:15%">
                             <a data-toggle="tab" id="subItem9">•组织管理</a>
@@ -327,7 +327,7 @@
                     </div>
                     <div id="item4" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                         <div class="row"></div>
-                        <ul class="nav nav-tabs" id="seculItem">
+                        <ul class="nav nav-tabs">
                             <li class="active" style="width:15%">
                                 <a data-toggle="tab" id="secsubItem1">•IDP</a>
                             </li>
@@ -689,34 +689,33 @@
                             <table>
                                 <tr>
                                     <td>实时数据采集频率：</td>
-                                    <td><input type="text" class="form-control setting-input"></td>
+                                    <td><input type="text" class="form-control setting-input" id="onlineinterval-input"></td>
                                     <td>单位（秒）</td>
                                 </tr>
                                 <tr>
                                     <td>暂态事件存储频率：</td>
-                                    <td><input type="text" class="form-control setting-input"></td>
+                                    <td><input type="text" class="form-control setting-input" id="tansentinterval-input"></td>
                                     <td>单位（分钟）</td>
                                 </tr>
                                 <tr>
                                     <td>数据上传时效：</td>
-                                    <td><input type="text" class="form-control setting-input"></td>
+                                    <td><input type="text" class="form-control setting-input" id="upload-input"></td>
                                     <td>单位（小时）</td>
                                 </tr>
                                 <tr>
                                     <td>实时数据IP地址</td>
-                                    <td><input type="text" class="form-control setting-input"></td>
-                                    <td><input type="text" class="form-control setting-input"></td>
-                                    <td><input type="text" class="form-control setting-input"></td>
-                                    <td><input type="text" class="form-control setting-input"></td>
+                                    <td><input type="text" class="form-control setting-input" id="ip1"></td>
+                                    <td><input type="text" class="form-control setting-input" id="ip2"></td>
+                                    <td><input type="text" class="form-control setting-input" id="ip3"></td>
+                                    <td><input type="text" class="form-control setting-input" id="ip4"></td>
                                 </tr>
                                 <tr>
                                     <td>实时数据端口号</td>
-                                    <td><input type="text" class="form-control setting-input"></td>
+                                    <td><input type="text" class="form-control setting-input" id="onlineport"></td>
                                     <td>暂态事件端口号</td>
-                                    <td><input type="text" class="form-control setting-input"></td>
+                                    <td><input type="text" class="form-control setting-input" id="tansentport"></td>
                                 </tr>
                                 <button onclick="captureSettingOk()">确定</button>
-                                <button onclick="cancle()">取消</button>
                             </table>
                         </div>
                     </div>
@@ -2309,7 +2308,7 @@
             alert("只能选择一种类型");
         else if(radioR5485 == "on" && radioRS232 == "on")
             alert("只能选择一种类型");
-        else if(radioR5485 != "on" && radioR5485 != "on" && radioRS232 != "on")
+        else if(radioEthernet != "on" && radioR5485 != "on" && radioRS232 != "on")
             alert("请选择一种类型");
         else  $.ajax({
                 type: "post",
@@ -2947,14 +2946,52 @@
 
     <!-- 删除省行div--wsy2018.9.7 -->
     function deleteProBankAlarmUser() {
-
         del=window.confirm("确定删除该省行信息？")
         if(del){
             alert("已经删除！");
         }else{
             //alert("已经取消！");
         }
+    }
+</script>
 
+<!-- 基础信息配置 -->
+<script type="text/javascript">
+    //确定设备读取、数据上传时效等设定
+    function captureSettingOk() {
+
+        var onlineinterval = $('#onlineinterval-input').val();
+        var tansentinterval = $('#tansentinterval-input').val();
+        var upload = $('#upload-input').val();
+
+        var ip1 = $('#ip1').val();
+        var ip2 = $('#ip2').val();
+        var ip3 = $('#ip3').val();
+        var ip4 = $('#ip4').val();
+
+        var onlineport = $('#onlineport').val();
+        var tansentport = $('#tansentport').val();
+
+        $.ajax({
+            type: "post",
+            url: "setCaptureSettingInfo",
+            data: {
+                onlineinterval: onlineinterval,
+                tansentinterval: tansentinterval,
+                upload: upload,
+                ip1: ip1,
+                ip2: ip2,
+                ip3: ip3,
+                ip4: ip4,
+                onlineport: onlineport,
+                tansentport: tansentport,
+                did: 2
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data);
+            }
+        });
     }
 </script>
 

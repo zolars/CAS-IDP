@@ -46,105 +46,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/datatables.min.js"></script>
 
 </head>
-<style type="text/css">
-    .r_out {
-        width: 120px;
-        height: 120px;
-        border: 2px solid #d9d9d9;
-        background: #fff;
-        box-shadow: 3px 3px 5px #bfbfbf;
-        -webkit-box-shadow: 3px 3px 5px #bfbfbf;
-        -moz-box-shadow: 3px 3px 5px #bfbfbf;
-        -ms-box-shadow: 3px 3px 5px #bfbfbf;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms_border-radius: 50%;
-        display: inline-block;
-        margin-right: 90px;
-        position: relative;
-    }
-
-    .r_out p {
-        position: absolute;
-        /**bottom:-50px;*/
-        color: #fff;
-        text-align: center;
-        margin: 0 auto;
-        width: 100%;
-        font-size: 14px;
-        line-height: 1.5;
-        font-weight: bold;
-    }
-
-    .r_in {
-        width: 120px;
-        height: 120px;
-        border: 10px solid #fff;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms_border-radius: 50%;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .r_c {
-        width: 120px;
-        height: 120px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 0;
-    }
-
-    .c1 {
-        background: #fbad4c;
-    }
-
-    .c2 {
-        background: #fff143;
-    }
-
-    .c3 {
-        background: #c9dd22;
-    }
-
-    .c4 {
-        background: #00e079;
-    }
-
-    .c5 {
-        background: #0eb83a;
-    }
-
-    .r_num {
-        color: #404040;
-        font-size: 23px;
-        line-height: 1.5;
-        font-weight: bold;
-        position: absolute;
-        top: 50%;
-        margin-top: -25px;
-        text-align: center;
-        width: 100%;
-    }
-
-    #triangle-right {
-        width: 0;
-        height: 0;
-        border-top: 15px solid transparent;
-        border-left: 15px solid #DB241C;
-        border-bottom: 15px solid transparent;
-    }
-
-    .alert-lost {
-        padding: 5px;
-        margin-top: 10px;
-        margin-bottom: -8px;
-        font-size: 14px;
-    }
-</style>
 
 <body id="skin-blur-blue">
     <!--登陆认证拦截-->
@@ -262,10 +163,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <button type="button" onClick="getDeviceEvent()" style="width:100px;height:260px;" >设备事件</button>
                                             <button type="button" onClick="getPowerEvent()"style="width:100px;height:260px;" >电能质量事件</button>
                                             <button type="button" onClick="getEvironmentEvent()" style="width:100px;height:260px;" >环境事件</button>
-
-                                            <button type="button" onClick="getDetailDeviceEvent()" >第二个页面-设备事件</button>
-                                            <button type="button" onClick="getDetailPowerEvent()" >第二个页面-电能质量事件</button>
-                                            <button type="button" >第二个页面-环境事件</button>
                                         </div>
 
                                         <div class="col-md-7">
@@ -391,21 +288,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         </div>
                                                     </td></tr>
 
-
                                                     <tr><td>时间段控制</td></tr>
 
                                                     <tr><td><input id="radio-day-event" type="radio"  name="event-data-peroid" value="day">天</td></tr>
                                                     <tr><td><input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</td></tr>
                                                     <tr><td><input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月</td></tr>
-
-
-
-                                                    <tr>
-                                                        <td><button id="today-button" type="button" class="btn btn-sm btn-alt" onclick="getTodayEvent()">今天</button></td>
-                                                        <td><button id="data-button" type="button" class="btn btn-sm btn-alt" onclick="getDataEvent()">Data?</button></td>
-                                                    </tr>
-                                                    <tr><td><button id="latestweek-button" type="button" class="btn btn-sm btn-alt" onclick="getLatestWeekEvent()">最新的week</button></td></tr>
-
 
                                                     <table class="display" id="place-event" style="width:100%">
                                                         <thead>
@@ -432,6 +319,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                             <option value="60">60分</option>
                                                         </select>
                                                     </td></tr>
+
+                                                    <tr>
+                                                        <td><button id="data-button" type="button" class="btn btn-sm btn-alt" onclick="getAllEvent()">查询</button></td>
+                                                    </tr>
+
                                                 </table>
                                             </div>
 
@@ -502,8 +394,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div id="jstree"></div>
                         <button onclick="AllSelected()" type="button" class="btn btn-sm btn-alt">全选</button>
                         <button onclick="AllDisSelected()" type="button" class="btn btn-sm btn-alt">全不选</button>
-                        <button onclick="HideDisSelected()" type="button" class="btn btn-sm btn-alt">隐藏未选中</button>
-                        <button onclick="AllShow()" type="button" class="btn btn-sm btn-alt">全部显示</button>
                         <button onclick="OK()" type="button" class="btn btn-sm btn-alt">确定</button>
                         <button onclick="cancle()" type="button" class="btn btn-sm btn-alt">取消</button>
                     </div>
@@ -859,167 +749,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     </script>
 
-    <!-- 设备事件-->
+    <!-- （详细）设备事件-点击进入第二个页面-->
     <script type="text/javascript">
         function getDeviceEvent(){}
     </script>
 
-    <!-- 电能事件-->
+    <!-- （详细）电能事件-点击进入第二个页面-->
     <script type="text/javascript">
-        //unix时间转常用时间格式
-        function formatTime (time) {
-            var unixtime = time;
-            var unixTimestamp = new Date(unixtime * 1);
-            var Y = unixTimestamp.getFullYear();
-            var M = ((unixTimestamp.getMonth() + 1) > 10 ? (unixTimestamp.getMonth() + 1) : '0' + (unixTimestamp.getMonth() + 1));
-            var D = (unixTimestamp.getDate() > 10 ? unixTimestamp.getDate() : '0' + unixTimestamp.getDate());
-            var toDay = Y + '-' + M + '-' + D;
-            return toDay;
-        }
-
-        $("input[name='event-data-peroid']").change(function(){
-            alert("free");
-        });
-
-        //获取当前日期时间
-        function getNowFormatDate() {
-            var date = new Date();
-            var seperator1 = "-";
-            var seperator2 = ":";
-            var month = date.getMonth() + 1;
-            var strDate = date.getDate();
-            if (month >= 1 && month <= 9) {
-                month = "0" + month;
-            }
-            if (strDate >= 0 && strDate <= 9) {
-                strDate = "0" + strDate;
-            }
-            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-                + " " + date.getHours() + seperator2 + date.getMinutes()
-                + seperator2 + date.getSeconds();
-            return currentdate;
-        }
-
-        //获取所有电能事件
         function getPowerEvent(){
-
-        var cbname = $("#city_code option:selected").val();
-        var edate = $("input[name='event-data-peroid']:checked").val();
-
-        var stime ;//"2018-08-22 08:00:00";
-        var etime ;//"2018-08-29 08:00:00";
-        var nowtime = getNowFormatDate();
-
-        if(edate == "lastone"){
-            stime = " ";
-            etime = " ";
-          //  getPowerEvent(cbname, stime, etime);
-        }
-        else  if(edate == "fromto"){
-            stime = $("#firstDate").val();
-            etime = $("#lastDate").val();
-           // getPowerEvent(cbname, stime, etime);
-        }
-        else  if(edate == "day"){
-
-            //昨天的时间
-            var now = new Date();
-            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var hour = date.getHours();
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-            stime = starttime;
-            etime = nowtime;
-          // getPowerEvent(cbname, stime, etime);
-        }
-        else  if(edate == "week"){
-
-            // 获取一星期前的时间：
-            var now = new Date();
-            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var hour = date.getHours();
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-            stime = starttime;
-            etime = nowtime;
-           // getPowerEvent(cbname, stime, etime);
-        }
-        else  if(edate == "month"){
-
-            // 获取一星期前的时间：
-            var now = new Date();
-            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var hour = date.getHours();
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-            stime = starttime;
-            etime = nowtime;
-         //   getPowerEvent(cbname, stime, etime);
-        }
-
-       // function getPowerEvent(cb, starttime, endtime){
-            $.ajax({
-                type: "post",
-                url: "getPowerEvent",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname
-                },
-                dataType : "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-
-                    var table = $("#power-event");
-                    var tbody = $("#power-event-tbody")[0];
-                    tbody.innerHTML = ""
-
-                    for (var i = 0; i < list.length; i++) {
-
-                        var liststr = list[i].split(",");
-
-                        var teid = liststr[0].split("["); //.teid;
-                        var name = liststr[1]; //.name;
-                        var location = liststr[2]; //.location;
-                        var type = liststr[3]; //.type;
-                        var description = liststr[4]; //.discription;
-                        var rawtime = liststr[5].split("]");
-                        var time = formatTime(rawtime[1]); //.time);
-
-                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
-                    }
-                }
-            });
-        }
-
-        $(document).ready(function(){
-            var cbn = $("#city_code option:selected").val();
-
-            if(cbn != undefined)
-                getPowerEvent(cbn, "2018-08-22 08:00:00", "2018-09-22 08:00:00");
-        });
-
-        //获取所有详细的电能事件（第二页）
-        function getDetailPowerEvent(){
 
             var cbname = $("#city_code option:selected").val();
             var edate = $("input[name='event-data-peroid']:checked").val();
@@ -1131,15 +868,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             });
         }
-
     </script>
 
-    <!-- 环境事件-->
+    <!-- （详细）环境事件-点击进入第二个页面-->
     <script type="text/javascript">
-        function getEvironmentEvent(){
+        function getEvironmentEvent(){}
+    </script>
+
+    <!-- 查询事件-->
+    <script type="text/javascript">
+        //unix时间转常用时间格式
+        function formatTime (time) {
+            var unixtime = time;
+            var unixTimestamp = new Date(unixtime * 1);
+            var Y = unixTimestamp.getFullYear();
+            var M = ((unixTimestamp.getMonth() + 1) > 10 ? (unixTimestamp.getMonth() + 1) : '0' + (unixTimestamp.getMonth() + 1));
+            var D = (unixTimestamp.getDate() > 10 ? unixTimestamp.getDate() : '0' + unixTimestamp.getDate());
+            var toDay = Y + '-' + M + '-' + D;
+            return toDay;
+        }
+
+        //获取当前日期时间
+        function getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "-";
+            var seperator2 = ":";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                + " " + date.getHours() + seperator2 + date.getMinutes()
+                + seperator2 + date.getSeconds();
+            return currentdate;
+        }
+
+        //根据时间、检测银行设置获得所有事件
+        function getAllEvent(){
+
+            var cbname = $("#city_code option:selected").val();
             var edate = $("input[name='event-data-peroid']:checked").val();
 
-            var rid = "1";
             var stime ;//"2018-08-22 08:00:00";
             var etime ;//"2018-08-29 08:00:00";
             var nowtime = getNowFormatDate();
@@ -1153,7 +926,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 etime = $("#lastDate").val();
             }
             else  if(edate == "day"){
-
                 //昨天的时间
                 var now = new Date();
                 var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
@@ -1169,7 +941,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 etime = nowtime;
             }
             else  if(edate == "week"){
-
                 // 获取一星期前的时间：
                 var now = new Date();
                 var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
@@ -1185,8 +956,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 etime = nowtime;
             }
             else  if(edate == "month"){
-
-                // 获取一星期前的时间：
+                // 获取一月前的时间：
                 var now = new Date();
                 var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
                 var year = date.getFullYear();
@@ -1201,55 +971,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 etime = nowtime;
             }
 
+            console.log(stime+ etime+ cbname);
+
+            //获取所有电能事件
             $.ajax({
                 type: "post",
-                url: "getEnvironmentEvent",
+                url: "getPowerEvent",
                 data: {
                     stime: stime,
                     etime: etime,
-                    rid: rid
+                    cbname: cbname
                 },
                 dataType : "json",
                 success: function (data) {
                     var obj = JSON.parse(data);
-                    var list = obj['alleelist'];
-                    var table = $("#event-table-body");
-                    table.empty();
-                    table.append('<tr><td style="padding-left:60px;">事件名称</td><td style="padding-left:60px;">位置</td><td style="padding-left:60px;">事件类型</td><td style="padding-left:60px;">事件描述</td><td style="padding-left:60px;">事件发生时间</td></tr>');
+                    var list = obj['allpelist'];
+                    var table = $("#power-event");
+                    var tbody = $("#power-event-tbody")[0];
+                    tbody.innerHTML = ""
 
                     for (var i = 0; i < list.length; i++) {
-                        var name = list[i].type;
-                        var location = list[i].mpid;
-                        var type = list[i].subtype;
-                        var description = list[i].discription;
-                        var time = list[i].time;
+                        var liststr = list[i].split(",");
 
-                        table.append('<tr>' +
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = formatTime(rawtime[1]);
+
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
                             '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
                             '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
                             '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
                     }
                 }
             });
-        }
-    </script>
 
-    <!-- 日期选择-->
-    <script type="text/javascript">
-        //获得今天的事件
-        function getTodayEvent(){
-            alert("today");
 
-        }
+            //获取所有设备事件
 
-        //获得Data？的事件
-        function getDataEvent(){
-            alert("data?");
-        }
+            //获取所有环境事件
 
-        //获得最近一周的事件
-        function getLatestWeekEvent(){
-            alert("LatestWeek");
         }
 
     </script>
@@ -1395,13 +1159,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $('#jstree').jstree('deselect_all');
         }
 
-        function HideDisSelected() {
-        }
-
-        function AllShow() {
-            var tree = $('#jstree');
-            tree.jstree(true).refresh();  //刷新树
-        }
 
         //设置按钮界面 OK
         function OK() {
@@ -1433,6 +1190,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         function confirmEvent(){
             $('#conformEventRow-modal').css('display', 'block');
             $('#clickEventRow-modal').css('display', 'none');
+            var sign = "<%=session.getAttribute("username")%>";
+            $('#signature').val(sign);
         }
 
         //点击单条事件-删除事件（假删除，只是前端不显示）

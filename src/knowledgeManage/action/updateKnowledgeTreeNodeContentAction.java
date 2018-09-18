@@ -36,6 +36,7 @@ public class updateKnowledgeTreeNodeContentAction extends ActionSupport {
             //获取节点id
             String kid = request.getParameter("kid");
             String tmpContent = request.getParameter("tmpContent");
+            String tmpTitle = request.getParameter("tmpTitle");
             String userid = (String)session.getAttribute("userid");
 
             KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();
@@ -45,7 +46,7 @@ public class updateKnowledgeTreeNodeContentAction extends ActionSupport {
             JSONObject jsonObject = new JSONObject();
 
             if(isValid){
-                Boolean rt = dao.updateKnowledgeNode(kid, tmpContent);
+                Boolean rt = dao.updateKnowledgeNode(kid, tmpTitle, tmpContent);
 
                 if(rt)
                     jsonObject.put("提示", "修改成功！");

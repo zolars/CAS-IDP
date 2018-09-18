@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class getPowerEventAction extends ActionSupport {
+public class setCaptureSettingInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -27,7 +27,7 @@ public class getPowerEventAction extends ActionSupport {
     }
 
 
-    /* 根据测量地点（市行名称）获取设备事件
+    /* 设置数据上传时效、端口号、ip等信息
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -35,22 +35,30 @@ public class getPowerEventAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String cbname = request.getParameter("cbname");
-            String starttime = request.getParameter("stime");
-            String endtime = request.getParameter("etime");
+            String onlineinterval = request.getParameter("onlineinterval");
+            String tansentinterval = request.getParameter("tansentinterval");
+            String upload = request.getParameter("upload");
+            String ip1 = request.getParameter("ip1");
+            String ip2 = request.getParameter("ip2");
+            String ip3 = request.getParameter("ip3");
+            String ip4 = request.getParameter("ip4");
+            String onlineport = request.getParameter("onlineport");
+            String tansentport = request.getParameter("tansentport");
+            String did = request.getParameter("did");
+
+            String ip = ip1 + "." + ip2 + "." + ip3 + "." + ip4;
 
             EventDAO dao = new EventDAOImpl();
 
             List<EventPower> pedata = new ArrayList();
 
-            if((starttime.equals(" ") && endtime.equals(" ")) || (starttime == null && endtime == null))
-                pedata = dao.getLocalLastPowerEvent(cbname);
-
-            else
-                pedata = dao.getLocalAllPowerEvent(cbname, starttime, endtime);
-
+            boolean rt = dao.setCaptrueSettingInfo(onlineinterval, tansentinterval, upload, ip, onlineport, tansentport, did);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("allpelist", pedata);
+
+            if(rt)
+                jsonObject.put("提示", "设置成功！");
+            else
+                jsonObject.put("提示", "设置失败，请重试！");
 
             result = JSON.toJSONString(jsonObject);
 

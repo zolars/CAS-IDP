@@ -77,6 +77,7 @@ public class UserLoginAction extends ActionSupport{
                 for(int i = 0; i < mlist.size(); i++){
                     String s = (String) mlist.get(i);
                     switch (s){
+                        case "1":  menulist.add("systemMng.jsp/item8");break;
                         case "2":  menulist.add("systemMng.jsp/item1");break;
                         case "3":  menulist.add("systemMng.jsp/item6");break;
                         case "4":  menulist.add("systemMng.jsp/item4");break;

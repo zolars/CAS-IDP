@@ -5,9 +5,6 @@ import hibernatePOJO.Knowledge;
 
 import java.util.List;
 
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
 
 
 public interface KnowledgeTreeDAO {
@@ -16,11 +13,11 @@ public interface KnowledgeTreeDAO {
 
     public Knowledge getKnowledgeNode(String kid);
 
-    public boolean updateKnowledgeNode(String kid, String content);
+    public boolean updateKnowledgeNode(String kid, String tmpTitle, String content);
 
     public boolean deleteKnowledgeNode(String kid);
 
-    public boolean addKnowledgeNode(String kid, String content);
+    public boolean addKnowledgeNode(String kid, String tmpTitle, String content);
 
     public boolean uploadKnowledgeNode(String kid, String content);
 
