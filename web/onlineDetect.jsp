@@ -1711,18 +1711,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 case "A" : {
                     // 更新幅值
                     $("#item3-text-name1").html(value + "1");
-                    $("#item3-text-value1").html(data[value.toLowerCase() + "1"]);
+                    $("#item3-text-value1").html(data[value.toLowerCase() + "1"].toFixed(2));
                     $("#item3-text-name2").html(value + "2");
-                    $("#item3-text-value2").html(data[value.toLowerCase() + "2"]);
+                    $("#item3-text-value2").html(data[value.toLowerCase() + "2"].toFixed(2));
                     $("#item3-text-name3").html(value + "3");
-                    $("#item3-text-value3").html(data[value.toLowerCase() + "3"]);
+                    $("#item3-text-value3").html(data[value.toLowerCase() + "3"].toFixed(2));
                     $("#item3-text-nameunb").html(value + "unb");
-                    $("#item3-text-valueunb").html(data[value.toLowerCase() + "unb"]);
+                    $("#item3-text-valueunb").html(data[value.toLowerCase() + "unb"].toFixed(2));
                     // 更新相位差
                     $("#item3-text ol.diff").show();
-                    $("#item3-text-diff1").html(data["angle" + value + "2"] - data["angle" + value + "1"]);
-                    $("#item3-text-diff2").html(data["angle" + value + "3"] - data["angle" + value + "2"]);
-                    $("#item3-text-diff3").html(data["angle" + value + "1"] - data["angle" + value + "3"]);
+                    $("#item3-text-diff1").html((data["angle" + value + "2"] - data["angle" + value + "1"]).toFixed(2));
+                    $("#item3-text-diff2").html((data["angle" + value + "3"] - data["angle" + value + "2"]).toFixed(2));
+                    $("#item3-text-diff3").html((data["angle" + value + "1"] - data["angle" + value + "3"]).toFixed(2));
                     break;
                 }
                 case "1" :
@@ -1730,11 +1730,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 case "3" : {
                     // 更新幅值
                     $("#item3-text-name1").html("U" + value);
-                    $("#item3-text-value1").html(data["u" + value]);
+                    $("#item3-text-value1").html(data["u" + value].toFixed(2));
                     $("#item3-text-name2").html("V" + value);
-                    $("#item3-text-value2").html(data["v" + value]);
+                    $("#item3-text-value2").html(data["v" + value].toFixed(2));
                     $("#item3-text-name3").html("A" + value);
-                    $("#item3-text-value3").html(data["a" + value]);
+                    $("#item3-text-value3").html(data["a" + value].toFixed(2));
                     // 隐藏相位差
                     $("#item3-text ol.diff").hide();
                     break;
@@ -1766,37 +1766,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         // 更新参数值表格
         function updateParams(data) {
+
             $("#params-basic").html(
                 "<caption>基本参数</caption>"+
-                "<tr><th>U1</th><td>"+data["u1"]+"</td></tr>"+
-                "<tr><th>U2</th><td>"+data["u2"]+"</td></tr>"+
-                "<tr><th>U3</th><td>"+data["u3"]+"</td></tr>"+
-                "<tr><th>U4</th><td>"+data["u4"]+"</td></tr>"+
-                "<tr><th>I1</th><td>"+data["i1"]+"</td></tr>"+
-                "<tr><th>I2</th><td>"+data["i2"]+"</td></tr>"+
-                "<tr><th>I3</th><td>"+data["i3"]+"</td></tr>"+
-                "<tr><th>I4</th><td>"+data["i4"]+"</td></tr>"
+                "<tr><th>U1</th><td>"+data["u1"].toFixed(2)+"</td></tr>"+
+                "<tr><th>U2</th><td>"+data["u2"].toFixed(2)+"</td></tr>"+
+                "<tr><th>U3</th><td>"+data["u3"].toFixed(2)+"</td></tr>"+
+                "<tr><th>U4</th><td>"+data["u4"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I1</th><td>"+data["i1"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I2</th><td>"+data["i2"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I3</th><td>"+data["i3"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I4</th><td>"+data["i4"].toFixed(2)+"</td></tr>"
             );
             $("#params-power").html(
                 "<caption>功率参数</caption>"+
                 "<tr><th></th><th>相1</th><th>相2</th><th>相3</th><th>总和</th></tr>"+
-                "<tr><th>P(W)</th><td>"+data["p1"]+"</td><td>"+data["p2"]+"</td><td>"+data["p3"]+"</td><td>"+Number(parseInt(data["p1"])+parseInt(data["p2"])+parseInt(data["p3"]))+"</td></tr>"+
-                "<tr><th>Q(Var)</th><td>"+data["q1"]+"</td><td>"+data["q2"]+"</td><td>"+data["q3"]+"</td><td>"+Number(parseInt(data["q1"])+parseInt(data["q2"])+parseInt(data["q3"]))+"</td></tr>"+
-                "<tr><th>S(VA)</th><td>"+data["s1"]+"</td><td>"+data["s2"]+"</td><td>"+data["s3"]+"</td><td>"+Number(parseInt(data["s1"])+parseInt(data["s2"])+parseInt(data["s3"]))+"</td></tr>"+
-                "<tr><th>PF</th><td>"+data["pf1"]+"</td><td>"+data["pf2"]+"</td><td>"+data["pf3"]+"</td><td>"+Number(parseInt(data["pf1"])+parseInt(data["pf2"])+parseInt(data["pf3"]))+"</td></tr>"+
-                "<tr><th>Cos PHI</th><td>"+data["cosPhi1"]+"</td><td>"+data["cosPhi2"]+"</td><td>"+data["cosPhi3"]+"</td><td></td></tr>"
+                "<tr><th>P(W)</th><td>"+data["p1"].toFixed(2)+"</td><td>"+data["p2"].toFixed(2)+"</td><td>"+data["p3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["p1"])+parseFloat(data["p2"])+parseFloat(data["p3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>Q(Var)</th><td>"+data["q1"].toFixed(2)+"</td><td>"+data["q2"].toFixed(2)+"</td><td>"+data["q3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["q1"])+parseFloat(data["q2"])+parseFloat(data["q3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>S(VA)</th><td>"+data["s1"].toFixed(2)+"</td><td>"+data["s2"].toFixed(2)+"</td><td>"+data["s3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["s1"])+parseFloat(data["s2"])+parseFloat(data["s3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>PF</th><td>"+data["pf1"].toFixed(2)+"</td><td>"+data["pf2"].toFixed(2)+"</td><td>"+data["pf3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["pf1"])+parseFloat(data["pf2"])+parseFloat(data["pf3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>Cos PHI</th><td>"+data["cosPhi1"].toFixed(2)+"</td><td>"+data["cosPhi2"].toFixed(2)+"</td><td>"+data["cosPhi3"].toFixed(2)+"</td><td></td></tr>"
             );
             $("#params-unb").html(
                 "<caption>&nbsp;</caption>"+
-                "<tr><th>不平衡度</th><td>"+data["unb"]+"</td></tr>"+
-                "<tr><th>频率</th><td>"+data["hz"]+"</td></tr>"
+               /* "<tr><th>不平衡度</th><td>"+data["unb"].toFixed(2)+"</td></tr>"+*/
+                "<tr><th>频率</th><td>"+data["hz"].toFixed(2)+"</td></tr>"
             );
             $("#params-shanbian").html(
                 "<caption>闪变</caption>"+
                 "<tr><th></th><th>U1</th><th>U2</th><th>U3</th></tr>"+
-                "<tr><th>|f|</th><td>"+data["iflU1"]+"</td><td>"+data["iflU2"]+"</td><td>"+data["iflU3"]+"</td></tr>"+
-                "<tr><th>Pst</th><td>"+data["pstU1"]+"</td><td>"+data["pstU2"]+"</td><td>"+data["pstU3"]+"</td></tr>"+
-                "<tr><th>Plt</th><td>"+data["pltU1"]+"</td><td>"+data["pltU2"]+"</td><td>"+data["pltU3"]+"</td></tr>"
+                "<tr><th>|f|</th><td>"+data["iflU1"].toFixed(2)+"</td><td>"+data["iflU2"].toFixed(2)+"</td><td>"+data["iflU3"].toFixed(2)+"</td></tr>"+
+                "<tr><th>Pst</th><td>"+data["pstU1"].toFixed(2)+"</td><td>"+data["pstU2"].toFixed(2)+"</td><td>"+data["pstU3"].toFixed(2)+"</td></tr>"+
+                "<tr><th>Plt</th><td>"+data["pltU1"].toFixed(2)+"</td><td>"+data["pltU2"].toFixed(2)+"</td><td>"+data["pltU3"].toFixed(2)+"</td></tr>"
             );
         }
     </script>

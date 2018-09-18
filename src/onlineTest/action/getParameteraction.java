@@ -40,7 +40,7 @@ public class getParameteraction extends ActionSupport {
 
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("nowpowerparm", pp);
-                result = JSON.toJSONString(jsonObject); // List转json
+                result = JSON.toJSONString(jsonObject);
             }
         } catch (Exception e) {
             e.printStackTrace();

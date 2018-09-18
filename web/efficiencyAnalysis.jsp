@@ -394,8 +394,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div id="jstree"></div>
                         <button onclick="AllSelected()" type="button" class="btn btn-sm btn-alt">全选</button>
                         <button onclick="AllDisSelected()" type="button" class="btn btn-sm btn-alt">全不选</button>
-                        <button onclick="HideDisSelected()" type="button" class="btn btn-sm btn-alt">隐藏未选中</button>
-                        <button onclick="AllShow()" type="button" class="btn btn-sm btn-alt">全部显示</button>
                         <button onclick="OK()" type="button" class="btn btn-sm btn-alt">确定</button>
                         <button onclick="cancle()" type="button" class="btn btn-sm btn-alt">取消</button>
                     </div>
@@ -1161,13 +1159,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $('#jstree').jstree('deselect_all');
         }
 
-        function HideDisSelected() {
-        }
-
-        function AllShow() {
-            var tree = $('#jstree');
-            tree.jstree(true).refresh();  //刷新树
-        }
 
         //设置按钮界面 OK
         function OK() {
