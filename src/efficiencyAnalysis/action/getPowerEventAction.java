@@ -43,7 +43,7 @@ public class getPowerEventAction extends ActionSupport {
 
             List<EventPower> pedata = new ArrayList();
 
-            if((starttime == " " && endtime == " ") || (starttime == null && endtime == null))
+            if((starttime.equals(" ") && endtime.equals(" ")) || (starttime == null && endtime == null))
                 pedata = dao.getLocalLastPowerEvent(cbname);
 
             else
@@ -52,7 +52,7 @@ public class getPowerEventAction extends ActionSupport {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allpelist", pedata);
 
-            result = JSON.toJSONString(jsonObject); // List转json
+            result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();

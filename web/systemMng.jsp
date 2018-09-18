@@ -2303,7 +2303,7 @@
             alert("只能选择一种类型");
         else if(radioR5485 == "on" && radioRS232 == "on")
             alert("只能选择一种类型");
-        else if(radioR5485 != "on" && radioR5485 != "on" && radioRS232 != "on")
+        else if(radioEthernet != "on" && radioR5485 != "on" && radioRS232 != "on")
             alert("请选择一种类型");
         else  $.ajax({
                 type: "post",
