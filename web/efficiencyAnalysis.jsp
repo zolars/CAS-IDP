@@ -156,7 +156,6 @@
                                     </thead>
                                 </table>
 
-                                <!--startprint-->
                                 <div class="row-fluid">
                                     <div class="col-md-1">
                                         <button type="button" style="width:100px;height:40px;" ></button>
@@ -167,6 +166,7 @@
 
                                     <div class="col-md-7">
 
+                                        <!--startprint-->
                                         <div id="eventdiv1" style="display: block">
                                             <table class="display" id="device-event" style="width:100%;">
                                                 <thead>
@@ -212,9 +212,11 @@
                                             </table>
                                         </div>
 
+                                        <!--endprint-->
+
                                         <div id="eventdiv2" style="display: none">
 
-                                            <ul class="nav nav-tabs" id="secItem">
+                                            <ul class="nav nav-tabs" id="secItem" name="secItem">
                                                 <li class="active"  style="width:15%">
                                                     <a data-toggle="tab" id="secItem1">•浪涌塌陷</a>
                                                 </li>
@@ -314,7 +316,6 @@
 
                                         </div>
                                     </div>
-                                    <!--endprint-->
 
                                     <div class="col-md-4">
 
@@ -398,9 +399,8 @@
                                                     <td>可见的列</td>
                                                 </tr>
                                                 <tr>
-                                                    <table>
+                                                    <table class="display" id="colume-table">
                                                         <tr><td>名字</td><td>宽度</td></tr>
-                                                        <tr><td>测量名称</td><td>100</td></tr>
                                                     </table>
                                                 </tr>
                                                 <tr>
@@ -430,7 +430,7 @@
                                                             <option value="13">中有波形数据</option>
                                                         </select>
                                                     </td>
-                                                    <td><button id="add-col-button" type="button" class="btn btn-sm btn-alt" onclick="getTodayEvent()">添加</button></td>
+                                                    <td><button id="add-col-button" type="button" class="btn btn-sm btn-alt" onclick="getColumnItem()">添加</button></td>
                                                 </tr>
                                             </table>
 
@@ -775,6 +775,17 @@
 
         $("#subItem1").click();
 
+        var col1 = $. cookie('row1-name');
+        var col2 = $. cookie('row2-name');
+        var col3 = $. cookie('row3-name');
+        var col4 = $. cookie('row4-name');
+        var col5 = $. cookie('row5-name');
+        var col6 = $. cookie('row6-name');
+        var col7 = $. cookie('row7-name');
+        var col8 = $. cookie('row8-name');
+        var col9 = $. cookie('row9-name');
+        var col10 = $. cookie('row10-name');
+
         //第二页电能质量事件，根据点击的电能质量类型，获取相应的事件，并渲染
         $("#secItem1").click(function () {
             $("#power-event-detail-1").show();
@@ -783,17 +794,28 @@
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").hide();
 
-            $('#power-event-detail-1').DataTable( {
+            $('#power-event-detail-1').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
                 "pagingType":     "full_numbers",
-                "dom":            "lBrtip"
+                "dom":            "lBrtip"/*,
+                "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
+                    {"targets": [ 2 ], "visible": (col2)? true : false},
+                    {"targets": [ 3 ], "visible": (col3)? true : false},
+                    {"targets": [ 4 ], "visible": (col4)? true : false},
+                    {"targets": [ 5 ], "visible": (col5)? true : false},
+                    {"targets": [ 6 ], "visible": (col6)? true : false},
+                    {"targets": [ 7 ], "visible": (col7)? true : false},
+                    {"targets": [ 8 ], "visible": (col8)? true : false},
+                    {"targets": [ 9 ], "visible": (col9)? true : false},
+                    {"targets": [ 10 ], "visible": (col10)? true : false}
+                ]*/
             });
-            $('#power-event-detail-2').dataTable().fnDestroy();
-            $('#power-event-detail-3').dataTable().fnDestroy();
-            $('#power-event-detail-4').dataTable().fnDestroy();
-            $('#power-event-detail-5').dataTable().fnDestroy();
+            $('#power-event-detail-2').DataTable().fnDestroy();
+            $('#power-event-detail-3').DataTable().fnDestroy();
+            $('#power-event-detail-4').DataTable().fnDestroy();
+            $('#power-event-detail-5').DataTable().fnDestroy();
 
         });
         $("#secItem2").click(function () {
@@ -803,17 +825,28 @@
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").hide();
 
-            $('#power-event-detail-2').DataTable( {
+            $('#power-event-detail-2').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
                 "pagingType":     "full_numbers",
-                "dom":            "lBrtip"
+                "dom":            "lBrtip"/*,
+                "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
+                    {"targets": [ 2 ], "visible": (col2)? true : false},
+                    {"targets": [ 3 ], "visible": (col3)? true : false},
+                    {"targets": [ 4 ], "visible": (col4)? true : false},
+                    {"targets": [ 5 ], "visible": (col5)? true : false},
+                    {"targets": [ 6 ], "visible": (col6)? true : false},
+                    {"targets": [ 7 ], "visible": (col7)? true : false},
+                    {"targets": [ 8 ], "visible": (col8)? true : false},
+                    {"targets": [ 9 ], "visible": (col9)? true : false},
+                    {"targets": [ 10 ], "visible": (col10)? true : false}
+                ]*/
             });
-            $('#power-event-detail-1').dataTable().fnDestroy();
-            $('#power-event-detail-3').dataTable().fnDestroy();
-            $('#power-event-detail-4').dataTable().fnDestroy();
-            $('#power-event-detail-5').dataTable().fnDestroy();
+            $('#power-event-detail-1').DataTable().fnDestroy();
+            $('#power-event-detail-3').DataTable().fnDestroy();
+            $('#power-event-detail-4').DataTable().fnDestroy();
+            $('#power-event-detail-5').DataTable().fnDestroy();
         });
         $("#secItem3").click(function () {
             $("#power-event-detail-1").hide();
@@ -822,17 +855,28 @@
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").hide();
 
-            $('#power-event-detail-3').DataTable( {
+            $('#power-event-detail-3').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
                 "pagingType":     "full_numbers",
-                "dom":            "lBrtip"
+                "dom":            "lBrtip"/*,
+                "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
+                    {"targets": [ 2 ], "visible": (col2)? true : false},
+                    {"targets": [ 3 ], "visible": (col3)? true : false},
+                    {"targets": [ 4 ], "visible": (col4)? true : false},
+                    {"targets": [ 5 ], "visible": (col5)? true : false},
+                    {"targets": [ 6 ], "visible": (col6)? true : false},
+                    {"targets": [ 7 ], "visible": (col7)? true : false},
+                    {"targets": [ 8 ], "visible": (col8)? true : false},
+                    {"targets": [ 9 ], "visible": (col9)? true : false},
+                    {"targets": [ 10 ], "visible": (col10)? true : false}
+                ]*/
             });
-            $('#power-event-detail-2').dataTable().fnDestroy();
-            $('#power-event-detail-1').dataTable().fnDestroy();
-            $('#power-event-detail-4').dataTable().fnDestroy();
-            $('#power-event-detail-5').dataTable().fnDestroy();
+            $('#power-event-detail-1').DataTable().fnDestroy();
+            $('#power-event-detail-2').DataTable().fnDestroy();
+            $('#power-event-detail-4').DataTable().fnDestroy();
+            $('#power-event-detail-5').DataTable().fnDestroy();
         });
         $("#secItem4").click(function () {
             $("#power-event-detail-1").hide();
@@ -841,17 +885,28 @@
             $("#power-event-detail-4").show();
             $("#power-event-detail-5").hide();
 
-            $('#power-event-detail-4').DataTable( {
+            $('#power-event-detail-4').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
                 "pagingType":     "full_numbers",
-                "dom":            "lBrtip"
+                "dom":            "lBrtip"/*,
+                "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
+                    {"targets": [ 2 ], "visible": (col2)? true : false},
+                    {"targets": [ 3 ], "visible": (col3)? true : false},
+                    {"targets": [ 4 ], "visible": (col4)? true : false},
+                    {"targets": [ 5 ], "visible": (col5)? true : false},
+                    {"targets": [ 6 ], "visible": (col6)? true : false},
+                    {"targets": [ 7 ], "visible": (col7)? true : false},
+                    {"targets": [ 8 ], "visible": (col8)? true : false},
+                    {"targets": [ 9 ], "visible": (col9)? true : false},
+                    {"targets": [ 10 ], "visible": (col10)? true : false}
+                ]*/
             });
-            $('#power-event-detail-2').dataTable().fnDestroy();
-            $('#power-event-detail-3').dataTable().fnDestroy();
-            $('#power-event-detail-1').dataTable().fnDestroy();
-            $('#power-event-detail-5').dataTable().fnDestroy();
+            $('#power-event-detail-1').DataTable().fnDestroy();
+            $('#power-event-detail-2').DataTable().fnDestroy();
+            $('#power-event-detail-3').DataTable().fnDestroy();
+            $('#power-event-detail-5').DataTable().fnDestroy();
         });
         $("#secItem5").click(function () {
             $("#power-event-detail-1").hide();
@@ -865,12 +920,24 @@
                 "scrollY":        "800px",
                 "scrollCollapse": true,
                 "pagingType":     "full_numbers",
-                "dom":            "lBrtip"
+                "dom":            "lBrtip"/*,
+                "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
+                    {"targets": [ 2 ], "visible": (col2)? true : false},
+                    {"targets": [ 3 ], "visible": (col3)? true : false},
+                    {"targets": [ 4 ], "visible": (col4)? true : false},
+                    {"targets": [ 5 ], "visible": (col5)? true : false},
+                    {"targets": [ 6 ], "visible": (col6)? true : false},
+                    {"targets": [ 7 ], "visible": (col7)? true : false},
+                    {"targets": [ 8 ], "visible": (col8)? true : false},
+                    {"targets": [ 9 ], "visible": (col9)? true : false},
+                    {"targets": [ 10 ], "visible": (col10)? true : false}
+                ]*/
             });
-            $('#power-event-detail-2').dataTable().fnDestroy();
-            $('#power-event-detail-3').dataTable().fnDestroy();
-            $('#power-event-detail-4').dataTable().fnDestroy();
-            $('#power-event-detail-1').dataTable().fnDestroy();
+            $('#power-event-detail-1').DataTable().fnDestroy();
+            $('#power-event-detail-2').DataTable().fnDestroy();
+            $('#power-event-detail-3').DataTable().fnDestroy();
+            $('#power-event-detail-4').DataTable().fnDestroy();
+
         });
 
         $("#secItem1").click();
@@ -984,7 +1051,7 @@
                     var type = liststr[3];
                     var description = liststr[4];
                     var rawtime = liststr[5].split("]");
-                    var time = formatTime(rawtime[1]);
+                    var time = rawtime[0];
 
                     tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
                         '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
@@ -1018,7 +1085,7 @@
                     var type = liststr[3];
                     var description = liststr[4];
                     var rawtime = liststr[5].split("]");
-                    var time = formatTime(rawtime[1]);
+                    var time = rawtime[0];
 
                     tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
                         '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
@@ -1052,7 +1119,7 @@
                     var type = liststr[3];
                     var description = liststr[4];
                     var rawtime = liststr[5].split("]");
-                    var time = formatTime(rawtime[1]);
+                    var time = rawtime[0];
 
                     tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
                         '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
@@ -1086,7 +1153,7 @@
                     var type = liststr[3];
                     var description = liststr[4];
                     var rawtime = liststr[5].split("]");
-                    var time = formatTime(rawtime[1]);
+                    var time = rawtime[0];
 
                     tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
                         '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
@@ -1120,7 +1187,7 @@
                     var type = liststr[3];
                     var description = liststr[4];
                     var rawtime = liststr[5].split("]");
-                    var time = formatTime(rawtime[1]);
+                    var time = rawtime[0];
 
                     tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
                         '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
@@ -1250,7 +1317,7 @@
                 $(document).ready(function() {
                     var powerEventTable = $('#power-event').DataTable( {
                         "info":           false,
-                        "scrollY":        "200px",
+                        "scrollY":        "260px",
                         "scrollCollapse": true,
                         "paging":         false,
                         "dom":            "lBrtip"
@@ -1277,7 +1344,7 @@
                     var type = liststr[3];
                     var description = liststr[4];
                     var rawtime = liststr[5].split("]");
-                    var time = formatTime(rawtime[1]);
+                    var time = rawtime[0];
 
                     tbody.innerHTML += ('<tr>' + '<td id="teid" style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
                         '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
@@ -1399,6 +1466,45 @@
 
 <!-- 右侧界面 第二个子菜单 列 -->
 <script type="text/javascript">
+
+    //初始化cookie中的列
+    $(document).ready(function() {
+        $. cookie('row1-name', '测量名称', {expires: 1, path: '/'});
+        $. cookie('row1-val', '100', {expires: 1, path: '/'});
+       /* $. cookie('row2-name', '时间', {expires: 1, path: '/'});
+        $. cookie('row2-val', '132', {expires: 1, path: '/'});*/
+        $. cookie('row3-name', '类型', {expires: 1, path: '/'});
+        $. cookie('row3-val', '50', {expires: 1, path: '/'});
+        $. cookie('row4-name', '触发相位', {expires: 1, path: '/'});
+        $. cookie('row4-val', '50', {expires: 1, path: '/'});
+        $. cookie('row5-name', '时间长短', {expires: 1, path: '/'});
+        $. cookie('row5-val', '60', {expires: 1, path: '/'});
+        $. cookie('row6-name', '深度', {expires: 1, path: '/'});
+        $. cookie('row6-val', '60', {expires: 1, path: '/'});
+        $. cookie('row7-name', '方向', {expires: 1, path: '/'});
+        $. cookie('row7-val', '10', {expires: 1, path: '/'});
+        /*$. cookie('row8-name', '触发相位数', {expires: 1, path: '/'});
+        $. cookie('row8-val', '10', {expires: 1, path: '/'});
+        $. cookie('row9-name', '评论', {expires: 1, path: '/'});
+        $. cookie('row9-val', '100', {expires: 1, path: '/'});
+        $. cookie('row10-name', '签名', {expires: 1, path: '/'});
+        $. cookie('row10-val', '100', {expires: 1, path: '/'});*/
+
+        var coltable = $("#colume-table");
+
+        coltable.append(
+            '<tr><td>'+$. cookie('row1-name')+'</td><td>'+$. cookie('row1-val')+'</td></tr>' +
+            '<tr><td>'+$. cookie('row2-name')+'</td><td>'+$. cookie('row2-val')+'</td></tr>' +
+            '<tr><td>'+$. cookie('row3-name')+'</td><td>'+$. cookie('row3-val')+'</td></tr>' +
+            '<tr><td>'+$. cookie('row4-name')+'</td><td>'+$. cookie('row4-val')+'</td></tr>' +
+            '<tr><td>'+$. cookie('row5-name')+'</td><td>'+$. cookie('row5-val')+'</td></tr>' +
+            '<tr><td>'+$. cookie('row6-name')+'</td><td>'+$. cookie('row6-val')+'</td></tr>' +
+            '<tr><td>'+$. cookie('row7-name')+'</td><td>'+$. cookie('row7-val')+'</td></tr>' );//+
+            /*'<tr><td>'+$. cookie('row8-name')+'</td><td>'+$. cookie('row8-val')+'</td></tr>' +
+            '<tr><td>'+$. cookie('row9-name')+'</td><td>'+$. cookie('row9-val')+'</td></tr>' +
+            '<tr><td>'+$. cookie('row10-name')+'</td><td>'+$. cookie('row10-val')+'</td></tr>');*/
+    });
+
     function upcol(){
         alert("up");
     }
@@ -1537,9 +1643,46 @@
 
 <!-- 导出-->
 <script type="text/javascript">
+
     function exportTable(){
-        var tableid = "event-table-body";
-        exportToExcel(tableid);
+/*
+        $("#secItem li").each(function(i){
+            $(this).click(function(){
+                idx = i;
+            });
+        });*/
+
+      /*  $("#secItem li")[0].onclick = function(){
+            idx = 1;
+            var tableid = "power-event-detail-tbody-"+idx;
+            console.log("被选中", tableid);
+            exportToExcel(tableid);
+        }
+        $("#secItem li")[1].onclick = function(){
+            idx = 2;
+            var tableid = "power-event-detail-tbody-"+idx;
+            console.log("被选中", tableid);
+            exportToExcel(tableid);
+        }
+        $("#secItem li")[2].onclick = function(){
+            idx = 3;
+            var tableid = "power-event-detail-tbody-"+idx;
+            console.log("被选中", tableid);
+            exportToExcel(tableid);
+        }
+        $("#secItem li")[3].onclick = function(){
+            idx = 4;
+            var tableid = "power-event-detail-tbody-"+idx;
+            console.log("被选中", tableid);
+            exportToExcel(tableid);
+        }
+        $("#secItem li")[4].onclick = function(){
+            idx = 5;
+            var tableid = "power-event-detail-tbody-"+idx;
+            console.log("被选中", tableid);
+            exportToExcel(tableid);
+        }*/
+
     }
 
     var idTmr;
@@ -1567,7 +1710,7 @@
         }
     }
 
-    function exportToExcel(tableid ) {//整个表格拷贝到EXCEL中
+    function exportToExcel(tableid) {//整个表格拷贝到EXCEL中
         if(getExplorer()=='ie'){
             var curTbl = document.getElementById(tableid);
             var oXL = new ActiveXObject("Excel.Application");
@@ -1596,11 +1739,9 @@
             } finally {
                 oWB.SaveAs(fname);
                 oWB.Close(savechanges = false);
-                //xls.visible = false;
                 oXL.Quit();
                 oXL = null;
                 //结束excel进程，退出完成
-                //window.setInterval("Cleanup();",1);
                 idTmr = window.setInterval("Cleanup();", 1);
             }
         }else{
@@ -1685,6 +1826,12 @@
 
         } );
     } );
+
+    //列栏表
+    $('#colume-table').DataTable( {
+        "info":           false,
+        "dom":            "lBrtip"
+    });
 
     //获取某一行选择的行，将该行的id放入某个隐藏的div中
     function selectOneRowEvent(rowdata){
