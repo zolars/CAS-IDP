@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!-- 引入struts的标签库-->
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -48,1409 +48,1654 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body id="skin-blur-blue">
-    <!--登陆认证拦截-->
-    <script>
-         if(!$. cookie('login')){
-             alert('您还未登录或您的认证已过期, 请先登陆.');
-             window.location.href = 'http://localhost:8082/';
-         }
-     </script>
+<!--登陆认证拦截-->
+<script>
+    if(!$. cookie('login')){
+        alert('您还未登录或您的认证已过期, 请先登陆.');
+        window.location.href = 'http://localhost:8082/';
+    }
+</script>
 
-    <header id="header" class="media">
-        <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
+<header id="header" class="media">
+    <a href="" id="menu-toggle"></a>
+    <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
 
-        <div class="media-body">
-            <div class="media" id="top-menu">
-                <div class="pull-left location-select">
-                    <select class="form-control location-select-item" id="province_code" name="province_code"
-                            onchange="getCity()">
-                        <option value="">请选择</option>
-                    </select>
+    <div class="media-body">
+        <div class="media" id="top-menu">
+            <div class="pull-left location-select">
+                <select class="form-control location-select-item" id="province_code" name="province_code"
+                        onchange="getCity()">
+                    <option value="">请选择</option>
+                </select>
 
-                    <script>
-                        $("#province_code").change(function(){
-                            var options = $("#province_code option:selected");
-                            $. cookie('opinion1', options.text(), {expires: 1, path: '/'});
-                        })
-                    </script>
+                <script>
+                    $("#province_code").change(function(){
+                        var options = $("#province_code option:selected");
+                        $. cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                    })
+                </script>
 
-                    <select class="form-control location-select-item" id="city_code" name="city_code"
-                            onchange="getComproom()">
-                        <option value="">请选择</option>
-                    </select>
+                <select class="form-control location-select-item" id="city_code" name="city_code"
+                        onchange="getComproom()">
+                    <option value="">请选择</option>
+                </select>
 
-                    <script>
-                        $("#city_code").change(function(){
-                            var options = $("#city_code option:selected");
-                            $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
-                        })
+                <script>
+                    $("#city_code").change(function(){
+                        var options = $("#city_code option:selected");
+                        $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                    })
 
-                    </script>
+                </script>
 
-                    <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
-                        <option value="">请选择</option>
-                    </select>
+                <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
+                    <option value="">请选择</option>
+                </select>
 
-                    <script>
-                        $("#comproom_code").change(function(){
-                            var options = $("#comproom_code option:selected");
-                            $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
-                        })
-                    </script>
-
-                </div>
-                <!-- 注销按钮 -->
-                <div class="pull-right">
-                    <li><a href="index.jsp">注销</a></li>
-                </div>
-
-                <div class="pull-right">欢迎用户${username}登录</div>
+                <script>
+                    $("#comproom_code").change(function(){
+                        var options = $("#comproom_code option:selected");
+                        $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
+                    })
+                </script>
 
             </div>
+            <!-- 注销按钮 -->
+            <div class="pull-right">
+                <li><a href="index.jsp">注销</a></li>
+            </div>
+
+            <div class="pull-right">欢迎用户${username}登录</div>
+
         </div>
-    </header>
+    </div>
+</header>
 
-    <div class="clearfix"></div>
+<div class="clearfix"></div>
 
-    <section id="main" class="p-relative" role="main">
-        <!-- Sidebar -->
-        <!-- 动态加载菜单项 -->
-        <aside id="sidebar">
-            <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
-            </ul>
-        </aside>
+<section id="main" class="p-relative" role="main">
+    <!-- Sidebar -->
+    <!-- 动态加载菜单项 -->
+    <aside id="sidebar">
+        <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
+        </ul>
+    </aside>
 
-        <!-- Content -->
-        <section id="content" class="container">
+    <!-- Content -->
+    <section id="content" class="container">
 
-            <!-- Breadcrumb -->
-            <!-- Main Widgets -->
-            <div class="block-area">
-                <div class="row">
+        <!-- Breadcrumb -->
+        <!-- Main Widgets -->
+        <div class="block-area">
+            <div class="row">
 
-                    <div class="col-md-12">
-                        <ul class="nav nav-tabs" id="ulItem">
-                            <li class="active"  style="width:15%">
-                                <a data-toggle="tab" id="subItem1">•事件分析</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="subItem2">•能效分析</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs" id="ulItem">
+                        <li class="active"  style="width:15%">
+                            <a data-toggle="tab" id="subItem1">•事件分析</a>
+                        </li>
+                        <li style="width:15%">
+                            <a data-toggle="tab" id="subItem2">•能效分析</a>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div id = "item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        <div class="block-area">
-                            <div class="row">
-                                <div class="col-md-12">
+                <div id = "item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                    <div class="block-area">
+                        <div class="row">
+                            <div class="col-md-12">
 
-                                    <table id="event-table-head1">
-                                        <thead>
-                                        <tr>
-                                            <th><img src="/img/setting.png" alt="" onClick="settingIcon()" ></th>
-                                            <th><img src="/img/refresh.png" alt="" onClick="refreshIcon()" ></th>
-                                            <th><button type="button" class="btn btn-sm btn-alt" onClick="exportTable()" >导出</button></th>
-                                            <th><button type="button" class="btn btn-sm btn-alt" onClick="printTable()" >打印</button></th>
-                                        </tr>
-                                        </thead>
-                                    </table>
+                                <table id="event-table-head1">
+                                    <thead>
+                                    <tr>
+                                        <th><img src="/img/setting.png" alt="" onClick="settingIcon()" ></th>
+                                        <th><img src="/img/refresh.png" alt="" onClick="refreshIcon()" ></th>
+                                        <th><button type="button" class="btn btn-sm btn-alt" onClick="exportTable()" >导出</button></th>
+                                        <th><button type="button" class="btn btn-sm btn-alt" onClick="printTable()" >打印</button></th>
+                                    </tr>
+                                    </thead>
+                                </table>
 
-                                    <!--startprint-->
-                                    <div class="row-fluid">
-                                        <div class="col-md-1">
-                                            <button type="button" style="width:100px;height:40px;" ></button>
-                                            <button type="button" onClick="getDeviceEvent()" style="width:100px;height:260px;" >设备事件</button>
-                                            <button type="button" onClick="getPowerEvent()"style="width:100px;height:260px;" >电能质量事件</button>
-                                            <button type="button" onClick="getEvironmentEvent()" style="width:100px;height:260px;" >环境事件</button>
+                                <!--startprint-->
+                                <div class="row-fluid">
+                                    <div class="col-md-1">
+                                        <button type="button" style="width:100px;height:40px;" ></button>
+                                        <button type="button" onClick="getDeviceEvent()" style="width:100px;height:260px;" >设备事件</button>
+                                        <button type="button" onClick="getPowerEvent()"style="width:100px;height:260px;" >电能质量事件</button>
+                                        <button type="button" onClick="getEvironmentEvent()" style="width:100px;height:260px;" >环境事件</button>
+                                    </div>
+
+                                    <div class="col-md-7">
+
+                                        <div id="eventdiv1" style="display: block">
+                                            <table class="display" id="device-event" style="width:100%;">
+                                                <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>事件名称</th>
+                                                    <th>位置</th>
+                                                    <th>事件类型</th>
+                                                    <th>事件描述</th>
+                                                    <th>事件发生时间</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <table class="display" id="power-event" style="width:100%;">
+                                                <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="power-event-tbody">
+                                                </tbody>
+                                            </table>
+                                            <table class="display" id="environment-event" style="width:100%;">
+                                                <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
                                         </div>
 
-                                        <div class="col-md-7">
+                                        <div id="eventdiv2" style="display: none">
 
-                                            <div id="eventdiv1" style="display: block">
-                                                <table class="display" id="device-event" style="width:100%;">
-                                                    <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>事件名称</th>
-                                                        <th>位置</th>
-                                                        <th>事件类型</th>
-                                                        <th>事件描述</th>
-                                                        <th>事件发生时间</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    </tbody>
-                                                </table>
-                                                <table class="display" id="power-event" style="width:100%;">
-                                                    <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody id="power-event-tbody">
-                                                    </tbody>
-                                                </table>
-                                                <table class="display" id="environment-event" style="width:100%;">
-                                                    <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div id="eventdiv2" style="display: none">
-
-                                                <ul class="nav nav-tabs" id="secItem">
-                                                    <li class="active"  style="width:15%">
-                                                        <a data-toggle="tab" id="secItem1">•浪涌塌陷</a>
-                                                    </li>
-                                                    <li style="width:15%">
-                                                        <a data-toggle="tab" id="secItem2">谐波</a>
-                                                    </li>
-                                                    <li  style="width:15%">
-                                                        <a data-toggle="tab" id="secItem3">•三相不平衡度</a>
-                                                    </li>
-                                                    <li style="width:15%">
-                                                        <a data-toggle="tab" id="secItem4">•瞬变</a>
-                                                    </li>
-                                                    <li style="width:15%">
-                                                        <a data-toggle="tab" id="secItem5">•闪变</a>
-                                                    </li>
-                                                </ul>
-
-                                                <table class="display" id="power-event-detail" style="width:100%;">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>测量名称</th>
-                                                        <th>时间</th>
-                                                        <th>类型</th>
-                                                        <th>时间长短</th>
-                                                        <th>深度（与标准的偏差）</th>
-                                                        <th>方向</th>
-                                                        <th>确认</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody id="power-event-detail-tbody">
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <!--endprint-->
-
-                                        <div class="col-md-4">
-
-                                            <ul class="nav nav-tabs" id="seculItem">
-                                                <li class="active" style="width:15%">
-                                                    <a data-toggle="tab" id="leftsubItem1">•时间地点</a>
+                                            <ul class="nav nav-tabs" id="secItem">
+                                                <li class="active"  style="width:15%">
+                                                    <a data-toggle="tab" id="secItem1">•浪涌塌陷</a>
                                                 </li>
                                                 <li style="width:15%">
-                                                    <a data-toggle="tab" id="leftsubItem2">•列</a>
+                                                    <a data-toggle="tab" id="secItem2">谐波</a>
+                                                </li>
+                                                <li  style="width:15%">
+                                                    <a data-toggle="tab" id="secItem3">•三相不平衡度</a>
                                                 </li>
                                                 <li style="width:15%">
-                                                    <a data-toggle="tab" id="leftsubItem3">•图形</a>
+                                                    <a data-toggle="tab" id="secItem4">•瞬变</a>
+                                                </li>
+                                                <li style="width:15%">
+                                                    <a data-toggle="tab" id="secItem5">•闪变</a>
                                                 </li>
                                             </ul>
 
-                                            <div id="leftItem1" style="width: 100%;">
-                                                <table>
-                                                    <tr><td>日期时间</td></tr>
-                                                    <tr><td><input id="radio-last-day-event" type="radio" name="event-data-peroid" value="lastone">观看最后的事件</td></tr>
-                                                    <tr><td><input id="radio-from-to-event" type="radio" name="event-data-peroid" value="fromto">从
-                                                        <div class="form-group">
-                                                            <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-                                                                <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                            <input type="hidden" id="dtp_input1" value="" /><br/>
-                                                        </div>
-                                                    </td></tr>
-                                                    <tr><td>到
-                                                        <div class="form-group">
-                                                            <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-                                                                <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                            <input type="hidden" id="dtp_input2" value="" /><br/>
-                                                        </div>
-                                                    </td></tr>
+                                            <table class="display" id="power-event-detail-1" style="width:100%;">
+                                                <thead>
+                                                <tr>
+                                                    <th>测量名称</th>
+                                                    <th>时间</th>
+                                                    <th>类型</th>
+                                                    <th>时间长短</th>
+                                                    <th>深度（与标准的偏差）</th>
+                                                    <th>方向</th>
+                                                    <th>确认</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="power-event-detail-tbody-1">
+                                                </tbody>
+                                            </table>
 
-                                                    <tr><td>时间段控制</td></tr>
+                                            <table class="display" id="power-event-detail-2" style="width:100%;display: none;">
+                                                <thead>
+                                                <tr>
+                                                    <th>测量名称</th>
+                                                    <th>时间</th>
+                                                    <th>类型</th>
+                                                    <th>时间长短</th>
+                                                    <th>深度（与标准的偏差）</th>
+                                                    <th>方向</th>
+                                                    <th>确认</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="power-event-detail-tbody-2">
+                                                </tbody>
+                                            </table>
 
-                                                    <tr><td><input id="radio-day-event" type="radio"  name="event-data-peroid" value="day">天</td></tr>
-                                                    <tr><td><input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</td></tr>
-                                                    <tr><td><input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月</td></tr>
+                                            <table class="display" id="power-event-detail-3" style="width:100%;display: none;">
+                                                <thead>
+                                                <tr>
+                                                    <th>测量名称</th>
+                                                    <th>时间</th>
+                                                    <th>类型</th>
+                                                    <th>时间长短</th>
+                                                    <th>深度（与标准的偏差）</th>
+                                                    <th>方向</th>
+                                                    <th>确认</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="power-event-detail-tbody-3">
+                                                </tbody>
+                                            </table>
 
-                                                    <table class="display" id="place-event" style="width:100%">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>测量地点</th>
-                                                            <th></th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
+                                            <table class="display" id="power-event-detail-4" style="width:100%;display: none;">
+                                                <thead>
+                                                <tr>
+                                                    <th>测量名称</th>
+                                                    <th>时间</th>
+                                                    <th>类型</th>
+                                                    <th>时间长短</th>
+                                                    <th>深度（与标准的偏差）</th>
+                                                    <th>方向</th>
+                                                    <th>确认</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="power-event-detail-tbody-4">
+                                                </tbody>
+                                            </table>
 
-                                                        </tbody>
-                                                    </table>
-
-                                                    <tr>
-                                                        <td><button id="add-button" type="button" class="btn btn-sm btn-alt"  onclick="addMonitorPoint()">添加</button></td>
-                                                        <td><button id="delete-button" type="button" class="btn btn-sm btn-alt"  onclick="deleteMonitorPoint()">删除</button></td>
-                                                    </tr>
-
-                                                    <tr><td>自动更新间隔
-                                                        <select class="form-control location-select-item" id="auto-update-interval">
-                                                            <option value="null">无</option>
-                                                            <option value="1">1分</option>
-                                                            <option value="10">10分</option>
-                                                            <option value="60">60分</option>
-                                                        </select>
-                                                    </td></tr>
-
-                                                    <tr>
-                                                        <td><button id="data-button" type="button" class="btn btn-sm btn-alt" onclick="getAllEvent()">查询</button></td>
-                                                    </tr>
-
-                                                </table>
-                                            </div>
-
-                                            <div id="leftItem2" style="width: 100%;">
-                                                <table>
-                                                    <tr>
-                                                        <td>可见的列</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <table>
-                                                            <tr><td>名字</td><td>宽度</td></tr>
-                                                            <tr><td>测量名称</td><td>100</td></tr>
-                                                        </table>
-                                                    </tr>
-                                                    <tr>
-                                                        <img src="/img/uparray.png" alt="" onClick="upcol()" >
-                                                        <img src="/img/deletearray.png" alt="" onClick="deletecol()" >
-                                                        <img src="/img/downarray.png" alt="" onClick="downcol()" >
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>可用的列</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <select class="form-control location-select-item" id="useful-col">
-                                                                <option value="1">测量名称</option>
-                                                                <option value="2">时间</option>
-                                                                <option value="3">测量名称</option>
-                                                                <option value="4">类型</option>
-                                                                <option value="5">触发相位</option>
-                                                                <option value="6">时间长短</option>
-                                                                <option value="7">深度</option>
-                                                                <option value="8">方向</option>
-                                                                <option value="9">触发相位数</option>
-                                                                <option value="10">评论</option>
-                                                                <option value="11">签名</option>
-                                                                <option value="12">触发水平</option>
-                                                                <option value="13">中有波形数据</option>
-                                                            </select>
-                                                        </td>
-                                                        <td><button id="add-col-button" type="button" class="btn btn-sm btn-alt" onclick="getTodayEvent()">添加</button></td>
-                                                    </tr>
-                                                </table>
-
-                                            </div>
-
-                                            <div id="leftItem3" style="width: 100%;">
-                                                浪涌塌陷曲线
-                                                U电压
-
-                                                I电流
-                                            </div>
+                                            <table class="display" id="power-event-detail-5" style="width:100%;display: none;">
+                                                <thead>
+                                                <tr>
+                                                    <th>测量名称</th>
+                                                    <th>时间</th>
+                                                    <th>类型</th>
+                                                    <th>时间长短</th>
+                                                    <th>深度（与标准的偏差）</th>
+                                                    <th>方向</th>
+                                                    <th>确认</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="power-event-detail-tbody-5">
+                                                </tbody>
+                                            </table>
 
                                         </div>
+                                    </div>
+                                    <!--endprint-->
+
+                                    <div class="col-md-4">
+
+                                        <ul class="nav nav-tabs" id="seculItem">
+                                            <li class="active" style="width:15%">
+                                                <a data-toggle="tab" id="leftsubItem1">•时间地点</a>
+                                            </li>
+                                            <li style="width:15%">
+                                                <a data-toggle="tab" id="leftsubItem2">•列</a>
+                                            </li>
+                                            <li style="width:15%">
+                                                <a data-toggle="tab" id="leftsubItem3">•图形</a>
+                                            </li>
+                                        </ul>
+
+                                        <div id="leftItem1" style="width: 100%;">
+                                            <table>
+                                                <tr><td>日期时间</td></tr>
+                                                <tr><td><input id="radio-last-day-event" type="radio" name="event-data-peroid" value="lastone">观看最后的事件</td></tr>
+                                                <tr><td><input id="radio-from-to-event" type="radio" name="event-data-peroid" value="fromto">从
+                                                    <div class="form-group">
+                                                        <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                            <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                                                    </div>
+                                                </td></tr>
+                                                <tr><td>到
+                                                    <div class="form-group">
+                                                        <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                            <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                        <input type="hidden" id="dtp_input2" value="" /><br/>
+                                                    </div>
+                                                </td></tr>
+
+                                                <tr><td>时间段控制</td></tr>
+
+                                                <tr><td><input id="radio-day-event" type="radio"  name="event-data-peroid" value="day">天</td></tr>
+                                                <tr><td><input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</td></tr>
+                                                <tr><td><input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月</td></tr>
+
+                                                <table class="display" id="place-event" style="width:100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>测量地点</th>
+                                                        <th></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+
+                                                <tr>
+                                                    <td><button id="add-button" type="button" class="btn btn-sm btn-alt"  onclick="addMonitorPoint()">添加</button></td>
+                                                    <td><button id="delete-button" type="button" class="btn btn-sm btn-alt"  onclick="deleteMonitorPoint()">删除</button></td>
+                                                </tr>
+
+                                                <tr><td>自动更新间隔
+                                                    <select class="form-control location-select-item" id="auto-update-interval">
+                                                        <option value="null">无</option>
+                                                        <option value="1">1分</option>
+                                                        <option value="10">10分</option>
+                                                        <option value="60">60分</option>
+                                                    </select>
+                                                </td></tr>
+
+                                                <tr>
+                                                    <td><button id="data-button" type="button" class="btn btn-sm btn-alt" onclick="getAllEvent()">查询</button></td>
+                                                </tr>
+
+                                            </table>
+                                        </div>
+
+                                        <div id="leftItem2" style="width: 100%;">
+                                            <table>
+                                                <tr>
+                                                    <td>可见的列</td>
+                                                </tr>
+                                                <tr>
+                                                    <table>
+                                                        <tr><td>名字</td><td>宽度</td></tr>
+                                                        <tr><td>测量名称</td><td>100</td></tr>
+                                                    </table>
+                                                </tr>
+                                                <tr>
+                                                    <img src="/img/uparray.png" alt="" onClick="upcol()" >
+                                                    <img src="/img/deletearray.png" alt="" onClick="deletecol()" >
+                                                    <img src="/img/downarray.png" alt="" onClick="downcol()" >
+                                                </tr>
+
+                                                <tr>
+                                                    <td>可用的列</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <select class="form-control location-select-item" id="useful-col">
+                                                            <option value="1">测量名称</option>
+                                                            <option value="2">时间</option>
+                                                            <option value="3">测量名称</option>
+                                                            <option value="4">类型</option>
+                                                            <option value="5">触发相位</option>
+                                                            <option value="6">时间长短</option>
+                                                            <option value="7">深度</option>
+                                                            <option value="8">方向</option>
+                                                            <option value="9">触发相位数</option>
+                                                            <option value="10">评论</option>
+                                                            <option value="11">签名</option>
+                                                            <option value="12">触发水平</option>
+                                                            <option value="13">中有波形数据</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><button id="add-col-button" type="button" class="btn btn-sm btn-alt" onclick="getTodayEvent()">添加</button></td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+
+                                        <div id="leftItem3" style="width: 100%;">
+                                            浪涌塌陷曲线
+                                            U电压
+
+                                            I电流
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        能效分析
-                    </div>
-
-                    <!-- settingmodel DIV-->
-                    <div class="setting-class" id="setting-modal">
-                        <div id="jstree"></div>
-                        <button onclick="AllSelected()" type="button" class="btn btn-sm btn-alt">全选</button>
-                        <button onclick="AllDisSelected()" type="button" class="btn btn-sm btn-alt">全不选</button>
-                        <button onclick="OK()" type="button" class="btn btn-sm btn-alt">确定</button>
-                        <button onclick="cancle()" type="button" class="btn btn-sm btn-alt">取消</button>
-                    </div>
-                    <!-- settingmodel DIV END-->
-
-                    <!-- addEventMonitorPoint DIV-->
-                    <div class="setting-class" id="addEventMonitorPoint-modal" style="display: none;">
-                        <div id="citybank-jstree"></div>
-                        <button onclick="addCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">确定</button>
-                        <button onclick="cancleCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">取消</button>
-                    </div>
-                    <!-- addEventMonitorPoint DIV END-->
-
-                    <!-- clickEventRow DIV-->
-                    <div class="clickEventRow-class" id="clickEventRow-modal" style="display: none;">
-                        <button onclick="confirmEvent()" type="button" class="btn btn-sm btn-alt">确认</button>
-                        <button onclick="deleteEvent()" type="button" class="btn btn-sm btn-alt">删除事件</button>
-                    </div>
-                    <!-- clickEventRow DIV END-->
-
-                    <!-- conformEventRow DIV-->
-                    <div class="conformEventRow-class" id="conformEventRow-modal" style="display: none;">
-                        <table>
-                            <tr>
-                                <td>通过签名来确认事件</td>
-                            </tr>
-                            <tr>
-                                <td> 签名：</td>
-                            </tr>
-                            <tr>
-                                <td><input type="text" id="signature" class="form-control add-roles-input"></td>
-                            </tr>
-                            <tr>
-                                <td> 注释：</td>
-                            </tr>
-                            <tr>
-                                <td><input type="text" id="annotation" class="form-control add-roles-input"></td>
-                            </tr>
-                            <tr>
-                                <td><button onclick="confirmOKEvent()" type="button" class="btn btn-sm btn-alt">确认</button></td>
-                                <td><button onclick="cancleOKEvent()" type="button" class="btn btn-sm btn-alt">取消</button></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!-- conformEventRow DIV END-->
-
-                    <!-- some hidden div-->
-                    <div id="select-teid" style="display: none"></div>
-                    <!-- some hidden div END-->
                 </div>
+
+                <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                    能效分析
+                </div>
+
+                <!-- settingmodel DIV-->
+                <div class="setting-class" id="setting-modal">
+                    <div id="jstree"></div>
+                    <button onclick="AllSelected()" type="button" class="btn btn-sm btn-alt">全选</button>
+                    <button onclick="AllDisSelected()" type="button" class="btn btn-sm btn-alt">全不选</button>
+                    <button onclick="OK()" type="button" class="btn btn-sm btn-alt">确定</button>
+                    <button onclick="cancle()" type="button" class="btn btn-sm btn-alt">取消</button>
+                </div>
+                <!-- settingmodel DIV END-->
+
+                <!-- addEventMonitorPoint DIV-->
+                <div class="setting-class" id="addEventMonitorPoint-modal" style="display: none;">
+                    <div id="citybank-jstree"></div>
+                    <button onclick="addCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">确定</button>
+                    <button onclick="cancleCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">取消</button>
+                </div>
+                <!-- addEventMonitorPoint DIV END-->
+
+                <!-- clickEventRow DIV-->
+                <div class="clickEventRow-class" id="clickEventRow-modal" style="display: none;">
+                    <button onclick="confirmEvent()" type="button" class="btn btn-sm btn-alt">确认</button>
+                    <button onclick="deleteEvent()" type="button" class="btn btn-sm btn-alt">删除事件</button>
+                </div>
+                <!-- clickEventRow DIV END-->
+
+                <!-- conformEventRow DIV-->
+                <div class="conformEventRow-class" id="conformEventRow-modal" style="display: none;">
+                    <table>
+                        <tr>
+                            <td>通过签名来确认事件</td>
+                        </tr>
+                        <tr>
+                            <td> 签名：</td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="signature" class="form-control add-roles-input"></td>
+                        </tr>
+                        <tr>
+                            <td> 注释：</td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="annotation" class="form-control add-roles-input"></td>
+                        </tr>
+                        <tr>
+                            <td><button onclick="confirmOKEvent()" type="button" class="btn btn-sm btn-alt">确认</button></td>
+                            <td><button onclick="cancleOKEvent()" type="button" class="btn btn-sm btn-alt">取消</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- conformEventRow DIV END-->
+
+                <!-- some hidden div-->
+                <div id="select-teid" style="display: none"></div>
+                <!-- some hidden div END-->
             </div>
-        </section>
+        </div>
     </section>
+</section>
 
-    <!-- Javascript Libraries -->
-    <!-- jQuery -->
-    <!-- <script src="js/jquery-3.3.1.js"></script> -->
+<!-- Javascript Libraries -->
+<!-- Bootstrap -->
+<script src="js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
+<!-- Charts -->
+<script src="js/charts/jquery.flot.js"></script>
+<!-- Flot Main -->
+<script src="js/charts/jquery.flot.time.js"></script>
+<!-- Flot sub -->
+<script src="js/charts/jquery.flot.animator.min.js"></script>
+<!-- Flot sub -->
+<script src="js/charts/jquery.flot.resize.min.js"></script>
+<!-- Flot sub - for repaint when resizing the screen -->
 
-    <!-- Charts -->
-    <script src="js/charts/jquery.flot.js"></script>
-    <!-- Flot Main -->
-    <script src="js/charts/jquery.flot.time.js"></script>
-    <!-- Flot sub -->
-    <script src="js/charts/jquery.flot.animator.min.js"></script>
-    <!-- Flot sub -->
-    <script src="js/charts/jquery.flot.resize.min.js"></script>
-    <!-- Flot sub - for repaint when resizing the screen -->
+<script src="js/sparkline.min.js"></script>
+<!-- Sparkline - Tiny charts -->
+<script src="js/easypiechart.js"></script>
+<!-- EasyPieChart - Animated Pie Charts -->
+<script src="js/charts.js"></script>
+<!-- All the above chart related functions -->
+<!--Media Player-->
+<script src="js/media-player.min.js"></script>
+<!-- USA Map for jVectorMap -->
+<!-- Map -->
+<script src="js/maps/jvectormap.min.js"></script>
+<!-- jVectorMap main library -->
+<script src="js/maps/usa.js"></script>
+<!-- USA Map for jVectorMap -->
 
-    <script src="js/sparkline.min.js"></script>
-    <!-- Sparkline - Tiny charts -->
-    <script src="js/easypiechart.js"></script>
-    <!-- EasyPieChart - Animated Pie Charts -->
-    <script src="js/charts.js"></script>
-    <!-- All the above chart related functions -->
-    <!--Media Player-->
-    <script src="js/media-player.min.js"></script>
-    <!-- USA Map for jVectorMap -->
-    <!-- Map -->
-    <script src="js/maps/jvectormap.min.js"></script>
-    <!-- jVectorMap main library -->
-    <script src="js/maps/usa.js"></script>
-    <!-- USA Map for jVectorMap -->
+<!--  Form Related -->
+<script src="js/icheck.js"></script>
+<!-- Custom Checkbox + Radio -->
 
-    <!--  Form Related -->
-    <script src="js/icheck.js"></script>
-    <!-- Custom Checkbox + Radio -->
+<!-- UX -->
+<script src="js/scroll.min.js"></script>
+<!-- Custom Scrollbar -->
+<script src="js/select.min.js"></script>
+<!-- Custom Select -->
+<!-- Other -->
+<script src="js/calendar.min.js"></script>
+<!-- Calendar -->
+<script src="assets/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="assets/amcharts/serial.js" type="text/javascript"></script>
+<script src="js/jquery.datetimepicker.js" type="text/javascript"></script>
 
-    <!-- UX -->
-    <script src="js/scroll.min.js"></script>
-    <!-- Custom Scrollbar -->
-    <script src="js/select.min.js"></script>
-    <!-- Custom Select -->
-    <!-- Other -->
-    <script src="js/calendar.min.js"></script>
-    <!-- Calendar -->
-    <script src="assets/amcharts/amcharts.js" type="text/javascript"></script>
-    <script src="assets/amcharts/serial.js" type="text/javascript"></script>
-    <script src="js/jquery.datetimepicker.js" type="text/javascript"></script>
-    <!--  		 <script src="js/feeds.min.js"></script> News Feeds -->
-    <!-- All JS functions -->
-    <script src="js/functions.js"></script>
+<!-- All JS functions -->
+<script src="js/functions.js"></script>
+<script src="js/echarts.js"></script>
+<script src="js/jstree.js"></script>
 
-    <script src="js/echarts.js"></script>
+<!-- 时间选择器-->
+<script type="text/javascript" src="bootstrap-timepicker/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
 
-    <script src="js/jstree.js"></script>
+    $("#firstDate").change(function() {
+        $('.firstDate').datetimepicker('setStartDate', $(this).val());
+    });
+    $("#lastDate").change(function() {
+        $('.lastDate').datetimepicker('setEndDate', $(this).val());
+    });
+</script>
 
-    <!-- 时间选择器-->
+<!-- 省\市\机房下拉菜单-->
+<script type="text/javascript">
+    /*加载省下拉选*/
 
-    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-    <script type="text/javascript">
-        $('.form_datetime').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            forceParse: 0,
-            showMeridian: 1
-        });
+    //读取cookie中已存的机房配置
+    var opinion1 = $. cookie('province_name');
 
-        $("#firstDate").change(function() {
-            $('.firstDate').datetimepicker('setStartDate', $(this).val());
-        });
-        $("#lastDate").change(function() {
-            $('.lastDate').datetimepicker('setEndDate', $(this).val());
-        });
-    </script>
+    $.ajax({
+        type: "post",
+        url: "setProvince",
+        data: {provid: opinion1},
+        dataType: "json",
+        success: function (data) {
+            $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
+            getCity();
+        },
+        error: function () {
+            $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
+            getCity();
+        }
+    });
 
-    <!-- 省\市\机房下拉菜单-->
-    <script type="text/javascript">
-        /*加载省下拉选*/
+    /*加载市下拉选*/
+    function getCity() {
+        var pname = $("#province_code").val();
 
         //读取cookie中已存的机房配置
-        var opinion1 = $. cookie('province_name');
+        var opinion2 = $. cookie('opinion2');
+
+        $("#city_code").empty();
+        $("#comproom_code").empty();
 
         $.ajax({
             type: "post",
-            url: "setProvince",
-            data: {provid: opinion1},
+            url: "getCityTree",
+            data: {provinceid: pname},
             dataType: "json",
             success: function (data) {
-                $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
-                getCity();
-            },
-            error: function () {
-                $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
-                getCity();
+
+                $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+
+                var obj = eval("(" + data + ")");
+                for (var i = 0; i < obj.length; i++) {
+                    if(obj[i].cbname == opinion2) {
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
+                        getComproom();
+                    }
+                    else
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
+
+                }
             }
         });
+    }
 
-        /*加载市下拉选*/
-        function getCity() {
-            var pname = $("#province_code").val();
+    /*加载机房下拉选*/
+    function getComproom() {
+        var cname = $("#city_code").val();
 
-            //读取cookie中已存的机房配置
-            var opinion2 = $. cookie('opinion2');
+        //读取cookie中已存的机房配置
+        var opinion3 = $. cookie('opinion3');
 
-            $("#city_code").empty();
-            $("#comproom_code").empty();
+        $("#comproom_code").empty();
 
-            $.ajax({
-                type: "post",
-                url: "getCityTree",
-                data: {provinceid: pname},
-                dataType: "json",
-                success: function (data) {
+        $.ajax({
+            type: "post",
+            url: "getCompTree",
+            data: {cityid: cname},
+            dataType: "json",
+            success: function (data) {
+                var list = data.allcomputerroom;
 
-                    $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
-                    var obj = eval("(" + data + ")");
-                    for (var i = 0; i < obj.length; i++) {
-                        if(obj[i].cbname == opinion2) {
-                            $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
-                            getComproom();
-                        }
-                        else
-                            $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
-
-                    }
+                $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                for (var i = 0; i < list.length; i++) {
+                    if(list[i].rname == opinion3)
+                        $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
+                    else
+                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                 }
-            });
+            }
+        });
+    }
+
+</script>
+
+<!-- 动态加载菜单项 -->
+<script type="text/javascript">
+    var menulist="<%=session.getAttribute("menulist")%>";
+    var cbidstr = menulist.split(",");
+    var isSystemMng = false;
+    var isNewSystemMng = false;
+
+    //处理第一个和最后一个
+    cbidstr[0] = cbidstr[0].substring(1);
+    cbidstr[0] = " " + cbidstr[0];
+
+    var idx = cbidstr.length - 1;
+    var len = cbidstr[idx].length;
+    cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
+
+    for(var i = 0; i < cbidstr.length; i++){
+
+        var menuname = "";
+        if(cbidstr[i] == " province.jsp"){
+            isSystemMng = false;
+            menuname = "集中监控";
+        }
+        else if(cbidstr[i] == " efficiencyDevice.jsp"){
+            isSystemMng = false;
+            menuname = "动力设施";
+        }
+        else if(cbidstr[i] == " onlineDetect.jsp"){
+            isSystemMng = false;
+            menuname = "在线监测";
+        }
+        else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
+            isSystemMng = false;
+            menuname = "动力分析";
+        }
+        else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
+            isSystemMng = false;
+            menuname = "动力评估";
+        }
+        else if(cbidstr[i] == ' reportChart.jsp'){
+            isSystemMng = false;
+            menuname = "报表功能";
+        }
+        else if(cbidstr[i] == ' history.jsp'){
+            isSystemMng = false;
+            menuname = "历史曲线";
+        }
+        else if(cbidstr[i].search('systemMng.jsp')){
+
+            if(!isNewSystemMng)
+            {//第一条systemMng的
+                isNewSystemMng = true;
+                menuname = "系统管理";
+                $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+            }
+            isSystemMng = true;
         }
 
-        /*加载机房下拉选*/
-        function getComproom() {
-            var cname = $("#city_code").val();
+        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+    }
+</script>
 
-            //读取cookie中已存的机房配置
-            var opinion3 = $. cookie('opinion3');
+<!-- 切换子菜单-->
+<script type="text/javascript">
+    $("#item1").show();
+    $("#item2").hide();
 
-            $("#comproom_code").empty();
+    $("#leftItem1").show();
+    $("#leftItem2").hide();
+    $("#leftItem3").hide();
 
-            $.ajax({
-                type: "post",
-                url: "getCompTree",
-                data: {cityid: cname},
-                dataType: "json",
-                success: function (data) {
-                    var list = data.allcomputerroom;
+    $(document).ready(function() {
 
-                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-                    for (var i = 0; i < list.length; i++) {
-                        if(list[i].rname == opinion3)
-                            $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
-                        else
-                            $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
-                    }
-                }
-            });
-        }
+        $("#subItem1").click(function () {
+            $("#item1").show();
+            $("#item2").hide();
 
-    </script>
-
-    <!-- 动态加载菜单项 -->
-    <script type="text/javascript">
-        var menulist="<%=session.getAttribute("menulist")%>";
-        var cbidstr = menulist.split(",");
-        var isSystemMng = false;
-        var isNewSystemMng = false;
-
-        //处理第一个和最后一个
-        cbidstr[0] = cbidstr[0].substring(1);
-        cbidstr[0] = " " + cbidstr[0];
-
-        var idx = cbidstr.length - 1;
-        var len = cbidstr[idx].length;
-        cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
-
-        for(var i = 0; i < cbidstr.length; i++){
-
-            var menuname = "";
-            if(cbidstr[i] == " province.jsp"){
-                isSystemMng = false;
-                menuname = "集中监控";
-            }
-            else if(cbidstr[i] == " efficiencyDevice.jsp"){
-                isSystemMng = false;
-                menuname = "动力设施";
-            }
-            else if(cbidstr[i] == " onlineDetect.jsp"){
-                isSystemMng = false;
-                menuname = "在线监测";
-            }
-            else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
-                isSystemMng = false;
-                menuname = "动力分析";
-            }
-            else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
-                isSystemMng = false;
-                menuname = "动力评估";
-            }
-            else if(cbidstr[i] == ' reportChart.jsp'){
-                isSystemMng = false;
-                menuname = "报表功能";
-            }
-            else if(cbidstr[i] == ' history.jsp'){
-                isSystemMng = false;
-                menuname = "历史曲线";
-            }
-            else if(cbidstr[i].search('systemMng.jsp')){
-
-                if(!isNewSystemMng)
-                {//第一条systemMng的
-                    isNewSystemMng = true;
-                    menuname = "系统管理";
-                    $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
-                }
-                isSystemMng = true;
-            }
-
-            if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
-        }
-    </script>
-
-    <!-- 切换子菜单-->
-    <script type="text/javascript">
-        $("#item1").show();
-        $("#item2").hide();
-
-        $("#leftItem1").show();
-        $("#leftItem2").hide();
-        $("#leftItem3").hide();
-
-        $(document).ready(function() {
-
-            $("#subItem1").click(function () {
-                $("#item1").show();
-                $("#item2").hide();
-
-                $(document).ready(function () {
-                    $("#leftsubItem1").click(function () {
-                        $("#leftItem1").show();
-                        $("#leftItem2").hide();
-                        $("#leftItem3").hide();
-                    });
-                    $("#leftsubItem2").click(function () {
-                        $("#leftItem1").hide();
-                        $("#leftItem2").show();
-                        $("#leftItem3").hide();
-                    });
-                    $("#leftsubItem3").click(function () {
-                        $("#leftItem1").hide();
-                        $("#leftItem2").hide();
-                        $("#leftItem3").show();
-                    });
+            $(document).ready(function () {
+                $("#leftsubItem1").click(function () {
+                    $("#leftItem1").show();
+                    $("#leftItem2").hide();
+                    $("#leftItem3").hide();
+                });
+                $("#leftsubItem2").click(function () {
+                    $("#leftItem1").hide();
+                    $("#leftItem2").show();
+                    $("#leftItem3").hide();
+                });
+                $("#leftsubItem3").click(function () {
+                    $("#leftItem1").hide();
+                    $("#leftItem2").hide();
+                    $("#leftItem3").show();
                 });
             });
-
-            $("#subItem2").click(function () {
-                $("#item1").hide();
-                $("#item2").show();
-            });
-
-            $("#subItem1").click();
-
-            //第二页电能质量事件，根据点击的电能质量类型，获取相应的事件，并渲染
-            $("#secItem1").click(function () {
-                console.log("langyongtaxian");
-
-            });
-            $("#secItem2").click(function () {
-                console.log("langyongtaxian");
-
-            });
-            $("#secItem3").click(function () {
-                console.log("langyongtaxian");
-            });
-            $("#secItem4").click(function () {
-                console.log("langyongtaxian");
-            });
-            $("#secItem5").click(function () {
-                console.log("langyongtaxian");
-            });
-
         });
 
-    </script>
-
-    <!-- 切换子菜单subItem效果-->
-    <script type="text/javascript">
-        $(function(){
-            $("#ulItem li").click(function() {
-                $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式selected
-                $(this).addClass('active');                            // 添加当前元素的样式
-            });
+        $("#subItem2").click(function () {
+            $("#item1").hide();
+            $("#item2").show();
         });
-    </script>
 
-    <!-- （详细）设备事件-点击进入第二个页面-->
-    <script type="text/javascript">
-        function getDeviceEvent(){}
-    </script>
+        $("#subItem1").click();
 
-    <!-- （详细）电能事件-点击进入第二个页面-->
-    <script type="text/javascript">
-        function getPowerEvent(){
+        //第二页电能质量事件，根据点击的电能质量类型，获取相应的事件，并渲染
+        $("#secItem1").click(function () {
+            $("#power-event-detail-1").show();
+            $("#power-event-detail-2").hide();
+            $("#power-event-detail-3").hide();
+            $("#power-event-detail-4").hide();
+            $("#power-event-detail-5").hide();
 
-            var cbname = $("#city_code option:selected").val();
-            var edate = $("input[name='event-data-peroid']:checked").val();
-
-            var stime ;//"2018-08-22 08:00:00";
-            var etime ;//"2018-08-29 08:00:00";
-            var nowtime = getNowFormatDate();
-
-            if(edate == "lastone"){
-                stime = " ";
-                etime = " ";
-                //  getPowerEvent(cbname, stime, etime);
-            }
-            else  if(edate == "fromto"){
-                stime = $("#firstDate").val();
-                etime = $("#lastDate").val();
-                // getPowerEvent(cbname, stime, etime);
-            }
-            else  if(edate == "day"){
-
-                //昨天的时间
-                var now = new Date();
-                var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate();
-                var hour = date.getHours();
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-                stime = starttime;
-                etime = nowtime;
-                // getPowerEvent(cbname, stime, etime);
-            }
-            else  if(edate == "week"){
-
-                // 获取一星期前的时间：
-                var now = new Date();
-                var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate();
-                var hour = date.getHours();
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-                stime = starttime;
-                etime = nowtime;
-                // getPowerEvent(cbname, stime, etime);
-            }
-            else  if(edate == "month"){
-
-                // 获取一星期前的时间：
-                var now = new Date();
-                var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate();
-                var hour = date.getHours();
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-                stime = starttime;
-                etime = nowtime;
-                //   getPowerEvent(cbname, stime, etime);
-            }
-
-            $('#eventdiv1').css('display', 'none');
-            $('#eventdiv2').css('display', 'block');
-
-            // function getPowerEvent(cb, starttime, endtime){
-            $.ajax({
-                type: "post",
-                url: "getDetailPowerEvent",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname
-                },
-                dataType : "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-
-                    var table = $("#power-event-detail");
-                    var tbody = $("#power-event-detail-tbody")[0];
-                    tbody.innerHTML = ""
-
-                    for (var i = 0; i < list.length; i++) {
-
-                     /*   var liststr = list[i].split(",");
-
-                        var teid = liststr[0].split("["); //.teid;
-                        var name = liststr[1]; //.name;
-                        var location = liststr[2]; //.location;
-                        var type = liststr[3]; //.type;
-                        var description = liststr[4]; //.discription;
-                        var rawtime = liststr[5].split("]");
-                        var time = formatTime(rawtime[1]); //.time);*/
-
-                   /*     tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
-              */      }
-                }
+            $('#power-event-detail-1').DataTable( {
+                "info":           true,
+                "scrollY":        "800px",
+                "scrollCollapse": true,
+                "pagingType":     "full_numbers",
+                "dom":            "lBrtip"
             });
+            $('#power-event-detail-2').dataTable().fnDestroy();
+            $('#power-event-detail-3').dataTable().fnDestroy();
+            $('#power-event-detail-4').dataTable().fnDestroy();
+            $('#power-event-detail-5').dataTable().fnDestroy();
+
+        });
+        $("#secItem2").click(function () {
+            $("#power-event-detail-1").hide();
+            $("#power-event-detail-2").show();
+            $("#power-event-detail-3").hide();
+            $("#power-event-detail-4").hide();
+            $("#power-event-detail-5").hide();
+
+            $('#power-event-detail-2').DataTable( {
+                "info":           true,
+                "scrollY":        "800px",
+                "scrollCollapse": true,
+                "pagingType":     "full_numbers",
+                "dom":            "lBrtip"
+            });
+            $('#power-event-detail-1').dataTable().fnDestroy();
+            $('#power-event-detail-3').dataTable().fnDestroy();
+            $('#power-event-detail-4').dataTable().fnDestroy();
+            $('#power-event-detail-5').dataTable().fnDestroy();
+        });
+        $("#secItem3").click(function () {
+            $("#power-event-detail-1").hide();
+            $("#power-event-detail-2").hide();
+            $("#power-event-detail-3").show();
+            $("#power-event-detail-4").hide();
+            $("#power-event-detail-5").hide();
+
+            $('#power-event-detail-3').DataTable( {
+                "info":           true,
+                "scrollY":        "800px",
+                "scrollCollapse": true,
+                "pagingType":     "full_numbers",
+                "dom":            "lBrtip"
+            });
+            $('#power-event-detail-2').dataTable().fnDestroy();
+            $('#power-event-detail-1').dataTable().fnDestroy();
+            $('#power-event-detail-4').dataTable().fnDestroy();
+            $('#power-event-detail-5').dataTable().fnDestroy();
+        });
+        $("#secItem4").click(function () {
+            $("#power-event-detail-1").hide();
+            $("#power-event-detail-2").hide();
+            $("#power-event-detail-3").hide();
+            $("#power-event-detail-4").show();
+            $("#power-event-detail-5").hide();
+
+            $('#power-event-detail-4').DataTable( {
+                "info":           true,
+                "scrollY":        "800px",
+                "scrollCollapse": true,
+                "pagingType":     "full_numbers",
+                "dom":            "lBrtip"
+            });
+            $('#power-event-detail-2').dataTable().fnDestroy();
+            $('#power-event-detail-3').dataTable().fnDestroy();
+            $('#power-event-detail-1').dataTable().fnDestroy();
+            $('#power-event-detail-5').dataTable().fnDestroy();
+        });
+        $("#secItem5").click(function () {
+            $("#power-event-detail-1").hide();
+            $("#power-event-detail-2").hide();
+            $("#power-event-detail-3").hide();
+            $("#power-event-detail-4").hide();
+            $("#power-event-detail-5").show();
+
+            $('#power-event-detail-5').DataTable( {
+                "info":           true,
+                "scrollY":        "800px",
+                "scrollCollapse": true,
+                "pagingType":     "full_numbers",
+                "dom":            "lBrtip"
+            });
+            $('#power-event-detail-2').dataTable().fnDestroy();
+            $('#power-event-detail-3').dataTable().fnDestroy();
+            $('#power-event-detail-4').dataTable().fnDestroy();
+            $('#power-event-detail-1').dataTable().fnDestroy();
+        });
+
+        $("#secItem1").click();
+    });
+
+</script>
+
+<!-- 切换子菜单subItem效果-->
+<script type="text/javascript">
+    $(function(){
+        $("#ulItem li").click(function() {
+            $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式selected
+            $(this).addClass('active');                            // 添加当前元素的样式
+        });
+    });
+</script>
+
+<!-- （详细）设备事件-点击进入第二个页面-->
+<script type="text/javascript">
+    function getDeviceEvent(){}
+</script>
+
+<!-- （详细）电能事件-点击进入第二个页面-->
+<script type="text/javascript">
+    function getPowerEvent(){
+
+        var cbname = $("#city_code option:selected").val();
+        var edate = $("input[name='event-data-peroid']:checked").val();
+        var stime;
+        var etime;
+        var nowtime = getNowFormatDate();
+
+        if(edate == "lastone"){
+            stime = " ";
+            etime = " ";
         }
-    </script>
-
-    <!-- （详细）环境事件-点击进入第二个页面-->
-    <script type="text/javascript">
-        function getEvironmentEvent(){}
-    </script>
-
-    <!-- 查询事件-->
-    <script type="text/javascript">
-        //unix时间转常用时间格式
-        function formatTime (time) {
-            var unixtime = time;
-            var unixTimestamp = new Date(unixtime * 1);
-            var Y = unixTimestamp.getFullYear();
-            var M = ((unixTimestamp.getMonth() + 1) > 10 ? (unixTimestamp.getMonth() + 1) : '0' + (unixTimestamp.getMonth() + 1));
-            var D = (unixTimestamp.getDate() > 10 ? unixTimestamp.getDate() : '0' + unixTimestamp.getDate());
-            var toDay = Y + '-' + M + '-' + D;
-            return toDay;
+        else  if(edate == "fromto"){
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
         }
-
-        //获取当前日期时间
-        function getNowFormatDate() {
-            var date = new Date();
-            var seperator1 = "-";
-            var seperator2 = ":";
+        else  if(edate == "day"){
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
             var month = date.getMonth() + 1;
-            var strDate = date.getDate();
-            if (month >= 1 && month <= 9) {
-                month = "0" + month;
-            }
-            if (strDate >= 0 && strDate <= 9) {
-                strDate = "0" + strDate;
-            }
-            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-                + " " + date.getHours() + seperator2 + date.getMinutes()
-                + seperator2 + date.getSeconds();
-            return currentdate;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+            stime = starttime;
+            etime = nowtime;
+        }
+        else  if(edate == "week"){
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+            stime = starttime;
+            etime = nowtime;
+        }
+        else  if(edate == "month"){
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+            stime = starttime;
+            etime = nowtime;
         }
 
-        //根据时间、检测银行设置获得所有事件
-        function getAllEvent(){
+        $('#eventdiv1').css('display', 'none');
+        $('#eventdiv2').css('display', 'block');
 
-            var cbname = $("#city_code option:selected").val();
-            var edate = $("input[name='event-data-peroid']:checked").val();
+        $.ajax({
+            type: "post",
+            url: "getDetailPowerEventlytx",
+            data: {
+                stime: stime,
+                etime: etime,
+                cbname: cbname
+            },
+            dataType : "json",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                var list = obj['allpelist'];
+                var table = $("#power-event-detail-1");
+                var tbody = $("#power-event-detail-tbody-1")[0];
+                tbody.innerHTML = "";
 
-            var stime ;//"2018-08-22 08:00:00";
-            var etime ;//"2018-08-29 08:00:00";
-            var nowtime = getNowFormatDate();
+                for (var i = 0; i < list.length; i++) {
+                    var liststr = list[i].split(",");
+                    var teid = liststr[0].split("[");
+                    var name = liststr[1];
+                    var location = liststr[2];
+                    var type = liststr[3];
+                    var description = liststr[4];
+                    var rawtime = liststr[5].split("]");
+                    var time = formatTime(rawtime[1]);
 
-            if(edate == "lastone"){
-                stime = " ";
-                etime = " ";
-            }
-            else  if(edate == "fromto"){
-                stime = $("#firstDate").val();
-                etime = $("#lastDate").val();
-            }
-            else  if(edate == "day"){
-                //昨天的时间
-                var now = new Date();
-                var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate();
-                var hour = date.getHours();
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-                stime = starttime;
-                etime = nowtime;
-            }
-            else  if(edate == "week"){
-                // 获取一星期前的时间：
-                var now = new Date();
-                var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate();
-                var hour = date.getHours();
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-                stime = starttime;
-                etime = nowtime;
-            }
-            else  if(edate == "month"){
-                // 获取一月前的时间：
-                var now = new Date();
-                var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate();
-                var hour = date.getHours();
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
-
-                stime = starttime;
-                etime = nowtime;
-            }
-
-            console.log(stime+ etime+ cbname);
-
-            //获取所有电能事件
-            $.ajax({
-                type: "post",
-                url: "getPowerEvent",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname
-                },
-                dataType : "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var table = $("#power-event");
-                    var tbody = $("#power-event-tbody")[0];
-                    tbody.innerHTML = ""
-
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = formatTime(rawtime[1]);
-
-                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
-                    }
+                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
                 }
-            });
+            }
+        });
 
+        $.ajax({
+            type: "post",
+            url: "getDetailPowerEventxb",
+            data: {
+                stime: stime,
+                etime: etime,
+                cbname: cbname
+            },
+            dataType : "json",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                var list = obj['allpelist'];
+                var table = $("#power-event-detail-2");
+                var tbody = $("#power-event-detail-tbody-2")[0];
+                tbody.innerHTML = "";
 
-            //获取所有设备事件
+                for (var i = 0; i < list.length; i++) {
+                    var liststr = list[i].split(",");
+                    var teid = liststr[0].split("[");
+                    var name = liststr[1];
+                    var location = liststr[2];
+                    var type = liststr[3];
+                    var description = liststr[4];
+                    var rawtime = liststr[5].split("]");
+                    var time = formatTime(rawtime[1]);
 
-            //获取所有环境事件
+                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                }
+            }
+        });
 
+        $.ajax({
+            type: "post",
+            url: "getDetailPowerEventsxbph",
+            data: {
+                stime: stime,
+                etime: etime,
+                cbname: cbname
+            },
+            dataType : "json",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                var list = obj['allpelist'];
+                var table = $("#power-event-detail-3");
+                var tbody = $("#power-event-detail-tbody-3")[0];
+                tbody.innerHTML = "";
+
+                for (var i = 0; i < list.length; i++) {
+                    var liststr = list[i].split(",");
+                    var teid = liststr[0].split("[");
+                    var name = liststr[1];
+                    var location = liststr[2];
+                    var type = liststr[3];
+                    var description = liststr[4];
+                    var rawtime = liststr[5].split("]");
+                    var time = formatTime(rawtime[1]);
+
+                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                }
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "getDetailPowerEventshunbian",
+            data: {
+                stime: stime,
+                etime: etime,
+                cbname: cbname
+            },
+            dataType : "json",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                var list = obj['allpelist'];
+                var table = $("#power-event-detail-4");
+                var tbody = $("#power-event-detail-tbody-4")[0];
+                tbody.innerHTML = "";
+
+                for (var i = 0; i < list.length; i++) {
+                    var liststr = list[i].split(",");
+                    var teid = liststr[0].split("[");
+                    var name = liststr[1];
+                    var location = liststr[2];
+                    var type = liststr[3];
+                    var description = liststr[4];
+                    var rawtime = liststr[5].split("]");
+                    var time = formatTime(rawtime[1]);
+
+                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                }
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "getDetailPowerEventshanbian",
+            data: {
+                stime: stime,
+                etime: etime,
+                cbname: cbname
+            },
+            dataType : "json",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                var list = obj['allpelist'];
+                var table = $("#power-event-detail-5");
+                var tbody = $("#power-event-detail-tbody-5")[0];
+                tbody.innerHTML = "";
+
+                for (var i = 0; i < list.length; i++) {
+                    var liststr = list[i].split(",");
+                    var teid = liststr[0].split("[");
+                    var name = liststr[1];
+                    var location = liststr[2];
+                    var type = liststr[3];
+                    var description = liststr[4];
+                    var rawtime = liststr[5].split("]");
+                    var time = formatTime(rawtime[1]);
+
+                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                }
+            }
+        });
+
+    }
+</script>
+
+<!-- （详细）环境事件-点击进入第二个页面-->
+<script type="text/javascript">
+    function getEvironmentEvent(){}
+</script>
+
+<!-- 查询事件-->
+<script type="text/javascript">
+    //unix时间转常用时间格式
+    function formatTime (time) {
+        var unixtime = time;
+        var unixTimestamp = new Date(unixtime * 1);
+        var Y = unixTimestamp.getFullYear();
+        var M = ((unixTimestamp.getMonth() + 1) > 10 ? (unixTimestamp.getMonth() + 1) : '0' + (unixTimestamp.getMonth() + 1));
+        var D = (unixTimestamp.getDate() > 10 ? unixTimestamp.getDate() : '0' + unixTimestamp.getDate());
+        var toDay = Y + '-' + M + '-' + D;
+        return toDay;
+    }
+
+    //获取当前日期时间
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+        return currentdate;
+    }
+
+    //根据时间、检测银行设置获得所有事件
+    function getAllEvent(){
+
+        var cbname = $("#city_code option:selected").val();
+        var edate = $("input[name='event-data-peroid']:checked").val();
+
+        var stime ;//"2018-08-22 08:00:00";
+        var etime ;//"2018-08-29 08:00:00";
+        var nowtime = getNowFormatDate();
+
+        if(edate == "lastone"){
+            stime = " ";
+            etime = " ";
+        }
+        else  if(edate == "fromto"){
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else  if(edate == "day"){
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+            stime = starttime;
+            etime = nowtime;
+        }
+        else  if(edate == "week"){
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+            stime = starttime;
+            etime = nowtime;
+        }
+        else  if(edate == "month"){
+            // 获取一月前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+            stime = starttime;
+            etime = nowtime;
         }
 
-    </script>
+        //获取所有电能事件
+        $.ajax({
+            type: "post",
+            url: "getPowerEvent",
+            data: {
+                stime: stime,
+                etime: etime,
+                cbname: cbname
+            },
+            dataType : "json",
+            success: function (data) {
 
-    <!-- 观测地点-->
-    <script type="text/javascript">
-        //添加监测点
-        function addMonitorPoint(){
+                //渲染电能事件table
+                $(document).ready(function() {
+                    var powerEventTable = $('#power-event').DataTable( {
+                        "info":           false,
+                        "scrollY":        "200px",
+                        "scrollCollapse": true,
+                        "paging":         false,
+                        "dom":            "lBrtip"
+                    } );
+                    //点击table中的某一行
+                    $('#power-event tbody').on( 'click', 'tr', function () {
+                        $(this).toggleClass('selected');
+                        selectOneRowEvent(this);
+                    } );
+                } );
 
-            var pbname = $("#province_code option:selected").val();
-            $('#addEventMonitorPoint-modal').css('display', 'block');
+                var obj = JSON.parse(data);
+                var list = obj['allpelist'];
+                var table = $("#power-event");
+                var tbody = $("#power-event-tbody")[0];
+                tbody.innerHTML = "";
 
-            $('#citybank-jstree').jstree({
-                "core": {
-                    "themes": {
-                        "responsive": false
-                    },
-                    "check_callback": true,
-                    'data': function (obj, callback) {
-                        var jsonstr = "[]";
-                        var jsonarray = eval('(' + jsonstr + ')');
-                        $.ajax({
-                            type: "post",
-                            url: "getOnlyCityBankTree",
-                            data: {
-                                pbname: pbname
-                            },
-                            dataType: "json",
-                            async: false,
-                            success: function (data) {
+                for (var i = 0; i < list.length; i++) {
+                    var liststr = list[i].split(",");
 
-                                var jdata = JSON.parse(data);
-                                var arrays = jdata.allcbtree;
+                    var teid = liststr[0].split("[");
+                    var name = liststr[1];
+                    var location = liststr[2];
+                    var type = liststr[3];
+                    var description = liststr[4];
+                    var rawtime = liststr[5].split("]");
+                    var time = formatTime(rawtime[1]);
 
-                                for (var i = 0; i < arrays.length; i++) {
-                                    var arr = {
-                                        "id": arrays[i].cbid + ":"+ arrays[i].cbname,
-                                        "parent": "#",
-                                        "text": arrays[i].cbname
-                                    };
-                                    jsonarray.push(arr);
-                                }
+                    tbody.innerHTML += ('<tr>' + '<td id="teid" style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                        '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                }
+            }
+        });
+
+
+        //获取所有设备事件
+        //设备事件
+       /* $(document).ready(function() {
+            var deviceEventTable = $('#device-event').DataTable({
+                "info":           false,
+                "scrollY":        "200px",
+                "scrollCollapse": true,
+                "paging":         false,
+                "dom":            "lBrtip"
+            });
+        });*/
+
+
+        //获取所有环境事件
+        //环境事件
+        /*$(document).ready(function() {
+            var environmentEventTable = $('#environment-event').DataTable({
+                "info":         false,
+                "scrollY":        "200px",
+                "scrollCollapse": true,
+                "paging":         false,
+                "dom":            "lBrtip"
+            });
+        });*/
+
+    }
+
+</script>
+
+<!-- 观测地点-->
+<script type="text/javascript">
+    //添加监测点
+    function addMonitorPoint(){
+
+        var pbname = $("#province_code option:selected").val();
+        $('#addEventMonitorPoint-modal').css('display', 'block');
+
+        $('#citybank-jstree').jstree({
+            "core": {
+                "themes": {
+                    "responsive": false
+                },
+                "check_callback": true,
+                'data': function (obj, callback) {
+                    var jsonstr = "[]";
+                    var jsonarray = eval('(' + jsonstr + ')');
+                    $.ajax({
+                        type: "post",
+                        url: "getOnlyCityBankTree",
+                        data: {
+                            pbname: pbname
+                        },
+                        dataType: "json",
+                        async: false,
+                        success: function (data) {
+
+                            var jdata = JSON.parse(data);
+                            var arrays = jdata.allcbtree;
+
+                            for (var i = 0; i < arrays.length; i++) {
+                                var arr = {
+                                    "id": arrays[i].cbid + ":"+ arrays[i].cbname,
+                                    "parent": "#",
+                                    "text": arrays[i].cbname
+                                };
+                                jsonarray.push(arr);
                             }
-                        });
-                        callback.call(this, jsonarray);
-                    },
+                        }
+                    });
+                    callback.call(this, jsonarray);
                 },
-                "plugins": ["checkbox"]
-            });
+            },
+            "plugins": ["checkbox"]
+        });
+    }
+
+    function addCityBankAsMonitorPoint(){
+
+        //取得所有选中的节点，返回节点对象的集合
+        var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
+        var nodes2 = nodes.toString();
+
+        var nodeset = new Array();
+        nodeset = nodes2.split(",");
+
+        var ptable = $("#place-event");
+        for (var i = 0 ;i < nodeset.length; i++)
+        {
+            var nset = new Array();
+            nset = nodeset[i].split(":");
+            ptable.append('<tr><td>' + nset[1] + '</td><td style="display: none">'+ nset[0] +'</td></tr>');
         }
 
-        function addCityBankAsMonitorPoint(){
+        cancleCityBankAsMonitorPoint();
+    }
 
-            //取得所有选中的节点，返回节点对象的集合
-            var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
-            var nodes2 = nodes.toString();
+    function cancleCityBankAsMonitorPoint(){
+        $('#addEventMonitorPoint-modal').css('display', 'none');
+    }
 
-            var nodeset = new Array();
-            nodeset = nodes2.split(",");
-
-            var ptable = $("#place-event");
-            for (var i = 0 ;i < nodeset.length; i++)
-            {
-                var nset = new Array();
-                nset = nodeset[i].split(":");
-                ptable.append('<tr><td>' + nset[1] + '</td><td style="display: none">'+ nset[0] +'</td></tr>');
-            }
-
-            cancleCityBankAsMonitorPoint();
-        }
-
-        function cancleCityBankAsMonitorPoint(){
-            $('#addEventMonitorPoint-modal').css('display', 'none');
-        }
-
-        //删除检测点
-        function deleteMonitorPoint(){
-            alert("delete");
+    //删除检测点
+    function deleteMonitorPoint(){
+        alert("delete");
 
 
-        }
+    }
 
-    </script>
+</script>
 
-    <!-- 右侧界面 第二个子菜单 列 -->
-    <script type="text/javascript">
-        function upcol(){
-            alert("up");
-        }
-        function downcol(){
-            alert("down");
-        }
-        function deletecol(){
-            alert("del");
-        }
-    </script>
+<!-- 右侧界面 第二个子菜单 列 -->
+<script type="text/javascript">
+    function upcol(){
+        alert("up");
+    }
+    function downcol(){
+        alert("down");
+    }
+    function deletecol(){
+        alert("del");
+    }
+</script>
 
-    <!-- 设置icon-->
-    <script type="text/javascript">
-        function settingIcon(){
+<!-- 设置icon-->
+<script type="text/javascript">
+    function settingIcon(){
 
-            $('#setting-modal').css('display', 'block');
+        $('#setting-modal').css('display', 'block');
 
-            $('#jstree').jstree({
-                "core": {
-                    "themes": {
-                        "responsive": false
-                    },
-                    "check_callback": true,
-                    'data': function (obj, callback) {
-                        var jsonstr = "[]";
-                        var jsonarray = eval('(' + jsonstr + ')');
-                        $.ajax({
-                            url: "getSettingTree",
-                            dataType: "json",
-                            async: false,
-                            success: function (result) {
-                                var arrays = result.allptree;
+        $('#jstree').jstree({
+            "core": {
+                "themes": {
+                    "responsive": false
+                },
+                "check_callback": true,
+                'data': function (obj, callback) {
+                    var jsonstr = "[]";
+                    var jsonarray = eval('(' + jsonstr + ')');
+                    $.ajax({
+                        url: "getSettingTree",
+                        dataType: "json",
+                        async: false,
+                        success: function (result) {
+                            var arrays = result.allptree;
 
-                                for (var i = arrays.length -1; i > 0; i--) {
-                                    var arr = {
-                                        "id": arrays[i].type,
-                                        "parent": arrays[i].pid == "0" ? "#" : arrays[i].pid,
-                                        "text": arrays[i].name
-                                    };
+                            for (var i = arrays.length -1; i > 0; i--) {
+                                var arr = {
+                                    "id": arrays[i].type,
+                                    "parent": arrays[i].pid == "0" ? "#" : arrays[i].pid,
+                                    "text": arrays[i].name
+                                };
 
-                                    jsonarray.push(arr);
-                                }
+                                jsonarray.push(arr);
                             }
-                        });
-                        callback.call(this, jsonarray);
-                    },
+                        }
+                    });
+                    callback.call(this, jsonarray);
                 },
-                "plugins": ["checkbox"]
-            })
-        }
+            },
+            "plugins": ["checkbox"]
+        })
+    }
 
-        function AllSelected() {
-            $('#jstree').jstree('select_all');
-        }
+    function AllSelected() {
+        $('#jstree').jstree('select_all');
+    }
 
-        function AllDisSelected() {
-            $('#jstree').jstree('deselect_all');
-        }
+    function AllDisSelected() {
+        $('#jstree').jstree('deselect_all');
+    }
 
 
-        //设置按钮界面 OK
-        function OK() {
+    //设置按钮界面 OK
+    function OK() {
 
-            //获取树每一行的优先级下拉框，节点id和将下拉框的值传入数据库
-            var priortylist = "1,2,3,4,5,6,7,8,9,10";
-            var eventtypelist = "1,2,3,4,5,6,7,8,9,10";
+        //获取树每一行的优先级下拉框，节点id和将下拉框的值传入数据库
+        var priortylist = "1,2,3,4,5,6,7,8,9,10";
+        var eventtypelist = "1,2,3,4,5,6,7,8,9,10";
 
-            $.ajax({
-                type: "post",
-                url: "setAllEventtypePriorty",
-                data:{
-                    priortylist: priortylist,
-                    eventtypelist: eventtypelist
-                },
-                success: function (data) {
-                    $('#setting-modal').css('display', 'none');
-                }
-            });
-
-        }
-
-        //设置按钮界面取消
-        function cancle() {
-            $('#setting-modal').css('display', 'none');
-        }
-
-        //点击单条事件-确认
-        function confirmEvent(){
-            $('#conformEventRow-modal').css('display', 'block');
-            $('#clickEventRow-modal').css('display', 'none');
-            var sign = "<%=session.getAttribute("username")%>";
-            $('#signature').val(sign);
-        }
-
-        //点击单条事件-删除事件（假删除，只是前端不显示）
-        function deleteEvent(){
-            var teid = $('#select-teid').val();
-            $('#clickEventRow-modal').css('display', 'none');
-        }
-
-        //点击单条事件-签名确认事件-确认
-        function confirmOKEvent(){
-            //添加该事件的签名和注释到数据库
-            var teid = $('#select-teid').val();
-            var sign = $('#signature').val();
-            var annot = $('#annotation').val();
-
-            $.ajax({
-                type: "post",
-                url: "addSignatureAndAnnotation",
-                dataType: "json",
-                data:{
-                    teid: teid,
-                    sign: sign,
-                    annot: annot
-                }
-            });
-            $('#conformEventRow-modal').css('display', 'none');
-        }
-
-        //点击单条事件-签名确认事件-取消
-        function cancleOKEvent(){
-            $('#conformEventRow-modal').css('display', 'none');
-        }
-
-    </script>
-
-    <!-- 刷新icon-->
-    <script type="text/javascript">
-        function refreshIcon(){
-            getPowerEvent();
-            //刷新设备类型事件的
-            //刷新环境类型事件的
-        }
-    </script>
-
-    <!-- 导出-->
-    <script type="text/javascript">
-        function exportTable(){
-            var tableid = "event-table-body";
-            exportToExcel(tableid);
-        }
-
-        var idTmr;
-        function getExplorer() {
-            var explorer = window.navigator.userAgent ;
-            //ie
-            if (explorer.indexOf("MSIE") >= 0) {
-                return 'ie';
+        $.ajax({
+            type: "post",
+            url: "setAllEventtypePriorty",
+            data:{
+                priortylist: priortylist,
+                eventtypelist: eventtypelist
+            },
+            success: function (data) {
+                $('#setting-modal').css('display', 'none');
             }
-            //firefox
-            else if (explorer.indexOf("Firefox") >= 0) {
-                return 'Firefox';
+        });
+
+    }
+
+    //设置按钮界面取消
+    function cancle() {
+        $('#setting-modal').css('display', 'none');
+    }
+
+    //点击单条事件-确认
+    function confirmEvent(){
+        $('#conformEventRow-modal').css('display', 'block');
+        $('#clickEventRow-modal').css('display', 'none');
+        var sign = "<%=session.getAttribute("username")%>";
+        $('#signature').val(sign);
+    }
+
+    //点击单条事件-删除事件（假删除，只是前端不显示）
+    function deleteEvent(){
+        var teid = $('#select-teid').val();
+        $('#clickEventRow-modal').css('display', 'none');
+    }
+
+    //点击单条事件-签名确认事件-确认
+    function confirmOKEvent(){
+        //添加该事件的签名和注释到数据库
+        var teid = $('#select-teid').val();
+        var sign = $('#signature').val();
+        var annot = $('#annotation').val();
+
+        $.ajax({
+            type: "post",
+            url: "addSignatureAndAnnotation",
+            dataType: "json",
+            data:{
+                teid: teid,
+                sign: sign,
+                annot: annot
             }
-            //Chrome
-            else if(explorer.indexOf("Chrome") >= 0){
-                return 'Chrome';
-            }
-            //Opera
-            else if(explorer.indexOf("Opera") >= 0){
-                return 'Opera';
-            }
-            //Safari
-            else if(explorer.indexOf("Safari") >= 0){
-                return 'Safari';
-            }
+        });
+        $('#conformEventRow-modal').css('display', 'none');
+    }
+
+    //点击单条事件-签名确认事件-取消
+    function cancleOKEvent(){
+        $('#conformEventRow-modal').css('display', 'none');
+    }
+
+</script>
+
+<!-- 刷新icon-->
+<script type="text/javascript">
+    function refreshIcon(){
+        //getPowerEvent();
+        //刷新设备类型事件的
+        //刷新环境类型事件的
+    }
+</script>
+
+<!-- 导出-->
+<script type="text/javascript">
+    function exportTable(){
+        var tableid = "event-table-body";
+        exportToExcel(tableid);
+    }
+
+    var idTmr;
+    function getExplorer() {
+        var explorer = window.navigator.userAgent ;
+        //ie
+        if (explorer.indexOf("MSIE") >= 0) {
+            return 'ie';
         }
+        //firefox
+        else if (explorer.indexOf("Firefox") >= 0) {
+            return 'Firefox';
+        }
+        //Chrome
+        else if(explorer.indexOf("Chrome") >= 0){
+            return 'Chrome';
+        }
+        //Opera
+        else if(explorer.indexOf("Opera") >= 0){
+            return 'Opera';
+        }
+        //Safari
+        else if(explorer.indexOf("Safari") >= 0){
+            return 'Safari';
+        }
+    }
 
-        function exportToExcel(tableid ) {//整个表格拷贝到EXCEL中
-            if(getExplorer()=='ie'){
-                var curTbl = document.getElementById(tableid);
-                var oXL = new ActiveXObject("Excel.Application");
+    function exportToExcel(tableid ) {//整个表格拷贝到EXCEL中
+        if(getExplorer()=='ie'){
+            var curTbl = document.getElementById(tableid);
+            var oXL = new ActiveXObject("Excel.Application");
 
-                //创建AX对象excel
-                var oWB = oXL.Workbooks.Add();
-                //获取workbook对象
-                var xlsheet = oWB.Worksheets(1);
-                //激活当前sheet
-                var sel = document.body.createTextRange();
-                sel.moveToElementText(curTbl);
-                //把表格中的内容移到TextRange中
-                sel.select;
-                //全选TextRange中内容
-                sel.execCommand("Copy");
-                //复制TextRange中内容
-                xlsheet.Paste();
-                //粘贴到活动的EXCEL中
-                oXL.Visible = true;
-                //设置excel可见属性
+            //创建AX对象excel
+            var oWB = oXL.Workbooks.Add();
+            //获取workbook对象
+            var xlsheet = oWB.Worksheets(1);
+            //激活当前sheet
+            var sel = document.body.createTextRange();
+            sel.moveToElementText(curTbl);
+            //把表格中的内容移到TextRange中
+            sel.select;
+            //全选TextRange中内容
+            sel.execCommand("Copy");
+            //复制TextRange中内容
+            xlsheet.Paste();
+            //粘贴到活动的EXCEL中
+            oXL.Visible = true;
+            //设置excel可见属性
 
-                try {
-                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
-                } catch (e) {
-                    print("Nested catch caught " + e);
-                } finally {
-                    oWB.SaveAs(fname);
-                    oWB.Close(savechanges = false);
-                    //xls.visible = false;
-                    oXL.Quit();
-                    oXL = null;
-                    //结束excel进程，退出完成
-                    //window.setInterval("Cleanup();",1);
-                    idTmr = window.setInterval("Cleanup();", 1);
-                }
-            }else{
-                tableToExcel(tableid)
+            try {
+                var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+            } catch (e) {
+                print("Nested catch caught " + e);
+            } finally {
+                oWB.SaveAs(fname);
+                oWB.Close(savechanges = false);
+                //xls.visible = false;
+                oXL.Quit();
+                oXL = null;
+                //结束excel进程，退出完成
+                //window.setInterval("Cleanup();",1);
+                idTmr = window.setInterval("Cleanup();", 1);
             }
+        }else{
+            tableToExcel(tableid)
         }
+    }
 
-        function Cleanup() {
-            window.clearInterval(idTmr);
-            CollectGarbage();
+    function Cleanup() {
+        window.clearInterval(idTmr);
+        CollectGarbage();
+    }
+
+    var tableToExcel = (function() {
+        var uri = 'data:application/vnd.ms-excel;base64,',
+            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" '
+                +'xmlns:x="urn:schemas-microsoft-com:office:excel" '
+                +'xmlns="http://www.w3.org/TR/REC-html40">'
+                +'<head>'
+                +'<!--[if gte mso 9]>'
+                +'<xml>'
+                +'<x:ExcelWorkbook>'
+                +'<x:ExcelWorksheets>'
+                +'<x:ExcelWorksheet>'
+                +'<x:Name>{worksheet}</x:Name>'
+                +'<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>'
+                +'</x:ExcelWorksheet>'
+                +'</x:ExcelWorksheets>'
+                +'</x:ExcelWorkbook>'
+                +'</xml>'
+                +'<![endif]-->'
+                +'</head>'
+                +'<body><table>{table}</table></body>'
+                +'</html>',
+
+            base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
+            format = function(s, c) {
+                return s.replace(/{(\w+)}/g,
+                    function(m, p) { return c[p]; }) }
+
+        return function(table, name) {
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+            window.location.href = uri + base64(format(template, ctx))
         }
+    })()
+</script>
 
-        var tableToExcel = (function() {
-            var uri = 'data:application/vnd.ms-excel;base64,',
-                template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" '
-                    +'xmlns:x="urn:schemas-microsoft-com:office:excel" '
-                    +'xmlns="http://www.w3.org/TR/REC-html40">'
-                    +'<head>'
-                    +'<!--[if gte mso 9]>'
-                    +'<xml>'
-                    +'<x:ExcelWorkbook>'
-                    +'<x:ExcelWorksheets>'
-                    +'<x:ExcelWorksheet>'
-                    +'<x:Name>{worksheet}</x:Name>'
-                    +'<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>'
-                    +'</x:ExcelWorksheet>'
-                    +'</x:ExcelWorksheets>'
-                    +'</x:ExcelWorkbook>'
-                    +'</xml>'
-                    +'<![endif]-->'
-                    +'</head>'
-                    +'<body><table>{table}</table></body>'
-                    +'</html>',
+<!-- 打印-->
+<script type="text/javascript">
+    function printTable(){
+        window.document.title = "";
+        window.document.URL = "";
 
-                base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
-                format = function(s, c) {
-                    return s.replace(/{(\w+)}/g,
-                        function(m, p) { return c[p]; }) }
+        bdhtml = window.document.body.innerHTML;
+        sprnstr = "<!--startprint-->";
+        eprnstr = "<!--endprint-->";
+        prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17);
+        prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+        window.document.body.innerHTML = prnhtml;
+        window.print();
+        setTimeout(location.reload(), 3000);
+    }
+</script>
 
-            return function(table, name) {
-                if (!table.nodeType) table = document.getElementById(table)
-                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
-                window.location.href = uri + base64(format(template, ctx))
-            }
-        })()
-    </script>
+<!-- -->
+<script type="text/javascript">
 
-    <!-- 打印-->
-    <script type="text/javascript">
-        function printTable(){
-            window.document.title = "";
-            window.document.URL = "";
+    //观测点
+    $(document).ready(function() {
+        var placeEventTable = $('#place-event').DataTable( {
+            "info":           false,
+            "scrollY":        "120px",
+            "scrollCollapse": true,
+            "paging":         false,
+            "ordering":       false,
+            "dom":             "lBrtip"
+        } );
 
-            bdhtml = window.document.body.innerHTML;
-            sprnstr = "<!--startprint-->";
-            eprnstr = "<!--endprint-->";
-            prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17);
-            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
-            window.document.body.innerHTML = prnhtml;
-            window.print();
-            setTimeout(location.reload(), 3000);
-        }
-    </script>
+        //点击table中的某一行
+        $('#place-event tbody').on( 'change', 'tr', function () {
+            alert("mp:"+ this);
 
-     <!-- -->
-     <script type="text/javascript">
-         $(document).ready(function() {
-             $('#device-event').DataTable( {
-                 "info":         false,
-                 "scrollY":        "200px",
-                 "scrollCollapse": true,
-                 "paging":         false,
-                 "dom":            "lBrtip"
-             } );
-         } );
+        } );
+    } );
 
-         $(document).ready(function() {
+    //获取某一行选择的行，将该行的id放入某个隐藏的div中
+    function selectOneRowEvent(rowdata){
+        $('#clickEventRow-modal').css('display', 'block');
+        var row = rowdata;
+        var cols = row.childNodes;
+        var teid = cols[0].innerText;
+        $('#select-teid').val(teid);
+    }
 
-             var tablepower = $('#power-event').DataTable( {
-                 "info":         false,
-                 "scrollY":        "200px",
-                 "scrollCollapse": true,
-                 "paging":         false,
-                 "dom":            "lBrtip"
-             } );
-
-             //点击table中的某一行
-             $('#power-event tbody').on( 'click', 'tr', function () {
-                 $(this).toggleClass('selected');
-                 selectOneRowEvent(this);
-             } );
-
-         } );
-
-         $(document).ready(function() {
-             $('#environment-event').DataTable( {
-                 "info":         false,
-                 "scrollY":        "200px",
-                 "scrollCollapse": true,
-                 "paging":         false,
-                 "dom":            "lBrtip"
-             } );
-         } );
-
-         $(document).ready(function() {
-             $('#place-event').DataTable( {
-                 "info":           false,
-                 "scrollY":        "120px",
-                 "scrollCollapse": true,
-                 "paging":         false,
-                 "ordering":       false,
-                 "dom":             "lBrtip"
-             } );
-
-             //点击table中的某一行
-             $('#place-event tbody').on( 'change', 'tr', function () {
-                 alert("mp:"+ this);
-
-             } );
-         } );
-
-         //获取某一行选择的行，将该行的id放入某个隐藏的div中
-         function selectOneRowEvent(rowdata){
-             $('#clickEventRow-modal').css('display', 'block');
-             var row = rowdata;
-             var cols = row.childNodes;
-             var teid = cols[0].innerText;
-             $('#select-teid').val(teid);
-         }
-
-         $(document).ready(function() {
-
-             var tablepower = $('#power-event-detail').DataTable( {
-                 "scrollY":        "200px",
-                 "scrollCollapse": true,
-                 "paging":         false,
-                 "dom":            "lBrtip"
-             } );
-
-             //点击table中的某一行
-             $('#power-event-detail tbody').on( 'click', 'tr', function () {
-                 $(this).toggleClass('selected');
-                 selectOneRowEvent(this);
-             } );
-
-         } );
-
-
-     </script>
+</script>
 
 </body>
 
