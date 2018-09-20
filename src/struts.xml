@@ -503,8 +503,40 @@
              </result>
          </action>
 
-         <action name="getDetailPowerEvent" class="efficiencyAnalysis.action.getDetailPowerEventAction">
-             <!--getDetailPowerEvent -->
+         <action name="getDetailPowerEventlytx" class="efficiencyAnalysis.action.getDetailPowerEventlytxAction">
+             <!--getDetailPowerEventlytx -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getDetailPowerEventxb" class="efficiencyAnalysis.action.getDetailPowerEventxbAction">
+             <!--getDetailPowerEventxb -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getDetailPowerEventsxbph" class="efficiencyAnalysis.action.getDetailPowerEventsxbphAction">
+             <!--getDetailPowerEventsxbph -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getDetailPowerEventshunbian" class="efficiencyAnalysis.action.getDetailPowerEventshunbianAction">
+             <!--getDetailPowerEventshunbian -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getDetailPowerEventshanbian" class="efficiencyAnalysis.action.getDetailPowerEventshanbianAction">
+             <!--getDetailPowerEventshanbian -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>
@@ -590,6 +622,15 @@
                  <param name="root">result</param>
              </result>
          </action>
+
+         <action name="plantformMessage" class="smsplantform.webservice">
+             <!--plantformMessage -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
 
      </package>
 

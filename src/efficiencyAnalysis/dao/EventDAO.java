@@ -12,9 +12,25 @@ public interface EventDAO {
 
     public List getLocalLastPowerEvent(String cbname);
 
-    public List getLocalAllDetailPowerEvent(String cbname, String starttime, String endtime);
+    public List getLocalAllDetailPowerEventlytx(String cbname, String starttime, String endtime);
 
-    public List getLocalLastDetailPowerEvent(String cbname);
+    public List getLocalLastDetailPowerEventlytx(String cbname);
+
+    public List getLocalAllDetailPowerEventxb(String cbname, String starttime, String endtime);
+
+    public List getLocalLastDetailPowerEventxb(String cbname);
+
+    public List getLocalAllDetailPowerEventsxbph(String cbname, String starttime, String endtime);
+
+    public List getLocalLastDetailPowerEventsxbph(String cbname);
+
+    public List getLocalAllDetailPowerEventshunbian(String cbname, String starttime, String endtime);
+
+    public List getLocalLastDetailPowerEventshunbian(String cbname);
+
+    public List getLocalAllDetailPowerEventshanbian(String cbname, String starttime, String endtime);
+
+    public List getLocalLastDetailPowerEventshanbian(String cbname);
 
     public List getAllCityEvent();
 

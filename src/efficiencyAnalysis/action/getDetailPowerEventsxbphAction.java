@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class getDetailPowerEventAction extends ActionSupport {
+public class getDetailPowerEventsxbphAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -27,7 +27,7 @@ public class getDetailPowerEventAction extends ActionSupport {
     }
 
 
-    /* 根据测量地点（市行名称）获取详细的 第二页设备事件
+    /* 根据测量地点（市行名称）获取详细的 第二页设备事件-三相不平衡度
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -43,11 +43,11 @@ public class getDetailPowerEventAction extends ActionSupport {
 
             List<EventPower> pedata = new ArrayList();
 
-            if((starttime == " " && endtime == " ") || (starttime == null && endtime == null))
-                pedata = dao.getLocalLastDetailPowerEvent(cbname);
+            if((starttime == null && endtime == null)||(starttime.equals(" ") && endtime.equals(" ")))
+                pedata = dao.getLocalLastDetailPowerEventsxbph(cbname);
 
             else
-                pedata = dao.getLocalAllDetailPowerEvent(cbname, starttime, endtime);
+                pedata = dao.getLocalAllDetailPowerEventsxbph(cbname, starttime, endtime);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allpelist", pedata);

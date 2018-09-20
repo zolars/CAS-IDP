@@ -641,42 +641,65 @@
                     </div>
                     <div id="item7" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
 
+                        <script>
+                            function cll(id){
+                                if(id==1){
+                                    document.getElementById("sms-div").style.display = 'block';
+                                    document.getElementById("alert-div").style.display = 'none';
+                                    document.getElementById("plantform-div").style.display = 'none';
+                                }
+                                else if(id==2){
+                                    document.getElementById("sms-div").style.display = 'none';
+                                    document.getElementById("alert-div").style.display = 'block';
+                                    document.getElementById("plantform-div").style.display = 'none';
+                                        }
+                                else if(id==3){
+                                    document.getElementById("sms-div").style.display = 'none';
+                                    document.getElementById("alert-div").style.display = 'none';
+                                    document.getElementById("plantform-div").style.display = 'block';
+                                }
+                            }
+                        </script>
+
                         <div class="add-user-title">预警方式</div>
-                        <select class="form-control location-select-item" id=""
-                                name="">
-                            <option value="">短信</option>
-                            <option value="">弹窗</option>
-                            <option value="">平台</option>
+                        <select class="form-control location-select-item" id="alarmtype-select"
+                                name="" onChange="cll(this.value)">
+                            <option value="1">短信</option>
+                            <option value="2">弹窗</option>
+                            <option value="3">平台</option>
                         </select>
 
                         <!-- sms div-->
                         <div id = "sms-div">
-
-
-
                         </div>
                         <!-- sms div end -->
 
                         <!-- alert div-->
-                        <div id = "alert-div">
-
-
-
+                        <div id = "alert-div" style="display: none;">
                         </div>
                         <!-- alert div end -->
 
                         <!-- plantform div-->
-                        <div id = "plantform-div">
+                        <div id = "plantform-div" style="display: none;">
+                            设备名称：<input type="text" id="plantform-dname" class="form-control setting-input">
+                            ip地址:<input type="text" id="plantform-ip" class="form-control setting-input">
+                            时间：<input type="text" id="plantform-time" class="form-control setting-input">
+                            告警级别：<input type="text" id="plantform-level" class="form-control setting-input">
+                            告警状态:<input type="text" id="plantform-status" class="form-control setting-input">
+                            告警对象名称：<input type="text" id="plantform-did" class="form-control setting-input">
+                            告警实例名称：<input type="text" id="plantform-diname" class="form-control setting-input">
+                            监控指标名称：<input type="text" id="plantform-typename" class="form-control setting-input">
+                            告警内容：<input type="text" id="plantform-content" class="form-control setting-input">
+                            扩展字段1：<input type="text" id="plantform-ext1" class="form-control setting-input">
+                            扩展字段2：<input type="text" id="plantform-ext2" class="form-control setting-input">
+                            扩展字段3：<input type="text" id="plantform-ext3" class="form-control setting-input">
 
-
-
+                            <button class="btn btn-default" onclick="testOk()">点击测试</button>
                         </div>
                         <!-- plantform div end -->
-                        <div class="add-user-title">执行类</div>
 
                         <button class="btn btn-default" onclick="addAlarm()">添加</button>
                         <button class="btn btn-default" onclick="deleterAlarm()">删除</button>
-
 
                     </div>
                     <div id="item8" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
@@ -2853,6 +2876,49 @@
 
 <!-- 告警配置-->
 <script type="text/javascript">
+    function testOk(){
+
+        var dname = $('#plantform-dname').val();
+        var ip = $('#plantform-ip').val();
+        var time = $('#plantform-time').val();
+        var level = $('#plantform-level').val();
+        var status = $('#plantform-status').val();
+        var did = $('#plantform-did').val();
+        var diname = $('#plantform-diname').val();
+        var typename = $('#plantform-typename').val();
+        var content = $('#plantform-content').val();
+        var ext1 = $('#plantform-ext1').val();
+        var ext2 = $('#plantform-ext2').val();
+        var ext3 = $('#plantform-ext3').val();
+
+        alert(dname + ip + time + level + status + did + diname + typename + content + ext1 + ext2 + ext3);
+
+
+        $.ajax({
+            type: "post",
+            url: "plantformMessage",
+            data: {
+                dname: dname,
+                ip: ip,
+                time: time,
+                level: level,
+                status: status,
+                did: did,
+                diname: diname,
+                typename: typename,
+                content: content,
+                ext1: ext1,
+                ext2: ext2,
+                ext3: ext3
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data);
+            }
+        });
+
+    }
+
     function addAlarm(){
         alert("add alarm");
     }

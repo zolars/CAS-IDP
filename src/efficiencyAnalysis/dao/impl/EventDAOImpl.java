@@ -96,12 +96,12 @@ public class EventDAOImpl implements EventDAO {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            try {
-                db.free();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
         return rtlist;
@@ -175,19 +175,19 @@ public class EventDAOImpl implements EventDAO {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            try {
-                db.free();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         return rtlist;
     }
 
-    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-浪涌塌陷
     //带有时间范围
-    public List getLocalAllDetailPowerEvent(String cbname, String starttime, String endtime){
+    public List getLocalAllDetailPowerEventlytx(String cbname, String starttime, String endtime){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
@@ -203,7 +203,7 @@ public class EventDAOImpl implements EventDAO {
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
-        String comidset[] = comstr.split(",");
+        String comidset[] = comstr.split("，");
 
         for(int i = 0; i < comidset.length; i++){
 
@@ -211,7 +211,9 @@ public class EventDAOImpl implements EventDAO {
             cp = (Computerroom)hbsessionDao.getFirst(
                     "FROM Computerroom where rid = '" + comidset[i]+ "'");
 
-            didstr += ","+ cp.getDidset();
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
         }
 
         //再根据设备id查询事件
@@ -225,7 +227,7 @@ public class EventDAOImpl implements EventDAO {
         for(int i = 0; i < didset.length; i++ ){
             String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
                     "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
-                    + "' and ta.did ='" + didset[i] + "' and time >"+ starttime + " and time <" + endtime;
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type in (1,2)";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -246,20 +248,20 @@ public class EventDAOImpl implements EventDAO {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            try {
-                db.free();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
         return rtlist;
     }
 
-    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件
-    //无时间范围
-    public List getLocalLastDetailPowerEvent(String cbname){
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-浪涌塌陷
+    //返回最近一条事件记录
+    public List getLocalLastDetailPowerEventlytx(String cbname){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Computerroom> didlist = new ArrayList<>();
@@ -300,7 +302,7 @@ public class EventDAOImpl implements EventDAO {
 
             String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
                     "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
-                    + "' and ta.did ='" + didset[i] + "'";
+                    + "' and ta.did ='" + didset[i] + "' and tb.type in (1,2)";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -321,12 +323,609 @@ public class EventDAOImpl implements EventDAO {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-谐波
+    //带有时间范围
+    public List getLocalAllDetailPowerEventxb(String cbname, String starttime, String endtime){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split(",");
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type in (5,6)";
             try {
-                db.free();
-            } catch (SQLException e) {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-谐波
+    //返回最近一条事件记录
+    public List getLocalLastDetailPowerEventxb(String cbname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and tb.type in (5,6)";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-三相
+    //带有时间范围
+    public List getLocalAllDetailPowerEventsxbph(String cbname, String starttime, String endtime){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split(",");
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type=9";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-三相
+    //返回最近一条事件记录
+    public List getLocalLastDetailPowerEventsxbph(String cbname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "'and tb.type=9";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-瞬变
+    //带有时间范围
+    public List getLocalAllDetailPowerEventshunbian(String cbname, String starttime, String endtime){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split(",");
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type=3";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-瞬变
+    //返回最近一条事件记录
+    public List getLocalLastDetailPowerEventshunbian(String cbname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and tb.type=3";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-闪变
+    //带有时间范围
+    public List getLocalAllDetailPowerEventshanbian(String cbname, String starttime, String endtime){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split(",");
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type=8";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-闪变
+    //返回最近一条事件记录
+    public List getLocalLastDetailPowerEventshanbian(String cbname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and tb.type=8";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
         return rtlist;
