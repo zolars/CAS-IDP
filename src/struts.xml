@@ -647,6 +647,21 @@
              </result>
          </action>
 
+         <action name="getOrgnizationTree" class="systemMng.action.getOrgnizationTreeAction">
+             <!--getOrgnizationTree -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="deleteOrgnizationTree" class="systemMng.action.deleteOrgnizationTreeAction">
+             <!--deleteOrgnizationTree -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
 
      </package>
 

@@ -184,29 +184,32 @@
                     <div id="item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                         <div class="block-area" id="defaultStyle">
                             <div class="row">
-                                <div class="col-md-7">
+                                <div class="col-md-12">
                                     <div class="tile">
                                         <h2 class="tile-title">账号信息</h2>
                                         <table id="userinfotablehead">
                                             <thead>
                                             <tr>
                                                 <th>
-                                                    <div style="padding-left:30px;">账号</div>
+                                                    <div style="width:10px;"></div>
                                                 </th>
                                                 <th>
-                                                    <div style="padding-left:30px;">姓名</div>
+                                                    <div style="width:50px;">账号</div>
                                                 </th>
                                                 <th>
-                                                    <div style="padding-left:40px;">组织</div>
+                                                    <div style="width:50px;">姓名</div>
                                                 </th>
                                                 <th>
-                                                    <div style="padding-left:40px;">角色</div>
+                                                    <div style="width:260px;">组织</div>
                                                 </th>
                                                 <th>
-                                                    <div style="padding-left:50px;">联系方式</div>
+                                                    <div style="width:100px;">角色</div>
                                                 </th>
                                                 <th>
-                                                    <div style="padding-left:50px;">公务手机</div>
+                                                    <div style="width:150px;">联系方式</div>
+                                                </th>
+                                                <th>
+                                                    <div style="width:150px;">公务手机</div>
                                                 </th>
                                             </tr>
                                             </thead>
@@ -738,137 +741,14 @@
                         </div>
                     </div>
                     <div id="item9" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        <!--wsy2018.9.6-->
-                        <div class="row"></div>
-                        <ul class="nav nav-tabs" id="seculItem">
-                            <li class="active" style="width:15%">
-                                <a data-toggle="tab" id="secsubItem7">•查询</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="secsubItem8">•添加</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="secsubItem9">•修改</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="secsubItem10">•删除</a>
-                            </li>
-                        </ul>
-                        <div id="secItem7" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+                        <div class="col-md-2">
+                            <div id="jstree-structure"></div>
+                            <div id="nodeidstruct" style="display: none"></div>
                         </div>
-                        <div id="secItem8" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-                        </div>
-                        <div id="secItem9" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-                        </div>
-                        <div id="proBankInfo" style="display: none">
-                            <label class="t-overflow">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <input id="searchInput2" class="searchInput form-control"
-                                                           type="text" placeholder="请输入省行名称">
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-default" onclick="checkProBank()">查询省行</button>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </label>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="tile">
-                                        <h2 class="tile-title">省行信息</h2>
-                                        <div>
-                                            <label class="t-overflow">
-                                                省行名称<input id="pbname" type="text" class="form-control setting-input" disabled="disabled">
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="tile">
-                                        <h2 class="tile-title">所属市行及机房信息</h2>
-                                        <div>
-                                            <table width="98%">
-                                                <tr>
-                                                    <label class="t-overflow" id="cb1">
-                                                        市行名称1<input id="cbname1" type="text" class="form-control setting-input" disabled="disabled">
-                                                    </label>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:433.133px">
-                                                        <label class="t-overflow" id="cr1">
-                                                            市行1机房1<input id="rname1" type="text" class="form-control setting-input" disabled="disabled">
-                                                        </label>
-                                                    </td>
-                                                    <td style="width:433.133px">
-                                                        <label class="t-overflow" id="cr2">
-                                                            市行1机房2<input id="rname2" type="text" class="form-control setting-input" disabled="disabled">
-                                                        </label>
-                                                    </td>
-                                                    <td style="width:433.133px">
-                                                        <label class="t-overflow" id="cr3">
-                                                            市行1机房3<input id="rname3" type="text" class="form-control setting-input" disabled="disabled">
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <table width="98%">
-                                                <tr>
-                                                    <label class="t-overflow" id="cb2">
-                                                        市行名称2<input id="cbname2" type="text" class="form-control setting-input" disabled="disabled">
-                                                    </label>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:433.133px">
-                                                        <label class="t-overflow" id="cr4">
-                                                            市行2机房1<input id="rname4" type="text" class="form-control setting-input" disabled="disabled">
-                                                        </label>
-                                                    </td>
-                                                    <td style="width:433.133px">
-                                                        <label class="t-overflow" id="cr5">
-                                                            市行2机房2<input id="rname5" type="text" class="form-control setting-input" disabled="disabled">
-                                                        </label>
-                                                    </td>
-                                                    <td style="width:433.133px">
-                                                        <label class="t-overflow" id="cr6">
-                                                            市行2机房3<input id="rname6" type="text" class="form-control setting-input" disabled="disabled">
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <table width="98%">
-                                                <tr>
-                                                    <label class="t-overflow" id="cb3">
-                                                        市行名称3<input id="cbname3" type="text" class="form-control setting-input" disabled="disabled">
-                                                    </label>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width:433.133px">
-                                                        <label class="t-overflow" id="cr7">
-                                                            市行3机房1<input id="rname7" type="text" class="form-control setting-input" disabled="disabled">
-                                                        </label>
-                                                    </td>
-                                                    <td style="width:433.133px">
-                                                        <label class="t-overflow" id="cr8">
-                                                            市行3机房2<input id="rname8" type="text" class="form-control setting-input" disabled="disabled">
-                                                        </label>
-                                                    </td>
-                                                    <td style="width:433.133px">
-                                                        <label class="t-overflow" id="cr9">
-                                                            市行3机房3<input id="rname9" type="text" class="form-control setting-input" disabled="disabled">
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-sm btn-alt" onClick="addOrg()">添加</button>
+                            <button type="button" class="btn btn-sm btn-alt" onClick="updateOrg()">修改</button>
+                            <button type="button" class="btn btn-sm btn-alt" onClick="deleteOrg()">删除</button>
                         </div>
                     </div>
                 </div>
@@ -1437,24 +1317,20 @@
                                         var arr = {
                                             "id": arrays[i].pid,
                                             "parent": arrays[i].parentpid == "0" ? "#" : arrays[i].parentpid,
-                                            "text": arrays[i].permissionname//,
-                                            // "state" : { "selected" : true}
-                                        }
+                                            "text": arrays[i].permissionname
+                                        };
                                         jsonarray.push(arr);
                                     }
-                                },
-                                error: function (result) {
-                                    alert("error" + result);
                                 }
                             });
                             callback.call(this, jsonarray);
                         },
                     },
                     "plugins": ["checkbox"]
-                })
+                });
             });
-
         });
+
         $("#subItem4").click(function () {
             $("#item1").hide();
             $("#item2").hide();
@@ -1726,10 +1602,15 @@
                         if(list[key][i][8] != undefined) govtelephone = list[key][i][8];
                         else govtelephone += " ";
 
-
-                        table.append('<tr><td><input type="checkbox" name="userid" id="userid" value=' + uid + '></td><td style="padding-left:15px;">' + account +
-                            '</td><td style="padding-left:20px;">' + name + '</td><td style="padding-left:20px;">' + org + '</td><td style="padding-left:20px;">'
-                            + role + '</td><td style="padding-left:20px;">' + telephone + '</td><td style="padding-left:20px;">' + govtelephone + '</td></tr>');
+                        table.append('<tr>' +
+                            '<td style="width:10px;"><input type="checkbox" name="userid" id="userid" value=' + uid + '></td>' +
+                            '<td style="width:50px;">' + account + '</td>' +
+                            '<td style="width:50px;">' + name + '</td>' +
+                            '<td style="width:260px;">' + org + '</td>' +
+                            '<td style="width:100px;">' + role + '</td>' +
+                            '<td style="width:150px;">' + telephone + '</td>' +
+                            '<td style="width:150px;">' + govtelephone + '</td>' +
+                            '</tr>');
                     }
                 }
             }
@@ -2539,6 +2420,13 @@
         $("#nodeid").val(currentNode.id);
     });
 
+    // 点击树的某个节点，存当前节点id到nodeid中
+    $('#jstree-structure').bind("activate_node.jstree", function (obj, e) {
+        var currentNode = e.node;
+        //当前点击的节点的id存到一个隐藏的div中
+        $("#nodeidstruct").val(currentNode.id);
+    });
+
     // 分配角色权限
     function allocateRoles() {
         //当前点击的角色id存到一个隐藏的div中
@@ -2960,66 +2848,43 @@
     }
 </script>
 
-<!-- 查询组织--省行管理/市行管理/机房管理--wsy2018.9.6 -->
+<!-- 查询组织--省行管理/市行管理/机房管理-->
 <script type="text/javascript">
 
-    <!-- 查询省行 -->
-    function checkProBank() {
-        var probankname = $("#searchInput2").val();
-        $("#pbname").val(probankname);
-
-        for(var q=0;q<3;q++)
-        {
-            $("#cbname"+(q+1)).val("");
-            $("#cb"+(q+1)).show();
-        }
-
-        for(var w=0;w<9;w++){
-            $("#rname"+(w+1)).val("");
-            $("#cr"+(w+1)).show();
-        }
-
-        $.ajax({
-            type: "post",
-            url: "getProBankInfo",
-            data: {
-                probankname: probankname
+    //获取所有组织结构树状结构
+    $('#jstree-structure').jstree({
+        "core": {
+            "themes": {
+                "responsive": false
             },
-            dataType: "json",
-            success: function (data) {
-                var list = JSON.parse(data);
-                var cblist = list['CityBank'];
-                var crlist = list['CompRoom'];
-
-                for(var i=0;i<cblist.length;i++)
-                {
-                    console.log(cblist[i]);
-                    $("#cbname"+(i+1)).val(cblist[i]);
-                }
-
-                for(var j=0;j<crlist.length;j++){
-                    var room = crlist[j].split("，");
-                    for(var k=0;k<room.length;k++){
-                        $("#rname"+(3*j+k+1)).val(room[k]);
+            "check_callback": true,
+            'data': function (obj, callback) {
+                var jsonstr = "[]";
+                var jsonarray = eval('(' + jsonstr + ')');
+                $.ajax({
+                    url: "getOrgnizationTree",
+                    dataType: "json",
+                    async: false,
+                    success: function (result) {
+                        var arrays = result.allotree;
+                        for (var i = 0; i < arrays.length; i++) {
+                            var arr = {
+                                "id": arrays[i].id,
+                                "parent": arrays[i].pid == "0" ? "#" : arrays[i].pid,
+                                "text": arrays[i].name
+                            };
+                            jsonarray.push(arr);
+                        }
                     }
-                }
+                });
+                callback.call(this, jsonarray);
+            },
+        },
+        "plugins": ["checkbox"]
+    });
 
-                for(var m=0;m<3;m++)
-                {
-                    if($("#cbname"+(m+1)).val() == "")
-                        $("#cb"+(m+1)).hide();
-                }
-
-                for(var n=0;n<9;n++){
-                    if($("#rname"+(n+1)).val() == "")
-                        $("#cr"+(n+1)).hide();
-                }
-            }
-        });
-    }
-
-    <!-- 添加省行div--wsy2018.9.7 -->
-    function addOrganization() {
+    <!-- 添加省行-->
+    function addOrg() {
 
         del=window.confirm("确定添加该省行信息？")
         if(del){
@@ -3031,7 +2896,7 @@
     }
 
     <!-- 修改省行div--wsy2018.9.7 -->
-    function changeProBankAlarmUser() {
+    function updateOrg() {
 
         del=window.confirm("确定修改该省行信息？")
         if(del){
@@ -3042,13 +2907,21 @@
 
     }
 
-    <!-- 删除省行div--wsy2018.9.7 -->
-    function deleteProBankAlarmUser() {
-        del=window.confirm("确定删除该省行信息？")
+    <!-- 删除省行-->
+    function deleteOrg() {
+
+        var tmpNodeOrgid = $("#nodeidstruct").val();
+        del=window.confirm("确定删除该省行信息？");
+
         if(del){
-            alert("已经删除！");
-        }else{
-            //alert("已经取消！");
+            $.ajax({
+                type: "post",
+                url: "deleteOrgnizationTree",
+                data: {
+                    orgid: tmpNodeOrgid
+                },
+                dataType: "json"
+            });
         }
     }
 </script>

@@ -75,6 +75,7 @@
         <mapping resource="hibernatePOJO/RolesPermission.hbm.xml"/>
         <mapping resource="hibernatePOJO/User.hbm.xml"/>
         <mapping resource="hibernatePOJO/UserRoles.hbm.xml"/>
+        <mapping resource="hibernatePOJO/OrgnizationStructure.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>
