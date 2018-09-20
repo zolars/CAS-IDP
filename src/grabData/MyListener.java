@@ -37,7 +37,8 @@ public class MyListener implements ServletContextListener {
                 //从数据库读取温度检测仪器配置信息(IP, port等)
                 List<CaptureSettingTemp> list_temp = hbSessionDao.search("FROM CaptureSettingTemp");
 
-                if (null != list && null != list_temp) {
+
+                if (null != list || null != list_temp) {
                     //创建取实时数据和暂态数据的client
                     for (CaptureSetting c : list) {
                         try {
@@ -60,7 +61,7 @@ public class MyListener implements ServletContextListener {
                             System.out.println("创建取实时数据连接 " +
                                     "温度监测点(" + d.getDid() + ") " +
                                     d.getIp() + ":" + d.getPort1());
-                            new DataOnlineClient(d.getIp(), d.getPort1(), d.getDid()).start();
+                            new TempDataClient(d.getIp(), d.getPort1(), d.getDid()).start();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

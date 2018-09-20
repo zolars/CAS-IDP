@@ -17,7 +17,7 @@ public class TemperatureSaveJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        Map<String, TemperatureMonitor> tempDataMap = TemperatureSave.gettempDataMap();
+        Map<String, TemperatureMonitor> tempDataMap = TemperatureSave.getTempDataMap();
 
         if(null != tempDataMap){
             Set<String> didSet = tempDataMap.keySet();

@@ -1,12 +1,13 @@
 package grabData;
 
-import com.alibaba.fastjson.JSON;
+// import com.alibaba.fastjson.JSON;
+
 import hibernatePOJO.*;
-import io.netty.channel.Channel;
+// import io.netty.channel.Channel;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.List;
+// import java.util.List;
 import java.util.Map;
 
 public class TemperatureSave {
@@ -33,7 +34,7 @@ public class TemperatureSave {
 
     }
 
-    public static Map<String, TemperatureMonitor> gettempDataMap() {
+    public static Map<String, TemperatureMonitor> getTempDataMap() {
         return tempDataMap;
     }
 }
