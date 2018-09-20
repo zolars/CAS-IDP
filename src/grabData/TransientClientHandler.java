@@ -109,7 +109,63 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
             case 19:e.setDiscription("Ub Uc 短时中断");break;
             case 20:e.setDiscription("Uc Ua 短时中断");break;
             case 21:e.setDiscription("Ua Ub Uc 短时中断");break;
-            default: break;
+
+            case 100:e.setDiscription("未知类型");break;
+            case 101:e.setDiscription("TBD");break;
+            case 102:e.setDiscription("频率偏差越上限");break;
+            case 103:e.setDiscription("频率偏差越下限");break;
+            case 104:e.setDiscription("TBD");break;
+            case 105:e.setDiscription("Ua 电压偏差越上限");break;
+            case 106:e.setDiscription("Ua 电压偏差越下限");break;
+            case 107:e.setDiscription("TBD");break;
+            case 108:e.setDiscription("Ub 电压偏差越上限");break;
+            case 109:e.setDiscription("Ub 电压偏差越下限");break;
+            case 110:e.setDiscription("TBD");break;
+            case 111:e.setDiscription("Uc 电压偏差越上限");break;
+            case 112:e.setDiscription("Uc 电压偏差越下限");break;
+            case 113:e.setDiscription("电压负序不平衡度越限");break;
+            case 114:e.setDiscription("TBD");break;
+            case 115:e.setDiscription("TBD");break;
+            case 116:e.setDiscription("TBD");break;
+            case 117:e.setDiscription("Ua 短时闪变越限");break;
+            case 118:e.setDiscription("Ub 短时闪变越限");break;
+            case 119:e.setDiscription("Uc 短时闪变越限");break;
+            case 120:e.setDiscription("Ua 长时闪变越限");break;
+            case 121:e.setDiscription("Ub 长时闪变越限");break;
+            case 122:e.setDiscription("Uc 长时闪变越限");break;
+            case 123:e.setDiscription("Ua 总谐波畸变率越限");break;
+            case 124:e.setDiscription("Ub 总谐波畸变率越限");break;
+            case 125:e.setDiscription("Uc 总谐波畸变率越限");break;
+            case 126:e.setDiscription("Ia 总谐波畸变率越限");break;
+            case 127:e.setDiscription("Ib 总谐波畸变率越限");break;
+            case 128:e.setDiscription("Ic 总谐波畸变率越限");break;
+            default: {
+                if(e.getSubtype() >= 129 && e.getSubtype() <= 177) {
+                    String discription = "Ua 谐波含有率越限 (" + String.valueOf(e.getSubtype() - 127) + ")";
+                    e.setDiscription(discription);
+                }
+                else if(e.getSubtype() >= 178 && e.getSubtype() <= 226) {
+                    String discription = "Ub 谐波含有率越限 (" + String.valueOf(e.getSubtype() - 176) + ")";
+                    e.setDiscription(discription);
+                }
+                else if(e.getSubtype() >= 227 && e.getSubtype() <= 275) {
+                    String discription = "Uc 谐波含有率越限 (" + String.valueOf(e.getSubtype() - 225) + ")";
+                    e.setDiscription(discription);
+                }
+                else if(e.getSubtype() >= 276 && e.getSubtype() <= 324) {
+                    String discription = "Ia 谐波有效值越限 (" + String.valueOf(e.getSubtype() - 274) + ")";
+                    e.setDiscription(discription);
+                }
+                else if(e.getSubtype() >= 325 && e.getSubtype() <= 373) {
+                    String discription = "Ib 谐波有效值越限 (" + String.valueOf(e.getSubtype() - 325) + ")";
+                    e.setDiscription(discription);
+                }
+                else if(e.getSubtype() >= 374 && e.getSubtype() <= 423) {
+                    String discription = "Ic 谐波有效值越限 (" + String.valueOf(e.getSubtype() - 372) + ")";
+                    e.setDiscription(discription);
+                }
+                break;
+            }
         }
     }
 }
