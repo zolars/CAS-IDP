@@ -591,17 +591,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 动态加载检测点(设备)列表 -->
     <script type="text/javascript">
+        //city 动态改变,computerroom清空
+        document.getElementById("comproom_code").addEventListener('change', function () {
+            $('#monitorpnt').empty();
+        });
+
         //获取检测点列表
         function getMonitorPoints(){
 
             var computerroom = $("#comproom_code option:selected").val();
             var mpcname = $("#monitorpnt").val();
 
-            if(!mpcname) { //若没有获取过，获取
+            if(!computerroom){
+                alert("请先选择机房，再选择检测点");
+            }
+            else if(!mpcname) { //若没有获取过，获取
                 $.ajax({
                     type: "post",
                     url: "getMonitorPoints",
-                    data: {computerroom: computerroom},
+                    data: {
+                        computerroom: computerroom
+                    },
                     dataType : "json",
                     success: function (data) {
                         var obj = JSON.parse(data);

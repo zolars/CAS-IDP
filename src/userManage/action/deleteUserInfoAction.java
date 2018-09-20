@@ -12,11 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
-
-
 public class deleteUserInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
@@ -32,7 +27,7 @@ public class deleteUserInfoAction extends ActionSupport {
 
     /* 删除一条用户信息、用户角色记录
      */
-    public String execute() throws Exception { //getUserTree() throws Exception{
+    public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
@@ -58,7 +53,7 @@ public class deleteUserInfoAction extends ActionSupport {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }

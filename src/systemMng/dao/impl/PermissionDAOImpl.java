@@ -1,6 +1,7 @@
 package systemMng.dao.impl;
 
 import Util.HBSessionDaoImpl;
+import hibernatePOJO.OrgnizationStructure;
 import hibernatePOJO.Permission;
 import hibernatePOJO.RolesPermission;
 import org.hibernate.Query;

@@ -8,30 +8,19 @@ import java.util.*;
 
 public class HisDAOImpl implements HisDAO {
 
-    /*  private Session session;
-  private Transaction transaction;
-    private Query query;*/
-
-    public  List getHisData(String monitorpoint, String starttime, String endtime){
+    public  List getHisData(String did, String starttime, String endtime){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-        //hbsessionDao.init();
 
         List<PowerparmMonitor> crlist = new ArrayList<>();
 
         List rtlist = new ArrayList<>();
 
         crlist = hbsessionDao.search(
-                "FROM PowerparmMonitor where mpid = '" + monitorpoint+ "' and time >= '"+ starttime + "' and time <= '" + endtime +"'");
-
+                "FROM PowerparmMonitor where did = '" + did + "' and time >= '"+ starttime + "' and time <= '" + endtime +"'");
 
         for(int i = 0; i < crlist.size(); i++){
             PowerparmMonitor temp = crlist.get(i);
             Map<String, Object> map = new LinkedHashMap<>();
-
-           /* String datatime = temp.getTime().toString();
-            String dats[] = datatime.split(" ");
-            map.put("time", dats[0]);*/
 
             map.put("time", temp.getTime().toString());
             map.put("u1", temp.getU1());
@@ -67,8 +56,6 @@ public class HisDAOImpl implements HisDAO {
             map.put("dpf", temp.getpFsum());//
             rtlist.add((Object) map);
         }
-
-        //hbsessionDao.closeSession();
 
         return rtlist;
     }

@@ -18,7 +18,7 @@ public class setProvinceAction extends ActionSupport {
         this.result = result;
     }
 
-    public String execute() throws Exception { //getUserTree() throws Exception{
+    public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
@@ -31,7 +31,7 @@ public class setProvinceAction extends ActionSupport {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }

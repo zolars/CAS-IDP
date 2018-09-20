@@ -7,4 +7,5 @@ public interface CityDAO {
 
     public List getAllCity();
 
+    public List getCityByProvince(String province);
 }
