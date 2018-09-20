@@ -793,13 +793,12 @@
             $("#power-event-detail-3").hide();
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").hide();
-
             $('#power-event-detail-1').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
                 "pagingType":     "full_numbers",
-                "dom":            "lBrtip"/*,
+                "dom":            "lBrtip",
                 "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
                     {"targets": [ 2 ], "visible": (col2)? true : false},
                     {"targets": [ 3 ], "visible": (col3)? true : false},
@@ -810,13 +809,12 @@
                     {"targets": [ 8 ], "visible": (col8)? true : false},
                     {"targets": [ 9 ], "visible": (col9)? true : false},
                     {"targets": [ 10 ], "visible": (col10)? true : false}
-                ]*/
+                ]
             });
             $('#power-event-detail-2').DataTable().fnDestroy();
             $('#power-event-detail-3').DataTable().fnDestroy();
             $('#power-event-detail-4').DataTable().fnDestroy();
             $('#power-event-detail-5').DataTable().fnDestroy();
-
         });
         $("#secItem2").click(function () {
             $("#power-event-detail-1").hide();
@@ -824,13 +822,12 @@
             $("#power-event-detail-3").hide();
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").hide();
-
             $('#power-event-detail-2').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
                 "pagingType":     "full_numbers",
-                "dom":            "lBrtip"/*,
+                "dom":            "lBrtip",
                 "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
                     {"targets": [ 2 ], "visible": (col2)? true : false},
                     {"targets": [ 3 ], "visible": (col3)? true : false},
@@ -841,7 +838,7 @@
                     {"targets": [ 8 ], "visible": (col8)? true : false},
                     {"targets": [ 9 ], "visible": (col9)? true : false},
                     {"targets": [ 10 ], "visible": (col10)? true : false}
-                ]*/
+                ]
             });
             $('#power-event-detail-1').DataTable().fnDestroy();
             $('#power-event-detail-3').DataTable().fnDestroy();
@@ -854,13 +851,12 @@
             $("#power-event-detail-3").show();
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").hide();
-
             $('#power-event-detail-3').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
                 "pagingType":     "full_numbers",
-                "dom":            "lBrtip"/*,
+                "dom":            "lBrtip",
                 "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
                     {"targets": [ 2 ], "visible": (col2)? true : false},
                     {"targets": [ 3 ], "visible": (col3)? true : false},
@@ -871,7 +867,7 @@
                     {"targets": [ 8 ], "visible": (col8)? true : false},
                     {"targets": [ 9 ], "visible": (col9)? true : false},
                     {"targets": [ 10 ], "visible": (col10)? true : false}
-                ]*/
+                ]
             });
             $('#power-event-detail-1').DataTable().fnDestroy();
             $('#power-event-detail-2').DataTable().fnDestroy();
@@ -884,13 +880,12 @@
             $("#power-event-detail-3").hide();
             $("#power-event-detail-4").show();
             $("#power-event-detail-5").hide();
-
             $('#power-event-detail-4').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
                 "pagingType":     "full_numbers",
-                "dom":            "lBrtip"/*,
+                "dom":            "lBrtip",
                 "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
                     {"targets": [ 2 ], "visible": (col2)? true : false},
                     {"targets": [ 3 ], "visible": (col3)? true : false},
@@ -901,7 +896,7 @@
                     {"targets": [ 8 ], "visible": (col8)? true : false},
                     {"targets": [ 9 ], "visible": (col9)? true : false},
                     {"targets": [ 10 ], "visible": (col10)? true : false}
-                ]*/
+                ]
             });
             $('#power-event-detail-1').DataTable().fnDestroy();
             $('#power-event-detail-2').DataTable().fnDestroy();
@@ -914,13 +909,12 @@
             $("#power-event-detail-3").hide();
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").show();
-
-            $('#power-event-detail-5').DataTable( {
+            $('#power-event-detail-5').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
                 "pagingType":     "full_numbers",
-                "dom":            "lBrtip"/*,
+                "dom":            "lBrtip",
                 "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
                     {"targets": [ 2 ], "visible": (col2)? true : false},
                     {"targets": [ 3 ], "visible": (col3)? true : false},
@@ -931,13 +925,12 @@
                     {"targets": [ 8 ], "visible": (col8)? true : false},
                     {"targets": [ 9 ], "visible": (col9)? true : false},
                     {"targets": [ 10 ], "visible": (col10)? true : false}
-                ]*/
+                ]
             });
             $('#power-event-detail-1').DataTable().fnDestroy();
             $('#power-event-detail-2').DataTable().fnDestroy();
             $('#power-event-detail-3').DataTable().fnDestroy();
             $('#power-event-detail-4').DataTable().fnDestroy();
-
         });
 
         $("#secItem1").click();
@@ -1811,27 +1804,27 @@
 
     //观测点
     $(document).ready(function() {
-        var placeEventTable = $('#place-event').DataTable( {
+        var placeEventTable = $('#place-event').DataTable({
             "info":           false,
             "scrollY":        "120px",
             "scrollCollapse": true,
             "paging":         false,
             "ordering":       false,
-            "dom":             "lBrtip"
+            "dom":            "lBrtip"
         } );
 
         //点击table中的某一行
         $('#place-event tbody').on( 'change', 'tr', function () {
             alert("mp:"+ this);
-
         } );
     } );
 
     //列栏表
-    $('#colume-table').DataTable( {
+    $('#colume-table').DataTable({
         "info":           false,
         "dom":            "lBrtip"
     });
+
 
     //获取某一行选择的行，将该行的id放入某个隐藏的div中
     function selectOneRowEvent(rowdata){

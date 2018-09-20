@@ -139,7 +139,7 @@
                         <div class="col-md-2">
                             <select class="form-control" name="his-mpid-select" id="his-mpid-select"
                                     onclick="getMonitorPoints()">
-                                <option value="">1</option>
+                                <option value="">请选择</option>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -176,9 +176,9 @@
                             </div>
                         </div>
                         <div>
-                            <button id="serch-his-button" onclick="searchHis()">查询</button>
+                            <button type="button" class="btn btn-sm btn-alt" id="serch-his-button" onclick="searchHis()">查询</button>
                         </div>
-                        <%--   </div>--%>
+
                         <div class="clearfix"></div>
                         <ul>
                             <li id='item2-1'>
@@ -474,11 +474,13 @@
         var computerroom = $("#comproom_code").val();
         var mpcname = $("#his-mpid-select").val();
 
-        if (!mpcname) { //若没有获取过，获取
+        if (!mpcname) {
             $.ajax({
                 type: "post",
                 url: "getMonitorPoints",
-                data: {computerroom: computerroom},
+                data: {
+                    computerroom: computerroom
+                },
                 dataType: "json",
                 success: function (data) {
                     var obj = JSON.parse(data);
@@ -486,9 +488,6 @@
                     for (var i = 0; i < rt.length; i++) {
                         $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
                     }
-                },
-                error: function () {
-                    alert("加载监测点失败");
                 }
             });
         }
@@ -509,6 +508,8 @@
             $("#item2").hide();
             $("#item3").show();
         });
+
+        $("#subItem2").click();
     });
 </script>
 
@@ -1168,14 +1169,14 @@
     }
 
     //获取数据，并更新图
-    function getData(starttime, endtime, mpid) {
+    function getData(starttime, endtime, did) {
         $.ajax({
             type: "post",
             url: "getHisData",
             data: {
                 starttime: starttime, // "2018-2-1 10：00：00",
                 endtime: endtime, //"2018-10-5 10：00：00",
-                monitorpointid: 1//mpid
+                monitorpointid: did
             },
             dataType: "json",
             success: function (result) {
@@ -1226,7 +1227,11 @@
     });
 
     function searchHis() {
-        getData($("#firstDate").val(), $("#lastDate").val(), $('#his-mpid-select').val());
+        var did = $("#his-mpid-select").val();
+        var stime = $("#firstDate").val();
+        var etime = $("#lastDate").val();
+        if(did != "" && stime != "" && etime != "")
+            getData(stime, etime, did);
     }
 
 </script>

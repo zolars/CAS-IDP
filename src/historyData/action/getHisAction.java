@@ -33,24 +33,24 @@ public class getHisAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             //获取监测点
-            String monitorpoint = request.getParameter("monitorpointid");
+            String did = request.getParameter("monitorpointid");
             String starttime = request.getParameter("starttime");
             String endtime = request.getParameter("endtime");
 
             HisDAO dao = new HisDAOImpl();
 
-            List<Object> data = dao.getHisData(monitorpoint, starttime, endtime);
+            List<Object> data = dao.getHisData(did, starttime, endtime);
             JSONObject jsonObject = new JSONObject();
 
             jsonObject.put("data", data);
 
-            result = JSON.toJSONString(data); // List转json
+            result = JSON.toJSONString(data);
 
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }
