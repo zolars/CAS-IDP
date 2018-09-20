@@ -157,7 +157,15 @@
          </action>
 
          <action name="getAllCity" class="userManage.action.getAllCityAction">
-             <!--getAllRoles -->
+             <!--getAllCity -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getCityByProvince" class="userManage.action.getCityByProvinceAction">
+             <!--getCityByProvince -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>
@@ -165,7 +173,15 @@
          </action>
 
          <action name="getAllComputerroom" class="userManage.action.getAllComputerroomAction">
-             <!--getAllRoles -->
+             <!--getAllComputerroom -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getComputerroomByCity" class="userManage.action.getComputerroomByCityAction">
+             <!--getComputerroomByCity -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>

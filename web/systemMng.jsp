@@ -907,8 +907,7 @@
                 </div>
                 <div class="add-user-item">
                     <div class="add-user-title">角色</div>
-                    <select class="form-control location-select-item" id="userroles" name="userroles"
-                            onclick="getRoles()">
+                    <select class="form-control" id="userroles" name="userroles">
                         <option value="">请选择</option>
                     </select>
                 </div>
@@ -918,7 +917,7 @@
                 <div class="add-user-item">
                     <div class="add-user-title">省</div>
                     <select class="form-control location-select-item" id="userorgnization-province"
-                            name="userorgnization-province" onclick="getAllProvince()">
+                            name="userorgnization-province">
                         <option value="">请选择</option>
                     </select>
                 </div>
@@ -1739,6 +1738,17 @@
 
     <!--显示user model -->
     function showAddUserModal() {
+        //清除上次填表的信息
+        $('#useraccount').val("");
+        $('#userpassword').val("");
+        $('#username').val("");
+        $('#usertelephone').val("");
+        $('#usergovtelephone').val("");
+        $('#userroles').val("");
+        $('#userorgnization-province').val("");
+        $('#userorgnization-city').val("");
+        $('#userorgnization-computerroom').val("");
+
         $('#add-user-modal').css('display', 'block');
         $('#add-user-handle').css('display', 'block');
         $('#update-user-handle').css('display', 'none');
@@ -1752,22 +1762,17 @@
         else if (useridcheck.length > 1)
             alert("每次只能删除一条用户信息");
         else {
-            // var monitorpoint = 1;
             var useridck = $("input[name='userid']:checked").serialize();
             $.ajax({
                 type: "post",
                 url: "deleteUserInfo",
                 data: {
-                    // monitorpointid: monitorpoint,
                     uid: useridck
                 },
                 dataType: "json",
                 success: function (data) {
                     alert(data);
                     getALLUserInfomation();
-                },
-                error: function () {
-                    alert("失败");
                 }
             });
         }
@@ -1900,8 +1905,8 @@
         }
     }
 
-    /*加载角色下拉选*/
-    function getRoles() {
+    $(document).ready(function() {
+        /*加载角色下拉选*/
         $.ajax({
             type: "post",
             url: "getAllRoles",
@@ -1914,10 +1919,8 @@
                 }
             }
         });
-    }
 
-    /*加载Province下拉选*/
-    function getAllProvince() {
+        /*加载Province下拉选*/
         $.ajax({
             type: "post",
             url: "getAllProvince",
@@ -1930,40 +1933,74 @@
                 }
             }
         });
-    }
+
+    });
+
+    //province 动态改变,city清空
+    document.getElementById("userorgnization-province").addEventListener('change', function () {
+        $('#userorgnization-city').empty();
+    });
+    //city 动态改变,computerroom清空
+    document.getElementById("userorgnization-city").addEventListener('change', function () {
+        $('#userorgnization-computerroom').empty();
+    });
 
     /*加载City下拉选*/
     function getAllCity() {
-        $.ajax({
-            type: "post",
-            url: "getAllCity",
-            dataType: "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var rt = obj.allcity;
 
-                for (var i = 0; i < rt.length; i++) {
-                    $('#userorgnization-city').append("<option value='" + rt[i].cbid + "' >" + rt[i].cbname + "</option>");
+        var province = $("#userorgnization-province option:selected").val();
+        var city = $("#userorgnization-city").val();
+
+        if(!province){
+            alert("请先选择省行，再选择市行");
+        }
+        else if (!city){
+            $.ajax({
+                type: "post",
+                url: "getCityByProvince",
+                data:{
+                    province: province
+                },
+                dataType: "json",
+                success: function (data) {
+                    $('#userorgnization-city').empty();
+                    var obj = JSON.parse(data);
+                    var rt = obj.allcity;
+
+                    for (var i = 0; i < rt.length; i++) {
+                        $('#userorgnization-city').append("<option value='" + rt[i].cbid + "' >" + rt[i].cbname + "</option>");
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     /*加载Computerroom下拉选*/
     function getAllComputerroom() {
-        $.ajax({
-            type: "post",
-            url: "getAllComputerroom",
-            dataType: "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var rt = obj.allcomputerroom;
+        var city = $("#userorgnization-city option:selected").val();
+        var computerroom = $("#userorgnization-computerroom").val();
 
-                for (var i = 0; i < rt.length; i++) {
-                    $('#userorgnization-computerroom').append("<option value='" + rt[i].rid + "' >" + rt[i].rname + "</option>");
+        if(!city){
+            alert("请先选择市行，再选择机房");
+        }
+        else if (!computerroom) {
+            $.ajax({
+                type: "post",
+                url: "getComputerroomByCity",
+                data:{
+                    city: city
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var rt = obj.allcomputerroom;
+
+                    for (var i = 0; i < rt.length; i++) {
+                        $('#userorgnization-computerroom').append("<option value='" + rt[i].rid + "' >" + rt[i].rname + "</option>");
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
 </script>

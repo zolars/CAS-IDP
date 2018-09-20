@@ -468,13 +468,21 @@
 
 <!-- 动态加载检测点(设备)列表 -->
 <script type="text/javascript">
+    //city 动态改变,computerroom清空
+    document.getElementById("comproom_code").addEventListener('change', function () {
+        $('#his-mpid-select').empty();
+    });
+
     //获取检测点列表
     function getMonitorPoints() {
 
-        var computerroom = $("#comproom_code").val();
+        var computerroom = $("#comproom_code option:selected").val();
         var mpcname = $("#his-mpid-select").val();
 
-        if (!mpcname) {
+        if(!computerroom){
+            alert("请先选择机房，再选择检测点");
+        }
+        else if (!mpcname) {
             $.ajax({
                 type: "post",
                 url: "getMonitorPoints",
@@ -1230,6 +1238,7 @@
         var did = $("#his-mpid-select").val();
         var stime = $("#firstDate").val();
         var etime = $("#lastDate").val();
+
         if(did != "" && stime != "" && etime != "")
             getData(stime, etime, did);
     }

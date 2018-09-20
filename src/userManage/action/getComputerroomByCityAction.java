@@ -5,14 +5,15 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
-import userManage.dao.UserDAO;
-import userManage.dao.impl.UserDAOImpl;
+import userManage.dao.ComputerroomDAO;
+import userManage.dao.impl.ComputerroomDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class deleteUserInfoAction extends ActionSupport {
+
+public class getComputerroomByCityAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -25,7 +26,7 @@ public class deleteUserInfoAction extends ActionSupport {
     }
 
 
-    /* 删除一条用户信息、用户角色记录
+    /* 查询所有用户的基本信息、用户角色、用户权限
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -33,19 +34,13 @@ public class deleteUserInfoAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String uidstr = request.getParameter("uid");
-            String uid[] = uidstr.split("=");
+            String city = request.getParameter("city");
 
-            UserDAO dao = new UserDAOImpl();
-            Boolean rt = dao.deleteUserInfo(uid[1]);
-            Boolean rt2 = dao.deleteUserRoles(uid[1]);
+            ComputerroomDAO dao = new ComputerroomDAOImpl();
+            List allcomputerroom = dao.getComputerroomByCity(city);
 
             JSONObject jsonObject = new JSONObject();
-
-            if(rt&&rt2)
-                jsonObject.put("提示", "删除成功！");
-            else
-                jsonObject.put("提示", "删除失败，请重试！");
+            jsonObject.put("allcomputerroom", allcomputerroom);
 
             result = JSON.toJSONString(jsonObject);
 

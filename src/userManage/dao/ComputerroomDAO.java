@@ -7,4 +7,6 @@ public interface ComputerroomDAO {
 
     public List getAllComputerroom();
 
+    public List getComputerroomByCity(String city);
+
 }
