@@ -14,6 +14,9 @@ public class Devices {
     private Integer isSms;
     private Integer isAlart;
     private Integer isPlartform;
+    private String onlineinterval;
+    private String thansentinterval;
+    private String uploadinterval;
 
     public String getDid() {
         return did;
@@ -103,6 +106,30 @@ public class Devices {
         this.isPlartform = isPlartform;
     }
 
+    public String getOnlineinterval() {
+        return onlineinterval;
+    }
+
+    public void setOnlineinterval(String onlineinterval) {
+        this.onlineinterval = onlineinterval;
+    }
+
+    public String getThansentinterval() {
+        return thansentinterval;
+    }
+
+    public void setThansentinterval(String thansentinterval) {
+        this.thansentinterval = thansentinterval;
+    }
+
+    public String getUploadinterval() {
+        return uploadinterval;
+    }
+
+    public void setUploadinterval(String uploadinterval) {
+        this.uploadinterval = uploadinterval;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -118,12 +145,15 @@ public class Devices {
                 Objects.equals(extra, devices.extra) &&
                 Objects.equals(isSms, devices.isSms) &&
                 Objects.equals(isAlart, devices.isAlart) &&
-                Objects.equals(isPlartform, devices.isPlartform);
+                Objects.equals(isPlartform, devices.isPlartform) &&
+                Objects.equals(onlineinterval, devices.onlineinterval) &&
+                Objects.equals(thansentinterval, devices.thansentinterval) &&
+                Objects.equals(uploadinterval, devices.uploadinterval);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(did, name, devicetype, type, serialno, iPaddress, port, extra, isSms, isAlart, isPlartform);
+        return Objects.hash(did, name, devicetype, type, serialno, iPaddress, port, extra, isSms, isAlart, isPlartform, onlineinterval, thansentinterval, uploadinterval);
     }
 }

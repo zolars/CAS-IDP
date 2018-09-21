@@ -1,17 +1,15 @@
 package hibernatePOJO;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "province_bank", schema = "test", catalog = "")
 public class ProvinceBank {
     private String pbid;
     private String pbname;
     private String cbidset;
+    private String compRoom;
+    private String didset;
+    private String tempset;
 
-    @Id
-    @Column(name = "pbid", nullable = false, length = 255)
     public String getPbid() {
         return pbid;
     }
@@ -20,8 +18,6 @@ public class ProvinceBank {
         this.pbid = pbid;
     }
 
-    @Basic
-    @Column(name = "pbname", nullable = false, length = 255)
     public String getPbname() {
         return pbname;
     }
@@ -30,14 +26,36 @@ public class ProvinceBank {
         this.pbname = pbname;
     }
 
-    @Basic
-    @Column(name = "cbidset", nullable = true, length = 255)
     public String getCbidset() {
         return cbidset;
     }
 
     public void setCbidset(String cbidset) {
         this.cbidset = cbidset;
+    }
+
+    public String getCompRoom() {
+        return compRoom;
+    }
+
+    public void setCompRoom(String compRoom) {
+        this.compRoom = compRoom;
+    }
+
+    public String getDidset() {
+        return didset;
+    }
+
+    public void setDidset(String didset) {
+        this.didset = didset;
+    }
+
+    public String getTempset() {
+        return tempset;
+    }
+
+    public void setTempset(String tempset) {
+        this.tempset = tempset;
     }
 
     @Override
@@ -47,12 +65,15 @@ public class ProvinceBank {
         ProvinceBank that = (ProvinceBank) o;
         return Objects.equals(pbid, that.pbid) &&
                 Objects.equals(pbname, that.pbname) &&
-                Objects.equals(cbidset, that.cbidset);
+                Objects.equals(cbidset, that.cbidset) &&
+                Objects.equals(compRoom, that.compRoom) &&
+                Objects.equals(didset, that.didset) &&
+                Objects.equals(tempset, that.tempset);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(pbid, pbname, cbidset);
+        return Objects.hash(pbid, pbname, cbidset, compRoom, didset, tempset);
     }
 }
