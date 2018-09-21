@@ -83,7 +83,7 @@
             <div class="pull-left location-select">
                 <select class="form-control location-select-item" id="province_code" name="province_code"
                         onchange="getCity()">
-                    <option value="">请选择</option>
+                    <option value="">未指定</option>
                 </select>
 
                 <script>
@@ -95,7 +95,7 @@
 
                 <select class="form-control location-select-item" id="city_code" name="city_code"
                         onchange="getComproom()">
-                    <option value="">请选择</option>
+                    <option value="">未指定</option>
                 </select>
 
                 <script>
@@ -107,13 +107,21 @@
                 </script>
 
                 <select class="form-control location-select-item" id="comproom_code" name="comproom_code">
-                    <option value="">请选择</option>
+                    <option value="">未指定</option>
                 </select>
 
                 <script>
                     $("#comproom_code").change(function () {
                         var options = $("#comproom_code option:selected");
                         $.cookie('opinion3', options.text(), {expires: 1, path: '/'});
+                        alert("您已选择: " + options.text() + ". 即将跳转到相应界面...");
+                        if(options.index() !== 0){
+                            $('#second-page').css('display', 'block');
+                            $('#first-page').css('display', 'none');
+                        } else {
+                            $('#second-page').css('display', 'none');
+                            $('#first-page').css('display', 'block');
+                        }
                     })
                 </script>
 
@@ -312,8 +320,8 @@
             dataType: "json",
             success: function (data) {
 
-                $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-                $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                $('#city_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
+                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
 
                 var obj = eval("(" + data + ")");
                 for (var i = 0; i < obj.length; i++) {
@@ -346,10 +354,13 @@
             success: function (data) {
                 var list = data.allcomputerroom;
 
-                $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
                 for (var i = 0; i < list.length; i++) {
-                    if (list[i].rname == opinion3)
+                    if (list[i].rname == opinion3) {
                         $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
+                        $('#second-page').css('display', 'block');
+                        $('#first-page').css('display', 'none');
+                    }
                     else
                         $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                 }
