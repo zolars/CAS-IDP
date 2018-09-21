@@ -46,21 +46,32 @@
 <!--登陆认证拦截-->
 <script src="js/jquery-3.3.1.js"></script>
 <script src="js/jquery.cookie.js"></script>
-<script>
-    function getUrlParam(name) {
-        var reg = new RegExp(name); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-        if (r != null) return true;
-        return false; //返回参数值
-    }
 
-    if (!$.cookie('login')) {
+<%
+    String userid = (String)session.getAttribute("userid");
+    if(userid == null) {
+%>
+<script>
         alert('您还未登录或您的认证已过期, 请先登陆.');
-        window.location.href = 'http://localhost:8082/';
-    } else if (!getUrlParam('prov=')) {
-        window.location.href = 'http://localhost:8082/province.jsp?prov=' + $.cookie('province_name');
-    }
+        window.location.href = 'http://localhost:8082/index.jsp';
 </script>
+<%
+    } else {
+%>
+<script>
+        function getUrlParam(name) {
+            var reg = new RegExp(name); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return true;
+            return false; //返回参数值
+        }
+        if (!getUrlParam('prov=')) {
+            window.location.href = 'http://localhost:8082/province.jsp?prov=' + $.cookie('province_name');
+        }
+</script>
+<%
+    }
+%>
 
 <header id="header" class="media">
     <a href="" id="menu-toggle"></a>

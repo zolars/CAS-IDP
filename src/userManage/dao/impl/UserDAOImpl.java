@@ -29,10 +29,7 @@ public class UserDAOImpl implements UserDAO {
         List<User> list = hbsessionDao.search(
                 "FROM User where uname = '" + user.getUname() + "' and password = '" + user.getPassword() + "'");
 
-        if (list != null && list.size() > 0) {
-            return true;
-        }
-        return false;
+        return (list != null && list.size() > 0);
     }
 
     public String getUserId(User user){
@@ -116,7 +113,6 @@ public class UserDAOImpl implements UserDAO {
 
         return prov.getPbname();
     }
-
 
     public String getCityBankName(String cbid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();

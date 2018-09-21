@@ -44,6 +44,7 @@
         <mapping class="hibernatePOJO.PowerparmMonitor"/>
         <mapping class="hibernatePOJO.PowersxdyMonitor"/>
         <mapping class="hibernatePOJO.PowerxbMonitor"/>
+        <mapping class="hibernatePOJO.TemperatureMonitor"/>
         <mapping class="hibernatePOJO.ProvinceBank"/>
         <mapping class="hibernatePOJO.Roles"/>
         <mapping class="hibernatePOJO.RolesPermission"/>
@@ -53,6 +54,7 @@
         <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
         <mapping resource="hibernatePOJO/CaptureSetting.hbm.xml"/>
+        <mapping resource="hibernatePOJO/CaptureSettingTemp.hbm.xml"/>
         <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>
         <mapping resource="hibernatePOJO/Computerroom.hbm.xml"/>
         <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
@@ -70,6 +72,7 @@
         <mapping resource="hibernatePOJO/PowerparmMonitor.hbm.xml"/>
         <mapping resource="hibernatePOJO/PowersxdyMonitor.hbm.xml"/>
         <mapping resource="hibernatePOJO/PowerxbMonitor.hbm.xml"/>
+        <mapping resource="hibernatePOJO/TemperatureMonitor.hbm.xml"/>
         <mapping resource="hibernatePOJO/ProvinceBank.hbm.xml"/>
         <mapping resource="hibernatePOJO/Roles.hbm.xml"/>
         <mapping resource="hibernatePOJO/RolesPermission.hbm.xml"/>

@@ -3,6 +3,11 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+
+<%
+    session.invalidate(); //注销
+%>
+
 <!-- 引入struts的标签库-->
 <%@ taglib uri="/struts-tags" prefix="s" %>
 
@@ -24,17 +29,19 @@
 
 <body>
 
-<%
-    session.invalidate(); //注销
-%>
-
 <script src="js/jquery-3.3.1.js"></script>
 <script src="js/jquery.cookie.js"></script>
 
+<!--清除所有cookies-->
 <script>
-    $.cookie('login', false, {expires: -1, path: '/'});
-    $.cookie('province_name', false, {expires: -1, path: '/'});
-    $.cookie('JSESSIONID', false, {expires: -1, path: '/'});
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
 </script>
 
 <table width="900" height="400" border="0" align="center">
