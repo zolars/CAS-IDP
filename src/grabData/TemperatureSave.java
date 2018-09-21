@@ -15,7 +15,6 @@ public class TemperatureSave {
     //存各个监测点的实时数据String
     private static Map<String, TemperatureMonitor> tempDataMap = new HashMap<>();
 
-
     // 使用modbus协议读取数据并直接存储
     public static void tempSave(String did, Map<String, Float> dataset) {
         // tempDataMap.put(did, JSON.toJSONString(dataset));//存成字符串 ???

@@ -55,7 +55,7 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // System.out.println("Recv:"+ByteBufUtil.hexDump(recMsg));
+        // System.out.println("Recv:" + ByteBufUtil.hexDump(recMsg));
 
         ByteBuf buf = (ByteBuf) msg;
         recMsg.writeBytes(buf);
@@ -107,8 +107,6 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
 
         String data = ByteBufUtil.hexDump(buf);
 
-        // System.out.println(data.substring(0,4) + " : " + data.substring(4,8));
-
         float temperatureInt = Integer.parseInt(data.substring(0,4), 16);
         float humidityInt = Integer.parseInt(data.substring(4,8), 16);
 
@@ -117,6 +115,6 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
 
         map.put("temperature", temperature);
         map.put("humidity",humidity);
-        // System.out.println("temperature: " + temperature + " humidity" + humidity);
+        System.out.println("temperature: " + temperature + " humidity: " + humidity);
     }
 }

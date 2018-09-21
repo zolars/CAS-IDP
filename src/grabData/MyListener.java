@@ -27,43 +27,40 @@ public class MyListener implements ServletContextListener {
             public void run() {
                 System.out.println("Begin to MyListener.........");
                 HBSessionDaoImpl hbSessionDao = new HBSessionDaoImpl();
-                //从数据库取监测点的配置信息(IP,port等)
+
+                //从数据库取每种设备的配置信息(IP,port等)
                 List<Devices> list = hbSessionDao.search("FROM Devices");
+
                 //从数据库中读取字典，datlist<map<String, Int>>类型
                 //diclist为第一个字典，dicpluslist为第二个索引字典
                 DataOnline.setDic(hbSessionDao.search("FROM Dictionary"));
                 DataOnline.setDicPlus(hbSessionDao.search("FROM DictionaryPlus"));
 
-                //从数据库读取温度检测仪器配置信息(IP, port等)
-                List<Devices> list_temp = hbSessionDao.search("FROM Devices");
-
-
-                if (null != list || null != list_temp) {
+                if (null != list) {
                     //创建取实时数据和暂态数据的client
                     for (Devices c : list) {
-                        try {
-                            System.out.println("创建取实时数据连接 " +
-                                    "监测点(" + c.getDid() + ") " +
-                                    c.getiPaddress() + ":" + c.getPort());
-                            new DataOnlineClient(c.getiPaddress(), Integer.parseInt(c.getPort()), c.getDid()).start();
-                            System.out.println("创建取暂态事件连接 " +
-                                    "监测点(" + c.getDid() + ") " +
-                                    c.getiPaddress() + ":" + c.getPort());
-                            new TransientClient(c.getiPaddress(), Integer.parseInt(c.getPort()), c.getDid()).start();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    //创建取温度数据的client
-                    for (Devices d : list_temp) {
-                        try {
-                            System.out.println("创建取实时数据连接 " +
-                                    "温度监测点(" + d.getDid() + ") " +
-                                    d.getiPaddress() + ":" + d.getPort());
-                            new TempDataClient(d.getiPaddress(), Integer.parseInt(d.getPort()), d.getDid()).start();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        if (c.getType().equals("IDP")) {
+                            try {
+                                System.out.println("创建取实时数据连接 " +
+                                        "监测点(" + c.getDid() + ") " +
+                                        c.getiPaddress() + ":" + c.getPort());
+                                new DataOnlineClient(c.getiPaddress(), Integer.parseInt(c.getPort()), c.getDid()).start();
+                                System.out.println("创建取暂态事件连接 " +
+                                        "监测点(" + c.getDid() + ") " +
+                                        c.getiPaddress() + ":" + c.getPort());
+                                new TransientClient(c.getiPaddress(), Integer.parseInt(c.getPort()), c.getDid()).start();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else if (c.getType().equals("temp")) {
+                            try {
+                                System.out.println("创建取实时数据连接 " +
+                                        "温度监测点(" + c.getDid() + ") " +
+                                        c.getiPaddress() + ":" + c.getPort());
+                                new TempDataClient(c.getiPaddress(), Integer.parseInt(c.getPort()), c.getDid()).start();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                     //创建任务调度
@@ -71,6 +68,7 @@ public class MyListener implements ServletContextListener {
                         Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
                         //设置任务，每5s存一次实时数据
                         //设置任务，检测告警（越线）事件
+                        System.out.println(list.get(0).getOnlineinterval());
                         Trigger trigger1 = newTrigger()
                                 .withIdentity("DataOnlineSaveTrigger", "DataOnlineSaveTriggerGroup")
                                 .startNow()
@@ -139,10 +137,10 @@ public class MyListener implements ServletContextListener {
 
                         //设置任务，每10分钟存一次温度实时数据
                         Trigger trigger6 = newTrigger()
-                               .withIdentity("TemperatureSaveTrigger", "TemperatureSaveTriggerGroup")
+                                .withIdentity("TemperatureSaveTrigger", "TemperatureSaveTriggerGroup")
                                 .startNow()
                                 .withSchedule(simpleSchedule()
-                                        .withIntervalInMinutes(Integer.parseInt(list_temp.get(0).getOnlineinterval()))
+                                        .withIntervalInMinutes(Integer.parseInt(list.get(1).getOnlineinterval()))
                                         .repeatForever())
                                 .build();
                         JobDetail job6 = newJob(TemperatureSaveJob.class)
