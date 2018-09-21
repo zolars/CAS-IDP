@@ -2,7 +2,7 @@ package grabData;
 
 import Util.HBSessionDaoImpl;
 import com.alibaba.fastjson.JSON;
-import hibernatePOJO.CaptureSetting;
+import hibernatePOJO.Devices;
 import hibernatePOJO.EventPower;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -23,7 +23,7 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
        // this.did=did;
 
         HBSessionDaoImpl hbSessionDao=new HBSessionDaoImpl();
-        List<CaptureSetting> list=hbSessionDao.search("FROM CaptureSetting");
+        List<Devices> list=hbSessionDao.search("FROM Devices");
         this.did = list.get(0).getDid();
 
     }

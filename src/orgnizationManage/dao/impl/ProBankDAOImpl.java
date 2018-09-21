@@ -1,13 +1,8 @@
 package orgnizationManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
+import hibernatePOJO.*;
 import orgnizationManage.dao.ProBankDAO;
-import hibernatePOJO.ProvinceBank;
-import hibernatePOJO.CityBank;
-import hibernatePOJO.Computerroom;
-import hibernatePOJO.DeviceAlarmUser;
-import hibernatePOJO.Devices;
-import hibernatePOJO.DevicesThreshold;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

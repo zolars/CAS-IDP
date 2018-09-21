@@ -4,12 +4,9 @@ package userManage.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import hibernatePOJO.CityBank;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.CityDAO;
-import userManage.dao.RolesDAO;
 import userManage.dao.impl.CityDAOImpl;
-import userManage.dao.impl.RolesDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

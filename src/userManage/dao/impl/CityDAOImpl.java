@@ -3,7 +3,6 @@ package userManage.dao.impl;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.CityBank;
 import hibernatePOJO.ProvinceBank;
-import hibernatePOJO.Roles;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
