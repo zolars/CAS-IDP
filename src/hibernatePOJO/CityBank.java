@@ -1,15 +1,14 @@
 package hibernatePOJO;
 
-import javax.persistence.Entity;
 import java.util.Objects;
 
-@Entity
-@javax.persistence.Table(name = "city_bank", schema = "test", catalog = "")
 public class CityBank {
     private String cbid;
+    private String cbname;
+    private String compRoom;
+    private String didset;
+    private String tempset;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "cbid", nullable = false, length = 255)
     public String getCbid() {
         return cbid;
     }
@@ -18,10 +17,6 @@ public class CityBank {
         this.cbid = cbid;
     }
 
-    private String cbname;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "cbname", nullable = true, length = 255)
     public String getCbname() {
         return cbname;
     }
@@ -30,16 +25,28 @@ public class CityBank {
         this.cbname = cbname;
     }
 
-    private String compRoom;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "compRoom", nullable = true, length = 255)
     public String getCompRoom() {
         return compRoom;
     }
 
     public void setCompRoom(String compRoom) {
         this.compRoom = compRoom;
+    }
+
+    public String getDidset() {
+        return didset;
+    }
+
+    public void setDidset(String didset) {
+        this.didset = didset;
+    }
+
+    public String getTempset() {
+        return tempset;
+    }
+
+    public void setTempset(String tempset) {
+        this.tempset = tempset;
     }
 
     @Override
@@ -49,12 +56,14 @@ public class CityBank {
         CityBank cityBank = (CityBank) o;
         return Objects.equals(cbid, cityBank.cbid) &&
                 Objects.equals(cbname, cityBank.cbname) &&
-                Objects.equals(compRoom, cityBank.compRoom);
+                Objects.equals(compRoom, cityBank.compRoom) &&
+                Objects.equals(didset, cityBank.didset) &&
+                Objects.equals(tempset, cityBank.tempset);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(cbid, cbname, compRoom);
+        return Objects.hash(cbid, cbname, compRoom, didset, tempset);
     }
 }

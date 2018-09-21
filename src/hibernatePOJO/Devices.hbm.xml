@@ -38,5 +38,14 @@
         <property name="isPlartform">
             <column name="isPlartform" sql-type="int(11)" not-null="true"/>
         </property>
+        <property name="onlineinterval">
+            <column name="onlineinterval" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="thansentinterval">
+            <column name="thansentinterval" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="uploadinterval">
+            <column name="uploadinterval" sql-type="varchar(255)" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

@@ -1125,11 +1125,11 @@ public class EventDAOImpl implements EventDAO {
         boolean rt = false;
 
         //若是已设置过的did的记录，则更新这条记录；否则，插入一条记录
-        CaptureSetting caps = (CaptureSetting)hbsessionDao.getFirst(
+        Devices caps = (Devices)hbsessionDao.getFirst(
                 "FROM CaptureSetting where did='"+ did + "'");
 
         if(caps != null){
-            String hql = "update CaptureSetting cs set cs.onlineinterval='" + onlineinterval + ",' cs.tansentinterval='" + tansentinterval +
+            String hql = "update Devices cs set cs.onlineinterval='" + onlineinterval + ",' cs.tansentinterval='" + tansentinterval +
                     ",' cs.upload='" + upload + ",' cs.ip='" + ip +  ",' cs.onlineport='" + onlineport +  ",' cs.tansentport='" + tansentport +
                     "' where cs.did='" + did + "'";
 
@@ -1137,14 +1137,14 @@ public class EventDAOImpl implements EventDAO {
         }
 
         else {
-            CaptureSetting cs = new CaptureSetting();
-            cs.setIp(ip);
-            cs.setPort1(Integer.parseInt(onlineport));
-            cs.setPort2(Integer.parseInt(tansentport));
+            Devices cs = new Devices();
+            cs.setiPaddress(ip);
+            cs.setPort(onlineport);
+            cs.setExtra(tansentport);
 
-            cs.setOnlineinterval(Integer.parseInt(onlineinterval));
-            cs.setThansentinterval(Integer.parseInt(tansentinterval));
-            cs.setUploadinterval(Integer.parseInt(upload));
+            cs.setOnlineinterval(onlineinterval);
+            cs.setThansentinterval(tansentinterval);
+            cs.setUploadinterval(upload);
 
             cs.setDid(did);
 
