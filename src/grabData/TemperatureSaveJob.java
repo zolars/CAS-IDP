@@ -27,6 +27,12 @@ public class TemperatureSaveJob implements Job {
                 TemperatureMonitor tempData = tempDataMap.get(did);
                 //实时数据存入数据库
                 if(tempData.getDid() !=  null)
+                    System.out.println(
+                            tempData.getDid() + " | " +
+                            tempData.getHumidity() + " | " +
+                            tempData.getTemperature() + " | " +
+                            tempData.getTime()
+                    );
                     hbsessionDao.insert(tempData);
             }
         }

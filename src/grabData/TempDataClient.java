@@ -19,6 +19,7 @@ public class TempDataClient extends Thread{
         this.host=host;
         this.port=port;
         this.did=did;
+        System.out.println(host + port + did);
     }
     @Override
     public void run(){

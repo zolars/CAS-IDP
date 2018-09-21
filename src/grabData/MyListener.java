@@ -26,6 +26,7 @@ public class MyListener implements ServletContextListener {
         Thread dataThread = new Thread() {
             @Override
             public void run() {
+                System.out.println("Begin to MyListener.........");
                 HBSessionDaoImpl hbSessionDao = new HBSessionDaoImpl();
                 //从数据库取监测点的配置信息(IP,port等)
                 List<CaptureSetting> list = hbSessionDao.search("FROM CaptureSetting");
@@ -43,16 +44,16 @@ public class MyListener implements ServletContextListener {
                     for (CaptureSetting c : list) {
                         try {
                             System.out.println("创建取实时数据连接 " +
-                                    "监测点(" + c.getDid() + ") " +
-                                    c.getIp() + ":" + c.getPort1());
-                            new DataOnlineClient(c.getIp(), c.getPort1(), c.getDid()).start();
-                            System.out.println("创建取暂态事件连接 " +
-                                    "监测点(" + c.getDid() + ") " +
-                                    c.getIp() + ":" + c.getPort2());
-                            new TransientClient(c.getIp(), c.getPort2(), c.getDid()).start();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                                "监测点(" + c.getDid() + ") " +
+                                c.getIp() + ":" + c.getPort1());
+                        new DataOnlineClient(c.getIp(), c.getPort1(), c.getDid()).start();
+                        System.out.println("创建取暂态事件连接 " +
+                                "监测点(" + c.getDid() + ") " +
+                                c.getIp() + ":" + c.getPort2());
+                        new TransientClient(c.getIp(), c.getPort2(), c.getDid()).start();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     }
 
                     //创建取温度数据的client
@@ -142,7 +143,7 @@ public class MyListener implements ServletContextListener {
                                .withIdentity("TemperatureSaveTrigger", "TemperatureSaveTriggerGroup")
                                 .startNow()
                                 .withSchedule(simpleSchedule()
-                                        .withIntervalInMinutes(list_temp.get(0).getOnlineinterval())
+                                        .withIntervalInSeconds(list_temp.get(0).getOnlineinterval())
                                         .repeatForever())
                                 .build();
                         JobDetail job6 = newJob(TemperatureSaveJob.class)

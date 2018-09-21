@@ -2,6 +2,7 @@ package grabData;
 
 import hibernatePOJO.*;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
@@ -28,12 +29,11 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("Temp建立连接");
 
-        String address = ctx.channel().remoteAddress().toString().replace("/", "");
+        // String address = ctx.channel().remoteAddress().toString().replace("/", "");
         // System.out.println("ip+端口为：" + address + "开始建立通讯");
 
-        ByteBuf sendMsg = ctx.alloc().buffer(8);
-
-        sendMsg.writeBytes(createMsg());
+        ByteBuf sendMsg = ctx.alloc().buffer();
+        sendMsg.writeBytes(createMsg(1,3,1,2));
         // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
@@ -55,6 +55,8 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        // System.out.println("Recv:"+ByteBufUtil.hexDump(recMsg));
+
         ByteBuf buf = (ByteBuf) msg;
         recMsg.writeBytes(buf);
         buf.release();
@@ -67,10 +69,11 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
 
         TemperatureSave.tempSave(did, map);
 
-        ByteBuf sendMsg = ctx.alloc().buffer(8);
+        // return;
 
-        sendMsg.writeBytes(createMsg());
-        // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
+        ByteBuf sendMsg = ctx.alloc().buffer();
+        sendMsg.writeBytes(createMsg(1,3,1,2));
+        // System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
@@ -82,25 +85,38 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     //readLength单位是2字节
-    public byte[] createMsg() {
-        byte[] msg = "10300001000295CB".getBytes();
+    public byte[] createMsg(int slaveId,int functionCode,int address,int readLength){
+        byte[] msg = new byte[12];
+        msg[0] = 0;
+        msg[1] = 0;
+        msg[2] = 0;
+        msg[3] = 0;
+        msg[4] = 0;
+        msg[5] = 6;
+        msg[6] = ((byte)slaveId);
+        msg[7] = ((byte)functionCode);
+        msg[8] = ((byte)(address >> 8));
+        msg[9] = ((byte)(address & 0xFF));
+        msg[10] = ((byte)(readLength >> 8));
+        msg[11] = ((byte)(readLength & 0xFF));
         return msg;
     }
 
-    public static int byteArrayToInt(byte[] b) {
-        return   b[3] & 0xFF |
-                (b[2] & 0xFF) << 8 |
-                (b[1] & 0xFF) << 16 |
-                (b[0] & 0xFF) << 24;
-    }
-
-
     public void dataResolve(ByteBuf buf) {
-        byte[] temperatureByte = {buf.getByte(3), buf.getByte(4)};
-        byte[] humidityByte = {buf.getByte(5), buf.getByte(6)};
-        float temperature = (float) byteArrayToInt(temperatureByte) / 10;
-        float humidity = (float) byteArrayToInt(humidityByte) / 10;
+        buf.skipBytes(9);//跳过前9个字节，与数据无关
+
+        String data = ByteBufUtil.hexDump(buf);
+
+        // System.out.println(data.substring(0,4) + " : " + data.substring(4,8));
+
+        float temperatureInt = Integer.parseInt(data.substring(0,4), 16);
+        float humidityInt = Integer.parseInt(data.substring(4,8), 16);
+
+        float temperature = temperatureInt / 10;
+        float humidity = humidityInt / 10;
+
         map.put("temperature", temperature);
         map.put("humidity",humidity);
+        // System.out.println("temperature: " + temperature + " humidity" + humidity);
     }
 }
