@@ -48,26 +48,27 @@
 <script src="js/jquery.cookie.js"></script>
 
 <%
-    String userid = (String)session.getAttribute("userid");
-    if(userid == null) {
+    String userid = (String) session.getAttribute("userid");
+    if (userid == null) {
 %>
 <script>
-        alert('您还未登录或您的认证已过期, 请先登陆.');
-        window.location.href = 'http://localhost:8082/index.jsp';
+    alert('您还未登录或您的认证已过期, 请先登陆.');
+    window.location.href = 'http://localhost:8082/index.jsp';
 </script>
 <%
-    } else {
+} else {
 %>
 <script>
-        function getUrlParam(name) {
-            var reg = new RegExp(name); //构造一个含有目标参数的正则表达式对象
-            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-            if (r != null) return true;
-            return false; //返回参数值
-        }
-        if (!getUrlParam('prov=')) {
-            window.location.href = 'http://localhost:8082/province.jsp?prov=' + $.cookie('province_name');
-        }
+    function getUrlParam(name) {
+        var reg = new RegExp(name); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return true;
+        return false; //返回参数值
+    }
+
+    if (!getUrlParam('prov=')) {
+        window.location.href = 'http://localhost:8082/province.jsp?prov=' + $.cookie('province_name');
+    }
 </script>
 <%
     }
@@ -86,9 +87,9 @@
                 </select>
 
                 <script>
-                    $("#province_code").change(function(){
+                    $("#province_code").change(function () {
                         var options = $("#province_code option:selected");
-                        $. cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion1', options.text(), {expires: 1, path: '/'});
                     })
                 </script>
 
@@ -98,9 +99,9 @@
                 </select>
 
                 <script>
-                    $("#city_code").change(function(){
+                    $("#city_code").change(function () {
                         var options = $("#city_code option:selected");
-                        $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion2', options.text(), {expires: 1, path: '/'});
                     })
 
                 </script>
@@ -110,9 +111,9 @@
                 </select>
 
                 <script>
-                    $("#comproom_code").change(function(){
+                    $("#comproom_code").change(function () {
                         var options = $("#comproom_code option:selected");
-                        $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion3', options.text(), {expires: 1, path: '/'});
                     })
                 </script>
 
@@ -235,16 +236,26 @@
         </div>
 
         <div id="second-page" style="display: none;">
-            <table style="width: 80%; height: 60%">
-                <tr style="width: 80%; height: 50%">
-                    <td style="width: 33%; height: 100%;"><button onclick="openPowerImg()">打开一张配电系统图</button></td>
-                    <td style="width: 33%; height: 100%"></td>
-                    <td style="width: 33%; height: 100%"></td>
-                </tr>
-                <tr style="width: 80%; height: 50%">
-                    <td style="width: 33%; height: 100%">温度</td>
-                    <td style="width: 33%; height: 100%">湿度</td>
-                    <td style="width: 33%; height: 100%">电能质量评估</td>
+
+            <div style="width: 50%; height: 30%;">
+                <div class="col-md-2 col-xs-6" style="width: 33%; height: 100%;">
+                    <button onclick="openPowerImg()">打开一张配电系统图</button>
+                </div>
+                <div class="col-md-2 col-xs-6"></div>
+                <div class="col-md-2 col-xs-6"></div>
+            </div>
+            <table>
+                <tr>
+                    <td style="width:60%; height: 200px;">
+                        <div id="tempbar" style="width:250%; height: 200px;">
+                        </div>
+                    </td>
+
+                    <td style="width:70%; height: 200px;">
+                        <div id="humidbar" style="width:250%; height: 200px;">
+                        </div>
+                    </td>
+
                 </tr>
             </table>
         </div>
@@ -267,7 +278,7 @@
     /*加载省下拉选*/
 
     //读取cookie中已存的机房配置
-    var opinion1 = $. cookie('province_name');
+    var opinion1 = $.cookie('province_name');
 
     $.ajax({
         type: "post",
@@ -289,7 +300,7 @@
         var pname = $("#province_code").val();
 
         //读取cookie中已存的机房配置
-        var opinion2 = $. cookie('opinion2');
+        var opinion2 = $.cookie('opinion2');
 
         $("#city_code").empty();
         $("#comproom_code").empty();
@@ -306,7 +317,7 @@
 
                 var obj = eval("(" + data + ")");
                 for (var i = 0; i < obj.length; i++) {
-                    if(obj[i].cbname == opinion2) {
+                    if (obj[i].cbname == opinion2) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
                         getComproom();
                     }
@@ -323,7 +334,7 @@
         var cname = $("#city_code").val();
 
         //读取cookie中已存的机房配置
-        var opinion3 = $. cookie('opinion3');
+        var opinion3 = $.cookie('opinion3');
 
         $("#comproom_code").empty();
 
@@ -337,7 +348,7 @@
 
                 $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                 for (var i = 0; i < list.length; i++) {
-                    if(list[i].rname == opinion3)
+                    if (list[i].rname == opinion3)
                         $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
                     else
                         $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
@@ -355,6 +366,8 @@
     var alarmChart = echarts.init(document.getElementById('alarmbar'));
     var nxChart = echarts.init(document.getElementById('nxbar'));
     var nhChart = echarts.init(document.getElementById('nhbar'));
+    var tempChart = echarts.init(document.getElementById('tempbar'));
+    var humidChart = echarts.init(document.getElementById('humidbar'));
 
     var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
     var pname = decodeURI(provinceidc[1]);
@@ -379,6 +392,8 @@
             var xdata = [];
             var eventdata = [];
             var alarmdata = [];
+            var tempdata = [26, 26, 26, 25.5];
+            var humiddata = [50, 40, 35, 30 ];
             var degree = [];
 
             for (var i = 0; i < list.length; i++) {
@@ -477,11 +492,57 @@
                 }]
             };
 
+            var tempoption = {
+                title: {
+                    text: '温度',
+                    subtext: '温度监测',
+                },
+                tooltip: {},
+                xAxis: {
+                    data: xdata
+                },
+                yAxis: {},
+                series: [{
+                    name: '数值',
+                    type: 'bar',
+                    itemStyle: {
+                        normal: {
+                            color: '#3EA3D8'
+                        }
+                    },
+                    data: tempdata
+                }]
+            };
+
+            var humidoption = {
+                title: {
+                    text: '湿度',
+                    subtext: '湿度监测',
+                },
+                tooltip: {},
+                xAxis: {
+                    data: xdata
+                },
+                yAxis: {},
+                series: [{
+                    name: '数值',
+                    type: 'bar',
+                    itemStyle: {
+                        normal: {
+                            color: '#3EA3D8'
+                        }
+                    },
+                    data: humiddata
+                }]
+            };
+
             // 使用刚指定的配置项和数据显示图表。
             eventChart.setOption(eventoption);
             alarmChart.setOption(alarmoption);
             nxChart.setOption(nxoption);
             nhChart.setOption(nhoption);
+            tempChart.setOption(tempoption);
+            humidChart.setOption(humidoption);
 
             // 显示评估等级
             var table = $("#assesstable");
@@ -499,7 +560,7 @@
     });
 
     //点击某个柱状图，进入该分行的页面
-    eventChart.on('click', function(){
+    eventChart.on('click', function () {
         $('#second-page').css('display', 'block');
         $('#first-page').css('display', 'none');
 
@@ -612,7 +673,7 @@
 </script>
 
 <script type="text/javascript">
-    function openPowerImg(){
+    function openPowerImg() {
         alert("请选择一张图片");
 
     }
