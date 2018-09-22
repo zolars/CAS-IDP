@@ -26,6 +26,7 @@
         <mapping class="hibernatePOJO.AssessRecord"/>
         <mapping class="hibernatePOJO.CityBank"/>
         <mapping class="hibernatePOJO.Computerroom"/>
+        <mapping class="hibernatePOJO.CtrlMonitor"/>
         <mapping class="hibernatePOJO.Devices"/>
         <mapping class="hibernatePOJO.DeviceAlarmUser"/>
         <mapping class="hibernatePOJO.DevicesThreshold"/>
@@ -53,6 +54,7 @@
         <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
         <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>
         <mapping resource="hibernatePOJO/Computerroom.hbm.xml"/>
+        <mapping resource="hibernatePOJO/CtrlMonitor.hbm.xml"/>
         <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
         <mapping resource="hibernatePOJO/DeviceAlarmUser.hbm.xml"/>
         <mapping resource="hibernatePOJO/DevicesThreshold.hbm.xml"/>
