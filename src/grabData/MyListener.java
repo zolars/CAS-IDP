@@ -88,7 +88,8 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("transientRequestTrigger", "transientRequestTriggerGroup")
                                 .startNow()
                                 .withSchedule(simpleSchedule()
-                                        .withIntervalInMinutes(Integer.parseInt(list.get(0).getThansentinterval()))
+                                        .withIntervalInMinutes(1)
+//                                        .withIntervalInMinutes(Integer.parseInt(list.get(0).getThansentinterval()))
                                         .repeatForever())
                                 .build();
                         JobDetail job2 = newJob(TransientRequestJob.class)

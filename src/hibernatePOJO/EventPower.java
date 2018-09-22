@@ -5,14 +5,13 @@ import java.util.Objects;
 
 public class EventPower {
     private int teid;
+    private int cid;
+    private double value;
+    private Double limit;
+    private Integer status;
     private String did;
     private Timestamp time;
-    private int eventtype;
-    private int type;
-    private int subtype;
     private int duration;
-    private double value;
-    private String discription;
     private String signature;
     private String annotation;
 
@@ -22,6 +21,38 @@ public class EventPower {
 
     public void setTeid(int teid) {
         this.teid = teid;
+    }
+
+    public int getCid() {
+        return cid;
+    }
+
+    public void setCid(int cid) {
+        this.cid = cid;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public Double getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Double limit) {
+        this.limit = limit;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getDid() {
@@ -40,52 +71,12 @@ public class EventPower {
         this.time = time;
     }
 
-    public int getEventtype() {
-        return eventtype;
-    }
-
-    public void setEventtype(int eventtype) {
-        this.eventtype = eventtype;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getSubtype() {
-        return subtype;
-    }
-
-    public void setSubtype(int subtype) {
-        this.subtype = subtype;
-    }
-
     public int getDuration() {
         return duration;
     }
 
     public void setDuration(int duration) {
         this.duration = duration;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    public String getDiscription() {
-        return discription;
-    }
-
-    public void setDiscription(String discription) {
-        this.discription = discription;
     }
 
     public String getSignature() {
@@ -110,14 +101,13 @@ public class EventPower {
         if (o == null || getClass() != o.getClass()) return false;
         EventPower that = (EventPower) o;
         return teid == that.teid &&
-                eventtype == that.eventtype &&
-                type == that.type &&
-                subtype == that.subtype &&
-                duration == that.duration &&
+                cid == that.cid &&
                 Double.compare(that.value, value) == 0 &&
+                duration == that.duration &&
+                Objects.equals(limit, that.limit) &&
+                Objects.equals(status, that.status) &&
                 Objects.equals(did, that.did) &&
                 Objects.equals(time, that.time) &&
-                Objects.equals(discription, that.discription) &&
                 Objects.equals(signature, that.signature) &&
                 Objects.equals(annotation, that.annotation);
     }
@@ -125,6 +115,6 @@ public class EventPower {
     @Override
     public int hashCode() {
 
-        return Objects.hash(teid, did, time, eventtype, type, subtype, duration, value, discription, signature, annotation);
+        return Objects.hash(teid, cid, value, limit, status, did, time, duration, signature, annotation);
     }
 }

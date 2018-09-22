@@ -131,14 +131,9 @@ public class DeviceDAOImpl implements DeviceDAO {
         DevicesThreshold dt = new DevicesThreshold();
         dt.setDid(did);
         dt.setDtid(dtid);
-        dt.setName(name);
-        dt.setType(type);
         dt.setUnit(unit);
-        dt.setStandardval(standval);
         dt.setCellval(cellval);
         dt.setFloorval(floorval);
-        dt.setIsMark(ismark);
-        dt.setAlarmcontent(alarmcontent);
 
         rt = hbsessionDao.insert(dt);
         return rt;
@@ -182,8 +177,6 @@ public class DeviceDAOImpl implements DeviceDAO {
         dt.setId(imaxid.toString());
         dt.setDid(did);
         dt.setUid(uid);
-        dt.setStime(tstime);
-        dt.setEtime(tetime);
 
         rt = hbsessionDao.insert(dt);
         return rt;

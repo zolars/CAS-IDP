@@ -41,7 +41,7 @@ public class alarmModelJob implements Job {
         if(alrmtranslist != null){
             for(int i = 0; i < alrmtranslist.size(); i++){
                 String did = alrmtranslist.get(i).getDid();
-                String msgstr = alrmtranslist.get(i).getDiscription();
+                String msgstr = "";//alrmtranslist.get(i).getAnnotation();
 
                 List<Object> allist = new ArrayList<>();
 
