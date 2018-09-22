@@ -13,4 +13,21 @@ public interface OrgnizationDAO {
 
     public Boolean delComputerroomOrgnization(String rid);
 
+    public Boolean updateProvinceOrgnization(String pbid, String name);
+
+    public Boolean updateCityOrgnization(String cbid, String name);
+
+    public Boolean updateComputerroomOrgnization(String rid, String name);
+
+    public Boolean addProvinceOrgnization(String pbid, String province);
+
+    public Boolean addCityOrgnization(String cbid, String city);
+
+    public Boolean addComputerroomOrgnizationUnderHeadBank(String orgid, String computerroom);
+
+    public Boolean addComputerroomOrgnizationUnderProvinceBank(String orgid, String computerroom);
+
+    public Boolean addComputerroomOrgnizationUnderCityBank(String orgid, String computerroom);
+
+
 }

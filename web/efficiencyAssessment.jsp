@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="row">
                     <table>
                         <tr>
-                            <td>红色</td> <td>大于</td>
+                            红色黄色等级阈值
                             <select class="form-control location-select-item" id="red_yellow" name="red_yellow">
                                 <option value="90">90</option>
                                 <option value="80">80</option>
@@ -136,13 +136,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </select>
                         </tr>
 
-                        <tr>
-                            <td>黄色</td>
-                        </tr>
+                        <tr></tr><tr></tr><tr></tr>
 
                         <tr>
-                            <td>绿色</td> <td>小于</td>
-
+                            黄色绿色等级阈值
                             <select class="form-control location-select-item" id="yellow_green" name="yellow_green">
                                 <option value="60">60</option>
                                 <option value="50">50</option>
@@ -151,13 +148,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <option value="20">20</option>
                                 <option value="10">10</option>
                             </select>
-
                         </tr>
 
                         <tr>
                             <td>时间：一天内</td>
                         </tr>
-
 
                     </table>
 

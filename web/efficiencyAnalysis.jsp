@@ -1471,9 +1471,9 @@
     //初始化cookie中的列
     $(document).ready(function() {
         $. cookie('row1-name', '测量名称', {expires: 1, path: '/'});
-        $. cookie('row1-val', '100', {expires: 1, path: '/'});
-       /* $. cookie('row2-name', '时间', {expires: 1, path: '/'});
-        $. cookie('row2-val', '132', {expires: 1, path: '/'});*/
+        $. cookie('row1-val', '100', {ea'j'x'axpires: 1, path: '/'});
+        $. cookie('row2-name', '时间', {expires: 1, path: '/'});
+        $. cookie('row2-val', '132', {expires: 1, path: '/'});
         $. cookie('row3-name', '类型', {expires: 1, path: '/'});
         $. cookie('row3-val', '50', {expires: 1, path: '/'});
         $. cookie('row4-name', '触发相位', {expires: 1, path: '/'});

@@ -663,6 +663,22 @@
              </result>
          </action>
 
+         <action name="updateOrgnizationTree" class="systemMng.action.updateOrgnizationTreeAction">
+             <!--updateOrgnizationTree -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="addOrgnizationTree" class="systemMng.action.addOrgnizationTreeAction">
+             <!--addOrgnizationTree -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
      </package>
 
 </struts>
