@@ -1,0 +1,65 @@
+.location-select-item {
+    width: 120px;
+    margin-right: 12px;
+}
+#header {
+    margin-top: 0;
+    border: 0;
+}
+.pull-left {
+    margin-right: 0!important;
+    padding-right: 0!important;
+}
+.header-right-text {
+    height: 34px;
+    line-height: 34px;
+}
+.header-logout {
+    color: #0ba0e1;
+}
+fieldset {
+    width: 100%;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 15px;
+}
+.form-group {
+    display: inline-block;
+    vertical-align: middle;
+    width: 260px;
+    margin-left: 0!important;
+    margin-right: 20px!important;
+    margin-bottom: 0!important;
+}
+.form_datetime {
+    width: 200px;
+    float: right;
+}
+.control-label {
+    padding: 0;
+    display: inline;
+    float: left;
+}
+#refresh-btn {
+    display: inline-block;
+    vertical-align: middle;
+}
+.chart-item {
+    background: rgba(255, 255, 255, 0.3);
+    margin: 20px;
+
+}
+.chart-item-title {
+    text-align: start;
+    font-weight: bold;
+    font-size: 19px;
+    color: #333333;
+}
+.header-left {
+    float: left;
+}
+.header-right {
+    width: calc(100% - 180px);
+    float: right;
+    height: 50px;
+    padding: 10px 20px;
+}

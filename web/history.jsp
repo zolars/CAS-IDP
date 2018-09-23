@@ -29,6 +29,7 @@
     <link href="css/menu.css" rel="stylesheet">
     <link href="css/mycss.css" rel="stylesheet">
     <link href="css/jstree-default/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/header.css">
 
 </head>
 
@@ -51,10 +52,11 @@
 %>
 
 <header id="header" class="media">
-    <a href="" id="menu-toggle"></a>
-    <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
-
-    <div class="media-body">
+    <div class="header-left">
+        <a href="" id="menu-toggle"></a>
+        <a class="logo pull-left" href="province.jsp">IDP数据中心</a>
+    </div>
+    <div class="header-right">
         <div class="media" id="top-menu">
             <div class="pull-left location-select">
                 <select class="form-control location-select-item" id="province_code" name="province_code"
@@ -97,11 +99,10 @@
 
 
             <!-- 注销按钮 -->
-            <div class="pull-right">
-                <li><a href="index.jsp">注销</a></li>
+            <div class="pull-right header-right-text">
+                <a class="header-logout" href="index.jsp">注销</a>
             </div>
-
-            <div class="pull-right">欢迎用户${username}登录</div>
+            <div class="pull-right header-right-text">欢迎用户${username}登录</div>
 
         </div>
     </div>

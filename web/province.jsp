@@ -32,12 +32,14 @@
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/pick-pcc.min.1.0.1.css"/>
     <link rel="stylesheet" href="css/mycss.css">
+    <link rel="stylesheet" href="css/header.css">
 
     <!-- bootstrap datepicker时间选择控件 -->
     <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
     <!-- jquery -->
     <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+
 
 </head>
 
@@ -74,10 +76,11 @@
 %>
 
 <header id="header" class="media">
-    <a href="" id="menu-toggle"></a>
-    <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
-
-    <div class="media-body">
+    <div class="header-left">
+        <a href="" id="menu-toggle"></a>
+        <a class="logo pull-left" href="province.jsp">IDP数据中心</a>
+    </div>
+    <div class="header-right">
         <div class="media" id="top-menu">
             <div class="pull-left location-select">
                 <select class="form-control location-select-item" id="province_code" name="province_code"
@@ -120,11 +123,10 @@
 
 
             <!-- 注销按钮 -->
-            <div class="pull-right">
-                <li><a href="index.jsp">注销</a></li>
+            <div class="pull-right header-right-text">
+                <a class="header-logout" href="index.jsp">注销</a>
             </div>
-
-            <div class="pull-right">欢迎用户${username}登录</div>
+            <div class="pull-right header-right-text">欢迎用户${username}登录</div>
 
         </div>
     </div>
@@ -151,84 +153,67 @@
 
             <!-- Time choose -->
             <div class="row">
-                <div class="col-md-4">
-                    <div class="container">
-                        <form action="" class="form-horizontal" role="form">
-                            <fieldset>
-                                <div class="form-group">
-                                    <label for="dtp_input1" class="col-md-2 control-label">开始日期</label>
-                                    <div class="input-group date form_datetime col-md-5"
-                                         data-date="2018-07-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p"
-                                         data-link-field="dtp_input1">
-                                        <input id="firstDate" class="form-control" size="16" type="text"
-                                               value="2018-01-01 00:00:00" readonly>
-                                        <span class="input-group-addon"><span
-                                                class="glyphicon glyphicon-th"></span></span>
-                                    </div>
-                                    <input type="hidden" id="dtp_input1" value=""/><br/>
+                <div class="container">
+                    <form action="" class="form-horizontal" role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="dtp_input1" class="control-label">开始日期</label>
+                                <div class="input-group date form_datetime"
+                                     data-date="2018-07-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p"
+                                     data-link-field="dtp_input1">
+                                    <input id="firstDate" class="form-control" size="16" type="text"
+                                           value="2018-01-01 00:00:00" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-th"></span></span>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="dtp_input2" class="col-md-2 control-label">结束日期</label>
-                                    <div class="input-group date form_datetime col-md-5"
-                                         data-date="2019-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p"
-                                         data-link-field="dtp_input1">
-                                        <input id="lastDate" class="form-control" size="16" type="text"
-                                               value="2018-12-01 00:00:00" readonly>
-                                        <span class="input-group-addon"><span
-                                                class="glyphicon glyphicon-th"></span></span>
-                                    </div>
-                                    <input type="hidden" id="dtp_input2" value=""/><br/>
-                                </div>
-
-                            </fieldset>
-
-                            <!-- 刷新按钮 -->
-                            <div class="row">
-                                <button id="refresh-btn" class="btn btn-primary" data-loading-text="Loading..."
-                                        type="button"> 刷新
-                                </button>
-                                <script>
-                                    $(document).ready(function () {
-                                        $("#refresh-btn").click(function () {
-                                            $(this).button('loading').delay(500).queue(function () {
-                                                alert("刷新成功!");
-                                                $(this).button('reset');
-                                                $(this).dequeue();
-                                            });
-                                        });
-                                    });
-                                </script>
+                                <input type="hidden" id="dtp_input1" value=""/><br/>
                             </div>
 
-                        </form>
-                    </div>
+                            <div class="form-group">
+                                <label for="dtp_input2" class="control-label">结束日期</label>
+                                <div class="input-group date form_datetime"
+                                     data-date="2019-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p"
+                                     data-link-field="dtp_input1">
+                                    <input id="lastDate" class="form-control" size="16" type="text"
+                                           value="2018-12-01 00:00:00" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input2" value=""/><br/>
+                            </div>
+                            <!-- 刷新按钮 -->
+                            <button id="refresh-btn" class="btn btn-primary" data-loading-text="Loading..."
+                                    type="button"> 刷新
+                            </button>
+                        </fieldset>
+
+                    </form>
                 </div>
             </div>
 
             <div class="row">
 
-                <div id="eventbar" class="col-md-2 col-xs-6" style="width:30%; height: 200px;">
+                <div id="eventbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
                 </div>
 
-                <div id="alarmbar" class="col-md-2 col-xs-6" style="width:30%; height: 200px;">
+                <div id="alarmbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
                 </div>
 
-                <div id="assessbar" class="col-md-2 col-xs-6" style="width:30%; height: 200px;text-align:center">
-                    <h>评估结果</h>
+                <div id="assessbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;text-align:center">
+                    <div class="chart-item-title">评估结果</div>
                     <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
                     </table>
                 </div>
             </div>
 
             <div class="row">
-                <div id="nxbar" class="col-md-2 col-xs-6" style="width:30%; height: 200px;">
+                <div id="nxbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
                 </div>
 
-                <div id="nhbar" class="col-md-2 col-xs-6" style="width:30%; height: 200px;">
+                <div id="nhbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
                 </div>
 
-                <div id="nullbar" class="col-md-2 col-xs-6" style="width:30%; height: 200px;">
+                <div id="nullbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
                 </div>
             </div>
 
@@ -261,6 +246,18 @@
 
 <!-- All JS functions -->
 <script src="js/functions.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#refresh-btn").click(function () {
+            $(this).button('loading').delay(500).queue(function () {
+                alert("刷新成功!");
+                $(this).button('reset');
+                $(this).dequeue();
+            });
+        });
+    });
+</script>
 
 <!-- 省\市\机房下拉菜单-->
 <script type="text/javascript">

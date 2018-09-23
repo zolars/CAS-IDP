@@ -33,6 +33,7 @@
     <link href="css/menu.css" rel="stylesheet">
     <link href="css/mycss.css" rel="stylesheet">
     <link href="css/jstree-default/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/header.css">
 
     <style>
         .outer {
@@ -60,6 +61,20 @@
         .tips-item:hover {
             background: #4e7bff;
         }
+        #userinfotable {
+            width: 100%;
+        }
+        .item-container {
+            width: 100%;
+        }
+        .item-btn-container {
+            width: 100%;
+            padding: 20px;
+        }
+        .item-btn-item {
+            width: 70px;
+
+        }
     </style>
 </head>
 
@@ -83,10 +98,11 @@
 <script Language="JavaScript" src="js/onlineDataInterface.js"></script>
 
 <header id="header" class="media">
-    <a href="" id="menu-toggle"></a>
-    <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
-
-    <div class="media-body">
+    <div class="header-left">
+        <a href="" id="menu-toggle"></a>
+        <a class="logo pull-left" href="province.jsp">IDP数据中心</a>
+    </div>
+    <div class="header-right">
         <div class="media" id="top-menu">
             <div class="pull-left location-select">
                 <select class="form-control location-select-item" id="province_code" name="province_code"
@@ -127,12 +143,12 @@
 
             </div>
 
-            <!-- 注销按钮 -->
-            <div class="pull-right">
-                <li><a href="index.jsp">注销</a></li>
-            </div>
 
-            <div class="pull-right">欢迎用户${username}登录</div>
+            <!-- 注销按钮 -->
+            <div class="pull-right header-right-text">
+                <a class="header-logout" href="index.jsp">注销</a>
+            </div>
+            <div class="pull-right header-right-text">欢迎用户${username}登录</div>
 
         </div>
     </div>
@@ -186,55 +202,28 @@
                         </li>
                     </ul>
 
-                    <div id="item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                    <div id="item1" class="col-md-2 col-xs-6 item-container">
                         <div class="block-area" id="defaultStyle">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="tile">
                                         <h2 class="tile-title">账号信息</h2>
-                                        <table id="userinfotablehead">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    <div style="width:10px;"></div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:50px;">账号</div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:50px;">姓名</div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:260px;">组织</div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:100px;">角色</div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:150px;">联系方式</div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:150px;">公务手机</div>
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                        </table>
-                                        <table id="userinfotable"></table>
-
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                        <div class="btn-group item-btn-container">
+                                            <button type="button" class="btn-sm btn-primary item-btn-item"
                                                     onClick="getALLUserInfomation()">查询
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                            <button type="button" class="btn-sm btn-success item-btn-item"
                                                     onclick="showAddUserModal()">新增
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                            <button type="button" class="btn-sm btn-danger item-btn-item"
                                                     onClick="deleteUserInfomation()">删除
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                            <button type="button" class="btn-sm btn-default item-btn-item"
                                                     onclick="showUpdateUserModal()">修改
                                             </button>
                                         </div>
+
+                                        <table id="userinfotable"></table>
                                     </div>
                                 </div>
                             </div>
@@ -1624,6 +1613,7 @@
                 var list = obj;
                 var table = $("#userinfotable");
                 table.empty();
+                table.append('<tr><td><div style="width:10px;"></div></td><td><div style="width:50px;">账号</div></td><td><div style="width:50px;">姓名</div></td><td><div style="width:260px;">组织</div></th><td><div style="widtd:100px;">角色</div></td><td><div style="width:150px;">联系方式</div></td><td> <div style="width:150px;">公务手机</div></td></tr>');
 
                 for (var key in list) {
                     var len = list[key].length;
