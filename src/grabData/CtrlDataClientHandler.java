@@ -13,13 +13,6 @@ import java.util.List;
 class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
     private List<Dictionary_Ctrl> dic = null;
 
-    private int[] id = new int[22];
-    private int[] functioncode = new int[22];
-    private int[] addr = new int[22];
-    private String[] description = new String[643];
-    private String[] forTrue = new String[643];
-    private String[] forFalse = new String[643];
-
     private ByteBuf recMsg = null;
 
     //监测点id
@@ -34,18 +27,9 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
         System.out.println("Ctrl建立连接");
         dic = CtrlSave.getDic();
 
-        for (int i = 0; i < dic.size(); i++) {
-            id[i] = dic.get(i).getId();
-            functioncode[i] = dic.get(i).getFunctioncode();
-            addr[i] = dic.get(i).getAddr();
-            description[i] = dic.get(i).getDescription();
-            forTrue[i] = dic.get(i).getForTrue();
-            forFalse[i] = dic.get(i).getForFalse();
-        }
-
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(1, 3, 1, 2));
-        // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
+        sendMsg.writeBytes(createMsg(1, 1, 4, 32));
+        System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
@@ -78,12 +62,13 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
         dataResolve(recMsg);
         recMsg.clear();
 
-        CtrlSave.ctrlSave(did, map);
+        // TODO: 2018/9/23 0023
+        // CtrlSave.ctrlSave(did, /* String */ );
 
         // return;
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(1, 3, 1, 2));
+        sendMsg.writeBytes(createMsg(1, 1, 4, 32));
         // System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
@@ -114,9 +99,23 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void dataResolve(ByteBuf buf) {
+        int count = 4;
         buf.skipBytes(9);//跳过前9个字节，与数据无关
-
         String data = ByteBufUtil.hexDump(buf);
+        for (int i = 0; i < data.length(); i += 2) {
+            String binary = Integer.toBinaryString(
+                    Integer.valueOf(data.substring(i, i + 2), 16)
+            );
+
+            for (int j = 0; j < binary.length(); j++) {
+                if (binary.length() - j >= 0) {
+                    if(binary.charAt(binary.length() - j) == '1')
+                        CtrlSave.ctrlSave(did, count + j);
+                    System.out.println(count + j);
+                }
+            }
+            count += 8;
+        }
 
     }
 }

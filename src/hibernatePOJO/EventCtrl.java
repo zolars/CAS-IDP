@@ -7,19 +7,21 @@ import java.util.Objects;
 @Entity
 @Table(name = "event_ctrl", schema = "test", catalog = "")
 public class EventCtrl {
-    private int ppid;
+    private int id;
     private String did;
     private Timestamp time;
-    private String event;
+    private int eventType;
+    private String description;
+    private String alarm;
 
     @Id
-    @Column(name = "ppid", nullable = false)
-    public int getPpid() {
-        return ppid;
+    @Column(name = "id", nullable = false)
+    public int getId() {
+        return id;
     }
 
-    public void setPpid(int ppid) {
-        this.ppid = ppid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -43,28 +45,51 @@ public class EventCtrl {
     }
 
     @Basic
-    @Column(name = "event", nullable = true)
-    public String getEvent() {
-        return event;
+    @Column(name = "eventType", nullable = true)
+    public int getEventType() {
+        return eventType;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
+    public void setEventType(int eventType) {
+        this.eventType = eventType;
     }
+
+    @Basic
+    @Column(name = "description", nullable = true)
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Basic
+    @Column(name = "alarm", nullable = true)
+    public String getAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(String alarm) {
+        this.alarm = alarm;
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventCtrl that = (EventCtrl) o;
-        return ppid == that.ppid &&
+        return id == that.id &&
                 Objects.equals(did, that.did) &&
                 Objects.equals(time, that.time) &&
-                Objects.equals(event, that.event);
+                Objects.equals(eventType, that.eventType) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(alarm, that.alarm);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ppid, did, time, event);
+        return Objects.hash(id, did, time, eventType, description, alarm);
     }
 }
