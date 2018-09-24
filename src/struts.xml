@@ -519,6 +519,30 @@
              </result>
          </action>
 
+         <action name="getEnvironmentEvent" class="efficiencyAnalysis.action.getEnvironmentEventAction">
+             <!--getEnvironmentEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getDetailEvironmentEventtemp" class="efficiencyAnalysis.action.getDetailEvironmentEventtempAction">
+             <!--getEnvironmentEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getDetailEvironmentEventwet" class="efficiencyAnalysis.action.getDetailEvironmentEventwetAction">
+             <!--getEnvironmentEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="getDetailPowerEventlytx" class="efficiencyAnalysis.action.getDetailPowerEventlytxAction">
              <!--getDetailPowerEventlytx -->
              <result name="failure">/failure.jsp</result>
@@ -560,7 +584,7 @@
          </action>
 
          <action name="setAssessmentInfo" class="efficiencyAnalysis.action.setAssessmentInfoAction">
-             <!--getEnvironmentEvent -->
+             <!--setAssessmentInfo -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>

@@ -698,11 +698,6 @@
                         <div class="col-md-5">
                             <table>
                                 <tr>
-                                    <td>设备名称</td>
-                                </tr>
-                            </table>
-                            <table>
-                                <tr>
                                     <td>实时数据采集频率：</td>
                                     <td><input type="text" class="form-control setting-input" id="onlineinterval-input"></td>
                                     <td>单位（秒）</td>
@@ -718,19 +713,8 @@
                                     <td>单位（小时）</td>
                                 </tr>
                                 <tr>
-                                    <td>实时数据IP地址</td>
-                                    <td><input type="text" class="form-control setting-input" id="ip1"></td>
-                                    <td><input type="text" class="form-control setting-input" id="ip2"></td>
-                                    <td><input type="text" class="form-control setting-input" id="ip3"></td>
-                                    <td><input type="text" class="form-control setting-input" id="ip4"></td>
+                                    <button class="btn-default" onclick="captureSettingOk()">确定</button>
                                 </tr>
-                                <tr>
-                                    <td>实时数据端口号</td>
-                                    <td><input type="text" class="form-control setting-input" id="onlineport"></td>
-                                    <td>暂态事件端口号</td>
-                                    <td><input type="text" class="form-control setting-input" id="tansentport"></td>
-                                </tr>
-                                <button onclick="captureSettingOk()">确定</button>
                             </table>
                         </div>
                     </div>
@@ -3050,15 +3034,7 @@
 
         var onlineinterval = $('#onlineinterval-input').val();
         var tansentinterval = $('#tansentinterval-input').val();
-        var upload = $('#upload-input').val();
-
-        var ip1 = $('#ip1').val();
-        var ip2 = $('#ip2').val();
-        var ip3 = $('#ip3').val();
-        var ip4 = $('#ip4').val();
-
-        var onlineport = $('#onlineport').val();
-        var tansentport = $('#tansentport').val();
+        var uploadinterval = $('#upload-input').val();
 
         $.ajax({
             type: "post",
@@ -3066,14 +3042,7 @@
             data: {
                 onlineinterval: onlineinterval,
                 tansentinterval: tansentinterval,
-                upload: upload,
-                ip1: ip1,
-                ip2: ip2,
-                ip3: ip3,
-                ip4: ip4,
-                onlineport: onlineport,
-                tansentport: tansentport,
-                did: 2
+                uploadinterval: uploadinterval
             },
             dataType: "json",
             success: function (data) {

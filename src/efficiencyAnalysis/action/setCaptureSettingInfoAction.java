@@ -27,7 +27,7 @@ public class setCaptureSettingInfoAction extends ActionSupport {
     }
 
 
-    /* 设置数据上传时效、端口号、ip等信息
+    /* 设置数据上传时效等信息
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -37,22 +37,11 @@ public class setCaptureSettingInfoAction extends ActionSupport {
 
             String onlineinterval = request.getParameter("onlineinterval");
             String tansentinterval = request.getParameter("tansentinterval");
-            String upload = request.getParameter("upload");
-            String ip1 = request.getParameter("ip1");
-            String ip2 = request.getParameter("ip2");
-            String ip3 = request.getParameter("ip3");
-            String ip4 = request.getParameter("ip4");
-            String onlineport = request.getParameter("onlineport");
-            String tansentport = request.getParameter("tansentport");
-            String did = request.getParameter("did");
-
-            String ip = ip1 + "." + ip2 + "." + ip3 + "." + ip4;
+            String uploadinterval = request.getParameter("uploadinterval");
 
             EventDAO dao = new EventDAOImpl();
 
-            List<EventPower> pedata = new ArrayList();
-
-            boolean rt = dao.setCaptrueSettingInfo(onlineinterval, tansentinterval, upload, ip, onlineport, tansentport, did);
+            boolean rt = dao.setCaptrueSettingInfo(onlineinterval, tansentinterval, uploadinterval);
             JSONObject jsonObject = new JSONObject();
 
             if(rt)

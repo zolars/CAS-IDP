@@ -22,11 +22,6 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
 
     public TransientClientHandler(String did) {
         this.did=did;
-
-      /*  HBSessionDaoImpl hbSessionDao=new HBSessionDaoImpl();
-        List<Devices> list=hbSessionDao.search("FROM Devices");
-        this.did = list.get(0).getDid();*/
-
     }
 
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
@@ -94,6 +89,7 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
+
     public void dataResolve(HBSessionDaoImpl hbsessionDao, EventPower e){
         EventsType et = (EventsType)hbsessionDao.getFirst("FROM EventsType where subtype='"+ e.getSubtype() +"'");
         Integer cid = et.getCid();

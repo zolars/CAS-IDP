@@ -25,14 +25,15 @@
         <!-- 持久化类所对应的映射文件 -->
         <mapping class="hibernatePOJO.AssessmentSetting"/>
         <mapping class="hibernatePOJO.AssessRecord"/>
+        <mapping class="hibernatePOJO.BasicSetting"/>
         <mapping class="hibernatePOJO.CityBank"/>
         <mapping class="hibernatePOJO.Computerroom"/>
-        <mapping class="hibernatePOJO.CtrlMonitor"/>
         <mapping class="hibernatePOJO.Devices"/>
         <mapping class="hibernatePOJO.DeviceAlarmUser"/>
         <mapping class="hibernatePOJO.DevicesThreshold"/>
         <mapping class="hibernatePOJO.Dictionary"/>
         <mapping class="hibernatePOJO.DictionaryPlus"/>
+        <mapping class="hibernatePOJO.EventCtrl"/>
         <mapping class="hibernatePOJO.EventPower"/>
         <mapping class="hibernatePOJO.EventsType"/>
         <mapping class="hibernatePOJO.Knowledge"/>
@@ -50,14 +51,15 @@
 
         <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
+        <mapping resource="hibernatePOJO/BasicSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>
         <mapping resource="hibernatePOJO/Computerroom.hbm.xml"/>
-        <mapping resource="hibernatePOJO/CtrlMonitor.hbm.xml"/>
         <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
         <mapping resource="hibernatePOJO/DeviceAlarmUser.hbm.xml"/>
         <mapping resource="hibernatePOJO/DevicesThreshold.hbm.xml"/>
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
+        <mapping resource="hibernatePOJO/EventCtrl.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventPower.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventsType.hbm.xml"/>
         <mapping resource="hibernatePOJO/Knowledge.hbm.xml"/>
@@ -72,6 +74,8 @@
         <mapping resource="hibernatePOJO/User.hbm.xml"/>
         <mapping resource="hibernatePOJO/UserRoles.hbm.xml"/>
         <mapping resource="hibernatePOJO/OrgnizationStructure.hbm.xml"/>
+        <mapping resource="hibernatePOJO/EventEnvironment.hbm.xml"/>
+
 
     </session-factory>
 </hibernate-configuration>

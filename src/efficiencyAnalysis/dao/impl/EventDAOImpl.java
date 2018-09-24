@@ -73,10 +73,11 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"'";
             try {
+                System.out.println(sql);
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -86,7 +87,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -150,8 +151,8 @@ public class EventDAOImpl implements EventDAO {
 
         for(int i = 0; i < didset.length; i++ ){
 
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "'";
             try {
                 ps = db.getPs(sql);
@@ -162,7 +163,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     if(maxtime.compareTo(rs.getString("time")) < 0){ //若当前取的数据时间更新
@@ -184,6 +185,7 @@ public class EventDAOImpl implements EventDAO {
         }
         return rtlist;
     }
+
 
     //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-浪涌塌陷
     //带有时间范围
@@ -225,9 +227,11 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type in (1,2)";
+
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -238,7 +242,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -300,9 +304,9 @@ public class EventDAOImpl implements EventDAO {
 
         for(int i = 0; i < didset.length; i++ ){
 
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
-                    + "' and ta.did ='" + didset[i] + "' and tb.type in (1,2)";
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] +"' and tb.type in (1,2)";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -313,7 +317,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -375,9 +379,11 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type in (5,6)";
+
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -388,7 +394,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -450,8 +456,8 @@ public class EventDAOImpl implements EventDAO {
 
         for(int i = 0; i < didset.length; i++ ){
 
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type in (5,6)";
             try {
                 ps = db.getPs(sql);
@@ -463,7 +469,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -524,9 +530,11 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type=9";
+
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -537,7 +545,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -599,9 +607,10 @@ public class EventDAOImpl implements EventDAO {
 
         for(int i = 0; i < didset.length; i++ ){
 
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
-                    + "' and ta.did ='" + didset[i] + "'and tb.type=9";
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and tb.type=9";
+
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -612,7 +621,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -673,9 +682,11 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type=3";
+
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -686,7 +697,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -748,9 +759,10 @@ public class EventDAOImpl implements EventDAO {
 
         for(int i = 0; i < didset.length; i++ ){
 
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type=3";
+
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -761,7 +773,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -822,9 +834,11 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type=8";
+
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -835,7 +849,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -897,9 +911,10 @@ public class EventDAOImpl implements EventDAO {
 
         for(int i = 0; i < didset.length; i++ ){
 
-            String sql = "select ta.teid as teid, tb.name as name, td.name as location, tc.name as type, ta.value as discription, ta.time as time " +
-                    "from event_power ta,events_type tb,eventtype_power tc,devices td where ta.type = tb.type and ta.subtype = tc.eid and td.did ='"+ didset[i]
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type=8";
+
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -910,7 +925,462 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
 
-                    list.add(rs.getString("discription"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件
+    //带有时间范围
+    public List getLocalAllEnvironmentEvent(String cbname, String starttime, String endtime){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"'";
+            try {
+                System.out.println(sql);
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件
+    //返回最近一条事件记录
+    public List getLocalLastEnvironmentEvent(String cbname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        String maxtime = "0000-00-00 00:00:00.0";
+
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "'";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    if(maxtime.compareTo(rs.getString("time")) < 0){ //若当前取的数据时间更新
+                        maxtime = rs.getString("time");
+                        rtlist.clear();
+                        rtlist.add(list.toString());
+                    }
+                }
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-温度
+    //带有时间范围
+    public List getLocalAllDetailEnvironmentEventtemp(String cbname, String starttime, String endtime){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type=11";
+
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-温度
+    //返回最近一条事件记录
+    public List getLocalLastDetailEnvironmentEventtemp(String cbname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] +"' and tb.type=11";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-湿度
+    //带有时间范围
+    public List getLocalAllDetailEnvironmentEventwet(String cbname, String starttime, String endtime){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type=12";
+
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
+                    list.add(rs.getString("time"));
+
+                    rtlist.add(list.toString());
+                }
+
+            }catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return rtlist;
+    }
+
+    //根据市行名称查询机房id的集合，再根据机房id查询设备id的集合，再根据设备id查询事件-湿度
+    //返回最近一条事件记录
+    public List getLocalLastDetailEnvironmentEventwet(String cbname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Computerroom> didlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
+
+        String didstr = "";
+
+        //根据市行名称查询机房id的集合
+        CityBank cb = new CityBank();
+        cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname+ "'");
+
+        //再根据机房id查询设备id的集合
+        String comstr = cb.getCompRoom();
+        String comidset[] = comstr.split("，");
+
+
+        for(int i = 0; i < comidset.length; i++){
+
+            Computerroom cp = new Computerroom();
+            cp = (Computerroom)hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + comidset[i]+ "'");
+
+            String str = cp.getDidset();
+            str += ",";
+            didstr += str;
+        }
+
+        //再根据设备id查询事件
+        String didset[] = didstr.split(",");
+
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+
+        for(int i = 0; i < didset.length; i++ ){
+
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
+                    + "' and ta.did ='" + didset[i] +"' and tb.type=12";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    List list = new ArrayList();
+                    list.add(rs.getString("teid"));
+                    list.add(rs.getString("name"));
+                    list.add(rs.getString("location"));
+                    list.add(rs.getString("type"));
+
+                    list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
 
                     rtlist.add(list.toString());
@@ -1119,38 +1589,16 @@ public class EventDAOImpl implements EventDAO {
         return rt;
     }
 
-    public boolean setCaptrueSettingInfo(String onlineinterval, String tansentinterval, String upload, String ip, String onlineport, String tansentport, String did){
+    public boolean setCaptrueSettingInfo(String onlineinterval, String thansentinterval, String uploadinterval){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
-        //若是已设置过的did的记录，则更新这条记录；否则，插入一条记录
-        Devices caps = (Devices)hbsessionDao.getFirst(
-                "FROM CaptureSetting where did='"+ did + "'");
+        String hql = "update BasicSetting bs set bs.onlineinterval=" + onlineinterval + ", bs.thansentinterval=" + thansentinterval +
+                ", bs.uploadinterval=" + uploadinterval + " where bs.id=0";
 
-        if(caps != null){
-            String hql = "update Devices cs set cs.onlineinterval='" + onlineinterval + ",' cs.tansentinterval='" + tansentinterval +
-                    ",' cs.upload='" + upload + ",' cs.ip='" + ip +  ",' cs.onlineport='" + onlineport +  ",' cs.tansentport='" + tansentport +
-                    "' where cs.did='" + did + "'";
+        rt = hbsessionDao.update(hql);
 
-            rt = hbsessionDao.update(hql);
-        }
-
-        else {
-            Devices cs = new Devices();
-            cs.setiPaddress(ip);
-            cs.setPort(onlineport);
-            cs.setExtra(tansentport);
-
-            cs.setOnlineinterval(onlineinterval);
-            cs.setThansentinterval(tansentinterval);
-            cs.setUploadinterval(upload);
-
-            cs.setDid(did);
-
-            rt = hbsessionDao.insert(cs);
-
-        }
         return rt;
     }
 

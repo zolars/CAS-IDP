@@ -24,7 +24,7 @@
         <!-- 持久化类所对应的映射文件 -->
         <mapping class="hibernatePOJO.AssessmentSetting"/>
         <mapping class="hibernatePOJO.AssessRecord"/>
-        <mapping class="hibernatePOJO.CaptureSetting"/>
+        <mapping class="hibernatePOJO.BasicSetting"/>
         <mapping class="hibernatePOJO.CityBank"/>
         <mapping class="hibernatePOJO.Computerroom"/>
         <mapping class="hibernatePOJO.Devices"/>
@@ -32,25 +32,25 @@
         <mapping class="hibernatePOJO.DevicesThreshold"/>
         <mapping class="hibernatePOJO.Dictionary"/>
         <mapping class="hibernatePOJO.DictionaryPlus"/>
+        <mapping class="hibernatePOJO.EventCtrl"/>
         <mapping class="hibernatePOJO.EventPower"/>
         <mapping class="hibernatePOJO.EventsType"/>
-        <mapping class="hibernatePOJO.EventtypeDevice"/>
-        <mapping class="hibernatePOJO.EventtypeEnvironment"/>
-        <mapping class="hibernatePOJO.EventtypePower"/>
         <mapping class="hibernatePOJO.Knowledge"/>
         <mapping class="hibernatePOJO.Permission"/>
         <mapping class="hibernatePOJO.PowerparmMonitor"/>
         <mapping class="hibernatePOJO.PowersxdyMonitor"/>
         <mapping class="hibernatePOJO.PowerxbMonitor"/>
+        <mapping class="hibernatePOJO.TemperatureMonitor"/>
         <mapping class="hibernatePOJO.ProvinceBank"/>
         <mapping class="hibernatePOJO.Roles"/>
         <mapping class="hibernatePOJO.RolesPermission"/>
         <mapping class="hibernatePOJO.User"/>
         <mapping class="hibernatePOJO.UserRoles"/>
+        <mapping class="hibernatePOJO.OrgnizationStructure"/>
 
         <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
-        <mapping resource="hibernatePOJO/CaptureSetting.hbm.xml"/>
+        <mapping resource="hibernatePOJO/BasicSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>
         <mapping resource="hibernatePOJO/Computerroom.hbm.xml"/>
         <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
@@ -58,21 +58,22 @@
         <mapping resource="hibernatePOJO/DevicesThreshold.hbm.xml"/>
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
+        <mapping resource="hibernatePOJO/EventCtrl.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventPower.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventsType.hbm.xml"/>
-        <mapping resource="hibernatePOJO/EventtypeDevice.hbm.xml"/>
-        <mapping resource="hibernatePOJO/EventtypeEnvironment.hbm.xml"/>
-        <mapping resource="hibernatePOJO/EventtypePower.hbm.xml"/>
         <mapping resource="hibernatePOJO/Knowledge.hbm.xml"/>
         <mapping resource="hibernatePOJO/Permission.hbm.xml"/>
         <mapping resource="hibernatePOJO/PowerparmMonitor.hbm.xml"/>
         <mapping resource="hibernatePOJO/PowersxdyMonitor.hbm.xml"/>
         <mapping resource="hibernatePOJO/PowerxbMonitor.hbm.xml"/>
+        <mapping resource="hibernatePOJO/TemperatureMonitor.hbm.xml"/>
         <mapping resource="hibernatePOJO/ProvinceBank.hbm.xml"/>
         <mapping resource="hibernatePOJO/Roles.hbm.xml"/>
         <mapping resource="hibernatePOJO/RolesPermission.hbm.xml"/>
         <mapping resource="hibernatePOJO/User.hbm.xml"/>
         <mapping resource="hibernatePOJO/UserRoles.hbm.xml"/>
+        <mapping resource="hibernatePOJO/OrgnizationStructure.hbm.xml"/>
+        <mapping resource="hibernatePOJO/EventEnvironment.hbm.xml"/>
 
 
     </session-factory>
