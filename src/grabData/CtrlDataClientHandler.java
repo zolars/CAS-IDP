@@ -1,43 +1,38 @@
 package grabData;
 
-import hibernatePOJO.*;
+import hibernatePOJO.Dictionary_Ctrl;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-class TempDataClientHandler extends ChannelInboundHandlerAdapter {
-    private Map<String, Float> map = null;
+
+class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
+    private List<Dictionary_Ctrl> dic = null;
 
     private ByteBuf recMsg = null;
 
     //监测点id
     private String did = "";
 
-    public TempDataClientHandler(String did) {
+    public CtrlDataClientHandler(String did) {
         this.did = did;
-        this.map = new HashMap<String, Float>();
-        TemperatureSave.getTempDataMap().put(did, new TemperatureMonitor()); //把实时数据map的引用存起来
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("Temp建立连接");
-
-        // String address = ctx.channel().remoteAddress().toString().replace("/", "");
-        // System.out.println("ip+端口为：" + address + "开始建立通讯");
+        System.out.println("Ctrl建立连接");
+        dic = CtrlSave.getDic();
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(1,3,1,2));
-        // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
+        sendMsg.writeBytes(createMsg(1, 1, 4, 32));
+        System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
-}
+    }
 
 
     @Override
@@ -67,12 +62,13 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
         dataResolve(recMsg);
         recMsg.clear();
 
-        TemperatureSave.tempSave(did, map);
+        // TODO: 2018/9/23 0023
+        // CtrlSave.ctrlSave(did, /* String */ );
 
         // return;
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(1,3,1,2));
+        sendMsg.writeBytes(createMsg(1, 1, 4, 32));
         // System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
@@ -85,7 +81,7 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     //readLength单位是2字节
-    public byte[] createMsg(int slaveId,int functionCode,int address,int readLength){
+    public byte[] createMsg(int slaveId, int functionCode, int address, int readLength) {
         byte[] msg = new byte[12];
         msg[0] = 0;
         msg[1] = 0;
@@ -93,28 +89,33 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
         msg[3] = 0;
         msg[4] = 0;
         msg[5] = 6;
-        msg[6] = ((byte)slaveId);
-        msg[7] = ((byte)functionCode);
-        msg[8] = ((byte)(address >> 8));
-        msg[9] = ((byte)(address & 0xFF));
-        msg[10] = ((byte)(readLength >> 8));
-        msg[11] = ((byte)(readLength & 0xFF));
+        msg[6] = ((byte) slaveId);
+        msg[7] = ((byte) functionCode);
+        msg[8] = ((byte) (address >> 8));
+        msg[9] = ((byte) (address & 0xFF));
+        msg[10] = ((byte) (readLength >> 8));
+        msg[11] = ((byte) (readLength & 0xFF));
         return msg;
     }
 
     public void dataResolve(ByteBuf buf) {
+        int count = 4;
         buf.skipBytes(9);//跳过前9个字节，与数据无关
-
         String data = ByteBufUtil.hexDump(buf);
+        for (int i = 0; i < data.length(); i += 2) {
+            String binary = Integer.toBinaryString(
+                    Integer.valueOf(data.substring(i, i + 2), 16)
+            );
 
-        float temperatureInt = Integer.parseInt(data.substring(0,4), 16);
-        float humidityInt = Integer.parseInt(data.substring(4,8), 16);
+            for (int j = 0; j < binary.length(); j++) {
+                if (binary.length() - j >= 0) {
+                    if(binary.charAt(binary.length() - j) == '1')
+                        CtrlSave.ctrlSave(did, count + j);
+                    System.out.println(count + j);
+                }
+            }
+            count += 8;
+        }
 
-        float temperature = temperatureInt / 10;
-        float humidity = humidityInt / 10;
-
-        map.put("temperature", temperature);
-        map.put("humidity",humidity);
-        System.out.println("temperature: " + temperature + " humidity: " + humidity);
     }
 }
