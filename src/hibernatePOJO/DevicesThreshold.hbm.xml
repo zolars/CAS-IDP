@@ -12,19 +12,22 @@
             <column name="did" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="classify">
-            <column name="classify" sql-type="varchar(255)" not-null="true"/>
+            <column name="classify" sql-type="varchar(255)"/>
         </property>
         <property name="unit">
             <column name="unit" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="cellval">
-            <column name="cellval" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+            <column name="cellval" sql-type="float" precision="-1"/>
         </property>
         <property name="floorval">
-            <column name="floorval" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+            <column name="floorval" sql-type="float" precision="-1"/>
         </property>
         <property name="aid">
-            <column name="aid" sql-type="int(255)" not-null="true"/>
+            <column name="aid" sql-type="int(255)"/>
+        </property>
+        <property name="cid">
+            <column name="cid" sql-type="int(11)"/>
         </property>
     </class>
 </hibernate-mapping>

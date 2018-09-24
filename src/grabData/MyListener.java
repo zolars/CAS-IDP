@@ -48,7 +48,7 @@ public class MyListener implements ServletContextListener {
                             System.out.println("创建取暂态事件连接 " +
                                     "监测点(" + c.getDid() + ") " +
                                     c.getiPaddress() + ":" + c.getPort());
-                            new TransientClient(c.getiPaddress(), Integer.parseInt(c.getPort()), c.getDid()).start();
+                            new TransientClient(c.getiPaddress(), Integer.parseInt(c.getExtra()), c.getDid()).start();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -88,8 +88,7 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("transientRequestTrigger", "transientRequestTriggerGroup")
                                 .startNow()
                                 .withSchedule(simpleSchedule()
-                                        .withIntervalInMinutes(1)
-//                                        .withIntervalInMinutes(Integer.parseInt(list.get(0).getThansentinterval()))
+                                        .withIntervalInMinutes(Integer.parseInt(list.get(0).getThansentinterval()))
                                         .repeatForever())
                                 .build();
                         JobDetail job2 = newJob(TransientRequestJob.class)

@@ -2,12 +2,12 @@ package grabData;
 
 import Util.HBSessionDaoImpl;
 import com.alibaba.fastjson.JSON;
-import hibernatePOJO.Devices;
+
 import hibernatePOJO.EventPower;
+import hibernatePOJO.EventsType;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.socket.SocketChannel;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -59,10 +59,10 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
                 //数据存入数据库
                 TransientResponse tr=JSON.parseObject(res, TransientResponse.class);//反序列化
                 List<EventPower> events=tr.getResult();
-                if(null!=events){
+                if(events.size() > 0){
                     HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
                     for(EventPower e:events){
-                        dataResolve(e);
+                        dataResolve(hbsessionDao, e);
                         hbsessionDao.insert(e);
                     }
                     hbsessionDao=null;
@@ -94,87 +94,10 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
-    public void dataResolve(EventPower e){
-      /*  switch (e.getSubtype()){
-            case 0:e.setDiscription("未知类型");break;
-            case 1:e.setDiscription("Ua 暂降");break;
-            case 2:e.setDiscription("Ub 暂降");break;
-            case 3:e.setDiscription("Uc 暂降");break;
-            case 4:e.setDiscription("Ua 暂升");break;
-            case 5:e.setDiscription("Ub 暂升");break;
-            case 6:e.setDiscription("Uc 暂升");break;
-            case 7:e.setDiscription("Ua 短时中断");break;
-            case 8:e.setDiscription("Ub 短时中断");break;
-            case 9:e.setDiscription("Uc 短时中断");break;
-            case 10:e.setDiscription("Ua Ub 暂降");break;
-            case 11:e.setDiscription("Ub Uc 暂降");break;
-            case 12:e.setDiscription("Uc Ua 暂降");break;
-            case 13:e.setDiscription("Ua Ub Uc 暂降");break;
-            case 14:e.setDiscription("Ua Ub 暂升");break;
-            case 15:e.setDiscription("Ub Uc 暂升");break;
-            case 16:e.setDiscription("Uc Ua 暂升");break;
-            case 17:e.setDiscription("Ua Ub Uc 暂升");break;
-            case 18:e.setDiscription("Ua Ub 短时中断");break;
-            case 19:e.setDiscription("Ub Uc 短时中断");break;
-            case 20:e.setDiscription("Uc Ua 短时中断");break;
-            case 21:e.setDiscription("Ua Ub Uc 短时中断");break;
-
-            case 100:e.setDiscription("未知类型");break;
-            case 101:e.setDiscription("TBD");break;
-            case 102:e.setDiscription("频率偏差越上限");break;
-            case 103:e.setDiscription("频率偏差越下限");break;
-            case 104:e.setDiscription("TBD");break;
-            case 105:e.setDiscription("Ua 电压偏差越上限");break;
-            case 106:e.setDiscription("Ua 电压偏差越下限");break;
-            case 107:e.setDiscription("TBD");break;
-            case 108:e.setDiscription("Ub 电压偏差越上限");break;
-            case 109:e.setDiscription("Ub 电压偏差越下限");break;
-            case 110:e.setDiscription("TBD");break;
-            case 111:e.setDiscription("Uc 电压偏差越上限");break;
-            case 112:e.setDiscription("Uc 电压偏差越下限");break;
-            case 113:e.setDiscription("电压负序不平衡度越限");break;
-            case 114:e.setDiscription("TBD");break;
-            case 115:e.setDiscription("TBD");break;
-            case 116:e.setDiscription("TBD");break;
-            case 117:e.setDiscription("Ua 短时闪变越限");break;
-            case 118:e.setDiscription("Ub 短时闪变越限");break;
-            case 119:e.setDiscription("Uc 短时闪变越限");break;
-            case 120:e.setDiscription("Ua 长时闪变越限");break;
-            case 121:e.setDiscription("Ub 长时闪变越限");break;
-            case 122:e.setDiscription("Uc 长时闪变越限");break;
-            case 123:e.setDiscription("Ua 总谐波畸变率越限");break;
-            case 124:e.setDiscription("Ub 总谐波畸变率越限");break;
-            case 125:e.setDiscription("Uc 总谐波畸变率越限");break;
-            case 126:e.setDiscription("Ia 总谐波畸变率越限");break;
-            case 127:e.setDiscription("Ib 总谐波畸变率越限");break;
-            case 128:e.setDiscription("Ic 总谐波畸变率越限");break;
-            default: {
-                if(e.getSubtype() >= 129 && e.getSubtype() <= 177) {
-                    String discription = "Ua 谐波含有率越限 (" + String.valueOf(e.getSubtype() - 127) + ")";
-                    e.setDiscription(discription);
-                }
-                else if(e.getSubtype() >= 178 && e.getSubtype() <= 226) {
-                    String discription = "Ub 谐波含有率越限 (" + String.valueOf(e.getSubtype() - 176) + ")";
-                    e.setDiscription(discription);
-                }
-                else if(e.getSubtype() >= 227 && e.getSubtype() <= 275) {
-                    String discription = "Uc 谐波含有率越限 (" + String.valueOf(e.getSubtype() - 225) + ")";
-                    e.setDiscription(discription);
-                }
-                else if(e.getSubtype() >= 276 && e.getSubtype() <= 324) {
-                    String discription = "Ia 谐波有效值越限 (" + String.valueOf(e.getSubtype() - 274) + ")";
-                    e.setDiscription(discription);
-                }
-                else if(e.getSubtype() >= 325 && e.getSubtype() <= 373) {
-                    String discription = "Ib 谐波有效值越限 (" + String.valueOf(e.getSubtype() - 325) + ")";
-                    e.setDiscription(discription);
-                }
-                else if(e.getSubtype() >= 374 && e.getSubtype() <= 423) {
-                    String discription = "Ic 谐波有效值越限 (" + String.valueOf(e.getSubtype() - 372) + ")";
-                    e.setDiscription(discription);
-                }
-                break;
-            }
-        }*/
+    public void dataResolve(HBSessionDaoImpl hbsessionDao, EventPower e){
+        EventsType et = (EventsType)hbsessionDao.getFirst("FROM EventsType where subtype='"+ e.getSubtype() +"'");
+        Integer cid = et.getCid();
+        e.setDid(did);
+        e.setCid(cid);
     }
 }
