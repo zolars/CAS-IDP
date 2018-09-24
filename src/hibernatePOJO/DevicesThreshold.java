@@ -5,14 +5,11 @@ import java.util.Objects;
 public class DevicesThreshold {
     private int dtid;
     private String did;
-    private String type;
-    private String name;
+    private String classify;
     private String unit;
-    private Double standardval;
     private Double cellval;
     private Double floorval;
-    private Integer isMark;
-    private String alarmcontent;
+    private Integer aid;
 
     public int getDtid() {
         return dtid;
@@ -30,20 +27,12 @@ public class DevicesThreshold {
         this.did = did;
     }
 
-    public String getType() {
-        return type;
+    public String getClassify() {
+        return classify;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setClassify(String classify) {
+        this.classify = classify;
     }
 
     public String getUnit() {
@@ -52,14 +41,6 @@ public class DevicesThreshold {
 
     public void setUnit(String unit) {
         this.unit = unit;
-    }
-
-    public Double getStandardval() {
-        return standardval;
-    }
-
-    public void setStandardval(Double standardval) {
-        this.standardval = standardval;
     }
 
     public Double getCellval() {
@@ -78,20 +59,12 @@ public class DevicesThreshold {
         this.floorval = floorval;
     }
 
-    public Integer getIsMark() {
-        return isMark;
+    public Integer getAid() {
+        return aid;
     }
 
-    public void setIsMark(Integer isMark) {
-        this.isMark = isMark;
-    }
-
-    public String getAlarmcontent() {
-        return alarmcontent;
-    }
-
-    public void setAlarmcontent(String alarmcontent) {
-        this.alarmcontent = alarmcontent;
+    public void setAid(Integer aid) {
+        this.aid = aid;
     }
 
     @Override
@@ -101,19 +74,16 @@ public class DevicesThreshold {
         DevicesThreshold that = (DevicesThreshold) o;
         return dtid == that.dtid &&
                 Objects.equals(did, that.did) &&
-                Objects.equals(type, that.type) &&
-                Objects.equals(name, that.name) &&
+                Objects.equals(classify, that.classify) &&
                 Objects.equals(unit, that.unit) &&
-                Objects.equals(standardval, that.standardval) &&
                 Objects.equals(cellval, that.cellval) &&
                 Objects.equals(floorval, that.floorval) &&
-                Objects.equals(isMark, that.isMark) &&
-                Objects.equals(alarmcontent, that.alarmcontent);
+                Objects.equals(aid, that.aid);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(dtid, did, type, name, unit, standardval, cellval, floorval, isMark, alarmcontent);
+        return Objects.hash(dtid, did, classify, unit, cellval, floorval, aid);
     }
 }

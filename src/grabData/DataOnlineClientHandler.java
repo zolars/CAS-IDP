@@ -55,8 +55,8 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
             len[i]=dicPlus.get(i).getLength();
         }
        // System.out.println(dicPlus.size());
-        byte[] bytes=new byte[12];
-        String address = ctx.channel().remoteAddress().toString().replace("/", "");
+        //byte[] bytes=new byte[12];
+        //String address = ctx.channel().remoteAddress().toString().replace("/", "");
        // System.out.println("ip+端口为：" + address + "开始建立通讯");
 
 

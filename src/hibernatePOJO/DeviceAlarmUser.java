@@ -1,16 +1,18 @@
 package hibernatePOJO;
 
-import javax.persistence.Entity;
-import java.sql.Timestamp;
 import java.util.Objects;
 
-@Entity
-@javax.persistence.Table(name = "device_alarm_user", schema = "test", catalog = "")
 public class DeviceAlarmUser {
     private String id;
+    private int aid;
+    private String timeperiod;
+    private Integer isAlert;
+    private Integer isPlantform;
+    private Integer isSms;
+    private String precontent;
+    private String uid;
+    private String did;
 
-    @javax.persistence.Id
-    @javax.persistence.Column(name = "id", nullable = false, length = 255)
     public String getId() {
         return id;
     }
@@ -19,58 +21,46 @@ public class DeviceAlarmUser {
         this.id = id;
     }
 
-    private String did;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "did", nullable = true, length = 255)
-    public String getDid() {
-        return did;
+    public int getAid() {
+        return aid;
     }
 
-    public void setDid(String did) {
-        this.did = did;
+    public void setAid(int aid) {
+        this.aid = aid;
     }
 
-    private String uid;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "uid", nullable = true, length = 255)
-    public String getUid() {
-        return uid;
+    public String getTimeperiod() {
+        return timeperiod;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setTimeperiod(String timeperiod) {
+        this.timeperiod = timeperiod;
     }
 
-    private Timestamp stime;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "stime", nullable = true)
-    public Timestamp getStime() {
-        return stime;
+    public Integer getIsAlert() {
+        return isAlert;
     }
 
-    public void setStime(Timestamp stime) {
-        this.stime = stime;
+    public void setIsAlert(Integer isAlert) {
+        this.isAlert = isAlert;
     }
 
-    private Timestamp etime;
-
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "etime", nullable = true)
-    public Timestamp getEtime() {
-        return etime;
+    public Integer getIsPlantform() {
+        return isPlantform;
     }
 
-    public void setEtime(Timestamp etime) {
-        this.etime = etime;
+    public void setIsPlantform(Integer isPlantform) {
+        this.isPlantform = isPlantform;
     }
 
-    private String precontent;
+    public Integer getIsSms() {
+        return isSms;
+    }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "precontent", nullable = true, length = 255)
+    public void setIsSms(Integer isSms) {
+        this.isSms = isSms;
+    }
+
     public String getPrecontent() {
         return precontent;
     }
@@ -79,23 +69,41 @@ public class DeviceAlarmUser {
         this.precontent = precontent;
     }
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getDid() {
+        return did;
+    }
+
+    public void setDid(String did) {
+        this.did = did;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeviceAlarmUser that = (DeviceAlarmUser) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(did, that.did) &&
+        return aid == that.aid &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(timeperiod, that.timeperiod) &&
+                Objects.equals(isAlert, that.isAlert) &&
+                Objects.equals(isPlantform, that.isPlantform) &&
+                Objects.equals(isSms, that.isSms) &&
+                Objects.equals(precontent, that.precontent) &&
                 Objects.equals(uid, that.uid) &&
-                Objects.equals(stime, that.stime) &&
-                Objects.equals(etime, that.etime) &&
-                Objects.equals(precontent, that.precontent);
+                Objects.equals(did, that.did);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, did, uid, stime, etime, precontent);
+        return Objects.hash(id, aid, timeperiod, isAlert, isPlantform, isSms, precontent, uid, did);
     }
 }

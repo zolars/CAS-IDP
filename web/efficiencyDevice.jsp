@@ -35,6 +35,14 @@
     <link href="css/menu.css" rel="stylesheet">
 
     <link href="css/mycss.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/header.css">
+
+    <style>
+        .location-select-item {
+            width: 120px;
+            margin-right: 12px;
+        }
+    </style>
 </head>
 
 <body id="skin-blur-blue">

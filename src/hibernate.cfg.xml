@@ -15,6 +15,7 @@
         <!-- 指定连接数据库的口令 -->
         <property name="connection.password">123456</property>
 
+
         <!-- true表示程序运行时，在控制台显示SQL语句，false表示不显示SQL语句 -->
         <property name="show_sql">false</property>
         <property name="format_sql">true</property>
@@ -34,9 +35,6 @@
         <mapping class="hibernatePOJO.DictionaryPlus"/>
         <mapping class="hibernatePOJO.EventPower"/>
         <mapping class="hibernatePOJO.EventsType"/>
-        <mapping class="hibernatePOJO.EventtypeDevice"/>
-        <mapping class="hibernatePOJO.EventtypeEnvironment"/>
-        <mapping class="hibernatePOJO.EventtypePower"/>
         <mapping class="hibernatePOJO.Knowledge"/>
         <mapping class="hibernatePOJO.Permission"/>
         <mapping class="hibernatePOJO.PowerparmMonitor"/>
@@ -62,9 +60,6 @@
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventPower.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventsType.hbm.xml"/>
-        <mapping resource="hibernatePOJO/EventtypeDevice.hbm.xml"/>
-        <mapping resource="hibernatePOJO/EventtypeEnvironment.hbm.xml"/>
-        <mapping resource="hibernatePOJO/EventtypePower.hbm.xml"/>
         <mapping resource="hibernatePOJO/Knowledge.hbm.xml"/>
         <mapping resource="hibernatePOJO/Permission.hbm.xml"/>
         <mapping resource="hibernatePOJO/PowerparmMonitor.hbm.xml"/>

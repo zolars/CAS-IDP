@@ -7,6 +7,7 @@ import hibernatePOJO.EventPower;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.socket.SocketChannel;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -17,14 +18,14 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
     private boolean newResponse=true;
     private short resLength=0;
     private ByteBuf tempBuf;
-    private String did="1";
+    private String did="";
 
     public TransientClientHandler(String did) {
-       // this.did=did;
+        this.did=did;
 
-        HBSessionDaoImpl hbSessionDao=new HBSessionDaoImpl();
+      /*  HBSessionDaoImpl hbSessionDao=new HBSessionDaoImpl();
         List<Devices> list=hbSessionDao.search("FROM Devices");
-        this.did = list.get(0).getDid();
+        this.did = list.get(0).getDid();*/
 
     }
 
@@ -76,7 +77,15 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //System.out.println("建立连接");
         //把channel存入map,用于发送transientRequest
-        DataOnline.getTransientChannelMap().put(this.did,ctx.channel());
+        DataOnline.getTransientChannelMap().put(this.did, ctx.channel());
+
+         /* ByteBuf sendMsg = ctx.alloc().buffer(8);
+
+      sendMsg.writeBytes(createMsg());
+        // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
+        SocketChannel sc = (SocketChannel) ctx.channel();
+        sc.writeAndFlush(sendMsg);*/
+
     }
 
     @Override
@@ -86,7 +95,7 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
     public void dataResolve(EventPower e){
-        switch (e.getSubtype()){
+      /*  switch (e.getSubtype()){
             case 0:e.setDiscription("未知类型");break;
             case 1:e.setDiscription("Ua 暂降");break;
             case 2:e.setDiscription("Ub 暂降");break;
@@ -166,6 +175,6 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
                 }
                 break;
             }
-        }
+        }*/
     }
 }

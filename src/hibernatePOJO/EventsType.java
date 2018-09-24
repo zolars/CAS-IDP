@@ -3,42 +3,62 @@ package hibernatePOJO;
 import java.util.Objects;
 
 public class EventsType {
-    private int type;
-    private int pid;
-    private String name;
-    private String subtypeset;
+    private int cid;
+    private String code;
+    private Integer pid;
+    private String type;
+    private String subtype;
+    private String devicename;
     private Integer prior;
+    private String classify;
+    private String desciption;
 
-    public int getType() {
-        return type;
+    public int getCid() {
+        return cid;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setCid(int cid) {
+        this.cid = cid;
     }
 
-    public int getPid() {
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getSubtypeset() {
-        return subtypeset;
+    public String getSubtype() {
+        return subtype;
     }
 
-    public void setSubtypeset(String subtypeset) {
-        this.subtypeset = subtypeset;
+    public void setSubtype(String subtype) {
+        this.subtype = subtype;
+    }
+
+    public String getDevicename() {
+        return devicename;
+    }
+
+    public void setDevicename(String devicename) {
+        this.devicename = devicename;
     }
 
     public Integer getPrior() {
@@ -49,20 +69,41 @@ public class EventsType {
         this.prior = prior;
     }
 
+    public String getClassify() {
+        return classify;
+    }
+
+    public void setClassify(String classify) {
+        this.classify = classify;
+    }
+
+    public String getDesciption() {
+        return desciption;
+    }
+
+    public void setDesciption(String desciption) {
+        this.desciption = desciption;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventsType that = (EventsType) o;
-        return type == that.type &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(subtypeset, that.subtypeset) &&
-                Objects.equals(prior, that.prior);
+        return cid == that.cid &&
+                Objects.equals(code, that.code) &&
+                Objects.equals(pid, that.pid) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(subtype, that.subtype) &&
+                Objects.equals(devicename, that.devicename) &&
+                Objects.equals(prior, that.prior) &&
+                Objects.equals(classify, that.classify) &&
+                Objects.equals(desciption, that.desciption);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(type, name, subtypeset, prior);
+        return Objects.hash(cid, code, pid, type, subtype, devicename, prior, classify, desciption);
     }
 }

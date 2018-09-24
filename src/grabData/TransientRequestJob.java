@@ -12,7 +12,7 @@ import java.util.*;
 public class TransientRequestJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        Map<String,Channel> channelMap=DataOnline.getTransientChannelMap();
+        Map<String,Channel> channelMap= DataOnline.getTransientChannelMap();
         if(null!=channelMap){
             Set<String> didSet = channelMap.keySet();
             Iterator<String> iterator = didSet.iterator();

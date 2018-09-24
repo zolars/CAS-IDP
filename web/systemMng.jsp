@@ -33,6 +33,7 @@
     <link href="css/menu.css" rel="stylesheet">
     <link href="css/mycss.css" rel="stylesheet">
     <link href="css/jstree-default/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/header.css">
 
     <style>
         .outer {
@@ -60,6 +61,20 @@
         .tips-item:hover {
             background: #4e7bff;
         }
+        #userinfotable {
+            width: 100%;
+        }
+        .item-container {
+            width: 100%;
+        }
+        .item-btn-container {
+            width: 100%;
+            padding: 20px;
+        }
+        .item-btn-item {
+            width: 70px;
+
+        }
     </style>
 </head>
 
@@ -83,10 +98,11 @@
 <script Language="JavaScript" src="js/onlineDataInterface.js"></script>
 
 <header id="header" class="media">
-    <a href="" id="menu-toggle"></a>
-    <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
-
-    <div class="media-body">
+    <div class="header-left">
+        <a href="" id="menu-toggle"></a>
+        <a class="logo pull-left" href="province.jsp">IDP数据中心</a>
+    </div>
+    <div class="header-right">
         <div class="media" id="top-menu">
             <div class="pull-left location-select">
                 <select class="form-control location-select-item" id="province_code" name="province_code"
@@ -127,12 +143,12 @@
 
             </div>
 
-            <!-- 注销按钮 -->
-            <div class="pull-right">
-                <li><a href="index.jsp">注销</a></li>
-            </div>
 
-            <div class="pull-right">欢迎用户${username}登录</div>
+            <!-- 注销按钮 -->
+            <div class="pull-right header-right-text">
+                <a class="header-logout" href="index.jsp">注销</a>
+            </div>
+            <div class="pull-right header-right-text">欢迎用户${username}登录</div>
 
         </div>
     </div>
@@ -186,55 +202,28 @@
                         </li>
                     </ul>
 
-                    <div id="item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                    <div id="item1" class="col-md-2 col-xs-6 item-container">
                         <div class="block-area" id="defaultStyle">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="tile">
                                         <h2 class="tile-title">账号信息</h2>
-                                        <table id="userinfotablehead">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    <div style="width:10px;"></div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:50px;">账号</div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:50px;">姓名</div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:260px;">组织</div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:100px;">角色</div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:150px;">联系方式</div>
-                                                </th>
-                                                <th>
-                                                    <div style="width:150px;">公务手机</div>
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                        </table>
-                                        <table id="userinfotable"></table>
-
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                        <div class="btn-group item-btn-container">
+                                            <button type="button" class="btn-sm btn-primary item-btn-item"
                                                     onClick="getALLUserInfomation()">查询
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                            <button type="button" class="btn-sm btn-success item-btn-item"
                                                     onclick="showAddUserModal()">新增
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                            <button type="button" class="btn-sm btn-danger item-btn-item"
                                                     onClick="deleteUserInfomation()">删除
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                            <button type="button" class="btn-sm btn-default item-btn-item"
                                                     onclick="showUpdateUserModal()">修改
                                             </button>
                                         </div>
+
+                                        <table id="userinfotable"></table>
                                     </div>
                                 </div>
                             </div>
@@ -989,6 +978,44 @@
             </div>
         </div>
         <!-- alarm user model DIV END-->
+
+
+        <!-- orgnization model DIV-->
+        <div class="add-roles" id="update-orgnization-modal" style="display: none">
+            <div class="add-roles-one-line">
+                <div id="oid" style="display: none"></div>
+                <div class="add-roles-item">
+                    <div class="add-roles-title">组织机构名称</div>
+                    <input id="orgname" class="form-control add-roles-input" type="text">
+                </div>
+            </div>
+
+            <div class="update-org-handle">
+                <button type="submit" class="btn btn-primary" id="update-org-handle" onclick="submitUpdateOrg()">确定</button>
+                <button class="btn btn-default" onclick="cancleUpdateOrg()">取消</button>
+            </div>
+        </div>
+
+        <div class="add-user" id="add-orgnization-modal" style="display: none">
+            <div class="add-roles-one-line">
+                <div class="add-roles-item">
+                    <div class="add-roles-title">省行名称</div>
+                    <input id="orgprovincename" class="form-control add-roles-input" type="text">
+                    <div class="add-roles-title">市行名称</div>
+                    <input id="orgcityname" class="form-control add-roles-input" type="text">
+                    <div class="add-roles-title">机房名称</div>
+                    <input id="orgcomputerroomname" class="form-control add-roles-input" type="text">
+                </div>
+            </div>
+
+            <div class="add-org-handle">
+                <button type="submit" class="btn btn-primary" id="add-org-handle" onclick="submitAddOrg()">确定</button>
+                <button class="btn btn-default" onclick="cancleAddOrg()">取消</button>
+            </div>
+        </div>
+        <!-- orgnization model DIV END-->
+
+
     </div>
 </section>
 
@@ -1586,6 +1613,7 @@
                 var list = obj;
                 var table = $("#userinfotable");
                 table.empty();
+                table.append('<tr><td><div style="width:10px;"></div></td><td><div style="width:50px;">账号</div></td><td><div style="width:50px;">姓名</div></td><td><div style="width:260px;">组织</div></th><td><div style="widtd:100px;">角色</div></td><td><div style="width:150px;">联系方式</div></td><td> <div style="width:150px;">公务手机</div></td></tr>');
 
                 for (var key in list) {
                     var len = list[key].length;
@@ -2425,7 +2453,7 @@
         $("#nodeid").val(currentNode.id);
     });
 
-    // 点击树的某个节点，存当前节点id到nodeid中
+    // 点击树的某个节点，存当前节点id到nodeidstruct中
     $('#jstree-structure').bind("activate_node.jstree", function (obj, e) {
         var currentNode = e.node;
         //当前点击的节点的id存到一个隐藏的div中
@@ -2888,33 +2916,117 @@
         "plugins": ["checkbox"]
     });
 
-    <!-- 添加省行-->
+    <!-- 添加组织结构-->
     function addOrg() {
-
-        del=window.confirm("确定添加该省行信息？")
+        del=window.confirm("确定添加？");
         if(del){
-            alert("已经添加！");
-        }else{
-            //alert("已经取消！");
+            $('#add-orgnization-modal').css('display', 'block');
         }
-
     }
 
-    <!-- 修改省行div--wsy2018.9.7 -->
+    <!-- 添加组织结构-确定添加-->
+    function submitAddOrg(){
+        var nodeid = $("#nodeidstruct").val();
+        var province = $("#orgprovincename").val();
+        var city = $("#orgcityname").val();
+        var computerroom = $("#orgcomputerroomname").val();
+
+        var nodeidtype = nodeid.length;
+
+        if(nodeidtype == 1){
+            if(!province && !city && !computerroom)
+                alert("请添加");
+            else if(city)
+                alert("请在总行下添加省行或机房");
+            else if(province && computerroom)
+                alert("请分别添加省行或机房");
+            else
+                addOrgnization(nodeid, province, city, computerroom);
+        }
+
+        if(nodeidtype == 3){
+            if(!province && !city && !computerroom)
+                alert("请添加");
+            else if(province)
+                alert("请在省行下添加市行或机房");
+            else if(city && computerroom)
+                alert("请分别添加市行或机房");
+            else
+                addOrgnization(nodeid, province, city, computerroom);
+        }
+
+        if(nodeidtype == 4){
+            if(!province && !city && !computerroom)
+                alert("请添加");
+            else if(!computerroom)
+                alert("请在市行下添加机房");
+            else if(province || city)
+                alert("请在市行下添加机房");
+            else
+                addOrgnization(nodeid, province, city, computerroom);
+        }
+    }
+
+    function addOrgnization(nodeid, province, city, computerroom){
+            $.ajax({
+                type: "post",
+                url: "addOrgnizationTree",
+                data: {
+                    nodeid: nodeid,
+                    province: province,
+                    city: city,
+                    computerroom: computerroom
+                },
+                dataType: "json",
+                success: function (data) {
+                    $('#add-orgnization-modal').css('display', 'none');
+
+                    $("#orgprovincename").val("");
+                    $("#orgcityname").val("");
+                    $("#orgcomputerroomname").val("");
+                }
+            });
+    }
+
+    <!-- 添加组织结构-取消添加-->
+    function cancleAddOrg(){
+        $('#add-orgnization-modal').css('display', 'none');
+    }
+
+    <!-- 修改组织结构div-->
     function updateOrg() {
-
-        del=window.confirm("确定修改该省行信息？")
+        del=window.confirm("确定修改？");
         if(del){
-            alert("已经修改！");
-        }else{
-            //alert("已经取消！");
+            $('#update-orgnization-modal').css('display', 'block');
         }
+    }
+    <!-- 修改组织结构-确定修改-->
+    function submitUpdateOrg(){
+        var nodeid = $("#nodeidstruct").val();
+        var nname = $("#orgname").val();
 
+        if(nname){
+            $.ajax({
+                type: "post",
+                url: "updateOrgnizationTree",
+                data: {
+                    nodeid: nodeid,
+                    newname: nname
+                },
+                dataType: "json",
+                success: function (data) {
+                    $('#update-orgnization-modal').css('display', 'none');
+                }
+            });
+        }
+    }
+    <!-- 修改组织结构-取消修改-->
+    function cancleUpdateOrg(){
+        $('#update-orgnization-modal').css('display', 'none');
     }
 
-    <!-- 删除省行-->
+    <!-- 删除组织结构-->
     function deleteOrg() {
-
         var tmpNodeOrgid = $("#nodeidstruct").val();
         del=window.confirm("确定删除该省行信息？");
 

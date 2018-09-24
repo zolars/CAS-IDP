@@ -3,11 +3,7 @@ package deviceManage.action;
 import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
-import hibernatePOJO.DeviceAlarmUser;
-import hibernatePOJO.User;
 import org.apache.struts2.ServletActionContext;
-import userManage.dao.UserDAO;
-import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

@@ -60,13 +60,8 @@ public class RolesPermissionDAOImpl implements RolesPermissionDAO {
                 else
                 {
                     String npid = oldpid+","+pid;
-                    RolesPermission newrp2 = new RolesPermission();
-                    newrp2.setRid(rid);
-                    newrp2.setPid(npid);
-
                     String hql = "update RolesPermission newrp2 set newrp2.pid='" + npid +"' where newrp2.rid='" + rid + "'";
-
-                    rt = hbsessionDao.update(hql); //newrp2,
+                    rt = hbsessionDao.update(hql);
                 }
             }
         }
