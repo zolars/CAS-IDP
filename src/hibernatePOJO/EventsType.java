@@ -11,7 +11,7 @@ public class EventsType {
     private String devicename;
     private Integer prior;
     private String classify;
-    private String desciption;
+    private String description;
 
     public int getCid() {
         return cid;
@@ -77,12 +77,12 @@ public class EventsType {
         this.classify = classify;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -98,12 +98,12 @@ public class EventsType {
                 Objects.equals(devicename, that.devicename) &&
                 Objects.equals(prior, that.prior) &&
                 Objects.equals(classify, that.classify) &&
-                Objects.equals(desciption, that.desciption);
+                Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(cid, code, pid, type, subtype, devicename, prior, classify, desciption);
+        return Objects.hash(cid, code, pid, type, subtype, devicename, prior, classify, description);
     }
 }

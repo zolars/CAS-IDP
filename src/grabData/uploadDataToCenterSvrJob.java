@@ -23,7 +23,7 @@ public class uploadDataToCenterSvrJob implements Job {
         calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) - 1);// 让小时减少1
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
-        //1.上传暂态事件到总服务器
+        //1.上传电能质量事件到总服务器
         List<EventPower> eventlist = hbsessionDao.search(
                 "FROM EventPower where time >'"+ date +"'");
 
@@ -36,7 +36,7 @@ public class uploadDataToCenterSvrJob implements Job {
             }
         }
 
-        //2.上传越限事件到总服务器
+        //2.上传事件到总服务器
 
         System.out.println("完成上传事件到总服务器:" + System.currentTimeMillis());
 

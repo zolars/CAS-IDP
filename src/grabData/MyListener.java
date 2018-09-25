@@ -1,6 +1,7 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
+import hibernatePOJO.BasicSetting;
 import hibernatePOJO.Devices;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -36,6 +37,9 @@ public class MyListener implements ServletContextListener {
                 DataOnline.setDicPlus(hbSessionDao.search("FROM DictionaryPlus"));
                 CtrlSave.setDic(hbSessionDao.search("FROM Dictionary_Ctrl"));
 
+                // 从数据库取基础配置信息(采集频率、上传频率)
+                List<BasicSetting> listbase = hbSessionDao.search("FROM BasicSetting");
+
                 if (null != list) {
                     // 创建取实时数据和暂态数据的client
                     for (Devices c : list) {
@@ -49,7 +53,7 @@ public class MyListener implements ServletContextListener {
                                         c.getDid()).start();
                                 System.out.println("创建取暂态事件连接 " + "监测点(" + c.getDid()
                                         + ") " + c.getiPaddress() + ":"
-                                        + c.getPort());
+                                        + c.getExtra()); //暂态事件的端口是extra
                                 new TransientClient(c.getiPaddress(),
                                         Integer.parseInt(c.getPort()),
                                         c.getDid()).start();
@@ -85,14 +89,13 @@ public class MyListener implements ServletContextListener {
                         Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
                         // 设置任务，每5s存一次实时数据
                         // 设置任务，检测告警（越线）事件
-                        System.out.println(list.get(0).getOnlineinterval());
+                        System.out.println(listbase.get(0).getOnlineinterval());
                         Trigger trigger1 = newTrigger()
                                 .withIdentity("DataOnlineSaveTrigger",
                                         "DataOnlineSaveTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInSeconds(
-                                        Integer.parseInt(list.get(0)
-                                                .getOnlineinterval()))
+                                .withSchedule(simpleSchedule().withIntervalInSeconds(listbase.get(0)
+                                                .getOnlineinterval())
                                         .repeatForever())
                                 .build();
                         JobDetail job1 = newJob(DataOnlineSaveJob.class).withIdentity(
@@ -100,15 +103,13 @@ public class MyListener implements ServletContextListener {
                         scheduler.scheduleJob(job1, trigger1);
 
                         // 设置任务，每30分钟发一次暂态事件请求
-                        TransientUtil.setInterval(
-                                Integer.parseInt(list.get(0).getThansentinterval()));
+                        TransientUtil.setInterval(listbase.get(0).getThansentinterval());
                         Trigger trigger2 = newTrigger()
                                 .withIdentity("transientRequestTrigger",
                                         "transientRequestTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInMinutes(
-                                        Integer.parseInt(list.get(0)
-                                                .getThansentinterval()))
+                                .withSchedule(simpleSchedule()
+                                        .withIntervalInMinutes(listbase.get(0).getThansentinterval())
                                         .repeatForever())
                                 .build();
                         JobDetail job2 = newJob(TransientRequestJob.class)
@@ -122,9 +123,8 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("uploadDataTrigger",
                                         "uploadDataTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInMinutes(
-                                        Integer.parseInt(list.get(0)
-                                                .getUploadinterval()))
+                                .withSchedule(simpleSchedule().withIntervalInMinutes(listbase.get(0)
+                                                .getUploadinterval())
                                         .repeatForever())
                                 .build();
                         JobDetail job3 = newJob(uploadDataToCenterSvrJob.class)
@@ -164,9 +164,8 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("TemperatureSaveTrigger",
                                         "TemperatureSaveTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInMinutes(
-                                        Integer.parseInt(list.get(1)
-                                                .getOnlineinterval()))
+                                .withSchedule(simpleSchedule().withIntervalInMinutes(listbase.get(1)
+                                                .getOnlineinterval())
                                         .repeatForever())
                                 .build();
                         JobDetail job6 = newJob(TemperatureSaveJob.class).withIdentity(

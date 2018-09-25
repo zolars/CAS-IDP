@@ -189,12 +189,13 @@
                                                     <th>事件发生时间</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="device-event-tbody">
                                                 </tbody>
                                             </table>
                                             <table class="display" id="power-event" style="width:100%;">
                                                 <thead>
                                                 <tr>
+                                                    <th></th>
                                                     <th></th>
                                                     <th></th>
                                                     <th></th>
@@ -217,7 +218,7 @@
                                                     <th></th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="environment-event-tbody">
                                                 </tbody>
                                             </table>
                                         </div>
@@ -325,6 +326,53 @@
                                             </table>
 
                                         </div>
+
+
+                                        <div id="eventdiv3" style="display: none">
+
+                                            <ul class="nav nav-tabs" id="triItem" name="triItem">
+                                                <li class="active"  style="width:15%">
+                                                    <a data-toggle="tab" id="triItem1">•温度</a>
+                                                </li>
+                                                <li style="width:15%">
+                                                    <a data-toggle="tab" id="triItem2">•湿度</a>
+                                                </li>
+                                            </ul>
+
+                                            <table class="display" id="evironment-event-detail-1" style="width:100%;">
+                                                <thead>
+                                                <tr>
+                                                    <th>测量名称</th>
+                                                    <th>时间</th>
+                                                    <th>类型</th>
+                                                    <th>时间长短</th>
+                                                    <th>深度（与标准的偏差）</th>
+                                                    <th>方向</th>
+                                                    <th>确认</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="evironment-event-detail-tbody-1">
+                                                </tbody>
+                                            </table>
+
+                                            <table class="display" id="evironment-event-detail-2" style="width:100%;display: none;">
+                                                <thead>
+                                                <tr>
+                                                    <th>测量名称</th>
+                                                    <th>时间</th>
+                                                    <th>类型</th>
+                                                    <th>时间长短</th>
+                                                    <th>深度（与标准的偏差）</th>
+                                                    <th>方向</th>
+                                                    <th>确认</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="evironment-event-detail-tbody-2">
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
                                     </div>
 
                                     <div class="col-md-4">
@@ -803,6 +851,7 @@
             $("#power-event-detail-3").hide();
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").hide();
+          /*
             $('#power-event-detail-1').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
@@ -824,7 +873,7 @@
             $('#power-event-detail-2').DataTable().fnDestroy();
             $('#power-event-detail-3').DataTable().fnDestroy();
             $('#power-event-detail-4').DataTable().fnDestroy();
-            $('#power-event-detail-5').DataTable().fnDestroy();
+            $('#power-event-detail-5').DataTable().fnDestroy();*/
         });
         $("#secItem2").click(function () {
             $("#power-event-detail-1").hide();
@@ -832,7 +881,7 @@
             $("#power-event-detail-3").hide();
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").hide();
-            $('#power-event-detail-2').DataTable({
+          /*  $('#power-event-detail-2').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
@@ -853,7 +902,7 @@
             $('#power-event-detail-1').DataTable().fnDestroy();
             $('#power-event-detail-3').DataTable().fnDestroy();
             $('#power-event-detail-4').DataTable().fnDestroy();
-            $('#power-event-detail-5').DataTable().fnDestroy();
+            $('#power-event-detail-5').DataTable().fnDestroy();*/
         });
         $("#secItem3").click(function () {
             $("#power-event-detail-1").hide();
@@ -861,7 +910,7 @@
             $("#power-event-detail-3").show();
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").hide();
-            $('#power-event-detail-3').DataTable({
+        /*    $('#power-event-detail-3').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
@@ -882,7 +931,7 @@
             $('#power-event-detail-1').DataTable().fnDestroy();
             $('#power-event-detail-2').DataTable().fnDestroy();
             $('#power-event-detail-4').DataTable().fnDestroy();
-            $('#power-event-detail-5').DataTable().fnDestroy();
+            $('#power-event-detail-5').DataTable().fnDestroy();*/
         });
         $("#secItem4").click(function () {
             $("#power-event-detail-1").hide();
@@ -890,7 +939,7 @@
             $("#power-event-detail-3").hide();
             $("#power-event-detail-4").show();
             $("#power-event-detail-5").hide();
-            $('#power-event-detail-4').DataTable({
+         /*   $('#power-event-detail-4').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
@@ -911,7 +960,7 @@
             $('#power-event-detail-1').DataTable().fnDestroy();
             $('#power-event-detail-2').DataTable().fnDestroy();
             $('#power-event-detail-3').DataTable().fnDestroy();
-            $('#power-event-detail-5').DataTable().fnDestroy();
+            $('#power-event-detail-5').DataTable().fnDestroy();*/
         });
         $("#secItem5").click(function () {
             $("#power-event-detail-1").hide();
@@ -919,7 +968,7 @@
             $("#power-event-detail-3").hide();
             $("#power-event-detail-4").hide();
             $("#power-event-detail-5").show();
-            $('#power-event-detail-5').DataTable({
+          /*  $('#power-event-detail-5').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
                 "scrollCollapse": true,
@@ -940,10 +989,21 @@
             $('#power-event-detail-1').DataTable().fnDestroy();
             $('#power-event-detail-2').DataTable().fnDestroy();
             $('#power-event-detail-3').DataTable().fnDestroy();
-            $('#power-event-detail-4').DataTable().fnDestroy();
+            $('#power-event-detail-4').DataTable().fnDestroy();*/
+        });
+
+        $("#triItem1").click(function () {
+            $("#evironment-event-detail-1").show();
+            $("#evironment-event-detail-2").hide();
+        });
+        $("#triItem2").click(function () {
+            $("#evironment-event-detail-1").hide();
+            $("#evironment-event-detail-2").show();
+
         });
 
         $("#secItem1").click();
+        $("#triItem1").click();
     });
 
 </script>
@@ -1029,6 +1089,7 @@
 
         $('#eventdiv1').css('display', 'none');
         $('#eventdiv2').css('display', 'block');
+        $('#eventdiv3').css('display', 'none');
 
         $.ajax({
             type: "post",
@@ -1205,7 +1266,143 @@
 
 <!-- （详细）环境事件-点击进入第二个页面-->
 <script type="text/javascript">
-    function getEvironmentEvent(){}
+    function getEvironmentEvent(){
+
+        var cbname = $("#city_code option:selected").val();
+        var edate = $("input[name='event-data-peroid']:checked").val();
+        var stime;
+        var etime;
+        var nowtime = getNowFormatDate();
+
+        if(edate == "lastone"){
+            stime = " ";
+            etime = " ";
+        }
+        else  if(edate == "fromto"){
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else  if(edate == "day"){
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+            stime = starttime;
+            etime = nowtime;
+        }
+        else  if(edate == "week"){
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+            stime = starttime;
+            etime = nowtime;
+        }
+        else  if(edate == "month"){
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+
+            stime = starttime;
+            etime = nowtime;
+        }
+
+        $('#eventdiv1').css('display', 'none');
+        $('#eventdiv2').css('display', 'none');
+        $('#eventdiv3').css('display', 'block');
+
+        $.ajax({
+            type: "post",
+            url: "getDetailEvironmentEventtemp",
+            data: {
+                stime: stime,
+                etime: etime,
+                cbname: cbname
+            },
+            dataType : "json",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                var list = obj['allpelist'];
+                var table = $("#evironment-event-detail-1");
+                var tbody = $("#evironment-event-detail-tbody-1")[0];
+                tbody.innerHTML = "";
+
+                for (var i = 0; i < list.length; i++) {
+                    var liststr = list[i].split(",");
+                    var teid = liststr[0].split("[");
+                    var name = liststr[1];
+                    var location = liststr[2];
+                    var type = liststr[3];
+                    var description = liststr[4];
+                    var rawtime = liststr[5].split("]");
+                    var time = rawtime[0];
+
+                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                }
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "getDetailEvironmentEventwet",
+            data: {
+                stime: stime,
+                etime: etime,
+                cbname: cbname
+            },
+            dataType : "json",
+            success: function (data) {
+
+                var obj = JSON.parse(data);
+                var list = obj['allpelist'];
+                var table = $("#evironment-event-detail-2");
+                var tbody = $("#evironment-event-detail-tbody-2")[0];
+                tbody.innerHTML = "";
+
+                for (var i = 0; i < list.length; i++) {
+                    var liststr = list[i].split(",");
+                    var teid = liststr[0].split("[");
+                    var name = liststr[1];
+                    var location = liststr[2];
+                    var type = liststr[3];
+                    var description = liststr[4];
+                    var rawtime = liststr[5].split("]");
+                    var time = rawtime[0];
+
+                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                }
+            }
+        });
+
+
+    }
 </script>
 
 <!-- 查询事件-->
@@ -1349,7 +1546,7 @@
                     var rawtime = liststr[5].split("]");
                     var time = rawtime[0];
 
-                    tbody.innerHTML += ('<tr>' + '<td id="teid" style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" value='+ teid[1]+'>' + '</td>' +
                         '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
                         '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
                         '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
@@ -1360,28 +1557,59 @@
 
         //获取所有设备事件
         //设备事件
-       /* $(document).ready(function() {
-            var deviceEventTable = $('#device-event').DataTable({
-                "info":           false,
-                "scrollY":        "200px",
-                "scrollCollapse": true,
-                "paging":         false,
-                "dom":            "lBrtip"
-            });
-        });*/
-
 
         //获取所有环境事件
-        //环境事件
-        /*$(document).ready(function() {
-            var environmentEventTable = $('#environment-event').DataTable({
-                "info":         false,
-                "scrollY":        "200px",
-                "scrollCollapse": true,
-                "paging":         false,
-                "dom":            "lBrtip"
-            });
-        });*/
+        $.ajax({
+            type: "post",
+            url: "getEnvironmentEvent",
+            data: {
+                stime: stime,
+                etime: etime,
+                cbname: cbname
+            },
+            dataType : "json",
+            success: function (data) {
+
+                //渲染电能事件table
+                $(document).ready(function() {
+                    var environmentEventTable = $('#environment-event').DataTable( {
+                        "info":           false,
+                        "scrollY":        "260px",
+                        "scrollCollapse": true,
+                        "paging":         false,
+                        "dom":            "lBrtip"
+                    } );
+                    //点击table中的某一行
+                    $('#environment-event tbody').on( 'click', 'tr', function () {
+                        $(this).toggleClass('selected');
+                        selectOneRowEvent(this);
+                    } );
+                } );
+
+                var obj = JSON.parse(data);
+                var list = obj['allpelist'];
+                var table = $("#environment-event");
+                var tbody = $("#environment-event-tbody")[0];
+                tbody.innerHTML = "";
+
+                for (var i = 0; i < list.length; i++) {
+                    var liststr = list[i].split(",");
+
+                    var teid = liststr[0].split("[");
+                    var name = liststr[1];
+                    var location = liststr[2];
+                    var type = liststr[3];
+                    var description = liststr[4];
+                    var rawtime = liststr[5].split("]");
+                    var time = rawtime[0];
+
+                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" value='+ teid[1]+'>' + '</td>' +
+                        '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                }
+            }
+        });
 
     }
 
@@ -1473,7 +1701,7 @@
     //初始化cookie中的列
     $(document).ready(function() {
         $. cookie('row1-name', '测量名称', {expires: 1, path: '/'});
-        $. cookie('row1-val', '100', {ea'j'x'axpires: 1, path: '/'});
+        $. cookie('row1-val', '100', {expires: 1, path: '/'});
         $. cookie('row2-name', '时间', {expires: 1, path: '/'});
         $. cookie('row2-val', '132', {expires: 1, path: '/'});
         $. cookie('row3-name', '类型', {expires: 1, path: '/'});
@@ -1543,9 +1771,9 @@
 
                             for (var i = arrays.length -1; i > 0; i--) {
                                 var arr = {
-                                    "id": arrays[i].type,
+                                    "id": arrays[i].cid,
                                     "parent": arrays[i].pid == "0" ? "#" : arrays[i].pid,
-                                    "text": arrays[i].name
+                                    "text": arrays[i].description
                                 };
 
                                 jsonarray.push(arr);
@@ -1834,7 +2062,6 @@
         "info":           false,
         "dom":            "lBrtip"
     });
-
 
     //获取某一行选择的行，将该行的id放入某个隐藏的div中
     function selectOneRowEvent(rowdata){

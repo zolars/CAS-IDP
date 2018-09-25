@@ -8,6 +8,7 @@ public interface EventDAO {
 
     public boolean addSignAndAnnotEvent(String teid, String sign, String annot);
 
+    //电能类事件
     public List getLocalAllPowerEvent(String cbname, String starttime, String endtime);
 
     public List getLocalLastPowerEvent(String cbname);
@@ -32,6 +33,19 @@ public interface EventDAO {
 
     public List getLocalLastDetailPowerEventshanbian(String cbname);
 
+    //环境类事件
+    public List getLocalAllEnvironmentEvent(String cbname, String starttime, String endtime);
+
+    public List getLocalLastEnvironmentEvent(String cbname);
+
+    public List getLocalAllDetailEnvironmentEventtemp(String cbname, String starttime, String endtime);
+
+    public List getLocalLastDetailEnvironmentEventtemp(String cbname);
+
+    public List getLocalAllDetailEnvironmentEventwet(String cbname, String starttime, String endtime);
+
+    public List getLocalLastDetailEnvironmentEventwet(String cbname);
+
     public List getAllCityEvent();
 
     public Map getAllProvinceEvent();
@@ -46,6 +60,6 @@ public interface EventDAO {
 
     public boolean setAllEventtypePriorty(String[] eventtypelist, String[] priortylist);
 
-    public boolean setCaptrueSettingInfo(String onlineinterval, String tansentinterval, String upload, String ip, String onlineport, String tansentport, String did);
+    public boolean setCaptrueSettingInfo(String onlineinterval, String tansentinterval, String uploadinterval);
 
 }

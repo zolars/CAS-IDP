@@ -10,6 +10,7 @@ public class DevicesThreshold {
     private Double cellval;
     private Double floorval;
     private Integer aid;
+    private Integer cid;
 
     public int getDtid() {
         return dtid;
@@ -67,6 +68,14 @@ public class DevicesThreshold {
         this.aid = aid;
     }
 
+    public Integer getCid() {
+        return cid;
+    }
+
+    public void setCid(Integer cid) {
+        this.cid = cid;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,12 +87,13 @@ public class DevicesThreshold {
                 Objects.equals(unit, that.unit) &&
                 Objects.equals(cellval, that.cellval) &&
                 Objects.equals(floorval, that.floorval) &&
-                Objects.equals(aid, that.aid);
+                Objects.equals(aid, that.aid) &&
+                Objects.equals(cid, that.cid);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(dtid, did, classify, unit, cellval, floorval, aid);
+        return Objects.hash(dtid, did, classify, unit, cellval, floorval, aid, cid);
     }
 }
