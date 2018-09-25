@@ -33,6 +33,7 @@
         <mapping class="hibernatePOJO.DevicesThreshold"/>
         <mapping class="hibernatePOJO.Dictionary"/>
         <mapping class="hibernatePOJO.DictionaryPlus"/>
+        <mapping class="hibernatePOJO.DictionaryCtrl"/>
         <mapping class="hibernatePOJO.EventCtrl"/>
         <mapping class="hibernatePOJO.EventPower"/>
         <mapping class="hibernatePOJO.EventsType"/>
@@ -59,6 +60,7 @@
         <mapping resource="hibernatePOJO/DevicesThreshold.hbm.xml"/>
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
+        <mapping resource="hibernatePOJO/DictionaryCtrl.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventCtrl.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventPower.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventsType.hbm.xml"/>

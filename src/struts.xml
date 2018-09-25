@@ -372,7 +372,7 @@
              </result>
          </action>
 
-         <action name="getAllAlarmUser" class="deviceManage.action.getAllAlarmUserAction">
+         <action name="getAllAlarmUser" class="systemMng.action.getAllAlarmUserAction">
              <!--getAllAlarmUser -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">

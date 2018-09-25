@@ -493,12 +493,12 @@
                                 </div>
 
                                 <div>
-                                    <button class="btn btn-default" onclick="addDeviceAlarmUser()">添加预警人员</button>
-                                    <button class="btn btn-default" onclick="deleteDeviceAlarmUser()">取消预警人员</button>
+                                    <button class="btn-success" onclick="addDeviceAlarmUser()">添加预警人员</button>
+                                    <button class="btn-default" onclick="deleteDeviceAlarmUser()">取消预警人员</button>
                                 </div>
 
                                 <div>
-                                    <button class="btn btn-default" onclick="addOneDevice()">添加设备</button>
+                                    <button class="btn-success" onclick="addOneDevice()">添加设备</button>
                                 </div>
                             </div>
                         </div>
@@ -2263,7 +2263,9 @@
             alert("只能选择一种类型");
         else if(radioEthernet != "on" && radioR5485 != "on" && radioRS232 != "on")
             alert("请选择一种类型");
-        else  $.ajax({
+        else if(radioEthernet != "on")
+            alert("只能选择TCP设备类型");
+        else $.ajax({
                 type: "post",
                 url: "addOneDevice",
                 data: {
@@ -2292,33 +2294,34 @@
     function checkDeviceAlarmUser() {
         var devicename = $("#searchInput").val();
 
-        $.ajax({
-            type: "post",
-            url: "getAllAlarmUser",
-            data: {
-                devicename: devicename
-            },
-            dataType: "json",
-            success: function (data) {
-                var list = data.alarmusers;
-                var listname = data.alarmusersname;
-                var table = $("#alarm-user-table");
+        if(devicename){
+            $.ajax({
+                type: "post",
+                url: "getAllAlarmUser",
+                data: {
+                    devicename: devicename
+                },
+                dataType: "json",
+                success: function (data) {
+                    var list = data.alarmusers;
+                    var listname = data.alarmusersname;
+                    var table = $("#alarm-user-table");
 
-                table.empty();
-                table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">开始时间</td><td style="padding-left:80px;">结束时间</td><td style="padding-left:40px;">账号</td></tr>');
+                    table.empty();
+                    table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">告警时段</td><td style="padding-left:40px;">账号</td></tr>');
 
-                for (var i = 0; i < list.length; i++) {
-                    var id = list[i].id;
-                    var stime = list[i].stime;
-                    var etime = list[i].etime;
-                    var uname = listname[i];
+                    for (var i = 0; i < list.length; i++) {
+                        var id = list[i].id;
+                        var timeperiod = (list[i].timeperiod != "1") ? "全天告警":"工作日告警";
+                        var uname = listname[i];
 
-                    table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="auid" id="auid" value=' + id + '></td>' +
-                        '<td style="padding-left:80px;">' + stime + '</td><td style="padding-left:80px;">' + etime + '</td>' +
-                        '<td style="padding-left:40px;">' + uname + '</td></tr>');
+                        table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="auid" id="auid" value=' + id + '></td>' +
+                            '<td style="padding-left:80px;">' + timeperiod + '</td>' +
+                            '<td style="padding-left:40px;">' + uname + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     //查询所有账号

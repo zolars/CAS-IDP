@@ -1,4 +1,4 @@
-package deviceManage.action;
+package systemMng.action;
 
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class getAllAlarmUserAction extends ActionSupport {
@@ -39,7 +38,6 @@ public class getAllAlarmUserAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
             String devicename = request.getParameter("devicename");
 
             DeviceDAO dao = new DeviceDAOImpl();

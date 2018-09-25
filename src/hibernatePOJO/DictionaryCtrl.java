@@ -1,60 +1,48 @@
 package hibernatePOJO;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "dictionary_ctrl", schema = "test", catalog = "")
-public class Dictionary_Ctrl {
-    private int id;
-    private Integer functioncode;
-    private Integer addr;
+public class DictionaryCtrl {
+    private long id;
+    private Long func;
+    private Long addr;
     private String description;
     private String forTrue;
     private String forFalse;
+    private int functioncode;
 
-    @Id
-    @Column(name = "id", nullable = false)
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "functioncode", nullable = true)
-    public Integer getFunctioncode() {
-        return functioncode;
+    public Long getFunc() {
+        return func;
     }
 
-    public void setFunctioncode(Integer functioncode) {
-        this.functioncode = functioncode;
+    public void setFunc(Long func) {
+        this.func = func;
     }
 
-    @Basic
-    @Column(name = "addr", nullable = true)
-    public Integer getAddr() {
+    public Long getAddr() {
         return addr;
     }
 
-    public void setAddr(Integer addr) {
+    public void setAddr(Long addr) {
         this.addr = addr;
     }
 
-    @Basic
-    @Column(name = "description", nullable = true)
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String start) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "forTrue", nullable = true)
     public String getForTrue() {
         return forTrue;
     }
@@ -63,8 +51,6 @@ public class Dictionary_Ctrl {
         this.forTrue = forTrue;
     }
 
-    @Basic
-    @Column(name = "forFalse", nullable = true)
     public String getForFalse() {
         return forFalse;
     }
@@ -73,14 +59,22 @@ public class Dictionary_Ctrl {
         this.forFalse = forFalse;
     }
 
+    public int getFunctioncode() {
+        return functioncode;
+    }
+
+    public void setFunctioncode(int functioncode) {
+        this.functioncode = functioncode;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Dictionary_Ctrl that = (Dictionary_Ctrl) o;
+        DictionaryCtrl that = (DictionaryCtrl) o;
         return id == that.id &&
-                Objects.equals(functioncode, that.functioncode) &&
+                functioncode == that.functioncode &&
+                Objects.equals(func, that.func) &&
                 Objects.equals(addr, that.addr) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(forTrue, that.forTrue) &&
@@ -90,6 +84,6 @@ public class Dictionary_Ctrl {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, functioncode, addr, description, forTrue, forFalse);
+        return Objects.hash(id, func, addr, description, forTrue, forFalse, functioncode);
     }
 }
