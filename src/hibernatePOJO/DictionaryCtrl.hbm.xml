@@ -8,9 +8,6 @@
         <id name="id">
             <column name="id" sql-type="bigint(20)"/>
         </id>
-        <property name="func">
-            <column name="func" sql-type="bigint(20)" not-null="true"/>
-        </property>
         <property name="addr">
             <column name="addr" sql-type="bigint(20)" not-null="true"/>
         </property>

@@ -24,8 +24,6 @@ public class DataOnline {
     private static Map<String,Map<String,Float>> onlineDataMap=new HashMap<>();
     //存各个监测点的暂态连接
     private static Map<String,Channel> transientChannelMap=new HashMap<>();
-    //public static Long time = new Long(5000); //default 5000ms
-    //public static Integer time = 6;
 
     public static void tempSave(String did, Map<String, Float> dataset) {
         onlineDataStrings.put(did,JSON.toJSONString(dataset));//存成字符串
@@ -751,6 +749,7 @@ public class DataOnline {
     public static Map<String, Channel> getTransientChannelMap() {
         return transientChannelMap;
     }
+
     public static List<Dictionary> getDic() {
         return dic;
     }

@@ -22,6 +22,9 @@ public class EventDAOImpl implements EventDAO {
     private Session session;
     private Transaction transaction;
     private Query query;
+    DBConnect db;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
 
     public boolean addSignAndAnnotEvent(String teid, String sign, String annot){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
@@ -67,13 +70,10 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"'";
             try {
@@ -89,6 +89,7 @@ public class EventDAOImpl implements EventDAO {
 
                     list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
+                    list.add(rs.getString("cid"));
 
                     rtlist.add(list.toString());
                 }
@@ -142,16 +143,13 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         String maxtime = "0000-00-00 00:00:00.0";
 
         for(int i = 0; i < didset.length; i++ ){
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
                     + "' and ta.did ='" + didset[i] + "'";
             try {
@@ -165,6 +163,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("type"));
                     list.add(rs.getString("type")+"。当前值为"+rs.getString("discription"));
                     list.add(rs.getString("time"));
+                    list.add(rs.getString("cid"));
 
                     if(maxtime.compareTo(rs.getString("time")) < 0){ //若当前取的数据时间更新
                         maxtime = rs.getString("time");
@@ -219,11 +218,8 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //再根据设备id查询事件
-        String didset[] = didstr.split(",");
+        String didset[] = didstr.split("，");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -295,11 +291,8 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //再根据设备id查询事件
-        String didset[] = didstr.split(",");
+        String didset[] = didstr.split("，");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -357,7 +350,7 @@ public class EventDAOImpl implements EventDAO {
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
-        String comidset[] = comstr.split(",");
+        String comidset[] = comstr.split("，");
 
         for(int i = 0; i < comidset.length; i++){
 
@@ -373,9 +366,6 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -449,9 +439,6 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -508,7 +495,7 @@ public class EventDAOImpl implements EventDAO {
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
-        String comidset[] = comstr.split(",");
+        String comidset[] = comstr.split("，");
 
         for(int i = 0; i < comidset.length; i++){
 
@@ -524,9 +511,6 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -600,9 +584,6 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -660,7 +641,7 @@ public class EventDAOImpl implements EventDAO {
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
-        String comidset[] = comstr.split(",");
+        String comidset[] = comstr.split("，");
 
         for(int i = 0; i < comidset.length; i++){
 
@@ -676,9 +657,6 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -812,7 +790,7 @@ public class EventDAOImpl implements EventDAO {
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
-        String comidset[] = comstr.split(",");
+        String comidset[] = comstr.split("，");
 
         for(int i = 0; i < comidset.length; i++){
 
@@ -1133,9 +1111,6 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -1209,9 +1184,6 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -1284,9 +1256,6 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -1360,9 +1329,6 @@ public class EventDAOImpl implements EventDAO {
         //再根据设备id查询事件
         String didset[] = didstr.split(",");
 
-        DBConnect db;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
         db = new DBConnect();
 
         for(int i = 0; i < didset.length; i++ ){
@@ -1495,7 +1461,7 @@ public class EventDAOImpl implements EventDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<List<Integer>> rtlist = new ArrayList<>();
+        List<List<String>> rtlist = new ArrayList<>();
 
         ProvinceBank provb = (ProvinceBank)hbsessionDao.getFirst(
                 "FROM ProvinceBank where pbid='" + pid + "'");
@@ -1510,31 +1476,48 @@ public class EventDAOImpl implements EventDAO {
 
         }
 
-        else{
+        else {
             String cbidstr[] = cbidset.split("，");
 
-            for(int i = 0 ; i < cbidstr.length; i++){
-                AssessRecord record = (AssessRecord)hbsessionDao.getFirst(
-                        "FROM AssessRecord where cbid='" + cbidstr[i] +"'");
-                if(record != null){
+            db = new DBConnect();
 
-                    List<Integer> nlist = new ArrayList();
-                    nlist.add(record.getPowernum());
-                    nlist.add(record.getTempreturenum());
-                    nlist.add(record.getWetnum());
-                    nlist.add(record.getDevicenum());
-                    nlist.add(record.getApowernum());
-                    nlist.add(record.getAtempreturenum());
-                    nlist.add(record.getAwetnum());
-                    nlist.add(record.getAdevicenum());
-                    nlist.add(record.getDegree());
-                    nlist.add(record.getCbid());
+            for (int i = 0; i < cbidstr.length; i++) {
 
-                    rtlist.add(nlist);
+                String sql = "select ta.powernum as powernum, ta.tempreturenum as tempreturenum, ta.wetnum as wetnum, ta.devicenum as devicenum, " +
+                        "ta.apowernum as apowernum, ta.atempreturenum as atempreturenum, ta.awetnum as awetnum, ta.adevicenum as adevicenum, " +
+                        " ta.degree as degree, tb.cbname as cbname" +
+                        " from assess_record ta, city_bank tb where ta.cbid = tb.cbid and ta.cbid ='" + cbidstr[i] + "'";
+
+                try {
+                    ps = db.getPs(sql);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        List list = new ArrayList();
+                        list.add(rs.getString("powernum"));
+                        list.add(rs.getString("tempreturenum"));
+                        list.add(rs.getString("wetnum"));
+                        list.add(rs.getString("devicenum"));
+                        list.add(rs.getString("apowernum"));
+                        list.add(rs.getString("atempreturenum"));
+                        list.add(rs.getString("awetnum"));
+                        list.add(rs.getString("adevicenum"));
+                        list.add(rs.getString("degree"));
+                        list.add(rs.getString("cbname"));
+
+                        rtlist.add(list);
+                    }
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
             }
+            try {
+                db.free();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
-
         return rtlist;
     }
 

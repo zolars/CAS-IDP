@@ -411,8 +411,8 @@
             for (var i = 0; i < list.length; i++) {
                 xdata[i] = list[i][9];
 
-                eventdata[i] = list[i][0] + list[i][1] + list[i][2] + list[i][3];
-                alarmdata[i] = list[i][4] + list[i][5] + list[i][6] + list[i][7];
+                eventdata[i] = parseInt(list[i][0]) + parseInt(list[i][1]) + parseInt(list[i][2]) + parseInt(list[i][3]);
+                alarmdata[i] = parseInt(list[i][4]) + parseInt(list[i][5]) + parseInt(list[i][6]) + parseInt(list[i][7]);
 
                 degree[i] = list[i][8];
             }

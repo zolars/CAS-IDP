@@ -57,6 +57,14 @@ public class MyListener implements ServletContextListener {
                                 new TransientClient(c.getiPaddress(),
                                         Integer.parseInt(c.getExtra()),
                                         c.getDid()).start();
+
+                               /* System.out.println("创建写阈值数据连接 " + "监测点(" + c.getDid()
+                                        + ") " + c.getiPaddress() + ":"
+                                        + c.getPort());
+                                new ThresholdClient(c.getiPaddress(),
+                                        Integer.parseInt(c.getPort()),
+                                        c.getDid()).start();*/
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -181,6 +189,16 @@ public class MyListener implements ServletContextListener {
                         JobDetail job7 = newJob(CtrlSaveJob.class).withIdentity(
                                 "CtrlSaveJob", "CtrlSaveGroup").build();
                         scheduler.scheduleJob(job7, trigger7);
+
+                        // 设置任务，每1h写入设备阈值设置
+                        Trigger trigger8 = newTrigger()
+                                .withIdentity("ThresholdSaveTrigger",
+                                        "ThresholdSaveTriggerGroup")
+                                .startNow()
+                                .withSchedule(simpleSchedule().withIntervalInSeconds(20).repeatForever()).build();
+                        JobDetail job8 = newJob(CtrlSaveJob.class).withIdentity(
+                                "ThresholdSaveJob", "ThresholdSaveGroup").build();
+                        scheduler.scheduleJob(job8, trigger8);
 
                         ///////////////////////////
                         scheduler.start();

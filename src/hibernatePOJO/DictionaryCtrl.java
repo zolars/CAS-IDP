@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class DictionaryCtrl {
     private long id;
-    private Long func;
     private Long addr;
     private String description;
     private String forTrue;
@@ -19,13 +18,6 @@ public class DictionaryCtrl {
         this.id = id;
     }
 
-    public Long getFunc() {
-        return func;
-    }
-
-    public void setFunc(Long func) {
-        this.func = func;
-    }
 
     public Long getAddr() {
         return addr;
@@ -74,7 +66,6 @@ public class DictionaryCtrl {
         DictionaryCtrl that = (DictionaryCtrl) o;
         return id == that.id &&
                 functioncode == that.functioncode &&
-                Objects.equals(func, that.func) &&
                 Objects.equals(addr, that.addr) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(forTrue, that.forTrue) &&
@@ -84,6 +75,6 @@ public class DictionaryCtrl {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, func, addr, description, forTrue, forFalse, functioncode);
+        return Objects.hash(id, addr, description, forTrue, forFalse, functioncode);
     }
 }

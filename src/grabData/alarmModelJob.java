@@ -109,7 +109,7 @@ public class alarmModelJob implements Job {
 
 
         //2.查询各个事件的告警方式、告警用户、告警时间范围
-        if(alrmtranslist.size() > 0){
+        if(alrmtranslist != null){
             for(int i = 0; i < alrmtranslist.size(); i++){
                 String did = alrmtranslist.get(i).getDid();
 

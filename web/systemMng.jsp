@@ -579,9 +579,14 @@
                                                 </div>
                                             </div>
                                         </td>
+                                    </tr>
+                                    <tr>
                                         <td>
-                                            <button class="btn btn-default" onclick="getOneDeviceThreshold()">查询
-                                            </button>
+                                            <button class="btn-primary" onclick="getOneDeviceThreshold()">查询</button>
+                                            <button class="btn-success" onclick="AddThresholdModal()" type="submit">添加</button>
+                                            <button class="btn-default" onclick="updateThresholdModal()">修改</button>
+                                            <button class="btn-danger" onclick="deleteThresholdModal()">删除</button>
+                                            <button class="btn-default" onclick="importThresholdModal()">导入</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -601,9 +606,6 @@
                                             <div style="padding-left:40px;">单位</div>
                                         </th>
                                         <th>
-                                            <div style="padding-left:40px;">标准值</div>
-                                        </th>
-                                        <th>
                                             <div style="padding-left:50px;">上限值</div>
                                         </th>
                                         <th>
@@ -612,18 +614,12 @@
                                         <th>
                                             <div style="padding-left:50px;">启用标识</div>
                                         </th>
-                                        <th>
-                                            <div style="padding-left:50px;">预警内容</div>
-                                        </th>
                                     </tr>
                                     </thead>
                                 </table>
                                 <table id="infotable"></table>
 
-                                <button type="submit" class="btn btn-primary" onclick="AddThresholdModal()">添加</button>
-                                <button class="btn btn-default" onclick="updateThresholdModal()">修改</button>
-                                <button class="btn btn-default" onclick="deleteThresholdModal()">删除</button>
-                                <button class="btn btn-default" onclick="importThresholdModal()">导入</button>
+
                             </div>
                         </div>
                         <div id="tridItem2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
@@ -2616,28 +2612,23 @@
                 var table = $("#threadinfotablehead");
                 table.empty();
                 table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:20px;">参数名称</td><td style="padding-left:20px;">参数分类</td><td style="padding-left:20px;">' +
-                    '单位</td><td style="padding-left:20px;">标准值</td><td style="padding-left:20px;">上限值</td><td style="padding-left:20px;">下限值</td><td style="padding-left:20px;">' +
-                    '启用标识</td><td style="padding-left:20px;">预警内容</td></tr>');
+                    '单位</td><td style="padding-left:20px;">上限值</td><td style="padding-left:20px;">下限值</td><td style="padding-left:20px;">' +
+                    '启用标识</td></tr>');
 
                 for (var i = 0; i < list.length; i++) {
                     var dtid = list[i].dtid;
-                    var name = list[i].name;
+                    var name = list[i].classify;
                     var type = list[i].type;
                     var unit = list[i].unit;
-                    var standardval = list[i].standardval;
                     var cellval = list[i].cellval;
                     var floorval = list[i].floorval;
                     var isMark = list[i].isMark;
-                    var alarmcontent = list[i].alarmcontent;
-
-                    console.log("dtid:" + dtid);
-
 
                     table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="dtid" id="dtid" value=' + dtid + '></td>' +
                         '<td style="padding-left:20px;">' + name + '</td><td style="padding-left:20px;">' + type + '</td>' +
-                        '<td style="padding-left:20px;">' + unit + '</td><td style="padding-left:20px;">' + standardval + '</td>' +
+                        '<td style="padding-left:20px;">' + unit  + '</td>' +
                         '<td style="padding-left:20px;">' + cellval + '</td><td style="padding-left:20px;">' + floorval + '</td>' +
-                        '<td style="padding-left:20px;">' + isMark + '</td><td style="padding-left:20px;">' + alarmcontent + '</td>' +
+                        '<td style="padding-left:20px;">' + isMark + '</td>' +
                         '</td></tr>');
                 }
             },
