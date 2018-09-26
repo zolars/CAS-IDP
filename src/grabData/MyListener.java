@@ -35,7 +35,7 @@ public class MyListener implements ServletContextListener {
                 // diclist为第一个字典，dicpluslist为第二个索引字典
                 DataOnline.setDic(hbSessionDao.search("FROM Dictionary"));
                 DataOnline.setDicPlus(hbSessionDao.search("FROM DictionaryPlus"));
-                CtrlSave.setDic(hbSessionDao.search("FROM Dictionary_Ctrl"));
+                CtrlSave.setDic(hbSessionDao.search("FROM DictionaryCtrl"));
 
                 // 从数据库取基础配置信息(采集频率、上传频率)
                 List<BasicSetting> listbase = hbSessionDao.search("FROM BasicSetting");
@@ -55,8 +55,16 @@ public class MyListener implements ServletContextListener {
                                         + ") " + c.getiPaddress() + ":"
                                         + c.getExtra()); //暂态事件的端口是extra
                                 new TransientClient(c.getiPaddress(),
-                                        Integer.parseInt(c.getPort()),
+                                        Integer.parseInt(c.getExtra()),
                                         c.getDid()).start();
+
+                               /* System.out.println("创建写阈值数据连接 " + "监测点(" + c.getDid()
+                                        + ") " + c.getiPaddress() + ":"
+                                        + c.getPort());
+                                new ThresholdClient(c.getiPaddress(),
+                                        Integer.parseInt(c.getPort()),
+                                        c.getDid()).start();*/
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -123,7 +131,7 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("uploadDataTrigger",
                                         "uploadDataTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInMinutes(listbase.get(0)
+                                .withSchedule(simpleSchedule().withIntervalInHours(listbase.get(0)
                                                 .getUploadinterval())
                                         .repeatForever())
                                 .build();
@@ -151,7 +159,7 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("alarmModelTrigger",
                                         "alarmModelTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInMinutes(15)
+                                .withSchedule(simpleSchedule().withIntervalInMinutes(30)
                                         .repeatForever())
                                 .build();
                         JobDetail job5 = newJob(alarmModelJob.class)
@@ -164,7 +172,7 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("TemperatureSaveTrigger",
                                         "TemperatureSaveTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInMinutes(listbase.get(1)
+                                .withSchedule(simpleSchedule().withIntervalInMinutes(listbase.get(0)
                                                 .getOnlineinterval())
                                         .repeatForever())
                                 .build();
@@ -174,13 +182,23 @@ public class MyListener implements ServletContextListener {
 
                         // 设置任务，实时读取治理模块告警
                         Trigger trigger7 = newTrigger()
-                                .withIdentity("TemperatureSaveTrigger",
-                                        "TemperatureSaveTriggerGroup")
+                                .withIdentity("CtrlSaveTrigger",
+                                        "CtrlSaveTriggerGroup")
                                 .startNow()
                                 .withSchedule(simpleSchedule().withIntervalInSeconds(5).repeatForever()).build();
-                        JobDetail job7 = newJob(TemperatureSaveJob.class).withIdentity(
-                                "TemperatureSaveJob", "TemperatureSaveGroup").build();
+                        JobDetail job7 = newJob(CtrlSaveJob.class).withIdentity(
+                                "CtrlSaveJob", "CtrlSaveGroup").build();
                         scheduler.scheduleJob(job7, trigger7);
+
+                        // 设置任务，每1h写入设备阈值设置
+                        Trigger trigger8 = newTrigger()
+                                .withIdentity("ThresholdSaveTrigger",
+                                        "ThresholdSaveTriggerGroup")
+                                .startNow()
+                                .withSchedule(simpleSchedule().withIntervalInSeconds(20).repeatForever()).build();
+                        JobDetail job8 = newJob(CtrlSaveJob.class).withIdentity(
+                                "ThresholdSaveJob", "ThresholdSaveGroup").build();
+                        scheduler.scheduleJob(job8, trigger8);
 
                         ///////////////////////////
                         scheduler.start();

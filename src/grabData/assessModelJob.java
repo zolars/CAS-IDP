@@ -29,7 +29,6 @@ public class assessModelJob implements Job {
         List<EventPower> eventpowerlist = hbsessionDao.search(
                 "FROM EventPower where time >'"+ date +"'");
 
-
         Integer eenum = 0;
         Integer epnum = 0;
         Integer aeenum = 0;

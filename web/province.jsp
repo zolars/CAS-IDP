@@ -211,6 +211,10 @@
                 <div id="assessbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;text-align:center">
                     <div class="chart-item-title">评估结果</div>
                     <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
+                        <tr><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td></tr>
+                        <tr><td style="font-size: 12px">状态：良</td></tr>
+                        <tr><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td></tr>
+                        <tr><td style="font-size: 12px">状态：良</td></tr>
                     </table>
                 </div>
             </div>
@@ -407,8 +411,8 @@
             for (var i = 0; i < list.length; i++) {
                 xdata[i] = list[i][9];
 
-                eventdata[i] = list[i][0] + list[i][1] + list[i][2] + list[i][3];
-                alarmdata[i] = list[i][4] + list[i][5] + list[i][6] + list[i][7];
+                eventdata[i] = parseInt(list[i][0]) + parseInt(list[i][1]) + parseInt(list[i][2]) + parseInt(list[i][3]);
+                alarmdata[i] = parseInt(list[i][4]) + parseInt(list[i][5]) + parseInt(list[i][6]) + parseInt(list[i][7]);
 
                 degree[i] = list[i][8];
             }
@@ -552,8 +556,9 @@
             tempChart.setOption(tempoption);
             humidChart.setOption(humidoption);
 
-            // 显示评估等级
+           /* // 显示评估等级
             var table = $("#assesstable");
+
             table.empty();
             for (var i = 0; i < degree.length; i++) {
                 if (degree[i] == 1)
@@ -562,7 +567,7 @@
                     table.append('<tr><td><img src="/img/icon/NORMAL.jpg"/></td></tr>');
                 if (degree[i] == 3)
                     table.append('<tr><td><img src="/img/icon/GOOD.jpeg"/></td></tr>');
-            }
+            }*/
 
         }
     });

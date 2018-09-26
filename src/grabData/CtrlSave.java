@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CtrlSave {
-    private static List<Dictionary_Ctrl> dic = null;
+    private static List<DictionaryCtrl> dic = null;
     private static Map<String, EventCtrl> eventCtrlMap = new HashMap<>();
 
     public static void ctrlSave(String did, int eventType) {
@@ -28,11 +28,11 @@ public class CtrlSave {
         var.setAlarm(dic.get(eventType).getForFalse());
     }
 
-    public static List<Dictionary_Ctrl> getDic() {
+    public static List<DictionaryCtrl> getDic() {
         return dic;
     }
 
-    public static void setDic(List<Dictionary_Ctrl> dic) {
+    public static void setDic(List<DictionaryCtrl> dic) {
         CtrlSave.dic = dic;
     }
 

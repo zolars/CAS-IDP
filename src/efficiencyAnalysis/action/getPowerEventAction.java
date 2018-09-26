@@ -38,16 +38,36 @@ public class getPowerEventAction extends ActionSupport {
             String cbname = request.getParameter("cbname");
             String starttime = request.getParameter("stime");
             String endtime = request.getParameter("etime");
+            String priortystr = request.getParameter("priortylist");
+            String priortylist[] = priortystr.split(",");
 
             EventDAO dao = new EventDAOImpl();
 
-            List<EventPower> pedata = new ArrayList();
+            List pedata = new ArrayList();
 
             if((starttime.equals(" ") && endtime.equals(" ")) || (starttime == null && endtime == null))
                 pedata = dao.getLocalLastPowerEvent(cbname);
 
             else
                 pedata = dao.getLocalAllPowerEvent(cbname, starttime, endtime);
+
+            for (int i = 0 ; i < pedata.size(); i++) {
+                String ep = (String)pedata.get(i);
+                List<String> eplist = java.util.Arrays.asList(ep.split(","));
+
+                String cid= (String)eplist.get(6);
+                String cidn = cid.substring(1, 2);
+
+                Boolean has = false;
+
+                for (int j = 0 ; j < priortylist.length; j++) {
+                    if (cidn.equals(priortylist[j]))
+                        has = true;
+                }
+
+                if(!has)
+                    pedata.remove(i);
+            }
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allpelist", pedata);

@@ -10,7 +10,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 
-
 public class DataOnlineClient extends Thread{
     private String host;
     private int port;
@@ -34,10 +33,7 @@ public class DataOnlineClient extends Thread{
                 public void initChannel(SocketChannel ch)
                         throws Exception
                 {
-
                     ch.pipeline().addLast(new DataOnlineClientHandler(did));
-                    //System.out.println("HANDLER-BUILT#####################################");
-
                 }
             });
             ChannelFuture f = b.connect(host, port).sync();

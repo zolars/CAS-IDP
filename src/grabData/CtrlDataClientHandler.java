@@ -1,6 +1,6 @@
 package grabData;
 
-import hibernatePOJO.Dictionary_Ctrl;
+import hibernatePOJO.DictionaryCtrl;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
@@ -11,7 +11,7 @@ import java.util.List;
 
 
 class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
-    private List<Dictionary_Ctrl> dic = null;
+    private List<DictionaryCtrl> dic = null;
 
     private ByteBuf recMsg = null;
 
