@@ -95,6 +95,48 @@
     }
 %>
 
+<script type="text/javascript">
+    <!-- 导入限值 model  -->
+        this.init = function() {
+            //模拟上传excel
+            $("#uploadEventBtn").unbind("click").bind("click", function () {
+                $("#uploadEventFile").click();
+            });
+            $("#uploadEventFile").bind("change", function () {
+                $("#uploadEventPath").attr("value", $("#uploadEventFile").val());
+            });
+        }
+
+        //点击上传钮
+        function deviceThresholdupload() {
+            var uploadEventFile = $("#uploadEventFile").val();
+            if (uploadEventFile == '') {
+                alert("请择excel,再上传");
+            } else if (uploadEventFile.lastIndexOf(".xls") < 0) {//可判断以.xls和.xlsx结尾的excel
+                alert("只能上传Excel文件");
+            } else {
+                //var url = "excel/import.do";
+                //var formData = new FormData($('form')[0]);
+                //user.sendAjaxRequest(url, "POST", formData);
+
+                $.ajax({
+                    url : url,
+                    type : type,
+                    data : {
+                        uploadEventFile: uploadEventFile
+                    },
+                    success : function(result) {
+                        alert(result);
+                    }
+                });
+
+            }
+        }
+
+    }
+
+</script>
+
 <script Language="JavaScript" src="js/onlineDataInterface.js"></script>
 
 <header id="header" class="media">
@@ -586,8 +628,15 @@
                                             <button class="btn-success" onclick="AddThresholdModal()" type="submit">添加</button>
                                             <button class="btn-default" onclick="updateThresholdModal()">修改</button>
                                             <button class="btn-danger" onclick="deleteThresholdModal()">删除</button>
-                                            <button class="btn-default" onclick="importThresholdModal()">导入</button>
                                         </td>
+
+                                       <%-- <form enctype="multipart/form-data" id="batchUpload"  action="/excel/import" method="post" class="form-horizontal">--%>
+                                            <button class="btn-success" id="uploadEventBtn" type="button" >请选择导入文件</button>
+                                            <input type="file" name="file"  style="width:0px;height:0px;" id="uploadEventFile">
+                                            <input id="uploadEventPath"  disabled="disabled"  type="text" placeholder="请选择excel表" style="border: 1px solid #e6e6e6; height: 26px;width: 200px;" />
+                                       <%-- </form>--%>
+                                        <button type="button" class="btn-success"  onclick="deviceThresholdupload()" >导入</button>
+
                                     </tr>
                                 </table>
                             </div>
@@ -2783,11 +2832,6 @@
                 alert("失败");
             }
         });
-    }
-
-    <!-- 导入限值 model  -->
-    function importThresholdModal() {
-
     }
 </script>
 

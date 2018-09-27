@@ -58,12 +58,12 @@ public class MyListener implements ServletContextListener {
                                         Integer.parseInt(c.getExtra()),
                                         c.getDid()).start();
 
-                               /* System.out.println("创建写阈值数据连接 " + "监测点(" + c.getDid()
+                                System.out.println("创建写阈值数据连接 " + "监测点(" + c.getDid()
                                         + ") " + c.getiPaddress() + ":"
                                         + c.getPort());
                                 new ThresholdClient(c.getiPaddress(),
                                         Integer.parseInt(c.getPort()),
-                                        c.getDid()).start();*/
+                                        c.getDid()).start();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
