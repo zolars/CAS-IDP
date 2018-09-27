@@ -10,8 +10,6 @@ import hibernatePOJO.DevicesThreshold;
 import jxl.Sheet;
 import jxl.Workbook;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 
 public class ImportService {
 
@@ -38,17 +36,21 @@ public class ImportService {
                     String unit=rs.getCell(j++, i).getContents();
                     String cellvalstr=rs.getCell(j++, i).getContents();
                     String floorvalstr=rs.getCell(j++, i).getContents();
-                    String aid=rs.getCell(j++, i).getContents();
-                    String cid=rs.getCell(j++, i).getContents();
+                    String aidstr=rs.getCell(j++, i).getContents();
+                    String cidstr=rs.getCell(j++, i).getContents();
 
                     Double cellval = 0.00;
                     Double floorval = 0.00;
-                    if(cellvalstr != null)
+                    Integer aid = 0;
+                    Integer cid = 0;
+                    if(cellvalstr != "")
                         cellval = Double.parseDouble(cellvalstr);
-                    if(floorval != null)
+                    if(floorvalstr != "")
                         floorval = Double.parseDouble(floorvalstr);
-
-
+                    if(cidstr != "")
+                        aid = Integer.parseInt(aidstr);
+                    if(cidstr != "")
+                        cid = Integer.parseInt(cidstr);
 
                     System.out.println("did:"+did+" classify:"+classify+" unit:"+unit+" cellval:"+cellval);
 
@@ -60,8 +62,8 @@ public class ImportService {
                     dt.setUnit(unit);
                     dt.setCellval(cellval);
                     dt.setFloorval(floorval);
-                    dt.setAid(Integer.parseInt(aid));
-                    dt.setCid(Integer.parseInt(cid));
+                    dt.setAid(aid);
+                    dt.setCid(cid);
 
                     list.add(dt);
                 }
@@ -71,7 +73,6 @@ public class ImportService {
             e.printStackTrace();
         }
         return list;
-
     }
 
     /**
