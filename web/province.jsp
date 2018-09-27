@@ -118,7 +118,7 @@
                         var options = $("#comproom_code option:selected");
                         $.cookie('opinion3', options.text(), {expires: 1, path: '/'});
                         alert("您已选择: " + options.text() + ". 即将跳转到相应界面...");
-                        if(options.index() !== 0){
+                        if (options.index() !== 0) {
                             $('#second-page').css('display', 'block');
                             $('#first-page').css('display', 'none');
                         } else {
@@ -208,13 +208,30 @@
                 <div id="alarmbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
                 </div>
 
-                <div id="assessbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;text-align:center">
+                <div id="assessbar" class="col-md-2 col-xs-6 chart-item"
+                     style="width:30%; height: 200px;text-align:center">
                     <div class="chart-item-title">评估结果</div>
                     <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
-                        <tr><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td></tr>
-                        <tr><td style="font-size: 12px">状态：良</td></tr>
-                        <tr><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td><td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td></tr>
-                        <tr><td style="font-size: 12px">状态：良</td></tr>
+                        <tr>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 12px">状态：良</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 12px">状态：良</td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -234,27 +251,142 @@
 
         <div id="second-page" style="display: none;">
 
-            <div style="width: 50%; height: 30%;">
-                <div class="col-md-2 col-xs-6" style="width: 33%; height: 100%;">
-                    <button onclick="openPowerImg()">打开一张配电系统图</button>
+            <div class="row">
+
+                <div class="col-md-2 col-xs-6"
+                     style="
+                         width: 425px;
+                         height: 200px;
+                         -webkit-tap-highlight-color: transparent;
+                         user-select: none;
+                         position: relative;
+                     ">
+                    <!-- html代码，不考虑CSS样式 -->
+                    <img id="preview" alt=""/>
+                    <form class="am-form" method="post" enctype="multipart/form-data">
+                        <input type="file" id="head" name="head" onchange="previewImage(this)">
+                        <script>
+                            // 上传图片前预览
+                            function previewImage(file) {
+                                var MAXWIDTH = 1200;  // 最大图片宽度
+                                var MAXHEIGHT = 360;  // 最大图片高度
+                                if (file.files && file.files[0]) {
+                                    var img = document.getElementById('preview');
+                                    img.onload = function () {
+                                        var rect = getZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                                        img.width = rect.width;
+                                        img.height = rect.height;
+                                    }
+                                    var reader = new FileReader();
+                                    reader.onload = function (evt) {
+                                        img.src = evt.target.result;
+                                    }
+                                    reader.readAsDataURL(file.files[0]);
+                                } else {
+                                    //兼容IE
+                                    file.select();
+                                    var src = document.selection.createRange().text;
+                                    var img = document.getElementById('preview');
+                                    img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+                                }
+                            }
+
+                            // 获取缩放的尺寸
+                            function getZoomParam(maxWidth, maxHeight, width, height) {
+                                var param = {top: 0, left: 0, width: width, height: height};
+                                if (width > maxWidth || height > maxHeight) {
+                                    rateWidth = width / maxWidth;
+                                    rateHeight = height / maxHeight;
+                                    if (rateWidth > rateHeight) {
+                                        param.width = maxWidth;
+                                        param.height = Math.round(height / rateWidth);
+                                    } else {
+                                        param.width = Math.round(width / rateHeight);
+                                        param.height = maxHeight;
+                                    }
+                                }
+                                param.left = Math.round((maxWidth - param.width) / 2);
+                                param.top = Math.round((maxHeight - param.height) / 2);
+                                return param;
+                            }
+                        </script>
+                    </form>
+
                 </div>
-                <div class="col-md-2 col-xs-6"></div>
-                <div class="col-md-2 col-xs-6"></div>
+
+                <div id="assessbar" class="col-md-2 col-xs-6 chart-item"
+                     style="width: 388px;
+                        height: 200px;
+                        -webkit-tap-highlight-color: transparent;
+                        user-select: none;
+                        position: relative;text-align:center">
+                    <div class="chart-item-title">评估结果</div>
+                    <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 12px">状态：良</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 12px">状态：良</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="nullbar" class="col-md-2 col-xs-6 chart-item"
+                     style="
+                         width: 388px;
+                        height: 200px;
+                        -webkit-tap-highlight-color: transparent;
+                        user-select: none;
+                        position: relative;
+                     ">
+                </div>
+
+                <div id="tempbar" class="col-md-2 col-xs-6 chart-item"
+                     style="
+                        width: 388px;
+                        height: 200px;
+                        -webkit-tap-highlight-color: transparent;
+                        user-select: none;
+                        position: relative;
+                     ">
+                </div>
+
+                <div id="humidbar" class="col-md-2 col-xs-6 chart-item"
+                     style="
+                         width: 388px;
+                        height: 200px;
+                        -webkit-tap-highlight-color: transparent;
+                        user-select: none;
+                        position: relative;
+                     ">
+                </div>
+
+                <div id="nullbar" class="col-md-2 col-xs-6 chart-item"
+                     style="
+                         width: 388px;
+                        height: 200px;
+                        -webkit-tap-highlight-color: transparent;
+                        user-select: none;
+                        position: relative;
+                     ">
+                </div>
             </div>
-            <table>
-                <tr>
-                    <td style="width:60%; height: 200px;">
-                        <div id="tempbar" style="width:250%; height: 200px;">
-                        </div>
-                    </td>
 
-                    <td style="width:70%; height: 200px;">
-                        <div id="humidbar" style="width:250%; height: 200px;">
-                        </div>
-                    </td>
 
-                </tr>
-            </table>
         </div>
 
         <hr class="whiter"/>
@@ -405,7 +537,7 @@
             var eventdata = [];
             var alarmdata = [];
             var tempdata = [26, 26, 26, 25.5];
-            var humiddata = [50, 40, 35, 30 ];
+            var humiddata = [50, 40, 35, 30];
             var degree = [];
 
             for (var i = 0; i < list.length; i++) {
@@ -556,18 +688,18 @@
             tempChart.setOption(tempoption);
             humidChart.setOption(humidoption);
 
-           /* // 显示评估等级
-            var table = $("#assesstable");
+            /* // 显示评估等级
+             var table = $("#assesstable");
 
-            table.empty();
-            for (var i = 0; i < degree.length; i++) {
-                if (degree[i] == 1)
-                    table.append('<tr><td><img src="/img/icon/BAD.jpeg"/></td></tr>');
-                if (degree[i] == 2)
-                    table.append('<tr><td><img src="/img/icon/NORMAL.jpg"/></td></tr>');
-                if (degree[i] == 3)
-                    table.append('<tr><td><img src="/img/icon/GOOD.jpeg"/></td></tr>');
-            }*/
+             table.empty();
+             for (var i = 0; i < degree.length; i++) {
+                 if (degree[i] == 1)
+                     table.append('<tr><td><img src="/img/icon/BAD.jpeg"/></td></tr>');
+                 if (degree[i] == 2)
+                     table.append('<tr><td><img src="/img/icon/NORMAL.jpg"/></td></tr>');
+                 if (degree[i] == 3)
+                     table.append('<tr><td><img src="/img/icon/GOOD.jpeg"/></td></tr>');
+             }*/
 
         }
     });
