@@ -124,7 +124,7 @@ public class DeviceDAOImpl implements DeviceDAO {
             return kl.getId();
     }
 
-    public Boolean addThresholdInfo(String did, Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark,String alarmcontent){
+    public Boolean addThresholdInfo(String did, Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark, Integer level){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
@@ -134,6 +134,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         dt.setUnit(unit);
         dt.setCellval(cellval);
         dt.setFloorval(floorval);
+        dt.setLevel(level);
 
         rt = hbsessionDao.insert(dt);
         return rt;
@@ -202,13 +203,12 @@ public class DeviceDAOImpl implements DeviceDAO {
         return dt;
     }
 
-    public Boolean updateDeviceThreshold(String dtid,String name,String type,String unit, Double standval, Double cellval, Double floorval, Integer ismark, String alarmcontent){
+    public Boolean updateDeviceThreshold(String dtid, String type, String unit, Double cellval, Double floorval, Integer ismark, Integer level){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = false;
-        DevicesThreshold kl = getDeviceThreshold(dtid);
 
-        String hql = "update DevicesThreshold kl set kl.name='" + name + "', kl.type='" + type +  "', kl.unit='" + unit +  "', kl.standardval='" + standval +
-                "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.isMark='" + ismark +  "', kl.alarmcontent='" + alarmcontent +  "' where kl.dtid='" + dtid + "'";
+        String hql = "update DevicesThreshold kl set kl.classify='" + type +  "', kl.unit='" + unit +
+                "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.ismark='" + ismark + "', kl.level='" + level + "' where kl.dtid='" + dtid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;

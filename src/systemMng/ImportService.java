@@ -1,4 +1,4 @@
-package Util;
+package systemMng;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Util.DBConnect;
 import hibernatePOJO.DevicesThreshold;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -26,11 +27,9 @@ public class ImportService {
             int clos=rs.getColumns();//得到所有的列
             int rows=rs.getRows();//得到所有的行
 
-            System.out.println(clos+" rows:"+rows);
             for (int i = 1; i < rows; i++) {
                 for (int j = 0; j < clos; j++) {
                     //第一个是列数，第二个是行数
-                    //String dtid=rs.getCell(j++, i).getContents();
                     String did=rs.getCell(j++, i).getContents();//默认最左边编号也算一列 所以这里得j++
                     String classify=rs.getCell(j++, i).getContents();
                     String unit=rs.getCell(j++, i).getContents();
@@ -51,8 +50,6 @@ public class ImportService {
                         aid = Integer.parseInt(aidstr);
                     if(cidstr != "")
                         cid = Integer.parseInt(cidstr);
-
-                    System.out.println("did:"+did+" classify:"+classify+" unit:"+unit+" cellval:"+cellval);
 
                     DevicesThreshold dt = new DevicesThreshold();
 

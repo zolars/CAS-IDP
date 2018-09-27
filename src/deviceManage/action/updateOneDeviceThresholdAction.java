@@ -24,7 +24,7 @@ public class updateOneDeviceThresholdAction extends ActionSupport {
     }
 
 
-    /*
+    /* 更新一个阈值的记录
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -33,25 +33,34 @@ public class updateOneDeviceThresholdAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
             String dtid = request.getParameter("dtid");
-            String name = request.getParameter("name");
             String type = request.getParameter("type");
             String unit = request.getParameter("unit");
-            String standval = request.getParameter("standval");
+           // String standval = request.getParameter("standval");
             String cellval = request.getParameter("cellval");
             String floorval = request.getParameter("floorval");
             String ismark = request.getParameter("ismark");
-            String alarmcontent = request.getParameter("alarmcontent");
+            String level = request.getParameter("level");
 
-            Double dstandval = Double.valueOf(standval);
-            Double dcellval = Double.valueOf(cellval);
-            Double dfloorval = Double.valueOf(floorval);
-            Integer iismark = Integer.valueOf(ismark);
+           // Double dstandval = Double.valueOf(standval);
+            Double dcellval = 0.00;
+            Double dfloorval = 0.00;
+            Integer iismark = 1;
+            Integer ilevel = 1;
+
+            if(cellval != "")
+                dcellval = Double.valueOf(cellval);
+            if(floorval != "")
+                dfloorval = Double.valueOf(floorval);
+            if(ismark != "")
+                iismark = Integer.valueOf(ismark);
+            if(level != "")
+                ilevel = Integer.valueOf(level);
+
 
             DeviceDAO dao = new DeviceDAOImpl();
 
-            Boolean rt = dao.updateDeviceThreshold(dtid, name, type, unit, dstandval, dcellval, dfloorval, iismark, alarmcontent);
+            Boolean rt = dao.updateDeviceThreshold(dtid, type, unit, dcellval, dfloorval, iismark, ilevel);
 
             JSONObject jsonObject = new JSONObject();
 

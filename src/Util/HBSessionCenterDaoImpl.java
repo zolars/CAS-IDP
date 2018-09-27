@@ -117,7 +117,7 @@ public class HBSessionCenterDaoImpl implements HBSessionCenterDao{
     }
 
     //使用HQL语句更新数据
-    public boolean update(Object obj, String hql) {
+    public boolean update(String hql) {
         try {
             Session session = null;
             session = getSession();

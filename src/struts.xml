@@ -703,6 +703,14 @@
              </result>
          </action>
 
+         <action name="uploadThresholdExcelToDB" class="systemMng.action.uploadThresholdExcelToDBAction">
+             <!--uploadThresholdExcelToDB -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
      </package>
 
 </struts>

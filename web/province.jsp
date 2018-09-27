@@ -213,21 +213,21 @@
                     <div class="chart-item-title">评估结果</div>
                     <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
                         </tr>
                         <tr>
                             <td style="font-size: 12px">状态：良</td>
                         </tr>
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
                         </tr>
                         <tr>
                             <td style="font-size: 12px">状态：良</td>
@@ -255,7 +255,7 @@
 
                 <div class="col-md-2 col-xs-6"
                      style="
-                         width: 425px;
+                         width: 30%;
                          height: 200px;
                          -webkit-tap-highlight-color: transparent;
                          user-select: none;
@@ -314,40 +314,47 @@
 
                 </div>
 
-                <div id="assessbar" class="col-md-2 col-xs-6 chart-item"
-                     style="width: 388px;
+                <div id="devicebar" class="col-md-2 col-xs-6 chart-item"
+                     style="width: 30%;
                         height: 200px;
                         -webkit-tap-highlight-color: transparent;
                         user-select: none;
                         position: relative;text-align:center">
-                    <div class="chart-item-title">评估结果</div>
-                    <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
+                    <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/1.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/2.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/3.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/4.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/5.png"/></td>
                         </tr>
                         <tr>
                             <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
                         </tr>
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
                         </tr>
                         <tr>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
                         </tr>
                     </table>
                 </div>
 
-                <div id="nullbar" class="col-md-2 col-xs-6 chart-item"
+                <div id="" class="col-md-2 col-xs-6 chart-item"
                      style="
-                         width: 388px;
+                        width: 30%;
                         height: 200px;
                         -webkit-tap-highlight-color: transparent;
                         user-select: none;
@@ -357,27 +364,29 @@
 
                 <div id="tempbar" class="col-md-2 col-xs-6 chart-item"
                      style="
-                        width: 388px;
+                        width: 30%;
                         height: 200px;
                         -webkit-tap-highlight-color: transparent;
                         user-select: none;
                         position: relative;
+                        z-index: 999;
                      ">
                 </div>
 
                 <div id="humidbar" class="col-md-2 col-xs-6 chart-item"
                      style="
-                         width: 388px;
+                         width: 30%;
                         height: 200px;
                         -webkit-tap-highlight-color: transparent;
                         user-select: none;
                         position: relative;
+                        z-index: 1;
                      ">
                 </div>
 
-                <div id="nullbar" class="col-md-2 col-xs-6 chart-item"
+                <div id="panelbar" class="col-md-2 col-xs-6 chart-item"
                      style="
-                         width: 388px;
+                         width: 30%;
                         height: 200px;
                         -webkit-tap-highlight-color: transparent;
                         user-select: none;
@@ -687,19 +696,6 @@
             nhChart.setOption(nhoption);
             tempChart.setOption(tempoption);
             humidChart.setOption(humidoption);
-
-            /* // 显示评估等级
-             var table = $("#assesstable");
-
-             table.empty();
-             for (var i = 0; i < degree.length; i++) {
-                 if (degree[i] == 1)
-                     table.append('<tr><td><img src="/img/icon/BAD.jpeg"/></td></tr>');
-                 if (degree[i] == 2)
-                     table.append('<tr><td><img src="/img/icon/NORMAL.jpg"/></td></tr>');
-                 if (degree[i] == 3)
-                     table.append('<tr><td><img src="/img/icon/GOOD.jpeg"/></td></tr>');
-             }*/
 
         }
     });
