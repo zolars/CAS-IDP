@@ -38,8 +38,13 @@
     <style>
         .outer {
             width: 200px;
-            height: 120px;
+            height: 30px;
             position: relative;
+            display: inline-block;
+        }
+
+        .searchButton{
+            display: inline-block;
         }
 
         .searchInput {
@@ -56,6 +61,9 @@
             height: 120px;
             overflow: scroll;
             border: 1px solid #cccccc;
+            z-index: 100000;
+            background: white;
+            color: black;
         }
 
         .tips-item:hover {
@@ -361,32 +369,18 @@
                         </div>
 
                         <div id="TCP-device" style="display: none">
-                            <label class="t-overflow">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <div id="outer" class="outer">
-                                                        <input id="searchInput" class="searchInput form-control"
-                                                               type="text">
-                                                        <div id="searchTips" class="tips" style="display: none">
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div id="item-devicename"
-                                                         style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">
-                                                        <ul id="device-name-Item">
-                                                        </ul>
-                                                    </div>
-                                                    <button class="btn btn-default" onclick="checkDevice()">查询</button>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                            <div id="outer" class="outer">
+                                <input id="searchInput" class="searchInput form-control"
+                                       type="text">
+                                <div id="searchTips" class="tips" style="display: none">
                                 </div>
-                            </label>
+                            </div>
+                            <button class="btn btn-default searchButton" onclick="checkDevice()">查询</button>
+                            <%--<div id="item-devicename"--%>
+                                 <%--style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">--%>
+                                <%--<ul id="device-name-Item">--%>
+                                <%--</ul>--%>
+                            <%--</div>--%>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="tile">
@@ -399,21 +393,21 @@
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input id="radio-Ethernet" name="radio-Ethernet" type="radio"> 以太网
+                                                        <input id="radio-Ethernet" name="myradio" type="radio"> 以太网
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input id="radio-R5485" name="radio-R5485" type="radio"> R5485
+                                                        <input id="radio-R5485" name="myradio" type="radio"> R5485
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input id="radio-RS232" name="radio-RS232" type="radio"> RS232
+                                                        <input id="radio-RS232" name="myradio" type="radio"> RS232
                                                     </label>
                                                 </div>
                                             </div>

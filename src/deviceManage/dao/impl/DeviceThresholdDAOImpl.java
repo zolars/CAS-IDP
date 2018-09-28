@@ -38,7 +38,7 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
 
         db = new DBConnect();
         List crlist = new ArrayList<>();
-        String sql = "select ta.dtid as dtid, tb.description as name, ta.classify as type, ta.unit as unit, ta.cellval as cellval, ta.floorval as floorval, ta.isMark as ismark, ta.level as level from devices_threshold as ta, events_type as tb where ta.cid = tb.cid and ta.did = '"+ did +"'";
+        String sql = "select ta.dtid as dtid, tb.description as name, ta.classify as type, ta.unit as unit, ta.cellval as cellval, ta.floorval as floorval, ta.isMark as ismark, ta.level as level from devices_threshold as ta, events_type as tb where ta.did = '"+ did +"'";
 
         try {
             ps = db.getPs(sql);

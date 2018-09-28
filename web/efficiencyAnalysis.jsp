@@ -46,6 +46,34 @@
     <script src="js/datatables.min.js"></script>
 
     <link rel="stylesheet" href="css/header.css">
+    <style>
+        .datetimepicker {
+            background: black!important;
+        }
+        .time-pick-container {
+            height: 34px;
+
+        }
+        .time-pick-container .iradio_minimal {
+            top: 10px!important;
+        }
+        .time-picker-radio {
+            padding-top: 8px;
+        }
+        .time-pick-text {
+            display: inline-block;
+            vertical-align: middle;
+            height: 34px;
+            line-height: 34px;
+            margin: 0 5px;
+        }
+        .time-pick-outer {
+            width: 200px;
+            height: 34px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
 
 </head>
 
@@ -389,77 +417,66 @@
                                     <div class="col-md-4">
 
                                         <ul class="nav nav-tabs" id="seculItem">
-                                            <li class="active" style="width:15%">
+                                            <li class="active" style="width:33.33333%">
                                                 <a data-toggle="tab" id="leftsubItem1">•时间地点</a>
                                             </li>
-                                            <li style="width:15%">
+                                            <li style="width:33.33333%">
                                                 <a data-toggle="tab" id="leftsubItem2">•列</a>
                                             </li>
-                                            <li style="width:15%">
+                                            <li style="width:33.33333%">
                                                 <a data-toggle="tab" id="leftsubItem3">•图形</a>
                                             </li>
                                         </ul>
 
                                         <div id="leftItem1" style="width: 100%;">
-                                            <table>
-                                                <tr><td>日期时间</td></tr>
-                                                <tr><td><input id="radio-last-day-event" type="radio" name="event-data-peroid" value="lastone">观看最后的事件</td></tr>
-                                                <tr><td><input id="radio-from-to-event" type="radio" name="event-data-peroid" value="fromto">从
-                                                    <div class="form-group">
-                                                        <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-                                                            <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                                            <div>日期时间</div>
+                                            <div><input id="radio-last-day-event" type="radio" name="event-data-peroid" value="lastone">观看最后的事件</div>
+                                            <div class="time-pick-container">
+                                                <input id="radio-from-to-event" class="time-picker-radio" type="radio" name="event-data-peroid" value="fromto"><div class="time-pick-text">从</div>
+                                                <div class="time-pick-outer">
+                                                    <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                        <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                     </div>
-                                                </td></tr>
-                                                <tr><td>到
-                                                    <div class="form-group">
-                                                        <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-                                                            <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                        <input type="hidden" id="dtp_input2" value="" /><br/>
+                                                    <input type="hidden" id="dtp_input1" value="" /><br/>
+                                                </div><div class="time-pick-text">到</div><div class="time-pick-outer">
+                                                    <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                        <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                     </div>
-                                                </td></tr>
-
-                                                <tr><td>时间段控制</td></tr>
-
-                                                <tr><td><input id="radio-day-event" type="radio"  name="event-data-peroid" value="day">天</td></tr>
-                                                <tr><td><input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</td></tr>
-                                                <tr><td><input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月</td></tr>
-
-                                                <table class="display" id="place-event" style="width:100%">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>测量地点</th>
-                                                        <th></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-
+                                                    <input type="hidden" id="dtp_input2" value="" /><br/>
+                                                </div>
+                                            </div>
+                                            <div><input id="radio-day-event" type="radio"  name="event-data-peroid" value="day">天</div>
+                                            <div> <input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</div>
+                                            <div>
+                                                <input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月
+                                            </div>
+                                            <table class="display" id="place-event" style="width:100%">
+                                                <thead>
                                                 <tr>
-                                                    <td><button id="add-button" type="button" class="btn btn-sm btn-alt"  onclick="addMonitorPoint()">添加</button></td>
-                                                    <td><button id="delete-button" type="button" class="btn btn-sm btn-alt"  onclick="deleteMonitorPoint()">删除</button></td>
+                                                    <th>测量地点</th>
+                                                    <th></th>
                                                 </tr>
+                                                </thead>
+                                                <tbody>
 
-                                                <tr><td>自动更新间隔
-                                                    <select class="form-control location-select-item" id="auto-update-interval">
-                                                        <option value="null">无</option>
-                                                        <option value="1">1分</option>
-                                                        <option value="10">10分</option>
-                                                        <option value="60">60分</option>
-                                                    </select>
-                                                </td></tr>
-
-                                                <tr>
-                                                    <td><button id="data-button" type="button" class="btn btn-sm btn-alt" onclick="getAllEvent()">查询</button></td>
-                                                </tr>
-
+                                                </tbody>
                                             </table>
+                                            <div id="add-button" type="button" class="btn btn-sm btn-alt"  onclick="addMonitorPoint()">添加</div>
+                                            <div id="delete-button" type="button" class="btn btn-sm btn-alt"  onclick="deleteMonitorPoint()">删除</div>
+                                            <div>
+                                                <span>自动更新间隔</span>
+                                                <select style="display: inline-block" class="form-control location-select-item" id="auto-update-interval">
+                                                    <option value="null">无</option>
+                                                    <option value="1">1分</option>
+                                                    <option value="10">10分</option>
+                                                    <option value="60">60分</option>
+                                                </select>
+                                            </div>
+
+                                            <div><button id="data-button" type="button" class="btn btn-sm btn-alt" onclick="getAllEvent()">查询</button></div>
+
                                         </div>
 
                                         <div id="leftItem2" style="width: 100%;">
@@ -477,13 +494,10 @@
                                                     <img src="/img/deletearray.png" alt="" onClick="deletecol()" >
                                                     <img src="/img/downarray.png" alt="" onClick="downcol()" >
                                                 </tr>
-
-                                                <tr>
-                                                    <td>可用的列</td>
-                                                </tr>
                                                 <tr>
                                                     <td>
-                                                        <select class="form-control location-select-item" id="useful-col">
+                                                        <span>可用的列</span>
+                                                        <select style="display: inline-block" class="form-control location-select-item" id="useful-col">
                                                             <option value="1">测量名称</option>
                                                             <option value="2">时间</option>
                                                             <option value="3">测量名称</option>
@@ -499,7 +513,9 @@
                                                             <option value="13">中有波形数据</option>
                                                         </select>
                                                     </td>
-                                                    <td><button id="add-col-button" type="button" class="btn btn-sm btn-alt" onclick="getColumnItem()">添加</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <button style="display: block;" id="add-col-button" type="button" class="btn btn-sm btn-alt" onclick="getColumnItem()">添加</button>
                                                 </tr>
                                             </table>
 
@@ -512,7 +528,7 @@
                                             I电流
                                         </div>
 
-                                    </div>
+                                    </>
                                 </div>
                             </div>
                         </div>

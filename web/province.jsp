@@ -39,7 +39,11 @@
 
     <!-- jquery -->
     <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
-
+    <style>
+        .datetimepicker {
+            background: black!important;
+        }
+    </style>
 
 </head>
 
@@ -249,7 +253,7 @@
 
         </div>
 
-        <div id="second-page" style="display: none;">
+        <div id="second-page">
 
             <div class="row">
 
@@ -342,6 +346,8 @@
                 $(this).dequeue();
             });
         });
+
+        $('#second-page').css('display', 'none');
     });
 </script>
 
