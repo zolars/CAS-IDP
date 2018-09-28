@@ -42,7 +42,7 @@ public class uploadThresholdExcelToDBAction extends ActionSupport {
             for (DevicesThreshold stuEntity : listExcel) {
                 HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-                Integer cid = stuEntity.getCid();
+                Integer cid = 999;//;
 
                 List<DevicesThreshold> list = hbsessionDao.search("From DevicesThreshold where cid='"+ cid + "'");
 

@@ -1732,14 +1732,13 @@
 <script type="text/javascript">
 
     function exportTable(){
-/*
         $("#secItem li").each(function(i){
             $(this).click(function(){
                 idx = i;
             });
-        });*/
+        });
 
-      /*  $("#secItem li")[0].onclick = function(){
+        $("#secItem li")[0].onclick = function(){
             idx = 1;
             var tableid = "power-event-detail-tbody-"+idx;
             console.log("被选中", tableid);
@@ -1768,7 +1767,7 @@
             var tableid = "power-event-detail-tbody-"+idx;
             console.log("被选中", tableid);
             exportToExcel(tableid);
-        }*/
+        }
 
     }
 

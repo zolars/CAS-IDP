@@ -38,5 +38,15 @@ public class PermissionDAOImpl implements PermissionDAO {
         return rp;
     }
 
+    public Boolean setDeviceAlarmUserInfo(String level, Integer isSMS, Integer isPlantform, Integer isAlert, String precontent){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        String sql = "update DeviceAlarmUser dt set dt.isAlert='"+ isAlert + "', dt.isSms='" + isSMS + "', dt.isPlantform='" + isPlantform +  "', dt.precontent='" + precontent + "' where dt.level='" + level + "'";
+
+        Boolean rt = hbsessionDao.update(sql);
+
+        return rt;
+    }
+
 
 }

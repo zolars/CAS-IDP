@@ -8,6 +8,9 @@
         <id name="dtid">
             <column name="dtid" sql-type="int(11)"/>
         </id>
+        <property name="type">
+            <column name="type" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
         <property name="did">
             <column name="did" sql-type="varchar(255)" not-null="true"/>
         </property>
@@ -25,9 +28,6 @@
         </property>
         <property name="aid">
             <column name="aid" sql-type="int(255)" not-null="true"/>
-        </property>
-        <property name="cid">
-            <column name="cid" sql-type="int(11)" not-null="true"/>
         </property>
         <property name="level">
             <column name="level" sql-type="int(11)" not-null="true"/>

@@ -607,14 +607,6 @@
              </result>
          </action>
 
-         <action name="getAlert" class="sms.getAlert">
-             <!--getAlert -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
          <action name="addDeviceAlarmInfo" class="deviceManage.action.addDeviceAlarmPreContentAction">
              <!--addDeviceAlarmInfo -->
              <result name="failure">/failure.jsp</result>
@@ -689,6 +681,15 @@
 
          <action name="updateOrgnizationTree" class="systemMng.action.updateOrgnizationTreeAction">
              <!--updateOrgnizationTree -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+
+         <action name="setAlarmUser" class="systemMng.action.setAlarmUserAction">
+             <!--setAlarmUser -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>

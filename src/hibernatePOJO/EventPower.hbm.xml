@@ -15,13 +15,13 @@
             <column name="value" sql-type="double" precision="-1"/>
         </property>
         <property name="limitval">
-            <column name="limitval" sql-type="double" precision="-1" not-null="false"/>
+            <column name="limitval" sql-type="double" precision="-1" not-null="true"/>
         </property>
         <property name="status">
-            <column name="status" sql-type="int(11)" not-null="false"/>
+            <column name="status" sql-type="int(11)" not-null="true"/>
         </property>
         <property name="did">
-            <column name="did" sql-type="varchar(255)" not-null="false"/>
+            <column name="did" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="time">
             <column name="time" sql-type="datetime"/>
@@ -30,13 +30,13 @@
             <column name="duration" sql-type="int(11)"/>
         </property>
         <property name="signature">
-            <column name="signature" sql-type="varchar(255)" not-null="false"/>
+            <column name="signature" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="annotation">
-            <column name="annotation" sql-type="varchar(255)" not-null="false"/>
+            <column name="annotation" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="subtype">
-            <column name="subtype" sql-type="varchar(255)" not-null="false"/>
+            <column name="subtype" sql-type="varchar(255)" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

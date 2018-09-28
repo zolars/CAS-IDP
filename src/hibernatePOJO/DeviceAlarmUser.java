@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class DeviceAlarmUser {
     private String id;
-    private int aid;
+    private Integer level;
     private String timeperiod;
     private Integer isAlert;
     private Integer isPlantform;
@@ -12,6 +12,7 @@ public class DeviceAlarmUser {
     private String precontent;
     private String uid;
     private String did;
+    private int aid;
 
     public String getId() {
         return id;
@@ -21,12 +22,12 @@ public class DeviceAlarmUser {
         this.id = id;
     }
 
-    public int getAid() {
-        return aid;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setAid(int aid) {
-        this.aid = aid;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getTimeperiod() {
@@ -85,6 +86,14 @@ public class DeviceAlarmUser {
         this.did = did;
     }
 
+    public int getAid() {
+        return aid;
+    }
+
+    public void setAid(int aid) {
+        this.aid = aid;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,6 +101,7 @@ public class DeviceAlarmUser {
         DeviceAlarmUser that = (DeviceAlarmUser) o;
         return aid == that.aid &&
                 Objects.equals(id, that.id) &&
+                Objects.equals(level, that.level) &&
                 Objects.equals(timeperiod, that.timeperiod) &&
                 Objects.equals(isAlert, that.isAlert) &&
                 Objects.equals(isPlantform, that.isPlantform) &&
@@ -104,6 +114,6 @@ public class DeviceAlarmUser {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, aid, timeperiod, isAlert, isPlantform, isSms, precontent, uid, did);
+        return Objects.hash(id, level, timeperiod, isAlert, isPlantform, isSms, precontent, uid, did, aid);
     }
 }

@@ -36,7 +36,6 @@ public class ImportService {
                     String cellvalstr=rs.getCell(j++, i).getContents();
                     String floorvalstr=rs.getCell(j++, i).getContents();
                     String aidstr=rs.getCell(j++, i).getContents();
-                    String cidstr=rs.getCell(j++, i).getContents();
 
                     Double cellval = 0.00;
                     Double floorval = 0.00;
@@ -46,10 +45,8 @@ public class ImportService {
                         cellval = Double.parseDouble(cellvalstr);
                     if(floorvalstr != "")
                         floorval = Double.parseDouble(floorvalstr);
-                    if(cidstr != "")
+                    if(aidstr != "")
                         aid = Integer.parseInt(aidstr);
-                    if(cidstr != "")
-                        cid = Integer.parseInt(cidstr);
 
                     DevicesThreshold dt = new DevicesThreshold();
 
@@ -60,7 +57,6 @@ public class ImportService {
                     dt.setCellval(cellval);
                     dt.setFloorval(floorval);
                     dt.setAid(aid);
-                    dt.setCid(cid);
 
                     list.add(dt);
                 }

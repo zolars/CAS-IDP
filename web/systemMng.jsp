@@ -608,46 +608,47 @@
                     </div>
                     <div id="item7" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
 
-                        <script>
-                            function cll(id){
-                                if(id==1){
-                                    document.getElementById("sms-div").style.display = 'block';
-                                    document.getElementById("alert-div").style.display = 'none';
-                                    document.getElementById("plantform-div").style.display = 'none';
-                                }
-                                else if(id==2){
-                                    document.getElementById("sms-div").style.display = 'none';
-                                    document.getElementById("alert-div").style.display = 'block';
-                                    document.getElementById("plantform-div").style.display = 'none';
-                                        }
-                                else if(id==3){
-                                    document.getElementById("sms-div").style.display = 'none';
-                                    document.getElementById("alert-div").style.display = 'none';
-                                    document.getElementById("plantform-div").style.display = 'block';
-                                }
-                            }
-                        </script>
 
-                        <div class="add-user-title">预警方式</div>
-                        <select class="form-control location-select-item" id="alarmtype-select"
-                                name="" onChange="cll(this.value)">
-                            <option value="1">短信</option>
-                            <option value="2">弹窗</option>
-                            <option value="3">平台</option>
-                        </select>
 
-                        <!-- sms div-->
-                        <div id = "sms-div">
+                        <div class="tile">
+                            预警方式<select class="form-control location-select-item" id="alarmtype-select"
+                                    name="alarmtype-select">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <div class="listview todo-list sortable">
+                                <div class="media">
+                                    <div class="checkbox m-0">
+                                        <label class="t-overflow">
+                                            <input type="checkbox" id="checkbox-sms-2" name="checkbox-sms-2"> 短信
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="checkbox m-0">
+                                        <label class="t-overflow">
+                                            <input type="checkbox" id="checkbox-alert-2" name="checkbox-alert-2"> 弹窗
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="checkbox m-0">
+                                        <label class="t-overflow">
+                                            <input type="checkbox" id="checkbox-plantform-2" name="checkbox-plantform-2"> 平台
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text">
+                            </div>
+                            <button class="btn-default" onclick="addAlarm()">确认</button>
                         </div>
-                        <!-- sms div end -->
 
-                        <!-- alert div-->
-                        <div id = "alert-div" style="display: none;">
-                        </div>
-                        <!-- alert div end -->
 
                         <!-- plantform div-->
-                        <div id = "plantform-div" style="display: none;">
+                        <div id = "plantform-div">
                             设备名称：<input type="text" id="plantform-dname" class="form-control setting-input">
                             ip地址:<input type="text" id="plantform-ip" class="form-control setting-input">
                             时间：<input type="text" id="plantform-time" class="form-control setting-input">
@@ -661,12 +662,11 @@
                             扩展字段2：<input type="text" id="plantform-ext2" class="form-control setting-input">
                             扩展字段3：<input type="text" id="plantform-ext3" class="form-control setting-input">
 
-                            <button class="btn btn-default" onclick="testOk()">点击测试</button>
+                            <button class="btn btn-default" onclick="testOk()">点击测试短信平台</button>
                         </div>
                         <!-- plantform div end -->
 
-                        <button class="btn btn-default" onclick="addAlarm()">添加</button>
-                        <button class="btn btn-default" onclick="deleterAlarm()">删除</button>
+
 
                     </div>
                     <div id="item8" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
@@ -2796,7 +2796,29 @@
     }
 
     function addAlarm(){
-        alert("add alarm");
+
+        var alarmlevel = $("#alarmtype-select").val();
+        var issms = $('input:checkbox[name="checkbox-sms-2"]:checked').val();
+        var isalert = $('input:checkbox[name="checkbox-alert-2"]:checked').val();
+        var isplantform = $('input:checkbox[name="checkbox-plantform-2"]:checked').val();
+        var content = $("#sms-content-input").val();
+
+        $.ajax({
+            type: "post",
+            url: "setAlarmUser",
+            data: {
+                alarmlevel: alarmlevel,
+                issms: issms,
+                isalert: isalert,
+                isplantform: isplantform,
+                content: content
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data);
+            }
+        });
+
     }
 
     function deleterAlarm(){

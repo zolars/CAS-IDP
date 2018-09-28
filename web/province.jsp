@@ -253,7 +253,7 @@
 
             <div class="row">
 
-                <div class="col-md-2 col-xs-6"
+                <div class="col-md-2 col-xs-6 chart-item"
                      style="
                          width: 30%;
                          height: 200px;
@@ -265,61 +265,10 @@
                     <img id="preview" alt=""/>
                     <form class="am-form" method="post" enctype="multipart/form-data">
                         <input type="file" id="head" name="head" onchange="previewImage(this)">
-                        <script>
-                            // 上传图片前预览
-                            function previewImage(file) {
-                                var MAXWIDTH = 1200;  // 最大图片宽度
-                                var MAXHEIGHT = 360;  // 最大图片高度
-                                if (file.files && file.files[0]) {
-                                    var img = document.getElementById('preview');
-                                    img.onload = function () {
-                                        var rect = getZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
-                                        img.width = rect.width;
-                                        img.height = rect.height;
-                                    }
-                                    var reader = new FileReader();
-                                    reader.onload = function (evt) {
-                                        img.src = evt.target.result;
-                                    }
-                                    reader.readAsDataURL(file.files[0]);
-                                } else {
-                                    //兼容IE
-                                    file.select();
-                                    var src = document.selection.createRange().text;
-                                    var img = document.getElementById('preview');
-                                    img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
-                                }
-                            }
-
-                            // 获取缩放的尺寸
-                            function getZoomParam(maxWidth, maxHeight, width, height) {
-                                var param = {top: 0, left: 0, width: width, height: height};
-                                if (width > maxWidth || height > maxHeight) {
-                                    rateWidth = width / maxWidth;
-                                    rateHeight = height / maxHeight;
-                                    if (rateWidth > rateHeight) {
-                                        param.width = maxWidth;
-                                        param.height = Math.round(height / rateWidth);
-                                    } else {
-                                        param.width = Math.round(width / rateHeight);
-                                        param.height = maxHeight;
-                                    }
-                                }
-                                param.left = Math.round((maxWidth - param.width) / 2);
-                                param.top = Math.round((maxHeight - param.height) / 2);
-                                return param;
-                            }
-                        </script>
                     </form>
-
                 </div>
 
-                <div id="devicebar" class="col-md-2 col-xs-6 chart-item"
-                     style="width: 30%;
-                        height: 200px;
-                        -webkit-tap-highlight-color: transparent;
-                        user-select: none;
-                        position: relative;text-align:center">
+                <div id="devicebar" class="col-md-2 col-xs-6 chart-item" style="width: 30%; height: 200px; text-align:center">
                     <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0">
                         <tr>
                             <td style="padding-right: 30px;"><img src="/img/1.png"/></td>
@@ -352,49 +301,22 @@
                     </table>
                 </div>
 
-                <div id="" class="col-md-2 col-xs-6 chart-item"
-                     style="
-                        width: 30%;
-                        height: 200px;
-                        -webkit-tap-highlight-color: transparent;
-                        user-select: none;
-                        position: relative;
-                     ">
+                <div id="" class="col-md-2 col-xs-6 chart-item" style="width: 30%; height: 200px;">
                 </div>
 
-                <div id="tempbar" class="col-md-2 col-xs-6 chart-item"
-                     style="
-                        width: 30%;
-                        height: 200px;
-                        -webkit-tap-highlight-color: transparent;
-                        user-select: none;
-                        position: relative;
-                        z-index: 999;
-                     ">
-                </div>
-
-                <div id="humidbar" class="col-md-2 col-xs-6 chart-item"
-                     style="
-                         width: 30%;
-                        height: 200px;
-                        -webkit-tap-highlight-color: transparent;
-                        user-select: none;
-                        position: relative;
-                        z-index: 1;
-                     ">
-                </div>
-
-                <div id="panelbar" class="col-md-2 col-xs-6 chart-item"
-                     style="
-                         width: 30%;
-                        height: 200px;
-                        -webkit-tap-highlight-color: transparent;
-                        user-select: none;
-                        position: relative;
-                     ">
-                </div>
             </div>
+            <div class="row">
 
+                <div id="tempbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%;height: 200px;">
+                </div>
+
+                <div id="humidbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%;height: 200px;">
+                </div>
+
+                <div id="panelbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%;height: 200px;">
+                </div>
+
+            </div>
 
         </div>
 
@@ -521,6 +443,7 @@
     var nhChart = echarts.init(document.getElementById('nhbar'));
     var tempChart = echarts.init(document.getElementById('tempbar'));
     var humidChart = echarts.init(document.getElementById('humidbar'));
+    var panelChart = echarts.init(document.getElementById('panelbar'));
 
     var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
     var pname = decodeURI(provinceidc[1]);
@@ -689,6 +612,33 @@
                 }]
             };
 
+            var paneloption = {
+                tooltip : {
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                toolbox: {
+                    feature: {
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                series: [
+                    {
+                        name: '',
+                        type: 'gauge',
+                        min: 1,
+                        max: 3,
+                        detail: {formatter:'{value}%'},
+                        data: [{value: 2, name: '评估等级'}]
+                    }
+                ]
+            };
+
+            /*setInterval(function () {
+                option.series[0].data[0].value = 1;
+                panelChart.setOption(option, true);
+            },10000);*/
+
             // 使用刚指定的配置项和数据显示图表。
             eventChart.setOption(eventoption);
             alarmChart.setOption(alarmoption);
@@ -696,7 +646,7 @@
             nhChart.setOption(nhoption);
             tempChart.setOption(tempoption);
             humidChart.setOption(humidoption);
-
+            panelChart.setOption(paneloption);
         }
     });
 
@@ -795,28 +745,49 @@
     }
 </script>
 
-<script type="text/javascript">
-
-    function asyncRequest() {
-        $.ajax({
-            type: "post",
-            url: "getAlert",
-            data: {},
-            dataType: "json",
-            success: function (data) {
-                alert(data);
+<script>
+    // 上传图片前预览
+    function previewImage(file) {
+        var MAXWIDTH = 1200;  // 最大图片宽度
+        var MAXHEIGHT = 360;  // 最大图片高度
+        if (file.files && file.files[0]) {
+            var img = document.getElementById('preview');
+            img.onload = function () {
+                var rect = getZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                img.width = rect.width;
+                img.height = rect.height;
             }
-        });
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                img.src = evt.target.result;
+            }
+            reader.readAsDataURL(file.files[0]);
+        } else {
+            //兼容IE
+            file.select();
+            var src = document.selection.createRange().text;
+            var img = document.getElementById('preview');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+        }
     }
 
-    var intervalTimer = window.setInterval(asyncRequest, 1500000);
-
-</script>
-
-<script type="text/javascript">
-    function openPowerImg() {
-        alert("请选择一张图片");
-
+    // 获取缩放的尺寸
+    function getZoomParam(maxWidth, maxHeight, width, height) {
+        var param = {top: 0, left: 0, width: width, height: height};
+        if (width > maxWidth || height > maxHeight) {
+            rateWidth = width / maxWidth;
+            rateHeight = height / maxHeight;
+            if (rateWidth > rateHeight) {
+                param.width = maxWidth;
+                param.height = Math.round(height / rateWidth);
+            } else {
+                param.width = Math.round(width / rateHeight);
+                param.height = maxHeight;
+            }
+        }
+        param.left = Math.round((maxWidth - param.width) / 2);
+        param.top = Math.round((maxHeight - param.height) / 2);
+        return param;
     }
 </script>
 

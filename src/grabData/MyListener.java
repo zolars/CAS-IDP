@@ -159,7 +159,7 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("alarmModelTrigger",
                                         "alarmModelTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInMinutes(30)
+                                .withSchedule(simpleSchedule().withIntervalInMinutes(15)
                                         .repeatForever())
                                 .build();
                         JobDetail job5 = newJob(alarmModelJob.class)
