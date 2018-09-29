@@ -1,13 +1,14 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.AssessmentSetting;
-import hibernatePOJO.EventPower;
+import hibernatePOJO.*;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -22,65 +23,144 @@ public class assessModelJob implements Job {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) - 24);// 让小时减少24
+        calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) - 24);   // 让时间减少1天
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
-        //1.获得当前市行的1天内的事件（分为四类：）
-        List<EventPower> eventpowerlist = hbsessionDao.search(
-                "FROM EventPower where time >'"+ date +"'");
+        //1.1.获得当前市行的1天内的告警事件-电能事件
+        //1.2.查询各个事件的告警方式、告警用户、告警时间范围
+        //通过event_power.cid 找到 events_type中的type， 通过type 找到 device_threshold中的3条不同等级的记录，对应不同的tvalue[]
+        //比较event_power.value 与 tvalue[] ，确定是哪一个等级的事件。tlevel
+        //将该事件的did、tlevel（degree）、teid 写入assess_record表
 
-        Integer eenum = 0;
-        Integer epnum = 0;
-        Integer aeenum = 0;
-        Integer aepnum = 0;
+        List<EventPower> eventpowerlist = new ArrayList<>();
+        List<EventPower> eventenvironmentlist = new ArrayList<>();
+        List<EventPower> eventctrllist = new ArrayList<>();
 
-        if(eventpowerlist != null)
-            epnum = eventpowerlist.size();
+        List<EventsType> typelist = new ArrayList<>();
+        List<DevicesThreshold> thresholdlist = new ArrayList<>();
+        List<DeviceAlarmUser> alarmuserlist = new ArrayList<>();
 
-        Integer tempreturenum = 0;
-        Integer wetnum = 0;
-        Integer devicenum = 0;
+        //电能类事件评估开始
+        eventpowerlist = hbsessionDao.search("FROM EventPower where time >'"+ date +"'");
 
-        //2. 获得当前市行的1天内的告警（分为四类：）
-        List<EventPower> alrmpowerlist = hbsessionDao.search(
-                "FROM EventPower where time >'"+ date +"'");
+        if(eventpowerlist != null) {
+            for (int i = 0; i < eventpowerlist.size(); i++) {
+                Integer teid = eventpowerlist.get(i).getTeid();
+                String sdid = eventpowerlist.get(i).getDid();
+                Integer did = Integer.parseInt(sdid);
+                Integer cid = eventpowerlist.get(i).getCid();
+                Double value = eventpowerlist.get(i).getValue();
+              //  Timestamp time = eventpowerlist.get(i).getTime();
+                Integer tlevel = 1;
 
-        if(alrmpowerlist != null)
-            aepnum = alrmpowerlist.size();
+                typelist = hbsessionDao.search("From EventsType where cid ='" + cid + "'");
 
-        Integer atempreturenum = 0;
-        Integer awetnum = 0;
-        Integer adevicenum = 0;
+                String type = typelist.get(0).getType();
+               // String description = typelist.get(0).getDescription();
 
-        //计算总体类别的告警数/事件数，得到评估等级，写入assess_record表
+                thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='" + type + "' order by level desc");
 
-        Integer sumevent = eenum + epnum + tempreturenum + wetnum + devicenum;
-        Integer alarmsumevent = aeenum + aepnum + atempreturenum + awetnum + adevicenum;
+                for (int j = 0; j < thresholdlist.size(); j++) {
 
-        double ratio;
-        if(sumevent == 0)
-            ratio = 0.00;
-        else ratio = (double)alarmsumevent/sumevent;
+                    Double fval = thresholdlist.get(j).getFloorval();
+                    Double cval = thresholdlist.get(j).getCellval();
 
-        AssessmentSetting setting = (AssessmentSetting)hbsessionDao.getFirst(
-                "FROM AssessmentSetting");
+                    if (fval != null) {
+                        if (value > fval) {
+                            tlevel = thresholdlist.get(j).getLevel();
+                            break;
+                        }
+                    } else if (cval != null) {
+                        if (value < cval) {
+                            tlevel = thresholdlist.get(j).getLevel();
+                            break;
+                        }
+                    }
+                }
+              // System.out.println("电能事件" + teid + "的告警级别：" + tlevel);
+                AssessRecord maxar = (AssessRecord)hbsessionDao.getFirst("FROM AssessRecord Order by aid desc");
 
-        int degree=3;
+                Integer aid = 0;
+                if(maxar != null)
+                    aid = maxar.getAid();
 
-        if(ratio > setting.getRedyellow())
-            degree = 1;
-        else if(ratio > setting.getYellowgreen())
-            degree = 2;
-        else if(ratio < setting.getYellowgreen())
-            degree = 3;
+                AssessRecord ar = new AssessRecord();
+                ar.setDegree(tlevel);
+                ar.setAid(aid + 1);
+                ar.setDid(did);
+                ar.setTeid(teid);
+                ar.setEventclass(1); //电能类事件类型为1
+                Boolean rt = hbsessionDao.insert(ar);
+            }
+        }
 
-        String hql = "update AssessRecord assess set assess.degree='" + degree +
-                "', assess.powernum='" + eenum + epnum + "', assess.tempreturenum='"+ tempreturenum +
-                "', assess.wetnum='" + wetnum + "', assess.devicenum='" + devicenum + "', assess.apowernum='"+
-                aeenum + aepnum + "', assess.atempreturenum='" + atempreturenum + "', assess.awetnum='"+
-                awetnum + "', assess.adevicenum='" + adevicenum + "' where assess.cbid='" + 1 + "'";
+        //电能类事件评估结束
 
-        Boolean rt = hbsessionDao.update(hql);
+        //温湿度类事件评估开始
+        eventenvironmentlist = hbsessionDao.search("FROM EventEnvironment where time >'"+ date +"'");
+
+        if(eventenvironmentlist != null) {
+            for (int i = 0; i < eventenvironmentlist.size(); i++) {
+                Integer teid = eventenvironmentlist.get(i).getTeid();
+                String sdid = eventenvironmentlist.get(i).getDid();
+                Integer did = Integer.parseInt(sdid);
+                Integer cid = eventenvironmentlist.get(i).getCid();
+                Double value = eventenvironmentlist.get(i).getValue();
+                //  Timestamp time = eventenvironmentlist.get(i).getTime();
+                Integer tlevel = 1;
+
+                typelist = hbsessionDao.search("From EventsType where cid ='" + cid + "'");
+
+                String type = typelist.get(0).getType();
+                // String description = typelist.get(0).getDescription();
+
+                thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='" + type + "' order by level desc");
+
+                for (int j = 0; j < thresholdlist.size(); j++) {
+
+                    Double fval = thresholdlist.get(j).getFloorval();
+                    Double cval = thresholdlist.get(j).getCellval();
+
+                    if (fval != null) {
+                        if (value > fval) {
+                            tlevel = thresholdlist.get(j).getLevel();
+                            break;
+                        }
+                    } else if (cval != null) {
+                        if (value < cval) {
+                            tlevel = thresholdlist.get(j).getLevel();
+                            break;
+                        }
+                    }
+                }
+                System.out.println("温度事件" + teid + "的告警级别：" + tlevel);
+                AssessRecord maxar = (AssessRecord)hbsessionDao.getFirst("FROM AssessRecord Order by aid desc");
+
+                Integer aid = 0;
+                if(maxar != null)
+                    aid = maxar.getAid();
+
+                AssessRecord ar = new AssessRecord();
+                ar.setDegree(tlevel);
+                ar.setAid(aid + 1);
+                ar.setDid(did);
+                ar.setTeid(teid);
+                if(type.equals(113)||type.equals(114))
+                    ar.setEventclass(2); //温度类事件类型为2
+                else if(type.equals(115)||type.equals(116))
+                    ar.setEventclass(3); //湿度类事件类型为3
+                Boolean rt = hbsessionDao.insert(ar);
+            }
+        }
+        //温湿度类事件评估结束
+
+
+        //设备类事件评估开始
+
+        //设备类事件评估结束
+
+
+
 
         System.out.println("完成执行评估模块:" + System.currentTimeMillis());
     }

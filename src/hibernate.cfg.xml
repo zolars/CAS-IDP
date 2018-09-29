@@ -23,7 +23,6 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- 持久化类所对应的映射文件 -->
-        <mapping class="hibernatePOJO.AssessmentSetting"/>
         <mapping class="hibernatePOJO.AssessRecord"/>
         <mapping class="hibernatePOJO.BasicSetting"/>
         <mapping class="hibernatePOJO.CityBank"/>
@@ -51,7 +50,6 @@
         <mapping class="hibernatePOJO.UserRoles"/>
         <mapping class="hibernatePOJO.OrgnizationStructure"/>
 
-        <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
         <mapping resource="hibernatePOJO/BasicSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>

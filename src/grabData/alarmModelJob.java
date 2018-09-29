@@ -110,7 +110,6 @@ public class alarmModelJob implements Job {
         //通过event_power.cid 找到 events_type中的type， 通过type 找到 device_threshold中的3条不同等级的记录，对应不同的tvalue[]
         //比较event_power.value 与 tvalue[] ，确定是哪一个等级的事件。tlevel
         //根据tlevel（0：不执行 1：弹窗 2：弹窗+短信/短信平台（工作日） 3.弹窗+短信/短信平台（全天））执行相应的告警
-        //将该事件写入assess_record表
 
         List<EventPower> eventpowerlist = new ArrayList<>();
         List<EventsType> typelist = new ArrayList<>();

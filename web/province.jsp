@@ -217,24 +217,32 @@
                     <div class="chart-item-title">评估结果</div>
                     <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t0" src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t1" src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t2" src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t3" src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t4" src="/img/icon/GOOD.png"/></td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px">状态：良</td>
+                            <td id="r2t0" style="font-size: 12px"></td>
+                            <td id="r2t1" style="font-size: 12px"></td>
+                            <td id="r2t2" style="font-size: 12px"></td>
+                            <td id="r2t3" style="font-size: 12px"></td>
+                            <td id="r2t4" style="font-size: 12px"></td>
                         </tr>
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px"></td>
+                            <td style="font-size: 12px"></td>
+                            <td style="font-size: 12px"></td>
+                            <td style="font-size: 12px"></td>
+                            <td style="font-size: 12px"></td>
                         </tr>
                     </table>
                 </div>
@@ -487,7 +495,7 @@
                 degree[i] = list[i][8];
             }
 
-            // 指定图表的配置项和数据
+            // 指定事件的图表的配置项和数据
             var eventoption = {
                 title: {
                     text: '事件',
@@ -510,7 +518,7 @@
                 }]
             };
 
-            // 指定图表的配置项和数据
+            // 指定告警的图表的配置项和数据
             var alarmoption = {
                 title: {
                     text: '告警',
@@ -574,6 +582,7 @@
                 }]
             };
 
+            //指定温度的图表的配置项和数据
             var tempoption = {
                 title: {
                     text: '温度',
@@ -596,6 +605,7 @@
                 }]
             };
 
+            //指定湿度的图表的配置项和数据
             var humidoption = {
                 title: {
                     text: '湿度',
@@ -618,6 +628,7 @@
                 }]
             };
 
+            //指定仪表盘的图表的配置项和数据
             var paneloption = {
                 tooltip : {
                     formatter: "{a} <br/>{b} : {c}%"
@@ -635,10 +646,27 @@
                         min: 1,
                         max: 3,
                         detail: {formatter:'{value}%'},
-                        data: [{value: 2, name: '评估等级'}]
+                        data: [{value: degree[0], name: '评估等级'}]
                     }
                 ]
             };
+
+            //指定评估结果块的数据
+            for(var i = 0; i < xdata.length; i++){
+                console.log(degree[i], xdata[i]);
+                if(degree[i] == '1'){
+                    $("#r1t"+i).attr("src","/img/icon/GOOD.png");
+                }
+                if(degree[i] == '2'){
+                    $("#r1t"+i).attr("src","/img/icon/NORMAL.png");
+                }
+                if(degree[i] == '3'){
+                    console.log("333");
+                    $("#r1t"+i).attr("src","/img/icon/BAD.png");
+                }
+
+                document.getElementById("r2t"+i).innerHTML = xdata[i];
+            }
 
             /*setInterval(function () {
                 option.series[0].data[0].value = 1;
