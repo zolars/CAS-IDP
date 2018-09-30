@@ -8,8 +8,11 @@
         <id name="id">
             <column name="id" sql-type="int(20)"/>
         </id>
-        <property name="addr">
-            <column name="addr" sql-type="int(20)" not-null="true"/>
+        <property name="addr1">
+            <column name="addr1" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="addr2">
+            <column name="addr2" sql-type="int(11)" not-null="true"/>
         </property>
         <property name="description">
             <column name="description" sql-type="longtext" not-null="true"/>

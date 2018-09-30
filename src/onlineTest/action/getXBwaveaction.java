@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import grabData.DataOnline;
+import hibernatePOJO.PowerparmMonitor;
 import hibernatePOJO.PowerxbMonitor;
 import org.apache.struts2.ServletActionContext;
 
@@ -34,10 +35,10 @@ public class getXBwaveaction extends ActionSupport {
 
             String did = request.getParameter("did");
             if(did != "") {
-                PowerxbMonitor pp = DataOnline.getXbMap().get(did);
+                PowerparmMonitor pp = DataOnline.getParmMap().get(did);
 
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("nowpowerxb", pp);
+                jsonObject.put("nowpowerwave", pp);
                 result = JSON.toJSONString(jsonObject); // List转json
             }
         } catch (Exception e) {

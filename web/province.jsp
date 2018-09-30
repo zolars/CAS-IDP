@@ -203,6 +203,21 @@
                                 }
                             });
 
+                            //获取治理设备状态
+                            $.ajax({
+                                type: "post",
+                                url: "getOneCtrlData",
+                                data: {
+                                    compname: options.text()
+                                },
+                                dataType: "json",
+                                success: function (data) {
+                                    alert(data);
+                                   // $('#ctrlstatus');
+                                    $("#ctrlstatus").attr("value","警");
+                                }
+                            });
+
                         } else {
                             $('#second-page').css('display', 'none');
                             $('#first-page').css('display', 'block');
@@ -368,7 +383,7 @@
                             <td style="padding-right: 30px;"><img src="/img/5.png"/></td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px" id="ctrlstatus">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>

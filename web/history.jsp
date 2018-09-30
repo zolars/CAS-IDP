@@ -31,6 +31,16 @@
     <link href="css/jstree-default/style.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/header.css">
 
+    <!-- bootstrap datepicker时间选择控件 -->
+    <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+    <!-- jquery -->
+    <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+    <style>
+        .datetimepicker {
+            background: black!important;
+        }
+    </style>
 </head>
 
 <body id="skin-blur-blue">

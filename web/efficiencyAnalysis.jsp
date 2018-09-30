@@ -183,7 +183,6 @@
                     <div class="block-area">
                         <div class="row">
                             <div class="col-md-12">
-
                                 <table id="event-table-head1">
                                     <thead>
                                     <tr>
@@ -196,55 +195,69 @@
                                 </table>
 
                                 <div class="row-fluid">
-                                    <div class="col-md-1">
+                                 <%--   <div class="col-md-1">
                                         <button type="button" style="width:100px;height:40px;" ></button>
                                         <button type="button" onClick="getDeviceEvent()" style="width:100px;height:260px;" >设备事件</button>
                                         <button type="button" onClick="getPowerEvent()"style="width:100px;height:260px;" >电能质量事件</button>
                                         <button type="button" onClick="getEvironmentEvent()" style="width:100px;height:260px;" >环境事件</button>
-                                    </div>
+                                    </div>--%>
+
+                                    <div class="col-md-7">
+                                         <ul class="nav nav-tabs" id="detailItem">
+                                             <li class="active"  style="width:33.333%">
+                                                 <a data-toggle="tab" id="detailItem1">•设备事件</a>
+                                             </li>
+                                             <li style="width:33.333%">
+                                                 <a data-toggle="tab" id="detailItem2">•电能质量事件</a>
+                                             </li>
+                                             <li style="width:33.333%">
+                                                 <a data-toggle="tab" id="detailItem3">•环境事件</a>
+                                             </li>
+                                         </ul>
+                                     </div>
 
                                     <div class="col-md-7">
 
                                         <!--startprint-->
+
                                         <div id="eventdiv1" style="display: block">
-                                            <table class="display" id="device-event" style="width:100%;">
+                                            <table border="1" class="display" id="device-event" style="width:100%;">
                                                 <thead>
                                                 <tr>
-                                                    <th></th>
-                                                    <th>事件名称</th>
-                                                    <th>位置</th>
-                                                    <th>事件类型</th>
-                                                    <th>事件描述</th>
-                                                    <th>事件发生时间</th>
+                                                    <th style="width:60px;"></th>
+                                                    <th style="width:60px;">事件名称</th>
+                                                    <th style="width:60px;">位置</th>
+                                                    <th style="width:60px;">事件类型</th>
+                                                    <th style="width:60px;">事件描述</th>
+                                                    <th style="width:60px;">事件发生时间</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="device-event-tbody">
                                                 </tbody>
                                             </table>
-                                            <table class="display" id="power-event" style="width:100%;">
+                                            <table border="1" class="display" id="power-event" style="width:100%;">
                                                 <thead>
                                                 <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
+                                                    <th style="width:60px;"></th>
+                                                    <th style="width:60px;">事件名称</th>
+                                                    <th style="width:60px;">位置</th>
+                                                    <th style="width:60px;">事件类型</th>
+                                                    <th style="width:60px;">事件描述</th>
+                                                    <th style="width:60px;">事件发生时间</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="power-event-tbody">
                                                 </tbody>
                                             </table>
-                                            <table class="display" id="environment-event" style="width:100%;">
+                                            <table border="1" class="display" id="environment-event" style="width:100%;">
                                                 <thead>
                                                 <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
+                                                    <th style="width:60px;"></th>
+                                                    <th style="width:60px;">事件名称</th>
+                                                    <th style="width:60px;">位置</th>
+                                                    <th style="width:60px;">事件类型</th>
+                                                    <th style="width:60px;">事件描述</th>
+                                                    <th style="width:60px;">事件发生时间</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="environment-event-tbody">
@@ -252,18 +265,17 @@
                                             </table>
                                         </div>
 
-                                        <!--endprint-->
-
+                                        <!-- 电能详细事件-->
                                         <div id="eventdiv2" style="display: none">
 
                                             <ul class="nav nav-tabs" id="secItem" name="secItem">
-                                                <li class="active"  style="width:15%">
+                                                <li class="active" style="width:15%">
                                                     <a data-toggle="tab" id="secItem1">•浪涌塌陷</a>
                                                 </li>
                                                 <li style="width:15%">
                                                     <a data-toggle="tab" id="secItem2">谐波</a>
                                                 </li>
-                                                <li  style="width:15%">
+                                                <li style="width:15%">
                                                     <a data-toggle="tab" id="secItem3">•三相不平衡度</a>
                                                 </li>
                                                 <li style="width:15%">
@@ -366,7 +378,7 @@
 
                                         </div>
 
-
+                                        <!-- 温湿度详细事件-->
                                         <div id="eventdiv3" style="display: none">
 
                                             <ul class="nav nav-tabs" id="triItem" name="triItem">
@@ -412,6 +424,53 @@
 
                                         </div>
 
+                                        <!-- 设备详细事件-->
+                                        <div id="eventdiv4" style="display: none">
+
+                                            <ul class="nav nav-tabs" id="fourItem" name="fourItem">
+                                                <li class="active"  style="width:15%">
+                                                    <a data-toggle="tab" id="fourItem1">•</a>
+                                                </li>
+                                                <li style="width:15%">
+                                                    <a data-toggle="tab" id="fourItem2">•</a>
+                                                </li>
+                                            </ul>
+
+                                            <table class="display" id="device-event-detail-1" style="width:100%;">
+                                                <thead>
+                                                <tr>
+                                                    <th>测量名称</th>
+                                                    <th>时间</th>
+                                                    <th>类型</th>
+                                                    <th>时间长短</th>
+                                                    <th>深度（与标准的偏差）</th>
+                                                    <th>方向</th>
+                                                    <th>确认</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="device-event-detail-tbody-1">
+                                                </tbody>
+                                            </table>
+
+                                            <table class="display" id="device-event-detail-2" style="width:100%;display: none;">
+                                                <thead>
+                                                <tr>
+                                                    <th>测量名称</th>
+                                                    <th>时间</th>
+                                                    <th>类型</th>
+                                                    <th>时间长短</th>
+                                                    <th>深度（与标准的偏差）</th>
+                                                    <th>方向</th>
+                                                    <th>确认</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="device-event-detail-tbody-2">
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+                                        <!--endprint-->
                                     </div>
 
                                     <div class="col-md-4">
@@ -521,14 +580,7 @@
 
                                         </div>
 
-                                        <div id="leftItem3" style="width: 100%;">
-                                            浪涌塌陷曲线
-                                            U电压
-
-                                            I电流
-                                        </div>
-
-                                    </>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -835,6 +887,31 @@
             $("#item2").hide();
 
             $(document).ready(function () {
+
+                $("#detailItem").click(function () {
+                    $("#detailItem1").click(function () {
+                        $("#eventdiv1").hide();
+                        $("#eventdiv2").show();
+                        $("#eventdiv3").hide();
+                        $("#eventdiv4").hide();
+                        getPowerEvent();
+                    });
+                    $("#detailItem2").click(function () {
+                        $("#eventdiv1").hide();
+                        $("#eventdiv2").hide();
+                        $("#eventdiv3").show();
+                        $("#eventdiv4").hide();
+                        getEvironmentEvent();
+                    });
+                    $("#detailItem3").click(function () {
+                        $("#eventdiv1").hide();
+                        $("#eventdiv2").hide();
+                        $("#eventdiv3").hide();
+                        $("#eventdiv4").show();
+                        getDeviceEvent();
+                    });
+                });
+
                 $("#leftsubItem1").click(function () {
                     $("#leftItem1").show();
                     $("#leftItem2").hide();
@@ -1019,7 +1096,7 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 var list = obj['allpelist'];
-                var table = $("#power-event-detail-1");
+               // var table = $("#power-event-detail-1");
                 var tbody = $("#power-event-detail-tbody-1")[0];
                 tbody.innerHTML = "";
 
@@ -1053,7 +1130,7 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 var list = obj['allpelist'];
-                var table = $("#power-event-detail-2");
+               // var table = $("#power-event-detail-2");
                 var tbody = $("#power-event-detail-tbody-2")[0];
                 tbody.innerHTML = "";
 
@@ -1087,7 +1164,7 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 var list = obj['allpelist'];
-                var table = $("#power-event-detail-3");
+               // var table = $("#power-event-detail-3");
                 var tbody = $("#power-event-detail-tbody-3")[0];
                 tbody.innerHTML = "";
 
@@ -1121,7 +1198,7 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 var list = obj['allpelist'];
-                var table = $("#power-event-detail-4");
+               // var table = $("#power-event-detail-4");
                 var tbody = $("#power-event-detail-tbody-4")[0];
                 tbody.innerHTML = "";
 
@@ -1155,7 +1232,7 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 var list = obj['allpelist'];
-                var table = $("#power-event-detail-5");
+               // var table = $("#power-event-detail-5");
                 var tbody = $("#power-event-detail-tbody-5")[0];
                 tbody.innerHTML = "";
 
@@ -1354,24 +1431,24 @@
     }
 
     //根据时间、检测银行设置获得所有事件
-    function getAllEvent(){
+    function getAllEvent() {
 
         var cbname = $("#city_code option:selected").val();
         var edate = $("input[name='event-data-peroid']:checked").val();
 
-        var stime ;//"2018-08-22 08:00:00";
-        var etime ;//"2018-08-29 08:00:00";
+        var stime;//"2018-08-22 08:00:00";
+        var etime;//"2018-08-29 08:00:00";
         var nowtime = getNowFormatDate();
 
-        if(edate == "lastone"){
+        if (edate == "lastone") {
             stime = " ";
             etime = " ";
         }
-        else  if(edate == "fromto"){
+        else if (edate == "fromto") {
             stime = $("#firstDate").val();
             etime = $("#lastDate").val();
         }
-        else  if(edate == "day"){
+        else if (edate == "day") {
             //昨天的时间
             var now = new Date();
             var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
@@ -1381,12 +1458,12 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
         }
-        else  if(edate == "week"){
+        else if (edate == "week") {
             // 获取一星期前的时间：
             var now = new Date();
             var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
@@ -1396,12 +1473,12 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
         }
-        else  if(edate == "month"){
+        else if (edate == "month") {
             // 获取一月前的时间：
             var now = new Date();
             var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
@@ -1411,17 +1488,19 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
         }
 
         //读取设置中的优先级cookie
-        var priortylist = $. cookie('priortylist');
-
-        //获取所有电能事件
-        $.ajax({
+        var priortylist = $.cookie('priortylist');
+        if (priortylist == null) {
+            alert("请先设定可查看的事件类型");
+        }
+        else{
+            $.ajax({ //获取所有电能事件
             type: "post",
             url: "getPowerEvent",
             data: {
@@ -1434,7 +1513,7 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 var list = obj['allpelist'];
-                var table = $("#power-event");
+               // var table = $("#power-event");
                 var tbody = $("#power-event-tbody")[0];
                 tbody.innerHTML = "";
 
@@ -1449,14 +1528,16 @@
                     var rawtime = liststr[5].split("]");
                     var time = rawtime[0];
 
-                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" value='+ teid[1]+'>' + '</td>' +
-                        '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:60px;" value='+ teid[1]+'></td>' +
+                        '<td id="name" style="width:60px;">' + name + '</td>' +
+                        '<td style="width:60px;">' + location + '</td>' +
+                        '<td style="width:60px;">' + type + '</td>' +
+                        '<td style="width:60px;">' + description + '</td>' +
+                        '<td style="width:60px;">' + time + '</td></tr>');
                 }
             }
         });
-
+        }
 
         //获取所有设备事件
         //设备事件
@@ -1911,33 +1992,33 @@
 <!-- -->
 <script type="text/javascript">
 
-            var powertable = $('#power-event').DataTable({
+           /* var powertable = $('#power-event').DataTable({
                 "info":           false,
                 "scrollY":        "260px",
                 "scrollCollapse": true,
                 "paging":         false,
                 "dom":            "lBrtip"
-            });
+            });*/
             //点击table中的某一行
             $('#power-event tbody').on('click', 'tr', function (){
                 $(this).toggleClass('selected');
                 selectOneRowEvent(this);
             });
 
-            $('#environment-event').DataTable({
+            /* $('#environment-event').DataTable({
                 "info":           false,
                 "scrollY":        "260px",
                 "scrollCollapse": true,
                 "paging":         false,
                 "dom":            "lBrtip"
-            });
+            });*/
             //点击table中的某一行
             $('#environment-event tbody').on('click', 'tr', function (){
                 $(this).toggleClass('selected');
                 selectOneRowEvent(this);
             });
 
-
+             /*
             $('#place-event').DataTable({
                 "info":           false,
                 "scrollY":        "120px",
@@ -1945,19 +2026,19 @@
                 "paging":         false,
                 "ordering":       false,
                 "dom":            "lBrtip"
-            });
+            });*/
 
             //点击table中的某一行
             $('#place-event tbody').on('change', 'tr', function (){
                 alert("mp:"+ this);
             });
 
-            //列栏表
+            /*  //列栏表
             $('#colume-table').DataTable({
                 "info":           false,
                 "dom":            "lBrtip"
             });
-
+*/
 
             //获取某一行选择的行，将该行的id放入某个隐藏的div中
             function selectOneRowEvent(rowdata){
@@ -1976,9 +2057,7 @@
 
                 powertable.row($(id).parents('tr')).remove().draw();
             }
-
-
-            //第二个事件页面
+           /* //第二个事件页面
             $('#power-event-detail-1').DataTable({
                 "info":           true,
                 "scrollY":        "800px",
@@ -2072,7 +2151,7 @@
                     {"targets": [ 9 ], "visible": (col9)? true : false},
                     {"targets": [ 10 ], "visible": (col10)? true : false}
                 ]
-            });
+            });*/
 
 </script>
 

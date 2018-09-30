@@ -1914,54 +1914,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 type: "post",
                 url: "getXBwave",
                 data: {
-                    did: did,
+                    did: did
                 },
                 dataType: "json",
                 success: function (data) {
                     var obj = JSON.parse(data);
-                    data0 = obj.nowpowerxb['u1Xb3'];
-                    data1 = obj.nowpowerxb['u2Xb3'];
-                    data2 = obj.nowpowerxb['u3Xb3'];
-                    data3 = obj.nowpowerxb['u4Xb3'];
-                    data4 = obj.nowpowerxb['i1Xb3'];
-                    data5 = obj.nowpowerxb['i2Xb3'];
-                    data6 = obj.nowpowerxb['i3Xb3'];
-                    data7 = obj.nowpowerxb['i4Xb3'];
+
+                    data0 = obj.nowpowerwave['u1'];
+                    data1 = obj.nowpowerwave['u2'];
+                    data2 = obj.nowpowerwave['u3'];
+                    data3 = obj.nowpowerwave['u4'];
+                    data4 = obj.nowpowerwave['i1'];
+                    data5 = obj.nowpowerwave['i2'];
+                    data6 = obj.nowpowerwave['i3'];
+                    data7 = obj.nowpowerwave['i4'];
+
+                    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+
+                    var odata0 = option4.series[0].data;
+                    var odata1 = option4.series[1].data;
+                    var odata2 = option4.series[2].data;
+                    var odata3 = option4.series[3].data;
+                    var odata4 = option4.series[4].data;
+                    var odata5 = option4.series[5].data;
+                    var odata6 = option4.series[6].data;
+                    var odata7 = option4.series[7].data;
+
+                    odata0.shift();
+                    odata0.push(data0);
+                    odata1.shift();
+                    odata1.push(data1);
+                    odata2.shift();
+                    odata2.push(data2);
+                    odata3.shift();
+                    odata3.push(data3);
+                    odata4.shift();
+                    odata4.push(data4);
+                    odata5.shift();
+                    odata5.push(data5);
+                    odata6.shift();
+                    odata6.push(data6);
+                    odata7.shift();
+                    odata7.push(data7);
+
+                    option4.xAxis[0].data.shift();
+                    option4.xAxis[0].data.push(axisData);
+
+                    eventChart4.setOption(option4);
                 }
             });
-
-            axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
-
-            var odata0 = option4.series[0].data;
-            var odata1 = option4.series[1].data;
-            var odata2 = option4.series[2].data;
-            var odata3 = option4.series[3].data;
-            var odata4 = option4.series[4].data;
-            var odata5 = option4.series[5].data;
-            var odata6 = option4.series[6].data;
-            var odata7 = option4.series[7].data;
-
-            odata0.shift();
-            odata0.push(data0);
-            odata1.shift();
-            odata1.push(data1);
-            odata2.shift();
-            odata2.push(data2);
-            odata3.shift();
-            odata3.push(data3);
-            odata4.shift();
-            odata4.push(data4);
-            odata5.shift();
-            odata5.push(data5);
-            odata6.shift();
-            odata6.push(data6);
-            odata7.shift();
-            odata7.push(data7);
-
-            option4.xAxis[0].data.shift();
-            option4.xAxis[0].data.push(axisData);
-
-            eventChart4.setOption(option4);
         }
     </script>
 

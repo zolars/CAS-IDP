@@ -48,6 +48,8 @@ public interface EventDAO {
 
     public List getAllCityEvent();
 
+    public boolean getComputerroomCtrlStatus(String cbname);
+
     public Map getAllProvinceEvent();
 
     public List getAllEventTypeTree();

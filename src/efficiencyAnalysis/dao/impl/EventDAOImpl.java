@@ -48,8 +48,7 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = new CityBank();
-        cb = (CityBank)hbsessionDao.getFirst(
+        CityBank cb = (CityBank)hbsessionDao.getFirst(
                 "FROM CityBank where cbname = '" + cbname+ "'");
 
         //再根据机房id查询设备id的集合
@@ -58,17 +57,16 @@ public class EventDAOImpl implements EventDAO {
 
         for(int i = 0; i < comidset.length; i++){
 
-            Computerroom cp = new Computerroom();
-            cp = (Computerroom)hbsessionDao.getFirst(
+            Computerroom cp = (Computerroom)hbsessionDao.getFirst(
                     "FROM Computerroom where rid = '" + comidset[i]+ "'");
 
             String str = cp.getDidset();
-            str += ",";
+            str += "，";
             didstr += str;
         }
 
         //再根据设备id查询事件
-        String didset[] = didstr.split(",");
+        String didset[] = didstr.split("，");
 
         db = new DBConnect();
 
@@ -359,12 +357,12 @@ public class EventDAOImpl implements EventDAO {
                     "FROM Computerroom where rid = '" + comidset[i]+ "'");
 
             String str = cp.getDidset();
-            str += ",";
+            str += "，";
             didstr += str;
         }
 
         //再根据设备id查询事件
-        String didset[] = didstr.split(",");
+        String didset[] = didstr.split("，");
 
         db = new DBConnect();
 
@@ -372,7 +370,9 @@ public class EventDAOImpl implements EventDAO {
 
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='"+ didset[i]
-                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type in (5,6)";
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'"+ starttime + "' and ta.time <'" + endtime +"' and tb.type > '23' and tb.type < '322'";
+
+            System.out.println(sql);
 
             try {
                 ps = db.getPs(sql);
@@ -1722,6 +1722,28 @@ public class EventDAOImpl implements EventDAO {
         }
 
         return rtlist;
+    }
+
+    public boolean getComputerroomCtrlStatus(String cbname){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<List<String>> rtlist = new ArrayList<>();
+
+        Computerroom comps = (Computerroom)hbsessionDao.getFirst(
+                "FROM Computerroom where cbname='" + cbname + "'");
+
+        String didset = comps.getDidset();
+        String didstr[] = didset.split("，");
+
+        EventCtrl temp = (EventCtrl)hbsessionDao.getFirst(
+                    "FROM EventCtrl where did='" + didstr[0] + "' Order by time desc");
+
+        List<String> list = new ArrayList();
+        if(temp.getAlarm() == "1")
+            return true;
+        else return false;
+
     }
 
     public boolean setAssessInfo(Integer red_yellow, Integer yellow_green){

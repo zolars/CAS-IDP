@@ -205,6 +205,31 @@
              </result>
          </action>
 
+         <!--wsy2018.9.26 -->
+         <action name="getHarmonicVoltage" class="reportChart.action.getHarmonicVoltage">
+             <!--getHarmonicVoltage -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+         <!--wsy2018.9.27 -->
+         <action name="getHarmonicCurrent" class="reportChart.action.getHarmonicCurrent">
+             <!--getHarmonicCurrent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+         <!--wsy2018.9.29 -->
+         <action name="getHVCrate" class="reportChart.action.getHVCrate">
+             <!--getHVCrate -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="addDeviceAlarmUser" class="deviceManage.action.addDeviceAlarmUserAction">
              <!--addDeviceAlarmUser -->
              <result name="failure">/failure.jsp</result>
@@ -552,6 +577,14 @@
 
          <action name="getDetailPowerEventlytx" class="efficiencyAnalysis.action.getDetailPowerEventlytxAction">
              <!--getDetailPowerEventlytx -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getOneCtrlData" class="efficiencyAnalysis.action.getOneCtrlDataAction">
+             <!--getOneCtrlData -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>

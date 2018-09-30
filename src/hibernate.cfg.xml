@@ -30,6 +30,7 @@
         <mapping class="hibernatePOJO.Devices"/>
         <mapping class="hibernatePOJO.DeviceAlarmUser"/>
         <mapping class="hibernatePOJO.DevicesThreshold"/>
+        <mapping class="hibernatePOJO.DevicesStandard"/>
         <mapping class="hibernatePOJO.Dictionary"/>
         <mapping class="hibernatePOJO.DictionaryPlus"/>
         <mapping class="hibernatePOJO.DictionaryCtrl"/>
@@ -57,6 +58,7 @@
         <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
         <mapping resource="hibernatePOJO/DeviceAlarmUser.hbm.xml"/>
         <mapping resource="hibernatePOJO/DevicesThreshold.hbm.xml"/>
+        <mapping resource="hibernatePOJO/DevicesStandard.hbm.xml"/>
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryCtrl.hbm.xml"/>

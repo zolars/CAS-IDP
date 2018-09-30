@@ -35,11 +35,11 @@ public class TemperatureSaveJob implements Job {
                     hbsessionDao.insert(tempData);
 
                     //查询温度阈值
-                    DevicesThreshold dt1 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where cid=344");
-                    DevicesThreshold dt2 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where cid=345");
+                    DevicesThreshold dt1 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where classify='温度过高' and level=1");
+                    DevicesThreshold dt2 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where classify='温度过低' and level=1");
 
-                    DevicesThreshold dt3 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where cid=346");
-                    DevicesThreshold dt4 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where cid=347");
+                    DevicesThreshold dt3 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where classify='湿度过高' and level=1");
+                    DevicesThreshold dt4 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where classify='湿度过低' and level=1");
 
                     double temphigh = dt1.getCellval();
                     double templow = dt2.getFloorval();
@@ -70,7 +70,7 @@ public class TemperatureSaveJob implements Job {
 
                         hbsessionDao.insert(ee);
                     }
-                    else  if(wet > temphigh){
+                    else  if(wet > wethigh){
 
                         EventPower ee = new EventPower();
                         ee.setCid(346);
@@ -80,7 +80,7 @@ public class TemperatureSaveJob implements Job {
 
                         hbsessionDao.insert(ee);
                     }
-                    else if(wet < templow){
+                    else if(wet < wetlow){
 
                         EventPower ee = new EventPower();
                         ee.setCid(347);

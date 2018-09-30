@@ -127,6 +127,9 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
         msg[7] = ((byte)functionCode);
         msg[8] = ((byte)(address >> 8));
         msg[9] = ((byte)(address & 0xFF));
+
+
+
         msg[10] = ((byte)(readLength >> 8));
         msg[11] = ((byte)(readLength & 0xFF));
         return msg;
