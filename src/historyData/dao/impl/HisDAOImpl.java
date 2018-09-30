@@ -4,6 +4,7 @@ import Util.HBSessionDaoImpl;
 import hibernatePOJO.PowerparmMonitor;
 import historyData.dao.HisDAO;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 public class HisDAOImpl implements HisDAO {
@@ -60,5 +61,35 @@ public class HisDAOImpl implements HisDAO {
         return rtlist;
     }
 
+    @Override
+    public List getHisDataLyTx(String did, String starttime, String endtime) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        List<?> crlist = new ArrayList<>();
+        List rtlist = new ArrayList<>();
 
+        crlist=hbsessionDao.search("select a.time, a.value, b.description from EventPower a, EventsType b " +
+                "where a.did='" + did + "' and a.time>='"+starttime+"' and a.time<='"+endtime+"' and (b.classify='塌陷' or b.classify='浪涌') and a.cid=b.cid");
+
+        double baseValue=220;//Ua Ub Uc的基值
+        for(int i = 0; i < crlist.size(); i++){
+            Map<String, Object> map = new LinkedHashMap<>();
+            Object[] temp= (Object[])crlist.get(i);
+            map.put("time",(Timestamp)temp[0]);
+            map.put("Ua",null);
+            map.put("Ub",null);
+            map.put("Uc",null);
+            String description=(String)temp[2];
+            if(description.indexOf("Ua")>=0){
+                map.put("Ua",baseValue+(double)temp[1]);
+            }
+            if(description.indexOf("Ub")>=0){
+                map.put("Ub",baseValue+(double)temp[1]);
+            }
+            if(description.indexOf("Uc")>=0){
+                map.put("Uc",baseValue+(double)temp[1]);
+            }
+            rtlist.add((Object) map);
+        }
+        return rtlist;
+    }
 }

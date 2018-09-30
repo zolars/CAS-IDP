@@ -445,6 +445,13 @@
                  <param name="root">result</param>
              </result>
          </action>
+         <!--获取浪涌塌陷数据-->
+         <action name="getHisDataLyTx" class="historyData.action.getHisLyTxAction">
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
          <!--获取历史数据结束-->
 
          <action name="getAllIDPDevice" class="deviceManage.action.getAllIDPDeviceAction">

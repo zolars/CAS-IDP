@@ -670,6 +670,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 show: false,
                 data: qstLegend
             },
+            // 数据窗口缩放
+            dataZoom: [
+                {
+                    type: 'slider',
+                    show: true,
+                    xAxisIndex: [0],
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'slider',
+                    show: true,
+                    yAxisIndex: [0],
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    xAxisIndex: [0],
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    yAxisIndex: [0],
+                    start: 0,
+                    end: 100
+                }
+            ],
             xAxis: {
                 type: 'time',
                 splitLine: {
