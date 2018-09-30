@@ -5,23 +5,23 @@
 <hibernate-mapping>
 
     <class name="hibernatePOJO.EventCtrl" table="event_ctrl" schema="test">
-        <id name="id">
-            <column name="id" sql-type="int(11)"/>
+        <id name="teid">
+            <column name="teid" sql-type="int(11)"/>
         </id>
         <property name="did">
-            <column name="did" sql-type="varchar(255)" not-null="true"/>
+            <column name="did" sql-type="longtext" not-null="true"/>
         </property>
         <property name="time">
-            <column name="time" sql-type="datetime"/>
+            <column name="time" sql-type="date" not-null="true"/>
         </property>
         <property name="eventType">
-            <column name="eventType" sql-type="int(11)"/>
+            <column name="eventType" sql-type="int(11)" not-null="true"/>
         </property>
-        <property name="description">
-            <column name="description" sql-type="String(255)" precision="255" not-null="true"/>
+        <property name="discription">
+            <column name="discription" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="alarm">
-            <column name="alarm" sql-type="String(255)" precision="255" not-null="true"/>
+            <column name="alarm" sql-type="varchar(255)" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

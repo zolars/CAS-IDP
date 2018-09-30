@@ -1698,6 +1698,32 @@ public class EventDAOImpl implements EventDAO {
         return list;
     }
 
+    //获取当前机房下的温度设备的温度、湿度记录
+    public List getComputerroomWetAndHumdity(String compname){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<List<String>> rtlist = new ArrayList<>();
+
+        Computerroom comps = (Computerroom)hbsessionDao.getFirst(
+                "FROM Computerroom where rname='" + compname + "'");
+
+        String tempset = comps.getTempset();
+        String tempstr[] = tempset.split("，");
+
+        for(int i = 0 ; i < tempstr.length; i++) {
+            TemperatureMonitor temp = (TemperatureMonitor)hbsessionDao.getFirst(
+                    "FROM TemperatureMonitor where did='" + tempstr[i] + "' Order by time desc");
+            List<String> list = new ArrayList();
+            list.add(temp.getDid());
+            list.add(temp.getTemperature().toString());
+            list.add(temp.getHumidity().toString());
+            rtlist.add(list);
+        }
+
+        return rtlist;
+    }
+
     public boolean setAssessInfo(Integer red_yellow, Integer yellow_green){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();

@@ -662,6 +662,14 @@
              </result>
          </action>
 
+         <action name="getOneComputerroomMapData" class="efficiencyAnalysis.action.getOneComputerroomMapDataAction">
+             <!--getOneComputerroomMapData -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="plantformMessage" class="smsplantform.webservice">
              <!--plantformMessage -->
              <result name="failure">/failure.jsp</result>

@@ -213,15 +213,15 @@ public class alarmModelJob implements Job {
         }
 
         //2.1.环境事件
-        List<EventEnvironment> alrmenvirolist = hbsessionDao.search(
-                "FROM EventEnvironment where time >'"+ date +"'");
+        //List<EventEnvironment> alrmenvirolist = hbsessionDao.search(
+         //       "FROM EventEnvironment where time >'"+ date +"'");
 
         //2.2.查询各个事件的告警方式、告警用户、告警时间范围
 
 
         //3.1.设备（治理）事件
-        List<EventCtrl> alrmctrllist = hbsessionDao.search(
-                "FROM EventCtrl where time >'"+ date +"'");
+      //  List<EventCtrl> alrmctrllist = hbsessionDao.search(
+        //        "FROM EventCtrl where time >'"+ date +"'");
 
         //3.2.查询各个事件的告警方式、告警用户、告警时间范围
 

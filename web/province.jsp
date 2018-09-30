@@ -125,6 +125,84 @@
                         if (options.index() !== 0) {
                             $('#second-page').css('display', 'block');
                             $('#first-page').css('display', 'none');
+
+                            //获取温度、湿度
+                            $.ajax({
+                                type: "post",
+                                url: "getOneComputerroomMapData",
+                                data: {
+                                    compname: options.text()
+                                },
+                                dataType: "json",
+                                success: function (data) {
+
+                                    alert(data);
+
+                                    var obj = eval('(' + data + ')');
+                                    var list = obj.oplist;
+
+                                    var tempdata = [];
+                                    var humiddata = [];
+                                    var xdata = [];
+
+                                    for (var i = 0; i < list.length; i++) {
+                                        xdata[i] = list[i][0];
+                                        tempdata[i] = list[i][1];
+                                        humiddata[i] = list[i][2];
+                                    }
+
+                                    //指定温度的图表的配置项和数据
+                                    var tempoption = {
+                                        title: {
+                                            text: '温度',
+                                            subtext: '温度监测',
+                                        },
+                                        tooltip: {},
+                                        xAxis: {
+                                            data: xdata
+                                        },
+                                        yAxis: {},
+                                        series: [{
+                                            name: '数值',
+                                            type: 'bar',
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#3EA3D8'
+                                                }
+                                            },
+                                            data: tempdata
+                                        }]
+                                    };
+
+                                    //指定湿度的图表的配置项和数据
+                                    var humidoption = {
+                                        title: {
+                                            text: '湿度',
+                                            subtext: '湿度监测',
+                                        },
+                                        tooltip: {},
+                                        xAxis: {
+                                            data: xdata
+                                        },
+                                        yAxis: {},
+                                        series: [{
+                                            name: '数值',
+                                            type: 'bar',
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#3EA3D8'
+                                                }
+                                            },
+                                            data: humiddata
+                                        }]
+                                    };
+
+                                    // 使用刚指定的配置项和数据显示图表。
+                                    tempChart.setOption(tempoption);
+                                    humidChart.setOption(humidoption);
+                                }
+                            });
+
                         } else {
                             $('#second-page').css('display', 'none');
                             $('#first-page').css('display', 'block');
@@ -464,6 +542,7 @@
     var stime = $("#firstDate").val();
     var etime = $("#lastDate").val();
 
+    //获取事件、告警、评估等级
     $.ajax({
         type: "post",
         url: "getOneProvinceMapData",
@@ -482,8 +561,6 @@
             var xdata = [];
             var eventdata = [];
             var alarmdata = [];
-            var tempdata = [26, 26, 26, 25.5];
-            var humiddata = [50, 40, 35, 30];
             var degree = [];
 
             for (var i = 0; i < list.length; i++) {
@@ -582,52 +659,6 @@
                 }]
             };
 
-            //指定温度的图表的配置项和数据
-            var tempoption = {
-                title: {
-                    text: '温度',
-                    subtext: '温度监测',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '数值',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            color: '#3EA3D8'
-                        }
-                    },
-                    data: tempdata
-                }]
-            };
-
-            //指定湿度的图表的配置项和数据
-            var humidoption = {
-                title: {
-                    text: '湿度',
-                    subtext: '湿度监测',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '数值',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            color: '#3EA3D8'
-                        }
-                    },
-                    data: humiddata
-                }]
-            };
-
             //指定仪表盘的图表的配置项和数据
             var paneloption = {
                 tooltip : {
@@ -653,7 +684,6 @@
 
             //指定评估结果块的数据
             for(var i = 0; i < xdata.length; i++){
-                console.log(degree[i], xdata[i]);
                 if(degree[i] == '1'){
                     $("#r1t"+i).attr("src","/img/icon/GOOD.png");
                 }
@@ -661,7 +691,6 @@
                     $("#r1t"+i).attr("src","/img/icon/NORMAL.png");
                 }
                 if(degree[i] == '3'){
-                    console.log("333");
                     $("#r1t"+i).attr("src","/img/icon/BAD.png");
                 }
 
@@ -678,17 +707,8 @@
             alarmChart.setOption(alarmoption);
             nxChart.setOption(nxoption);
             nhChart.setOption(nhoption);
-            tempChart.setOption(tempoption);
-            humidChart.setOption(humidoption);
             panelChart.setOption(paneloption);
         }
-    });
-
-    //点击某个柱状图，进入该分行的页面
-    eventChart.on('click', function () {
-        $('#second-page').css('display', 'block');
-        $('#first-page').css('display', 'none');
-
     });
 
 </script>

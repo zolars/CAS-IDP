@@ -13,10 +13,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class TransientUtil {
+public class OverLimitUtil {
     private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private static String code="0001";
-    private static String checkCode="wizpower";
+    private static String code="0002";
+    private static String checkCode="";//"wizpower";
     private static int interval = 30;//默认一次取30分钟内的暂态事件
 
     /*
@@ -24,7 +24,7 @@ public class TransientUtil {
       由于一个请求帧中的MsgContent最多只能为2048个字节，所以一次请求可能会被分割为多个请求帧
      */
     public static List<ByteBuf> createMsg(){
-        TransientRequest tr=createTransientRequest();
+        OverLimitRequest tr=createOverLimitRequest();
         String content=JSON.toJSONString(tr);
         List<ByteBuf> list=new ArrayList();
         int frame_num=content.length()/2048;    //请求帧帧数
@@ -67,14 +67,14 @@ public class TransientUtil {
         }
         return list;
     }
-    //返回一个请求体对象,code为"0001",starttime为当前时间往前24个小时，endtime为当前时间
-    public static TransientRequest createTransientRequest(){
-        TransientRequest tr=new TransientRequest();
+    //返回一个请求体对象,code为"0002",starttime为当前时间往前24个小时，endtime为当前时间
+    public static OverLimitRequest createOverLimitRequest(){
+        OverLimitRequest tr=new OverLimitRequest();
         tr.setCode(code);
         Calendar c=Calendar.getInstance();
         c.setTime(new Date());
         tr.setEndtime(sdf.format(c.getTime()));
-        c.add(Calendar.MINUTE,- interval); //interval
+        c.add(Calendar.MINUTE,- 600*interval); //interval
         tr.setStarttime(sdf.format(c.getTime()));
         return tr;
     }
@@ -105,7 +105,7 @@ public class TransientUtil {
     }
 
     public static void setCode(String code) {
-        TransientUtil.code = code;
+        OverLimitUtil.code = code;
     }
 
     public static String getCheckCode() {
@@ -113,7 +113,7 @@ public class TransientUtil {
     }
 
     public static void setCheckCode(String checkCode) {
-        TransientUtil.checkCode = checkCode;
+        OverLimitUtil.checkCode = checkCode;
     }
 
     public static int getInterval() {
@@ -121,6 +121,6 @@ public class TransientUtil {
     }
 
     public static void setInterval(int interval) {
-        TransientUtil.interval = interval;
+        OverLimitUtil.interval = interval;
     }
 }

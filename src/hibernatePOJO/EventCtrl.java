@@ -1,31 +1,24 @@
 package hibernatePOJO;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Objects;
 
-@Entity
-@Table(name = "event_ctrl", schema = "test", catalog = "")
 public class EventCtrl {
-    private int id;
+    private int teid;
     private String did;
-    private Timestamp time;
-    private int eventType;
-    private String description;
+    private Date time;
+    private Integer eventType;
+    private String discription;
     private String alarm;
 
-    @Id
-    @Column(name = "id", nullable = false)
-    public int getId() {
-        return id;
+    public int getTeid() {
+        return teid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTeid(int teid) {
+        this.teid = teid;
     }
 
-    @Basic
-    @Column(name = "did", nullable = true)
     public String getDid() {
         return did;
     }
@@ -34,38 +27,30 @@ public class EventCtrl {
         this.did = did;
     }
 
-    @Basic
-    @Column(name = "time", nullable = true)
-    public Timestamp getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
-    @Basic
-    @Column(name = "eventType", nullable = true)
-    public int getEventType() {
+    public Integer getEventType() {
         return eventType;
     }
 
-    public void setEventType(int eventType) {
+    public void setEventType(Integer eventType) {
         this.eventType = eventType;
     }
 
-    @Basic
-    @Column(name = "description", nullable = true)
-    public String getDescription() {
-        return description;
+    public String getDiscription() {
+        return discription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDiscription(String discription) {
+        this.discription = discription;
     }
 
-    @Basic
-    @Column(name = "alarm", nullable = true)
     public String getAlarm() {
         return alarm;
     }
@@ -74,22 +59,22 @@ public class EventCtrl {
         this.alarm = alarm;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EventCtrl that = (EventCtrl) o;
-        return id == that.id &&
-                Objects.equals(did, that.did) &&
-                Objects.equals(time, that.time) &&
-                Objects.equals(eventType, that.eventType) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(alarm, that.alarm);
+        EventCtrl eventCtrl = (EventCtrl) o;
+        return teid == eventCtrl.teid &&
+                Objects.equals(did, eventCtrl.did) &&
+                Objects.equals(time, eventCtrl.time) &&
+                Objects.equals(eventType, eventCtrl.eventType) &&
+                Objects.equals(discription, eventCtrl.discription) &&
+                Objects.equals(alarm, eventCtrl.alarm);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, did, time, eventType, description, alarm);
+
+        return Objects.hash(teid, did, time, eventType, discription, alarm);
     }
 }

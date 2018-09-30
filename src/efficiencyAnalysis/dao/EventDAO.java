@@ -56,6 +56,8 @@ public interface EventDAO {
 
     public List getAllCityBankEvent(String pbname);
 
+    public List getComputerroomWetAndHumdity(String compname);
+
     public boolean setAssessInfo(Integer red_yellow, Integer yellow_green);
 
     public boolean setAllEventtypePriorty(String[] eventtypelist, String[] priortylist);

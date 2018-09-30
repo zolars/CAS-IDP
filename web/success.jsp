@@ -24,6 +24,12 @@
             height: 1000px;
             margin: auto;
         }
+        #whole-page {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            background-color: #0d6aad;
+        }
     </style>
 
 </head>
@@ -47,7 +53,10 @@
     }
 %>
 
-<div id="china-map"></div>
+<div id="whole-page">
+    <div id="china-map"></div>
+</div>
+
 
 <!-- Javascript Libraries -->
 

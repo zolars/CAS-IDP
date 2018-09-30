@@ -50,15 +50,19 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
             len[i] = 4;
 
             String thsholdname = dicThreshold.get(i).getDescription();
+            System.out.println("FROM DevicesThreshold where classify='" + thsholdname + "' and level = 1");
 
             List<DevicesThreshold> dt = hbsessionDao.search(
-                    "FROM DevicesThreshold where classify='" + thsholdname + "' and level = 1" + "'");
+                    "FROM DevicesThreshold where classify='" + thsholdname + "' and level = 1");
 
 
             if(dt.get(0) != null){
-
-                double dfval =dt.get(0).getFloorval();
-                double dcval = dt.get(0).getCellval();
+                double dfval = 0;
+                double dcval = 0;
+                if(dt.get(0).getFloorval() != null)
+                    dfval = dt.get(0).getFloorval();
+                if(dt.get(0).getCellval() != null)
+                    dcval = dt.get(0).getCellval();
 
                 Float ffval = (float)dfval;
                 Float fcval = (float)dcval;
@@ -84,7 +88,6 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
                 SocketChannel sc = (SocketChannel)ctx.channel();
 
                 sc.writeAndFlush(sendMsg);
-
             }
         }
     }
