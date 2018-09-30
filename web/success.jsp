@@ -78,14 +78,13 @@
                     min: 1,
                     max: 3,
                     inRange: {
-                        color: ["#FF0000", "#FFFF00", "#00FF00"]
+                        color: ["#00FF00", "#FFFF00", "#FF0000"]
                     },
                     text: ["H", "L"],
                     calculable: true
                 },
                 toolbox: {
                     show: true,
-                    //orient: "vertical",
                     left: "left",
                     top: "top",
                     feature: {
@@ -150,37 +149,12 @@
             myChart.setOption(option);
             myChart.on("mouseover", function (params) {
                 var dataIndex = params.dataIndex;
-                //  console.log(params);
             });
 
             myChart.on("click", function (param) {
-                //if(province = "河南")
-                //   top.location.href = "province.jsp";
-                //else(province = "山东")
-                /*top.location.href = "/province.jsp";*/
-                //var province = param.selected;
-                /*var urlArr = ['http://www.baidu.com','http://http://www.cnblogs.com/sapho'];
-                for (var p in province) {
-                    if (province[p]) {
-                       switch(p){
-                            case "山东":
-                                location.href = urlArr[0];
-                                break;
-                            case "内蒙古":
-                                top.location.href = "http://www.baidu.com";
-                                break;
-                            default:
-                                break;
-                       }
-
-                    }
-                }*/
-
                 var province = param.name;
-
                 $.cookie('province_name', province, {expires: 1, path: '/'});
                 top.location.href = "/province.jsp?prov=" + province;
-
             });
         }
     });
