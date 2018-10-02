@@ -50,7 +50,7 @@ public class assessModelJob implements Job {
                 Integer did = Integer.parseInt(sdid);
                 Integer cid = eventpowerlist.get(i).getCid();
                 Double value = eventpowerlist.get(i).getValue();
-              //  Timestamp time = eventpowerlist.get(i).getTime();
+                Timestamp time = eventpowerlist.get(i).getTime();
                 Integer tlevel = 1;
 
                 typelist = hbsessionDao.search("From EventsType where cid ='" + cid + "'");
@@ -77,7 +77,7 @@ public class assessModelJob implements Job {
                         }
                     }
                 }
-              // System.out.println("电能事件" + teid + "的告警级别：" + tlevel);
+
                 AssessRecord maxar = (AssessRecord)hbsessionDao.getFirst("FROM AssessRecord Order by aid desc");
 
                 Integer aid = 0;
@@ -90,6 +90,7 @@ public class assessModelJob implements Job {
                 ar.setDid(did);
                 ar.setTeid(teid);
                 ar.setEventclass(1); //电能类事件类型为1
+                ar.setTime(time); //为评估记录赋值发生时间，便于查询
                 Boolean rt = hbsessionDao.insert(ar);
             }
         }
@@ -106,7 +107,7 @@ public class assessModelJob implements Job {
                 Integer did = Integer.parseInt(sdid);
                 Integer cid = eventenvironmentlist.get(i).getCid();
                 Double value = eventenvironmentlist.get(i).getValue();
-                //  Timestamp time = eventenvironmentlist.get(i).getTime();
+                Timestamp time = eventenvironmentlist.get(i).getTime();
                 Integer tlevel = 1;
 
                 typelist = hbsessionDao.search("From EventsType where cid ='" + cid + "'");
@@ -133,7 +134,7 @@ public class assessModelJob implements Job {
                         }
                     }
                 }
-                System.out.println("温度事件" + teid + "的告警级别：" + tlevel);
+
                 AssessRecord maxar = (AssessRecord)hbsessionDao.getFirst("FROM AssessRecord Order by aid desc");
 
                 Integer aid = 0;
@@ -145,6 +146,7 @@ public class assessModelJob implements Job {
                 ar.setAid(aid + 1);
                 ar.setDid(did);
                 ar.setTeid(teid);
+                ar.setTime(time); //为评估记录赋值发生时间，便于查询
                 if(type.equals(113)||type.equals(114))
                     ar.setEventclass(2); //温度类事件类型为2
                 else if(type.equals(115)||type.equals(116))

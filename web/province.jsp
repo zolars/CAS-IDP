@@ -121,7 +121,6 @@
                     $("#comproom_code").change(function () {
                         var options = $("#comproom_code option:selected");
                         $.cookie('opinion3', options.text(), {expires: 1, path: '/'});
-                        alert("您已选择: " + options.text() + ". 即将跳转到相应界面...");
                         if (options.index() !== 0) {
                             $('#second-page').css('display', 'block');
                             $('#first-page').css('display', 'none');
@@ -135,8 +134,6 @@
                                 },
                                 dataType: "json",
                                 success: function (data) {
-
-                                    alert(data);
 
                                     var obj = eval('(' + data + ')');
                                     var list = obj.oplist;
@@ -212,8 +209,7 @@
                                 },
                                 dataType: "json",
                                 success: function (data) {
-                                    alert(data);
-                                   // $('#ctrlstatus');
+                                    alert("00000"+data);
                                     $("#ctrlstatus").attr("value","警");
                                 }
                             });
@@ -264,11 +260,9 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="dtp_input1" class="control-label">开始日期</label>
-                                <div class="input-group date form_datetime"
-                                     data-date="2018-07-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p"
+                                <div class="input-group date form_datetime" data-date-format="yyyy-mm-dd hh:ii:ss"
                                      data-link-field="dtp_input1">
-                                    <input id="firstDate" class="form-control" size="16" type="text"
-                                           value="2018-01-01 00:00:00" readonly>
+                                    <input id="firstDate" class="form-control" size="16" type="text" readonly>
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-th"></span></span>
                                 </div>
@@ -277,20 +271,16 @@
 
                             <div class="form-group">
                                 <label for="dtp_input2" class="control-label">结束日期</label>
-                                <div class="input-group date form_datetime"
-                                     data-date="2019-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p"
+                                <div class="input-group date form_datetime" data-date-format="yyyy-mm-dd hh:ii:ss"
                                      data-link-field="dtp_input1">
-                                    <input id="lastDate" class="form-control" size="16" type="text"
-                                           value="2018-12-01 00:00:00" readonly>
+                                    <input id="lastDate" class="form-control" size="16" type="text" readonly>
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-th"></span></span>
                                 </div>
                                 <input type="hidden" id="dtp_input2" value=""/><br/>
                             </div>
                             <!-- 刷新按钮 -->
-                            <button id="refresh-btn" class="btn btn-primary" data-loading-text="Loading..."
-                                    type="button"> 刷新
-                            </button>
+                            <button id="refresh-btn" class="btn-primary" data-loading-text="Loading..." type="button"> 刷新</button>
                         </fieldset>
 
                     </form>
@@ -323,6 +313,7 @@
                             <td id="r2t3" style="font-size: 12px"></td>
                             <td id="r2t4" style="font-size: 12px"></td>
                         </tr>
+                        <tr style="height: 28px;"></tr>
                         <tr>
                             <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
                             <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
@@ -366,7 +357,6 @@
                          user-select: none;
                          position: relative;
                      ">
-                    <!-- html代码，不考虑CSS样式 -->
                     <img id="preview" alt=""/>
                     <form class="am-form" method="post" enctype="multipart/form-data">
                         <input type="file" id="head" name="head" onchange="previewImage(this)">
@@ -375,6 +365,7 @@
 
                 <div id="devicebar" class="col-md-2 col-xs-6 chart-item" style="width: 30%; height: 200px; text-align:center">
                     <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0">
+                        <tr style="height: 28px;"></tr>
                         <tr>
                             <td style="padding-right: 30px;"><img src="/img/1.png"/></td>
                             <td style="padding-right: 30px;"><img src="/img/2.png"/></td>
@@ -389,6 +380,7 @@
                             <td style="font-size: 12px">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
                         </tr>
+                        <tr style="height: 28px;"></tr>
                         <tr>
                             <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
                             <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
@@ -442,7 +434,14 @@
     $(document).ready(function () {
         $("#refresh-btn").click(function () {
             $(this).button('loading').delay(500).queue(function () {
-                alert("刷新成功!");
+
+                var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
+                var pname = decodeURI(provinceidc[1]);
+                var stime = $("#firstDate").val();
+                var etime = $("#lastDate").val();
+
+                getOneProvinceMapData(pname, stime, etime);
+
                 $(this).button('reset');
                 $(this).dequeue();
             });
@@ -554,177 +553,193 @@
 
     var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
     var pname = decodeURI(provinceidc[1]);
+
+    $("#firstDate").val(getFormatDate(-1));
+    $("#lastDate").val(getFormatDate(0));
+
     var stime = $("#firstDate").val();
     var etime = $("#lastDate").val();
 
+    getOneProvinceMapData(pname, stime, etime);
+
     //获取事件、告警、评估等级
-    $.ajax({
-        type: "post",
-        url: "getOneProvinceMapData",
-        data: {
-            pname: pname,
-            stime: stime,
-            etime: etime
-        },
-        dataType: "json",
-        success: function (data) {
-            //[1,2,3,4,1,1,1,1,3,2001]: event1, event2,event3, event4, alarm1, alram2, alarm3, alartm4, degree(R:1,Y:2,G:3)，cbid
+    function getOneProvinceMapData(pname, stime, etime){
+        $.ajax({
+            type: "post",
+            url: "getOneProvinceMapData",
+            data: {
+                pname: pname,
+                stime: stime,
+                etime: etime
+            },
+            dataType: "json",
+            success: function (data) {
+                //[1,2,3,4,1,1,1,1,3,2001]: event1, event2,event3, event4, alarm1, alram2, alarm3, alartm4, degree(R:1,Y:2,G:3)，cbid
+                var obj = eval('(' + data + ')');
+                var list = obj.oplist;
 
-            var obj = eval('(' + data + ')');
-            var list = obj.oplist;
+                var xdata = [];
+                var eventdata = [];
+                var alarmdata = [];
+                var degree = [];
 
-            var xdata = [];
-            var eventdata = [];
-            var alarmdata = [];
-            var degree = [];
+                for (var i = 0; i < list.length; i++) {
+                    xdata[i] = list[i][9];
 
-            for (var i = 0; i < list.length; i++) {
-                xdata[i] = list[i][9];
+                    eventdata[i] = parseInt(list[i][0]) + parseInt(list[i][1]) + parseInt(list[i][2]) + parseInt(list[i][3]);
+                    alarmdata[i] = parseInt(list[i][4]) + parseInt(list[i][5]) + parseInt(list[i][6]) + parseInt(list[i][7]);
 
-                eventdata[i] = parseInt(list[i][0]) + parseInt(list[i][1]) + parseInt(list[i][2]) + parseInt(list[i][3]);
-                alarmdata[i] = parseInt(list[i][4]) + parseInt(list[i][5]) + parseInt(list[i][6]) + parseInt(list[i][7]);
+                    degree[i] = list[i][8];
+                }
 
-                degree[i] = list[i][8];
-            }
-
-            // 指定事件的图表的配置项和数据
-            var eventoption = {
-                title: {
-                    text: '事件',
-                    subtext: '威胁分布',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '个数',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            color: '#3EA3D8'
-                        }
+                // 指定事件的图表的配置项和数据
+                var eventoption = {
+                    title: {
+                        text: '事件',
+                        subtext: '威胁分布',
                     },
-                    data: eventdata
-                }]
-            };
-
-            // 指定告警的图表的配置项和数据
-            var alarmoption = {
-                title: {
-                    text: '告警',
-                    subtext: '风险',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '个数',
-                    type: 'bar',
-                    data: alarmdata
-                }]
-            };
-
-            // 指定图表的配置项和数据
-            var nxoption = {
-                title: {
-                    text: '能效',
-                    subtext: 'PUE统计',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '个数',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            color: '#44764B'
-                        }
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
                     },
-                    data: [0, 0, 0, 0]
-                }]
-            };
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: '#3EA3D8'
+                            }
+                        },
+                        data: eventdata
+                    }]
+                };
 
-            // 指定图表的配置项和数据
-            var nhoption = {
-                title: {
-                    text: '能耗',
-                    subtext: '用电统计',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '个数',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            color: '#9F842F'
-                        }
+                // 指定告警的图表的配置项和数据
+                var alarmoption = {
+                    title: {
+                        text: '告警',
+                        subtext: '风险',
                     },
-                    data: [0, 0, 0, 0]
-                }]
-            };
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        data: alarmdata
+                    }]
+                };
 
-            //指定仪表盘的图表的配置项和数据
-            var paneloption = {
-                tooltip : {
-                    formatter: "{a} <br/>{b} : {c}%"
-                },
-                toolbox: {
-                    feature: {
-                        restore: {},
-                        saveAsImage: {}
+                // 指定图表的配置项和数据
+                var nxoption = {
+                    title: {
+                        text: '能效',
+                        subtext: 'PUE统计',
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: '#44764B'
+                            }
+                        },
+                        data: [0, 0, 0, 0]
+                    }]
+                };
+
+                // 指定图表的配置项和数据
+                var nhoption = {
+                    title: {
+                        text: '能耗',
+                        subtext: '用电统计',
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: '#9F842F'
+                            }
+                        },
+                        data: [0, 0, 0, 0]
+                    }]
+                };
+
+                //指定仪表盘的图表的配置项和数据
+                var paneloption = {
+                    tooltip : {
+                        formatter: "{a} <br/>{b} : {c}%"
+                    },
+                    series: [
+                        {
+                            name: '',
+                            type: 'gauge',
+                            min: 1,
+                            max: 3,
+                            detail: {formatter:'{value}'},
+                            data: [{value: degree[0], name: '评估等级'}]
+                        }
+                    ]
+                };
+
+                //指定评估结果块的数据
+                for(var i = 0; i < xdata.length; i++){
+                    if(degree[i] == '1'){
+                        $("#r1t"+i).attr("src","/img/icon/GOOD.png");
                     }
-                },
-                series: [
-                    {
-                        name: '',
-                        type: 'gauge',
-                        min: 1,
-                        max: 3,
-                        detail: {formatter:'{value}%'},
-                        data: [{value: degree[0], name: '评估等级'}]
+                    if(degree[i] == '2'){
+                        $("#r1t"+i).attr("src","/img/icon/NORMAL.png");
                     }
-                ]
-            };
+                    if(degree[i] == '3'){
+                        $("#r1t"+i).attr("src","/img/icon/BAD.png");
+                    }
 
-            //指定评估结果块的数据
-            for(var i = 0; i < xdata.length; i++){
-                if(degree[i] == '1'){
-                    $("#r1t"+i).attr("src","/img/icon/GOOD.png");
-                }
-                if(degree[i] == '2'){
-                    $("#r1t"+i).attr("src","/img/icon/NORMAL.png");
-                }
-                if(degree[i] == '3'){
-                    $("#r1t"+i).attr("src","/img/icon/BAD.png");
+                    document.getElementById("r2t"+i).innerHTML = xdata[i];
                 }
 
-                document.getElementById("r2t"+i).innerHTML = xdata[i];
+                // 使用刚指定的配置项和数据显示图表。
+                eventChart.setOption(eventoption);
+                alarmChart.setOption(alarmoption);
+                nxChart.setOption(nxoption);
+                nhChart.setOption(nhoption);
+                panelChart.setOption(paneloption);
             }
+        });
+    }
 
-            /*setInterval(function () {
-                option.series[0].data[0].value = 1;
-                panelChart.setOption(option, true);
-            },10000);*/
+    //获取当前日期前adddaycount天时间
+    function getFormatDate(AddDayCount) {
+        var dd = new Date();
+        dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+        var y = dd.getFullYear();
+        var m = dd.getMonth()+1;//获取当前月份的日期
+        var d = dd.getDate();
+        var h = dd.getHours();
+        var minute = dd.getMinutes();
+        var s = dd.getSeconds();
 
-            // 使用刚指定的配置项和数据显示图表。
-            eventChart.setOption(eventoption);
-            alarmChart.setOption(alarmoption);
-            nxChart.setOption(nxoption);
-            nhChart.setOption(nhoption);
-            panelChart.setOption(paneloption);
-        }
-    });
+        var seperator1 = "-";
+        var seperator2 = ":";
+
+        var currentdate = y + seperator1 + m + seperator1 + d
+            + " " + h + seperator2 + minute
+            + seperator2 + s;
+        return currentdate;
+    }
 
 </script>
 
@@ -746,11 +761,9 @@
 
     $("#firstDate").change(function () {
         $('.firstDate').datetimepicker('setStartDate', $(this).val());
-        alert("starttime:" + $(this).val());
     });
     $("#lastDate").change(function () {
         $('.lastDate').datetimepicker('setEndDate', $(this).val());
-        alert("endtime:" + $(this).val());
     });
 </script>
 
@@ -814,6 +827,7 @@
     }
 </script>
 
+<!-- 上传图片功能 -->
 <script>
     // 上传图片前预览
     function previewImage(file) {
@@ -825,11 +839,11 @@
                 var rect = getZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
                 img.width = rect.width;
                 img.height = rect.height;
-            }
+            };
             var reader = new FileReader();
             reader.onload = function (evt) {
                 img.src = evt.target.result;
-            }
+            };
             reader.readAsDataURL(file.files[0]);
         } else {
             //兼容IE

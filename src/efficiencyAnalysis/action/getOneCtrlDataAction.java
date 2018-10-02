@@ -24,7 +24,6 @@ public class getOneCtrlDataAction extends ActionSupport {
         this.result = result;
     }
 
-
     /* 获取治理设备的状态
      */
     public String execute() throws Exception {

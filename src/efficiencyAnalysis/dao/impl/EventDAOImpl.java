@@ -1613,9 +1613,7 @@ public class EventDAOImpl implements EventDAO {
             }
 
             //根据didset转换为didstring
-            System.out.println(didset.size()+","+tempset.size());
             String didsetstring = "(";
-
             for(int idx = 0; idx < didset.size(); idx++){
                 didsetstring += didset.get(idx) + ",";
             }
@@ -1623,37 +1621,38 @@ public class EventDAOImpl implements EventDAO {
                 didsetstring = didsetstring.substring(0, didsetstring.length() - 1);
                 didsetstring += ")";
 
-                System.out.println(didsetstring);
+                List<AssessRecord> assessrecordlist =
+                        hbsessionDao.search("FROM AssessRecord where did IN" + didsetstring + " and time > '" + stime + "' and time < '" + etime + "'");
 
-                List<AssessRecord> assessrecordlist = hbsessionDao.search("FROM AssessRecord where did IN" + didsetstring);
+                if(assessrecordlist != null){
+                    for (int j = 0; j < assessrecordlist.size(); j++) {
+                        if (assessrecordlist.get(i).getDegree() == 3)
+                            degree3 = true;
+                        if (assessrecordlist.get(i).getDegree() == 2)
+                            degree2 = true;
 
-                for (int j = 0; j < assessrecordlist.size(); j++) {
-                    if (assessrecordlist.get(i).getDegree() == 3)
-                        degree3 = true;
-                    if (assessrecordlist.get(i).getDegree() == 2)
-                        degree2 = true;
+                        //计算电能类事件数量、温度类事件数量、湿度类事件数量、设备类事件数量
+                        if (assessrecordlist.get(i).getEventclass().equals(1))
+                            evnum1++;
+                        else if (assessrecordlist.get(i).getEventclass().equals(2))
+                            evnum2++;
+                        else if (assessrecordlist.get(i).getEventclass().equals(3))
+                            evnum3++;
+                        else if (assessrecordlist.get(i).getEventclass().equals(4))
+                            evnum4++;
 
-                    //计算电能类事件数量、温度类事件数量、湿度类事件数量、设备类事件数量
-                    if (assessrecordlist.get(i).getEventclass().equals(1))
-                        evnum1++;
-                    else if (assessrecordlist.get(i).getEventclass().equals(2))
-                        evnum2++;
-                    else if (assessrecordlist.get(i).getEventclass().equals(3))
-                        evnum3++;
-                    else if (assessrecordlist.get(i).getEventclass().equals(4))
-                        evnum4++;
+                        //计算电能类告警数量、温度类告警数量、湿度类告警数量、设备类告警数量
+                        Integer teid = assessrecordlist.get(i).getTeid();
 
-                    //计算电能类告警数量、温度类告警数量、湿度类告警数量、设备类告警数量
-                    Integer teid = assessrecordlist.get(i).getTeid();
-
-                    if (assessrecordlist.get(i).getEventclass().equals(1))
-                        anum1++;
-                    else if (assessrecordlist.get(i).getEventclass().equals(2))
-                        anum2++;
-                    else if (assessrecordlist.get(i).getEventclass().equals(3))
-                        anum3++;
-                    else if (assessrecordlist.get(i).getEventclass().equals(4))
-                        anum4++;
+                        if (assessrecordlist.get(i).getEventclass().equals(1))
+                            anum1++;
+                        else if (assessrecordlist.get(i).getEventclass().equals(2))
+                            anum2++;
+                        else if (assessrecordlist.get(i).getEventclass().equals(3))
+                            anum3++;
+                        else if (assessrecordlist.get(i).getEventclass().equals(4))
+                            anum4++;
+                    }
                 }
             }
             List nlist = new ArrayList();
@@ -1709,41 +1708,72 @@ public class EventDAOImpl implements EventDAO {
                 "FROM Computerroom where rname='" + compname + "'");
 
         String tempset = comps.getTempset();
-        String tempstr[] = tempset.split("，");
 
-        for(int i = 0 ; i < tempstr.length; i++) {
-            TemperatureMonitor temp = (TemperatureMonitor)hbsessionDao.getFirst(
-                    "FROM TemperatureMonitor where did='" + tempstr[i] + "' Order by time desc");
-            List<String> list = new ArrayList();
-            list.add(temp.getDid());
-            list.add(temp.getTemperature().toString());
-            list.add(temp.getHumidity().toString());
-            rtlist.add(list);
+        if(tempset.equals(null)){
+            return rtlist;
         }
+        else {
 
-        return rtlist;
+            String tempstr[] = tempset.split("，");
+            db = new DBConnect();
+
+            for (int i = 0; i < tempstr.length; i++) {
+                String sql = "select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity" +
+                        " from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
+
+                try {
+                    ps = db.getPs(sql);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        List<String> list = new ArrayList();
+                        list.add(rs.getString("dname"));
+                        list.add(rs.getString("temperature"));
+                        list.add(rs.getString("humidity"));
+
+                        rtlist.add(list);
+                    }
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            try {
+                db.free();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return rtlist;
+        }
     }
 
     public boolean getComputerroomCtrlStatus(String cbname){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<List<String>> rtlist = new ArrayList<>();
-
         Computerroom comps = (Computerroom)hbsessionDao.getFirst(
                 "FROM Computerroom where cbname='" + cbname + "'");
 
         String didset = comps.getDidset();
         String didstr[] = didset.split("，");
+        List<String> didlist = new ArrayList();
 
-        EventCtrl temp = (EventCtrl)hbsessionDao.getFirst(
-                    "FROM EventCtrl where did='" + didstr[0] + "' Order by time desc");
+        //寻找ctrl类（治理设备）的device
+        for(int i = 0; i < didstr.length; i++){
+            Devices dv = (Devices)hbsessionDao.getFirst(
+                    "FROM Devices where did='" + didstr[i] + "' and type = 'ctrl'");
+            if(dv != null)
+                didlist.add(dv.getDid());
+        }
 
-        List<String> list = new ArrayList();
-        if(temp.getAlarm() == "1")
-            return true;
-        else return false;
+        if(didlist != null){
+            EventCtrl temp = (EventCtrl)hbsessionDao.getFirst(
+                    "FROM EventCtrl where did='" + didlist.get(0) + "' Order by time desc");
 
+            if(temp.getAlarm() == "1")  //状态码为1，告警
+                return true;
+        }
+        return false; //状态码为0，正常
     }
 
     public boolean setAssessInfo(Integer red_yellow, Integer yellow_green){
