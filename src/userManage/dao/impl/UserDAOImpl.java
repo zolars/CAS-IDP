@@ -259,7 +259,10 @@ public class UserDAOImpl implements UserDAO {
 
         //获取当前用户，判断是否可以更改信息
         User ur = (User)hbsessionDao.getFirst("FROM User where uid = '" + temuser+ "'");
-        if((uid.equals(temuser)) || (ur.getRid().equals("1"))){ //可以修改
+        UserRoles userole = (UserRoles)hbsessionDao.getFirst("FROM UserRoles where uid = '" + temuser+ "'");
+        Roles role = (Roles)hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles + "'");
+
+        if((uid.equals(temuser)) || (userole.getRid().equals("1"))){ //可以修改
 
             User newur = new User();
             newur.setUid(uid);
@@ -268,7 +271,6 @@ public class UserDAOImpl implements UserDAO {
             newur.setPassword(password);
             newur.setTelephone(telephone);
             newur.setGovtelephone(govtelephone);
-
             newur.setPbid(province);
             newur.setCbid(city);
             newur.setRid(computerroom);
@@ -280,17 +282,12 @@ public class UserDAOImpl implements UserDAO {
 
             rt = hbsessionDao.update(hql);
 
-            UserRoles newurole = new UserRoles();
-            newurole.setUid(uid);
-            newurole.setRid(roles);
-
-            String hql2 = "update UserRoles newurole set newurole.rid='" + roles +
-                    "' where newurole.uid='" + uid + "'";
-
-            rt = hbsessionDao.update(hql2);
-
+            if(userole.getRid() != null) {
+                String hql2 = "update UserRoles newurole set newurole.rid='" + role.getRid() +
+                        "' where newurole.uid='" + uid + "'";
+                rt = hbsessionDao.update(hql2);
+            }
         }
-
         return rt;
     }
 

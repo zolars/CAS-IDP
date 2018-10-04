@@ -179,29 +179,21 @@
                     </ul>
                 </div>
 
-                <div id = "item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                <div id = "item1" class="col-md-12 col-xs-6" style="height: 600px;">
                     <div class="block-area">
                         <div class="row">
                             <div class="col-md-12">
                                 <table id="event-table-head1">
                                     <thead>
                                     <tr>
-                                        <th><img src="/img/setting.png" alt="" onClick="settingIcon()" ></th>
-                                        <th><img src="/img/refresh.png" alt="" onClick="refreshIcon()" ></th>
-                                        <th><button type="button" class="btn btn-sm btn-alt" onClick="exportTable()" >导出</button></th>
-                                        <th><button type="button" class="btn btn-sm btn-alt" onClick="printTable()" >打印</button></th>
+                                        <th><img src="/img/setting.png" alt="" onClick="settingIcon()"></th>
+                                        <th><img src="/img/refresh.png" alt="" onClick="refreshIcon()"></th>
+                                        <th><button type="button" class="btn-sm btn-alt" onClick="exportTable()" >导出</button></th>
+                                        <th><button type="button" class="btn-sm btn-alt" onClick="printTable()" >打印</button></th>
                                     </tr>
                                     </thead>
                                 </table>
-
                                 <div class="row-fluid">
-                                 <%--   <div class="col-md-1">
-                                        <button type="button" style="width:100px;height:40px;" ></button>
-                                        <button type="button" onClick="getDeviceEvent()" style="width:100px;height:260px;" >设备事件</button>
-                                        <button type="button" onClick="getPowerEvent()"style="width:100px;height:260px;" >电能质量事件</button>
-                                        <button type="button" onClick="getEvironmentEvent()" style="width:100px;height:260px;" >环境事件</button>
-                                    </div>--%>
-
                                     <div class="col-md-7">
                                          <ul class="nav nav-tabs" id="detailItem">
                                              <li class="active"  style="width:33.333%">
@@ -473,17 +465,14 @@
                                         <!--endprint-->
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
 
                                         <ul class="nav nav-tabs" id="seculItem">
-                                            <li class="active" style="width:33.33333%">
+                                            <li class="active" style="width:50%">
                                                 <a data-toggle="tab" id="leftsubItem1">•时间地点</a>
                                             </li>
-                                            <li style="width:33.33333%">
+                                            <li style="width:50%">
                                                 <a data-toggle="tab" id="leftsubItem2">•列</a>
-                                            </li>
-                                            <li style="width:33.33333%">
-                                                <a data-toggle="tab" id="leftsubItem3">•图形</a>
                                             </li>
                                         </ul>
 
@@ -507,23 +496,14 @@
                                                 </div>
                                             </div>
                                             <div><input id="radio-day-event" type="radio"  name="event-data-peroid" value="day">天</div>
-                                            <div> <input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</div>
-                                            <div>
-                                                <input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月
-                                            </div>
-                                            <table class="display" id="place-event" style="width:100%">
-                                                <thead>
-                                                <tr>
-                                                    <th>测量地点</th>
-                                                    <th></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                </tbody>
+                                            <div><input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</div>
+                                            <div><input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月</div>
+                                            <table class="display" id="place-event" border="1">
+                                                <thead><tr><th>测量地点</th><th></th></tr></thead>
+                                                <tbody></tbody>
                                             </table>
-                                            <div id="add-button" type="button" class="btn btn-sm btn-alt"  onclick="addMonitorPoint()">添加</div>
-                                            <div id="delete-button" type="button" class="btn btn-sm btn-alt"  onclick="deleteMonitorPoint()">删除</div>
+                                            <div><button id="add-button" type="button" class="btn-sm btn-success" onclick="addMonitorPoint()">添加</button></div>
+                                            <div><button id="delete-button" type="button" class="btn-sm btn-danger" onclick="deleteMonitorPoint()">删除</button></div>
                                             <div>
                                                 <span>自动更新间隔</span>
                                                 <select style="display: inline-block" class="form-control location-select-item" id="auto-update-interval">
@@ -534,7 +514,7 @@
                                                 </select>
                                             </div>
 
-                                            <div><button id="data-button" type="button" class="btn btn-sm btn-alt" onclick="getAllEvent()">查询</button></div>
+                                            <div><button id="data-button" type="button" class="btn-sm btn-default" onclick="getAllEvent()">查询</button></div>
 
                                         </div>
 
@@ -587,7 +567,7 @@
                     </div>
                 </div>
 
-                <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                <div id = "item2" class="col-md-12 col-xs-6" style="height: 600px;">
                     能效分析
                 </div>
 
@@ -915,17 +895,10 @@
                 $("#leftsubItem1").click(function () {
                     $("#leftItem1").show();
                     $("#leftItem2").hide();
-                    $("#leftItem3").hide();
                 });
                 $("#leftsubItem2").click(function () {
                     $("#leftItem1").hide();
                     $("#leftItem2").show();
-                    $("#leftItem3").hide();
-                });
-                $("#leftsubItem3").click(function () {
-                    $("#leftItem1").hide();
-                    $("#leftItem2").hide();
-                    $("#leftItem3").show();
                 });
             });
         });
@@ -1634,16 +1607,14 @@
         //取得所有选中的节点，返回节点对象的集合
         var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
         var nodes2 = nodes.toString();
-
-        var nodeset = new Array();
-        nodeset = nodes2.split(",");
-
+        var nodeset = nodes2.split(",");
         var ptable = $("#place-event");
+
         for (var i = 0 ;i < nodeset.length; i++)
         {
             var nset = new Array();
             nset = nodeset[i].split(":");
-            ptable.append('<tr><td>' + nset[1] + '</td><td style="display: none">'+ nset[0] +'</td></tr>');
+            ptable.append('<tr><td><input id="radio-mpid" name="radio-mpid" type="radio" value="'+nset[0]+'"></td><td>' + nset[1] + '</td></tr>');
         }
 
         cancleCityBankAsMonitorPoint();
@@ -1655,8 +1626,7 @@
 
     //删除检测点
     function deleteMonitorPoint(){
-        alert("delete");
-
+        var delmpid = $('input[name="radio-mpid"]:checked').val();
 
     }
 
@@ -2030,7 +2000,7 @@
 
             //点击table中的某一行
             $('#place-event tbody').on('change', 'tr', function (){
-                alert("mp:"+ this);
+                //alert("mp:"+ this);
             });
 
             /*  //列栏表

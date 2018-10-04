@@ -88,6 +88,11 @@
 
 <body id="skin-blur-blue">
 
+<script>
+    var allUserList = null;
+
+</script>
+
 <!--登陆认证拦截-->
 <script src="js/jquery-3.3.1.js"></script>
 <script src="js/jquery.cookie.js"></script>
@@ -766,8 +771,7 @@
 
             <div class="add-roles-handle">
                 <button type="submit" class="btn btn-primary" id="add-user-handle" onclick="submitAddUser()">确定</button>
-                <button type="submit" class="btn btn-primary" id="update-user-handle" onclick="submitUpdateUser()">确定
-                </button>
+                <button type="submit" class="btn btn-primary" id="update-user-handle" onclick="submitUpdateUser()">确定</button>
                 <button class="btn btn-default" onclick="hiddenUserModel()">取消</button>
             </div>
         </div>
@@ -1532,33 +1536,35 @@
             dataType: "json",
             success: function (data) {
                 var obj = JSON.parse(data);
-                var list = obj;
+                //var list = obj;
+                allUserList = obj;
                 var table = $("#userinfotable");
                 table.empty();
                 table.append('<tr><td><div style="width:10px;"></div></td><td><div style="width:50px;">账号</div></td><td><div style="width:50px;">姓名</div></td><td><div style="width:260px;">组织</div></th><td><div style="widtd:100px;">角色</div></td><td><div style="width:150px;">联系方式</div></td><td> <div style="width:150px;">公务手机</div></td></tr>');
 
-                for (var key in list) {
-                    var len = list[key].length;
+                for (var key in allUserList) {
+                    var len = allUserList[key].length;
+
                     for (var i = 0; i < len; i++) {
-                        var uid = list[key][i][0];
-                        var account = list[key][i][1];
-                        var name = list[key][i][2];
-                        var org = list[key][i][3] + list[key][i][4] + list[key][i][5];
+                        var uid = allUserList[key][i][0];
+                        var account = allUserList[key][i][1];
+                        var name = allUserList[key][i][2];
+                        var org = allUserList[key][i][3] + allUserList[key][i][4] + allUserList[key][i][5];
 
                         var role;
-                        if(list[key][i][6] != undefined) role = list[key][i][6];
+                        if(allUserList[key][i][6] != undefined) role = allUserList[key][i][6];
                         else role += " ";
 
                         var telephone;
-                        if(list[key][i][7] != undefined) telephone = list[key][i][7];
+                        if(allUserList[key][i][7] != undefined) telephone = allUserList[key][i][7];
                         else telephone += " ";
 
                         var govtelephone;
-                        if(list[key][i][8] != undefined) govtelephone = list[key][i][8];
+                        if(allUserList[key][i][8] != undefined) govtelephone = allUserList[key][i][8];
                         else govtelephone += " ";
 
                         table.append('<tr>' +
-                            '<td style="width:10px;"><input type="checkbox" name="userid" id="userid" value=' + uid + '></td>' +
+                            '<td style="width:10px;"><input type="radio" name="userid" id="userid" value=' + uid + '></td>' +
                             '<td style="width:50px;">' + account + '</td>' +
                             '<td style="width:50px;">' + name + '</td>' +
                             '<td style="width:260px;">' + org + '</td>' +
@@ -1616,38 +1622,37 @@
 
     <!--修改账号 -->
     function showUpdateUserModal() {
-        $('#add-user-modal').css('display', 'block');
-        $('#add-user-handle').css('display', 'none');
-        $('#update-user-handle').css('display', 'block');
 
-        //显示 用户信息到div
-        var useridcheck = $("input[name='userid']:checked").serialize();
+        //查询要显示的用户信息到div
+        var useridcheck = $("input[name='userid']:checked").val();
 
-        $.ajax({
-            type: "post",
-            url: "getUserInfo",
-            data: {
-                uid: useridcheck
-            },
-            dataType: "json",
-            success: function (data) {
-                var list = JSON.parse(data);
-                var userdata = list['user'];
-                var userroledata = list['userrole'];
+        if(useridcheck == undefined)
+            alert("请选择一个用户");
+        else{
+            for(var i = 0; i < allUserList['alluser'].length; i++){
+                if(allUserList['alluser'][i][0] == useridcheck){
+                    $("#uid").val(allUserList['alluser'][i][0]);
+                    $("#useraccount").val(allUserList['alluser'][i][1]);
+                    $("#username").val(allUserList['alluser'][i][2]);
+                    $("#usertelephone").val(allUserList['alluser'][i][7]);
+                    $("#usergovtelephone").val(allUserList['alluser'][i][8]);
 
-                $("#uid").val(userdata.uid);
-                $("#useraccount").val(userdata.uname);
-                $("#userpassword").val();
-                $("#username").val(userdata.chinesename);
-                $("#usertelephone").val(userdata.telephone);
-                $("#usergovtelephone").val(userdata.govtelephone);
-                $("#userorgnization-province").val(userdata.pbid);
-                $("#userorgnization-city").val(userdata.cbid);
-                $("#userorgnization-computerroom").val(userdata.rid);
-                $("#userroles").val(userroledata.rid);
+                    for(var j = 0; j< $("#userroles option").length; j++ ) {
+                        if($("#userroles option")[j].value == allUserList['alluser'][i][6]) {
+                            document.getElementById("userroles")[j].selected = true;
+                        }
+                    }
 
+                    //$("#userorgnization-province").val(allUserList['alluser'][i][3]);
+                    //$("#userorgnization-city").val(allUserList['alluser'][i][3]);
+                    //$("#userorgnization-computerroom").val(allUserList['alluser'][i][3]);
+                }
             }
-        });
+            $('#add-user-modal').css('display', 'block');
+            $('#add-user-handle').css('display', 'none');
+            $('#update-user-handle').css('display', 'block');
+        }
+
     }
 
     <!--修改账号-确认修改 -->
@@ -1685,8 +1690,8 @@
                 },
                 dataType: "json",
                 success: function (data) {
-                    alert(data);
                     hiddenUserModel();
+                    getALLUserInfomation();
                 }
             });
         }
@@ -1742,7 +1747,7 @@
     }
 
     $(document).ready(function() {
-        /*加载角色下拉选*/
+        /*初始加载角色下拉选*/
         $.ajax({
             type: "post",
             url: "getAllRoles",
@@ -1751,12 +1756,12 @@
                 var obj = JSON.parse(data);
                 var rt = obj.allroles;
                 for (var i = 0; i < rt.length; i++) {
-                    $('#userroles').append("<option value='" + rt[i].rid + "' >" + rt[i].rolesname + "</option>");
+                    $('#userroles').append("<option value='" + rt[i].rolesname + "' >" + rt[i].rolesname + "</option>");
                 }
             }
         });
 
-        /*加载Province下拉选*/
+        /*初始加载Province下拉选*/
         $.ajax({
             type: "post",
             url: "getAllProvince",
