@@ -551,6 +551,14 @@
              </result>
          </action>
 
+         <action name="getCtrlEvent" class="efficiencyAnalysis.action.getCtrlEventAction">
+             <!--getCtrlEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="getEnvironmentEvent" class="efficiencyAnalysis.action.getEnvironmentEventAction">
              <!--getEnvironmentEvent -->
              <result name="failure">/failure.jsp</result>

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class getPowerEventAction extends ActionSupport {
+public class getCtrlEventAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -26,7 +26,7 @@ public class getPowerEventAction extends ActionSupport {
     }
 
 
-    /* 根据测量地点（市行名称）获取电能质量事件
+    /* 根据测量地点（市行名称）获取治理设备事件
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -46,9 +46,9 @@ public class getPowerEventAction extends ActionSupport {
 
             for(int i = 0; i <cbnamelist.length; i++){
                 if((starttime.equals(" ") && endtime.equals(" ")) || (starttime == null && endtime == null))
-                    pedata.addAll(dao.getLocalLastPowerEvent(cbnamelist[i]));
+                    pedata.addAll(dao.getLocalLastCtrlEvent(cbnamelist[i]));
                 else
-                    pedata.addAll(dao.getLocalAllPowerEvent(cbnamelist[i], starttime, endtime));
+                    pedata.addAll(dao.getLocalAllCtrlEvent(cbnamelist[i], starttime, endtime));
             }
 
             for (int i = 0 ; i < pedata.size(); i++) {
@@ -57,14 +57,12 @@ public class getPowerEventAction extends ActionSupport {
 
                 String cid= (String)eplist.get(6);
                 String cidn = cid.substring(1, cid.length() - 1);
-
                 Boolean has = false;
 
                 for (int j = 0 ; j < priortylist.length; j++) {
                     if (cidn.equals(priortylist[j]))
                         has = true;
                 }
-
                 if(!has) pedata.remove(i);
             }
 

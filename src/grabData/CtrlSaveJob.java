@@ -23,7 +23,6 @@ public class CtrlSaveJob implements Job {
             Iterator<String> iterator = didSet.iterator();
             while (iterator.hasNext()) {
                 String did = iterator.next();  //监测点id
-
                 EventCtrl var = eventCtrlMap.get(did);
 
                 //实时数据存入数据库

@@ -9,46 +9,51 @@ public interface EventDAO {
     public boolean addSignAndAnnotEvent(String teid, String sign, String annot);
 
     //电能类事件
-    public List getLocalAllPowerEvent(String cbname, String starttime, String endtime);
+    public List getLocalAllPowerEvent(String cbid, String starttime, String endtime);
 
-    public List getLocalLastPowerEvent(String cbname);
+    public List getLocalLastPowerEvent(String cbid);
 
-    public List getLocalAllDetailPowerEventlytx(String cbname, String starttime, String endtime);
+    public List getLocalAllDetailPowerEventlytx(String cbid, String starttime, String endtime);
 
-    public List getLocalLastDetailPowerEventlytx(String cbname);
+    public List getLocalLastDetailPowerEventlytx(String cbid);
 
-    public List getLocalAllDetailPowerEventxb(String cbname, String starttime, String endtime);
+    public List getLocalAllDetailPowerEventxb(String cbid, String starttime, String endtime);
 
-    public List getLocalLastDetailPowerEventxb(String cbname);
+    public List getLocalLastDetailPowerEventxb(String cbid);
 
-    public List getLocalAllDetailPowerEventsxbph(String cbname, String starttime, String endtime);
+    public List getLocalAllDetailPowerEventsxbph(String cbid, String starttime, String endtime);
 
-    public List getLocalLastDetailPowerEventsxbph(String cbname);
+    public List getLocalLastDetailPowerEventsxbph(String cbid);
 
-    public List getLocalAllDetailPowerEventshunbian(String cbname, String starttime, String endtime);
+    public List getLocalAllDetailPowerEventshunbian(String cbid, String starttime, String endtime);
 
-    public List getLocalLastDetailPowerEventshunbian(String cbname);
+    public List getLocalLastDetailPowerEventshunbian(String cbid);
 
-    public List getLocalAllDetailPowerEventshanbian(String cbname, String starttime, String endtime);
+    public List getLocalAllDetailPowerEventshanbian(String cbid, String starttime, String endtime);
 
-    public List getLocalLastDetailPowerEventshanbian(String cbname);
+    public List getLocalLastDetailPowerEventshanbian(String cbid);
 
     //环境类事件
-    public List getLocalAllEnvironmentEvent(String cbname, String starttime, String endtime);
+    public List getLocalAllEnvironmentEvent(String cbid, String starttime, String endtime);
 
-    public List getLocalLastEnvironmentEvent(String cbname);
+    public List getLocalLastEnvironmentEvent(String cbid);
 
-    public List getLocalAllDetailEnvironmentEventtemp(String cbname, String starttime, String endtime);
+    public List getLocalAllDetailEnvironmentEventtemp(String cbid, String starttime, String endtime);
 
-    public List getLocalLastDetailEnvironmentEventtemp(String cbname);
+    public List getLocalLastDetailEnvironmentEventtemp(String cbid);
 
-    public List getLocalAllDetailEnvironmentEventwet(String cbname, String starttime, String endtime);
+    public List getLocalAllDetailEnvironmentEventwet(String cbid, String starttime, String endtime);
 
-    public List getLocalLastDetailEnvironmentEventwet(String cbname);
+    public List getLocalLastDetailEnvironmentEventwet(String cbid);
+
+    //设备类事件
+    public List getLocalAllCtrlEvent(String cbid, String starttime, String endtime);
+
+    public List getLocalLastCtrlEvent(String cbid);
 
     public List getAllCityEvent();
 
-    public boolean getComputerroomCtrlStatus(String cbname);
+    public boolean getComputerroomCtrlStatus(String cbid);
 
     public Map getAllProvinceEvent();
 

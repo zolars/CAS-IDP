@@ -37,21 +37,17 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        // super.handlerAdded(ctx);
         recMsg = ctx.alloc().buffer();
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        // super.handlerRemoved(ctx);
         recMsg.release();
         recMsg = null;
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // System.out.println("Recv:" + ByteBufUtil.hexDump(recMsg));
-
         ByteBuf buf = (ByteBuf) msg;
         recMsg.writeBytes(buf);
         buf.release();
@@ -62,14 +58,8 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
         dataResolve(recMsg);
         recMsg.clear();
 
-        // TODO: 2018/9/23 0023
-        // CtrlSave.ctrlSave(did, /* String */ );
-
-        // return;
-
         ByteBuf sendMsg = ctx.alloc().buffer();
         sendMsg.writeBytes(createMsg(1, 1, 4, 32));
-        // System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
@@ -111,7 +101,6 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
                 if (binary.length() - j >= 0) {
                     if(binary.charAt(binary.length() - j) == '1')
                         CtrlSave.ctrlSave(did, count + j);
-                    System.out.println(count + j);
                 }
             }
             count += 8;

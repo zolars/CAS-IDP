@@ -73,6 +73,10 @@
             display: inline-block;
             vertical-align: middle;
         }
+        .table-container {
+            height: 230px;
+            overflow: scroll;
+        }
     </style>
 
 </head>
@@ -87,7 +91,6 @@
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
     window.location.href = 'http://localhost:8082/index.jsp';
-
 </script>
 
 <%
@@ -213,48 +216,57 @@
                                         <!--startprint-->
 
                                         <div id="eventdiv1" style="display: block">
-                                            <table border="1" class="display" id="device-event" style="width:100%;">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width:60px;"></th>
-                                                    <th style="width:60px;">事件名称</th>
-                                                    <th style="width:60px;">位置</th>
-                                                    <th style="width:60px;">事件类型</th>
-                                                    <th style="width:60px;">事件描述</th>
-                                                    <th style="width:60px;">事件发生时间</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="device-event-tbody">
-                                                </tbody>
-                                            </table>
-                                            <table border="1" class="display" id="power-event" style="width:100%;">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width:60px;"></th>
-                                                    <th style="width:60px;">事件名称</th>
-                                                    <th style="width:60px;">位置</th>
-                                                    <th style="width:60px;">事件类型</th>
-                                                    <th style="width:60px;">事件描述</th>
-                                                    <th style="width:60px;">事件发生时间</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="power-event-tbody">
-                                                </tbody>
-                                            </table>
-                                            <table border="1" class="display" id="environment-event" style="width:100%;">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width:60px;"></th>
-                                                    <th style="width:60px;">事件名称</th>
-                                                    <th style="width:60px;">位置</th>
-                                                    <th style="width:60px;">事件类型</th>
-                                                    <th style="width:60px;">事件描述</th>
-                                                    <th style="width:60px;">事件发生时间</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="environment-event-tbody">
-                                                </tbody>
-                                            </table>
+                                            <div class="table-container">
+                                                <table border="1" class="display" id="device-event" style="width:100%;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:60px;"></th>
+                                                        <th style="width:60px;">事件名称</th>
+                                                        <th style="width:60px;">位置</th>
+                                                        <th style="width:60px;">事件类型</th>
+                                                        <th style="width:60px;">事件描述</th>
+                                                        <th style="width:60px;">事件发生时间</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="device-event-tbody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="table-container">
+                                                <table border="1" class="display" id="power-event" style="width:100%;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:60px;"></th>
+                                                        <th style="width:60px;">事件名称</th>
+                                                        <th style="width:60px;">位置</th>
+                                                        <th style="width:60px;">事件类型</th>
+                                                        <th style="width:60px;">事件描述</th>
+                                                        <th style="width:60px;">事件发生时间</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="power-event-tbody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="table-container">
+                                                <table border="1" class="display" id="environment-event" style="width:100%;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:60px;"></th>
+                                                        <th style="width:60px;">事件名称</th>
+                                                        <th style="width:60px;">位置</th>
+                                                        <th style="width:60px;">事件类型</th>
+                                                        <th style="width:60px;">事件描述</th>
+                                                        <th style="width:60px;">事件发生时间</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="environment-event-tbody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
                                         </div>
 
                                         <!-- 电能详细事件-->
@@ -498,12 +510,13 @@
                                             <div><input id="radio-day-event" type="radio"  name="event-data-peroid" value="day">天</div>
                                             <div><input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</div>
                                             <div><input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月</div>
-                                            <table class="display" id="place-event" border="1">
-                                                <thead><tr><th>测量地点</th><th></th></tr></thead>
-                                                <tbody></tbody>
+                                            <table><tr><th>测量地点</th><th></th></tr></table>
+                                            <table class="display" id="place-event" border="1" style="width: 100%">
                                             </table>
-                                            <div><button id="add-button" type="button" class="btn-sm btn-success" onclick="addMonitorPoint()">添加</button></div>
-                                            <div><button id="delete-button" type="button" class="btn-sm btn-danger" onclick="deleteMonitorPoint()">删除</button></div>
+                                            <div>
+                                                <button id="add-button" type="button" class="btn-sm btn-success" onclick="addMonitorPoint()">添加</button>
+                                                <button id="delete-button" type="button" class="btn-sm btn-danger" onclick="deleteMonitorPoint()">删除</button>
+                                            </div>
                                             <div>
                                                 <span>自动更新间隔</span>
                                                 <select style="display: inline-block" class="form-control location-select-item" id="auto-update-interval">
@@ -1403,15 +1416,26 @@
         return currentdate;
     }
 
-    //根据时间、检测银行设置获得所有事件
+    //根据时间、检测点、设置获得所有事件
     function getAllEvent() {
 
-        var cbname = $("#city_code option:selected").val();
-        var edate = $("input[name='event-data-peroid']:checked").val();
-
-        var stime;//"2018-08-22 08:00:00";
-        var etime;//"2018-08-29 08:00:00";
+        var cbname = [];
+        var stime = null;
+        var etime = null;
         var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-peroid']:checked").val();
+        var nodeset = [], nodes2;
+
+        var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
+
+        if(nodes) {
+            nodes2 = nodes.toString();
+            nodeset = nodes2.split(",");
+            for (var i = 0 ;i < nodeset.length; i++)
+            {
+                cbname.push(nodeset[i].split(":")[0]);
+            }
+        }
 
         if (edate == "lastone") {
             stime = " ";
@@ -1469,30 +1493,36 @@
 
         //读取设置中的优先级cookie
         var priortylist = $.cookie('priortylist');
-        if (priortylist == null) {
-            alert("请先设定可查看的事件类型");
+
+        if(stime == null || etime == null){
+            alert("请选择日期时间");
+        }
+        else if(cbname == "[object Object]"){
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
         }
         else{
-            $.ajax({ //获取所有电能事件
+            //获取所有电能事件
+            $.ajax({
             type: "post",
             url: "getPowerEvent",
             data: {
                 stime: stime,
                 etime: etime,
-                cbname: cbname,
+                cbname: cbname.toString(),
                 priortylist: priortylist
             },
             dataType : "json",
             success: function (data) {
                 var obj = JSON.parse(data);
                 var list = obj['allpelist'];
-               // var table = $("#power-event");
                 var tbody = $("#power-event-tbody")[0];
                 tbody.innerHTML = "";
 
                 for (var i = 0; i < list.length; i++) {
                     var liststr = list[i].split(",");
-
                     var teid = liststr[0].split("[");
                     var name = liststr[1];
                     var location = liststr[2];
@@ -1509,47 +1539,80 @@
                         '<td style="width:60px;">' + time + '</td></tr>');
                 }
             }
-        });
-        }
+            });
 
-        //获取所有设备事件
-        //设备事件
+            //获取所有设备事件
+            $.ajax({
+                type: "post",
+                url: "getCtrlEvent",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#device-event-tbody")[0];
+                    tbody.innerHTML = "";
 
-        //获取所有环境事件
-        $.ajax({
-            type: "post",
-            url: "getEnvironmentEvent",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#environment-event");
-                var tbody = $("#environment-event-tbody")[0];
-                tbody.innerHTML = "";
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
-
-                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" value='+ teid[1]+'>' + '</td>' +
-                        '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:60px;" value='+ teid[1]+'></td>' +
+                            '<td id="name" style="width:60px;">' + name + '</td>' +
+                            '<td style="width:60px;">' + location + '</td>' +
+                            '<td style="width:60px;">' + type + '</td>' +
+                            '<td style="width:60px;">' + description + '</td>' +
+                            '<td style="width:60px;">' + time + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
+
+            //获取所有环境事件
+            $.ajax({
+                type: "post",
+                url: "getEnvironmentEvent",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#environment-event-tbody")[0];
+                    tbody.innerHTML = "";
+
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+
+                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" value='+ teid[1]+'>' + '</td>' +
+                            '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
+                }
+            });
+        }
 
     }
 
@@ -1557,7 +1620,7 @@
 
 <!-- 观测地点-->
 <script type="text/javascript">
-    //添加监测点
+    //添加监测点-弹出添加div
     function addMonitorPoint(){
 
         var pbname = $("#province_code option:selected").val();
@@ -1602,6 +1665,7 @@
         });
     }
 
+    //添加检测点-确定
     function addCityBankAsMonitorPoint(){
 
         //取得所有选中的节点，返回节点对象的集合
@@ -1609,25 +1673,29 @@
         var nodes2 = nodes.toString();
         var nodeset = nodes2.split(",");
         var ptable = $("#place-event");
+        ptable.empty();
 
         for (var i = 0 ;i < nodeset.length; i++)
         {
-            var nset = new Array();
-            nset = nodeset[i].split(":");
-            ptable.append('<tr><td><input id="radio-mpid" name="radio-mpid" type="radio" value="'+nset[0]+'"></td><td>' + nset[1] + '</td></tr>');
+            var nset = nodeset[i].split(":");
+            ptable.append('<tr id="'+nset[0]+'"><td><input id="radio-mpid" name="radio-mpid" type="radio" value="'+nset[0]+'">' + nset[1] + '</td></tr>');
         }
 
         cancleCityBankAsMonitorPoint();
     }
 
+    //添加检测点-取消
     function cancleCityBankAsMonitorPoint(){
         $('#addEventMonitorPoint-modal').css('display', 'none');
     }
 
     //删除检测点
     function deleteMonitorPoint(){
-        var delmpid = $('input[name="radio-mpid"]:checked').val();
+        var delmpid = $('input[name="radio-mpid"]:checked');
 
+        delmpid.each(function(){
+            $(this).parent().parent().remove();
+        });
     }
 
 </script>
@@ -1789,9 +1857,8 @@
 <!-- 刷新icon-->
 <script type="text/javascript">
     function refreshIcon(){
-        //getPowerEvent();
-        //刷新设备类型事件的
-        //刷新环境类型事件的
+        //刷新事件
+        getAllEvent();
     }
 </script>
 
