@@ -26,10 +26,30 @@ public class EventDAOImpl implements EventDAO {
     ResultSet rs = null;
     PreparedStatement ps = null;
 
-    public boolean addSignAndAnnotEvent(String teid, String sign, String annot){
+    public boolean addSignAndAnnotDeviceEvent(String teid, String sign, String annot){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+        String hql = "update EventCtrl ep set ep.signature='" + sign +
+                "', ep.annotation='"+ annot +"' where ep.teid='" + teid + "'";
+
+        rt = hbsessionDao.update(hql);
+        return rt;
+    }
+
+    public boolean addSignAndAnnotPowerEvent(String teid, String sign, String annot){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
         String hql = "update EventPower ep set ep.signature='" + sign +
+                "', ep.annotation='"+ annot +"' where ep.teid='" + teid + "'";
+
+        rt = hbsessionDao.update(hql);
+        return rt;
+    }
+
+    public boolean addSignAndAnnotEnvironEvent(String teid, String sign, String annot){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+        String hql = "update EventEnvironment ep set ep.signature='" + sign +
                 "', ep.annotation='"+ annot +"' where ep.teid='" + teid + "'";
 
         rt = hbsessionDao.update(hql);

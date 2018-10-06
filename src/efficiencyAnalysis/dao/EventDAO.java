@@ -6,7 +6,11 @@ import java.util.Map;
 
 public interface EventDAO {
 
-    public boolean addSignAndAnnotEvent(String teid, String sign, String annot);
+    public boolean addSignAndAnnotDeviceEvent(String teid, String sign, String annot);
+
+    public boolean addSignAndAnnotPowerEvent(String teid, String sign, String annot);
+
+    public boolean addSignAndAnnotEnvironEvent(String teid, String sign, String annot);
 
     //电能类事件
     public List getLocalAllPowerEvent(String cbid, String starttime, String endtime);
