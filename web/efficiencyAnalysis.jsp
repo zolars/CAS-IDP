@@ -201,13 +201,13 @@
                                     <div class="col-md-7">
                                          <ul class="nav nav-tabs" id="detailItem">
                                              <li class="active"  style="width:33.333%">
-                                                 <a data-toggle="tab" id="detailItem1">•设备事件</a>
+                                                 <a data-toggle="tab" id="detailItem1">•电能质量事件</a>
                                              </li>
                                              <li style="width:33.333%">
-                                                 <a data-toggle="tab" id="detailItem2">•电能质量事件</a>
+                                                 <a data-toggle="tab" id="detailItem2">•环境事件</a>
                                              </li>
                                              <li style="width:33.333%">
-                                                 <a data-toggle="tab" id="detailItem3">•环境事件</a>
+                                                 <a data-toggle="tab" id="detailItem3">•设备事件</a>
                                              </li>
                                          </ul>
                                      </div>
@@ -274,25 +274,25 @@
                                         <div id="eventdiv2" style="display: none">
 
                                             <ul class="nav nav-tabs" id="secItem" name="secItem">
-                                                <li class="active" style="width:15%">
+                                                <li class="active" style="width:20%">
                                                     <a data-toggle="tab" id="secItem1">•浪涌塌陷</a>
                                                 </li>
-                                                <li style="width:15%">
+                                                <li style="width:20%">
                                                     <a data-toggle="tab" id="secItem2">谐波</a>
                                                 </li>
-                                                <li style="width:15%">
+                                                <li style="width:20%">
                                                     <a data-toggle="tab" id="secItem3">•三相不平衡度</a>
                                                 </li>
-                                                <li style="width:15%">
+                                                <li style="width:20%">
                                                     <a data-toggle="tab" id="secItem4">•瞬变</a>
                                                 </li>
-                                                <li style="width:15%">
+                                                <li style="width:20%">
                                                     <a data-toggle="tab" id="secItem5">•闪变</a>
                                                 </li>
                                             </ul>
 
                                             <div id="power-event-detail-1-div" style="width:100%;">
-                                                <table class="display" id="power-event-detail-1" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-1" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>测量名称</th>
@@ -310,7 +310,7 @@
                                             </div>
 
                                             <div id="power-event-detail-2-div" style="width:100%;display: none;">
-                                                <table class="display" id="power-event-detail-2" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-2" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>测量名称</th>
@@ -328,7 +328,7 @@
                                             </div>
 
                                             <div id="power-event-detail-3-div" style="width:100%;display: none;">
-                                                <table class="display" id="power-event-detail-3" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-3" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>测量名称</th>
@@ -346,7 +346,7 @@
                                             </div>
 
                                             <div id="power-event-detail-4-div" style="width:100%;display: none;">
-                                                <table class="display" id="power-event-detail-4" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-4" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>测量名称</th>
@@ -364,7 +364,7 @@
                                             </div>
 
                                             <div id="power-event-detail-5-div" style="width:100%;display: none;">
-                                                <table class="display" id="power-event-detail-5" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-5" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>测量名称</th>
@@ -519,14 +519,14 @@
                                                     <td>可见的列</td>
                                                 </tr>
                                                 <tr>
-                                                    <table class="display" id="colume-table">
+                                                    <table class="display" id="colume-table" border="1px" width="160px">
                                                         <tr><td>名字</td><td>宽度</td></tr>
                                                     </table>
                                                 </tr>
                                                 <tr>
-                                                    <img src="/img/uparray.png" alt="" onClick="upcol()" >
-                                                    <img src="/img/deletearray.png" alt="" onClick="deletecol()" >
-                                                    <img src="/img/downarray.png" alt="" onClick="downcol()" >
+                                                    <td><img src="/img/uparray.png" onClick="upcol()"></td>
+                                                    <td><img src="/img/deletearray.png" onClick="deletecol()"></td>
+                                                    <td><img src="/img/downarray.png" onClick="downcol()"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -549,7 +549,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <button style="display: block;" id="add-col-button" type="button" class="btn btn-sm btn-alt" onclick="getColumnItem()">添加</button>
+                                                    <button style="display: block;" id="add-col-button" type="button" class="btn-success btn-sm" onclick="getColumnItem()">添加</button>
                                                 </tr>
                                             </table>
 
@@ -982,18 +982,38 @@
 
 <!-- （详细）设备事件-点击进入第二个页面-->
 <script type="text/javascript">
-    function getDeviceEvent(){}
+    function getDeviceEvent(){
+
+
+
+    }
 </script>
 
 <!-- （详细）电能事件-点击进入第二个页面-->
 <script type="text/javascript">
     function getPowerEvent(){
+        $('#eventdiv1').css('display', 'none');
+        $('#eventdiv2').css('display', 'block');
+        $('#eventdiv3').css('display', 'none');
+        $('#eventdiv4').css('display', 'none');
 
-        var cbname = $("#city_code option:selected").val();
-        var edate = $("input[name='event-data-peroid']:checked").val();
-        var stime;
-        var etime;
+        var cbname = [];
+        var stime = null;
+        var etime = null;
         var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-peroid']:checked").val();
+        var nodeset = [], nodes2;
+
+        var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
+
+        if(nodes) {
+            nodes2 = nodes.toString();
+            nodeset = nodes2.split(",");
+            for (var i = 0 ;i < nodeset.length; i++)
+            {
+                cbname.push(nodeset[i].split(":")[0]);
+            }
+        }
 
         if(edate == "lastone"){
             stime = " ";
@@ -1049,187 +1069,223 @@
             etime = nowtime;
         }
 
-        $('#eventdiv1').css('display', 'none');
-        $('#eventdiv2').css('display', 'block');
-        $('#eventdiv3').css('display', 'none');
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
 
-        $.ajax({
-            type: "post",
-            url: "getDetailPowerEventlytx",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var tbody = $("#power-event-detail-tbody-1")[0];
-                tbody.innerHTML = "";
+        if(stime == null || etime == null){
+            alert("请选择日期时间");
+        }
+        else if(cbname == "[object Object]"){
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            $.ajax({
+                type: "post",
+                url: "getDetailPowerEventlytx",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-detail-tbody-1")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        console.log("lytx"+teid+name+location+type+description+time);
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
 
-        $.ajax({
-            type: "post",
-            url: "getDetailPowerEventxb",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var tbody = $("#power-event-detail-tbody-2")[0];
-                tbody.innerHTML = "";
+            $.ajax({
+                type: "post",
+                url: "getDetailPowerEventxb",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-detail-tbody-2")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        console.log("xb"+teid+name+location+type+description+time);
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
 
-        $.ajax({
-            type: "post",
-            url: "getDetailPowerEventsxbph",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var tbody = $("#power-event-detail-tbody-3")[0];
-                tbody.innerHTML = "";
+            $.ajax({
+                type: "post",
+                url: "getDetailPowerEventsxbph",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-detail-tbody-3")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        console.log("sx"+teid+name+location+type+description+time);
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
 
-        $.ajax({
-            type: "post",
-            url: "getDetailPowerEventshunbian",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var tbody = $("#power-event-detail-tbody-4")[0];
-                tbody.innerHTML = "";
+            $.ajax({
+                type: "post",
+                url: "getDetailPowerEventshunbian",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-detail-tbody-4")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        console.log("sb"+teid+name+location+type+description+time);
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
 
-        $.ajax({
-            type: "post",
-            url: "getDetailPowerEventshanbian",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var tbody = $("#power-event-detail-tbody-5")[0];
-                tbody.innerHTML = "";
+            $.ajax({
+                type: "post",
+                url: "getDetailPowerEventshanbian",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-detail-tbody-5")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        console.log("shanbian"+teid+name+location+type+description+time);
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
-
+            });
+        }
     }
 </script>
 
 <!-- （详细）环境事件-点击进入第二个页面-->
 <script type="text/javascript">
     function getEvironmentEvent(){
+        $('#eventdiv1').css('display', 'none');
+        $('#eventdiv2').css('display', 'none');
+        $('#eventdiv3').css('display', 'block');
+        $('#eventdiv4').css('display', 'none');
 
-        var cbname = $("#city_code option:selected").val();
-        var edate = $("input[name='event-data-peroid']:checked").val();
-        var stime;
-        var etime;
+        var cbname = [];
+        var stime = null;
+        var etime = null;
         var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-peroid']:checked").val();
+        var nodeset = [], nodes2;
+
+        var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
+
+        if(nodes) {
+            nodes2 = nodes.toString();
+            nodeset = nodes2.split(",");
+            for (var i = 0 ;i < nodeset.length; i++)
+            {
+                cbname.push(nodeset[i].split(":")[0]);
+            }
+        }
 
         if(edate == "lastone"){
             stime = " ";
@@ -1285,79 +1341,90 @@
             etime = nowtime;
         }
 
-        $('#eventdiv1').css('display', 'none');
-        $('#eventdiv2').css('display', 'none');
-        $('#eventdiv3').css('display', 'block');
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
 
-        $.ajax({
-            type: "post",
-            url: "getDetailEvironmentEventtemp",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#evironment-event-detail-1");
-                var tbody = $("#evironment-event-detail-tbody-1")[0];
-                tbody.innerHTML = "";
+        if(stime == null || etime == null){
+            alert("请选择日期时间");
+        }
+        else if(cbname == "[object Object]"){
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            $.ajax({
+                type: "post",
+                url: "getDetailEvironmentEventtemp",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var table = $("#evironment-event-detail-1");
+                    var tbody = $("#evironment-event-detail-tbody-1")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
 
-        $.ajax({
-            type: "post",
-            url: "getDetailEvironmentEventwet",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
+            $.ajax({
+                type: "post",
+                url: "getDetailEvironmentEventwet",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
 
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#evironment-event-detail-2");
-                var tbody = $("#evironment-event-detail-tbody-2")[0];
-                tbody.innerHTML = "";
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var table = $("#evironment-event-detail-2");
+                    var tbody = $("#evironment-event-detail-tbody-2")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
-
+            });
+        }
 
     }
 </script>
