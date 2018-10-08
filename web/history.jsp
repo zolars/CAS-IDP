@@ -31,6 +31,16 @@
     <link href="css/jstree-default/style.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/header.css">
 
+    <!-- bootstrap datepicker时间选择控件 -->
+    <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+    <!-- jquery -->
+    <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+    <style>
+        .datetimepicker {
+            background: black!important;
+        }
+    </style>
 </head>
 
 <body id="skin-blur-blue">
@@ -254,8 +264,12 @@
                                 <div id='item2-P' style='width: 100%;height: 500px;'></div>
                             </li>
                             <li id='item2-4'>
-                                <div></div>
-                                <div></div>
+                                <div id="item2-LyTx-ctrl">
+                                    <input class="default-show" type="checkbox" name="" id="" value="Ua">Ua
+                                    <input type="checkbox" name="" id="" value="Ub">Ub
+                                    <input type="checkbox" name="" id="" value="Uc">Uc
+                                </div>
+                                <div id='item2-LyTx' style='width: 100%;height: 500px;'></div>
                             </li>
                         </ul>
                     </div>
@@ -761,9 +775,11 @@
     var eventChart1 = echarts.init(document.getElementById('item2-UI'));
     var eventChart2 = echarts.init(document.getElementById('item2-HZ'));
     var eventChart3 = echarts.init(document.getElementById('item2-P'));
+    var eventChart4 = echarts.init(document.getElementById('item2-LyTx'));
     var chart1Legend = ['u1', 'u2', 'u3', 'u4', 'i1', 'i2', 'i3', 'i4', 'i'];
     var chart3Legend = ['p1', 'p2', 'p3', 'p', 's1', 's2', 's3', 's', 'q1', 'q2', 'q3', 'q',
         'pf1', 'pf2', 'pf3', 'pf', 'dpf1', 'dpf2', 'dpf3', 'dpf'];
+    var chart4Legend = ['Ua','Ub','Uc'];
     var markPointUI = {//电压\电流图最大值、最小值标注点
         label: {formatter: '{a}{b}:{c}'},
         data: []
@@ -1008,6 +1024,41 @@
             }
         ]
     };
+    var option4 = {
+        legend: {
+            show: false,
+            data: chart4Legend
+        },
+        tooltip: {},
+        xAxis: {
+            type: 'time',
+            splitLine: {
+                show: false
+            }
+        },
+        yAxis: {
+            type: 'value',
+            scale: true,
+            splitLine: {
+                show: false
+            }
+        },
+        series: [
+            // 浪涌/塌陷
+            {
+                name: 'Ua',type: 'scatter',
+                encode: {x: 'time', y: 'Ua'}
+            },
+            {
+                name: 'Ub',type: 'scatter',
+                encode: {x: 'time', y: 'Ub'}
+            },
+            {
+                name: 'Uc',type: 'scatter',
+                encode: {x: 'time', y: 'Uc'}
+            }
+        ]
+    };
 
     //事件绑定函数
     function eventBanding() {
@@ -1160,6 +1211,23 @@
                 eventChart3.setOption(option3);
             });
         });
+        //绑定浪涌塌陷图中checkbox点击事件
+        $('#item2-LyTx-ctrl input:checkbox').each(function () {
+            $(this).click(function () {
+                if (this.checked) {
+                    eventChart4.dispatchAction({
+                        type: "legendSelect",
+                        name: this.value
+                    });
+                }
+                else {
+                    eventChart4.dispatchAction({
+                        type: "legendUnSelect",
+                        name: this.value
+                    });
+                }
+            });
+        });
     }
 
     //绘制图表
@@ -1168,6 +1236,7 @@
         eventChart1.setOption(option1);
         eventChart2.setOption(option2);
         eventChart3.setOption(option3);
+        eventChart4.setOption(option4);
         //设置曲线图初始不显示
         chart1Legend.forEach(function (item) {
             eventChart1.dispatchAction({
@@ -1181,10 +1250,17 @@
                 name: item
             });
         });
+        chart4Legend.forEach(function (item) {
+            eventChart4.dispatchAction({
+                type: "legendUnSelect",
+                name: item
+            });
+        });
     }
 
     //获取数据，并更新图
     function getData(starttime, endtime, did) {
+        //取电压、电流、频率、功率数据
         $.ajax({
             type: "post",
             url: "getHisData",
@@ -1210,6 +1286,25 @@
                     $(this).trigger('click');
                 });
 
+            }
+        });
+        //取浪涌、塌陷数据
+        $.ajax({
+            type: "post",
+            url: "getHisDataLyTx",
+            data: {
+                starttime: starttime,
+                endtime: endtime,
+                monitorpointid: did
+            },
+            dataType: "json",
+            success: function(result){
+                //console.log(result);
+                var data=JSON.parse(result);
+                eventChart4.setOption({dataset: {source: data}});
+                $('#item2-LyTx-ctrl input.default-show').each(function () {//显示默认的系列
+                    $(this).trigger('click');
+                });
             }
         });
     }

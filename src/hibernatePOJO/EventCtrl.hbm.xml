@@ -5,23 +5,38 @@
 <hibernate-mapping>
 
     <class name="hibernatePOJO.EventCtrl" table="event_ctrl" schema="test">
-        <id name="id">
-            <column name="id" sql-type="int(11)"/>
+        <id name="teid">
+            <column name="teid" sql-type="int(11)"/>
         </id>
+        <property name="cid">
+            <column name="cid" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="value">
+            <column name="value" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="limitval">
+            <column name="limitval" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="status">
+            <column name="status" sql-type="int(11)" not-null="true"/>
+        </property>
         <property name="did">
-            <column name="did" sql-type="varchar(255)" not-null="true"/>
+            <column name="did" sql-type="longtext" not-null="true"/>
         </property>
         <property name="time">
-            <column name="time" sql-type="datetime"/>
+            <column name="time" sql-type="datetime" not-null="true"/>
         </property>
-        <property name="eventType">
-            <column name="eventType" sql-type="int(11)"/>
+        <property name="duration">
+            <column name="duration" sql-type="varchar(255)" not-null="true"/>
         </property>
-        <property name="description">
-            <column name="description" sql-type="String(255)" precision="255" not-null="true"/>
+        <property name="signature">
+            <column name="signature" sql-type="varchar(255)" not-null="true"/>
         </property>
-        <property name="alarm">
-            <column name="alarm" sql-type="String(255)" precision="255" not-null="true"/>
+        <property name="annotation">
+            <column name="annotation" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="subtype">
+            <column name="subtype" sql-type="int(11)" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

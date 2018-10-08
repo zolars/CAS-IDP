@@ -1,13 +1,14 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.EventPower;
+import hibernatePOJO.*;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import sms.SmsAlarm;
 
 import javax.swing.*;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -85,7 +86,8 @@ public class alarmModelJob implements Job {
 
     @Override
     /*
-    读取当前时间之前的15分钟内的告警事件、并分别根据设定的告警方式、执行短信、弹窗、平台告警
+    读取当前时间之前的30分钟内的告警事件、
+    并分别根据设定的告警方式、执行短信、弹窗、平台告警
      */
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
@@ -95,7 +97,7 @@ public class alarmModelJob implements Job {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) - 15);// 让分钟减少15
+        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) - 30);   // 让分钟减少30
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
         Calendar calendarnow = Calendar.getInstance();
@@ -103,64 +105,128 @@ public class alarmModelJob implements Job {
         calendarnow.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
         String nowtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
-        //1.获得当前市行的15分钟内的告警事件（分为四类：）
-        List<EventPower> alrmtranslist = hbsessionDao.search(
-                "FROM EventPower where time >'"+ date +"'");
+        //1.1.获得当前市行的30分钟内的告警事件-电能事件
+        //1.2.查询各个事件的告警方式、告警用户、告警时间范围
+        //通过event_power.cid 找到 events_type中的type， 通过type 找到 device_threshold中的3条不同等级的记录，对应不同的tvalue[]
+        //比较event_power.value 与 tvalue[] ，确定是哪一个等级的事件。tlevel
+        //根据tlevel（0：不执行 1：弹窗 2：弹窗+短信/短信平台（工作日） 3.弹窗+短信/短信平台（全天））执行相应的告警
 
+        List<EventPower> eventpowerlist = new ArrayList<>();
+        List<EventsType> typelist = new ArrayList<>();
+        List<DevicesThreshold> thresholdlist = new ArrayList<>();
+        List<DeviceAlarmUser> alarmuserlist = new ArrayList<>();
+        Integer tlevel = 0;
 
-        //2.查询各个事件的告警方式、告警用户、告警时间范围
-        if(alrmtranslist != null){
-            for(int i = 0; i < alrmtranslist.size(); i++){
-                String did = alrmtranslist.get(i).getDid();
+        eventpowerlist = hbsessionDao.search("FROM EventPower where time >'"+ date +"'");
+        alarmuserlist = hbsessionDao.search("From DeviceAlarmUser");
 
-                List<Object> allist = new ArrayList<>();
+        if(eventpowerlist != null){
+            for(int i = 0; i < eventpowerlist.size(); i++){
+                String did = eventpowerlist.get(i).getDid();
+                Integer cid = eventpowerlist.get(i).getCid();
+                Double value = eventpowerlist.get(i).getValue();
+                Timestamp time = eventpowerlist.get(i).getTime();
 
-                allist = hbsessionDao.search(
-                        "select ta.isSms,ta.isAlart, ta.isPlartform, tc.govtelephone, tb.timeperiod, tb.precontent, td.description, ta.did from Devices as ta, DeviceAlarmUser as tb, User as tc, EventsType as td where ta.did ='"+ did +"'and tb.did ='"+ did + "' and tb.uid = tc.uid and td.cid ='" + alrmtranslist.get(i).getCid() + "'");
+                typelist = hbsessionDao.search("From EventsType where cid ='"+ cid +"'");
 
-                if(allist.size() > 0){
-                    Object[] objects=(Object[])allist.get(0);
-                    Integer isSms =  (Integer)objects[0];
-                    Integer isAlart =  (Integer)objects[1];
-                    Integer isPlartform =  (Integer)objects[2];
-                    String telephone =  (String)objects[3];
-                    String timeperiod =  (String)objects[4];
-                    String precontent =  (String)objects[5];
-                    String msgstr =  (String)objects[6];
+                String type = typelist.get(0).getType();
+                String description = typelist.get(0).getDescription();
 
-                    if(timeperiod == "0"){  //全天报警
+                thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='"+ type +"' order by level desc");
 
-                        if(isAlart== 1){ //执行弹窗报警
-                            JOptionPane.showMessageDialog(null,precontent+ "\r\n" + "时间：" + alrmtranslist.get(i).getTime() + "\r\n信息：" +  msgstr);
+                for(int j = 0 ; j < thresholdlist.size(); j++){
+
+                    Double fval = thresholdlist.get(j).getFloorval();
+                    Double cval = thresholdlist.get(j).getCellval();
+
+                    if(fval != null) {
+                        if (value > fval) {
+                            tlevel = thresholdlist.get(j).getLevel();
+                            break;
                         }
-                        if(isSms == 1){ //执行短信报警
+                    }
+                    else if(cval != null){
+                        if (value < cval) {
+                            tlevel = thresholdlist.get(j).getLevel();
+                            break;
+                        }
+                    }
+                }
+
+                System.out.println("事件"+ did +"的告警级别："+tlevel);
+
+                Integer isSms = 0;
+                Integer isAlart = 0;
+                Integer isPlartform = 0;
+                String precontent = "";
+                String timeperiod = "";
+                String govtelephone = "";
+                String telephone = "";
+
+                List<Object> aulist = hbsessionDao.search("select ta.isSms, ta.isAlert, ta.isPlantform, ta.precontent, ta.timeperiod, tb.govtelephone, tb.telephone" +
+                        " from DeviceAlarmUser ta, User tb " +
+                        "where ta.uid = tb.uid and ta.level='" + tlevel +"'");
+
+                if(aulist.size() > 0){
+                    Object[] objects=(Object[])aulist.get(0);
+                    isSms =  (Integer)objects[0];
+                    isAlart =  (Integer)objects[1];
+                    isPlartform =  (Integer)objects[2];
+                    precontent =  (String)objects[3];
+                    timeperiod =  (String)objects[4];
+                    govtelephone =  (String)objects[5];
+                    telephone =  (String)objects[6];
+                }
+
+                if(timeperiod == "1") { //若是第二等级,即timeperiod == 1
+                    if (isWorkTime(nowtime)) {
+                        if (isSms == 1) { //执行短信报警
                             SmsAlarm s = new SmsAlarm();
-                            s.excuteSmsAlarm(telephone, msgstr);
+                            if (govtelephone != "")
+                                s.excuteSmsAlarm(govtelephone, description);
+                            if (telephone != "")
+                                s.excuteSmsAlarm(telephone, description);
                         }
-                        if(isPlartform== 1){ //执行平台报警
+                        if (isPlartform == 1) { //执行平台报警
                             System.out.println("执行平台报警");
                         }
-
                     }
-                    else{ //工作日报警
+                }
 
-                        if(isWorkTime(nowtime)){
-                            if(isAlart== 1){ //执行弹窗报警
-                                JOptionPane.showMessageDialog(null,precontent+ "\r\n" + "时间：" + alrmtranslist.get(i).getTime() + "\r\n信息：" +  msgstr);
-                            }
-                            if(isSms == 1){ //执行短信报警
-                                SmsAlarm s = new SmsAlarm();
-                                s.excuteSmsAlarm(telephone, msgstr);
-                            }
-                            if(isPlartform== 1){ //执行平台报警
-                                System.out.println("执行平台报警");
-                            }
-                        }
-
+                else{ //非第二等级
+                    if (isSms == 1) { //执行短信报警
+                        SmsAlarm s = new SmsAlarm();
+                        if(govtelephone != "")
+                            s.excuteSmsAlarm(govtelephone, description);
+                        if(telephone != "")
+                            s.excuteSmsAlarm(telephone, description);
                     }
+                    if (isPlartform == 1) { //执行平台报警
+                        System.out.println("执行平台报警");
+                    }
+                }
+
+                if(isAlart == 1){ //执行弹窗报警
+                    JOptionPane.showMessageDialog(null,precontent+ "\r\n" + "时间：" + time + "\r\n信息：" +  description);
                 }
             }
         }
+
+        //2.1.环境事件
+        //List<EventEnvironment> alrmenvirolist = hbsessionDao.search(
+         //       "FROM EventEnvironment where time >'"+ date +"'");
+
+        //2.2.查询各个事件的告警方式、告警用户、告警时间范围
+
+
+        //3.1.设备（治理）事件
+      //  List<EventCtrl> alrmctrllist = hbsessionDao.search(
+        //        "FROM EventCtrl where time >'"+ date +"'");
+
+        //3.2.查询各个事件的告警方式、告警用户、告警时间范围
+
+
+
 
         System.out.println("完成告警模块:" + System.currentTimeMillis());
     }

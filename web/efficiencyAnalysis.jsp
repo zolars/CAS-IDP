@@ -46,6 +46,38 @@
     <script src="js/datatables.min.js"></script>
 
     <link rel="stylesheet" href="css/header.css">
+    <style>
+        .datetimepicker {
+            background: black!important;
+        }
+        .time-pick-container {
+            height: 34px;
+
+        }
+        .time-pick-container .iradio_minimal {
+            top: 10px!important;
+        }
+        .time-picker-radio {
+            padding-top: 8px;
+        }
+        .time-pick-text {
+            display: inline-block;
+            vertical-align: middle;
+            height: 34px;
+            line-height: 34px;
+            margin: 0 5px;
+        }
+        .time-pick-outer {
+            width: 200px;
+            height: 34px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .table-container {
+            height: 230px;
+            overflow: scroll;
+        }
+    </style>
 
 </head>
 
@@ -57,9 +89,9 @@
     if(userid == null) {
 %>
 <script>
+    var eventtypetable = null;
     alert('您还未登录或您的认证已过期, 请先登陆.');
     window.location.href = 'http://localhost:8082/index.jsp';
-
 </script>
 
 <%
@@ -151,103 +183,116 @@
                     </ul>
                 </div>
 
-                <div id = "item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                <div id = "item1" class="col-md-12 col-xs-6" style="height: 600px;">
                     <div class="block-area">
                         <div class="row">
                             <div class="col-md-12">
-
                                 <table id="event-table-head1">
                                     <thead>
                                     <tr>
-                                        <th><img src="/img/setting.png" alt="" onClick="settingIcon()" ></th>
-                                        <th><img src="/img/refresh.png" alt="" onClick="refreshIcon()" ></th>
-                                        <th><button type="button" class="btn btn-sm btn-alt" onClick="exportTable()" >导出</button></th>
-                                        <th><button type="button" class="btn btn-sm btn-alt" onClick="printTable()" >打印</button></th>
+                                        <th><img src="/img/setting.png" alt="" onClick="settingIcon()"></th>
+                                        <th><img src="/img/refresh.png" alt="" onClick="refreshIcon()"></th>
+                                        <th><button type="button" class="btn-sm btn-primary" onClick="exportTable()" >导出</button></th>
+                                        <th><button type="button" class="btn-sm btn-warning" onClick="printTable()" >打印</button></th>
                                     </tr>
                                     </thead>
                                 </table>
-
                                 <div class="row-fluid">
-                                    <div class="col-md-1">
-                                        <button type="button" style="width:100px;height:40px;" ></button>
-                                        <button type="button" onClick="getDeviceEvent()" style="width:100px;height:260px;" >设备事件</button>
-                                        <button type="button" onClick="getPowerEvent()"style="width:100px;height:260px;" >电能质量事件</button>
-                                        <button type="button" onClick="getEvironmentEvent()" style="width:100px;height:260px;" >环境事件</button>
-                                    </div>
+                                    <div class="col-md-7">
+                                         <ul class="nav nav-tabs" id="detailItem">
+                                             <li class="active"  style="width:33.333%">
+                                                 <a data-toggle="tab" id="detailItem1">•电能质量事件</a>
+                                             </li>
+                                             <li style="width:33.333%">
+                                                 <a data-toggle="tab" id="detailItem2">•环境事件</a>
+                                             </li>
+                                             <li style="width:33.333%">
+                                                 <a data-toggle="tab" id="detailItem3">•设备事件</a>
+                                             </li>
+                                         </ul>
+                                     </div>
 
                                     <div class="col-md-7">
 
                                         <!--startprint-->
+
                                         <div id="eventdiv1" style="display: block">
-                                            <table class="display" id="device-event" style="width:100%;">
-                                                <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>事件名称</th>
-                                                    <th>位置</th>
-                                                    <th>事件类型</th>
-                                                    <th>事件描述</th>
-                                                    <th>事件发生时间</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="device-event-tbody">
-                                                </tbody>
-                                            </table>
-                                            <table class="display" id="power-event" style="width:100%;">
-                                                <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="power-event-tbody">
-                                                </tbody>
-                                            </table>
-                                            <table class="display" id="environment-event" style="width:100%;">
-                                                <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="environment-event-tbody">
-                                                </tbody>
-                                            </table>
+                                            <div class="table-container">
+                                                <table border="1" class="display" id="device-event" style="width:100%;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:60px;"></th>
+                                                        <th style="width:60px;">事件名称</th>
+                                                        <th style="width:60px;">位置</th>
+                                                        <th style="width:60px;">事件类型</th>
+                                                        <th style="width:60px;">事件描述</th>
+                                                        <th style="width:60px;">事件发生时间</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="device-event-tbody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="table-container">
+                                                <table border="1" class="display" id="power-event" style="width:100%;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:60px;"></th>
+                                                        <th style="width:60px;">事件名称</th>
+                                                        <th style="width:60px;">位置</th>
+                                                        <th style="width:60px;">事件类型</th>
+                                                        <th style="width:60px;">事件描述</th>
+                                                        <th style="width:60px;">事件发生时间</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="power-event-tbody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="table-container">
+                                                <table border="1" class="display" id="environment-event" style="width:100%;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:60px;"></th>
+                                                        <th style="width:60px;">事件名称</th>
+                                                        <th style="width:60px;">位置</th>
+                                                        <th style="width:60px;">事件类型</th>
+                                                        <th style="width:60px;">事件描述</th>
+                                                        <th style="width:60px;">事件发生时间</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="environment-event-tbody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
                                         </div>
 
-                                        <!--endprint-->
-
+                                        <!-- 电能详细事件-->
                                         <div id="eventdiv2" style="display: none">
 
                                             <ul class="nav nav-tabs" id="secItem" name="secItem">
-                                                <li class="active"  style="width:15%">
+                                                <li class="active" style="width:20%">
                                                     <a data-toggle="tab" id="secItem1">•浪涌塌陷</a>
                                                 </li>
-                                                <li style="width:15%">
+                                                <li style="width:20%">
                                                     <a data-toggle="tab" id="secItem2">谐波</a>
                                                 </li>
-                                                <li  style="width:15%">
+                                                <li style="width:20%">
                                                     <a data-toggle="tab" id="secItem3">•三相不平衡度</a>
                                                 </li>
-                                                <li style="width:15%">
+                                                <li style="width:20%">
                                                     <a data-toggle="tab" id="secItem4">•瞬变</a>
                                                 </li>
-                                                <li style="width:15%">
+                                                <li style="width:20%">
                                                     <a data-toggle="tab" id="secItem5">•闪变</a>
                                                 </li>
                                             </ul>
 
                                             <div id="power-event-detail-1-div" style="width:100%;">
-                                                <table class="display" id="power-event-detail-1" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-1" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>测量名称</th>
@@ -265,7 +310,7 @@
                                             </div>
 
                                             <div id="power-event-detail-2-div" style="width:100%;display: none;">
-                                                <table class="display" id="power-event-detail-2" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-2" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>测量名称</th>
@@ -283,7 +328,7 @@
                                             </div>
 
                                             <div id="power-event-detail-3-div" style="width:100%;display: none;">
-                                                <table class="display" id="power-event-detail-3" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-3" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>测量名称</th>
@@ -301,7 +346,7 @@
                                             </div>
 
                                             <div id="power-event-detail-4-div" style="width:100%;display: none;">
-                                                <table class="display" id="power-event-detail-4" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-4" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>测量名称</th>
@@ -319,7 +364,7 @@
                                             </div>
 
                                             <div id="power-event-detail-5-div" style="width:100%;display: none;">
-                                                <table class="display" id="power-event-detail-5" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-5" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th>测量名称</th>
@@ -338,7 +383,7 @@
 
                                         </div>
 
-
+                                        <!-- 温湿度详细事件-->
                                         <div id="eventdiv3" style="display: none">
 
                                             <ul class="nav nav-tabs" id="triItem" name="triItem">
@@ -384,82 +429,88 @@
 
                                         </div>
 
+                                        <!-- 设备详细事件-->
+                                        <div id="eventdiv4" style="display: none">
+
+                                            <ul class="nav nav-tabs" id="fourItem" name="fourItem">
+                                                <li class="active"  style="width:15%">
+                                                    <a data-toggle="tab" id="fourItem1">•治理</a>
+                                                </li>
+                                            </ul>
+
+                                            <table class="display" id="device-event-detail-1" style="width:100%;">
+                                                <thead>
+                                                <tr>
+                                                    <th>测量名称</th>
+                                                    <th>时间</th>
+                                                    <th>类型</th>
+                                                    <th>时间长短</th>
+                                                    <th>深度（与标准的偏差）</th>
+                                                    <th>方向</th>
+                                                    <th>确认</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="device-event-detail-tbody-1">
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+                                        <!--endprint-->
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
 
                                         <ul class="nav nav-tabs" id="seculItem">
-                                            <li class="active" style="width:15%">
+                                            <li class="active" style="width:50%">
                                                 <a data-toggle="tab" id="leftsubItem1">•时间地点</a>
                                             </li>
-                                            <li style="width:15%">
+                                            <li style="width:50%">
                                                 <a data-toggle="tab" id="leftsubItem2">•列</a>
-                                            </li>
-                                            <li style="width:15%">
-                                                <a data-toggle="tab" id="leftsubItem3">•图形</a>
                                             </li>
                                         </ul>
 
                                         <div id="leftItem1" style="width: 100%;">
-                                            <table>
-                                                <tr><td>日期时间</td></tr>
-                                                <tr><td><input id="radio-last-day-event" type="radio" name="event-data-peroid" value="lastone">观看最后的事件</td></tr>
-                                                <tr><td><input id="radio-from-to-event" type="radio" name="event-data-peroid" value="fromto">从
-                                                    <div class="form-group">
-                                                        <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-                                                            <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                                            <div>日期时间</div>
+                                            <div><input id="radio-last-day-event" type="radio" name="event-data-peroid" value="lastone">观看最后的事件</div>
+                                            <div class="time-pick-container">
+                                                <input id="radio-from-to-event" class="time-picker-radio" type="radio" name="event-data-peroid" value="fromto"><div class="time-pick-text">从</div>
+                                                <div class="time-pick-outer">
+                                                    <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                        <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                     </div>
-                                                </td></tr>
-                                                <tr><td>到
-                                                    <div class="form-group">
-                                                        <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-                                                            <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                        <input type="hidden" id="dtp_input2" value="" /><br/>
+                                                    <input type="hidden" id="dtp_input1" value="" /><br/>
+                                                </div><div class="time-pick-text">到</div><div class="time-pick-outer">
+                                                    <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                        <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                     </div>
-                                                </td></tr>
-
-                                                <tr><td>时间段控制</td></tr>
-
-                                                <tr><td><input id="radio-day-event" type="radio"  name="event-data-peroid" value="day">天</td></tr>
-                                                <tr><td><input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</td></tr>
-                                                <tr><td><input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月</td></tr>
-
-                                                <table class="display" id="place-event" style="width:100%">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>测量地点</th>
-                                                        <th></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-
-                                                <tr>
-                                                    <td><button id="add-button" type="button" class="btn btn-sm btn-alt"  onclick="addMonitorPoint()">添加</button></td>
-                                                    <td><button id="delete-button" type="button" class="btn btn-sm btn-alt"  onclick="deleteMonitorPoint()">删除</button></td>
-                                                </tr>
-
-                                                <tr><td>自动更新间隔
-                                                    <select class="form-control location-select-item" id="auto-update-interval">
-                                                        <option value="null">无</option>
-                                                        <option value="1">1分</option>
-                                                        <option value="10">10分</option>
-                                                        <option value="60">60分</option>
-                                                    </select>
-                                                </td></tr>
-
-                                                <tr>
-                                                    <td><button id="data-button" type="button" class="btn btn-sm btn-alt" onclick="getAllEvent()">查询</button></td>
-                                                </tr>
-
+                                                    <input type="hidden" id="dtp_input2" value="" /><br/>
+                                                </div>
+                                            </div>
+                                            <div><input id="radio-day-event" type="radio"  name="event-data-peroid" value="day">天</div>
+                                            <div><input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</div>
+                                            <div><input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月</div>
+                                            <table><tr><th>测量地点</th><th></th></tr></table>
+                                            <table class="display" id="place-event" border="1" style="width: 100%">
                                             </table>
+                                            <div>
+                                                <button id="add-button" type="button" class="btn-sm btn-success" onclick="addMonitorPoint()">添加</button>
+                                                <button id="delete-button" type="button" class="btn-sm btn-danger" onclick="deleteMonitorPoint()">删除</button>
+                                            </div>
+                                            <div>
+                                                <span>自动更新间隔</span>
+                                                <select style="display: inline-block" class="form-control location-select-item" id="auto-update-interval">
+                                                    <option value="">无</option>
+                                                    <option value="60000">1分</option>
+                                                    <option value="600000">10分</option>
+                                                    <option value="3600000">60分</option>
+                                                </select>
+                                            </div>
+
+                                            <div><button id="data-button" type="button" class="btn-sm btn-default" onclick="getAllEvent()">查询</button></div>
+
                                         </div>
 
                                         <div id="leftItem2" style="width: 100%;">
@@ -468,22 +519,19 @@
                                                     <td>可见的列</td>
                                                 </tr>
                                                 <tr>
-                                                    <table class="display" id="colume-table">
+                                                    <table class="display" id="colume-table" border="1px" width="160px">
                                                         <tr><td>名字</td><td>宽度</td></tr>
                                                     </table>
                                                 </tr>
                                                 <tr>
-                                                    <img src="/img/uparray.png" alt="" onClick="upcol()" >
-                                                    <img src="/img/deletearray.png" alt="" onClick="deletecol()" >
-                                                    <img src="/img/downarray.png" alt="" onClick="downcol()" >
-                                                </tr>
-
-                                                <tr>
-                                                    <td>可用的列</td>
+                                                    <td><img src="/img/uparray.png" onClick="upcol()"></td>
+                                                    <td><img src="/img/deletearray.png" onClick="deletecol()"></td>
+                                                    <td><img src="/img/downarray.png" onClick="downcol()"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <select class="form-control location-select-item" id="useful-col">
+                                                        <span>可用的列</span>
+                                                        <select style="display: inline-block" class="form-control location-select-item" id="useful-col">
                                                             <option value="1">测量名称</option>
                                                             <option value="2">时间</option>
                                                             <option value="3">测量名称</option>
@@ -499,17 +547,12 @@
                                                             <option value="13">中有波形数据</option>
                                                         </select>
                                                     </td>
-                                                    <td><button id="add-col-button" type="button" class="btn btn-sm btn-alt" onclick="getColumnItem()">添加</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <button style="display: block;" id="add-col-button" type="button" class="btn-success btn-sm" onclick="getColumnItem()">添加</button>
                                                 </tr>
                                             </table>
 
-                                        </div>
-
-                                        <div id="leftItem3" style="width: 100%;">
-                                            浪涌塌陷曲线
-                                            U电压
-
-                                            I电流
                                         </div>
 
                                     </div>
@@ -519,7 +562,7 @@
                     </div>
                 </div>
 
-                <div id = "item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                <div id = "item2" class="col-md-12 col-xs-6" style="height: 600px;">
                     能效分析
                 </div>
 
@@ -543,8 +586,8 @@
 
                 <!-- clickEventRow DIV-->
                 <div class="clickEventRow-class" id="clickEventRow-modal" style="display: none;">
-                    <button onclick="confirmEvent()" type="button" class="btn btn-sm btn-alt">确认</button>
-                    <button onclick="deleteEvent()" type="button" class="btn btn-sm btn-alt">删除事件</button>
+                    <button onclick="confirmEvent()" type="button" class="btn-default btn-sm">确认</button>
+                    <button onclick="deleteEvent()" type="button" class="btn-warning btn-sm">删除事件</button>
                 </div>
                 <!-- clickEventRow DIV END-->
 
@@ -566,6 +609,7 @@
                         <tr>
                             <td><input type="text" id="annotation" class="form-control add-roles-input"></td>
                         </tr>
+                        <tr></tr><tr></tr>
                         <tr>
                             <td><button onclick="confirmOKEvent()" type="button" class="btn btn-sm btn-alt">确认</button></td>
                             <td><button onclick="cancleOKEvent()" type="button" class="btn btn-sm btn-alt">取消</button></td>
@@ -819,20 +863,38 @@
             $("#item2").hide();
 
             $(document).ready(function () {
+
+                $("#detailItem").click(function () {
+                    $("#detailItem1").click(function () {
+                        $("#eventdiv1").hide();
+                        $("#eventdiv2").show();
+                        $("#eventdiv3").hide();
+                        $("#eventdiv4").hide();
+                        getPowerEvent();
+                    });
+                    $("#detailItem2").click(function () {
+                        $("#eventdiv1").hide();
+                        $("#eventdiv2").hide();
+                        $("#eventdiv3").show();
+                        $("#eventdiv4").hide();
+                        getEvironmentEvent();
+                    });
+                    $("#detailItem3").click(function () {
+                        $("#eventdiv1").hide();
+                        $("#eventdiv2").hide();
+                        $("#eventdiv3").hide();
+                        $("#eventdiv4").show();
+                        getDeviceEvent();
+                    });
+                });
+
                 $("#leftsubItem1").click(function () {
                     $("#leftItem1").show();
                     $("#leftItem2").hide();
-                    $("#leftItem3").hide();
                 });
                 $("#leftsubItem2").click(function () {
                     $("#leftItem1").hide();
                     $("#leftItem2").show();
-                    $("#leftItem3").hide();
-                });
-                $("#leftsubItem3").click(function () {
-                    $("#leftItem1").hide();
-                    $("#leftItem2").hide();
-                    $("#leftItem3").show();
                 });
             });
         });
@@ -920,18 +982,38 @@
 
 <!-- （详细）设备事件-点击进入第二个页面-->
 <script type="text/javascript">
-    function getDeviceEvent(){}
+    function getDeviceEvent(){
+
+
+
+    }
 </script>
 
 <!-- （详细）电能事件-点击进入第二个页面-->
 <script type="text/javascript">
     function getPowerEvent(){
+        $('#eventdiv1').css('display', 'none');
+        $('#eventdiv2').css('display', 'block');
+        $('#eventdiv3').css('display', 'none');
+        $('#eventdiv4').css('display', 'none');
 
-        var cbname = $("#city_code option:selected").val();
-        var edate = $("input[name='event-data-peroid']:checked").val();
-        var stime;
-        var etime;
+        var cbname = [];
+        var stime = null;
+        var etime = null;
         var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-peroid']:checked").val();
+        var nodeset = [], nodes2;
+
+        var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
+
+        if(nodes) {
+            nodes2 = nodes.toString();
+            nodeset = nodes2.split(",");
+            for (var i = 0 ;i < nodeset.length; i++)
+            {
+                cbname.push(nodeset[i].split(":")[0]);
+            }
+        }
 
         if(edate == "lastone"){
             stime = " ";
@@ -987,192 +1069,223 @@
             etime = nowtime;
         }
 
-        $('#eventdiv1').css('display', 'none');
-        $('#eventdiv2').css('display', 'block');
-        $('#eventdiv3').css('display', 'none');
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
 
-        $.ajax({
-            type: "post",
-            url: "getDetailPowerEventlytx",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#power-event-detail-1");
-                var tbody = $("#power-event-detail-tbody-1")[0];
-                tbody.innerHTML = "";
+        if(stime == null || etime == null){
+            alert("请选择日期时间");
+        }
+        else if(cbname == "[object Object]"){
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            $.ajax({
+                type: "post",
+                url: "getDetailPowerEventlytx",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-detail-tbody-1")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        console.log("lytx"+teid+name+location+type+description+time);
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
 
-        $.ajax({
-            type: "post",
-            url: "getDetailPowerEventxb",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#power-event-detail-2");
-                var tbody = $("#power-event-detail-tbody-2")[0];
-                tbody.innerHTML = "";
+            $.ajax({
+                type: "post",
+                url: "getDetailPowerEventxb",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-detail-tbody-2")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        console.log("xb"+teid+name+location+type+description+time);
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
 
-        $.ajax({
-            type: "post",
-            url: "getDetailPowerEventsxbph",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#power-event-detail-3");
-                var tbody = $("#power-event-detail-tbody-3")[0];
-                tbody.innerHTML = "";
+            $.ajax({
+                type: "post",
+                url: "getDetailPowerEventsxbph",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-detail-tbody-3")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        console.log("sx"+teid+name+location+type+description+time);
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
 
-        $.ajax({
-            type: "post",
-            url: "getDetailPowerEventshunbian",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#power-event-detail-4");
-                var tbody = $("#power-event-detail-tbody-4")[0];
-                tbody.innerHTML = "";
+            $.ajax({
+                type: "post",
+                url: "getDetailPowerEventshunbian",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-detail-tbody-4")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        console.log("sb"+teid+name+location+type+description+time);
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
 
-        $.ajax({
-            type: "post",
-            url: "getDetailPowerEventshanbian",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#power-event-detail-5");
-                var tbody = $("#power-event-detail-tbody-5")[0];
-                tbody.innerHTML = "";
+            $.ajax({
+                type: "post",
+                url: "getDetailPowerEventshanbian",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-detail-tbody-5")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        console.log("shanbian"+teid+name+location+type+description+time);
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
-
+            });
+        }
     }
 </script>
 
 <!-- （详细）环境事件-点击进入第二个页面-->
 <script type="text/javascript">
     function getEvironmentEvent(){
+        $('#eventdiv1').css('display', 'none');
+        $('#eventdiv2').css('display', 'none');
+        $('#eventdiv3').css('display', 'block');
+        $('#eventdiv4').css('display', 'none');
 
-        var cbname = $("#city_code option:selected").val();
-        var edate = $("input[name='event-data-peroid']:checked").val();
-        var stime;
-        var etime;
+        var cbname = [];
+        var stime = null;
+        var etime = null;
         var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-peroid']:checked").val();
+        var nodeset = [], nodes2;
+
+        var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
+
+        if(nodes) {
+            nodes2 = nodes.toString();
+            nodeset = nodes2.split(",");
+            for (var i = 0 ;i < nodeset.length; i++)
+            {
+                cbname.push(nodeset[i].split(":")[0]);
+            }
+        }
 
         if(edate == "lastone"){
             stime = " ";
@@ -1228,79 +1341,90 @@
             etime = nowtime;
         }
 
-        $('#eventdiv1').css('display', 'none');
-        $('#eventdiv2').css('display', 'none');
-        $('#eventdiv3').css('display', 'block');
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
 
-        $.ajax({
-            type: "post",
-            url: "getDetailEvironmentEventtemp",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#evironment-event-detail-1");
-                var tbody = $("#evironment-event-detail-tbody-1")[0];
-                tbody.innerHTML = "";
+        if(stime == null || etime == null){
+            alert("请选择日期时间");
+        }
+        else if(cbname == "[object Object]"){
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            $.ajax({
+                type: "post",
+                url: "getDetailEvironmentEventtemp",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var table = $("#evironment-event-detail-1");
+                    var tbody = $("#evironment-event-detail-tbody-1")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
 
-        $.ajax({
-            type: "post",
-            url: "getDetailEvironmentEventwet",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
+            $.ajax({
+                type: "post",
+                url: "getDetailEvironmentEventwet",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
 
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#evironment-event-detail-2");
-                var tbody = $("#evironment-event-detail-tbody-2")[0];
-                tbody.innerHTML = "";
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var table = $("#evironment-event-detail-2");
+                    var tbody = $("#evironment-event-detail-tbody-2")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
 
-                    tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                        '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
                 }
-            }
-        });
-
+            });
+        }
 
     }
 </script>
@@ -1337,25 +1461,36 @@
         return currentdate;
     }
 
-    //根据时间、检测银行设置获得所有事件
-    function getAllEvent(){
+    //根据时间、检测点、设置获得所有事件
+    function getAllEvent() {
 
-        var cbname = $("#city_code option:selected").val();
-        var edate = $("input[name='event-data-peroid']:checked").val();
-
-        var stime ;//"2018-08-22 08:00:00";
-        var etime ;//"2018-08-29 08:00:00";
+        var cbname = [];
+        var stime = null;
+        var etime = null;
         var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-peroid']:checked").val();
+        var nodeset = [], nodes2;
 
-        if(edate == "lastone"){
+        var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
+
+        if(nodes) {
+            nodes2 = nodes.toString();
+            nodeset = nodes2.split(",");
+            for (var i = 0 ;i < nodeset.length; i++)
+            {
+                cbname.push(nodeset[i].split(":")[0]);
+            }
+        }
+
+        if (edate == "lastone") {
             stime = " ";
             etime = " ";
         }
-        else  if(edate == "fromto"){
+        else if (edate == "fromto") {
             stime = $("#firstDate").val();
             etime = $("#lastDate").val();
         }
-        else  if(edate == "day"){
+        else if (edate == "day") {
             //昨天的时间
             var now = new Date();
             var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
@@ -1365,12 +1500,12 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
         }
-        else  if(edate == "week"){
+        else if (edate == "week") {
             // 获取一星期前的时间：
             var now = new Date();
             var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
@@ -1380,12 +1515,12 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
         }
-        else  if(edate == "month"){
+        else if (edate == "month") {
             // 获取一月前的时间：
             var now = new Date();
             var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
@@ -1395,36 +1530,44 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
         }
 
         //读取设置中的优先级cookie
-        var priortylist = $. cookie('priortylist');
+        var priortylist = $.cookie('priortylist');
 
-        //获取所有电能事件
-        $.ajax({
+        if(stime == null || etime == null){
+            alert("请选择日期时间");
+        }
+        else if(cbname == "[object Object]"){
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else{
+            //获取所有电能事件
+            $.ajax({
             type: "post",
             url: "getPowerEvent",
             data: {
                 stime: stime,
                 etime: etime,
-                cbname: cbname,
+                cbname: cbname.toString(),
                 priortylist: priortylist
             },
             dataType : "json",
             success: function (data) {
                 var obj = JSON.parse(data);
                 var list = obj['allpelist'];
-                var table = $("#power-event");
                 var tbody = $("#power-event-tbody")[0];
                 tbody.innerHTML = "";
 
                 for (var i = 0; i < list.length; i++) {
                     var liststr = list[i].split(",");
-
                     var teid = liststr[0].split("[");
                     var name = liststr[1];
                     var location = liststr[2];
@@ -1433,53 +1576,88 @@
                     var rawtime = liststr[5].split("]");
                     var time = rawtime[0];
 
-                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" value='+ teid[1]+'>' + '</td>' +
-                        '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:60px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
+                        '<td id="name" style="width:60px;">' + name + '</td>' +
+                        '<td style="width:60px;">' + location + '</td>' +
+                        '<td style="width:60px;">' + type + '</td>' +
+                        '<td style="width:60px;">' + description + '</td>' +
+                        '<td style="width:60px;">' + time + '</td></tr>');
                 }
             }
-        });
+            });
 
+            //获取所有设备事件
+            $.ajax({
+                type: "post",
+                url: "getCtrlEvent",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#device-event-tbody")[0];
+                    tbody.innerHTML = "";
 
-        //获取所有设备事件
-        //设备事件
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
 
-        //获取所有环境事件
-        $.ajax({
-            type: "post",
-            url: "getEnvironmentEvent",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var table = $("#environment-event");
-                var tbody = $("#environment-event-tbody")[0];
-                tbody.innerHTML = "";
-
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
-
-                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" value='+ teid[1]+'>' + '</td>' +
-                        '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                        '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                        '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:60px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
+                            '<td id="name" style="width:60px;">' + name + '</td>' +
+                            '<td style="width:60px;">' + location + '</td>' +
+                            '<td style="width:60px;">' + type + '</td>' +
+                            '<td style="width:60px;">' + description + '</td>' +
+                            '<td style="width:60px;">' + time + '</td></tr>');
+                    }
                 }
-            }
-        });
+            });
+
+            //获取所有环境事件
+            $.ajax({
+                type: "post",
+                url: "getEnvironmentEvent",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType : "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#environment-event-tbody")[0];
+                    tbody.innerHTML = "";
+
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+
+                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" value='+ teid[1]+'>' + teid[1] + '</td>' +
+                            '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
+                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                    }
+                }
+            });
+        }
 
     }
 
@@ -1487,7 +1665,7 @@
 
 <!-- 观测地点-->
 <script type="text/javascript">
-    //添加监测点
+    //添加监测点-弹出添加div
     function addMonitorPoint(){
 
         var pbname = $("#province_code option:selected").val();
@@ -1532,35 +1710,37 @@
         });
     }
 
+    //添加检测点-确定
     function addCityBankAsMonitorPoint(){
 
         //取得所有选中的节点，返回节点对象的集合
         var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
         var nodes2 = nodes.toString();
-
-        var nodeset = new Array();
-        nodeset = nodes2.split(",");
-
+        var nodeset = nodes2.split(",");
         var ptable = $("#place-event");
+        ptable.empty();
+
         for (var i = 0 ;i < nodeset.length; i++)
         {
-            var nset = new Array();
-            nset = nodeset[i].split(":");
-            ptable.append('<tr><td>' + nset[1] + '</td><td style="display: none">'+ nset[0] +'</td></tr>');
+            var nset = nodeset[i].split(":");
+            ptable.append('<tr id="'+nset[0]+'"><td><input id="radio-mpid" name="radio-mpid" type="radio" value="'+nset[0]+'">' + nset[1] + '</td></tr>');
         }
 
         cancleCityBankAsMonitorPoint();
     }
 
+    //添加检测点-取消
     function cancleCityBankAsMonitorPoint(){
         $('#addEventMonitorPoint-modal').css('display', 'none');
     }
 
     //删除检测点
     function deleteMonitorPoint(){
-        alert("delete");
+        var delmpid = $('input[name="radio-mpid"]:checked');
 
-
+        delmpid.each(function(){
+            $(this).parent().parent().remove();
+        });
     }
 
 </script>
@@ -1620,9 +1800,7 @@
 <!-- 设置icon-->
 <script type="text/javascript">
     function settingIcon(){
-
         $('#setting-modal').css('display', 'block');
-
         $('#jstree').jstree({
             "core": {
                 "themes": {
@@ -1665,7 +1843,6 @@
         $('#jstree').jstree('deselect_all');
     }
 
-
     //设置按钮界面 OK
     function OK() {
 
@@ -1698,6 +1875,7 @@
         var teid = $('#select-teid').val();
         var sign = $('#signature').val();
         var annot = $('#annotation').val();
+        var ettype = eventtypetable;
 
         $.ajax({
             type: "post",
@@ -1706,7 +1884,8 @@
             data:{
                 teid: teid,
                 sign: sign,
-                annot: annot
+                annot: annot,
+                eventtabletype: ettype
             }
         });
         $('#conformEventRow-modal').css('display', 'none');
@@ -1722,9 +1901,8 @@
 <!-- 刷新icon-->
 <script type="text/javascript">
     function refreshIcon(){
-        //getPowerEvent();
-        //刷新设备类型事件的
-        //刷新环境类型事件的
+        //刷新事件
+        getAllEvent();
     }
 </script>
 
@@ -1732,19 +1910,25 @@
 <script type="text/javascript">
 
     function exportTable(){
-/*
+
+        var tableid1 = "device-event";
+        var tableid2 = "power-event";
+        var tableid3 = "environment-event";
+        setTimeout(exportToExcel(tableid1), 1000);//等待1s后执行exportToExcel函数
+        setTimeout(exportToExcel(tableid2), 1000);
+        setTimeout(exportToExcel(tableid3), 1000);
+
         $("#secItem li").each(function(i){
             $(this).click(function(){
                 idx = i;
             });
-        });*/
-
-      /*  $("#secItem li")[0].onclick = function(){
+        });
+        $("#secItem li")[0].onclick = function(){
             idx = 1;
             var tableid = "power-event-detail-tbody-"+idx;
             console.log("被选中", tableid);
             exportToExcel(tableid);
-        }
+        };
         $("#secItem li")[1].onclick = function(){
             idx = 2;
             var tableid = "power-event-detail-tbody-"+idx;
@@ -1768,8 +1952,7 @@
             var tableid = "power-event-detail-tbody-"+idx;
             console.log("被选中", tableid);
             exportToExcel(tableid);
-        }*/
-
+        }
     }
 
     var idTmr;
@@ -1822,7 +2005,7 @@
             try {
                 var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
             } catch (e) {
-                print("Nested catch caught " + e);
+                alert("Nested catch caught " + e);
             } finally {
                 oWB.SaveAs(fname);
                 oWB.Close(savechanges = false);
@@ -1895,170 +2078,60 @@
 
 <!-- -->
 <script type="text/javascript">
-
-            var powertable = $('#power-event').DataTable({
-                "info":           false,
-                "scrollY":        "260px",
-                "scrollCollapse": true,
-                "paging":         false,
-                "dom":            "lBrtip"
-            });
-            //点击table中的某一行
-            $('#power-event tbody').on('click', 'tr', function (){
-                $(this).toggleClass('selected');
-                selectOneRowEvent(this);
-            });
-
-            $('#environment-event').DataTable({
-                "info":           false,
-                "scrollY":        "260px",
-                "scrollCollapse": true,
-                "paging":         false,
-                "dom":            "lBrtip"
-            });
-            //点击table中的某一行
-            $('#environment-event tbody').on('click', 'tr', function (){
-                $(this).toggleClass('selected');
-                selectOneRowEvent(this);
-            });
-
-
-            $('#place-event').DataTable({
-                "info":           false,
-                "scrollY":        "120px",
-                "scrollCollapse": true,
-                "paging":         false,
-                "ordering":       false,
-                "dom":            "lBrtip"
-            });
-
-            //点击table中的某一行
-            $('#place-event tbody').on('change', 'tr', function (){
-                alert("mp:"+ this);
-            });
-
-            //列栏表
-            $('#colume-table').DataTable({
-                "info":           false,
-                "dom":            "lBrtip"
-            });
-
-
-            //获取某一行选择的行，将该行的id放入某个隐藏的div中
-            function selectOneRowEvent(rowdata){
-                $('#clickEventRow-modal').css('display', 'block');
-                var row = rowdata;
-                var cols = row.childNodes;
-                var teid = cols[0].innerText;
-                $('#select-teid').val(teid);
-
+    //刷新功能
+    $("#auto-update-interval").on("change", function () {
+        var updateinterval=$('#auto-update-interval').val();
+        var timer = null;
+        if(updateinterval) {
+            timer = setInterval(getAllEvent, updateinterval);
+        } else {
+            if(timer==null) {
+                clearInterval(timer)
             }
+        }
+    });
 
-            //点击单条事件-删除事件（假删除，只是前端不显示）
-            function deleteEvent(){
-                var id = $('#select-teid').val();
-                $('#clickEventRow-modal').css('display', 'none');
+    //点击device-event table中的某一行
+    $('#device-event tbody').on('click', 'tr', function (){
+        $(this).toggleClass('selected');
+        selectOneRowEvent(this);
+        eventtypetable = "device";
+    });
 
-                powertable.row($(id).parents('tr')).remove().draw();
-            }
+    //点击power-event table中的某一行
+    $('#power-event tbody').on('click', 'tr', function (){
+        $(this).toggleClass('selected');
+        selectOneRowEvent(this);
+        eventtypetable = "power";
+    });
 
+    //点击environment-event table中的某一行
+    $('#environment-event tbody').on('click', 'tr', function (){
+        $(this).toggleClass('selected');
+        selectOneRowEvent(this);
+        eventtypetable = "envrionment";
+    });
 
-            //第二个事件页面
-            $('#power-event-detail-1').DataTable({
-                "info":           true,
-                "scrollY":        "800px",
-                "scrollCollapse": true,
-                "pagingType":     "full_numbers",
-                "dom":            "lBrtip",
-                "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
-                    {"targets": [ 2 ], "visible": (col2)? true : false},
-                    {"targets": [ 3 ], "visible": (col3)? true : false},
-                    {"targets": [ 4 ], "visible": (col4)? true : false},
-                    {"targets": [ 5 ], "visible": (col5)? true : false},
-                    {"targets": [ 6 ], "visible": (col6)? true : false},
-                    {"targets": [ 7 ], "visible": (col7)? true : false},
-                    {"targets": [ 8 ], "visible": (col8)? true : false},
-                    {"targets": [ 9 ], "visible": (col9)? true : false},
-                    {"targets": [ 10 ], "visible": (col10)? true : false}
-                ]
-            });
+    //点击table中的某一行
+    $('#place-event tbody').on('change', 'tr', function (){
+        //alert("mp:"+ this);
+    });
 
-            $('#power-event-detail-2').DataTable({
-                "info":           true,
-                "scrollY":        "800px",
-                "scrollCollapse": true,
-                "pagingType":     "full_numbers",
-                "dom":            "lBrtip",
-                "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
-                    {"targets": [ 2 ], "visible": (col2)? true : false},
-                    {"targets": [ 3 ], "visible": (col3)? true : false},
-                    {"targets": [ 4 ], "visible": (col4)? true : false},
-                    {"targets": [ 5 ], "visible": (col5)? true : false},
-                    {"targets": [ 6 ], "visible": (col6)? true : false},
-                    {"targets": [ 7 ], "visible": (col7)? true : false},
-                    {"targets": [ 8 ], "visible": (col8)? true : false},
-                    {"targets": [ 9 ], "visible": (col9)? true : false},
-                    {"targets": [ 10 ], "visible": (col10)? true : false}
-                ]
-            });
+    //获取某一行选择的行，将该行的id放入某个隐藏的div中
+    function selectOneRowEvent(rowdata){
+        $('#clickEventRow-modal').css('display', 'block');
+        var row = rowdata;
+        var cols = row.childNodes;
+        var teid = cols[0].innerText;
+        $('#select-teid').val(teid);
+    }
 
-            $('#power-event-detail-3').DataTable({
-                "info":           true,
-                "scrollY":        "800px",
-                "scrollCollapse": true,
-                "pagingType":     "full_numbers",
-                "dom":            "lBrtip",
-                "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
-                    {"targets": [ 2 ], "visible": (col2)? true : false},
-                    {"targets": [ 3 ], "visible": (col3)? true : false},
-                    {"targets": [ 4 ], "visible": (col4)? true : false},
-                    {"targets": [ 5 ], "visible": (col5)? true : false},
-                    {"targets": [ 6 ], "visible": (col6)? true : false},
-                    {"targets": [ 7 ], "visible": (col7)? true : false},
-                    {"targets": [ 8 ], "visible": (col8)? true : false},
-                    {"targets": [ 9 ], "visible": (col9)? true : false},
-                    {"targets": [ 10 ], "visible": (col10)? true : false}
-                ]
-            });
-
-            $('#power-event-detail-4').DataTable({
-                "info":           true,
-                "scrollY":        "800px",
-                "scrollCollapse": true,
-                "pagingType":     "full_numbers",
-                "dom":            "lBrtip",
-                "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
-                    {"targets": [ 2 ], "visible": (col2)? true : false},
-                    {"targets": [ 3 ], "visible": (col3)? true : false},
-                    {"targets": [ 4 ], "visible": (col4)? true : false},
-                    {"targets": [ 5 ], "visible": (col5)? true : false},
-                    {"targets": [ 6 ], "visible": (col6)? true : false},
-                    {"targets": [ 7 ], "visible": (col7)? true : false},
-                    {"targets": [ 8 ], "visible": (col8)? true : false},
-                    {"targets": [ 9 ], "visible": (col9)? true : false},
-                    {"targets": [ 10 ], "visible": (col10)? true : false}
-                ]
-            });
-
-            $('#power-event-detail-5').DataTable({
-                "info":           true,
-                "scrollY":        "800px",
-                "scrollCollapse": true,
-                "pagingType":     "full_numbers",
-                "dom":            "lBrtip",
-                "columnDefs": [{"targets": [ 1 ], "visible": (col1)? true : false},
-                    {"targets": [ 2 ], "visible": (col2)? true : false},
-                    {"targets": [ 3 ], "visible": (col3)? true : false},
-                    {"targets": [ 4 ], "visible": (col4)? true : false},
-                    {"targets": [ 5 ], "visible": (col5)? true : false},
-                    {"targets": [ 6 ], "visible": (col6)? true : false},
-                    {"targets": [ 7 ], "visible": (col7)? true : false},
-                    {"targets": [ 8 ], "visible": (col8)? true : false},
-                    {"targets": [ 9 ], "visible": (col9)? true : false},
-                    {"targets": [ 10 ], "visible": (col10)? true : false}
-                ]
-            });
-
+    //点击单条事件-删除事件（假删除，只是前端不显示）
+    function deleteEvent(){
+        var id = $('#select-teid').val();
+        $('#clickEventRow-modal').css('display', 'none');
+        powertable.row($(id).parents('tr')).remove().draw();
+    }
 </script>
 
 </body>

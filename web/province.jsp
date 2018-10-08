@@ -39,7 +39,11 @@
 
     <!-- jquery -->
     <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
-
+    <style>
+        .datetimepicker {
+            background: black!important;
+        }
+    </style>
 
 </head>
 
@@ -117,10 +121,99 @@
                     $("#comproom_code").change(function () {
                         var options = $("#comproom_code option:selected");
                         $.cookie('opinion3', options.text(), {expires: 1, path: '/'});
-                        alert("您已选择: " + options.text() + ". 即将跳转到相应界面...");
                         if (options.index() !== 0) {
                             $('#second-page').css('display', 'block');
                             $('#first-page').css('display', 'none');
+
+                            //获取温度、湿度
+                            $.ajax({
+                                type: "post",
+                                url: "getOneComputerroomMapData",
+                                data: {
+                                    compname: options.text()
+                                },
+                                dataType: "json",
+                                success: function (data) {
+
+                                    var obj = eval('(' + data + ')');
+                                    var list = obj.oplist;
+
+                                    var tempdata = [];
+                                    var humiddata = [];
+                                    var xdata = [];
+
+                                    for (var i = 0; i < list.length; i++) {
+                                        xdata[i] = list[i][0];
+                                        tempdata[i] = list[i][1];
+                                        humiddata[i] = list[i][2];
+                                    }
+
+                                    //指定温度的图表的配置项和数据
+                                    var tempoption = {
+                                        title: {
+                                            text: '温度',
+                                            subtext: '温度监测',
+                                        },
+                                        tooltip: {},
+                                        xAxis: {
+                                            data: xdata
+                                        },
+                                        yAxis: {},
+                                        series: [{
+                                            name: '数值',
+                                            type: 'bar',
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#3EA3D8'
+                                                }
+                                            },
+                                            data: tempdata
+                                        }]
+                                    };
+
+                                    //指定湿度的图表的配置项和数据
+                                    var humidoption = {
+                                        title: {
+                                            text: '湿度',
+                                            subtext: '湿度监测',
+                                        },
+                                        tooltip: {},
+                                        xAxis: {
+                                            data: xdata
+                                        },
+                                        yAxis: {},
+                                        series: [{
+                                            name: '数值',
+                                            type: 'bar',
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#3EA3D8'
+                                                }
+                                            },
+                                            data: humiddata
+                                        }]
+                                    };
+
+                                    // 使用刚指定的配置项和数据显示图表。
+                                    tempChart.setOption(tempoption);
+                                    humidChart.setOption(humidoption);
+                                }
+                            });
+
+                            //获取治理设备状态
+                            $.ajax({
+                                type: "post",
+                                url: "getOneCtrlData",
+                                data: {
+                                    compname: options.text()
+                                },
+                                dataType: "json",
+                                success: function (data) {
+                                    alert("00000"+data);
+                                    $("#ctrlstatus").attr("value","警");
+                                }
+                            });
+
                         } else {
                             $('#second-page').css('display', 'none');
                             $('#first-page').css('display', 'block');
@@ -167,11 +260,9 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="dtp_input1" class="control-label">开始日期</label>
-                                <div class="input-group date form_datetime"
-                                     data-date="2018-07-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p"
+                                <div class="input-group date form_datetime" data-date-format="yyyy-mm-dd hh:ii:ss"
                                      data-link-field="dtp_input1">
-                                    <input id="firstDate" class="form-control" size="16" type="text"
-                                           value="2018-01-01 00:00:00" readonly>
+                                    <input id="firstDate" class="form-control" size="16" type="text" readonly>
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-th"></span></span>
                                 </div>
@@ -180,20 +271,16 @@
 
                             <div class="form-group">
                                 <label for="dtp_input2" class="control-label">结束日期</label>
-                                <div class="input-group date form_datetime"
-                                     data-date="2019-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p"
+                                <div class="input-group date form_datetime" data-date-format="yyyy-mm-dd hh:ii:ss"
                                      data-link-field="dtp_input1">
-                                    <input id="lastDate" class="form-control" size="16" type="text"
-                                           value="2018-12-01 00:00:00" readonly>
+                                    <input id="lastDate" class="form-control" size="16" type="text" readonly>
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-th"></span></span>
                                 </div>
                                 <input type="hidden" id="dtp_input2" value=""/><br/>
                             </div>
                             <!-- 刷新按钮 -->
-                            <button id="refresh-btn" class="btn btn-primary" data-loading-text="Loading..."
-                                    type="button"> 刷新
-                            </button>
+                            <button id="refresh-btn" class="btn-primary" data-loading-text="Loading..." type="button"> 刷新</button>
                         </fieldset>
 
                     </form>
@@ -213,24 +300,33 @@
                     <div class="chart-item-title">评估结果</div>
                     <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t0" src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t1" src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t2" src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t3" src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t4" src="/img/icon/GOOD.png"/></td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px">状态：良</td>
+                            <td id="r2t0" style="font-size: 12px"></td>
+                            <td id="r2t1" style="font-size: 12px"></td>
+                            <td id="r2t2" style="font-size: 12px"></td>
+                            <td id="r2t3" style="font-size: 12px"></td>
+                            <td id="r2t4" style="font-size: 12px"></td>
+                        </tr>
+                        <tr style="height: 28px;"></tr>
+                        <tr>
+                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
                         </tr>
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px"></td>
+                            <td style="font-size: 12px"></td>
+                            <td style="font-size: 12px"></td>
+                            <td style="font-size: 12px"></td>
+                            <td style="font-size: 12px"></td>
                         </tr>
                     </table>
                 </div>
@@ -249,143 +345,75 @@
 
         </div>
 
-        <div id="second-page" style="display: none;">
+        <div id="second-page">
 
             <div class="row">
 
-                <div class="col-md-2 col-xs-6"
+                <div class="col-md-2 col-xs-6 chart-item"
                      style="
-                         width: 425px;
+                         width: 30%;
                          height: 200px;
                          -webkit-tap-highlight-color: transparent;
                          user-select: none;
                          position: relative;
                      ">
-                    <!-- html代码，不考虑CSS样式 -->
                     <img id="preview" alt=""/>
                     <form class="am-form" method="post" enctype="multipart/form-data">
                         <input type="file" id="head" name="head" onchange="previewImage(this)">
-                        <script>
-                            // 上传图片前预览
-                            function previewImage(file) {
-                                var MAXWIDTH = 1200;  // 最大图片宽度
-                                var MAXHEIGHT = 360;  // 最大图片高度
-                                if (file.files && file.files[0]) {
-                                    var img = document.getElementById('preview');
-                                    img.onload = function () {
-                                        var rect = getZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
-                                        img.width = rect.width;
-                                        img.height = rect.height;
-                                    }
-                                    var reader = new FileReader();
-                                    reader.onload = function (evt) {
-                                        img.src = evt.target.result;
-                                    }
-                                    reader.readAsDataURL(file.files[0]);
-                                } else {
-                                    //兼容IE
-                                    file.select();
-                                    var src = document.selection.createRange().text;
-                                    var img = document.getElementById('preview');
-                                    img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
-                                }
-                            }
-
-                            // 获取缩放的尺寸
-                            function getZoomParam(maxWidth, maxHeight, width, height) {
-                                var param = {top: 0, left: 0, width: width, height: height};
-                                if (width > maxWidth || height > maxHeight) {
-                                    rateWidth = width / maxWidth;
-                                    rateHeight = height / maxHeight;
-                                    if (rateWidth > rateHeight) {
-                                        param.width = maxWidth;
-                                        param.height = Math.round(height / rateWidth);
-                                    } else {
-                                        param.width = Math.round(width / rateHeight);
-                                        param.height = maxHeight;
-                                    }
-                                }
-                                param.left = Math.round((maxWidth - param.width) / 2);
-                                param.top = Math.round((maxHeight - param.height) / 2);
-                                return param;
-                            }
-                        </script>
                     </form>
-
                 </div>
 
-                <div id="assessbar" class="col-md-2 col-xs-6 chart-item"
-                     style="width: 388px;
-                        height: 200px;
-                        -webkit-tap-highlight-color: transparent;
-                        user-select: none;
-                        position: relative;text-align:center">
-                    <div class="chart-item-title">评估结果</div>
-                    <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
+                <div id="devicebar" class="col-md-2 col-xs-6 chart-item" style="width: 30%; height: 200px; text-align:center">
+                    <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0">
+                        <tr style="height: 28px;"></tr>
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/1.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/2.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/3.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/4.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/5.png"/></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 12px" id="ctrlstatus">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
+                        </tr>
+                        <tr style="height: 28px;"></tr>
+                        <tr>
+                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
                         </tr>
                         <tr>
                             <td style="font-size: 12px">状态：良</td>
-                        </tr>
-                        <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/BAD.jpeg"/></td>
-                        </tr>
-                        <tr>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
                         </tr>
                     </table>
                 </div>
 
-                <div id="nullbar" class="col-md-2 col-xs-6 chart-item"
-                     style="
-                         width: 388px;
-                        height: 200px;
-                        -webkit-tap-highlight-color: transparent;
-                        user-select: none;
-                        position: relative;
-                     ">
+                <div id="" class="col-md-2 col-xs-6 chart-item" style="width: 30%; height: 200px;">
                 </div>
 
-                <div id="tempbar" class="col-md-2 col-xs-6 chart-item"
-                     style="
-                        width: 388px;
-                        height: 200px;
-                        -webkit-tap-highlight-color: transparent;
-                        user-select: none;
-                        position: relative;
-                     ">
-                </div>
-
-                <div id="humidbar" class="col-md-2 col-xs-6 chart-item"
-                     style="
-                         width: 388px;
-                        height: 200px;
-                        -webkit-tap-highlight-color: transparent;
-                        user-select: none;
-                        position: relative;
-                     ">
-                </div>
-
-                <div id="nullbar" class="col-md-2 col-xs-6 chart-item"
-                     style="
-                         width: 388px;
-                        height: 200px;
-                        -webkit-tap-highlight-color: transparent;
-                        user-select: none;
-                        position: relative;
-                     ">
-                </div>
             </div>
+            <div class="row">
 
+                <div id="tempbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%;height: 200px;">
+                </div>
+
+                <div id="humidbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%;height: 200px;">
+                </div>
+
+                <div id="panelbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%;height: 200px;">
+                </div>
+
+            </div>
 
         </div>
 
@@ -406,11 +434,20 @@
     $(document).ready(function () {
         $("#refresh-btn").click(function () {
             $(this).button('loading').delay(500).queue(function () {
-                alert("刷新成功!");
+
+                var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
+                var pname = decodeURI(provinceidc[1]);
+                var stime = $("#firstDate").val();
+                var etime = $("#lastDate").val();
+
+                getOneProvinceMapData(pname, stime, etime);
+
                 $(this).button('reset');
                 $(this).dequeue();
             });
         });
+
+        $('#second-page').css('display', 'none');
     });
 </script>
 
@@ -512,204 +549,197 @@
     var nhChart = echarts.init(document.getElementById('nhbar'));
     var tempChart = echarts.init(document.getElementById('tempbar'));
     var humidChart = echarts.init(document.getElementById('humidbar'));
+    var panelChart = echarts.init(document.getElementById('panelbar'));
 
     var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
     var pname = decodeURI(provinceidc[1]);
+
+    $("#firstDate").val(getFormatDate(-1));
+    $("#lastDate").val(getFormatDate(0));
+
     var stime = $("#firstDate").val();
     var etime = $("#lastDate").val();
 
-    $.ajax({
-        type: "post",
-        url: "getOneProvinceMapData",
-        data: {
-            pname: pname,
-            stime: stime,
-            etime: etime
-        },
-        dataType: "json",
-        success: function (data) {
-            //[1,2,3,4,1,1,1,1,3,2001]: event1, event2,event3, event4, alarm1, alram2, alarm3, alartm4, degree(R:1,Y:2,G:3)，cbid
+    getOneProvinceMapData(pname, stime, etime);
 
-            var obj = eval('(' + data + ')');
-            var list = obj.oplist;
+    //获取事件、告警、评估等级
+    function getOneProvinceMapData(pname, stime, etime){
+        $.ajax({
+            type: "post",
+            url: "getOneProvinceMapData",
+            data: {
+                pname: pname,
+                stime: stime,
+                etime: etime
+            },
+            dataType: "json",
+            success: function (data) {
+                //[1,2,3,4,1,1,1,1,3,2001]: event1, event2,event3, event4, alarm1, alram2, alarm3, alartm4, degree(R:1,Y:2,G:3)，cbid
+                var obj = eval('(' + data + ')');
+                var list = obj.oplist;
 
-            var xdata = [];
-            var eventdata = [];
-            var alarmdata = [];
-            var tempdata = [26, 26, 26, 25.5];
-            var humiddata = [50, 40, 35, 30];
-            var degree = [];
+                var xdata = [];
+                var eventdata = [];
+                var alarmdata = [];
+                var degree = [];
 
-            for (var i = 0; i < list.length; i++) {
-                xdata[i] = list[i][9];
+                for (var i = 0; i < list.length; i++) {
+                    xdata[i] = list[i][9];
 
-                eventdata[i] = parseInt(list[i][0]) + parseInt(list[i][1]) + parseInt(list[i][2]) + parseInt(list[i][3]);
-                alarmdata[i] = parseInt(list[i][4]) + parseInt(list[i][5]) + parseInt(list[i][6]) + parseInt(list[i][7]);
+                    eventdata[i] = parseInt(list[i][0]) + parseInt(list[i][1]) + parseInt(list[i][2]) + parseInt(list[i][3]);
+                    alarmdata[i] = parseInt(list[i][4]) + parseInt(list[i][5]) + parseInt(list[i][6]) + parseInt(list[i][7]);
 
-                degree[i] = list[i][8];
+                    degree[i] = list[i][8];
+                }
+
+                // 指定事件的图表的配置项和数据
+                var eventoption = {
+                    title: {
+                        text: '事件',
+                        subtext: '威胁分布',
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: '#3EA3D8'
+                            }
+                        },
+                        data: eventdata
+                    }]
+                };
+
+                // 指定告警的图表的配置项和数据
+                var alarmoption = {
+                    title: {
+                        text: '告警',
+                        subtext: '风险',
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        data: alarmdata
+                    }]
+                };
+
+                // 指定图表的配置项和数据
+                var nxoption = {
+                    title: {
+                        text: '能效',
+                        subtext: 'PUE统计',
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: '#44764B'
+                            }
+                        },
+                        data: [0, 0, 0, 0]
+                    }]
+                };
+
+                // 指定图表的配置项和数据
+                var nhoption = {
+                    title: {
+                        text: '能耗',
+                        subtext: '用电统计',
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '个数',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: '#9F842F'
+                            }
+                        },
+                        data: [0, 0, 0, 0]
+                    }]
+                };
+
+                //指定仪表盘的图表的配置项和数据
+                var paneloption = {
+                    tooltip : {
+                        formatter: "{a} <br/>{b} : {c}%"
+                    },
+                    series: [
+                        {
+                            name: '',
+                            type: 'gauge',
+                            min: 1,
+                            max: 3,
+                            detail: {formatter:'{value}'},
+                            data: [{value: degree[0], name: '评估等级'}]
+                        }
+                    ]
+                };
+
+                //指定评估结果块的数据
+                for(var i = 0; i < xdata.length; i++){
+                    if(degree[i] == '1'){
+                        $("#r1t"+i).attr("src","/img/icon/GOOD.png");
+                    }
+                    if(degree[i] == '2'){
+                        $("#r1t"+i).attr("src","/img/icon/NORMAL.png");
+                    }
+                    if(degree[i] == '3'){
+                        $("#r1t"+i).attr("src","/img/icon/BAD.png");
+                    }
+
+                    document.getElementById("r2t"+i).innerHTML = xdata[i];
+                }
+
+                // 使用刚指定的配置项和数据显示图表。
+                eventChart.setOption(eventoption);
+                alarmChart.setOption(alarmoption);
+                nxChart.setOption(nxoption);
+                nhChart.setOption(nhoption);
+                panelChart.setOption(paneloption);
             }
+        });
+    }
 
-            // 指定图表的配置项和数据
-            var eventoption = {
-                title: {
-                    text: '事件',
-                    subtext: '威胁分布',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '个数',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            color: '#3EA3D8'
-                        }
-                    },
-                    data: eventdata
-                }]
-            };
+    //获取当前日期前adddaycount天时间
+    function getFormatDate(AddDayCount) {
+        var dd = new Date();
+        dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+        var y = dd.getFullYear();
+        var m = dd.getMonth()+1;//获取当前月份的日期
+        var d = dd.getDate();
+        var h = dd.getHours();
+        var minute = dd.getMinutes();
+        var s = dd.getSeconds();
 
-            // 指定图表的配置项和数据
-            var alarmoption = {
-                title: {
-                    text: '告警',
-                    subtext: '风险',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '个数',
-                    type: 'bar',
-                    data: alarmdata
-                }]
-            };
+        var seperator1 = "-";
+        var seperator2 = ":";
 
-            // 指定图表的配置项和数据
-            var nxoption = {
-                title: {
-                    text: '能效',
-                    subtext: 'PUE统计',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '个数',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            color: '#44764B'
-                        }
-                    },
-                    data: [0, 0, 0, 0]
-                }]
-            };
-
-            // 指定图表的配置项和数据
-            var nhoption = {
-                title: {
-                    text: '能耗',
-                    subtext: '用电统计',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '个数',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            color: '#9F842F'
-                        }
-                    },
-                    data: [0, 0, 0, 0]
-                }]
-            };
-
-            var tempoption = {
-                title: {
-                    text: '温度',
-                    subtext: '温度监测',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '数值',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            color: '#3EA3D8'
-                        }
-                    },
-                    data: tempdata
-                }]
-            };
-
-            var humidoption = {
-                title: {
-                    text: '湿度',
-                    subtext: '湿度监测',
-                },
-                tooltip: {},
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [{
-                    name: '数值',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            color: '#3EA3D8'
-                        }
-                    },
-                    data: humiddata
-                }]
-            };
-
-            // 使用刚指定的配置项和数据显示图表。
-            eventChart.setOption(eventoption);
-            alarmChart.setOption(alarmoption);
-            nxChart.setOption(nxoption);
-            nhChart.setOption(nhoption);
-            tempChart.setOption(tempoption);
-            humidChart.setOption(humidoption);
-
-            /* // 显示评估等级
-             var table = $("#assesstable");
-
-             table.empty();
-             for (var i = 0; i < degree.length; i++) {
-                 if (degree[i] == 1)
-                     table.append('<tr><td><img src="/img/icon/BAD.jpeg"/></td></tr>');
-                 if (degree[i] == 2)
-                     table.append('<tr><td><img src="/img/icon/NORMAL.jpg"/></td></tr>');
-                 if (degree[i] == 3)
-                     table.append('<tr><td><img src="/img/icon/GOOD.jpeg"/></td></tr>');
-             }*/
-
-        }
-    });
-
-    //点击某个柱状图，进入该分行的页面
-    eventChart.on('click', function () {
-        $('#second-page').css('display', 'block');
-        $('#first-page').css('display', 'none');
-
-    });
+        var currentdate = y + seperator1 + m + seperator1 + d
+            + " " + h + seperator2 + minute
+            + seperator2 + s;
+        return currentdate;
+    }
 
 </script>
 
@@ -731,11 +761,9 @@
 
     $("#firstDate").change(function () {
         $('.firstDate').datetimepicker('setStartDate', $(this).val());
-        alert("starttime:" + $(this).val());
     });
     $("#lastDate").change(function () {
         $('.lastDate').datetimepicker('setEndDate', $(this).val());
-        alert("endtime:" + $(this).val());
     });
 </script>
 
@@ -799,28 +827,50 @@
     }
 </script>
 
-<script type="text/javascript">
-
-    function asyncRequest() {
-        $.ajax({
-            type: "post",
-            url: "getAlert",
-            data: {},
-            dataType: "json",
-            success: function (data) {
-                alert(data);
-            }
-        });
+<!-- 上传图片功能 -->
+<script>
+    // 上传图片前预览
+    function previewImage(file) {
+        var MAXWIDTH = 1200;  // 最大图片宽度
+        var MAXHEIGHT = 360;  // 最大图片高度
+        if (file.files && file.files[0]) {
+            var img = document.getElementById('preview');
+            img.onload = function () {
+                var rect = getZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                img.width = rect.width;
+                img.height = rect.height;
+            };
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                img.src = evt.target.result;
+            };
+            reader.readAsDataURL(file.files[0]);
+        } else {
+            //兼容IE
+            file.select();
+            var src = document.selection.createRange().text;
+            var img = document.getElementById('preview');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+        }
     }
 
-    var intervalTimer = window.setInterval(asyncRequest, 1500000);
-
-</script>
-
-<script type="text/javascript">
-    function openPowerImg() {
-        alert("请选择一张图片");
-
+    // 获取缩放的尺寸
+    function getZoomParam(maxWidth, maxHeight, width, height) {
+        var param = {top: 0, left: 0, width: width, height: height};
+        if (width > maxWidth || height > maxHeight) {
+            rateWidth = width / maxWidth;
+            rateHeight = height / maxHeight;
+            if (rateWidth > rateHeight) {
+                param.width = maxWidth;
+                param.height = Math.round(height / rateWidth);
+            } else {
+                param.width = Math.round(width / rateHeight);
+                param.height = maxHeight;
+            }
+        }
+        param.left = Math.round((maxWidth - param.width) / 2);
+        param.top = Math.round((maxHeight - param.height) / 2);
+        return param;
     }
 </script>
 

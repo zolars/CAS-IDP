@@ -23,7 +23,6 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- 持久化类所对应的映射文件 -->
-        <mapping class="hibernatePOJO.AssessmentSetting"/>
         <mapping class="hibernatePOJO.AssessRecord"/>
         <mapping class="hibernatePOJO.BasicSetting"/>
         <mapping class="hibernatePOJO.CityBank"/>
@@ -31,6 +30,7 @@
         <mapping class="hibernatePOJO.Devices"/>
         <mapping class="hibernatePOJO.DeviceAlarmUser"/>
         <mapping class="hibernatePOJO.DevicesThreshold"/>
+        <mapping class="hibernatePOJO.DevicesStandard"/>
         <mapping class="hibernatePOJO.Dictionary"/>
         <mapping class="hibernatePOJO.DictionaryPlus"/>
         <mapping class="hibernatePOJO.DictionaryCtrl"/>
@@ -51,7 +51,6 @@
         <mapping class="hibernatePOJO.UserRoles"/>
         <mapping class="hibernatePOJO.OrgnizationStructure"/>
 
-        <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
         <mapping resource="hibernatePOJO/BasicSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>
@@ -59,6 +58,7 @@
         <mapping resource="hibernatePOJO/Devices.hbm.xml"/>
         <mapping resource="hibernatePOJO/DeviceAlarmUser.hbm.xml"/>
         <mapping resource="hibernatePOJO/DevicesThreshold.hbm.xml"/>
+        <mapping resource="hibernatePOJO/DevicesStandard.hbm.xml"/>
         <mapping resource="hibernatePOJO/Dictionary.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryPlus.hbm.xml"/>
         <mapping resource="hibernatePOJO/DictionaryCtrl.hbm.xml"/>

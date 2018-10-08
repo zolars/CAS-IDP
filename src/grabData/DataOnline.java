@@ -24,6 +24,9 @@ public class DataOnline {
     private static Map<String,Map<String,Float>> onlineDataMap=new HashMap<>();
     //存各个监测点的暂态连接
     private static Map<String,Channel> transientChannelMap=new HashMap<>();
+    //存各个监测点的越限连接
+    private static Map<String,Channel> overlimitChannelMap=new HashMap<>();
+
 
     public static void tempSave(String did, Map<String, Float> dataset) {
         onlineDataStrings.put(did,JSON.toJSONString(dataset));//存成字符串
@@ -748,6 +751,10 @@ public class DataOnline {
 
     public static Map<String, Channel> getTransientChannelMap() {
         return transientChannelMap;
+    }
+
+    public static Map<String, Channel> getOverLimitChannelMap() {
+        return overlimitChannelMap;
     }
 
     public static List<Dictionary> getDic() {

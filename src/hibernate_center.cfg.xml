@@ -7,7 +7,7 @@
         <!-- 指定连接数据库的驱动程序 -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <!-- 指定连接数据库的URL -->
-        <property name="connection.url">jdbc:mysql://localhost:3306/Test</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/Test?useUnicode=true&amp;characterEncoding=UTF8</property>
         <!-- 指定数据库使用的SQL方言 -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- 指定连接数据库的用户名，这里远程集中库允许连接的用户名 -->
@@ -22,7 +22,6 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- 持久化类所对应的映射文件 -->
-        <mapping class="hibernatePOJO.AssessmentSetting"/>
         <mapping class="hibernatePOJO.AssessRecord"/>
         <mapping class="hibernatePOJO.BasicSetting"/>
         <mapping class="hibernatePOJO.CityBank"/>
@@ -50,7 +49,6 @@
         <mapping class="hibernatePOJO.UserRoles"/>
         <mapping class="hibernatePOJO.OrgnizationStructure"/>
 
-        <mapping resource="hibernatePOJO/AssessmentSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
         <mapping resource="hibernatePOJO/BasicSetting.hbm.xml"/>
         <mapping resource="hibernatePOJO/CityBank.hbm.xml"/>

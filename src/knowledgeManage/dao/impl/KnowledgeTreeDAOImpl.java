@@ -72,12 +72,11 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
     public boolean uploadKnowledgeNode(String kid, String content){
         HBSessionCenterDaoImpl hbsessioncenterDao = new HBSessionCenterDaoImpl();
         Boolean rt = false;
-        Knowledge kl = getKnowledgeNode(kid);
-        kl.setContent(content);
+
         String hql = "update Knowledge kl set kl.content='" + content +"' where kl.kid='" + kid + "'";
 
         //远程数据库的hbsession
-        rt = hbsessioncenterDao.update(kl, hql);
+        rt = hbsessioncenterDao.update(hql);
         return rt;
     }
 
@@ -101,7 +100,6 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
 
             else return false;
         }
-
     }
 
     /*

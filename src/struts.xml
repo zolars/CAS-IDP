@@ -205,6 +205,31 @@
              </result>
          </action>
 
+         <!--wsy2018.9.26 -->
+         <action name="getHarmonicVoltage" class="reportChart.action.getHarmonicVoltage">
+             <!--getHarmonicVoltage -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+         <!--wsy2018.9.27 -->
+         <action name="getHarmonicCurrent" class="reportChart.action.getHarmonicCurrent">
+             <!--getHarmonicCurrent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+         <!--wsy2018.9.29 -->
+         <action name="getHVCrate" class="reportChart.action.getHVCrate">
+             <!--getHVCrate -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="addDeviceAlarmUser" class="deviceManage.action.addDeviceAlarmUserAction">
              <!--addDeviceAlarmUser -->
              <result name="failure">/failure.jsp</result>
@@ -445,6 +470,13 @@
                  <param name="root">result</param>
              </result>
          </action>
+         <!--获取浪涌塌陷数据-->
+         <action name="getHisDataLyTx" class="historyData.action.getHisLyTxAction">
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
          <!--获取历史数据结束-->
 
          <action name="getAllIDPDevice" class="deviceManage.action.getAllIDPDeviceAction">
@@ -519,6 +551,14 @@
              </result>
          </action>
 
+         <action name="getCtrlEvent" class="efficiencyAnalysis.action.getCtrlEventAction">
+             <!--getCtrlEvent -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="getEnvironmentEvent" class="efficiencyAnalysis.action.getEnvironmentEventAction">
              <!--getEnvironmentEvent -->
              <result name="failure">/failure.jsp</result>
@@ -545,6 +585,14 @@
 
          <action name="getDetailPowerEventlytx" class="efficiencyAnalysis.action.getDetailPowerEventlytxAction">
              <!--getDetailPowerEventlytx -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="getOneCtrlData" class="efficiencyAnalysis.action.getOneCtrlDataAction">
+             <!--getOneCtrlData -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>
@@ -607,14 +655,6 @@
              </result>
          </action>
 
-         <action name="getAlert" class="sms.getAlert">
-             <!--getAlert -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
          <action name="addDeviceAlarmInfo" class="deviceManage.action.addDeviceAlarmPreContentAction">
              <!--addDeviceAlarmInfo -->
              <result name="failure">/failure.jsp</result>
@@ -663,6 +703,14 @@
              </result>
          </action>
 
+         <action name="getOneComputerroomMapData" class="efficiencyAnalysis.action.getOneComputerroomMapDataAction">
+             <!--getOneComputerroomMapData -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="plantformMessage" class="smsplantform.webservice">
              <!--plantformMessage -->
              <result name="failure">/failure.jsp</result>
@@ -695,8 +743,25 @@
              </result>
          </action>
 
+
+         <action name="setAlarmUser" class="systemMng.action.setAlarmUserAction">
+             <!--setAlarmUser -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="addOrgnizationTree" class="systemMng.action.addOrgnizationTreeAction">
              <!--addOrgnizationTree -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
+         <action name="uploadThresholdExcelToDB" class="systemMng.action.uploadThresholdExcelToDBAction">
+             <!--uploadThresholdExcelToDB -->
              <result name="failure">/failure.jsp</result>
              <result name="success" type="json">
                  <param name="root">result</param>

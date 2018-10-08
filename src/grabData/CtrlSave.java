@@ -1,9 +1,9 @@
 package grabData;
 
-import com.alibaba.fastjson.JSON;
 import hibernatePOJO.*;
-import io.netty.channel.Channel;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -18,14 +18,10 @@ public class CtrlSave {
         //当前时间、检测设备id、maxID
         Timestamp currenttime = new Timestamp(System.currentTimeMillis());
         var.setTime(currenttime);
-
         var.setDid(did);
-
-        var.setEventType(eventType);
-
-        var.setDescription(dic.get(eventType).getDescription());
-
-        var.setAlarm(dic.get(eventType).getForFalse());
+        var.setSubtype(eventType);
+        //var.setDiscription(dic.get(eventType).getDescription());
+        var.setValue(dic.get(eventType).getForFalse());
     }
 
     public static List<DictionaryCtrl> getDic() {

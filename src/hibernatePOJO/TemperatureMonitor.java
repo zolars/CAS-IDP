@@ -55,11 +55,11 @@ public class TemperatureMonitor {
 
     @Basic
     @Column(name = "humidity", nullable = true, precision = 2)
-    public float getHumidity() {
+    public Float getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(float humidity) {
+    public void setHumidity(Float humidity) {
         this.humidity = humidity;
     }
 

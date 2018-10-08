@@ -18,7 +18,7 @@
             <column name="temperature" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="humidity">
-            <column name="humidity" sql-type="float(255,0)" precision="255" scale="2" not-null="true"/>
+            <column name="humidity" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

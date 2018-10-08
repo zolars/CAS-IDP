@@ -4,21 +4,14 @@ import java.util.List;
 
 public class SmsAlarm {
 
-    private static String phone;
-    private static String msg;
-
-    public static void SmsAlarm() {
-    }
-
     public static void excuteSmsAlarm(String phone, String msg) {
 
         List<String> comlist = Sms.getComPort();
 
         for(int i = 0; i < comlist.size(); i++){
-            System.out.println("正在通过端口"+comlist.get(i)+"发送短信");
+            System.out.println("正在通过端口"+comlist.get(i)+"向手机号为"+phone+"的用户发送短信，短信内容为："+msg);
             String comstr = comlist.get(i);
             Sms.sendSms(phone, msg, comstr);
-            // Sms.sendSms("18511587339", "test18511587339", comstr);
         }
     }
 }

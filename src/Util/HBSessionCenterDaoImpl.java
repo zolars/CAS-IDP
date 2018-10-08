@@ -16,19 +16,23 @@ public class HBSessionCenterDaoImpl implements HBSessionCenterDao{
     private Transaction transaction;
 
     private void init() {
-        //创建配置对象
-        Configuration cfg = new Configuration().configure("/hibernate_center.cfg.xml");
-        //Configuration cfg = new Configuration().configure();
-        //创建服务注册对象
-        StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                .applySettings(cfg.getProperties()).build();
+        try{
+            //创建配置对象
+            Configuration cfg = new Configuration().configure("/hibernate_center.cfg.xml");
+            //Configuration cfg = new Configuration().configure();
+            //创建服务注册对象
+            StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                    .applySettings(cfg.getProperties()).build();
 
-        //创建会话工厂对象
-        sessionFactory = cfg.buildSessionFactory(serviceRegistry);
-        //会话对象
-        session =sessionFactory.openSession();
-        //开启事务
-        transaction = session.beginTransaction();
+            //创建会话工厂对象
+            sessionFactory = cfg.buildSessionFactory(serviceRegistry);
+            //会话对象
+            session =sessionFactory.openSession();
+            //开启事务
+            transaction = session.beginTransaction();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -46,38 +50,54 @@ public class HBSessionCenterDaoImpl implements HBSessionCenterDao{
 
     @Override
     public List search(String hql) {
-        //查询不用事务管理
-        Session session = null;
-        session = getSession();
         List alist = null;
-        alist = session.createQuery(hql).list();
-        session.close();
-        return alist;
+        try {
+            //查询不用事务管理
+            Session session = null;
+            session = getSession();
+            alist = session.createQuery(hql).list();
+            session.close();
+            return alist;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return alist;
+        }
     }
 
     @Override
     public List searchWithNum(String hql, int num) {
-        //查询不用事务管理
-        Session session = null;
-        session = getSession();
-        Query query = session.createQuery(hql);
-        query.setMaxResults(num);
-        List alist = query.list();
-        session.close();
-        return alist;
+        List alist = null;
+        try {
+            //查询不用事务管理
+            Session session = null;
+            session = getSession();
+            Query query = session.createQuery(hql);
+            query.setMaxResults(num);
+            alist = query.list();
+            session.close();
+            return alist;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return alist;
+        }
     }
 
     @Override
     public Object getFirst(String hql) {
-        //查询不用事务管理
-        Session session = null;
-        session = getSession();
-        List alist = null;
         Object aobject = null;
-        alist = session.createQuery(hql).list();
-        aobject = alist.get(0);
-        session.close();
-        return aobject;
+        try{
+            //查询不用事务管理
+            Session session = null;
+            session = getSession();
+            List alist = null;
+            alist = session.createQuery(hql).list();
+            aobject = alist.get(0);
+            session.close();
+            return aobject;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return aobject;
+        }
     }
 
     //使用HQL语句删除数据
@@ -117,7 +137,7 @@ public class HBSessionCenterDaoImpl implements HBSessionCenterDao{
     }
 
     //使用HQL语句更新数据
-    public boolean update(Object obj, String hql) {
+    public boolean update(String hql) {
         try {
             Session session = null;
             session = getSession();

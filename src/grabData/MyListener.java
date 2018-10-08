@@ -57,7 +57,12 @@ public class MyListener implements ServletContextListener {
                                 new TransientClient(c.getiPaddress(),
                                         Integer.parseInt(c.getExtra()),
                                         c.getDid()).start();
-
+                                System.out.println("创建取越限事件连接 " + "监测点(" + c.getDid()
+                                        + ") " + c.getiPaddress() + ":"
+                                        + c.getExtra()); //越限事件的端口是extra
+                                new OverLimitClient(c.getiPaddress(),
+                                        Integer.parseInt(c.getExtra()),
+                                        c.getDid()).start();
                                 System.out.println("创建写阈值数据连接 " + "监测点(" + c.getDid()
                                         + ") " + c.getiPaddress() + ":"
                                         + c.getPort());
@@ -96,7 +101,6 @@ public class MyListener implements ServletContextListener {
                     try {
                         Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
                         // 设置任务，每5s存一次实时数据
-                        // 设置任务，检测告警（越线）事件
                         System.out.println(listbase.get(0).getOnlineinterval());
                         Trigger trigger1 = newTrigger()
                                 .withIdentity("DataOnlineSaveTrigger",
@@ -110,7 +114,7 @@ public class MyListener implements ServletContextListener {
                                 "DataOnlineSaveJob", "DataOnlineSaveGroup").build();
                         scheduler.scheduleJob(job1, trigger1);
 
-                        // 设置任务，每30分钟发一次暂态事件请求
+                        // 设置任务，根据设定每多少分钟发一次暂态事件请求
                         TransientUtil.setInterval(listbase.get(0).getThansentinterval());
                         Trigger trigger2 = newTrigger()
                                 .withIdentity("transientRequestTrigger",
@@ -126,7 +130,7 @@ public class MyListener implements ServletContextListener {
                                 .build();
                         scheduler.scheduleJob(job2, trigger2);
 
-                        // 设置任务，每1h上传一次本地事件数据到远程数据库
+                        // 设置任务，根据设定每多少小时上传一次本地事件数据到远程数据库
                         Trigger trigger3 = newTrigger()
                                 .withIdentity("uploadDataTrigger",
                                         "uploadDataTriggerGroup")
@@ -159,7 +163,7 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("alarmModelTrigger",
                                         "alarmModelTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInMinutes(30)
+                                .withSchedule(simpleSchedule().withIntervalInMinutes(15)
                                         .repeatForever())
                                 .build();
                         JobDetail job5 = newJob(alarmModelJob.class)
@@ -167,13 +171,12 @@ public class MyListener implements ServletContextListener {
                                 .build();
                         scheduler.scheduleJob(job5, trigger5);
 
-                        // 设置任务，每10分钟存一次温度实时数据
+                        // 设置任务，每15s存一次温度实时数据
                         Trigger trigger6 = newTrigger()
                                 .withIdentity("TemperatureSaveTrigger",
                                         "TemperatureSaveTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInMinutes(listbase.get(0)
-                                                .getOnlineinterval())
+                                .withSchedule(simpleSchedule().withIntervalInSeconds(15)
                                         .repeatForever())
                                 .build();
                         JobDetail job6 = newJob(TemperatureSaveJob.class).withIdentity(
@@ -199,6 +202,22 @@ public class MyListener implements ServletContextListener {
                         JobDetail job8 = newJob(CtrlSaveJob.class).withIdentity(
                                 "ThresholdSaveJob", "ThresholdSaveGroup").build();
                         scheduler.scheduleJob(job8, trigger8);
+
+                        // 设置任务，根据设定每多少分钟发一次越线事件请求
+                        OverLimitUtil.setInterval(listbase.get(0).getThansentinterval());
+                        Trigger trigger9 = newTrigger()
+                                .withIdentity("OverLimitRequestTrigger",
+                                        "OverLimitRequestTriggerGroup")
+                                .startNow()
+                                .withSchedule(simpleSchedule()
+                                        .withIntervalInMinutes(listbase.get(0).getThansentinterval())
+                                        .repeatForever())
+                                .build();
+                        JobDetail job9 = newJob(OverLimitRequestJob.class)
+                                .withIdentity("OverLimitRequestJob",
+                                        "OverLimitRequestJobGroup")
+                                .build();
+                        scheduler.scheduleJob(job9, trigger9);
 
                         ///////////////////////////
                         scheduler.start();

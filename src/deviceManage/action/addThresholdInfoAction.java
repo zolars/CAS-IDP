@@ -39,7 +39,7 @@ public class addThresholdInfoAction extends ActionSupport {
             String cellval = request.getParameter("cellval");
             String floorval = request.getParameter("floorval");
             String ismark = request.getParameter("ismark");
-            String alarmcontent = request.getParameter("alarmcontent");
+            String level = request.getParameter("level");
 
             DeviceDAO dao = new DeviceDAOImpl();
 
@@ -49,8 +49,9 @@ public class addThresholdInfoAction extends ActionSupport {
             Double dfloorval = Double.valueOf(floorval);
             Integer iismark = Integer.valueOf(ismark);
             String did = dao.getDeviceIDByName(dname);
+            Integer ilevel = Integer.valueOf(level);
 
-            Boolean rt = dao.addThresholdInfo(did,maxdtid+1, name, type, unit, dstandval, dcellval, dfloorval, iismark, alarmcontent);
+            Boolean rt = dao.addThresholdInfo(did,maxdtid+1, name, type, unit, dstandval, dcellval, dfloorval, iismark, ilevel);
             JSONObject jsonObject = new JSONObject();
 
             if(rt)

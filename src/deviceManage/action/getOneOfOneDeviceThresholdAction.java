@@ -33,7 +33,6 @@ public class getOneOfOneDeviceThresholdAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
             String dtidstr = request.getParameter("dtid");
             Integer dtid = Integer.parseInt(dtidstr);
 

@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
-import hibernatePOJO.EventPower;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +26,7 @@ public class getPowerEventAction extends ActionSupport {
     }
 
 
-    /* 根据测量地点（市行名称）获取设备事件
+    /* 根据测量地点（市行名称）获取电能质量事件
      */
     public String execute() throws Exception {
         try {//获取数据
@@ -35,28 +34,29 @@ public class getPowerEventAction extends ActionSupport {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String cbname = request.getParameter("cbname");
+            String cbnamestr = request.getParameter("cbname");
             String starttime = request.getParameter("stime");
             String endtime = request.getParameter("etime");
             String priortystr = request.getParameter("priortylist");
+            String cbnamelist[] = cbnamestr.split(",");
             String priortylist[] = priortystr.split(",");
 
             EventDAO dao = new EventDAOImpl();
-
             List pedata = new ArrayList();
 
-            if((starttime.equals(" ") && endtime.equals(" ")) || (starttime == null && endtime == null))
-                pedata = dao.getLocalLastPowerEvent(cbname);
-
-            else
-                pedata = dao.getLocalAllPowerEvent(cbname, starttime, endtime);
+            for(int i = 0; i <cbnamelist.length; i++){
+                if((starttime.equals(" ") && endtime.equals(" ")) || (starttime == null && endtime == null))
+                    pedata.addAll(dao.getLocalLastPowerEvent(cbnamelist[i]));
+                else
+                    pedata.addAll(dao.getLocalAllPowerEvent(cbnamelist[i], starttime, endtime));
+            }
 
             for (int i = 0 ; i < pedata.size(); i++) {
                 String ep = (String)pedata.get(i);
                 List<String> eplist = java.util.Arrays.asList(ep.split(","));
 
                 String cid= (String)eplist.get(6);
-                String cidn = cid.substring(1, 2);
+                String cidn = cid.substring(1, cid.length() - 1);
 
                 Boolean has = false;
 
@@ -65,8 +65,7 @@ public class getPowerEventAction extends ActionSupport {
                         has = true;
                 }
 
-                if(!has)
-                    pedata.remove(i);
+                if(!has) pedata.remove(i);
             }
 
             JSONObject jsonObject = new JSONObject();

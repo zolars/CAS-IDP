@@ -123,52 +123,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- Content -->
         <section id="content" class="container">
 
-            <div class="block-area">
-
-                <div class="row">
-                    <table>
-                        <tr>
-                            红色黄色等级阈值
-                            <select class="form-control location-select-item" id="red_yellow" name="red_yellow">
-                                <option value="90">90</option>
-                                <option value="80">80</option>
-                                <option value="70">70</option>
-                                <option value="60">60</option>
-                                <option value="50">50</option>
-                            </select>
-                        </tr>
-
-                        <tr></tr><tr></tr><tr></tr>
-
-                        <tr>
-                            黄色绿色等级阈值
-                            <select class="form-control location-select-item" id="yellow_green" name="yellow_green">
-                                <option value="60">60</option>
-                                <option value="50">50</option>
-                                <option value="40">40</option>
-                                <option value="30">30</option>
-                                <option value="20">20</option>
-                                <option value="10">10</option>
-                            </select>
-                        </tr>
-
-                        <tr>
-                            <td>时间：一天内</td>
-                        </tr>
-
-                    </table>
-
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-alt"
-                                onClick="setAssessment()">确定
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
-
-
         </section>
     </section>
 
@@ -364,29 +318,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
 
             if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
-        }
-    </script>
-
-    <!-- 设定评估值-->
-    <script type="text/javascript">
-        function setAssessment(){
-
-            var red_yellow = $("#red_yellow").val();
-            var yellow_green = $("#yellow_green").val();
-
-            $.ajax({
-                type: "post",
-                url: "setAssessmentInfo",
-                data: {
-                    red_yellow: red_yellow,
-                    yellow_green: yellow_green,
-                    time: 1
-                },
-                dataType: "json",
-                success: function (data) {
-                    alert(data);
-                }
-            });
         }
     </script>
 

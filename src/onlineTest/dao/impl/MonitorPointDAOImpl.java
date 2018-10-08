@@ -27,7 +27,7 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
                 "FROM Computerroom where rid = '" + computerroom+ "'");
 
         String didset = cp.getDidset();
-        String did[] = didset.split(",");
+        String did[] = didset.split("，");
 
         for(int i= 0; i < did.length; i++){
             Devices dv = (Devices)hbsessionDao.getFirst(

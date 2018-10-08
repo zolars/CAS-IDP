@@ -4,13 +4,15 @@ import java.util.Objects;
 
 public class DevicesThreshold {
     private int dtid;
+    private String type;
     private String did;
     private String classify;
     private String unit;
     private Double cellval;
     private Double floorval;
     private Integer aid;
-    private Integer cid;
+    private Integer level;
+    private Integer ismark;
 
     public int getDtid() {
         return dtid;
@@ -18,6 +20,14 @@ public class DevicesThreshold {
 
     public void setDtid(int dtid) {
         this.dtid = dtid;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDid() {
@@ -68,12 +78,20 @@ public class DevicesThreshold {
         this.aid = aid;
     }
 
-    public Integer getCid() {
-        return cid;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setCid(Integer cid) {
-        this.cid = cid;
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getIsmark() {
+        return ismark;
+    }
+
+    public void setIsmark(Integer ismark) {
+        this.ismark = ismark;
     }
 
     @Override
@@ -82,18 +100,20 @@ public class DevicesThreshold {
         if (o == null || getClass() != o.getClass()) return false;
         DevicesThreshold that = (DevicesThreshold) o;
         return dtid == that.dtid &&
+                Objects.equals(type, that.type) &&
                 Objects.equals(did, that.did) &&
                 Objects.equals(classify, that.classify) &&
                 Objects.equals(unit, that.unit) &&
                 Objects.equals(cellval, that.cellval) &&
                 Objects.equals(floorval, that.floorval) &&
                 Objects.equals(aid, that.aid) &&
-                Objects.equals(cid, that.cid);
+                Objects.equals(level, that.level) &&
+                Objects.equals(ismark, that.ismark);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(dtid, did, classify, unit, cellval, floorval, aid, cid);
+        return Objects.hash(dtid, type, did, classify, unit, cellval, floorval, aid, level, ismark);
     }
 }

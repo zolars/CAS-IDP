@@ -32,22 +32,41 @@ public class getDetailPowerEventsxbphAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            String cbname = request.getParameter("cbname");
+            String cbnamestr = request.getParameter("cbname");
             String starttime = request.getParameter("stime");
             String endtime = request.getParameter("etime");
+            String priortystr = request.getParameter("priortylist");
+            String cbnamelist[] = cbnamestr.split(",");
+            String priortylist[] = priortystr.split(",");
 
             EventDAO dao = new EventDAOImpl();
+            List pedata = new ArrayList();
 
-            List<EventPower> pedata = new ArrayList();
+            for(int i = 0; i <cbnamelist.length; i++) {
+                if ((starttime == null && endtime == null) || (starttime.equals(" ") && endtime.equals(" ")))
+                    pedata.addAll(dao.getLocalLastDetailPowerEventsxbph(cbnamelist[i]));
+                else
+                    pedata.addAll(dao.getLocalAllDetailPowerEventsxbph(cbnamelist[i], starttime, endtime));
+            }
 
-            if((starttime == null && endtime == null)||(starttime.equals(" ") && endtime.equals(" ")))
-                pedata = dao.getLocalLastDetailPowerEventsxbph(cbname);
+            for (int i = 0 ; i < pedata.size(); i++) {
+                String ep = (String)pedata.get(i);
+                List<String> eplist = java.util.Arrays.asList(ep.split(","));
 
-            else
-                pedata = dao.getLocalAllDetailPowerEventsxbph(cbname, starttime, endtime);
+                String cid= (String)eplist.get(6);
+                String cidn = cid.substring(1, cid.length() - 1);
+
+                Boolean has = false;
+
+                for (int j = 0 ; j < priortylist.length; j++) {
+                    if (cidn.equals(priortylist[j]))
+                        has = true;
+                }
+
+                if(!has) pedata.remove(i);
+            }
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allpelist", pedata);

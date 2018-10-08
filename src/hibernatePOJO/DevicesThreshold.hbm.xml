@@ -8,26 +8,32 @@
         <id name="dtid">
             <column name="dtid" sql-type="int(11)"/>
         </id>
+        <property name="type">
+            <column name="type" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
         <property name="did">
             <column name="did" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="classify">
-            <column name="classify" sql-type="varchar(255)"/>
+            <column name="classify" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="unit">
             <column name="unit" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="cellval">
-            <column name="cellval" sql-type="float" precision="-1"/>
+            <column name="cellval" sql-type="float" precision="-1" not-null="true"/>
         </property>
         <property name="floorval">
-            <column name="floorval" sql-type="float" precision="-1"/>
+            <column name="floorval" sql-type="float" precision="-1" not-null="true"/>
         </property>
         <property name="aid">
-            <column name="aid" sql-type="int(255)"/>
+            <column name="aid" sql-type="int(255)" not-null="true"/>
         </property>
-        <property name="cid">
-            <column name="cid" sql-type="int(11)"/>
+        <property name="level">
+            <column name="level" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="ismark">
+            <column name="ismark" sql-type="int(11)" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

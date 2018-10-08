@@ -17,6 +17,5 @@ public class ThresholdSaveJob implements Job {
     private static HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-
     }
 }

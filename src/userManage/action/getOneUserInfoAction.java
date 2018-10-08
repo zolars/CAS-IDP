@@ -33,7 +33,6 @@ public class getOneUserInfoAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String uidStr = request.getParameter("uid");
@@ -42,7 +41,6 @@ public class getOneUserInfoAction extends ActionSupport {
 
             UserDAO dao = new UserDAOImpl();
             User user = dao.getOneUserInfo(uid);
-
             UserRoles ur = dao.getUserRolesByUid(uid);
 
             JSONObject jsonObject = new JSONObject();

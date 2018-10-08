@@ -17,7 +17,7 @@ public class TransientUtil {
     private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static String code="0001";
     private static String checkCode="wizpower";
-    private static int interval=30;//默认一次取30分钟内的暂态事件
+    private static int interval = 30;//默认一次取30分钟内的暂态事件
 
     /*
       根据请求体创建请求帧，返回类型为List,
@@ -74,7 +74,7 @@ public class TransientUtil {
         Calendar c=Calendar.getInstance();
         c.setTime(new Date());
         tr.setEndtime(sdf.format(c.getTime()));
-        c.add(Calendar.MINUTE,-interval);//默认减去30分钟
+        c.add(Calendar.MINUTE,- interval); //interval
         tr.setStarttime(sdf.format(c.getTime()));
         return tr;
     }

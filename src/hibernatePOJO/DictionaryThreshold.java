@@ -4,7 +4,8 @@ import java.util.Objects;
 
 public class DictionaryThreshold {
     private int id;
-    private Integer addr;
+    private Integer addr1;
+    private Integer addr2;
     private String description;
     private int functioncode;
 
@@ -16,12 +17,20 @@ public class DictionaryThreshold {
         this.id = id;
     }
 
-    public Integer getAddr() {
-        return addr;
+    public Integer getAddr1() {
+        return addr1;
     }
 
-    public void setAddr(Integer addr) {
-        this.addr = addr;
+    public void setAddr1(Integer addr1) {
+        this.addr1 = addr1;
+    }
+
+    public Integer getAddr2() {
+        return addr2;
+    }
+
+    public void setAddr2(Integer addr2) {
+        this.addr2 = addr2;
     }
 
     public String getDescription() {
@@ -47,13 +56,14 @@ public class DictionaryThreshold {
         DictionaryThreshold that = (DictionaryThreshold) o;
         return id == that.id &&
                 functioncode == that.functioncode &&
-                Objects.equals(addr, that.addr) &&
+                Objects.equals(addr1, that.addr1) &&
+                Objects.equals(addr2, that.addr2) &&
                 Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, addr, description, functioncode);
+        return Objects.hash(id, addr1, addr2, description, functioncode);
     }
 }

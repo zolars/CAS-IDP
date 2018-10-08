@@ -65,7 +65,6 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
             }
             tempBuf.clear();
         }
-
     }
 
     @Override
@@ -73,14 +72,6 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
         //System.out.println("建立连接");
         //把channel存入map,用于发送transientRequest
         DataOnline.getTransientChannelMap().put(this.did, ctx.channel());
-
-         /* ByteBuf sendMsg = ctx.alloc().buffer(8);
-
-      sendMsg.writeBytes(createMsg());
-        // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
-        SocketChannel sc = (SocketChannel) ctx.channel();
-        sc.writeAndFlush(sendMsg);*/
-
     }
 
     @Override
@@ -91,7 +82,7 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void dataResolve(HBSessionDaoImpl hbsessionDao, EventPower e){
-        EventsType et = (EventsType)hbsessionDao.getFirst("FROM EventsType where subtype='"+ e.getSubtype() +"'");
+        EventsType et = (EventsType)hbsessionDao.getFirst("FROM EventsType where subtype='"+ e.getSubtype() + "' and code ='0001'");
         Integer cid = et.getCid();
         e.setDid(did);
         e.setCid(cid);

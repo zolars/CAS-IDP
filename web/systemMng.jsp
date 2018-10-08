@@ -38,8 +38,13 @@
     <style>
         .outer {
             width: 200px;
-            height: 120px;
+            height: 30px;
             position: relative;
+            display: inline-block;
+        }
+
+        .searchButton{
+            display: inline-block;
         }
 
         .searchInput {
@@ -56,6 +61,9 @@
             height: 120px;
             overflow: scroll;
             border: 1px solid #cccccc;
+            z-index: 100000;
+            background: white;
+            color: black;
         }
 
         .tips-item:hover {
@@ -80,6 +88,11 @@
 
 <body id="skin-blur-blue">
 
+<script>
+    var allUserList = null;
+
+</script>
+
 <!--登陆认证拦截-->
 <script src="js/jquery-3.3.1.js"></script>
 <script src="js/jquery.cookie.js"></script>
@@ -95,47 +108,6 @@
     }
 %>
 
-<script type="text/javascript">
-    <!-- 导入限值 model  -->
-        this.init = function() {
-            //模拟上传excel
-            $("#uploadEventBtn").unbind("click").bind("click", function () {
-                $("#uploadEventFile").click();
-            });
-            $("#uploadEventFile").bind("change", function () {
-                $("#uploadEventPath").attr("value", $("#uploadEventFile").val());
-            });
-        }
-
-        //点击上传钮
-        function deviceThresholdupload() {
-            var uploadEventFile = $("#uploadEventFile").val();
-            if (uploadEventFile == '') {
-                alert("请择excel,再上传");
-            } else if (uploadEventFile.lastIndexOf(".xls") < 0) {//可判断以.xls和.xlsx结尾的excel
-                alert("只能上传Excel文件");
-            } else {
-                //var url = "excel/import.do";
-                //var formData = new FormData($('form')[0]);
-                //user.sendAjaxRequest(url, "POST", formData);
-
-                $.ajax({
-                    url : url,
-                    type : type,
-                    data : {
-                        uploadEventFile: uploadEventFile
-                    },
-                    success : function(result) {
-                        alert(result);
-                    }
-                });
-
-            }
-        }
-
-    }
-
-</script>
 
 <script Language="JavaScript" src="js/onlineDataInterface.js"></script>
 
@@ -295,16 +267,16 @@
                                         <table id="rolesinfotable"></table>
 
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                            <button type="button" class="btn-primary"
                                                     onClick="getALLRolesInfomation()">查询
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                            <button type="button" class="btn-success"
                                                     onclick="showAddRolesrModal()">新增
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                            <button type="button" class="btn-danger"
                                                     onClick="deleteRolesInfomation()">删除
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-alt"
+                                            <button type="button" class="btn-default"
                                                     onclick="showUpdateRolesModal()">修改
                                             </button>
                                         </div>
@@ -338,10 +310,10 @@
                                     <div id="roleid" style="display: none"></div>
 
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-alt" onclick="allocateRoles()">
+                                        <button type="button" class="btn-primary" onclick="allocateRoles()">
                                             分配功能
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-alt"
+                                        <button type="button" class="btn-primary"
                                                 onclick="getOneRolesFunctions()">查看角色功能
                                         </button>
                                     </div>
@@ -402,32 +374,18 @@
                         </div>
 
                         <div id="TCP-device" style="display: none">
-                            <label class="t-overflow">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <div id="outer" class="outer">
-                                                        <input id="searchInput" class="searchInput form-control"
-                                                               type="text">
-                                                        <div id="searchTips" class="tips" style="display: none">
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div id="item-devicename"
-                                                         style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">
-                                                        <ul id="device-name-Item">
-                                                        </ul>
-                                                    </div>
-                                                    <button class="btn btn-default" onclick="checkDevice()">查询</button>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                            <div id="outer" class="outer">
+                                <input id="searchInput" class="searchInput form-control"
+                                       type="text">
+                                <div id="searchTips" class="tips" style="display: none">
                                 </div>
-                            </label>
+                            </div>
+                            <button class="btn btn-default searchButton" onclick="checkDevice()">查询</button>
+                            <%--<div id="item-devicename"--%>
+                                 <%--style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">--%>
+                                <%--<ul id="device-name-Item">--%>
+                                <%--</ul>--%>
+                            <%--</div>--%>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="tile">
@@ -440,21 +398,21 @@
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input id="radio-Ethernet" name="radio-Ethernet" type="radio"> 以太网
+                                                        <input id="radio-Ethernet" name="myradio" type="radio"> 以太网
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input id="radio-R5485" name="radio-R5485" type="radio"> R5485
+                                                        <input id="radio-R5485" name="myradio" type="radio"> R5485
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="media">
                                                 <div class="checkbox m-0">
                                                     <label class="t-overflow">
-                                                        <input id="radio-RS232" name="radio-RS232" type="radio"> RS232
+                                                        <input id="radio-RS232" name="myradio" type="radio"> RS232
                                                     </label>
                                                 </div>
                                             </div>
@@ -630,45 +588,16 @@
                                             <button class="btn-danger" onclick="deleteThresholdModal()">删除</button>
                                         </td>
 
-                                       <%-- <form enctype="multipart/form-data" id="batchUpload"  action="/excel/import" method="post" class="form-horizontal">--%>
-                                            <button class="btn-success" id="uploadEventBtn" type="button" >请选择导入文件</button>
-                                            <input type="file" name="file"  style="width:0px;height:0px;" id="uploadEventFile">
-                                            <input id="uploadEventPath"  disabled="disabled"  type="text" placeholder="请选择excel表" style="border: 1px solid #e6e6e6; height: 26px;width: 200px;" />
-                                       <%-- </form>--%>
-                                        <button type="button" class="btn-success"  onclick="deviceThresholdupload()" >导入</button>
+                                        <input type="file" name="请选择导入文件" id="uploadEventFile">
+                                        <button type="button" class="btn-success" onclick="deviceThresholdupload()">导入</button>
 
                                     </tr>
                                 </table>
                             </div>
 
                             <div class="col-md-8">
-                                <table id="threadinfotablehead">
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            <div style="padding-left:30px;">参数名称</div>
-                                        </th>
-                                        <th>
-                                            <div style="padding-left:30px;">参数分类</div>
-                                        </th>
-                                        <th>
-                                            <div style="padding-left:40px;">单位</div>
-                                        </th>
-                                        <th>
-                                            <div style="padding-left:50px;">上限值</div>
-                                        </th>
-                                        <th>
-                                            <div style="padding-left:50px;">下限值</div>
-                                        </th>
-                                        <th>
-                                            <div style="padding-left:50px;">启用标识</div>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                </table>
+                                <table id="threadinfotablehead"></table>
                                 <table id="infotable"></table>
-
-
                             </div>
                         </div>
                         <div id="tridItem2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
@@ -678,46 +607,47 @@
                     </div>
                     <div id="item7" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
 
-                        <script>
-                            function cll(id){
-                                if(id==1){
-                                    document.getElementById("sms-div").style.display = 'block';
-                                    document.getElementById("alert-div").style.display = 'none';
-                                    document.getElementById("plantform-div").style.display = 'none';
-                                }
-                                else if(id==2){
-                                    document.getElementById("sms-div").style.display = 'none';
-                                    document.getElementById("alert-div").style.display = 'block';
-                                    document.getElementById("plantform-div").style.display = 'none';
-                                        }
-                                else if(id==3){
-                                    document.getElementById("sms-div").style.display = 'none';
-                                    document.getElementById("alert-div").style.display = 'none';
-                                    document.getElementById("plantform-div").style.display = 'block';
-                                }
-                            }
-                        </script>
 
-                        <div class="add-user-title">预警方式</div>
-                        <select class="form-control location-select-item" id="alarmtype-select"
-                                name="" onChange="cll(this.value)">
-                            <option value="1">短信</option>
-                            <option value="2">弹窗</option>
-                            <option value="3">平台</option>
-                        </select>
 
-                        <!-- sms div-->
-                        <div id = "sms-div">
+                        <div class="tile">
+                            预警方式<select class="form-control location-select-item" id="alarmtype-select"
+                                    name="alarmtype-select">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                            <div class="listview todo-list sortable">
+                                <div class="media">
+                                    <div class="checkbox m-0">
+                                        <label class="t-overflow">
+                                            <input type="checkbox" id="checkbox-sms-2" name="checkbox-sms-2"> 短信
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="checkbox m-0">
+                                        <label class="t-overflow">
+                                            <input type="checkbox" id="checkbox-alert-2" name="checkbox-alert-2"> 弹窗
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="checkbox m-0">
+                                        <label class="t-overflow">
+                                            <input type="checkbox" id="checkbox-plantform-2" name="checkbox-plantform-2"> 平台
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text">
+                            </div>
+                            <button class="btn-default" onclick="addAlarm()">确认</button>
                         </div>
-                        <!-- sms div end -->
 
-                        <!-- alert div-->
-                        <div id = "alert-div" style="display: none;">
-                        </div>
-                        <!-- alert div end -->
 
                         <!-- plantform div-->
-                        <div id = "plantform-div" style="display: none;">
+                        <div id = "plantform-div">
                             设备名称：<input type="text" id="plantform-dname" class="form-control setting-input">
                             ip地址:<input type="text" id="plantform-ip" class="form-control setting-input">
                             时间：<input type="text" id="plantform-time" class="form-control setting-input">
@@ -731,12 +661,11 @@
                             扩展字段2：<input type="text" id="plantform-ext2" class="form-control setting-input">
                             扩展字段3：<input type="text" id="plantform-ext3" class="form-control setting-input">
 
-                            <button class="btn btn-default" onclick="testOk()">点击测试</button>
+                            <button class="btn btn-default" onclick="testOk()">点击测试短信平台</button>
                         </div>
                         <!-- plantform div end -->
 
-                        <button class="btn btn-default" onclick="addAlarm()">添加</button>
-                        <button class="btn btn-default" onclick="deleterAlarm()">删除</button>
+
 
                     </div>
                     <div id="item8" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
@@ -842,8 +771,7 @@
 
             <div class="add-roles-handle">
                 <button type="submit" class="btn btn-primary" id="add-user-handle" onclick="submitAddUser()">确定</button>
-                <button type="submit" class="btn btn-primary" id="update-user-handle" onclick="submitUpdateUser()">确定
-                </button>
+                <button type="submit" class="btn btn-primary" id="update-user-handle" onclick="submitUpdateUser()">确定</button>
                 <button class="btn btn-default" onclick="hiddenUserModel()">取消</button>
             </div>
         </div>
@@ -880,67 +808,32 @@
             <div class="add-threshold-one-line">
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数名称</div>
-                    <select class="form-control location-select-item" id="thresholdname" name="thresholdname"
-                            onclick="">
-                        <option value="U1">U1</option>
-                        <option value="U2">U2</option>
-                        <option value="U3">U3</option>
-                        <option value="U4">U4</option>
-
-                        <option value="I1">I1</option>
-                        <option value="I2">I2</option>
-                        <option value="I3">I3</option>
-                        <option value="I4">I4</option>
-
-                        <option value="P1">P1</option>
-                        <option value="P2">P2</option>
-                        <option value="P3">P3</option>
-                        <option value="Psum">Psum</option>
-
-                        <option value="Q1">Q1</option>
-                        <option value="Q2">Q2</option>
-                        <option value="Q3">Q3</option>
-                        <option value="Qsum">Qsum</option>
-
-                        <option value="S1">S1</option>
-                        <option value="S2">S2</option>
-                        <option value="S3">S3</option>
-                        <option value="Ssum">Ssum</option>
-
-                        <option value="PF1">PF1</option>
-                        <option value="PF2">PF2</option>
-                        <option value="PF3">PF3</option>
-                        <option value="PFsum">PFsum</option>
-
-                        <option value="CosPH1">CosPH1</option>
-                        <option value="CosPH2">CosPH2</option>
-                        <option value="CosPH3">CosPH3</option>
-
-                    </select>
-
+                    <input class="form-control location-select-item" id="thresholdname" name="thresholdname"  disabled="disabled">
+                    </input>
                 </div>
 
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数分类</div>
                     <select class="form-control location-select-item" id="thresholdtype" name="thresholdtype"
                             onclick="">
-                        <option value="IDP">IDP</option>
-                        <option value="UPS">UPS</option>
-                        <option value="蓄电池">蓄电池</option>
-                        <option value="柴油发电机">柴油发电机</option>
-                        <option value="空调">空调</option>
-                        <option value="其他传感器">其他传感器</option>
+                        <option value="塌陷">塌陷</option>
+                        <option value="浪涌">浪涌</option>
+                        <option value="瞬变">瞬变</option>
+                        <option value="温度">温度</option>
+                        <option value="湿度">湿度</option>
+                        <option value="频率偏差越限">频率偏差越限</option>
+                        <option value="电流谐波越限">电流谐波越限</option>
+                        <option value="电流谐波越限">电压谐波越限</option>
+                        <option value="电流谐波越限">电压闪变越限</option>
+                        <option value="电流谐波越限">电压不平衡度</option>
                     </select>
                 </div>
             </div>
+
             <div class="add-threshold-one-line">
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">单位</div>
                     <input id="thresholdunit" class="form-control add-threshold-input" type="text">
-                </div>
-                <div class="add-threshold-item">
-                    <div class="add-threshold-title">标准值</div>
-                    <input id="thresholdstandval" class="form-control add-threshold-input" type="text">
                 </div>
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">上限值</div>
@@ -961,8 +854,12 @@
                     </select>
                 </div>
                 <div class="add-threshold-item">
-                    <div class="add-threshold-title">预警内容</div>
-                    <input id="thresholdalarmcontent" class="form-control add-threshold-input" type="text">
+                    等级<select class="form-control location-select-item" id="thresholdlevel" name="thresholdlevel"
+                            onclick="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
                 </div>
             </div>
 
@@ -1639,33 +1536,35 @@
             dataType: "json",
             success: function (data) {
                 var obj = JSON.parse(data);
-                var list = obj;
+                //var list = obj;
+                allUserList = obj;
                 var table = $("#userinfotable");
                 table.empty();
                 table.append('<tr><td><div style="width:10px;"></div></td><td><div style="width:50px;">账号</div></td><td><div style="width:50px;">姓名</div></td><td><div style="width:260px;">组织</div></th><td><div style="widtd:100px;">角色</div></td><td><div style="width:150px;">联系方式</div></td><td> <div style="width:150px;">公务手机</div></td></tr>');
 
-                for (var key in list) {
-                    var len = list[key].length;
+                for (var key in allUserList) {
+                    var len = allUserList[key].length;
+
                     for (var i = 0; i < len; i++) {
-                        var uid = list[key][i][0];
-                        var account = list[key][i][1];
-                        var name = list[key][i][2];
-                        var org = list[key][i][3] + list[key][i][4] + list[key][i][5];
+                        var uid = allUserList[key][i][0];
+                        var account = allUserList[key][i][1];
+                        var name = allUserList[key][i][2];
+                        var org = allUserList[key][i][3] + allUserList[key][i][4] + allUserList[key][i][5];
 
                         var role;
-                        if(list[key][i][6] != undefined) role = list[key][i][6];
+                        if(allUserList[key][i][6] != undefined) role = allUserList[key][i][6];
                         else role += " ";
 
                         var telephone;
-                        if(list[key][i][7] != undefined) telephone = list[key][i][7];
+                        if(allUserList[key][i][7] != undefined) telephone = allUserList[key][i][7];
                         else telephone += " ";
 
                         var govtelephone;
-                        if(list[key][i][8] != undefined) govtelephone = list[key][i][8];
+                        if(allUserList[key][i][8] != undefined) govtelephone = allUserList[key][i][8];
                         else govtelephone += " ";
 
                         table.append('<tr>' +
-                            '<td style="width:10px;"><input type="checkbox" name="userid" id="userid" value=' + uid + '></td>' +
+                            '<td style="width:10px;"><input type="radio" name="userid" id="userid" value=' + uid + '></td>' +
                             '<td style="width:50px;">' + account + '</td>' +
                             '<td style="width:50px;">' + name + '</td>' +
                             '<td style="width:260px;">' + org + '</td>' +
@@ -1723,38 +1622,37 @@
 
     <!--修改账号 -->
     function showUpdateUserModal() {
-        $('#add-user-modal').css('display', 'block');
-        $('#add-user-handle').css('display', 'none');
-        $('#update-user-handle').css('display', 'block');
 
-        //显示 用户信息到div
-        var useridcheck = $("input[name='userid']:checked").serialize();
+        //查询要显示的用户信息到div
+        var useridcheck = $("input[name='userid']:checked").val();
 
-        $.ajax({
-            type: "post",
-            url: "getUserInfo",
-            data: {
-                uid: useridcheck
-            },
-            dataType: "json",
-            success: function (data) {
-                var list = JSON.parse(data);
-                var userdata = list['user'];
-                var userroledata = list['userrole'];
+        if(useridcheck == undefined)
+            alert("请选择一个用户");
+        else{
+            for(var i = 0; i < allUserList['alluser'].length; i++){
+                if(allUserList['alluser'][i][0] == useridcheck){
+                    $("#uid").val(allUserList['alluser'][i][0]);
+                    $("#useraccount").val(allUserList['alluser'][i][1]);
+                    $("#username").val(allUserList['alluser'][i][2]);
+                    $("#usertelephone").val(allUserList['alluser'][i][7]);
+                    $("#usergovtelephone").val(allUserList['alluser'][i][8]);
 
-                $("#uid").val(userdata.uid);
-                $("#useraccount").val(userdata.uname);
-                $("#userpassword").val();
-                $("#username").val(userdata.chinesename);
-                $("#usertelephone").val(userdata.telephone);
-                $("#usergovtelephone").val(userdata.govtelephone);
-                $("#userorgnization-province").val(userdata.pbid);
-                $("#userorgnization-city").val(userdata.cbid);
-                $("#userorgnization-computerroom").val(userdata.rid);
-                $("#userroles").val(userroledata.rid);
+                    for(var j = 0; j< $("#userroles option").length; j++ ) {
+                        if($("#userroles option")[j].value == allUserList['alluser'][i][6]) {
+                            document.getElementById("userroles")[j].selected = true;
+                        }
+                    }
 
+                    //$("#userorgnization-province").val(allUserList['alluser'][i][3]);
+                    //$("#userorgnization-city").val(allUserList['alluser'][i][3]);
+                    //$("#userorgnization-computerroom").val(allUserList['alluser'][i][3]);
+                }
             }
-        });
+            $('#add-user-modal').css('display', 'block');
+            $('#add-user-handle').css('display', 'none');
+            $('#update-user-handle').css('display', 'block');
+        }
+
     }
 
     <!--修改账号-确认修改 -->
@@ -1792,8 +1690,8 @@
                 },
                 dataType: "json",
                 success: function (data) {
-                    alert(data);
                     hiddenUserModel();
+                    getALLUserInfomation();
                 }
             });
         }
@@ -1849,7 +1747,7 @@
     }
 
     $(document).ready(function() {
-        /*加载角色下拉选*/
+        /*初始加载角色下拉选*/
         $.ajax({
             type: "post",
             url: "getAllRoles",
@@ -1858,12 +1756,12 @@
                 var obj = JSON.parse(data);
                 var rt = obj.allroles;
                 for (var i = 0; i < rt.length; i++) {
-                    $('#userroles').append("<option value='" + rt[i].rid + "' >" + rt[i].rolesname + "</option>");
+                    $('#userroles').append("<option value='" + rt[i].rolesname + "' >" + rt[i].rolesname + "</option>");
                 }
             }
         });
 
-        /*加载Province下拉选*/
+        /*初始加载Province下拉选*/
         $.ajax({
             type: "post",
             url: "getAllProvince",
@@ -2624,7 +2522,6 @@
         if (result && result.length > 0) {
             devthdtips.style.display = 'block'
         }
-        ;
         devthdappendData(result);
     };
 
@@ -2648,43 +2545,49 @@
     function getOneDeviceThreshold() {
         var dname = $("#device-threshold-name").val();
 
-        $.ajax({
-            type: "post",
-            url: "getOneDeviceThreshold",
-            data: {
-                dname: dname
-            },
-            dataType: "json",
-            success: function (data) {
-                var list = data.alldtlist;
+        if(dname == null || dname == undefined || dname == "")
+            alert("请输入某个设备名称");
+        else{
+            $.ajax({
+                type: "post",
+                url: "getOneDeviceThreshold",
+                data: {
+                    dname: dname
+                },
+                dataType: "json",
+                success: function (data) {
+                    var list = data.alldtlist;
 
-                var table = $("#threadinfotablehead");
-                table.empty();
-                table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:20px;">参数名称</td><td style="padding-left:20px;">参数分类</td><td style="padding-left:20px;">' +
-                    '单位</td><td style="padding-left:20px;">上限值</td><td style="padding-left:20px;">下限值</td><td style="padding-left:20px;">' +
-                    '启用标识</td></tr>');
+                    var table = $("#threadinfotablehead");
+                    table.empty();
+                    table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:20px;">参数名称</td><td style="padding-left:20px;">参数分类</td><td style="padding-left:20px;">' +
+                        '单位</td><td style="padding-left:20px;">上限值</td><td style="padding-left:20px;">下限值</td><td style="padding-left:20px;">' +
+                        '启用标识</td><td style="padding-left:20px;">等级</td></tr>');
 
-                for (var i = 0; i < list.length; i++) {
-                    var dtid = list[i].dtid;
-                    var name = list[i].classify;
-                    var type = list[i].type;
-                    var unit = list[i].unit;
-                    var cellval = list[i].cellval;
-                    var floorval = list[i].floorval;
-                    var isMark = list[i].isMark;
+                    for (var i = 0; i < list.length; i++) {
+                        var dtid = list[i][0];
+                        var name = list[i][1];
+                        var type = list[i][2];
+                        var unit = list[i][3];
+                        var cellval = list[i][4];
+                        var floorval = list[i][5];
+                        var isMark = list[i][6];
+                        var level = list[i][7];
 
-                    table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="dtid" id="dtid" value=' + dtid + '></td>' +
-                        '<td style="padding-left:20px;">' + name + '</td><td style="padding-left:20px;">' + type + '</td>' +
-                        '<td style="padding-left:20px;">' + unit  + '</td>' +
-                        '<td style="padding-left:20px;">' + cellval + '</td><td style="padding-left:20px;">' + floorval + '</td>' +
-                        '<td style="padding-left:20px;">' + isMark + '</td>' +
-                        '</td></tr>');
+                        table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="dtid" id="dtid" value=' + dtid + '></td>' +
+                            '<td style="padding-left:20px;">' + name + '</td><td style="padding-left:20px;">' + type + '</td>' +
+                            '<td style="padding-left:20px;">' + unit  + '</td>' +
+                            '<td style="padding-left:20px;">' + cellval + '</td><td style="padding-left:20px;">' + floorval + '</td>' +
+                            '<td style="padding-left:20px;">' + isMark + '</td>' + '<td style="padding-left:20px;">' + level +
+                            '</td></tr>');
+                    }
+                },
+                error: function () {
+                    alert("获取失败");
                 }
-            },
-            error: function () {
-                alert("失败");
-            }
-        });
+            });
+        }
+
     }
 
     <!-- 显示添加限值 model  -->
@@ -2713,14 +2616,14 @@
             success: function (data) {
                 var list = data.devicesThreshold;
 
-                $("#thresholdname").val(list[0].name);
-                $("#thresholdtype").val(list[0].type);
-                $("#thresholdunit").val(list[0].unit);
-                $("#thresholdcellval").val(list[0].cellval);
-                $("#thresholdstandval").val(list[0].standardval);
-                $("#thresholdfloorval").val(list[0].floorval);
-                $("#thresholdismark").val(list[0].ismark);
-                $("#thresholdalarmcontent").val(list[0].alarmcontent);
+                $("#thresholdname").val(list[0][1]);
+                $("#thresholdtype").val(list[0][2]);
+                $("#thresholdunit").val(list[0][3]);
+                $("#thresholdcellval").val(list[0][4]);
+              //  $("#thresholdstandval").val(list[0].standardval);
+                $("#thresholdfloorval").val(list[0][5]);
+                $("#thresholdismark").val(list[0][6]);
+                $("#thresholdlevel").val(list[0][7]);
             },
             error: function () {
                 alert("失败");
@@ -2739,21 +2642,21 @@
     <!-- 提交添加限值 model  -->
     function submitAddThreshold() {
         var dname = $("#device-threshold-name").val();
-        var did = $("#dtid").val();
+        var dtid = $("#dtid").val();
         var name = $("#thresholdname").val();
         var type = $("#thresholdtype").val();
         var unit = $("#thresholdunit").val();
-        var standval = $("#thresholdstandval").val();
         var cellval = $("#thresholdcellval").val();
         var floorval = $("#thresholdfloorval").val();
         var ismark = $("#thresholdismark").val();
-        var alarmcontent = $("#thresholdalarmcontent").val();
+        var level = $("#thresholdlevel").val();
 
         $.ajax({
             type: "post",
             url: "addThresholdInfo",
             data: {
                 dname: dname,
+                dtid: dtid,
                 name: name,
                 type: type,
                 unit: unit,
@@ -2761,7 +2664,7 @@
                 cellval: cellval,
                 floorval: floorval,
                 ismark: ismark,
-                alarmcontent: alarmcontent
+                level: level
             },
             dataType: "json",
             success: function (data) {
@@ -2778,32 +2681,30 @@
     <!-- 提交修改限值 model  -->
     function submitUpdateThreshold() {
         var dtid = $("input[name='dtid']:checked").val();
-        var name = $("#thresholdname").val();
+       // var name = $("#thresholdname").val();
         var type = $("#thresholdtype").val();
         var unit = $("#thresholdunit").val();
-        var standval = $("#thresholdstandval").val();
+      //  var standval = $("#thresholdstandval").val();
         var cellval = $("#thresholdcellval").val();
         var floorval = $("#thresholdfloorval").val();
         var ismark = $("#thresholdismark").val();
-        var alarmcontent = $("#thresholdalarmcontent").val();
+        var level = $("#thresholdlevel").val();
 
         $.ajax({
             type: "post",
             url: "updateOneDeviceThreshold",
             data: {
                 dtid: dtid,
-                name: name,
                 type: type,
                 unit: unit,
-                standval: standval,
+               // standval: standval,
                 cellval: cellval,
                 floorval: floorval,
                 ismark: ismark,
-                alarmcontent: alarmcontent
+                level: level
             },
             dataType: "json",
             success: function (data) {
-                alert(data);
                 hiddenThresholdModel();
             },
             error: function () {
@@ -2816,7 +2717,6 @@
     <!-- 删除限值 model  -->
     function deleteThresholdModal() {
         var dtid = $("input[name='dtid']:checked").val();
-        console.log("dtid:" + dtid);
 
         $.ajax({
             type: "post",
@@ -2895,7 +2795,29 @@
     }
 
     function addAlarm(){
-        alert("add alarm");
+
+        var alarmlevel = $("#alarmtype-select").val();
+        var issms = $('input:checkbox[name="checkbox-sms-2"]:checked').val();
+        var isalert = $('input:checkbox[name="checkbox-alert-2"]:checked').val();
+        var isplantform = $('input:checkbox[name="checkbox-plantform-2"]:checked').val();
+        var content = $("#sms-content-input").val();
+
+        $.ajax({
+            type: "post",
+            url: "setAlarmUser",
+            data: {
+                alarmlevel: alarmlevel,
+                issms: issms,
+                isalert: isalert,
+                isplantform: isplantform,
+                content: content
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data);
+            }
+        });
+
     }
 
     function deleterAlarm(){
@@ -3089,6 +3011,48 @@
         });
     }
 </script>
+
+<!-- 导入excel到阈值表-->
+<script type="text/javascript">
+    function getFilePath(input){
+        if(input){
+            if(window.navigator.userAgent.indexOf("MSIE")>=1){  //如果是IE
+                input.select();
+                return document.selection.createRange().text;
+            }
+            else if(window.navigator.userAgent.indexOf("Firefox")>=1){  //如果是火狐
+                if(input.files){
+                    return input.files.item(0).getAsDataURL();
+                }
+                return input.value;
+            }
+            return input.value;
+        }
+    }
+
+    //点击上传钮
+    function deviceThresholdupload() {
+
+        var uploadEventFile = getFilePath(document.getElementById("uploadEventFile"));
+        if (uploadEventFile == '') {
+            alert("请择Excel,再上传");
+        } else if (uploadEventFile.lastIndexOf(".xls") < 0) {//可判断以.xls和.xlsx结尾的excel
+            alert("只能上传Excel文件");
+        } else {
+            $.ajax({
+                type: "post",
+                url : "uploadThresholdExcelToDB",
+                data : {
+                    uploadEventFile: uploadEventFile
+                },
+                success : function(result) {
+                    alert(result);
+                }
+            });
+        }
+    }
+</script>
+
 
 
 </body>

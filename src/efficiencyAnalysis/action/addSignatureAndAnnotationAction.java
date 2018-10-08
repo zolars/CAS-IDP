@@ -29,16 +29,21 @@ public class addSignatureAndAnnotationAction extends ActionSupport {
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String teid = request.getParameter("teid");
             String sign = request.getParameter("sign");
             String annot = request.getParameter("annot");
+            String ettype = request.getParameter("eventtabletype");
 
             EventDAO dao = new EventDAOImpl();
-
-            Boolean rt = dao.addSignAndAnnotEvent(teid, sign, annot);
+            Boolean rt = false;
+            if(ettype.equals("device"))
+                rt = dao.addSignAndAnnotDeviceEvent(teid, sign, annot);
+            else if(ettype.equals("power"))
+                rt = dao.addSignAndAnnotPowerEvent(teid, sign, annot);
+            else if(ettype.equals("envrionment"))
+                rt = dao.addSignAndAnnotEnvironEvent(teid, sign, annot);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("", rt);
