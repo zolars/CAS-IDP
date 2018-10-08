@@ -15,74 +15,74 @@ import java.util.List;
 import java.util.Map;
 
 class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
-    private Map<String,Float> map=null;
-    private List<DictionaryThreshold> dicThreshold=null;
-    private ByteBuf recMsg=null;
+    private Map<String, Float> map = null;
+    private List<DictionaryThreshold> dicThreshold = null;
+    private ByteBuf recMsg = null;
 
-    private int[] slaveId= new int[22];
-    private int[] fCode=new int[22];
-    private int[] addr=new int[22];
-    private int[] len=new int [22];
+    private int[] slaveId = new int[22];
+    private int[] fCode = new int[22];
+    private int[] addr = new int[22];
+    private int[] len = new int[22];
     private String[] name = new String[643];
-    private Integer[] factor= new Integer[643];
+    private Integer[] factor = new Integer[643];
 
-    private int part=0;
-    private int count=0;
+    private int part = 0;
+    private int count = 0;
 
     //监测点id
     private String did = "";
 
     public ThresholdClientHandler(String did) {
-        this.did=did;
+        this.did = did;
     }
    /* @Override
     public void connect(ChannelHandlerContext ctx) throws Exception {
     }*/
 
-/*
-    @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        //super.handlerAdded(ctx);
-        recMsg=ctx.alloc().buffer();
-    }
+    /*
+        @Override
+        public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+            //super.handlerAdded(ctx);
+            recMsg=ctx.alloc().buffer();
+        }
 
-    @Override
-    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-//        super.handlerRemoved(ctx);
-        recMsg.release();
-        recMsg=null;
-    }*/
+        @Override
+        public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+    //        super.handlerRemoved(ctx);
+            recMsg.release();
+            recMsg=null;
+        }*/
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-       // System.out.println("有新客户端连接接入。。。"+ctx.channel().remoteAddress());
+        // System.out.println("有新客户端连接接入。。。"+ctx.channel().remoteAddress());
         System.out.println("Threshold建立连接");
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<DictionaryThreshold> dicThreshold = hbsessionDao.search(
                 "FROM DictionaryThreshold");
 
-        for (int i=0;i< 10;i++){
+        for (int i = 0; i < 10; i++) {
             System.out.println("i" + i);
-            slaveId[i]= 1;
-            fCode[i] =dicThreshold.get(i).getFunctioncode();
+            slaveId[i] = 1;
+            fCode[i] = dicThreshold.get(i).getFunctioncode();
             addr[i] = dicThreshold.get(i).getAddr();
             len[i] = 4;
         }
         System.out.println(dicThreshold.size());
 
         String address = ctx.channel().remoteAddress().toString().replace("/", "");
-        System.out.println("ip+端口为：" + address + "开始建立通讯");
+        System.out.println("ip+端口为：" + address + "开始建立通讯???");
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(slaveId[part],fCode[part],addr[part],len[part]));
-        // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
-        SocketChannel sc = (SocketChannel)ctx.channel();
+        sendMsg.writeBytes(createMsg(slaveId[part], fCode[part], addr[part], len[part]));
+        System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
+        SocketChannel sc = (SocketChannel) ctx.channel();
 
         System.out.println("socket channel is writeable: " + sc.isWritable());
         System.out.println("socket channel is isOpen: " + sc.isOpen());
 
         sc.write(sendMsg);
-//        sc.writeAndFlush(sendMsg);
+        // sc.writeAndFlush(sendMsg);
 
         System.out.println("socket channel is isShutdown: " + sc.isShutdown());
     }
@@ -90,28 +90,28 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
-        System.out.println("Threshold建立连接");
+        System.out.println("Threshold建立连接！！！！！！！！！！！！！");
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<DictionaryThreshold> dicThreshold = hbsessionDao.search(
                 "FROM DictionaryThreshold");
 
-        for (int i=0;i< 10;i++){
+        for (int i = 0; i < 10; i++) {
             System.out.println("i" + i);
-            slaveId[i]= 1;
-            fCode[i] =dicThreshold.get(i).getFunctioncode();
+            slaveId[i] = 1;
+            fCode[i] = dicThreshold.get(i).getFunctioncode();
             addr[i] = dicThreshold.get(i).getAddr();
             len[i] = 4;
         }
         System.out.println(dicThreshold.size());
-        byte[] bytes=new byte[12];
+        byte[] bytes = new byte[12];
         String address = ctx.channel().remoteAddress().toString().replace("/", "");
-        System.out.println("ip+端口为：" + address + "开始建立通讯");
+        System.out.println("ip+端口为：" + address + "开始建立通讯!!!!!!!!!!!!!!!!!!!!1");
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(1, fCode[part], addr[part], len[part]));
-        // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
-        SocketChannel sc = (SocketChannel)ctx.channel();
+        sendMsg.writeBytes(createMsg(1, 10, addr[part], len[part]));
+        System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
+        SocketChannel sc = (SocketChannel) ctx.channel();
 
         System.out.println("socket channel is writeable: " + sc.isWritable());
         System.out.println("socket channel is isOpen: " + sc.isOpen());
@@ -151,22 +151,28 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
-    //readLength单位是2字节
-    public byte[] createMsg(int slaveId,int functionCode,int address,int readLength){
-       /* byte[] msg = new byte[12];
-        msg[0] = 11;
-        msg[1] = ((byte)slaveId);
-        msg[2] = ((byte)functionCode);
-        msg[3] = new Byte("80");
-        msg[4] = (byte)0x00; //new Byte("00");//;
-        msg[5] = (byte)0x00; //new Byte("00");//(byte)0x00;
-        msg[6] = (byte)0x02; //new Byte("02");//(byte)0x02;
-        msg[7] = (byte)0x04; //new Byte("04");//(byte)0x04;  //写入数据长度为4字节
 
-        msg[8] = (byte) 0x3a; //new Byte("3A");//(byte)0x40;  //写入数据的第1个字节
-        msg[9] =  (byte) 0x8e; //new Byte("8E");//(byte)0x2A;  //写入数据的第2个字节
-        msg[10] = (byte) 0x38; //new Byte("38");//(byte)0x3D;  //写入数据的第3个字节
-        msg[11] = (byte) 0x86; //new Byte("86");// (byte)0x71;  //写入数据的第4个字节*/
+    //readLength单位是2字节
+    public byte[] createMsg(int slaveId, int functionCode, int address, int readLength) {
+ /*
+        byte[] msg = new byte[17];
+        msg[0] = 0;
+        msg[1] = 0;
+        msg[2] = 0;
+        msg[3] = 0;
+        msg[4] = 0;
+        msg[5] = ((byte) 0x11);
+        msg[6] = ((byte) 0xff);
+        msg[7] = ((byte) 0x10);
+        msg[8] = (byte) 0x80; //new Byte("00");//;
+        msg[9] = (byte) 0x00; //new Byte("00");//(byte)0x00;
+        msg[10] = (byte) 0x00; //new Byte("02");//(byte)0x02;
+        msg[11] = (byte)0x02; //new Byte("04");//(byte)0x04;  //写入数据长度为4字节
+        msg[12] = (byte) 0x04;
+        msg[13] = (byte) 0x3a; //new Byte("3A");//(byte)0x40;  //写入数据的第1个字节
+        msg[14] =  (byte) 0x8e; //new Byte("8E");//(byte)0x2A;  //写入数据的第2个字节
+        msg[15] = (byte) 0x38; //new Byte("38");//(byte)0x3D;  //写入数据的第3个字节
+        msg[16] = (byte) 0x86; //new Byte("86");// (byte)0x71;  //写入数据的第4个字节*/
 
 
         byte[] msg = new byte[17];
@@ -175,17 +181,17 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
         msg[2] = 0;
         msg[3] = 0;
         msg[4] = 0;
-        msg[5] = 11;
-        msg[6] = ((byte)slaveId);
-        msg[7] = ((byte)functionCode);
-        msg[8] = new Byte("80");
-        msg[9] = (byte)0x00; //new Byte("00");//;
-        msg[10] = (byte)0x00; //new Byte("00");//(byte)0x00;
-        msg[11] = (byte)0x02; //new Byte("02");//(byte)0x02;
-        msg[12] = (byte)0x04; //new Byte("04");//(byte)0x04;  //写入数据长度为4字节
+        msg[5] = (byte) 0x11;
+        msg[6] = ((byte) slaveId);
+        msg[7] = ((byte) 0x10);
+        msg[8] = (byte) 0x80;
+        msg[9] = (byte) 0x00; //new Byte("00");//;
+        msg[10] = (byte) 0x00; //new Byte("00");//(byte)0x00;
+        msg[11] = (byte) 0x02; //new Byte("02");//(byte)0x02;
+        msg[12] = (byte) 0x04; //new Byte("04");//(byte)0x04;  //写入数据长度为4字节
 
         msg[13] = (byte) 0x3a; //new Byte("3A");//(byte)0x40;  //写入数据的第1个字节
-        msg[14] =  (byte) 0x8e; //new Byte("8E");//(byte)0x2A;  //写入数据的第2个字节
+        msg[14] = (byte) 0x8e; //new Byte("8E");//(byte)0x2A;  //写入数据的第2个字节
         msg[15] = (byte) 0x38; //new Byte("38");//(byte)0x3D;  //写入数据的第3个字节
         msg[16] = (byte) 0x86; //new Byte("86");// (byte)0x71;  //写入数据的第4个字节
 

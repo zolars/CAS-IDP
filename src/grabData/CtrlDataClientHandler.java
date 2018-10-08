@@ -100,18 +100,29 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
 
     public void dataResolve(ByteBuf buf) {
         int count = 4;
+
+        System.out.println("buf" + ByteBufUtil.hexDump(buf));
+
+
         buf.skipBytes(9);//跳过前9个字节，与数据无关
         String data = ByteBufUtil.hexDump(buf);
+
+        System.out.println("data: " + data);
+
         for (int i = 0; i < data.length(); i += 2) {
             String binary = Integer.toBinaryString(
                     Integer.valueOf(data.substring(i, i + 2), 16)
             );
 
+            System.out.println("Binary: "+binary);
+
             for (int j = 0; j < binary.length(); j++) {
                 if (binary.length() - j >= 0) {
-                    if(binary.charAt(binary.length() - j) == '1')
+                    if(binary.charAt(binary.length() - j) == '1'){
                         CtrlSave.ctrlSave(did, count + j);
-                    System.out.println(count + j);
+                        System.out.println(count + j);
+                    }
+
                 }
             }
             count += 8;

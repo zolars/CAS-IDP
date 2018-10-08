@@ -474,7 +474,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3").hide();
                     $("#item4").hide();
                     $("#item5").hide();
-                    //切换子菜单时，从后台读取数据
+                    // 切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
                     if(mpcname) getDataQst(mpcname);
                 });
@@ -484,7 +484,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3").hide();
                     $("#item4").hide();
                     $("#item5").hide();
-                    //切换子菜单时，从后台读取数据
+                    // 切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
                     if(mpcname) getDataXb(mpcname);
                 });
@@ -494,7 +494,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3").show();
                     $("#item4").hide();
                     $("#item5").hide();
-                    //切换子菜单时，从后台读取数据
+                    // 切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
                     if(mpcname) getDataSxdy(mpcname);
                 });
@@ -504,7 +504,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3").hide();
                     $("#item4").show();
                     $("#item5").hide();
-                    //切换子菜单时，从后台读取数据
+                    // 切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
                     if(mpcname) getDataParams(mpcname);
                 });
@@ -514,7 +514,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3").hide();
                     $("#item4").hide();
                     $("#item5").show();
-                    //切换子菜单时，从后台读取数据
+                    // 切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
                     if(mpcname) getOnlineWave(mpcname);
                 });
