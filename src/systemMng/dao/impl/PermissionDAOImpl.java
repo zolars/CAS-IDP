@@ -1,6 +1,7 @@
 package systemMng.dao.impl;
 
 import Util.HBSessionDaoImpl;
+import hibernatePOJO.DeviceAlarmUser;
 import hibernatePOJO.OrgnizationStructure;
 import hibernatePOJO.Permission;
 import hibernatePOJO.RolesPermission;
@@ -9,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import systemMng.dao.PermissionDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PermissionDAOImpl implements PermissionDAO {
@@ -38,14 +40,33 @@ public class PermissionDAOImpl implements PermissionDAO {
         return rp;
     }
 
-    public Boolean setDeviceAlarmUserInfo(String level, Integer isSMS, Integer isPlantform, Integer isAlert, String precontent){
+    public Boolean setDeviceAlarmUserInfo(String level, String precontent){
+
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        String sql = "update DeviceAlarmUser dt set dt.isAlert='"+ isAlert + "', dt.isSms='" + isSMS + "', dt.isPlantform='" + isPlantform +  "', dt.precontent='" + precontent + "' where dt.level='" + level + "'";
+        String sql = "update DeviceAlarmUser dt set dt.precontent='" + precontent + "' where dt.level='" + level + "'";
 
         Boolean rt = hbsessionDao.update(sql);
 
         return rt;
+    }
+
+    public List getDeviceAlarmUserInfoByLevel(String level){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        List rtlist = new ArrayList();
+
+        DeviceAlarmUser alarmUser = (DeviceAlarmUser)hbsessionDao.getFirst(
+                "FROM DeviceAlarmUser where level='"+ level +"'");
+
+        if(alarmUser.getId() != null){
+            rtlist.add(alarmUser.getIsAlert());
+            rtlist.add(alarmUser.getIsSms());
+            rtlist.add(alarmUser.getIsPlantform());
+            rtlist.add(alarmUser.getPrecontent());
+        }
+
+        return rtlist;
     }
 
 

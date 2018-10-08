@@ -752,6 +752,14 @@
              </result>
          </action>
 
+         <action name="getAlarmUserByLevel" class="systemMng.action.getAlarmUserByLevelAction">
+             <!--getAlarmUserByLevel -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="addOrgnizationTree" class="systemMng.action.addOrgnizationTreeAction">
              <!--addOrgnizationTree -->
              <result name="failure">/failure.jsp</result>

@@ -28,7 +28,7 @@ public interface DeviceDAO {
 
     public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port, String extra, Integer sms, Integer alert, Integer plantform);
 
-    public Boolean addOneDeviceAlarmUser(String did, String uid, String stime, String etime);
+    public Boolean addOneDeviceAlarmUser(String did, String uid, String period);
 
     public Boolean addOneDeviceAlarmInfo(String etime);
 

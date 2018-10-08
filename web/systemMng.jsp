@@ -381,11 +381,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-default searchButton" onclick="checkDevice()">查询</button>
-                            <%--<div id="item-devicename"--%>
-                                 <%--style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">--%>
-                                <%--<ul id="device-name-Item">--%>
-                                <%--</ul>--%>
-                            <%--</div>--%>
+
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="tile">
@@ -607,47 +603,48 @@
                     </div>
                     <div id="item7" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
 
+                        <div class="col-md-4">
+                            <div class="tile">
+                                <div>
+                                    预警等级
+                                    <select class="form-control location-select-item" id="alarmtype-select" name="alarmtype-select" onclick="getAlarmLevelSetting()">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
 
+                                <div class="listview todo-list sortable">
+                                    <div class="media">
+                                        <div class="checkbox m-0">
+                                            <label class="t-overflow">
+                                                <input type="checkbox" id="checkbox-alert-2" name="checkbox-alert-2"> 弹窗
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="checkbox m-0">
+                                            <label class="t-overflow">
+                                                <input type="radio" id="checkbox-sms-2" name="checkbox-smsorplant" onchange="hiddenplantformsetting(this)"> 短信
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="checkbox m-0">
+                                            <label class="t-overflow">
+                                                <input type="radio" id="checkbox-plantform-2" name="checkbox-smsorplant" onchange="showplantformsetting(this)"> 平台
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <div class="tile">
-                            预警方式<select class="form-control location-select-item" id="alarmtype-select"
-                                    name="alarmtype-select">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <div class="listview todo-list sortable">
-                                <div class="media">
-                                    <div class="checkbox m-0">
-                                        <label class="t-overflow">
-                                            <input type="checkbox" id="checkbox-sms-2" name="checkbox-sms-2"> 短信
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="checkbox m-0">
-                                        <label class="t-overflow">
-                                            <input type="checkbox" id="checkbox-alert-2" name="checkbox-alert-2"> 弹窗
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="checkbox m-0">
-                                        <label class="t-overflow">
-                                            <input type="checkbox" id="checkbox-plantform-2" name="checkbox-plantform-2"> 平台
-                                        </label>
-                                    </div>
-                                </div>
+                                <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text"></div>
+                                <button class="btn-default" onclick="addAlarm()">确认</button>
                             </div>
-
-                            <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text">
-                            </div>
-                            <button class="btn-default" onclick="addAlarm()">确认</button>
                         </div>
 
-
                         <!-- plantform div-->
-                        <div id = "plantform-div">
+                        <div id = "plantform-div" class="col-md-6" style="display:none;">
                             设备名称：<input type="text" id="plantform-dname" class="form-control setting-input">
                             ip地址:<input type="text" id="plantform-ip" class="form-control setting-input">
                             时间：<input type="text" id="plantform-time" class="form-control setting-input">
@@ -664,8 +661,6 @@
                             <button class="btn btn-default" onclick="testOk()">点击测试短信平台</button>
                         </div>
                         <!-- plantform div end -->
-
-
 
                     </div>
                     <div id="item8" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
@@ -877,7 +872,6 @@
 
         <!-- alarm user model DIV-->
         <div class="add-alarm-user" id="add-alarm-user-modal" style="display: none">
-
             预警人员
             <select class="form-control location-select-item" id="alarm-user"
                     name="alarm-user" onclick="getALLUserInfoSimple()">
@@ -885,22 +879,17 @@
             </select>
 
             <div class="add-roles-one-line">
-                <div id="aauid" style="display: none"></div>
-                <div class="add-roles-item">
-                    <div class="add-roles-title">开始时间</div>
-                    <input id="alarm-stime" class="form-control add-roles-input" type="text">
-                </div>
-                <div class="add-roles-item">
-                    <div class="add-roles-title">结束时间</div>
-                    <input id="alarm-etime" class="form-control add-roles-input" type="text">
-                </div>
+                <input type="radio" id="add-alarm-user-allday-radio" name="add-alarm-user-radio" value="allday">全天
+            </div>
+            <div class="add-roles-one-line">
+                <input type="radio" id="add-alarm-user-workday-radio" name="add-alarm-user-radio" value="workday">工作日
             </div>
 
             <div class="add-threshold-handle">
-                <button type="submit" class="btn btn-primary" id="add-alarm-user-handle"
+                <button type="submit" class="btn-primary" id="add-alarm-user-handle"
                         onclick="addAlarmUser()">确定
                 </button>
-                <button class="btn btn-default" onclick="cancle()">取消</button>
+                <button class="btn-default" onclick="cancle()">取消</button>
             </div>
         </div>
         <!-- alarm user model DIV END-->
@@ -1248,7 +1237,7 @@
                         if(list[i].extra != undefined) rextra = list[i].extra;
                         else rextra = " ";
 
-                        table.append('<tr><td><input type="checkbox" id="cbox-rid" name="cbox-rid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
+                        table.append('<tr><td><input type="radio" id="cbox-rid" name="cbox-rid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
                             '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
                     }
                 }
@@ -1613,7 +1602,6 @@
                 },
                 dataType: "json",
                 success: function (data) {
-                    alert(data);
                     getALLUserInfomation();
                 }
             });
@@ -1867,12 +1855,11 @@
 
                     var rid = list[i].rid;
                     var  rname = list[i].rolesname;
-
                     var rextra;
                     if(list[i].extra != undefined) rextra = list[i].extra;
                     else rextra = " ";
 
-                    table.append('<tr><td><input type="checkbox" name="rolesid" id="rolesid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
+                    table.append('<tr><td><input type="radio" name="rolesid" id="rolesid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
                         '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
                 }
             }
@@ -2081,7 +2068,7 @@
             timer = setTimeout(function () {
                 func.apply(context, args);
             }, interval);
-        }
+        };
     };
 
     function appendData(data) {
@@ -2094,8 +2081,7 @@
             });
             item.setAttribute("class", "tips-item");
             tips.appendChild(item);
-        }
-        ;
+        };
     };
 
     function insertData(value) {
@@ -2104,8 +2090,7 @@
         var result = fakeApi(value);
         if (result && result.length > 0) {
             tips.style.display = 'block'
-        }
-        ;
+        };
         appendData(result);
     };
 
@@ -2258,7 +2243,7 @@
                         var timeperiod = (list[i].timeperiod != "1") ? "全天告警":"工作日告警";
                         var uname = listname[i];
 
-                        table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="auid" id="auid" value=' + id + '></td>' +
+                        table.append('<tr><td style="padding-left:20px;"><input type="radio" name="auid" id="auid" value=' + id + '></td>' +
                             '<td style="padding-left:80px;">' + timeperiod + '</td>' +
                             '<td style="padding-left:40px;">' + uname + '</td></tr>');
                     }
@@ -2302,25 +2287,27 @@
     <!-- 确认添加预警人员 -->
     function addAlarmUser() {
         var did = $("#did").val();
-        var astime = $("#alarm-stime").val();
-        var aetime = $("#alarm-etime").val();
+        var aucradio = $('input[name="add-alarm-user-radio"]:checked').val();
         var auser = $("#alarm-user").val();
 
-        $.ajax({
-            type: "post",
-            url: "addDeviceAlarmUser",
-            data: {
-                did: did,
-                stime: astime,
-                etime: aetime,
-                uid: auser
-            },
-            dataType: "json",
-            success: function (data) {
-                alert(data);
-                $('#add-alarm-user-modal').css('display', 'none');
-            }
-        });
+        if(aucradio == undefined)
+            alert("请选择告警时段");
+        else{
+            $.ajax({
+                type: "post",
+                url: "addDeviceAlarmUser",
+                data: {
+                    did: did,
+                    aucradio: aucradio,
+                    uid: auser
+                },
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                    $('#add-alarm-user-modal').css('display', 'none');
+                }
+            });
+        }
     }
 
     function cancle() {
@@ -2794,35 +2781,69 @@
 
     }
 
+    //告警管理-添加告警内容
     function addAlarm(){
 
         var alarmlevel = $("#alarmtype-select").val();
-        var issms = $('input:checkbox[name="checkbox-sms-2"]:checked').val();
-        var isalert = $('input:checkbox[name="checkbox-alert-2"]:checked').val();
-        var isplantform = $('input:checkbox[name="checkbox-plantform-2"]:checked').val();
         var content = $("#sms-content-input").val();
+
+        if(content == "")
+            alert("请填写预警内容");
+        else{
+            $.ajax({
+                type: "post",
+                url: "setAlarmUser",
+                data: {
+                    alarmlevel: alarmlevel,
+                    content: content
+                },
+                dataType: "json",
+                success: function (data) {
+                }
+            });
+        }
+    }
+
+    //告警管理-选中平台radio
+    function showplantformsetting(){
+        $('#plantform-div').css('display', 'block');
+    }
+
+    //告警管理-选中短信radio
+    function hiddenplantformsetting(){
+        $('#plantform-div').css('display', 'none');
+    }
+
+    //告警管理-查询某个等级对应的告警设置
+    function getAlarmLevelSetting(){
+        var alarmlevel = $("#alarmtype-select").val();
 
         $.ajax({
             type: "post",
-            url: "setAlarmUser",
+            url: "getAlarmUserByLevel",
             data: {
-                alarmlevel: alarmlevel,
-                issms: issms,
-                isalert: isalert,
-                isplantform: isplantform,
-                content: content
+                alarmlevel: alarmlevel
             },
             dataType: "json",
             success: function (data) {
-                alert(data);
+                var list = data.alarmlist;
+
+                $("#checkbox-alert-2").removeAttr("checked");
+                $("#checkbox-sms-2").removeAttr("checked");
+                $("#checkbox-plantform-2").removeAttr("checked");
+
+                if(list[0] == "1")
+                    $("#checkbox-alert-2").attr("checked", "checked");
+                if(list[1] == "1")
+                    $("#checkbox-sms-2").attr("checked", "checked");
+                if(list[2] == "1")
+                    $("#checkbox-plantform-2").attr("checked", "checked");
+
+                $("#sms-content-input").val(list[3]);
             }
         });
-
     }
 
-    function deleterAlarm(){
-        alert("add alarm");
-    }
 </script>
 
 <!-- 查询组织--省行管理/市行管理/机房管理-->

@@ -11,6 +11,7 @@ public interface PermissionDAO {
 
     public RolesPermission getRolesPermissionTree(String rid);
 
-    public Boolean setDeviceAlarmUserInfo(String level, Integer isSMS, Integer isPlantform, Integer isAlert, String precontent);
+    public Boolean setDeviceAlarmUserInfo(String level, String precontent);
 
+    public List getDeviceAlarmUserInfoByLevel(String level);
 }

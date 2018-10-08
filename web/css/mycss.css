@@ -46,6 +46,22 @@
     padding: 30px;
 }
 
+.add-alarm-user{
+    display: none;
+    width: 400px;
+    height: 250px;
+    background: rgba(0,0,0,.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2000;
+    border-radius: 20px;
+    padding: 30px;
+}
+
 .add-user {
     display: none;
     width: 500px;
@@ -96,7 +112,7 @@ add-alarm-user{
 
 
 .clickEventRow-class {
-    width: 71px;
+    width: 90px;
     height: 60px;
     background: rgba(0,0,0,.0);
     position: absolute;

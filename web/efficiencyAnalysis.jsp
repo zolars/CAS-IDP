@@ -227,6 +227,8 @@
                                                         <th style="width:60px;">事件类型</th>
                                                         <th style="width:60px;">事件描述</th>
                                                         <th style="width:60px;">事件发生时间</th>
+                                                        <th style="width:60px;">签名</th>
+                                                        <th style="width:60px;">注释</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="device-event-tbody">
@@ -244,6 +246,8 @@
                                                         <th style="width:60px;">事件类型</th>
                                                         <th style="width:60px;">事件描述</th>
                                                         <th style="width:60px;">事件发生时间</th>
+                                                        <th style="width:60px;">签名</th>
+                                                        <th style="width:60px;">注释</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="power-event-tbody">
@@ -261,6 +265,8 @@
                                                         <th style="width:60px;">事件类型</th>
                                                         <th style="width:60px;">事件描述</th>
                                                         <th style="width:60px;">事件发生时间</th>
+                                                        <th style="width:60px;">签名</th>
+                                                        <th style="width:60px;">注释</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="environment-event-tbody">
@@ -586,8 +592,8 @@
 
                 <!-- clickEventRow DIV-->
                 <div class="clickEventRow-class" id="clickEventRow-modal" style="display: none;">
-                    <button onclick="confirmEvent()" type="button" class="btn-default btn-sm">确认</button>
-                    <button onclick="deleteEvent()" type="button" class="btn-warning btn-sm">删除事件</button>
+                    <button onclick="confirmEvent()" type="button" class="btn-default btn-sm" style="width: 80px;">确        认</button>
+                    <button onclick="deleteEvent()" type="button" class="btn-warning btn-sm" style="width: 80px;">删除事件</button>
                 </div>
                 <!-- clickEventRow DIV END-->
 
@@ -1575,13 +1581,23 @@
                     var description = liststr[4];
                     var rawtime = liststr[5].split("]");
                     var time = rawtime[0];
+                    var signature = liststr[7];
+                    var annotationstr = liststr[8];
+                    var annotation = annotationstr.split("]");
 
-                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:60px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
+                    if(signature == " null")
+                        signature = "";
+                    if(annotation[0] == " null")
+                        annotation[0] = "";
+
+                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:20px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
                         '<td id="name" style="width:60px;">' + name + '</td>' +
                         '<td style="width:60px;">' + location + '</td>' +
                         '<td style="width:60px;">' + type + '</td>' +
                         '<td style="width:60px;">' + description + '</td>' +
-                        '<td style="width:60px;">' + time + '</td></tr>');
+                        '<td style="width:60px;">' + time + '</td>' +
+                        '<td style="width:60px;">' + signature + '</td>' +
+                        '<td style="width:60px;">' + annotation[0] + '</td></tr>');
                 }
             }
             });
@@ -1612,13 +1628,23 @@
                         var description = liststr[4];
                         var rawtime = liststr[5].split("]");
                         var time = rawtime[0];
+                        var signature = liststr[7];
+                        var annotation = liststr[8];
+                       // var annotation = annotationstr.split("]");
 
-                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:60px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
+                        if(signature == undefined)
+                            signature = "";
+                        if(annotation == undefined)
+                            annotation = "";
+
+                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:20px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
                             '<td id="name" style="width:60px;">' + name + '</td>' +
                             '<td style="width:60px;">' + location + '</td>' +
                             '<td style="width:60px;">' + type + '</td>' +
                             '<td style="width:60px;">' + description + '</td>' +
-                            '<td style="width:60px;">' + time + '</td></tr>');
+                            '<td style="width:60px;">' + time + '</td>' +
+                            '<td style="width:60px;">' + signature + '</td>' +
+                            '<td style="width:60px;">' + annotation + '</td></tr>');
                     }
                 }
             });
@@ -1649,11 +1675,23 @@
                         var description = liststr[4];
                         var rawtime = liststr[5].split("]");
                         var time = rawtime[0];
+                        var signature = liststr[7];
+                        var annotationstr = liststr[8];
+                        var annotation = annotationstr.split("]");
 
-                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" value='+ teid[1]+'>' + teid[1] + '</td>' +
-                            '<td id="name" style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        if(signature == " null")
+                            signature = "";
+                        if(annotation[0] == " null")
+                            annotation[0] = "";
+
+                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:20px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
+                            '<td id="name" style="width:60px;">' + name + '</td>' +
+                            '<td style="width:60px;">' + location + '</td>' +
+                            '<td style="width:60px;">' + type + '</td>' +
+                            '<td style="width:60px;">' + description + '</td>' +
+                            '<td style="width:60px;">' + time + '</td>' +
+                            '<td style="width:60px;">' +signature + '</td>' +
+                            '<td style="width:60px;">' + annotation[0] + '</td></tr>');
                     }
                 }
             });

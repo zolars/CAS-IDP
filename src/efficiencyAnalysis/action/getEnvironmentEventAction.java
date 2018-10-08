@@ -56,8 +56,7 @@ public class getEnvironmentEventAction extends ActionSupport {
                 List<String> eplist = java.util.Arrays.asList(ep.split(","));
 
                 String cid= (String)eplist.get(6);
-                String cidn = cid.substring(1, cid.length() - 1);
-
+                String cidn = cid.substring(1, cid.length());
                 Boolean has = false;
 
                 for (int j = 0 ; j < priortylist.length; j++) {
