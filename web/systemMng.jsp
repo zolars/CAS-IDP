@@ -253,7 +253,7 @@
                             <div class="">
                                 <div class="tile">
                                     <h2 class="tile-title">角色管理</h2>
-                                    <table id="rolesinfotablehead">
+                                    <table id="rolesinfotablehead" border="1px">
                                         <thead>
                                         <tr>
                                             <th>
@@ -268,7 +268,7 @@
                                         </tr>
                                         </thead>
                                     </table>
-                                    <table id="rolesinfotable"></table>
+                                    <table id="rolesinfotable" border="1px"></table>
 
                                     <div class="btn-group">
                                         <button type="button" class="btn-primary"
@@ -290,7 +290,7 @@
                     </div>
                     <div id="item3" class="">
                         <div class="block-area-inner">
-                                <div style="width: 300px;position: relative;">
+                                <div style="width: 500px;display: inline-block;vertical-align: top">
                                     <div class="tile">
                                         <h2 class="tile-title">角色</h2>
                                         <table id="rolesinfotablehead-functionmng">
@@ -323,7 +323,7 @@
                                     </div>
                                 </div>
 
-                                <div style="width: 700px;position: relative;">
+                                <div style="width: 500px;display: inline-block;vertical-align: top">
                                     <div class="tile">
                                         <h2 class="tile-title">功能</h2>
 
@@ -611,10 +611,9 @@
                         </div>
                         </div>
                     </div>
-                    <div id="item7" class="" style="width:90%; height: 600px;">
-                        <div class="block-area-inner">
-                        <div class="">
-                            <div class="tile">
+                    <div id="item7" class="" style="width:90%;">
+                        <div class="block-area-inner" style="float: left">
+                            <div class="tile" style="width: 400px">
                                 <div>
                                     预警等级
                                     <select class="form-control location-select-item" id="alarmtype-select" name="alarmtype-select" onclick="getAlarmLevelSetting()">
@@ -648,13 +647,13 @@
                                     </div>
                                 </div>
 
-                                <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text"></div>
+                                <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text" style="width: 350px"></div>
                                 <button class="btn-default" onclick="addAlarm()">确认</button>
                             </div>
                         </div>
 
                         <!-- plantform div-->
-                        <div id = "plantform-div" class="col-md-6" style="display:none;">
+                        <div id = "plantform-div" class="col-md-6" style="display:none; float: right">
                             设备名称：<input type="text" id="plantform-dname" class="form-control setting-input">
                             ip地址:<input type="text" id="plantform-ip" class="form-control setting-input">
                             时间：<input type="text" id="plantform-time" class="form-control setting-input">
@@ -671,7 +670,6 @@
                             <button class="btn btn-default" onclick="testOk()">点击测试短信平台</button>
                         </div>
                         <!-- plantform div end -->
-                        </div>
                     </div>
                     <div id="item8" class="" style="width:90%; height: 600px;">
                         <div class="block-area-inner">
@@ -1870,6 +1868,8 @@
                 var list = obj.allroles;
                 var table = $("#rolesinfotable");
                 table.empty();
+                table.append('<tr><td><input type="radio" name="rolesid" id="rolesid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
+                    '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
 
                 for (var i = 0; i < list.length; i++) {
 

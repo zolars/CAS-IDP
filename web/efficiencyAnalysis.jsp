@@ -77,6 +77,9 @@
             height: 230px;
             overflow: scroll;
         }
+        .col-active {
+            background: black;
+        }
     </style>
 
 </head>
@@ -302,13 +305,14 @@
                                                 <table class="display" border="1px" id="power-event-detail-1" style="width:100%;">
                                                     <thead>
                                                     <tr>
+                                                        <th></th>
                                                         <th>测量名称</th>
-                                                        <th>时间</th>
                                                         <th>类型</th>
+                                                        <th>时间</th>
                                                         <th>时间长短</th>
                                                         <th>深度（与标准的偏差）</th>
-                                                        <th>方向</th>
-                                                        <th>确认</th>
+                                                        <th>评论</th>
+                                                        <th>签名</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-1">
@@ -320,13 +324,14 @@
                                                 <table class="display" border="1px" id="power-event-detail-2" style="width:100%;">
                                                     <thead>
                                                     <tr>
+                                                        <th></th>
                                                         <th>测量名称</th>
-                                                        <th>时间</th>
                                                         <th>类型</th>
+                                                        <th>时间</th>
                                                         <th>时间长短</th>
                                                         <th>深度（与标准的偏差）</th>
-                                                        <th>方向</th>
-                                                        <th>确认</th>
+                                                        <th>评论</th>
+                                                        <th>签名</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-2">
@@ -338,13 +343,14 @@
                                                 <table class="display" border="1px" id="power-event-detail-3" style="width:100%;">
                                                     <thead>
                                                     <tr>
+                                                        <th></th>
                                                         <th>测量名称</th>
-                                                        <th>时间</th>
                                                         <th>类型</th>
+                                                        <th>时间</th>
                                                         <th>时间长短</th>
                                                         <th>深度（与标准的偏差）</th>
-                                                        <th>方向</th>
-                                                        <th>确认</th>
+                                                        <th>评论</th>
+                                                        <th>签名</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-3">
@@ -356,13 +362,14 @@
                                                 <table class="display" border="1px" id="power-event-detail-4" style="width:100%;">
                                                     <thead>
                                                     <tr>
+                                                        <th></th>
                                                         <th>测量名称</th>
-                                                        <th>时间</th>
                                                         <th>类型</th>
+                                                        <th>时间</th>
                                                         <th>时间长短</th>
                                                         <th>深度（与标准的偏差）</th>
-                                                        <th>方向</th>
-                                                        <th>确认</th>
+                                                        <th>评论</th>
+                                                        <th>签名</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-4">
@@ -374,13 +381,14 @@
                                                 <table class="display" border="1px" id="power-event-detail-5" style="width:100%;">
                                                     <thead>
                                                     <tr>
+                                                        <th></th>
                                                         <th>测量名称</th>
-                                                        <th>时间</th>
                                                         <th>类型</th>
+                                                        <th>时间</th>
                                                         <th>时间长短</th>
                                                         <th>深度（与标准的偏差）</th>
-                                                        <th>方向</th>
-                                                        <th>确认</th>
+                                                        <th>评论</th>
+                                                        <th>签名</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-5">
@@ -527,7 +535,11 @@
                                                 </tr>
                                                 <tr>
                                                     <table class="display" id="colume-table" border="1px" width="160px">
-                                                        <tr><td>名字</td><td>宽度</td></tr>
+                                                        <thead>
+                                                             <tr><td>名字</td><td>宽度</td></tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+
                                                     </table>
                                                 </tr>
                                                 <tr>
@@ -539,24 +551,12 @@
                                                     <td>
                                                         <span>可用的列</span>
                                                         <select style="display: inline-block" class="form-control location-select-item" id="useful-col">
-                                                            <option value="1">测量名称</option>
-                                                            <option value="2">时间</option>
-                                                            <option value="3">测量名称</option>
-                                                            <option value="4">类型</option>
-                                                            <option value="5">触发相位</option>
-                                                            <option value="6">时间长短</option>
-                                                            <option value="7">深度</option>
-                                                            <option value="8">方向</option>
-                                                            <option value="9">触发相位数</option>
-                                                            <option value="10">评论</option>
-                                                            <option value="11">签名</option>
-                                                            <option value="12">触发水平</option>
-                                                            <option value="13">中有波形数据</option>
+
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <button style="display: block;" id="add-col-button" type="button" class="btn-success btn-sm" onclick="getColumnItem()">添加</button>
+                                                    <button style="display: block;" id="add-col-button" type="button" class="btn-success btn-sm" onclick="addColumnItem()">添加</button>
                                                 </tr>
                                             </table>
 
@@ -594,7 +594,7 @@
                 <!-- clickEventRow DIV-->
                 <div class="clickEventRow-class" id="clickEventRow-modal" style="display: none;">
                     <button onclick="confirmEvent()" type="button" class="btn-default btn-sm" style="width: 80px;">确        认</button>
-                    <button onclick="deleteEvent()" type="button" class="btn-warning btn-sm" style="width: 80px;">删除事件</button>
+                    <button id="deleteItem" type="button" class="btn-warning btn-sm" style="width: 80px;">删除事件</button>
                 </div>
                 <!-- clickEventRow DIV END-->
 
@@ -868,42 +868,6 @@
         $("#subItem1").click(function () {
             $("#item1").show();
             $("#item2").hide();
-
-            $(document).ready(function () {
-
-                $("#detailItem").click(function () {
-                    $("#detailItem1").click(function () {
-                        $("#eventdiv1").hide();
-                        $("#eventdiv2").show();
-                        $("#eventdiv3").hide();
-                        $("#eventdiv4").hide();
-                        getPowerEvent();
-                    });
-                    $("#detailItem2").click(function () {
-                        $("#eventdiv1").hide();
-                        $("#eventdiv2").hide();
-                        $("#eventdiv3").show();
-                        $("#eventdiv4").hide();
-                        getEvironmentEvent();
-                    });
-                    $("#detailItem3").click(function () {
-                        $("#eventdiv1").hide();
-                        $("#eventdiv2").hide();
-                        $("#eventdiv3").hide();
-                        $("#eventdiv4").show();
-                        getDeviceEvent();
-                    });
-                });
-
-                $("#leftsubItem1").click(function () {
-                    $("#leftItem1").show();
-                    $("#leftItem2").hide();
-                });
-                $("#leftsubItem2").click(function () {
-                    $("#leftItem1").hide();
-                    $("#leftItem2").show();
-                });
-            });
         });
 
         $("#subItem2").click(function () {
@@ -912,6 +876,37 @@
         });
 
         $("#subItem1").click();
+
+        $("#detailItem1").click(function () {
+            $("#eventdiv1").hide();
+            $("#eventdiv2").show();
+            $("#eventdiv3").hide();
+            $("#eventdiv4").hide();
+            getPowerEvent();
+        });
+        $("#detailItem2").click(function () {
+            $("#eventdiv1").hide();
+            $("#eventdiv2").hide();
+            $("#eventdiv3").show();
+            $("#eventdiv4").hide();
+            getEvironmentEvent();
+        });
+        $("#detailItem3").click(function () {
+            $("#eventdiv1").hide();
+            $("#eventdiv2").hide();
+            $("#eventdiv3").hide();
+            $("#eventdiv4").show();
+            getDeviceEvent();
+        });
+
+        $("#leftsubItem1").click(function () {
+            $("#leftItem1").show();
+            $("#leftItem2").hide();
+        });
+        $("#leftsubItem2").click(function () {
+            $("#leftItem1").hide();
+            $("#leftItem2").show();
+        });
 
         var col1 = $. cookie('row1-name');
         var col2 = $. cookie('row2-name');
@@ -1100,7 +1095,6 @@
                 },
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
                     var obj = JSON.parse(data);
                     var list = obj['allpelist'];
                     var tbody = $("#power-event-detail-tbody-1")[0];
@@ -1108,19 +1102,21 @@
 
                     for (var i = 0; i < list.length; i++) {
                         var liststr = list[i].split(",");
+
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        console.log("lytx"+teid+name+location+type+description+time);
+                        var type = liststr[2];
+                        var time = liststr[3];
+                        var duration = liststr[5];
+                        var discription = liststr[6];
+                        var annotation = liststr[7];
+                        var signature = liststr[8];
 
                         tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + type + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + duration + '</td>' +
+                            '<td style="padding-left:60px;">' + discription + '</td><td style="padding-left:60px;">' + annotation + '</td>' +
+                            '<td style="padding-left:60px;">' + signature + '</td></tr>');
                     }
                 }
             });
@@ -1143,19 +1139,21 @@
 
                     for (var i = 0; i < list.length; i++) {
                         var liststr = list[i].split(",");
+
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        console.log("xb"+teid+name+location+type+description+time);
+                        var type = liststr[2];
+                        var time = liststr[3];
+                        var duration = liststr[5];
+                        var discription = liststr[6];
+                        var annotation = liststr[7];
+                        var signature = liststr[8];
 
                         tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + type + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + duration + '</td>' +
+                            '<td style="padding-left:60px;">' + discription + '</td><td style="padding-left:60px;">' + annotation + '</td>' +
+                            '<td style="padding-left:60px;">' + signature + '</td></tr>');
                     }
                 }
             });
@@ -1178,19 +1176,21 @@
 
                     for (var i = 0; i < list.length; i++) {
                         var liststr = list[i].split(",");
+
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        console.log("sx"+teid+name+location+type+description+time);
+                        var type = liststr[2];
+                        var time = liststr[3];
+                        var duration = liststr[5];
+                        var discription = liststr[6];
+                        var annotation = liststr[7];
+                        var signature = liststr[8];
 
                         tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + type + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + duration + '</td>' +
+                            '<td style="padding-left:60px;">' + discription + '</td><td style="padding-left:60px;">' + annotation + '</td>' +
+                            '<td style="padding-left:60px;">' + signature + '</td></tr>');
                     }
                 }
             });
@@ -1213,19 +1213,21 @@
 
                     for (var i = 0; i < list.length; i++) {
                         var liststr = list[i].split(",");
+
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        console.log("sb"+teid+name+location+type+description+time);
+                        var type = liststr[2];
+                        var time = liststr[3];
+                        var duration = liststr[5];
+                        var discription = liststr[6];
+                        var annotation = liststr[7];
+                        var signature = liststr[8];
 
                         tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + type + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + duration + '</td>' +
+                            '<td style="padding-left:60px;">' + discription + '</td><td style="padding-left:60px;">' + annotation + '</td>' +
+                            '<td style="padding-left:60px;">' + signature + '</td></tr>');
                     }
                 }
             });
@@ -1248,19 +1250,21 @@
 
                     for (var i = 0; i < list.length; i++) {
                         var liststr = list[i].split(",");
+
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        console.log("shanbian"+teid+name+location+type+description+time);
+                        var type = liststr[2];
+                        var time = liststr[3];
+                        var duration = liststr[5];
+                        var discription = liststr[6];
+                        var annotation = liststr[7];
+                        var signature = liststr[8];
 
                         tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + type + '</td>' +
+                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + duration + '</td>' +
+                            '<td style="padding-left:60px;">' + discription + '</td><td style="padding-left:60px;">' + annotation + '</td>' +
+                            '<td style="padding-left:60px;">' + signature + '</td></tr>');
                     }
                 }
             });
@@ -1591,7 +1595,7 @@
                     if(annotation[0] == " null")
                         annotation[0] = "";
 
-                    tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:20px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
+                    tbody.innerHTML += ('<tr id=' + teid[1] +  '>' + '<td name="teid" id="teid" style="width:20px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
                         '<td id="name" style="width:60px;">' + name + '</td>' +
                         '<td style="width:60px;">' + location + '</td>' +
                         '<td style="width:60px;">' + type + '</td>' +
@@ -1786,53 +1790,88 @@
 
 <!-- 右侧界面 第二个子菜单 列 -->
 <script type="text/javascript">
+    var optionDataSource = [{ name: '测量名称', length: '90'}, { name: '时间', length: '110'}, { name: '类型', length: '50'},
+        { name: '触发相位', length: '50'}, { name: '时间长短', length: '50'}, { name: '深度', length: '50'}, { name: '方向', length: '50'},
+        { name: '评论', length: '50'}, { name: '签名', length: '50'}, { name: '触发水平', length: '50'}, { name: '中有波形数据', length: '50'}];
+    optionDataSource.forEach(function(item, index) {
+        $("#useful-col").append('<option id=' + index + '>' + item.name + '</option>')
+    })
 
-    //初始化cookie中的列
+    var visibleColumnData = [];
+
     $(document).ready(function() {
-        $. cookie('row1-name', '测量名称', {expires: 1, path: '/'});
-        $. cookie('row1-val', '100', {expires: 1, path: '/'});
-        $. cookie('row2-name', '时间', {expires: 1, path: '/'});
-        $. cookie('row2-val', '132', {expires: 1, path: '/'});
-        $. cookie('row3-name', '类型', {expires: 1, path: '/'});
-        $. cookie('row3-val', '50', {expires: 1, path: '/'});
-        $. cookie('row4-name', '触发相位', {expires: 1, path: '/'});
-        $. cookie('row4-val', '50', {expires: 1, path: '/'});
-        $. cookie('row5-name', '时间长短', {expires: 1, path: '/'});
-        $. cookie('row5-val', '60', {expires: 1, path: '/'});
-        $. cookie('row6-name', '深度', {expires: 1, path: '/'});
-        $. cookie('row6-val', '60', {expires: 1, path: '/'});
-        $. cookie('row7-name', '方向', {expires: 1, path: '/'});
-        $. cookie('row7-val', '10', {expires: 1, path: '/'});
-        /*$. cookie('row8-name', '触发相位数', {expires: 1, path: '/'});
-        $. cookie('row8-val', '10', {expires: 1, path: '/'});
-        $. cookie('row9-name', '评论', {expires: 1, path: '/'});
-        $. cookie('row9-val', '100', {expires: 1, path: '/'});
-        $. cookie('row10-name', '签名', {expires: 1, path: '/'});
-        $. cookie('row10-val', '100', {expires: 1, path: '/'});*/
+        var tbody = $("#colume-table").children("tbody");
+        if(localStorage.getItem("visibleColumn")) {
+            visibleColumnData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        if(visibleColumnData.length > 0) {
+            visibleColumnData.forEach(function(item, index) {
+                tbody.append('<tr id=' + index + '><td>' + item.name + '</td><td>' + item.length + '</td></tr>' )
+            })
+        }
 
-        var coltable = $("#colume-table");
-
-        coltable.append(
-            '<tr><td>'+$. cookie('row1-name')+'</td><td>'+$. cookie('row1-val')+'</td></tr>' +
-            '<tr><td>'+$. cookie('row2-name')+'</td><td>'+$. cookie('row2-val')+'</td></tr>' +
-            '<tr><td>'+$. cookie('row3-name')+'</td><td>'+$. cookie('row3-val')+'</td></tr>' +
-            '<tr><td>'+$. cookie('row4-name')+'</td><td>'+$. cookie('row4-val')+'</td></tr>' +
-            '<tr><td>'+$. cookie('row5-name')+'</td><td>'+$. cookie('row5-val')+'</td></tr>' +
-            '<tr><td>'+$. cookie('row6-name')+'</td><td>'+$. cookie('row6-val')+'</td></tr>' +
-            '<tr><td>'+$. cookie('row7-name')+'</td><td>'+$. cookie('row7-val')+'</td></tr>' );//+
-            /*'<tr><td>'+$. cookie('row8-name')+'</td><td>'+$. cookie('row8-val')+'</td></tr>' +
-            '<tr><td>'+$. cookie('row9-name')+'</td><td>'+$. cookie('row9-val')+'</td></tr>' +
-            '<tr><td>'+$. cookie('row10-name')+'</td><td>'+$. cookie('row10-val')+'</td></tr>');*/
+        tbody.on('click', 'tr', function () {
+            var that = $(this);
+            tbody.children('tr').removeClass('col-active');
+            if(!that.hasClass('col-active')) {
+                that.addClass('col-active')
+            }
+        })
     });
 
+    function addColumnItem() {
+        var index = Number($("#useful-col option:selected").attr("id"));
+        visibleColumnData.push(optionDataSource[index]);
+        localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
+        var tbody = $("#colume-table").children("tbody");
+        tbody.append('<tr id=' + (visibleColumnData.length - 1) +'><td>' + optionDataSource[index].name + '</td><td>' + optionDataSource[index].length + '</td></tr>')
+    }
+
     function upcol(){
-        alert("up");
+        var coltable = $("#colume-table");
+        var target = coltable.children("tbody").children(".col-active");
+        var list = coltable.children("tbody").children('tr');
+        if(target.length > 0){
+            var thisLocation = list.index( target );
+            if( thisLocation < 1 ){
+                alert('已移到最顶端了');
+            }else {
+                target.prev().before(target); //上移动
+            }
+        }else {
+            alert('请选择要上移的列');
+        }
     }
     function downcol(){
-        alert("down");
+        var coltable = $("#colume-table");
+        var target = coltable.children("tbody").children(".col-active");
+        var list = coltable.children("tbody").children('tr');
+        if(target.length > 0){
+            var thisLocation = list.index( target );
+            if( thisLocation >= list.length - 1 ){
+                return alert('已移到最底端了');
+            }else {
+                target.next().after(target); //下移动
+            }
+        }else {
+            return alert('请选择要下移的列');
+        }
     }
     function deletecol(){
-        alert("del");
+        var coltable = $("#colume-table");
+        var deleteData = coltable.children("tbody").children(".col-active");
+        if(!deleteData) {
+            return alert('请选择删除的项');
+        }
+        var daleteIndex = [];
+        for(var i = 0; i < deleteData.length; i++) {
+            daleteIndex.push(Number(deleteData[i].id));
+        }
+        visibleColumnData = visibleColumnData.filter(function(item, index) {
+            return daleteIndex.indexOf(index) < 0
+        });
+        localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
+        deleteData.remove();
     }
 </script>
 
@@ -2164,13 +2203,14 @@
         var teid = cols[0].innerText;
         $('#select-teid').val(teid);
     }
-
     //点击单条事件-删除事件（假删除，只是前端不显示）
-    function deleteEvent(){
+    $('#deleteItem').on('click', function () {
+        var tbody = $("#power-event-tbody");
         var id = $('#select-teid').val();
+        tbody.children("#" + id).remove();
         $('#clickEventRow-modal').css('display', 'none');
-        powertable.row($(id).parents('tr')).remove().draw();
-    }
+    });
+
 </script>
 
 </body>
