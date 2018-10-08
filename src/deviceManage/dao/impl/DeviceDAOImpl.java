@@ -124,20 +124,42 @@ public class DeviceDAOImpl implements DeviceDAO {
             return kl.getId();
     }
 
-    public Boolean addThresholdInfo(String did, Integer dtid, String name,String type,String unit,Double standval,Double cellval,Double floorval,Integer ismark, Integer level){
+    public Boolean addThresholdInfo(String did, Integer dtid, String name,String type,String unit,Double cellval,Double floorval,Integer ismark, Integer level){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
         DevicesThreshold dt = new DevicesThreshold();
-        dt.setDid(did);
+
         dt.setDtid(dtid);
+        dt.setType(type);
+        dt.setDid(did);
+        dt.setClassify(name);
         dt.setUnit(unit);
         dt.setCellval(cellval);
         dt.setFloorval(floorval);
         dt.setLevel(level);
+        dt.setIsmark(ismark);
 
         rt = hbsessionDao.insert(dt);
         return rt;
+    }
+
+    public String getOneDeviceThresholdByNameAndLevel(String name, String level){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        DeviceAlarmUser kl = (DeviceAlarmUser)hbsessionDao.getFirst(
+                "FROM DeviceAlarmUser order by id desc");
+
+        return "0";
+    }
+
+    public String getTypeByName(String name){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        DeviceAlarmUser kl = (DeviceAlarmUser)hbsessionDao.getFirst(
+                "FROM DeviceAlarmUser order by id desc");
+
+        return "0";
     }
 
     public Boolean  addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port,

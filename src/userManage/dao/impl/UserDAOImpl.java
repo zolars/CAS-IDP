@@ -259,7 +259,8 @@ public class UserDAOImpl implements UserDAO {
 
         //获取当前用户，判断是否可以更改信息
         User ur = (User)hbsessionDao.getFirst("FROM User where uid = '" + temuser+ "'");
-        UserRoles userole = (UserRoles)hbsessionDao.getFirst("FROM UserRoles where uid = '" + temuser+ "'");
+        UserRoles userole = (UserRoles)hbsessionDao.getFirst("FROM UserRoles where uid = '" + temuser + "'"); //当前用户
+        UserRoles userole2 = (UserRoles)hbsessionDao.getFirst("FROM UserRoles where uid = '" + uid + "'"); //待修改用户
         Roles role = (Roles)hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles + "'");
 
         if((uid.equals(temuser)) || (userole.getRid().equals("1"))){ //可以修改
@@ -282,7 +283,7 @@ public class UserDAOImpl implements UserDAO {
 
             rt = hbsessionDao.update(hql);
 
-            if(userole.getRid() != null) {
+            if(userole2.getRid() != null) {
                 String hql2 = "update UserRoles newurole set newurole.rid='" + role.getRid() +
                         "' where newurole.uid='" + uid + "'";
                 rt = hbsessionDao.update(hql2);

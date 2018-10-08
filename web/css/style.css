@@ -2096,6 +2096,10 @@ a.list-group-item.active > .badge,
         padding: 15px 15px 0; 
     }
 
+    .block-area-inner{
+        padding: 10px 0 0;
+    }
+
     /* Sidebar */
     #sidebar {
         padding-left: 45px;
