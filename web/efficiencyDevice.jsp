@@ -63,9 +63,11 @@
 %>
 
     <header id="header" class="media">
-        <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">IDP数据中心动力管控系统</a>
-
+        <div class="header-left">
+            <a href="" id="menu-toggle"></a>
+            <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
+            <img src="/img/index/logo.jpg" alt="">
+        </div>
         <div class="media-body">
             <div class="media" id="top-menu">
                 <div class="pull-left location-select">

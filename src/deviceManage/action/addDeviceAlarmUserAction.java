@@ -28,17 +28,18 @@ public class addDeviceAlarmUserAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String did = request.getParameter("did");
-            String stime = request.getParameter("stime");
-            String etime = request.getParameter("etime");
+            String aucradio = request.getParameter("aucradio");
             String uid = request.getParameter("uid");
+            String period = "0";
+            if(aucradio.equals("allday"))
+                period = "1";
 
             DeviceDAO dao = new DeviceDAOImpl();
 
-            Boolean rt = dao.addOneDeviceAlarmUser(did, uid, stime, etime);
+            Boolean rt = dao.addOneDeviceAlarmUser(did, uid, period);
             JSONObject jsonObject = new JSONObject();
 
             if(rt)

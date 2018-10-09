@@ -83,6 +83,10 @@
             width: 70px;
 
         }
+        .table-container {
+            height: 700px;
+            overflow: scroll;
+        }
     </style>
 </head>
 
@@ -114,7 +118,8 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">IDP数据中心</a>
+        <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
+        <img src="/img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -217,9 +222,9 @@
                     </ul>
 
                     <div id="item1" class="col-md-2 col-xs-6 item-container">
-                        <div class="block-area" id="defaultStyle">
+                        <div class="block-area-inner" id="defaultStyle">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="">
                                     <div class="tile">
                                         <h2 class="tile-title">账号信息</h2>
                                         <div class="btn-group item-btn-container">
@@ -237,60 +242,18 @@
                                             </button>
                                         </div>
 
-                                        <table id="userinfotable"></table>
+                                        <table id="userinfotable" border="1px"></table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        <div class="block-area">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="tile">
-                                        <h2 class="tile-title">角色管理</h2>
-                                        <table id="rolesinfotablehead">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    <div style="padding-left:40px;">角色编码</div>
-                                                </th>
-                                                <th>
-                                                    <div style="padding-left:40px;">角色名称</div>
-                                                </th>
-                                                <th>
-                                                    <div style="padding-left:40px;">备注</div>
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                        </table>
-                                        <table id="rolesinfotable"></table>
-
-                                        <div class="btn-group">
-                                            <button type="button" class="btn-primary"
-                                                    onClick="getALLRolesInfomation()">查询
-                                            </button>
-                                            <button type="button" class="btn-success"
-                                                    onclick="showAddRolesrModal()">新增
-                                            </button>
-                                            <button type="button" class="btn-danger"
-                                                    onClick="deleteRolesInfomation()">删除
-                                            </button>
-                                            <button type="button" class="btn-default"
-                                                    onclick="showUpdateRolesModal()">修改
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        <div class="block-area">
-                            <div class="col-md-5">
+                    <div id="item2" class="">
+                        <div class="block-area-inner">
+                            <div class="">
                                 <div class="tile">
-                                    <h2 class="tile-title">角色</h2>
-                                    <table id="rolesinfotablehead-functionmng">
+                                    <h2 class="tile-title">角色管理</h2>
+                                    <table id="rolesinfotablehead" border="1px">
                                         <thead>
                                         <tr>
                                             <th>
@@ -305,207 +268,245 @@
                                         </tr>
                                         </thead>
                                     </table>
-                                    <table id="rolesinfotable-functionmng"></table>
-
-                                    <div id="roleid" style="display: none"></div>
+                                    <table id="rolesinfotable" border="1px"></table>
 
                                     <div class="btn-group">
-                                        <button type="button" class="btn-primary" onclick="allocateRoles()">
-                                            分配功能
-                                        </button>
                                         <button type="button" class="btn-primary"
-                                                onclick="getOneRolesFunctions()">查看角色功能
+                                                onClick="getALLRolesInfomation()">查询
+                                        </button>
+                                        <button type="button" class="btn-success"
+                                                onclick="showAddRolesrModal()">新增
+                                        </button>
+                                        <button type="button" class="btn-danger"
+                                                onClick="deleteRolesInfomation()">删除
+                                        </button>
+                                        <button type="button" class="btn-default"
+                                                onclick="showUpdateRolesModal()">修改
                                         </button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div id="item3" class="">
+                        <div class="block-area-inner">
+                                <div style="width: 500px;display: inline-block;vertical-align: top">
+                                    <div class="tile">
+                                        <h2 class="tile-title">角色</h2>
+                                        <table id="rolesinfotablehead-functionmng">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    <div style="padding-left:40px;">角色编码</div>
+                                                </th>
+                                                <th>
+                                                    <div style="padding-left:40px;">角色名称</div>
+                                                </th>
+                                                <th>
+                                                    <div style="padding-left:40px;">备注</div>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                        <table id="rolesinfotable-functionmng"></table>
 
-                            <div class="col-md-7">
-                                <div class="tile">
-                                    <h2 class="tile-title">功能</h2>
+                                        <div id="roleid" style="display: none"></div>
 
-                                    <div id="jstree"></div>
-                                    <div id="nodeid" style="display: none"></div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-primary" onclick="allocateRoles()">
+                                                分配功能
+                                            </button>
+                                            <button type="button" class="btn-primary"
+                                                    onclick="getOneRolesFunctions()">查看角色功能
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div style="width: 500px;display: inline-block;vertical-align: top">
+                                    <div class="tile">
+                                        <h2 class="tile-title">功能</h2>
+
+                                        <div id="jstree"></div>
+                                        <div id="nodeid" style="display: none"></div>
+
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+                    <div id="item4" class="">
+                        <div class="block-area-inner">
+                            <ul class="nav nav-tabs">
+                                <li class="active" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem1">•IDP</a>
+                                </li>
+                                <li style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem2">•UPS</a>
+                                </li>
+                                <li style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem3">•蓄电池</a>
+                                </li>
+                                <li style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem4">•柴油发电机</a>
+                                </li>
+                                <li style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem5">•空调</a>
+                                </li>
+                                <li style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem6">•其他传感器</a>
+                                </li>
+                            </ul>
+
+                            <div id="secItem1" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+                            <div id="secItem2" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+                            <div id="secItem3" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+                            <div id="secItem4" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+                            <div id="secItem5" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+                            <div id="secItem6" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+
+                            </div>
+
+                            <div id="TCP-device" style="display: none">
+                                <div id="outer" class="outer">
+                                    <input id="searchInput" class="searchInput form-control"
+                                           type="text">
+                                    <div id="searchTips" class="tips" style="display: none">
+                                    </div>
+                                </div>
+                                <button class="btn btn-default searchButton" onclick="checkDevice()">查询</button>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="tile">
+                                            <h2 class="tile-title">类型</h2>
+                                            <div class="tile-config dropdown">
+                                                <a data-toggle="dropdown"></a>
+                                            </div>
+
+                                            <div class="listview todo-list sortable">
+                                                <div class="media">
+                                                    <div class="checkbox m-0">
+                                                        <label class="t-overflow">
+                                                            <input id="radio-Ethernet" name="myradio" type="radio"> 以太网
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="media">
+                                                    <div class="checkbox m-0">
+                                                        <label class="t-overflow">
+                                                            <input id="radio-R5485" name="myradio" type="radio"> R5485
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="media">
+                                                    <div class="checkbox m-0">
+                                                        <label class="t-overflow">
+                                                            <input id="radio-RS232" name="myradio" type="radio"> RS232
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tile">
+                                            <h2 class="tile-title">预警方式</h2>
+                                            <div class="tile-config dropdown">
+                                                <a data-toggle="dropdown"></a>
+                                            </div>
+
+                                            <div class="listview todo-list sortable">
+                                                <div class="media">
+                                                    <div class="checkbox m-0">
+                                                        <label class="t-overflow">
+                                                            <input type="checkbox" id="checkbox-sms" name="checkbox-sms"> 短信
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="media">
+                                                    <div class="checkbox m-0">
+                                                        <label class="t-overflow">
+                                                            <input type="checkbox" id="checkbox-alert" name="checkbox-alert"> 弹窗
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="media">
+                                                    <div class="checkbox m-0">
+                                                        <label class="t-overflow">
+                                                            <input type="checkbox" id="checkbox-plantform" name="checkbox-plantform"> 平台
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="tile">
+                                            <h2 class="tile-title">设置</h2>
+                                            <div class="tile-config dropdown">
+                                                <a data-toggle="dropdown"></a>
+                                            </div>
+
+                                            <div>
+                                                <div class="did" id="did"></div>
+                                                <label class="t-overflow">
+                                                    设备名称<input id="devname" type="text" class="form-control setting-input">
+                                                </label>
+                                                <label class="t-overflow">
+                                                    设备类型 <input id="devtype" type="text" class="form-control setting-input">
+                                                </label>
+                                                <label class="t-overflow">
+                                                    序列号 <input id="serialno" type="text" class="form-control setting-input">
+                                                </label>
+                                                <label class="t-overflow">
+                                                    IP地址 <input id="IPaddress" type="text"
+                                                                class="form-control setting-input">
+                                                </label>
+                                                <label class="t-overflow">
+                                                    端口号 <input id="port" type="text" class="form-control setting-input">
+                                                </label>
+                                                <label class="t-overflow">
+                                                    备注 <input id="extra" type="text" class="form-control setting-input">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="tile">
+                                        <h2 class="tile-title">预警人员</h2>
+                                        <div class="tile-config dropdown">
+                                            <a data-toggle="dropdown"></a>
+                                        </div>
+                                        <table id="alarm-user-table" class="alarm-user-table">
+                                        </table>
+                                    </div>
+
+                                    <div>
+                                        <button class="btn-success" onclick="addDeviceAlarmUser()">添加预警人员</button>
+                                        <button class="btn-default" onclick="deleteDeviceAlarmUser()">取消预警人员</button>
+                                    </div>
+
+                                    <div>
+                                        <button class="btn-success" onclick="addOneDevice()">添加设备</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="item4" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        <div class="row"></div>
-                        <ul class="nav nav-tabs">
-                            <li class="active" style="width:15%">
-                                <a data-toggle="tab" id="secsubItem1">•IDP</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="secsubItem2">•UPS</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="secsubItem3">•蓄电池</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="secsubItem4">•柴油发电机</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="secsubItem5">•空调</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="secsubItem6">•其他传感器</a>
-                            </li>
-                        </ul>
-
-                        <div id="secItem1" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                        </div>
-                        <div id="secItem2" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                        </div>
-                        <div id="secItem3" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                        </div>
-                        <div id="secItem4" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                        </div>
-                        <div id="secItem5" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                        </div>
-                        <div id="secItem6" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                        </div>
-
-                        <div id="TCP-device" style="display: none">
-                            <div id="outer" class="outer">
-                                <input id="searchInput" class="searchInput form-control"
-                                       type="text">
-                                <div id="searchTips" class="tips" style="display: none">
-                                </div>
-                            </div>
-                            <button class="btn btn-default searchButton" onclick="checkDevice()">查询</button>
-                            <%--<div id="item-devicename"--%>
-                                 <%--style="display: none;width: 250px; height: 100px;background: rgba(1, 1, 1, 0.5);">--%>
-                                <%--<ul id="device-name-Item">--%>
-                                <%--</ul>--%>
-                            <%--</div>--%>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="tile">
-                                        <h2 class="tile-title">类型</h2>
-                                        <div class="tile-config dropdown">
-                                            <a data-toggle="dropdown"></a>
-                                        </div>
-
-                                        <div class="listview todo-list sortable">
-                                            <div class="media">
-                                                <div class="checkbox m-0">
-                                                    <label class="t-overflow">
-                                                        <input id="radio-Ethernet" name="myradio" type="radio"> 以太网
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="media">
-                                                <div class="checkbox m-0">
-                                                    <label class="t-overflow">
-                                                        <input id="radio-R5485" name="myradio" type="radio"> R5485
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="media">
-                                                <div class="checkbox m-0">
-                                                    <label class="t-overflow">
-                                                        <input id="radio-RS232" name="myradio" type="radio"> RS232
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tile">
-                                        <h2 class="tile-title">预警方式</h2>
-                                        <div class="tile-config dropdown">
-                                            <a data-toggle="dropdown"></a>
-                                        </div>
-
-                                        <div class="listview todo-list sortable">
-                                            <div class="media">
-                                                <div class="checkbox m-0">
-                                                    <label class="t-overflow">
-                                                        <input type="checkbox" id="checkbox-sms" name="checkbox-sms"> 短信
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="media">
-                                                <div class="checkbox m-0">
-                                                    <label class="t-overflow">
-                                                        <input type="checkbox" id="checkbox-alert" name="checkbox-alert"> 弹窗
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="media">
-                                                <div class="checkbox m-0">
-                                                    <label class="t-overflow">
-                                                        <input type="checkbox" id="checkbox-plantform" name="checkbox-plantform"> 平台
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="tile">
-                                        <h2 class="tile-title">设置</h2>
-                                        <div class="tile-config dropdown">
-                                            <a data-toggle="dropdown"></a>
-                                        </div>
-
-                                        <div>
-                                            <div class="did" id="did"></div>
-                                            <label class="t-overflow">
-                                                设备名称<input id="devname" type="text" class="form-control setting-input">
-                                            </label>
-                                            <label class="t-overflow">
-                                                设备类型 <input id="devtype" type="text" class="form-control setting-input">
-                                            </label>
-                                            <label class="t-overflow">
-                                                序列号 <input id="serialno" type="text" class="form-control setting-input">
-                                            </label>
-                                            <label class="t-overflow">
-                                                IP地址 <input id="IPaddress" type="text"
-                                                            class="form-control setting-input">
-                                            </label>
-                                            <label class="t-overflow">
-                                                端口号 <input id="port" type="text" class="form-control setting-input">
-                                            </label>
-                                            <label class="t-overflow">
-                                                备注 <input id="extra" type="text" class="form-control setting-input">
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="tile">
-                                    <h2 class="tile-title">预警人员</h2>
-                                    <div class="tile-config dropdown">
-                                        <a data-toggle="dropdown"></a>
-                                    </div>
-                                    <table id="alarm-user-table" class="alarm-user-table">
-                                    </table>
-                                </div>
-
-                                <div>
-                                    <button class="btn-success" onclick="addDeviceAlarmUser()">添加预警人员</button>
-                                    <button class="btn-default" onclick="deleteDeviceAlarmUser()">取消预警人员</button>
-                                </div>
-
-                                <div>
-                                    <button class="btn-success" onclick="addOneDevice()">添加设备</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div id="item5" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        <div class="tile">
+                    <div id="item5" class="" style="width:90%; height: 600px;">
+                        <div class="block-area-inner">
+                           <div class="tile">
                             <table>
                                 <thead>
                                 <tr>
@@ -552,8 +553,10 @@
                                 </tr>
                             </table>
                         </div>
+                        </div>
                     </div>
-                    <div id="item6" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                    <div id="item6" class="" style="width:90%; height: 600px;">
+                        <div class="block-area-inner">
                         <div class="row"></div>
                         <ul class="nav nav-tabs" id="tridulItem">
                             <li class="active" style="width:15%">
@@ -595,59 +598,62 @@
                                 </table>
                             </div>
 
-                            <div class="col-md-8">
-                                <table id="threadinfotablehead"></table>
-                                <table id="infotable"></table>
+                            <div class="col-md-10">
+                                <div class="table-container">
+                                    <table border="1px" id="threadinfotablehead"></table>
+                                 <%--   <table id="infotable"></table>--%>
+                                </div>
                             </div>
                         </div>
                         <div id="tridItem2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                         </div>
                         <div id="tridItem3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                         </div>
+                        </div>
                     </div>
-                    <div id="item7" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                    <div id="item7" class="" style="width:90%;">
+                        <div class="block-area-inner" style="float: left">
+                            <div class="tile" style="width: 400px">
+                                <div>
+                                    预警等级
+                                    <select class="form-control location-select-item" id="alarmtype-select" name="alarmtype-select" onclick="getAlarmLevelSetting()">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
 
-
-
-                        <div class="tile">
-                            预警方式<select class="form-control location-select-item" id="alarmtype-select"
-                                    name="alarmtype-select">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                            <div class="listview todo-list sortable">
-                                <div class="media">
-                                    <div class="checkbox m-0">
-                                        <label class="t-overflow">
-                                            <input type="checkbox" id="checkbox-sms-2" name="checkbox-sms-2"> 短信
-                                        </label>
+                                <div class="listview todo-list sortable">
+                                    <div class="media">
+                                        <div class="checkbox m-0">
+                                            <label class="t-overflow">
+                                                <input type="checkbox" id="checkbox-alert-2" name="checkbox-alert-2"> 弹窗
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="checkbox m-0">
+                                            <label class="t-overflow">
+                                                <input type="radio" id="checkbox-sms-2" name="checkbox-smsorplant" onchange="hiddenplantformsetting(this)"> 短信
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="checkbox m-0">
+                                            <label class="t-overflow">
+                                                <input type="radio" id="checkbox-plantform-2" name="checkbox-smsorplant" onchange="showplantformsetting(this)"> 平台
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="media">
-                                    <div class="checkbox m-0">
-                                        <label class="t-overflow">
-                                            <input type="checkbox" id="checkbox-alert-2" name="checkbox-alert-2"> 弹窗
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="checkbox m-0">
-                                        <label class="t-overflow">
-                                            <input type="checkbox" id="checkbox-plantform-2" name="checkbox-plantform-2"> 平台
-                                        </label>
-                                    </div>
-                                </div>
+
+                                <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text" style="width: 350px"></div>
+                                <button class="btn-default" onclick="addAlarm()">确认</button>
                             </div>
-
-                            <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text">
-                            </div>
-                            <button class="btn-default" onclick="addAlarm()">确认</button>
                         </div>
 
-
                         <!-- plantform div-->
-                        <div id = "plantform-div">
+                        <div id = "plantform-div" class="col-md-6" style="display:none; float: right">
                             设备名称：<input type="text" id="plantform-dname" class="form-control setting-input">
                             ip地址:<input type="text" id="plantform-ip" class="form-control setting-input">
                             时间：<input type="text" id="plantform-time" class="form-control setting-input">
@@ -664,12 +670,10 @@
                             <button class="btn btn-default" onclick="testOk()">点击测试短信平台</button>
                         </div>
                         <!-- plantform div end -->
-
-
-
                     </div>
-                    <div id="item8" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        <div class="col-md-5">
+                    <div id="item8" class="" style="width:90%; height: 600px;">
+                        <div class="block-area-inner">
+                        <div class="">
                             <table>
                                 <tr>
                                     <td>实时数据采集频率：</td>
@@ -691,8 +695,10 @@
                                 </tr>
                             </table>
                         </div>
+                        </div>
                     </div>
-                    <div id="item9" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                    <div id="item9" class="" style="width:90%; height: 600px;">
+                        <div class="block-area-inner">
                         <div class="col-md-2">
                             <div id="jstree-structure"></div>
                             <div id="nodeidstruct" style="display: none"></div>
@@ -701,6 +707,7 @@
                             <button type="button" class="btn btn-sm btn-alt" onClick="addOrg()">添加</button>
                             <button type="button" class="btn btn-sm btn-alt" onClick="updateOrg()">修改</button>
                             <button type="button" class="btn btn-sm btn-alt" onClick="deleteOrg()">删除</button>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -808,7 +815,7 @@
             <div class="add-threshold-one-line">
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数名称</div>
-                    <input class="form-control location-select-item" id="thresholdname" name="thresholdname"  disabled="disabled">
+                    <input class="form-control location-select-item" id="thresholdname" name="thresholdname">
                     </input>
                 </div>
 
@@ -877,7 +884,6 @@
 
         <!-- alarm user model DIV-->
         <div class="add-alarm-user" id="add-alarm-user-modal" style="display: none">
-
             预警人员
             <select class="form-control location-select-item" id="alarm-user"
                     name="alarm-user" onclick="getALLUserInfoSimple()">
@@ -885,22 +891,17 @@
             </select>
 
             <div class="add-roles-one-line">
-                <div id="aauid" style="display: none"></div>
-                <div class="add-roles-item">
-                    <div class="add-roles-title">开始时间</div>
-                    <input id="alarm-stime" class="form-control add-roles-input" type="text">
-                </div>
-                <div class="add-roles-item">
-                    <div class="add-roles-title">结束时间</div>
-                    <input id="alarm-etime" class="form-control add-roles-input" type="text">
-                </div>
+                <input type="radio" id="add-alarm-user-allday-radio" name="add-alarm-user-radio" value="allday">全天
+            </div>
+            <div class="add-roles-one-line">
+                <input type="radio" id="add-alarm-user-workday-radio" name="add-alarm-user-radio" value="workday">工作日
             </div>
 
             <div class="add-threshold-handle">
-                <button type="submit" class="btn btn-primary" id="add-alarm-user-handle"
+                <button type="submit" class="btn-primary" id="add-alarm-user-handle"
                         onclick="addAlarmUser()">确定
                 </button>
-                <button class="btn btn-default" onclick="cancle()">取消</button>
+                <button class="btn-default" onclick="cancle()">取消</button>
             </div>
         </div>
         <!-- alarm user model DIV END-->
@@ -1248,7 +1249,7 @@
                         if(list[i].extra != undefined) rextra = list[i].extra;
                         else rextra = " ";
 
-                        table.append('<tr><td><input type="checkbox" id="cbox-rid" name="cbox-rid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
+                        table.append('<tr><td><input type="radio" id="cbox-rid" name="cbox-rid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
                             '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
                     }
                 }
@@ -1613,7 +1614,6 @@
                 },
                 dataType: "json",
                 success: function (data) {
-                    alert(data);
                     getALLUserInfomation();
                 }
             });
@@ -1671,7 +1671,13 @@
 
         var temuser = "<%=session.getAttribute("userid")%>"; //用于验证当前账户的是否具有修改用户信息的权限
 
-        if (testTelephone(telephone) && testTelephone(govtelephone)) {
+        if(rid == "")
+            alert("角色不能为空，请选择！");
+        else if(uname == "")
+            alert("账号不能为空，请选择！");
+        else if(chinesename == "")
+            alert("姓名不能为空，请选择！");
+        else if(testTelephone(telephone) && testTelephone(govtelephone)) {
             $.ajax({
                 type: "post",
                 url: "updateUserInfo",
@@ -1862,17 +1868,18 @@
                 var list = obj.allroles;
                 var table = $("#rolesinfotable");
                 table.empty();
+                table.append('<tr><td><input type="radio" name="rolesid" id="rolesid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
+                    '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
 
                 for (var i = 0; i < list.length; i++) {
 
                     var rid = list[i].rid;
                     var  rname = list[i].rolesname;
-
                     var rextra;
                     if(list[i].extra != undefined) rextra = list[i].extra;
                     else rextra = " ";
 
-                    table.append('<tr><td><input type="checkbox" name="rolesid" id="rolesid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
+                    table.append('<tr><td><input type="radio" name="rolesid" id="rolesid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
                         '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
                 }
             }
@@ -2081,7 +2088,7 @@
             timer = setTimeout(function () {
                 func.apply(context, args);
             }, interval);
-        }
+        };
     };
 
     function appendData(data) {
@@ -2094,8 +2101,7 @@
             });
             item.setAttribute("class", "tips-item");
             tips.appendChild(item);
-        }
-        ;
+        };
     };
 
     function insertData(value) {
@@ -2104,8 +2110,7 @@
         var result = fakeApi(value);
         if (result && result.length > 0) {
             tips.style.display = 'block'
-        }
-        ;
+        };
         appendData(result);
     };
 
@@ -2258,7 +2263,7 @@
                         var timeperiod = (list[i].timeperiod != "1") ? "全天告警":"工作日告警";
                         var uname = listname[i];
 
-                        table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="auid" id="auid" value=' + id + '></td>' +
+                        table.append('<tr><td style="padding-left:20px;"><input type="radio" name="auid" id="auid" value=' + id + '></td>' +
                             '<td style="padding-left:80px;">' + timeperiod + '</td>' +
                             '<td style="padding-left:40px;">' + uname + '</td></tr>');
                     }
@@ -2302,25 +2307,27 @@
     <!-- 确认添加预警人员 -->
     function addAlarmUser() {
         var did = $("#did").val();
-        var astime = $("#alarm-stime").val();
-        var aetime = $("#alarm-etime").val();
+        var aucradio = $('input[name="add-alarm-user-radio"]:checked').val();
         var auser = $("#alarm-user").val();
 
-        $.ajax({
-            type: "post",
-            url: "addDeviceAlarmUser",
-            data: {
-                did: did,
-                stime: astime,
-                etime: aetime,
-                uid: auser
-            },
-            dataType: "json",
-            success: function (data) {
-                alert(data);
-                $('#add-alarm-user-modal').css('display', 'none');
-            }
-        });
+        if(aucradio == undefined)
+            alert("请选择告警时段");
+        else{
+            $.ajax({
+                type: "post",
+                url: "addDeviceAlarmUser",
+                data: {
+                    did: did,
+                    aucradio: aucradio,
+                    uid: auser
+                },
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                    $('#add-alarm-user-modal').css('display', 'none');
+                }
+            });
+        }
     }
 
     function cancle() {
@@ -2574,7 +2581,14 @@
                         var isMark = list[i][6];
                         var level = list[i][7];
 
-                        table.append('<tr><td style="padding-left:20px;"><input type="checkbox" name="dtid" id="dtid" value=' + dtid + '></td>' +
+                        if(cellval == null)
+                            cellval = "";
+                        if(floorval == null)
+                            floorval = "";
+                        if(isMark == null)
+                            isMark = "";
+
+                        table.append('<tr><td style="padding-left:20px;"><input type="radio" name="dtid" id="dtid" value=' + dtid + '></td>' +
                             '<td style="padding-left:20px;">' + name + '</td><td style="padding-left:20px;">' + type + '</td>' +
                             '<td style="padding-left:20px;">' + unit  + '</td>' +
                             '<td style="padding-left:20px;">' + cellval + '</td><td style="padding-left:20px;">' + floorval + '</td>' +
@@ -2642,9 +2656,9 @@
     <!-- 提交添加限值 model  -->
     function submitAddThreshold() {
         var dname = $("#device-threshold-name").val();
-        var dtid = $("#dtid").val();
+       // var dtid = $("#dtid").val();
         var name = $("#thresholdname").val();
-        var type = $("#thresholdtype").val();
+      //  var type = $("#thresholdtype").val();
         var unit = $("#thresholdunit").val();
         var cellval = $("#thresholdcellval").val();
         var floorval = $("#thresholdfloorval").val();
@@ -2656,11 +2670,10 @@
             url: "addThresholdInfo",
             data: {
                 dname: dname,
-                dtid: dtid,
+          //      dtid: dtid,
                 name: name,
-                type: type,
+           //     type: type,
                 unit: unit,
-                standval: standval,
                 cellval: cellval,
                 floorval: floorval,
                 ismark: ismark,
@@ -2794,35 +2807,69 @@
 
     }
 
+    //告警管理-添加告警内容
     function addAlarm(){
 
         var alarmlevel = $("#alarmtype-select").val();
-        var issms = $('input:checkbox[name="checkbox-sms-2"]:checked').val();
-        var isalert = $('input:checkbox[name="checkbox-alert-2"]:checked').val();
-        var isplantform = $('input:checkbox[name="checkbox-plantform-2"]:checked').val();
         var content = $("#sms-content-input").val();
+
+        if(content == "")
+            alert("请填写预警内容");
+        else{
+            $.ajax({
+                type: "post",
+                url: "setAlarmUser",
+                data: {
+                    alarmlevel: alarmlevel,
+                    content: content
+                },
+                dataType: "json",
+                success: function (data) {
+                }
+            });
+        }
+    }
+
+    //告警管理-选中平台radio
+    function showplantformsetting(){
+        $('#plantform-div').css('display', 'block');
+    }
+
+    //告警管理-选中短信radio
+    function hiddenplantformsetting(){
+        $('#plantform-div').css('display', 'none');
+    }
+
+    //告警管理-查询某个等级对应的告警设置
+    function getAlarmLevelSetting(){
+        var alarmlevel = $("#alarmtype-select").val();
 
         $.ajax({
             type: "post",
-            url: "setAlarmUser",
+            url: "getAlarmUserByLevel",
             data: {
-                alarmlevel: alarmlevel,
-                issms: issms,
-                isalert: isalert,
-                isplantform: isplantform,
-                content: content
+                alarmlevel: alarmlevel
             },
             dataType: "json",
             success: function (data) {
-                alert(data);
+                var list = data.alarmlist;
+
+                $("#checkbox-alert-2").removeAttr("checked");
+                $("#checkbox-sms-2").removeAttr("checked");
+                $("#checkbox-plantform-2").removeAttr("checked");
+
+                if(list[0] == "1")
+                    $("#checkbox-alert-2").attr("checked", "checked");
+                if(list[1] == "1")
+                    $("#checkbox-sms-2").attr("checked", "checked");
+                if(list[2] == "1")
+                    $("#checkbox-plantform-2").attr("checked", "checked");
+
+                $("#sms-content-input").val(list[3]);
             }
         });
-
     }
 
-    function deleterAlarm(){
-        alert("add alarm");
-    }
 </script>
 
 <!-- 查询组织--省行管理/市行管理/机房管理-->

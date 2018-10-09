@@ -31,7 +31,6 @@ public class getCtrlEventAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String cbnamestr = request.getParameter("cbname");
@@ -56,7 +55,7 @@ public class getCtrlEventAction extends ActionSupport {
                 List<String> eplist = java.util.Arrays.asList(ep.split(","));
 
                 String cid= (String)eplist.get(6);
-                String cidn = cid.substring(1, cid.length() - 1);
+                String cidn = cid.substring(1, cid.length());
                 Boolean has = false;
 
                 for (int j = 0 ; j < priortylist.length; j++) {

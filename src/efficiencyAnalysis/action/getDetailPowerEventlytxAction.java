@@ -55,8 +55,8 @@ public class getDetailPowerEventlytxAction extends ActionSupport {
                 String ep = (String)pedata.get(i);
                 List<String> eplist = java.util.Arrays.asList(ep.split(","));
 
-                String cid= (String)eplist.get(6);
-                String cidn = cid.substring(1, cid.length() - 1);
+                String cid= (String)eplist.get(4);
+                String cidn = cid.substring(1, cid.length());
 
                 Boolean has = false;
 

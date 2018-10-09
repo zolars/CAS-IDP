@@ -83,7 +83,8 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">IDP数据中心</a>
+       <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
+        <img src="/img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -357,7 +358,7 @@
                          user-select: none;
                          position: relative;
                      ">
-                    <img id="preview" alt=""/>
+                    <img id="preview" alt="" width="507px;" height="175px;"/>
                     <form class="am-form" method="post" enctype="multipart/form-data">
                         <input type="file" id="head" name="head" onchange="previewImage(this)">
                     </form>
@@ -365,7 +366,7 @@
 
                 <div id="devicebar" class="col-md-2 col-xs-6 chart-item" style="width: 30%; height: 200px; text-align:center">
                     <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0">
-                        <tr style="height: 28px;"></tr>
+                        <tr style="height: 8px;"></tr>
                         <tr>
                             <td style="padding-right: 30px;"><img src="/img/1.png"/></td>
                             <td style="padding-right: 30px;"><img src="/img/2.png"/></td>
@@ -380,7 +381,7 @@
                             <td style="font-size: 12px">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
                         </tr>
-                        <tr style="height: 28px;"></tr>
+                        <tr style="height: 18px;"></tr>
                         <tr>
                             <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
                             <td style="padding-right: 30px;"><img src="/img/6.png"/></td>

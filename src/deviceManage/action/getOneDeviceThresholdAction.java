@@ -33,7 +33,6 @@ public class getOneDeviceThresholdAction extends ActionSupport {
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
             //获取数据
             String dname = request.getParameter("dname");

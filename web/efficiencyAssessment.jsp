@@ -55,7 +55,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <a class="logo pull-left" href="province.jsp">IDP数据中心</a>
+        <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
+        <img src="/img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">

@@ -24,18 +24,18 @@ public class addThresholdInfoAction extends ActionSupport {
 
 
     /* 添加一条设备限值
+       先根据name和level查找表中是否存在三条或以下限值记录，若存在，则获取该id，并更新；
+       否则，新建一条限值记录
      */
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String dname = request.getParameter("dname");
             String name = request.getParameter("name");
-            String type = request.getParameter("type");
+           // String type = request.getParameter("type");
             String unit = request.getParameter("unit");
-            String standval = request.getParameter("standval");
             String cellval = request.getParameter("cellval");
             String floorval = request.getParameter("floorval");
             String ismark = request.getParameter("ismark");
@@ -43,15 +43,24 @@ public class addThresholdInfoAction extends ActionSupport {
 
             DeviceDAO dao = new DeviceDAOImpl();
 
-            Integer maxdtid = dao.getMaxThresholdId();
-            Double dstandval = Double.valueOf(standval);
+            Integer maxdtid;
             Double dcellval = Double.valueOf(cellval);
             Double dfloorval = Double.valueOf(floorval);
             Integer iismark = Integer.valueOf(ismark);
             String did = dao.getDeviceIDByName(dname);
             Integer ilevel = Integer.valueOf(level);
 
-            Boolean rt = dao.addThresholdInfo(did,maxdtid+1, name, type, unit, dstandval, dcellval, dfloorval, iismark, ilevel);
+            String dtid = dao.getOneDeviceThresholdByNameAndLevel(name, level);
+
+            if(dtid.equals("")) //不存在
+                maxdtid = dao.getMaxThresholdId();
+            else{
+                maxdtid = Integer.parseInt(dtid);
+            }
+
+            String type = dao.getTypeByName(name);
+
+            Boolean rt = dao.addThresholdInfo(did,maxdtid+1, name, type, unit, dcellval, dfloorval, iismark, ilevel);
             JSONObject jsonObject = new JSONObject();
 
             if(rt)

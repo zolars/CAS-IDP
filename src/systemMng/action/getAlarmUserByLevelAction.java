@@ -8,11 +8,11 @@ import systemMng.dao.PermissionDAO;
 import systemMng.dao.impl.PermissionDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class setAlarmUserAction extends ActionSupport {
+public class getAlarmUserByLevelAction extends ActionSupport {
     private JSONObject result;
 
     public JSONObject getResult() {
@@ -31,13 +31,13 @@ public class setAlarmUserAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             String level = request.getParameter("alarmlevel");
-            String precontent = request.getParameter("content");
 
             PermissionDAO dao = new PermissionDAOImpl();
-            Boolean rt = dao.setDeviceAlarmUserInfo(level, precontent);
+            List<String> alist = new ArrayList();
+            alist = dao.getDeviceAlarmUserInfoByLevel(level);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("", rt);
+            jsonObject.put("alarmlist", alist);
             result = jsonObject;
 
         } catch (Exception e) {
