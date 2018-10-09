@@ -29,39 +29,39 @@ public class getAllAlarmUserAction extends ActionSupport {
     }
 
 
-    /* 根据设备名称查询设备告警人员信息
+    /* 查询all设备告警人员信息
      */
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
-
-            //获取监测点
-            String devicename = request.getParameter("devicename");
 
             DeviceDAO dao = new DeviceDAOImpl();
 
             List<DeviceAlarmUser> alrmlist = new ArrayList();
-            List<String> alrmnamelist = new ArrayList();
+            List rtlist = new ArrayList();
 
-            alrmlist = dao.getDeviceAlarmUserDataByName(devicename);
+            alrmlist = dao.getDeviceAlarmUserData();
 
             for(int i = 0; i< alrmlist.size(); i++){
+
                 DeviceAlarmUser tmpau = alrmlist.get(i);
-                String usrid = tmpau.getUid();
 
-                UserDAO usrdao = new UserDAOImpl();
-                User user = usrdao.getOneUserInfo(usrid);
+                String level = tmpau.getLevel().toString();
+                String uidstr = tmpau.getUid();
+                String uidset[] = uidstr.split("，");
 
-                String uname = user.getUname();
+                for(int j = 0; j < uidset.length; j++){
+                    List<String> list = new ArrayList();
+                    list.add(level);
+                    list.add(uidset[j]);
 
-                alrmnamelist.add(uname);
+                    rtlist.add(list);
+                }
             }
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("alarmusers", alrmlist);
-            jsonObject.put("alarmusersname", alrmnamelist);
+            jsonObject.put("alarmusers", rtlist);
 
             result = jsonObject;
 

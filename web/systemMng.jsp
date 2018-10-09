@@ -81,7 +81,9 @@
         }
         .item-btn-item {
             width: 70px;
-
+        }
+        .item-btn-item-widther {
+            width: 100px;
         }
         .table-container {
             height: 700px;
@@ -248,42 +250,27 @@
                             </div>
                         </div>
                     </div>
-                    <div id="item2" class="">
+                    <div id="item2">
                         <div class="block-area-inner">
                             <div class="">
                                 <div class="tile">
                                     <h2 class="tile-title">角色管理</h2>
-                                    <table id="rolesinfotablehead" border="1px">
-                                        <thead>
-                                        <tr>
-                                            <th>
-                                                <div style="padding-left:40px;">角色编码</div>
-                                            </th>
-                                            <th>
-                                                <div style="padding-left:40px;">角色名称</div>
-                                            </th>
-                                            <th>
-                                                <div style="padding-left:40px;">备注</div>
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                    <table id="rolesinfotable" border="1px"></table>
-
-                                    <div class="btn-group">
-                                        <button type="button" class="btn-primary"
+                                    <div class="btn-group item-btn-container">
+                                        <button type="button" class="btn-sm btn-primary item-btn-item"
                                                 onClick="getALLRolesInfomation()">查询
                                         </button>
-                                        <button type="button" class="btn-success"
+                                        <button type="button" class="btn-sm btn-success item-btn-item"
                                                 onclick="showAddRolesrModal()">新增
                                         </button>
-                                        <button type="button" class="btn-danger"
+                                        <button type="button" class="btn-sm btn-danger item-btn-item"
                                                 onClick="deleteRolesInfomation()">删除
                                         </button>
-                                        <button type="button" class="btn-default"
+                                        <button type="button" class="btn-sm btn-default item-btn-item"
                                                 onclick="showUpdateRolesModal()">修改
                                         </button>
                                     </div>
+
+                                    <table class="item-container" id="rolesinfotable" border="1px"></table>
                                 </div>
                             </div>
                         </div>
@@ -293,30 +280,15 @@
                                 <div style="width: 500px;display: inline-block;vertical-align: top">
                                     <div class="tile">
                                         <h2 class="tile-title">角色</h2>
-                                        <table id="rolesinfotablehead-functionmng">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    <div style="padding-left:40px;">角色编码</div>
-                                                </th>
-                                                <th>
-                                                    <div style="padding-left:40px;">角色名称</div>
-                                                </th>
-                                                <th>
-                                                    <div style="padding-left:40px;">备注</div>
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                        </table>
-                                        <table id="rolesinfotable-functionmng"></table>
+                                        <table id="rolesinfotable-functionmng" border="1px" class="item-container"></table>
 
                                         <div id="roleid" style="display: none"></div>
 
                                         <div class="btn-group">
-                                            <button type="button" class="btn-primary" onclick="allocateRoles()">
+                                            <button type="button" class="btn-sm btn-primary item-btn-item-widther" onclick="allocateRoles()">
                                                 分配功能
                                             </button>
-                                            <button type="button" class="btn-primary"
+                                            <button type="button" class="btn-sm btn-primary item-btn-item-widther"
                                                     onclick="getOneRolesFunctions()">查看角色功能
                                             </button>
                                         </div>
@@ -384,7 +356,8 @@
                                     <div id="searchTips" class="tips" style="display: none">
                                     </div>
                                 </div>
-                                <button class="btn btn-default searchButton" onclick="checkDevice()">查询</button>
+                                <button class="btn-sm btn-default searchButton item-btn-item" onclick="checkDevice()">查询</button>
+                                <button class="btn-sm btn-success item-btn-item-widther" onclick="addOneDevice()">添加设备</button>
 
                                 <div class="row">
                                     <div class="col-md-4">
@@ -482,25 +455,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <div class="tile">
-                                        <h2 class="tile-title">预警人员</h2>
-                                        <div class="tile-config dropdown">
-                                            <a data-toggle="dropdown"></a>
-                                        </div>
-                                        <table id="alarm-user-table" class="alarm-user-table">
-                                        </table>
-                                    </div>
-
-                                    <div>
-                                        <button class="btn-success" onclick="addDeviceAlarmUser()">添加预警人员</button>
-                                        <button class="btn-default" onclick="deleteDeviceAlarmUser()">取消预警人员</button>
-                                    </div>
-
-                                    <div>
-                                        <button class="btn-success" onclick="addOneDevice()">添加设备</button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -585,15 +539,14 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button class="btn-primary" onclick="getOneDeviceThreshold()">查询</button>
-                                            <button class="btn-success" onclick="AddThresholdModal()" type="submit">添加</button>
-                                            <button class="btn-default" onclick="updateThresholdModal()">修改</button>
-                                            <button class="btn-danger" onclick="deleteThresholdModal()">删除</button>
+                                            <button class="btn-sm btn-primary item-btn-item" onclick="getOneDeviceThreshold()">查询</button>
+                                            <button class="btn-sm btn-success item-btn-item" onclick="AddThresholdModal()" type="submit">添加</button>
+                                            <button class="btn-sm btn-default item-btn-item" onclick="updateThresholdModal()">修改</button>
+                                            <button class="btn-sm btn-danger item-btn-item" onclick="deleteThresholdModal()">删除</button>
                                         </td>
 
                                         <input type="file" name="请选择导入文件" id="uploadEventFile">
-                                        <button type="button" class="btn-success" onclick="deviceThresholdupload()">导入</button>
-
+                                        <button type="button" class="btn-sm btn-success item-btn-item" onclick="deviceThresholdupload()">导入</button>
                                     </tr>
                                 </table>
                             </div>
@@ -601,7 +554,6 @@
                             <div class="col-md-10">
                                 <div class="table-container">
                                     <table border="1px" id="threadinfotablehead"></table>
-                                 <%--   <table id="infotable"></table>--%>
                                 </div>
                             </div>
                         </div>
@@ -613,7 +565,7 @@
                     </div>
                     <div id="item7" class="" style="width:90%;">
                         <div class="block-area-inner" style="float: left">
-                            <div class="tile" style="width: 400px">
+                            <div class="tile" style="width: 40%;">
                                 <div>
                                     预警等级
                                     <select class="form-control location-select-item" id="alarmtype-select" name="alarmtype-select" onclick="getAlarmLevelSetting()">
@@ -648,9 +600,28 @@
                                 </div>
 
                                 <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text" style="width: 350px"></div>
-                                <button class="btn-default" onclick="addAlarm()">确认</button>
+                                <button class="btn-sm btn-default item-btn-item" onclick="addAlarm()">确认</button>
                             </div>
+
+                            <div class="">
+                                <div class="tile">
+                                    <h2 class="tile-title">预警人员</h2>
+                                    <div class="tile-config dropdown">
+                                        <a data-toggle="dropdown"></a>
+                                    </div>
+                                    <table id="alarm-user-table" border="1px" class="alarm-user-table">
+                                    </table>
+                                </div>
+
+                                <div>
+                                    <button class="btn-sm btn-success item-btn-item-widther" onclick="addDeviceAlarmUser()">添加预警人员</button>
+                                    <button class="btn-sm btn-default item-btn-item-widther" onclick="deleteDeviceAlarmUser()">取消预警人员</button>
+                                </div>
+                            </div>
+
                         </div>
+
+
 
                         <!-- plantform div-->
                         <div id = "plantform-div" class="col-md-6" style="display:none; float: right">
@@ -691,7 +662,7 @@
                                     <td>单位（小时）</td>
                                 </tr>
                                 <tr>
-                                    <button class="btn-default" onclick="captureSettingOk()">确定</button>
+                                    <button class="btn-sm btn-default item-btn-item" onclick="captureSettingOk()">确定</button>
                                 </tr>
                             </table>
                         </div>
@@ -704,9 +675,9 @@
                             <div id="nodeidstruct" style="display: none"></div>
                         </div>
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-sm btn-alt" onClick="addOrg()">添加</button>
-                            <button type="button" class="btn btn-sm btn-alt" onClick="updateOrg()">修改</button>
-                            <button type="button" class="btn btn-sm btn-alt" onClick="deleteOrg()">删除</button>
+                            <button type="button" class="btn-sm btn-success item-btn-item" onClick="addOrg()">添加</button>
+                            <button type="button" class="btn-sm btn-default item-btn-item" onClick="updateOrg()">修改</button>
+                            <button type="button" class="btn-sm btn-danger item-btn-item" onClick="deleteOrg()">删除</button>
                         </div>
                         </div>
                     </div>
@@ -884,23 +855,26 @@
 
         <!-- alarm user model DIV-->
         <div class="add-alarm-user" id="add-alarm-user-modal" style="display: none">
-            预警人员
-            <select class="form-control location-select-item" id="alarm-user"
-                    name="alarm-user" onclick="getALLUserInfoSimple()">
-                <option value="">请选择</option>
-            </select>
+            <div class="add-roles-one-line">
+                预警人员
+                <select class="form-control location-select-item" id="alarm-user"
+                        name="alarm-user">
+                    <option value="">请选择</option>
+                </select>
+            </div>
 
             <div class="add-roles-one-line">
-                <input type="radio" id="add-alarm-user-allday-radio" name="add-alarm-user-radio" value="allday">全天
-            </div>
-            <div class="add-roles-one-line">
-                <input type="radio" id="add-alarm-user-workday-radio" name="add-alarm-user-radio" value="workday">工作日
+                预警等级
+                <select class="form-control location-select-item" id="alarm-level"
+                        name="alarm-level">
+                    <option value="1" selected='selected'>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
             </div>
 
             <div class="add-threshold-handle">
-                <button type="submit" class="btn-primary" id="add-alarm-user-handle"
-                        onclick="addAlarmUser()">确定
-                </button>
+                <button type="submit" class="btn-primary" id="add-alarm-user-handle" onclick="addAlarmUser()">确定</button>
                 <button class="btn-default" onclick="cancle()">取消</button>
             </div>
         </div>
@@ -1242,6 +1216,11 @@
                     var list = obj.allroles;
                     var table = $("#rolesinfotable-functionmng");
                     table.empty();
+                    table.append('<tr><td style="width:10%;"><div></div></td>' +
+                        '<td style="width:30%;"><div>角色编码</div></td>' +
+                        '<td style="width:30%;"><div>角色名称</div></td>' +
+                        '<td style="width:30%;"><div>备注</div></td></tr>');
+
                     for (var i = 0; i < list.length; i++) {
                         var rid = list[i].rid;
                         var rname = list[i].rolesname;
@@ -1249,8 +1228,10 @@
                         if(list[i].extra != undefined) rextra = list[i].extra;
                         else rextra = " ";
 
-                        table.append('<tr><td><input type="radio" id="cbox-rid" name="cbox-rid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
-                            '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
+                        table.append('<tr><td style="width:10%;"><input type="radio" id="cbox-rid" name="cbox-rid" value=' + rid + '></td>' +
+                            '<td style="width:30%;">' + rid + '</td>' +
+                            '<td style="width:30%;">' + rname + '</td>' +
+                            '<td style="width:30%;">' + rextra + '</td></tr>');
                     }
                 }
             });
@@ -1448,6 +1429,8 @@
             $("#item7").show();
             $("#item8").hide();
             $("#item9").hide();
+            //查询预警人员
+            checkDeviceAlarmUser();
         });
         $("#subItem8").click(function () {
             $("#item1").hide();
@@ -1537,11 +1520,16 @@
             dataType: "json",
             success: function (data) {
                 var obj = JSON.parse(data);
-                //var list = obj;
                 allUserList = obj;
                 var table = $("#userinfotable");
                 table.empty();
-                table.append('<tr><td><div style="width:10px;"></div></td><td><div style="width:50px;">账号</div></td><td><div style="width:50px;">姓名</div></td><td><div style="width:260px;">组织</div></th><td><div style="widtd:100px;">角色</div></td><td><div style="width:150px;">联系方式</div></td><td> <div style="width:150px;">公务手机</div></td></tr>');
+                table.append('<tr><td style="width:5%;"><div></div></td>' +
+                    '<td style="width:15%;"><div>账号</div></td>' +
+                    '<td style="width:15%;"><div>姓名</div></td>' +
+                    '<td style="width:20%;"><div>组织</div></td>' +
+                    '<td style="width:15%;"><div>角色</div></td>' +
+                    '<td style="width:15%;"><div>联系方式</div></td>' +
+                    '<td style="width:15%;"><div>公务手机</div></td></tr>');
 
                 for (var key in allUserList) {
                     var len = allUserList[key].length;
@@ -1565,13 +1553,13 @@
                         else govtelephone += " ";
 
                         table.append('<tr>' +
-                            '<td style="width:10px;"><input type="radio" name="userid" id="userid" value=' + uid + '></td>' +
-                            '<td style="width:50px;">' + account + '</td>' +
-                            '<td style="width:50px;">' + name + '</td>' +
-                            '<td style="width:260px;">' + org + '</td>' +
-                            '<td style="width:100px;">' + role + '</td>' +
-                            '<td style="width:150px;">' + telephone + '</td>' +
-                            '<td style="width:150px;">' + govtelephone + '</td>' +
+                            '<td style="width:5%;"><input type="radio" name="userid" id="userid" value=' + uid + '></td>' +
+                            '<td style="width:15%;">' + account + '</td>' +
+                            '<td style="width:15%;">' + name + '</td>' +
+                            '<td style="width:20%;">' + org + '</td>' +
+                            '<td style="width:15%;">' + role + '</td>' +
+                            '<td style="width:15%;">' + telephone + '</td>' +
+                            '<td style="width:15%;">' + govtelephone + '</td>' +
                             '</tr>');
                     }
                 }
@@ -1868,19 +1856,23 @@
                 var list = obj.allroles;
                 var table = $("#rolesinfotable");
                 table.empty();
-                table.append('<tr><td><input type="radio" name="rolesid" id="rolesid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
-                    '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
+                table.append('<tr><td style="width:10%;"><div></div></td>' +
+                '<td style="width:30%;"><div>角色编码</div></td>' +
+                '<td style="width:30%;"><div>角色名称</div></td>' +
+                '<td style="width:30%;"><div>备注</div></td></tr>');
 
                 for (var i = 0; i < list.length; i++) {
 
                     var rid = list[i].rid;
-                    var  rname = list[i].rolesname;
+                    var rname = list[i].rolesname;
                     var rextra;
                     if(list[i].extra != undefined) rextra = list[i].extra;
                     else rextra = " ";
 
-                    table.append('<tr><td><input type="radio" name="rolesid" id="rolesid" value=' + rid + '></td><td style="padding-left:40px;">' + rid +
-                        '</td><td style="padding-left:80px;">' + rname + '</td><td style="padding-left:40px;">' + rextra + '</td></tr>');
+                    table.append('<tr><td style="width:10%;"><input type="radio" name="rolesid" id="rolesid" value=' + rid + '></td>' +
+                        '<td style="width:30%;">' + rid + '</td>' +
+                        '<td style="width:30%;">' + rname + '</td>' +
+                        '<td style="width:30%;">' + rextra + '</td></tr>');
                 }
             }
         });
@@ -2177,9 +2169,6 @@
                 if (obj[0].isPlartform == "1") {
                     $("#checkbox-plantform").attr("checked", "checked");
                 }
-
-                //预警人员
-                checkDeviceAlarmUser();
             }
         });
     }
@@ -2240,43 +2229,34 @@
 
     <!-- 查询预警人员 -->
     function checkDeviceAlarmUser() {
-        var devicename = $("#searchInput").val();
-
-        if(devicename){
-            $.ajax({
+        $.ajax({
                 type: "post",
                 url: "getAllAlarmUser",
                 data: {
-                    devicename: devicename
                 },
                 dataType: "json",
                 success: function (data) {
                     var list = data.alarmusers;
-                    var listname = data.alarmusersname;
                     var table = $("#alarm-user-table");
 
                     table.empty();
-                    table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:80px;">告警时段</td><td style="padding-left:40px;">账号</td></tr>');
+                    table.append('<tr><td style="width:180px;">告警等级</td><td style="width:260px;">账号</td></tr>');
 
                     for (var i = 0; i < list.length; i++) {
-                        var id = list[i].id;
-                        var timeperiod = (list[i].timeperiod != "1") ? "全天告警":"工作日告警";
-                        var uname = listname[i];
+                        var level = list[i][0];
+                        var uname = list[i][1];
 
-                        table.append('<tr><td style="padding-left:20px;"><input type="radio" name="auid" id="auid" value=' + id + '></td>' +
-                            '<td style="padding-left:80px;">' + timeperiod + '</td>' +
-                            '<td style="padding-left:40px;">' + uname + '</td></tr>');
+                        table.append('<tr>' +
+                            '<td style="width:180px;">' + level + '</td>' +
+                            '<td style="width:260px;">' + uname + '</td></tr>');
                     }
                 }
             });
-        }
     }
 
     //查询所有账号
-    function getALLUserInfoSimple() {
-
+    //function getALLUserInfoSimple() {
         $("#alarm-user").empty();
-
         $.ajax({
             type: "post",
             url: "getAllUserInfo",
@@ -2297,7 +2277,7 @@
                 }
             }
         });
-    }
+   // }
 
     <!-- 添加预警人员 -->
     function addDeviceAlarmUser() {
@@ -2306,25 +2286,26 @@
 
     <!-- 确认添加预警人员 -->
     function addAlarmUser() {
-        var did = $("#did").val();
-        var aucradio = $('input[name="add-alarm-user-radio"]:checked').val();
-        var auser = $("#alarm-user").val();
 
-        if(aucradio == undefined)
-            alert("请选择告警时段");
+        var auser = $("#alarm-user").val();
+        var alevel = $("#alarm-level").val();
+
+        if(auser == "")
+            alert("请选择预警用户");
+        else if(alevel == undefined)
+            alert("请选择预警等级");
         else{
             $.ajax({
                 type: "post",
                 url: "addDeviceAlarmUser",
                 data: {
-                    did: did,
-                    aucradio: aucradio,
-                    uid: auser
+                    auser: auser,
+                    alevel: alevel
                 },
                 dataType: "json",
                 success: function (data) {
-                    alert(data);
                     $('#add-alarm-user-modal').css('display', 'none');
+                    checkDeviceAlarmUser();
                 }
             });
         }
@@ -2567,9 +2548,9 @@
 
                     var table = $("#threadinfotablehead");
                     table.empty();
-                    table.append('<tr><td style="padding-left:20px;"></td><td style="padding-left:20px;">参数名称</td><td style="padding-left:20px;">参数分类</td><td style="padding-left:20px;">' +
-                        '单位</td><td style="padding-left:20px;">上限值</td><td style="padding-left:20px;">下限值</td><td style="padding-left:20px;">' +
-                        '启用标识</td><td style="padding-left:20px;">等级</td></tr>');
+                    table.append('<tr><td style="width:5%;"></td><td style="width:20%">参数名称</td><td style="width:12.5%;">参数分类</td><td style="width:12.5%;">' +
+                        '单位</td><td style="width:12.5%;">上限值</td><td style="width:12.5%;">下限值</td><td style="width:12.5%;">' +
+                        '启用标识</td><td style="width:12.5%;">等级</td></tr>');
 
                     for (var i = 0; i < list.length; i++) {
                         var dtid = list[i][0];
@@ -2588,11 +2569,11 @@
                         if(isMark == null)
                             isMark = "";
 
-                        table.append('<tr><td style="padding-left:20px;"><input type="radio" name="dtid" id="dtid" value=' + dtid + '></td>' +
-                            '<td style="padding-left:20px;">' + name + '</td><td style="padding-left:20px;">' + type + '</td>' +
-                            '<td style="padding-left:20px;">' + unit  + '</td>' +
-                            '<td style="padding-left:20px;">' + cellval + '</td><td style="padding-left:20px;">' + floorval + '</td>' +
-                            '<td style="padding-left:20px;">' + isMark + '</td>' + '<td style="padding-left:20px;">' + level +
+                        table.append('<tr><td style="width:5%;"><input type="radio" name="dtid" id="dtid" value=' + dtid + '></td>' +
+                            '<td style="width:20%;">' + name + '</td><td style="width:12.5%;">' + type + '</td>' +
+                            '<td style="width:12.5%;">' + unit  + '</td>' +
+                            '<td style="width:12.5%;">' + cellval + '</td><td style="width:12.5%;">' + floorval + '</td>' +
+                            '<td style="width:12.5%;">' + isMark + '</td>' + '<td style="width:12.5%;">' + level +
                             '</td></tr>');
                     }
                 },

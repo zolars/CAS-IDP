@@ -30,16 +30,12 @@ public class addDeviceAlarmUserAction extends ActionSupport {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
-            String did = request.getParameter("did");
-            String aucradio = request.getParameter("aucradio");
-            String uid = request.getParameter("uid");
-            String period = "0";
-            if(aucradio.equals("allday"))
-                period = "1";
+            String auser = request.getParameter("auser");
+            String alevel = request.getParameter("alevel");
 
             DeviceDAO dao = new DeviceDAOImpl();
 
-            Boolean rt = dao.addOneDeviceAlarmUser(did, uid, period);
+            Boolean rt = dao.addOneDeviceAlarmUser(auser, alevel);
             JSONObject jsonObject = new JSONObject();
 
             if(rt)
