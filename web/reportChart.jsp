@@ -168,7 +168,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <form class="form-inline" role="form">
                                         <label for="date" class="form-label">时间：</label>
                                         <div class="input-group date form_datetime" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
