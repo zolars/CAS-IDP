@@ -29,20 +29,17 @@ public class updateOneDeviceThresholdAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             //获取监测点
             String dtid = request.getParameter("dtid");
             String type = request.getParameter("type");
             String unit = request.getParameter("unit");
-           // String standval = request.getParameter("standval");
             String cellval = request.getParameter("cellval");
             String floorval = request.getParameter("floorval");
             String ismark = request.getParameter("ismark");
             String level = request.getParameter("level");
 
-           // Double dstandval = Double.valueOf(standval);
             Double dcellval = 0.00;
             Double dfloorval = 0.00;
             Integer iismark = 1;
@@ -56,7 +53,6 @@ public class updateOneDeviceThresholdAction extends ActionSupport {
                 iismark = Integer.valueOf(ismark);
             if(level != "")
                 ilevel = Integer.valueOf(level);
-
 
             DeviceDAO dao = new DeviceDAOImpl();
 

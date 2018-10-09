@@ -565,7 +565,7 @@
                     </div>
                     <div id="item7" class="" style="width:90%;">
                         <div class="block-area-inner" style="float: left">
-                            <div class="tile" style="width: 40%;">
+                            <div class="tile">
                                 <div>
                                     预警等级
                                     <select class="form-control location-select-item" id="alarmtype-select" name="alarmtype-select" onclick="getAlarmLevelSetting()">
@@ -661,10 +661,10 @@
                                     <td><input type="text" class="form-control setting-input" id="upload-input"></td>
                                     <td>单位（小时）</td>
                                 </tr>
-                                <tr>
-                                    <button class="btn-sm btn-default item-btn-item" onclick="captureSettingOk()">确定</button>
-                                </tr>
                             </table>
+
+                            <button class="btn-sm btn-default item-btn-item" onclick="captureSettingOk()">确定</button>
+
                         </div>
                         </div>
                     </div>
@@ -792,18 +792,22 @@
 
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数分类</div>
-                    <select class="form-control location-select-item" id="thresholdtype" name="thresholdtype"
-                            onclick="">
-                        <option value="塌陷">塌陷</option>
-                        <option value="浪涌">浪涌</option>
-                        <option value="瞬变">瞬变</option>
-                        <option value="温度">温度</option>
-                        <option value="湿度">湿度</option>
-                        <option value="频率偏差越限">频率偏差越限</option>
-                        <option value="电流谐波越限">电流谐波越限</option>
-                        <option value="电流谐波越限">电压谐波越限</option>
-                        <option value="电流谐波越限">电压闪变越限</option>
-                        <option value="电流谐波越限">电压不平衡度</option>
+                    <select class="form-control location-select-item" id="thresholdtype" name="thresholdtype">
+                        <option value="频率上限值">频率上限值</option>
+                        <option value="频率下限值">频率下限值</option>
+                        <option value="电压偏差越上限">电压偏差越上限</option>
+                        <option value="电压偏差越下限">电压偏差越下限</option>
+                        <option value="短时闪变">短时闪变</option>
+                        <option value="长时闪变">长时闪变</option>
+                        <option value="三相电压负序不平衡度">三相电压负序不平衡度</option>
+                        <option value="电压暂升阈值">电压暂升阈值</option>
+                        <option value="电压暂降阈值">电压暂降阈值</option>
+                        <option value="电压短时中断阈值">电压短时中断阈值</option>
+                        <option value="电压总谐波含有率">电压总谐波含有率</option>
+                        <option value="温度过高">温度过高</option>
+                        <option value="温度过低">温度过低</option>
+                        <option value="湿度过高">湿度过高</option>
+                        <option value="湿度过低">湿度过低</option>
                     </select>
                 </div>
             </div>
@@ -1852,7 +1856,6 @@
 <script type="text/javascript">
     //查询所有角色
     function getALLRolesInfomation() {
-
         $.ajax({
             type: "post",
             url: "getAllRoles",
@@ -1860,6 +1863,7 @@
             },
             dataType: "json",
             success: function (data) {
+
                 var obj = JSON.parse(data);
                 var list = obj.allroles;
                 var table = $("#rolesinfotable");
@@ -1911,15 +1915,7 @@
                 },
                 dataType: "json",
                 success: function (data) {
-                    var obj = JSON.parse(data);
-                    var rt = obj.result;
-
-                    if (rt) {
-                        getALLRolesInfomation();
-                    }
-                    else {
-                        alert("删除失败");
-                    }
+                    getALLRolesInfomation();
                 },
                 error: function () {
                     alert("失败");
@@ -1999,32 +1995,26 @@
         var rname = $("#rolesname").val();
         var rextra = $("#rolesextra").val();
 
-        // var monitorpoint = 1;
-
-        $.ajax({
-            type: "post",
-            url: "addRolesInfo",
-            data: {
-                rname: rname,
-                rextra: rextra
-            },
-            dataType: "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var rt = obj.result;
-
-                if (rt) {
+        if(rname == "")
+            alert("请输入角色名称");
+        else{
+            $.ajax({
+                type: "post",
+                url: "addRolesInfo",
+                data: {
+                    rname: rname,
+                    rextra: rextra
+                },
+                dataType: "json",
+                success: function (data) {
                     hiddenRolesModel();
                     getALLRolesInfomation();
+                },
+                error: function () {
+                    alert("失败");
                 }
-                else {
-                    alert("添加失败");
-                }
-            },
-            error: function () {
-                alert("失败");
-            }
-        });
+            });
+        }
     }
 </script>
 
@@ -2141,6 +2131,7 @@
             dataType: "json",
             success: function (data) {
                 var obj = JSON.parse(data);
+
                 $("#did").val(obj[0].did);
                 $("#devname").val(obj[0].name);
                 $("#devtype").val(obj[0].type);
@@ -2182,9 +2173,9 @@
     <!-- 添加设备 -->
     function addOneDevice(){
 
-        var radioEthernet = $('input[name="radio-Ethernet"]:checked').val();
-        var radioR5485 = $('input[name="radio-R5485"]:checked').val();
-        var radioRS232 = $('input[name="radio-RS232"]:checked').val();
+        var radioEthernet = $('input[id="radio-Ethernet"]:checked').val();
+        var radioR5485 = $('input[id="radio-R5485"]:checked').val();
+        var radioRS232 = $('input[id="radio-RS232"]:checked').val();
         var checkboxsms = $('input:checkbox[name="checkbox-sms"]:checked').val();
         var checkboxalert = $('input:checkbox[name="checkbox-alert"]:checked').val();
         var checkboxplantform = $('input:checkbox[name="checkbox-plantform"]:checked').val();
@@ -2208,6 +2199,16 @@
             alert("请选择一种类型");
         else if(radioEthernet != "on")
             alert("只能选择TCP设备类型");
+        else if(devname == "")
+            alert("请输入设备名称");
+        else if(devtype == "")
+            alert("请输入设备类型");
+        else if(serialno == "")
+            alert("请输入序列号");
+        else if(IPaddress == "")
+            alert("请输入IP地址");
+        else if(port == "")
+            alert("请输入端口号");
         else $.ajax({
                 type: "post",
                 url: "addOneDevice",
@@ -2621,7 +2622,6 @@
                 $("#thresholdtype").val(list[0][2]);
                 $("#thresholdunit").val(list[0][3]);
                 $("#thresholdcellval").val(list[0][4]);
-              //  $("#thresholdstandval").val(list[0].standardval);
                 $("#thresholdfloorval").val(list[0][5]);
                 $("#thresholdismark").val(list[0][6]);
                 $("#thresholdlevel").val(list[0][7]);
@@ -2643,9 +2643,7 @@
     <!-- 提交添加限值 model  -->
     function submitAddThreshold() {
         var dname = $("#device-threshold-name").val();
-       // var dtid = $("#dtid").val();
         var name = $("#thresholdname").val();
-      //  var type = $("#thresholdtype").val();
         var unit = $("#thresholdunit").val();
         var cellval = $("#thresholdcellval").val();
         var floorval = $("#thresholdfloorval").val();
@@ -2657,9 +2655,7 @@
             url: "addThresholdInfo",
             data: {
                 dname: dname,
-          //      dtid: dtid,
                 name: name,
-           //     type: type,
                 unit: unit,
                 cellval: cellval,
                 floorval: floorval,
@@ -2681,37 +2677,38 @@
     <!-- 提交修改限值 model  -->
     function submitUpdateThreshold() {
         var dtid = $("input[name='dtid']:checked").val();
-       // var name = $("#thresholdname").val();
         var type = $("#thresholdtype").val();
         var unit = $("#thresholdunit").val();
-      //  var standval = $("#thresholdstandval").val();
         var cellval = $("#thresholdcellval").val();
         var floorval = $("#thresholdfloorval").val();
         var ismark = $("#thresholdismark").val();
         var level = $("#thresholdlevel").val();
 
-        $.ajax({
-            type: "post",
-            url: "updateOneDeviceThreshold",
-            data: {
-                dtid: dtid,
-                type: type,
-                unit: unit,
-               // standval: standval,
-                cellval: cellval,
-                floorval: floorval,
-                ismark: ismark,
-                level: level
-            },
-            dataType: "json",
-            success: function (data) {
-                hiddenThresholdModel();
-            },
-            error: function () {
-                alert("失败");
-            }
-        });
-
+        if(type == "")
+            alert("请选择类型");
+        else{
+            $.ajax({
+                type: "post",
+                url: "updateOneDeviceThreshold",
+                data: {
+                    dtid: dtid,
+                    type: type,
+                    unit: unit,
+                    cellval: cellval,
+                    floorval: floorval,
+                    ismark: ismark,
+                    level: level
+                },
+                dataType: "json",
+                success: function (data) {
+                    hiddenThresholdModel();
+                    getOneDeviceThreshold();
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
     }
 
     <!-- 删除限值 model  -->
