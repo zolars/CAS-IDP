@@ -1631,9 +1631,9 @@
                         }
                     }
 
-                    //$("#userorgnization-province").val(allUserList['alluser'][i][3]);
-                    //$("#userorgnization-city").val(allUserList['alluser'][i][3]);
-                    //$("#userorgnization-computerroom").val(allUserList['alluser'][i][3]);
+                    $("#userorgnization-province").val(allUserList['alluser'][i][3]);
+                    $("#userorgnization-city").val(allUserList['alluser'][i][3]);
+                    $("#userorgnization-computerroom").val(allUserList['alluser'][i][3]);
                 }
             }
             $('#add-user-modal').css('display', 'block');
@@ -1712,7 +1712,15 @@
         var ucity = $("#userorgnization-city").val();
         var ucomputerroom = $("#userorgnization-computerroom").val();
 
-        if (testTelephone(utelephone) && testTelephone(ugovtelephone)) {
+        if(uaccount == "")
+            alert("请输入账号");
+        else if(upassword == "")
+            alert("请输入密码");
+        else if(uname == "")
+            alert("请输入姓名");
+        else if(uroles == "")
+            alert("请选择角色");
+        else if (testTelephone(utelephone) && testTelephone(ugovtelephone)) {
             $.ajax({
                 type: "post",
                 url: "addUserInfo",
@@ -1731,7 +1739,7 @@
                 success: function (data) {
                     alert(data);
                     hiddenUserModel();
-                    //getALLUserInfomation();
+                    getALLUserInfomation();
                 },
                 error: function () {
                     alert("新增失败");
@@ -1894,13 +1902,11 @@
         else if (ridcheck.length > 1)
             alert("每次只能删除一条角色信息");
         else {
-            //var monitorpoint = 1;
             var ridck = $("input[name='rolesid']:checked").serialize();
             $.ajax({
                 type: "post",
                 url: "deleteRolesInfo",
                 data: {
-                    //monitorpointid: monitorpoint,
                     rid: ridck
                 },
                 dataType: "json",

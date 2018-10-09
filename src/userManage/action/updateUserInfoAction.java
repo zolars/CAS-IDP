@@ -1,6 +1,7 @@
 package userManage.action;
 
 
+import Util.ToHex;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
@@ -10,6 +11,7 @@ import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
 
 
 public class updateUserInfoAction extends ActionSupport {
@@ -40,16 +42,18 @@ public class updateUserInfoAction extends ActionSupport {
             String chinesename = request.getParameter("chinesename");
             String telephone = request.getParameter("telephone");
             String govtelephone = request.getParameter("govtelephone");
-
             String roles = request.getParameter("rid");
             String province = request.getParameter("pbid");
             String city = request.getParameter("cbid");
             String computerroom = request.getParameter("ccid");
-
             String temuser = request.getParameter("temuser");
 
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] bytes = md.digest(password.getBytes("utf-8"));
+            String passwd = ToHex.toHex(bytes);
+
             UserDAO dao = new UserDAOImpl();
-            Boolean rt = dao.updateUserInfo(uid, password, name, chinesename, telephone, govtelephone, roles, province, city, computerroom, temuser);
+            Boolean rt = dao.updateUserInfo(uid, passwd, name, chinesename, telephone, govtelephone, roles, province, city, computerroom, temuser);
 
             JSONObject jsonObject = new JSONObject();
 
