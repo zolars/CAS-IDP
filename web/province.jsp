@@ -17,7 +17,6 @@
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
-
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap-3.3.4.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/animate.min.css">
@@ -209,8 +208,9 @@
                                     compname: options.text()
                                 },
                                 dataType: "json",
-                                success: function (data) {
-                                    $("#ctrlstatus").attr("value","警");
+                                success: function () {
+                                    $("#ctrlstatus").attr("value","状态：告警");
+                                    document.getElementById("ctrlstatus").innerHTML = "状态：告警";
                                 }
                             });
 
@@ -374,8 +374,8 @@
                             <td style="padding-right: 30px;"><img src="/img/5.png"/></td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px" id="ctrlstatus">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px" id="ctrlstatus">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>

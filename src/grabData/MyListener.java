@@ -188,7 +188,7 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("CtrlSaveTrigger",
                                         "CtrlSaveTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInSeconds(5).repeatForever()).build();
+                                .withSchedule(simpleSchedule().withIntervalInSeconds(60).repeatForever()).build();
                         JobDetail job7 = newJob(CtrlSaveJob.class).withIdentity(
                                 "CtrlSaveJob", "CtrlSaveGroup").build();
                         scheduler.scheduleJob(job7, trigger7);

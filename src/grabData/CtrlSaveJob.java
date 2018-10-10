@@ -15,8 +15,6 @@ public class CtrlSaveJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        System.out.println("SaveCtrlYeah");
-
         Map<String, List<EventCtrl>> eventCtrlMap = CtrlSave.getEventCtrlMap();
         if (null != eventCtrlMap) {
             Set<String> didSet = eventCtrlMap.keySet();
