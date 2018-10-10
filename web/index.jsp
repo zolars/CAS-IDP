@@ -83,8 +83,8 @@
             color: #ffffff;
         }
         .login-button {
-            float: right;
-        }
+             float: right;
+         }
         .login-input {
             width: 228px;
 

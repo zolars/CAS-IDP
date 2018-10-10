@@ -89,7 +89,7 @@ public class MyListener implements ServletContextListener {
                                 System.out.println("创建取实时数据连接 " + "治理模块监测点("
                                         + c.getDid() + ") " + c.getiPaddress()
                                         + ":" + c.getPort());
-                                new TempDataClient(c.getiPaddress(),
+                                new CtrlDataClient(c.getiPaddress(),
                                         Integer.parseInt(c.getPort()),
                                         c.getDid()).start();
                             } catch (Exception e) {
