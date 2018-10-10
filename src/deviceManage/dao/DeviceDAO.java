@@ -10,7 +10,7 @@ public interface DeviceDAO {
 
     public String getDeviceIDByName(String name);
 
-    public List getDeviceAlarmUserDataByName(String name);
+    public List getDeviceAlarmUserData();
 
     public List getDeviceAlarmUserNameDataByName(String name);
 
@@ -32,7 +32,7 @@ public interface DeviceDAO {
 
     public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port, String extra, Integer sms, Integer alert, Integer plantform);
 
-    public Boolean addOneDeviceAlarmUser(String did, String uid, String period);
+    public Boolean addOneDeviceAlarmUser(String uid, String level);
 
     public Boolean addOneDeviceAlarmInfo(String etime);
 

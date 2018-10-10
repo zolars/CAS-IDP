@@ -66,7 +66,6 @@ public class addUserInfoAction extends ActionSupport {
 
             result = JSON.toJSONString(jsonObject);
 
-
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

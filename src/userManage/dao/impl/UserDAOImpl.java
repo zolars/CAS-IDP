@@ -240,10 +240,10 @@ public class UserDAOImpl implements UserDAO {
     public boolean addUserRolesInfo(String uid, String roles){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
-
+        Roles role = (Roles)hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles+ "'");
         UserRoles userrole = new UserRoles();
         userrole.setUid(uid);
-        userrole.setRid(roles);
+        userrole.setRid(role.getRid());
 
         rt = hbsessionDao.insert(userrole);
         return rt;
@@ -255,10 +255,10 @@ public class UserDAOImpl implements UserDAO {
      */
     public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        boolean rt = false;
+        boolean rt1 = false;
+        boolean rt2 = false;
 
         //获取当前用户，判断是否可以更改信息
-        User ur = (User)hbsessionDao.getFirst("FROM User where uid = '" + temuser+ "'");
         UserRoles userole = (UserRoles)hbsessionDao.getFirst("FROM UserRoles where uid = '" + temuser + "'"); //当前用户
         UserRoles userole2 = (UserRoles)hbsessionDao.getFirst("FROM UserRoles where uid = '" + uid + "'"); //待修改用户
         Roles role = (Roles)hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles + "'");
@@ -281,15 +281,15 @@ public class UserDAOImpl implements UserDAO {
                     ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
                     " where newur.uid='" + uid + "'";
 
-            rt = hbsessionDao.update(hql);
+            rt1 = hbsessionDao.update(hql);
 
             if(userole2.getRid() != null) {
                 String hql2 = "update UserRoles newurole set newurole.rid='" + role.getRid() +
                         "' where newurole.uid='" + uid + "'";
-                rt = hbsessionDao.update(hql2);
+                rt2 = hbsessionDao.update(hql2);
             }
         }
-        return rt;
+        return rt1 && rt2;
     }
 
     public List<Object> getUserDynamicMenu(User user){

@@ -304,15 +304,8 @@
                                             <div id="power-event-detail-1-div" style="width:100%;">
                                                 <table class="display" border="1px" id="power-event-detail-1" style="width:100%;">
                                                     <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>测量名称</th>
-                                                        <th>类型</th>
-                                                        <th>时间</th>
-                                                        <th>时间长短</th>
-                                                        <th>深度（与标准的偏差）</th>
-                                                        <th>评论</th>
-                                                        <th>签名</th>
+                                                    <tr id="power-event-detail-thead-1-tr">
+
                                                     </tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-1">
@@ -993,6 +986,18 @@
 
 <!-- （详细）电能事件-点击进入第二个页面-->
 <script type="text/javascript">
+
+    <%--设置thead--%>
+
+    var tableData = [];
+    if(localStorage.getItem("visibleColumn")) {
+        tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+    }
+    var thead1 = $("#power-event-detail-thead-1-tr")[0];
+    tableData.forEach(function (item) {
+        thead1.innerHTML += ('<th>' + item.name + '</th>')
+    });
+
     function getPowerEvent(){
         $('#eventdiv1').css('display', 'none');
         $('#eventdiv2').css('display', 'block');
@@ -1102,7 +1107,6 @@
 
                     for (var i = 0; i < list.length; i++) {
                         var liststr = list[i].split(",");
-
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
                         var type = liststr[2];
@@ -1111,12 +1115,35 @@
                         var discription = liststr[6];
                         var annotation = liststr[7];
                         var signature = liststr[8];
+                        var newLine = '<tr>'
 
-                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + type + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + duration + '</td>' +
-                            '<td style="padding-left:60px;">' + discription + '</td><td style="padding-left:60px;">' + annotation + '</td>' +
-                            '<td style="padding-left:60px;">' + signature + '</td></tr>');
+                        tableData.forEach(function(item) {
+                            if(item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;">' + name + '</td>')
+                            } else if(item.name === "时间") {
+                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
+                            } else if(item.name === "类型") {
+                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if(item.name === "触发相位") {
+
+                            } else if(item.name === "时间长短") {
+                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                            } else if(item.name === "深度") {
+                                newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
+                            } else if(item.name === "方向") {
+
+                            } else if(item.name === "评论") {
+                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
+                            } else if(item.name === "签名") {
+                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
+                            } else if(item.name === "触发水平") {
+
+                            } else if(item.name === "中有波形数据") {
+
+                            }
+                        });
+                        newLine += '</tr>';
+                        tbody.innerHTML += newLine;
                     }
                 }
             });
@@ -1831,11 +1858,18 @@
         var coltable = $("#colume-table");
         var target = coltable.children("tbody").children(".col-active");
         var list = coltable.children("tbody").children('tr');
+        var targetId = Number(target[0].id)
+        var upperData = visibleColumnData[targetId - 1];
         if(target.length > 0){
             var thisLocation = list.index( target );
             if( thisLocation < 1 ){
                 alert('已移到最顶端了');
             }else {
+                visibleColumnData[targetId - 1] = visibleColumnData[targetId];
+                visibleColumnData[targetId] = upperData;
+                localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
+                target[0].id = (Number(target[0].id)) - 1 + ''
+                target.prev()[0].id = (Number(target.prev()[0].id)) + 1 + ''
                 target.prev().before(target); //上移动
             }
         }else {
@@ -1846,11 +1880,21 @@
         var coltable = $("#colume-table");
         var target = coltable.children("tbody").children(".col-active");
         var list = coltable.children("tbody").children('tr');
+        console.log('target',target.attr("id"))
+        var targetId = Number(target.attr("id"))
+        console.log('targetId',targetId)
+        var downData = visibleColumnData[targetId + 1];
         if(target.length > 0){
             var thisLocation = list.index( target );
             if( thisLocation >= list.length - 1 ){
                 return alert('已移到最底端了');
             }else {
+                visibleColumnData[targetId + 1] = visibleColumnData[targetId];
+                visibleColumnData[targetId] = downData;
+                console.log('visibleColumnData',visibleColumnData)
+                localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
+                target[0].id = (Number(target.attr("id"))) + 1 + ''
+                target.next()[0].id = (Number(target.next()[0].id)) - 1 + ''
                 target.next().after(target); //下移动
             }
         }else {

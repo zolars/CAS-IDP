@@ -29,7 +29,6 @@ public class getOneOfOneDeviceThresholdAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             //获取监测点
@@ -38,7 +37,7 @@ public class getOneOfOneDeviceThresholdAction extends ActionSupport {
 
             DeviceThresholdDAO dtdao = new DeviceThresholdDAOImpl();
 
-            List<DevicesThreshold> dt = dtdao.getOneofOneDeviceThreshold(dtid);
+            List dt = dtdao.getOneofOneDeviceThreshold(dtid);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("devicesThreshold", dt);

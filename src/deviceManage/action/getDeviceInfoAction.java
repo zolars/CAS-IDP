@@ -32,7 +32,6 @@ public class getDeviceInfoAction extends ActionSupport {
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String devicename = request.getParameter("devicename");

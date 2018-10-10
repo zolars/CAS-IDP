@@ -68,7 +68,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
         <img src="/img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
@@ -169,7 +168,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <form class="form-inline" role="form">
                                         <label for="date" class="form-label">时间：</label>
                                         <div class="input-group date form_datetime" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
@@ -198,8 +197,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="col-md-7" style="text-align:right">
                                         <form class="form-inline" role="form">
                                             <div class="form-group">
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="searchHV()">查询</button>
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="exportHVtable()">导出</button>
+                                                <button type="button" class="btn-sm btn-primary" onclick="searchHV()">查询</button>
+                                                <button type="button" class="btn-sm btn-default" onclick="exportHVtable()">导出</button>
                                             </div>
                                         </form>
                                     </div>
@@ -1190,8 +1189,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="col-md-7" style="text-align:right">
                                         <form class="form-inline" role="form">
                                             <div class="form-group">
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="searchHC()">查询</button>
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="exportHCtable()">导出</button>
+                                                <button type="button" class="btn-sm btn-primary" onclick="searchHC()">查询</button>
+                                                <button type="button" class="btn-sm btn-default" onclick="exportHCtable()">导出</button>
                                             </div>
                                         </form>
                                     </div>
@@ -2182,14 +2181,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="col-md-8" style="text-align:right">
                                         <form class="form-inline" role="form">
                                             <div class="form-group">
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="searchHI()">查询</button>
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="searchHis()">导出</button>
+                                                <button type="button" class="btn-sm btn-primary" onclick="searchHI()">查询</button>
+                                                <button type="button" class="btn-sm btn-default" onclick="searchHis()">导出</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table border="1" id="hvtable">
+                                    <table border="1" id="table3">
                                         <tr>
                                             <td style="text-align:center">参数</td>
                                             <td style="text-align:center" colspan="2">最大值</td>
@@ -2384,8 +2383,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="col-md-8" style="text-align:right">
                                         <form class="form-inline" role="form">
                                             <div class="form-group">
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="searchHVCrate()">查询</button>
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="exportHVCRateTable()">导出</button>
+                                                <button type="button" class="btn-sm btn-primary" onclick="searchHVCrate()">查询</button>
+                                                <button type="button" class="btn-sm btn-default" onclick="exportHVCRateTable()">导出</button>
                                             </div>
                                         </form>
                                     </div>
@@ -3226,14 +3225,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="col-md-6" style="text-align:right">
                                         <form class="form-inline" role="form">
                                             <div class="form-group">
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="search()">查询</button>
-                                                <button type="button" class="btn btn-sm btn-alt" onclick="searchHis()">导出</button>
+                                                <button type="button" class="btn-sm btn-primary" onclick="search()">查询</button>
+                                                <button type="button" class="btn-sm btn-default" onclick="searchHis()">导出</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table border="1" id="hvtable">
+                                    <table border="1" id="table5">
                                         <tr>
                                             <td style="text-align:center" rowspan="2">参数</td>
                                             <td style="text-align:center" colspan="4">A相</td>
@@ -3708,6 +3707,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $("#item5").show();
             });
         });
+
+        $("#subItem1").click();
     </script>
 
     <!-- 省\市\机房下拉菜单-->
@@ -3910,8 +3911,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var time = $("#date").val();
         var did = $('#his-mpid-select').val();
         var date = time.substring(0,10);
-        console.log(date);
-        console.log(did);
+
         if(time && did){
             $.ajax({
                 type: "post",
@@ -3927,8 +3927,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var temp_threshold = obj.thresholdResult;
                     var temp_vcfund = obj.vcfund;
                     var table = document.getElementById('hvtable');
-                    console.log(temp_result);
-                    console.log(table.rows.length);
+
                     for (var i = 0; i < temp_result.length; i++) {
                         var result= temp_result[i].split(",");
                         if(result[1]=='a'){

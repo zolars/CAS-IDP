@@ -194,7 +194,7 @@
                             </div>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-sm btn-alt" id="serch-his-button" onclick="searchHis()">查询</button>
+                            <button type="button" class="btn-sm btn-primary" id="serch-his-button" onclick="searchHis()">查询</button>
                         </div>
 
                         <div class="clearfix"></div>
@@ -893,7 +893,7 @@
         series: [
             //频率hz
             {
-                name: 'hz', type: 'bar',
+                name: 'hz', type: 'line',
                 markPoint: markPointHZ, markLine: markLineHZ,
                 encode: {x: 'time', y: 'hz'}
             }

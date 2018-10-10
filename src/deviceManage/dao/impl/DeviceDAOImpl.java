@@ -37,14 +37,11 @@ public class DeviceDAOImpl implements DeviceDAO {
         return dv.getDid();
     }
 
-    public List getDeviceAlarmUserDataByName(String name){
+    public List getDeviceAlarmUserData(){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Devices dv = (Devices)hbsessionDao.getFirst(
-                "FROM Devices where name = '" + name+ "'");
-
         List<DeviceAlarmUser> list = hbsessionDao.search(
-                "FROM DeviceAlarmUser where did = '" + dv.getDid() + "'");
+                "FROM DeviceAlarmUser");
 
         return list;
     }
@@ -187,20 +184,19 @@ public class DeviceDAOImpl implements DeviceDAO {
         return rt;
     }
 
-    public Boolean addOneDeviceAlarmUser(String did, String uid, String period){
+    public Boolean addOneDeviceAlarmUser(String uid, String level){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
+        DeviceAlarmUser adu = (DeviceAlarmUser) hbsessionDao.getFirst(
+                "FROM DeviceAlarmUser where level='"+ level +"'");
 
-        DeviceAlarmUser dt = new DeviceAlarmUser();
-        String maxid = getMaxDeviceAlarmId();
-        Integer imaxid = Integer.parseInt(maxid) + 1;
+        String uidset = adu.getUid();
+        String appendstr = "，" + uid;
+        uidset += appendstr;
 
-        dt.setId(imaxid.toString());
-        dt.setDid(did);
-        dt.setUid(uid);
-        dt.setTimeperiod(period);
+        String hql = "update DeviceAlarmUser kl set kl.uid='" + uidset + "' where level = '"+ level +"'";
 
-        rt = hbsessionDao.insert(dt);
+        rt = hbsessionDao.update(hql);
         return rt;
     }
 
