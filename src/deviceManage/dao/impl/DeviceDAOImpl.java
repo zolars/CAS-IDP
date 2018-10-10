@@ -9,7 +9,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +32,10 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         Devices dv = (Devices)hbsessionDao.getFirst(
                 "FROM Devices where name = '" + name+ "'");
-
-        return dv.getDid();
+        if(dv == null)
+            return "";
+        else
+            return dv.getDid();
     }
 
     public List getDeviceAlarmUserData(){
@@ -121,16 +122,17 @@ public class DeviceDAOImpl implements DeviceDAO {
             return kl.getId();
     }
 
-    public Boolean addThresholdInfo(String did, Integer dtid, String name,String type,String unit,Double cellval,Double floorval,Integer ismark, Integer level){
+    public Boolean addThresholdInfo(String did, Integer dtid, String name,String type,String classify,String unit,Double cellval,Double floorval,Integer ismark, Integer level){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
         DevicesThreshold dt = new DevicesThreshold();
 
         dt.setDtid(dtid);
+        dt.setName(name);
         dt.setType(type);
         dt.setDid(did);
-        dt.setClassify(name);
+        dt.setClassify(classify);
         dt.setUnit(unit);
         dt.setCellval(cellval);
         dt.setFloorval(floorval);
@@ -141,13 +143,16 @@ public class DeviceDAOImpl implements DeviceDAO {
         return rt;
     }
 
-    public String getOneDeviceThresholdByNameAndLevel(String name, String level){
+    public Integer getOneDeviceThresholdByNameAndLevel(String name, String level){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        DeviceAlarmUser kl = (DeviceAlarmUser)hbsessionDao.getFirst(
-                "FROM DeviceAlarmUser order by id desc");
+        DevicesThreshold kl = (DevicesThreshold)hbsessionDao.getFirst(
+                "FROM DevicesThreshold where name='"+name+"' and level="+level);
 
-        return "0";
+        if(kl == null)
+            return 0;
+        else
+            return kl.getDtid();
     }
 
     public String getTypeByName(String name){
@@ -226,6 +231,18 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         String hql = "update DevicesThreshold kl set kl.classify='" + type +  "', kl.unit='" + unit +
                 "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.ismark='" + ismark + "', kl.level='" + level + "' where kl.dtid='" + dtid + "'";
+
+        rt = hbsessionDao.update(hql);
+        return rt;
+    }
+
+    public Boolean updateThresholdInfo(String did, Integer dtid, String name,String type,String classify,String unit,Double cellval,Double floorval,Integer ismark, Integer level){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = false;
+
+        String hql = "update DevicesThreshold kl set kl.dtid='" + dtid +  "', kl.classify='" + classify +
+                "', kl.type='" + type + "', kl.did='" + did + "', kl.unit='" + unit +  "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.ismark='" + ismark +
+                "' where kl.name='" + name + "' and kl.level="+ level;
 
         rt = hbsessionDao.update(hql);
         return rt;

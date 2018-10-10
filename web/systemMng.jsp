@@ -785,6 +785,10 @@
             <div id="dtid" style="display: none"></div>
             <div class="add-threshold-one-line">
                 <div class="add-threshold-item">
+                    <div class="add-threshold-title">设备名称</div>
+                    <input id="input-device-threshold-name" class="form-control" type="text">
+                </div>
+                <div class="add-threshold-item">
                     <div class="add-threshold-title">参数名称</div>
                     <input class="form-control location-select-item" id="thresholdname" name="thresholdname">
                     </input>
@@ -793,7 +797,7 @@
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数分类</div>
                     <select class="form-control location-select-item" id="thresholdtype" name="thresholdtype">
-                        <option value="频率上限值">频率上限值</option>
+                        <%--<option value="频率上限值">频率上限值</option>
                         <option value="频率下限值">频率下限值</option>
                         <option value="电压偏差越上限">电压偏差越上限</option>
                         <option value="电压偏差越下限">电压偏差越下限</option>
@@ -807,7 +811,10 @@
                         <option value="温度过高">温度过高</option>
                         <option value="温度过低">温度过低</option>
                         <option value="湿度过高">湿度过高</option>
-                        <option value="湿度过低">湿度过低</option>
+                        <option value="湿度过低">湿度过低</option>--%>
+                            <option value="电能">电能</option>
+                            <option value="环境">环境</option>
+                            <option value="其他">其他</option>
                     </select>
                 </div>
             </div>
@@ -2559,15 +2566,16 @@
                         '单位</td><td style="width:12.5%;">上限值</td><td style="width:12.5%;">下限值</td><td style="width:12.5%;">' +
                         '启用标识</td><td style="width:12.5%;">等级</td></tr>');
 
+
                     for (var i = 0; i < list.length; i++) {
-                        var dtid = list[i][0];
-                        var name = list[i][1];
-                        var type = list[i][2];
-                        var unit = list[i][3];
-                        var cellval = list[i][4];
-                        var floorval = list[i][5];
-                        var isMark = list[i][6];
-                        var level = list[i][7];
+                        var dtid = list[i].dtid;
+                        var name = list[i].name;
+                        var classify = list[i].classify;
+                        var unit = list[i].unit;
+                        var cellval = list[i].cellval;
+                        var floorval = list[i].floorval;
+                        var isMark = list[i].ismark;
+                        var level = list[i].level;
 
                         if(cellval == null)
                             cellval = "";
@@ -2577,7 +2585,7 @@
                             isMark = "";
 
                         table.append('<tr><td style="width:5%;"><input type="radio" name="dtid" id="dtid" value=' + dtid + '></td>' +
-                            '<td style="width:20%;">' + name + '</td><td style="width:12.5%;">' + type + '</td>' +
+                            '<td style="width:20%;">' + name + '</td><td style="width:12.5%;">' + classify + '</td>' +
                             '<td style="width:12.5%;">' + unit  + '</td>' +
                             '<td style="width:12.5%;">' + cellval + '</td><td style="width:12.5%;">' + floorval + '</td>' +
                             '<td style="width:12.5%;">' + isMark + '</td>' + '<td style="width:12.5%;">' + level +
@@ -2642,8 +2650,9 @@
 
     <!-- 提交添加限值 model  -->
     function submitAddThreshold() {
-        var dname = $("#device-threshold-name").val();
+        var dname = $("#input-device-threshold-name").val();
         var name = $("#thresholdname").val();
+        var classify = $("#thresholdtype").val();
         var unit = $("#thresholdunit").val();
         var cellval = $("#thresholdcellval").val();
         var floorval = $("#thresholdfloorval").val();
@@ -2656,6 +2665,7 @@
             data: {
                 dname: dname,
                 name: name,
+                classify: classify,
                 unit: unit,
                 cellval: cellval,
                 floorval: floorval,
@@ -3076,8 +3086,8 @@
                 data : {
                     uploadEventFile: uploadEventFile
                 },
-                success : function(result) {
-                    alert(result);
+                success : function(data) {
+                    alert("导入成功");
                 }
             });
         }

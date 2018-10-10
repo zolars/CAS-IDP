@@ -210,7 +210,6 @@
                                 },
                                 dataType: "json",
                                 success: function (data) {
-                                    alert("00000"+data);
                                     $("#ctrlstatus").attr("value","警");
                                 }
                             });
