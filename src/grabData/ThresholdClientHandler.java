@@ -72,26 +72,21 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
                     valuestr = Integer.toHexString(Float.floatToIntBits(fcval));
                 }
 
-                if (!valuestr.equals("")) {
-                    String val1 = valuestr.substring(0, 1);
-                    String val2 = valuestr.substring(2, 3);
-                    String val3 = valuestr.substring(4, 5);
-                    String val4 = valuestr.substring(6, 7);
-                    //byte[] value = ToHex.toBytes(valuestr);
 
-                    ByteBuf sendMsg = ctx.alloc().buffer();
 
-                    int addr = 8000;
-                    float value = (float) 1.1111;
-                    sendMsg.writeBytes(createMsg(addr, value));
-                    System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
+                ByteBuf sendMsg = ctx.alloc().buffer();
 
-                    SocketChannel sc = (SocketChannel) ctx.channel();
+                int addr = 8000;
+                float value = (float) 1.1111;
+                sendMsg.writeBytes(createMsg(addr, value));
+                System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
 
-                    sc.writeAndFlush(sendMsg);
-                }
+                SocketChannel sc = (SocketChannel) ctx.channel();
+
+                sc.writeAndFlush(sendMsg);
             }
         }
+
     }
 
     @Override

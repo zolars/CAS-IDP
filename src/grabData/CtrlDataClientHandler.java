@@ -16,7 +16,8 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
     private ByteBuf recMsg = null;
 
     //监测点id
-    private String did = "";
+    private String did;
+
 
     public CtrlDataClientHandler(String did) {
         this.did = did;
@@ -25,11 +26,10 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("Ctrl建立连接");
-        dic = CtrlSave.getDic();
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(1, 1, 4, 32));
-        System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
+        // TODO: 2018/10/10 0010 更改functionCode和readLength 
+        sendMsg.writeBytes(createMsg(1, 3, 1, 2));
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
@@ -59,7 +59,9 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
         recMsg.clear();
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(1, 1, 4, 32));
+        // TODO: 2018/10/10 0010 更改functionCode和readLength 
+        sendMsg.writeBytes(createMsg(1, 3, 1, 2));
+        // System.out.println("CtrlSend:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
@@ -89,22 +91,11 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void dataResolve(ByteBuf buf) {
-        int count = 4;
         buf.skipBytes(9);//跳过前9个字节，与数据无关
         String data = ByteBufUtil.hexDump(buf);
-        for (int i = 0; i < data.length(); i += 2) {
-            String binary = Integer.toBinaryString(
-                    Integer.valueOf(data.substring(i, i + 2), 16)
-            );
 
-            for (int j = 0; j < binary.length(); j++) {
-                if (binary.length() - j >= 0) {
-                    if(binary.charAt(binary.length() - j) == '1')
-                        CtrlSave.ctrlSave(did, count + j);
-                }
-            }
-            count += 8;
-        }
+        data = "4008080002";
 
+        CtrlSave.ctrlSave(did, data);
     }
 }

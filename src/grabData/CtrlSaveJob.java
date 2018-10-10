@@ -6,29 +6,33 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public class CtrlSaveJob implements Job {
-    private static HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        private static HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        Map<String, EventCtrl> eventCtrlMap = CtrlSave.getEventCtrlMap();
+        System.out.println("SaveCtrlYeah");
+
+        Map<String, List<EventCtrl>> eventCtrlMap = CtrlSave.getEventCtrlMap();
         if (null != eventCtrlMap) {
             Set<String> didSet = eventCtrlMap.keySet();
             Iterator<String> iterator = didSet.iterator();
             while (iterator.hasNext()) {
                 String did = iterator.next();  //监测点id
-                EventCtrl var = eventCtrlMap.get(did);
+                List<EventCtrl> var = eventCtrlMap.get(did);
 
-                //实时数据存入数据库
-                if (var.getDid() != null)
-                    hbsessionDao.insert(var);
+                Iterator<EventCtrl> it = var.iterator();
+                while (it.hasNext()) {
+                    EventCtrl event = it.next();
 
+                    //实时数据存入数据库
+                    if (event.getDid() != null)
+                        hbsessionDao.insert(event);
+                }
             }
         }
     }
