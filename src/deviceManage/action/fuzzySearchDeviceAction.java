@@ -30,11 +30,9 @@ public class fuzzySearchDeviceAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
             String name = request.getParameter("name");
 
             DeviceDAO dao = new DeviceDAOImpl();

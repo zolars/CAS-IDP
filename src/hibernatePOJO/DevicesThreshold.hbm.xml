@@ -8,6 +8,9 @@
         <id name="dtid">
             <column name="dtid" sql-type="int(11)"/>
         </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(255)" not-null="true"/>
+        </property>
         <property name="type">
             <column name="type" sql-type="varchar(11)" length="11" not-null="true"/>
         </property>
@@ -25,9 +28,6 @@
         </property>
         <property name="floorval">
             <column name="floorval" sql-type="float" precision="-1" not-null="true"/>
-        </property>
-        <property name="aid">
-            <column name="aid" sql-type="int(255)" not-null="true"/>
         </property>
         <property name="level">
             <column name="level" sql-type="int(11)" not-null="true"/>

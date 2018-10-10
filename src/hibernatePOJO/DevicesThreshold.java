@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class DevicesThreshold {
     private int dtid;
+    private String name;
     private String type;
     private String did;
     private String classify;
     private String unit;
     private Double cellval;
     private Double floorval;
-    private Integer aid;
     private Integer level;
     private Integer ismark;
 
@@ -20,6 +20,14 @@ public class DevicesThreshold {
 
     public void setDtid(int dtid) {
         this.dtid = dtid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {
@@ -70,14 +78,6 @@ public class DevicesThreshold {
         this.floorval = floorval;
     }
 
-    public Integer getAid() {
-        return aid;
-    }
-
-    public void setAid(Integer aid) {
-        this.aid = aid;
-    }
-
     public Integer getLevel() {
         return level;
     }
@@ -100,13 +100,13 @@ public class DevicesThreshold {
         if (o == null || getClass() != o.getClass()) return false;
         DevicesThreshold that = (DevicesThreshold) o;
         return dtid == that.dtid &&
+                Objects.equals(name, that.name) &&
                 Objects.equals(type, that.type) &&
                 Objects.equals(did, that.did) &&
                 Objects.equals(classify, that.classify) &&
                 Objects.equals(unit, that.unit) &&
                 Objects.equals(cellval, that.cellval) &&
                 Objects.equals(floorval, that.floorval) &&
-                Objects.equals(aid, that.aid) &&
                 Objects.equals(level, that.level) &&
                 Objects.equals(ismark, that.ismark);
     }
@@ -114,6 +114,6 @@ public class DevicesThreshold {
     @Override
     public int hashCode() {
 
-        return Objects.hash(dtid, type, did, classify, unit, cellval, floorval, aid, level, ismark);
+        return Objects.hash(dtid, name, type, did, classify, unit, cellval, floorval, level, ismark);
     }
 }
