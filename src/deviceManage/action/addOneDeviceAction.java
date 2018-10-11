@@ -8,7 +8,6 @@ import deviceManage.dao.impl.DeviceDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class addOneDeviceAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -28,7 +27,6 @@ public class addOneDeviceAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String radioEthernet = request.getParameter("radioEthernet");
@@ -40,7 +38,7 @@ public class addOneDeviceAction extends ActionSupport {
             String devname = request.getParameter("devname");
             String devtype = request.getParameter("devtype");
             String serialno = request.getParameter("serialno");
-            String IPaddress = request.getParameter("IPaddress");
+            String iPaddress = request.getParameter("IPaddress");
             String port = request.getParameter("port");
             String extra = request.getParameter("extra");
 
@@ -48,32 +46,36 @@ public class addOneDeviceAction extends ActionSupport {
 
             String deviceType = "";
 
-            if(radioEthernet != null)
+            if (radioEthernet != null) {
                 deviceType = "以太网";
-            else if(radioR5485 != null)
+            } else if (radioR5485 != null) {
                 deviceType = "R5485";
-            else if(radioRS232 != null)
+            } else if (radioRS232 != null) {
                 deviceType = "RS232";
+            }
 
             Integer sms = 0;
             Integer alert = 0;
             Integer plantform = 0;
 
-            if(checkboxsms != null)
+            if (checkboxsms != null) {
                 sms = 1;
-            if(checkboxalert != null)
+            }
+            if (checkboxalert != null) {
                 alert = 1;
-            if(checkboxplantform != null)
+            }
+            if (checkboxplantform != null) {
                 plantform = 1;
+            }
 
-            Boolean rt = dao.addOneDeviceInfo(deviceType, devname, devtype, serialno, IPaddress, port, extra, sms, alert, plantform);
+            Boolean rt = dao.addOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform);
             JSONObject jsonObject = new JSONObject();
 
-            if(rt)
+            if (rt) {
                 jsonObject.put("提示", "添加成功！");
-            else
+            } else {
                 jsonObject.put("提示", "添加失败，请重试！");
-
+            }
             result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {

@@ -28,7 +28,7 @@ public class fuzzySearchDeviceAction extends ActionSupport {
     /*获取模糊查询的设备
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 

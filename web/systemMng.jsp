@@ -120,7 +120,6 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
         <img src="/img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
@@ -161,7 +160,6 @@
                         $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
                     })
                 </script>
-
             </div>
 
 
@@ -330,27 +328,8 @@
                                 </li>
                             </ul>
 
-                            <div id="secItem1" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                            </div>
-                            <div id="secItem2" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                            </div>
-                            <div id="secItem3" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                            </div>
-                            <div id="secItem4" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                            </div>
-                            <div id="secItem5" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                            </div>
-                            <div id="secItem6" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
-
-                            </div>
-
-                            <div id="TCP-device" style="display: none">
-                                <div id="outer" class="outer">
+                            <div id="TCP-device">
+                                <div class="outer">
                                     <input id="searchInput" class="searchInput form-control"
                                            type="text">
                                     <div id="searchTips" class="tips" style="display: none">
@@ -441,13 +420,28 @@
                                                 <label class="t-overflow">
                                                     序列号 <input id="serialno" type="text" class="form-control setting-input">
                                                 </label>
-                                                <label class="t-overflow">
-                                                    IP地址 <input id="IPaddress" type="text"
-                                                                class="form-control setting-input">
-                                                </label>
-                                                <label class="t-overflow">
-                                                    端口号 <input id="port" type="text" class="form-control setting-input">
-                                                </label>
+                                                <div id="ipaddress-div" style="display: none;">
+                                                    <label class="t-overflow">
+                                                        IP地址 <input id="IPaddress" type="text"
+                                                                    class="form-control setting-input">
+                                                    </label>
+                                                </div>
+                                                <div id="port-div" style="display: none;">
+                                                    <label class="t-overflow">
+                                                        端口号 <input id="port" type="text" class="form-control setting-input">
+                                                    </label>
+                                                </div>
+                                                <div id="conncom-div" style="display: none;">
+                                                    <label class="t-overflow">
+                                                        通信串口 <input id="conncom" type="text" class="form-control setting-input">
+                                                    </label>
+                                                </div>
+                                                <div id="485address-div" style="display: none;">
+                                                    <label class="t-overflow">
+                                                        485地址 <input id="485address" type="text"
+                                                                     class="form-control setting-input">
+                                                    </label>
+                                                </div>
                                                 <label class="t-overflow">
                                                     备注 <input id="extra" type="text" class="form-control setting-input">
                                                 </label>
@@ -456,6 +450,20 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="secItem1" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+                            </div>
+                            <div id="secItem2" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+                            </div>
+                            <div id="secItem3" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+                            </div>
+                            <div id="secItem4" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+                            </div>
+                            <div id="secItem5" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+                            </div>
+                            <div id="secItem6" class="col-md-2 col-xs-6" style="width:90%; height: 0px;">
+                            </div>
+
                         </div>
                     </div>
                     <div id="item5" class="" style="width:90%; height: 600px;">
@@ -1304,84 +1312,53 @@
 
             $(document).ready(function () {
                 $("#secsubItem1").click(function () {
-                    $("#secItem1").show();
-                    $("#secItem2").hide();
-                    $("#secItem3").hide();
-                    $("#secItem4").hide();
-                    $("#secItem5").hide();
-                    $("#secItem6").hide();
-
-                    $('#TCP-device').css('display', 'block');
-                    $('#485-serialno-device').css('display', 'none');
-
+                    $('#ipaddress-div').css('display', 'block');
+                    $('#port-div').css('display', 'block');
+                    $('#conncom-div').css('display', 'none');
+                    $('#485address-div').css('display', 'none');
                     clearDeviceDiv();
                 });
                 $("#secsubItem2").click(function () {
-                    $("#secItem1").hide();
-                    $("#secItem2").show();
-                    $("#secItem3").hide();
-                    $("#secItem4").hide();
-                    $("#secItem5").hide();
-                    $("#secItem6").hide();
-
-                    $('#TCP-device').css('display', 'block');
-                    $('#485-serialno-device').css('display', 'none');
-
+                    $('#ipaddress-div').css('display', 'block');
+                    $('#port-div').css('display', 'block');
+                    $('#conncom-div').css('display', 'none');
+                    $('#485address-div').css('display', 'none');
                     clearDeviceDiv();
                 });
                 $("#secsubItem3").click(function () {
-                    $("#secItem1").hide();
-                    $("#secItem2").hide();
-                    $("#secItem3").show();
-                    $("#secItem4").hide();
-                    $("#secItem5").hide();
-                    $("#secItem6").hide();
-
-                    $('#TCP-device').css('display', 'none');
-                    $('#485-serialno-device').css('display', 'block');
-
-                    clearDeviceDiv2();
+                    $('#ipaddress-div').css('display', 'none');
+                    $('#port-div').css('display', 'none');
+                    $('#conncom-div').css('display', 'block');
+                    $('#485address-div').css('display', 'block');
+                    clearDeviceDiv();
                 });
                 $("#secsubItem4").click(function () {
-                    $("#secItem1").hide();
-                    $("#secItem2").hide();
-                    $("#secItem3").hide();
-                    $("#secItem4").show();
-                    $("#secItem5").hide();
-                    $("#secItem6").hide();
-
-                    $('#TCP-device').css('display', 'none');
-                    $('#485-serialno-device').css('display', 'block');
-
-                    clearDeviceDiv2();
+                    $('#ipaddress-div').css('display', 'none');
+                    $('#port-div').css('display', 'none');
+                    $('#conncom-div').css('display', 'block');
+                    $('#485address-div').css('display', 'block');
+                    clearDeviceDiv();
                 });
                 $("#secsubItem5").click(function () {
-                    $("#secItem1").hide();
-                    $("#secItem2").hide();
-                    $("#secItem3").hide();
-                    $("#secItem4").hide();
-                    $("#secItem5").show();
-                    $("#secItem6").hide();
-
-                    $('#TCP-device').css('display', 'none');
-                    $('#485-serialno-device').css('display', 'block');
-
-                    clearDeviceDiv2();
+                    $('#ipaddress-div').css('display', 'none');
+                    $('#port-div').css('display', 'none');
+                    $('#conncom-div').css('display', 'block');
+                    $('#485address-div').css('display', 'block');
+                    clearDeviceDiv();
                 });
                 $("#secsubItem6").click(function () {
-                    $("#secItem1").hide();
-                    $("#secItem2").hide();
-                    $("#secItem3").hide();
-                    $("#secItem4").hide();
-                    $("#secItem5").hide();
-                    $("#secItem6").show();
-
-                    $('#TCP-device').css('display', 'none');
-                    $('#485-serialno-device').css('display', 'block');
-
-                    clearDeviceDiv2();
+                    $('#ipaddress-div').css('display', 'none');
+                    $('#port-div').css('display', 'none');
+                    $('#conncom-div').css('display', 'block');
+                    $('#485address-div').css('display', 'block');
+                    clearDeviceDiv();
                 });
             });
+
+            $('#ipaddress-div').css('display', 'block');
+            $('#port-div').css('display', 'block');
+            $('#conncom-div').css('display', 'none');
+            $('#485address-div').css('display', 'none');
         });
         $("#subItem5").click(function () {
             $("#item1").hide();
@@ -2104,14 +2081,14 @@
         tips.innerHTML = '';
         var result = fakeApi(value);
         if (result && result.length > 0) {
-            tips.style.display = 'block'
+            tips.style.display = 'block';
         };
         appendData(result);
     };
 
     searchInput.addEventListener('blur', function () {
         setTimeout(function () {
-            tips.style.display = 'none'
+            tips.style.display = 'none';
         }, 150);
     });
 
@@ -2143,28 +2120,32 @@
                 $("#devname").val(obj[0].name);
                 $("#devtype").val(obj[0].type);
                 $("#serialno").val(obj[0].serialno);
-                $("#IPaddress").val(obj[0].iPaddress);
-                $("#port").val(obj[0].port);
                 $("#extra").val(obj[0].extra);
 
-                if (obj[0].devicetype == "以太网") {
+                if (obj[0].devicetype == "以太网") {  //IDP UPS
                     $("#radio-Ethernet").attr("checked", "checked");
                     $("#radio-R5485").removeAttr("checked");
                     $("#radio-RS232").removeAttr("checked");
+
+                    $("#IPaddress").val(obj[0].iPaddress);
+                    $("#port").val(obj[0].port);
                 }
-                if (obj[0].devicetype == "RS485") {
+                if (obj[0].devicetype == "RS485") {  //蓄电池 柴发 空调 其他传感器（温度湿度）
                     $("#radio-Ethernet").removeAttr("checked");
                     $("#radio-R5485").attr("checked", "checked");
                     $("#radio-RS232").removeAttr("checked");
+
+                    $("#conncom").val(obj[0].iPaddress);
+                    $("#485address").val(obj[0].port);
                 }
-                if (obj[0].devicetype == "RS232") {
+                if (obj[0].devicetype == "RS232") {  //
                     $("#radio-Ethernet").removeAttr("checked");
                     $("#radio-R5485").removeAttr("checked");
                     $("#radio-RS232").attr("checked", "checked");
                 }
 
                 //预警方式
-                if (obj[0].isSMS == "1") {
+                if (obj[0].isSms == "1") {
                     $("#checkbox-sms").attr("checked", "checked");
                 }
                 if (obj[0].isAlart == "1") {
@@ -2192,6 +2173,8 @@
         var serialno = $("#serialno").val();
         var IPaddress = $("#IPaddress").val();
         var port = $("#port").val();
+        var conncom = $("#conncom").val();
+        var address485 = $("#485address").val();
         var extra = $("#extra").val();
 
         if(radioEthernet == "on" && radioR5485 == "on" && radioRS232 == "on")
@@ -2212,9 +2195,9 @@
             alert("请输入设备类型");
         else if(serialno == "")
             alert("请输入序列号");
-        else if(IPaddress == "")
+        else if(IPaddress == "" && conncom=="")
             alert("请输入IP地址");
-        else if(port == "")
+        else if(port == "" && address485=="")
             alert("请输入端口号");
         else $.ajax({
                 type: "post",
@@ -2368,10 +2351,19 @@
         $("#IPaddress").val("");
         $("#port").val("");
         $("#extra").val("");
+        $("#conncom").val("");
+        $("#485address").val("");
+
         $("#radio-Ethernet").removeAttr("checked");
         $("#radio-R5485").removeAttr("checked");
         $("#radio-RS232").removeAttr("checked");
+
+        $("#checkbox-sms").removeAttr("checked");
+        $("#checkbox-alert").removeAttr("checked");
+        $("#checkbox-plantform").removeAttr("checked");
+
         $("#alarm-user-table").empty();
+
     }
 </script>
 
@@ -2566,7 +2558,6 @@
                         '单位</td><td style="width:12.5%;">上限值</td><td style="width:12.5%;">下限值</td><td style="width:12.5%;">' +
                         '启用标识</td><td style="width:12.5%;">等级</td></tr>');
 
-
                     for (var i = 0; i < list.length; i++) {
                         var dtid = list[i].dtid;
                         var name = list[i].name;
@@ -2733,7 +2724,7 @@
             },
             dataType: "json",
             success: function (data) {
-                alert(data);
+                getOneDeviceThreshold();
             },
             error: function () {
                 alert("失败");
@@ -3093,8 +3084,6 @@
         }
     }
 </script>
-
-
 
 </body>
 

@@ -49,11 +49,9 @@ public class getQstaction extends ActionSupport {
             // 5 records
             ((RMSDAOImpl) rmsdao).getCurrentData(did);
             //getQstRMS
-            List qstdata = rmsdao.getCurrentRMSData();
+            List qstdata = rmsdao.getCurrentRMSData(did);
             //getQstTHD
             List thddata = rmsdao.getCurrentTHDData();
-            //getQstCF
-            List cfdata = rmsdao.getCurrentCFData();
             //getQstHZ
             List hzdata = rmsdao.getCurrentHzData(did);
             //getQstUNB%
@@ -74,16 +72,12 @@ public class getQstaction extends ActionSupport {
             List pstdata = rmsdao.getCurrentPstData(did);
             //getQstPLT
             List pltdata = rmsdao.getCurrentPltData(did);
-            //getQstVh
-            List Vhdata = rmsdao.getCurrentVhData(did);
 
-            //getQstAh
             // PowerparmMonitor pp = DataOnline.getParmMap().get(did);
            // PowerxbMonitor pxb = DataOnline.getXbMap().get(did);
 
             jsonObject.put("allRMS", qstdata);
             jsonObject.put("allTHD", thddata);
-            jsonObject.put("allCF", cfdata);
             jsonObject.put("allHZ", hzdata);
             jsonObject.put("allUNB", unbdata);
             jsonObject.put("allW", wdata);
@@ -94,8 +88,6 @@ public class getQstaction extends ActionSupport {
             jsonObject.put("allTAN", tandata);
             jsonObject.put("allPST", pstdata);
             jsonObject.put("allPLT", pltdata);
-            jsonObject.put("allVh", Vhdata);
-            //jsonObject.put("allAh", Vhdata);
 
             result = JSON.toJSONString(jsonObject); // List转json
 
