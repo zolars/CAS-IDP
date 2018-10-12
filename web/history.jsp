@@ -827,17 +827,32 @@
             {
                 name: "u1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "u1"}
+                encode: {x: "time", y: "u1"},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
             },
             {
                 name: "u2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "u2"}
+                encode: {x: "time", y: "u2"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
             },
             {
                 name: "u3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "u3"}
+                encode: {x: "time", y: "u3"},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
             },
             {
                 name: "u4", type: "line", smooth: true, showSymbol: false,
@@ -848,17 +863,32 @@
             {
                 name: "i1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "i1"}
+                encode: {x: "time", y: "i1"},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
             },
             {
                 name: "i2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "i2"}
+                encode: {x: "time", y: "i2"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
             },
             {
                 name: "i3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "i3"}
+                encode: {x: "time", y: "i3"},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
             },
             {
                 name: "i4", type: "line", smooth: true, showSymbol: false,
@@ -1042,15 +1072,30 @@
             // 浪涌/塌陷
             {
                 name: 'Ua',type: 'scatter',
-                encode: {x: 'time', y: 'Ua'}
+                encode: {x: 'time', y: 'Ua'},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
             },
             {
                 name: 'Ub',type: 'scatter',
-                encode: {x: 'time', y: 'Ub'}
+                encode: {x: 'time', y: 'Ub'},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
             },
             {
                 name: 'Uc',type: 'scatter',
-                encode: {x: 'time', y: 'Uc'}
+                encode: {x: 'time', y: 'Uc'},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
             }
         ]
     };

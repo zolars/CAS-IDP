@@ -28,7 +28,7 @@ public interface DeviceDAO {
 
     public String getTypeByName(String name);
 
-    public Boolean addThresholdInfo(String did, Integer dtid, String name,String type,String classify,String unit,Double cellval,Double floorval,Integer ismark,Integer alarmcontent);
+    public Boolean addThresholdInfo(String did, Integer dtid, String name, String classify, String unit, Double cellval, Double floorval, Integer ismark, Integer alarmcontent);
 
     public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port, String extra, Integer sms, Integer alert, Integer plantform);
 
@@ -40,7 +40,7 @@ public interface DeviceDAO {
 
     public Boolean updateDeviceThreshold(String dtid, String type,String unit, Double cellval, Double floorval, Integer ismark, Integer level);
 
-    public Boolean updateThresholdInfo(String did, Integer dtid, String name,String type,String classify,String unit,Double cellval,Double floorval,Integer ismark,Integer level);
+    public Boolean updateThresholdInfo(String did, Integer dtid, String name, String classify, String unit, Double cellval, Double floorval, Integer ismark, Integer level);
 
     public List getAllIDPDevice();
 

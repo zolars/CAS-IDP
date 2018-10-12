@@ -16,14 +16,9 @@ import java.util.List;
 
 public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
-
     DBConnect db;
     ResultSet rs = null;
     PreparedStatement ps = null;
-    boolean result = false;
 
     public List searchFuzzyDeviceThreshold(String name){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();

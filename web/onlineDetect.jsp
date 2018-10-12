@@ -171,7 +171,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <ol>
                                         <li><button class="btn btn-default active" value="rms">RMS</button></li>
                                         <li><button class="btn btn-default" value="thd">THD</button></li>
-                                        <li><button class="btn btn-default" value="cf">CF</button></li>
+                                      <%--  <li><button class="btn btn-default" value="cf">CF</button></li>--%>
                                         <li><button class="btn btn-default" value="hz">Hz</button></li>
                                         <li><button class="btn btn-default" value="p">W</button></li>
                                         <li><button class="btn btn-default" value="s">VA</button></li>
@@ -180,8 +180,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <li><button class="btn btn-default" value="unb">unb</button></li>
                                         <li><button class="btn btn-default" value="pst">Pst</button></li>
                                         <li><button class="btn btn-default" value="plt">Plt</button></li>
-                                        <li><button class="btn btn-default" value="vh">Vh</button></li>
-                                        <li><button class="btn btn-default" value="ah">Ah</button></li>
+                                       <%-- <li><button class="btn btn-default" value="vh">Vh</button></li>
+                                        <li><button class="btn btn-default" value="ah">Ah</button></li>--%>
                                     </ol>
                                 </div>
                                 <select id="myDropDown" style="display: none">
@@ -248,9 +248,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div id="item3-graph" class="col-md-8" style="height: 580px;"></div>
                             <div id="item3-sidebar" class="col-md-2" style="height: 580px;">
                                 <ol class="symbol">
-                                    <li style="border: 2px solid #f00;">1</li>
-                                    <li style="border: 2px solid #00f;">2</li>
-                                    <li style="border: 2px solid #ff0;">3</li>
+                                    <li style="border: 2px solid #ff0;">1</li>
+                                    <li style="border: 2px solid #0f0;">2</li>
+                                    <li style="border: 2px solid #f00;">3</li>
                                 </ol>
                                 <div class="clearfix"></div>
                                 <ol>
@@ -477,7 +477,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item5").hide();
                     // 切换子菜单时，从后台读取数据
                     var mpcname = $("#monitorpnt").val();
-                    if(mpcname) getDataQst(mpcname);
+                    //if(mpcname) getDataQst(mpcname);
                 });
                 $("#subItem2").click(function(){
                     $("#item1").hide();
@@ -637,7 +637,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var qstLegend=[
             "rmsU1","rmsU2","rmsU3","rmsI1","rmsI2","rmsI3",
             "thdU1","thdU2","thdU3","thdI1","thdI2","thdI3",
-            "cfU1","cfU2","cfU3","cfI1","cfI2","cfI3",
+         /*   "cfU1","cfU2","cfU3","cfI1","cfI2","cfI3",*/
             "hz",
             "p1","p2","p3", "s1","s2","s3", "q1","q2","q3",
             "pf1","pf2","pf3",
@@ -646,13 +646,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             "unb",
             "pstU1","pstU2","pstU3",
             "pltU1","pltU2","pltU3",
-            "vh1", "vh2", "vh3", "vh4", "vh5", "vh6", "vh7", "vh8", "vh9", "vh10",
+           /* "vh1", "vh2", "vh3", "vh4", "vh5", "vh6", "vh7", "vh8", "vh9", "vh10",
             "vh11", "vh12", "vh13", "vh14", "vh15", "vh16", "vh17", "vh18", "vh19", "vh20",
             "vh21", "vh22", "vh23", "vh24", "vh25", "vh26", "vh27", "vh28", "vh29", "vh30",
             "vh31", "vh32", "vh33", "vh34", "vh35", "vh36", "vh37", "vh38", "vh39", "vh40",
-            "vh41", "vh42", "vh43", "vh44", "vh45", "vh46", "vh47", "vh48", "vh49", "vh50"
+            "vh41", "vh42", "vh43", "vh44", "vh45", "vh46", "vh47", "vh48", "vh49", "vh50"*/
             ];//趋势图图例
-        var gaugePointerColor = ["#ff0000", "#0000ff", "#ffff00"]; // 三相不平衡度表的指针颜色
+        var gaugePointerColor = ["#ffff00", "#00ff00", "#ff0000"]; // 三相不平衡度表的指针颜色
         var sxbphdlegend = ["U1", "U2", "U3", "V1", "V2", "V3", "A1", "A2", "A3"]; // 三相不平衡度表的图例
         var maxAmplitude = 400; // 三相不平衡度表中幅值的最大值，用来计算指针长度
         var dataSxbphd = null; // 暂存三相不平衡度表中的数据
@@ -777,7 +777,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdI3"}
                 },
-                // CF
+               /* // CF
                 {
                     name: "cfU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
@@ -807,7 +807,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     name: "cfI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "cfI3"}
-                },
+                },*/
                 // Hz
                 {
                     name: "hz", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
@@ -948,7 +948,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pltU3"}
                 },
-                //Vh
+               /* //Vh
                 {name: "vh1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
                 {name: "vh2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
                 {name: "vh3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
@@ -998,7 +998,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {name: "vh47", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
                 {name: "vh48", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
                 {name: "vh49", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh50", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,}
+                {name: "vh50", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,}*/
             ]
         };
         var option2 = {
@@ -1015,7 +1015,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         yAxisIndex: 'none'
                     },
                     dataView: {readOnly: false},
-                    magicType: {type: ['line', 'bar']},
+                    magicType: {type: ['bar','line']},
                     restore: {},
                     // saveAsImage: {}
                 }
@@ -1449,7 +1449,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     addData(qstRecords, JSON.parse(data));
                     updateQst(qstRecords);
 
-                    //更新数据
+                   /* //更新数据
                     var nRecord = JSON.parse(data);
                     var vb = nRecord["allVh"];
 
@@ -1463,7 +1463,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     dataSource3[0] = vb[2][0];
                     dataSource3[1] = vb[2][1];
-                    dataSource3[2] = vb[2][2];
+                    dataSource3[2] = vb[2][2];*/
                 }
             });
         }
@@ -1510,19 +1510,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     rmsI2: newRecord["allRMS"][i]["i2"],
                     rmsI3: newRecord["allRMS"][i]["i3"],
                     // THD
-                    thdU1: newRecord["allTHD"][i]["u1"],
+                   /* thdU1: newRecord["allTHD"][i]["u1"],
                     thdU2: newRecord["allTHD"][i]["u2"],
                     thdU3: newRecord["allTHD"][i]["u3"],
                     thdI1: newRecord["allTHD"][i]["i1"],
                     thdI2: newRecord["allTHD"][i]["i2"],
-                    thdI3: newRecord["allTHD"][i]["i3"],
-                    // CF
-                    cfU1: newRecord["allCF"][i]["u1"],
-                    cfU2: newRecord["allCF"][i]["u2"],
-                    cfU3: newRecord["allCF"][i]["u3"],
-                    cfI1: newRecord["allCF"][i]["i1"],
-                    cfI2: newRecord["allCF"][i]["i2"],
-                    cfI3: newRecord["allCF"][i]["i3"],
+                    thdI3: newRecord["allTHD"][i]["i3"],*/
                     // Hz
                     hz: newRecord["allHZ"][i]["hz"],
                     // W
@@ -1558,15 +1551,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     // Plt
                     pltU1: newRecord["allPLT"][i]["pltU1"],
                     pltU2: newRecord["allPLT"][i]["pltU2"],
-                    pltU3: newRecord["allPLT"][i]["pltU3"],
-                    // vh
+                    pltU3: newRecord["allPLT"][i]["pltU3"]//,
+                  /*  // vh
                     vh1: newRecord["allVh"][i][0],
                     vh2: newRecord["allVh"][i][1],
                     vh3: newRecord["allVh"][i][2],
                     vh4: newRecord["allVh"][i][3],
                     vh5: newRecord["allVh"][i][4],
                     vh6: newRecord["allVh"][i][5],
-                    vh7: newRecord["allVh"][i][6]// ,
+                    vh7: newRecord["allVh"][i][6]// ,*/
                    /* vh8: newRecord["allVh"][i]["vh8"],
                     vh9: newRecord["allVh"][i]["vh9"],
                     vh10: newRecord["allVh"][i]["vh10"],
@@ -1651,14 +1644,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     res.push(temp);
             }
             eventChart2.setOption({
-                series: [{name: "U1", type: 'line', data: res[0]},
-                    {name: "U2", type: 'line', data: res[1]},
-                    {name: "U3", type: 'line', data: res[2]},
-                    {name: "U4", type: 'line', data: res[3]},
-                    {name: "I1", type: 'line', data: res[4]},
-                    {name: "I2", type: 'line', data: res[5]},
-                    {name: "I3", type: 'line', data: res[6]},
-                    {name: "I4", type: 'line', data: res[7]}
+                series: [{name: "U1", type: 'bar', data: res[0]},
+                    {name: "U2", type: 'bar', data: res[1]},
+                    {name: "U3", type: 'bar', data: res[2]},
+                    {name: "U4", type: 'bar', data: res[3]},
+                    {name: "I1", type: 'bar', data: res[4]},
+                    {name: "I2", type: 'bar', data: res[5]},
+                    {name: "I3", type: 'bar', data: res[6]},
+                    {name: "I4", type: 'bar', data: res[7]}
                 ]
             });
         }
@@ -1704,17 +1697,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     {
                         name: "U1",
                         pointer: {length: pointerLength[0]},
-                        data: [{value: data["angleU1"]}]
+                        data: [{value: data["angleU1"]}],
+                        itemStyle:{
+                            normal:{
+                                color:'#FFFF00'
+                            }
+                        }
                     },
                     {
                         name: "U2",
                         pointer: {length: pointerLength[1]},
-                        data: [{value: data["angleU2"]}]
+                        data: [{value: data["angleU2"]}],
+                        itemStyle:{
+                            normal:{
+                                color:'#00FF00'
+                            }
+                        }
                     },
                     {
                         name: "U3",
                         pointer: {length: pointerLength[2]},
-                        data: [{value: data["angleU3"]}]
+                        data: [{value: data["angleU3"]}],
+                        itemStyle:{
+                            normal:{
+                                color:'#FF0000'
+                            }
+                        }
                     },
                     {
                         name: "V1",

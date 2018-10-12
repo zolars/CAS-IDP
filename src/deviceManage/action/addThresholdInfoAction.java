@@ -34,7 +34,6 @@ public class addThresholdInfoAction extends ActionSupport {
 
             String dname = request.getParameter("dname");
             String name = request.getParameter("name");
-            String type = request.getParameter("type");
             String classify = request.getParameter("classify");
             String unit = request.getParameter("unit");
             String cellval = request.getParameter("cellval");
@@ -45,8 +44,15 @@ public class addThresholdInfoAction extends ActionSupport {
             DeviceDAO dao = new DeviceDAOImpl();
 
             Integer maxdtid;
-            Double dcellval = Double.valueOf(cellval);
-            Double dfloorval = Double.valueOf(floorval);
+            Double dcellval = null;
+            Double dfloorval = null;
+            if (cellval.equals("")) {
+                dcellval = Double.valueOf(cellval);
+            }
+            if (cellval.equals("")) {
+                dfloorval = Double.valueOf(floorval);
+            }
+
             Integer iismark = Integer.valueOf(ismark);
             String did = dao.getDeviceIDByName(dname);
             Integer ilevel = Integer.valueOf(level);
@@ -55,19 +61,17 @@ public class addThresholdInfoAction extends ActionSupport {
             Boolean rt = false;
             JSONObject jsonObject = new JSONObject();
 
-            if(did.equals("")) {
+            if (did.equals("")) {
 
                 jsonObject.put("提示", "设备名称不存在！");
 
-            }
-            else{
+            } else {
 
-                if(dtid.equals(0)) { //不存在
+                if (dtid.equals(0)) { //不存在
                     maxdtid = dao.getMaxThresholdId();
-                    rt = dao.addThresholdInfo(did,maxdtid+1, name, type, classify, unit, dcellval, dfloorval, iismark, ilevel);
-                }
-                else{  //存在 更新
-                    rt = dao.updateThresholdInfo(did, dtid, name, type, classify, unit, dcellval, dfloorval, iismark, ilevel);
+                    rt = dao.addThresholdInfo(did,maxdtid + 1, name, classify, unit, dcellval, dfloorval, iismark, ilevel);
+                } else {  //存在 更新
+                    rt = dao.updateThresholdInfo(did, dtid, name, classify, unit, dcellval, dfloorval, iismark, ilevel);
                 }
 
                 if(rt)
