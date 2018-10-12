@@ -1,10 +1,10 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!-- 引入struts的标签库-->
-<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -12,7 +12,7 @@
 <head>
     <title>IDP数据中心动力管控系统</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="format-detection" content="telephone=no">
     <meta charset="UTF-8">
     <meta name="description" content="Violate Responsive Admin Template">
@@ -48,18 +48,22 @@
     <link rel="stylesheet" href="css/header.css">
     <style>
         .datetimepicker {
-            background: black!important;
+            background: black !important;
         }
+
         .time-pick-container {
             height: 34px;
 
         }
+
         .time-pick-container .iradio_minimal {
-            top: 10px!important;
+            top: 10px !important;
         }
+
         .time-picker-radio {
             padding-top: 8px;
         }
+
         .time-pick-text {
             display: inline-block;
             vertical-align: middle;
@@ -67,16 +71,19 @@
             line-height: 34px;
             margin: 0 5px;
         }
+
         .time-pick-outer {
             width: 200px;
             height: 34px;
             display: inline-block;
             vertical-align: middle;
         }
+
         .table-container {
             height: 230px;
             overflow: scroll;
         }
+
         .col-active {
             background: black;
         }
@@ -88,8 +95,8 @@
 
 <!--登陆认证拦截-->
 <%
-    String userid = (String)session.getAttribute("userid");
-    if(userid == null) {
+    String userid = (String) session.getAttribute("userid");
+    if (userid == null) {
 %>
 <script>
     var eventtypetable = null;
@@ -110,27 +117,27 @@
     <div class="header-right">
         <div class="media" id="top-menu">
             <div class="pull-left location-select">
-                <select class="form-control location-select-item" id="province_code" name="province_code"
-                        onchange="getCity()">
+                <select class="form-control location-select-item" id="province_code" name="province_code">
                     <option value="">请选择</option>
                 </select>
 
                 <script>
-                    $("#province_code").change(function(){
+                    $("#province_code").change(function () {
                         var options = $("#province_code option:selected");
-                        $. cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                        getCity();
                     })
                 </script>
 
-                <select class="form-control location-select-item" id="city_code" name="city_code"
-                        onchange="getComproom()">
+                <select class="form-control location-select-item" id="city_code" name="city_code">
                     <option value="">请选择</option>
                 </select>
 
                 <script>
-                    $("#city_code").change(function(){
+                    $("#city_code").change(function () {
                         var options = $("#city_code option:selected");
-                        $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                        getComproom();
                     })
 
                 </script>
@@ -140,9 +147,9 @@
                 </select>
 
                 <script>
-                    $("#comproom_code").change(function(){
+                    $("#comproom_code").change(function () {
                         var options = $("#comproom_code option:selected");
-                        $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion3', options.text(), {expires: 1, path: '/'});
                     })
                 </script>
 
@@ -178,7 +185,7 @@
 
                 <div class="col-md-12">
                     <ul class="nav nav-tabs" id="ulItem">
-                        <li class="active"  style="width:15%">
+                        <li class="active" style="width:15%">
                             <a data-toggle="tab" id="subItem1">•事件分析</a>
                         </li>
                         <li style="width:15%">
@@ -187,7 +194,7 @@
                     </ul>
                 </div>
 
-                <div id = "item1" class="col-md-12 col-xs-6" style="height: 600px;">
+                <div id="item1" class="col-md-12 col-xs-6" style="height: 600px;">
                     <div class="block-area">
                         <div class="row">
                             <div class="col-md-12">
@@ -196,25 +203,32 @@
                                     <tr>
                                         <th><img src="/img/setting.png" alt="" onClick="settingIcon()"></th>
                                         <th><img src="/img/refresh.png" alt="" onClick="refreshIcon()"></th>
-                                        <th><button type="button" class="btn-sm btn-primary" onClick="exportTable()" >导出</button></th>
-                                        <th><button type="button" class="btn-sm btn-warning" onClick="printTable()" >打印</button></th>
+                                        <th>
+                                            <button type="button" class="btn-sm btn-primary" onClick="exportTable()">
+                                                导出
+                                            </button>
+                                        </th>
+                                        <th>
+                                            <button type="button" class="btn-sm btn-warning" onClick="printTable()">打印
+                                            </button>
+                                        </th>
                                     </tr>
                                     </thead>
                                 </table>
                                 <div class="row-fluid">
                                     <div class="col-md-7">
-                                         <ul class="nav nav-tabs" id="detailItem">
-                                             <li class="active"  style="width:33.333%">
-                                                 <a data-toggle="tab" id="detailItem1">•电能质量事件</a>
-                                             </li>
-                                             <li style="width:33.333%">
-                                                 <a data-toggle="tab" id="detailItem2">•环境事件</a>
-                                             </li>
-                                             <li style="width:33.333%">
-                                                 <a data-toggle="tab" id="detailItem3">•设备事件</a>
-                                             </li>
-                                         </ul>
-                                     </div>
+                                        <ul class="nav nav-tabs" id="detailItem">
+                                            <li id="detailItemTab1" style="width:33.333%" class="active">
+                                                <a data-toggle="tab" id="detailItem1">•电能质量事件</a>
+                                            </li>
+                                            <li id="detailItemTab2" style="width:33.333%">
+                                                <a data-toggle="tab" id="detailItem2">•环境事件</a>
+                                            </li>
+                                            <li id="detailItemTab3" style="width:33.333%">
+                                                <a data-toggle="tab" id="detailItem3">•设备事件</a>
+                                            </li>
+                                        </ul>
+                                    </div>
 
                                     <div class="col-md-7">
 
@@ -260,7 +274,8 @@
                                             </div>
 
                                             <div class="table-container">
-                                                <table border="1" class="display" id="environment-event" style="width:100%;">
+                                                <table border="1" class="display" id="environment-event"
+                                                       style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th style="width:60px;"></th>
@@ -288,7 +303,7 @@
                                                     <a data-toggle="tab" id="secItem1">•浪涌塌陷</a>
                                                 </li>
                                                 <li style="width:20%">
-                                                    <a data-toggle="tab" id="secItem2">谐波</a>
+                                                    <a data-toggle="tab" id="secItem2">•谐波</a>
                                                 </li>
                                                 <li style="width:20%">
                                                     <a data-toggle="tab" id="secItem3">•三相不平衡度</a>
@@ -302,11 +317,10 @@
                                             </ul>
 
                                             <div id="power-event-detail-1-div" style="width:100%;">
-                                                <table class="display" border="1px" id="power-event-detail-1" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-1"
+                                                       style="width:100%;">
                                                     <thead>
-                                                    <tr id="power-event-detail-thead-1-tr">
-
-                                                    </tr>
+                                                    <tr id="power-event-detail-thead-1-tr"></tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-1">
                                                     </tbody>
@@ -314,18 +328,10 @@
                                             </div>
 
                                             <div id="power-event-detail-2-div" style="width:100%;display: none;">
-                                                <table class="display" border="1px" id="power-event-detail-2" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-2"
+                                                       style="width:100%;">
                                                     <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>测量名称</th>
-                                                        <th>类型</th>
-                                                        <th>时间</th>
-                                                        <th>时间长短</th>
-                                                        <th>深度（与标准的偏差）</th>
-                                                        <th>评论</th>
-                                                        <th>签名</th>
-                                                    </tr>
+                                                    <tr id="power-event-detail-thead-2-tr"></tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-2">
                                                     </tbody>
@@ -333,18 +339,10 @@
                                             </div>
 
                                             <div id="power-event-detail-3-div" style="width:100%;display: none;">
-                                                <table class="display" border="1px" id="power-event-detail-3" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-3"
+                                                       style="width:100%;">
                                                     <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>测量名称</th>
-                                                        <th>类型</th>
-                                                        <th>时间</th>
-                                                        <th>时间长短</th>
-                                                        <th>深度（与标准的偏差）</th>
-                                                        <th>评论</th>
-                                                        <th>签名</th>
-                                                    </tr>
+                                                    <tr id="power-event-detail-thead-3-tr"></tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-3">
                                                     </tbody>
@@ -352,18 +350,10 @@
                                             </div>
 
                                             <div id="power-event-detail-4-div" style="width:100%;display: none;">
-                                                <table class="display" border="1px" id="power-event-detail-4" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-4"
+                                                       style="width:100%;">
                                                     <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>测量名称</th>
-                                                        <th>类型</th>
-                                                        <th>时间</th>
-                                                        <th>时间长短</th>
-                                                        <th>深度（与标准的偏差）</th>
-                                                        <th>评论</th>
-                                                        <th>签名</th>
-                                                    </tr>
+                                                    <tr id="power-event-detail-thead-4-tr"></tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-4">
                                                     </tbody>
@@ -371,18 +361,10 @@
                                             </div>
 
                                             <div id="power-event-detail-5-div" style="width:100%;display: none;">
-                                                <table class="display" border="1px" id="power-event-detail-5" style="width:100%;">
+                                                <table class="display" border="1px" id="power-event-detail-5"
+                                                       style="width:100%;">
                                                     <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>测量名称</th>
-                                                        <th>类型</th>
-                                                        <th>时间</th>
-                                                        <th>时间长短</th>
-                                                        <th>深度（与标准的偏差）</th>
-                                                        <th>评论</th>
-                                                        <th>签名</th>
-                                                    </tr>
+                                                    <tr id="power-event-detail-thead-5-tr"></tr>
                                                     </thead>
                                                     <tbody id="power-event-detail-tbody-5">
                                                     </tbody>
@@ -395,7 +377,7 @@
                                         <div id="eventdiv3" style="display: none">
 
                                             <ul class="nav nav-tabs" id="triItem" name="triItem">
-                                                <li class="active"  style="width:15%">
+                                                <li class="active" style="width:15%">
                                                     <a data-toggle="tab" id="triItem1">•温度</a>
                                                 </li>
                                                 <li style="width:15%">
@@ -403,7 +385,7 @@
                                                 </li>
                                             </ul>
 
-                                            <table class="display" id="evironment-event-detail-1" style="width:100%;">
+                                            <table class="display" id="environment-event-detail-1" style="width:100%;">
                                                 <thead>
                                                 <tr>
                                                     <th>测量名称</th>
@@ -415,11 +397,12 @@
                                                     <th>确认</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody id="evironment-event-detail-tbody-1">
+                                                <tbody id="environment-event-detail-tbody-1">
                                                 </tbody>
                                             </table>
 
-                                            <table class="display" id="evironment-event-detail-2" style="width:100%;display: none;">
+                                            <table class="display" id="environment-event-detail-2"
+                                                   style="width:100%;display: none;">
                                                 <thead>
                                                 <tr>
                                                     <th>测量名称</th>
@@ -431,7 +414,7 @@
                                                     <th>确认</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody id="evironment-event-detail-tbody-2">
+                                                <tbody id="environment-event-detail-tbody-2">
                                                 </tbody>
                                             </table>
 
@@ -441,7 +424,7 @@
                                         <div id="eventdiv4" style="display: none">
 
                                             <ul class="nav nav-tabs" id="fourItem" name="fourItem">
-                                                <li class="active"  style="width:15%">
+                                                <li class="active" style="width:15%">
                                                     <a data-toggle="tab" id="fourItem1">•治理</a>
                                                 </li>
                                             </ul>
@@ -471,45 +454,79 @@
 
                                         <ul class="nav nav-tabs" id="seculItem">
                                             <li class="active" style="width:50%">
-                                                <a data-toggle="tab" id="leftsubItem1">•时间地点</a>
+                                                <a data-toggle="tab" id="rightsubItem1">•时间地点</a>
                                             </li>
                                             <li style="width:50%">
-                                                <a data-toggle="tab" id="leftsubItem2">•列</a>
+                                                <a data-toggle="tab" id="rightsubItem2">•列</a>
                                             </li>
                                         </ul>
 
-                                        <div id="leftItem1" style="width: 100%;">
-                                            <div>日期时间</div>
-                                            <div><input id="radio-last-day-event" type="radio" name="event-data-peroid" value="lastone">观看最后的事件</div>
+                                        <div id="rightItem1" style="width: 100%;">
+                                            <br>
+                                            <!--<div>日期时间</div>-->
+                                            <div><input id="radio-last-day-event" type="radio" name="event-data-period"
+                                                        value="lastone">观看最后的事件
+                                            </div>
                                             <div class="time-pick-container">
-                                                <input id="radio-from-to-event" class="time-picker-radio" type="radio" name="event-data-peroid" value="fromto"><div class="time-pick-text">从</div>
+                                                <input id="radio-from-to-event" class="time-picker-radio" type="radio"
+                                                       name="event-data-period" value="fromto">
+                                                <div class="time-pick-text">从</div>
                                                 <div class="time-pick-outer">
-                                                    <div class="input-group date form_datetime col-md-5" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-                                                        <input id="firstDate" class="form-control" size="16" type="text" value="" readonly>
-                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                    <div class="input-group date form_datetime col-md-5"
+                                                         data-date="2018-07-16T05:25:07Z"
+                                                         data-date-format="yyyy-mm-dd hh:ii:ss"
+                                                         data-link-field="dtp_input1">
+                                                        <input id="firstDate" class="form-control" size="16" type="text"
+                                                               value="" readonly>
+                                                        <span class="input-group-addon"><span
+                                                                class="glyphicon glyphicon-th"></span></span>
                                                     </div>
-                                                    <input type="hidden" id="dtp_input1" value="" /><br/>
-                                                </div><div class="time-pick-text">到</div><div class="time-pick-outer">
-                                                    <div class="input-group date form_datetime col-md-5" data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-                                                        <input id="lastDate" class="form-control" size="16" type="text" value="" readonly>
-                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                    <input type="hidden" id="dtp_input1" value=""/><br/>
+                                                </div>
+                                                <div class="time-pick-text">到</div>
+                                                <div class="time-pick-outer">
+                                                    <div class="input-group date form_datetime col-md-5"
+                                                         data-date="2019-09-16T05:25:07Z"
+                                                         data-date-format="yyyy-mm-dd hh:ii:ss"
+                                                         data-link-field="dtp_input1">
+                                                        <input id="lastDate" class="form-control" size="16" type="text"
+                                                               value="" readonly>
+                                                        <span class="input-group-addon"><span
+                                                                class="glyphicon glyphicon-th"></span></span>
                                                     </div>
-                                                    <input type="hidden" id="dtp_input2" value="" /><br/>
+                                                    <input type="hidden" id="dtp_input2" value=""/><br/>
                                                 </div>
                                             </div>
-                                            <div><input id="radio-day-event" type="radio"  name="event-data-peroid" value="day">天</div>
-                                            <div><input id="radio-week-event" type="radio"  name="event-data-peroid" value="week">周</div>
-                                            <div><input id="radio-month-event" type="radio"  name="event-data-peroid" value="month">月</div>
-                                            <table><tr><th>测量地点</th><th></th></tr></table>
+                                            <div><input id="radio-day-event" type="radio" name="event-data-period"
+                                                        value="day">天
+                                            </div>
+                                            <div><input id="radio-week-event" type="radio" name="event-data-period"
+                                                        value="week">周
+                                            </div>
+                                            <div><input id="radio-month-event" type="radio" name="event-data-period"
+                                                        value="month">月
+                                            </div>
+                                            <table>
+                                                <tr>
+                                                    <th>测量地点</th>
+                                                    <th></th>
+                                                </tr>
+                                            </table>
                                             <table class="display" id="place-event" border="1" style="width: 100%">
                                             </table>
                                             <div>
-                                                <button id="add-button" type="button" class="btn-sm btn-success" onclick="addMonitorPoint()">添加</button>
-                                                <button id="delete-button" type="button" class="btn-sm btn-danger" onclick="deleteMonitorPoint()">删除</button>
+                                                <button id="add-button" type="button" class="btn-sm btn-success"
+                                                        onclick="addMonitorPoint()">添加
+                                                </button>
+                                                <button id="delete-button" type="button" class="btn-sm btn-danger"
+                                                        onclick="deleteMonitorPoint()">删除
+                                                </button>
                                             </div>
                                             <div>
                                                 <span>自动更新间隔</span>
-                                                <select style="display: inline-block" class="form-control location-select-item" id="auto-update-interval">
+                                                <select style="display: inline-block"
+                                                        class="form-control location-select-item"
+                                                        id="auto-update-interval">
                                                     <option value="">无</option>
                                                     <option value="60000">1分</option>
                                                     <option value="600000">10分</option>
@@ -517,19 +534,29 @@
                                                 </select>
                                             </div>
 
-                                            <div><button id="data-button" type="button" class="btn-sm btn-default" onclick="getAllEvent()">查询</button></div>
+                                            <div>
+                                                <button id="data-button" type="button" class="btn-sm btn-default">
+                                                    查询
+                                                </button>
+                                            </div>
 
                                         </div>
 
-                                        <div id="leftItem2" style="width: 100%;">
+                                        <div id="rightItem2" style="width: 100%;">
                                             <table>
+                                                <br>
+                                                <!--
                                                 <tr>
                                                     <td>可见的列</td>
                                                 </tr>
+                                                -->
                                                 <tr>
                                                     <table class="display" id="colume-table" border="1px" width="160px">
                                                         <thead>
-                                                             <tr><td>名字</td><td>宽度</td></tr>
+                                                        <tr>
+                                                            <td>名字</td>
+                                                            <td>宽度</td>
+                                                        </tr>
                                                         </thead>
                                                         <tbody></tbody>
 
@@ -539,18 +566,27 @@
                                                     <td><img src="/img/uparray.png" onClick="upcol()"></td>
                                                     <td><img src="/img/deletearray.png" onClick="deletecol()"></td>
                                                     <td><img src="/img/downarray.png" onClick="downcol()"></td>
+                                                    <td><br></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <span>可用的列</span>
-                                                        <select style="display: inline-block" class="form-control location-select-item" id="useful-col">
+                                                    <table class="display">
+                                                        <tr>
+                                                            <td>
+                                                                <select style="display: inline-block"
+                                                                        class="form-control location-select-item"
+                                                                        id="useful-col">
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <button style="display: block;" id="add-col-button"
+                                                                        type="button" class="btn-success btn-sm"
+                                                                        onclick="addColumnItem()">添加
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </tr>
 
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <button style="display: block;" id="add-col-button" type="button" class="btn-success btn-sm" onclick="addColumnItem()">添加</button>
-                                                </tr>
                                             </table>
 
                                         </div>
@@ -562,7 +598,7 @@
                     </div>
                 </div>
 
-                <div id = "item2" class="col-md-12 col-xs-6" style="height: 600px;">
+                <div id="item2" class="col-md-12 col-xs-6" style="height: 600px;">
                     能效分析
                 </div>
 
@@ -580,13 +616,15 @@
                 <div class="setting-class" id="addEventMonitorPoint-modal" style="display: none;">
                     <div id="citybank-jstree"></div>
                     <button onclick="addCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">确定</button>
-                    <button onclick="cancleCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">取消</button>
+                    <button onclick="cancleCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">取消
+                    </button>
                 </div>
                 <!-- addEventMonitorPoint DIV END-->
 
                 <!-- clickEventRow DIV-->
                 <div class="clickEventRow-class" id="clickEventRow-modal" style="display: none;">
-                    <button onclick="confirmEvent()" type="button" class="btn-default btn-sm" style="width: 80px;">确        认</button>
+                    <button onclick="confirmEvent()" type="button" class="btn-default btn-sm" style="width: 80px;">确 认
+                    </button>
                     <button id="deleteItem" type="button" class="btn-warning btn-sm" style="width: 80px;">删除事件</button>
                 </div>
                 <!-- clickEventRow DIV END-->
@@ -609,10 +647,15 @@
                         <tr>
                             <td><input type="text" id="annotation" class="form-control add-roles-input"></td>
                         </tr>
-                        <tr></tr><tr></tr>
+                        <tr></tr>
+                        <tr></tr>
                         <tr>
-                            <td><button onclick="confirmOKEvent()" type="button" class="btn btn-sm btn-alt">确认</button></td>
-                            <td><button onclick="cancleOKEvent()" type="button" class="btn btn-sm btn-alt">取消</button></td>
+                            <td>
+                                <button onclick="confirmOKEvent()" type="button" class="btn btn-sm btn-alt">确认</button>
+                            </td>
+                            <td>
+                                <button onclick="cancleOKEvent()" type="button" class="btn btn-sm btn-alt">取消</button>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -684,7 +727,7 @@
     $('.form_datetime').datetimepicker({
         //language:  'fr',
         weekStart: 1,
-        todayBtn:  1,
+        todayBtn: 1,
         autoclose: 1,
         todayHighlight: 1,
         startView: 2,
@@ -692,10 +735,10 @@
         showMeridian: 1
     });
 
-    $("#firstDate").change(function() {
+    $("#firstDate").change(function () {
         $('.firstDate').datetimepicker('setStartDate', $(this).val());
     });
-    $("#lastDate").change(function() {
+    $("#lastDate").change(function () {
         $('.lastDate').datetimepicker('setEndDate', $(this).val());
     });
 </script>
@@ -705,7 +748,7 @@
     /*加载省下拉选*/
 
     //读取cookie中已存的机房配置
-    var opinion1 = $. cookie('province_name');
+    var opinion1 = $.cookie('province_name');
 
     $.ajax({
         type: "post",
@@ -727,7 +770,7 @@
         var pname = $("#province_code").val();
 
         //读取cookie中已存的机房配置
-        var opinion2 = $. cookie('opinion2');
+        var opinion2 = $.cookie('opinion2');
 
         $("#city_code").empty();
         $("#comproom_code").empty();
@@ -744,7 +787,7 @@
 
                 var obj = eval("(" + data + ")");
                 for (var i = 0; i < obj.length; i++) {
-                    if(obj[i].cbname == opinion2) {
+                    if (obj[i].cbname == opinion2) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
                         getComproom();
                     }
@@ -761,7 +804,7 @@
         var cname = $("#city_code").val();
 
         //读取cookie中已存的机房配置
-        var opinion3 = $. cookie('opinion3');
+        var opinion3 = $.cookie('opinion3');
 
         $("#comproom_code").empty();
 
@@ -775,7 +818,7 @@
 
                 $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
                 for (var i = 0; i < list.length; i++) {
-                    if(list[i].rname == opinion3)
+                    if (list[i].rname == opinion3)
                         $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
                     else
                         $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
@@ -788,7 +831,7 @@
 
 <!-- 动态加载菜单项 -->
 <script type="text/javascript">
-    var menulist="<%=session.getAttribute("menulist")%>";
+    var menulist = "<%=session.getAttribute("menulist")%>";
     var cbidstr = menulist.split(",");
     var isSystemMng = false;
     var isNewSystemMng = false;
@@ -801,41 +844,40 @@
     var len = cbidstr[idx].length;
     cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
 
-    for(var i = 0; i < cbidstr.length; i++){
+    for (var i = 0; i < cbidstr.length; i++) {
 
         var menuname = "";
-        if(cbidstr[i] == " province.jsp"){
+        if (cbidstr[i] == " province.jsp") {
             isSystemMng = false;
             menuname = "集中监控";
         }
-        else if(cbidstr[i] == " efficiencyDevice.jsp"){
+        else if (cbidstr[i] == " efficiencyDevice.jsp") {
             isSystemMng = false;
             menuname = "动力设施";
         }
-        else if(cbidstr[i] == " onlineDetect.jsp"){
+        else if (cbidstr[i] == " onlineDetect.jsp") {
             isSystemMng = false;
             menuname = "在线监测";
         }
-        else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
+        else if (cbidstr[i] == ' efficiencyAnalysis.jsp') {
             isSystemMng = false;
             menuname = "动力分析";
         }
-        else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
+        else if (cbidstr[i] == ' efficiencyAssessment.jsp') {
             isSystemMng = false;
             menuname = "动力评估";
         }
-        else if(cbidstr[i] == ' reportChart.jsp'){
+        else if (cbidstr[i] == ' reportChart.jsp') {
             isSystemMng = false;
             menuname = "报表功能";
         }
-        else if(cbidstr[i] == ' history.jsp'){
+        else if (cbidstr[i] == ' history.jsp') {
             isSystemMng = false;
             menuname = "历史曲线";
         }
-        else if(cbidstr[i].search('systemMng.jsp')){
+        else if (cbidstr[i].search('systemMng.jsp')) {
 
-            if(!isNewSystemMng)
-            {//第一条systemMng的
+            if (!isNewSystemMng) {//第一条systemMng的
                 isNewSystemMng = true;
                 menuname = "系统管理";
                 $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
@@ -843,20 +885,23 @@
             isSystemMng = true;
         }
 
-        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+        if (!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
     }
 </script>
 
 <!-- 切换子菜单-->
 <script type="text/javascript">
-    $("#item1").show();
-    $("#item2").hide();
+    // 刷新左侧菜单
+    $("#eventdiv1").hide();
+    $("#eventdiv2").show();
+    $("#eventdiv3").hide();
+    $("#eventdiv4").hide();
 
-    $("#leftItem1").show();
-    $("#leftItem2").hide();
-    $("#leftItem3").hide();
+    // 刷新右侧菜单
+    $("#rightItem1").show();
+    $("#rightItem2").hide();
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         $("#subItem1").click(function () {
             $("#item1").show();
@@ -882,7 +927,7 @@
             $("#eventdiv2").hide();
             $("#eventdiv3").show();
             $("#eventdiv4").hide();
-            getEvironmentEvent();
+            getEnvironmentEvent();
         });
         $("#detailItem3").click(function () {
             $("#eventdiv1").hide();
@@ -892,25 +937,25 @@
             getDeviceEvent();
         });
 
-        $("#leftsubItem1").click(function () {
-            $("#leftItem1").show();
-            $("#leftItem2").hide();
+        $("#rightsubItem1").click(function () {
+            $("#rightItem1").show();
+            $("#rightItem2").hide();
         });
-        $("#leftsubItem2").click(function () {
-            $("#leftItem1").hide();
-            $("#leftItem2").show();
+        $("#rightsubItem2").click(function () {
+            $("#rightItem1").hide();
+            $("#rightItem2").show();
         });
 
-        var col1 = $. cookie('row1-name');
-        var col2 = $. cookie('row2-name');
-        var col3 = $. cookie('row3-name');
-        var col4 = $. cookie('row4-name');
-        var col5 = $. cookie('row5-name');
-        var col6 = $. cookie('row6-name');
-        var col7 = $. cookie('row7-name');
-        var col8 = $. cookie('row8-name');
-        var col9 = $. cookie('row9-name');
-        var col10 = $. cookie('row10-name');
+        var col1 = $.cookie('row1-name');
+        var col2 = $.cookie('row2-name');
+        var col3 = $.cookie('row3-name');
+        var col4 = $.cookie('row4-name');
+        var col5 = $.cookie('row5-name');
+        var col6 = $.cookie('row6-name');
+        var col7 = $.cookie('row7-name');
+        var col8 = $.cookie('row8-name');
+        var col9 = $.cookie('row9-name');
+        var col10 = $.cookie('row10-name');
 
         //第二页电能质量事件，根据点击的电能质量类型，获取相应的事件，并渲染
         $("#secItem1").click(function () {
@@ -950,12 +995,12 @@
         });
 
         $("#triItem1").click(function () {
-            $("#evironment-event-detail-1").css('display', 'block');
-            $("#evironment-event-detail-2").css('display', 'none');
+            $("#environment-event-detail-1").css('display', 'block');
+            $("#environment-event-detail-2").css('display', 'none');
         });
         $("#triItem2").click(function () {
-            $("#evironment-event-detail-1").css('display', 'none');
-            $("#evironment-event-detail-2").css('display', 'block');
+            $("#environment-event-detail-1").css('display', 'none');
+            $("#environment-event-detail-2").css('display', 'block');
 
         });
 
@@ -965,10 +1010,34 @@
 
 </script>
 
+<!--查询和刷新按钮效果-->
+<script>
+    function refresh() {
+        if ($("#detailItemTab1").hasClass("active")) {
+            getPowerEvent();
+        } else if ($("#detailItemTab2").hasClass("active")) {
+            getEnvironmentEvent();
+        } else if ($("#detailItemTab3").hasClass("active")) {
+            getDeviceEvent();
+        }
+    }
+
+    // 天, 周, 月的点击刷新
+    /*$("#rightItem1").click(function () {
+        refresh()
+    })*/
+
+    $("#data-button").click(function () {
+        refresh();
+    })
+
+
+</script>
+
 <!-- 切换子菜单subItem效果-->
 <script type="text/javascript">
-    $(function(){
-        $("#ulItem li").click(function() {
+    $(function () {
+        $("#ulItem li").click(function () {
             $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式selected
             $(this).addClass('active');                            // 添加当前元素的样式
         });
@@ -977,8 +1046,7 @@
 
 <!-- （详细）设备事件-点击进入第二个页面-->
 <script type="text/javascript">
-    function getDeviceEvent(){
-
+    function getDeviceEvent() {
 
 
     }
@@ -990,15 +1058,23 @@
     <%--设置thead--%>
 
     var tableData = [];
-    if(localStorage.getItem("visibleColumn")) {
+    if (localStorage.getItem("visibleColumn")) {
         tableData = JSON.parse(localStorage.getItem("visibleColumn"));
     }
     var thead1 = $("#power-event-detail-thead-1-tr")[0];
+    var thead2 = $("#power-event-detail-thead-2-tr")[0];
+    var thead3 = $("#power-event-detail-thead-3-tr")[0];
+    var thead4 = $("#power-event-detail-thead-4-tr")[0];
+    var thead5 = $("#power-event-detail-thead-5-tr")[0];
     tableData.forEach(function (item) {
-        thead1.innerHTML += ('<th>' + item.name + '</th>')
+        thead1.innerHTML += ('<th>' + item.name + '</th>');
+        thead2.innerHTML += ('<th>' + item.name + '</th>');
+        thead3.innerHTML += ('<th>' + item.name + '</th>');
+        thead4.innerHTML += ('<th>' + item.name + '</th>');
+        thead5.innerHTML += ('<th>' + item.name + '</th>');
     });
 
-    function getPowerEvent(){
+    function getPowerEvent() {
         $('#eventdiv1').css('display', 'none');
         $('#eventdiv2').css('display', 'block');
         $('#eventdiv3').css('display', 'none');
@@ -1008,29 +1084,30 @@
         var stime = null;
         var etime = null;
         var nowtime = getNowFormatDate();
-        var edate = $("input[name='event-data-peroid']:checked").val();
+        var edate = $("input[name='event-data-period']:checked").val();
         var nodeset = [], nodes2;
 
         var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
 
-        if(nodes) {
+        if (nodes) {
             nodes2 = nodes.toString();
             nodeset = nodes2.split(",");
-            for (var i = 0 ;i < nodeset.length; i++)
-            {
+            for (var i = 0; i < nodeset.length; i++) {
                 cbname.push(nodeset[i].split(":")[0]);
             }
         }
 
-        if(edate == "lastone"){
+        if (edate == "lastone") {
             stime = " ";
             etime = " ";
+
         }
-        else  if(edate == "fromto"){
+        else if (edate == "fromto") {
             stime = $("#firstDate").val();
             etime = $("#lastDate").val();
+
         }
-        else  if(edate == "day"){
+        else if (edate == "day") {
             //昨天的时间
             var now = new Date();
             var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
@@ -1040,12 +1117,13 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
+
         }
-        else  if(edate == "week"){
+        else if (edate == "week") {
             // 获取一星期前的时间：
             var now = new Date();
             var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
@@ -1055,12 +1133,13 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
+
         }
-        else  if(edate == "month"){
+        else if (edate == "month") {
             // 获取一星期前的时间：
             var now = new Date();
             var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
@@ -1070,19 +1149,20 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
+
         }
 
         //读取设置中的优先级cookie
         var priortylist = $.cookie('priortylist');
 
-        if(stime == null || etime == null){
+        if (stime == null || etime == null) {
             alert("请选择日期时间");
         }
-        else if(cbname == "[object Object]"){
+        else if (cbname == "[object Object]") {
             alert("请选择测量地点");
         }
         else if (priortylist == null) {
@@ -1117,28 +1197,28 @@
                         var signature = liststr[8];
                         var newLine = '<tr>'
 
-                        tableData.forEach(function(item) {
-                            if(item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;">' + name + '</td>')
-                            } else if(item.name === "时间") {
+                        tableData.forEach(function (item) {
+                            if (item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
+                            } else if (item.name === "时间") {
                                 newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if(item.name === "类型") {
+                            } else if (item.name === "类型") {
                                 newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if(item.name === "触发相位") {
+                            } else if (item.name === "触发相位") {
 
-                            } else if(item.name === "时间长短") {
+                            } else if (item.name === "时间长短") {
                                 newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
-                            } else if(item.name === "深度") {
+                            } else if (item.name === "深度") {
                                 newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
-                            } else if(item.name === "方向") {
+                            } else if (item.name === "方向") {
 
-                            } else if(item.name === "评论") {
+                            } else if (item.name === "评论") {
                                 newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if(item.name === "签名") {
+                            } else if (item.name === "签名") {
                                 newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if(item.name === "触发水平") {
+                            } else if (item.name === "触发水平") {
 
-                            } else if(item.name === "中有波形数据") {
+                            } else if (item.name === "中有波形数据") {
 
                             }
                         });
@@ -1166,7 +1246,6 @@
 
                     for (var i = 0; i < list.length; i++) {
                         var liststr = list[i].split(",");
-
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
                         var type = liststr[2];
@@ -1175,12 +1254,35 @@
                         var discription = liststr[6];
                         var annotation = liststr[7];
                         var signature = liststr[8];
+                        var newLine = '<tr>'
 
-                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + type + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + duration + '</td>' +
-                            '<td style="padding-left:60px;">' + discription + '</td><td style="padding-left:60px;">' + annotation + '</td>' +
-                            '<td style="padding-left:60px;">' + signature + '</td></tr>');
+                        tableData.forEach(function (item) {
+                            if (item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
+                            } else if (item.name === "时间") {
+                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
+                            } else if (item.name === "类型") {
+                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "触发相位") {
+
+                            } else if (item.name === "时间长短") {
+                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                            } else if (item.name === "深度") {
+                                newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
+                            } else if (item.name === "方向") {
+
+                            } else if (item.name === "评论") {
+                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
+                            } else if (item.name === "签名") {
+                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
+                            } else if (item.name === "触发水平") {
+
+                            } else if (item.name === "中有波形数据") {
+
+                            }
+                        });
+                        newLine += '</tr>';
+                        tbody.innerHTML += newLine;
                     }
                 }
             });
@@ -1203,7 +1305,6 @@
 
                     for (var i = 0; i < list.length; i++) {
                         var liststr = list[i].split(",");
-
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
                         var type = liststr[2];
@@ -1212,12 +1313,35 @@
                         var discription = liststr[6];
                         var annotation = liststr[7];
                         var signature = liststr[8];
+                        var newLine = '<tr>'
 
-                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + type + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + duration + '</td>' +
-                            '<td style="padding-left:60px;">' + discription + '</td><td style="padding-left:60px;">' + annotation + '</td>' +
-                            '<td style="padding-left:60px;">' + signature + '</td></tr>');
+                        tableData.forEach(function (item) {
+                            if (item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
+                            } else if (item.name === "时间") {
+                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
+                            } else if (item.name === "类型") {
+                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "触发相位") {
+
+                            } else if (item.name === "时间长短") {
+                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                            } else if (item.name === "深度") {
+                                newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
+                            } else if (item.name === "方向") {
+
+                            } else if (item.name === "评论") {
+                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
+                            } else if (item.name === "签名") {
+                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
+                            } else if (item.name === "触发水平") {
+
+                            } else if (item.name === "中有波形数据") {
+
+                            }
+                        });
+                        newLine += '</tr>';
+                        tbody.innerHTML += newLine;
                     }
                 }
             });
@@ -1240,7 +1364,6 @@
 
                     for (var i = 0; i < list.length; i++) {
                         var liststr = list[i].split(",");
-
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
                         var type = liststr[2];
@@ -1249,12 +1372,35 @@
                         var discription = liststr[6];
                         var annotation = liststr[7];
                         var signature = liststr[8];
+                        var newLine = '<tr>'
 
-                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + type + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + duration + '</td>' +
-                            '<td style="padding-left:60px;">' + discription + '</td><td style="padding-left:60px;">' + annotation + '</td>' +
-                            '<td style="padding-left:60px;">' + signature + '</td></tr>');
+                        tableData.forEach(function (item) {
+                            if (item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
+                            } else if (item.name === "时间") {
+                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
+                            } else if (item.name === "类型") {
+                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "触发相位") {
+
+                            } else if (item.name === "时间长短") {
+                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                            } else if (item.name === "深度") {
+                                newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
+                            } else if (item.name === "方向") {
+
+                            } else if (item.name === "评论") {
+                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
+                            } else if (item.name === "签名") {
+                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
+                            } else if (item.name === "触发水平") {
+
+                            } else if (item.name === "中有波形数据") {
+
+                            }
+                        });
+                        newLine += '</tr>';
+                        tbody.innerHTML += newLine;
                     }
                 }
             });
@@ -1277,7 +1423,6 @@
 
                     for (var i = 0; i < list.length; i++) {
                         var liststr = list[i].split(",");
-
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
                         var type = liststr[2];
@@ -1286,12 +1431,35 @@
                         var discription = liststr[6];
                         var annotation = liststr[7];
                         var signature = liststr[8];
+                        var newLine = '<tr>'
 
-                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + type + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + duration + '</td>' +
-                            '<td style="padding-left:60px;">' + discription + '</td><td style="padding-left:60px;">' + annotation + '</td>' +
-                            '<td style="padding-left:60px;">' + signature + '</td></tr>');
+                        tableData.forEach(function (item) {
+                            if (item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
+                            } else if (item.name === "时间") {
+                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
+                            } else if (item.name === "类型") {
+                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "触发相位") {
+
+                            } else if (item.name === "时间长短") {
+                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                            } else if (item.name === "深度") {
+                                newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
+                            } else if (item.name === "方向") {
+
+                            } else if (item.name === "评论") {
+                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
+                            } else if (item.name === "签名") {
+                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
+                            } else if (item.name === "触发水平") {
+
+                            } else if (item.name === "中有波形数据") {
+
+                            }
+                        });
+                        newLine += '</tr>';
+                        tbody.innerHTML += newLine;
                     }
                 }
             });
@@ -1301,7 +1469,7 @@
 
 <!-- （详细）环境事件-点击进入第二个页面-->
 <script type="text/javascript">
-    function getEvironmentEvent(){
+    function getEnvironmentEvent() {
         $('#eventdiv1').css('display', 'none');
         $('#eventdiv2').css('display', 'none');
         $('#eventdiv3').css('display', 'block');
@@ -1311,29 +1479,30 @@
         var stime = null;
         var etime = null;
         var nowtime = getNowFormatDate();
-        var edate = $("input[name='event-data-peroid']:checked").val();
+        var edate = $("input[name='event-data-period']:checked").val();
         var nodeset = [], nodes2;
 
         var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
 
-        if(nodes) {
+        if (nodes) {
             nodes2 = nodes.toString();
             nodeset = nodes2.split(",");
-            for (var i = 0 ;i < nodeset.length; i++)
-            {
+            for (var i = 0; i < nodeset.length; i++) {
                 cbname.push(nodeset[i].split(":")[0]);
             }
         }
 
-        if(edate == "lastone"){
+        if (edate == "lastone") {
             stime = " ";
             etime = " ";
+
         }
-        else  if(edate == "fromto"){
+        else if (edate == "fromto") {
             stime = $("#firstDate").val();
             etime = $("#lastDate").val();
+
         }
-        else  if(edate == "day"){
+        else if (edate == "day") {
             //昨天的时间
             var now = new Date();
             var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
@@ -1343,12 +1512,13 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
+
         }
-        else  if(edate == "week"){
+        else if (edate == "week") {
             // 获取一星期前的时间：
             var now = new Date();
             var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
@@ -1358,12 +1528,13 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
+
         }
-        else  if(edate == "month"){
+        else if (edate == "month") {
             // 获取一星期前的时间：
             var now = new Date();
             var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
@@ -1373,19 +1544,20 @@
             var hour = date.getHours();
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day  + ' ' + hour + ':' + minute + ':' + second;
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
             stime = starttime;
             etime = nowtime;
+
         }
 
         //读取设置中的优先级cookie
         var priortylist = $.cookie('priortylist');
 
-        if(stime == null || etime == null){
+        if (stime == null || etime == null) {
             alert("请选择日期时间");
         }
-        else if(cbname == "[object Object]"){
+        else if (cbname == "[object Object]") {
             alert("请选择测量地点");
         }
         else if (priortylist == null) {
@@ -1394,7 +1566,7 @@
         else {
             $.ajax({
                 type: "post",
-                url: "getDetailEvironmentEventtemp",
+                url: "getDetailEnvironmentEventtemp",
                 data: {
                     stime: stime,
                     etime: etime,
@@ -1405,8 +1577,8 @@
                 success: function (data) {
                     var obj = JSON.parse(data);
                     var list = obj['allpelist'];
-                    var table = $("#evironment-event-detail-1");
-                    var tbody = $("#evironment-event-detail-tbody-1")[0];
+                    var table = $("#environment-event-detail-1");
+                    var tbody = $("#environment-event-detail-tbody-1")[0];
                     tbody.innerHTML = "";
 
                     for (var i = 0; i < list.length; i++) {
@@ -1429,7 +1601,7 @@
 
             $.ajax({
                 type: "post",
-                url: "getDetailEvironmentEventwet",
+                url: "getDetailEnvironmentEventwet",
                 data: {
                     stime: stime,
                     etime: etime,
@@ -1441,8 +1613,8 @@
 
                     var obj = JSON.parse(data);
                     var list = obj['allpelist'];
-                    var table = $("#evironment-event-detail-2");
-                    var tbody = $("#evironment-event-detail-tbody-2")[0];
+                    var table = $("#environment-event-detail-2");
+                    var tbody = $("#environment-event-detail-tbody-2")[0];
                     tbody.innerHTML = "";
 
                     for (var i = 0; i < list.length; i++) {
@@ -1470,7 +1642,7 @@
 <!-- 查询事件-->
 <script type="text/javascript">
     //unix时间转常用时间格式
-    function formatTime (time) {
+    function formatTime(time) {
         var unixtime = time;
         var unixTimestamp = new Date(unixtime * 1);
         var Y = unixTimestamp.getFullYear();
@@ -1506,16 +1678,15 @@
         var stime = null;
         var etime = null;
         var nowtime = getNowFormatDate();
-        var edate = $("input[name='event-data-peroid']:checked").val();
+        var edate = $("input[name='event-data-period']:checked").val();
         var nodeset = [], nodes2;
 
         var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
 
-        if(nodes) {
+        if (nodes) {
             nodes2 = nodes.toString();
             nodeset = nodes2.split(",");
-            for (var i = 0 ;i < nodeset.length; i++)
-            {
+            for (var i = 0; i < nodeset.length; i++) {
                 cbname.push(nodeset[i].split(":")[0]);
             }
         }
@@ -1523,10 +1694,12 @@
         if (edate == "lastone") {
             stime = " ";
             etime = " ";
+
         }
         else if (edate == "fromto") {
             stime = $("#firstDate").val();
             etime = $("#lastDate").val();
+
         }
         else if (edate == "day") {
             //昨天的时间
@@ -1542,6 +1715,7 @@
 
             stime = starttime;
             etime = nowtime;
+
         }
         else if (edate == "week") {
             // 获取一星期前的时间：
@@ -1557,6 +1731,7 @@
 
             stime = starttime;
             etime = nowtime;
+
         }
         else if (edate == "month") {
             // 获取一月前的时间：
@@ -1572,66 +1747,67 @@
 
             stime = starttime;
             etime = nowtime;
+
         }
 
         //读取设置中的优先级cookie
         var priortylist = $.cookie('priortylist');
 
-        if(stime == null || etime == null){
+        if (stime == null || etime == null) {
             alert("请选择日期时间");
         }
-        else if(cbname == "[object Object]"){
+        else if (cbname == "[object Object]") {
             alert("请选择测量地点");
         }
         else if (priortylist == null) {
             alert("请设定可查看的事件类型");
         }
-        else{
+        else {
             //获取所有电能事件
             $.ajax({
-            type: "post",
-            url: "getPowerEvent",
-            data: {
-                stime: stime,
-                etime: etime,
-                cbname: cbname.toString(),
-                priortylist: priortylist
-            },
-            dataType : "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj['allpelist'];
-                var tbody = $("#power-event-tbody")[0];
-                tbody.innerHTML = "";
+                type: "post",
+                url: "getPowerEvent",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#power-event-tbody")[0];
+                    tbody.innerHTML = "";
 
-                for (var i = 0; i < list.length; i++) {
-                    var liststr = list[i].split(",");
-                    var teid = liststr[0].split("[");
-                    var name = liststr[1];
-                    var location = liststr[2];
-                    var type = liststr[3];
-                    var description = liststr[4];
-                    var rawtime = liststr[5].split("]");
-                    var time = rawtime[0];
-                    var signature = liststr[7];
-                    var annotationstr = liststr[8];
-                    var annotation = annotationstr.split("]");
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        var signature = liststr[7];
+                        var annotationstr = liststr[8];
+                        var annotation = annotationstr.split("]");
 
-                    if(signature == " null")
-                        signature = "";
-                    if(annotation[0] == " null")
-                        annotation[0] = "";
+                        if (signature == " null")
+                            signature = "";
+                        if (annotation[0] == " null")
+                            annotation[0] = "";
 
-                    tbody.innerHTML += ('<tr id=' + teid[1] +  '>' + '<td name="teid" id="teid" style="width:20px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
-                        '<td id="name" style="width:60px;">' + name + '</td>' +
-                        '<td style="width:60px;">' + location + '</td>' +
-                        '<td style="width:60px;">' + type + '</td>' +
-                        '<td style="width:60px;">' + description + '</td>' +
-                        '<td style="width:60px;">' + time + '</td>' +
-                        '<td style="width:60px;">' + signature + '</td>' +
-                        '<td style="width:60px;">' + annotation[0] + '</td></tr>');
+                        tbody.innerHTML += ('<tr id=' + teid[1] + '>' + '<td name="teid" id="teid" style="width:20px;" value=' + teid[1] + '>' + teid[1] + '</td>' +
+                            '<td id="name" style="width:60px;">' + name + '</td>' +
+                            '<td style="width:60px;">' + location + '</td>' +
+                            '<td style="width:60px;">' + type + '</td>' +
+                            '<td style="width:60px;">' + description + '</td>' +
+                            '<td style="width:60px;">' + time + '</td>' +
+                            '<td style="width:60px;">' + signature + '</td>' +
+                            '<td style="width:60px;">' + annotation[0] + '</td></tr>');
+                    }
                 }
-            }
             });
 
             //获取所有设备事件
@@ -1644,7 +1820,7 @@
                     cbname: cbname.toString(),
                     priortylist: priortylist
                 },
-                dataType : "json",
+                dataType: "json",
                 success: function (data) {
                     var obj = JSON.parse(data);
                     var list = obj['allpelist'];
@@ -1662,14 +1838,14 @@
                         var time = rawtime[0];
                         var signature = liststr[7];
                         var annotation = liststr[8];
-                       // var annotation = annotationstr.split("]");
+                        // var annotation = annotationstr.split("]");
 
-                        if(signature == undefined)
+                        if (signature == undefined)
                             signature = "";
-                        if(annotation == undefined)
+                        if (annotation == undefined)
                             annotation = "";
 
-                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:20px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
+                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:20px;" value=' + teid[1] + '>' + teid[1] + '</td>' +
                             '<td id="name" style="width:60px;">' + name + '</td>' +
                             '<td style="width:60px;">' + location + '</td>' +
                             '<td style="width:60px;">' + type + '</td>' +
@@ -1691,7 +1867,7 @@
                     cbname: cbname.toString(),
                     priortylist: priortylist
                 },
-                dataType : "json",
+                dataType: "json",
                 success: function (data) {
                     var obj = JSON.parse(data);
                     var list = obj['allpelist'];
@@ -1711,18 +1887,18 @@
                         var annotationstr = liststr[8];
                         var annotation = annotationstr.split("]");
 
-                        if(signature == " null")
+                        if (signature == " null")
                             signature = "";
-                        if(annotation[0] == " null")
+                        if (annotation[0] == " null")
                             annotation[0] = "";
 
-                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:20px;" value='+ teid[1]+'>' + teid[1] + '</td>' +
+                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:20px;" value=' + teid[1] + '>' + teid[1] + '</td>' +
                             '<td id="name" style="width:60px;">' + name + '</td>' +
                             '<td style="width:60px;">' + location + '</td>' +
                             '<td style="width:60px;">' + type + '</td>' +
                             '<td style="width:60px;">' + description + '</td>' +
                             '<td style="width:60px;">' + time + '</td>' +
-                            '<td style="width:60px;">' +signature + '</td>' +
+                            '<td style="width:60px;">' + signature + '</td>' +
                             '<td style="width:60px;">' + annotation[0] + '</td></tr>');
                     }
                 }
@@ -1736,7 +1912,7 @@
 <!-- 观测地点-->
 <script type="text/javascript">
     //添加监测点-弹出添加div
-    function addMonitorPoint(){
+    function addMonitorPoint() {
 
         var pbname = $("#province_code option:selected").val();
         $('#addEventMonitorPoint-modal').css('display', 'block');
@@ -1765,7 +1941,7 @@
 
                             for (var i = 0; i < arrays.length; i++) {
                                 var arr = {
-                                    "id": arrays[i].cbid + ":"+ arrays[i].cbname,
+                                    "id": arrays[i].cbid + ":" + arrays[i].cbname,
                                     "parent": "#",
                                     "text": arrays[i].cbname
                                 };
@@ -1781,7 +1957,7 @@
     }
 
     //添加检测点-确定
-    function addCityBankAsMonitorPoint(){
+    function addCityBankAsMonitorPoint() {
 
         //取得所有选中的节点，返回节点对象的集合
         var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
@@ -1790,25 +1966,24 @@
         var ptable = $("#place-event");
         ptable.empty();
 
-        for (var i = 0 ;i < nodeset.length; i++)
-        {
+        for (var i = 0; i < nodeset.length; i++) {
             var nset = nodeset[i].split(":");
-            ptable.append('<tr id="'+nset[0]+'"><td><input id="radio-mpid" name="radio-mpid" type="radio" value="'+nset[0]+'">' + nset[1] + '</td></tr>');
+            ptable.append('<tr id="' + nset[0] + '"><td><input id="radio-mpid" name="radio-mpid" type="radio" value="' + nset[0] + '">' + nset[1] + '</td></tr>');
         }
 
         cancleCityBankAsMonitorPoint();
     }
 
     //添加检测点-取消
-    function cancleCityBankAsMonitorPoint(){
+    function cancleCityBankAsMonitorPoint() {
         $('#addEventMonitorPoint-modal').css('display', 'none');
     }
 
     //删除检测点
-    function deleteMonitorPoint(){
+    function deleteMonitorPoint() {
         var delmpid = $('input[name="radio-mpid"]:checked');
 
-        delmpid.each(function(){
+        delmpid.each(function () {
             $(this).parent().parent().remove();
         });
     }
@@ -1817,30 +1992,36 @@
 
 <!-- 右侧界面 第二个子菜单 列 -->
 <script type="text/javascript">
-    var optionDataSource = [{ name: '测量名称', length: '90'}, { name: '时间', length: '110'}, { name: '类型', length: '50'},
-        { name: '触发相位', length: '50'}, { name: '时间长短', length: '50'}, { name: '深度', length: '50'}, { name: '方向', length: '50'},
-        { name: '评论', length: '50'}, { name: '签名', length: '50'}, { name: '触发水平', length: '50'}, { name: '中有波形数据', length: '50'}];
-    optionDataSource.forEach(function(item, index) {
+    var optionDataSource = [{name: '测量名称', length: '90'}, {name: '时间', length: '110'}, {name: '类型', length: '50'},
+        {name: '触发相位', length: '50'}, {name: '时间长短', length: '50'}, {name: '深度', length: '50'}, {
+            name: '方向',
+            length: '50'
+        },
+        {name: '评论', length: '50'}, {name: '签名', length: '50'}, {name: '触发水平', length: '50'}, {
+            name: '中有波形数据',
+            length: '50'
+        }];
+    optionDataSource.forEach(function (item, index) {
         $("#useful-col").append('<option id=' + index + '>' + item.name + '</option>')
     })
 
     var visibleColumnData = [];
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         var tbody = $("#colume-table").children("tbody");
-        if(localStorage.getItem("visibleColumn")) {
+        if (localStorage.getItem("visibleColumn")) {
             visibleColumnData = JSON.parse(localStorage.getItem("visibleColumn"));
         }
-        if(visibleColumnData.length > 0) {
-            visibleColumnData.forEach(function(item, index) {
-                tbody.append('<tr id=' + index + '><td>' + item.name + '</td><td>' + item.length + '</td></tr>' )
+        if (visibleColumnData.length > 0) {
+            visibleColumnData.forEach(function (item, index) {
+                tbody.append('<tr id=' + index + '><td>' + item.name + '</td><td>' + item.length + '</td></tr>')
             })
         }
 
         tbody.on('click', 'tr', function () {
             var that = $(this);
             tbody.children('tr').removeClass('col-active');
-            if(!that.hasClass('col-active')) {
+            if (!that.hasClass('col-active')) {
                 that.addClass('col-active')
             }
         })
@@ -1851,20 +2032,20 @@
         visibleColumnData.push(optionDataSource[index]);
         localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
         var tbody = $("#colume-table").children("tbody");
-        tbody.append('<tr id=' + (visibleColumnData.length - 1) +'><td>' + optionDataSource[index].name + '</td><td>' + optionDataSource[index].length + '</td></tr>')
+        tbody.append('<tr id=' + (visibleColumnData.length - 1) + '><td>' + optionDataSource[index].name + '</td><td>' + optionDataSource[index].length + '</td></tr>')
     }
 
-    function upcol(){
+    function upcol() {
         var coltable = $("#colume-table");
         var target = coltable.children("tbody").children(".col-active");
         var list = coltable.children("tbody").children('tr');
         var targetId = Number(target[0].id)
         var upperData = visibleColumnData[targetId - 1];
-        if(target.length > 0){
-            var thisLocation = list.index( target );
-            if( thisLocation < 1 ){
+        if (target.length > 0) {
+            var thisLocation = list.index(target);
+            if (thisLocation < 1) {
                 alert('已移到最顶端了');
-            }else {
+            } else {
                 visibleColumnData[targetId - 1] = visibleColumnData[targetId];
                 visibleColumnData[targetId] = upperData;
                 localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
@@ -1872,46 +2053,48 @@
                 target.prev()[0].id = (Number(target.prev()[0].id)) + 1 + ''
                 target.prev().before(target); //上移动
             }
-        }else {
+        } else {
             alert('请选择要上移的列');
         }
     }
-    function downcol(){
+
+    function downcol() {
         var coltable = $("#colume-table");
         var target = coltable.children("tbody").children(".col-active");
         var list = coltable.children("tbody").children('tr');
-        console.log('target',target.attr("id"))
+        console.log('target', target.attr("id"))
         var targetId = Number(target.attr("id"))
-        console.log('targetId',targetId)
+        console.log('targetId', targetId)
         var downData = visibleColumnData[targetId + 1];
-        if(target.length > 0){
-            var thisLocation = list.index( target );
-            if( thisLocation >= list.length - 1 ){
+        if (target.length > 0) {
+            var thisLocation = list.index(target);
+            if (thisLocation >= list.length - 1) {
                 return alert('已移到最底端了');
-            }else {
+            } else {
                 visibleColumnData[targetId + 1] = visibleColumnData[targetId];
                 visibleColumnData[targetId] = downData;
-                console.log('visibleColumnData',visibleColumnData)
+                console.log('visibleColumnData', visibleColumnData)
                 localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
                 target[0].id = (Number(target.attr("id"))) + 1 + ''
                 target.next()[0].id = (Number(target.next()[0].id)) - 1 + ''
                 target.next().after(target); //下移动
             }
-        }else {
+        } else {
             return alert('请选择要下移的列');
         }
     }
-    function deletecol(){
+
+    function deletecol() {
         var coltable = $("#colume-table");
         var deleteData = coltable.children("tbody").children(".col-active");
-        if(!deleteData) {
+        if (!deleteData) {
             return alert('请选择删除的项');
         }
         var daleteIndex = [];
-        for(var i = 0; i < deleteData.length; i++) {
+        for (var i = 0; i < deleteData.length; i++) {
             daleteIndex.push(Number(deleteData[i].id));
         }
-        visibleColumnData = visibleColumnData.filter(function(item, index) {
+        visibleColumnData = visibleColumnData.filter(function (item, index) {
             return daleteIndex.indexOf(index) < 0
         });
         localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
@@ -1921,7 +2104,7 @@
 
 <!-- 设置icon-->
 <script type="text/javascript">
-    function settingIcon(){
+    function settingIcon() {
         $('#setting-modal').css('display', 'block');
         $('#jstree').jstree({
             "core": {
@@ -1939,7 +2122,7 @@
                         success: function (result) {
                             var arrays = result.allptree;
 
-                            for (var i = arrays.length -1; i > 0; i--) {
+                            for (var i = arrays.length - 1; i > 0; i--) {
                                 var arr = {
                                     "id": arrays[i].cid,
                                     "parent": arrays[i].pid == "0" ? "#" : arrays[i].pid,
@@ -1969,7 +2152,7 @@
     function OK() {
 
         var priortylist = $('#jstree').jstree().get_checked();
-        $. cookie('priortylist', priortylist, {expires: 1, path: '/'});
+        $.cookie('priortylist', priortylist, {expires: 1, path: '/'});
 
         //获取树每一行的优先级下拉框，节点id和将下拉框的值传入数据库
         var priortylist = "1,2,3,4,5,6,7,8,9,10";
@@ -1984,7 +2167,7 @@
     }
 
     //点击单条事件-确认
-    function confirmEvent(){
+    function confirmEvent() {
         $('#conformEventRow-modal').css('display', 'block');
         $('#clickEventRow-modal').css('display', 'none');
         var sign = "<%=session.getAttribute("username")%>";
@@ -1992,7 +2175,7 @@
     }
 
     //点击单条事件-签名确认事件-确认
-    function confirmOKEvent(){
+    function confirmOKEvent() {
         //添加该事件的签名和注释到数据库
         var teid = $('#select-teid').val();
         var sign = $('#signature').val();
@@ -2003,7 +2186,7 @@
             type: "post",
             url: "addSignatureAndAnnotation",
             dataType: "json",
-            data:{
+            data: {
                 teid: teid,
                 sign: sign,
                 annot: annot,
@@ -2014,7 +2197,7 @@
     }
 
     //点击单条事件-签名确认事件-取消
-    function cancleOKEvent(){
+    function cancleOKEvent() {
         $('#conformEventRow-modal').css('display', 'none');
     }
 
@@ -2022,16 +2205,17 @@
 
 <!-- 刷新icon-->
 <script type="text/javascript">
-    function refreshIcon(){
+    function refreshIcon() {
         //刷新事件
         getAllEvent();
+
     }
 </script>
 
 <!-- 导出-->
 <script type="text/javascript">
 
-    function exportTable(){
+    function exportTable() {
 
         var tableid1 = "device-event";
         var tableid2 = "power-event";
@@ -2040,46 +2224,47 @@
         setTimeout(exportToExcel(tableid2), 1000);
         setTimeout(exportToExcel(tableid3), 1000);
 
-        $("#secItem li").each(function(i){
-            $(this).click(function(){
+        $("#secItem li").each(function (i) {
+            $(this).click(function () {
                 idx = i;
             });
         });
-        $("#secItem li")[0].onclick = function(){
+        $("#secItem li")[0].onclick = function () {
             idx = 1;
-            var tableid = "power-event-detail-tbody-"+idx;
+            var tableid = "power-event-detail-tbody-" + idx;
             console.log("被选中", tableid);
             exportToExcel(tableid);
         };
-        $("#secItem li")[1].onclick = function(){
+        $("#secItem li")[1].onclick = function () {
             idx = 2;
-            var tableid = "power-event-detail-tbody-"+idx;
+            var tableid = "power-event-detail-tbody-" + idx;
             console.log("被选中", tableid);
             exportToExcel(tableid);
         }
-        $("#secItem li")[2].onclick = function(){
+        $("#secItem li")[2].onclick = function () {
             idx = 3;
-            var tableid = "power-event-detail-tbody-"+idx;
+            var tableid = "power-event-detail-tbody-" + idx;
             console.log("被选中", tableid);
             exportToExcel(tableid);
         }
-        $("#secItem li")[3].onclick = function(){
+        $("#secItem li")[3].onclick = function () {
             idx = 4;
-            var tableid = "power-event-detail-tbody-"+idx;
+            var tableid = "power-event-detail-tbody-" + idx;
             console.log("被选中", tableid);
             exportToExcel(tableid);
         }
-        $("#secItem li")[4].onclick = function(){
+        $("#secItem li")[4].onclick = function () {
             idx = 5;
-            var tableid = "power-event-detail-tbody-"+idx;
+            var tableid = "power-event-detail-tbody-" + idx;
             console.log("被选中", tableid);
             exportToExcel(tableid);
         }
     }
 
     var idTmr;
+
     function getExplorer() {
-        var explorer = window.navigator.userAgent ;
+        var explorer = window.navigator.userAgent;
         //ie
         if (explorer.indexOf("MSIE") >= 0) {
             return 'ie';
@@ -2089,21 +2274,21 @@
             return 'Firefox';
         }
         //Chrome
-        else if(explorer.indexOf("Chrome") >= 0){
+        else if (explorer.indexOf("Chrome") >= 0) {
             return 'Chrome';
         }
         //Opera
-        else if(explorer.indexOf("Opera") >= 0){
+        else if (explorer.indexOf("Opera") >= 0) {
             return 'Opera';
         }
         //Safari
-        else if(explorer.indexOf("Safari") >= 0){
+        else if (explorer.indexOf("Safari") >= 0) {
             return 'Safari';
         }
     }
 
     function exportToExcel(tableid) {//整个表格拷贝到EXCEL中
-        if(getExplorer()=='ie'){
+        if (getExplorer() == 'ie') {
             var curTbl = document.getElementById(tableid);
             var oXL = new ActiveXObject("Excel.Application");
 
@@ -2136,7 +2321,7 @@
                 //结束excel进程，退出完成
                 idTmr = window.setInterval("Cleanup();", 1);
             }
-        }else{
+        } else {
             tableToExcel(tableid)
         }
     }
@@ -2146,34 +2331,39 @@
         CollectGarbage();
     }
 
-    var tableToExcel = (function() {
+    var tableToExcel = (function () {
         var uri = 'data:application/vnd.ms-excel;base64,',
             template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" '
-                +'xmlns:x="urn:schemas-microsoft-com:office:excel" '
-                +'xmlns="http://www.w3.org/TR/REC-html40">'
-                +'<head>'
-                +'<!--[if gte mso 9]>'
-                +'<xml>'
-                +'<x:ExcelWorkbook>'
-                +'<x:ExcelWorksheets>'
-                +'<x:ExcelWorksheet>'
-                +'<x:Name>{worksheet}</x:Name>'
-                +'<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>'
-                +'</x:ExcelWorksheet>'
-                +'</x:ExcelWorksheets>'
-                +'</x:ExcelWorkbook>'
-                +'</xml>'
-                +'<![endif]-->'
-                +'</head>'
-                +'<body><table>{table}</table></body>'
-                +'</html>',
+                + 'xmlns:x="urn:schemas-microsoft-com:office:excel" '
+                + 'xmlns="http://www.w3.org/TR/REC-html40">'
+                + '<head>'
+                + '<!--[if gte mso 9]>'
+                + '<xml>'
+                + '<x:ExcelWorkbook>'
+                + '<x:ExcelWorksheets>'
+                + '<x:ExcelWorksheet>'
+                + '<x:Name>{worksheet}</x:Name>'
+                + '<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>'
+                + '</x:ExcelWorksheet>'
+                + '</x:ExcelWorksheets>'
+                + '</x:ExcelWorkbook>'
+                + '</xml>'
+                + '<![endif]-->'
+                + '</head>'
+                + '<body><table>{table}</table></body>'
+                + '</html>',
 
-            base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
-            format = function(s, c) {
+            base64 = function (s) {
+                return window.btoa(unescape(encodeURIComponent(s)))
+            },
+            format = function (s, c) {
                 return s.replace(/{(\w+)}/g,
-                    function(m, p) { return c[p]; }) }
+                    function (m, p) {
+                        return c[p];
+                    })
+            }
 
-        return function(table, name) {
+        return function (table, name) {
             if (!table.nodeType) table = document.getElementById(table)
             var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
             window.location.href = uri + base64(format(template, ctx))
@@ -2183,7 +2373,7 @@
 
 <!-- 打印-->
 <script type="text/javascript">
-    function printTable(){
+    function printTable() {
         window.document.title = "";
         window.document.URL = "";
 
@@ -2202,51 +2392,52 @@
 <script type="text/javascript">
     //刷新功能
     $("#auto-update-interval").on("change", function () {
-        var updateinterval=$('#auto-update-interval').val();
+        var updateinterval = $('#auto-update-interval').val();
         var timer = null;
-        if(updateinterval) {
+        if (updateinterval) {
             timer = setInterval(getAllEvent, updateinterval);
         } else {
-            if(timer==null) {
+            if (timer == null) {
                 clearInterval(timer)
             }
         }
     });
 
     //点击device-event table中的某一行
-    $('#device-event tbody').on('click', 'tr', function (){
+    $('#device-event tbody').on('click', 'tr', function () {
         $(this).toggleClass('selected');
         selectOneRowEvent(this);
         eventtypetable = "device";
     });
 
     //点击power-event table中的某一行
-    $('#power-event tbody').on('click', 'tr', function (){
+    $('#power-event tbody').on('click', 'tr', function () {
         $(this).toggleClass('selected');
         selectOneRowEvent(this);
         eventtypetable = "power";
     });
 
     //点击environment-event table中的某一行
-    $('#environment-event tbody').on('click', 'tr', function (){
+    $('#environment-event tbody').on('click', 'tr', function () {
         $(this).toggleClass('selected');
         selectOneRowEvent(this);
         eventtypetable = "envrionment";
     });
 
     //点击table中的某一行
-    $('#place-event tbody').on('change', 'tr', function (){
+    $('#place-event tbody').on('change', 'tr', function () {
         //alert("mp:"+ this);
     });
 
     //获取某一行选择的行，将该行的id放入某个隐藏的div中
-    function selectOneRowEvent(rowdata){
+    function selectOneRowEvent(rowdata) {
         $('#clickEventRow-modal').css('display', 'block');
         var row = rowdata;
         var cols = row.childNodes;
         var teid = cols[0].innerText;
         $('#select-teid').val(teid);
     }
+
     //点击单条事件-删除事件（假删除，只是前端不显示）
     $('#deleteItem').on('click', function () {
         var tbody = $("#power-event-tbody");

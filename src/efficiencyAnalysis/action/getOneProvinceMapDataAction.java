@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import org.apache.struts2.ServletActionContext;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import userManage.dao.ProvinceDAO;
 import userManage.dao.impl.ProvinceDAOImpl;
 
@@ -41,12 +42,12 @@ public class getOneProvinceMapDataAction extends ActionSupport {
             String pname = request.getParameter("pname");
             String starttime = request.getParameter("stime");
             String endtime = request.getParameter("etime");
-
+            
             EventDAO dao = new EventDAOImpl();
             ProvinceDAO pdap = new ProvinceDAOImpl();
 
             List<List<Integer>> oneprovince = new ArrayList<>();
-            String pid = pdap.getProvinceIdByName(pname+"分行");
+            String pid = pdap.getProvinceIdByName(pname + "分行");
 
             oneprovince = dao.getOneProvinceEvent(pid, starttime, endtime);
 
