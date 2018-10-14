@@ -2181,14 +2181,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="col-md-8" style="text-align:right">
                                         <form class="form-inline" role="form">
                                             <div class="form-group">
-                                                <button type="button" class="btn-sm btn-primary" onclick="searchHI()">查询</button>
+                                                <button type="button" class="btn-sm btn-primary" onclick="searchSynthesis()">查询</button>
                                                 <button type="button" class="btn-sm btn-default" onclick="searchHis()">导出</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table border="1" id="table3">
+                                    <table border="1" id="syntable">
                                         <tr>
                                             <td style="text-align:center">参数</td>
                                             <td style="text-align:center" colspan="2">最大值</td>
@@ -3905,7 +3905,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     </script>
 
-<!--查询谐波电压 -->
+<!-- 查询谐波电压 -->
 <script type="text/javascript">
     function searchHV() {
         var time = $("#date").val();
@@ -4000,7 +4000,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     }
 </script>
-<!--查询谐波电流 -->
+<!-- 查询谐波电流 -->
 <script type="text/javascript">
     function searchHC() {
         var time = $("#date").val();
@@ -4097,7 +4097,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     }
 </script>
-<!--查询谐波电压 谐波电流合格率 -->
+<!-- 查询谐波电压 谐波电流合格率 -->
 <script type="text/javascript">
     function searchHVCrate() {
         var time = $("#date").val();
@@ -4179,6 +4179,216 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         if(vcFundResult[0]=='i3'){
                             table.rows[2].cells[12].innerHTML = vcFundResult[6];
                             table.rows[2].cells[13].innerHTML = vcFundResult[7];
+                        }
+                    }
+                },
+                error:function(data){
+                    alert("Error!");
+                }
+            });
+        }
+    }
+</script>
+<!-- 查询综合项目统计报表 -->
+<script type="text/javascript">
+    function searchSynthesis() {
+        var time = $("#date").val();
+        var did = $('#his-mpid-select').val();
+        var date = time.substring(0,10);
+
+        if(time && did){
+            $.ajax({
+                type: "post",
+                url: "getSynthesis",
+                data: {
+                    time:date,
+                    did:did
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var temp_hz= obj.hzresult;
+                    var temp_sxdy= obj.sxdyresult;
+                    var temp_sxdyThresholdResult= obj.sxdyThresholdResult;
+                    var temp_dsdysbresult= obj.dsdysbresult;
+                    var temp_dsdysbThresholdResult= obj.dsdysbThresholdResult;
+                    var temp_csdysbresult= obj.csdysbresult;
+                    var temp_csdysbThresholdResult= obj.csdysbThresholdResult;
+                    var temp_activePowerResult= obj.activePowerResult;
+                    var temp_reactivePowerResult= obj.reactivePowerResult;
+                    var temp_powerFactorResult= obj.powerFactorResult;
+
+                    var table = document.getElementById('syntable');
+
+                    table.rows[1].cells[5].innerHTML = '50';
+                    if(temp_hz!=""){
+                        var hz = temp_hz[0].split(",");
+                        table.rows[1].cells[1].innerHTML = hz[0];
+                        table.rows[1].cells[2].innerHTML = hz[1];
+                        table.rows[1].cells[3].innerHTML = hz[2];
+                        table.rows[1].cells[4].innerHTML = hz[3];
+                        table.rows[13].cells[1].innerHTML = hz[4];
+                        table.rows[13].cells[2].innerHTML = hz[5];
+                        if(hz[3]<=50)
+                            table.rows[1].cells[6].innerHTML = '合格';
+                        else
+                            table.rows[1].cells[6].innerHTML = '不合格';
+                    }
+
+                    if(temp_sxdyThresholdResult!=""){
+                        table.rows[3].cells[5].innerHTML = temp_sxdyThresholdResult[0];
+                    }
+                    if(temp_sxdy!=""){
+                        var sxdy = temp_sxdy[0].split(",");
+                        table.rows[3].cells[1].innerHTML = sxdy[0];
+                        table.rows[3].cells[2].innerHTML = sxdy[1];
+                        table.rows[3].cells[3].innerHTML = sxdy[2];
+                        table.rows[3].cells[4].innerHTML = sxdy[3];
+                        if(sxdy[3] <= temp_sxdyThresholdResult[0])
+                            table.rows[3].cells[6].innerHTML = '合格';
+                        else
+                            table.rows[3].cells[6].innerHTML = '不合格';
+                    }
+
+                    //短时电压闪变
+                    table.rows[6].cells[16].innerHTML = temp_dsdysbThresholdResult[0];
+                    for(var i=0;i<temp_dsdysbresult.length;i++){
+                        var dsdysb = temp_dsdysbresult[i].split(",");
+                        if(dsdysb[0]=='1'){
+                            table.rows[6].cells[1].innerHTML = dsdysb[1];
+                            table.rows[6].cells[2].innerHTML = dsdysb[2];
+                            table.rows[6].cells[3].innerHTML = dsdysb[3];
+                            table.rows[6].cells[4].innerHTML = dsdysb[4];
+                            if(dsdysb[4] <= temp_dsdysbThresholdResult[0])
+                                table.rows[6].cells[5].innerHTML = '合格';
+                            else
+                                table.rows[6].cells[5].innerHTML = '不合格';
+                        }
+                        if(dsdysb[0]=='2'){
+                            table.rows[6].cells[6].innerHTML = dsdysb[1];
+                            table.rows[6].cells[7].innerHTML = dsdysb[2];
+                            table.rows[6].cells[8].innerHTML = dsdysb[3];
+                            table.rows[6].cells[9].innerHTML = dsdysb[4];
+                            if(dsdysb[4] <= temp_dsdysbThresholdResult[0])
+                                table.rows[6].cells[10].innerHTML = '合格';
+                            else
+                                table.rows[6].cells[10].innerHTML = '不合格';
+                        }
+                        if(dsdysb[0]=='3'){
+                            table.rows[6].cells[11].innerHTML = dsdysb[1];
+                            table.rows[6].cells[12].innerHTML = dsdysb[2];
+                            table.rows[6].cells[13].innerHTML = dsdysb[3];
+                            table.rows[6].cells[14].innerHTML = dsdysb[4];
+                            if(dsdysb[4] <= temp_dsdysbThresholdResult[0])
+                                table.rows[6].cells[15].innerHTML = '合格';
+                            else
+                                table.rows[6].cells[15].innerHTML = '不合格';
+                        }
+                    }
+
+                    //长时电压闪变
+                    table.rows[7].cells[16].innerHTML = temp_csdysbThresholdResult[0];
+                    for(var i=0;i<temp_csdysbresult.length;i++){
+                        var csdysb = temp_csdysbresult[i].split(",");
+                        if(csdysb[0]=='1'){
+                            table.rows[7].cells[1].innerHTML = csdysb[1];
+                            table.rows[7].cells[2].innerHTML = csdysb[2];
+                            table.rows[7].cells[3].innerHTML = csdysb[3];
+                            table.rows[7].cells[4].innerHTML = csdysb[4];
+                            if(csdysb[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[7].cells[5].innerHTML = '合格';
+                            else
+                                table.rows[7].cells[5].innerHTML = '不合格';
+                        }
+                        if(csdysb[0]=='2'){
+                            table.rows[7].cells[6].innerHTML = csdysb[1];
+                            table.rows[7].cells[7].innerHTML = csdysb[2];
+                            table.rows[7].cells[8].innerHTML = csdysb[3];
+                            table.rows[7].cells[9].innerHTML = csdysb[4];
+                            if(csdysb[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[7].cells[10].innerHTML = '合格';
+                            else
+                                table.rows[7].cells[10].innerHTML = '不合格';
+                        }
+                        if(csdysb[0]=='3'){
+                            table.rows[7].cells[11].innerHTML = csdysb[1];
+                            table.rows[7].cells[12].innerHTML = csdysb[2];
+                            table.rows[7].cells[13].innerHTML = csdysb[3];
+                            table.rows[7].cells[14].innerHTML = csdysb[4];
+                            if(csdysb[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[7].cells[15].innerHTML = '合格';
+                            else
+                                table.rows[7].cells[15].innerHTML = '不合格';
+                        }
+                    }
+
+                    //有功功率
+                    for(var i=0;i<temp_activePowerResult.length;i++){
+                        var activePower = temp_activePowerResult[i].split(",");
+                        if(activePower[0]=='1'){
+                            table.rows[9].cells[1].innerHTML = activePower[1];
+                            table.rows[9].cells[2].innerHTML = activePower[2];
+                            table.rows[9].cells[3].innerHTML = activePower[3];
+                            table.rows[9].cells[4].innerHTML = activePower[4];
+                        }
+                        if(activePower[0]=='2'){
+                            table.rows[9].cells[6].innerHTML = activePower[1];
+                            table.rows[9].cells[7].innerHTML = activePower[2];
+                            table.rows[9].cells[8].innerHTML = activePower[3];
+                            table.rows[9].cells[9].innerHTML = activePower[4];
+                        }
+                        if(activePower[0]=='3'){
+                            table.rows[9].cells[11].innerHTML = activePower[1];
+                            table.rows[9].cells[12].innerHTML = activePower[2];
+                            table.rows[9].cells[13].innerHTML = activePower[3];
+                            table.rows[9].cells[14].innerHTML = activePower[4];
+                        }
+                    }
+
+                    //无功功率
+                    for(var i=0;i<temp_reactivePowerResult.length;i++){
+                        var reactivePower = temp_reactivePowerResult[i].split(",");
+                        if(reactivePower[0]=='1'){
+                            table.rows[10].cells[1].innerHTML = reactivePower[1];
+                            table.rows[10].cells[2].innerHTML = reactivePower[2];
+                            table.rows[10].cells[3].innerHTML = reactivePower[3];
+                            table.rows[10].cells[4].innerHTML = reactivePower[4];
+                        }
+                        if(reactivePower[0]=='2'){
+                            table.rows[10].cells[6].innerHTML = reactivePower[1];
+                            table.rows[10].cells[7].innerHTML = reactivePower[2];
+                            table.rows[10].cells[8].innerHTML = reactivePower[3];
+                            table.rows[10].cells[9].innerHTML = reactivePower[4];
+                        }
+                        if(reactivePower[0]=='3'){
+                            table.rows[10].cells[11].innerHTML = reactivePower[1];
+                            table.rows[10].cells[12].innerHTML = reactivePower[2];
+                            table.rows[10].cells[13].innerHTML = reactivePower[3];
+                            table.rows[10].cells[14].innerHTML = reactivePower[4];
+                        }
+                    }
+
+                    //功率因数
+                    for(var i=0;i<temp_powerFactorResult.length;i++){
+                        var powerFactor = temp_powerFactorResult[i].split(",");
+                        console.log(powerFactor);
+                        if(powerFactor[0]=='1'){
+                            table.rows[11].cells[1].innerHTML = powerFactor[1];
+                            table.rows[11].cells[2].innerHTML = powerFactor[2];
+                            table.rows[11].cells[3].innerHTML = powerFactor[3];
+                            table.rows[11].cells[4].innerHTML = powerFactor[4];
+                        }
+                        if(powerFactor[0]=='2'){
+                            table.rows[11].cells[6].innerHTML = powerFactor[1];
+                            table.rows[11].cells[7].innerHTML = powerFactor[2];
+                            table.rows[11].cells[8].innerHTML = powerFactor[3];
+                            table.rows[11].cells[9].innerHTML = powerFactor[4];
+                        }
+                        if(powerFactor[0]=='3'){
+                            table.rows[11].cells[11].innerHTML = powerFactor[1];
+                            table.rows[11].cells[12].innerHTML = powerFactor[2];
+                            table.rows[11].cells[13].innerHTML = powerFactor[3];
+                            table.rows[11].cells[14].innerHTML = powerFactor[4];
                         }
                     }
                 },
