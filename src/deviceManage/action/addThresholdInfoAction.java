@@ -23,7 +23,7 @@ public class addThresholdInfoAction extends ActionSupport {
     }
 
 
-    /* 添加一条设备限值
+    /* 添加一条限值
        先根据name和level查找表中是否存在三条或以下限值记录，若存在，则获取该id，并更新；
        否则，新建一条限值记录
      */
@@ -34,7 +34,7 @@ public class addThresholdInfoAction extends ActionSupport {
 
             String dname = request.getParameter("dname");
             String name = request.getParameter("name");
-           // String type = request.getParameter("type");
+            String classify = request.getParameter("classify");
             String unit = request.getParameter("unit");
             String cellval = request.getParameter("cellval");
             String floorval = request.getParameter("floorval");
@@ -44,29 +44,42 @@ public class addThresholdInfoAction extends ActionSupport {
             DeviceDAO dao = new DeviceDAOImpl();
 
             Integer maxdtid;
-            Double dcellval = Double.valueOf(cellval);
-            Double dfloorval = Double.valueOf(floorval);
+            Double dcellval = null;
+            Double dfloorval = null;
+            if (cellval.equals("")) {
+                dcellval = Double.valueOf(cellval);
+            }
+            if (cellval.equals("")) {
+                dfloorval = Double.valueOf(floorval);
+            }
+
             Integer iismark = Integer.valueOf(ismark);
             String did = dao.getDeviceIDByName(dname);
             Integer ilevel = Integer.valueOf(level);
 
-            String dtid = dao.getOneDeviceThresholdByNameAndLevel(name, level);
-
-            if(dtid.equals("")) //不存在
-                maxdtid = dao.getMaxThresholdId();
-            else{
-                maxdtid = Integer.parseInt(dtid);
-            }
-
-            String type = dao.getTypeByName(name);
-
-            Boolean rt = dao.addThresholdInfo(did,maxdtid+1, name, type, unit, dcellval, dfloorval, iismark, ilevel);
+            Integer dtid = dao.getOneDeviceThresholdByNameAndLevel(name, level);
+            Boolean rt = false;
             JSONObject jsonObject = new JSONObject();
 
-            if(rt)
-                jsonObject.put("提示", "添加成功！");
-            else
-                jsonObject.put("提示", "添加失败，请重试！");
+            if (did.equals("")) {
+
+                jsonObject.put("提示", "设备名称不存在！");
+
+            } else {
+
+                if (dtid.equals(0)) { //不存在
+                    maxdtid = dao.getMaxThresholdId();
+                    rt = dao.addThresholdInfo(did,maxdtid + 1, name, classify, unit, dcellval, dfloorval, iismark, ilevel);
+                } else {  //存在 更新
+                    rt = dao.updateThresholdInfo(did, dtid, name, classify, unit, dcellval, dfloorval, iismark, ilevel);
+                }
+
+                if(rt)
+                    jsonObject.put("提示", "添加成功！");
+                else
+                    jsonObject.put("提示", "添加失败，请重试！");
+
+            }
 
             result = JSON.toJSONString(jsonObject);
 

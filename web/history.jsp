@@ -216,7 +216,6 @@
                                             <input type="checkbox" name="" value="i2">I2
                                             <input type="checkbox" name="" value="i1">I3
                                             <input type="checkbox" name="" value="i4">I4
-                                            <input type="checkbox" name="" value="i">I
                                         </li>
                                     </ul>
                                 </div>
@@ -777,7 +776,7 @@
     var eventChart2 = echarts.init(document.getElementById('item2-HZ'));
     var eventChart3 = echarts.init(document.getElementById('item2-P'));
     var eventChart4 = echarts.init(document.getElementById('item2-LyTx'));
-    var chart1Legend = ['u1', 'u2', 'u3', 'u4', 'i1', 'i2', 'i3', 'i4', 'i'];
+    var chart1Legend = ['u1', 'u2', 'u3', 'u4', 'i1', 'i2', 'i3', 'i4'];
     var chart3Legend = ['p1', 'p2', 'p3', 'p', 's1', 's2', 's3', 's', 'q1', 'q2', 'q3', 'q',
         'pf1', 'pf2', 'pf3', 'pf', 'dpf1', 'dpf2', 'dpf3', 'dpf'];
     var chart4Legend = ['Ua','Ub','Uc'];
@@ -828,17 +827,32 @@
             {
                 name: "u1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "u1"}
+                encode: {x: "time", y: "u1"},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
             },
             {
                 name: "u2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "u2"}
+                encode: {x: "time", y: "u2"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
             },
             {
                 name: "u3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "u3"}
+                encode: {x: "time", y: "u3"},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
             },
             {
                 name: "u4", type: "line", smooth: true, showSymbol: false,
@@ -849,27 +863,37 @@
             {
                 name: "i1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "i1"}
+                encode: {x: "time", y: "i1"},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
             },
             {
                 name: "i2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "i2"}
+                encode: {x: "time", y: "i2"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
             },
             {
                 name: "i3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "i3"}
+                encode: {x: "time", y: "i3"},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
             },
             {
                 name: "i4", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "i4"}
-            },
-            {
-                name: "i", type: "line", smooth: true, showSymbol: false,
-                markPoint: markPointUI, markLine: markLineUI,
-                encode: {x: "time", y: "i"}
             }
         ]
     };
@@ -1048,15 +1072,30 @@
             // 浪涌/塌陷
             {
                 name: 'Ua',type: 'scatter',
-                encode: {x: 'time', y: 'Ua'}
+                encode: {x: 'time', y: 'Ua'},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
             },
             {
                 name: 'Ub',type: 'scatter',
-                encode: {x: 'time', y: 'Ub'}
+                encode: {x: 'time', y: 'Ub'},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
             },
             {
                 name: 'Uc',type: 'scatter',
-                encode: {x: 'time', y: 'Uc'}
+                encode: {x: 'time', y: 'Uc'},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
             }
         ]
     };

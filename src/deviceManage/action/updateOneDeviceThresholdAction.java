@@ -3,6 +3,7 @@ package deviceManage.action;
 import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,10 +41,10 @@ public class updateOneDeviceThresholdAction extends ActionSupport {
             String ismark = request.getParameter("ismark");
             String level = request.getParameter("level");
 
-            Double dcellval = 0.00;
-            Double dfloorval = 0.00;
-            Integer iismark = 1;
-            Integer ilevel = 1;
+            Double dcellval = null;
+            Double dfloorval = null;
+            Integer iismark = null;
+            Integer ilevel = null;
 
             if(cellval != "")
                 dcellval = Double.valueOf(cellval);

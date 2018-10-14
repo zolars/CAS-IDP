@@ -7,7 +7,7 @@ public interface RMSDAO {
 
     public void getCurrentData(String did);
 
-    public List getCurrentRMSData();
+    public List getCurrentRMSData(String did);
 
     public List getCurrentTHDData();
 

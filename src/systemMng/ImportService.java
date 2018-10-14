@@ -20,7 +20,7 @@ public class ImportService {
      * @return
      */
     public static List<DevicesThreshold> getAllByExcel(String file){
-        List<DevicesThreshold> list=new ArrayList<DevicesThreshold>();
+        List<DevicesThreshold> list = new ArrayList<>();
         try {
             Workbook rwb=Workbook.getWorkbook(new File(file));
             Sheet rs=rwb.getSheet("Sheet1"); //或者rwb.getSheet(0)
@@ -30,33 +30,43 @@ public class ImportService {
             for (int i = 1; i < rows; i++) {
                 for (int j = 0; j < clos; j++) {
                     //第一个是列数，第二个是行数
+                    //dtid自增或更新
+                    String name=rs.getCell(j++, i).getContents();
+                    //type null  或删除
                     String did=rs.getCell(j++, i).getContents();//默认最左边编号也算一列 所以这里得j++
                     String classify=rs.getCell(j++, i).getContents();
                     String unit=rs.getCell(j++, i).getContents();
                     String cellvalstr=rs.getCell(j++, i).getContents();
                     String floorvalstr=rs.getCell(j++, i).getContents();
-                    String aidstr=rs.getCell(j++, i).getContents();
+                    String ismarkstr=rs.getCell(j++, i).getContents();
+                    String levelstr=rs.getCell(j++, i).getContents();
 
                     Double cellval = 0.00;
                     Double floorval = 0.00;
-                    Integer aid = 0;
-                    Integer cid = 0;
+                    Integer ismark = 0;
+                    Integer level = 1;
+
                     if(cellvalstr != "")
                         cellval = Double.parseDouble(cellvalstr);
                     if(floorvalstr != "")
                         floorval = Double.parseDouble(floorvalstr);
-                    if(aidstr != "")
-                        aid = Integer.parseInt(aidstr);
+                    if(ismarkstr != "")
+                        ismark = Integer.parseInt(ismarkstr);
+                    if(levelstr != "")
+                        level = Integer.parseInt(levelstr);
 
                     DevicesThreshold dt = new DevicesThreshold();
 
-                    dt.setDtid(999);
+                    dt.setDtid((i-1)*clos + j);
+                    dt.setName(name);
+                    //dt.setType
                     dt.setDid(did);
                     dt.setClassify(classify);
                     dt.setUnit(unit);
                     dt.setCellval(cellval);
                     dt.setFloorval(floorval);
-                    dt.setAid(aid);
+                    dt.setIsmark(ismark);
+                    dt.setLevel(level);
 
                     list.add(dt);
                 }

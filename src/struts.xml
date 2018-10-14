@@ -5,28 +5,11 @@
 
 <struts>
     <constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
-	<constant name="struts.devMode" value="true"></constant>
+    <constant name="struts.devMode" value="true"></constant>
     <constant name="struts.i18n.encoding" value="UTF-8"></constant>
 
     <package name="struts-interceptor" extends="struts-default"
              namespace="/">
-        <!-- 拦截器配置开始 主要是对sessionID拦截 -->
-       <!-- <interceptors>
-            <interceptor name="sessionIDInterceptor"
-                         class="cn.com.ctsi.common.interceptor.SessionIDInterceptor"></interceptor>
-            &lt;!&ndash; 定义一个包含sessionID检查的拦截器栈 &ndash;&gt;
-            <interceptor-stack name="sessionCheckInterceptor">
-                &lt;!&ndash; 配置自定义的拦截器 &ndash;&gt;
-                <interceptor-ref name="sessionIDInterceptor"></interceptor-ref>
-                &lt;!&ndash; 配置内建默认拦截器 &ndash;&gt;
-                <interceptor-ref name="defaultStack"></interceptor-ref>
-            </interceptor-stack>
-        </interceptors>
-        &lt;!&ndash; 这句是设置所有Action自动调用的拦截器堆栈）&ndash;&gt;
-        <default-interceptor-ref name="sessionCheckInterceptor" />
-         <global-results>
-            <result name="login" type="redirect">/index.jsp</result>
-        </global-results>-->
     </package>
     <!-- json包 -->
     <package name="json-interceptor" extends="struts-interceptor">
@@ -37,7 +20,6 @@
             <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" />
         </interceptors>
     </package>
-
 
     <!--<package name="struts2" namespace="/" extends="struts-default">-->
      <package name="struts2" namespace="/" extends="json-interceptor">

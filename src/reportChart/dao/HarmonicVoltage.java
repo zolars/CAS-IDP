@@ -1,5 +1,4 @@
 package reportChart.dao;
-import hibernatePOJO.DevicesThreshold;
 import java.util.List;
 public interface HarmonicVoltage {
     public List getHVresultBydt(String did, String time);

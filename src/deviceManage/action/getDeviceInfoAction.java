@@ -4,12 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
-import onlineTest.dao.PowerParameterDAO;
-import onlineTest.dao.impl.PowerParameterDAOImpl;
 import org.apache.struts2.ServletActionContext;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,11 +34,9 @@ public class getDeviceInfoAction extends ActionSupport {
 
             DeviceDAO dao = new DeviceDAOImpl();
 
-            List qstdata = new ArrayList();
+            List qstdata = dao.getDeviceDataByName(devicename);
 
-            qstdata = dao.getDeviceDataByName(devicename);
-
-            result = JSON.toJSONString(qstdata); // List转json
+            result = JSON.toJSONString(qstdata);
 
         } catch (Exception e) {
             e.printStackTrace();
