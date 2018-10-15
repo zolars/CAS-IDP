@@ -13,7 +13,7 @@ public class DBConnect {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/Test",
+					"jdbc:mysql://localhost:3306/Test?characterEncoding=utf8",
 					"root", "123456");
 			
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,

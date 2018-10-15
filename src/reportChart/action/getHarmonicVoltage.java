@@ -18,12 +18,12 @@ public class getHarmonicVoltage extends ActionSupport {
     public void setResult(String result) {
         this.result = result;
     }
-    /* 根据省行名称查询市行信息
+
+    /* 根据设备名称、时间查询谐波电压统计报表
      */
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
             String time = request.getParameter("time");
             String did = request.getParameter("did");
@@ -31,13 +31,13 @@ public class getHarmonicVoltage extends ActionSupport {
             List hvresult = new ArrayList();
             List thresholdResult = new ArrayList();
             List vcfund = new ArrayList();
-            hvresult = dao.getHVresultBydt(did,time);
-            thresholdResult = dao.getHVthreshold();
-            vcfund = dao.getVCfundBydt(did,time);
+            hvresult = dao.getHVresultBydt(did, time);
+            thresholdResult = dao.getHCthreshold();
+            vcfund = dao.getVCfundBydt(did, time);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("hvresult",hvresult);
-            jsonObject.put("thresholdResult",thresholdResult);
-            jsonObject.put("vcfund",vcfund);
+            jsonObject.put("hvresult", hvresult);
+            jsonObject.put("thresholdResult", thresholdResult);
+            jsonObject.put("vcfund", vcfund);
             result = JSON.toJSONString(jsonObject); // List转json
         } catch (Exception e) {
             e.printStackTrace();

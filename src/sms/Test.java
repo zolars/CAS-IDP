@@ -17,8 +17,8 @@ public class Test {
 
         List<String> comlist = Sms.getComPort();
 
-        for (int i = 0; i < comlist.size(); i++){
-            System.out.println("正在通过端口"+comlist.get(i)+"发送短信");
+        for (int i = 0; i < comlist.size(); i++) {
+            System.out.println("正在通过端口" + comlist.get(i) + "发送短信");
             String comstr = comlist.get(i);
             Sms.sendSms("18511587339", "test18511587339", comstr);
         }

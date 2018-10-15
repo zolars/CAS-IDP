@@ -31,28 +31,28 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     private String did = "";
 
     public DataOnlineClientHandler(String did) {
-        this.did=did;
+        this.did = did;
         this.map = new HashMap<String, Float>();
-        DataOnline.getParmMap().put(did,new PowerparmMonitor());//把实时数据对象的引用暂存起来
-        DataOnline.getXbMap().put(did,new PowerxbMonitor());
-        DataOnline.getSxdyMap().put(did,new PowersxdyMonitor());
-        DataOnline.getOnlineDataMap().put(did,this.map);//把实时数据map的引用存起来
+        DataOnline.getParmMap().put(did, new PowerparmMonitor()); //把实时数据对象的引用暂存起来
+        DataOnline.getXbMap().put(did, new PowerxbMonitor());
+        DataOnline.getSxdyMap().put(did, new PowersxdyMonitor());
+        DataOnline.getOnlineDataMap().put(did, this.map); //把实时数据map的引用存起来
     }
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
        // System.out.println("建立连接");
-        dicPlus=DataOnline.getDicPlus();
-        dic=DataOnline.getDic();
+        dicPlus = DataOnline.getDicPlus();
+        dic = DataOnline.getDic();
 
-        for (int i=0;i<dic.size();i++){
-            name[i]=dic.get(i).getItem();
-            factor[i]=dic.get(i).getCoefficient();
+        for (int i = 0; i < dic.size(); i++) {
+            name[i] = dic.get(i).getItem();
+            factor[i] = dic.get(i).getCoefficient();
         }
-        for (int i=0;i<dicPlus.size();i++){
-            slaveId[i]=dicPlus.get(i).getSlaveid();
-            fCode[i]=dicPlus.get(i).getFunctioncode();
-            addr[i]=dicPlus.get(i).getStart();
-            len[i]=dicPlus.get(i).getLength();
+        for (int i = 0; i < dicPlus.size(); i++) {
+            slaveId[i] = dicPlus.get(i).getSlaveid();
+            fCode[i] = dicPlus.get(i).getFunctioncode();
+            addr[i] = dicPlus.get(i).getStart();
+            len[i] = dicPlus.get(i).getLength();
         }
        // System.out.println(dicPlus.size());
         //byte[] bytes=new byte[12];
@@ -61,9 +61,9 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
 
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(slaveId[part],fCode[part],addr[part],len[part]));
+        sendMsg.writeBytes(createMsg(slaveId[part], fCode[part], addr[part], len[part]));
        // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
-        SocketChannel sc = (SocketChannel)ctx.channel();
+        SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
 
@@ -71,14 +71,14 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         //super.handlerAdded(ctx);
-        recMsg=ctx.alloc().buffer();
+        recMsg = ctx.alloc().buffer();
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
 //        super.handlerRemoved(ctx);
         recMsg.release();
-        recMsg=null;
+        recMsg = null;
     }
 
     @Override
@@ -87,19 +87,18 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
         recMsg.writeBytes(buf);
         buf.release();
         //数据累积
-        if(recMsg.readableBytes()<2*len[part]+9){
+        if (recMsg.readableBytes() < 2*len[part] + 9) {
             return;
         }
         dataResolve(recMsg, addr[part], len[part]);
         recMsg.clear();
         if (part < 21) {
             part++;
-        }
-        else {
+        } else {
             part = 0;
             count = 0;
             //取到一次完整的实时数据，暂存起来
-            DataOnline.tempSave(did,map);
+            DataOnline.tempSave(did, map);
         }
         //System.out.println("开始请求：part:" + part + "start:" + addr[part] + "length" + len[part]);
         ByteBuf sendMsg = ctx.alloc().buffer(12);
@@ -115,7 +114,7 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
     //readLength单位是2字节
-    public byte[] createMsg(int slaveId,int functionCode,int address,int readLength){
+    public byte[] createMsg(int slaveId, int functionCode, int address, int readLength) {
         byte[] msg = new byte[12];
         msg[0] = 0;
         msg[1] = 0;
@@ -123,23 +122,21 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
         msg[3] = 0;
         msg[4] = 0;
         msg[5] = 6;
-        msg[6] = ((byte)slaveId);
-        msg[7] = ((byte)functionCode);
+        msg[6] = ((byte) slaveId);
+        msg[7] = ((byte) functionCode);
         msg[8] = ((byte)(address >> 8));
         msg[9] = ((byte)(address & 0xFF));
-
-
-
         msg[10] = ((byte)(readLength >> 8));
         msg[11] = ((byte)(readLength & 0xFF));
         return msg;
     }
-    public void dataResolve(ByteBuf buf,int addr,int len){
-        float temp=0;
-        buf.skipBytes(9);//跳过前9个字节，与数据无关
-        for(int i=addr/2;i<(len+addr)/2;i++) {
-            temp=Float.intBitsToFloat((int)buf.readUnsignedInt());
-            map.put(name[count],temp*factor[count]);
+
+    public void dataResolve(ByteBuf buf, int addr, int len) {
+        float temp = 0;
+        buf.skipBytes(9); //跳过前9个字节，与数据无关
+        for (int i = addr / 2; i < (len + addr) / 2; i++) {
+            temp = Float.intBitsToFloat((int) buf.readUnsignedInt());
+            map.put(name[count], temp * factor[count]);
             count++;
         }
     }

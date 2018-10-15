@@ -51,11 +51,10 @@ public class webservice extends ActionSupport{
             String ext2 = request.getParameter("ext2");
             String ext3 = request.getParameter("ext3");
 
-            String dataToSend = "ECMP_DCP|1002"+"|"+dname+"##"+ip+"##"+time+"##"+level+"##"+status+"##"+did+"##"+diname+"##"+typename+"##"+content+"##"+ext1+"##"+ext2+"##"+ext3+"\n";
+            String dataToSend = "ECMP_DCP|1002" + "|" + dname + "##" + ip + "##" + time + "##" + level + "##" + status + "##" + did + "##" + diname + "##" + typename + "##" + content + "##" + ext1 + "##" + ext2 + "##" + ext3 + "\n";
             writer.print(dataToSend);
             writer.flush();
             result = in.readLine();
-            System.out.println("Server:" + result);
             writer.close();
             in.close();
             socket.close();

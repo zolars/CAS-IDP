@@ -12,13 +12,7 @@ import java.util.List;
 
 public class OrgnizationDAOImpl implements OrgnizationDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
-    private Object object;
-
-
-    public List getOrgnizationTree(){
+    public List getOrgnizationTree() {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
@@ -30,7 +24,7 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
 
     /*删除orgnizationstruct表+ province表
     * */
-    public Boolean delProvinceOrgnization(String pbid){
+    public Boolean delProvinceOrgnization(String pbid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
@@ -40,7 +34,7 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
         return rt1 && rt2;
     }
 
-    public Boolean delCityOrgnization(String cbid){
+    public Boolean delCityOrgnization(String cbid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
@@ -50,7 +44,7 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
         return rt1 && rt2;
     }
 
-    public Boolean delComputerroomOrgnization(String rid){
+    public Boolean delComputerroomOrgnization(String rid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
@@ -60,7 +54,7 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
         return rt1 && rt2;
     }
 
-    public Boolean updateProvinceOrgnization(String pbid, String name){
+    public Boolean updateProvinceOrgnization(String pbid, String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
@@ -72,7 +66,7 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
         return rt1 && rt2;
     }
 
-    public Boolean updateCityOrgnization(String cbid, String name){
+    public Boolean updateCityOrgnization(String cbid, String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
@@ -84,7 +78,7 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
         return rt1 && rt2;
     }
 
-    public Boolean updateComputerroomOrgnization(String rid, String name){
+    public Boolean updateComputerroomOrgnization(String rid, String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
@@ -96,11 +90,11 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
         return rt1 && rt2;
     }
 
-    public Boolean addProvinceOrgnization(String pbid, String province){
+    public Boolean addProvinceOrgnization(String pbid, String province) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
-        ProvinceBank maxcr = (ProvinceBank)hbsessionDao.getFirst(
+        ProvinceBank maxcr = (ProvinceBank) hbsessionDao.getFirst(
                 "FROM ProvinceBank Order by pbid desc");
         Integer maxid = Integer.parseInt(maxcr.getPbid()) + 1;
 
@@ -128,7 +122,7 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
-        CityBank maxcr = (CityBank)hbsessionDao.getFirst(
+        CityBank maxcr = (CityBank) hbsessionDao.getFirst(
                 "FROM CityBank Order by cbid desc");
         Integer maxid = Integer.parseInt(maxcr.getCbid()) + 1;
 
@@ -155,7 +149,7 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
-        Computerroom maxcr = (Computerroom)hbsessionDao.getFirst(
+        Computerroom maxcr = (Computerroom) hbsessionDao.getFirst(
                 "FROM Computerroom Order by rid desc");
         Integer maxrid = Integer.parseInt(maxcr.getRid()) + 1;
 
@@ -177,11 +171,11 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
         return rt1 && rt2;
     }
 
-    public Boolean addComputerroomOrgnizationUnderProvinceBank(String orgid, String computerroom){
+    public Boolean addComputerroomOrgnizationUnderProvinceBank(String orgid, String computerroom) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
-        Computerroom maxcr = (Computerroom)hbsessionDao.getFirst(
+        Computerroom maxcr = (Computerroom) hbsessionDao.getFirst(
                 "FROM Computerroom Order by rid desc");
         Integer maxrid = Integer.parseInt(maxcr.getRid()) + 1;
 
@@ -203,11 +197,11 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
         return rt1 && rt2;
     }
 
-    public Boolean addComputerroomOrgnizationUnderCityBank(String orgid, String computerroom){
+    public Boolean addComputerroomOrgnizationUnderCityBank(String orgid, String computerroom) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;
 
-        Computerroom maxcr = (Computerroom)hbsessionDao.getFirst(
+        Computerroom maxcr = (Computerroom) hbsessionDao.getFirst(
                 "FROM Computerroom Order by rid desc");
         Integer maxrid = Integer.parseInt(maxcr.getRid()) + 1;
 

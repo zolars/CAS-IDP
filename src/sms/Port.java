@@ -83,7 +83,7 @@ public class Port {
                 System.out.println("port is null");
             }
             try {
-                serialPort = (SerialPort) portId.open(getrechargeablePassword(), 1971);//20000);
+                serialPort = (SerialPort) portId.open(getrechargeablePassword(), 1971); //20000);
             } catch (PortInUseException e) {
                 System.gc();
                 System.out.println("COM端口被占用，请选择正确的COM端口！！");

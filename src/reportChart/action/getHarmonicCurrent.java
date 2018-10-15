@@ -18,12 +18,11 @@ public class getHarmonicCurrent extends ActionSupport {
     public void setResult(String result) {
         this.result = result;
     }
-    /* 根据省行名称查询市行信息
+    /* 根据设备名称、时间查询谐波电流值
      */
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
             String time = request.getParameter("time");
             String did = request.getParameter("did");
@@ -31,13 +30,13 @@ public class getHarmonicCurrent extends ActionSupport {
             List hcresult = new ArrayList();
             List thresholdResult = new ArrayList();
             List vcfund = new ArrayList();
-            hcresult = dao.getHCresultBydt(did,time);
+            hcresult = dao.getHCresultBydt(did, time);
             thresholdResult = dao.getHCthreshold();
-            vcfund = dao.getVCfundBydt(did,time);
+            vcfund = dao.getVCfundBydt(did, time);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("hcresult",hcresult);
-            jsonObject.put("thresholdResult",thresholdResult);
-            jsonObject.put("vcfund",vcfund);
+            jsonObject.put("hcresult", hcresult);
+            jsonObject.put("thresholdResult", thresholdResult);
+            jsonObject.put("vcfund", vcfund);
             result = JSON.toJSONString(jsonObject); // List转json
         } catch (Exception e) {
             e.printStackTrace();

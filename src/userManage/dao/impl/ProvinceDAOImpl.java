@@ -11,12 +11,7 @@ import java.util.List;
 
 public class ProvinceDAOImpl implements ProvinceDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
-    private Object object;
-
-    public List getAllProvince(){
+    public List getAllProvince() {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
@@ -26,12 +21,12 @@ public class ProvinceDAOImpl implements ProvinceDAO {
         return list;
     }
 
-    public String getProvinceIdByName(String name){
+    public String getProvinceIdByName(String name) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        ProvinceBank pb = (ProvinceBank)hbsessionDao.getFirst(
-                "FROM ProvinceBank where pbname='"+ name + "'");
+        ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
+                "FROM ProvinceBank where pbname='" + name + "'");
 
         return pb.getPbid();
     }

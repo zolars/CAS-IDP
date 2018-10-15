@@ -14,12 +14,7 @@ import java.util.List;
 
 public class ComputerroomDAOImpl implements ComputerroomDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
-    private Object object;
-
-    public List getAllComputerroom(){
+    public List getAllComputerroom() {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
@@ -29,21 +24,21 @@ public class ComputerroomDAOImpl implements ComputerroomDAO {
         return list;
     }
 
-    public List getComputerroomByCity(String city){
+    public List getComputerroomByCity(String city) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Computerroom> list = new ArrayList<>();
 
-        CityBank cb = (CityBank)hbsessionDao.getFirst(
-                "FROM CityBank where cbid='"+ city +"'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst(
+                "FROM CityBank where cbid='" + city + "'");
 
         String comidstr = cb.getCompRoom();
         String comidset[] = comidstr.split("，");
 
-        for(int i= 0; i < comidset.length; i++){
-            Computerroom com = (Computerroom)hbsessionDao.getFirst(
-                    "FROM Computerroom where rid='"+ comidset[i] +"'");
+        for (int i = 0; i < comidset.length; i++) {
+            Computerroom com = (Computerroom) hbsessionDao.getFirst(
+                    "FROM Computerroom where rid='" + comidset[i] + "'");
             list.add(com);
         }
 

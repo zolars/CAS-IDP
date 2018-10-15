@@ -3534,13 +3534,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 table.rows[result[0]].cells[15].innerHTML = '不合格';
                         }
                     }
-                    for(var j=0;j<49*3;j++){
+                    for (var j=0;j<49*3;j++) {
                         var threshold = temp_threshold[j].split(",");
                         if(threshold[1]='a')
                             table.rows[threshold[0]].cells[16].innerHTML = threshold[2];
                     }
-                    console.log(temp_vcfund);
-                    for(var k=0;k<temp_vcfund.length;k++){
+                    for (var k=0;k<temp_vcfund.length;k++) {
                         var vcfund = temp_vcfund[k].split(",");
                         if(vcfund[0]=='u1'){
                             table.rows[2].cells[1].innerHTML = vcfund[1];
@@ -3579,8 +3578,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var time = $("#date").val();
         var did = $('#his-mpid-select').val();
         var date = time.substring(0,10);
-        console.log(date);
-        console.log(did);
+
         if(time && did){
             $.ajax({
                 type: "post",
@@ -3596,8 +3594,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var temp_threshold = obj.thresholdResult;
                     var temp_vcfund = obj.vcfund;
                     var table = document.getElementById('hctable');
-                    console.log(temp_threshold);
-                    console.log(table.rows.length);
+
                     for (var j = 0; j < temp_result.length; j++) {
                         var result= temp_result[j].split(",");
                         if(result[1]=='a'){
@@ -3631,13 +3628,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 table.rows[result[0]].cells[15].innerHTML = '不合格';
                         }
                     }
-                    for(var j=0;j<49*3;j++){
+                    for (var j = 0; j < 49*3; j++) {
                         var threshold = temp_threshold[j].split(",");
                         if(threshold[1]='a')
                             table.rows[threshold[0]].cells[16].innerHTML = threshold[2];
                     }
-                    console.log(temp_vcfund);
-                    for(var k=0;k<temp_vcfund.length;k++){
+                    for (var k = 0; k < temp_vcfund.length; k++) {
                         var vcfund = temp_vcfund[k].split(",");
                         if(vcfund[0]=='i1'){
                             table.rows[2].cells[1].innerHTML = vcfund[1];
