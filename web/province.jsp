@@ -581,7 +581,7 @@
         nhChart.resize();
         tempChart.resize();
         humidChart.resize();
-        panelChart.resize();x                                                  d2
+        panelChart.resize();
     };
 
     var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
