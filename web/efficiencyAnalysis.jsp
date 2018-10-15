@@ -212,7 +212,6 @@
                                             <button type="button" class="btn-sm btn-warning" onClick="printTable()">打印
                                             </button>
                                         </th>
-                                        <th><button id="data-button" type="button" class="btn-sm btn-default" onclick="getAllEvent()">查询</button></th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -234,48 +233,10 @@
                                     <div class="col-md-7">
 
                                         <!--startprint-->
-                                        <div class="table-container">
-                                            <table border="1" class="display" id="power-event" style="width:100%;">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width:60px;"></th>
-                                                    <th style="width:60px;">事件名称</th>
-                                                    <th style="width:60px;">位置</th>
-                                                    <th style="width:60px;">事件类型</th>
-                                                    <th style="width:60px;">事件描述</th>
-                                                    <th style="width:60px;">事件发生时间</th>
-                                                    <th style="width:60px;">签名</th>
-                                                    <th style="width:60px;">注释</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="power-event-tbody">
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        <div class="table-container">
-                                            <table border="1" class="display" id="environment-event" style="width:100%;">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width:60px;"></th>
-                                                    <th style="width:60px;">事件名称</th>
-                                                    <th style="width:60px;">位置</th>
-                                                    <th style="width:60px;">事件类型</th>
-                                                    <th style="width:60px;">事件描述</th>
-                                                    <th style="width:60px;">事件发生时间</th>
-                                                    <th style="width:60px;">签名</th>
-                                                    <th style="width:60px;">注释</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="environment-event-tbody">
-                                                </tbody>
-                                            </table>
-                                        </div>
 
                                         <div id="eventdiv1" style="display: block">
                                             <div class="table-container">
-                                                <table border="1" class="display" id="device-event"
-                                                       style="width:100%;">
+                                                <table border="1" class="display" id="device-event" style="width:100%;">
                                                     <thead>
                                                     <tr>
                                                         <th style="width:60px;"></th>
@@ -289,6 +250,45 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody id="device-event-tbody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="table-container">
+                                                <table border="1" class="display" id="power-event" style="width:100%;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:60px;"></th>
+                                                        <th style="width:60px;">事件名称</th>
+                                                        <th style="width:60px;">位置</th>
+                                                        <th style="width:60px;">事件类型</th>
+                                                        <th style="width:60px;">事件描述</th>
+                                                        <th style="width:60px;">事件发生时间</th>
+                                                        <th style="width:60px;">签名</th>
+                                                        <th style="width:60px;">注释</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="power-event-tbody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="table-container">
+                                                <table border="1" class="display" id="environment-event"
+                                                       style="width:100%;">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:60px;"></th>
+                                                        <th style="width:60px;">事件名称</th>
+                                                        <th style="width:60px;">位置</th>
+                                                        <th style="width:60px;">事件类型</th>
+                                                        <th style="width:60px;">事件描述</th>
+                                                        <th style="width:60px;">事件发生时间</th>
+                                                        <th style="width:60px;">签名</th>
+                                                        <th style="width:60px;">注释</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="environment-event-tbody">
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -533,12 +533,12 @@
                                                     <option value="3600000">60分</option>
                                                 </select>
                                             </div>
-                                            <div>
-                                                <button onclick="confirmEvent()" type="button" class="btn-default btn-sm" style="width: 80px;">确认事件</button>
-                                                <button onclick="deleteEventOnlyPage()" id="deleteItem" type="button" class="btn-warning btn-sm" style="width: 80px;">删除事件</button>
-                                            </div>
 
-                                        </div>
+                                            <div>
+                                                <button id="data-button" type="button" class="btn-sm btn-default">
+                                                    查询
+                                                </button>
+                                            </div>
 
                                         </div>
 
@@ -622,9 +622,11 @@
                 <!-- addEventMonitorPoint DIV END-->
 
                 <!-- clickEventRow DIV-->
-               <%-- <div class="clickEventRow-class" id="clickEventRow-modal" style="display: none;">
-
-                </div>--%>
+                <div class="clickEventRow-class" id="clickEventRow-modal" style="display: none;">
+                    <button onclick="confirmEvent()" type="button" class="btn-default btn-sm" style="width: 80px;">确 认
+                    </button>
+                    <button id="deleteItem" type="button" class="btn-warning btn-sm" style="width: 80px;">删除事件</button>
+                </div>
                 <!-- clickEventRow DIV END-->
 
                 <!-- conformEventRow DIV-->
@@ -659,6 +661,9 @@
                 </div>
                 <!-- conformEventRow DIV END-->
 
+                <!-- some hidden div-->
+                <div id="select-teid" style="display: none"></div>
+                <!-- some hidden div END-->
             </div>
         </div>
     </section>
@@ -1793,7 +1798,7 @@
                         if (annotation[0] == " null")
                             annotation[0] = "";
 
-                        tbody.innerHTML += ('<tr id=' + teid[1] + '>' + '<td style="width:20px;"><input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>' +
+                        tbody.innerHTML += ('<tr id=' + teid[1] + '>' + '<td name="teid" id="teid" style="width:20px;" value=' + teid[1] + '>' + teid[1] + '</td>' +
                             '<td id="name" style="width:60px;">' + name + '</td>' +
                             '<td style="width:60px;">' + location + '</td>' +
                             '<td style="width:60px;">' + type + '</td>' +
@@ -1832,22 +1837,22 @@
                         var rawtime = liststr[5].split("]");
                         var time = rawtime[0];
                         var signature = liststr[7];
-                        var annotationstr = liststr[8];
-                         var annotation = annotationstr.split("]");
+                        var annotation = liststr[8];
+                        // var annotation = annotationstr.split("]");
 
                         if (signature == undefined)
                             signature = "";
                         if (annotation == undefined)
                             annotation = "";
 
-                        tbody.innerHTML += ('<tr id=' + teid[1] + '>' + '<td style="width:20px;"><input type="radio" id="teidCtrl" name="teid" value=' + teid[1] + '></td>' +
+                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:20px;" value=' + teid[1] + '>' + teid[1] + '</td>' +
                             '<td id="name" style="width:60px;">' + name + '</td>' +
                             '<td style="width:60px;">' + location + '</td>' +
                             '<td style="width:60px;">' + type + '</td>' +
                             '<td style="width:60px;">' + description + '</td>' +
                             '<td style="width:60px;">' + time + '</td>' +
                             '<td style="width:60px;">' + signature + '</td>' +
-                            '<td style="width:60px;">' + annotation[0] + '</td></tr>');
+                            '<td style="width:60px;">' + annotation + '</td></tr>');
                     }
                 }
             });
@@ -1887,7 +1892,7 @@
                         if (annotation[0] == " null")
                             annotation[0] = "";
 
-                        tbody.innerHTML += ('<tr id=' + teid[1] + '>' + '<td style="width:20px;"><input type="radio" id="teidEnvironment" name="teid" value=' + teid[1] + '></td>' +
+                        tbody.innerHTML += ('<tr>' + '<td name="teid" id="teid" style="width:20px;" value=' + teid[1] + '>' + teid[1] + '</td>' +
                             '<td id="name" style="width:60px;">' + name + '</td>' +
                             '<td style="width:60px;">' + location + '</td>' +
                             '<td style="width:60px;">' + type + '</td>' +
@@ -2161,39 +2166,21 @@
         $('#setting-modal').css('display', 'none');
     }
 
-    //点击单条事件-确认事件
+    //点击单条事件-确认
     function confirmEvent() {
-        var teidPower = $('input[id="teidPower"]:checked').val();
-        var teidCtrl =  $('input[id="teidCtrl"]:checked').val();
-        var teidEnvironment =  $('input[id="teidEnvironment"]:checked').val();
-
-        if(teidPower == undefined && teidCtrl == undefined && teidEnvironment == undefined)
-            alert("请选择一个要确认的事件");
-        else{
-            $('#conformEventRow-modal').css('display', 'block');
-            var sign = "<%=session.getAttribute("username")%>";
-            $('#signature').val(sign);
-        }
-
+        $('#conformEventRow-modal').css('display', 'block');
+        $('#clickEventRow-modal').css('display', 'none');
+        var sign = "<%=session.getAttribute("username")%>";
+        $('#signature').val(sign);
     }
 
     //点击单条事件-签名确认事件-确认
     function confirmOKEvent() {
         //添加该事件的签名和注释到数据库
-        var teid = "";
-        var teidPower = $('input[id="teidPower"]:checked').val();
-        var teidCtrl =  $('input[id="teidCtrl"]:checked').val();
-        var teidEnvironment =  $('input[id="teidEnvironment"]:checked').val();
+        var teid = $('#select-teid').val();
         var sign = $('#signature').val();
         var annot = $('#annotation').val();
         var ettype = eventtypetable;
-
-        if(teidPower != undefined)
-            teid = teidPower;
-        else if(teidCtrl != undefined)
-            teid = teidCtrl;
-        else if(teidEnvironment != undefined)
-            teid = teidEnvironment;
 
         $.ajax({
             type: "post",
@@ -2206,10 +2193,7 @@
                 eventtabletype: ettype
             }
         });
-
         $('#conformEventRow-modal').css('display', 'none');
-        getAllEvent();
-
     }
 
     //点击单条事件-签名确认事件-取消
@@ -2419,33 +2403,48 @@
         }
     });
 
+    //点击device-event table中的某一行
+    $('#device-event tbody').on('click', 'tr', function () {
+        $(this).toggleClass('selected');
+        selectOneRowEvent(this);
+        eventtypetable = "device";
+    });
+
+    //点击power-event table中的某一行
+    $('#power-event tbody').on('click', 'tr', function () {
+        $(this).toggleClass('selected');
+        selectOneRowEvent(this);
+        eventtypetable = "power";
+    });
+
+    //点击environment-event table中的某一行
+    $('#environment-event tbody').on('click', 'tr', function () {
+        $(this).toggleClass('selected');
+        selectOneRowEvent(this);
+        eventtypetable = "envrionment";
+    });
+
     //点击table中的某一行
     $('#place-event tbody').on('change', 'tr', function () {
         //alert("mp:"+ this);
     });
 
-    //点击单条事件-删除事件（假删除，只是前端不显示）
-    function deleteEventOnlyPage(){
-        var teidPowerId = $('input[id="teidPower"]:checked').val();
-        var teidCtrlId = $('input[id="teidCtrl"]:checked').val();
-        var teidEnvironmentId = $('input[id="teidEnvironment"]:checked').val();
-
-        if(teidPowerId != undefined){
-            var tbody = $("#power-event-tbody");
-            tbody.children("#" + teidPowerId).remove();
-        }
-
-        if(teidCtrlId != undefined){
-            var tbody = $("#device-event-tbody");
-            tbody.children("#" + teidCtrlId).remove();
-        }
-
-        if(teidEnvironmentId != undefined){
-            var tbody = $("#environment-event-tbody");
-            tbody.children("#" + teidEnvironmentId).remove();
-        }
-
+    //获取某一行选择的行，将该行的id放入某个隐藏的div中
+    function selectOneRowEvent(rowdata) {
+        $('#clickEventRow-modal').css('display', 'block');
+        var row = rowdata;
+        var cols = row.childNodes;
+        var teid = cols[0].innerText;
+        $('#select-teid').val(teid);
     }
+
+    //点击单条事件-删除事件（假删除，只是前端不显示）
+    $('#deleteItem').on('click', function () {
+        var tbody = $("#power-event-tbody");
+        var id = $('#select-teid').val();
+        tbody.children("#" + id).remove();
+        $('#clickEventRow-modal').css('display', 'none');
+    });
 
 </script>
 
