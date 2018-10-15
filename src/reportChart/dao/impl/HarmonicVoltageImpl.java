@@ -409,6 +409,367 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         }
         return result;
     }
+    public List getHzBydt(String did,String time){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        int passnum = 0;
+        try {
+            List<Double> hz = new ArrayList<>();
+            String sql = "SELECT ppm.Hz as hz FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE'" + time + "%'";
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String shz = rs.getString("hz");
+                Double dhz = Double.parseDouble(shz);
+                if(dhz <= 50)
+                    passnum += 1;
+                hz.add(dhz);
+            }
+            if(hz.size()>0){
+                double max = getMax(hz);
+                double min = getMin(hz);
+                double ave = getAve(hz);
+                double pro = get95p(hz);
+                double passRate = 100.0*passnum/hz.size();
+                result.add(max + "," + min + "," + ave + "," + pro + "," + hz.size() + "," + passRate);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public List getsxdyBydt(String did,String time){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        System.out.println(time);
+        try {
+            List<Double> sxdy = new ArrayList<>();
+            String sql = "SELECT psm.Uunb as sxdy FROM powersxdy_monitor psm WHERE psm.did = '" + did + "' AND psm.time LIKE'" + time + "%'";
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String ssxdy = rs.getString("sxdy");
+                Double dsxdy = Double.parseDouble(ssxdy);
+                sxdy.add(dsxdy);
+            }
+            if(sxdy.size()>0){
+                double max = getMax(sxdy);
+                double min = getMin(sxdy);
+                double ave = getAve(sxdy);
+                double pro = get95p(sxdy);
+                result.add(max + "," + min + "," + ave + "," + pro);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public List getsxdythreshold(String did){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        try {
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.classify = '三相电压负序不平衡度' AND dt.level = '1'";
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String scellval = rs.getString("cellval");
+                Double cellval = Double.parseDouble(scellval);
+                result.add(cellval);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public List getdsdysbBydt(String did,String time){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        System.out.println(time);
+        try {
+            for(int i = 0;i <3;i++){
+                List<Double> shortu = new ArrayList<>();
+                String sql = "SELECT ppm.Pst_U" + (i+1) + " as short_u" + (i+1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    String sshortu = rs.getString("short_u"+(i+1));
+                    Double dshortu = Double.parseDouble(sshortu);
+                    shortu.add(dshortu);
+                }
+                if(shortu.size()>0){
+                    double max = getMax(shortu);
+                    double min = getMin(shortu);
+                    double ave = getAve(shortu);
+                    double pro = get95p(shortu);
+                    result.add((i+1)+ "," + max + "," + min + "," + ave + "," + pro);
+                }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public List getdsdysbthreshold(String did){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        try {
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.classify = '短时闪变' AND dt.level = '1'";
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String scellval = rs.getString("cellval");
+                Double cellval = Double.parseDouble(scellval);
+                result.add(cellval);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public List getcsdysbBydt(String did,String time){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        System.out.println(time);
+        try {
+            for(int i = 0;i <3;i++){
+                List<Double> longu = new ArrayList<>();
+                String sql = "SELECT ppm.Plt_U" + (i+1) + " as long_u" + (i+1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    String slongu = rs.getString("long_u"+(i+1));
+                    Double dlongu = Double.parseDouble(slongu);
+                    longu.add(dlongu);
+                }
+                if(longu.size()>0){
+                    double max = getMax(longu);
+                    double min = getMin(longu);
+                    double ave = getAve(longu);
+                    double pro = get95p(longu);
+                    result.add((i+1)+ "," + max + "," + min + "," + ave + "," + pro);
+                }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public List getcsdysbthreshold(String did){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        try {
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.classify = '长时闪变' AND dt.level = '1'";
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String scellval = rs.getString("cellval");
+                Double cellval = Double.parseDouble(scellval);
+                result.add(cellval);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public List getActivePowerBydt(String did,String time){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        System.out.println(time);
+        try {
+            for(int i = 0;i <3;i++){
+                List<Double> activePower = new ArrayList<>();
+                String sql = "SELECT ppm.P" + (i+1) + " as activePower" + (i+1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    String sactivePower = rs.getString("activePower"+(i+1));
+                    Double dactivePower = Double.parseDouble(sactivePower);
+                    activePower.add(dactivePower);
+                }
+                if(activePower.size()>0){
+                    double max = getMax(activePower);
+                    double min = getMin(activePower);
+                    double ave = getAve(activePower);
+                    double pro = get95p(activePower);
+                    result.add((i+1)+ "," + max + "," + min + "," + ave + "," + pro);
+                }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public List getReactivePowerBydt(String did,String time){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        System.out.println(time);
+        try {
+            for(int i = 0;i <3;i++){
+                List<Double> reactivePower = new ArrayList<>();
+                String sql = "SELECT ppm.Q" + (i+1) + " as reactivePower" + (i+1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    String sreactivePower = rs.getString("reactivePower"+(i+1));
+                    Double dreactivePower = Double.parseDouble(sreactivePower);
+                    reactivePower.add(dreactivePower);
+                }
+                if(reactivePower.size()>0){
+                    double max = getMax(reactivePower);
+                    double min = getMin(reactivePower);
+                    double ave = getAve(reactivePower);
+                    double pro = get95p(reactivePower);
+                    result.add((i+1)+ "," + max + "," + min + "," + ave + "," + pro);
+                }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public List getPowerFactorBydt(String did,String time){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        System.out.println(time);
+        try {
+            for(int i = 0;i <3;i++){
+                List<Double> powerFactor = new ArrayList<>();
+                String sql = "SELECT ppm.S" + (i+1) + " as powerFactor" + (i+1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    String spowerFactor = rs.getString("powerFactor"+(i+1));
+                    Double dpowerFactor = Double.parseDouble(spowerFactor);
+                    powerFactor.add(dpowerFactor);
+                }
+                if(powerFactor.size()>0){
+                    double max = getMax(powerFactor);
+                    double min = getMin(powerFactor);
+                    double ave = getAve(powerFactor);
+                    double pro = get95p(powerFactor);
+                    result.add((i+1)+ "," + max + "," + min + "," + ave + "," + pro);
+                }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(result);
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
     public double getMax(List<Double> value){
         double max = value.get(0);
         for(double v:value){

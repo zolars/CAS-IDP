@@ -214,6 +214,14 @@
                  <param name="root">result</param>
              </result>
          </action>
+         <!--wsy2018.10.12 -->
+         <action name="getSynthesis" class="reportChart.action.getSynthesis">
+             <!--getSynthesis -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
 
          <action name="addDeviceAlarmUser" class="deviceManage.action.addDeviceAlarmUserAction">
              <!--addDeviceAlarmUser -->
