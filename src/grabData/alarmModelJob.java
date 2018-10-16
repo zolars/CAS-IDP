@@ -26,9 +26,9 @@ public class alarmModelJob implements Job {
      * @return  true 周一到周五; false 周末
      * @Exception 发生异常
      */
-    public boolean isWorkTime(String pTime){
+    public boolean isWorkTime(String pTime) {
         Boolean rt1 = false, rt2 = false;
-        try{
+        try {
             String dstr[] = pTime.split(" ");
             String day = dstr[0];
             String time = dstr[1];
@@ -37,22 +37,21 @@ public class alarmModelJob implements Job {
             Calendar c = Calendar.getInstance();
             c.setTime(format.parse(day));
             int dayForWeek = 0;
-            if(c.get(Calendar.DAY_OF_WEEK) == 1)
+            if (c.get(Calendar.DAY_OF_WEEK) == 1) {
                 dayForWeek = 7;
-            else
+            } else {
                 dayForWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
-
+            }
             //获取时间
             String formattime = "yyyy-MM-dd HH:mm:ss:SS";
             Date nowTime = new SimpleDateFormat(formattime).parse(pTime);
 
-            Date startTime = new SimpleDateFormat(formattime).parse(day+" 08:00:00:000");
-            Date endTime = new SimpleDateFormat(formattime).parse(day+" 18:00:00:000");
+            Date startTime = new SimpleDateFormat(formattime).parse(day + " 08:00:00:000");
+            Date endTime = new SimpleDateFormat(formattime).parse(day + " 18:00:00:000");
 
-            if (nowTime.getTime() == startTime.getTime()
-                    || nowTime.getTime() == endTime.getTime())
+            if (nowTime.getTime() == startTime.getTime() || nowTime.getTime() == endTime.getTime()) {
                 rt2 = true;
-
+            }
             Calendar date = Calendar.getInstance();
             date.setTime(nowTime);
 
@@ -68,19 +67,22 @@ public class alarmModelJob implements Job {
                 rt2 = false;
             }
 
-            if(dayForWeek == 6 || dayForWeek ==7)
+            if (dayForWeek == 6 || dayForWeek == 7) {
                 rt1 = false;
-            else rt1 = true;
+            } else {
+                rt1 = true;
+            }
 
-        } catch ( Exception e) {
-            // TODO: handle exception
-            	System.out.println(e.getClass());
-            	e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+            e.printStackTrace();
         }
 
-        if(rt1&&rt2)
+        if (rt1 && rt2) {
             return true;
-        else return false;
+        } else {
+            return false;
+        }
 
     }
 
@@ -97,7 +99,8 @@ public class alarmModelJob implements Job {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) - 30);   // 让分钟减少30
+        //calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) - 30);   // 让分钟减少30
+        calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) - 10);   // test
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
         Calendar calendarnow = Calendar.getInstance();
@@ -114,100 +117,119 @@ public class alarmModelJob implements Job {
         List<EventPower> eventpowerlist = new ArrayList<>();
         List<EventsType> typelist = new ArrayList<>();
         List<DevicesThreshold> thresholdlist = new ArrayList<>();
-        List<DeviceAlarmUser> alarmuserlist = new ArrayList<>();
         Integer tlevel = 0;
 
-        eventpowerlist = hbsessionDao.search("FROM EventPower where time >'"+ date +"'");
-        alarmuserlist = hbsessionDao.search("From DeviceAlarmUser");
+        eventpowerlist = hbsessionDao.search("FROM EventPower where time >'" + date + "'");
 
-        if(eventpowerlist != null){
-            for(int i = 0; i < eventpowerlist.size(); i++){
+        if (eventpowerlist != null) {
+            for (int i = 0; i < eventpowerlist.size(); i++) {
                 String did = eventpowerlist.get(i).getDid();
                 Integer cid = eventpowerlist.get(i).getCid();
-                Double value = eventpowerlist.get(i).getValue();
+                Double value = eventpowerlist.get(i).getValue() + 220; //220为基准值
                 Timestamp time = eventpowerlist.get(i).getTime();
 
-                typelist = hbsessionDao.search("From EventsType where cid ='"+ cid +"'");
+                typelist = hbsessionDao.search("From EventsType where cid ='" + cid + "'");
 
-                String type = typelist.get(0).getType();
-                String description = typelist.get(0).getDescription();
+                if (typelist == null) {
+                    break;
+                } else {
+                    String type = typelist.get(0).getType();
+                    String description = typelist.get(0).getDescription();
 
-                thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='"+ type +"' order by level desc");
+                    thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='" + type + "' and ismark = '1' order by level desc");
 
-                for(int j = 0 ; j < thresholdlist.size(); j++){
+                    for (int j = 0; j < thresholdlist.size(); j++) {
 
-                    Double fval = thresholdlist.get(j).getFloorval();
-                    Double cval = thresholdlist.get(j).getCellval();
+                        Double fval = thresholdlist.get(j).getFloorval();
+                        Double cval = thresholdlist.get(j).getCellval();
 
-                    if(fval != null) {
-                        if (value > fval) {
-                            tlevel = thresholdlist.get(j).getLevel();
-                            break;
+                        if (fval != null) {
+                            if (value < fval) {
+                                tlevel = thresholdlist.get(j).getLevel();
+                                break;
+                            }
+                        } else if (cval != null) {
+                            if (value > cval) {
+                                tlevel = thresholdlist.get(j).getLevel();
+                                break;
+                            }
                         }
                     }
-                    else if(cval != null){
-                        if (value < cval) {
-                            tlevel = thresholdlist.get(j).getLevel();
-                            break;
+
+                    Integer isSms = 0;
+                    Integer isAlart = 0;
+                    Integer isPlartform = 0;
+                    String preContent = "";
+                    String timeperiod = "";
+                    String uidstr = "";
+                    String govtelephone = "";
+                    String telephone = "";
+                    String alarmString = "";
+
+                    List<DeviceAlarmUser> aulist = hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
+
+                    if (aulist != null) {
+                        isSms =  (Integer) aulist.get(0).getIsSms();
+                        isAlart =  (Integer) aulist.get(0).getIsAlert();
+                        isPlartform =  (Integer) aulist.get(0).getIsPlantform();
+                        preContent =  (String) aulist.get(0).getPrecontent();
+                        timeperiod =  (String) aulist.get(0).getTimeperiod();
+                        uidstr = aulist.get(0).getUid();
+
+                        String uidset[] = uidstr.split("，");
+
+                        for (String uid : uidset) {
+                            List<User> userlist = hbsessionDao.search(" from User where uid='" + uid + "'");
+
+                            if (userlist != null) {
+                                govtelephone = userlist.get(0).getGovtelephone();
+                                telephone = userlist.get(0).getTelephone();
+
+                                //替换precontent中的事件类型# 值$ 时间% 三个信息
+                                String alarmString1 = preContent.replaceAll("#", description);
+                                String alarmString2  = alarmString1.replaceAll("&", value.toString());
+                                alarmString  = alarmString2.replaceAll("%", time.toString());
+
+                                //执行告警开始
+                                if (isAlart == 1) { //执行弹窗报警
+                                   // JOptionPane.showMessageDialog(null, alarmString);
+                                    JOptionPane joption = new JOptionPane();
+                                    joption.setLocation(999,-999);
+                                    joption.showMessageDialog(null, alarmString);
+                                }
+                                if (timeperiod == "1") { //若是第二等级,即timeperiod == 1
+                                    if (isWorkTime(nowtime)) {
+                                        if (isSms == 1) { //执行短信报警
+                                            SmsAlarm s = new SmsAlarm();
+                                            if (!govtelephone.equals("") && !govtelephone.equals(" ") && !govtelephone.equals(null)) {
+                                                s.excuteSmsAlarm(govtelephone, alarmString);
+                                            }
+                                            if (!telephone.equals("") && !telephone.equals(" ") && !telephone.equals(null)) {
+                                                s.excuteSmsAlarm(telephone, alarmString);
+                                            }
+                                        }
+                                        if (isPlartform == 1) { //执行平台报警
+                                            System.out.println("执行平台报警");
+                                        }
+                                    }
+                                } else { //非第二等级
+                                    if (isSms == 1) { //执行短信报警
+                                        SmsAlarm s = new SmsAlarm();
+                                        if (!govtelephone.equals("") && !govtelephone.equals(" ") && !govtelephone.equals(null)) {
+                                            s.excuteSmsAlarm(govtelephone, alarmString);
+                                        }
+                                        if (!telephone.equals("") && !telephone.equals(" ") && !telephone.equals(null)) {
+                                            s.excuteSmsAlarm(telephone, alarmString);
+                                        }
+                                    }
+                                    if (isPlartform == 1) { //执行平台报警
+                                        System.out.println("执行平台报警");
+                                    }
+                                }
+                                //执行告警结束
+                            }
                         }
                     }
-                }
-
-                System.out.println("事件"+ did +"的告警级别："+tlevel);
-
-                Integer isSms = 0;
-                Integer isAlart = 0;
-                Integer isPlartform = 0;
-                String precontent = "";
-                String timeperiod = "";
-                String govtelephone = "";
-                String telephone = "";
-
-                List<Object> aulist = hbsessionDao.search("select ta.isSms, ta.isAlert, ta.isPlantform, ta.precontent, ta.timeperiod, tb.govtelephone, tb.telephone" +
-                        " from DeviceAlarmUser ta, User tb " +
-                        "where ta.uid = tb.uid and ta.level='" + tlevel +"'");
-
-                if(aulist.size() > 0){
-                    Object[] objects=(Object[])aulist.get(0);
-                    isSms =  (Integer)objects[0];
-                    isAlart =  (Integer)objects[1];
-                    isPlartform =  (Integer)objects[2];
-                    precontent =  (String)objects[3];
-                    timeperiod =  (String)objects[4];
-                    govtelephone =  (String)objects[5];
-                    telephone =  (String)objects[6];
-                }
-
-                if(timeperiod == "1") { //若是第二等级,即timeperiod == 1
-                    if (isWorkTime(nowtime)) {
-                        if (isSms == 1) { //执行短信报警
-                            SmsAlarm s = new SmsAlarm();
-                            if (govtelephone != "")
-                                s.excuteSmsAlarm(govtelephone, description);
-                            if (telephone != "")
-                                s.excuteSmsAlarm(telephone, description);
-                        }
-                        if (isPlartform == 1) { //执行平台报警
-                            System.out.println("执行平台报警");
-                        }
-                    }
-                }
-
-                else{ //非第二等级
-                    if (isSms == 1) { //执行短信报警
-                        SmsAlarm s = new SmsAlarm();
-                        if(govtelephone != "")
-                            s.excuteSmsAlarm(govtelephone, description);
-                        if(telephone != "")
-                            s.excuteSmsAlarm(telephone, description);
-                    }
-                    if (isPlartform == 1) { //执行平台报警
-                        System.out.println("执行平台报警");
-                    }
-                }
-
-                if(isAlart == 1){ //执行弹窗报警
-                    JOptionPane.showMessageDialog(null,precontent+ "\r\n" + "时间：" + time + "\r\n信息：" +  description);
                 }
             }
         }
@@ -218,14 +240,11 @@ public class alarmModelJob implements Job {
 
         //2.2.查询各个事件的告警方式、告警用户、告警时间范围
 
-
         //3.1.设备（治理）事件
-      //  List<EventCtrl> alrmctrllist = hbsessionDao.search(
+        //  List<EventCtrl> alrmctrllist = hbsessionDao.search(
         //        "FROM EventCtrl where time >'"+ date +"'");
 
         //3.2.查询各个事件的告警方式、告警用户、告警时间范围
-
-
 
 
         System.out.println("完成告警模块:" + System.currentTimeMillis());
