@@ -42,13 +42,13 @@ public class OverLimitHandler extends ChannelInboundHandlerAdapter {
             //MD5校验
             byte[] resContent = new byte[resLength-16];
             byte[] resChkSum = new byte[16];
-            tempBuf.readBytes(resContent);//读取response的消息体
-            tempBuf.readBytes(resChkSum);//读取response的校验和
+            tempBuf.readBytes(resContent); //读取response的消息体
+            tempBuf.readBytes(resChkSum); //读取response的校验和
             byte[] contentCheckCode = OverLimitUtil.mergeByteArray(resContent, OverLimitUtil.getCheckCode().getBytes());
             if (Arrays.equals(OverLimitUtil.md5(contentCheckCode), resChkSum)) {
-                String res = new String(resContent,10,resContent.length-10,"UTF-8");
+                String res = new String(resContent, 10, resContent.length - 10, "UTF-8");
                 //数据存入数据库
-                OverLimitResponse tr = JSON.parseObject(res, OverLimitResponse.class);//反序列化
+                OverLimitResponse tr = JSON.parseObject(res, OverLimitResponse.class); //反序列化
                 List<EventPower> events = tr.getResult();
                 if (events.size() > 0) {
                     HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
@@ -67,9 +67,6 @@ public class OverLimitHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //把channel存入map,用于发送OverLimitRequest
         DataOnline.getOverLimitChannelMap().put(this.did, ctx.channel());
-
-
-
     }
 
     @Override

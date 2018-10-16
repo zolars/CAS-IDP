@@ -27,9 +27,8 @@ public class getXBaction extends ActionSupport {
     /* 根据检测点实时监测点谐波数据
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String did = request.getParameter("did");

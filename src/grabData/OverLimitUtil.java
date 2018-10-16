@@ -1,6 +1,8 @@
 package grabData;
 
+import Util.HBSessionDaoImpl;
 import com.alibaba.fastjson.JSON;
+import hibernatePOJO.BasicSetting;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
@@ -16,8 +18,8 @@ import java.util.List;
 public class OverLimitUtil {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static String code = "0002";
-    private static String checkCode = ""; //"wizpower";
-    private static int interval = 30; //默认一次取30分钟内的暂态事件
+    private static String checkCode = "wizpower";
+    private static int interval = 1; //默认一次取1分钟内的越限事件
 
     /*
       根据请求体创建请求帧，返回类型为List,
@@ -68,12 +70,17 @@ public class OverLimitUtil {
 
     //返回一个请求体对象,code为"0002",starttime为当前时间往前24个小时，endtime为当前时间
     public static OverLimitRequest createOverLimitRequest() {
+        // 从数据库取基础配置信息(采集频率、上传频率)
+        HBSessionDaoImpl hbSessionDao = new HBSessionDaoImpl();
+        List<BasicSetting> listbase = hbSessionDao.search("FROM BasicSetting");
+        interval = listbase.get(0).getThansentinterval();
+
         OverLimitRequest tr = new OverLimitRequest();
         tr.setCode(code);
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
         tr.setEndtime(sdf.format(c.getTime()));
-        c.add(Calendar.DAY_OF_MONTH, -interval); //interval
+        c.add(Calendar.MINUTE, -interval); //interval
         tr.setStarttime(sdf.format(c.getTime()));
         return tr;
     }

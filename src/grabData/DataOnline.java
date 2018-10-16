@@ -29,7 +29,7 @@ public class DataOnline {
 
 
     public static void tempSave(String did, Map<String, Float> dataset) {
-        onlineDataStrings.put(did, JSON.toJSONString(dataset));//存成字符串
+        onlineDataStrings.put(did, JSON.toJSONString(dataset)); //存成字符串
 
         PowerparmMonitor var = parmMap.get(did);
         PowerxbMonitor varxb = xbMap.get(did);

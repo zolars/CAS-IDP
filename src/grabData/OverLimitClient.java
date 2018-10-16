@@ -9,40 +9,35 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-public class OverLimitClient extends Thread{
+public class OverLimitClient extends Thread {
     private String host;
     private int port;
     private String did;
 
-    public OverLimitClient(String host, int port, String did){
-        this.host=host;
-        this.port=port;
-        this.did=did;
+    public OverLimitClient(String host, int port, String did) {
+        this.host = host;
+        this.port = port;
+        this.did = did;
     }
     @Override
     public void run() {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-        try{
+        try {
             Bootstrap b = new Bootstrap();
             b.group(workerGroup);
             b.channel(NioSocketChannel.class);
             b.option(ChannelOption.SO_KEEPALIVE, Boolean.valueOf(true));
-            b.handler(new ChannelInitializer<SocketChannel>()
-            {
+            b.handler(new ChannelInitializer<SocketChannel>() {
                 public void initChannel(SocketChannel ch)
-                        throws Exception
-                {
+                        throws Exception {
                     ch.pipeline().addLast(new OverLimitHandler(did));
                 }
             });
             ChannelFuture f = b.connect(host, port).sync();
             f.channel().closeFuture().sync();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             workerGroup.shutdownGracefully();
         }
     }
