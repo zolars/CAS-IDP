@@ -12,8 +12,9 @@ public class StringUtil {
      */
     public static String analyseStr(String str) {
         StringBuffer sb = new StringBuffer();
-        if (!(str.length() % 4 == 0))
+        if (!(str.length() % 4 == 0)) {
             return str;
+        }
         for (int i = 0; i < str.length(); i++) {
             if (i == 0 || i % 4 == 0) {
                 sb.append("\\u");
@@ -40,7 +41,9 @@ public class StringUtil {
             String charStr = "";
             charStr = str.substring(index + 2, index + 6);
             char letter = 0;
-            try{letter = (char) Integer.parseInt(charStr, 16);}catch (Exception e) {}
+            try {
+                letter = (char) Integer.parseInt(charStr, 16);
+            } catch (Exception e) {}
             buffer.append(letter);
             index += 6;
         }
@@ -67,12 +70,11 @@ public class StringUtil {
                 continue;
 
             }
-            try{result.append("\\u" + Integer.toHexString((int) chr1));}catch (Exception e) {}
-
+            try {
+                result.append("\\u" + Integer.toHexString((int) chr1));
+            } catch (Exception e) {}
         }
-
         return result.toString();
-
     }
 
     /**
@@ -82,7 +84,6 @@ public class StringUtil {
      */
     public static boolean isNeedConvert(char para) {
         return ((para & (0x00FF)) != para);
-
     }
 
     /**
@@ -103,7 +104,10 @@ public class StringUtil {
         int n = 0;
         int m = 0;
         for (int i = 0; i < bytes.length; i++) {
-            try{b = Integer.toHexString(bytes[i]);}catch (Exception e) {}
+            try {
+                b = Integer.toHexString(bytes[i]);
+            } catch (Exception e) {}
+
             if (bytes[i] > 0) {
                 buff.append("00");
                 buff.append(b);
@@ -111,7 +115,9 @@ public class StringUtil {
             } else {
                 a = str.charAt((i - n) / 2 + n);
                 m = a;
-                try{b = Integer.toHexString(m);}catch (Exception e) {}
+                try {
+                    b = Integer.toHexString(m);
+                } catch (Exception e) {}
                 buff.append(b.substring(0, 4));
 
                 i = i + 1;

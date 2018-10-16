@@ -13,12 +13,8 @@ import java.util.List;
 
 public class RolesDAOImpl implements RolesDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
-    private Object object;
 
-    public List getAllRoles(){
+    public List getAllRoles() {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Roles> list = hbsessionDao.search(
@@ -26,15 +22,15 @@ public class RolesDAOImpl implements RolesDAO {
         return list;
     }
 
-    public String getMaxRolesId(){
+    public String getMaxRolesId() {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        Roles role = (Roles)hbsessionDao.getFirst(
+        Roles role = (Roles) hbsessionDao.getFirst(
                 "FROM Roles order by rid desc");
         return role.getRid();
     }
 
-    public boolean deleteRolesInfo(String rid){
+    public boolean deleteRolesInfo(String rid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
 
@@ -43,7 +39,7 @@ public class RolesDAOImpl implements RolesDAO {
         return rt;
     }
 
-    public boolean addRolesInfo(String rid, String name, String extra){
+    public boolean addRolesInfo(String rid, String name, String extra) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
@@ -56,18 +52,18 @@ public class RolesDAOImpl implements RolesDAO {
         return rt;
     }
 
-    public Roles getOneRolesInfo(String rid){
+    public Roles getOneRolesInfo(String rid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        Roles role = (Roles)hbsessionDao.getFirst(
-                "FROM Roles order where rid = '"+ rid +"'");
+        Roles role = (Roles) hbsessionDao.getFirst(
+                "FROM Roles order where rid = '" + rid + "'");
         return role;
     }
 
-    public boolean updateRoleInfo(String rid, String name, String extra){
+    public boolean updateRoleInfo(String rid, String name, String extra) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
         String hql = "update Roles role set role.rolesname='" + name +
-                "', role.extra='"+ extra +"' where role.rid='" + rid + "'";
+                "', role.extra='" + extra + "' where role.rid='" + rid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;

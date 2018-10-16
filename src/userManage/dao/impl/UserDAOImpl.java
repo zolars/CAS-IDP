@@ -17,13 +17,9 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
-    private Object object;
 
     @Override
-    public boolean login(User user){
+    public boolean login(User user) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<User> list = hbsessionDao.search(
@@ -32,19 +28,19 @@ public class UserDAOImpl implements UserDAO {
         return (list != null && list.size() > 0);
     }
 
-    public String getUserId(User user){
+    public String getUserId(User user) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         String uid = "";
-        User usr = (User)hbsessionDao.getFirst(
+        User usr = (User) hbsessionDao.getFirst(
                 "FROM User where uname = '" + user.getUname() + "'");
         uid = usr.getUid();
         return uid;
     }
 
-    public UserRoles getUserRolesByUid(String uid){
+    public UserRoles getUserRolesByUid(String uid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        UserRoles usr = (UserRoles)hbsessionDao.getFirst(
+        UserRoles usr = (UserRoles) hbsessionDao.getFirst(
                 "FROM UserRoles where uid = '" + uid + "'");
 
         return usr;
@@ -66,38 +62,38 @@ public class UserDAOImpl implements UserDAO {
         return prov.getPbname();
     }
 
-    public List<Object> getCityBank(int pbid){
+    public List<Object> getCityBank(int pbid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> cblist = new ArrayList<>();
 
-        ProvinceBank pro = (ProvinceBank)hbsessionDao.getFirst(
+        ProvinceBank pro = (ProvinceBank) hbsessionDao.getFirst(
                 "FROM ProvinceBank where pbid = '" + pbid + "'");
 
         String cbidset = pro.getCbidset();
-        String[] cbidstr= cbidset.split("，");
-        for(int i = 0; i < cbidstr.length; i++) {
+        String[] cbidstr = cbidset.split("，");
+        for (int i = 0; i < cbidstr.length; i++) {
             String cbid = cbidstr[i];
 
-            CityBank cb = (CityBank)hbsessionDao.getFirst(
+            CityBank cb = (CityBank) hbsessionDao.getFirst(
                     "FROM CityBank where cbid = '" + cbid + "'");
 
-            cblist.add((Object)cb);
+            cblist.add((Object) cb);
         }
 
         return cblist;
     }
 
-    public List getComputerroom(String cbname){
+    public List getComputerroom(String cbname) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Computerroom> crlist = new ArrayList<>();
 
-        CityBank cb = (CityBank)hbsessionDao.getFirst(
-                "FROM CityBank where cbname = '" + cbname+ "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst(
+                "FROM CityBank where cbname = '" + cbname + "'");
 
         String comroomset = cb.getCompRoom();
-        String[] coroomstr= comroomset.split("，");
-        for(int i = 0; i < coroomstr.length; i++) {
-            Computerroom cp = (Computerroom)hbsessionDao.getFirst(
+        String[] coroomstr = comroomset.split("，");
+        for (int i = 0; i < coroomstr.length; i++) {
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
                     "FROM Computerroom where rid = '" + coroomstr[i] + "'");
             crlist.add(cp);
         }
@@ -142,7 +138,7 @@ public class UserDAOImpl implements UserDAO {
         return prov.getRolesname();
     }
 
-    public List<List>  getAllUserInfo(){
+    public List<List>  getAllUserInfo() {
 
         DBConnect db;
         ResultSet rs = null;
@@ -173,7 +169,7 @@ public class UserDAOImpl implements UserDAO {
                 list.add(rs.getString("telephone"));
                 list.add(rs.getString("govtelephone"));
 
-                crlist.add((List)list);
+                crlist.add((List) list);
             }
             return crlist;
 
@@ -190,16 +186,16 @@ public class UserDAOImpl implements UserDAO {
         return  new ArrayList<>();
     }
 
-    public User getOneUserInfo(String uid){
+    public User getOneUserInfo(String uid) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        User ur = (User)hbsessionDao.getFirst("FROM User where uid = '" + uid+ "'");
+        User ur = (User) hbsessionDao.getFirst("FROM User where uid = '" + uid + "'");
 
         return ur;
     }
 
-    public boolean deleteUserInfo(String uid){
+    public boolean deleteUserInfo(String uid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
 
@@ -208,7 +204,7 @@ public class UserDAOImpl implements UserDAO {
         return rt;
     }
 
-    public boolean deleteUserRoles(String uid){
+    public boolean deleteUserRoles(String uid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
 
@@ -217,7 +213,7 @@ public class UserDAOImpl implements UserDAO {
         return rt;
     }
 
-    public boolean addUserInfo(String uid,String account,String password,String name,String telephone,String govtelephone, String province, String city, String computerroom){
+    public boolean addUserInfo(String uid, String account, String password, String name, String telephone, String govtelephone, String province, String city, String computerroom) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
 
@@ -237,10 +233,10 @@ public class UserDAOImpl implements UserDAO {
         return rt;
     }
 
-    public boolean addUserRolesInfo(String uid, String roles){
+    public boolean addUserRolesInfo(String uid, String roles) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
-        Roles role = (Roles)hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles+ "'");
+        Roles role = (Roles) hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles+ "'");
         UserRoles userrole = new UserRoles();
         userrole.setUid(uid);
         userrole.setRid(role.getRid());
@@ -253,17 +249,17 @@ public class UserDAOImpl implements UserDAO {
        2.userroles表修改
        注意：需要验证是否为管理员或者用户自己
      */
-    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser){
+    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1 = false;
         boolean rt2 = false;
 
         //获取当前用户，判断是否可以更改信息
-        UserRoles userole = (UserRoles)hbsessionDao.getFirst("FROM UserRoles where uid = '" + temuser + "'"); //当前用户
-        UserRoles userole2 = (UserRoles)hbsessionDao.getFirst("FROM UserRoles where uid = '" + uid + "'"); //待修改用户
-        Roles role = (Roles)hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles + "'");
+        UserRoles userole = (UserRoles) hbsessionDao.getFirst("FROM UserRoles where uid = '" + temuser + "'"); //当前用户
+        UserRoles userole2 = (UserRoles) hbsessionDao.getFirst("FROM UserRoles where uid = '" + uid + "'"); //待修改用户
+        Roles role = (Roles) hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles + "'");
 
-        if((uid.equals(temuser)) || (userole.getRid().equals("1"))){ //可以修改
+        if((uid.equals(temuser)) || (userole.getRid().equals("1"))) { //可以修改
 
             User newur = new User();
             newur.setUid(uid);
@@ -276,14 +272,14 @@ public class UserDAOImpl implements UserDAO {
             newur.setCbid(city);
             newur.setRid(computerroom);
 
-            String hql = "update User newur set newur.uname='" + name +"', newur.chinesename='" + chinesename +"', newur.password='" + password +"'," +
-                    "newur.telephone='" + telephone +"', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
+            String hql = "update User newur set newur.uname='" + name + "', newur.chinesename='" + chinesename + "', newur.password='" + password + "'," +
+                    "newur.telephone='" + telephone + "', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
                     ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
                     " where newur.uid='" + uid + "'";
 
             rt1 = hbsessionDao.update(hql);
 
-            if(userole2.getRid() != null) {
+            if (userole2.getRid() != null) {
                 String hql2 = "update UserRoles newurole set newurole.rid='" + role.getRid() +
                         "' where newurole.uid='" + uid + "'";
                 rt2 = hbsessionDao.update(hql2);
@@ -292,20 +288,20 @@ public class UserDAOImpl implements UserDAO {
         return rt1 && rt2;
     }
 
-    public List<Object> getUserDynamicMenu(User user){
+    public List<Object> getUserDynamicMenu(User user) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Object> crlist = new ArrayList<>();
 
         crlist = hbsessionDao.search(
-                "select tc.pid from User as ta, UserRoles as tb, RolesPermission as tc where ta.uid = tb.uid and tb.rid = tc.rid and ta.uid = "+ user.getUid());
+                "select tc.pid from User as ta, UserRoles as tb, RolesPermission as tc where ta.uid = tb.uid and tb.rid = tc.rid and ta.uid = " + user.getUid());
 
-        if(crlist.size() > 0){
+        if (crlist.size() > 0) {
             String pidset = crlist.get(0).toString();
-            String[] pidstr= pidset.split(",");
+            String[] pidstr = pidset.split(",");
             crlist.clear();
 
-            for(int i = 0; i < pidstr.length; i++) {
+            for (int i = 0; i < pidstr.length; i++) {
                 crlist.add(pidstr[i]);
             }
         }
@@ -313,7 +309,7 @@ public class UserDAOImpl implements UserDAO {
         return crlist;
     }
 
-    public String getMaxUserId(){
+    public String getMaxUserId() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         User ur = (User) hbsessionDao.getFirst(

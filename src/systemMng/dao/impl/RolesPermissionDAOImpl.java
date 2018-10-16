@@ -9,11 +9,6 @@ import systemMng.dao.RolesPermissionDAO;
 
 public class RolesPermissionDAOImpl implements RolesPermissionDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
-    private Object object;
-
     /**
      * 先根据rid查询pid，再在pid后追加新的权限pid
      * 0.若无rid与pid的记录，需要新建
@@ -22,45 +17,43 @@ public class RolesPermissionDAOImpl implements RolesPermissionDAO {
      *   2.1 判断新的pid是否已存在老的pid中，若是，不操作
      *   2.2 若不存在，追加
      */
-    public Boolean allocPermission(String rid, String pid){
+    public Boolean allocPermission(String rid, String pid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = false;
 
-        RolesPermission rp = (RolesPermission)hbsessionDao.getFirst(
+        RolesPermission rp = (RolesPermission) hbsessionDao.getFirst(
                 "FROM RolesPermission where rid = '" + rid + "'");
 
-        if(rp == null){
+        if (rp == null) {
             RolesPermission newrp = new RolesPermission();
             newrp.setPid(pid);
             newrp.setRid(rid);
 
             rt = hbsessionDao.insert(newrp);
-        }
-        else{
+        } else {
             String oldpid = rp.getPid();
 
-            if(oldpid == null){
+            if (oldpid == null) {
                 RolesPermission newrp1 = new RolesPermission();
                 newrp1.setPid(pid);
                 newrp1.setRid(rid);
 
                 rt = hbsessionDao.insert(newrp1);
-            }
-            else{
+            } else {
                 boolean hasridFlag = false;
                 String oldpidstr[] = oldpid.split(",");
-                for(int i = 0; i < oldpidstr.length; i++){
+                for (int i = 0; i < oldpidstr.length; i++) {
                     String tmprid = oldpidstr[i];
-                    if(rid.equals(tmprid))
+                    if (rid.equals(tmprid)) {
                         hasridFlag = true;
+                    }
                 }
 
-                if(hasridFlag)
+                if (hasridFlag) {
                     rt = true;
-                else
-                {
-                    String npid = oldpid+","+pid;
-                    String hql = "update RolesPermission newrp2 set newrp2.pid='" + npid +"' where newrp2.rid='" + rid + "'";
+                } else {
+                    String npid = oldpid + "," + pid;
+                    String hql = "update RolesPermission newrp2 set newrp2.pid='" + npid + "' where newrp2.rid='" + rid + "'";
                     rt = hbsessionDao.update(hql);
                 }
             }

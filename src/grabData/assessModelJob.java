@@ -43,7 +43,7 @@ public class assessModelJob implements Job {
         //电能类事件评估开始
         eventpowerlist = hbsessionDao.search("FROM EventPower where time >'"+ date +"'");
 
-        if(eventpowerlist != null) {
+        if (eventpowerlist != null) {
             for (int i = 0; i < eventpowerlist.size(); i++) {
                 Integer teid = eventpowerlist.get(i).getTeid();
                 String sdid = eventpowerlist.get(i).getDid();
@@ -78,12 +78,12 @@ public class assessModelJob implements Job {
                     }
                 }
 
-                AssessRecord maxar = (AssessRecord)hbsessionDao.getFirst("FROM AssessRecord Order by aid desc");
+                AssessRecord maxar = (AssessRecord) hbsessionDao.getFirst("FROM AssessRecord Order by aid desc");
 
                 Integer aid = 0;
-                if(maxar != null)
+                if (maxar != null) {
                     aid = maxar.getAid();
-
+                }
                 AssessRecord ar = new AssessRecord();
                 ar.setDegree(tlevel);
                 ar.setAid(aid + 1);

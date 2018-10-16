@@ -56,92 +56,39 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
             String thsholdname = dicThreshold.get(i).getDescription();
 
             DevicesThreshold dt = (DevicesThreshold) hbsessionDao.getFirst(
-                    "FROM DevicesThreshold where classify='" + thsholdname + "' and level = 1");
+                    "FROM DevicesThreshold where name='" + thsholdname + "' and level = 1");
 
             if (dt != null) {
-                String valuestr = "";
+                Float value = null;
 
                 if (dt.getFloorval() != null) {
                     double dfval = dt.getFloorval();
-                    Float ffval = (float) dfval;
-                    valuestr = Integer.toHexString(Float.floatToIntBits(ffval));
-
+                    value = (float) dfval;
                 } else if (dt.getCellval() != null) {
                     double dcval = dt.getCellval();
-                    Float fcval = (float) dcval;
-                    valuestr = Integer.toHexString(Float.floatToIntBits(fcval));
+                    value = (float) dcval;
                 }
 
+                if (!value.equals(null)) {
 
+                    ByteBuf sendMsg = ctx.alloc().buffer();
 
-                ByteBuf sendMsg = ctx.alloc().buffer();
+                    int addr = addr1 * 100 + addr2;
+                    value = (float) 0.1;
+                    //int addr = 8000;
+                    //float value = (float) 1.1111;
+                    sendMsg.writeBytes(createMsg(addr, value));
+                    //System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
 
-                int addr = 8000;
-                float value = (float) 1.1111;
-                sendMsg.writeBytes(createMsg(addr, value));
-                System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
-
-                SocketChannel sc = (SocketChannel) ctx.channel();
-
-                sc.writeAndFlush(sendMsg);
+                    SocketChannel sc = (SocketChannel) ctx.channel();
+                    sc.writeAndFlush(sendMsg);
+                }
             }
         }
-
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-/*
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<DictionaryThreshold> dicThreshold = hbsessionDao.search(
-                "FROM DictionaryThreshold");
-
-        String address = ctx.channel().remoteAddress().toString().replace("/", "");
-        System.out.println("ip+端口为：" + address + "开始建立通讯");
-
-        for (int i=0;i< dicThreshold.size();i++){
-            slaveId[i]= 1;
-            fCode[i] =dicThreshold.get(i).getFunctioncode();
-            addr[i] = dicThreshold.get(i).getAddr();
-            len[i] = 4;
-
-            String thsholdname = dicThreshold.get(i).getDescription();
-
-            DevicesThreshold dt = (DevicesThreshold)hbsessionDao.getFirst(
-                    "FROM DevicesThreshold where classify='" + thsholdname + "' and level = 1" + "'");
-
-            if(dt != null){
-
-                double dfval =dt.getFloorval();
-                double dcval = dt.getCellval();
-
-                Float ffval = (float)dfval;
-                Float fcval = (float)dcval;
-
-                String valuestr = "";
-
-                if(ffval != 0)
-                    valuestr = Integer.toHexString(Float.floatToIntBits(ffval));
-                else if(fcval != 0)
-                    valuestr = Integer.toHexString(Float.floatToIntBits(fcval));
-                else break;
-
-                String val1 = valuestr.substring(0,1);
-                String val2 = valuestr.substring(2,3);
-                String val3 = valuestr.substring(4,5);
-                String val4 = valuestr.substring(6,7);
-                System.out.println(val4 + val3 + val2 + val1);
-
-                byte[] value= ToHex.toBytes(valuestr);
-
-                ByteBuf sendMsg = ctx.alloc().buffer();
-                sendMsg.writeBytes(createMsg(1, fCode[part], addr[part], value[1], value[2], value[3], value[4]));
-                SocketChannel sc = (SocketChannel)ctx.channel();
-
-                sc.writeAndFlush(sendMsg);
-
-            }
-        }*/
     }
 
     @Override

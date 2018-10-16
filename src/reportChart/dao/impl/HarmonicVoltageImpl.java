@@ -18,7 +18,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
     private Session session;
     private Transaction transaction;
     private Query query;
-    public List getHVresultBydt(String did,String time){
+
+    public List getHVresultBydt(String did, String time) {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -26,11 +27,12 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         List result = new ArrayList<String>();
         System.out.println(time);
         try {
-            for(int i=0;i<49;i++) {
-                for (int j = 0; j < 3; j++) {
-                    char state = (char) (97 + j);
+            for (int i = 1; i <= 49; i++) {
+                for (int j = 1; j <= 3; j++) {
+                    char state = (char) (96 + j);
                     List<Double> value = new ArrayList<>();
-                    String sql = "SELECT ep.value as value FROM event_power ep, events_type et WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%' AND et.description = 'U" + state + "谐波含有率越限" + (i + 2) + "' AND ep.cid=et.cid ORDER BY ep.value";
+                   //String sql = "SELECT ep.value as value FROM event_power ep, events_type et WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%' AND et.description = 'U" + state + "谐波含有率越限" + (i + 2) + "' AND ep.cid=et.cid ORDER BY ep.value";
+                    String sql = "SELECT ep." + "U" + j + "xb_" + i + " as value FROM powerxb_monitor ep WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%'";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -39,12 +41,12 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                         Double dvalue = Double.parseDouble(svalue);
                         value.add(dvalue);
                     }
-                    if(value.size()>0){
+                    if (value.size() > 0) {
                         double max = getMax(value);
                         double min = getMin(value);
                         double ave = getAve(value);
                         double pro = get95p(value);
-                        result.add((i + 3) + "," + state + "," + max + "," + min + "," + ave + "," + pro);
+                        result.add((i + 2) + "," + state + "," + max + "," + min + "," + ave + "," + pro);
                     }
                 }
             }
@@ -52,7 +54,6 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println(result);
         try {
             db.free();
         } catch (SQLException e) {
@@ -61,7 +62,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         }
         return result;
     }
-    public List getHCresultBydt(String did,String time){
+
+    public List getHCresultBydt(String did, String time){
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -69,11 +71,13 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         List result = new ArrayList<String>();
         System.out.println(time);
         try {
-            for(int i=0;i<49;i++) {
-                for (int j = 0; j < 3; j++) {
-                    char state = (char) (97 + j);
+            for (int i = 1; i <= 49; i++) {
+                for (int j = 1; j <= 3; j++) {
+                    char state = (char) (96 + j);
                     List<Double> value = new ArrayList<>();
-                    String sql = "SELECT ep.value as value FROM event_power ep, events_type et WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%' AND et.description = 'I" + state + "谐波有效值越限" + (i + 2) + "' AND ep.cid=et.cid ORDER BY ep.value";
+                   // String sql = "SELECT ep.value as value FROM event_power ep, events_type et WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%' AND et.description = 'I" + state + "谐波有效值越限" + (i + 2) + "' AND ep.cid=et.cid ORDER BY ep.value";
+                    String sql = "SELECT ep." + "I" + j + "va_" + i + " as value FROM powerxb_monitor ep WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%'";
+
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
                     while (rs.next()) {
@@ -81,12 +85,12 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                         Double dvalue = Double.parseDouble(svalue);
                         value.add(dvalue);
                     }
-                    if(value.size()>0){
+                    if (value.size() > 0) {
                         double max = getMax(value);
                         double min = getMin(value);
                         double ave = getAve(value);
                         double pro = get95p(value);
-                        result.add((i + 3) + "," + state + "," + max + "," + min + "," + ave + "," + pro);
+                        result.add((i + 2) + "," + state + "," + max + "," + min + "," + ave + "," + pro);
                     }
                 }
             }
@@ -94,7 +98,6 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println(result);
         try {
             db.free();
         } catch (SQLException e) {
@@ -103,21 +106,21 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         }
         return result;
     }
-    public List getHVthreshold(){
+    public List getHVthreshold() {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            for(int i=0;i<49;i++) {
+            for (int i = 0; i < 49; i++) {
                 for (int j = 0; j < 3; j++) {
                     char state = (char) (97 + j);
                     String sql = "SELECT ds.value as value FROM devices_standard ds, events_type et WHERE et.description = 'U" + state + "谐波含有率越限" + (i + 2) + "' AND ds.cid=et.cid";
-                    System.out.println(sql);
+
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
-                    while (rs.next()){
+                    while (rs.next()) {
                         String value = rs.getString("value");
                         result.add((i + 3) + "," + state + "," +  value);
                     }
@@ -127,7 +130,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println(result);
+
         try {
             db.free();
         } catch (SQLException e) {
@@ -136,21 +139,21 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         }
         return result;
     }
-    public List getHCthreshold(){
+    public List getHCthreshold() {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            for(int i=0;i<49;i++) {
+            for (int i = 0; i < 49; i++) {
                 for (int j = 0; j < 3; j++) {
                     char state = (char) (97 + j);
                     String sql = "SELECT ds.value as value FROM devices_standard ds, events_type et WHERE et.description = 'I" + state + "谐波有效值越限" + (i + 2) + "' AND ds.cid=et.cid";
                     System.out.println(sql);
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
-                    while (rs.next()){
+                    while (rs.next()) {
                         String value = rs.getString("value");
                         result.add((i + 3) + "," + state + "," +  value);
                     }
@@ -169,7 +172,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         }
         return result;
     }
-    public List getVCfundBydt(String did,String time){
+    public List getVCfundBydt(String did, String time){
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;

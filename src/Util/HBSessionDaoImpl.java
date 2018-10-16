@@ -22,7 +22,7 @@ public class HBSessionDaoImpl implements HBSessionDao{
                 .applySettings(cfg.getProperties()).build();
         //创建会话工厂对象
         sessionFactory = cfg.buildSessionFactory(serviceRegistry);
-        onlineSession=sessionFactory.openSession();
+        onlineSession = sessionFactory.openSession();
     }
 
     public Session getOnlineSession() {
@@ -32,15 +32,14 @@ public class HBSessionDaoImpl implements HBSessionDao{
     @Override
     public List search(String hql) {
         //查询不用事务管理
-        Session session=sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         List alist = null;
         alist = session.createQuery(hql).list();
 
-        if(alist.size() == 0){
+        if (alist.size() == 0) {
             session.close();
             return null;
-        }
-        else {
+        } else {
             session.close();
             return alist;
         }
@@ -49,7 +48,7 @@ public class HBSessionDaoImpl implements HBSessionDao{
     @Override
     public List searchWithNum(String hql, int num) {
         //查询不用事务管理
-        Session session=sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         Query query = session.createQuery(hql);
         query.setMaxResults(num);
         List alist = query.list();
@@ -60,16 +59,15 @@ public class HBSessionDaoImpl implements HBSessionDao{
     @Override
     public Object getFirst(String hql) {
         //查询不用事务管理
-        Session session=sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
         List alist = null;
         Object aobject = null;
         alist = session.createQuery(hql).list();
 
-        if(alist.size() == 0){
+        if (alist.size() == 0) {
             session.close();
             return null;
-        }
-        else{
+        } else {
             aobject = alist.get(0);
             session.close();
             return aobject;
@@ -80,7 +78,7 @@ public class HBSessionDaoImpl implements HBSessionDao{
     @Override
     public boolean delete(String hql, String id) {
         try {
-            Session session=sessionFactory.openSession();
+            Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             Query q = session.createQuery(hql);
             q.setString(0, id);
@@ -99,8 +97,8 @@ public class HBSessionDaoImpl implements HBSessionDao{
     @Override
     public boolean insert(Object obj) {
         try {
-            Session session=sessionFactory.openSession();
-            Transaction transaction=session.beginTransaction();
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
             session.save(obj);
             transaction.commit();
             session.close();
@@ -115,8 +113,8 @@ public class HBSessionDaoImpl implements HBSessionDao{
     //使用HQL语句更新数据Object obj,
     public boolean update(String hql) {
         try {
-            Session session=sessionFactory.openSession();
-            Transaction transaction=session.beginTransaction();
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
             Query q = session.createQuery(hql);
             q.executeUpdate();
             transaction.commit();

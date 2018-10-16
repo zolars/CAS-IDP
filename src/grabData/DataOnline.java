@@ -10,30 +10,30 @@ import java.util.List;
 import java.util.Map;
 
 public class DataOnline {
-    private static List<Dictionary> dic=null;
-    private static List<DictionaryPlus> dicPlus=null;
+    private static List<Dictionary> dic = null;
+    private static List<DictionaryPlus> dicPlus = null;
     //存各个监测点的实时数据String
-    private static Map<String,String> onlineDataStrings=new HashMap<>();
+    private static Map<String, String> onlineDataStrings = new HashMap<>();
     //存各个监测点parm
-    private static Map<String,PowerparmMonitor> parmMap=new HashMap<>();
+    private static Map<String, PowerparmMonitor> parmMap = new HashMap<>();
     //存各个监测点xb
-    private static Map<String, PowerxbMonitor> xbMap=new HashMap<>();
+    private static Map<String, PowerxbMonitor> xbMap = new HashMap<>();
     //存各个监测点sxdy
-    private static Map<String, PowersxdyMonitor> sxdyMap=new HashMap<>();
+    private static Map<String, PowersxdyMonitor> sxdyMap = new HashMap<>();
     //存各个监测点的实时数据map的引用
-    private static Map<String,Map<String,Float>> onlineDataMap=new HashMap<>();
+    private static Map<String, Map<String, Float>> onlineDataMap = new HashMap<>();
     //存各个监测点的暂态连接
-    private static Map<String,Channel> transientChannelMap=new HashMap<>();
+    private static Map<String, Channel> transientChannelMap = new HashMap<>();
     //存各个监测点的越限连接
-    private static Map<String,Channel> overlimitChannelMap=new HashMap<>();
+    private static Map<String, Channel> overlimitChannelMap = new HashMap<>();
 
 
     public static void tempSave(String did, Map<String, Float> dataset) {
-        onlineDataStrings.put(did,JSON.toJSONString(dataset));//存成字符串
+        onlineDataStrings.put(did, JSON.toJSONString(dataset)); //存成字符串
 
-        PowerparmMonitor var=parmMap.get(did);
-        PowerxbMonitor varxb=xbMap.get(did);
-        PowersxdyMonitor varsxdy=sxdyMap.get(did);
+        PowerparmMonitor var = parmMap.get(did);
+        PowerxbMonitor varxb = xbMap.get(did);
+        PowersxdyMonitor varsxdy = sxdyMap.get(did);
 
         //当前时间、检测设备id、maxID
         Timestamp currenttime = new Timestamp(System.currentTimeMillis());

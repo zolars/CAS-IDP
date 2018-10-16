@@ -15,10 +15,10 @@ public class DataOnlineSaveJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        Map<String, PowerparmMonitor> parmMap=DataOnline.getParmMap();
-        Map<String, PowerxbMonitor> xbMap=DataOnline.getXbMap();
-        Map<String, PowersxdyMonitor> sxdyMap=DataOnline.getSxdyMap();
-        if(null!=parmMap && null!=xbMap && null!=sxdyMap){
+        Map<String, PowerparmMonitor> parmMap = DataOnline.getParmMap();
+        Map<String, PowerxbMonitor> xbMap = DataOnline.getXbMap();
+        Map<String, PowersxdyMonitor> sxdyMap = DataOnline.getSxdyMap();
+        if (null != parmMap && null != xbMap && null != sxdyMap) {
             Set<String> didSet = parmMap.keySet();
             Iterator<String> iterator = didSet.iterator();
             while (iterator.hasNext()) {
@@ -29,12 +29,15 @@ public class DataOnlineSaveJob implements Job {
                 PowersxdyMonitor varsxdy = sxdyMap.get(did);
 
                 //实时数据存入数据库
-                if(var.getDid() !=  null)
+                if (var.getDid() !=  null) {
                     hbsessionDao.insert(var);
-                if(varxb.getDid() !=  null)
+                }
+                if (varxb.getDid() !=  null) {
                     hbsessionDao.insert(varxb);
-                if(varsxdy.getDid() !=  null)
+                }
+                if (varsxdy.getDid() !=  null) {
                     hbsessionDao.insert(varsxdy);
+                }
 
             }
         }

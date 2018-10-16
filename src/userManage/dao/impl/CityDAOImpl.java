@@ -13,12 +13,7 @@ import java.util.List;
 
 public class CityDAOImpl implements CityDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
-    private Object object;
-
-    public List getAllCity(){
+    public List getAllCity() {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
@@ -28,21 +23,21 @@ public class CityDAOImpl implements CityDAO {
         return list;
     }
 
-    public List getCityByProvince(String province){
+    public List getCityByProvince(String province) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<CityBank> list = new ArrayList<>();
 
-        ProvinceBank pb = (ProvinceBank)hbsessionDao.getFirst(
-                "FROM ProvinceBank where pbid='"+ province +"'");
+        ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
+                "FROM ProvinceBank where pbid='" + province + "'");
 
         String cbidstr = pb.getCbidset();
         String cbidset[] = cbidstr.split("，");
 
-        for(int i= 0; i < cbidset.length; i++){
-            CityBank cb = (CityBank)hbsessionDao.getFirst(
-                    "FROM CityBank where cbid='"+ cbidset[i] +"'");
+        for (int i = 0; i < cbidset.length; i++) {
+            CityBank cb = (CityBank) hbsessionDao.getFirst(
+                    "FROM CityBank where cbid='" + cbidset[i] + "'");
             list.add(cb);
         }
 
