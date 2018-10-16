@@ -10,11 +10,8 @@ import userManage.dao.ProvinceDAO;
 import userManage.dao.impl.ProvinceDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class getOneProvinceMapDataAction extends ActionSupport {
@@ -35,7 +32,6 @@ public class getOneProvinceMapDataAction extends ActionSupport {
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String pname = request.getParameter("pname");
@@ -46,7 +42,7 @@ public class getOneProvinceMapDataAction extends ActionSupport {
             ProvinceDAO pdap = new ProvinceDAOImpl();
 
             List<List<Integer>> oneprovince = new ArrayList<>();
-            String pid = pdap.getProvinceIdByName(pname+"分行");
+            String pid = pdap.getProvinceIdByName(pname + "分行");
 
             oneprovince = dao.getOneProvinceEvent(pid, starttime, endtime);
 

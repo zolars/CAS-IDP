@@ -28,10 +28,6 @@ public class Sms {
 
         String Command5 = "AT+SMSEND=\"" + commonsms.getRecver() + "\",3,\"" + commonsms.getSmstext() + "\"" + String.valueOf(symbol1);
 
-        System.out.println(Command2);
-        System.out.println(Command3);
-        System.out.println(Command5);
-
         try {
             String Return2 = myport.sendAT(Command2);
 
