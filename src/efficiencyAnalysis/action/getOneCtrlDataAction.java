@@ -33,21 +33,20 @@ public class getOneCtrlDataAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             String compname = request.getParameter("compname");
+            String starttime = request.getParameter("stime");
+            String endtime = request.getParameter("etime");
 
             EventDAO dao = new EventDAOImpl();
 
-            Boolean rt = dao.getComputerroomCtrlStatus(compname);
+            Boolean rt = dao.getComputerroomCtrlStatus(compname, starttime, endtime);
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("oplist", rt);
-
-            result = JSON.toJSONString(jsonObject);
+            if (rt) return "success";
+            else return "failure";
 
         } catch (Exception e) {
             e.printStackTrace();
             return "failure";
         }
-        return "success";
     }
 
 }
