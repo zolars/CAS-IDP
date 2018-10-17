@@ -366,7 +366,7 @@
 
                                                 <table class="display" id="environment-event-detail-1"
                                                        style="width:100%;">
-                                                    <thead>
+                                                    <%--<thead>
                                                     <tr>
                                                         <th>测量名称</th>
                                                         <th>时间</th>
@@ -376,14 +376,14 @@
                                                         <th>方向</th>
                                                         <th>确认</th>
                                                     </tr>
-                                                    </thead>
+                                                    </thead>--%>
                                                     <tbody id="environment-event-detail-tbody-1">
                                                     </tbody>
                                                 </table>
 
                                                 <table class="display" id="environment-event-detail-2"
                                                        style="width:100%;display: none;">
-                                                    <thead>
+                                                    <%--<thead>
                                                     <tr>
                                                         <th>测量名称</th>
                                                         <th>时间</th>
@@ -393,7 +393,7 @@
                                                         <th>方向</th>
                                                         <th>确认</th>
                                                     </tr>
-                                                    </thead>
+                                                    </thead>--%>
                                                     <tbody id="environment-event-detail-tbody-2">
                                                     </tbody>
                                                 </table>
@@ -429,7 +429,7 @@
                                                 </table>
 
                                                 <table class="display" id="device-event-detail-1" style="width:100%;">
-                                                    <thead>
+                                                    <%--<thead>
                                                     <tr>
                                                         <th>测量名称</th>
                                                         <th>时间</th>
@@ -439,7 +439,7 @@
                                                         <th>方向</th>
                                                         <th>确认</th>
                                                     </tr>
-                                                    </thead>
+                                                    </thead>--%>
                                                     <tbody id="device-event-detail-tbody-1">
                                                     </tbody>
                                                 </table>

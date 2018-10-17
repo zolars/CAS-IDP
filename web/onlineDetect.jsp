@@ -1603,12 +1603,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var res=[];//二维数组
 
             for(var i = 0; i < series.length; i++){
-                    var temp=[];    //一维数组
-                    for(var j = 1;j < 50 + 1; j++){
-                        var jindx = series[i] + j;
-                        temp.push(parseFloat(obj[jindx]));
+                var temp=[];    //一维数组
+
+                var basic = parseFloat(obj["u1Xb1"]);
+
+                if(i == 0) temp.push(parseFloat(obj["thdu1"] * 100) / basic);
+                if(i == 1) temp.push(parseFloat(obj["thdu2"] * 100) / basic);
+                if(i == 2) temp.push(parseFloat(obj["thdu3"] * 100) / basic);
+                if(i == 3) temp.push(parseFloat(obj["thdu4"] * 100) / basic);
+                if(i == 4) temp.push(parseFloat(obj["thdi1"] * 100) / basic);
+                if(i == 5) temp.push(parseFloat(obj["thdi2"] * 100) / basic);
+                if(i == 6) temp.push(parseFloat(obj["thdi3"] * 100) / basic);
+                if(i == 7) temp.push(parseFloat(obj["thdi4"] * 100) / basic);
+
+                for(var j = 1;j <= 50; j++){
+                    var jindx = series[i] + j;
+
+                    if(j == 1){
+                        temp.push(100); //obj[jindx]
                     }
-                    res.push(temp);
+                    else {
+                        temp.push(10000 * parseFloat(obj[jindx]/ basic));
+                    }
+                }
+                res.push(temp);
             }
             eventChart2.setOption({
                 series: [{name: "U1", type: 'bar', data: res[0]},

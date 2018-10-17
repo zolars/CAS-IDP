@@ -125,23 +125,5 @@
         <property name="hz">
             <column name="Hz" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
-        <property name="thdu1">
-            <column name="THDU1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
-        </property>
-        <property name="thdu2">
-            <column name="THDU2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
-        </property>
-        <property name="thdu3">
-            <column name="THDU3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
-        </property>
-        <property name="thdi1">
-            <column name="THDI1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
-        </property>
-        <property name="thdi2">
-            <column name="THDI2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
-        </property>
-        <property name="thdi3">
-            <column name="THDI3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
-        </property>
     </class>
 </hibernate-mapping>

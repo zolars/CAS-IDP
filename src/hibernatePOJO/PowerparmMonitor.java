@@ -47,12 +47,6 @@ public class PowerparmMonitor {
     private Float pltU2;
     private Float pltU3;
     private Float hz;
-    private Float thdu1;
-    private Float thdu2;
-    private Float thdu3;
-    private Float thdi1;
-    private Float thdi2;
-    private Float thdi3;
 
     @Id
     @Column(name = "ppid", nullable = false)
@@ -507,51 +501,4 @@ public class PowerparmMonitor {
         return Objects.hash(ppid, did, time, u1, u2, u3, u4, i1, i2, i3, i4, p1, p2, p3, psum, q1, q2, q3, qsum, s1, s2, s3, ssum, pf1, pf2, pf3, pFsum, cosPhi1, cosPhi2, cosPhi3, iflU1, iflU2, iflU3, pstU1, pstU2, pstU3, pltU1, pltU2, pltU3, hz);
     }
 
-    public Float getThdu1() {
-        return thdu1;
-    }
-
-    public void setThdu1(Float thdu1) {
-        this.thdu1 = thdu1;
-    }
-
-    public Float getThdu2() {
-        return thdu2;
-    }
-
-    public void setThdu2(Float thdu2) {
-        this.thdu2 = thdu2;
-    }
-
-    public Float getThdu3() {
-        return thdu3;
-    }
-
-    public void setThdu3(Float thdu3) {
-        this.thdu3 = thdu3;
-    }
-
-    public Float getThdi1() {
-        return thdi1;
-    }
-
-    public void setThdi1(Float thdi1) {
-        this.thdi1 = thdi1;
-    }
-
-    public Float getThdi2() {
-        return thdi2;
-    }
-
-    public void setThdi2(Float thdi2) {
-        this.thdi2 = thdi2;
-    }
-
-    public Float getThdi3() {
-        return thdi3;
-    }
-
-    public void setThdi3(Float thdi3) {
-        this.thdi3 = thdi3;
-    }
 }

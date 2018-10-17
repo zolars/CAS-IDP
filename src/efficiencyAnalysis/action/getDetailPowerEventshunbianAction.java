@@ -5,11 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
-import hibernatePOJO.EventPower;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class getDetailPowerEventshunbianAction extends ActionSupport {
     /* 根据测量地点（市行名称）获取详细的 第二页设备事件-瞬变
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
@@ -44,28 +42,32 @@ public class getDetailPowerEventshunbianAction extends ActionSupport {
             EventDAO dao = new EventDAOImpl();
             List pedata = new ArrayList();
 
-            for(int i = 0; i <cbnamelist.length; i++) {
-                if ((starttime == null && endtime == null) || (starttime.equals(" ") && endtime.equals(" ")))
+            for (int i = 0; i < cbnamelist.length; i++) {
+                if ((starttime == null && endtime == null) || (starttime.equals(" ") && endtime.equals(" "))) {
                     pedata.addAll(dao.getLocalLastDetailPowerEventshunbian(cbnamelist[i]));
-                else
+                } else {
                     pedata.addAll(dao.getLocalAllDetailPowerEventshunbian(cbnamelist[i], starttime, endtime));
+                }
             }
 
             for (int i = 0 ; i < pedata.size(); i++) {
-                String ep = (String)pedata.get(i);
+                String ep = (String) pedata.get(i);
                 List<String> eplist = java.util.Arrays.asList(ep.split(","));
 
-                String cid= (String)eplist.get(4);
+                String cid = (String) eplist.get(4);
                 String cidn = cid.substring(1, cid.length());
 
                 Boolean has = false;
 
                 for (int j = 0 ; j < priortylist.length; j++) {
-                    if (cidn.equals(priortylist[j]))
+                    if (cidn.equals(priortylist[j])) {
                         has = true;
+                    }
                 }
 
-                if(!has) pedata.remove(i);
+                if (!has) {
+                    pedata.remove(i);
+                }
             }
 
             JSONObject jsonObject = new JSONObject();

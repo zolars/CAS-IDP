@@ -409,12 +409,12 @@ public class DataOnline {
         var.setPltU3(dataset.get("Plt_U3"));
 
         //输入总谐波畸变率相关
-        var.setThdu1(dataset.get("THDU1"));
-        var.setThdu2(dataset.get("THDU2"));
-        var.setThdu3(dataset.get("THDU3"));
-        var.setThdi1(dataset.get("THDI1"));
-        var.setThdi2(dataset.get("THDI2"));
-        var.setThdi3(dataset.get("THDI3"));
+        varxb.setThdu1(dataset.get("THDU1"));
+        varxb.setThdu2(dataset.get("THDU2"));
+        varxb.setThdu3(dataset.get("THDU3"));
+        varxb.setThdi1(dataset.get("THDI1"));
+        varxb.setThdi2(dataset.get("THDI2"));
+        varxb.setThdi3(dataset.get("THDI3"));
 
         Float angleu1 = dataset.get("PHI_U1");
         Float angleu2 = dataset.get("PHI_U2");
