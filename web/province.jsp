@@ -279,10 +279,8 @@
 
         <h4 class="page-title">关键信息集中监控</h4>
 
-        <!-- Quick Stats -->
-        <div id="first-page" class="block-area">
-
-            <!-- Time choose -->
+        <!-- Time choose -->
+        <div class="block-area">
             <div class="row">
                 <div class="container">
                     <form action="" class="form-horizontal" role="form">
@@ -317,6 +315,10 @@
                     </form>
                 </div>
             </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div id="first-page" class="block-area">
 
             <div class="row">
 
@@ -362,7 +364,6 @@
                     </table>
                 </div>
             </div>
-            uo
             <div class="row">
                 <div id="nxbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
                 </div>
@@ -414,11 +415,11 @@
                             <td style="padding-right: 30px;"><img src="/img/5.png"/></td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px">状态：良</td>
-                            <td style="font-size: 12px" id="ctrlstatus">状态：良</td>
-                            <td style="font-size: 12px">状态：良</td>
-                            <td style="font-size: 12px">状态：良</td>
-                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px;color: #000000">状态：良</td>
+                            <td style="font-size: 12px;color: #000000" id="ctrlstatus">状态：良</td>
+                            <td style="font-size: 12px;color: #000000">状态：良</td>
+                            <td style="font-size: 12px;color: #000000">状态：良</td>
+                            <td style="font-size: 12px;color: #000000">状态：良</td>
                         </tr>
                         <tr style="height: 18px;"></tr>
                         <tr>
@@ -429,11 +430,11 @@
                             <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px">状态：良</td>
-                            <td style="font-size: 12px">状态：良</td>
-                            <td style="font-size: 12px">状态：良</td>
-                            <td style="font-size: 12px">状态：良</td>
-                            <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px;color: #000000">状态：良</td>
+                            <td style="font-size: 12px;color: #000000">状态：良</td>
+                            <td style="font-size: 12px;color: #000000">状态：良</td>
+                            <td style="font-size: 12px;color: #000000">状态：良</td>
+                            <td style="font-size: 12px;color: #000000">状态：良</td>
                         </tr>
                     </table>
                 </div>
