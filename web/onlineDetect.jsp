@@ -260,7 +260,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <button value="V" class="btn btn-default">3V</button>
                                     </li>
                                     <li>
-                                        <button value="I" class="btn btn-default">3A</button>
+                                        <button value="A" class="btn btn-default">3A</button>
                                     </li>
                                    <%-- <li>
                                         <button value="1" class="btn btn-default">L1</button>
@@ -280,7 +280,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                         </div>
                     </div>
-                    <div id = "item4" style="height: 600px;">
+                    <div id ="item4" style="height: 600px;">
                         <div class="row">
                             <div class="col-md-3 col-md-offset-1 col-xs-12">
                                 <table id="params-basic" class="table table-bordered">
@@ -1450,9 +1450,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         // 更新趋势图
         function updateQst(data) {
-
-            //console.log("updateQst:"+data);
-
             eventChart1.setOption({
                 dataset: {source: data}
             });
@@ -1764,33 +1761,69 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var value = $("#item3-sidebar ol li button.active").attr("value");
 
             switch (value) {
-                case "U" :
-                case "V" :
-                case "I" : {
+                case "U" : {
                     // 更新幅值
-                    $("#item3-text-name1").html(value + "1");
-                    $("#item3-text-value1").html(data[value.toLowerCase() + "1"].toFixed(2));
-                    $("#item3-text-name2").html(value + "2");
-                    $("#item3-text-value2").html(data[value.toLowerCase() + "2"].toFixed(2));
-                    $("#item3-text-name3").html(value + "3");
-                    $("#item3-text-value3").html(data[value.toLowerCase() + "3"].toFixed(2));
+                    $("#item3-text-name1").html("U1");
+                    $("#item3-text-value1").html(data["u1"].toFixed(2));
+                    $("#item3-text-name2").html("U2");
+                    $("#item3-text-value2").html(data["u2"].toFixed(2));
+                    $("#item3-text-name3").html("U3");
+                    $("#item3-text-value3").html(data["u3"].toFixed(2));
 
                     // 更新unb
-                    //I -> A
-                    if (value == "I") {
-                        $("#item3-text-nameunb").html("Aunb");
-                        $("#item3-text-valueunb").html(data["aunb"].toFixed(2));
-                    } else {
-                        $("#item3-text-nameunb").html(value + "unb");
-                        $("#item3-text-valueunb").html(data[value.toLowerCase() + "unb"].toFixed(2));
-                    }
+                    $("#item3-text-nameunb").html("Uunb");
+                    $("#item3-text-valueunb").html(data["uunb"].toFixed(2));
 
                     // 更新相位差
                     $("#item3-text ol.diff").show();
 
-                    $("#item3-text-diff1").html(data["angle" + value + "1"].toFixed(2));
-                    $("#item3-text-diff2").html(data["angle" + value + "2"].toFixed(2));
-                    $("#item3-text-diff3").html(data["angle" + value + "3"].toFixed(2));
+                    $("#item3-text-diff1").html(data["angleU1"].toFixed(2));
+                    $("#item3-text-diff2").html(data["angleU2"].toFixed(2));
+                    $("#item3-text-diff3").html(data["angleU3"].toFixed(2));
+
+                    break;
+                }
+                case "V" : {
+                    // 更新幅值
+                    $("#item3-text-name1").html("V1");
+                    $("#item3-text-value1").html(data["v1"].toFixed(2));
+                    $("#item3-text-name2").html("V2");
+                    $("#item3-text-value2").html(data["v2"].toFixed(2));
+                    $("#item3-text-name3").html("V3");
+                    $("#item3-text-value3").html(data["v3"].toFixed(2));
+
+                    // 更新unb
+                    $("#item3-text-nameunb").html("Vunb");
+                    $("#item3-text-valueunb").html(data["vunb"].toFixed(2));
+
+                    // 更新相位差
+                    $("#item3-text ol.diff").show();
+
+                    $("#item3-text-diff1").html(data["angleV1"].toFixed(2));
+                    $("#item3-text-diff2").html(data["angleV2"].toFixed(2));
+                    $("#item3-text-diff3").html(data["angleV3"].toFixed(2));
+
+                    break;
+                }
+                case "A" : {
+                    // 更新幅值
+                    $("#item3-text-name1").html("I1");
+                    $("#item3-text-value1").html(data["i1"].toFixed(2));
+                    $("#item3-text-name2").html("I2");
+                    $("#item3-text-value2").html(data["i2"].toFixed(2));
+                    $("#item3-text-name3").html("I3");
+                    $("#item3-text-value3").html(data["i3"].toFixed(2));
+
+                    // 更新unb
+                    $("#item3-text-nameunb").html("Aunb");
+                    $("#item3-text-valueunb").html(data["aunb"].toFixed(2));
+
+                    // 更新相位差
+                    $("#item3-text ol.diff").show();
+
+                    $("#item3-text-diff1").html(data["angleI1"].toFixed(2));
+                    $("#item3-text-diff2").html(data["angleI2"].toFixed(2));
+                    $("#item3-text-diff3").html(data["angleI3"].toFixed(2));
 
                     break;
                 }
@@ -1823,7 +1856,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3-text ol.diff").hide();
                     break;
                 }*/
-                }
                 default : {
                 }
             }
@@ -1848,16 +1880,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var rt2 = obj.nowpoweruunb;
 
                     updateParams(rt1, rt2);
-                    var rt = obj.nowpowerparm;
-                    updateParams(rt);
                 }
             })
         }
         // 更新参数值表格
         function updateParams(data, data2) {
-
-            console.log(data2);
-        function updateParams(data) {
 
             $("#params-basic").html(
                 "<caption>基本参数</caption>"+
@@ -1882,7 +1909,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $("#params-unb").html(
                 "<caption>&nbsp;</caption>"+
                 "<tr><th>不平衡度</th><td>"+data2.toFixed(2)+"</td></tr>"+
-               /* "<tr><th>不平衡度</th><td>"+data["unb"].toFixed(2)+"</td></tr>"+*/
                 "<tr><th>频率</th><td>"+data["hz"].toFixed(2)+"</td></tr>"
             );
             $("#params-shanbian").html(
