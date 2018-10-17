@@ -1,5 +1,6 @@
 package hibernatePOJO;
 
+import javax.annotation.Generated;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -20,7 +21,7 @@ public class EventCtrl {
     private Integer subtype;
 
     @Id
-    @Column(name = "teid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getTeid() {
         return teid;
     }

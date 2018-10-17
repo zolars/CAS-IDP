@@ -73,8 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     })
                 </script>
 
-                <select class="form-control location-select-item" id="city_code" name="city_code"
-                        onchange="getComproom()">
+                <select class="form-control location-select-item" id="city_code" name="city_code">
                     <option value="">请选择</option>
                 </select>
 
@@ -82,6 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#city_code").change(function(){
                         var options = $("#city_code option:selected");
                         $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                        getCity();
                     })
 
                 </script>
@@ -94,6 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#comproom_code").change(function(){
                         var options = $("#comproom_code option:selected");
                         $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
+                        getComproom();
                     })
                 </script>
 

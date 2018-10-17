@@ -45,7 +45,7 @@ public class getOneCtrlDataAction extends ActionSupport {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "error";
+            return "failure";
         }
         return "success";
     }

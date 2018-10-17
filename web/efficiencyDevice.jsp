@@ -71,8 +71,7 @@
         <div class="media-body">
             <div class="media" id="top-menu">
                 <div class="pull-left location-select">
-                    <select class="form-control location-select-item" id="province_code" name="province_code"
-                            onchange="getCity()">
+                    <select class="form-control location-select-item" id="province_code" name="province_code">
                         <option value="">请选择</option>
                     </select>
 
@@ -80,11 +79,11 @@
                         $("#province_code").change(function(){
                             var options = $("#province_code option:selected");
                             $. cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                            getCity();
                         })
                     </script>
 
-                    <select class="form-control location-select-item" id="city_code" name="city_code"
-                            onchange="getComproom()">
+                    <select class="form-control location-select-item" id="city_code" name="city_code">
                         <option value="">请选择</option>
                     </select>
 
@@ -92,6 +91,7 @@
                         $("#city_code").change(function(){
                             var options = $("#city_code option:selected");
                             $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                            getComproom();
                         })
 
                     </script>
