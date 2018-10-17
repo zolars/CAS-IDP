@@ -26,7 +26,7 @@ public class Sms {
 
         String Command3 = "AT+S" + String.valueOf(symbol1);
 
-        String Command5 = "AT+SMSEND='" + commonsms.getRecver() + "',3,'" + commonsms.getSmstext() + "'" + String.valueOf(symbol1);
+        String Command5 = "AT+SMSEND=\"" + commonsms.getRecver() + "\",3,\"" + commonsms.getSmstext() + "\"" + String.valueOf(symbol1);
 
         try {
             String Return2 = myport.sendAT(Command2);
@@ -37,19 +37,19 @@ public class Sms {
 
                 if (Return3.indexOf("OK", 0) != -1) {
                     System.out.println("AT+S 成功");
-                    Thread.sleep(30000);  //设备重启时间，暂定为30s
+                    Thread.sleep(30000);  //设备重启时间，暂定为3s
                     String Return5 = myport.sendAT(Command5);
 
                     if (Return5.indexOf("OK", 0) != -1) {
-                        System.out.println("发送短信 成功");
+                        System.out.println("发送短信 成功" + Return5);
                     } else {
-                        System.out.println("发送短信 失败");
+                        System.out.println("发送短信 失败" + Return5);
                     }
                 } else {
-                    System.out.println("AT+S 失败;" + "发送短信失败");
+                    System.out.println("AT+S 失败;");
                 }
             }  else {
-                System.out.println("AT+WKMOD=cmd 失败;" + "发送短信失败");
+                System.out.println("AT+WKMOD=cmd 失败;");
             }
 
         } catch (RemoteException e) {

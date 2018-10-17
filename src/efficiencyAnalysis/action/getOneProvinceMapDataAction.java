@@ -11,11 +11,8 @@ import userManage.dao.ProvinceDAO;
 import userManage.dao.impl.ProvinceDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class getOneProvinceMapDataAction extends ActionSupport {
@@ -36,7 +33,6 @@ public class getOneProvinceMapDataAction extends ActionSupport {
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String pname = request.getParameter("pname");
