@@ -78,11 +78,13 @@ public class DataOnline {
         var.setPf2(dataset.get("PF2"));
         var.setPf3(dataset.get("PF3"));
         var.setpFsum(dataset.get("PFsum"));
-        /*22-25四项存的是三项电压电流的不平衡度，未定用零序还是负序
+        /*22-25四项存的是三项电压电流的不平衡度，用负序
          */
         varsxdy.setUunb(dataset.get("Uunb"));
-        //数据库字段有重名是否已经修改？
+        //varsxdy.setUunb(dataset.get("Uunbzero"));
+        varsxdy.setVunb(dataset.get("Vunb"));
         varsxdy.setAunb(dataset.get("Aunb"));
+
         //U1谐波
         varxb.setU1Xb1(dataset.get("U1xb_1"));
         varxb.setU1Xb2(dataset.get("U1xb_2"));
@@ -406,20 +408,29 @@ public class DataOnline {
         var.setPltU2(dataset.get("Plt_U2"));
         var.setPltU3(dataset.get("Plt_U3"));
 
-        Float angleu1 = dataset.get("PHI_U1") + 360;
-        Float angleu2 = dataset.get("PHI_U2") + 360;
-        Float angleu3 = dataset.get("PHI_U3") + 360;
+        //输入总谐波畸变率相关
+        var.setThdu1(dataset.get("THDU1"));
+        var.setThdu2(dataset.get("THDU2"));
+        var.setThdu3(dataset.get("THDU3"));
+        var.setThdi1(dataset.get("THDI1"));
+        var.setThdi2(dataset.get("THDI2"));
+        var.setThdi3(dataset.get("THDI3"));
 
-        Float anglei1 = dataset.get("PHI_I1") + 360;
-        Float anglei2 = dataset.get("PHI_I2") + 360;
-        Float anglei3 = dataset.get("PHI_I3") + 360;
+        Float angleu1 = dataset.get("PHI_U1");
+        Float angleu2 = dataset.get("PHI_U2");
+        Float angleu3 = dataset.get("PHI_U3");
 
-        varsxdy.setAngleU1(angleu1 % 360);
-        varsxdy.setAngleU2(angleu2 % 360);
-        varsxdy.setAngleU3(angleu3 % 360);
-        varsxdy.setAngleI1(anglei1 % 360);
-        varsxdy.setAngleI2(anglei2 % 360);
-        varsxdy.setAngleI3(anglei3 % 360);
+        Float anglei1 = dataset.get("PHI_I1");
+        Float anglei2 = dataset.get("PHI_I2");
+        Float anglei3 = dataset.get("PHI_I3");
+
+
+        varsxdy.setAngleU1((angleu1 % 360));
+        varsxdy.setAngleU2((angleu2 % 360));
+        varsxdy.setAngleU3((angleu3 % 360));
+        varsxdy.setAngleI1((anglei1 % 360));
+        varsxdy.setAngleI2((anglei2 % 360));
+        varsxdy.setAngleI3((anglei3 % 360));
 
         //U1谐波含有率
 

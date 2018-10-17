@@ -3,17 +3,12 @@ package onlineTest.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import grabData.DataOnline;
-import hibernatePOJO.PowerparmMonitor;
-import hibernatePOJO.PowerxbMonitor;
 import onlineTest.dao.RMSDAO;
-import onlineTest.dao.Vh;
 import onlineTest.dao.impl.RMSDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,7 +29,7 @@ public class getQstaction extends ActionSupport {
     /* 根据监测点获取趋势图数据
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
@@ -46,12 +41,11 @@ public class getQstaction extends ActionSupport {
 
             JSONObject jsonObject = new JSONObject();
 
-            // 5 records
-            ((RMSDAOImpl) rmsdao).getCurrentData(did);
+            // 1 records
             //getQstRMS
             List qstdata = rmsdao.getCurrentRMSData(did);
             //getQstTHD
-            List thddata = rmsdao.getCurrentTHDData();
+            List thddata = rmsdao.getCurrentTHDData(did);
             //getQstHZ
             List hzdata = rmsdao.getCurrentHzData(did);
             //getQstUNB%
@@ -74,7 +68,7 @@ public class getQstaction extends ActionSupport {
             List pltdata = rmsdao.getCurrentPltData(did);
 
             // PowerparmMonitor pp = DataOnline.getParmMap().get(did);
-           // PowerxbMonitor pxb = DataOnline.getXbMap().get(did);
+            // PowerxbMonitor pxb = DataOnline.getXbMap().get(did);
 
             jsonObject.put("allRMS", qstdata);
             jsonObject.put("allTHD", thddata);
