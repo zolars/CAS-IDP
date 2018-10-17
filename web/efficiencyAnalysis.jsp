@@ -1757,15 +1757,18 @@
                         var liststr = list[i].split(",");
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
-                        var type = liststr[2];
-                        var time = liststr[3];
+                        var location = liststr[2];
+                        var type = liststr[3];
                         var description = liststr[4];
-                        var duration = liststr[5];
-                        var deepth = liststr[6];
-                        var annotation = liststr[7];
-                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        var signature = liststr[7];
+                        var annotationstr = liststr[8];
+                        var annotation = annotationstr.split("]");
                         if (signature == " null")
                             signature = "";
+                        if (annotation[0] == " null")
+                            annotation[0] = "";
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
