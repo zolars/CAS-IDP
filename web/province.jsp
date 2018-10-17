@@ -17,7 +17,6 @@
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
-
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap-3.3.4.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/animate.min.css">
@@ -41,7 +40,36 @@
     <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
     <style>
         .datetimepicker {
-            background: black!important;
+            background: black !important;
+        }
+
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+        }
+
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .file:hover {
+            background: #AADFFD;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
         }
     </style>
 
@@ -83,14 +111,13 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-       <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
+        <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
         <img src="/img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
             <div class="pull-left location-select">
-                <select class="form-control location-select-item" id="province_code" name="province_code"
-                        onchange="getCity()">
+                <select class="form-control location-select-item" id="province_code" name="province_code">
                     <option value="">未指定</option>
                 </select>
 
@@ -98,11 +125,11 @@
                     $("#province_code").change(function () {
                         var options = $("#province_code option:selected");
                         $.cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                        getCity();
                     })
                 </script>
 
-                <select class="form-control location-select-item" id="city_code" name="city_code"
-                        onchange="getComproom()">
+                <select class="form-control location-select-item" id="city_code" name="city_code">
                     <option value="">未指定</option>
                 </select>
 
@@ -110,6 +137,7 @@
                     $("#city_code").change(function () {
                         var options = $("#city_code option:selected");
                         $.cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                        getComproom();
                     })
 
                 </script>
@@ -209,8 +237,9 @@
                                     compname: options.text()
                                 },
                                 dataType: "json",
-                                success: function (data) {
-                                    $("#ctrlstatus").attr("value","警");
+                                success: function () {
+                                    $("#ctrlstatus").attr("value", "状态：告警");
+                                    document.getElementById("ctrlstatus").innerHTML = "状态：告警";
                                 }
                             });
 
@@ -280,7 +309,9 @@
                                 <input type="hidden" id="dtp_input2" value=""/><br/>
                             </div>
                             <!-- 刷新按钮 -->
-                            <button id="refresh-btn" class="btn-primary" data-loading-text="Loading..." type="button"> 刷新</button>
+                            <button id="refresh-btn" class="btn-primary" data-loading-text="Loading..." type="button">
+                                刷新
+                            </button>
                         </fieldset>
 
                     </form>
@@ -331,7 +362,7 @@
                     </table>
                 </div>
             </div>
-
+            uo
             <div class="row">
                 <div id="nxbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
                 </div>
@@ -348,7 +379,7 @@
         <div id="second-page">
 
             <div class="row">
-
+                <!--上传并显示图片-管理员专属-->
                 <div class="col-md-2 col-xs-6 chart-item"
                      style="
                          width: 30%;
@@ -357,13 +388,22 @@
                          user-select: none;
                          position: relative;
                      ">
-                    <img id="preview" alt="" width="507px;" height="175px;"/>
-                    <form class="am-form" method="post" enctype="multipart/form-data">
-                        <input type="file" id="head" name="head" onchange="previewImage(this)">
+
+                    <img id="preview" src="/upload/ElectricSystemImg.jpg" alt="" width="507px;" height="175px;"/>
+                    <form action="uploadOne" method="post" enctype="multipart/form-data">
+                        <a class="file">选择文件
+                            <input type="file" name="uploadFile" onchange="uploadImage(this)">
+                        </a>
+                        <a id="submit" style="display:none;" class="file">上传
+                            <input type="submit">
+                        </a>
                     </form>
+
+
                 </div>
 
-                <div id="devicebar" class="col-md-2 col-xs-6 chart-item" style="width: 30%; height: 200px; text-align:center">
+                <div id="devicebar" class="col-md-2 col-xs-6 chart-item"
+                     style="width: 30%; height: 200px; text-align:center">
                     <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0">
                         <tr style="height: 8px;"></tr>
                         <tr>
@@ -374,8 +414,8 @@
                             <td style="padding-right: 30px;"><img src="/img/5.png"/></td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px" id="ctrlstatus">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
+                            <td style="font-size: 12px" id="ctrlstatus">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
                             <td style="font-size: 12px">状态：良</td>
@@ -551,6 +591,25 @@
     var humidChart = echarts.init(document.getElementById('humidbar'));
     var panelChart = echarts.init(document.getElementById('panelbar'));
 
+
+    window.onresize = function () {
+        $("#eventChart").width($('#eventbar').width());
+        $("#alarmChart").width($('#alarmbar').width());
+        $("#nxChart").width($('#nxbar').width());
+        $("#nhChart").width($('#nhbar').width());
+        $("#tempChart").width($('#tempbar').width());
+        $("#humidChart").width($('#humidbar').width());
+        $("#panelChart").width($('#panelbar').width());
+
+        eventChart.resize();
+        alarmChart.resize();
+        nxChart.resize();
+        nhChart.resize();
+        tempChart.resize();
+        humidChart.resize();
+        panelChart.resize();
+    };
+
     var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
     var pname = decodeURI(provinceidc[1]);
 
@@ -563,7 +622,7 @@
     getOneProvinceMapData(pname, stime, etime);
 
     //获取事件、告警、评估等级
-    function getOneProvinceMapData(pname, stime, etime){
+    function getOneProvinceMapData(pname, stime, etime) {
         $.ajax({
             type: "post",
             url: "getOneProvinceMapData",
@@ -681,7 +740,7 @@
 
                 //指定仪表盘的图表的配置项和数据
                 var paneloption = {
-                    tooltip : {
+                    tooltip: {
                         formatter: "{a} <br/>{b} : {c}%"
                     },
                     series: [
@@ -690,25 +749,25 @@
                             type: 'gauge',
                             min: 1,
                             max: 3,
-                            detail: {formatter:'{value}'},
+                            detail: {formatter: '{value}'},
                             data: [{value: degree[0], name: '评估等级'}]
                         }
                     ]
                 };
 
                 //指定评估结果块的数据
-                for(var i = 0; i < xdata.length; i++){
-                    if(degree[i] == '1'){
-                        $("#r1t"+i).attr("src","/img/icon/GOOD.png");
+                for (var i = 0; i < xdata.length; i++) {
+                    if (degree[i] == '1') {
+                        $("#r1t" + i).attr("src", "/img/icon/GOOD.png");
                     }
-                    if(degree[i] == '2'){
-                        $("#r1t"+i).attr("src","/img/icon/NORMAL.png");
+                    if (degree[i] == '2') {
+                        $("#r1t" + i).attr("src", "/img/icon/NORMAL.png");
                     }
-                    if(degree[i] == '3'){
-                        $("#r1t"+i).attr("src","/img/icon/BAD.png");
+                    if (degree[i] == '3') {
+                        $("#r1t" + i).attr("src", "/img/icon/BAD.png");
                     }
 
-                    document.getElementById("r2t"+i).innerHTML = xdata[i];
+                    document.getElementById("r2t" + i).innerHTML = xdata[i];
                 }
 
                 // 使用刚指定的配置项和数据显示图表。
@@ -724,9 +783,9 @@
     //获取当前日期前adddaycount天时间
     function getFormatDate(AddDayCount) {
         var dd = new Date();
-        dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+        dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
         var y = dd.getFullYear();
-        var m = dd.getMonth()+1;//获取当前月份的日期
+        var m = dd.getMonth() + 1;//获取当前月份的日期
         var d = dd.getDate();
         var h = dd.getHours();
         var minute = dd.getMinutes();
@@ -830,27 +889,35 @@
 <!-- 上传图片功能 -->
 <script>
     // 上传图片前预览
-    function previewImage(file) {
-        var MAXWIDTH = 1200;  // 最大图片宽度
-        var MAXHEIGHT = 360;  // 最大图片高度
-        if (file.files && file.files[0]) {
-            var img = document.getElementById('preview');
-            img.onload = function () {
-                var rect = getZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
-                img.width = rect.width;
-                img.height = rect.height;
-            };
-            var reader = new FileReader();
-            reader.onload = function (evt) {
-                img.src = evt.target.result;
-            };
-            reader.readAsDataURL(file.files[0]);
-        } else {
-            //兼容IE
-            file.select();
-            var src = document.selection.createRange().text;
-            var img = document.getElementById('preview');
-            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+    function uploadImage(file) {
+        $("#submit").css('display', 'inline-block');
+        var userrole = "<%=session.getAttribute("userrole")%>";
+        if (userrole === "1") {
+            var MAXWIDTH = 1200;  // 最大图片宽度
+            var MAXHEIGHT = 360;  // 最大图片高度
+            if (file.files && file.files[0]) {
+                var img = document.getElementById('preview');
+                img.onload = function () {
+                    var rect = getZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                    img.width = rect.width;
+                    img.height = rect.height;
+                };
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    img.src = evt.target.result;
+                };
+                reader.readAsDataURL(file.files[0]);
+            } else {
+                //兼容IE
+                alert("您的浏览器版本过低, 可能会出现一些页面bug.");
+                file.select();
+                var src = document.selection.createRange().text;
+                var img = document.getElementById('preview');
+                img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            }
+        }
+        else {
+            alert("抱歉, 您没有权限进行此操作, 请联系管理员!")
         }
     }
 

@@ -35,7 +35,7 @@ public class MyListener implements ServletContextListener {
                 // diclist为第一个字典，dicpluslist为第二个索引字典
                 DataOnline.setDic(hbSessionDao.search("FROM Dictionary"));
                 DataOnline.setDicPlus(hbSessionDao.search("FROM DictionaryPlus"));
-                CtrlSave.setDic(hbSessionDao.search("FROM DictionaryCtrl"));
+                // CtrlSave.setDic(hbSessionDao.search("FROM DictionaryCtrl"));
 
                 // 从数据库取基础配置信息(采集频率、上传频率)
                 List<BasicSetting> listbase = hbSessionDao.search("FROM BasicSetting");
@@ -107,7 +107,7 @@ public class MyListener implements ServletContextListener {
                                         "DataOnlineSaveTriggerGroup")
                                 .startNow()
                                 .withSchedule(simpleSchedule().withIntervalInSeconds(listbase.get(0)
-                                                .getOnlineinterval())
+                                        .getOnlineinterval())
                                         .repeatForever())
                                 .build();
                         JobDetail job1 = newJob(DataOnlineSaveJob.class).withIdentity(
@@ -136,7 +136,7 @@ public class MyListener implements ServletContextListener {
                                         "uploadDataTriggerGroup")
                                 .startNow()
                                 .withSchedule(simpleSchedule().withIntervalInHours(listbase.get(0)
-                                                .getUploadinterval())
+                                        .getUploadinterval())
                                         .repeatForever())
                                 .build();
                         JobDetail job3 = newJob(uploadDataToCenterSvrJob.class)
@@ -188,11 +188,11 @@ public class MyListener implements ServletContextListener {
                                 .withIdentity("CtrlSaveTrigger",
                                         "CtrlSaveTriggerGroup")
                                 .startNow()
-                                .withSchedule(simpleSchedule().withIntervalInSeconds(5).repeatForever()).build();
+                                .withSchedule(simpleSchedule().withIntervalInSeconds(60).repeatForever()).build();
                         JobDetail job7 = newJob(CtrlSaveJob.class).withIdentity(
                                 "CtrlSaveJob", "CtrlSaveGroup").build();
                         scheduler.scheduleJob(job7, trigger7);
-
+/*
                         // 设置任务，每1h写入设备阈值设置
                         Trigger trigger8 = newTrigger()
                                 .withIdentity("ThresholdSaveTrigger",
@@ -202,7 +202,7 @@ public class MyListener implements ServletContextListener {
                         JobDetail job8 = newJob(CtrlSaveJob.class).withIdentity(
                                 "ThresholdSaveJob", "ThresholdSaveGroup").build();
                         scheduler.scheduleJob(job8, trigger8);
-
+*/
                         // 设置任务，根据设定每多少分钟发一次越线事件请求
                         OverLimitUtil.setInterval(listbase.get(0).getThansentinterval());
                         Trigger trigger9 = newTrigger()

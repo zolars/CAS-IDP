@@ -5,8 +5,8 @@
       <configuration>
         <datasource-map>
           <unit-entry name="a.xml" value="1ecb4362-1495-4547-a652-2f68ab666262" />
-          <unit-entry name="db_center" value="2a486cc8-51b3-4fb3-a9c5-e245eb34f02d" />
-          <unit-entry name="db_local" value="1ecb4362-1495-4547-a652-2f68ab666262" />
+          <unit-entry name="db_center" value="b49d09b3-b75f-46f0-92d4-715e05fa8b60" />
+          <unit-entry name="db_local" value="b49d09b3-b75f-46f0-92d4-715e05fa8b60" />
           <unit-entry name="hibernate.cfg.xml" value="eb253fd1-ac3b-4741-b2fa-f1b6b9f49f31" />
         </datasource-map>
         <naming-strategy-map />

@@ -10,44 +10,40 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 
-public class TempDataClient extends Thread{
+public class TempDataClient extends Thread {
     private String host;
     private int port;
     private String did;
 
-    public TempDataClient(String host, int port, String did){
-        this.host=host;
-        this.port=port;
-        this.did=did;
+    public TempDataClient(String host, int port, String did) {
+        this.host = host;
+        this.port = port;
+        this.did = did;
         System.out.println(host + port + did);
     }
+
     @Override
-    public void run(){
+    public void run() {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-        try{
+        try {
             Bootstrap b = new Bootstrap();
             b.group(workerGroup);
             b.channel(NioSocketChannel.class);
             b.option(ChannelOption.SO_KEEPALIVE, Boolean.valueOf(true));
-            b.handler(new ChannelInitializer<SocketChannel>()
-            {
+            b.handler(new ChannelInitializer<SocketChannel>() {
                 public void initChannel(SocketChannel ch)
-                        throws Exception
-                {
+                        throws Exception {
 
                     ch.pipeline().addLast(new TempDataClientHandler(did));
-                    //System.out.println("HANDLER-BUILT#####################################");
+                    System.out.println("TEMP-HANDLER-BUILT#####################################");
 
                 }
             });
             ChannelFuture f = b.connect(host, port).sync();
             f.channel().closeFuture().sync();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             workerGroup.shutdownGracefully();
         }
     }

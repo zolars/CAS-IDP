@@ -7,6 +7,9 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
     <constant name="struts.devMode" value="true"></constant>
     <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <constant name="struts.custom.i18n.resources" value="messageResource"/>
+    <constant name="struts.multipart.maxSize" value="1924102400"/>
+    <constant name="struts.multipart.saveDir" value="e:/test"></constant>
 
     <package name="struts-interceptor" extends="struts-default"
              namespace="/">
@@ -764,6 +767,21 @@
              <result name="success" type="json">
                  <param name="root">result</param>
              </result>
+         </action>
+
+         <action name="uploadOne" class="Util.UploadImageAction" >
+             <!-- 限制图片的格式和图片的大小 -->
+             <interceptor-ref name="fileUpload">
+                 <param name="allowedTypes">
+                     image/bmp,image/png,image/gif,image/jpeg,image/jpg
+                 </param>
+                 <param name="maximumSize">1024000000</param>
+             </interceptor-ref>
+             <!-- 默认的拦截器，必须要写 -->
+             <interceptor-ref name="defaultStack" />
+
+             <result name="success">/province.jsp</result>
+             <result name="input">/failure.jsp</result>
          </action>
 
      </package>

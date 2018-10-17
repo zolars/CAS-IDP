@@ -29,15 +29,12 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("Temp建立连接");
 
-        // String address = ctx.channel().remoteAddress().toString().replace("/", "");
-        // System.out.println("ip+端口为：" + address + "开始建立通讯");
-
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(1,3,1,2));
+        sendMsg.writeBytes(createMsg(1, 3, 1, 2));
         // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
-}
+    }
 
 
     @Override
@@ -72,8 +69,8 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
         // return;
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        sendMsg.writeBytes(createMsg(1,3,1,2));
-        // System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
+        sendMsg.writeBytes(createMsg(1, 3, 1, 2));
+        System.out.println("TempSend:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
@@ -85,7 +82,7 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     //readLength单位是2字节
-    public byte[] createMsg(int slaveId,int functionCode,int address,int readLength){
+    public byte[] createMsg(int slaveId, int functionCode, int address, int readLength) {
         byte[] msg = new byte[12];
         msg[0] = 0;
         msg[1] = 0;
@@ -93,12 +90,12 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
         msg[3] = 0;
         msg[4] = 0;
         msg[5] = 6;
-        msg[6] = ((byte)slaveId);
-        msg[7] = ((byte)functionCode);
-        msg[8] = ((byte)(address >> 8));
-        msg[9] = ((byte)(address & 0xFF));
-        msg[10] = ((byte)(readLength >> 8));
-        msg[11] = ((byte)(readLength & 0xFF));
+        msg[6] = ((byte) slaveId);
+        msg[7] = ((byte) functionCode);
+        msg[8] = ((byte) (address >> 8));
+        msg[9] = ((byte) (address & 0xFF));
+        msg[10] = ((byte) (readLength >> 8));
+        msg[11] = ((byte) (readLength & 0xFF));
         return msg;
     }
 
