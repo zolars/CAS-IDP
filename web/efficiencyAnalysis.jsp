@@ -268,16 +268,7 @@
                                                     <table border="1" class="display" id="power-event"
                                                            style="width:100%;">
                                                         <thead>
-                                                        <tr>
-                                                            <th style="width:60px;"></th>
-                                                            <th style="width:60px;">事件名称</th>
-                                                            <th style="width:60px;">位置</th>
-                                                            <th style="width:60px;">事件类型</th>
-                                                            <th style="width:60px;">事件描述</th>
-                                                            <th style="width:60px;">事件发生时间</th>
-                                                            <th style="width:60px;">签名</th>
-                                                            <th style="width:60px;">注释</th>
-                                                        </tr>
+                                                        <tr id="power-event-thead"></tr>
                                                         </thead>
                                                         <tbody id="power-event-tbody">
                                                         </tbody>
@@ -1017,6 +1008,7 @@
     })
 </script>
 
+
 <!-- 切换子菜单subItem效果-->
 <script type="text/javascript">
     $(function () {
@@ -1040,12 +1032,23 @@
     if (localStorage.getItem("visibleColumn")) {
         tableData = JSON.parse(localStorage.getItem("visibleColumn"));
     }
+
+    var thead0 = $("#power-event-thead")[0];
     var thead1 = $("#power-event-detail-thead-1-tr")[0];
     var thead2 = $("#power-event-detail-thead-2-tr")[0];
     var thead3 = $("#power-event-detail-thead-3-tr")[0];
     var thead4 = $("#power-event-detail-thead-4-tr")[0];
     var thead5 = $("#power-event-detail-thead-5-tr")[0];
+
+    thead0.innerHTML += ('<th style="width:30px;"></th>');
+    thead1.innerHTML += ('<th style="width:30px;"></th>');
+    thead2.innerHTML += ('<th style="width:30px;"></th>');
+    thead3.innerHTML += ('<th style="width:30px;"></th>');
+    thead4.innerHTML += ('<th style="width:30px;"></th>');
+    thead5.innerHTML += ('<th style="width:30px;"></th>');
+
     tableData.forEach(function (item) {
+        thead0.innerHTML += ('<th>' + item.name + '</th>');
         thead1.innerHTML += ('<th>' + item.name + '</th>');
         thead2.innerHTML += ('<th>' + item.name + '</th>');
         thead3.innerHTML += ('<th>' + item.name + '</th>');
@@ -1155,11 +1158,18 @@
                         var name = liststr[1];
                         var type = liststr[2];
                         var time = liststr[3];
+                        var description = liststr[4];
                         var duration = liststr[5];
-                        var discription = liststr[6];
+                        var deepth = liststr[6];
                         var annotation = liststr[7];
-                        var signature = liststr[8];
-                        var newLine = '<tr>'
+                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        if (signature == " null")
+                            signature = "";
+                        var newLine = '<tr>';
+
+                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
+                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
+
                         tableData.forEach(function (item) {
                             if (item.name === "测量名称") {
                                 newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
@@ -1167,18 +1177,26 @@
                                 newLine += ('<td style="padding-left:60px;">' + time + '</td>')
                             } else if (item.name === "类型") {
                                 newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "事件描述") {
+                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
+                            } else if (item.name === "位置") {
+                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
                             } else if (item.name === "触发相位") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "时间长短") {
                                 newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
                             } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
                             } else if (item.name === "方向") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "评论") {
                                 newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
                             } else if (item.name === "签名") {
                                 newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
                             } else if (item.name === "触发水平") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "中有波形数据") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             }
                         });
                         newLine += '</tr>';
@@ -1207,11 +1225,18 @@
                         var name = liststr[1];
                         var type = liststr[2];
                         var time = liststr[3];
+                        var description = liststr[4];
                         var duration = liststr[5];
-                        var discription = liststr[6];
+                        var deepth = liststr[6];
                         var annotation = liststr[7];
-                        var signature = liststr[8];
-                        var newLine = '<tr>'
+                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        if (signature == " null")
+                            signature = "";
+                        var newLine = '<tr>';
+
+                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
+                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
+
                         tableData.forEach(function (item) {
                             if (item.name === "测量名称") {
                                 newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
@@ -1219,18 +1244,26 @@
                                 newLine += ('<td style="padding-left:60px;">' + time + '</td>')
                             } else if (item.name === "类型") {
                                 newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "事件描述") {
+                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
+                            } else if (item.name === "位置") {
+                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
                             } else if (item.name === "触发相位") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "时间长短") {
                                 newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
                             } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
                             } else if (item.name === "方向") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "评论") {
                                 newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
                             } else if (item.name === "签名") {
                                 newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
                             } else if (item.name === "触发水平") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "中有波形数据") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             }
                         });
                         newLine += '</tr>';
@@ -1259,11 +1292,18 @@
                         var name = liststr[1];
                         var type = liststr[2];
                         var time = liststr[3];
+                        var description = liststr[4];
                         var duration = liststr[5];
-                        var discription = liststr[6];
+                        var deepth = liststr[6];
                         var annotation = liststr[7];
-                        var signature = liststr[8];
-                        var newLine = '<tr>'
+                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        if (signature == " null")
+                            signature = "";
+                        var newLine = '<tr>';
+
+                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
+                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
+
                         tableData.forEach(function (item) {
                             if (item.name === "测量名称") {
                                 newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
@@ -1271,18 +1311,26 @@
                                 newLine += ('<td style="padding-left:60px;">' + time + '</td>')
                             } else if (item.name === "类型") {
                                 newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "事件描述") {
+                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
+                            } else if (item.name === "位置") {
+                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
                             } else if (item.name === "触发相位") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "时间长短") {
                                 newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
                             } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
                             } else if (item.name === "方向") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "评论") {
                                 newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
                             } else if (item.name === "签名") {
                                 newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
                             } else if (item.name === "触发水平") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "中有波形数据") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             }
                         });
                         newLine += '</tr>';
@@ -1311,11 +1359,18 @@
                         var name = liststr[1];
                         var type = liststr[2];
                         var time = liststr[3];
+                        var description = liststr[4];
                         var duration = liststr[5];
-                        var discription = liststr[6];
+                        var deepth = liststr[6];
                         var annotation = liststr[7];
-                        var signature = liststr[8];
-                        var newLine = '<tr>'
+                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        if (signature == " null")
+                            signature = "";
+                        var newLine = '<tr>';
+
+                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
+                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
+
                         tableData.forEach(function (item) {
                             if (item.name === "测量名称") {
                                 newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
@@ -1323,18 +1378,26 @@
                                 newLine += ('<td style="padding-left:60px;">' + time + '</td>')
                             } else if (item.name === "类型") {
                                 newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "事件描述") {
+                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
+                            } else if (item.name === "位置") {
+                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
                             } else if (item.name === "触发相位") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "时间长短") {
                                 newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
                             } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
                             } else if (item.name === "方向") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "评论") {
                                 newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
                             } else if (item.name === "签名") {
                                 newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
                             } else if (item.name === "触发水平") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "中有波形数据") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             }
                         });
                         newLine += '</tr>';
@@ -1363,11 +1426,18 @@
                         var name = liststr[1];
                         var type = liststr[2];
                         var time = liststr[3];
+                        var description = liststr[4];
                         var duration = liststr[5];
-                        var discription = liststr[6];
+                        var deepth = liststr[6];
                         var annotation = liststr[7];
-                        var signature = liststr[8];
-                        var newLine = '<tr>'
+                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        if (signature == " null")
+                            signature = "";
+                        var newLine = '<tr>';
+
+                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
+                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
+
                         tableData.forEach(function (item) {
                             if (item.name === "测量名称") {
                                 newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
@@ -1375,18 +1445,26 @@
                                 newLine += ('<td style="padding-left:60px;">' + time + '</td>')
                             } else if (item.name === "类型") {
                                 newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "事件描述") {
+                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
+                            } else if (item.name === "位置") {
+                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
                             } else if (item.name === "触发相位") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "时间长短") {
                                 newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
                             } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + discription + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
                             } else if (item.name === "方向") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "评论") {
                                 newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
                             } else if (item.name === "签名") {
                                 newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
                             } else if (item.name === "触发水平") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "中有波形数据") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
                             }
                         });
                         newLine += '</tr>';
@@ -1679,27 +1757,53 @@
                         var liststr = list[i].split(",");
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
+                        var type = liststr[2];
+                        var time = liststr[3];
                         var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        var signature = liststr[7];
-                        var annotationstr = liststr[8];
-                        var annotation = annotationstr.split("]");
+                        var duration = liststr[5];
+                        var deepth = liststr[6];
+                        var annotation = liststr[7];
+                        var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
-                        if (annotation[0] == " null")
-                            annotation[0] = "";
-                        tbody.innerHTML += ('<tr id=' + teid[1] + '>' + '<td style="width:20px;"><input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>' +
-                            '<td id="name" style="width:60px;">' + name + '</td>' +
-                            '<td style="width:60px;">' + location + '</td>' +
-                            '<td style="width:60px;">' + type + '</td>' +
-                            '<td style="width:60px;">' + description + '</td>' +
-                            '<td style="width:60px;">' + time + '</td>' +
-                            '<td style="width:60px;">' + signature + '</td>' +
-                            '<td style="width:60px;">' + annotation[0] + '</td></tr>');
+                        var newLine = '<tr>';
+
+                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
+                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
+
+                        tableData.forEach(function (item) {
+                            if (item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
+                            } else if (item.name === "时间") {
+                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
+                            } else if (item.name === "类型") {
+                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "事件描述") {
+                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
+                            } else if (item.name === "位置") {
+                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
+                            } else if (item.name === "触发相位") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "时间长短") {
+                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                            } else if (item.name === "深度") {
+                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
+                            } else if (item.name === "方向") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "评论") {
+                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
+                            } else if (item.name === "签名") {
+                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
+                            } else if (item.name === "触发水平") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "中有波形数据") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            }
+                        });
+                        newLine += '</tr>';
+                        tbody.innerHTML += newLine;
                     }
+
                 }
             });
             //获取所有设备事件
@@ -1730,7 +1834,7 @@
                         var signature = liststr[7];
                         var annotationstr = liststr[8];
                         var annotation = annotationstr.split("]");
-                        if (signature == undefined)
+                        if (signature == " null")
                             signature = "";
                         if (annotation == undefined)
                             annotation = "";
@@ -1789,6 +1893,7 @@
                 }
             });
         }
+        refresh();
     }
 </script>
 
@@ -1866,15 +1971,21 @@
 
 <!-- 右侧界面 第二个子菜单 列 -->
 <script type="text/javascript">
-    var optionDataSource = [{name: '测量名称', length: '90'}, {name: '时间', length: '110'}, {name: '类型', length: '50'},
-        {name: '触发相位', length: '50'}, {name: '时间长短', length: '50'}, {name: '深度', length: '50'}, {
-            name: '方向',
-            length: '50'
-        },
-        {name: '评论', length: '50'}, {name: '签名', length: '50'}, {name: '触发水平', length: '50'}, {
-            name: '中有波形数据',
-            length: '50'
-        }];
+    var optionDataSource = [
+        {name: '测量名称', length: '90'},
+        {name: '时间', length: '110'},
+        {name: '类型', length: '50'},
+        {name: '事件描述', length: '50'},
+        {name: '位置', length: '50'},
+        {name: '触发相位', length: '50'},
+        {name: '时间长短', length: '50'},
+        {name: '深度', length: '50'},
+        {name: '方向', length: '50'},
+        {name: '评论', length: '50'},
+        {name: '签名', length: '50'},
+        {name: '触发水平', length: '50'},
+        {name: '中有波形数据', length: '50'},
+    ];
     optionDataSource.forEach(function (item, index) {
         $("#useful-col").append('<option id=' + index + '>' + item.name + '</option>')
     })
@@ -2055,13 +2166,20 @@
         var teidEnvironment = $('input[id="teidEnvironment"]:checked').val();
         var sign = $('#signature').val();
         var annot = $('#annotation').val();
-        var ettype = eventtypetable;
-        if (teidPower != undefined)
+        var ettype;
+
+        if (teidPower != undefined) {
             teid = teidPower;
-        else if (teidCtrl != undefined)
+            ettype = "power";
+        }
+        else if (teidCtrl != undefined) {
             teid = teidCtrl;
-        else if (teidEnvironment != undefined)
+            ettype = "device";
+        }
+        else if (teidEnvironment != undefined) {
             teid = teidEnvironment;
+            ettype = "environment";
+        }
         $.ajax({
             type: "post",
             url: "addSignatureAndAnnotation",
@@ -2284,8 +2402,18 @@
         var teidCtrlId = $('input[id="teidCtrl"]:checked').val();
         var teidEnvironmentId = $('input[id="teidEnvironment"]:checked').val();
         if (teidPowerId != undefined) {
-            var tbody = $("#power-event-tbody");
-            tbody.children("#" + teidPowerId).remove();
+            var tbody = [
+                $("#power-event-tbody"),
+                $("#power-event-detail-tbody-1"),
+                $("#power-event-detail-tbody-2"),
+                $("#power-event-detail-tbody-3"),
+                $("#power-event-detail-tbody-4"),
+                $("#power-event-detail-tbody-5"),
+            ];
+            tbody.forEach(function (item) {
+                item.children("#" + teidPowerId).remove();
+            })
+
         }
         if (teidCtrlId != undefined) {
             var tbody = $("#device-event-tbody");

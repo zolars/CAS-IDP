@@ -42,6 +42,35 @@
         .datetimepicker {
             background: black !important;
         }
+
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+        }
+
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .file:hover {
+            background: #AADFFD;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
+        }
     </style>
 
 </head>
@@ -333,7 +362,7 @@
                     </table>
                 </div>
             </div>
-
+            uo
             <div class="row">
                 <div id="nxbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
                 </div>
@@ -360,19 +389,16 @@
                          position: relative;
                      ">
 
-                    <!--
-
-                    <form class="am-form" method="post" enctype="multipart/form-data">
-                        <input type="file" id="head" name="head" onchange="uploadImage(this)">
-                        <input type="submit" value="上传"/>
-                    </form>
-                    -->
-
                     <img id="preview" src="/upload/ElectricSystemImg.jpg" alt="" width="507px;" height="175px;"/>
-                    <s:form action="uploadOne" method="post" enctype="multipart/form-data">
-                        <s:file name="uploadFile" onchange="uploadImage(this)"> </s:file>
-                        <s:submit label="上传"/>
-                    </s:form>
+                    <form action="uploadOne" method="post" enctype="multipart/form-data">
+                        <a class="file">选择文件
+                            <input type="file" name="uploadFile" onchange="uploadImage(this)">
+                        </a>
+                        <a id="submit" style="display:none;" class="file">上传
+                            <input type="submit">
+                        </a>
+                    </form>
+
 
                 </div>
 
@@ -864,6 +890,7 @@
 <script>
     // 上传图片前预览
     function uploadImage(file) {
+        $("#submit").css('display', 'inline-block');
         var userrole = "<%=session.getAttribute("userrole")%>";
         if (userrole === "1") {
             var MAXWIDTH = 1200;  // 最大图片宽度
