@@ -2361,6 +2361,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td style="text-align:center">-</td>
                                         </tr>
                                         <tr>
+                                            <td style="text-align:center">电压总谐波畸变率</td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center">电流总谐波畸变率</td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                            <td style="text-align:center"></td>
+                                        </tr>
+                                        <tr>
                                             <td style="text-align:center">参数</td>
                                             <td style="text-align:center" colspan="8">采样点数</td>
                                             <td style="text-align:center" colspan="8">合格率(%)</td>
@@ -3786,6 +3824,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var temp_activePowerResult= obj.activePowerResult;
                     var temp_reactivePowerResult= obj.reactivePowerResult;
                     var temp_powerFactorResult= obj.powerFactorResult;
+                    var temp_thdUResult= obj.thdUResult;
+                    var temp_thdIResult= obj.thdIResult;
+                    var temp_thdUThresholdResult= obj.thdUThresholdResult;
+                    var temp_thdIThresholdResult= obj.thdIThresholdResult;
 
                     var table = document.getElementById('syntable');
 
@@ -3960,6 +4002,85 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[11].cells[14].innerHTML = powerFactor[4];
                         }
                     }
+
+                    //电压总谐波畸变率
+                    for(var i=0;i<temp_thdUResult.length;i++){
+                        var powerFactor = temp_thdUResult[i].split(",");
+                        console.log(powerFactor);
+                        if(powerFactor[0]=='1'){
+                            table.rows[12].cells[1].innerHTML = powerFactor[1];
+                            table.rows[12].cells[2].innerHTML = powerFactor[2];
+                            table.rows[12].cells[3].innerHTML = powerFactor[3];
+                            table.rows[12].cells[4].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[12].cells[5].innerHTML = '合格';
+                            else
+                                table.rows[12].cells[5].innerHTML = '不合格';
+                        }
+                        if(powerFactor[0]=='2'){
+                            table.rows[12].cells[6].innerHTML = powerFactor[1];
+                            table.rows[12].cells[7].innerHTML = powerFactor[2];
+                            table.rows[12].cells[8].innerHTML = powerFactor[3];
+                            table.rows[12].cells[9].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[12].cells[10].innerHTML = '合格';
+                            else
+                                table.rows[12].cells[10].innerHTML = '不合格';
+                        }
+                        if(powerFactor[0]=='3'){
+                            table.rows[12].cells[11].innerHTML = powerFactor[1];
+                            table.rows[12].cells[12].innerHTML = powerFactor[2];
+                            table.rows[12].cells[13].innerHTML = powerFactor[3];
+                            table.rows[12].cells[14].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[12].cells[15].innerHTML = '合格';
+                            else
+                                table.rows[12].cells[15].innerHTML = '不合格';
+                        }
+                        if(temp_thdUThresholdResult!=""){
+                            table.rows[12].cells[16].innerHTML = temp_thdUThresholdResult[0];
+                        }
+                    }
+
+                    //电流总谐波畸变率
+                    for(var i=0;i<temp_thdIResult.length;i++){
+                        var powerFactor = temp_thdIResult[i].split(",");
+                        console.log(powerFactor);
+                        if(powerFactor[0]=='1') {
+                            table.rows[13].cells[1].innerHTML = powerFactor[1];
+                            table.rows[13].cells[2].innerHTML = powerFactor[2];
+                            table.rows[13].cells[3].innerHTML = powerFactor[3];
+                            table.rows[13].cells[4].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[13].cells[5].innerHTML = '合格';
+                            else
+                                table.rows[13].cells[5].innerHTML = '不合格';
+                        }
+                        if(powerFactor[0]=='2'){
+                            table.rows[13].cells[6].innerHTML = powerFactor[1];
+                            table.rows[13].cells[7].innerHTML = powerFactor[2];
+                            table.rows[13].cells[8].innerHTML = powerFactor[3];
+                            table.rows[13].cells[9].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[13].cells[10].innerHTML = '合格';
+                            else
+                                table.rows[13].cells[10].innerHTML = '不合格';
+                        }
+                        if(powerFactor[0]=='3'){
+                            table.rows[13].cells[11].innerHTML = powerFactor[1];
+                            table.rows[13].cells[12].innerHTML = powerFactor[2];
+                            table.rows[13].cells[13].innerHTML = powerFactor[3];
+                            table.rows[13].cells[14].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[13].cells[15].innerHTML = '合格';
+                            else
+                                table.rows[13].cells[15].innerHTML = '不合格';
+                        }
+                        if(temp_thdIThresholdResult!=""){
+                            table.rows[13].cells[16].innerHTML = temp_thdIThresholdResult[0];
+                        }
+                    }
+
                 },
                 error:function(data){
                     alert("Error!");

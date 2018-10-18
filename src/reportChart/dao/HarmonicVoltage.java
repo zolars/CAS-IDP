@@ -22,4 +22,8 @@ public interface HarmonicVoltage {
     public List getActivePowerBydt(String did, String time);
     public List getReactivePowerBydt(String did, String time);
     public List getPowerFactorBydt(String did, String time);
+    public List getthdUBydt(String did, String time);
+    public List getthdIBydt(String did, String time);
+    public List getthduthreshold(String did);
+    public List getthdithreshold(String did);
 }

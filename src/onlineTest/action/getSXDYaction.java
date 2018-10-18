@@ -26,14 +26,13 @@ public class getSXDYaction extends ActionSupport {
     /* 根据监测点设备获取当前三相电压数据
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String did = request.getParameter("did");
 
-            if(did != "") {
+            if (did != "") {
                 PowersxdyMonitor pp = DataOnline.getSxdyMap().get(did);
 
                 JSONObject jsonObject = new JSONObject();

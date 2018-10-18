@@ -1,6 +1,5 @@
 package grabData;
 
-import com.alibaba.fastjson.JSON;
 import hibernatePOJO.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,20 +11,20 @@ import java.util.Map;
 import java.util.HashMap;
 
 class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
-    private Map<String,Float> map=null;
-    private List<Dictionary> dic=null;
-    private List<DictionaryPlus> dicPlus=null;
-    private ByteBuf recMsg=null;
+    private Map<String, Float> map = null;
+    private List<Dictionary> dic = null;
+    private List<DictionaryPlus> dicPlus = null;
+    private ByteBuf recMsg = null;
 
-    private int[] slaveId= new int[22];
-    private int[] fCode=new int[22];
-    private int[] addr=new int[22];
-    private int[] len=new int [22];
+    private int[] slaveId = new int[22];
+    private int[] fCode = new int[22];
+    private int[] addr = new int[22];
+    private int[] len = new int [22];
     private String[] name = new String[643];
-    private Integer[] factor= new Integer[643];
+    private Integer[] factor = new Integer[643];
 
-    private int part=0;
-    private int count=0;
+    private int part = 0;
+    private int count = 0;
 
     //监测点id
     private String did = "";
@@ -59,7 +58,6 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
         //String address = ctx.channel().remoteAddress().toString().replace("/", "");
        // System.out.println("ip+端口为：" + address + "开始建立通讯");
 
-
         ByteBuf sendMsg = ctx.alloc().buffer();
         sendMsg.writeBytes(createMsg(slaveId[part], fCode[part], addr[part], len[part]));
        // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
@@ -87,7 +85,7 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
         recMsg.writeBytes(buf);
         buf.release();
         //数据累积
-        if (recMsg.readableBytes() < 2*len[part] + 9) {
+        if (recMsg.readableBytes() < 2 * len[part] + 9) {
             return;
         }
         dataResolve(recMsg, addr[part], len[part]);

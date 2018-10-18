@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import grabData.DataOnline;
 import hibernatePOJO.PowerparmMonitor;
+import hibernatePOJO.PowersxdyMonitor;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,7 @@ public class getParameteraction extends ActionSupport {
     /* 根据检测点获取当前电能参数
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
@@ -35,11 +36,15 @@ public class getParameteraction extends ActionSupport {
             //获取监测点
             String did = request.getParameter("did");
 
-            if(did != "") {
+            if (did != "") {
                 PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+
+                PowersxdyMonitor psxdy = DataOnline.getSxdyMap().get(did);
+                Float uunb = psxdy.getUunb();
 
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("nowpowerparm", pp);
+                jsonObject.put("nowpoweruunb", uunb);
                 result = JSON.toJSONString(jsonObject);
             }
         } catch (Exception e) {

@@ -8,7 +8,6 @@ import hibernatePOJO.PowerxbMonitor;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 public class getXBaction extends ActionSupport {
@@ -32,7 +31,7 @@ public class getXBaction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             String did = request.getParameter("did");
-            if(did != "") {
+            if (did != "") {
                 PowerxbMonitor pp = DataOnline.getXbMap().get(did);
 
                 JSONObject jsonObject = new JSONObject();

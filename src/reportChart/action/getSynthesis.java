@@ -26,7 +26,6 @@ public class getSynthesis extends ActionSupport {
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
             String time = request.getParameter("time");
             String did = request.getParameter("did");
@@ -41,29 +40,41 @@ public class getSynthesis extends ActionSupport {
             List activePowerResult = new ArrayList();
             List reactivePowerResult = new ArrayList();
             List powerFactorResult = new ArrayList();
+            List thdUResult = new ArrayList();
+            List thdIResult = new ArrayList();
+            List thdUThresholdResult = new ArrayList();
+            List thdIThresholdResult = new ArrayList();
 
-            hzresult = dao.getHzBydt(did,time);
-            sxdyresult = dao.getsxdyBydt(did,time);
+            hzresult = dao.getHzBydt(did, time);
+            sxdyresult = dao.getsxdyBydt(did, time);
             sxdyThresholdResult = dao.getsxdythreshold(did);
-            dsdysbresult = dao.getdsdysbBydt(did,time);
+            dsdysbresult = dao.getdsdysbBydt(did, time);
             dsdysbThresholdResult = dao.getdsdysbthreshold(did);
-            csdysbresult = dao.getcsdysbBydt(did,time);
+            csdysbresult = dao.getcsdysbBydt(did, time);
             csdysbThresholdResult = dao.getcsdysbthreshold(did);
-            activePowerResult = dao.getActivePowerBydt(did,time);
-            reactivePowerResult = dao.getReactivePowerBydt(did,time);
-            powerFactorResult = dao.getPowerFactorBydt(did,time);
+            activePowerResult = dao.getActivePowerBydt(did, time);
+            reactivePowerResult = dao.getReactivePowerBydt(did, time);
+            powerFactorResult = dao.getPowerFactorBydt(did, time);
+            thdUResult = dao.getthdUBydt(did, time);
+            thdIResult = dao.getthdIBydt(did, time);
+            thdUThresholdResult = dao.getthduthreshold(did);
+            thdIThresholdResult = dao.getthdithreshold(did);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("hzresult",hzresult);
-            jsonObject.put("sxdyresult",sxdyresult);
-            jsonObject.put("sxdyThresholdResult",sxdyThresholdResult);
-            jsonObject.put("dsdysbresult",dsdysbresult);
-            jsonObject.put("dsdysbThresholdResult",dsdysbThresholdResult);
-            jsonObject.put("csdysbresult",csdysbresult);
-            jsonObject.put("csdysbThresholdResult",csdysbThresholdResult);
-            jsonObject.put("activePowerResult",activePowerResult);
-            jsonObject.put("reactivePowerResult",reactivePowerResult);
-            jsonObject.put("powerFactorResult",powerFactorResult);
+            jsonObject.put("hzresult", hzresult);
+            jsonObject.put("sxdyresult", sxdyresult);
+            jsonObject.put("sxdyThresholdResult", sxdyThresholdResult);
+            jsonObject.put("dsdysbresult", dsdysbresult);
+            jsonObject.put("dsdysbThresholdResult", dsdysbThresholdResult);
+            jsonObject.put("csdysbresult", csdysbresult);
+            jsonObject.put("csdysbThresholdResult", csdysbThresholdResult);
+            jsonObject.put("activePowerResult", activePowerResult);
+            jsonObject.put("reactivePowerResult", reactivePowerResult);
+            jsonObject.put("powerFactorResult", powerFactorResult);
+            jsonObject.put("thdUResult", thdUResult);
+            jsonObject.put("thdIResult", thdIResult);
+            jsonObject.put("thdUThresholdResult", thdUThresholdResult);
+            jsonObject.put("thdIThresholdResult", thdIThresholdResult);
 
             result = JSON.toJSONString(jsonObject); // List转json
         } catch (Exception e) {
