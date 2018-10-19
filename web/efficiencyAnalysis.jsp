@@ -265,7 +265,7 @@
                                             </ul>
                                             <div class="table-container">
                                                 <div id="power-event-detail-0-div" style="width:100%;">
-                                                    <table border="1" class="display" id="power-event"
+                                                    <table class="display" border="1px" id="power-event"
                                                            style="width:100%;">
                                                         <thead>
                                                         <tr id="power-event-thead"></tr>
@@ -338,6 +338,9 @@
 
                                             <ul class="nav nav-tabs" id="triItem" name="triItem">
                                                 <li class="active" style="width:15%">
+                                                    <a data-toggle="tab" id="triItem0">•全部事件</a>
+                                                </li>
+                                                <li style="width:15%">
                                                     <a data-toggle="tab" id="triItem1">•温度</a>
                                                 </li>
                                                 <li style="width:15%">
@@ -346,57 +349,38 @@
                                             </ul>
 
                                             <div class="table-container">
-                                                <table border="1" class="display" id="environment-event"
-                                                       style="width:100%;">
-                                                    <thead>
-                                                    <tr>
-                                                        <th style="width:60px;"></th>
-                                                        <th style="width:60px;">事件名称</th>
-                                                        <th style="width:60px;">位置</th>
-                                                        <th style="width:60px;">事件类型</th>
-                                                        <th style="width:60px;">事件描述</th>
-                                                        <th style="width:60px;">事件发生时间</th>
-                                                        <th style="width:60px;">签名</th>
-                                                        <th style="width:60px;">注释</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody id="environment-event-tbody">
-                                                    </tbody>
-                                                </table>
+                                                <div id="environment-event-div" style="width:100%;">
+                                                    <table class="display" border="1px" id="environment-event"
+                                                           style="width:100%;">
+                                                        <thead>
+                                                        <tr id="environment-event-tr"></tr>
+                                                        </thead>
+                                                        <tbody id="environment-event-tbody">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
 
-                                                <table class="display" id="environment-event-detail-1"
-                                                       style="width:100%;">
-                                                    <%--<thead>
-                                                    <tr>
-                                                        <th>测量名称</th>
-                                                        <th>时间</th>
-                                                        <th>类型</th>
-                                                        <th>时间长短</th>
-                                                        <th>深度（与标准的偏差）</th>
-                                                        <th>方向</th>
-                                                        <th>确认</th>
-                                                    </tr>
-                                                    </thead>--%>
-                                                    <tbody id="environment-event-detail-tbody-1">
-                                                    </tbody>
-                                                </table>
+                                                <div id="environment-event-detail-1-div" style="width:100%;">
+                                                    <table class="display" border="1px" id="environment-event-detail-1"
+                                                           style="width:100%;">
+                                                        <thead>
+                                                        <tr id="environment-event-detail-1-tr"></tr>
+                                                        </thead>
+                                                        <tbody id="environment-event-detail-tbody-1">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
 
-                                                <table class="display" id="environment-event-detail-2"
-                                                       style="width:100%;display: none;">
-                                                    <%--<thead>
-                                                    <tr>
-                                                        <th>测量名称</th>
-                                                        <th>时间</th>
-                                                        <th>类型</th>
-                                                        <th>时间长短</th>
-                                                        <th>深度（与标准的偏差）</th>
-                                                        <th>方向</th>
-                                                        <th>确认</th>
-                                                    </tr>
-                                                    </thead>--%>
-                                                    <tbody id="environment-event-detail-tbody-2">
-                                                    </tbody>
-                                                </table>
+                                                <div id="environment-event-detail-2-div" style="width:100%;">
+                                                    <table class="display" border="1px" id="environment-event-detail-2"
+                                                           style="width:100%;">
+                                                        <thead>
+                                                        <tr id="environment-event-detail-2-tr"></tr>
+                                                        </thead>
+                                                        <tbody id="environment-event-detail-tbody-2">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -405,44 +389,34 @@
 
                                             <ul class="nav nav-tabs" id="fourItem" name="fourItem">
                                                 <li class="active" style="width:15%">
+                                                    <a data-toggle="tab" id="fourItem0">•全部事件</a>
+                                                </li>
+                                                <li style="width:15%">
                                                     <a data-toggle="tab" id="fourItem1">•治理</a>
                                                 </li>
                                             </ul>
 
                                             <div class="table-container">
-                                                <table border="1" class="display" id="device-event"
-                                                       style="width:100%;">
-                                                    <thead>
-                                                    <tr>
-                                                        <th style="width:60px;"></th>
-                                                        <th style="width:60px;">事件名称</th>
-                                                        <th style="width:60px;">位置</th>
-                                                        <th style="width:60px;">事件类型</th>
-                                                        <th style="width:60px;">事件描述</th>
-                                                        <th style="width:60px;">事件发生时间</th>
-                                                        <th style="width:60px;">签名</th>
-                                                        <th style="width:60px;">注释</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody id="device-event-tbody">
-                                                    </tbody>
-                                                </table>
-
-                                                <table class="display" id="device-event-detail-1" style="width:100%;">
-                                                    <%--<thead>
-                                                    <tr>
-                                                        <th>测量名称</th>
-                                                        <th>时间</th>
-                                                        <th>类型</th>
-                                                        <th>时间长短</th>
-                                                        <th>深度（与标准的偏差）</th>
-                                                        <th>方向</th>
-                                                        <th>确认</th>
-                                                    </tr>
-                                                    </thead>--%>
-                                                    <tbody id="device-event-detail-tbody-1">
-                                                    </tbody>
-                                                </table>
+                                                <div id="device-event-div" style="width:100%;">
+                                                    <table border="1" class="display" id="device-event"
+                                                           style="width:100%;">
+                                                        <thead>
+                                                        <tr id="device-event-tr"></tr>
+                                                        </thead>
+                                                        <tbody id="device-event-tbody">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="device-event-detail-1-div" style="width:100%;">
+                                                    <table class="display" id="device-event-detail-1"
+                                                           style="width:100%;">
+                                                        <thead>
+                                                        <tr id="device-event-detail-1-tr"></tr>
+                                                        </thead>
+                                                        <tbody id="device-event-detail-1-tbody">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -543,57 +517,48 @@
 
                                         </div>
 
+                                        <div id="rightItem2" style="width: 100%;">
+                                            <table>
+                                                <br>
+                                                <tr>
+                                                    <table class="display" id="colume-table" border="1px" width="160px">
+                                                        <thead>
+                                                        <tr>
+                                                            <td>名字</td>
+                                                            <td>宽度</td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+
+                                                    </table>
+                                                </tr>
+                                                <tr>
+                                                    <td><img src="/img/uparray.png" onClick="upcol()"></td>
+                                                    <td><img src="/img/deletearray.png" onClick="deletecol()"></td>
+                                                    <td><img src="/img/downarray.png" onClick="downcol()"></td>
+                                                    <td><br></td>
+                                                </tr>
+                                                <tr>
+                                                    <table class="display">
+                                                        <tr>
+                                                            <td>
+                                                                <select style="display: inline-block"
+                                                                        class="form-control location-select-item"
+                                                                        id="useful-col">
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <button style="display: block;" id="add-col-button"
+                                                                        type="button" class="btn-success btn-sm"
+                                                                        onclick="addColumnItem()">添加
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
-
-                                    <div id="rightItem2" style="width: 100%;">
-                                        <table>
-                                            <br>
-                                            <!--
-                                            <tr>
-                                                <td>可见的列</td>
-                                            </tr>
-                                            -->
-                                            <tr>
-                                                <table class="display" id="colume-table" border="1px" width="160px">
-                                                    <thead>
-                                                    <tr>
-                                                        <td>名字</td>
-                                                        <td>宽度</td>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody></tbody>
-
-                                                </table>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="/img/uparray.png" onClick="upcol()"></td>
-                                                <td><img src="/img/deletearray.png" onClick="deletecol()"></td>
-                                                <td><img src="/img/downarray.png" onClick="downcol()"></td>
-                                                <td><br></td>
-                                            </tr>
-                                            <tr>
-                                                <table class="display">
-                                                    <tr>
-                                                        <td>
-                                                            <select style="display: inline-block"
-                                                                    class="form-control location-select-item"
-                                                                    id="useful-col">
-                                                            </select>
-                                                        </td>
-                                                        <td>
-                                                            <button style="display: block;" id="add-col-button"
-                                                                    type="button" class="btn-success btn-sm"
-                                                                    onclick="addColumnItem()">添加
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </tr>
-
-                                        </table>
-
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -971,19 +936,35 @@
             $("#power-event-detail-1-div").css('display', 'none');
             $("#power-event-detail-2-div").css('display', 'none');
             $("#power-event-detail-3-div").css('display', 'none');
-            $("#power-event-detail-4-div").css('display', 'none');
+            $("#environment-event-detail-1power-event-detail-4-div").css('display', 'none');
             $("#power-event-detail-5-div").css('display', 'block');
         });
+        $("#triItem0").click(function () {
+            $("#environment-event-div").css('display', 'block');
+            $("#environment-event-detail-1-div").css('display', 'none');
+            $("#environment-event-detail-2-div").css('display', 'none');
+        });
         $("#triItem1").click(function () {
-            $("#environment-event-detail-1").css('display', 'block');
-            $("#environment-event-detail-2").css('display', 'none');
+            $("#environment-event-div").css('display', 'none');
+            $("#environment-event-detail-1-div").css('display', 'block');
+            $("#environment-event-detail-2-div").css('display', 'none');
         });
         $("#triItem2").click(function () {
-            $("#environment-event-detail-1").css('display', 'none');
-            $("#environment-event-detail-2").css('display', 'block');
+            $("#environment-event-div").css('display', 'none');
+            $("#environment-event-detail-1-div").css('display', 'none');
+            $("#environment-event-detail-2-div").css('display', 'block');
+        });
+        $("#fourItem0").click(function () {
+            $("#device-event-div").css('display', 'block');
+            $("#device-event-detail-1-div").css('display', 'none');
+        });
+        $("#fourItem1").click(function () {
+            $("#device-event-div").css('display', 'none');
+            $("#device-event-detail-1-div").css('display', 'block');
         });
         $("#secItem0").click();
-        $("#triItem1").click();
+        $("#triItem0").click();
+        $("#fourItem0").click();
     });
 </script>
 
@@ -999,10 +980,6 @@
         }
     }
 
-    // 天, 周, 月的点击刷新
-    /*$("#rightItem1").click(function () {
-        refresh()
-    })*/
     $("#data-button").click(function () {
         refresh();
     })
@@ -1478,6 +1455,26 @@
 
 <!-- （详细）环境事件-点击进入第二个页面-->
 <script type="text/javascript">
+    <%--设置thead--%>
+    var tableData = [];
+    if (localStorage.getItem("visibleColumn")) {
+        tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+    }
+
+    var thead0 = $("#environment-event-tr")[0];
+    var thead1 = $("#environment-event-detail-1-tr")[0];
+    var thead2 = $("#environment-event-detail-2-tr")[0];
+
+    thead0.innerHTML += ('<th style="width:30px;"></th>');
+    thead1.innerHTML += ('<th style="width:30px;"></th>');
+    thead2.innerHTML += ('<th style="width:30px;"></th>');
+
+    tableData.forEach(function (item) {
+        thead0.innerHTML += ('<th>' + item.name + '</th>');
+        thead1.innerHTML += ('<th>' + item.name + '</th>');
+        thead2.innerHTML += ('<th>' + item.name + '</th>');
+    });
+
     function getEnvironmentEvent() {
         $('#eventdiv1').css('display', 'none');
         $('#eventdiv2').css('display', 'none');
@@ -1572,7 +1569,6 @@
                 success: function (data) {
                     var obj = JSON.parse(data);
                     var list = obj['allpelist'];
-                    var table = $("#environment-event-detail-1");
                     var tbody = $("#environment-event-detail-tbody-1")[0];
                     tbody.innerHTML = "";
                     for (var i = 0; i < list.length; i++) {
@@ -1584,10 +1580,42 @@
                         var description = liststr[4];
                         var rawtime = liststr[5].split("]");
                         var time = rawtime[0];
-                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        var newLine = '<tr>';
+
+                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
+                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
+
+                        tableData.forEach(function (item) {
+                            if (item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
+                            } else if (item.name === "时间") {
+                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
+                            } else if (item.name === "类型") {
+                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "事件描述") {
+                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
+                            } else if (item.name === "位置") {
+                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
+                            } else if (item.name === "触发相位") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "时间长短") {
+                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                            } else if (item.name === "深度") {
+                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
+                            } else if (item.name === "方向") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "评论") {
+                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
+                            } else if (item.name === "签名") {
+                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
+                            } else if (item.name === "触发水平") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "中有波形数据") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            }
+                        });
+                        newLine += '</tr>';
+                        tbody.innerHTML += newLine;
                     }
                 }
             });
@@ -1604,7 +1632,6 @@
                 success: function (data) {
                     var obj = JSON.parse(data);
                     var list = obj['allpelist'];
-                    var table = $("#environment-event-detail-2");
                     var tbody = $("#environment-event-detail-tbody-2")[0];
                     tbody.innerHTML = "";
                     for (var i = 0; i < list.length; i++) {
@@ -1616,15 +1643,68 @@
                         var description = liststr[4];
                         var rawtime = liststr[5].split("]");
                         var time = rawtime[0];
-                        tbody.innerHTML += ('<tr>' + '<td style="padding-left:60px;" style="display: none">' + teid[1] + '</td>' +
-                            '<td style="padding-left:60px;">' + name + '</td><td style="padding-left:60px;">' + location + '</td>' +
-                            '<td style="padding-left:60px;">' + type + '</td><td style="padding-left:60px;">' + description + '</td>' +
-                            '<td style="padding-left:60px;">' + time + '</td><td style="padding-left:60px;">' + '</td></tr>');
+                        var newLine = '<tr>';
+
+                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
+                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
+
+                        tableData.forEach(function (item) {
+                            if (item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
+                            } else if (item.name === "时间") {
+                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
+                            } else if (item.name === "类型") {
+                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "事件描述") {
+                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
+                            } else if (item.name === "位置") {
+                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
+                            } else if (item.name === "触发相位") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "时间长短") {
+                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                            } else if (item.name === "深度") {
+                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
+                            } else if (item.name === "方向") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "评论") {
+                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
+                            } else if (item.name === "签名") {
+                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
+                            } else if (item.name === "触发水平") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "中有波形数据") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            }
+                        });
+                        newLine += '</tr>';
+                        tbody.innerHTML += newLine;
                     }
                 }
             });
         }
     }
+</script>
+
+
+<!-- （详细）设备事件-点击进入第二个页面-->
+<script type="text/javascript">
+    <%--设置thead--%>
+    var tableData = [];
+    if (localStorage.getItem("visibleColumn")) {
+        tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+    }
+
+    var thead0 = $("#device-event-tr")[0];
+    var thead1 = $("#device-event-detail-1-tr")[0];
+
+    thead0.innerHTML += ('<th style="width:30px;"></th>');
+    thead1.innerHTML += ('<th style="width:30px;"></th>');
+
+    tableData.forEach(function (item) {
+        thead0.innerHTML += ('<th>' + item.name + '</th>');
+        thead1.innerHTML += ('<th>' + item.name + '</th>');
+    });
 </script>
 
 <!-- 查询事件-->
@@ -1806,50 +1886,6 @@
                         newLine += '</tr>';
                         tbody.innerHTML += newLine;
                     }
-
-                }
-            });
-            //获取所有设备事件
-            $.ajax({
-                type: "post",
-                url: "getCtrlEvent",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#device-event-tbody")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        var signature = liststr[7];
-                        var annotationstr = liststr[8];
-                        var annotation = annotationstr.split("]");
-                        if (signature == " null")
-                            signature = "";
-                        if (annotation == undefined)
-                            annotation = "";
-                        tbody.innerHTML += ('<tr id=' + teid[1] + '>' + '<td style="width:20px;"><input type="radio" id="teidCtrl" name="teid" value=' + teid[1] + '></td>' +
-                            '<td id="name" style="width:60px;">' + name + '</td>' +
-                            '<td style="width:60px;">' + location + '</td>' +
-                            '<td style="width:60px;">' + type + '</td>' +
-                            '<td style="width:60px;">' + description + '</td>' +
-                            '<td style="width:60px;">' + time + '</td>' +
-                            '<td style="width:60px;">' + signature + '</td>' +
-                            '<td style="width:60px;">' + annotation[0] + '</td></tr>');
-                    }
                 }
             });
             //获取所有环境事件
@@ -1884,14 +1920,113 @@
                             signature = "";
                         if (annotation[0] == " null")
                             annotation[0] = "";
-                        tbody.innerHTML += ('<tr id=' + teid[1] + '>' + '<td style="width:20px;"><input type="radio" id="teidEnvironment" name="teid" value=' + teid[1] + '></td>' +
-                            '<td id="name" style="width:60px;">' + name + '</td>' +
-                            '<td style="width:60px;">' + location + '</td>' +
-                            '<td style="width:60px;">' + type + '</td>' +
-                            '<td style="width:60px;">' + description + '</td>' +
-                            '<td style="width:60px;">' + time + '</td>' +
-                            '<td style="width:60px;">' + signature + '</td>' +
-                            '<td style="width:60px;">' + annotation[0] + '</td></tr>');
+                        var newLine = '<tr>';
+
+                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
+                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
+
+                        tableData.forEach(function (item) {
+                            if (item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
+                            } else if (item.name === "时间") {
+                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
+                            } else if (item.name === "类型") {
+                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "事件描述") {
+                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
+                            } else if (item.name === "位置") {
+                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
+                            } else if (item.name === "触发相位") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "时间长短") {
+                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                            } else if (item.name === "深度") {
+                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
+                            } else if (item.name === "方向") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "评论") {
+                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
+                            } else if (item.name === "签名") {
+                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
+                            } else if (item.name === "触发水平") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "中有波形数据") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            }
+                        });
+                        newLine += '</tr>';
+                        tbody.innerHTML += newLine;
+                    }
+                }
+            });
+            //获取所有设备事件
+            $.ajax({
+                type: "post",
+                url: "getCtrlEvent",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    cbname: cbname.toString(),
+                    priortylist: priortylist
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var list = obj['allpelist'];
+                    var tbody = $("#device-event-tbody")[0];
+                    tbody.innerHTML = "";
+                    for (var i = 0; i < list.length; i++) {
+                        var liststr = list[i].split(",");
+                        var teid = liststr[0].split("[");
+                        var name = liststr[1];
+                        var location = liststr[2];
+                        var type = liststr[3];
+                        var description = liststr[4];
+                        var rawtime = liststr[5].split("]");
+                        var time = rawtime[0];
+                        var signature = liststr[7];
+                        var annotationstr = liststr[8];
+                        var annotation = annotationstr.split("]");
+                        if (signature == " null")
+                            signature = "";
+                        if (annotation == undefined)
+                            annotation = "";
+                        var newLine = '<tr>';
+
+                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
+                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
+
+                        tableData.forEach(function (item) {
+                            if (item.name === "测量名称") {
+                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
+                            } else if (item.name === "时间") {
+                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
+                            } else if (item.name === "类型") {
+                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
+                            } else if (item.name === "事件描述") {
+                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
+                            } else if (item.name === "位置") {
+                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
+                            } else if (item.name === "触发相位") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "时间长短") {
+                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                            } else if (item.name === "深度") {
+                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
+                            } else if (item.name === "方向") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "评论") {
+                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
+                            } else if (item.name === "签名") {
+                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
+                            } else if (item.name === "触发水平") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            } else if (item.name === "中有波形数据") {
+                                newLine += ('<td style="padding-left:60px;"></td>')
+                            }
+                        });
+                        newLine += '</tr>';
+                        tbody.innerHTML += newLine;
                     }
                 }
             });
@@ -2411,7 +2546,7 @@
                 $("#power-event-detail-tbody-2"),
                 $("#power-event-detail-tbody-3"),
                 $("#power-event-detail-tbody-4"),
-                $("#power-event-detail-tbody-5"),
+                $("#power-event-detail-tbody-5")
             ];
             tbody.forEach(function (item) {
                 item.children("#" + teidPowerId).remove();
@@ -2419,12 +2554,17 @@
 
         }
         if (teidCtrlId != undefined) {
-            var tbody = $("#device-event-tbody");
+            var tbody = [$("#device-event-tbody"), $("#device-event-detail-tbody-1"),];
             tbody.children("#" + teidCtrlId).remove();
         }
         if (teidEnvironmentId != undefined) {
-            var tbody = $("#environment-event-tbody");
-            tbody.children("#" + teidEnvironmentId).remove();
+            var tbody = [$("#environment-event-tbody"),
+                $("#environment-event-detail-tbody-1"),
+                $("#environment-event-detail-tbody-2")
+            ];
+            tbody.forEach(function (item) {
+                item.children("#" + teidEnvironmentId).remove();
+            })
         }
     }
 </script>

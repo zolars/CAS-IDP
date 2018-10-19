@@ -43,9 +43,15 @@ public class UploadImageAction extends ActionSupport {
             String dataDir = ServletActionContext.getRequest().getRealPath("/upload");
             InputStream is = new FileInputStream(uploadFile);
 
+            File folder = new File(dataDir);
             File destFile = new File(dataDir, "ElectricSystemImg.jpg");
             uploadFile.renameTo(destFile);
 
+            if (!folder.exists()) {
+                try {
+                    folder.mkdirs();
+                } catch (Exception e){}
+            }
 
             if (destFile.exists()) {
                 destFile.delete();
@@ -54,7 +60,7 @@ public class UploadImageAction extends ActionSupport {
             //把图片写入到上面设置的路径里
             OutputStream os = new FileOutputStream(destFile);
             byte[] buffer = new byte[400];
-            int length  = 0;
+            int length = 0;
             while ((length = is.read(buffer)) > 0) {
                 os.write(buffer, 0, length);
             }
