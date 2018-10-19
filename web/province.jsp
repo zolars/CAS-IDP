@@ -342,11 +342,11 @@
                             <td style="padding-right: 30px;"><img id="r1t4" src="/img/icon/GOOD.png"/></td>
                         </tr>
                         <tr>
-                            <td id="r2t0" style="font-size: 12px"></td>
-                            <td id="r2t1" style="font-size: 12px"></td>
-                            <td id="r2t2" style="font-size: 12px"></td>
-                            <td id="r2t3" style="font-size: 12px"></td>
-                            <td id="r2t4" style="font-size: 12px"></td>
+                            <td id="r2t0" style="font-size: 12px;color: black;"></td>
+                            <td id="r2t1" style="font-size: 12px;color: black;"></td>
+                            <td id="r2t2" style="font-size: 12px;color: black;"></td>
+                            <td id="r2t3" style="font-size: 12px;color: black;"></td>
+                            <td id="r2t4" style="font-size: 12px;color: black;"></td>
                         </tr>
                         <tr style="height: 28px;"></tr>
                         <tr>
@@ -357,11 +357,11 @@
                             <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px"></td>
-                            <td style="font-size: 12px"></td>
-                            <td style="font-size: 12px"></td>
-                            <td style="font-size: 12px"></td>
-                            <td style="font-size: 12px"></td>
+                            <td style="font-size: 12px;color: black;"></td>
+                            <td style="font-size: 12px;color: black;"></td>
+                            <td style="font-size: 12px;color: black;"></td>
+                            <td style="font-size: 12px;color: black;"></td>
+                            <td style="font-size: 12px;color: black;"></td>
                         </tr>
                     </table>
                 </div>

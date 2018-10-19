@@ -33,7 +33,6 @@ public class RMSDAOImpl implements RMSDAO {
     double maxi1 = 0,maxi2 = 0,maxi3 = 0;
     double maxv1 = 0,maxv2 = 0,maxv3 = 0;
 
-
     public List getCurrentRMSData(String did) {
         List<RMS> crlist = new ArrayList<>();
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
