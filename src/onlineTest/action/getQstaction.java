@@ -41,7 +41,7 @@ public class getQstaction extends ActionSupport {
 
             JSONObject jsonObject = new JSONObject();
 
-            // 1 records
+            //1 records
             //getQstRMS
             List qstdata = rmsdao.getCurrentRMSData(did);
             //getQstTHD

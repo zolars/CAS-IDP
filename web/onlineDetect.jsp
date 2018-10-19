@@ -34,13 +34,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/mycss.css" rel="stylesheet">
     <link rel="stylesheet" href="css/header.css">
 
-  <%--<style>
-        #myDropDown {
-            color: black;
-            width: 40px;
-        }
-    </style>--%>
-
 </head>
 
 <body id="skin-blur-blue">
@@ -177,18 +170,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <li><button class="btn btn-default" value="unb">unb</button></li>
                                         <li><button class="btn btn-default" value="pst">Pst</button></li>
                                         <li><button class="btn btn-default" value="plt">Plt</button></li>
-                                       <%-- <li><button class="btn btn-default" value="vh">Vh</button></li>
-                                        <li><button class="btn btn-default" value="ah">Ah</button></li>--%>
                                     </ol>
                                 </div>
-                               <%-- <select id="myDropDown" style="display: none">
-                                <select id="myDropDown" style="display: none">
-                                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
-                                    <option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
-                                    <option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option>
-                                    <option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option>
-                                    <option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option>
-                                </select>--%>
+
                                 </select>
                                 <div id="item1-params-text" class="row">
                                     <div class="clearfix"></div>
@@ -262,15 +246,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <li>
                                         <button value="A" class="btn btn-default">3A</button>
                                     </li>
-                                   <%-- <li>
-                                        <button value="1" class="btn btn-default">L1</button>
-                                    </li>
-                                    <li>
-                                        <button value="2" class="btn btn-default">L2</button>
-                                    </li>
-                                    <li>
-                                        <button value="3" class="btn btn-default">L3</button>
-                                    </li>--%>
                                 </ol>
                             </div>
                         </div>
@@ -329,9 +304,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </section>
 
     <!-- Javascript Libraries -->
-    <!-- jQuery -->
-    <!--<script src="js/jquery-3.3.1.js"></script>-->
-
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
 
@@ -474,9 +446,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3").hide();
                     $("#item4").hide();
                     $("#item5").hide();
-                    // 切换子菜单时，从后台读取数据
-                    //var mpcname = $("#monitorpnt").val();
-                    //if(mpcname) getDataQst(mpcname);
+
                 });
                 $("#subItem2").click(function(){
                     $("#item1").hide();
@@ -484,9 +454,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3").hide();
                     $("#item4").hide();
                     $("#item5").hide();
-                    // 切换子菜单时，从后台读取数据
-                    //var mpcname = $("#monitorpnt").val();
-                    //if(mpcname) getDataXb(mpcname);
+
                 });
                 $("#subItem3").click(function(){
                     $("#item1").hide();
@@ -494,9 +462,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3").show();
                     $("#item4").hide();
                     $("#item5").hide();
-                    // 切换子菜单时，从后台读取数据
-                    //var mpcname = $("#monitorpnt").val();
-                    //if(mpcname) getDataSxdy(mpcname);
+
                 });
                 $("#subItem4").click(function(){
                     $("#item1").hide();
@@ -504,9 +470,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3").hide();
                     $("#item4").show();
                     $("#item5").hide();
-                    // 切换子菜单时，从后台读取数据
-                    //var mpcname = $("#monitorpnt").val();
-                    //if(mpcname) getDataParams(mpcname);
+
                 });
                 $("#subItem5").click(function(){
                     $("#item1").hide();
@@ -514,9 +478,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item3").hide();
                     $("#item4").hide();
                     $("#item5").show();
-                    // 切换子菜单时，从后台读取数据
-                    //var mpcname = $("#monitorpnt").val();
-                    //if(mpcname) getOnlineWave(mpcname);
+
                 });
                 $("#subItem1").trigger("click");
             });
@@ -632,11 +594,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%--图表中使用到的变量声明--%> <%--趋势图相关函数 --%>
     <script type="text/javascript">
         // 全局变量、暂存数据的变量、配置项变量
-        var qstRecords = []; // 暂存趋势图数据
+        var qstRecordRmsu1 = [];// 暂存趋势图rmsu1数据
+        var qstRecordRmsu2 = []; // 暂存趋势图rmsu2数据
+        var qstRecordRmsu3 = []; // 暂存趋势图rmsu3数据
+        var qstRecordRmsi1 = []; // 暂存趋势图rmsi1数据
+        var qstRecordRmsi2 = []; // 暂存趋势图rmsi2数据
+        var qstRecordRmsi3 = []; // 暂存趋势图rmsi3数据
+        var qstRecordThdu1 = []; // 暂存趋势图thdu1数据
+        var qstRecordThdu2 = []; // 暂存趋势图thdu1数据
+        var qstRecordThdu3 = []; // 暂存趋势图thdu1数据
+        var qstRecordThdi1 = []; // 暂存趋势图thdi1数据
+        var qstRecordThdi2 = []; // 暂存趋势图thdi1数据
+        var qstRecordThdi3 = []; // 暂存趋势图thdi1数据
+        var qstRecordhz = []; // 暂存趋势图hz数据
+        var qstRecordp1 = []; // 暂存趋势图p1数据
+        var qstRecordp2 =[]; // 暂存趋势图p2数据
+        var qstRecordp3 =[]; // 暂存趋势图p3数据
+        var qstRecords1 = []; // 暂存趋势图s1数据
+        var qstRecords2 =[]; // 暂存趋势图s2数据
+        var qstRecords3 = []; // 暂存趋势图s3数据
+        var qstRecordq1 =[]; // 暂存趋势图q1数据
+        var qstRecordq2 = []; // 暂存趋势图q2数据
+        var qstRecordq3 =[]; // 暂存趋势图q3数据
+        var qstRecordpf1 =[]; // 暂存趋势图pf1数据
+        var qstRecordpf2 =[]; // 暂存趋势图pf2数据
+        var qstRecordpf3 = []; // 暂存趋势图pf3数据
+        var qstRecorddpf1 =[]; // 暂存趋势图dpf1数据
+        var qstRecorddpf2 = []; // 暂存趋势图dpf2数据
+        var qstRecorddpf3 = []; // 暂存趋势图dpf3数据
+        var qstRecordtan1 =[]; // 暂存趋势图tan1数据
+        var qstRecordtan2 = []; // 暂存趋势图tan2数据
+        var qstRecordtan3 = []; // 暂存趋势图tan3数据
+        var qstRecordunb = []; // 暂存趋势图unb数据
+        var qstRecordpstu1 =[]; // 暂存趋势图pstu1数据
+        var qstRecordpstu2 = []; // 暂存趋势图pstu2数据
+        var qstRecordpstu3 =[]; // 暂存趋势图pstu3数据
+        var qstRecordpltu1 =[]; // 暂存趋势图pltu1数据
+        var qstRecordpltu2 =[]; // 暂存趋势图pltu2数据
+        var qstRecordpltu3 = []; // 暂存趋势图pltu3数据
+
         var qstLegend=[
             "rmsU1","rmsU2","rmsU3","rmsI1","rmsI2","rmsI3",
             "thdU1","thdU2","thdU3","thdI1","thdI2","thdI3",
-         /*   "cfU1","cfU2","cfU3","cfI1","cfI2","cfI3",*/
             "hz",
             "p1","p2","p3", "s1","s2","s3", "q1","q2","q3",
             "pf1","pf2","pf3",
@@ -644,12 +643,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             "tan1","tan2","tan3",
             "unb",
             "pstU1","pstU2","pstU3",
-            "pltU1","pltU2","pltU3"/* ,
-           "vh1", "vh2", "vh3", "vh4", "vh5", "vh6", "vh7", "vh8", "vh9", "vh10",
-            "vh11", "vh12", "vh13", "vh14", "vh15", "vh16", "vh17", "vh18", "vh19", "vh20",
-            "vh21", "vh22", "vh23", "vh24", "vh25", "vh26", "vh27", "vh28", "vh29", "vh30",
-            "vh31", "vh32", "vh33", "vh34", "vh35", "vh36", "vh37", "vh38", "vh39", "vh40",
-            "vh41", "vh42", "vh43", "vh44", "vh45", "vh46", "vh47", "vh48", "vh49", "vh50"*/
+            "pltU1","pltU2","pltU3"
             ];//趋势图图例
         var gaugePointerColor = ["#ffff00", "#00ff00", "#ff0000"]; // 三相不平衡度表的指针颜色
         var sxbphdlegend = ["U1", "U2", "U3", "V1", "V2", "V3", "A1", "A2", "A3"]; // 三相不平衡度表的图例
@@ -670,7 +664,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 show: false,
                 data: qstLegend
             },
-            // 数据窗口缩放
+           /* // 数据窗口缩放
             dataZoom: [
                 {
                     type: 'slider',
@@ -698,7 +692,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     start: 0,
                     end: 100
                 }
-            ],
+            ],*/
             xAxis: {
                 type: 'time',
                 splitLine: {
@@ -719,254 +713,242 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     name: "rmsU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsU1"}
-                },
+                    ,data: qstRecordRmsu1
+                }
+                ,
                 {
                     name: "rmsU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "rmsU3"}
+                    encode: {x: "time", y: "rmsU2"}
+                    ,data: qstRecordRmsu2
                 },
                 {
                     name: "rmsU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsU3"}
+                    ,data: qstRecordRmsu3
                 },
                 {
                     name: "rmsI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsI1"}
+                    ,data: qstRecordRmsi1
                 },
                 {
                     name: "rmsI2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsI2"}
+                    ,data: qstRecordRmsi2
                 },
                 {
                     name: "rmsI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsI3"}
+                    ,data: qstRecordRmsi3
                 },
                 // THD
                 {
                     name: "thdU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdU1"}
+                    ,data: qstRecordThdu1
                 },
                 {
                     name: "thdU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "thdU3"}
+                    encode: {x: "time", y: "thdU2"}
+                    ,data: qstRecordThdu2
                 },
                 {
                     name: "thdU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdU3"}
+                    ,data: qstRecordThdu3
                 },
                 {
                     name: "thdI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdI1"}
+                    ,data: qstRecordThdi1
                 },
                 {
                     name: "thdI2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdI2"}
+                    ,data: qstRecordThdi2
                 },
                 {
                     name: "thdI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "thdI3"}
+                    ,data: qstRecordThdi3
                 },
                 // Hz
                 {
                     name: "hz", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "hz"}
+                    ,data: qstRecordhz
                 },
                 // W
                 {
                     name: "p1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "p1"}
+                    ,data: qstRecordp1
                 },
                 {
                     name: "p2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "p2"}
+                    ,data: qstRecordp2
                 },
                 {
                     name: "p3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "p3"}
+                    ,data: qstRecordp3
                 },
                 // VA
                 {
                     name: "s1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "s1"}
+                    ,data: qstRecords1
                 },
                 {
                     name: "s2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "s2"}
+                    ,data: qstRecords2
                 },
                 {
                     name: "s3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "s3"}
+                    ,data: qstRecords3
                 },
                 // Var
                 {
                     name: "q1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "q1"}
+                    ,data: qstRecordq1
                 },
                 {
                     name: "q2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "q2"}
+                    ,data: qstRecordq2
                 },
                 {
                     name: "q3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "q3"}
+                    ,data: qstRecordq3
                 },
                 // PF
                 {
                     name: "pf1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pf1"}
+                    ,data: qstRecordpf1
                 },
                 {
                     name: "pf2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pf2"}
+                    ,data: qstRecordpf2
                 },
                 {
                     name: "pf3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pf3"}
+                    ,data: qstRecordpf3
                 },
                 // DPF
                 {
                     name: "dpf1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "dpf1"}
+                    ,data: qstRecorddpf1
                 },
                 {
                     name: "dpf2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "dpf2"}
+                    ,data: qstRecorddpf2
                 },
                 {
                     name: "dpf3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "dpf3"}
+                    ,data: qstRecorddpf3
                 },
                 // Tan
                 {
                     name: "tan1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "tan1"}
+                    ,data: qstRecordtan1
                 },
                 {
                     name: "tan2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "tan2"}
+                    ,data: qstRecordtan2
                 },
                 {
                     name: "tan3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "tan3"}
+                    ,data: qstRecordtan3
                 },
                 // unb
                 {
                     name: "unb", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "unb"}
+                    ,data: qstRecordunb
                 },
                 // Pst
                 {
                     name: "pstU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pstU1"}
+                    ,data: qstRecordpstu1
                 },
                 {
                     name: "pstU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pstU2"}
+                    ,data: qstRecordpstu2
                 },
                 {
                     name: "pstU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pstU3"}
+                    ,data: qstRecordpstu3
                 },
                 // Plt
                 {
                     name: "pltU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pltU1"}
+                    ,data: qstRecordpltu1
                 },
                 {
                     name: "pltU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pltU2"}
+                    ,data: qstRecordpltu2
                 },
                 {
                     name: "pltU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pltU3"}
+                    ,data: qstRecordpltu3
                 }
-                /* //Vh
-                {name: "vh1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh4", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh5", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh6", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh7", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh8", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh9", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh10", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh11", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh12", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh13", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh14", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh15", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh16", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh17", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh18", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh19", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh20", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh21", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh22", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh23", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh24", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh25", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh26", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh27", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh28", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh29", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh30", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh31", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh32", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh33", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh34", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh35", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh36", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh37", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh38", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh39", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh40", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh41", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh42", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh43", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh44", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh45", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh46", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh47", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh48", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh49", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,},
-                {name: "vh50", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,}*/
             ]
         };
         var option2 = {
@@ -1166,7 +1148,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             ]
         };
-
         var option4 = {
             tooltip: {
                 trigger: 'axis',
@@ -1324,11 +1305,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 var self=this;
                 $("#item1-params-list ol li button").removeClass("active");
                 $(this).addClass("active");
-                /*if(this.value === "ah" || this.value === "vh") {
-                    $("#myDropDown")[0].style.display = "block";
-                } else {
-                    $("#myDropDown")[0].style.display = "none";
-                }*/
                 qstLegend.forEach(function(item){
                     if(0===item.indexOf(self.value)){
                         eventChart1.dispatchAction({
@@ -1388,192 +1364,194 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             eventChart1.dispatchAction({
                                 type: "legendUnSelect",
                                 name: item
-                            })
+                            });
                         }
                     });
                 });
             });
             $("#item1-params-list ol li button.active").trigger("click");//默认显示rms数据
             $("#item1-sidebar ol li button.active").trigger("click");
-        };
-
-        var dataSource1 = new Array(1); //  //Array(3)  = [820, 932, 901, 934, 1290, 1330, 1320];
-        var dataSource2 = new Array(1);
-        var dataSource3 = new Array(1);
+        }
 
         // 获取趋势图数据
         function getDataQst(did) {
-            $.ajax({
-                type: "post",
-                url: "getQst",
-                data: {did: did},
-                dataType: "json",
-                success: function (data) {
-                    addData(qstRecords, JSON.parse(data));
-                    updateQst(qstRecords);
-
-                   /* //更新数据
-                    var nRecord = JSON.parse(data);
-                    var vb = nRecord["allVh"];
-
-                    dataSource1[0] = vb[0][0];
-                    dataSource1[1] = vb[0][1];
-                    dataSource1[2] = vb[0][2];
-
-                    dataSource2[0] = vb[1][0];
-                    dataSource2[1] = vb[1][1];
-                    dataSource2[2] = vb[1][2];
-
-                    dataSource3[0] = vb[2][0];
-                    dataSource3[1] = vb[2][1];
-                    dataSource3[2] = vb[2][2];*/
-                }
-            });
+            if(did != null && did != ""){
+                $.ajax({
+                    type: "post",
+                    url: "getQst",
+                    data: {did: did},
+                    dataType: "json",
+                    success: function (data) {
+                        addData(JSON.parse(data));
+                        updateQst();
+                    }
+                });
+            }
         }
 
-        //选择1~50次中的某一次，echarts显示相应的折线
-        /*$("#myDropDown").change(function(){
-            var opt=$("#myDropDown").val();
-            var selectValue = 'vh' + opt;
-            var myOption = eventChart1.getOption();
-            //var dataSource = [820, 932, 901, 934, 1290, 1330, 1320];
-            alert("datascr1"+dataSource1);
-            alert("datascr2"+dataSource2);
-            alert("datascr3"+dataSource3);
-            myOption.series.forEach(function (item, index) {
-                if(item.name === selectValue) {
-                    myOption.series[index].data = dataSource1;
-                    eventChart1.setOption(myOption);
-                }
-            })
-        });*/
-
         // 更新趋势图
-        function updateQst(data) {
+        function updateQst() {
+            console.log("qstRecordRmsi2.len="+qstRecordRmsi2.length);
+
+            for(var i = 0; i < qstRecordRmsi2.length; i++){
+                console.log("qstRecordRmsi2"+ qstRecordRmsi2[i].name + "...." + qstRecordRmsi2[i].value);
+            }
+
             eventChart1.setOption({
-                dataset: {source: data}
+                series: [
+                    {data: qstRecordRmsu1},
+                    {data: qstRecordRmsu2},
+                    {data: qstRecordRmsu3},
+                    {data: qstRecordRmsi1},
+                    {data: qstRecordRmsi2},
+                    {data: qstRecordRmsi3},
+                    {data: qstRecordThdu1},
+                    {data: qstRecordThdu2},
+                    {data: qstRecordThdu3},
+                    {data: qstRecordThdi1},
+                    {data: qstRecordThdi2},
+                    {data: qstRecordThdi3},
+                    {data: qstRecordhz},
+                    {data: qstRecordp1},
+                    {data: qstRecordp2},
+                    {data: qstRecordp3},
+                    {data: qstRecords1},
+                    {data: qstRecords2},
+                    {data: qstRecords3},
+                    {data: qstRecordq1},
+                    {data: qstRecordq2},
+                    {data: qstRecordq3},
+                    {data: qstRecordpf1},
+                    {data: qstRecordpf2},
+                    {data: qstRecordpf3},
+                    {data: qstRecorddpf1},
+                    {data: qstRecorddpf2},
+                    {data: qstRecorddpf3},
+                    {data: qstRecordtan1},
+                    {data: qstRecordtan2},
+                    {data: qstRecordtan3},
+                    {data: qstRecordunb},
+                    {data: qstRecordpstu1},
+                    {data: qstRecordpstu2},
+                    {data: qstRecordpstu3},
+                    {data: qstRecordpltu1},
+                    {data: qstRecordpltu2},
+                    {data: qstRecordpltu3}
+                ]
             });
         }
 
         // 添加数据
-        function addData(qstRecords, newRecord) {
-          //  console.log("qstRecords[] "+qstRecords);
+        function addData(newRecord) {
+            // 构造1条记录
+            var time = formatDateTime(newRecord["allHZ"][0]["time"]);
+            // RMS
+            var rmsU1 = newRecord["allRMS"][0]["u1"];
+            var rmsU2 = newRecord["allRMS"][0]["u2"];
+            var rmsU3 = newRecord["allRMS"][0]["u3"];
+            var rmsI1 = newRecord["allRMS"][0]["i1"];
+            var rmsI2 = newRecord["allRMS"][0]["i2"];
+            var rmsI3 = newRecord["allRMS"][0]["i3"];
+            // THD
+            var thdU1 = newRecord["allTHD"][0]["u1"];
+            var thdU2 = newRecord["allTHD"][0]["u2"];
+            var thdU3 = newRecord["allTHD"][0]["u3"];
+            var thdI1 = newRecord["allTHD"][0]["i1"];
+            var thdI2 = newRecord["allTHD"][0]["i2"];
+            var thdI3 = newRecord["allTHD"][0]["i3"];
+            // Hz
+            var hz = newRecord["allHZ"][0]["hz"];
+            // W
+            var p1 = newRecord["allW"][0]["p1"];
+            var p2 = newRecord["allW"][0]["p2"];
+            var p3 = newRecord["allW"][0]["p3"];
+            // VA
+            var s1 = newRecord["allVA"][0]["s1"];
+            var s2 = newRecord["allVA"][0]["s2"];
+            var s3 = newRecord["allVA"][0]["s3"];
+            // Var
+            var q1 = newRecord["allVAR"][0]["q1"];
+            var q2 = newRecord["allVAR"][0]["q2"];
+            var q3 = newRecord["allVAR"][0]["q3"];
+            // PF
+            var pf1 = newRecord["allPF"][0]["pf1"];
+            var pf2 = newRecord["allPF"][0]["pf2"];
+            var pf3 = newRecord["allPF"][0]["pf3"];
+            // DPF
+            var dpf1 = newRecord["allDPF"][0]["cosPhi1"];
+            var dpf2 = newRecord["allDPF"][0]["cosPhi2"];
+            var dpf3 = newRecord["allDPF"][0]["cosPhi3"];
+            // Tan
+            var tan1 = newRecord["allTAN"][0]["tan1"];
+            var tan2 = newRecord["allTAN"][0]["tan2"];
+            var tan3 = newRecord["allTAN"][0]["tan3"];
+            // unb
+            var unb = newRecord["allUNB"][0]["unb"];
+            // Pst
+            var pstU1 = newRecord["allPST"][0]["pstU1"];
+            var pstU2 = newRecord["allPST"][0]["pstU2"];
+            var pstU3 = newRecord["allPST"][0]["pstU3"];
+            // Plt
+            var pltU1 = newRecord["allPLT"][0]["pltU1"];
+            var pltU2 = newRecord["allPLT"][0]["pltU2"];
+            var pltU3 =  newRecord["allPLT"][0]["pltU3"];
 
-            if (qstRecords.length > (60 * 12)) {
-                alert("ifififif qstRecords.length"+qstRecords.length);
-                qstRecords.shift();
-                qstRecords.shift();
-                qstRecords.shift();
-            }
-            // 构造3条记录
-            for(var i = 0; i < 1; i++){  //i < 3
-                var oneRecord = {
-                    time: newRecord["allHZ"][i]["time"],
-                    // RMS
-                    rmsU1: newRecord["allRMS"][i]["u1"],
-                    rmsU2: newRecord["allRMS"][i]["u2"],
-                    rmsU3: newRecord["allRMS"][i]["u3"],
-                    rmsI1: newRecord["allRMS"][i]["i1"],
-                    rmsI2: newRecord["allRMS"][i]["i2"],
-                    rmsI3: newRecord["allRMS"][i]["i3"],
-                    // THD
-                    thdU1: newRecord["allTHD"][i]["u1"],
-                    thdU2: newRecord["allTHD"][i]["u2"],
-                    thdU3: newRecord["allTHD"][i]["u3"],
-                    thdI1: newRecord["allTHD"][i]["i1"],
-                    thdI2: newRecord["allTHD"][i]["i2"],
-                    thdI3: newRecord["allTHD"][i]["i3"],
-                    // Hz
-                    hz: newRecord["allHZ"][i]["hz"],
-                    // W
-                    p1: newRecord["allW"][i]["p1"],
-                    p2: newRecord["allW"][i]["p2"],
-                    p3: newRecord["allW"][i]["p3"],
-                    // VA
-                    s1: newRecord["allVA"][i]["s1"],
-                    s2: newRecord["allVA"][i]["s2"],
-                    s3: newRecord["allVA"][i]["s3"],
-                    // Var
-                    q1: newRecord["allVAR"][i]["q1"],
-                    q2: newRecord["allVAR"][i]["q2"],
-                    q3: newRecord["allVAR"][i]["q3"],
-                    // PF
-                    pf1: newRecord["allPF"][i]["pf1"],
-                    pf2: newRecord["allPF"][i]["pf2"],
-                    pf3: newRecord["allPF"][i]["pf3"],
-                    // DPF
-                    dpf1: newRecord["allDPF"][i]["cosPhi1"],
-                    dpf2: newRecord["allDPF"][i]["cosPhi2"],
-                    dpf3: newRecord["allDPF"][i]["cosPhi3"],
-                    // Tan
-                    tan1: newRecord["allTAN"][i]["tan1"],
-                    tan2: newRecord["allTAN"][i]["tan2"],
-                    tan3: newRecord["allTAN"][i]["tan3"],
-                    // unb
-                    unb: newRecord["allUNB"][i]["unb"],
-                    // Pst
-                    pstU1: newRecord["allPST"][i]["pstU1"],
-                    pstU2: newRecord["allPST"][i]["pstU2"],
-                    pstU3: newRecord["allPST"][i]["pstU3"],
-                    // Plt
-                    pltU1: newRecord["allPLT"][i]["pltU1"],
-                    pltU2: newRecord["allPLT"][i]["pltU2"],
-                    pltU3: newRecord["allPLT"][i]["pltU3"]//,
-                  /*  // vh
-                    vh1: newRecord["allVh"][i][0],
-                    vh2: newRecord["allVh"][i][1],
-                    vh3: newRecord["allVh"][i][2],
-                    vh4: newRecord["allVh"][i][3],
-                    vh5: newRecord["allVh"][i][4],
-                    vh6: newRecord["allVh"][i][5],
-                    vh7: newRecord["allVh"][i][6]// ,*/
-                   /* vh8: newRecord["allVh"][i]["vh8"],
-                    vh9: newRecord["allVh"][i]["vh9"],
-                    vh10: newRecord["allVh"][i]["vh10"],
-                    vh11: newRecord["allVh"][i]["vh11"],
-                    vh12: newRecord["allVh"][i]["vh12"],
-                    vh13: newRecord["allVh"][i]["vh13"],
-                    vh14: newRecord["allVh"][i]["vh14"],
-                    vh15: newRecord["allVh"][i]["vh15"],
-                    vh16: newRecord["allVh"][i]["vh16"],
-                    vh17: newRecord["allVh"][i]["vh17"],
-                    vh18: newRecord["allVh"][i]["vh18"],
-                    vh19: newRecord["allVh"][i]["vh19"],
-                    vh20: newRecord["allVh"][i]["vh20"],
-                    vh21: newRecord["allVh"][i]["vh21"],
-                    vh22: newRecord["allVh"][i]["vh22"],
-                    vh23: newRecord["allVh"][i]["vh23"],
-                    vh24: newRecord["allVh"][i]["vh24"],
-                    vh25: newRecord["allVh"][i]["vh25"],
-                    vh26: newRecord["allVh"][i]["vh26"],
-                    vh27: newRecord["allVh"][i]["vh27"],
-                    vh28: newRecord["allVh"][i]["vh28"],
-                    vh29: newRecord["allVh"][i]["vh29"],
-                    vh30: newRecord["allVh"][i]["vh30"],
-                    vh31: newRecord["allVh"][i]["vh31"],
-                    vh32: newRecord["allVh"][i]["vh32"],
-                    vh33: newRecord["allVh"][i]["vh33"],
-                    vh34: newRecord["allVh"][i]["vh34"],
-                    vh35: newRecord["allVh"][i]["vh35"],
-                    vh36: newRecord["allVh"][i]["vh36"],
-                    vh37: newRecord["allVh"][i]["vh37"],
-                    vh38: newRecord["allVh"][i]["vh38"],
-                    vh39: newRecord["allVh"][i]["vh39"],
-                    vh40: newRecord["allVh"][i]["vh40"],
-                    vh41: newRecord["allVh"][i]["vh41"],
-                    vh42: newRecord["allVh"][i]["vh42"],
-                    vh43: newRecord["allVh"][i]["vh43"],
-                    vh44: newRecord["allVh"][i]["vh44"],
-                    vh45: newRecord["allVh"][i]["vh45"],
-                    vh46: newRecord["allVh"][i]["vh46"],
-                    vh47: newRecord["allVh"][i]["vh47"],
-                    vh48: newRecord["allVh"][i]["vh48"],
-                    vh49: newRecord["allVh"][i]["vh49"],
-                    vh50: newRecord["allVh"][i]["vh50"]*/
-                    // Ah
-                };
-                qstRecords.push(oneRecord);
-            }
+
+            qstRecordRmsu1.push( {name: time, value:[time, rmsU1]} );
+            qstRecordRmsu2.push( {name: time, value:[time, rmsU2]} );
+            qstRecordRmsu3.push( {name: time, value:[time, rmsU3]} );
+
+            qstRecordRmsi1.push( {name: time, value:[time, rmsI1]} );
+            qstRecordRmsi2.push( {name: time, value:[time, rmsI2]} );
+            qstRecordRmsi3.push( {name: time, value:[time, rmsI3]} );
+
+            qstRecordThdu1.push( {name: time, value:[time, thdU1]} );
+            qstRecordThdu2.push( {name: time, value:[time, thdU2]} );
+            qstRecordThdu3.push( {name: time, value:[time, thdU3]} );
+
+            qstRecordThdi1.push( {name: time, value:[time, thdI1]} );
+            qstRecordThdi2.push( {name: time, value:[time, thdI2]} );
+            qstRecordThdi3.push( {name: time, value:[time, thdI3]} );
+
+            qstRecordhz.push( {name: time, value:[time, hz]} );
+
+            qstRecordp1.push( {name: time, value:[time, dpf1]} );
+            qstRecordp2.push( {name: time, value:[time, dpf2]} );
+            qstRecordp3.push( {name: time, value:[time, dpf3]} );
+
+            qstRecordp1.push( {name: time, value:[time, p1]} );
+            qstRecordp2.push( {name: time, value:[time, p2]} );
+            qstRecordp3.push( {name: time, value:[time, p3]} );
+
+            qstRecords1.push( {name: time, value:[time, s1]} );
+            qstRecords2.push( {name: time, value:[time, s2]} );
+            qstRecords3.push( {name: time, value:[time, s3]} );
+
+            qstRecordq1.push( {name: time, value:[time, q1]} );
+            qstRecordq2.push( {name: time, value:[time, q2]} );
+            qstRecordq3.push( {name: time, value:[time, q3]} );
+
+            qstRecordpf1.push( {name: time, value:[time, pf1]} );
+            qstRecordpf2.push( {name: time, value:[time, pf2]} );
+            qstRecordpf3.push( {name: time, value:[time, pf3]} );
+
+            qstRecorddpf1.push( {name: time, value:[time, dpf1]} );
+            qstRecorddpf2.push( {name: time, value:[time, dpf2]} );
+            qstRecorddpf3.push( {name: time, value:[time, dpf3]} );
+
+            qstRecordtan1.push( {name: time, value:[time, tan1]} );
+            qstRecordtan2.push( {name: time, value:[time, tan2]} );
+            qstRecordtan3.push( {name: time, value:[time, tan3]} );
+
+            qstRecordunb.push( {name: time, value:[time, unb]} );
+
+            qstRecordpstu1.push( {name: time, value:[time, pstU1]} );
+            qstRecordpstu2.push( {name: time, value:[time, pstU2]} );
+            qstRecordpstu3.push( {name: time, value:[time, pstU3]} );
+
+            qstRecordpltu1.push( {name: time, value:[time, pltU1]} );
+            qstRecordpltu2.push( {name: time, value:[time, pltU2]} );
+            qstRecordpltu3.push( {name: time, value:[time, pltU3]} );
         }
     </script>
 
@@ -1959,6 +1937,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             return currentdate;
         }
 
+        function formatDateTime(time) {
+
+            var unixtime = time;
+            var unixTimestamp = new Date(unixtime * 1);
+            var Y = unixTimestamp.getFullYear();
+            var M = unixTimestamp.getMonth() + 1; //((unixTimestamp.getMonth() + 1) > 10 ? (unixTimestamp.getMonth() + 1) : '0' + (unixTimestamp.getMonth() + 1));
+            var D = (unixTimestamp.getDate() > 10 ? unixTimestamp.getDate() : '0' + unixTimestamp.getDate());
+            var Hour = unixTimestamp.getHours();
+            var Minute = unixTimestamp.getMinutes();
+            var Second = unixTimestamp.getSeconds();
+
+            if (M >= 1 && M <= 9) {
+                M = "0" + M;
+            }
+            if (D >= 0 && D <= 9) {
+                D = "0" + D;
+            }
+            if (Hour >= 0 && Hour <= 9) {
+                Hour = "0" + Hour;
+            }
+            if (Minute >= 0 && Minute <= 9) {
+                Minute = "0" + Minute;
+            }
+            if (Second >= 0 && Second <= 9) {
+                Second = "0" + Second;
+            }
+
+            return  Y + '-' + M + '-' + D + " " + Hour + ":" + Minute + ":" + Second;
+        }
+
         function chartsInit(){
             // 初始化图表
             eventChart1.setOption(option1);
@@ -1968,20 +1976,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             eventBanding();
             // 按指定时间间隔5s 更新图表
-            setInterval(function () {
+
+           // var did = $("#monitorpnt").val();
+
+           // if(did != ""){
+             /*   console.log("did !=  "+did);
+                setInterval(function () {
+                    getDataQst(did);
+                    getDataXb(did);
+                    getDataSxdy(did);
+                    getDataParams(did);
+                    getOnlineWave(did);
+                }, 8000);*/
+            //}
+
+           /* setInterval(function () {
                 getDataQst($("#monitorpnt").val());
                 getDataXb($("#monitorpnt").val());
                 getDataSxdy($("#monitorpnt").val());
                 getDataParams($("#monitorpnt").val());
                 getOnlineWave($("#monitorpnt").val());
-            },5000);
-
+            }, 30000);*/
             // 更新时间 每2s
             setInterval(function () {
                 $("#item3-realtime span").html(getNowFormatDate());
             },5000);
         }
         chartsInit();
+
+        setInterval(function () {
+            getDataQst($("#monitorpnt").val());
+            getDataXb($("#monitorpnt").val());
+            getDataSxdy($("#monitorpnt").val());
+            getDataParams($("#monitorpnt").val());
+            getOnlineWave($("#monitorpnt").val());
+        }, 10000); // 10s
 
     </script>
 
@@ -2053,27 +2082,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
         }
     </script>
-
-
-    <%--&lt;%&ndash;选择监测点时，从后台读取相应数据&ndash;%&gt;
-    <script type="text/javascript"f>
-    $("#monitorpnt").change(function(){
-        var opt=$("#monitorpnt").val();
-        if(opt) {
-            if ($("#item1").is(":visible"))
-                getDataQst(opt);
-            else if ($("#item2").is(":visible"))
-                getDataXb(opt);
-            else if ($("#item3").is(":visible"))
-                getDataSxdy(opt);
-            else if ($("#item4").is(":visible"))
-                getDataParams(opt);
-            else if ($("#item5").is(":visible"))
-                getOnlineWave(opt);
-        }
-    });
-    </script>
---%>
 
 </body>
 
