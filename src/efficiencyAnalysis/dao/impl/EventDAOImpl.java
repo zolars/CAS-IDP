@@ -1860,7 +1860,7 @@ public class EventDAOImpl implements EventDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rname='" + cbname + "'");
+                "FROM Computerroom where rid='" + cbname + "'");
 
         String didset = comps.getDidset();
         String didstr[] = didset.split("，");
@@ -1876,10 +1876,11 @@ public class EventDAOImpl implements EventDAO {
         }
 
         if (didlist != null) {
+            System.out.println("from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
             EventCtrl temp = (EventCtrl) hbsessionDao.getFirst(
                     "from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
             if (temp != null)
-                return (temp.getValue().equals("1")); //状态码为1，告警
+                return true; //状态码为1，告警
         }
         return false; //状态码为0，正常
     }

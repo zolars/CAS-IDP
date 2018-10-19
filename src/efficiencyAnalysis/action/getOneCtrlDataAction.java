@@ -38,15 +38,18 @@ public class getOneCtrlDataAction extends ActionSupport {
 
             EventDAO dao = new EventDAOImpl();
 
-            Boolean rt = dao.getComputerroomCtrlStatus(compname, starttime, endtime);
+            boolean rt = dao.getComputerroomCtrlStatus(compname, starttime, endtime);
 
-            if (rt) return "success";
-            else return "failure";
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("rt", rt);
+
+            result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();
             return "failure";
         }
+        return "success";
     }
 
 }

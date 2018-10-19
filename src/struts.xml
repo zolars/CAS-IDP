@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-    "http://struts.apache.org/dtds/struts-2.0.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
     <constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
@@ -17,771 +17,774 @@
     <!-- json包 -->
     <package name="json-interceptor" extends="struts-interceptor">
         <result-types>
-            <result-type name="json" class="org.apache.struts2.json.JSONResult" />
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
         </result-types>
         <interceptors>
-            <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" />
+            <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>
         </interceptors>
     </package>
 
     <!--<package name="struts2" namespace="/" extends="struts-default">-->
-     <package name="struts2" namespace="/" extends="json-interceptor">
-         <action name="login" class="userManage.action.UserLoginAction">
-             <!-- 将login映射到物理地址 -->
+    <package name="struts2" namespace="/" extends="json-interceptor">
+        <action name="login" class="userManage.action.UserLoginAction">
+            <!-- 将login映射到物理地址 -->
             <result name="success">/success.jsp</result>
             <result name="failure">/failure.jsp</result>
-         </action>
-
-         <action name="setProvince" class="userManage.action.setProvinceAction">
-             <result name="success"></result>
-             <result name="failure">/failure.jsp</result>
-         </action>
-
-         <action name="getCityTree" class="userManage.action.CityTreeAction">
-             <!--将getUserTree映射到物理地址 -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getCompTree" class="userManage.action.CompTreeAction">
-             <!--将getUserTree映射到物理地址 -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllUserInfo" class="userManage.action.getUserInfoAction">
-             <!--将getUserInfo映射到物理地址 -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getUserInfo" class="userManage.action.getOneUserInfoAction">
-             <!--getUserInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="updateRolesInfo" class="userManage.action.updateRoleInfoAction">
-             <!--updateRolesInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="deleteUserInfo" class="userManage.action.deleteUserInfoAction">
-             <!--deleteUserInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="deleteRolesInfo" class="userManage.action.deleteRolesInfoAction">
-             <!--deleteUserInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="updateUserInfo" class="userManage.action.updateUserInfoAction">
-             <!--updateUserInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="addUserInfo" class="userManage.action.addUserInfoAction">
-             <!--addUserInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="addRolesInfo" class="userManage.action.addRolesInfoAction">
-             <!--addRolesInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllRoles" class="userManage.action.getAllRolesAction">
-             <!--getAllRoles -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getRolesInfo" class="userManage.action.getOneRolesAction">
-             <!--getRolesInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllProvince" class="userManage.action.getAllProvinceAction">
-             <!--getAllRoles -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllCity" class="userManage.action.getAllCityAction">
-             <!--getAllCity -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getCityByProvince" class="userManage.action.getCityByProvinceAction">
-             <!--getCityByProvince -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllComputerroom" class="userManage.action.getAllComputerroomAction">
-             <!--getAllComputerroom -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getComputerroomByCity" class="userManage.action.getComputerroomByCityAction">
-             <!--getComputerroomByCity -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getDeviceInfo" class="deviceManage.action.getDeviceInfoAction">
-             <!--getDeviceInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <!--wsy2018.9.6 -->
-         <action name="getProBankInfo" class="orgnizationManage.action.getProBankInfoAction">
-             <!--getProBankInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <!--wsy2018.9.26 -->
-         <action name="getHarmonicVoltage" class="reportChart.action.getHarmonicVoltage">
-             <!--getHarmonicVoltage -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-         <!--wsy2018.9.27 -->
-         <action name="getHarmonicCurrent" class="reportChart.action.getHarmonicCurrent">
-             <!--getHarmonicCurrent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-         <!--wsy2018.9.29 -->
-         <action name="getHVCrate" class="reportChart.action.getHVCrate">
-             <!--getHVCrate -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-         <!--wsy2018.10.12 -->
-         <action name="getSynthesis" class="reportChart.action.getSynthesis">
-             <!--getSynthesis -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="addDeviceAlarmUser" class="deviceManage.action.addDeviceAlarmUserAction">
-             <!--addDeviceAlarmUser -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="addOneDevice" class="deviceManage.action.addOneDeviceAction">
-             <!--addOneDevice -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getXB" class="onlineTest.action.getXBaction">
-             <!--getXB -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getXBwave" class="onlineTest.action.getXBwaveaction">
-             <!--getXBwave -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getParameter" class="onlineTest.action.getParameteraction">
-             <!--getParameter -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getSXDY" class="onlineTest.action.getSXDYaction">
-             <!--getSXDY -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getQst" class="onlineTest.action.getQstaction">
-             <!--getQst -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getParameterHis" class="onlineTest.action.getParameteractionHis">
-             <!--getParameter -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getMonitorPoints" class="onlineTest.action.getMonitorPointsAction">
-             <!--getMonitorPoints -->
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getKnowledgeTree" class="knowledgeManage.action.getKnowledgeTreeAction">
-             <!--getKnowledgeTree -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getKnowledgeTreeNodeContent" class="knowledgeManage.action.getKnowledgeTreeNodeContentAction">
-             <!--getKnowledgeTreeNodeContent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="updateKnowledgeTreeNodeContent" class="knowledgeManage.action.updateKnowledgeTreeNodeContentAction">
-             <!--updateKnowledgeTreeNodeContent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="deleteKnowledgeTreeNodeContent" class="knowledgeManage.action.deleteKnowledgeTreeNodeContentAction">
-             <!--deleteKnowledgeTreeNodeContent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="addKnowledgeTreeNodeContent" class="knowledgeManage.action.addKnowledgeTreeNodeContentAction">
-             <!--addKnowledgeTreeNodeContent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="uploadKnowledgeTree" class="knowledgeManage.action.uploadKnowledgeTreeAction">
-             <!--uploadKnowledgeTree -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="addKnowledgeTreeNodeStruct" class="knowledgeManage.action.addKnowledgeTreeNodeStructAction">
-             <!--addKnowledgeTreeNodeStruct -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="updateKnowledgeTreeNodeStruct" class="knowledgeManage.action.updateKnowledgeTreeNodeStructAction">
-             <!--updateKnowledgeTreeNodeStruct -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="deleteKnowledgeTreeNodeStruct" class="knowledgeManage.action.deleteKnowledgeTreeNodeStructAction">
-             <!--deleteKnowledgeTreeNodeStruct -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getPermissionTree" class="systemMng.action.getPermissionTreeAction">
-             <!--getPermissionTree -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getOneRolesFunctions" class="systemMng.action.getOneRolesFunctionsAction">
-             <!--getOneRolesFunctions -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="allocRolesPermission" class="systemMng.action.allocRolesPermissionAction">
-             <!--allocRolesPermission -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllAlarmUser" class="systemMng.action.getAllAlarmUserAction">
-             <!--getAllAlarmUser -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="deleteDeviceAlarmRoles" class="deviceManage.action.deleteDeviceAlarmRolesAction">
-             <!--deleteDeviceAlarmRoles -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getDeviceThreshold" class="deviceManage.action.getDeviceThresholdAction">
-             <!--getDeviceThreshold -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="addThresholdInfo" class="deviceManage.action.addThresholdInfoAction">
-             <!--addThresholdInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getOneDeviceThreshold" class="deviceManage.action.getOneDeviceThresholdAction">
-             <!--getOneDeviceThreshold -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getOneofOneDeviceThreshold" class="deviceManage.action.getOneOfOneDeviceThresholdAction">
-             <!--getOneDeviceThreshold -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="updateOneDeviceThreshold" class="deviceManage.action.updateOneDeviceThresholdAction">
-             <!--updateOneDeviceThreshold -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="deleteOneDeviceThreshold" class="deviceManage.action.deleteOneDeviceThresholdAction">
-             <!--deleteOneDeviceThreshold -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-
-         <!--获取历史数据开始-->
-         <action name="getHisData" class="historyData.action.getHisAction">
-             <!--getHisData -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-         <!--获取浪涌塌陷数据-->
-         <action name="getHisDataLyTx" class="historyData.action.getHisLyTxAction">
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-         <!--获取历史数据结束-->
-
-         <action name="getAllIDPDevice" class="deviceManage.action.getAllIDPDeviceAction">
-             <!--getAllIDPDevice -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllUPSDevice" class="deviceManage.action.getAllUPSDeviceAction">
-             <!--getAllUPSDevice -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllxdcDevice" class="deviceManage.action.getAllxdcDeviceAction">
-             <!--getAllxdcDevice -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllfdjDevice" class="deviceManage.action.getAllfdjDeviceAction">
-             <!--getAllfdjDevice -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllktDevice" class="deviceManage.action.getAllktDeviceAction">
-             <!--getAllktDevice -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAllotherDevice" class="deviceManage.action.getAllotherDeviceAction">
-             <!--getAllotherDevice -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="fuzzySearchDevice" class="deviceManage.action.fuzzySearchDeviceAction">
-             <!--fuzzySearchDevice -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="fuzzySearchDeviceThresold" class="deviceManage.action.fuzzySearchDeviceThresoldAction">
-             <!--fuzzySearchDeviceThresold -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getPowerEvent" class="efficiencyAnalysis.action.getPowerEventAction">
-             <!--getPowerEvent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getCtrlEvent" class="efficiencyAnalysis.action.getCtrlEventAction">
-             <!--getCtrlEvent -->
-             <result name="failure"></result>
-             <result name="success" type="json"></result>
-         </action>
-
-         <action name="getEnvironmentEvent" class="efficiencyAnalysis.action.getEnvironmentEventAction">
-             <!--getEnvironmentEvent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getDetailEvironmentEventtemp" class="efficiencyAnalysis.action.getDetailEvironmentEventtempAction">
-             <!--getEnvironmentEvent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getDetailEvironmentEventwet" class="efficiencyAnalysis.action.getDetailEvironmentEventwetAction">
-             <!--getEnvironmentEvent -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getDetailPowerEventlytx" class="efficiencyAnalysis.action.getDetailPowerEventlytxAction">
-             <!--getDetailPowerEventlytx -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getOneCtrlData" class="efficiencyAnalysis.action.getOneCtrlDataAction">
-             <!--getOneCtrlData -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getDetailPowerEventxb" class="efficiencyAnalysis.action.getDetailPowerEventxbAction">
-             <!--getDetailPowerEventxb -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getDetailPowerEventsxbph" class="efficiencyAnalysis.action.getDetailPowerEventsxbphAction">
-             <!--getDetailPowerEventsxbph -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getDetailPowerEventshunbian" class="efficiencyAnalysis.action.getDetailPowerEventshunbianAction">
-             <!--getDetailPowerEventshunbian -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getDetailPowerEventshanbian" class="efficiencyAnalysis.action.getDetailPowerEventshanbianAction">
-             <!--getDetailPowerEventshanbian -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="setAssessmentInfo" class="efficiencyAnalysis.action.setAssessmentInfoAction">
-             <!--setAssessmentInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getChinaMapData" class="efficiencyAnalysis.action.getChinaMapDataAction">
-             <!--getChinaMapData -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getOneProvinceMapData" class="efficiencyAnalysis.action.getOneProvinceMapDataAction">
-             <!--getOneProvinceMapData -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="addDeviceAlarmInfo" class="deviceManage.action.addDeviceAlarmPreContentAction">
-             <!--addDeviceAlarmInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getOnlyCityBankTree" class="efficiencyAnalysis.action.getOnlyCityBankTreeAction">
-             <!--getOnlyCityBankTree -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="addSignatureAndAnnotation" class="efficiencyAnalysis.action.addSignatureAndAnnotationAction">
-             <!--addSignatureAndAnnotation -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getSettingTree" class="efficiencyAnalysis.action.getSettingTreeAction">
-             <!--getSettingTree -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="setAllEventtypePriorty" class="efficiencyAnalysis.action.setAllEventtypePriortyAction">
-             <!--setAllEventtypePriorty -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="setCaptureSettingInfo" class="efficiencyAnalysis.action.setCaptureSettingInfoAction">
-             <!--setCaptureSettingInfo -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getOneComputerroomMapData" class="efficiencyAnalysis.action.getOneComputerroomMapDataAction">
-             <!--getOneComputerroomMapData -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="plantformMessage" class="smsplantform.webservice">
-             <!--plantformMessage -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getOrgnizationTree" class="systemMng.action.getOrgnizationTreeAction">
-             <!--getOrgnizationTree -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="deleteOrgnizationTree" class="systemMng.action.deleteOrgnizationTreeAction">
-             <!--deleteOrgnizationTree -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="updateOrgnizationTree" class="systemMng.action.updateOrgnizationTreeAction">
-             <!--updateOrgnizationTree -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-
-         <action name="setAlarmUser" class="systemMng.action.setAlarmUserAction">
-             <!--setAlarmUser -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="getAlarmUserByLevel" class="systemMng.action.getAlarmUserByLevelAction">
-             <!--getAlarmUserByLevel -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="addOrgnizationTree" class="systemMng.action.addOrgnizationTreeAction">
-             <!--addOrgnizationTree -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="uploadThresholdExcelToDB" class="systemMng.action.uploadThresholdExcelToDBAction">
-             <!--uploadThresholdExcelToDB -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
-
-         <action name="uploadOne" class="Util.UploadImageAction" >
-             <!-- 限制图片的格式和图片的大小 -->
-             <interceptor-ref name="fileUpload">
-                 <param name="allowedTypes">
-                     image/bmp,image/png,image/gif,image/jpeg,image/jpg
-                 </param>
-                 <param name="maximumSize">1024000000</param>
-             </interceptor-ref>
-             <!-- 默认的拦截器，必须要写 -->
-             <interceptor-ref name="defaultStack" />
-
-             <result name="success">/province.jsp</result>
-             <result name="input">/failure.jsp</result>
-         </action>
-
-     </package>
+        </action>
+
+        <action name="setProvince" class="userManage.action.setProvinceAction">
+            <result name="success"></result>
+            <result name="failure">/failure.jsp</result>
+        </action>
+
+        <action name="getCityTree" class="userManage.action.CityTreeAction">
+            <!--将getUserTree映射到物理地址 -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getCompTree" class="userManage.action.CompTreeAction">
+            <!--将getUserTree映射到物理地址 -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllUserInfo" class="userManage.action.getUserInfoAction">
+            <!--将getUserInfo映射到物理地址 -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getUserInfo" class="userManage.action.getOneUserInfoAction">
+            <!--getUserInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="updateRolesInfo" class="userManage.action.updateRoleInfoAction">
+            <!--updateRolesInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="deleteUserInfo" class="userManage.action.deleteUserInfoAction">
+            <!--deleteUserInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="deleteRolesInfo" class="userManage.action.deleteRolesInfoAction">
+            <!--deleteUserInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="updateUserInfo" class="userManage.action.updateUserInfoAction">
+            <!--updateUserInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="addUserInfo" class="userManage.action.addUserInfoAction">
+            <!--addUserInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="addRolesInfo" class="userManage.action.addRolesInfoAction">
+            <!--addRolesInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllRoles" class="userManage.action.getAllRolesAction">
+            <!--getAllRoles -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getRolesInfo" class="userManage.action.getOneRolesAction">
+            <!--getRolesInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllProvince" class="userManage.action.getAllProvinceAction">
+            <!--getAllRoles -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllCity" class="userManage.action.getAllCityAction">
+            <!--getAllCity -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getCityByProvince" class="userManage.action.getCityByProvinceAction">
+            <!--getCityByProvince -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllComputerroom" class="userManage.action.getAllComputerroomAction">
+            <!--getAllComputerroom -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getComputerroomByCity" class="userManage.action.getComputerroomByCityAction">
+            <!--getComputerroomByCity -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getDeviceInfo" class="deviceManage.action.getDeviceInfoAction">
+            <!--getDeviceInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <!--wsy2018.9.6 -->
+        <action name="getProBankInfo" class="orgnizationManage.action.getProBankInfoAction">
+            <!--getProBankInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <!--wsy2018.9.26 -->
+        <action name="getHarmonicVoltage" class="reportChart.action.getHarmonicVoltage">
+            <!--getHarmonicVoltage -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+        <!--wsy2018.9.27 -->
+        <action name="getHarmonicCurrent" class="reportChart.action.getHarmonicCurrent">
+            <!--getHarmonicCurrent -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+        <!--wsy2018.9.29 -->
+        <action name="getHVCrate" class="reportChart.action.getHVCrate">
+            <!--getHVCrate -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+        <!--wsy2018.10.12 -->
+        <action name="getSynthesis" class="reportChart.action.getSynthesis">
+            <!--getSynthesis -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="addDeviceAlarmUser" class="deviceManage.action.addDeviceAlarmUserAction">
+            <!--addDeviceAlarmUser -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="addOneDevice" class="deviceManage.action.addOneDeviceAction">
+            <!--addOneDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getXB" class="onlineTest.action.getXBaction">
+            <!--getXB -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getXBwave" class="onlineTest.action.getXBwaveaction">
+            <!--getXBwave -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getParameter" class="onlineTest.action.getParameteraction">
+            <!--getParameter -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getSXDY" class="onlineTest.action.getSXDYaction">
+            <!--getSXDY -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getQst" class="onlineTest.action.getQstaction">
+            <!--getQst -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getParameterHis" class="onlineTest.action.getParameteractionHis">
+            <!--getParameter -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getMonitorPoints" class="onlineTest.action.getMonitorPointsAction">
+            <!--getMonitorPoints -->
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getKnowledgeTree" class="knowledgeManage.action.getKnowledgeTreeAction">
+            <!--getKnowledgeTree -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getKnowledgeTreeNodeContent" class="knowledgeManage.action.getKnowledgeTreeNodeContentAction">
+            <!--getKnowledgeTreeNodeContent -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="updateKnowledgeTreeNodeContent"
+                class="knowledgeManage.action.updateKnowledgeTreeNodeContentAction">
+            <!--updateKnowledgeTreeNodeContent -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="deleteKnowledgeTreeNodeContent"
+                class="knowledgeManage.action.deleteKnowledgeTreeNodeContentAction">
+            <!--deleteKnowledgeTreeNodeContent -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="addKnowledgeTreeNodeContent" class="knowledgeManage.action.addKnowledgeTreeNodeContentAction">
+            <!--addKnowledgeTreeNodeContent -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="uploadKnowledgeTree" class="knowledgeManage.action.uploadKnowledgeTreeAction">
+            <!--uploadKnowledgeTree -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="addKnowledgeTreeNodeStruct" class="knowledgeManage.action.addKnowledgeTreeNodeStructAction">
+            <!--addKnowledgeTreeNodeStruct -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="updateKnowledgeTreeNodeStruct" class="knowledgeManage.action.updateKnowledgeTreeNodeStructAction">
+            <!--updateKnowledgeTreeNodeStruct -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="deleteKnowledgeTreeNodeStruct" class="knowledgeManage.action.deleteKnowledgeTreeNodeStructAction">
+            <!--deleteKnowledgeTreeNodeStruct -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getPermissionTree" class="systemMng.action.getPermissionTreeAction">
+            <!--getPermissionTree -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getOneRolesFunctions" class="systemMng.action.getOneRolesFunctionsAction">
+            <!--getOneRolesFunctions -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="allocRolesPermission" class="systemMng.action.allocRolesPermissionAction">
+            <!--allocRolesPermission -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllAlarmUser" class="systemMng.action.getAllAlarmUserAction">
+            <!--getAllAlarmUser -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="deleteDeviceAlarmRoles" class="deviceManage.action.deleteDeviceAlarmRolesAction">
+            <!--deleteDeviceAlarmRoles -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getDeviceThreshold" class="deviceManage.action.getDeviceThresholdAction">
+            <!--getDeviceThreshold -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="addThresholdInfo" class="deviceManage.action.addThresholdInfoAction">
+            <!--addThresholdInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getOneDeviceThreshold" class="deviceManage.action.getOneDeviceThresholdAction">
+            <!--getOneDeviceThreshold -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getOneofOneDeviceThreshold" class="deviceManage.action.getOneOfOneDeviceThresholdAction">
+            <!--getOneDeviceThreshold -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="updateOneDeviceThreshold" class="deviceManage.action.updateOneDeviceThresholdAction">
+            <!--updateOneDeviceThreshold -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="deleteOneDeviceThreshold" class="deviceManage.action.deleteOneDeviceThresholdAction">
+            <!--deleteOneDeviceThreshold -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+
+        <!--获取历史数据开始-->
+        <action name="getHisData" class="historyData.action.getHisAction">
+            <!--getHisData -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+        <!--获取浪涌塌陷数据-->
+        <action name="getHisDataLyTx" class="historyData.action.getHisLyTxAction">
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+        <!--获取历史数据结束-->
+
+        <action name="getAllIDPDevice" class="deviceManage.action.getAllIDPDeviceAction">
+            <!--getAllIDPDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllUPSDevice" class="deviceManage.action.getAllUPSDeviceAction">
+            <!--getAllUPSDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllxdcDevice" class="deviceManage.action.getAllxdcDeviceAction">
+            <!--getAllxdcDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllfdjDevice" class="deviceManage.action.getAllfdjDeviceAction">
+            <!--getAllfdjDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllktDevice" class="deviceManage.action.getAllktDeviceAction">
+            <!--getAllktDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAllotherDevice" class="deviceManage.action.getAllotherDeviceAction">
+            <!--getAllotherDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="fuzzySearchDevice" class="deviceManage.action.fuzzySearchDeviceAction">
+            <!--fuzzySearchDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="fuzzySearchDeviceThresold" class="deviceManage.action.fuzzySearchDeviceThresoldAction">
+            <!--fuzzySearchDeviceThresold -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getPowerEvent" class="efficiencyAnalysis.action.getPowerEventAction">
+            <!--getPowerEvent -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getCtrlEvent" class="efficiencyAnalysis.action.getCtrlEventAction">
+            <!--getCtrlEvent -->
+            <result name="failure"></result>
+            <result name="success" type="json"></result>
+        </action>
+
+        <action name="getEnvironmentEvent" class="efficiencyAnalysis.action.getEnvironmentEventAction">
+            <!--getEnvironmentEvent -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getDetailEvironmentEventtemp"
+                class="efficiencyAnalysis.action.getDetailEvironmentEventtempAction">
+            <!--getEnvironmentEvent -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getDetailEvironmentEventwet" class="efficiencyAnalysis.action.getDetailEvironmentEventwetAction">
+            <!--getEnvironmentEvent -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getDetailPowerEventlytx" class="efficiencyAnalysis.action.getDetailPowerEventlytxAction">
+            <!--getDetailPowerEventlytx -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getOneCtrlData" class="efficiencyAnalysis.action.getOneCtrlDataAction">
+            <!--getOneCtrlData -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getDetailPowerEventxb" class="efficiencyAnalysis.action.getDetailPowerEventxbAction">
+            <!--getDetailPowerEventxb -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getDetailPowerEventsxbph" class="efficiencyAnalysis.action.getDetailPowerEventsxbphAction">
+            <!--getDetailPowerEventsxbph -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getDetailPowerEventshunbian" class="efficiencyAnalysis.action.getDetailPowerEventshunbianAction">
+            <!--getDetailPowerEventshunbian -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getDetailPowerEventshanbian" class="efficiencyAnalysis.action.getDetailPowerEventshanbianAction">
+            <!--getDetailPowerEventshanbian -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="setAssessmentInfo" class="efficiencyAnalysis.action.setAssessmentInfoAction">
+            <!--setAssessmentInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getChinaMapData" class="efficiencyAnalysis.action.getChinaMapDataAction">
+            <!--getChinaMapData -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getOneProvinceMapData" class="efficiencyAnalysis.action.getOneProvinceMapDataAction">
+            <!--getOneProvinceMapData -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="addDeviceAlarmInfo" class="deviceManage.action.addDeviceAlarmPreContentAction">
+            <!--addDeviceAlarmInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getOnlyCityBankTree" class="efficiencyAnalysis.action.getOnlyCityBankTreeAction">
+            <!--getOnlyCityBankTree -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="addSignatureAndAnnotation" class="efficiencyAnalysis.action.addSignatureAndAnnotationAction">
+            <!--addSignatureAndAnnotation -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getSettingTree" class="efficiencyAnalysis.action.getSettingTreeAction">
+            <!--getSettingTree -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="setAllEventtypePriorty" class="efficiencyAnalysis.action.setAllEventtypePriortyAction">
+            <!--setAllEventtypePriorty -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="setCaptureSettingInfo" class="efficiencyAnalysis.action.setCaptureSettingInfoAction">
+            <!--setCaptureSettingInfo -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getOneComputerroomMapData" class="efficiencyAnalysis.action.getOneComputerroomMapDataAction">
+            <!--getOneComputerroomMapData -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="plantformMessage" class="smsplantform.webservice">
+            <!--plantformMessage -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getOrgnizationTree" class="systemMng.action.getOrgnizationTreeAction">
+            <!--getOrgnizationTree -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="deleteOrgnizationTree" class="systemMng.action.deleteOrgnizationTreeAction">
+            <!--deleteOrgnizationTree -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="updateOrgnizationTree" class="systemMng.action.updateOrgnizationTreeAction">
+            <!--updateOrgnizationTree -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+
+        <action name="setAlarmUser" class="systemMng.action.setAlarmUserAction">
+            <!--setAlarmUser -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getAlarmUserByLevel" class="systemMng.action.getAlarmUserByLevelAction">
+            <!--getAlarmUserByLevel -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="addOrgnizationTree" class="systemMng.action.addOrgnizationTreeAction">
+            <!--addOrgnizationTree -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="uploadThresholdExcelToDB" class="systemMng.action.uploadThresholdExcelToDBAction">
+            <!--uploadThresholdExcelToDB -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="uploadOne" class="Util.UploadImageAction">
+            <!-- 限制图片的格式和图片的大小 -->
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">
+                    image/bmp,image/png,image/gif,image/jpeg,image/jpg
+                </param>
+                <param name="maximumSize">1024000000</param>
+            </interceptor-ref>
+            <!-- 默认的拦截器，必须要写 -->
+            <interceptor-ref name="defaultStack"/>
+
+            <result name="success">/province.jsp</result>
+            <result name="input">/failure.jsp</result>
+        </action>
+
+    </package>
 
 </struts>
