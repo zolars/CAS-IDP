@@ -203,9 +203,9 @@
                                 <div id="item2-UI-ctrl">
                                     <ul>
                                         <li class="mark-ctrl">
-                                            <input type="checkbox" name="" id="" value='max'>最大值
-                                            <input type="checkbox" name="" id="" value='min'>最小值
-                                            <input type="checkbox" name="" id="" value='average'>平均值
+                                            <input type="checkbox" value='max'>最大值
+                                            <input type="checkbox" value='min'>最小值
+                                            <input type="checkbox" value='average'>平均值
                                         </li>
                                         <li class="series-ctrl">
                                             <input class="default-show" type="checkbox" name="" value="u1">U1
@@ -219,57 +219,57 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div id='item2-UI' style='width: 100%;height: 500px;'></div>
+                                <div id='item2-UI' class="chart-item" style='width: 100%;height: 500px;'></div>
                             </li>
                             <li id='item2-2'>
                                 <div id='item2-HZ-ctrl'>
-                                    <input type="checkbox" name="" id="" value='max'>最大值
-                                    <input type="checkbox" name="" id="" value='min'>最小值
-                                    <input type="checkbox" name="" id="" value='average'>平均值
+                                    <input type="checkbox" value='max'>最大值
+                                    <input type="checkbox" value='min'>最小值
+                                    <input type="checkbox" value='average'>平均值
                                 </div>
-                                <div id='item2-HZ' style='width: 100%;height: 500px;'></div>
+                                <div id='item2-HZ' class="chart-item" style='width: 100%;height: 500px;'></div>
                             </li>
                             <li id='item2-3'>
                                 <div id='item2-P-ctrl'>
                                     <ul>
                                         <li class="mark-ctrl">
-                                            <input type="checkbox" name="" id="" value='max'>最大值
-                                            <input type="checkbox" name="" id="" value='min'>最小值
-                                            <input type="checkbox" name="" id="" value='average'>平均值
+                                            <input type="checkbox" value='max'>最大值
+                                            <input type="checkbox" value='min'>最小值
+                                            <input type="checkbox" value='average'>平均值
                                         </li>
                                         <li class="series-ctrl">
-                                            <input class="default-show" type="checkbox" name="" id="" value='p1'>P1
-                                            <input type="checkbox" name="" id="" value='p2'>P2
-                                            <input type="checkbox" name="" id="" value='p3'>P3
-                                            <input type="checkbox" name="" id="" value='p'>P
-                                            <input class="default-show" type="checkbox" name="" id="" value='s1'>S1
-                                            <input type="checkbox" name="" id="" value='s2'>S2
-                                            <input type="checkbox" name="" id="" value='s3'>S3
-                                            <input type="checkbox" name="" id="" value='s'>S
-                                            <input type="checkbox" name="" id="" value='q1'>Q1
-                                            <input type="checkbox" name="" id="" value='q2'>Q2
-                                            <input type="checkbox" name="" id="" value='q3'>Q3
-                                            <input type="checkbox" name="" id="" value='q'>Q
-                                            <input class="default-show" type="checkbox" name="" id="" value='pf1'>PF1
-                                            <input type="checkbox" name="" id="" value='pf2'>PF2
-                                            <input type="checkbox" name="" id="" value='pf3'>PF3
-                                            <input type="checkbox" name="" id="" value='pf'>PF
-                                            <input class="default-show" type="checkbox" name="" id="" value='dpf1'>DPF1
-                                            <input type="checkbox" name="" id="" value='dpf2'>DPF2
-                                            <input type="checkbox" name="" id="" value='dpf3'>DPF3
-                                            <input type="checkbox" name="" id="" value='dpf'>DPF
+                                            <input class="default-show" type="checkbox" value='p1'>P1
+                                            <input type="checkbox" value='p2'>P2
+                                            <input type="checkbox" value='p3'>P3
+                                            <input type="checkbox" value='p'>P
+                                            <input class="default-show" type="checkbox" value='s1'>S1
+                                            <input type="checkbox" value='s2'>S2
+                                            <input type="checkbox" value='s3'>S3
+                                            <input type="checkbox" value='s'>S
+                                            <input type="checkbox" value='q1'>Q1
+                                            <input type="checkbox" value='q2'>Q2
+                                            <input type="checkbox" value='q3'>Q3
+                                            <input type="checkbox" value='q'>Q
+                                            <input class="default-show" type="checkbox" value='pf1'>PF1
+                                            <input type="checkbox" value='pf2'>PF2
+                                            <input type="checkbox" value='pf3'>PF3
+                                            <input type="checkbox" value='pf'>PF
+                                            <input class="default-show" type="checkbox" value='dpf1'>DPF1
+                                            <input type="checkbox" value='dpf2'>DPF2
+                                            <input type="checkbox" value='dpf3'>DPF3
+                                            <input type="checkbox" value='dpf'>DPF
                                         </li>
                                     </ul>
                                 </div>
-                                <div id='item2-P' style='width: 100%;height: 500px;'></div>
+                                <div id='item2-P' class="chart-item" style='width: 100%;height: 500px;'></div>
                             </li>
                             <li id='item2-4'>
                                 <div id="item2-LyTx-ctrl">
-                                    <input class="default-show" type="checkbox" name="" id="" value="Ua">Ua
-                                    <input type="checkbox" name="" id="" value="Ub">Ub
-                                    <input type="checkbox" name="" id="" value="Uc">Uc
+                                    <input class="default-show" type="checkbox" value="Ua">Ua
+                                    <input type="checkbox" value="Ub">Ub
+                                    <input type="checkbox" value="Uc">Uc
                                 </div>
-                                <div id='item2-LyTx' style='width: 100%;height: 500px;'></div>
+                                <div id='item2-LyTx' class="chart-item" style='width: 100%;height: 500px;'></div>
                             </li>
                         </ul>
                     </div>

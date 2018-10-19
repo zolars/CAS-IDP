@@ -2,6 +2,7 @@ package deviceManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import deviceManage.dao.DeviceDAO;
+import hibernatePOJO.BasicSetting;
 import hibernatePOJO.DeviceAlarmUser;
 import hibernatePOJO.Devices;
 import hibernatePOJO.DevicesThreshold;
@@ -520,6 +521,15 @@ public class DeviceDAOImpl implements DeviceDAO {
                 "FROM Devices where name like '" + name + "%'");
 
         return list;
+    }
+
+    public Integer getQstinterval() {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        BasicSetting bs = (BasicSetting) hbsessionDao.getFirst(
+                "FROM BasicSetting");
+
+        return bs.getQstinterval();
     }
 
 }

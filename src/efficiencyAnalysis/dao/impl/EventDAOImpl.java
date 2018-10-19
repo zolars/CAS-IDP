@@ -1916,12 +1916,12 @@ public class EventDAOImpl implements EventDAO {
         return rt;
     }
 
-    public boolean setCaptrueSettingInfo(String onlineinterval, String thansentinterval, String uploadinterval) {
+    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String thansentinterval, String uploadinterval) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
-        String hql = "update BasicSetting bs set bs.onlineinterval=" + onlineinterval + ", bs.thansentinterval=" + thansentinterval +
+        String hql = "update BasicSetting bs set bs.onlineinterval=" + onlineinterval + ", bs.qstinterval=" + qstinterval + ", bs.thansentinterval=" + thansentinterval +
                 ", bs.uploadinterval=" + uploadinterval + " where bs.id=0";
 
         rt = hbsessionDao.update(hql);

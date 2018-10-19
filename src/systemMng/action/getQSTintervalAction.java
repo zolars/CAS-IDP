@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class getAllAlarmUserAction extends ActionSupport {
+public class getQSTintervalAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private JSONObject result;
 
@@ -25,7 +25,7 @@ public class getAllAlarmUserAction extends ActionSupport {
     }
 
 
-    /* 查询all设备告警人员信息
+    /* 查询趋势图刷新频率信息
      */
     public String execute() throws Exception {
         try { //获取数据
@@ -34,30 +34,10 @@ public class getAllAlarmUserAction extends ActionSupport {
 
             DeviceDAO dao = new DeviceDAOImpl();
 
-            List<DeviceAlarmUser> alrmlist = new ArrayList();
-            List rtlist = new ArrayList();
-
-            alrmlist = dao.getDeviceAlarmUserData();
-
-            for (int i = 0; i < alrmlist.size(); i++) {
-
-                DeviceAlarmUser tmpau = alrmlist.get(i);
-
-                String level = tmpau.getLevel().toString();
-                String uidstr = tmpau.getUid();
-                String uidset[] = uidstr.split("，");
-
-                for (int j = 0; j < uidset.length; j++) {
-                    List<String> list = new ArrayList();
-                    list.add(level);
-                    list.add(uidset[j]);
-
-                    rtlist.add(list);
-                }
-            }
+            Integer qstinterval = dao.getQstinterval();
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("alarmusers", rtlist);
+            jsonObject.put("qstinterval", qstinterval);
 
             result = jsonObject;
 

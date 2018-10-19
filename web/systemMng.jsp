@@ -660,12 +660,17 @@
                                     <td>单位（秒）</td>
                                 </tr>
                                 <tr>
+                                    <td>趋势图数据刷新频率：</td>
+                                    <td><input type="text" class="form-control setting-input" id="qstinterval-input"></td>
+                                    <td>单位（秒）</td>
+                                </tr>
+                                <tr>
                                     <td>暂态事件存储频率：</td>
                                     <td><input type="text" class="form-control setting-input" id="tansentinterval-input"></td>
                                     <td>单位（分钟）</td>
                                 </tr>
                                 <tr>
-                                    <td>数据上传时效：</td>
+                                    <td>数据上传频率：</td>
                                     <td><input type="text" class="form-control setting-input" id="upload-input"></td>
                                     <td>单位（小时）</td>
                                 </tr>
@@ -3025,23 +3030,43 @@
     function captureSettingOk() {
 
         var onlineinterval = $('#onlineinterval-input').val();
+        var qstinterval = $('#qstinterval-input').val();
         var tansentinterval = $('#tansentinterval-input').val();
         var uploadinterval = $('#upload-input').val();
 
-        $.ajax({
-            type: "post",
-            url: "setCaptureSettingInfo",
-            data: {
-                onlineinterval: onlineinterval,
-                tansentinterval: tansentinterval,
-                uploadinterval: uploadinterval
-            },
-            dataType: "json",
-            success: function (data) {
-                alert(data);
-            }
-        });
+        if(!testPositiveInt(onlineinterval))
+            alert("请填写实时数据采集频率");
+        else if(!testPositiveInt(qstinterval))
+            alert("请填写趋势图数据刷新频率");
+        else if(!testPositiveInt(tansentinterval))
+            alert("请填写暂态事件存储频率");
+        else if(!testPositiveInt(uploadinterval))
+            alert("请填写数据上传频率");
+        else if(onlineinterval > qstinterval)
+            alert("实时数据采集频率需要比趋势图数据刷新频率高");
+        else{
+            $.ajax({
+                type: "post",
+                url: "setCaptureSettingInfo",
+                data: {
+                    onlineinterval: onlineinterval,
+                    qstinterval: qstinterval,
+                    tansentinterval: tansentinterval,
+                    uploadinterval: uploadinterval
+                },
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
     }
+
+    function testPositiveInt(str){  //  如果判断为正整数，则返回true；非正整数，返回false
+        var r = /^\+?[1-9][0-9]*$/;　　//正整数正则
+        return r.test(str);
+    }
+
 </script>
 
 <!-- 导入excel到阈值表-->

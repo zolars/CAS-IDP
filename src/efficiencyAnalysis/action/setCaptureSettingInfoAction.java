@@ -8,7 +8,6 @@ import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 public class setCaptureSettingInfoAction extends ActionSupport {
@@ -27,24 +26,25 @@ public class setCaptureSettingInfoAction extends ActionSupport {
     /* 设置数据上传时效等信息
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String onlineinterval = request.getParameter("onlineinterval");
+            String qstinterval = request.getParameter("qstinterval");
             String tansentinterval = request.getParameter("tansentinterval");
             String uploadinterval = request.getParameter("uploadinterval");
 
             EventDAO dao = new EventDAOImpl();
 
-            boolean rt = dao.setCaptrueSettingInfo(onlineinterval, tansentinterval, uploadinterval);
+            boolean rt = dao.setCaptrueSettingInfo(onlineinterval, qstinterval, tansentinterval, uploadinterval);
             JSONObject jsonObject = new JSONObject();
 
-            if(rt)
+            if (rt) {
                 jsonObject.put("提示", "设置成功！");
-            else
+            } else {
                 jsonObject.put("提示", "设置失败，请重试！");
+            }
 
             result = JSON.toJSONString(jsonObject);
 

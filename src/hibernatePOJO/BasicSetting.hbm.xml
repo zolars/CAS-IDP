@@ -17,5 +17,8 @@
         <property name="uploadinterval">
             <column name="uploadinterval" sql-type="int(11)" not-null="true"/>
         </property>
+        <property name="qstinterval">
+            <column name="qstinterval" sql-type="int(11)" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

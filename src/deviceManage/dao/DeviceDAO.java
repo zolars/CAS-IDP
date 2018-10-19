@@ -56,5 +56,6 @@ public interface DeviceDAO {
 
     public List searchFuzzyDevice(String name);
 
+    public Integer getQstinterval();
 
 }

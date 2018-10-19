@@ -182,7 +182,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <li><button class="btn btn-default" value="max">MAX</button></li>
                                     </ol>
                                 </div>
-                                <div class="row" id="item1-graph" style="height: 550px;"></div>
+                                <div class="row chart-item" id="item1-graph" style="height: 550px;"></div>
                             </div>
                             <div id="item1-sidebar" class="col-md-1">
                                 <div class="clearfix"></div>
@@ -209,7 +209,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                         </div>
                     </div>
-                    <div id = "item2" class="col-md-12" style="height: 600px;">
+                    <div id = "item2" class="col-md-12 chart-item" style="height: 600px;">
                     </div>
                     <div id = "item3" class="col-md-12" style="height: 600px;">
                         <div class="row">
@@ -255,7 +255,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                         </div>
                     </div>
-                    <div id ="item4" style="height: 600px;">
+                    <div id = "item4" style="height: 600px;">
                         <div class="row">
                             <div class="col-md-3 col-md-offset-1 col-xs-12">
                                 <table id="params-basic" class="table table-bordered">
@@ -293,8 +293,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div id = "item5" class="col-md-12" style="height: 600px;width: 800px;">
                         <div class="row">
-                            通道选择
-                            <div class="row" id="item4-graph" style="height: 550px;"></div>
+                            <div class="row chart-item" id="item4-graph" style="height: 550px;"></div>
                         </div>
                     </div>
                 </div>
@@ -637,7 +636,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             "rmsU1","rmsU2","rmsU3","rmsI1","rmsI2","rmsI3",
             "thdU1","thdU2","thdU3","thdI1","thdI2","thdI3",
             "hz",
-            "p1","p2","p3", "s1","s2","s3", "q1","q2","q3",
+            "p1","p2","p3",
+            "s1","s2","s3",
+            "q1","q2","q3",
             "pf1","pf2","pf3",
             "dpf1","dpf2","dpf3",
             "tan1","tan2","tan3",
@@ -664,7 +665,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 show: false,
                 data: qstLegend
             },
-           /* // 数据窗口缩放
+            // 数据窗口缩放
             dataZoom: [
                 {
                     type: 'slider',
@@ -692,7 +693,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     start: 0,
                     end: 100
                 }
-            ],*/
+            ],
             xAxis: {
                 type: 'time',
                 splitLine: {
@@ -712,242 +713,203 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 {
                     name: "rmsU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "rmsU1"}
-                    ,data: qstRecordRmsu1
-                }
-                ,
+                    encode: {x: "time", y: "rmsU1"},data: qstRecordRmsu1
+                },
                 {
                     name: "rmsU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "rmsU2"}
-                    ,data: qstRecordRmsu2
+                    encode: {x: "time", y: "rmsU2"},data: qstRecordRmsu2
                 },
                 {
                     name: "rmsU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "rmsU3"}
-                    ,data: qstRecordRmsu3
+                    encode: {x: "time", y: "rmsU3"},data: qstRecordRmsu3
                 },
                 {
                     name: "rmsI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "rmsI1"}
-                    ,data: qstRecordRmsi1
+                    encode: {x: "time", y: "rmsI1"},data: qstRecordRmsi1
                 },
                 {
                     name: "rmsI2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "rmsI2"}
-                    ,data: qstRecordRmsi2
+                    encode: {x: "time", y: "rmsI2"},data: qstRecordRmsi2
                 },
                 {
                     name: "rmsI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "rmsI3"}
-                    ,data: qstRecordRmsi3
+                    encode: {x: "time", y: "rmsI3"},data: qstRecordRmsi3
                 },
                 // THD
                 {
                     name: "thdU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "thdU1"}
-                    ,data: qstRecordThdu1
+                    encode: {x: "time", y: "thdU1"},data: qstRecordThdu1
                 },
                 {
                     name: "thdU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "thdU2"}
-                    ,data: qstRecordThdu2
+                    encode: {x: "time", y: "thdU2"},data: qstRecordThdu2
                 },
                 {
                     name: "thdU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "thdU3"}
-                    ,data: qstRecordThdu3
+                    encode: {x: "time", y: "thdU3"},data: qstRecordThdu3
                 },
                 {
                     name: "thdI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "thdI1"}
-                    ,data: qstRecordThdi1
+                    encode: {x: "time", y: "thdI1"},data: qstRecordThdi1
                 },
                 {
                     name: "thdI2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "thdI2"}
-                    ,data: qstRecordThdi2
+                    encode: {x: "time", y: "thdI2"},data: qstRecordThdi2
                 },
                 {
                     name: "thdI3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "thdI3"}
-                    ,data: qstRecordThdi3
+                    encode: {x: "time", y: "thdI3"},data: qstRecordThdi3
                 },
                 // Hz
                 {
                     name: "hz", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "hz"}
-                    ,data: qstRecordhz
+                    encode: {x: "time", y: "hz"},data: qstRecordhz
                 },
                 // W
                 {
                     name: "p1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "p1"}
-                    ,data: qstRecordp1
+                    encode: {x: "time", y: "p1"},data: qstRecordp1
                 },
                 {
                     name: "p2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "p2"}
-                    ,data: qstRecordp2
+                    encode: {x: "time", y: "p2"},data: qstRecordp2
                 },
                 {
                     name: "p3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "p3"}
-                    ,data: qstRecordp3
+                    encode: {x: "time", y: "p3"},data: qstRecordp3
                 },
                 // VA
                 {
                     name: "s1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "s1"}
-                    ,data: qstRecords1
+                    encode: {x: "time", y: "s1"},data: qstRecords1
                 },
                 {
                     name: "s2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "s2"}
-                    ,data: qstRecords2
+                    encode: {x: "time", y: "s2"},data: qstRecords2
                 },
                 {
                     name: "s3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "s3"}
-                    ,data: qstRecords3
+                    encode: {x: "time", y: "s3"},data: qstRecords3
                 },
                 // Var
                 {
                     name: "q1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "q1"}
-                    ,data: qstRecordq1
+                    encode: {x: "time", y: "q1"},data: qstRecordq1
                 },
                 {
                     name: "q2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "q2"}
-                    ,data: qstRecordq2
+                    encode: {x: "time", y: "q2"},data: qstRecordq2
                 },
                 {
                     name: "q3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "q3"}
-                    ,data: qstRecordq3
+                    encode: {x: "time", y: "q3"},data: qstRecordq3
                 },
                 // PF
                 {
                     name: "pf1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "pf1"}
-                    ,data: qstRecordpf1
+                    encode: {x: "time", y: "pf1"},data: qstRecordpf1
                 },
                 {
                     name: "pf2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "pf2"}
-                    ,data: qstRecordpf2
+                    encode: {x: "time", y: "pf2"},data: qstRecordpf2
                 },
                 {
                     name: "pf3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "pf3"}
-                    ,data: qstRecordpf3
+                    encode: {x: "time", y: "pf3"},data: qstRecordpf3
                 },
                 // DPF
                 {
                     name: "dpf1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "dpf1"}
-                    ,data: qstRecorddpf1
+                    encode: {x: "time", y: "dpf1"},data: qstRecorddpf1
                 },
                 {
                     name: "dpf2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "dpf2"}
-                    ,data: qstRecorddpf2
+                    encode: {x: "time", y: "dpf2"},data: qstRecorddpf2
                 },
                 {
                     name: "dpf3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "dpf3"}
-                    ,data: qstRecorddpf3
+                    encode: {x: "time", y: "dpf3"},data: qstRecorddpf3
                 },
                 // Tan
                 {
                     name: "tan1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "tan1"}
-                    ,data: qstRecordtan1
+                    encode: {x: "time", y: "tan1"},data: qstRecordtan1
                 },
                 {
                     name: "tan2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "tan2"}
-                    ,data: qstRecordtan2
+                    encode: {x: "time", y: "tan2"},data: qstRecordtan2
                 },
                 {
                     name: "tan3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "tan3"}
-                    ,data: qstRecordtan3
+                    encode: {x: "time", y: "tan3"},data: qstRecordtan3
                 },
                 // unb
                 {
                     name: "unb", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "unb"}
-                    ,data: qstRecordunb
+                    encode: {x: "time", y: "unb"},data: qstRecordunb
                 },
                 // Pst
                 {
                     name: "pstU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "pstU1"}
-                    ,data: qstRecordpstu1
+                    encode: {x: "time", y: "pstU1"},data: qstRecordpstu1
                 },
                 {
                     name: "pstU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "pstU2"}
-                    ,data: qstRecordpstu2
+                    encode: {x: "time", y: "pstU2"},data: qstRecordpstu2
                 },
                 {
                     name: "pstU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "pstU3"}
-                    ,data: qstRecordpstu3
+                    encode: {x: "time", y: "pstU3"},data: qstRecordpstu3
                 },
                 // Plt
                 {
                     name: "pltU1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "pltU1"}
-                    ,data: qstRecordpltu1
+                    encode: {x: "time", y: "pltU1"},data: qstRecordpltu1
                 },
                 {
                     name: "pltU2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "pltU2"}
-                    ,data: qstRecordpltu2
+                    encode: {x: "time", y: "pltU2"},data: qstRecordpltu2
                 },
                 {
                     name: "pltU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "pltU3"}
-                    ,data: qstRecordpltu3
+                    encode: {x: "time", y: "pltU3"},data: qstRecordpltu3
                 }
             ]
         };
@@ -980,7 +942,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 type: 'value',
                 scale: true,
                 axisLabel: {
-                    formatter: '{value}'
+                    formatter: '{value}%'
                 }
             }
         };
@@ -995,7 +957,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: sxbphdlegend
             },
             series: [
-                {name: "U1", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
+                {name: "U1", type: "gauge", min: 0, max: 240, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     splitLine: {show: true, length: "10%", lineStyle: {width: 4}},
                     axisLine: {show: true, lineStyle: {color: [[0.5, "#ccc"], [1, "#ccc"]], width: 10}},
                     axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
@@ -1013,13 +975,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
                     axisLabel: {show: false,},
-                    //指针
-                    // pointer: {length: pointerLength[1]},
                     //指针样式
                     itemStyle: {color: gaugePointerColor[1]},
                     title: {show: false},
                     detail: {show: false}
-                    // data:[{value: pointerAngle[1]}]
                 },
                 {name: "U3", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
@@ -1030,13 +989,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
                     axisLabel: {show: false,},
-                    //指针
-                    // pointer: {length: pointerLength[2] },
                     //指针样式
                     itemStyle: {color: gaugePointerColor[2]},
                     title: {show: false},
                     detail: {show: false}
-                    // data:[{value: pointerAngle[2]}]
                 },
                 {
                     name: "V1", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
@@ -1048,13 +1004,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
                     axisLabel: {show: false,},
-                    //指针
-                    // pointer: { length: pointerLength[3] },
                     //指针样式
                     itemStyle: {color: gaugePointerColor[0]},
                     title: {show: false},
                     detail: {show: false}
-                    // data:[{value: pointerAngle[3]}]
                 },
                 {name: "V2", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
@@ -1065,13 +1018,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
                     axisLabel: {show: false,},
-                    //指针
-                    // pointer: {length: pointerLength[4]},
                     //指针样式
                     itemStyle: {color: gaugePointerColor[1]},
                     title: {show: false},
                     detail: {show: false}
-                    // data:[{value: pointerAngle[4]}]
                 },
                 {name: "V3", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
@@ -1082,13 +1032,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
                     axisLabel: {show: false,},
-                    //指针
-                    // pointer: {   length: pointerLength[5]},
                     //指针样式
                     itemStyle: {color: gaugePointerColor[2]},
                     title: {show: false},
                     detail: {show: false}
-                    // data:[{value: pointerAngle[5]}]
                 },
                 {name: "A1", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
@@ -1099,13 +1046,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
                     axisLabel: {show: false,},
-                    //指针
-                    // pointer: {     length: pointerLength[6] },
                     //指针样式
                     itemStyle: {color: gaugePointerColor[0]},
                     title: {show: false},
                     detail: {show: false}
-                    // data:[{value: pointerAngle[6]}]
                 },
                 {name: "A2", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99, splitNumber: 12,
                     //分隔线
@@ -1117,15 +1061,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
                     axisLabel: {show: false,},
-                    //指针
-                    // pointer: {
-                    //     length: pointerLength[7]
-                    // },
                     //指针样式
                     itemStyle: {color: gaugePointerColor[1]},
                     title: {show: false},
                     detail: {show: false}
-                    // data:[{value: pointerAngle[7]}]
                 },
                 {name: "A3", type: "gauge", min: 0, max: 360, startAngle: 0, endAngle: 359.99,
                     //分割段数
@@ -1138,13 +1077,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     axisTick: {show: true, splitNumber: 2, length: "5%", lineStyle: {width: 2}},
                     //刻度标签
                     axisLabel: {show: false,},
-                    //指针
-                    // pointer: { length: pointerLength[8]},
                     //指针样式
                     itemStyle: {color: gaugePointerColor[2]},
                     title: {show: false},
                     detail: {show: false}
-                    // data:[{value: pointerAngle[8]}]
                 }
             ]
         };
@@ -1391,11 +1327,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         // 更新趋势图
         function updateQst() {
-            console.log("qstRecordRmsi2.len="+qstRecordRmsi2.length);
+         /*   console.log("qstRecordp1.len="+qstRecordp1.length);
 
             for(var i = 0; i < qstRecordRmsi2.length; i++){
-                console.log("qstRecordRmsi2"+ qstRecordRmsi2[i].name + "...." + qstRecordRmsi2[i].value);
-            }
+                console.log("qstRecordp1"+ qstRecordp1[i].name + "...." + qstRecordp1[i].value);
+            }*/
 
             eventChart1.setOption({
                 series: [
@@ -1515,10 +1451,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             qstRecordhz.push( {name: time, value:[time, hz]} );
 
-            qstRecordp1.push( {name: time, value:[time, dpf1]} );
-            qstRecordp2.push( {name: time, value:[time, dpf2]} );
-            qstRecordp3.push( {name: time, value:[time, dpf3]} );
-
             qstRecordp1.push( {name: time, value:[time, p1]} );
             qstRecordp2.push( {name: time, value:[time, p2]} );
             qstRecordp3.push( {name: time, value:[time, p3]} );
@@ -1559,21 +1491,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         // 获取谐波数据
         function getDataXb(did) {
-            $.ajax({
-                type: "post",
-                url: "getXB",
-                data: {
-                    did: did
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var ndata = obj.nowpowerxb;
+            if(did != null && did != "") {
+                $.ajax({
+                    type: "post",
+                    url: "getXB",
+                    data: {
+                        did: did
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        var ndata = obj.nowpowerxb;
 
-                    updateXbt(ndata);
-                }
-            });
+                        updateXbt(ndata);
+                    }
+                });
+            }
         }
+
         // 更新谐波图
         function updateXbt(obj) {
 
@@ -1624,19 +1559,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         // 获取三相电压、电流数据
         function getDataSxdy(did) {
-            $.ajax({
-                type: "post",
-                url: "getSXDY",
-                data: {did: did},
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    dataSxbphd = obj.nowpowersxdy;
-                    updateSxdyt(dataSxbphd);
-                    // 设置显示的系列
-                    $("#item3-sidebar ol li button.active").trigger("click");
-                }
-            });
+            if(did != null && did != "") {
+                $.ajax({
+                    type: "post",
+                    url: "getSXDY",
+                    data: {did: did},
+                    dataType: "json",
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        dataSxbphd = obj.nowpowersxdy;
+                        updateSxdyt(dataSxbphd);
+                        // 设置显示的系列
+                        $("#item3-sidebar ol li button.active").trigger("click");
+                    }
+                });
+            }
         }
 
         // 更新三相电压、电流图
@@ -1866,18 +1803,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
         // 获取参数值
         function getDataParams(did) {
-            $.ajax({
-                type: "post",
-                url: "getParameter",
-                data: {did: did},
-                success: function(data){
-                    var obj = JSON.parse(data);
-                    var rt1 = obj.nowpowerparm;
-                    var rt2 = obj.nowpoweruunb;
+            if(did != null && did != "") {
+                $.ajax({
+                    type: "post",
+                    url: "getParameter",
+                    data: {did: did},
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        var rt1 = obj.nowpowerparm;
+                        var rt2 = obj.nowpoweruunb;
 
-                    updateParams(rt1, rt2);
-                }
-            })
+                        updateParams(rt1, rt2);
+                    }
+                });
+            }
         }
         // 更新参数值表格
         function updateParams(data, data2) {
@@ -1975,34 +1914,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             eventChart4.setOption(option4);
 
             eventBanding();
-            // 按指定时间间隔5s 更新图表
 
-           // var did = $("#monitorpnt").val();
-
-           // if(did != ""){
-             /*   console.log("did !=  "+did);
-                setInterval(function () {
-                    getDataQst(did);
-                    getDataXb(did);
-                    getDataSxdy(did);
-                    getDataParams(did);
-                    getOnlineWave(did);
-                }, 8000);*/
-            //}
-
-           /* setInterval(function () {
-                getDataQst($("#monitorpnt").val());
-                getDataXb($("#monitorpnt").val());
-                getDataSxdy($("#monitorpnt").val());
-                getDataParams($("#monitorpnt").val());
-                getOnlineWave($("#monitorpnt").val());
-            }, 30000);*/
-            // 更新时间 每2s
+            // 更新时间 每1s
             setInterval(function () {
                 $("#item3-realtime span").html(getNowFormatDate());
-            },5000);
+            },1000);
         }
+
         chartsInit();
+
+        var qstinterval = 5000;  //qst默认刷新频率为5s
+
+        $.ajax({
+            type: "post",
+            url: "getQSTinterval",
+            success: function (data) {
+                qstinterval = data.qstinterval;
+            }
+        });
 
         setInterval(function () {
             getDataQst($("#monitorpnt").val());
@@ -2010,7 +1939,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             getDataSxdy($("#monitorpnt").val());
             getDataParams($("#monitorpnt").val());
             getOnlineWave($("#monitorpnt").val());
-        }, 10000); // 10s
+        }, qstinterval);
 
     </script>
 
@@ -2026,60 +1955,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var data5 = 0;
             var data6 = 0;
             var data7 = 0;
+            if(did != null && did != "") {
+                $.ajax({
+                    type: "post",
+                    url: "getXBwave",
+                    data: {
+                        did: did
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        var obj = JSON.parse(data);
 
-            $.ajax({
-                type: "post",
-                url: "getXBwave",
-                data: {
-                    did: did
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
+                        data0 = obj.nowpowerwave['u1'];
+                        data1 = obj.nowpowerwave['u2'];
+                        data2 = obj.nowpowerwave['u3'];
+                        data3 = obj.nowpowerwave['u4'];
+                        data4 = obj.nowpowerwave['i1'];
+                        data5 = obj.nowpowerwave['i2'];
+                        data6 = obj.nowpowerwave['i3'];
+                        data7 = obj.nowpowerwave['i4'];
 
-                    data0 = obj.nowpowerwave['u1'];
-                    data1 = obj.nowpowerwave['u2'];
-                    data2 = obj.nowpowerwave['u3'];
-                    data3 = obj.nowpowerwave['u4'];
-                    data4 = obj.nowpowerwave['i1'];
-                    data5 = obj.nowpowerwave['i2'];
-                    data6 = obj.nowpowerwave['i3'];
-                    data7 = obj.nowpowerwave['i4'];
+                        axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
-                    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+                        var odata0 = option4.series[0].data;
+                        var odata1 = option4.series[1].data;
+                        var odata2 = option4.series[2].data;
+                        var odata3 = option4.series[3].data;
+                        var odata4 = option4.series[4].data;
+                        var odata5 = option4.series[5].data;
+                        var odata6 = option4.series[6].data;
+                        var odata7 = option4.series[7].data;
 
-                    var odata0 = option4.series[0].data;
-                    var odata1 = option4.series[1].data;
-                    var odata2 = option4.series[2].data;
-                    var odata3 = option4.series[3].data;
-                    var odata4 = option4.series[4].data;
-                    var odata5 = option4.series[5].data;
-                    var odata6 = option4.series[6].data;
-                    var odata7 = option4.series[7].data;
+                        odata0.shift();
+                        odata0.push(data0);
+                        odata1.shift();
+                        odata1.push(data1);
+                        odata2.shift();
+                        odata2.push(data2);
+                        odata3.shift();
+                        odata3.push(data3);
+                        odata4.shift();
+                        odata4.push(data4);
+                        odata5.shift();
+                        odata5.push(data5);
+                        odata6.shift();
+                        odata6.push(data6);
+                        odata7.shift();
+                        odata7.push(data7);
 
-                    odata0.shift();
-                    odata0.push(data0);
-                    odata1.shift();
-                    odata1.push(data1);
-                    odata2.shift();
-                    odata2.push(data2);
-                    odata3.shift();
-                    odata3.push(data3);
-                    odata4.shift();
-                    odata4.push(data4);
-                    odata5.shift();
-                    odata5.push(data5);
-                    odata6.shift();
-                    odata6.push(data6);
-                    odata7.shift();
-                    odata7.push(data7);
+                        option4.xAxis[0].data.shift();
+                        option4.xAxis[0].data.push(axisData);
 
-                    option4.xAxis[0].data.shift();
-                    option4.xAxis[0].data.push(axisData);
-
-                    eventChart4.setOption(option4);
-                }
-            });
+                        eventChart4.setOption(option4);
+                    }
+                });
+            }
         }
     </script>
 

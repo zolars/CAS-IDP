@@ -767,6 +767,14 @@
              </result>
          </action>
 
+         <action name="getQSTinterval" class="systemMng.action.getQSTintervalAction">
+             <!--getQSTinterval -->
+             <result name="failure">/failure.jsp</result>
+             <result name="success" type="json">
+                 <param name="root">result</param>
+             </result>
+         </action>
+
          <action name="uploadOne" class="Util.UploadImageAction" >
              <!-- 限制图片的格式和图片的大小 -->
              <interceptor-ref name="fileUpload">
