@@ -1096,6 +1096,12 @@
                         color:'#ff0000'
                     }
                 }
+            },
+            {
+                name:'',
+                type:'line',
+                //yAxisIndex: 1,
+                data:[500.0, 200.0, 140.0, 120.0, 120.0, 120.0, 110.0, 110.0]
             }
         ]
     };
@@ -1328,6 +1334,7 @@
 
             }
         });
+
         //取浪涌、塌陷数据
         $.ajax({
             type: "post",
@@ -1339,7 +1346,6 @@
             },
             dataType: "json",
             success: function(result){
-                //console.log(result);
                 var data=JSON.parse(result);
                 eventChart4.setOption({dataset: {source: data}});
                 $('#item2-LyTx-ctrl input.default-show').each(function () {//显示默认的系列
@@ -1381,8 +1387,12 @@
         var stime = $("#firstDate").val();
         var etime = $("#lastDate").val();
 
-        if(did != "" && stime != "" && etime != "")
+        if (stime > etime) {
+            alert("开始日期不能早于结束日期");
+        } else if(did != "" && stime != "" && etime != "") {
             getData(stime, etime, did);
+        }
+
     }
 
 </script>
