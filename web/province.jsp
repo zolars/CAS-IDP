@@ -234,11 +234,14 @@
                                 type: "post",
                                 url: "getOneCtrlData",
                                 data: {
-                                    compname: options.text()
+                                    compname: options.text(),
+                                    stime: stime,
+                                    etime: etime
                                 },
                                 dataType: "json",
                                 success: function () {
-                                    $("#ctrlstatus").attr("value", "状态：告警");
+                                    alert("success");
+                                    // $("#ctrlstatus").attr("value", "状态：告警");
                                     document.getElementById("ctrlstatus").innerHTML = "状态：告警";
                                 }
                             });
@@ -249,7 +252,6 @@
                         }
                     })
                 </script>
-
             </div>
 
 

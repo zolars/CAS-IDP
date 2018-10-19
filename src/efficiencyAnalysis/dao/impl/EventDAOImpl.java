@@ -1405,7 +1405,7 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
         String maxtime = "0000-00-00 00:00:00.0";
 
-        for (int i = 0; i < didset.length; i++ ) {
+        for (int i = 0; i < didset.length; i++) {
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
                     "from event_ctrl ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "'";
@@ -1506,7 +1506,7 @@ public class EventDAOImpl implements EventDAO {
                 String cbidstr[] = cbidset.split("，");
 
                 //查找当前市行下的设备
-                for (int i = 0 ; i < cbidstr.length; i++) {
+                for (int i = 0; i < cbidstr.length; i++) {
                     List<CityBank> cityblist = hbsessionDao.search(
                             "FROM CityBank where cbid='" + cbidstr[i] + "'");
                     String didset2 = cityblist.get(0).getDidset();
@@ -1819,7 +1819,7 @@ public class EventDAOImpl implements EventDAO {
 
         String tempset = comps.getTempset();
 
-        if (tempset.equals(null)) {
+        if (tempset.equals(null) || tempset == null) {
             return rtlist;
         } else {
 
@@ -1856,12 +1856,11 @@ public class EventDAOImpl implements EventDAO {
         }
     }
 
-    public boolean getComputerroomCtrlStatus(String cbname) {
-
+    public boolean getComputerroomCtrlStatus(String cbname, String stime, String etime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where cbname='" + cbname + "'");
+                "FROM Computerroom where rname='" + cbname + "'");
 
         String didset = comps.getDidset();
         String didstr[] = didset.split("，");
@@ -1878,10 +1877,9 @@ public class EventDAOImpl implements EventDAO {
 
         if (didlist != null) {
             EventCtrl temp = (EventCtrl) hbsessionDao.getFirst(
-                    "FROM EventCtrl where did='" + didlist.get(0) + "' Order by time desc");
-            if (temp.getValue() == "1") { //状态码为1，告警
-                return true;
-            }
+                    "from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
+            if (temp != null)
+                return (temp.getValue().equals("1")); //状态码为1，告警
         }
         return false; //状态码为0，正常
     }
@@ -1906,13 +1904,13 @@ public class EventDAOImpl implements EventDAO {
 
         for (int i = 0; i < eventtypelist.length; i++) {
             String hql = "update EventsType et set et.prior='" + priortylist[i] +
-                   "' where et.type='" + eventtypelist[i] + "'";
+                    "' where et.type='" + eventtypelist[i] + "'";
 
-             rt = hbsessionDao.update(hql);
+            rt = hbsessionDao.update(hql);
 
-             if (rt == false) {
-                 return rt;
-             }
+            if (rt == false) {
+                return rt;
+            }
         }
 
         return rt;

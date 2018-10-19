@@ -57,7 +57,7 @@ public interface EventDAO {
 
     public List getAllCityEvent();
 
-    public boolean getComputerroomCtrlStatus(String cbid);
+    public boolean getComputerroomCtrlStatus(String cbid, String starttime, String endtime);
 
     public Map getAllProvinceEvent();
 
