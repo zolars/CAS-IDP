@@ -12,11 +12,15 @@ public interface DeviceDAO {
 
     public List getDeviceAlarmUserData();
 
+    public String getDeviceAlarmUserName(String uid);
+
+    public String getDeviceAlarmUserSet(String id);
+
     public List getDeviceAlarmUserNameDataByName(String name);
 
     public List getDeviceThresholdInfoByType(String type);
 
-    public Boolean deleteDeviceAlarmUser(String id);
+    public Boolean deleteDeviceAlarmUser(String id, String uid);
 
     public Boolean deleteDeviceThreshold(String dtid);
 

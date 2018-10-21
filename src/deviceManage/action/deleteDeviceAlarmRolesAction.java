@@ -8,7 +8,6 @@ import deviceManage.dao.impl.DeviceDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class deleteDeviceAlarmRolesAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -26,27 +25,30 @@ public class deleteDeviceAlarmRolesAction extends ActionSupport {
     /* 根据设备名称删除告警人员
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
             String auid = request.getParameter("auid");
+            String str[] = auid.split("/");
 
             DeviceDAO dao = new DeviceDAOImpl();
 
-            //判断是否删除成功
-            Boolean rt = dao.deleteDeviceAlarmUser(auid);
-            JSONObject jsonObject = new JSONObject();
+            if (str.length == 2) {
+                String uidset = dao.getDeviceAlarmUserSet(str[0]);
 
-            if(rt)
-                jsonObject.put("提示", "删除成功！");
-            else
-                jsonObject.put("提示", "删除失败，请重试！");
+                String temp = uidset.replace(str[1], "");
 
-            result = JSON.toJSONString(jsonObject);
+                Boolean rt = dao.deleteDeviceAlarmUser(str[0], temp);
+                JSONObject jsonObject = new JSONObject();
+
+                if(rt)
+                    jsonObject.put("提示", "删除成功！");
+                else
+                    jsonObject.put("提示", "删除失败，请重试！");
+
+                result = JSON.toJSONString(jsonObject);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

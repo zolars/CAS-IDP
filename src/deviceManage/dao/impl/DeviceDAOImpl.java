@@ -2,10 +2,7 @@ package deviceManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import deviceManage.dao.DeviceDAO;
-import hibernatePOJO.BasicSetting;
-import hibernatePOJO.DeviceAlarmUser;
-import hibernatePOJO.Devices;
-import hibernatePOJO.DevicesThreshold;
+import hibernatePOJO.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +57,24 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     /**
+     * 获取某个uid为uid的用户名信息
+     * @return 所有用户名
+     */
+    public String getDeviceAlarmUserName(String uid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        String uname = "";
+
+        User dauser = (User)hbsessionDao.getFirst(
+                "FROM User where uid=" + uid);
+
+        if (dauser != null) {
+            uname = dauser.getUname();
+        }
+
+        return uname;
+    }
+
+    /**
      * 根据设备名称，获取所有设备告警表的信息
      * @param name 设备名称
      * @return 所有设备告警表的信息list
@@ -95,6 +110,15 @@ public class DeviceDAOImpl implements DeviceDAO {
         return dtlist;
     }
 
+    public String getDeviceAlarmUserSet(String id) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        DeviceAlarmUser da = (DeviceAlarmUser)hbsessionDao.getFirst(
+                "FROM DeviceAlarmUser where id = '" + id + "'");
+
+        return da.getUid();
+    }
+
     /**
      * 删除DevicesThreshold表中dtid=dtid的记录
      * @param dtid dtid
@@ -114,11 +138,11 @@ public class DeviceDAOImpl implements DeviceDAO {
      * @param id id
      * @return 真或假
      */
-    public Boolean deleteDeviceAlarmUser(String id) {
+    public Boolean deleteDeviceAlarmUser(String id, String uid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
-        rt = hbsessionDao.delete("Delete FROM DeviceAlarmUser Where id=?", id);
+        rt = hbsessionDao.update("Update DeviceAlarmUser set uid ='" + uid + "' Where id=" + id);
 
         return rt;
     }

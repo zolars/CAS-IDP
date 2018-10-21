@@ -808,24 +808,9 @@
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数分类</div>
                     <select class="form-control location-select-item" id="thresholdtype" name="thresholdtype">
-                        <%--<option value="频率上限值">频率上限值</option>
-                        <option value="频率下限值">频率下限值</option>
-                        <option value="电压偏差越上限">电压偏差越上限</option>
-                        <option value="电压偏差越下限">电压偏差越下限</option>
-                        <option value="短时闪变">短时闪变</option>
-                        <option value="长时闪变">长时闪变</option>
-                        <option value="三相电压负序不平衡度">三相电压负序不平衡度</option>
-                        <option value="电压暂升阈值">电压暂升阈值</option>
-                        <option value="电压暂降阈值">电压暂降阈值</option>
-                        <option value="电压短时中断阈值">电压短时中断阈值</option>
-                        <option value="电压总谐波含有率">电压总谐波含有率</option>
-                        <option value="温度过高">温度过高</option>
-                        <option value="温度过低">温度过低</option>
-                        <option value="湿度过高">湿度过高</option>
-                        <option value="湿度过低">湿度过低</option>--%>
-                            <option value="电能">电能</option>
-                            <option value="环境">环境</option>
-                            <option value="其他">其他</option>
+                        <option value="电能">电能</option>
+                        <option value="环境">环境</option>
+                        <option value="其他">其他</option>
                     </select>
                 </div>
             </div>
@@ -1862,7 +1847,6 @@
                 '<td style="width:30%;"><div>备注</div></td></tr>');
 
                 for (var i = 0; i < list.length; i++) {
-
                     var rid = list[i].rid;
                     var rname = list[i].rolesname;
                     var rextra;
@@ -2027,7 +2011,6 @@
                 },
                 dataType: "json",
                 success: function (data) {
-
                     var list = data.alldlist;
                     for (var i = 0; i < list.length; i++) {
                         rt[i] = list[i].name;
@@ -2112,6 +2095,24 @@
 
     <!-- 查询设备 -->
     function checkDevice() {
+
+        //清空文本框等内容
+        $("#did").val("");
+        $("#devname").val("");
+        $("#devtype").val("");
+        $("#serialno").val("");
+        $("#extra").val("");
+        $("#radio-Ethernet").removeAttr("checked");
+        $("#radio-R5485").removeAttr("checked");
+        $("#radio-RS232").removeAttr("checked");
+        $("#IPaddress").val("");
+        $("#port").val("");
+        $("#conncom").val("");
+        $("#485address").val("");
+        $("#checkbox-sms").removeAttr("checked");
+        $("#checkbox-alert").removeAttr("checked");
+        $("#checkbox-plantform").removeAttr("checked");
+
         var devicename = $("#searchInput").val();
 
         $.ajax({
@@ -2245,13 +2246,15 @@
                     var table = $("#alarm-user-table");
 
                     table.empty();
-                    table.append('<tr><td style="width:180px;">告警等级</td><td style="width:260px;">账号</td></tr>');
+                    table.append('<tr><td style="width:80px;"></td><td style="width:180px;">告警等级</td><td style="width:260px;">账号</td></tr>');
 
                     for (var i = 0; i < list.length; i++) {
-                        var level = list[i][0];
-                        var uname = list[i][1];
+                        var id = list[i][0];
+                        var level = list[i][1];
+                        var uname = list[i][2];
 
                         table.append('<tr>' +
+                            '<td style="width:80px;"><input type="radio" name="alarmuserid" id="alarmuserid" value=' + id + '></td>' +
                             '<td style="width:180px;">' + level + '</td>' +
                             '<td style="width:260px;">' + uname + '</td></tr>');
                     }
@@ -2260,29 +2263,28 @@
     }
 
     //查询所有账号
-    //function getALLUserInfoSimple() {
-        $("#alarm-user").empty();
-        $.ajax({
-            type: "post",
-            url: "getAllUserInfo",
-            dataType: "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj;
+    $("#alarm-user").empty();
+    $.ajax({
+        type: "post",
+        url: "getAllUserInfo",
+        dataType: "json",
+        success: function (data) {
+            var obj = JSON.parse(data);
+            var list = obj;
 
-                for (var key in list) {
-                    var len = list[key].length;
-                    for (var i = 0; i < len; i++) {
-                        var uid = list[key][i][0];
-                        var account = list[key][i][1];
+            for (var key in list) {
+                var len = list[key].length;
+                for (var i = 0; i < len; i++) {
+                    var uid = list[key][i][0];
+                    var account = list[key][i][1];
 
-                        $('#alarm-user').append("<option value='" + uid + "' >" + account + "</option>");
+                    $('#alarm-user').append("<option value='" + uid + "' >" + account + "</option>");
 
-                    }
                 }
             }
-        });
-   // }
+        }
+    });
+
 
     <!-- 添加预警人员 -->
     function addDeviceAlarmUser() {
@@ -2323,19 +2325,17 @@
     <!-- 取消（删除）预警人员 -->
     function deleteDeviceAlarmUser() {
 
-        var auidcheck = $("input[name='auid']:checked");
+        var auidcheck = $("input[id='alarmuserid']:checked");
         if (auidcheck.length == 0)
             alert("请选择一条预警人员信息");
         else if (auidcheck.length > 1)
             alert("每次只能删除一条预警人员信息");
         else {
-            //var monitorpoint = 1;
-            var auidck = $("input[name='auid']:checked").serialize();
+            var auidck = $("input[id='alarmuserid']:checked").val();
             $.ajax({
                 type: "post",
                 url: "deleteDeviceAlarmRoles",
                 data: {
-                    //monitorpointid: monitorpoint,
                     auid: auidck
                 },
                 dataType: "json",
@@ -2582,6 +2582,11 @@
                             floorval = "";
                         if(isMark == null)
                             isMark = "";
+                        else if(isMark == "1")
+                            isMark = "是";
+                        else if(isMark == "0")
+                            isMark = "否";
+                        else isMark = "";
 
                         table.append('<tr><td style="width:5%;"><input type="radio" name="dtid" id="dtid" value=' + dtid + '></td>' +
                             '<td style="width:20%;">' + name + '</td><td style="width:12.5%;">' + classify + '</td>' +

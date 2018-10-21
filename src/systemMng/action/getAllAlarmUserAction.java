@@ -43,16 +43,24 @@ public class getAllAlarmUserAction extends ActionSupport {
 
                 DeviceAlarmUser tmpau = alrmlist.get(i);
 
+                String id = tmpau.getId();
                 String level = tmpau.getLevel().toString();
                 String uidstr = tmpau.getUid();
                 String uidset[] = uidstr.split("，");
 
                 for (int j = 0; j < uidset.length; j++) {
-                    List<String> list = new ArrayList();
-                    list.add(level);
-                    list.add(uidset[j]);
 
-                    rtlist.add(list);
+                    if (!uidset[j].equals("")) {
+                        String name = dao.getDeviceAlarmUserName(uidset[j]);
+
+                        List<String> list = new ArrayList();
+                        list.add(id + "/" + uidset[j]);
+                        list.add(level);
+                        list.add(name);
+
+                        rtlist.add(list);
+                    }
+
                 }
             }
 
