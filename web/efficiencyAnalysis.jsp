@@ -211,8 +211,7 @@
                                             </button>
                                         </th>
                                         <th>
-                                            <button id="data-button" type="button" class="btn-sm btn-default"
-                                                    onclick="getAllEvent()">查询
+                                            <button id="data-button" type="button" class="btn-sm btn-default">查询
                                             </button>
                                         </th>
                                     </tr>
@@ -979,10 +978,6 @@
             getDeviceEvent();
         }
     }
-
-    $("#data-button").click(function () {
-        refresh();
-    })
 </script>
 
 
@@ -1105,13 +1100,13 @@
         //读取设置中的优先级cookie
         var priortylist = $.cookie('priortylist');
         if (stime == null || etime == null) {
-            alert("请选择日期时间");
+            // alert("请选择日期时间");
         }
         else if (cbname == "[object Object]") {
-            alert("请选择测量地点");
+            // alert("请选择测量地点");
         }
         else if (priortylist == null) {
-            alert("请设定可查看的事件类型");
+            // alert("请设定可查看的事件类型");
         }
         else {
             $.ajax({
@@ -1559,13 +1554,13 @@
         //读取设置中的优先级cookie
         var priortylist = $.cookie('priortylist');
         if (stime == null || etime == null) {
-            alert("请选择日期时间");
+            // alert("请选择日期时间");
         }
         else if (cbname == "[object Object]") {
-            alert("请选择测量地点");
+            // alert("请选择测量地点");
         }
         else if (priortylist == null) {
-            alert("请设定可查看的事件类型");
+            // alert("请设定可查看的事件类型");
         }
         else {
             $.ajax({
@@ -1716,6 +1711,18 @@
     tableData.forEach(function (item) {
         thead0.innerHTML += ('<th>' + item.name + '</th>');
         thead1.innerHTML += ('<th>' + item.name + '</th>');
+    });
+</script>
+
+<!--查询按钮-->
+<script>
+    $("#data-button").click(function () {
+        getAllEvent();
+        refresh();
+        $(this).button('loading').delay(500).queue(function () {
+            $(this).button('reset');
+            $(this).dequeue();
+        });
     });
 </script>
 
