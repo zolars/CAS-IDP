@@ -8,10 +8,7 @@ import historyData.dao.impl.HisDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class getHisLyTxAction extends ActionSupport {
 
@@ -27,9 +24,8 @@ public class getHisLyTxAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             //获取监测点

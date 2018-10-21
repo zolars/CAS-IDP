@@ -1527,7 +1527,7 @@ hr {
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     border-color: transparent;
-    background: rgba(0,0,0,0.35);
+    background: rgb(0, 0, 255);
     color: #fff;
 }
 
@@ -1993,7 +1993,7 @@ a.list-group-item.active > .badge,
         background-attachment: fixed;
     }
 
-    #skin-blur-violate {
+  /*  #skin-blur-violate {
         background-image: url(../img/body/violate.jpg);
     }
 
@@ -2015,13 +2015,13 @@ a.list-group-item.active > .badge,
     
     #skin-blur-sunny {
         background-image: url(../img/body/sunny.jpg);
-    }
+    }*/
     
     #skin-blur-blue {
-        background-image: url(../img/body/blue.jpg);
+        background-image: url(../img/body/ocean.jpg);
     }
     
-    #skin-blur-chrome {
+  /*  #skin-blur-chrome {
         background-image: url(../img/body/chrome.jpg);
     }
     
@@ -2039,7 +2039,7 @@ a.list-group-item.active > .badge,
 
     #skin-blur-kiwi {
         background-image: url(../img/body/kiwi.jpg);
-    }
+    }*/
     
     /* Sidebar */
     .side-menu > li > a:hover, .side-menu > li.active > a, .side-menu > li > a.active:hover, .side-menu > li.hovered > a {

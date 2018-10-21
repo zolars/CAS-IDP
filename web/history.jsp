@@ -137,10 +137,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs" id="ulItem">
-                        <li style="width:25%">
+                        <li style="width:50%">
                             <a data-toggle="tab" id="subItem2">•历史曲线</a>
                         </li>
-                        <li style="width:25%">
+                        <li style="width:50%">
                             <a data-toggle="tab" id="subItem3">•知识库</a>
                         </li>
                     </ul>
@@ -214,7 +214,7 @@
                                             <input type="checkbox" name="" value="u4">U4
                                             <input class="default-show" type="checkbox" name="" value="i1">I1
                                             <input type="checkbox" name="" value="i2">I2
-                                            <input type="checkbox" name="" value="i1">I3
+                                            <input type="checkbox" name="" value="i3">I3
                                             <input type="checkbox" name="" value="i4">I4
                                         </li>
                                     </ul>
@@ -1099,9 +1099,8 @@
             },
             {
                 name:'',
-                type:'line',
-                //yAxisIndex: 1,
-                data:[500.0, 200.0, 140.0, 120.0, 120.0, 120.0, 110.0, 110.0]
+                type:'line'//,
+               /// yAxisIndex: 1
             }
         ]
     };
@@ -1318,7 +1317,6 @@
             dataType: "json",
             success: function (result) {
                 var data = JSON.parse(result);
-
                 //UI图表部分
                 eventChart1.setOption({dataset: {source: data}});
                 $('#item2-UI-ctrl input.default-show').each(function () {//显示默认的曲线系列

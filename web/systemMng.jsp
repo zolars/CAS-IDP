@@ -192,31 +192,31 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs" id="ulItem">
-                        <li class="active" style="width:15%">
+                        <li class="active" style="width:11%">
                             <a data-toggle="tab" id="subItem1">•账号管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem2">•角色管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem3">•功能管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem4">•设备管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem5">•接口管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem6">•限值管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem7">•预警管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem8">•基础信息配置</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem9">•组织管理</a>
                         </li>
                     </ul>
@@ -629,8 +629,6 @@
 
                         </div>
 
-
-
                         <!-- plantform div-->
                         <div id = "plantform-div" class="col-md-6" style="display:none; float: right">
                             设备名称：<input type="text" id="plantform-dname" class="form-control setting-input">
@@ -761,9 +759,9 @@
             </div>
 
             <div class="add-roles-handle">
-                <button type="submit" class="btn btn-primary" id="add-user-handle" onclick="submitAddUser()">确定</button>
-                <button type="submit" class="btn btn-primary" id="update-user-handle" onclick="submitUpdateUser()">确定</button>
-                <button class="btn btn-default" onclick="hiddenUserModel()">取消</button>
+                <button type="submit" class="btn-primary" id="add-user-handle" onclick="submitAddUser()">确定</button>
+                <button type="submit" class="btn-primary" id="update-user-handle" onclick="submitUpdateUser()">确定</button>
+                <button class="btn-default" onclick="hiddenUserModel()">取消</button>
             </div>
         </div>
         <!-- user model DIV END-->
@@ -783,12 +781,12 @@
             </div>
 
             <div class="add-roles-handle">
-                <button type="submit" class="btn btn-primary" id="add-roles-handle" onclick="submitAddRoles()">确定
+                <button type="submit" class="btn-primary" id="add-roles-handle" onclick="submitAddRoles()">确定
                 </button>
-                <button type="submit" class="btn btn-primary" id="update-roles-handle" onclick="submitUpdateRoles()">
+                <button type="submit" class="btn-primary" id="update-roles-handle" onclick="submitUpdateRoles()">
                     确定
                 </button>
-                <button class="btn btn-default" onclick="hiddenRolesModel()">取消</button>
+                <button class="btn-default" onclick="hiddenRolesModel()">取消</button>
             </div>
         </div>
         <!-- roles model DIV END-->
@@ -866,13 +864,13 @@
             </div>
 
             <div class="add-threshold-handle">
-                <button type="submit" class="btn btn-primary" id="add-threshold-handle" onclick="submitAddThreshold()">
+                <button type="submit" class="btn-primary" id="add-threshold-handle" onclick="submitAddThreshold()">
                     确定
                 </button>
-                <button type="submit" class="btn btn-primary" id="update-threshold-handle"
+                <button type="submit" class="btn-primary" id="update-threshold-handle"
                         onclick="submitUpdateThreshold()">确定
                 </button>
-                <button class="btn btn-default" onclick="hiddenThresholdModel()">取消</button>
+                <button class="btn-default" onclick="hiddenThresholdModel()">取消</button>
             </div>
         </div>
         <!-- threshold model DIV END-->
@@ -916,8 +914,8 @@
             </div>
 
             <div class="update-org-handle">
-                <button type="submit" class="btn btn-primary" id="update-org-handle" onclick="submitUpdateOrg()">确定</button>
-                <button class="btn btn-default" onclick="cancleUpdateOrg()">取消</button>
+                <button type="submit" class="btn-primary" id="update-org-handle" onclick="submitUpdateOrg()">确定</button>
+                <button class="btn-default" onclick="cancleUpdateOrg()">取消</button>
             </div>
         </div>
 
@@ -934,12 +932,11 @@
             </div>
 
             <div class="add-org-handle">
-                <button type="submit" class="btn btn-primary" id="add-org-handle" onclick="submitAddOrg()">确定</button>
-                <button class="btn btn-default" onclick="cancleAddOrg()">取消</button>
+                <button type="submit" class="btn-primary" id="add-org-handle" onclick="submitAddOrg()">确定</button>
+                <button class="btn-default" onclick="cancleAddOrg()">取消</button>
             </div>
         </div>
         <!-- orgnization model DIV END-->
-
 
     </div>
 </section>
@@ -1813,6 +1810,7 @@
 
     /*加载Computerroom下拉选*/
     function getAllComputerroom() {
+
         var city = $("#userorgnization-city option:selected").val();
         var computerroom = $("#userorgnization-computerroom").val();
 
@@ -1828,6 +1826,7 @@
                 },
                 dataType: "json",
                 success: function (data) {
+                    $('#userorgnization-computerroom').empty();
                     var obj = JSON.parse(data);
                     var rt = obj.allcomputerroom;
 
@@ -1884,6 +1883,9 @@
         $('#add-roles-modal').css('display', 'block');
         $('#add-roles-handle').css('display', 'block');
         $('#update-roles-handle').css('display', 'none');
+
+        $("#rolesname").val("");
+        $("#rolesextra").val("");
     }
 
     <!-- 删除角色 -->
@@ -1919,6 +1921,9 @@
         $('#add-roles-handle').css('display', 'none');
         $('#update-roles-handle').css('display', 'block');
 
+        $("#rolesname").val("");
+        $("#rolesextra").val("");
+
         //显示信息到div
         var rolesidcheck = $("input[name='rolesid']:checked").serialize();
 
@@ -1931,7 +1936,6 @@
             dataType: "json",
             success: function (data) {
                 var list = JSON.parse(data);
-
                 var rolesdata = list['roles'];
 
                 $("#rid").val(rolesdata.rid);
@@ -1960,9 +1964,8 @@
             },
             dataType: "json",
             success: function (data) {
-                alert(data);
                 hiddenRolesModel();
-                //getALLUserInfomation();
+                getALLRolesInfomation();
             },
             error: function () {
                 alert("失败");

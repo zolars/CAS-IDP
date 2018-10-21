@@ -4,9 +4,6 @@ import Util.HBSessionDaoImpl;
 import hibernatePOJO.CityBank;
 import hibernatePOJO.Computerroom;
 import hibernatePOJO.Roles;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import userManage.dao.ComputerroomDAO;
 
 import java.util.ArrayList;
@@ -34,12 +31,15 @@ public class ComputerroomDAOImpl implements ComputerroomDAO {
                 "FROM CityBank where cbid='" + city + "'");
 
         String comidstr = cb.getCompRoom();
-        String comidset[] = comidstr.split("，");
 
-        for (int i = 0; i < comidset.length; i++) {
-            Computerroom com = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid='" + comidset[i] + "'");
-            list.add(com);
+        if (comidstr != null && !comidstr.equals("")) {
+            String comidset[] = comidstr.split("，");
+
+            for (int i = 0; i < comidset.length; i++) {
+                Computerroom com = (Computerroom) hbsessionDao.getFirst(
+                        "FROM Computerroom where rid='" + comidset[i] + "'");
+                list.add(com);
+            }
         }
 
         return list;

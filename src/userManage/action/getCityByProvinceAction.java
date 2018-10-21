@@ -28,9 +28,8 @@ public class getCityByProvinceAction extends ActionSupport {
     /* 根据省行id查询所属的市行
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String province = request.getParameter("province");

@@ -1558,7 +1558,6 @@ public class EventDAOImpl implements EventDAO {
                 }
             }
 
-            System.out.println(provblist.get(j).getPbname() + ":" + didset.size() + "," + tempset.size());
             String didsetstring = "(";
 
             for (int idx = 0; idx < didset.size(); idx++) {
@@ -1569,11 +1568,8 @@ public class EventDAOImpl implements EventDAO {
                 didsetstring = didsetstring.substring(0, didsetstring.length() - 1);
                 didsetstring += ")";
 
-                System.out.println(didsetstring);
                 List<AssessRecord> assessrecordlist = hbsessionDao.search(
                         "FROM AssessRecord where did IN" + didsetstring);
-
-                //List<Integer> teid = new ArrayList<>();
 
                 for (int i = 0; i < assessrecordlist.size(); i++) {
                     if (assessrecordlist.get(i).getDegree() == 3) {

@@ -77,7 +77,8 @@ public class DataOnline {
         var.setPf1(dataset.get("PF1"));
         var.setPf2(dataset.get("PF2"));
         var.setPf3(dataset.get("PF3"));
-        var.setpFsum(dataset.get("PFsum"));
+        //var.setpFsum(dataset.get("PFsum"));
+        var.setpFsum(dataset.get("PF1") + dataset.get("PF2") + dataset.get("PF3"));
         /*22-25四项存的是三项电压电流的不平衡度，用负序
          */
         varsxdy.setUunb(dataset.get("Uunb"));
