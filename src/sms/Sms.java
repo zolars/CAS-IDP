@@ -18,7 +18,7 @@ public class Sms {
 
     private void SendSms(Port myport) {
         if (!myport.isIsused()) {
-            System.out.println(myport.getCOMname()+"通讯端口未正常打开!");
+            System.out.println(myport.getCOMname() + "通讯端口未正常打开!");
             return;
         }
 

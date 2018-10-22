@@ -163,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <li><button class="btn btn-default active" value="rms">RMS</button></li>
                                         <li><button class="btn btn-default" value="thd">THD</button></li>
                                         <li><button class="btn btn-default" value="hz">Hz</button></li>
-                                        <li><button class="btn btn-default" value="p">W</button></li>
+                                        <li><button class="btn btn-default" value="W">W</button></li>
                                         <li><button class="btn btn-default" value="s">VA</button></li>
                                         <li><button class="btn btn-default" value="q">Var</button></li>
                                         <li><button class="btn btn-default" value="pf">PF</button></li>
@@ -582,7 +582,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         var obj = JSON.parse(data);
                         var rt = obj.allmpdata;
                         for (var i = 0; i < rt.length; i++) {
-                            $('#monitorpnt').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+                            if(i == 0)
+                                $('#monitorpnt').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
+                            else
+                                $('#monitorpnt').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
                         }
                     }
                 });
@@ -636,7 +639,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             "rmsU1","rmsU2","rmsU3","rmsI1","rmsI2","rmsI3",
             "thdU1","thdU2","thdU3","thdI1","thdI2","thdI3",
             "hz",
-            "p1","p2","p3",
+            "W1","W2","W3",
             "s1","s2","s3",
             "q1","q2","q3",
             "pf1","pf2","pf3",
@@ -779,19 +782,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 },
                 // W
                 {
-                    name: "p1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    name: "W1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "p1"},data: qstRecordp1
+                    encode: {x: "time", y: "W1"},data: qstRecordp1
                 },
                 {
-                    name: "p2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    name: "W2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "p2"},data: qstRecordp2
+                    encode: {x: "time", y: "W2"},data: qstRecordp2
                 },
                 {
-                    name: "p3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    name: "W3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "p3"},data: qstRecordp3
+                    encode: {x: "time", y: "W3"},data: qstRecordp3
                 },
                 // VA
                 {
@@ -1327,12 +1330,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         // 更新趋势图
         function updateQst() {
-         /*   console.log("qstRecordp1.len="+qstRecordp1.length);
-
-            for(var i = 0; i < qstRecordRmsi2.length; i++){
-                console.log("qstRecordp1"+ qstRecordp1[i].name + "...." + qstRecordp1[i].value);
-            }*/
-
             eventChart1.setOption({
                 series: [
                     {data: qstRecordRmsu1},
@@ -1422,7 +1419,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var tan2 = newRecord["allTAN"][0]["tan2"];
             var tan3 = newRecord["allTAN"][0]["tan3"];
             // unb
-            var unb = newRecord["allUNB"][0]["unb"];
+            var unb = newRecord["allUNB"][0]["uunb"];
             // Pst
             var pstU1 = newRecord["allPST"][0]["pstU1"];
             var pstU2 = newRecord["allPST"][0]["pstU2"];
@@ -1431,7 +1428,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var pltU1 = newRecord["allPLT"][0]["pltU1"];
             var pltU2 = newRecord["allPLT"][0]["pltU2"];
             var pltU3 =  newRecord["allPLT"][0]["pltU3"];
-
 
             qstRecordRmsu1.push( {name: time, value:[time, rmsU1]} );
             qstRecordRmsu2.push( {name: time, value:[time, rmsU2]} );

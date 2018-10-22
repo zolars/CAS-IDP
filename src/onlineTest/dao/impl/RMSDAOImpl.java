@@ -343,7 +343,7 @@ public class RMSDAOImpl implements RMSDAO {
         return crlist;
     }
 
-    //DPF
+    //DPF = P/S
     public List getCurrentDPFData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
