@@ -33,12 +33,15 @@ public class CityDAOImpl implements CityDAO {
                 "FROM ProvinceBank where pbid='" + province + "'");
 
         String cbidstr = pb.getCbidset();
-        String cbidset[] = cbidstr.split("，");
 
-        for (int i = 0; i < cbidset.length; i++) {
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid='" + cbidset[i] + "'");
-            list.add(cb);
+        if (cbidstr != null && !cbidstr.equals("")) {
+            String cbidset[] = cbidstr.split("，");
+
+            for (int i = 0; i < cbidset.length; i++) {
+                CityBank cb = (CityBank) hbsessionDao.getFirst(
+                        "FROM CityBank where cbid='" + cbidset[i] + "'");
+                list.add(cb);
+            }
         }
 
         return list;

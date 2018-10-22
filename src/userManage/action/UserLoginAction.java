@@ -3,7 +3,6 @@ package userManage.action;
 import Util.ToHex;
 import com.opensymphony.xwork2.ActionSupport;
 import hibernatePOJO.User;
-import hibernatePOJO.UserRoles;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.UserDAO;
 import userManage.dao.impl.UserDAOImpl;
@@ -59,7 +58,6 @@ public class UserLoginAction extends ActionSupport {
 
         user.setUname(username);
         user.setPassword(password);
-
 
         UserDAO dao = new UserDAOImpl();
         if (dao.login(user)) {

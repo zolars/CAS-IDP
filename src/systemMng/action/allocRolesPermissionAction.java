@@ -9,8 +9,6 @@ import systemMng.dao.RolesPermissionDAO;
 import systemMng.dao.impl.RolesPermissionDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 
 public class allocRolesPermissionAction extends ActionSupport {
@@ -28,9 +26,8 @@ public class allocRolesPermissionAction extends ActionSupport {
     /* 分配给角色功能权限
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String pid = request.getParameter("pid");
@@ -42,10 +39,11 @@ public class allocRolesPermissionAction extends ActionSupport {
             JSONObject jsonObject = new JSONObject();
             Boolean rt = dao.allocPermission(rid, pid);
 
-            if(rt)
+            if (rt) {
                 jsonObject.put("提示", "添加成功！");
-            else
+            } else {
                 jsonObject.put("提示", "添加失败，请重试！");
+            }
 
             result = JSON.toJSONString(jsonObject);
 

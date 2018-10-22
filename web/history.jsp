@@ -137,10 +137,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs" id="ulItem">
-                        <li style="width:25%">
+                        <li style="width:50%">
                             <a data-toggle="tab" id="subItem2">•历史曲线</a>
                         </li>
-                        <li style="width:25%">
+                        <li style="width:50%">
                             <a data-toggle="tab" id="subItem3">•知识库</a>
                         </li>
                     </ul>
@@ -203,9 +203,9 @@
                                 <div id="item2-UI-ctrl">
                                     <ul>
                                         <li class="mark-ctrl">
-                                            <input type="checkbox" name="" id="" value='max'>最大值
-                                            <input type="checkbox" name="" id="" value='min'>最小值
-                                            <input type="checkbox" name="" id="" value='average'>平均值
+                                            <input type="checkbox" value='max'>最大值
+                                            <input type="checkbox" value='min'>最小值
+                                            <input type="checkbox" value='average'>平均值
                                         </li>
                                         <li class="series-ctrl">
                                             <input class="default-show" type="checkbox" name="" value="u1">U1
@@ -214,62 +214,62 @@
                                             <input type="checkbox" name="" value="u4">U4
                                             <input class="default-show" type="checkbox" name="" value="i1">I1
                                             <input type="checkbox" name="" value="i2">I2
-                                            <input type="checkbox" name="" value="i1">I3
+                                            <input type="checkbox" name="" value="i3">I3
                                             <input type="checkbox" name="" value="i4">I4
                                         </li>
                                     </ul>
                                 </div>
-                                <div id='item2-UI' style='width: 100%;height: 500px;'></div>
+                                <div id='item2-UI' class="chart-item" style='width: 100%;height: 500px;'></div>
                             </li>
                             <li id='item2-2'>
                                 <div id='item2-HZ-ctrl'>
-                                    <input type="checkbox" name="" id="" value='max'>最大值
-                                    <input type="checkbox" name="" id="" value='min'>最小值
-                                    <input type="checkbox" name="" id="" value='average'>平均值
+                                    <input type="checkbox" value='max'>最大值
+                                    <input type="checkbox" value='min'>最小值
+                                    <input type="checkbox" value='average'>平均值
                                 </div>
-                                <div id='item2-HZ' style='width: 100%;height: 500px;'></div>
+                                <div id='item2-HZ' class="chart-item" style='width: 100%;height: 500px;'></div>
                             </li>
                             <li id='item2-3'>
                                 <div id='item2-P-ctrl'>
                                     <ul>
                                         <li class="mark-ctrl">
-                                            <input type="checkbox" name="" id="" value='max'>最大值
-                                            <input type="checkbox" name="" id="" value='min'>最小值
-                                            <input type="checkbox" name="" id="" value='average'>平均值
+                                            <input type="checkbox" value='max'>最大值
+                                            <input type="checkbox" value='min'>最小值
+                                            <input type="checkbox" value='average'>平均值
                                         </li>
                                         <li class="series-ctrl">
-                                            <input class="default-show" type="checkbox" name="" id="" value='p1'>P1
-                                            <input type="checkbox" name="" id="" value='p2'>P2
-                                            <input type="checkbox" name="" id="" value='p3'>P3
-                                            <input type="checkbox" name="" id="" value='p'>P
-                                            <input class="default-show" type="checkbox" name="" id="" value='s1'>S1
-                                            <input type="checkbox" name="" id="" value='s2'>S2
-                                            <input type="checkbox" name="" id="" value='s3'>S3
-                                            <input type="checkbox" name="" id="" value='s'>S
-                                            <input type="checkbox" name="" id="" value='q1'>Q1
-                                            <input type="checkbox" name="" id="" value='q2'>Q2
-                                            <input type="checkbox" name="" id="" value='q3'>Q3
-                                            <input type="checkbox" name="" id="" value='q'>Q
-                                            <input class="default-show" type="checkbox" name="" id="" value='pf1'>PF1
-                                            <input type="checkbox" name="" id="" value='pf2'>PF2
-                                            <input type="checkbox" name="" id="" value='pf3'>PF3
-                                            <input type="checkbox" name="" id="" value='pf'>PF
-                                            <input class="default-show" type="checkbox" name="" id="" value='dpf1'>DPF1
-                                            <input type="checkbox" name="" id="" value='dpf2'>DPF2
-                                            <input type="checkbox" name="" id="" value='dpf3'>DPF3
-                                            <input type="checkbox" name="" id="" value='dpf'>DPF
+                                            <input class="default-show" type="checkbox" value='p1'>P1
+                                            <input type="checkbox" value='p2'>P2
+                                            <input type="checkbox" value='p3'>P3
+                                            <input type="checkbox" value='p'>P
+                                            <input class="default-show" type="checkbox" value='s1'>S1
+                                            <input type="checkbox" value='s2'>S2
+                                            <input type="checkbox" value='s3'>S3
+                                            <input type="checkbox" value='s'>S
+                                            <input type="checkbox" value='q1'>Q1
+                                            <input type="checkbox" value='q2'>Q2
+                                            <input type="checkbox" value='q3'>Q3
+                                            <input type="checkbox" value='q'>Q
+                                            <input class="default-show" type="checkbox" value='pf1'>PF1
+                                            <input type="checkbox" value='pf2'>PF2
+                                            <input type="checkbox" value='pf3'>PF3
+                                            <input type="checkbox" value='pf'>PF
+                                            <input class="default-show" type="checkbox" value='dpf1'>DPF1
+                                            <input type="checkbox" value='dpf2'>DPF2
+                                            <input type="checkbox" value='dpf3'>DPF3
+                                            <input type="checkbox" value='dpf'>DPF
                                         </li>
                                     </ul>
                                 </div>
-                                <div id='item2-P' style='width: 100%;height: 500px;'></div>
+                                <div id='item2-P' class="chart-item" style='width: 100%;height: 500px;'></div>
                             </li>
                             <li id='item2-4'>
                                 <div id="item2-LyTx-ctrl">
-                                    <input class="default-show" type="checkbox" name="" id="" value="Ua">Ua
-                                    <input type="checkbox" name="" id="" value="Ub">Ub
-                                    <input type="checkbox" name="" id="" value="Uc">Uc
+                                    <input class="default-show" type="checkbox" value="Ua">Ua
+                                    <input type="checkbox" value="Ub">Ub
+                                    <input type="checkbox" value="Uc">Uc
                                 </div>
-                                <div id='item2-LyTx' style='width: 100%;height: 500px;'></div>
+                                <div id='item2-LyTx' class="chart-item" style='width: 100%;height: 500px;'></div>
                             </li>
                         </ul>
                     </div>
@@ -515,7 +515,10 @@
                     var obj = JSON.parse(data);
                     var rt = obj.allmpdata;
                     for (var i = 0; i < rt.length; i++) {
-                        $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+                        if(i == 0)
+                            $('#his-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
+                        else
+                            $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
                     }
                 }
             });
@@ -818,6 +821,7 @@
         yAxis: {
             type: 'value',
             scale: true,
+            boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
             }
@@ -910,6 +914,7 @@
         yAxis: {
             type: 'value',
             scale: true,
+            boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
             }
@@ -937,6 +942,7 @@
         yAxis: {
             type: 'value',
             scale: true,
+            boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
             }
@@ -1064,6 +1070,7 @@
         yAxis: {
             type: 'value',
             scale: true,
+            boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
             }
@@ -1096,6 +1103,11 @@
                         color:'#ff0000'
                     }
                 }
+            },
+            {
+                name:'',
+                type:'line'//,
+               /// yAxisIndex: 1
             }
         ]
     };
@@ -1312,7 +1324,6 @@
             dataType: "json",
             success: function (result) {
                 var data = JSON.parse(result);
-
                 //UI图表部分
                 eventChart1.setOption({dataset: {source: data}});
                 $('#item2-UI-ctrl input.default-show').each(function () {//显示默认的曲线系列
@@ -1328,6 +1339,7 @@
 
             }
         });
+
         //取浪涌、塌陷数据
         $.ajax({
             type: "post",
@@ -1339,7 +1351,6 @@
             },
             dataType: "json",
             success: function(result){
-                //console.log(result);
                 var data=JSON.parse(result);
                 eventChart4.setOption({dataset: {source: data}});
                 $('#item2-LyTx-ctrl input.default-show').each(function () {//显示默认的系列
@@ -1381,8 +1392,12 @@
         var stime = $("#firstDate").val();
         var etime = $("#lastDate").val();
 
-        if(did != "" && stime != "" && etime != "")
+        if (stime > etime) {
+            alert("开始日期不能早于结束日期");
+        } else if(did != "" && stime != "" && etime != "") {
             getData(stime, etime, did);
+        }
+
     }
 
 </script>

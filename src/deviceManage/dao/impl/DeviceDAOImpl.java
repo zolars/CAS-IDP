@@ -2,9 +2,7 @@ package deviceManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import deviceManage.dao.DeviceDAO;
-import hibernatePOJO.DeviceAlarmUser;
-import hibernatePOJO.Devices;
-import hibernatePOJO.DevicesThreshold;
+import hibernatePOJO.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +22,20 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         List<Devices> list = hbsessionDao.search(
                 "FROM Devices where name = '" + name + "'");
+
+        return list;
+    }
+
+    /**
+     * 通过设备名称获取设备
+     * @param name 设备名称
+     * @return 设备实体list
+     */
+    public List getDeviceDataByName(String type, String name) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices where name = '" + name + "' and type='" + type + "'");
 
         return list;
     }
@@ -56,6 +68,24 @@ public class DeviceDAOImpl implements DeviceDAO {
                 "FROM DeviceAlarmUser");
 
         return list;
+    }
+
+    /**
+     * 获取某个uid为uid的用户名信息
+     * @return 所有用户名
+     */
+    public String getDeviceAlarmUserName(String uid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        String uname = "";
+
+        User dauser = (User)hbsessionDao.getFirst(
+                "FROM User where uid=" + uid);
+
+        if (dauser != null) {
+            uname = dauser.getUname();
+        }
+
+        return uname;
     }
 
     /**
@@ -94,6 +124,15 @@ public class DeviceDAOImpl implements DeviceDAO {
         return dtlist;
     }
 
+    public String getDeviceAlarmUserSet(String id) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        DeviceAlarmUser da = (DeviceAlarmUser)hbsessionDao.getFirst(
+                "FROM DeviceAlarmUser where id = '" + id + "'");
+
+        return da.getUid();
+    }
+
     /**
      * 删除DevicesThreshold表中dtid=dtid的记录
      * @param dtid dtid
@@ -113,11 +152,11 @@ public class DeviceDAOImpl implements DeviceDAO {
      * @param id id
      * @return 真或假
      */
-    public Boolean deleteDeviceAlarmUser(String id) {
+    public Boolean deleteDeviceAlarmUser(String id, String uid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
-        rt = hbsessionDao.delete("Delete FROM DeviceAlarmUser Where id=?", id);
+        rt = hbsessionDao.update("Update DeviceAlarmUser set uid ='" + uid + "' Where id=" + id);
 
         return rt;
     }
@@ -520,6 +559,15 @@ public class DeviceDAOImpl implements DeviceDAO {
                 "FROM Devices where name like '" + name + "%'");
 
         return list;
+    }
+
+    public Integer getQstinterval() {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        BasicSetting bs = (BasicSetting) hbsessionDao.getFirst(
+                "FROM BasicSetting");
+
+        return bs.getQstinterval();
     }
 
 }

@@ -31,15 +31,17 @@ public class HBSessionDaoImpl implements HBSessionDao{
 
     @Override
     public List search(String hql) {
-        //查询不用事务管理
         Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
         List alist = null;
         alist = session.createQuery(hql).list();
 
         if (alist.size() == 0) {
+            transaction.commit();
             session.close();
             return null;
         } else {
+            transaction.commit();
             session.close();
             return alist;
         }
@@ -49,9 +51,11 @@ public class HBSessionDaoImpl implements HBSessionDao{
     public List searchWithNum(String hql, int num) {
         //查询不用事务管理
         Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
         Query query = session.createQuery(hql);
         query.setMaxResults(num);
         List alist = query.list();
+        transaction.commit();
         session.close();
         return alist;
     }
@@ -60,14 +64,17 @@ public class HBSessionDaoImpl implements HBSessionDao{
     public Object getFirst(String hql) {
         //查询不用事务管理
         Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
         List alist = null;
         Object aobject = null;
         alist = session.createQuery(hql).list();
 
         if (alist.size() == 0) {
+            transaction.commit();
             session.close();
             return null;
         } else {
+            transaction.commit();
             aobject = alist.get(0);
             session.close();
             return aobject;

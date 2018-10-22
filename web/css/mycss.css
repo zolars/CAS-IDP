@@ -2,7 +2,7 @@
     display: none;
     width: 500px;
     height: 440px;
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.9);
     position: fixed;
     top: 0;
     left: 0;
@@ -18,7 +18,7 @@
     display: none;
     width: 500px;
     height: 200px;
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.9);
     position: fixed;
     top: 0;
     left: 0;
@@ -34,7 +34,7 @@
     display: none;
     width: 500px;
     height: 380px;
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.9);
     position: fixed;
     top: 0;
     left: 0;
@@ -50,23 +50,7 @@
     display: none;
     width: 400px;
     height: 250px;
-    background: rgba(0,0,0,.7);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: 2000;
-    border-radius: 20px;
-    padding: 30px;
-}
-
-.add-user {
-    display: none;
-    width: 500px;
-    height: 440px;
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.9);
     position: fixed;
     top: 0;
     left: 0;
@@ -82,7 +66,7 @@ add-alarm-user{
     display: none;
     width: 500px;
     height: 440px;
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.9);
     position: fixed;
     top: 0;
     left: 0;
@@ -98,7 +82,7 @@ add-alarm-user{
     display: none;
     width: 500px;
     height: 440px;
-    background: rgba(0,0,0,.7);
+    background: rgba(0,0,0,.9);
     position: fixed;
     top: 0;
     left: 0;
@@ -126,7 +110,7 @@ add-alarm-user{
     display: block;
     width: 300px;
     height: 280px;
-    background: rgba(0,0,0,.7);
+    background: rgba(0,0,0,.9);
     position: fixed;
     top: 0;
     left: 0;

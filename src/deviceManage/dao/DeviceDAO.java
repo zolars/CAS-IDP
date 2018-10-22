@@ -8,15 +8,21 @@ public interface DeviceDAO {
 
     public List getDeviceDataByName(String name);
 
+    public List getDeviceDataByName(String devicetype, String name);
+
     public String getDeviceIDByName(String name);
 
     public List getDeviceAlarmUserData();
+
+    public String getDeviceAlarmUserName(String uid);
+
+    public String getDeviceAlarmUserSet(String id);
 
     public List getDeviceAlarmUserNameDataByName(String name);
 
     public List getDeviceThresholdInfoByType(String type);
 
-    public Boolean deleteDeviceAlarmUser(String id);
+    public Boolean deleteDeviceAlarmUser(String id, String uid);
 
     public Boolean deleteDeviceThreshold(String dtid);
 
@@ -56,5 +62,6 @@ public interface DeviceDAO {
 
     public List searchFuzzyDevice(String name);
 
+    public Integer getQstinterval();
 
 }

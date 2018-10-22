@@ -5,13 +5,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
 import hibernatePOJO.DeviceAlarmUser;
-import hibernatePOJO.User;
 import org.apache.struts2.ServletActionContext;
-import userManage.dao.UserDAO;
-import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +28,7 @@ public class getAllAlarmUserAction extends ActionSupport {
     /* 查询all设备告警人员信息
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
@@ -43,20 +39,28 @@ public class getAllAlarmUserAction extends ActionSupport {
 
             alrmlist = dao.getDeviceAlarmUserData();
 
-            for(int i = 0; i< alrmlist.size(); i++){
+            for (int i = 0; i < alrmlist.size(); i++) {
 
                 DeviceAlarmUser tmpau = alrmlist.get(i);
 
+                String id = tmpau.getId();
                 String level = tmpau.getLevel().toString();
                 String uidstr = tmpau.getUid();
                 String uidset[] = uidstr.split("，");
 
-                for(int j = 0; j < uidset.length; j++){
-                    List<String> list = new ArrayList();
-                    list.add(level);
-                    list.add(uidset[j]);
+                for (int j = 0; j < uidset.length; j++) {
 
-                    rtlist.add(list);
+                    if (!uidset[j].equals("")) {
+                        String name = dao.getDeviceAlarmUserName(uidset[j]);
+
+                        List<String> list = new ArrayList();
+                        list.add(id + "/" + uidset[j]);
+                        list.add(level);
+                        list.add(name);
+
+                        rtlist.add(list);
+                    }
+
                 }
             }
 

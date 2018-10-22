@@ -1,11 +1,10 @@
-package deviceManage.action;
+package systemMng.action;
 
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
-import hibernatePOJO.Devices;
-import hibernatePOJO.DevicesThreshold;
+import hibernatePOJO.DeviceAlarmUser;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class getDeviceThresholdAction extends ActionSupport {
+public class getQSTintervalAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private JSONObject result;
 
@@ -26,29 +25,19 @@ public class getDeviceThresholdAction extends ActionSupport {
     }
 
 
-    /* 根据设备名称查询设备类型
-       根据设备类型查找设备告警阈值信息
+    /* 查询趋势图刷新频率信息
      */
     public String execute() throws Exception {
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
-            String dtid = request.getParameter("dtid");
-
             DeviceDAO dao = new DeviceDAOImpl();
 
-            List<Devices> devcielist = new ArrayList();
-            List<DevicesThreshold> dtlist = new ArrayList();
-
-            devcielist = dao.getDeviceDataByName(dtid);
-
-            String type = devcielist.get(0).getType();
-
-            dtlist = dao.getDeviceThresholdInfoByType(type);
+            Integer qstinterval = dao.getQstinterval();
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("alldtlist", dtlist);
+            jsonObject.put("qstinterval", qstinterval);
 
             result = jsonObject;
 

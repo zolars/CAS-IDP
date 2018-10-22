@@ -6,7 +6,6 @@ import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
 import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,11 +29,23 @@ public class getDeviceInfoAction extends ActionSupport {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
+            String devicetype = request.getParameter("devicetype");
             String devicename = request.getParameter("devicename");
+
+           /* if (devicetype.equals("蓄电池")) {
+                devicetype = "battery";
+            } else if (devicetype.equals("柴油发电机")) {
+                devicetype = "";
+            } else if (devicetype.equals("空调")) {
+                devicetype = "";
+            } else */
+            if (devicetype.equals("其他传感器")) {
+                devicetype = "temp";
+            }
 
             DeviceDAO dao = new DeviceDAOImpl();
 
-            List qstdata = dao.getDeviceDataByName(devicename);
+            List qstdata = dao.getDeviceDataByName(devicetype, devicename);
 
             result = JSON.toJSONString(qstdata);
 

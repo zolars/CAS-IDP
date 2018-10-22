@@ -6,12 +6,15 @@ import java.util.List;
 
 public interface HBSessionCenterDao {
 
-    public Session getSession();
-    public void closeSession();
+    public  Session getSession();
+
     public List search(String hql);
+
     public List searchWithNum(String hql, int num);
+
     public Object getFirst(String hql);
+
     public boolean delete(String hql, String id);
-   // public boolean insert(User user);
+
     public boolean insert(Object obj);
 }

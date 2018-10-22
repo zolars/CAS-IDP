@@ -2,11 +2,8 @@ package userManage.action;
 
 
 import Util.ProvinceEnum;
-
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.UserDAO;
 import userManage.dao.impl.UserDAOImpl;
@@ -34,7 +31,7 @@ public class CityTreeAction extends ActionSupport {
     /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的行级结构树状串
      */
     public String execute() throws Exception { //getUserTree() throws Exception{
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");

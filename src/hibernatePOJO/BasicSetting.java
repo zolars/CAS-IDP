@@ -7,6 +7,7 @@ public class BasicSetting {
     private Integer onlineinterval;
     private Integer thansentinterval;
     private Integer uploadinterval;
+    private Integer qstinterval;
 
     public int getId() {
         return id;
@@ -55,5 +56,13 @@ public class BasicSetting {
     public int hashCode() {
 
         return Objects.hash(id, onlineinterval, thansentinterval, uploadinterval);
+    }
+
+    public Integer getQstinterval() {
+        return qstinterval;
+    }
+
+    public void setQstinterval(Integer qstinterval) {
+        this.qstinterval = qstinterval;
     }
 }

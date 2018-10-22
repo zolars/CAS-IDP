@@ -192,31 +192,31 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs" id="ulItem">
-                        <li class="active" style="width:15%">
+                        <li class="active" style="width:11%">
                             <a data-toggle="tab" id="subItem1">•账号管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem2">•角色管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem3">•功能管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem4">•设备管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem5">•接口管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem6">•限值管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem7">•预警管理</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem8">•基础信息配置</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:11%">
                             <a data-toggle="tab" id="subItem9">•组织管理</a>
                         </li>
                     </ul>
@@ -308,23 +308,23 @@
                     <div id="item4" class="">
                         <div class="block-area-inner">
                             <ul class="nav nav-tabs">
-                                <li class="active" style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem1">•IDP</a>
+                                <li class="active" name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem1">IDP</a>
                                 </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem2">•UPS</a>
+                                <li name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem2">UPS</a>
                                 </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem3">•蓄电池</a>
+                                <li name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem3">蓄电池</a>
                                 </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem4">•柴油发电机</a>
+                                <li name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem4">柴油发电机</a>
                                 </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem5">•空调</a>
+                                <li name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem5">空调</a>
                                 </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem6">•其他传感器</a>
+                                <li name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem6">其他传感器</a>
                                 </li>
                             </ul>
 
@@ -629,8 +629,6 @@
 
                         </div>
 
-
-
                         <!-- plantform div-->
                         <div id = "plantform-div" class="col-md-6" style="display:none; float: right">
                             设备名称：<input type="text" id="plantform-dname" class="form-control setting-input">
@@ -660,12 +658,17 @@
                                     <td>单位（秒）</td>
                                 </tr>
                                 <tr>
+                                    <td>趋势图数据刷新频率：</td>
+                                    <td><input type="text" class="form-control setting-input" id="qstinterval-input"></td>
+                                    <td>单位（秒）</td>
+                                </tr>
+                                <tr>
                                     <td>暂态事件存储频率：</td>
                                     <td><input type="text" class="form-control setting-input" id="tansentinterval-input"></td>
                                     <td>单位（分钟）</td>
                                 </tr>
                                 <tr>
-                                    <td>数据上传时效：</td>
+                                    <td>数据上传频率：</td>
                                     <td><input type="text" class="form-control setting-input" id="upload-input"></td>
                                     <td>单位（小时）</td>
                                 </tr>
@@ -756,9 +759,9 @@
             </div>
 
             <div class="add-roles-handle">
-                <button type="submit" class="btn btn-primary" id="add-user-handle" onclick="submitAddUser()">确定</button>
-                <button type="submit" class="btn btn-primary" id="update-user-handle" onclick="submitUpdateUser()">确定</button>
-                <button class="btn btn-default" onclick="hiddenUserModel()">取消</button>
+                <button type="submit" class="btn-primary" id="add-user-handle" onclick="submitAddUser()">确定</button>
+                <button type="submit" class="btn-primary" id="update-user-handle" onclick="submitUpdateUser()">确定</button>
+                <button class="btn-default" onclick="hiddenUserModel()">取消</button>
             </div>
         </div>
         <!-- user model DIV END-->
@@ -778,12 +781,12 @@
             </div>
 
             <div class="add-roles-handle">
-                <button type="submit" class="btn btn-primary" id="add-roles-handle" onclick="submitAddRoles()">确定
+                <button type="submit" class="btn-primary" id="add-roles-handle" onclick="submitAddRoles()">确定
                 </button>
-                <button type="submit" class="btn btn-primary" id="update-roles-handle" onclick="submitUpdateRoles()">
+                <button type="submit" class="btn-primary" id="update-roles-handle" onclick="submitUpdateRoles()">
                     确定
                 </button>
-                <button class="btn btn-default" onclick="hiddenRolesModel()">取消</button>
+                <button class="btn-default" onclick="hiddenRolesModel()">取消</button>
             </div>
         </div>
         <!-- roles model DIV END-->
@@ -805,24 +808,9 @@
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数分类</div>
                     <select class="form-control location-select-item" id="thresholdtype" name="thresholdtype">
-                        <%--<option value="频率上限值">频率上限值</option>
-                        <option value="频率下限值">频率下限值</option>
-                        <option value="电压偏差越上限">电压偏差越上限</option>
-                        <option value="电压偏差越下限">电压偏差越下限</option>
-                        <option value="短时闪变">短时闪变</option>
-                        <option value="长时闪变">长时闪变</option>
-                        <option value="三相电压负序不平衡度">三相电压负序不平衡度</option>
-                        <option value="电压暂升阈值">电压暂升阈值</option>
-                        <option value="电压暂降阈值">电压暂降阈值</option>
-                        <option value="电压短时中断阈值">电压短时中断阈值</option>
-                        <option value="电压总谐波含有率">电压总谐波含有率</option>
-                        <option value="温度过高">温度过高</option>
-                        <option value="温度过低">温度过低</option>
-                        <option value="湿度过高">湿度过高</option>
-                        <option value="湿度过低">湿度过低</option>--%>
-                            <option value="电能">电能</option>
-                            <option value="环境">环境</option>
-                            <option value="其他">其他</option>
+                        <option value="电能">电能</option>
+                        <option value="环境">环境</option>
+                        <option value="其他">其他</option>
                     </select>
                 </div>
             </div>
@@ -861,13 +849,13 @@
             </div>
 
             <div class="add-threshold-handle">
-                <button type="submit" class="btn btn-primary" id="add-threshold-handle" onclick="submitAddThreshold()">
+                <button type="submit" class="btn-primary" id="add-threshold-handle" onclick="submitAddThreshold()">
                     确定
                 </button>
-                <button type="submit" class="btn btn-primary" id="update-threshold-handle"
+                <button type="submit" class="btn-primary" id="update-threshold-handle"
                         onclick="submitUpdateThreshold()">确定
                 </button>
-                <button class="btn btn-default" onclick="hiddenThresholdModel()">取消</button>
+                <button class="btn-default" onclick="hiddenThresholdModel()">取消</button>
             </div>
         </div>
         <!-- threshold model DIV END-->
@@ -911,8 +899,8 @@
             </div>
 
             <div class="update-org-handle">
-                <button type="submit" class="btn btn-primary" id="update-org-handle" onclick="submitUpdateOrg()">确定</button>
-                <button class="btn btn-default" onclick="cancleUpdateOrg()">取消</button>
+                <button type="submit" class="btn-primary" id="update-org-handle" onclick="submitUpdateOrg()">确定</button>
+                <button class="btn-default" onclick="cancleUpdateOrg()">取消</button>
             </div>
         </div>
 
@@ -929,12 +917,11 @@
             </div>
 
             <div class="add-org-handle">
-                <button type="submit" class="btn btn-primary" id="add-org-handle" onclick="submitAddOrg()">确定</button>
-                <button class="btn btn-default" onclick="cancleAddOrg()">取消</button>
+                <button type="submit" class="btn-primary" id="add-org-handle" onclick="submitAddOrg()">确定</button>
+                <button class="btn-default" onclick="cancleAddOrg()">取消</button>
             </div>
         </div>
         <!-- orgnization model DIV END-->
-
 
     </div>
 </section>
@@ -1808,6 +1795,7 @@
 
     /*加载Computerroom下拉选*/
     function getAllComputerroom() {
+
         var city = $("#userorgnization-city option:selected").val();
         var computerroom = $("#userorgnization-computerroom").val();
 
@@ -1823,6 +1811,7 @@
                 },
                 dataType: "json",
                 success: function (data) {
+                    $('#userorgnization-computerroom').empty();
                     var obj = JSON.parse(data);
                     var rt = obj.allcomputerroom;
 
@@ -1858,7 +1847,6 @@
                 '<td style="width:30%;"><div>备注</div></td></tr>');
 
                 for (var i = 0; i < list.length; i++) {
-
                     var rid = list[i].rid;
                     var rname = list[i].rolesname;
                     var rextra;
@@ -1879,6 +1867,9 @@
         $('#add-roles-modal').css('display', 'block');
         $('#add-roles-handle').css('display', 'block');
         $('#update-roles-handle').css('display', 'none');
+
+        $("#rolesname").val("");
+        $("#rolesextra").val("");
     }
 
     <!-- 删除角色 -->
@@ -1914,6 +1905,9 @@
         $('#add-roles-handle').css('display', 'none');
         $('#update-roles-handle').css('display', 'block');
 
+        $("#rolesname").val("");
+        $("#rolesextra").val("");
+
         //显示信息到div
         var rolesidcheck = $("input[name='rolesid']:checked").serialize();
 
@@ -1926,7 +1920,6 @@
             dataType: "json",
             success: function (data) {
                 var list = JSON.parse(data);
-
                 var rolesdata = list['roles'];
 
                 $("#rid").val(rolesdata.rid);
@@ -1955,9 +1948,8 @@
             },
             dataType: "json",
             success: function (data) {
-                alert(data);
                 hiddenRolesModel();
-                //getALLUserInfomation();
+                getALLRolesInfomation();
             },
             error: function () {
                 alert("失败");
@@ -2019,7 +2011,6 @@
                 },
                 dataType: "json",
                 success: function (data) {
-
                     var list = data.alldlist;
                     for (var i = 0; i < list.length; i++) {
                         rt[i] = list[i].name;
@@ -2104,56 +2095,86 @@
 
     <!-- 查询设备 -->
     function checkDevice() {
+
+        //清空文本框等内容
+        $("#did").val("");
+        $("#devname").val("");
+        $("#devtype").val("");
+        $("#serialno").val("");
+        $("#extra").val("");
+        $("#radio-Ethernet").removeAttr("checked");
+        $("#radio-R5485").removeAttr("checked");
+        $("#radio-RS232").removeAttr("checked");
+        $("#IPaddress").val("");
+        $("#port").val("");
+        $("#conncom").val("");
+        $("#485address").val("");
+        $("#checkbox-sms").removeAttr("checked");
+        $("#checkbox-alert").removeAttr("checked");
+        $("#checkbox-plantform").removeAttr("checked");
+
         var devicename = $("#searchInput").val();
+        var devicetype = "IDP";
+
+        //与查询的设备类型做关联
+        $("li[name='device-type-li']").each(function () {
+            //找到带有active的li
+            if ($(this).hasClass("active")) {
+                //得到该元素下a的值
+                devicetype = $(this).children("a").text();
+            }
+        });
 
         $.ajax({
             type: "post",
             url: "getDeviceInfo",
             data: {
+                devicetype: devicetype,
                 devicename: devicename
             },
             dataType: "json",
             success: function (data) {
-                var obj = JSON.parse(data);
+               var obj = JSON.parse(data);
+               if(obj != null){
+                   $("#did").val(obj[0].did);
+                   $("#devname").val(obj[0].name);
+                   $("#devtype").val(obj[0].type);
+                   $("#serialno").val(obj[0].serialno);
+                   $("#extra").val(obj[0].extra);
 
-                $("#did").val(obj[0].did);
-                $("#devname").val(obj[0].name);
-                $("#devtype").val(obj[0].type);
-                $("#serialno").val(obj[0].serialno);
-                $("#extra").val(obj[0].extra);
+                   if (obj[0].devicetype == "以太网") {  //IDP UPS
+                       $("#radio-Ethernet").attr("checked", "checked");
+                       $("#radio-R5485").removeAttr("checked");
+                       $("#radio-RS232").removeAttr("checked");
 
-                if (obj[0].devicetype == "以太网") {  //IDP UPS
-                    $("#radio-Ethernet").attr("checked", "checked");
-                    $("#radio-R5485").removeAttr("checked");
-                    $("#radio-RS232").removeAttr("checked");
+                       $("#IPaddress").val(obj[0].iPaddress);
+                       $("#port").val(obj[0].port);
+                   }
+                   if (obj[0].devicetype == "RS485") {  //蓄电池 柴发 空调 其他传感器（温度湿度）
+                       $("#radio-Ethernet").removeAttr("checked");
+                       $("#radio-R5485").attr("checked", "checked");
+                       $("#radio-RS232").removeAttr("checked");
 
-                    $("#IPaddress").val(obj[0].iPaddress);
-                    $("#port").val(obj[0].port);
-                }
-                if (obj[0].devicetype == "RS485") {  //蓄电池 柴发 空调 其他传感器（温度湿度）
-                    $("#radio-Ethernet").removeAttr("checked");
-                    $("#radio-R5485").attr("checked", "checked");
-                    $("#radio-RS232").removeAttr("checked");
+                       $("#conncom").val(obj[0].iPaddress);
+                       $("#485address").val(obj[0].port);
+                   }
+                   if (obj[0].devicetype == "RS232") {  //
+                       $("#radio-Ethernet").removeAttr("checked");
+                       $("#radio-R5485").removeAttr("checked");
+                       $("#radio-RS232").attr("checked", "checked");
+                   }
 
-                    $("#conncom").val(obj[0].iPaddress);
-                    $("#485address").val(obj[0].port);
-                }
-                if (obj[0].devicetype == "RS232") {  //
-                    $("#radio-Ethernet").removeAttr("checked");
-                    $("#radio-R5485").removeAttr("checked");
-                    $("#radio-RS232").attr("checked", "checked");
-                }
-
-                //预警方式
-                if (obj[0].isSms == "1") {
-                    $("#checkbox-sms").attr("checked", "checked");
-                }
-                if (obj[0].isAlart == "1") {
-                    $("#checkbox-alert").attr("checked", "checked");
-                }
-                if (obj[0].isPlartform == "1") {
-                    $("#checkbox-plantform").attr("checked", "checked");
-                }
+                   //预警方式
+                   if (obj[0].isSms == "1") {
+                       $("#checkbox-sms").attr("checked", "checked");
+                   }
+                   if (obj[0].isAlart == "1") {
+                       $("#checkbox-alert").attr("checked", "checked");
+                   }
+                   if (obj[0].isPlartform == "1") {
+                       $("#checkbox-plantform").attr("checked", "checked");
+                   }
+               }
             }
         });
     }
@@ -2237,13 +2258,15 @@
                     var table = $("#alarm-user-table");
 
                     table.empty();
-                    table.append('<tr><td style="width:180px;">告警等级</td><td style="width:260px;">账号</td></tr>');
+                    table.append('<tr><td style="width:80px;"></td><td style="width:180px;">告警等级</td><td style="width:260px;">账号</td></tr>');
 
                     for (var i = 0; i < list.length; i++) {
-                        var level = list[i][0];
-                        var uname = list[i][1];
+                        var id = list[i][0];
+                        var level = list[i][1];
+                        var uname = list[i][2];
 
                         table.append('<tr>' +
+                            '<td style="width:80px;"><input type="radio" name="alarmuserid" id="alarmuserid" value=' + id + '></td>' +
                             '<td style="width:180px;">' + level + '</td>' +
                             '<td style="width:260px;">' + uname + '</td></tr>');
                     }
@@ -2252,29 +2275,28 @@
     }
 
     //查询所有账号
-    //function getALLUserInfoSimple() {
-        $("#alarm-user").empty();
-        $.ajax({
-            type: "post",
-            url: "getAllUserInfo",
-            dataType: "json",
-            success: function (data) {
-                var obj = JSON.parse(data);
-                var list = obj;
+    $("#alarm-user").empty();
+    $.ajax({
+        type: "post",
+        url: "getAllUserInfo",
+        dataType: "json",
+        success: function (data) {
+            var obj = JSON.parse(data);
+            var list = obj;
 
-                for (var key in list) {
-                    var len = list[key].length;
-                    for (var i = 0; i < len; i++) {
-                        var uid = list[key][i][0];
-                        var account = list[key][i][1];
+            for (var key in list) {
+                var len = list[key].length;
+                for (var i = 0; i < len; i++) {
+                    var uid = list[key][i][0];
+                    var account = list[key][i][1];
 
-                        $('#alarm-user').append("<option value='" + uid + "' >" + account + "</option>");
+                    $('#alarm-user').append("<option value='" + uid + "' >" + account + "</option>");
 
-                    }
                 }
             }
-        });
-   // }
+        }
+    });
+
 
     <!-- 添加预警人员 -->
     function addDeviceAlarmUser() {
@@ -2315,19 +2337,17 @@
     <!-- 取消（删除）预警人员 -->
     function deleteDeviceAlarmUser() {
 
-        var auidcheck = $("input[name='auid']:checked");
+        var auidcheck = $("input[id='alarmuserid']:checked");
         if (auidcheck.length == 0)
             alert("请选择一条预警人员信息");
         else if (auidcheck.length > 1)
             alert("每次只能删除一条预警人员信息");
         else {
-            //var monitorpoint = 1;
-            var auidck = $("input[name='auid']:checked").serialize();
+            var auidck = $("input[id='alarmuserid']:checked").val();
             $.ajax({
                 type: "post",
                 url: "deleteDeviceAlarmRoles",
                 data: {
-                    //monitorpointid: monitorpoint,
                     auid: auidck
                 },
                 dataType: "json",
@@ -2574,6 +2594,11 @@
                             floorval = "";
                         if(isMark == null)
                             isMark = "";
+                        else if(isMark == "1")
+                            isMark = "是";
+                        else if(isMark == "0")
+                            isMark = "否";
+                        else isMark = "";
 
                         table.append('<tr><td style="width:5%;"><input type="radio" name="dtid" id="dtid" value=' + dtid + '></td>' +
                             '<td style="width:20%;">' + name + '</td><td style="width:12.5%;">' + classify + '</td>' +
@@ -3025,23 +3050,43 @@
     function captureSettingOk() {
 
         var onlineinterval = $('#onlineinterval-input').val();
+        var qstinterval = $('#qstinterval-input').val();
         var tansentinterval = $('#tansentinterval-input').val();
         var uploadinterval = $('#upload-input').val();
 
-        $.ajax({
-            type: "post",
-            url: "setCaptureSettingInfo",
-            data: {
-                onlineinterval: onlineinterval,
-                tansentinterval: tansentinterval,
-                uploadinterval: uploadinterval
-            },
-            dataType: "json",
-            success: function (data) {
-                alert(data);
-            }
-        });
+        if(!testPositiveInt(onlineinterval))
+            alert("请填写实时数据采集频率");
+        else if(!testPositiveInt(qstinterval))
+            alert("请填写趋势图数据刷新频率");
+        else if(!testPositiveInt(tansentinterval))
+            alert("请填写暂态事件存储频率");
+        else if(!testPositiveInt(uploadinterval))
+            alert("请填写数据上传频率");
+        else if(onlineinterval > qstinterval)
+            alert("实时数据采集频率需要比趋势图数据刷新频率高");
+        else{
+            $.ajax({
+                type: "post",
+                url: "setCaptureSettingInfo",
+                data: {
+                    onlineinterval: onlineinterval,
+                    qstinterval: qstinterval,
+                    tansentinterval: tansentinterval,
+                    uploadinterval: uploadinterval
+                },
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
     }
+
+    function testPositiveInt(str){  //  如果判断为正整数，则返回true；非正整数，返回false
+        var r = /^\+?[1-9][0-9]*$/;　　//正整数正则
+        return r.test(str);
+    }
+
 </script>
 
 <!-- 导入excel到阈值表-->

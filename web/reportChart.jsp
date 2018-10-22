@@ -140,16 +140,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs" id="ulItem">
-                            <li class="active" style="width:15%">
+                            <li class="active" style="width:25%">
                                 <a data-toggle="tab" id="subItem1">•谐波电压统计报表</a>
                             </li>
-                            <li style="width:15%">
+                            <li style="width:25%">
                                 <a data-toggle="tab" id="subItem2">•谐波电流统计报表</a>
                             </li>
-                            <li style="width:15%">
+                            <li style="width:25%">
                                 <a data-toggle="tab" id="subItem3">•综合项目统计报表</a>
                             </li>
-                            <li style="width:17%">
+                            <li style="width:25%">
                                 <a data-toggle="tab" id="subItem4">•谐波电压、谐波电流合格率统计报表</a>
                             </li>
                         </ul>

@@ -183,10 +183,10 @@
 
                 <div class="col-md-12">
                     <ul class="nav nav-tabs" id="ulItem">
-                        <li class="active" style="width:15%">
+                        <li class="active" style="width:50%">
                             <a data-toggle="tab" id="subItem1">•事件分析</a>
                         </li>
-                        <li style="width:15%">
+                        <li style="width:50%">
                             <a data-toggle="tab" id="subItem2">•能效分析</a>
                         </li>
                     </ul>

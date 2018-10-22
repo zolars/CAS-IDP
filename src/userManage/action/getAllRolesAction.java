@@ -9,9 +9,7 @@ import userManage.dao.RolesDAO;
 import userManage.dao.impl.RolesDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
-
 
 
 public class getAllRolesAction extends ActionSupport {
@@ -30,7 +28,7 @@ public class getAllRolesAction extends ActionSupport {
     /* 查询所有角色的信息
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
