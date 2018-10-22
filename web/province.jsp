@@ -713,7 +713,7 @@
                 var humiddata = [];
                 var xdata = [];
 
-                for (var i = 0; i < list.length; i++) {
+                for (var i = 0; i < 3; i++) {
                     xdata[i] = list[i][0];
                     tempdata[i] = list[i][1];
                     humiddata[i] = list[i][2];

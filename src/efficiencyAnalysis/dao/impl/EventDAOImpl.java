@@ -1815,7 +1815,7 @@ public class EventDAOImpl implements EventDAO {
         List<List<String>> rtlist = new ArrayList<>();
 
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rname='" + compname + "'");
+                "FROM Computerroom where rid='" + compname + "'");
 
         String tempset = comps.getTempset();
 
@@ -1827,8 +1827,7 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             for (int i = 0; i < tempstr.length; i++) {
-                String sql = "select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity" +
-                        " from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
+                String sql = "select ta.time as dname, ta.temperature as temperature, ta.humidity as humidity from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
 
                 try {
                     ps = db.getPs(sql);
@@ -1876,7 +1875,6 @@ public class EventDAOImpl implements EventDAO {
         }
 
         if (didlist != null) {
-            System.out.println("from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
             EventCtrl temp = (EventCtrl) hbsessionDao.getFirst(
                     "from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
             if (temp != null)
