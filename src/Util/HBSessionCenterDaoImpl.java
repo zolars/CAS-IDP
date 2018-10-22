@@ -24,7 +24,7 @@ public class HBSessionCenterDaoImpl implements HBSessionCenterDao{
             //创建会话工厂对象
             sessionFactory = cfg.buildSessionFactory(serviceRegistry);
             //会话对象
-            session =sessionFactory.openSession();
+            session = sessionFactory.openSession();
     }
 
     @Override

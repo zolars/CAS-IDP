@@ -83,7 +83,7 @@ public class DataOnline {
          */
         varsxdy.setUunb(dataset.get("Uunb"));
         //varsxdy.setUunb(dataset.get("Uunbzero"));
-        varsxdy.setVunb(dataset.get("Vunb"));
+        varsxdy.setVunb((float)0);
         varsxdy.setAunb(dataset.get("Aunb"));
 
         //U1谐波

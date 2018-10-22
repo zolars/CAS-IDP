@@ -40,7 +40,7 @@ public class OverLimitHandler extends ChannelInboundHandlerAdapter {
         if (tempBuf.readableBytes() >= resLength) {
             newResponse = true;
             //MD5校验
-            byte[] resContent = new byte[resLength-16];
+            byte[] resContent = new byte[resLength - 16];
             byte[] resChkSum = new byte[16];
             tempBuf.readBytes(resContent); //读取response的消息体
             tempBuf.readBytes(resChkSum); //读取response的校验和
