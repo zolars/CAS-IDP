@@ -402,6 +402,7 @@ public class DataOnline {
         var.setIflU1(dataset.get("|f|_U1"));
         var.setIflU2(dataset.get("|f|_U2"));
         var.setIflU3(dataset.get("|f|_U3"));
+        var.setIflSum(dataset.get("|f|_sum"));
         var.setPstU1(dataset.get("Pst_U1"));
         var.setPstU2(dataset.get("Pst_U2"));
         var.setPstU3(dataset.get("Pst_U3"));

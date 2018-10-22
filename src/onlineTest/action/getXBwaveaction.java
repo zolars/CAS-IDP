@@ -5,11 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import grabData.DataOnline;
 import hibernatePOJO.PowerparmMonitor;
-import hibernatePOJO.PowerxbMonitor;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 public class getXBwaveaction extends ActionSupport {
@@ -28,13 +26,12 @@ public class getXBwaveaction extends ActionSupport {
     /* 获取实时谐波波形图
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String did = request.getParameter("did");
-            if(did != "") {
+            if (did != "") {
                 PowerparmMonitor pp = DataOnline.getParmMap().get(did);
 
                 JSONObject jsonObject = new JSONObject();

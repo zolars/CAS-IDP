@@ -470,6 +470,49 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         return result;
     }
 
+    public List getHzpcBydt(String did, String time) {
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        int passnum = 0;
+        try {
+            List<Double> hzpc = new ArrayList<>();
+            String sql = "SELECT ppm.Ifl_sum as hzpc FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE'" + time + "%'";
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String shzpc = rs.getString("hzpc");
+                Double dhzpc = Double.parseDouble(shzpc);
+                if (dhzpc <= 50) {
+                    passnum += 1;
+                }
+                hzpc.add(dhzpc);
+            }
+            if (hzpc.size() > 0) {
+                double max = getMax(hzpc);
+                double min = getMin(hzpc);
+                double ave = getAve(hzpc);
+                double pro = get95p(hzpc);
+                double passRate = 100.0 * passnum / hzpc.size();
+                result.add(max + "," + min + "," + ave + "," + pro);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public List getsxdyBydt(String did, String time) {
         DBConnect db;
         ResultSet rs = null;
@@ -516,7 +559,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.classify = '三相电压负序不平衡度' AND dt.level = '1'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.name = '三相电压负序不平衡度' AND dt.level = '1'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -525,6 +568,90 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 Double cellval = Double.parseDouble(scellval);
                 result.add(cellval);
             }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List getDypcBydt(String did, String time) {
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+
+        try {
+            for (int i = 0; i < 3; i++) {
+                List<Double> dypc = new ArrayList<>();
+                String sql = "SELECT ppm.Ifl_U" + (i + 1) + " as Ifl_U" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    String sdypc = rs.getString("Ifl_U" + (i + 1));
+                    Double ddypc = Double.parseDouble(sdypc);
+                    dypc.add(ddypc);
+                }
+                if (dypc.size() > 0) {
+                    double max = getMax(dypc);
+                    double min = getMin(dypc);
+                    double ave = getAve(dypc);
+                    double pro = get95p(dypc);
+                    result.add((i + 1) + "," + max + "," + min + "," + ave + "," + pro);
+                }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List getDypcthreshold(String did) {
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        try {
+            Double cellval = null, cfloorval = null;
+
+
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.name = '电压偏差越上限' AND dt.level = '1'";
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String scellval = rs.getString("cellval");
+                cellval = Double.parseDouble(scellval);
+            }
+
+            String sql2 = "SELECT dt.floorval as floorval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.name = '电压偏差越下限' AND dt.level = '1'";
+
+            ps = db.getPs(sql2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String sfloorval = rs.getString("floorval");
+                cfloorval = Double.parseDouble(sfloorval);
+            }
+
+            result.add(cfloorval + "-" + cellval);
+
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -586,7 +713,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.classify = '短时闪变' AND dt.level = '1'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.name = '短时闪变' AND dt.level = '1'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -656,7 +783,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.classify = '长时闪变' AND dt.level = '1'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.name = '长时闪变' AND dt.level = '1'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();

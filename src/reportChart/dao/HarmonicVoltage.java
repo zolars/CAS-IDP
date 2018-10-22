@@ -13,8 +13,11 @@ public interface HarmonicVoltage {
     public double getAve(List<Double> value);
     public double get95p(List<Double> value);
     public List getHzBydt(String did, String time);
+    public List getHzpcBydt(String did, String time);
     public List getsxdyBydt(String did, String time);
     public List getsxdythreshold(String did);
+    public List getDypcBydt(String did, String time);
+    public List getDypcthreshold(String did);
     public List getdsdysbBydt(String did, String time);
     public List getdsdysbthreshold(String did);
     public List getcsdysbBydt(String did, String time);

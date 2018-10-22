@@ -3507,7 +3507,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         var obj = JSON.parse(data);
                         var rt = obj.allmpdata;
                         for (var i = 0; i < rt.length; i++) {
-                            $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+                            if(i == 0)
+                                $('#his-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
+                            else
+                                $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
                         }
                     }
                 });
@@ -3815,8 +3818,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 success: function (data) {
                     var obj = JSON.parse(data);
                     var temp_hz= obj.hzresult;
+                    var temp_hzpc= obj.hzpcresult;
                     var temp_sxdy= obj.sxdyresult;
                     var temp_sxdyThresholdResult= obj.sxdyThresholdResult;
+                    var temp_dypc= obj.dypcresult;
+                    var temp_dypcThresholdResult= obj.dypcThresholdResult;
                     var temp_dsdysbresult= obj.dsdysbresult;
                     var temp_dsdysbThresholdResult= obj.dsdysbThresholdResult;
                     var temp_csdysbresult= obj.csdysbresult;
@@ -3838,12 +3844,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         table.rows[1].cells[2].innerHTML = hz[1];
                         table.rows[1].cells[3].innerHTML = hz[2];
                         table.rows[1].cells[4].innerHTML = hz[3];
-                        table.rows[13].cells[1].innerHTML = hz[4];
-                        table.rows[13].cells[2].innerHTML = hz[5];
+                        table.rows[15].cells[1].innerHTML = hz[4];
+                        table.rows[15].cells[2].innerHTML = hz[5];
                         if(hz[3]<=50)
                             table.rows[1].cells[6].innerHTML = '合格';
                         else
                             table.rows[1].cells[6].innerHTML = '不合格';
+                    }
+
+                    if(temp_hzpc!=""){
+                        var hzpc = temp_hzpc[0].split(",");
+                        table.rows[2].cells[1].innerHTML = hzpc[0];
+                        table.rows[2].cells[2].innerHTML = hzpc[1];
+                        table.rows[2].cells[3].innerHTML = hzpc[2];
+                        table.rows[2].cells[4].innerHTML = hzpc[3];
+                        if(hzpc[3]<=50)
+                            table.rows[2].cells[6].innerHTML = '合格';
+                        else
+                            table.rows[2].cells[6].innerHTML = '不合格';
                     }
 
                     if(temp_sxdyThresholdResult!=""){
@@ -3930,6 +3948,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 table.rows[7].cells[15].innerHTML = '合格';
                             else
                                 table.rows[7].cells[15].innerHTML = '不合格';
+                        }
+                    }
+
+                    //电压偏差
+                    table.rows[8].cells[16].innerHTML = temp_dypcThresholdResult[0];
+                    for(var i=0;i<temp_dypc.length;i++){
+                        var dypc = temp_dypc[i].split(",");
+                        if(dypc[0]=='1'){
+                            table.rows[8].cells[1].innerHTML = dypc[1];
+                            table.rows[8].cells[2].innerHTML = dypc[2];
+                            table.rows[8].cells[3].innerHTML = dypc[3];
+                            table.rows[8].cells[4].innerHTML = dypc[4];
+                            if(dypc[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[8].cells[5].innerHTML = '合格';
+                            else
+                                table.rows[8].cells[5].innerHTML = '不合格';
+                        }
+                        if(dypc[0]=='2'){
+                            table.rows[8].cells[6].innerHTML = dypc[1];
+                            table.rows[8].cells[7].innerHTML = dypc[2];
+                            table.rows[8].cells[8].innerHTML = dypc[3];
+                            table.rows[8].cells[9].innerHTML = dypc[4];
+                            if(dypc[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[8].cells[10].innerHTML = '合格';
+                            else
+                                table.rows[8].cells[10].innerHTML = '不合格';
+                        }
+                        if(dypc[0]=='3'){
+                            table.rows[8].cells[11].innerHTML = dypc[1];
+                            table.rows[8].cells[12].innerHTML = dypc[2];
+                            table.rows[8].cells[13].innerHTML = dypc[3];
+                            table.rows[8].cells[14].innerHTML = dypc[4];
+                            if(dypc[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[8].cells[15].innerHTML = '合格';
+                            else
+                                table.rows[8].cells[15].innerHTML = '不合格';
                         }
                     }
 

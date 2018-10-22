@@ -9,8 +9,6 @@ import hibernatePOJO.PowersxdyMonitor;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 
 public class getParameteraction extends ActionSupport {
@@ -30,7 +28,6 @@ public class getParameteraction extends ActionSupport {
     public String execute() throws Exception {
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             //获取监测点
