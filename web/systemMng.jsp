@@ -308,23 +308,23 @@
                     <div id="item4" class="">
                         <div class="block-area-inner">
                             <ul class="nav nav-tabs">
-                                <li class="active" style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem1">•IDP</a>
+                                <li class="active" name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem1">IDP</a>
                                 </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem2">•UPS</a>
+                                <li name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem2">UPS</a>
                                 </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem3">•蓄电池</a>
+                                <li name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem3">蓄电池</a>
                                 </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem4">•柴油发电机</a>
+                                <li name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem4">柴油发电机</a>
                                 </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem5">•空调</a>
+                                <li name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem5">空调</a>
                                 </li>
-                                <li style="width:15%">
-                                    <a data-toggle="tab" id="secsubItem6">•其他传感器</a>
+                                <li name="device-type-li" style="width:15%">
+                                    <a data-toggle="tab" id="secsubItem6">其他传感器</a>
                                 </li>
                             </ul>
 
@@ -2114,55 +2114,67 @@
         $("#checkbox-plantform").removeAttr("checked");
 
         var devicename = $("#searchInput").val();
+        var devicetype = "IDP";
+
+        //与查询的设备类型做关联
+        $("li[name='device-type-li']").each(function () {
+            //找到带有active的li
+            if ($(this).hasClass("active")) {
+                //得到该元素下a的值
+                devicetype = $(this).children("a").text();
+            }
+        });
 
         $.ajax({
             type: "post",
             url: "getDeviceInfo",
             data: {
+                devicetype: devicetype,
                 devicename: devicename
             },
             dataType: "json",
             success: function (data) {
-                var obj = JSON.parse(data);
+               var obj = JSON.parse(data);
+               if(obj != null){
+                   $("#did").val(obj[0].did);
+                   $("#devname").val(obj[0].name);
+                   $("#devtype").val(obj[0].type);
+                   $("#serialno").val(obj[0].serialno);
+                   $("#extra").val(obj[0].extra);
 
-                $("#did").val(obj[0].did);
-                $("#devname").val(obj[0].name);
-                $("#devtype").val(obj[0].type);
-                $("#serialno").val(obj[0].serialno);
-                $("#extra").val(obj[0].extra);
+                   if (obj[0].devicetype == "以太网") {  //IDP UPS
+                       $("#radio-Ethernet").attr("checked", "checked");
+                       $("#radio-R5485").removeAttr("checked");
+                       $("#radio-RS232").removeAttr("checked");
 
-                if (obj[0].devicetype == "以太网") {  //IDP UPS
-                    $("#radio-Ethernet").attr("checked", "checked");
-                    $("#radio-R5485").removeAttr("checked");
-                    $("#radio-RS232").removeAttr("checked");
+                       $("#IPaddress").val(obj[0].iPaddress);
+                       $("#port").val(obj[0].port);
+                   }
+                   if (obj[0].devicetype == "RS485") {  //蓄电池 柴发 空调 其他传感器（温度湿度）
+                       $("#radio-Ethernet").removeAttr("checked");
+                       $("#radio-R5485").attr("checked", "checked");
+                       $("#radio-RS232").removeAttr("checked");
 
-                    $("#IPaddress").val(obj[0].iPaddress);
-                    $("#port").val(obj[0].port);
-                }
-                if (obj[0].devicetype == "RS485") {  //蓄电池 柴发 空调 其他传感器（温度湿度）
-                    $("#radio-Ethernet").removeAttr("checked");
-                    $("#radio-R5485").attr("checked", "checked");
-                    $("#radio-RS232").removeAttr("checked");
+                       $("#conncom").val(obj[0].iPaddress);
+                       $("#485address").val(obj[0].port);
+                   }
+                   if (obj[0].devicetype == "RS232") {  //
+                       $("#radio-Ethernet").removeAttr("checked");
+                       $("#radio-R5485").removeAttr("checked");
+                       $("#radio-RS232").attr("checked", "checked");
+                   }
 
-                    $("#conncom").val(obj[0].iPaddress);
-                    $("#485address").val(obj[0].port);
-                }
-                if (obj[0].devicetype == "RS232") {  //
-                    $("#radio-Ethernet").removeAttr("checked");
-                    $("#radio-R5485").removeAttr("checked");
-                    $("#radio-RS232").attr("checked", "checked");
-                }
-
-                //预警方式
-                if (obj[0].isSms == "1") {
-                    $("#checkbox-sms").attr("checked", "checked");
-                }
-                if (obj[0].isAlart == "1") {
-                    $("#checkbox-alert").attr("checked", "checked");
-                }
-                if (obj[0].isPlartform == "1") {
-                    $("#checkbox-plantform").attr("checked", "checked");
-                }
+                   //预警方式
+                   if (obj[0].isSms == "1") {
+                       $("#checkbox-sms").attr("checked", "checked");
+                   }
+                   if (obj[0].isAlart == "1") {
+                       $("#checkbox-alert").attr("checked", "checked");
+                   }
+                   if (obj[0].isPlartform == "1") {
+                       $("#checkbox-plantform").attr("checked", "checked");
+                   }
+               }
             }
         });
     }

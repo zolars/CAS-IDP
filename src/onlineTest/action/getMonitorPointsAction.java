@@ -31,7 +31,6 @@ public class getMonitorPointsAction extends ActionSupport {
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String computerroom = request.getParameter("computerroom");

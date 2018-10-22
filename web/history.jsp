@@ -515,7 +515,10 @@
                     var obj = JSON.parse(data);
                     var rt = obj.allmpdata;
                     for (var i = 0; i < rt.length; i++) {
-                        $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+                        if(i == 0)
+                            $('#his-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
+                        else
+                            $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
                     }
                 }
             });
@@ -818,6 +821,7 @@
         yAxis: {
             type: 'value',
             scale: true,
+            boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
             }
@@ -910,6 +914,7 @@
         yAxis: {
             type: 'value',
             scale: true,
+            boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
             }
@@ -937,6 +942,7 @@
         yAxis: {
             type: 'value',
             scale: true,
+            boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
             }
@@ -1064,6 +1070,7 @@
         yAxis: {
             type: 'value',
             scale: true,
+            boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
             }

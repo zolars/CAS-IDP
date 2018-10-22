@@ -27,6 +27,20 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     /**
+     * 通过设备名称获取设备
+     * @param name 设备名称
+     * @return 设备实体list
+     */
+    public List getDeviceDataByName(String type, String name) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices where name = '" + name + "' and type='" + type + "'");
+
+        return list;
+    }
+
+    /**
      * 通过设备名称获取设备did
      * @param name 设备名称
      * @return 设备did

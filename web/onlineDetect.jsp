@@ -215,9 +215,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="row">
                             <div id="item3-text" class="col-md-2" style="height: 580px;" >
                                 <ol class="value">
-                                    <li>|<span id="item3-text-name1">A1</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-value1"></span><span>A</span></li>
-                                    <li>|<span id="item3-text-name2">A2</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-value2"></span><span>A</span></li>
-                                    <li>|<span id="item3-text-name3">A3</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-value3"></span><span>A</span></li>
+                                    <li>|<span id="item3-text-name1">A1</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-value1"></span><span id="item3-text-label1">A</span></li>
+                                    <li>|<span id="item3-text-name2">A2</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-value2"></span><span id="item3-text-label2">A</span></li>
+                                    <li>|<span id="item3-text-name3">A3</span>|&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-value3"></span><span id="item3-text-label3">A</span></li>
                                 </ol>
                                 <ol class="diff">
                                     <li>&Phi;<sub>12</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="item3-text-diff1"></span><sup>&nbsp;o</sup></li>
@@ -664,6 +664,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         // 各个图的配置项
         var option1 = {
+            tooltip: {
+                trigger: 'axis'
+            },
             legend: {
                 show: false,
                 data: qstLegend
@@ -706,7 +709,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             yAxis: {
                 type: 'value',
                 scale: true,
-                boundaryGap: [0, '100%'],
+                boundaryGap: ['10%', '10%'],
                 splitLine: {
                     show: false
                 }
@@ -1694,10 +1697,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     // 更新幅值
                     $("#item3-text-name1").html("U1");
                     $("#item3-text-value1").html(data["u1"].toFixed(2));
+                    $("#item3-text-label1").html("V");
                     $("#item3-text-name2").html("U2");
                     $("#item3-text-value2").html(data["u2"].toFixed(2));
+                    $("#item3-text-label2").html("V");
                     $("#item3-text-name3").html("U3");
                     $("#item3-text-value3").html(data["u3"].toFixed(2));
+                    $("#item3-text-label3").html("V");
 
                     // 更新unb
                     $("#item3-text-nameunb").html("Uunb");
@@ -1716,10 +1722,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     // 更新幅值
                     $("#item3-text-name1").html("V1");
                     $("#item3-text-value1").html(data["v1"].toFixed(2));
+                    $("#item3-text-label1").html("V");
                     $("#item3-text-name2").html("V2");
                     $("#item3-text-value2").html(data["v2"].toFixed(2));
+                    $("#item3-text-label2").html("V");
                     $("#item3-text-name3").html("V3");
                     $("#item3-text-value3").html(data["v3"].toFixed(2));
+                    $("#item3-text-label3").html("V");
 
                     // 更新unb
                     $("#item3-text-nameunb").html("Vunb");
@@ -1738,10 +1747,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     // 更新幅值
                     $("#item3-text-name1").html("I1");
                     $("#item3-text-value1").html(data["i1"].toFixed(2));
+                    $("#item3-text-label1").html("A");
                     $("#item3-text-name2").html("I2");
                     $("#item3-text-value2").html(data["i2"].toFixed(2));
+                    $("#item3-text-label2").html("A");
                     $("#item3-text-name3").html("I3");
                     $("#item3-text-value3").html(data["i3"].toFixed(2));
+                    $("#item3-text-label3").html("A");
 
                     // 更新unb
                     $("#item3-text-nameunb").html("Aunb");

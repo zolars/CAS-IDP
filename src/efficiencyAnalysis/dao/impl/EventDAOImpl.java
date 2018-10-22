@@ -1874,8 +1874,9 @@ public class EventDAOImpl implements EventDAO {
         if (didlist != null) {
             EventCtrl temp = (EventCtrl) hbsessionDao.getFirst(
                     "from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
-            if (temp != null)
+            if (temp != null) {
                 return (temp.getValue().equals("1")); //状态码为1，告警
+            }
         }
         return false; //状态码为0，正常
     }

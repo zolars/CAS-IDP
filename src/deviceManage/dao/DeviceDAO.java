@@ -8,6 +8,8 @@ public interface DeviceDAO {
 
     public List getDeviceDataByName(String name);
 
+    public List getDeviceDataByName(String devicetype, String name);
+
     public String getDeviceIDByName(String name);
 
     public List getDeviceAlarmUserData();

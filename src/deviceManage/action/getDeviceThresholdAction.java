@@ -9,7 +9,6 @@ import hibernatePOJO.DevicesThreshold;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +30,10 @@ public class getDeviceThresholdAction extends ActionSupport {
        根据设备类型查找设备告警阈值信息
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
             String dtid = request.getParameter("dtid");
 
             DeviceDAO dao = new DeviceDAOImpl();

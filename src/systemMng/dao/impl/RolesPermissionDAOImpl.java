@@ -2,9 +2,6 @@ package systemMng.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.RolesPermission;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import systemMng.dao.RolesPermissionDAO;
 
 public class RolesPermissionDAOImpl implements RolesPermissionDAO {
