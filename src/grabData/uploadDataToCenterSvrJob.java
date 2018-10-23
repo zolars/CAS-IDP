@@ -22,20 +22,20 @@ public class uploadDataToCenterSvrJob implements Job {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         HBSessionCenterDaoImpl hbsessioncenterDao = new HBSessionCenterDaoImpl();
 
-        BasicSetting bs = (BasicSetting)hbsessionDao.getFirst("FROM BasicSetting");
+        BasicSetting bs = (BasicSetting) hbsessionDao.getFirst("FROM BasicSetting");
         Integer inteval = bs.getUploadinterval();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) - inteval);// 让小时减少设置的值
+        calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) - inteval); // 让小时减少设置的值
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
         //1.上传电能质量事件到总服务器
         List<EventPower> eventpowerlist = hbsessionDao.search(
-                "FROM EventPower where time >'"+ date +"'");
+                "FROM EventPower where time >'" + date + "'");
 
-        if(eventpowerlist != null){
-            for(int i = 0; i < eventpowerlist.size(); i++){
+        if (eventpowerlist != null) {
+            for (int i = 0; i < eventpowerlist.size(); i++) {
                 EventPower et = eventpowerlist.get(i);
                 hbsessioncenterDao.insert(et);
             }
@@ -43,10 +43,10 @@ public class uploadDataToCenterSvrJob implements Job {
 
         //2.上传温湿度事件到总服务器
         List<EventEnvironment> eventenvrionlist = hbsessionDao.search(
-                "FROM EventEnvironment where time >'"+ date +"'");
+                "FROM EventEnvironment where time >'" + date + "'");
 
-        if(eventenvrionlist != null){
-            for(int i = 0; i < eventenvrionlist.size(); i++){
+        if (eventenvrionlist != null) {
+            for (int i = 0; i < eventenvrionlist.size(); i++) {
                 EventEnvironment et = eventenvrionlist.get(i);
                 hbsessioncenterDao.insert(et);
             }
@@ -54,10 +54,10 @@ public class uploadDataToCenterSvrJob implements Job {
 
         //3.上传设备事件到总服务器
         List<EventCtrl> eventctrllist = hbsessionDao.search(
-                "FROM EventCtrl where time >'"+ date +"'");
+                "FROM EventCtrl where time >'" + date + "'");
 
-        if(eventctrllist != null){
-            for(int i = 0; i < eventctrllist.size(); i++){
+        if (eventctrllist != null) {
+            for (int i = 0; i < eventctrllist.size(); i++) {
                 EventCtrl et = eventctrllist.get(i);
                 hbsessioncenterDao.insert(et);
             }

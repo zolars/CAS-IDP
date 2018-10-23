@@ -104,6 +104,9 @@
         <property name="iflU3">
             <column name="Ifl_U3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
+        <property name="iflSum">
+            <column name="Ifl_sum" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+        </property>
         <property name="pstU1">
             <column name="Pst_U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>

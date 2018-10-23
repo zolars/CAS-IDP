@@ -8,7 +8,6 @@ import reportChart.dao.HarmonicVoltage;
 import reportChart.dao.impl.HarmonicVoltageImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +30,15 @@ public class getSynthesis extends ActionSupport {
             String did = request.getParameter("did");
             HarmonicVoltage dao = new HarmonicVoltageImpl();
             List hzresult = new ArrayList();
+            List hzpcresult = new ArrayList();
             List sxdyresult = new ArrayList();
             List sxdyThresholdResult = new ArrayList();
             List dsdysbresult = new ArrayList();
             List dsdysbThresholdResult = new ArrayList();
             List csdysbresult = new ArrayList();
             List csdysbThresholdResult = new ArrayList();
+            List dypcresult = new ArrayList();
+            List dypcThresholdResult = new ArrayList();
             List activePowerResult = new ArrayList();
             List reactivePowerResult = new ArrayList();
             List powerFactorResult = new ArrayList();
@@ -46,8 +48,11 @@ public class getSynthesis extends ActionSupport {
             List thdIThresholdResult = new ArrayList();
 
             hzresult = dao.getHzBydt(did, time);
+            hzpcresult = dao.getHzpcBydt(did, time);
             sxdyresult = dao.getsxdyBydt(did, time);
             sxdyThresholdResult = dao.getsxdythreshold(did);
+            dypcresult = dao.getDypcBydt(did, time);
+            dypcThresholdResult = dao.getDypcthreshold(did);
             dsdysbresult = dao.getdsdysbBydt(did, time);
             dsdysbThresholdResult = dao.getdsdysbthreshold(did);
             csdysbresult = dao.getcsdysbBydt(did, time);
@@ -62,8 +67,11 @@ public class getSynthesis extends ActionSupport {
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("hzresult", hzresult);
+            jsonObject.put("hzpcresult", hzpcresult);
             jsonObject.put("sxdyresult", sxdyresult);
             jsonObject.put("sxdyThresholdResult", sxdyThresholdResult);
+            jsonObject.put("dypcresult", dypcresult);
+            jsonObject.put("dypcThresholdResult", dypcThresholdResult);
             jsonObject.put("dsdysbresult", dsdysbresult);
             jsonObject.put("dsdysbThresholdResult", dsdysbThresholdResult);
             jsonObject.put("csdysbresult", csdysbresult);
