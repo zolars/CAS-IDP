@@ -1432,6 +1432,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var pltU2 = newRecord["allPLT"][0]["pltU2"];
             var pltU3 =  newRecord["allPLT"][0]["pltU3"];
 
+            if(qstRecordRmsu1.length >= 720) {  //页面最多放每720条数据
+                qstRecordRmsu1.shift();
+                qstRecordRmsu2.shift();
+                qstRecordRmsu3.shift();
+
+                qstRecordRmsi1.shift();
+                qstRecordRmsi2.shift();
+                qstRecordRmsi3.shift();
+
+                qstRecordThdu1.shift();
+                qstRecordThdu2.shift();
+                qstRecordThdu3.shift();
+
+                qstRecordThdi1.shift();
+                qstRecordThdi2.shift();
+                qstRecordThdi3.shift();
+
+                qstRecordhz.shift();
+
+                qstRecordp1.shift();
+                qstRecordp2.shift();
+                qstRecordp3.shift();
+
+                qstRecords1.shift();
+                qstRecords2.shift();
+                qstRecords3.shift();
+
+                qstRecordq1.shift();
+                qstRecordq2.shift();
+                qstRecordq3.shift();
+
+                qstRecordpf1.shift();
+                qstRecordpf2.shift();
+                qstRecordpf3.shift();
+
+                qstRecorddpf1.shift();
+                qstRecorddpf2.shift();
+                qstRecorddpf3.shift();
+
+                qstRecordtan1.shift();
+                qstRecordtan2.shift();
+                qstRecordtan3.shift();
+
+                qstRecordunb.shift();
+
+                qstRecordpstu1.shift();
+                qstRecordpstu2.shift();
+                qstRecordpstu3.shift();
+
+                qstRecordpltu1.shift();
+                qstRecordpltu2.shift();
+                qstRecordpltu3.shift();
+            }
+
             qstRecordRmsu1.push( {name: time, value:[time, rmsU1]} );
             qstRecordRmsu2.push( {name: time, value:[time, rmsU2]} );
             qstRecordRmsu3.push( {name: time, value:[time, rmsU3]} );

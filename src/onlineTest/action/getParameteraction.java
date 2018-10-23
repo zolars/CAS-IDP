@@ -37,12 +37,14 @@ public class getParameteraction extends ActionSupport {
                 PowerparmMonitor pp = DataOnline.getParmMap().get(did);
 
                 PowersxdyMonitor psxdy = DataOnline.getSxdyMap().get(did);
-                Float uunb = psxdy.getUunb();
+                if (psxdy != null) {
+                    Float uunb = psxdy.getUunb();
 
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("nowpowerparm", pp);
-                jsonObject.put("nowpoweruunb", uunb);
-                result = JSON.toJSONString(jsonObject);
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("nowpowerparm", pp);
+                    jsonObject.put("nowpoweruunb", uunb);
+                    result = JSON.toJSONString(jsonObject);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

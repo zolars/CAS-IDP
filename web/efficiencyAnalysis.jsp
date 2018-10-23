@@ -2368,7 +2368,7 @@
 
 <!-- 导出-->
 <script type="text/javascript">
-    function exportTable() {
+   /* function exportTable() {
         var tableid1 = "device-event";
         var tableid2 = "power-event";
         var tableid3 = "environment-event";
@@ -2410,6 +2410,60 @@
             console.log("被选中", tableid);
             exportToExcel(tableid);
         }
+    }*/
+
+    function exportTable() {
+        var type = 0;
+        $("#detailItem li").each(function (i) {
+            if ($(this).hasClass("active")) {
+                type = i;
+            }
+        });
+
+        if (type == 0) {
+            var idx = 0;
+            var tableid;
+            $("#secItem li").each(function (i) {
+                if ($(this).hasClass("active")) {
+                    idx = i;
+                }
+            });
+            if(idx == 0)
+                tableid = "power-event-tbody";
+            else
+                tableid = "power-event-detail-tbody-" + idx;
+            exportToExcel(tableid);
+
+        } else if (type == 1) {
+            var idx = 0;
+            var tableid;
+            $("#triItem li").each(function (i) {
+                if ($(this).hasClass("active")) {
+                    idx = i;
+                }
+            });
+            if(idx == 0)
+                tableid = "environment-event-tbody";
+            else
+                tableid = "environment-event-detail-tbody-" + idx;
+            exportToExcel(tableid);
+
+        } else if (type == 2) {
+
+            var idx = 0;
+            var tableid;
+            $("#fourItem li").each(function (i) {
+                if ($(this).hasClass("active")) {
+                    idx = i;
+                }
+            });
+            if(idx == 0)
+                tableid = "device-event-tbody";
+            else
+                tableid = "device-event-detail-tbody-" + idx;
+            exportToExcel(tableid);
+        }
+
     }
 
     var idTmr;
