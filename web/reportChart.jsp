@@ -2398,7 +2398,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td style="text-align:center"></td>
                                             <td style="text-align:center"></td>
                                         </tr>
-                                        <tr>
+                                      <%--  <tr>
                                             <td style="text-align:center">参数</td>
                                             <td style="text-align:center" colspan="8">采样点数</td>
                                             <td style="text-align:center" colspan="8">合格率(%)</td>
@@ -2407,7 +2407,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td style="text-align:center">频率(%)</td>
                                             <td style="text-align:center" colspan="8"></td>
                                             <td style="text-align:center" colspan="8"></td>
-                                        </tr>
+                                        </tr>--%>
                                     </table>
                                 </div>
                             </div>
@@ -3844,8 +3844,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         table.rows[1].cells[2].innerHTML = hz[1];
                         table.rows[1].cells[3].innerHTML = hz[2];
                         table.rows[1].cells[4].innerHTML = hz[3];
-                        table.rows[15].cells[1].innerHTML = hz[4];
-                        table.rows[15].cells[2].innerHTML = hz[5];
+                    //    table.rows[15].cells[1].innerHTML = hz[4];
+                    //    table.rows[15].cells[2].innerHTML = hz[5];
                         if(hz[3]<=50)
                             table.rows[1].cells[6].innerHTML = '合格';
                         else

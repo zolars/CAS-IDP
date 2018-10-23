@@ -254,10 +254,6 @@
                                             <input type="checkbox" value='pf2'>PF2
                                             <input type="checkbox" value='pf3'>PF3
                                             <input type="checkbox" value='pf'>PF
-                                            <input class="default-show" type="checkbox" value='dpf1'>DPF1
-                                            <input type="checkbox" value='dpf2'>DPF2
-                                            <input type="checkbox" value='dpf3'>DPF3
-                                            <input type="checkbox" value='dpf'>DPF
                                         </li>
                                     </ul>
                                 </div>
@@ -808,6 +804,9 @@
         data: []
     };
     var option1 = {
+        tooltip: {
+            trigger: 'axis'
+        },
         legend: {
             show: false,
             data: chart1Legend
@@ -902,6 +901,9 @@
         ]
     };
     var option2 = {
+        tooltip: {
+            trigger: 'axis'
+        },
         legend: {
             show: false
         },
@@ -929,6 +931,9 @@
         ]
     };
     var option3 = {
+        tooltip: {
+            trigger: 'axis'
+        },
         legend: {
             show: false,
             data: chart3Legend
@@ -1031,38 +1036,22 @@
                 name: "pf", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
                 encode: {x: "time", y: "pf"}
-            },
-            //功率DPF
-            {
-                name: "dpf1", type: "line", smooth: true, showSymbol: false,
-                markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "dpf1"}
-            },
-            {
-                name: "dpf2", type: "line", smooth: true, showSymbol: false,
-                markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "dpf2"}
-            },
-            {
-                name: "dpf3", type: "line", smooth: true, showSymbol: false,
-                markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "dpf3"}
-            },
-            {
-                name: "dpf", type: "line", smooth: true, showSymbol: false,
-                markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "dpf"}
             }
         ]
     };
     var option4 = {
+        tooltip: {
+            trigger: 'axis'
+        },
         legend: {
             show: false,
             data: chart4Legend
         },
         tooltip: {},
         xAxis: {
-            type: 'time',
+            type: 'value',
+            max: 100,
+            min: 0,
             splitLine: {
                 show: false
             }
@@ -1070,6 +1059,8 @@
         yAxis: {
             type: 'value',
             scale: true,
+            max: 650,
+            min: 0,
             boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
@@ -1106,8 +1097,23 @@
             },
             {
                 name:'',
-                type:'line'//,
-               /// yAxisIndex: 1
+                type:'line',
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                },
+                data:[['0','500'], ['0.001','200'], ['0.005','140'], ['0.005','120'], ['0.5','120'], ['0.5','110'], ['100','110']]
+            },
+            {
+                name:'',
+                type:'line',
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                },
+                data:[['0.03','70'], ['0.05','70'], ['0.5','75'], ['0.1','75'], ['0.1','80'], ['100','80']]
             }
         ]
     };

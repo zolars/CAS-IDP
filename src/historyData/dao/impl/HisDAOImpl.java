@@ -68,10 +68,7 @@ public class HisDAOImpl implements HisDAO {
         List<?> crlist = new ArrayList<>();
         List rtlist = new ArrayList<>();
 
-        System.out.println("select a.time, a.value, b.description from EventPower a, EventsType b " +
-                "where a.did='" + did + "' and a.time>='" + starttime + "' and a.time<='" + endtime + "' and (b.classify='塌陷' or b.classify='浪涌') and a.cid=b.cid");
-
-        crlist = hbsessionDao.search("select a.time, a.value, b.description from EventPower a, EventsType b " +
+        crlist = hbsessionDao.search("select a.duration, a.value, b.description from EventPower a, EventsType b " +
                 "where a.did='" + did + "' and a.time>='" + starttime + "' and a.time<='" + endtime + "' and (b.classify='塌陷' or b.classify='浪涌') and a.cid=b.cid");
 
         double baseValue = 220; //Ua Ub Uc的基值
@@ -79,7 +76,7 @@ public class HisDAOImpl implements HisDAO {
             for (int i = 0; i < crlist.size(); i++) {
                 Map<String, Object> map = new LinkedHashMap<>();
                 Object[] temp= (Object[])crlist.get(i);
-                map.put("time",(Timestamp)temp[0]);
+                map.put("time",temp[0]);
                 map.put("Ua",null);
                 map.put("Ub",null);
                 map.put("Uc",null);

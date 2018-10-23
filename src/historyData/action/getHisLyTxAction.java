@@ -28,7 +28,6 @@ public class getHisLyTxAction extends ActionSupport {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
-            //获取监测点
             String did = request.getParameter("monitorpointid");
             String starttime = request.getParameter("starttime");
             String endtime = request.getParameter("endtime");
