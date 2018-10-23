@@ -6,9 +6,6 @@ import hibernatePOJO.PowersxdyMonitor;
 import hibernatePOJO.PowerxbMonitor;
 import onlineTest.dao.*;
 
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 

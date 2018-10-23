@@ -1851,11 +1851,11 @@ public class EventDAOImpl implements EventDAO {
         }
     }
 
-    public boolean getComputerroomCtrlStatus(String cbname, String stime, String etime) {
+    public boolean getComputerroomCtrlStatus(String rname, String stime, String etime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rid='" + cbname + "'");
+                "FROM Computerroom where rname='" + rname + "'");
 
         String didset = comps.getDidset();
         String didstr[] = didset.split("，");
@@ -1873,8 +1873,9 @@ public class EventDAOImpl implements EventDAO {
         if (didlist != null) {
             EventCtrl temp = (EventCtrl) hbsessionDao.getFirst(
                     "from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
-            if (temp != null)
+            if (temp != null) {
                 return true; //状态码为1，告警
+            }
         }
         return false; //状态码为0，正常
     }
