@@ -712,17 +712,25 @@
                 var humiddata = [];
                 var xdata = [];
 
-                for (var i = 0; i < 3; i++) {
-                    xdata[i] = list[i][0];
-                    tempdata[i] = list[i][1];
-                    humiddata[i] = list[i][2];
+                for (var i = 0; i < list.length; i++) {
+                    var k = true;
+                    for (var j = 0; j < xdata.length; j++) {
+                        if (xdata[j] == list[i][0]) {
+                            k = false;
+                        }
+                    }
+                    if (k) {
+                        xdata[xdata.length++] = list[i][0];
+                        tempdata[tempdata.length++] = list[i][1];
+                        humiddata[humiddata.length++] = list[i][2];
+                    }
                 }
 
                 //指定温度的图表的配置项和数据
                 var tempoption = {
                     title: {
                         text: '温度',
-                        subtext: '温度监测',
+                        subtext: '温度监测'
                     },
                     tooltip: {},
                     xAxis: {
@@ -745,7 +753,7 @@
                 var humidoption = {
                     title: {
                         text: '湿度',
-                        subtext: '湿度监测',
+                        subtext: '湿度监测'
                     },
                     tooltip: {},
                     xAxis: {

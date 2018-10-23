@@ -1823,7 +1823,7 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             for (int i = 0; i < tempstr.length; i++) {
-                String sql = "select ta.time as dname, ta.temperature as temperature, ta.humidity as humidity from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
+                String sql = "select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
 
                 try {
                     ps = db.getPs(sql);
