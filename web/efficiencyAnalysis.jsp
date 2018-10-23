@@ -1146,6 +1146,7 @@
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
+                        var location = liststr[9].substring(0, liststr[9].length - 1);
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
@@ -1215,6 +1216,7 @@
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
+                        var location = liststr[9].substring(0, liststr[9].length - 1);
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
@@ -1284,6 +1286,7 @@
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
+                        var location = liststr[9].substring(0, liststr[9].length - 1);
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
@@ -1353,6 +1356,7 @@
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
+                        var location = liststr[9].substring(0, liststr[9].length - 1);
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
@@ -1423,7 +1427,7 @@
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
-
+                        var location = liststr[9].substring(0, liststr[9].length - 1);
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
