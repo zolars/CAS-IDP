@@ -994,41 +994,48 @@
 <!-- （详细）设备事件-点击进入第二个页面-->
 <script type="text/javascript">
     function getDeviceEvent() {
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
     }
 </script>
 
 <!-- （详细）电能事件-点击进入第二个页面-->
 <script type="text/javascript">
-    <%--设置thead--%>
-    var tableData = [];
-    if (localStorage.getItem("visibleColumn")) {
-        tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+
+    // 设置thead
+    function setThead1(tableData) {
+        var thead0 = $("#power-event-thead")[0];
+        var thead1 = $("#power-event-detail-thead-1-tr")[0];
+        var thead2 = $("#power-event-detail-thead-2-tr")[0];
+        var thead3 = $("#power-event-detail-thead-3-tr")[0];
+        var thead4 = $("#power-event-detail-thead-4-tr")[0];
+        var thead5 = $("#power-event-detail-thead-5-tr")[0];
+
+        thead0.innerHTML = ('<th style="width:30px;"></th>');
+        thead1.innerHTML = ('<th style="width:30px;"></th>');
+        thead2.innerHTML = ('<th style="width:30px;"></th>');
+        thead3.innerHTML = ('<th style="width:30px;"></th>');
+        thead4.innerHTML = ('<th style="width:30px;"></th>');
+        thead5.innerHTML = ('<th style="width:30px;"></th>');
+
+        tableData.forEach(function (item) {
+            thead0.innerHTML += ('<th>' + item.name + '</th>');
+            thead1.innerHTML += ('<th>' + item.name + '</th>');
+            thead2.innerHTML += ('<th>' + item.name + '</th>');
+            thead3.innerHTML += ('<th>' + item.name + '</th>');
+            thead4.innerHTML += ('<th>' + item.name + '</th>');
+            thead5.innerHTML += ('<th>' + item.name + '</th>');
+        });
     }
 
-    var thead0 = $("#power-event-thead")[0];
-    var thead1 = $("#power-event-detail-thead-1-tr")[0];
-    var thead2 = $("#power-event-detail-thead-2-tr")[0];
-    var thead3 = $("#power-event-detail-thead-3-tr")[0];
-    var thead4 = $("#power-event-detail-thead-4-tr")[0];
-    var thead5 = $("#power-event-detail-thead-5-tr")[0];
-
-    thead0.innerHTML += ('<th style="width:30px;"></th>');
-    thead1.innerHTML += ('<th style="width:30px;"></th>');
-    thead2.innerHTML += ('<th style="width:30px;"></th>');
-    thead3.innerHTML += ('<th style="width:30px;"></th>');
-    thead4.innerHTML += ('<th style="width:30px;"></th>');
-    thead5.innerHTML += ('<th style="width:30px;"></th>');
-
-    tableData.forEach(function (item) {
-        thead0.innerHTML += ('<th>' + item.name + '</th>');
-        thead1.innerHTML += ('<th>' + item.name + '</th>');
-        thead2.innerHTML += ('<th>' + item.name + '</th>');
-        thead3.innerHTML += ('<th>' + item.name + '</th>');
-        thead4.innerHTML += ('<th>' + item.name + '</th>');
-        thead5.innerHTML += ('<th>' + item.name + '</th>');
-    });
-
     function getPowerEvent() {
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        setThead1(tableData);
         $('#eventdiv1').css('display', 'block');
         $('#eventdiv2').css('display', 'block');
         $('#eventdiv3').css('display', 'none');
@@ -1462,27 +1469,29 @@
 
 <!-- （详细）环境事件-点击进入第二个页面-->
 <script type="text/javascript">
-    <%--设置thead--%>
-    var tableData = [];
-    if (localStorage.getItem("visibleColumn")) {
-        tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+    // 设置thead
+    function setThead2(tableData) {
+        var thead0 = $("#environment-event-tr")[0];
+        var thead1 = $("#environment-event-detail-1-tr")[0];
+        var thead2 = $("#environment-event-detail-2-tr")[0];
+
+        thead0.innerHTML += ('<th style="width:30px;"></th>');
+        thead1.innerHTML += ('<th style="width:30px;"></th>');
+        thead2.innerHTML += ('<th style="width:30px;"></th>');
+
+        tableData.forEach(function (item) {
+            thead0.innerHTML += ('<th>' + item.name + '</th>');
+            thead1.innerHTML += ('<th>' + item.name + '</th>');
+            thead2.innerHTML += ('<th>' + item.name + '</th>');
+        });
     }
 
-    var thead0 = $("#environment-event-tr")[0];
-    var thead1 = $("#environment-event-detail-1-tr")[0];
-    var thead2 = $("#environment-event-detail-2-tr")[0];
-
-    thead0.innerHTML += ('<th style="width:30px;"></th>');
-    thead1.innerHTML += ('<th style="width:30px;"></th>');
-    thead2.innerHTML += ('<th style="width:30px;"></th>');
-
-    tableData.forEach(function (item) {
-        thead0.innerHTML += ('<th>' + item.name + '</th>');
-        thead1.innerHTML += ('<th>' + item.name + '</th>');
-        thead2.innerHTML += ('<th>' + item.name + '</th>');
-    });
-
     function getEnvironmentEvent() {
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        setThead2();
         $('#eventdiv1').css('display', 'none');
         $('#eventdiv2').css('display', 'none');
         $('#eventdiv3').css('display', 'block');
@@ -1696,22 +1705,19 @@
 
 <!-- （详细）设备事件-点击进入第二个页面-->
 <script type="text/javascript">
-    <%--设置thead--%>
-    var tableData = [];
-    if (localStorage.getItem("visibleColumn")) {
-        tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+    // 设置thead
+    function setThead3(tableData) {
+        var thead0 = $("#device-event-tr")[0];
+        var thead1 = $("#device-event-detail-1-tr")[0];
+
+        thead0.innerHTML += ('<th style="width:30px;"></th>');
+        thead1.innerHTML += ('<th style="width:30px;"></th>');
+
+        tableData.forEach(function (item) {
+            thead0.innerHTML += ('<th>' + item.name + '</th>');
+            thead1.innerHTML += ('<th>' + item.name + '</th>');
+        });
     }
-
-    var thead0 = $("#device-event-tr")[0];
-    var thead1 = $("#device-event-detail-1-tr")[0];
-
-    thead0.innerHTML += ('<th style="width:30px;"></th>');
-    thead1.innerHTML += ('<th style="width:30px;"></th>');
-
-    tableData.forEach(function (item) {
-        thead0.innerHTML += ('<th>' + item.name + '</th>');
-        thead1.innerHTML += ('<th>' + item.name + '</th>');
-    });
 </script>
 
 <!--查询按钮-->
@@ -1760,6 +1766,10 @@
 
     //根据时间、检测点、设置获得所有事件
     function getAllEvent() {
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
         var cbname = [];
         var stime = null;
         var etime = null;
@@ -1863,7 +1873,7 @@
                         var time = rawtime[0];
                         var annotationstr = liststr[8];
                         var annotation = annotationstr.substring(0, annotationstr.length - 1);
-                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        var signature = liststr[7];
                         if (signature == " null")
                             signature = "";
                         if (annotation == " null")
@@ -1889,7 +1899,7 @@
                             } else if (item.name === "时间长短") {
                                 newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
                             } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + '' + '</td>')
                             } else if (item.name === "方向") {
                                 newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "评论") {
