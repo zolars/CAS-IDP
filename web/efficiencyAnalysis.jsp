@@ -211,8 +211,7 @@
                                             </button>
                                         </th>
                                         <th>
-                                            <button id="data-button" type="button" class="btn-sm btn-default"
-                                                    onclick="getAllEvent()">查询
+                                            <button id="data-button" type="button" class="btn-sm btn-default">查询
                                             </button>
                                         </th>
                                     </tr>
@@ -936,7 +935,7 @@
             $("#power-event-detail-1-div").css('display', 'none');
             $("#power-event-detail-2-div").css('display', 'none');
             $("#power-event-detail-3-div").css('display', 'none');
-            $("#environment-event-detail-1power-event-detail-4-div").css('display', 'none');
+            $("#power-event-detail-4-div").css('display', 'none');
             $("#power-event-detail-5-div").css('display', 'block');
         });
         $("#triItem0").click(function () {
@@ -979,10 +978,6 @@
             getDeviceEvent();
         }
     }
-
-    $("#data-button").click(function () {
-        refresh();
-    })
 </script>
 
 
@@ -1105,13 +1100,13 @@
         //读取设置中的优先级cookie
         var priortylist = $.cookie('priortylist');
         if (stime == null || etime == null) {
-            alert("请选择日期时间");
+            // alert("请选择日期时间");
         }
         else if (cbname == "[object Object]") {
-            alert("请选择测量地点");
+            // alert("请选择测量地点");
         }
         else if (priortylist == null) {
-            alert("请设定可查看的事件类型");
+            // alert("请设定可查看的事件类型");
         }
         else {
             $.ajax({
@@ -1139,6 +1134,8 @@
                         var duration = liststr[5];
                         var deepth = liststr[6];
                         var annotation = liststr[7];
+                        if (annotation == " null")
+                            annotation = "";
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
@@ -1206,6 +1203,8 @@
                         var duration = liststr[5];
                         var deepth = liststr[6];
                         var annotation = liststr[7];
+                        if (annotation == " null")
+                            annotation = "";
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
@@ -1273,6 +1272,8 @@
                         var duration = liststr[5];
                         var deepth = liststr[6];
                         var annotation = liststr[7];
+                        if (annotation == " null")
+                            annotation = "";
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
@@ -1340,6 +1341,8 @@
                         var duration = liststr[5];
                         var deepth = liststr[6];
                         var annotation = liststr[7];
+                        if (annotation == " null")
+                            annotation = "";
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
@@ -1398,6 +1401,7 @@
                     var tbody = $("#power-event-detail-tbody-5")[0];
                     tbody.innerHTML = "";
                     for (var i = 0; i < list.length; i++) {
+
                         var liststr = list[i].split(",");
                         var teid = liststr[0].split("[");
                         var name = liststr[1];
@@ -1406,10 +1410,13 @@
                         var description = liststr[4];
                         var duration = liststr[5];
                         var deepth = liststr[6];
-                        var annotation = liststr[7];
+                        var annotation = liststr[7].substring(0, liststr[7].length - 1);
+                        if (annotation == " null")
+                            annotation = "";
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
+
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
@@ -1547,13 +1554,13 @@
         //读取设置中的优先级cookie
         var priortylist = $.cookie('priortylist');
         if (stime == null || etime == null) {
-            alert("请选择日期时间");
+            // alert("请选择日期时间");
         }
         else if (cbname == "[object Object]") {
-            alert("请选择测量地点");
+            // alert("请选择测量地点");
         }
         else if (priortylist == null) {
-            alert("请设定可查看的事件类型");
+            // alert("请设定可查看的事件类型");
         }
         else {
             $.ajax({
@@ -1707,6 +1714,18 @@
     });
 </script>
 
+<!--查询按钮-->
+<script>
+    $("#data-button").click(function () {
+        getAllEvent();
+        refresh();
+        $(this).button('loading').delay(500).queue(function () {
+            $(this).button('reset');
+            $(this).dequeue();
+        });
+    });
+</script>
+
 <!-- 查询事件-->
 <script type="text/javascript">
     //unix时间转常用时间格式
@@ -1842,13 +1861,13 @@
                         var description = liststr[4];
                         var rawtime = liststr[5].split("]");
                         var time = rawtime[0];
-                        var signature = liststr[7];
                         var annotationstr = liststr[8];
-                        var annotation = annotationstr.split("]");
+                        var annotation = annotationstr.substring(0, annotationstr.length - 1);
+                        var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
-                        if (annotation[0] == " null")
-                            annotation[0] = "";
+                        if (annotation == " null")
+                            annotation = "";
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +

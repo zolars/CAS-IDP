@@ -152,99 +152,6 @@
                         if (options.index() !== 0) {
                             $('#second-page').css('display', 'block');
                             $('#first-page').css('display', 'none');
-
-                            //获取温度、湿度
-                            $.ajax({
-                                type: "post",
-                                url: "getOneComputerroomMapData",
-                                data: {
-                                    compname: options.text()
-                                },
-                                dataType: "json",
-                                success: function (data) {
-
-                                    var obj = eval('(' + data + ')');
-                                    var list = obj.oplist;
-
-                                    var tempdata = [];
-                                    var humiddata = [];
-                                    var xdata = [];
-
-                                    for (var i = 0; i < list.length; i++) {
-                                        xdata[i] = list[i][0];
-                                        tempdata[i] = list[i][1];
-                                        humiddata[i] = list[i][2];
-                                    }
-
-                                    //指定温度的图表的配置项和数据
-                                    var tempoption = {
-                                        title: {
-                                            text: '温度',
-                                            subtext: '温度监测',
-                                        },
-                                        tooltip: {},
-                                        xAxis: {
-                                            data: xdata
-                                        },
-                                        yAxis: {},
-                                        series: [{
-                                            name: '数值',
-                                            type: 'bar',
-                                            itemStyle: {
-                                                normal: {
-                                                    color: '#3EA3D8'
-                                                }
-                                            },
-                                            data: tempdata
-                                        }]
-                                    };
-
-                                    //指定湿度的图表的配置项和数据
-                                    var humidoption = {
-                                        title: {
-                                            text: '湿度',
-                                            subtext: '湿度监测',
-                                        },
-                                        tooltip: {},
-                                        xAxis: {
-                                            data: xdata
-                                        },
-                                        yAxis: {},
-                                        series: [{
-                                            name: '数值',
-                                            type: 'bar',
-                                            itemStyle: {
-                                                normal: {
-                                                    color: '#3EA3D8'
-                                                }
-                                            },
-                                            data: humiddata
-                                        }]
-                                    };
-
-                                    // 使用刚指定的配置项和数据显示图表。
-                                    tempChart.setOption(tempoption);
-                                    humidChart.setOption(humidoption);
-                                }
-                            });
-
-                            //获取治理设备状态
-                            $.ajax({
-                                type: "post",
-                                url: "getOneCtrlData",
-                                data: {
-                                    compname: options.text(),
-                                    stime: stime,
-                                    etime: etime
-                                },
-                                dataType: "json",
-                                success: function () {
-                                    alert("success");
-                                    // $("#ctrlstatus").attr("value", "状态：告警");
-                                    document.getElementById("ctrlstatus").innerHTML = "状态：告警";
-                                }
-                            });
-
                         } else {
                             $('#second-page').css('display', 'none');
                             $('#first-page').css('display', 'block');
@@ -476,13 +383,15 @@
     $(document).ready(function () {
         $("#refresh-btn").click(function () {
             $(this).button('loading').delay(500).queue(function () {
-
                 var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
                 var pname = decodeURI(provinceidc[1]);
                 var stime = $("#firstDate").val();
                 var etime = $("#lastDate").val();
+                var cbname = $("#comproom_code option:selected").val();
 
                 getOneProvinceMapData(pname, stime, etime);
+                getEnvironmentInfo(cbname);
+                getCtrlStatus(cbname, stime, etime);
 
                 $(this).button('reset');
                 $(this).dequeue();
@@ -614,6 +523,7 @@
 
     var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
     var pname = decodeURI(provinceidc[1]);
+    var cbname = $("#comproom_code option:selected").val();
 
     $("#firstDate").val(getFormatDate(-1));
     $("#lastDate").val(getFormatDate(0));
@@ -622,6 +532,8 @@
     var etime = $("#lastDate").val();
 
     getOneProvinceMapData(pname, stime, etime);
+    getEnvironmentInfo(cbname);
+    getCtrlStatus(cbname, stime, etime);
 
     //获取事件、告警、评估等级
     function getOneProvinceMapData(pname, stime, etime) {
@@ -778,6 +690,105 @@
                 nxChart.setOption(nxoption);
                 nhChart.setOption(nhoption);
                 panelChart.setOption(paneloption);
+            }
+        });
+    }
+
+    function getEnvironmentInfo(cbname) {
+        //获取温度、湿度
+        $.ajax({
+            type: "post",
+            url: "getOneComputerroomMapData",
+            data: {
+                compname: cbname
+            },
+            dataType: "json",
+            success: function (data) {
+
+                var obj = eval('(' + data + ')');
+                var list = obj.oplist;
+
+                var tempdata = [];
+                var humiddata = [];
+                var xdata = [];
+
+                for (var i = 0; i < 3; i++) {
+                    xdata[i] = list[i][0];
+                    tempdata[i] = list[i][1];
+                    humiddata[i] = list[i][2];
+                }
+
+                //指定温度的图表的配置项和数据
+                var tempoption = {
+                    title: {
+                        text: '温度',
+                        subtext: '温度监测',
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '数值',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: '#3EA3D8'
+                            }
+                        },
+                        data: tempdata
+                    }]
+                };
+
+                //指定湿度的图表的配置项和数据
+                var humidoption = {
+                    title: {
+                        text: '湿度',
+                        subtext: '湿度监测',
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: xdata
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '数值',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: '#3EA3D8'
+                            }
+                        },
+                        data: humiddata
+                    }]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                tempChart.setOption(tempoption);
+                humidChart.setOption(humidoption);
+            }
+        });
+    }
+
+    function getCtrlStatus(cbname, stime, etime) {
+        //获取治理设备状态
+        $.ajax({
+            type: "post",
+            url: "getOneCtrlData",
+            data: {
+                compname: cbname,
+                stime: stime,
+                etime: etime
+            },
+            dataType: "json",
+            success: function (data) {
+                var obj = eval('(' + data + ')');
+                var list = obj.rt;
+                if (list == true)
+                    document.getElementById("ctrlstatus").innerHTML = "状态：告警";
+                else
+                    document.getElementById("ctrlstatus").innerHTML = "状态：良";
             }
         });
     }

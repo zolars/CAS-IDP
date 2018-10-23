@@ -1,5 +1,7 @@
 package efficiencyAnalysis.action;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
@@ -32,18 +34,18 @@ public class getOneCtrlDataAction extends ActionSupport {
 
             EventDAO dao = new EventDAOImpl();
 
-            Boolean rt = dao.getComputerroomCtrlStatus(compname, starttime, endtime);
+            boolean rt = dao.getComputerroomCtrlStatus(compname, starttime, endtime);
 
-            if (rt) {
-                return "success";
-            } else {
-                return "failure";
-            }
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("rt", rt);
+
+            result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();
             return "failure";
         }
+        return "success";
     }
 
 }

@@ -1811,7 +1811,7 @@ public class EventDAOImpl implements EventDAO {
         List<List<String>> rtlist = new ArrayList<>();
 
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rname='" + compname + "'");
+                "FROM Computerroom where rid='" + compname + "'");
 
         String tempset = comps.getTempset();
 
@@ -1823,8 +1823,7 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             for (int i = 0; i < tempstr.length; i++) {
-                String sql = "select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity" +
-                        " from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
+                String sql = "select ta.time as dname, ta.temperature as temperature, ta.humidity as humidity from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
 
                 try {
                     ps = db.getPs(sql);
@@ -1856,7 +1855,7 @@ public class EventDAOImpl implements EventDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rname='" + cbname + "'");
+                "FROM Computerroom where rid='" + cbname + "'");
 
         String didset = comps.getDidset();
         String didstr[] = didset.split("，");
@@ -1874,9 +1873,8 @@ public class EventDAOImpl implements EventDAO {
         if (didlist != null) {
             EventCtrl temp = (EventCtrl) hbsessionDao.getFirst(
                     "from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
-            if (temp != null) {
-                return (temp.getValue().equals("1")); //状态码为1，告警
-            }
+            if (temp != null)
+                return true; //状态码为1，告警
         }
         return false; //状态码为0，正常
     }
