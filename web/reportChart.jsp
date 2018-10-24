@@ -3552,7 +3552,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[4].innerHTML = result[5];
                             if(table.rows[result[0]].cells[16].innerHTML == "")
                                 table.rows[result[0]].cells[5].innerHTML = '<span style="color: white;">合格</span>';
-                            else if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: white;">合格</span>';
                             else
                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
@@ -3564,7 +3564,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[9].innerHTML = result[5];
                             if(table.rows[result[0]].cells[16].innerHTML == "")
                                 table.rows[result[0]].cells[10].innerHTML = '<span style="color: white;">合格</span>';
-                            else if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
                                 table.rows[result[0]].cells[10].innerHTML = '<span style="color: white;">合格</span>';
                             else{
                                 table.rows[result[0]].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
@@ -3577,7 +3577,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[14].innerHTML = result[5];
                             if(table.rows[result[0]].cells[16].innerHTML == "")
                                 table.rows[result[0]].cells[15].innerHTML = '<span style="color: white;">合格</span>';
-                            else if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
                                 table.rows[result[0]].cells[15].innerHTML = '<span style="color: white;">合格</span>';
                             else{
                                 table.rows[result[0]].cells[15].innerHTML = '<span style="color: red;">不合格</span>';

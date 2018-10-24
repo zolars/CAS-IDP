@@ -158,7 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="row">
                             <div class="col-md-11">
 
-                               <div id="units-label" style="position: absolute;left: 140px; top: 150px;color: black;z-index: 999;">
+                               <div id="units-label" style="position: absolute;left: 140px; top: 140px;color: black;z-index: 999;">
                                    U
                                </div>
 
@@ -1258,40 +1258,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $("#item1-sidebar ol li button").each(function () {
                         $(this).click(function () {
                            if(this.value == 'U' || this.value == 'V')
-                                $("#units-label").text('V');
+                                $("#units-label").text('单位(V)');
                             else if(this.value == 'I')
-                                $("#units-label").text('A');
+                                $("#units-label").text('单位(A)');
                             else
-                                $("#units-label").text('');
+                                $("#units-label").text('单位()');
                         });
                     });
                 } else if(self.value == 'thd'){
-                    $("#item1-sidebar ol li button").each(function () {
-                        $(this).click(function () {
-                            if(this.value == 'U' || this.value == 'V')
-                                $("#units-label").text('V');
-                            else if(this.value == 'I')
-                                $("#units-label").text('A');
-                            else
-                                $("#units-label").text('');
-                        });
-                    });
+                    $("#units-label").text('单位(%)');
                 } else if(self.value == 'W'){
-                    $("#units-label").text('kV');
+                    $("#units-label").text('单位(kV)');
                 } else if(self.value == 's'){
-                    $("#units-label").text('kVA');
+                    $("#units-label").text('单位(kVA)');
                 } else if(self.value == 'q'){
-                    $("#units-label").text('kVar');
+                    $("#units-label").text('单位(kVar)');
                 } else if(self.value == 'pf'){
-                    $("#units-label").text('');
+                    $("#units-label").text('单位()');
                 } else if(self.value == 'unb'){
-                    $("#units-label").text('%');
+                    $("#units-label").text('单位(%)');
                 } else if(self.value == 'pst'){
-                    $("#units-label").text('V');
+                    $("#units-label").text('单位(V)');
                 } else if(self.value == 'plt'){
-                    $("#units-label").text('V');
-                } else { //hz
-                    $("#units-label").text(self.value);
+                    $("#units-label").text('单位(V)');
+                } else if(self.value == 'hz'){
+                    $("#units-label").text('单位(Hz)');
                 }
 
             });
