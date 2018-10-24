@@ -76,7 +76,7 @@ public class HisDAOImpl implements HisDAO {
             for (int i = 0; i < crlist.size(); i++) {
                 Map<String, Object> map = new LinkedHashMap<>();
                 Object[] temp= (Object[])crlist.get(i);
-                map.put("time",temp[0]);
+                map.put("time", temp[0]);
                 map.put("Ua",null);
                 map.put("Ub",null);
                 map.put("Uc",null);
