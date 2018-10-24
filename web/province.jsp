@@ -38,6 +38,9 @@
 
     <!-- jquery -->
     <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+    <!--告警弹窗-->
+    <script type="text/javascript" src = "js/websocketconnect.js"></script>
+
     <style>
         .datetimepicker {
             background: black !important;

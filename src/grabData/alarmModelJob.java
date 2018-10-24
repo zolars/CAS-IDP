@@ -2,12 +2,16 @@ package grabData;
 
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.*;
+import io.netty.channel.ChannelFuture;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import sms.SmsAlarm;
 
 import javax.swing.*;
+import javax.websocket.*;
+import java.net.InetSocketAddress;
+import java.net.URI;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -17,13 +21,13 @@ import java.util.Date;
 import java.util.List;
 
 
-public class alarmModelJob implements Job {
+public class AlarmModelJob implements Job {
 
     /**
      * 判断当前日期是否为工作日时段
      *
      * @param
-     * @return  true 周一到周五; false 周末
+     * @return true 周一到周五; false 周末
      * @Exception 发生异常
      */
     public boolean isWorkTime(String pTime) {
@@ -94,6 +98,20 @@ public class alarmModelJob implements Job {
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
         System.out.println("开始执行告警模块:" + System.currentTimeMillis());
+
+        // 打开服务器
+        AlarmModelClient server = new AlarmModelClient();
+        ChannelFuture f = server.start(new InetSocketAddress(2048));
+
+        // 与端口建立连接并发送示例告警信息
+        WebSocketContainer conmtainer = ContainerProvider.getWebSocketContainer();
+        WebSocketClient client = new WebSocketClient();
+        try {
+            conmtainer.connectToServer(client, new URI("ws://localhost:2048/ws"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        client.send("服务器已经连接！");
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
@@ -172,11 +190,11 @@ public class alarmModelJob implements Job {
                     List<DeviceAlarmUser> aulist = hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
 
                     if (aulist != null) {
-                        isSms =  (Integer) aulist.get(0).getIsSms();
-                        isAlart =  (Integer) aulist.get(0).getIsAlert();
-                        isPlartform =  (Integer) aulist.get(0).getIsPlantform();
-                        preContent =  (String) aulist.get(0).getPrecontent();
-                        timeperiod =  (String) aulist.get(0).getTimeperiod();
+                        isSms = (Integer) aulist.get(0).getIsSms();
+                        isAlart = (Integer) aulist.get(0).getIsAlert();
+                        isPlartform = (Integer) aulist.get(0).getIsPlantform();
+                        preContent = (String) aulist.get(0).getPrecontent();
+                        timeperiod = (String) aulist.get(0).getTimeperiod();
                         uidstr = aulist.get(0).getUid();
 
                         String uidset[] = uidstr.split("，");
@@ -190,15 +208,16 @@ public class alarmModelJob implements Job {
 
                                 //替换precontent中的事件类型# 值$ 时间% 三个信息
                                 String alarmString1 = preContent.replaceAll("#", description);
-                                String alarmString2  = alarmString1.replaceAll("&", value.toString());
-                                alarmString  = alarmString2.replaceAll("%", time.toString());
+                                String alarmString2 = alarmString1.replaceAll("&", value.toString());
+                                alarmString = alarmString2.replaceAll("%", time.toString());
 
                                 //执行告警开始
                                 if (isAlart == 1) { //执行弹窗报警
-                                   // JOptionPane.showMessageDialog(null, alarmString);
+                                    // JOptionPane.showMessageDialog(null, alarmString);
                                     JOptionPane joption = new JOptionPane();
-                                    joption.setLocation(999,-999);
+                                    joption.setLocation(999, -999);
                                     joption.showMessageDialog(null, alarmString);
+                                    client.send(alarmString);
                                 }
                                 if (timeperiod == "1") { //若是第二等级,即timeperiod == 1
                                     if (isWorkTime(nowtime)) {
@@ -289,11 +308,11 @@ public class alarmModelJob implements Job {
                     List<DeviceAlarmUser> aulist = hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
 
                     if (aulist != null) {
-                        isSms =  (Integer) aulist.get(0).getIsSms();
-                        isAlart =  (Integer) aulist.get(0).getIsAlert();
-                        isPlartform =  (Integer) aulist.get(0).getIsPlantform();
-                        preContent =  (String) aulist.get(0).getPrecontent();
-                        timeperiod =  (String) aulist.get(0).getTimeperiod();
+                        isSms = (Integer) aulist.get(0).getIsSms();
+                        isAlart = (Integer) aulist.get(0).getIsAlert();
+                        isPlartform = (Integer) aulist.get(0).getIsPlantform();
+                        preContent = (String) aulist.get(0).getPrecontent();
+                        timeperiod = (String) aulist.get(0).getTimeperiod();
                         uidstr = aulist.get(0).getUid();
 
                         String uidset[] = uidstr.split("，");
@@ -307,15 +326,16 @@ public class alarmModelJob implements Job {
 
                                 //替换precontent中的事件类型# 值$ 时间% 三个信息
                                 String alarmString1 = preContent.replaceAll("#", description);
-                                String alarmString2  = alarmString1.replaceAll("&", value.toString());
-                                alarmString  = alarmString2.replaceAll("%", time.toString());
+                                String alarmString2 = alarmString1.replaceAll("&", value.toString());
+                                alarmString = alarmString2.replaceAll("%", time.toString());
 
                                 //执行告警开始
                                 if (isAlart == 1) { //执行弹窗报警
                                     // JOptionPane.showMessageDialog(null, alarmString);
                                     JOptionPane joption = new JOptionPane();
-                                    joption.setLocation(999,-999);
+                                    joption.setLocation(999, -999);
                                     joption.showMessageDialog(null, alarmString);
+                                    client.send(alarmString);
                                 }
                                 if (timeperiod == "1") { //若是第二等级,即timeperiod == 1
                                     if (isWorkTime(nowtime)) {
@@ -409,11 +429,11 @@ public class alarmModelJob implements Job {
                     List<DeviceAlarmUser> aulist = hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
 
                     if (aulist != null) {
-                        isSms =  (Integer) aulist.get(0).getIsSms();
-                        isAlart =  (Integer) aulist.get(0).getIsAlert();
-                        isPlartform =  (Integer) aulist.get(0).getIsPlantform();
-                        preContent =  (String) aulist.get(0).getPrecontent();
-                        timeperiod =  (String) aulist.get(0).getTimeperiod();
+                        isSms = (Integer) aulist.get(0).getIsSms();
+                        isAlart = (Integer) aulist.get(0).getIsAlert();
+                        isPlartform = (Integer) aulist.get(0).getIsPlantform();
+                        preContent = (String) aulist.get(0).getPrecontent();
+                        timeperiod = (String) aulist.get(0).getTimeperiod();
                         uidstr = aulist.get(0).getUid();
 
                         String uidset[] = uidstr.split("，");
@@ -427,15 +447,16 @@ public class alarmModelJob implements Job {
 
                                 //替换precontent中的事件类型# 值$ 时间% 三个信息
                                 String alarmString1 = preContent.replaceAll("#", description);
-                                String alarmString2  = alarmString1.replaceAll("&", value.toString());
-                                alarmString  = alarmString2.replaceAll("%", time.toString());
+                                String alarmString2 = alarmString1.replaceAll("&", value.toString());
+                                alarmString = alarmString2.replaceAll("%", time.toString());
 
                                 //执行告警开始
                                 if (isAlart == 1) { //执行弹窗报警
                                     // JOptionPane.showMessageDialog(null, alarmString);
                                     JOptionPane joption = new JOptionPane();
-                                    joption.setLocation(999,-999);
+                                    joption.setLocation(999, -999);
                                     joption.showMessageDialog(null, alarmString);
+                                    client.send(alarmString);
                                 }
                                 if (timeperiod == "1") { //若是第二等级,即timeperiod == 1
                                     if (isWorkTime(nowtime)) {
@@ -473,10 +494,6 @@ public class alarmModelJob implements Job {
                 }
             }
         }
-
-
-
-
 
         System.out.println("完成告警模块:" + System.currentTimeMillis());
     }
