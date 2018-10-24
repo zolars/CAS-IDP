@@ -157,6 +157,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div id = "item1" class="col-md-12" style="height: 600px;">
                         <div class="row">
                             <div class="col-md-11">
+
+                               <div id="units-label" style="position: absolute;left: 140px; top: 150px;color: black;z-index: 999;">
+                                   U
+                               </div>
+
                                 <div id="item1-params-list" class="row">
                                     <div class="clearfix"></div>
                                     <ol>
@@ -599,6 +604,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var qstRecordRmsu1 = [];// 暂存趋势图rmsu1数据
         var qstRecordRmsu2 = []; // 暂存趋势图rmsu2数据
         var qstRecordRmsu3 = []; // 暂存趋势图rmsu3数据
+        var qstRecordRmsv1 = [];// 暂存趋势图rmsu1数据
+        var qstRecordRmsv2 = []; // 暂存趋势图rmsu2数据
+        var qstRecordRmsv3 = []; // 暂存趋势图rmsu3数据
         var qstRecordRmsi1 = []; // 暂存趋势图rmsi1数据
         var qstRecordRmsi2 = []; // 暂存趋势图rmsi2数据
         var qstRecordRmsi3 = []; // 暂存趋势图rmsi3数据
@@ -636,7 +644,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var qstRecordpltu3 = []; // 暂存趋势图pltu3数据
 
         var qstLegend=[
-            "rmsU1","rmsU2","rmsU3","rmsI1","rmsI2","rmsI3",
+            "rmsU1","rmsU2","rmsU3","rmsV1","rmsV2","rmsV3","rmsI1","rmsI2","rmsI3",
             "thdU1","thdU2","thdU3","thdI1","thdI2","thdI3",
             "hz",
             "W1","W2","W3",
@@ -730,6 +738,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     name: "rmsU3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "rmsU3"},data: qstRecordRmsu3
+                },
+                {
+                    name: "rmsV1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
+                    encode: {x: "time", y: "rmsV1"},data: qstRecordRmsv1
+                },
+                {
+                    name: "rmsV2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
+                    encode: {x: "time", y: "rmsV2"},data: qstRecordRmsv2
+                },
+                {
+                    name: "rmsV3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
+                    markPoint: markPoint, markLine: markLine,
+                    encode: {x: "time", y: "rmsV3"},data: qstRecordRmsv3
                 },
                 {
                     name: "rmsI1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
@@ -846,38 +869,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     name: "pf3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
                     markPoint: markPoint, markLine: markLine,
                     encode: {x: "time", y: "pf3"},data: qstRecordpf3
-                },
-                // DPF
-                {
-                    name: "dpf1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                    markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "dpf1"},data: qstRecorddpf1
-                },
-                {
-                    name: "dpf2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                    markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "dpf2"},data: qstRecorddpf2
-                },
-                {
-                    name: "dpf3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                    markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "dpf3"},data: qstRecorddpf3
-                },
-                // Tan
-                {
-                    name: "tan1", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                    markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "tan1"},data: qstRecordtan1
-                },
-                {
-                    name: "tan2", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                    markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "tan2"},data: qstRecordtan2
-                },
-                {
-                    name: "tan3", type: "line", smooth: true, showSymbol: true, hoverAnimation: false,
-                    markPoint: markPoint, markLine: markLine,
-                    encode: {x: "time", y: "tan3"},data: qstRecordtan3
                 },
                 // unb
                 {
@@ -1261,6 +1252,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         });
                     }
                 });
+
+                //单位的变化
+                if(self.value == 'rms'){
+                    $("#item1-sidebar ol li button").each(function () {
+                        $(this).click(function () {
+                           if(this.value == 'U' || this.value == 'V')
+                                $("#units-label").text('V');
+                            else if(this.value == 'I')
+                                $("#units-label").text('A');
+                            else
+                                $("#units-label").text('');
+                        });
+                    });
+                } else if(self.value == 'thd'){
+                    $("#item1-sidebar ol li button").each(function () {
+                        $(this).click(function () {
+                            if(this.value == 'U' || this.value == 'V')
+                                $("#units-label").text('V');
+                            else if(this.value == 'I')
+                                $("#units-label").text('A');
+                            else
+                                $("#units-label").text('');
+                        });
+                    });
+                } else if(self.value == 'W'){
+                    $("#units-label").text('kV');
+                } else if(self.value == 's'){
+                    $("#units-label").text('kVA');
+                } else if(self.value == 'q'){
+                    $("#units-label").text('kVar');
+                } else if(self.value == 'pf'){
+                    $("#units-label").text('');
+                } else if(self.value == 'unb'){
+                    $("#units-label").text('%');
+                } else if(self.value == 'pst'){
+                    $("#units-label").text('V');
+                } else if(self.value == 'plt'){
+                    $("#units-label").text('V');
+                } else { //hz
+                    $("#units-label").text(self.value);
+                }
+
             });
             $("#item1-params-text ol li button").click(function () {
                 $(this).toggleClass("active");
@@ -1338,6 +1371,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     {data: qstRecordRmsu1},
                     {data: qstRecordRmsu2},
                     {data: qstRecordRmsu3},
+                    {data: qstRecordRmsv1},
+                    {data: qstRecordRmsv2},
+                    {data: qstRecordRmsv3},
                     {data: qstRecordRmsi1},
                     {data: qstRecordRmsi2},
                     {data: qstRecordRmsi3},
@@ -1360,12 +1396,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     {data: qstRecordpf1},
                     {data: qstRecordpf2},
                     {data: qstRecordpf3},
-                    {data: qstRecorddpf1},
-                    {data: qstRecorddpf2},
-                    {data: qstRecorddpf3},
-                    {data: qstRecordtan1},
-                    {data: qstRecordtan2},
-                    {data: qstRecordtan3},
                     {data: qstRecordunb},
                     {data: qstRecordpstu1},
                     {data: qstRecordpstu2},
@@ -1382,60 +1412,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             // 构造1条记录
             var time = formatDateTime(newRecord["allHZ"][0]["time"]);
             // RMS
-            var rmsU1 = newRecord["allRMS"][0]["u1"];
-            var rmsU2 = newRecord["allRMS"][0]["u2"];
-            var rmsU3 = newRecord["allRMS"][0]["u3"];
-            var rmsI1 = newRecord["allRMS"][0]["i1"];
-            var rmsI2 = newRecord["allRMS"][0]["i2"];
-            var rmsI3 = newRecord["allRMS"][0]["i3"];
+            var rmsU1 = newRecord["allRMS"][0]["u1"].toFixed(2);
+            var rmsU2 = newRecord["allRMS"][0]["u2"].toFixed(2);
+            var rmsU3 = newRecord["allRMS"][0]["u3"].toFixed(2);
+            var rmsI1 = newRecord["allRMS"][0]["i1"].toFixed(2);
+            var rmsI2 = newRecord["allRMS"][0]["i2"].toFixed(2);
+            var rmsI3 = newRecord["allRMS"][0]["i3"].toFixed(2);
             // THD
-            var thdU1 = newRecord["allTHD"][0]["u1"];
-            var thdU2 = newRecord["allTHD"][0]["u2"];
-            var thdU3 = newRecord["allTHD"][0]["u3"];
-            var thdI1 = newRecord["allTHD"][0]["i1"];
-            var thdI2 = newRecord["allTHD"][0]["i2"];
-            var thdI3 = newRecord["allTHD"][0]["i3"];
+            var thdU1 = newRecord["allTHD"][0]["u1"].toFixed(2);
+            var thdU2 = newRecord["allTHD"][0]["u2"].toFixed(2);
+            var thdU3 = newRecord["allTHD"][0]["u3"].toFixed(2);
+            var thdI1 = newRecord["allTHD"][0]["i1"].toFixed(2);
+            var thdI2 = newRecord["allTHD"][0]["i2"].toFixed(2);
+            var thdI3 = newRecord["allTHD"][0]["i3"].toFixed(2);
             // Hz
-            var hz = newRecord["allHZ"][0]["hz"];
+            var hz = newRecord["allHZ"][0]["hz"].toFixed(2);
             // W
-            var p1 = newRecord["allW"][0]["p1"];
-            var p2 = newRecord["allW"][0]["p2"];
-            var p3 = newRecord["allW"][0]["p3"];
+            var p1 = newRecord["allW"][0]["p1"].toFixed(2);
+            var p2 = newRecord["allW"][0]["p2"].toFixed(2);
+            var p3 = newRecord["allW"][0]["p3"].toFixed(2);
             // VA
-            var s1 = newRecord["allVA"][0]["s1"];
-            var s2 = newRecord["allVA"][0]["s2"];
-            var s3 = newRecord["allVA"][0]["s3"];
+            var s1 = newRecord["allVA"][0]["s1"].toFixed(2);
+            var s2 = newRecord["allVA"][0]["s2"].toFixed(2);
+            var s3 = newRecord["allVA"][0]["s3"].toFixed(2);
             // Var
-            var q1 = newRecord["allVAR"][0]["q1"];
-            var q2 = newRecord["allVAR"][0]["q2"];
-            var q3 = newRecord["allVAR"][0]["q3"];
+            var q1 = newRecord["allVAR"][0]["q1"].toFixed(2);
+            var q2 = newRecord["allVAR"][0]["q2"].toFixed(2);
+            var q3 = newRecord["allVAR"][0]["q3"].toFixed(2);
             // PF
-            var pf1 = newRecord["allPF"][0]["pf1"];
-            var pf2 = newRecord["allPF"][0]["pf2"];
-            var pf3 = newRecord["allPF"][0]["pf3"];
-            // DPF
-            var dpf1 = newRecord["allDPF"][0]["cosPhi1"];
-            var dpf2 = newRecord["allDPF"][0]["cosPhi2"];
-            var dpf3 = newRecord["allDPF"][0]["cosPhi3"];
-            // Tan
-            var tan1 = newRecord["allTAN"][0]["tan1"];
-            var tan2 = newRecord["allTAN"][0]["tan2"];
-            var tan3 = newRecord["allTAN"][0]["tan3"];
+            var pf1 = newRecord["allPF"][0]["pf1"].toFixed(2);
+            var pf2 = newRecord["allPF"][0]["pf2"].toFixed(2);
+            var pf3 = newRecord["allPF"][0]["pf3"].toFixed(2);
             // unb
-            var unb = newRecord["allUNB"][0]["uunb"];
+            var unb = newRecord["allUNB"][0]["uunb"].toFixed(2);
             // Pst
-            var pstU1 = newRecord["allPST"][0]["pstU1"];
-            var pstU2 = newRecord["allPST"][0]["pstU2"];
-            var pstU3 = newRecord["allPST"][0]["pstU3"];
+            var pstU1 = newRecord["allPST"][0]["pstU1"].toFixed(2);
+            var pstU2 = newRecord["allPST"][0]["pstU2"].toFixed(2);
+            var pstU3 = newRecord["allPST"][0]["pstU3"].toFixed(2);
             // Plt
-            var pltU1 = newRecord["allPLT"][0]["pltU1"];
-            var pltU2 = newRecord["allPLT"][0]["pltU2"];
-            var pltU3 =  newRecord["allPLT"][0]["pltU3"];
+            var pltU1 = newRecord["allPLT"][0]["pltU1"].toFixed(2);
+            var pltU2 = newRecord["allPLT"][0]["pltU2"].toFixed(2);
+            var pltU3 =  newRecord["allPLT"][0]["pltU3"].toFixed(2);
 
             if(qstRecordRmsu1.length >= 720) {  //页面最多放每720条数据
                 qstRecordRmsu1.shift();
                 qstRecordRmsu2.shift();
                 qstRecordRmsu3.shift();
+
+                qstRecordRmsv1.shift();
+                qstRecordRmsv2.shift();
+                qstRecordRmsv3.shift();
 
                 qstRecordRmsi1.shift();
                 qstRecordRmsi2.shift();
@@ -1467,14 +1493,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 qstRecordpf2.shift();
                 qstRecordpf3.shift();
 
-                qstRecorddpf1.shift();
-                qstRecorddpf2.shift();
-                qstRecorddpf3.shift();
-
-                qstRecordtan1.shift();
-                qstRecordtan2.shift();
-                qstRecordtan3.shift();
-
                 qstRecordunb.shift();
 
                 qstRecordpstu1.shift();
@@ -1489,6 +1507,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             qstRecordRmsu1.push( {name: time, value:[time, rmsU1]} );
             qstRecordRmsu2.push( {name: time, value:[time, rmsU2]} );
             qstRecordRmsu3.push( {name: time, value:[time, rmsU3]} );
+
+            qstRecordRmsv1.push( {name: time, value:[time, Math.sqrt(3) * rmsU1]} );
+            qstRecordRmsv2.push( {name: time, value:[time, Math.sqrt(3) * rmsU2]} );
+            qstRecordRmsv3.push( {name: time, value:[time, Math.sqrt(3) * rmsU3]} );
 
             qstRecordRmsi1.push( {name: time, value:[time, rmsI1]} );
             qstRecordRmsi2.push( {name: time, value:[time, rmsI2]} );
@@ -1519,14 +1541,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             qstRecordpf1.push( {name: time, value:[time, pf1]} );
             qstRecordpf2.push( {name: time, value:[time, pf2]} );
             qstRecordpf3.push( {name: time, value:[time, pf3]} );
-
-            qstRecorddpf1.push( {name: time, value:[time, dpf1]} );
-            qstRecorddpf2.push( {name: time, value:[time, dpf2]} );
-            qstRecorddpf3.push( {name: time, value:[time, dpf3]} );
-
-            qstRecordtan1.push( {name: time, value:[time, tan1]} );
-            qstRecordtan2.push( {name: time, value:[time, tan2]} );
-            qstRecordtan3.push( {name: time, value:[time, tan3]} );
 
             qstRecordunb.push( {name: time, value:[time, unb]} );
 

@@ -3532,6 +3532,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var temp_vcfund = obj.vcfund;
                     var table = document.getElementById('hvtable');
 
+                    for (var j=0;j<49*3;j++) {
+                        var threshold = temp_threshold[j].split(",");
+                        if(threshold[1]=='a') {
+                            if (threshold[2] == 'null') {
+                                table.rows[threshold[0]].cells[16].innerHTML = "";
+                            } else {
+                                table.rows[threshold[0]].cells[16].innerHTML = threshold[2];
+                            }
+                        }
+                    }
+
                     for (var i = 0; i < temp_result.length; i++) {
                         var result= temp_result[i].split(",");
                         if(result[1]=='a'){
@@ -3539,7 +3550,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[2].innerHTML = result[3];
                             table.rows[result[0]].cells[3].innerHTML = result[4];
                             table.rows[result[0]].cells[4].innerHTML = result[5];
-                            if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                            else if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: white;">合格</span>';
                             else
                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
@@ -3549,7 +3562,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[7].innerHTML = result[3];
                             table.rows[result[0]].cells[8].innerHTML = result[4];
                             table.rows[result[0]].cells[9].innerHTML = result[5];
-                            if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                            else if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
                                 table.rows[result[0]].cells[10].innerHTML = '<span style="color: white;">合格</span>';
                             else{
                                 table.rows[result[0]].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
@@ -3560,18 +3575,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[12].innerHTML = result[3];
                             table.rows[result[0]].cells[13].innerHTML = result[4];
                             table.rows[result[0]].cells[14].innerHTML = result[5];
-                            if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                            else if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
                                 table.rows[result[0]].cells[15].innerHTML = '<span style="color: white;">合格</span>';
                             else{
                                 table.rows[result[0]].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
                             }
                         }
                     }
-                    for (var j=0;j<49*3;j++) {
-                        var threshold = temp_threshold[j].split(",");
-                        if(threshold[1]='a')
-                            table.rows[threshold[0]].cells[16].innerHTML = threshold[2];
-                    }
+
                     for (var k=0;k<temp_vcfund.length;k++) {
                         var vcfund = temp_vcfund[k].split(",");
                         if(vcfund[0]=='u1'){
@@ -3637,6 +3650,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var temp_vcfund = obj.vcfund;
                     var table = document.getElementById('hctable');
 
+                    for (var j = 0; j < 49*3; j++) {
+                        var threshold = temp_threshold[j].split(",");
+                        if(threshold[1]=='a') {
+                            if (threshold[2]=='null') {
+                                table.rows[threshold[0]].cells[16].innerHTML = "";
+                            } else {
+                                table.rows[threshold[0]].cells[16].innerHTML = threshold[2];
+                            }
+                        }
+                    }
+
                     for (var j = 0; j < temp_result.length; j++) {
                         var result= temp_result[j].split(",");
                         if(result[1]=='a'){
@@ -3644,7 +3668,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[2].innerHTML = result[3];
                             table.rows[result[0]].cells[3].innerHTML = result[4];
                             table.rows[result[0]].cells[4].innerHTML = result[5];
-                            if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
                                 table.rows[result[0]].cells[5].innerHTML = '<span style="color: white;">合格</span>';
                             else
                                 table.rows[result[0]].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
@@ -3654,7 +3680,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[7].innerHTML = result[3];
                             table.rows[result[0]].cells[8].innerHTML = result[4];
                             table.rows[result[0]].cells[9].innerHTML = result[5];
-                            if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
                                 table.rows[result[0]].cells[10].innerHTML = '<span style="color: white;">合格</span>';
                             else
                                 table.rows[result[0]].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
@@ -3664,17 +3692,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[12].innerHTML = result[3];
                             table.rows[result[0]].cells[13].innerHTML = result[4];
                             table.rows[result[0]].cells[14].innerHTML = result[5];
-                            if(result[5]>=table.rows[result[0]].cells[16].innerHTML)
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
                                 table.rows[result[0]].cells[15].innerHTML = '<span style="color: white;">合格</span>';
                             else
                                 table.rows[result[0]].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
                         }
                     }
-                    for (var j = 0; j < 49*3; j++) {
-                        var threshold = temp_threshold[j].split(",");
-                        if(threshold[1]='a')
-                            table.rows[threshold[0]].cells[16].innerHTML = threshold[2];
-                    }
+
                     for (var k = 0; k < temp_vcfund.length; k++) {
                         var vcfund = temp_vcfund[k].split(",");
                         if(vcfund[0]=='i1'){
