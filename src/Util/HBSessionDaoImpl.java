@@ -103,16 +103,17 @@ public class HBSessionDaoImpl implements HBSessionDao{
     //使用HQL语句插入数据
     @Override
     public boolean insert(Object obj) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction;
         try {
-            Session session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.save(obj);
             transaction.commit();
-            session.close();
-
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        } finally {
+            session.close();
         }
         return true;
     }

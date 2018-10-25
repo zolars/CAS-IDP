@@ -2229,10 +2229,10 @@
             } else {
                 visibleColumnData[targetId + 1] = visibleColumnData[targetId];
                 visibleColumnData[targetId] = downData;
-                console.log('visibleColumnData', visibleColumnData)
+
                 localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
-                target[0].id = (Number(target.attr("id"))) + 1 + ''
-                target.next()[0].id = (Number(target.next()[0].id)) - 1 + ''
+                target[0].id = (Number(target.attr("id"))) + 1 + '';
+                target.next()[0].id = (Number(target.next()[0].id)) - 1 + '';
                 target.next().after(target); //下移动
             }
         } else {
@@ -2385,49 +2385,6 @@
 
 <!-- 导出-->
 <script type="text/javascript">
-   /* function exportTable() {
-        var tableid1 = "device-event";
-        var tableid2 = "power-event";
-        var tableid3 = "environment-event";
-        setTimeout(exportToExcel(tableid1), 1000);//等待1s后执行exportToExcel函数
-        setTimeout(exportToExcel(tableid2), 1000);
-        setTimeout(exportToExcel(tableid3), 1000);
-        $("#secItem li").each(function (i) {
-            $(this).click(function () {
-                idx = i;
-            });
-        });
-        $("#secItem li")[0].onclick = function () {
-            idx = 1;
-            var tableid = "power-event-detail-tbody-" + idx;
-            console.log("被选中", tableid);
-            exportToExcel(tableid);
-        };
-        $("#secItem li")[1].onclick = function () {
-            idx = 2;
-            var tableid = "power-event-detail-tbody-" + idx;
-            console.log("被选中", tableid);
-            exportToExcel(tableid);
-        }
-        $("#secItem li")[2].onclick = function () {
-            idx = 3;
-            var tableid = "power-event-detail-tbody-" + idx;
-            console.log("被选中", tableid);
-            exportToExcel(tableid);
-        }
-        $("#secItem li")[3].onclick = function () {
-            idx = 4;
-            var tableid = "power-event-detail-tbody-" + idx;
-            console.log("被选中", tableid);
-            exportToExcel(tableid);
-        }
-        $("#secItem li")[4].onclick = function () {
-            idx = 5;
-            var tableid = "power-event-detail-tbody-" + idx;
-            console.log("被选中", tableid);
-            exportToExcel(tableid);
-        }
-    }*/
 
     function exportTable() {
         var type = 0;

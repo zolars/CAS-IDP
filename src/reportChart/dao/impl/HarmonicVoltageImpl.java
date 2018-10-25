@@ -110,7 +110,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 49; i++) {
                 for (int j = 0; j < 3; j++) {
                     char state = (char) (97 + j);
-                    String sql = "SELECT ds.value as value FROM devices_standard ds, events_type et WHERE et.description = 'U" + state + "谐波含有率越限" + (i + 2) + "' AND ds.cid=et.cid";
+                    String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '" + "电压总谐波含有率限值" + (i + 2) + "' AND ds.level=1";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -144,7 +144,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 49; i++) {
                 for (int j = 0; j < 3; j++) {
                     char state = (char) (97 + j);
-                    String sql = "SELECT ds.value as value FROM devices_standard ds, events_type et WHERE et.description = 'I" + state + "谐波有效值越限" + (i + 2) + "' AND ds.cid=et.cid";
+                    String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '" + "电流总谐波有效值限值" + (i + 2) + "' AND ds.level=1";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();

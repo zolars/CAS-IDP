@@ -6,9 +6,9 @@ import org.apache.struts2.ServletActionContext;
 import reportChart.dao.HarmonicVoltage;
 import reportChart.dao.impl.HarmonicVoltageImpl;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+
 public class getHarmonicVoltage extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
@@ -32,7 +32,7 @@ public class getHarmonicVoltage extends ActionSupport {
             List thresholdResult = new ArrayList();
             List vcfund = new ArrayList();
             hvresult = dao.getHVresultBydt(did, time);
-            thresholdResult = dao.getHCthreshold();
+            thresholdResult = dao.getHVthreshold();
             vcfund = dao.getVCfundBydt(did, time);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("hvresult", hvresult);

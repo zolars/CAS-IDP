@@ -6,9 +6,9 @@ import org.apache.struts2.ServletActionContext;
 import reportChart.dao.HarmonicVoltage;
 import reportChart.dao.impl.HarmonicVoltageImpl;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+
 public class getHarmonicCurrent extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;

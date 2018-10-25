@@ -257,10 +257,6 @@
                                             <input type="checkbox" value='pf2'>PF2
                                             <input type="checkbox" value='pf3'>PF3
                                             <input type="checkbox" value='pf'>PF
-                                            <input class="default-show" type="checkbox" value='dpf1'>DPF1
-                                            <input type="checkbox" value='dpf2'>DPF2
-                                            <input type="checkbox" value='dpf3'>DPF3
-                                            <input type="checkbox" value='dpf'>DPF
                                         </li>
                                     </ul>
                                 </div>
@@ -811,6 +807,9 @@
         data: []
     };
     var option1 = {
+        tooltip: {
+            trigger: 'axis'
+        },
         legend: {
             show: false,
             data: chart1Legend
@@ -905,6 +904,9 @@
         ]
     };
     var option2 = {
+        tooltip: {
+            trigger: 'axis'
+        },
         legend: {
             show: false
         },
@@ -932,6 +934,9 @@
         ]
     };
     var option3 = {
+        tooltip: {
+            trigger: 'axis'
+        },
         legend: {
             show: false,
             data: chart3Legend
@@ -1034,38 +1039,22 @@
                 name: "pf", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
                 encode: {x: "time", y: "pf"}
-            },
-            //功率DPF
-            {
-                name: "dpf1", type: "line", smooth: true, showSymbol: false,
-                markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "dpf1"}
-            },
-            {
-                name: "dpf2", type: "line", smooth: true, showSymbol: false,
-                markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "dpf2"}
-            },
-            {
-                name: "dpf3", type: "line", smooth: true, showSymbol: false,
-                markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "dpf3"}
-            },
-            {
-                name: "dpf", type: "line", smooth: true, showSymbol: false,
-                markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "dpf"}
             }
         ]
     };
     var option4 = {
+        tooltip: {
+            trigger: 'axis'
+        },
         legend: {
             show: false,
             data: chart4Legend
         },
         tooltip: {},
         xAxis: {
-            type: 'time',
+            type: 'value',
+            max: 100,
+            min: 0,
             splitLine: {
                 show: false
             }
@@ -1073,6 +1062,8 @@
         yAxis: {
             type: 'value',
             scale: true,
+            max: 200,
+            min: 0,
             boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
@@ -1082,7 +1073,7 @@
             // 浪涌/塌陷
             {
                 name: 'Ua',type: 'scatter',
-                encode: {x: 'time', y: 'Ua'},
+                encode: {x: 'time'* 1000, y: 'Ua'},
                 itemStyle:{
                     normal:{
                         color:'#ffff00'
@@ -1091,7 +1082,7 @@
             },
             {
                 name: 'Ub',type: 'scatter',
-                encode: {x: 'time', y: 'Ub'},
+                encode: {x: 'time'* 1000, y: 'Ub'},
                 itemStyle:{
                     normal:{
                         color:'#00ff00'
@@ -1100,7 +1091,7 @@
             },
             {
                 name: 'Uc',type: 'scatter',
-                encode: {x: 'time', y: 'Uc'},
+                encode: {x: 'time'* 1000, y: 'Uc'},
                 itemStyle:{
                     normal:{
                         color:'#ff0000'
@@ -1109,8 +1100,23 @@
             },
             {
                 name:'',
-                type:'line'//,
-               /// yAxisIndex: 1
+                type:'line',
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                },
+                data:[['1','200'], ['5','140'], ['5','120'], ['500','120'], ['500','110'], ['10000','110']]
+            },
+            {
+                name:'',
+                type:'line',
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                },
+                data:[['30','20'], ['30','70'], ['50','70'], ['500','75'], ['100','75'], ['100','80'], ['10000','80']]
             }
         ]
     };
