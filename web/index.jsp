@@ -114,7 +114,7 @@
     <%--<img class="login-title" src="img/index/logo.jpg" alt="IDP数据中心动力管控系统"/>--%>
     <div class="login-box">
         <div class="login-box-title">用户登录</div>
-        <form id="login" name="login" action="/login.action" method="post">
+        <form id="login" name="login" action="/IDP/login.action" method="post">
             <div class="login-item">
                 <label for="login_username" class="login-label">用户名&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 <input class="login-input" type="text" name="username" value="" id="login_username">

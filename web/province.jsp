@@ -87,7 +87,8 @@
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
-    window.location.href = 'http://localhost:8082/index.jsp';
+  //  window.location.href = 'http://localhost:8082/index.jsp';
+    window.location.href = <%=basePath%>+'index.jsp';
 </script>
 <%
 } else {
@@ -101,7 +102,7 @@
     }
 
     if (!getUrlParam('prov=')) {
-        window.location.href = 'http://localhost:8082/province.jsp?prov=' + $.cookie('province_name');
+        window.location.href = <%=basePath%>+'province.jsp?prov=' + $.cookie('province_name');
     }
 </script>
 <%
@@ -111,7 +112,7 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <img src="/img/index/logo.jpg" alt="">
+        <img src="img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -163,7 +164,7 @@
 
             <!-- 注销按钮 -->
             <div class="pull-right header-right-text">
-                <a class="header-logout" href="index.jsp">注销</a>
+                <a class="header-logout" href="/index.jsp">注销</a>
             </div>
             <div class="pull-right header-right-text">欢迎用户${username}登录</div>
 
@@ -241,11 +242,11 @@
                     <div class="chart-item-title">评估结果</div>
                     <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td style="padding-right: 30px;"><img id="r1t0" src="/img/icon/GOOD.png"/></td>
-                            <td style="padding-right: 30px;"><img id="r1t1" src="/img/icon/GOOD.png"/></td>
-                            <td style="padding-right: 30px;"><img id="r1t2" src="/img/icon/GOOD.png"/></td>
-                            <td style="padding-right: 30px;"><img id="r1t3" src="/img/icon/GOOD.png"/></td>
-                            <td style="padding-right: 30px;"><img id="r1t4" src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t0" src="img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t1" src="img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t2" src="img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t3" src="img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img id="r1t4" src="img/icon/GOOD.png"/></td>
                         </tr>
                         <tr>
                             <td id="r2t0" style="font-size: 12px;color: black;"></td>
@@ -256,11 +257,11 @@
                         </tr>
                         <tr style="height: 28px;"></tr>
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/icon/GOOD.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/icon/GOOD.png"/></td>
                         </tr>
                         <tr>
                             <td style="font-size: 12px;color: black;"></td>
@@ -298,7 +299,7 @@
                          position: relative;
                      ">
 
-                    <img id="preview" src="/upload/ElectricSystemImg.jpg" alt="" width="507px;" height="175px;"/>
+                    <img id="preview" src="upload/ElectricSystemImg.jpg" alt="" width="507px;" height="175px;"/>
                     <form action="uploadOne" method="post" enctype="multipart/form-data">
                         <a class="file">选择文件
                             <input type="file" name="uploadFile" onchange="uploadImage(this)">
@@ -316,11 +317,11 @@
                     <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0">
                         <tr style="height: 8px;"></tr>
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/1.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/2.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/3.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/4.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/5.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/1.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/2.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/3.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/4.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/5.png"/></td>
                         </tr>
                         <tr>
                             <td style="font-size: 12px;color: #000000">状态：良</td>
@@ -331,11 +332,11 @@
                         </tr>
                         <tr style="height: 18px;"></tr>
                         <tr>
-                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
-                            <td style="padding-right: 30px;"><img src="/img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/6.png"/></td>
+                            <td style="padding-right: 30px;"><img src="img/6.png"/></td>
                         </tr>
                         <tr>
                             <td style="font-size: 12px;color: #000000">状态：良</td>
@@ -672,13 +673,13 @@
                 //指定评估结果块的数据
                 for (var i = 0; i < xdata.length; i++) {
                     if (degree[i] == '1') {
-                        $("#r1t" + i).attr("src", "/img/icon/GOOD.png");
+                        $("#r1t" + i).attr("src", "img/icon/GOOD.png");
                     }
                     if (degree[i] == '2') {
-                        $("#r1t" + i).attr("src", "/img/icon/NORMAL.png");
+                        $("#r1t" + i).attr("src", "img/icon/NORMAL.png");
                     }
                     if (degree[i] == '3') {
-                        $("#r1t" + i).attr("src", "/img/icon/BAD.png");
+                        $("#r1t" + i).attr("src", "img/icon/BAD.png");
                     }
 
                     document.getElementById("r2t" + i).innerHTML = xdata[i];

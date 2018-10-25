@@ -56,6 +56,8 @@
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
+    //  window.location.href = 'http://localhost:8082/index.jsp';
+    window.location.href = <%=basePath%>+'index.jsp';
     window.location.href = 'http://localhost:8082/index.jsp';
 </script>
 <%
@@ -66,6 +68,7 @@
         <div class="header-left">
             <a href="" id="menu-toggle"></a>
             <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
+            <img src="img/index/logo.jpg" alt="">
             <img src="/img/index/logo.jpg" alt="">
         </div>
         <div class="media-body">

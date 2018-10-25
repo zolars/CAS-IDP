@@ -55,7 +55,8 @@
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
-    window.location.href = 'http://localhost:8082/index.jsp';
+    //  window.location.href = 'http://localhost:8082/index.jsp';
+    window.location.href = <%=basePath%>+'index.jsp';
 </script>
 <%
     }
@@ -65,7 +66,7 @@
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
         <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
-        <img src="/img/index/logo.jpg" alt="">
+        <img src="img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -1113,7 +1114,7 @@
                         color:'#ff0000'
                     }
                 },
-                data:[['30','20'], ['30','70'], ['50','70'], ['500','75'], ['100','75'], ['100','80'], ['10000','80']]
+                data:[['30','0'], ['30','70'], ['50','70'], ['500','75'], ['10000','75'], ['10000','80']]
             }
         ]
     };

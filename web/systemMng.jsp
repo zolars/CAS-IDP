@@ -108,7 +108,8 @@
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
-    window.location.href = 'http://localhost:8082/index.jsp';
+    //  window.location.href = 'http://localhost:8082/index.jsp';
+    window.location.href = <%=basePath%>+'index.jsp';
 </script>
 <%
     }
@@ -120,7 +121,7 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <img src="/img/index/logo.jpg" alt="">
+        <img src="img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -165,7 +166,7 @@
 
             <!-- 注销按钮 -->
             <div class="pull-right header-right-text">
-                <a class="header-logout" href="index.jsp">注销</a>
+                <a class="header-logout" href="/index.jsp">注销</a>
             </div>
             <div class="pull-right header-right-text">欢迎用户${username}登录</div>
 
@@ -954,7 +955,6 @@
 <!-- 省\市\机房下拉菜单-->
 <script type="text/javascript">
     /*加载省下拉选*/
-
     //读取cookie中已存的机房配置
     var opinion1 = $. cookie('province_name');
 

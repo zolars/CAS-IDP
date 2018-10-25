@@ -163,7 +163,7 @@
             myChart.on("click", function (param) {
                 var province = param.name;
                 $.cookie('province_name', province, {expires: 1, path: '/'});
-                top.location.href = "/province.jsp?prov=" + province;
+                top.location.href = "/IDP/province.jsp?prov=" + province;
             });
         }
     });

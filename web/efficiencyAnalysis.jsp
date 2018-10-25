@@ -100,7 +100,7 @@
 <script>
     var eventtypetable = null;
     alert('您还未登录或您的认证已过期, 请先登陆.');
-    window.location.href = 'http://localhost:8082/index.jsp';
+    window.location.href = <%=basePath%>+'index.jsp';
 </script>
 
 <%
@@ -110,8 +110,7 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
-        <img src="/img/index/logo.jpg" alt="">
+        <img src="img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -199,8 +198,8 @@
                                 <table id="event-table-head1">
                                     <thead>
                                     <tr>
-                                        <th><img src="/img/setting.png" alt="" onClick="settingIcon()"></th>
-                                        <th><img src="/img/refresh.png" alt="" onClick="refreshIcon()"></th>
+                                        <th><img src="img/setting.png" alt="" onClick="settingIcon()"></th>
+                                        <th><img src="img/refresh.png" alt="" onClick="refreshIcon()"></th>
                                         <th>
                                             <button type="button" class="btn-sm btn-primary" onClick="exportTable()">
                                                 导出
@@ -532,9 +531,9 @@
                                                     </table>
                                                 </tr>
                                                 <tr>
-                                                    <td><img src="/img/uparray.png" onClick="upcol()"></td>
-                                                    <td><img src="/img/deletearray.png" onClick="deletecol()"></td>
-                                                    <td><img src="/img/downarray.png" onClick="downcol()"></td>
+                                                    <td><img src="img/uparray.png" onClick="upcol()"></td>
+                                                    <td><img src="img/deletearray.png" onClick="deletecol()"></td>
+                                                    <td><img src="img/downarray.png" onClick="downcol()"></td>
                                                     <td><br></td>
                                                 </tr>
                                                 <tr>

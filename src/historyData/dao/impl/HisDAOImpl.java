@@ -71,7 +71,7 @@ public class HisDAOImpl implements HisDAO {
         crlist = hbsessionDao.search("select a.duration, a.value, b.description from EventPower a, EventsType b " +
                 "where a.did='" + did + "' and a.time>='" + starttime + "' and a.time<='" + endtime + "' and (b.classify='塌陷' or b.classify='浪涌') and a.cid=b.cid");
 
-        double baseValue = 220; //Ua Ub Uc的基值
+        double baseValue = 220.00; //Ua Ub Uc的基值
         if (crlist != null) {
             for (int i = 0; i < crlist.size(); i++) {
                 Map<String, Object> map = new LinkedHashMap<>();
@@ -82,13 +82,13 @@ public class HisDAOImpl implements HisDAO {
                 map.put("Uc",null);
                 String description=(String)temp[2];
                 if (description.indexOf("Ua")>=0) {
-                    map.put("Ua",baseValue+(double)temp[1]);
+                    map.put("Ua", 100 * (baseValue+(double)temp[1]) / baseValue );
                 }
                 if (description.indexOf("Ub")>=0) {
-                    map.put("Ub",baseValue+(double)temp[1]);
+                    map.put("Ub", 100 *(baseValue+(double)temp[1]) / baseValue );
                 }
                 if (description.indexOf("Uc")>=0) {
-                    map.put("Uc",baseValue+(double)temp[1]);
+                    map.put("Uc", 100 *(baseValue+(double)temp[1]) / baseValue );
                 }
                 rtlist.add((Object) map);
             }
