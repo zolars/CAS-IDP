@@ -94,9 +94,11 @@
 
 <body id="skin-blur-blue">
 
+<!--告警弹窗-->
+<script type="text/javascript" src = "js/websocketconnect.js"></script>
+
 <script>
     var allUserList = null;
-
 </script>
 
 <!--登陆认证拦截-->

@@ -3,6 +3,7 @@ package grabData;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.BasicSetting;
 import hibernatePOJO.Devices;
+import io.netty.channel.ChannelFuture;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -11,6 +12,7 @@ import org.quartz.impl.StdSchedulerFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.net.InetSocketAddress;
 import java.util.List;
 
 import static org.quartz.JobBuilder.newJob;
@@ -25,7 +27,7 @@ public class MyListener implements ServletContextListener {
         Thread dataThread = new Thread() {
             @Override
             public void run() {
-                System.out.println("Begin to MyListener.........");
+                System.out.println("MyListener Server Start.........");
                 HBSessionDaoImpl hbSessionDao = new HBSessionDaoImpl();
 
                 // 从数据库取每种设备的配置信息(IP,port等)
@@ -35,7 +37,6 @@ public class MyListener implements ServletContextListener {
                 // diclist为第一个字典，dicpluslist为第二个索引字典
                 DataOnline.setDic(hbSessionDao.search("FROM Dictionary"));
                 DataOnline.setDicPlus(hbSessionDao.search("FROM DictionaryPlus"));
-                // CtrlSave.setDic(hbSessionDao.search("FROM DictionaryCtrl"));
 
                 // 从数据库取基础配置信息(采集频率、上传频率)
                 List<BasicSetting> listbase = hbSessionDao.search("FROM BasicSetting");
@@ -160,14 +161,14 @@ public class MyListener implements ServletContextListener {
 
                         // 设置任务，每15分钟执行一次告警
                         Trigger trigger5 = newTrigger()
-                                .withIdentity("alarmModelTrigger",
-                                        "alarmModelTriggerGroup")
+                                .withIdentity("AlarmModelTrigger",
+                                        "AlarmModelTriggerGroup")
                                 .startNow()
                                 .withSchedule(simpleSchedule().withIntervalInMinutes(15)
                                         .repeatForever())
                                 .build();
-                        JobDetail job5 = newJob(alarmModelJob.class)
-                                .withIdentity("alarmModelJob", "alarmModelGroup")
+                        JobDetail job5 = newJob(AlarmModelJob.class)
+                                .withIdentity("AlarmModelJob", "AlarmModelGroup")
                                 .build();
                         scheduler.scheduleJob(job5, trigger5);
 

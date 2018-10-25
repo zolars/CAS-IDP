@@ -48,6 +48,9 @@
 <script src="js/jquery-3.3.1.js"></script>
 <script src="js/jquery.cookie.js"></script>
 
+<!--告警弹窗-->
+<script type="text/javascript" src = "js/websocketconnect.js"></script>
+
 <!--登陆认证拦截-->
 <%
     String userid = (String)session.getAttribute("userid");

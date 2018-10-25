@@ -92,6 +92,9 @@
 
 <body id="skin-blur-blue">
 
+<!--告警弹窗-->
+<script type="text/javascript" src = "js/websocketconnect.js"></script>
+
 <!--登陆认证拦截-->
 <%
     String userid = (String) session.getAttribute("userid");
@@ -1137,7 +1140,7 @@
                         var type = liststr[2];
                         var time = liststr[3];
                         var description = liststr[4];
-                        var duration = liststr[5];
+                        var duration = liststr[5] + " ms";
                         var deepth = liststr[6];
                         var annotation = liststr[7];
                         if (annotation == " null")
@@ -1145,6 +1148,7 @@
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
+                        var location = liststr[9].substring(0, liststr[9].length - 1);
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
@@ -1206,7 +1210,7 @@
                         var type = liststr[2];
                         var time = liststr[3];
                         var description = liststr[4];
-                        var duration = liststr[5];
+                        var duration = liststr[5] + " ms";
                         var deepth = liststr[6];
                         var annotation = liststr[7];
                         if (annotation == " null")
@@ -1214,6 +1218,7 @@
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
+                        var location = liststr[9].substring(0, liststr[9].length - 1);
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
@@ -1275,7 +1280,7 @@
                         var type = liststr[2];
                         var time = liststr[3];
                         var description = liststr[4];
-                        var duration = liststr[5];
+                        var duration = liststr[5] + " ms";
                         var deepth = liststr[6];
                         var annotation = liststr[7];
                         if (annotation == " null")
@@ -1283,6 +1288,7 @@
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
+                        var location = liststr[9].substring(0, liststr[9].length - 1);
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
@@ -1344,7 +1350,7 @@
                         var type = liststr[2];
                         var time = liststr[3];
                         var description = liststr[4];
-                        var duration = liststr[5];
+                        var duration = liststr[5] + " ms";
                         var deepth = liststr[6];
                         var annotation = liststr[7];
                         if (annotation == " null")
@@ -1352,6 +1358,7 @@
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
+                        var location = liststr[9].substring(0, liststr[9].length - 1);
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
@@ -1414,7 +1421,7 @@
                         var type = liststr[2];
                         var time = liststr[3];
                         var description = liststr[4];
-                        var duration = liststr[5];
+                        var duration = liststr[5] + " ms";
                         var deepth = liststr[6];
                         var annotation = liststr[7].substring(0, liststr[7].length - 1);
                         if (annotation == " null")
@@ -1422,7 +1429,7 @@
                         var signature = liststr[8].substring(0, liststr[8].length - 1);
                         if (signature == " null")
                             signature = "";
-
+                        var location = liststr[9].substring(0, liststr[9].length - 1);
                         var newLine = '<tr>';
 
                         newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
@@ -1614,7 +1621,7 @@
                             } else if (item.name === "触发相位") {
                                 newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + "" + '</td>')
                             } else if (item.name === "深度") {
                                 newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
                             } else if (item.name === "方向") {
@@ -1677,7 +1684,7 @@
                             } else if (item.name === "触发相位") {
                                 newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + "" + '</td>')
                             } else if (item.name === "深度") {
                                 newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
                             } else if (item.name === "方向") {
@@ -1896,7 +1903,7 @@
                             } else if (item.name === "触发相位") {
                                 newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + "" + '</td>')
                             } else if (item.name === "深度") {
                                 newLine += ('<td style="padding-left:60px;">' + '' + '</td>')
                             } else if (item.name === "方向") {
@@ -1967,7 +1974,7 @@
                             } else if (item.name === "触发相位") {
                                 newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + "" + '</td>')
                             } else if (item.name === "深度") {
                                 newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
                             } else if (item.name === "方向") {
@@ -2038,7 +2045,7 @@
                             } else if (item.name === "触发相位") {
                                 newLine += ('<td style="padding-left:60px;"></td>')
                             } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
+                                newLine += ('<td style="padding-left:60px;">' + "" + '</td>')
                             } else if (item.name === "深度") {
                                 newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
                             } else if (item.name === "方向") {
