@@ -241,7 +241,6 @@ public class EventDAOImpl implements EventDAO {
                     List list = new ArrayList();
                     list.add(rs.getString("teid"));       //teid
                     list.add(rs.getString("name"));       //测量名称
-                    //list.add(rs.getString("location"));
                     list.add(rs.getString("type"));       //类型 (触发相位)
                     //list.add(rs.getString("type"));         //触发相位
                     list.add(rs.getString("time"));         //时间
@@ -251,6 +250,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("discription"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
+                    list.add(rs.getString("location")); // 位置
 
                     rtlist.add(list.toString());
                 }
@@ -381,7 +381,6 @@ public class EventDAOImpl implements EventDAO {
                     List list = new ArrayList();
                     list.add(rs.getString("teid"));       //teid
                     list.add(rs.getString("name"));       //测量名称
-                    //list.add(rs.getString("location"));
                     list.add(rs.getString("type"));       //类型 (触发相位)
                     //list.add(rs.getString("type"));         //触发相位
                     list.add(rs.getString("time"));         //时间
@@ -391,6 +390,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("discription"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
+                    list.add(rs.getString("location")); // 位置
                     rtlist.add(list.toString());
                 }
             } catch (SQLException e) {
@@ -520,7 +520,6 @@ public class EventDAOImpl implements EventDAO {
                     List list = new ArrayList();
                     list.add(rs.getString("teid"));       //teid
                     list.add(rs.getString("name"));       //测量名称
-                    //list.add(rs.getString("location"));
                     list.add(rs.getString("type"));       //类型 (触发相位)
                     //list.add(rs.getString("type"));         //触发相位
                     list.add(rs.getString("time"));         //时间
@@ -530,6 +529,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("discription"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
+                    list.add(rs.getString("location")); // 位置
 
                     rtlist.add(list.toString());
                 }
@@ -660,7 +660,6 @@ public class EventDAOImpl implements EventDAO {
                     List list = new ArrayList();
                     list.add(rs.getString("teid"));       //teid
                     list.add(rs.getString("name"));       //测量名称
-                    //list.add(rs.getString("location"));
                     list.add(rs.getString("type"));       //类型 (触发相位)
                     //list.add(rs.getString("type"));         //触发相位
                     list.add(rs.getString("time"));         //时间
@@ -670,6 +669,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("discription"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
+                    list.add(rs.getString("location")); // 位置
 
                     rtlist.add(list.toString());
                 }
@@ -801,7 +801,6 @@ public class EventDAOImpl implements EventDAO {
                     List list = new ArrayList();
                     list.add(rs.getString("teid"));       //teid
                     list.add(rs.getString("name"));       //测量名称
-                    //list.add(rs.getString("location"));
                     list.add(rs.getString("type"));       //类型 (触发相位)
                     //list.add(rs.getString("type"));         //触发相位
                     list.add(rs.getString("time"));         //时间
@@ -811,6 +810,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("discription"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
+                    list.add(rs.getString("location")); // 位置
 
                     rtlist.add(list.toString());
                 }
