@@ -1813,42 +1813,45 @@ public class EventDAOImpl implements EventDAO {
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
                 "FROM Computerroom where rid='" + compname + "'");
 
-        String tempset = comps.getTempset();
+        if (comps != null) {
+            String tempset = comps.getTempset();
 
-        if (tempset.equals(null) || tempset == null) {
-            return rtlist;
-        } else {
+            if (tempset.equals(null) || tempset == null) {
+                return rtlist;
+            } else {
 
-            String tempstr[] = tempset.split("，");
-            db = new DBConnect();
+                String tempstr[] = tempset.split("，");
+                db = new DBConnect();
 
-            for (int i = 0; i < tempstr.length; i++) {
-                String sql = "select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
+                for (int i = 0; i < tempstr.length; i++) {
+                    String sql = "select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
 
-                try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        List<String> list = new ArrayList();
-                        list.add(rs.getString("dname"));
-                        list.add(rs.getString("temperature"));
-                        list.add(rs.getString("humidity"));
+                    try {
+                        ps = db.getPs(sql);
+                        rs = ps.executeQuery();
+                        while (rs.next()) {
+                            List<String> list = new ArrayList();
+                            list.add(rs.getString("dname"));
+                            list.add(rs.getString("temperature"));
+                            list.add(rs.getString("humidity"));
 
-                        rtlist.add(list);
+                            rtlist.add(list);
+                        }
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
                     }
+                }
+                try {
+                    db.free();
                 } catch (SQLException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
-            try {
-                db.free();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return rtlist;
         }
+
+        return rtlist;
     }
 
     public boolean getComputerroomCtrlStatus(String rname, String stime, String etime) {
