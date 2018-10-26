@@ -4,8 +4,10 @@ import Util.HBSessionDaoImpl;
 import hibernatePOJO.PowerparmMonitor;
 import historyData.dao.HisDAO;
 
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HisDAOImpl implements HisDAO {
 
@@ -65,7 +67,7 @@ public class HisDAOImpl implements HisDAO {
     @Override
     public List getHisDataLyTx(String did, String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<?> crlist = new ArrayList<>();
+        List crlist = new ArrayList<>();
         List rtlist = new ArrayList<>();
 
         crlist = hbsessionDao.search("select a.duration, a.value, b.description from EventPower a, EventsType b " +
@@ -90,7 +92,7 @@ public class HisDAOImpl implements HisDAO {
                 if (description.indexOf("Uc")>=0) {
                     map.put("Uc", 100 *(baseValue+(double)temp[1]) / baseValue );
                 }
-                rtlist.add((Object) map);
+                rtlist.add(map);
             }
         }
 

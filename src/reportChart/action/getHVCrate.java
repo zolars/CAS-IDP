@@ -1,12 +1,13 @@
 package reportChart.action;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import reportChart.dao.HarmonicVoltage;
 import reportChart.dao.impl.HarmonicVoltageImpl;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 public class getHVCrate extends ActionSupport {
@@ -23,7 +24,6 @@ public class getHVCrate extends ActionSupport {
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
             String time = request.getParameter("time");
             String did = request.getParameter("did");

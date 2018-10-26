@@ -9,7 +9,6 @@ import userManage.dao.CityDAO;
 import userManage.dao.impl.CityDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class getAllCityAction extends ActionSupport {
@@ -28,9 +27,8 @@ public class getAllCityAction extends ActionSupport {
     /* 查询所有用户的基本信息、用户角色、用户权限
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             CityDAO dao = new CityDAOImpl();

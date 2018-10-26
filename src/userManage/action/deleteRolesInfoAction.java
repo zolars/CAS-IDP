@@ -4,15 +4,11 @@ package userManage.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import hibernatePOJO.Roles;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.RolesDAO;
-import userManage.dao.UserDAO;
 import userManage.dao.impl.RolesDAOImpl;
-import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 public class deleteRolesInfoAction extends ActionSupport {
@@ -30,13 +26,11 @@ public class deleteRolesInfoAction extends ActionSupport {
 
     /* 查询所有用户的基本信息、用户角色、用户权限
      */
-    public String execute() throws Exception { //getUserTree() throws Exception{
+    public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //String monitorpointid = request.getParameter("monitorpointid");
             String ridstr = request.getParameter("rid");
             String rid[] = ridstr.split("=");
 

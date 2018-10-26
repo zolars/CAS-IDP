@@ -9,7 +9,6 @@ import userManage.dao.CityDAO;
 import userManage.dao.impl.CityDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class getCityByProvinceAction extends ActionSupport {

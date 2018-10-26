@@ -5,7 +5,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
-import sun.plugin2.message.TextEventMessage;
 
 public class AlarmModelHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     private ChannelGroup group;

@@ -3,20 +3,12 @@ package orgnizationManage.dao.impl;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.*;
 import orgnizationManage.dao.ProBankDAO;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.String;
 
 public class ProBankDAOImpl implements ProBankDAO {
-
-    private Session session;
-    private Transaction transaction;
-    private Query query;
 
         public List getCityBankDataByName(String name){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();

@@ -26,7 +26,7 @@ public class StringUtil {
 
     /**
      * 将unicode编码 "\u4F60\u597D\uFF01" 转换成中文 "你好！"
-     * @param dataStr 要转化的字符串
+     * @param str 要转化的字符串
      * @return 转换后的中文字符串
      */
     public static String Unicode2GBK(String str) {

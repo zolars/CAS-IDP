@@ -1,18 +1,17 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
-import Util.ToHex;
-//import com.sun.tools.javac.util.Convert;
-import hibernatePOJO.*;
+import hibernatePOJO.DevicesThreshold;
+import hibernatePOJO.DictionaryThreshold;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Map;
+
+//import com.sun.tools.javac.util.Convert;
 
 class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
     private Map<String, Float> map = null;

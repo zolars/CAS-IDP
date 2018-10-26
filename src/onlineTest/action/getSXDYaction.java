@@ -8,7 +8,6 @@ import hibernatePOJO.PowersxdyMonitor;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 public class getSXDYaction extends ActionSupport {

@@ -11,7 +11,9 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class uploadDataToCenterSvrJob implements Job {
     @Override

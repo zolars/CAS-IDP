@@ -8,7 +8,6 @@ import userManage.dao.UserDAO;
 import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -31,7 +30,6 @@ public class getUserInfoAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             UserDAO dao = new UserDAOImpl();

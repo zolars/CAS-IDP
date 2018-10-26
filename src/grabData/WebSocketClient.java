@@ -14,7 +14,6 @@ public class WebSocketClient {
 
     @OnMessage
     public void onMessage(String message) {
-        // System.out.println("\n\n\n woshoudaole : " + message + "\n\n\n");
     }
 
     @OnClose

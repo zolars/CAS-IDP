@@ -6,16 +6,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import userManage.dao.RolesDAO;
-import userManage.dao.UserDAO;
 import userManage.dao.impl.RolesDAOImpl;
-import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
 
 
 public class updateRoleInfoAction extends ActionSupport {
@@ -36,10 +29,8 @@ public class updateRoleInfoAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
-            //String monitorpointid = request.getParameter("monitorpointid");
             String rid = request.getParameter("rid");
             String rname = request.getParameter("rname");
             String rextra = request.getParameter("rextra");

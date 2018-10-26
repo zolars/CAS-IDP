@@ -9,17 +9,12 @@ import systemMng.dao.PermissionDAO;
 import systemMng.dao.impl.PermissionDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-//import hibernatePOJO.UserPermission;
-//import net.sf.json.JSON;
-//import net.sf.json.JSONObject;
-
 
 public class getOneRolesFunctionsAction extends ActionSupport {
-    //private static final long serialVersionUID = 13L;
+
     private JSONObject result;
 
     public JSONObject getResult() {
@@ -35,7 +30,6 @@ public class getOneRolesFunctionsAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String rid = request.getParameter("rid");

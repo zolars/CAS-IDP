@@ -9,8 +9,6 @@ import userManage.dao.UserDAO;
 import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 public class deleteUserInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -30,7 +28,6 @@ public class deleteUserInfoAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String uidstr = request.getParameter("uid");

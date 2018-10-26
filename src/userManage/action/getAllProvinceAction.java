@@ -8,7 +8,6 @@ import userManage.dao.ProvinceDAO;
 import userManage.dao.impl.ProvinceDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 

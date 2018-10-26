@@ -1,12 +1,11 @@
 package systemMng.dao.impl;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.*;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import hibernatePOJO.CityBank;
+import hibernatePOJO.Computerroom;
+import hibernatePOJO.OrgnizationStructure;
+import hibernatePOJO.ProvinceBank;
 import systemMng.dao.OrgnizationDAO;
-import systemMng.dao.PermissionDAO;
 
 import java.util.List;
 

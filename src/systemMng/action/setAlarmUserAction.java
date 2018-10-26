@@ -8,8 +8,6 @@ import systemMng.dao.PermissionDAO;
 import systemMng.dao.impl.PermissionDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 
 public class setAlarmUserAction extends ActionSupport {

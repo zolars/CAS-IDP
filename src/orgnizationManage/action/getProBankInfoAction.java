@@ -1,18 +1,15 @@
 package orgnizationManage.action;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
 import orgnizationManage.dao.ProBankDAO;
 import orgnizationManage.dao.impl.ProBankDAOImpl;
-import onlineTest.dao.PowerParameterDAO;
-import onlineTest.dao.impl.PowerParameterDAOImpl;
-import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import com.alibaba.fastjson.JSONObject;
 
 public class getProBankInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -32,7 +29,6 @@ public class getProBankInfoAction extends ActionSupport {
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String probankname = request.getParameter("probankname");

@@ -5,18 +5,11 @@ import Util.HBSessionDaoImpl;
 import hibernatePOJO.Knowledge;
 import hibernatePOJO.UserRoles;
 import knowledgeManage.dao.KnowledgeTreeDAO;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.util.List;
 
 public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
-    private Object object;
 
     public List getKnowledgeTree(){
 

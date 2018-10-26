@@ -1,10 +1,12 @@
 package reportChart.action;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import reportChart.dao.HarmonicVoltage;
 import reportChart.dao.impl.HarmonicVoltageImpl;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;

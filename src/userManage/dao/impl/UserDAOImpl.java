@@ -2,11 +2,7 @@ package userManage.dao.impl;
 
 import Util.DBConnect;
 import Util.HBSessionDaoImpl;
-
 import hibernatePOJO.*;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import userManage.dao.UserDAO;
 
 import java.sql.PreparedStatement;

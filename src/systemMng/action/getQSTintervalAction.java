@@ -4,12 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
-import hibernatePOJO.DeviceAlarmUser;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class getQSTintervalAction extends ActionSupport {

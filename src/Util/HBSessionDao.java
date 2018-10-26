@@ -1,8 +1,8 @@
 package Util;
 
-import java.util.List;
-
 import org.hibernate.Session;
+
+import java.util.List;
 
 public interface HBSessionDao {
 

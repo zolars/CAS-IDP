@@ -1,10 +1,7 @@
 package grabData;
 
-import hibernatePOJO.*;
+import hibernatePOJO.EventCtrl;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
 

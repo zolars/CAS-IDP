@@ -3,13 +3,11 @@ package knowledgeManage.action;
 
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
-import hibernatePOJO.Knowledge;
 import knowledgeManage.dao.KnowledgeTreeDAO;
 import knowledgeManage.dao.impl.KnowledgeTreeDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -32,7 +30,6 @@ public class getKnowledgeTreeAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();

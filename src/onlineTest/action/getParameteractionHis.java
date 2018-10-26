@@ -7,7 +7,6 @@ import onlineTest.dao.impl.PowerParameterDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +30,6 @@ public class getParameteractionHis extends ActionSupport {
     public String execute() throws Exception {
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String monitorpoint = request.getParameter("monitorpointid");

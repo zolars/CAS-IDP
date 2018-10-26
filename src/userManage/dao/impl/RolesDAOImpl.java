@@ -1,14 +1,9 @@
 package userManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.*;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import hibernatePOJO.Roles;
 import userManage.dao.RolesDAO;
-import userManage.dao.UserDAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RolesDAOImpl implements RolesDAO {

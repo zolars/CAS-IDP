@@ -11,7 +11,6 @@ import userManage.dao.UserDAO;
 import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 

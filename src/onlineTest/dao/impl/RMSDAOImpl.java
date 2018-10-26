@@ -4,31 +4,15 @@ import Util.HBSessionDaoImpl;
 import hibernatePOJO.PowerparmMonitor;
 import hibernatePOJO.PowersxdyMonitor;
 import hibernatePOJO.PowerxbMonitor;
-import onlineTest.dao.*;
+import onlineTest.dao.RMS;
+import onlineTest.dao.RMSDAO;
+import onlineTest.dao.THD;
+import onlineTest.dao.Tan;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RMSDAOImpl implements RMSDAO {
-
-    private List<PowerxbMonitor> u1list = new ArrayList<>();
-
-    private float u1_1 = 0,u2_1 = 0,u3_1 = 0;
-    private float v1_1 = 0,v2_1 = 0,v3_1 = 0;
-    private float i1_1 = 0,i2_1 = 0,i3_1 = 0;
-
-    private float u1_2 = 0,u2_2 = 0,u3_2 = 0;
-    private float v1_2 = 0,v2_2 = 0,v3_2 = 0;
-    private float i1_2 = 0,i2_2 = 0,i3_2 = 0;
-
-    private float u1_3 = 0,u2_3 = 0,u3_3 = 0;
-    private float v1_3 = 0,v2_3 = 0,v3_3 = 0;
-    private float i1_3 = 0,i2_3 = 0,i3_3 = 0;
-
-    //find max of the latest records
-    double maxu1 = 0,maxu2 = 0,maxu3 = 0;
-    double maxi1 = 0,maxi2 = 0,maxi3 = 0;
-    double maxv1 = 0,maxv2 = 0,maxv3 = 0;
 
     public List getCurrentRMSData(String did) {
         List<RMS> crlist = new ArrayList<>();

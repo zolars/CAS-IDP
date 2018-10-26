@@ -28,7 +28,7 @@ public class uploadKnowledgeTreeAction extends ActionSupport {
     /* 管理员和作者用户可以上传某个子节点知识到总服务器
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");

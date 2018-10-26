@@ -5,8 +5,6 @@ import java.util.List;
 
 public interface RMSDAO {
 
-   /* public void getCurrentData(String did);*/
-
     public List getCurrentRMSData(String did);
 
     public List getCurrentTHDData(String did);
@@ -31,5 +29,4 @@ public interface RMSDAO {
 
     public List getCurrentPltData(String did);
 
-  /*  public List getCurrentVhData(String did);*/
 }

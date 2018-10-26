@@ -4,23 +4,16 @@ import Util.HBSessionDaoImpl;
 import hibernatePOJO.Computerroom;
 import hibernatePOJO.Devices;
 import monitorPoint.dao.MonitorPointDAO;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MonitorPointDAOImpl implements MonitorPointDAO {
 
-    private Session session;
-    private Transaction transaction;
-    private Query query;
-
     public List getLocalAllMonitorPoint(String computerroom){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Computerroom cp = new Computerroom();
-       /* List<Monitorpoints> list = new ArrayList<>();*/
+
         List<Devices> list = new ArrayList<>();
 
         cp = (Computerroom)hbsessionDao.getFirst(

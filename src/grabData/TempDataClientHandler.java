@@ -1,6 +1,6 @@
 package grabData;
 
-import hibernatePOJO.*;
+import hibernatePOJO.TemperatureMonitor;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,7 +8,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 class TempDataClientHandler extends ChannelInboundHandlerAdapter {

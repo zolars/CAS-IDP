@@ -8,7 +8,6 @@ import userManage.dao.RolesDAO;
 import userManage.dao.impl.RolesDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 public class addRolesInfoAction extends ActionSupport {

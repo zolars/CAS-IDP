@@ -6,7 +6,6 @@ import hibernatePOJO.Knowledge;
 import java.util.List;
 
 
-
 public interface KnowledgeTreeDAO {
 
     public List getKnowledgeTree();

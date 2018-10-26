@@ -35,7 +35,6 @@ public class setAssessmentInfoAction extends ActionSupport {
 
             String red_yellow = request.getParameter("red_yellow");
             String yellow_green = request.getParameter("yellow_green");
-            String time = request.getParameter("time");
 
             EventDAO dao = new EventDAOImpl();
 

@@ -2,12 +2,8 @@ package systemMng.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.DeviceAlarmUser;
-import hibernatePOJO.OrgnizationStructure;
 import hibernatePOJO.Permission;
 import hibernatePOJO.RolesPermission;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import systemMng.dao.PermissionDAO;
 
 import java.util.ArrayList;

@@ -1,14 +1,12 @@
 package grabData;
 
 
-import Util.HBSessionDaoImpl;
-import hibernatePOJO.*;
-// import io.netty.channel.Channel;
+import hibernatePOJO.TemperatureMonitor;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
-// import java.util.List;
 import java.util.Map;
+
 
 public class TemperatureSave {
 

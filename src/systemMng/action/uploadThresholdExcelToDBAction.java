@@ -1,16 +1,13 @@
 package systemMng.action;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.DevicesThreshold;
-import systemMng.ImportService;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import hibernatePOJO.DevicesThreshold;
 import org.apache.struts2.ServletActionContext;
-import systemMng.dao.OrgnizationDAO;
-import systemMng.dao.impl.OrgnizationDAOImpl;
+import systemMng.ImportService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 

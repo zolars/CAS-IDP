@@ -5,13 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import systemMng.dao.OrgnizationDAO;
-import systemMng.dao.PermissionDAO;
 import systemMng.dao.impl.OrgnizationDAOImpl;
-import systemMng.dao.impl.PermissionDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 
 public class deleteOrgnizationTreeAction extends ActionSupport {
@@ -33,7 +29,6 @@ public class deleteOrgnizationTreeAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String orgid = request.getParameter("orgid");

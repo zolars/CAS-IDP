@@ -5,7 +5,6 @@ import hibernatePOJO.DevicesThreshold;
 import hibernatePOJO.EventEnvironment;
 import hibernatePOJO.EventPower;
 import hibernatePOJO.TemperatureMonitor;
-
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

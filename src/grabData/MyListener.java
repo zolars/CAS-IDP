@@ -3,7 +3,6 @@ package grabData;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.BasicSetting;
 import hibernatePOJO.Devices;
-import io.netty.channel.ChannelFuture;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -12,7 +11,6 @@ import org.quartz.impl.StdSchedulerFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.net.InetSocketAddress;
 import java.util.List;
 
 import static org.quartz.JobBuilder.newJob;

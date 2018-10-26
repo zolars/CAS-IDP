@@ -2,7 +2,6 @@ package grabData;
 
 import Util.HBSessionDaoImpl;
 import com.alibaba.fastjson.JSON;
-
 import hibernatePOJO.EventPower;
 import hibernatePOJO.EventsType;
 import io.netty.buffer.ByteBuf;
@@ -25,7 +24,6 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        //super.handlerAdded(ctx);
         tempBuf = ctx.alloc().buffer();
     }
 
@@ -35,7 +33,6 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
         if (newResponse) {
             resLength = buf.getShort(2);
             newResponse = false;
-            //System.out.println("响应长度: "+resLength);
         }
         tempBuf.writeBytes(buf);
         buf.release();
@@ -48,9 +45,7 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
             tempBuf.readBytes(resChkSum); //读取response的校验和
             byte[] contentCheckCode = TransientUtil.mergeByteArray(resContent, TransientUtil.getCheckCode().getBytes());
             if (Arrays.equals(TransientUtil.md5(contentCheckCode), resChkSum)) {
-                //System.out.println("校验通过");
                 String res = new String(resContent, 10, resContent.length - 10, "UTF-8");
-                //System.out.println("响应消息体: "+res);
                 //数据存入数据库
                 TransientResponse tr = JSON.parseObject(res, TransientResponse.class); //反序列化
                 List<EventPower> events = tr.getResult();
