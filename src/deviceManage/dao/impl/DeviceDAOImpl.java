@@ -89,28 +89,6 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     /**
-     * 根据设备名称，获取所有设备告警表的信息
-     * @param name 设备名称
-     * @return 所有设备告警表的信息list
-     */
-    public List getDeviceAlarmUserNameDataByName(String name) {
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<DeviceAlarmUser> list = new ArrayList<>();
-
-        Devices dv = (Devices) hbsessionDao.getFirst(
-                "FROM Devices where name = '" + name + "'");
-
-        if (dv != null) {
-            String did = dv.getDid();
-            if (did != null) {
-                list = hbsessionDao.search("FROM DeviceAlarmUser where did = '" + did + "'");
-            }
-        }
-
-        return list;
-    }
-
-    /**
      * 根据类型，获取类型相关的记录
      * @param type 类型
      * @return 所有类型相关的list
@@ -196,23 +174,6 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     /**
-     * 获得DeviceAlarmUser表中id的最大值
-     * @return 最大的id
-     */
-    public String getMaxDeviceAlarmId() {
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-        DeviceAlarmUser kl = (DeviceAlarmUser) hbsessionDao.getFirst(
-                "FROM DeviceAlarmUser order by id desc");
-
-        if (kl == null) {
-            return "0";
-        } else {
-            return kl.getId();
-        }
-    }
-
-    /**
      * 添加一条阈值记录
      * @param did did
      * @param dtid dtid
@@ -264,20 +225,6 @@ public class DeviceDAOImpl implements DeviceDAO {
         } else {
             return kl.getDtid();
         }
-    }
-
-    /**
-     * XXXXX
-     * @param name name
-     * @return XXXXXX
-     */
-    public String getTypeByName(String name) {
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-        DeviceAlarmUser kl = (DeviceAlarmUser) hbsessionDao.getFirst(
-                "FROM DeviceAlarmUser order by id desc");
-
-        return "0";
     }
 
     /**
@@ -354,21 +301,6 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         rt = hbsessionDao.update(hql);
         return rt;
-    }
-
-    /**
-     * 从DevicesThreshold表中获得一条dtid=dtid的记录
-     * @param dtid dtid
-     * @return 返回记录
-     */
-    public DevicesThreshold getDeviceThreshold(String dtid) {
-
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-        DevicesThreshold dt = (DevicesThreshold) hbsessionDao.getFirst(
-                "FROM DevicesThreshold where dtid='" + dtid + "'");
-
-        return dt;
     }
 
     /**

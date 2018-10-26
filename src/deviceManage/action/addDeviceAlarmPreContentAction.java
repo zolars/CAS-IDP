@@ -8,7 +8,6 @@ import deviceManage.dao.impl.DeviceDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class addDeviceAlarmPreContentAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -23,12 +22,11 @@ public class addDeviceAlarmPreContentAction extends ActionSupport {
     }
 
 
-    /*
+    /*添加设备告警内容
      */
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
 
             String precontent = request.getParameter("precontent");

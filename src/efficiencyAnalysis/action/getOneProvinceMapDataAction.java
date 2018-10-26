@@ -6,7 +6,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import org.apache.struts2.ServletActionContext;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import userManage.dao.ProvinceDAO;
 import userManage.dao.impl.ProvinceDAOImpl;
 

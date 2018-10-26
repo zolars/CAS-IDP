@@ -8,7 +8,6 @@ import hibernatePOJO.Devices;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +30,7 @@ public class getAllktDeviceAction extends ActionSupport {
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
             request.setCharacterEncoding("utf-8");
-
-            //获取监测点
-            //String computerroom = request.getParameter("computerroomid");
-           // String devicename = request.getParameter("devicename");
 
             DeviceDAO dao = new DeviceDAOImpl();
 

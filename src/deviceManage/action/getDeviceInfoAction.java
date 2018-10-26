@@ -32,13 +32,6 @@ public class getDeviceInfoAction extends ActionSupport {
             String devicetype = request.getParameter("devicetype");
             String devicename = request.getParameter("devicename");
 
-           /* if (devicetype.equals("蓄电池")) {
-                devicetype = "battery";
-            } else if (devicetype.equals("柴油发电机")) {
-                devicetype = "";
-            } else if (devicetype.equals("空调")) {
-                devicetype = "";
-            } else */
             if (devicetype.equals("其他传感器")) {
                 devicetype = "temp";
             }

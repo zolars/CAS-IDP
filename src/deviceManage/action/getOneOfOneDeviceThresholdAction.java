@@ -29,7 +29,6 @@ public class getOneOfOneDeviceThresholdAction extends ActionSupport {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
-            //获取监测点
             String dtidstr = request.getParameter("dtid");
             Integer dtid = Integer.parseInt(dtidstr);
 

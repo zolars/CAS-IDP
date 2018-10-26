@@ -1,9 +1,6 @@
 package Util;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -15,6 +12,7 @@ public class HBSessionCenterDaoImpl implements HBSessionCenterDao {
     private static Session session;
 
     static {
+        try {
             //创建配置对象
             Configuration cfg = new Configuration().configure("/hibernate_center.cfg.xml");
             //创建服务注册对象
@@ -25,6 +23,9 @@ public class HBSessionCenterDaoImpl implements HBSessionCenterDao {
             sessionFactory = cfg.buildSessionFactory(serviceRegistry);
             //会话对象
             session = sessionFactory.openSession();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -1,6 +1,5 @@
 package efficiencyAnalysis.dao;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +53,6 @@ public interface EventDAO {
     public List getLocalAllCtrlEvent(String cbid, String starttime, String endtime);
 
     public List getLocalLastCtrlEvent(String cbid);
-
-    public List getAllCityEvent();
 
     public boolean getComputerroomCtrlStatus(String cbid, String starttime, String endtime);
 

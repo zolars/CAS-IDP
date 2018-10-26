@@ -8,7 +8,6 @@ import deviceManage.dao.impl.DeviceDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 public class deleteOneDeviceThresholdAction extends ActionSupport {
@@ -27,7 +26,7 @@ public class deleteOneDeviceThresholdAction extends ActionSupport {
     /*删除一条阈值
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 

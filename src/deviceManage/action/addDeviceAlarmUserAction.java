@@ -8,7 +8,7 @@ import deviceManage.dao.impl.DeviceDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 public class addDeviceAlarmUserAction extends ActionSupport {
     private static final long serialVersionUID = 13L;

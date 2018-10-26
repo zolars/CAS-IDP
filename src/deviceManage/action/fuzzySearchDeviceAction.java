@@ -8,7 +8,6 @@ import hibernatePOJO.Devices;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +31,6 @@ public class fuzzySearchDeviceAction extends ActionSupport {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
-            //获取监测点
             String name = request.getParameter("name");
 
             DeviceDAO dao = new DeviceDAOImpl();
