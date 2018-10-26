@@ -111,7 +111,6 @@
 </script>
 
 <div class="login-container">
-    <%--<img class="login-title" src="img/index/logo.jpg" alt="IDP数据中心动力管控系统"/>--%>
     <div class="login-box">
         <div class="login-box-title">用户登录</div>
         <form id="login" name="login" action="/IDP/login.action" method="post">
@@ -125,64 +124,10 @@
             </div>
             <div class="login-item">
                 <button class="btn btn-primary login-button" type="submit">登录</button>
-                <%--<input type="submit" value="登录" id="login_0">--%>
             </div>
        </form>
     </div>
 
-    <%--<table width="900" height="400" border="0" align="center">--%>
-        <%--<tr>--%>
-            <%--<td width="100%" height="120">--%>
-                <%--<table>--%>
-                    <%--<tr>--%>
-                        <%--<td>--%>
-                            <%--<img src="img/index/logo.jpg" width="100%" height="120">--%>
-                        <%--</td>--%>
-                    <%--</tr>--%>
-                <%--</table>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-
-        <%--<tr>--%>
-            <%--<td height="10" class="firsttoolbar">--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-
-        <%--<tr>--%>
-            <%--<td>--%>
-                <%--<table>--%>
-                    <%--<tr>--%>
-                        <%--<td width="47%" class="leftline">--%>
-                            <%--<table align="center">--%>
-                                <%--<tr>--%>
-                                    <%--<td colspan="2">--%>
-                                        <%--<img name="" src="img/index/in_user.png" alt="">--%>
-                                    <%--</td>--%>
-                                <%--</tr>--%>
-                            <%--</table>--%>
-                           <%----%>
-                        <%--</td>--%>
-
-                        <%--<td width="53%" class="rightline" align="center">--%>
-                            <%--<img src="img/index/in_banner.jpg">--%>
-                        <%--</td>--%>
-                    <%--</tr>--%>
-                <%--</table>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-
-        <%--<tr>--%>
-            <%--<td align="right" class="secondtoolbar" height="20">--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-
-        <%--<tr>--%>
-            <%--<td align="right" height="20" class="fontbottom">--%>
-                <%--北京中大科慧科技发展有限公司--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-
-    <%--</table>--%>
 </div>
 
 

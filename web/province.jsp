@@ -90,7 +90,6 @@
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
-  //  window.location.href = 'http://localhost:8082/index.jsp';
     window.location.href = <%=basePath%>+'index.jsp';
 </script>
 <%
@@ -408,25 +407,11 @@
 
 <!-- 省\市\机房下拉菜单-->
 <script type="text/javascript">
-    /*加载省下拉选*/
 
     //读取cookie中已存的机房配置
     var opinion1 = $.cookie('province_name');
-
-    $.ajax({
-        type: "post",
-        url: "setProvince",
-        data: {provid: opinion1},
-        dataType: "json",
-        success: function (data) {
-            $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
-            getCity();
-        },
-        error: function () {
-            $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
-            getCity();
-        }
-    });
+    $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
+    getCity();
 
     /*加载市下拉选*/
     function getCity() {
@@ -434,6 +419,7 @@
 
         //读取cookie中已存的机房配置
         var opinion2 = $.cookie('opinion2');
+        var uname = "${username}";
 
         $("#city_code").empty();
         $("#comproom_code").empty();
@@ -441,7 +427,10 @@
         $.ajax({
             type: "post",
             url: "getCityTree",
-            data: {provinceid: pname},
+            data: {
+                provinceid: pname,
+                uname: uname
+            },
             dataType: "json",
             success: function (data) {
 
@@ -450,7 +439,7 @@
 
                 var obj = eval("(" + data + ")");
                 for (var i = 0; i < obj.length; i++) {
-                    if (obj[i].cbname == opinion2) {
+                    if (obj[i].cbname == opinion2 || i == 0) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
                         getComproom();
                     }
@@ -468,20 +457,24 @@
 
         //读取cookie中已存的机房配置
         var opinion3 = $.cookie('opinion3');
+        var uname = "${username}";
 
         $("#comproom_code").empty();
 
         $.ajax({
             type: "post",
             url: "getCompTree",
-            data: {cityid: cname},
+            data: {
+                cityid: cname,
+                uname: uname
+            },
             dataType: "json",
             success: function (data) {
                 var list = data.allcomputerroom;
 
                 $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
                 for (var i = 0; i < list.length; i++) {
-                    if (list[i].rname == opinion3) {
+                    if (list[i].rname == opinion3 || i == 0) {
                         $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
                         $('#second-page').css('display', 'block');
                         $('#first-page').css('display', 'none');

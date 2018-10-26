@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
@@ -62,40 +63,100 @@ public class UserDAOImpl implements UserDAO {
         return prov.getPbname();
     }
 
-    public List<Object> getCityBank(int pbid) {
+
+    /**
+     * 获取市行list
+     * @param pbname 省行名称
+     * @param uname 当前登陆的用户名称
+     * @return 市行list，第一个为当前用户所在的市行
+     */
+    public List<Object> getCityBank(String pbname, String uname) {
+
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> cblist = new ArrayList<>();
 
         ProvinceBank pro = (ProvinceBank) hbsessionDao.getFirst(
-                "FROM ProvinceBank where pbid = '" + pbid + "'");
+                "FROM ProvinceBank where pbname = '" + pbname + "'");
 
-        String cbidset = pro.getCbidset();
-        String[] cbidstr = cbidset.split("，");
-        for (int i = 0; i < cbidstr.length; i++) {
-            String cbid = cbidstr[i];
+        User temuser = (User) hbsessionDao.getFirst(
+                "FROM User where uname = '" + uname + "'");
 
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbid + "'");
+        if (pro != null && temuser != null) {
 
-            cblist.add((Object) cb);
+            String cbidset = pro.getCbidset();
+            String[] cbidstr = cbidset.split("，");
+
+            String usercbid = temuser.getCbid();
+
+            for (int i = 0; i < cbidstr.length; i++) {
+                if (cbidstr[i] == usercbid) { //若该用户所属的市行 在市行集合中存在，把这个cbid从市行集合中删除
+                    //删除数组中的某一个元素的方法：把最后一个元素替代指定的元素，然后数组缩容
+                    cbidstr[i] = cbidstr[cbidstr.length - 1];
+                    cbidstr = Arrays.copyOf(cbidstr, cbidstr.length-1);
+                }
+            }
+
+            CityBank usercb = (CityBank) hbsessionDao.getFirst(
+                    "FROM CityBank where cbid = '" + usercbid + "'");
+
+            if (usercb != null) {
+                cblist.add(usercb);
+            }
+
+            for (int i = 0; i < cbidstr.length; i++) {
+                CityBank cb = (CityBank) hbsessionDao.getFirst(
+                        "FROM CityBank where cbid = '" + cbidstr[i] + "'");
+                cblist.add(cb);
+            }
         }
 
         return cblist;
     }
 
-    public List getComputerroom(String cbname) {
+    /**
+     * 获取机房list
+     * @param cbname 市行名称
+     * @param uname 当前登陆的用户名称
+     * @return 机房list，第一个为当前用户所在的机房
+     */
+    public List getComputerroom(String cbname, String uname) {
+
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Computerroom> crlist = new ArrayList<>();
 
         CityBank cb = (CityBank) hbsessionDao.getFirst(
                 "FROM CityBank where cbname = '" + cbname + "'");
 
-        String comroomset = cb.getCompRoom();
-        String[] coroomstr = comroomset.split("，");
-        for (int i = 0; i < coroomstr.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + coroomstr[i] + "'");
-            crlist.add(cp);
+        User temuser = (User) hbsessionDao.getFirst(
+                "FROM User where uname = '" + uname + "'");
+
+        if (cb != null && temuser != null) {
+
+            String comroomset = cb.getCompRoom();
+            String[] coroomstr = comroomset.split("，");
+
+            String usercbid = temuser.getCbid();
+
+            for (int i = 0; i < coroomstr.length; i++) {
+                if (coroomstr[i] == usercbid) { //若该用户所属的市行 在市行集合中存在，把这个cbid从市行集合中删除
+                    //删除数组中的某一个元素的方法：把最后一个元素替代指定的元素，然后数组缩容
+                    coroomstr[i] = coroomstr[coroomstr.length - 1];
+                    coroomstr = Arrays.copyOf(coroomstr, coroomstr.length-1);
+                }
+            }
+
+            Computerroom usercb = (Computerroom) hbsessionDao.getFirst(
+                    "FROM Computerroom where rid = '" + usercbid + "'");
+
+            if (usercb != null) {
+                crlist.add(usercb);
+            }
+
+            for (int i = 0; i < coroomstr.length; i++) {
+                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
+                        "FROM Computerroom where rid = '" + coroomstr[i] + "'");
+                crlist.add(cp);
+            }
         }
 
         return crlist;

@@ -50,7 +50,7 @@
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
-    window.location.href = 'http://localhost:8082/index.jsp';
+    window.location.href = <%=basePath%>+'index.jsp';
 </script>
 <%
     }

@@ -59,9 +59,7 @@
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
-    //  window.location.href = 'http://localhost:8082/index.jsp';
     window.location.href = <%=basePath%>+'index.jsp';
-    window.location.href = 'http://localhost:8082/index.jsp';
 </script>
 <%
     }
@@ -70,9 +68,7 @@
     <header id="header" class="media">
         <div class="header-left">
             <a href="" id="menu-toggle"></a>
-            <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
             <img src="img/index/logo.jpg" alt="">
-            <img src="/img/index/logo.jpg" alt="">
         </div>
         <div class="media-body">
             <div class="media" id="top-menu">
@@ -191,93 +187,91 @@
     <script src="js/functions.js"></script>
     <script type="text/javascript" src="js/deviceManager.js"></script>
 
-    <!-- 省\市\机房下拉菜单-->
-    <script type="text/javascript">
-        /*加载省下拉选*/
+<!-- 省\市\机房下拉菜单-->
+<script type="text/javascript">
+
+    //读取cookie中已存的机房配置
+    var opinion1 = $.cookie('province_name');
+    $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
+    getCity();
+
+    /*加载市下拉选*/
+    function getCity() {
+        var pname = $("#province_code").val();
 
         //读取cookie中已存的机房配置
-        var opinion1 = $. cookie('province_name');
+        var opinion2 = $.cookie('opinion2');
+        var uname = "${username}";
+
+        $("#city_code").empty();
+        $("#comproom_code").empty();
 
         $.ajax({
             type: "post",
-            url: "setProvince",
-            data: {provid: opinion1},
+            url: "getCityTree",
+            data: {
+                provinceid: pname,
+                uname: uname
+            },
             dataType: "json",
             success: function (data) {
-                $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
-                getCity();
-            },
-            error: function () {
-                $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
-                getCity();
+
+                $('#city_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
+                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
+
+                var obj = eval("(" + data + ")");
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj[i].cbname == opinion2 || i == 0) {
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
+                        getComproom();
+                    }
+                    else
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
+
+                }
             }
         });
+    }
 
-        /*加载市下拉选*/
-        function getCity() {
-            var pname = $("#province_code").val();
+    /*加载机房下拉选*/
+    function getComproom() {
+        var cname = $("#city_code").val();
 
-            //读取cookie中已存的机房配置
-            var opinion2 = $. cookie('opinion2');
+        //读取cookie中已存的机房配置
+        var opinion3 = $.cookie('opinion3');
+        var uname = "${username}";
 
-            $("#city_code").empty();
-            $("#comproom_code").empty();
+        $("#comproom_code").empty();
 
-            $.ajax({
-                type: "post",
-                url: "getCityTree",
-                data: {provinceid: pname},
-                dataType: "json",
-                success: function (data) {
+        $.ajax({
+            type: "post",
+            url: "getCompTree",
+            data: {
+                cityid: cname,
+                uname: uname
+            },
+            dataType: "json",
+            success: function (data) {
+                var list = data.allcomputerroom;
 
-                    $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-
-                    var obj = eval("(" + data + ")");
-                    for (var i = 0; i < obj.length; i++) {
-                        if(obj[i].cbname == opinion2) {
-                            $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
-                            getComproom();
-                        }
-                        else
-                            $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
-
+                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i].rname == opinion3 || i == 0) {
+                        $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
+                        $('#second-page').css('display', 'block');
+                        $('#first-page').css('display', 'none');
                     }
+                    else
+                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                 }
-            });
-        }
+            }
+        });
+    }
 
-        /*加载机房下拉选*/
-        function getComproom() {
-            var cname = $("#city_code").val();
+</script>
 
-            //读取cookie中已存的机房配置
-            var opinion3 = $. cookie('opinion3');
 
-            $("#comproom_code").empty();
-
-            $.ajax({
-                type: "post",
-                url: "getCompTree",
-                data: {cityid: cname},
-                dataType: "json",
-                success: function (data) {
-                    var list = data.allcomputerroom;
-
-                    $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-                    for (var i = 0; i < list.length; i++) {
-                        if(list[i].rname == opinion3)
-                            $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
-                        else
-                            $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
-                    }
-                }
-            });
-        }
-
-    </script>
-
-    <!-- 动态加载菜单项 -->
+<!-- 动态加载菜单项 -->
     <script type="text/javascript">
         var menulist="<%=session.getAttribute("menulist")%>";
         var cbidstr = menulist.split(",");

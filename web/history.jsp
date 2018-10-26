@@ -58,7 +58,6 @@
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
-    //  window.location.href = 'http://localhost:8082/index.jsp';
     window.location.href = <%=basePath%>+'index.jsp';
 </script>
 <%
@@ -68,7 +67,6 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <%-- <a class="logo pull-left" href="province.jsp">IDP数据中心</a>--%>
         <img src="img/index/logo.jpg" alt="">
     </div>
     <div class="header-right">
@@ -111,7 +109,6 @@
                 </script>
 
             </div>
-
 
             <!-- 注销按钮 -->
             <div class="pull-right header-right-text">
@@ -342,32 +339,18 @@
 <!-- 省\市\机房下拉菜单-->
 <script type="text/javascript">
 
-    /*加载省下拉选*/
-
     //读取cookie中已存的机房配置
-    var opinion1 = $. cookie('province_name');
-
-    $.ajax({
-        type: "post",
-        url: "setProvince",
-        data: {provid: opinion1},
-        dataType: "json",
-        success: function (data) {
-            $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
-            getCity();
-        },
-        error: function () {
-            $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
-            getCity();
-        }
-    });
+    var opinion1 = $.cookie('province_name');
+    $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
+    getCity();
 
     /*加载市下拉选*/
     function getCity() {
         var pname = $("#province_code").val();
 
         //读取cookie中已存的机房配置
-        var opinion2 = $. cookie('opinion2');
+        var opinion2 = $.cookie('opinion2');
+        var uname = "${username}";
 
         $("#city_code").empty();
         $("#comproom_code").empty();
@@ -375,16 +358,19 @@
         $.ajax({
             type: "post",
             url: "getCityTree",
-            data: {provinceid: pname},
+            data: {
+                provinceid: pname,
+                uname: uname
+            },
             dataType: "json",
             success: function (data) {
 
-                $('#city_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
-                $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                $('#city_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
+                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
 
                 var obj = eval("(" + data + ")");
                 for (var i = 0; i < obj.length; i++) {
-                    if(obj[i].cbname == opinion2) {
+                    if (obj[i].cbname == opinion2 || i == 0) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
                         getComproom();
                     }
@@ -401,22 +387,29 @@
         var cname = $("#city_code").val();
 
         //读取cookie中已存的机房配置
-        var opinion3 = $. cookie('opinion3');
+        var opinion3 = $.cookie('opinion3');
+        var uname = "${username}";
 
         $("#comproom_code").empty();
 
         $.ajax({
             type: "post",
             url: "getCompTree",
-            data: {cityid: cname},
+            data: {
+                cityid: cname,
+                uname: uname
+            },
             dataType: "json",
             success: function (data) {
                 var list = data.allcomputerroom;
 
-                $('#comproom_code').append("<option value='' selected='selected' >" + '请选择' + "</option>");
+                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
                 for (var i = 0; i < list.length; i++) {
-                    if(list[i].rname == opinion3)
+                    if (list[i].rname == opinion3 || i == 0) {
                         $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
+                        $('#second-page').css('display', 'block');
+                        $('#first-page').css('display', 'none');
+                    }
                     else
                         $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                 }
@@ -807,6 +800,29 @@
         label: {formatter: '{a}{b}:{c}'},
         data: []
     };
+
+    var line1 = [];
+    line1.push([ '1' , '200']);
+    line1.push([ '2' , '185']);
+    line1.push([ '3' , '170']);
+    line1.push([ '4' , '155']);
+    line1.push([ '5' , '140']);
+
+    for(var i = 5; i <= 500; i++){
+        line1.push([ i , '140']);
+    }
+
+    for(var i = 500; i <= 2000; i++){
+        line1.push([ i , '120']);
+    }
+
+    var line2 = [];
+    line2.push([ '30' , '0']);
+
+    for(var i = 30; i <= 2000; i++){
+        line2.push([ i , '70']);
+    }
+
     var option1 = {
         tooltip: {
             trigger: 'axis'
@@ -920,6 +936,7 @@
         yAxis: {
             type: 'value',
             scale: true,
+            name: '(单位：Hz)',
             boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
@@ -1054,8 +1071,9 @@
         tooltip: {},
         xAxis: {
             type: 'value',
-            max: 100,
+            max: 2000,
             min: 0,
+            name: '(单位：ms)',
             splitLine: {
                 show: false
             }
@@ -1065,11 +1083,28 @@
             scale: true,
             max: 200,
             min: 0,
+            name: '(单位：%)',
             boundaryGap: ['10%', '10%'],
             splitLine: {
                 show: false
             }
         },
+        // 数据窗口缩放
+        dataZoom: [
+            {
+                type: 'slider',
+                show: true,
+                xAxisIndex: [0],
+                start: 0,
+                end: 50
+            },
+            {
+                type: 'inside',
+                xAxisIndex: [0],
+                start: 0,
+                end: 50
+            }
+        ],
         series: [
             // 浪涌/塌陷
             {
@@ -1107,7 +1142,7 @@
                         color:'#ff0000'
                     }
                 },
-                data:[['1','200'], ['5','140'], ['5','120'], ['500','120'], ['500','110'], ['10000','110']]
+                data: line1
             },
             {
                 name:'',
@@ -1117,7 +1152,7 @@
                         color:'#ff0000'
                     }
                 },
-                data:[['30','0'], ['30','70'], ['50','70'], ['500','75'], ['10000','75'], ['10000','80']]
+                data: line2
             }
         ]
     };
