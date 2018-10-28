@@ -59,7 +59,6 @@ public class ImportService {
 
                     dt.setDtid((i-1)*clos + j);
                     dt.setName(name);
-                    //dt.setType
                     dt.setDid(did);
                     dt.setClassify(classify);
                     dt.setUnit(unit);
@@ -98,13 +97,7 @@ public class ImportService {
     }
 
     public static void main(String[] args) {
-        /*List<StuEntity> all=getAllByDb();
-        for (StuEntity stuEntity : all) {
-            System.out.println(stuEntity.toString());
-        }*/
-
-        System.out.println(isExist(1));
-
+        isExist(1);
     }
 
 }

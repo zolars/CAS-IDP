@@ -21,10 +21,10 @@ public class setAlarmUserAction extends ActionSupport {
         this.result = result;
     }
 
-    /* 设置
+    /* 设置某个level的告警内容
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 

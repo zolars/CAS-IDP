@@ -118,7 +118,7 @@ public class HBSessionDaoImpl implements HBSessionDao{
         return true;
     }
 
-    //使用HQL语句更新数据Object obj,
+    //使用HQL语句更新数据Object obj
     public boolean update(String hql) {
         try {
             Session session = sessionFactory.openSession();

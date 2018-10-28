@@ -195,7 +195,7 @@ public class UserDAOImpl implements UserDAO {
         return prov.getRolesname();
     }
 
-    public List<List>  getAllUserInfo() {
+    public List<List> getAllUserInfo() {
 
         DBConnect db;
         ResultSet rs = null;
@@ -215,14 +215,10 @@ public class UserDAOImpl implements UserDAO {
                 list.add(rs.getString("nuid"));
                 list.add(rs.getString("nuname"));
                 list.add(rs.getString("nchinesename"));
-                //list.add(rs.getString("npassword"));
-
                 list.add(rs.getString("pbid"));
                 list.add(rs.getString("cbid"));
                 list.add(rs.getString("comprid"));
-
                 list.add(rs.getString("nrolename"));
-
                 list.add(rs.getString("telephone"));
                 list.add(rs.getString("govtelephone"));
 
@@ -281,7 +277,6 @@ public class UserDAOImpl implements UserDAO {
         user.setPassword(password);
         user.setTelephone(telephone);
         user.setGovtelephone(govtelephone);
-
         user.setCbid(city);
         user.setPbid(province);
         user.setRid(computerroom);
@@ -293,7 +288,7 @@ public class UserDAOImpl implements UserDAO {
     public boolean addUserRolesInfo(String uid, String roles) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
-        Roles role = (Roles) hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles+ "'");
+        Roles role = (Roles) hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles + "'");
         UserRoles userrole = new UserRoles();
         userrole.setUid(uid);
         userrole.setRid(role.getRid());
@@ -373,5 +368,35 @@ public class UserDAOImpl implements UserDAO {
                 "FROM User order by uid desc");
 
         return ur.getUid();
+    }
+
+    public Boolean checkUnameIsOccupiedForAdd(String uname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = true;
+
+        List<User> urlist =  hbsessionDao.search(
+                "FROM User where uname = '" + uname + "'");
+
+        if (urlist != null) {
+            rt = false;
+        }
+        return rt;
+    }
+
+    public Boolean checkUnameIsOccupiedForUpdate(String uid, String uname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = true;
+
+        List<User> urlist =  hbsessionDao.search(
+                "FROM User where uname = '" + uname + "'");
+
+        if (urlist != null) {
+            if (urlist.get(0).getUid().equals(uid)) {
+                rt = true;
+            } else {
+                rt = false;
+            }
+        }
+        return rt;
     }
 }

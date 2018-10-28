@@ -25,7 +25,7 @@ public class getAllProvinceAction extends ActionSupport {
     }
 
 
-    /* 查询所有用户的基本信息、用户角色、用户权限
+    /* 查询所有省行list
      */
     public String execute() throws Exception {
         try { //获取数据

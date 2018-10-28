@@ -27,7 +27,7 @@ public class getPermissionTreeAction extends ActionSupport {
     /* 查询所有功能权限
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 

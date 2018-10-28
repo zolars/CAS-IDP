@@ -12,8 +12,6 @@ import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
-
-
 public class getOneUserInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
@@ -30,7 +28,7 @@ public class getOneUserInfoAction extends ActionSupport {
     /* 查询1个用户的基本信息、用户角色、用户权限
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
@@ -52,7 +50,7 @@ public class getOneUserInfoAction extends ActionSupport {
             e.printStackTrace();
             return "error";
         }
-        return "success";//ERROR;
+        return "success";
     }
 
 }

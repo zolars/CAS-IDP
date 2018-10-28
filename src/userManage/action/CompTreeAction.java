@@ -24,7 +24,7 @@ public class CompTreeAction extends ActionSupport {
     }
 
 
-    /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的行级结构树状串
+    /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的机房级结构树状串
      */
     public String execute() throws Exception {
         try { //获取数据

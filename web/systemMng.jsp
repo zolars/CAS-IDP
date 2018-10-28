@@ -1658,6 +1658,7 @@
                 },
                 dataType: "json",
                 success: function (data) {
+                    alert(data);
                     hiddenUserModel();
                     getALLUserInfomation();
                 }
@@ -2765,7 +2766,7 @@
             return true;
         }
         else {
-            alert(str + "请输入11位手机号码");
+            alert("请输入11位手机号码");
             return false;
         }
     }

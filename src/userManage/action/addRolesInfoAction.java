@@ -26,7 +26,7 @@ public class addRolesInfoAction extends ActionSupport {
     /* 新建一条角色
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
@@ -35,7 +35,7 @@ public class addRolesInfoAction extends ActionSupport {
 
             RolesDAO dao = new RolesDAOImpl();
             String rid = dao.getMaxRolesId();
-            int intrid = Integer.parseInt(rid)+1;//将该数字加一
+            int intrid = Integer.parseInt(rid) + 1; //将该数字加一
             String addrid = String.valueOf(intrid);
             Boolean rt = dao.addRolesInfo(addrid, name, extra);
 

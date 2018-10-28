@@ -1119,13 +1119,13 @@
         //读取设置中的优先级cookie
         var priortylist = $.cookie('priortylist');
         if (stime == null || etime == null) {
-            // alert("请选择日期时间");
+             alert("请选择日期时间");
         }
         else if (cbname == "[object Object]") {
-            // alert("请选择测量地点");
+             alert("请选择测量地点");
         }
         else if (priortylist == null) {
-            // alert("请设定可查看的事件类型");
+             alert("请设定可查看的事件类型");
         }
         else {
             $.ajax({

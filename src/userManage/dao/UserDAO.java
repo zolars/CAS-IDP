@@ -51,4 +51,8 @@ public interface UserDAO {
 
     public UserRoles getUserRolesByUid(String uid);
 
+    public Boolean checkUnameIsOccupiedForAdd(String uname);
+
+    public Boolean checkUnameIsOccupiedForUpdate(String uid, String uname);
+
 }

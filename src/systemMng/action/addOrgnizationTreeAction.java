@@ -27,7 +27,7 @@ public class addOrgnizationTreeAction extends ActionSupport {
        若是机房，id长度为5
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
@@ -39,28 +39,22 @@ public class addOrgnizationTreeAction extends ActionSupport {
             OrgnizationDAO dao = new OrgnizationDAOImpl();
             Boolean rt = false;
 
-            System.out.println("6666666"+ orgid + province + city + computerroom);
-
             if(orgid.length() == 1){
                 if(province.length() > 0)
                     rt = dao.addProvinceOrgnization(orgid, province);
                 else if(computerroom.length() > 0)
                     rt = dao.addComputerroomOrgnizationUnderHeadBank(orgid, computerroom);
             }
-
             else if(orgid.length() == 3){
                 if(city.length() > 0)
                     rt = dao.addCityOrgnization(orgid, city);
                 else if(computerroom.length() > 0)
                     rt = dao.addComputerroomOrgnizationUnderProvinceBank(orgid, computerroom);
             }
-
-
             else if(orgid.length() == 4){
                 if(computerroom.length() > 0)
                     rt = dao.addComputerroomOrgnizationUnderCityBank(orgid, computerroom);
             }
-
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("", rt);

@@ -11,8 +11,6 @@ import userManage.dao.impl.RolesDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
-
-
 public class getOneRolesAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;

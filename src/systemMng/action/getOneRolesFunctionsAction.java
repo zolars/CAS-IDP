@@ -28,7 +28,7 @@ public class getOneRolesFunctionsAction extends ActionSupport {
     /* 查询角色拥有的功能
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
@@ -43,7 +43,6 @@ public class getOneRolesFunctionsAction extends ActionSupport {
             List<String> rtlist = new ArrayList<>();
 
             for(int i = 0 ; i < pset.length; i++){
-                System.out.println(pset[i]);
                 rtlist.add(pset[i]);
             }
 
@@ -51,8 +50,6 @@ public class getOneRolesFunctionsAction extends ActionSupport {
             jsonObject.put("allrptree", rtlist);
 
             result = jsonObject;
-            //result = JSON.toJSONString(jsonObject);
-
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

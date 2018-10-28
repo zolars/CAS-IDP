@@ -25,7 +25,7 @@ public class getAllRolesAction extends ActionSupport {
     }
 
 
-    /* 查询所有角色的信息
+    /* 查询所有角色list
      */
     public String execute() throws Exception {
         try { //获取数据

@@ -30,7 +30,7 @@ public class updateUserInfoAction extends ActionSupport {
        修改密码：只有管理员账号或账号本人可以修改密码
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
@@ -51,15 +51,20 @@ public class updateUserInfoAction extends ActionSupport {
             String passwd = ToHex.toHex(bytes);
 
             UserDAO dao = new UserDAOImpl();
-            Boolean rt = dao.updateUserInfo(uid, passwd, name, chinesename, telephone, govtelephone, roles, province, city, computerroom, temuser);
+            Boolean rt1 = false;
+            Boolean rt2 = false;
 
+            rt1 = dao.checkUnameIsOccupiedForUpdate(uid, name);
+            if (rt1) {
+                rt2 = dao.updateUserInfo(uid, passwd, name, chinesename, telephone, govtelephone, roles, province, city, computerroom, temuser);
+            }
             JSONObject jsonObject = new JSONObject();
 
-            if(rt)
+            if (rt2) {
                 jsonObject.put("提示", "修改成功！");
-            else
+            } else {
                 jsonObject.put("提示", "修改失败，请联系管理员或者重试");
-
+            }
             result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {

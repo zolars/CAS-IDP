@@ -25,7 +25,7 @@ public class getOrgnizationTreeAction extends ActionSupport {
     /* 查询所有组织结构
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 

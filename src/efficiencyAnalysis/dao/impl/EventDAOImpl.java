@@ -1860,26 +1860,29 @@ public class EventDAOImpl implements EventDAO {
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
                 "FROM Computerroom where rname='" + rname + "'");
 
-        String didset = comps.getDidset();
-        String didstr[] = didset.split("，");
-        List<String> didlist = new ArrayList();
+        if (comps != null) {
+            String didset = comps.getDidset();
+            String didstr[] = didset.split("，");
+            List<String> didlist = new ArrayList();
 
-        //寻找ctrl类（治理设备）的device
-        for (int i = 0; i < didstr.length; i++) {
-            Devices dv = (Devices) hbsessionDao.getFirst(
-                    "FROM Devices where did='" + didstr[i] + "' and type = 'ctrl'");
-            if (dv != null) {
-                didlist.add(dv.getDid());
+            //寻找ctrl类（治理设备）的device
+            for (int i = 0; i < didstr.length; i++) {
+                Devices dv = (Devices) hbsessionDao.getFirst(
+                        "FROM Devices where did='" + didstr[i] + "' and type = 'ctrl'");
+                if (dv != null) {
+                    didlist.add(dv.getDid());
+                }
+            }
+
+            if (didlist != null) {
+                EventCtrl temp = (EventCtrl) hbsessionDao.getFirst(
+                        "from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
+                if (temp != null) {
+                    return true; //状态码为1，告警
+                }
             }
         }
 
-        if (didlist != null) {
-            EventCtrl temp = (EventCtrl) hbsessionDao.getFirst(
-                    "from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
-            if (temp != null) {
-                return true; //状态码为1，告警
-            }
-        }
         return false; //状态码为0，正常
     }
 

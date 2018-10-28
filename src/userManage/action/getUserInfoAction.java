@@ -10,8 +10,6 @@ import userManage.dao.impl.UserDAOImpl;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-
-
 public class getUserInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
@@ -28,7 +26,7 @@ public class getUserInfoAction extends ActionSupport {
     /* 查询所有用户的基本信息、用户角色、用户权限
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
@@ -37,7 +35,8 @@ public class getUserInfoAction extends ActionSupport {
 
             //处理 ：undefined 转为 空
             //      组织转为组织名称
-            for(int i = 0; i < alluser.size(); i++){
+            if (alluser != null) {
+                for(int i = 0; i < alluser.size(); i++){
                     List tmpur = alluser.get(i);
                     String prob = "";
                     String cityb = "";
@@ -65,6 +64,7 @@ public class getUserInfoAction extends ActionSupport {
                     tmpur.set(4, cityb);
                     tmpur.set(5, computerrom);
                     tmpur.set(6, role);
+                }
             }
 
             JSONObject jsonObject = new JSONObject();

@@ -495,11 +495,16 @@ public class DeviceDAOImpl implements DeviceDAO {
 
     public Integer getQstinterval() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Integer rt = null;
 
         BasicSetting bs = (BasicSetting) hbsessionDao.getFirst(
                 "FROM BasicSetting");
 
-        return bs.getQstinterval();
+        if (bs != null) {
+            rt = bs.getQstinterval();
+        }
+
+        return rt;
     }
 
 }

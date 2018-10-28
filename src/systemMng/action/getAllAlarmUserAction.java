@@ -60,7 +60,6 @@ public class getAllAlarmUserAction extends ActionSupport {
 
                         rtlist.add(list);
                     }
-
                 }
             }
 

@@ -22,7 +22,7 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
     }
 
     /*删除orgnizationstruct表+ province表
-    * */
+    */
     public Boolean delProvinceOrgnization(String pbid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1, rt2;

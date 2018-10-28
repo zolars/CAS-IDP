@@ -1,6 +1,5 @@
 package userManage.action;
 
-
 import Util.ToHex;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -11,7 +10,6 @@ import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
-
 
 public class addUserInfoAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
@@ -29,7 +27,7 @@ public class addUserInfoAction extends ActionSupport {
                    用户角色
      */
     public String execute() throws Exception {
-        try {//获取数据
+        try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
@@ -52,16 +50,25 @@ public class addUserInfoAction extends ActionSupport {
             byte[] bytes = md.digest(password.getBytes("utf-8"));
             String passwd = ToHex.toHex(bytes);
 
-            Boolean rt = dao.addUserInfo(maxuid.toString(), account, passwd, name, telephone, govtelephone, province, city, computerroom);
-            Boolean rt2 = dao.addUserRolesInfo(maxuid.toString(), roles);
+            Boolean rt1 = false;
+            Boolean rt3 = false;
+
+            rt1 = dao.checkUnameIsOccupiedForAdd(account);
+            if (rt1) {
+                Boolean rt2 = dao.addUserInfo(maxuid.toString(), account, passwd, name, telephone, govtelephone, province, city, computerroom);
+
+                if (rt2) {
+                    rt3 = dao.addUserRolesInfo(maxuid.toString(), roles);
+                }
+            }
 
             JSONObject jsonObject = new JSONObject();
 
-            if(rt&&rt2)
+            if (rt3) {
                 jsonObject.put("提示", "添加成功！");
-            else
+            } else {
                 jsonObject.put("提示", "添加失败，请重试！");
-
+            }
             result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
