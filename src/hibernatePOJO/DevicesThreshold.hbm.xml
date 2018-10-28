@@ -24,10 +24,10 @@
             <column name="unit" sql-type="varchar(255)" not-null="true"/>
         </property>
         <property name="cellval">
-            <column name="cellval" sql-type="float" precision="-1" not-null="true"/>
+            <column name="cellval" sql-type="float" precision="-1" not-null="false"/>
         </property>
         <property name="floorval">
-            <column name="floorval" sql-type="float" precision="-1" not-null="true"/>
+            <column name="floorval" sql-type="float" precision="-1" not-null="false"/>
         </property>
         <property name="level">
             <column name="level" sql-type="int(11)" not-null="true"/>

@@ -2704,29 +2704,49 @@
         var ismark = $("#thresholdismark").val();
         var level = $("#thresholdlevel").val();
 
-        $.ajax({
-            type: "post",
-            url: "addThresholdInfo",
-            data: {
-                dname: dname,
-                name: name,
-                classify: classify,
-                unit: unit,
-                cellval: cellval,
-                floorval: floorval,
-                ismark: ismark,
-                level: level
-            },
-            dataType: "json",
-            success: function (data) {
-                alert(data);
-                hiddenThresholdModel();
-                //getALLUserInfomation();
-            },
-            error: function () {
-                alert("新增失败");
-            }
-        });
+        if(dname == "")
+            alert("请填写设备名称");
+        else if(name == "")
+            alert("请填写参数名称");
+        else if(classify == "")
+            alert("请选择参数分裂");
+        else if(unit == "")
+            alert("请填写单位");
+        else if(cellval == "" && floorval == "")
+            alert("请填写上限值或下限值");
+        else if((cellval == "")&&(!testIsNumber(floorval)))
+            alert("下限值必须为数字");
+        else if((floorval == "")&&(!testIsNumber(cellval)))
+            alert("上限值必须为数字");
+        else if(ismark == "")
+            alert("请选择启用标识");
+        else if(level == "")
+            alert("请选择等级");
+        else {
+            $.ajax({
+                type: "post",
+                url: "addThresholdInfo",
+                data: {
+                    dname: dname,
+                    name: name,
+                    classify: classify,
+                    unit: unit,
+                    cellval: cellval,
+                    floorval: floorval,
+                    ismark: ismark,
+                    level: level
+                },
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                    hiddenThresholdModel();
+                    //getALLUserInfomation();
+                },
+                error: function () {
+                    alert("新增失败");
+                }
+            });
+        }
     }
 
     <!-- 提交修改限值 model  -->
@@ -2821,6 +2841,15 @@
         else if(str == "battery")
             return true;
         else return false;
+    }
+
+    //验证字符串是否是数字
+    function testIsNumber(str) {
+        var reg = /^[0-9]+.?[0-9]*$/;
+        if (reg.test(str)) {
+            return true;
+        }
+        return false;
     }
 </script>
 
