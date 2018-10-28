@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <img src="img/index/logo.jpg" alt="">
+        <img src="img/index/logo.jpg" alt="" class="header-img">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -119,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- Sidebar -->
         <!-- 动态加载菜单项 -->
         <aside id="sidebar">
-            <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
+            <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;">
             </ul>
         </aside>
 
@@ -498,66 +498,111 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     </script>
 
-    <!-- 动态加载菜单项 -->
-    <script type="text/javascript">
-        var menulist="<%=session.getAttribute("menulist")%>";
-        var cbidstr = menulist.split(",");
-        var isSystemMng = false;
-        var isNewSystemMng = false;
+<!-- 动态加载菜单项 -->
+<script type="text/javascript">
+    var menulist="<%=session.getAttribute("menulist")%>";
+    var cbidstr = menulist.split(",");
+    var isSystemMng = false;
+    var isNewSystemMng = false;
+    var ulist = new Array();
+    var u2list = new Array();
 
-        //处理第一个和最后一个
-        cbidstr[0] = cbidstr[0].substring(1);
-        cbidstr[0] = " " + cbidstr[0];
+    //处理第一个和最后一个
+    cbidstr[0] = cbidstr[0].substring(1);
+    cbidstr[0] = " " + cbidstr[0];
 
-        var idx = cbidstr.length - 1;
-        var len = cbidstr[idx].length;
-        cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
+    var idx = cbidstr.length - 1;
+    var len = cbidstr[idx].length;
+    cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
 
-        for(var i = 0; i < cbidstr.length; i++){
+    for(var i = 0; i < cbidstr.length; i++){
 
-            var menuname = "";
-            if(cbidstr[i] == " province.jsp"){
-                isSystemMng = false;
-                menuname = "集中监控";
-            }
-            else if(cbidstr[i] == " efficiencyDevice.jsp"){
-                isSystemMng = false;
-                menuname = "动力设施";
-            }
-            else if(cbidstr[i] == " onlineDetect.jsp"){
-                isSystemMng = false;
-                menuname = "在线监测";
-            }
-            else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
-                isSystemMng = false;
-                menuname = "动力分析";
-            }
-            else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
-                isSystemMng = false;
-                menuname = "动力评估";
-            }
-            else if(cbidstr[i] == ' reportChart.jsp'){
-                isSystemMng = false;
-                menuname = "报表功能";
-            }
-            else if(cbidstr[i] == ' history.jsp'){
-                isSystemMng = false;
-                menuname = "历史曲线";
-            }
-            else if(cbidstr[i].search('systemMng.jsp')){
-
-                if(!isNewSystemMng)
-                {//第一条systemMng的
-                    isNewSystemMng = true;
-                    menuname = "系统管理";
-                    $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
-                }
-                isSystemMng = true;
-            }
-
-            if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+        var menuname = "";
+        if(cbidstr[i] == " province.jsp"){
+            isSystemMng = false;
+            menuname = "集中监控";
         }
-    </script>
+        else if(cbidstr[i] == " efficiencyDevice.jsp"){
+            isSystemMng = false;
+            menuname = "动力设施";
+        }
+        else if(cbidstr[i] == " onlineDetect.jsp"){
+            isSystemMng = false;
+            menuname = "在线监测";
+        }
+        else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
+            isSystemMng = false;
+            menuname = "动力分析";
+        }
+        else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
+            isSystemMng = false;
+            menuname = "动力评估";
+        }
+        else if(cbidstr[i] == ' reportChart.jsp'){
+            isSystemMng = false;
+            menuname = "报表功能";
+        }
+        else if(cbidstr[i] == ' history.jsp'){
+            isSystemMng = false;
+            menuname = "历史曲线";
+        }
+        else if(cbidstr[i].search('systemMng.jsp')){
+
+            //对字符串分段处理（2或3段）
+            var substr = cbidstr[i].split("/");
+
+            if(substr.length == 2){
+                ulist.push(substr[1]);
+            }
+
+            else
+            {
+                ulist.push(substr[1]);
+                u2list.push(substr[2]);
+            }
+
+            if(!isNewSystemMng)
+            {//第一条systemMng的
+                isNewSystemMng = true;
+                menuname = "系统管理";
+                $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'>" + menuname + "</a></li>");
+            }
+            isSystemMng = true;
+        }
+        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
+    }
+
+    for(var i = 1; i <= 8; i++){
+        var ustr = "item" + i;
+
+        for(var j = 0; j < ulist.length; j++){
+            if(ustr == ulist[j]){
+                break;
+            }
+            if(j == ulist.length - 1){
+                $("#"+ustr+"").remove();
+            }
+        }
+    }
+
+    for(var i = 1; i <= 9; i++){
+        var ustr;
+        if(i < 7)
+            ustr = "secsubItem" + i;
+        else
+            ustr = "tridsubItem" + i;
+
+        for(var j = 0; j < u2list.length; j++){
+            if(ustr == u2list[j]){
+                break;
+            }
+            if(j == u2list.length - 1){
+                $("#"+ustr+"").remove();
+            }
+        }
+    }
+
+</script>
 
     <!-- 动态加载检测点(设备)列表 -->
     <script type="text/javascript">

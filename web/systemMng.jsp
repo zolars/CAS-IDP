@@ -122,7 +122,7 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <img src="img/index/logo.jpg" alt="">
+        <img src="img/index/logo.jpg" alt="" class="header-img">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -182,7 +182,7 @@
     <!-- Sidebar -->
     <!-- 动态加载菜单项 -->
     <aside id="sidebar">
-        <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
+        <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;">
         </ul>
     </aside>
 
@@ -310,22 +310,22 @@
                     <div id="item4" class="">
                         <div class="block-area-inner">
                             <ul class="nav nav-tabs">
-                                <li class="active" name="device-type-li" style="width:15%">
+                                <li class="active" name="device-type-li" style="width:16.66%">
                                     <a data-toggle="tab" id="secsubItem1">IDP</a>
                                 </li>
-                                <li name="device-type-li" style="width:15%">
+                                <li name="device-type-li" style="width:16.66%">
                                     <a data-toggle="tab" id="secsubItem2">UPS</a>
                                 </li>
-                                <li name="device-type-li" style="width:15%">
+                                <li name="device-type-li" style="width:16.66%">
                                     <a data-toggle="tab" id="secsubItem3">蓄电池</a>
                                 </li>
-                                <li name="device-type-li" style="width:15%">
+                                <li name="device-type-li" style="width:16.66%">
                                     <a data-toggle="tab" id="secsubItem4">柴油发电机</a>
                                 </li>
-                                <li name="device-type-li" style="width:15%">
+                                <li name="device-type-li" style="width:16.66%">
                                     <a data-toggle="tab" id="secsubItem5">空调</a>
                                 </li>
-                                <li name="device-type-li" style="width:15%">
+                                <li name="device-type-li" style="width:16.66%">
                                     <a data-toggle="tab" id="secsubItem6">其他传感器</a>
                                 </li>
                             </ul>
@@ -1103,14 +1103,14 @@
             {//第一条systemMng的
                 isNewSystemMng = true;
                 menuname = "系统管理";
-                $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+                $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'>" + menuname + "</a></li>");
             }
             isSystemMng = true;
         }
-        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
     }
 
-   for(var i = 1; i <= 8; i++){
+    for(var i = 1; i <= 8; i++){
         var ustr = "item" + i;
 
         for(var j = 0; j < ulist.length; j++){
@@ -2233,6 +2233,8 @@
             alert("请输入IP地址");
         else if(port == "" && address485=="")
             alert("请输入端口号");
+        else if (!testValidIPaddress(IPaddress))
+            alert("请输入格式为 XXX.XXX.XXX.XXX 的IP地址");
         else $.ajax({
                 type: "post",
                 url: "addOneDevice",
@@ -2289,6 +2291,7 @@
 
     //查询所有账号
     $("#alarm-user").empty();
+
     $.ajax({
         type: "post",
         url: "getAllUserInfo",
@@ -2309,7 +2312,6 @@
             }
         }
     });
-
 
     <!-- 添加预警人员 -->
     function addDeviceAlarmUser() {
@@ -2425,18 +2427,26 @@
         var tmpNodePid = $("#nodeid").val();
         var tmpRid = $("#roleid").val();
 
-        $.ajax({
-            type: "post",
-            url: "allocRolesPermission",
-            data: {
-                pid: tmpNodePid,
-                rid: tmpRid
-            },
-            dataType: "json",
-            success: function (data) {
-                alert(data);
-            }
-        });
+        console.log(tmpNodePid);
+
+        if (tmpRid == "") {
+            alert("清选择角色");
+        } else if (tmpNodePid == "") {
+            alert("清选择要分配的功能");
+        } else {
+            $.ajax({
+                type: "post",
+                url: "allocRolesPermission",
+                data: {
+                    pid: tmpNodePid,
+                    rid: tmpRid
+                },
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
     }
 
     //点击左侧某个角色，右侧jstree显示角色的功能，先清理一下右侧树的选中状态
@@ -2774,12 +2784,21 @@
 <!-- 正则表达式-->
 <script type="text/javascript">
     function testTelephone(str) {
-        var re = /^1\d{10}$/    //正则表达式
+        var re = /^1\d{10}$/;   //正则表达式
         if (re.test(str)) {      //判断字符是否是11位数字
             return true;
         }
         else {
             alert("请输入11位手机号码");
+            return false;
+        }
+    }
+
+    function testValidIPaddress(str) {
+        var re = /((25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))/; //正则表达式
+        if (re.test(str)) {
+            return true;
+        } else {
             return false;
         }
     }

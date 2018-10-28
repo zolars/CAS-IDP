@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <img src="img/index/logo.jpg" alt="">
+        <img src="img/index/logo.jpg" alt="" class="header-img">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -132,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- Sidebar -->
         <!-- 动态加载菜单项 -->
         <aside id="sidebar">
-            <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;padding-top: 20px;">
+            <ul id="ulbar" class="list-unstyled side-menu" style="width: 100%!important;">
             </ul>
         </aside>
 
@@ -3397,7 +3397,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }
 
 </script>
-
+<script>
     //读取cookie中已存的机房配置
     var opinion1 = $.cookie('province_name');
     $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
@@ -3475,15 +3475,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         });
     }
-
 </script>
 
-    <!-- 动态加载菜单项 -->
-    <script type="text/javascript">
+<!-- 动态加载菜单项 -->
+<script type="text/javascript">
     var menulist="<%=session.getAttribute("menulist")%>";
     var cbidstr = menulist.split(",");
     var isSystemMng = false;
     var isNewSystemMng = false;
+    var ulist = new Array();
+    var u2list = new Array();
 
     //处理第一个和最后一个
     cbidstr[0] = cbidstr[0].substring(1);
@@ -3526,17 +3527,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         else if(cbidstr[i].search('systemMng.jsp')){
 
+            //对字符串分段处理（2或3段）
+            var substr = cbidstr[i].split("/");
+
+            if(substr.length == 2){
+                ulist.push(substr[1]);
+            }
+
+            else
+            {
+                ulist.push(substr[1]);
+                u2list.push(substr[2]);
+            }
+
             if(!isNewSystemMng)
             {//第一条systemMng的
                 isNewSystemMng = true;
                 menuname = "系统管理";
-                $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+                $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'>" + menuname + "</a></li>");
             }
             isSystemMng = true;
         }
-
-        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'><i class='fa fa-calendar-o'></i><span>" + menuname + "</span></a></li>");
+        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
     }
+
+    for(var i = 1; i <= 8; i++){
+        var ustr = "item" + i;
+
+        for(var j = 0; j < ulist.length; j++){
+            if(ustr == ulist[j]){
+                break;
+            }
+            if(j == ulist.length - 1){
+                $("#"+ustr+"").remove();
+            }
+        }
+    }
+
+    for(var i = 1; i <= 9; i++){
+        var ustr;
+        if(i < 7)
+            ustr = "secsubItem" + i;
+        else
+            ustr = "tridsubItem" + i;
+
+        for(var j = 0; j < u2list.length; j++){
+            if(ustr == u2list[j]){
+                break;
+            }
+            if(j == u2list.length - 1){
+                $("#"+ustr+"").remove();
+            }
+        }
+    }
+
 </script>
 
     <!-- 事件选择器 -->

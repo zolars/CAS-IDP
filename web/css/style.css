@@ -375,7 +375,7 @@ blockquote small {
 
 #menu-toggle {
     width: 45px;
-    height: 49px;
+    height: 50px;
     background-repeat: no-repeat;
     background-position: center;
     float: left;
@@ -432,6 +432,7 @@ blockquote small {
     z-index: 10;
     font-size: 12px;
     height: 42px;
+    line-height: 42px;
     margin-bottom: -4px;
     text-align: center;
     opacity: 0.55;
