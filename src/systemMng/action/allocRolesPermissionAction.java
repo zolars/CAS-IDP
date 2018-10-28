@@ -23,7 +23,7 @@ public class allocRolesPermissionAction extends ActionSupport {
         this.result = result;
     }
 
-    /* 分配给角色功能权限
+    /* 分配给一个角色功能权限
      */
     public String execute() throws Exception {
         try { //获取数据

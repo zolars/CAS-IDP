@@ -519,7 +519,7 @@
                         </div>
                         </div>
                     </div>
-                    <div id="item6" class="" style="width:90%; height: 600px;">
+                    <div id="item6" style="height: 600px;">
                         <div class="block-area-inner">
                         <div class="row"></div>
                         <ul class="nav nav-tabs" id="tridulItem">
@@ -533,40 +533,44 @@
                                 <a data-toggle="tab" id="tridsubItem3">•其他传感器</a>
                             </li>
                         </ul>
+                            <div class="row" style="padding-top:8px;padding-left:5px;">
+                                <div id="tridItem1" style="height: 600px;">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="outer">
+                                                        <input id="device-threshold-name" class="searchInput form-control"
+                                                               type="text">
+                                                        <div id="device-threshold-Tips" class="tips" style="display: none">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button class="btn-sm btn-primary item-btn-item" onclick="getOneDeviceThreshold()">查询</button>
+                                                    <button class="btn-sm btn-success item-btn-item" onclick="AddThresholdModal()" type="submit">添加</button>
+                                                    <button class="btn-sm btn-default item-btn-item" onclick="updateThresholdModal()">修改</button>
+                                                    <button class="btn-sm btn-danger item-btn-item" onclick="deleteThresholdModal()">删除</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="file" name="请选择导入文件" id="uploadEventFile">
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn-sm btn-success item-btn-item" onclick="deviceThresholdupload()">导入</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
 
-                        <div id="tridItem1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                            <div class="col-md-2">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div class="outer">
-                                                <input id="device-threshold-name" class="searchInput form-control"
-                                                       type="text">
-                                                <div id="device-threshold-Tips" class="tips" style="display: none">
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <button class="btn-sm btn-primary item-btn-item" onclick="getOneDeviceThreshold()">查询</button>
-                                            <button class="btn-sm btn-success item-btn-item" onclick="AddThresholdModal()" type="submit">添加</button>
-                                            <button class="btn-sm btn-default item-btn-item" onclick="updateThresholdModal()">修改</button>
-                                            <button class="btn-sm btn-danger item-btn-item" onclick="deleteThresholdModal()">删除</button>
-                                        </td>
-
-                                        <input type="file" name="请选择导入文件" id="uploadEventFile">
-                                        <button type="button" class="btn-sm btn-success item-btn-item" onclick="deviceThresholdupload()">导入</button>
-                                    </tr>
-                                </table>
-                            </div>
-
-                            <div class="col-md-10">
-                                <div class="table-container">
-                                    <table border="1px" id="threadinfotablehead"></table>
+                                    <div style="width: 50%;">
+                                        <div class="table-container">
+                                            <table border="1px" id="threadinfotablehead"></table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <div id="tridItem2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                         </div>
                         <div id="tridItem3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
@@ -2171,7 +2175,7 @@
                        $("#conncom").val(obj[0].iPaddress);
                        $("#485address").val(obj[0].port);
                    }
-                   if (obj[0].devicetype == "RS232") {  //
+                   if (obj[0].devicetype == "RS232") {
                        $("#radio-Ethernet").removeAttr("checked");
                        $("#radio-R5485").removeAttr("checked");
                        $("#radio-RS232").attr("checked", "checked");
@@ -2235,6 +2239,8 @@
             alert("请输入端口号");
         else if (!testValidIPaddress(IPaddress))
             alert("请输入格式为 XXX.XXX.XXX.XXX 的IP地址");
+        else if (!testValidDeviceType(devtype))
+            alert("请输入正确的设备类型，设备类型包括：IDP UPS temp ctrl battery");
         else $.ajax({
                 type: "post",
                 url: "addOneDevice",
@@ -2597,7 +2603,7 @@
 
                     var table = $("#threadinfotablehead");
                     table.empty();
-                    table.append('<tr><td style="width:5%;"></td><td style="width:20%">参数名称</td><td style="width:12.5%;">参数分类</td><td style="width:12.5%;">' +
+                    table.append('<tr style="width:100%;"><td style="width:5%;"></td><td style="width:20%">参数名称</td><td style="width:12.5%;">参数分类</td><td style="width:12.5%;">' +
                         '单位</td><td style="width:12.5%;">上限值</td><td style="width:12.5%;">下限值</td><td style="width:12.5%;">' +
                         '启用标识</td><td style="width:12.5%;">等级</td></tr>');
 
@@ -2801,6 +2807,20 @@
         } else {
             return false;
         }
+    }
+
+    function testValidDeviceType(str) {
+        if(str == "IDP")
+            return true;
+        else if(str == "UPS")
+            return true;
+        else if(str == "temp")
+            return true;
+        else if(str == "ctrl")
+            return true;
+        else if(str == "battery")
+            return true;
+        else return false;
     }
 </script>
 

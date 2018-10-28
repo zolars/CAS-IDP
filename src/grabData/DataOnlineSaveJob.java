@@ -41,7 +41,6 @@ public class DataOnlineSaveJob implements Job {
                 if (varsxdy.getDid() !=  null) {
                     hbsessionDao.insert(varsxdy);
                 }
-
             }
         }
     }
