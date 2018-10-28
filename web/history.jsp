@@ -137,7 +137,7 @@
         <div class="block-area">
             <div class="row">
                 <div class="col-md-12">
-                    <ul class="nav nav-tabs" id="ulItem">
+                    <ul class="nav nav-tabs" id="ulItem" style="margin-bottom: 20px">
                         <li style="width:50%">
                             <a data-toggle="tab" id="subItem2">•历史曲线</a>
                         </li>
@@ -161,40 +161,38 @@
                                 <option value="">请选择</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="container">
                                 <form action="" class="form-horizontal" role="form">
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label for="dtp_input1" class="col-md-2 control-label">开始日期</label>
-                                            <div class="input-group date form_datetime col-md-5"
-                                                 data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss"
-                                                 data-link-field="dtp_input1">
-                                                <input id="firstDate" class="form-control" size="16" type="text"
-                                                       value="" readonly>
-                                                <span class="input-group-addon"><span
-                                                        class="glyphicon glyphicon-th"></span></span>
-                                            </div>
-                                            <input type="hidden" id="dtp_input1" value=""/><br/>
+                                    <div class="form-group">
+                                        <label for="dtp_input1" class="control-label">开始日期</label>
+                                        <div class="input-group date form_datetime col-md-5"
+                                             data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss"
+                                             data-link-field="dtp_input1">
+                                            <input id="firstDate" class="form-control" size="16" type="text"
+                                                   value="" readonly>
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-th"></span></span>
                                         </div>
+                                        <input type="hidden" id="dtp_input1" value=""/><br/>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="dtp_input2" class="col-md-2 control-label">结束日期</label>
-                                            <div class="input-group date form_datetime col-md-5"
-                                                 data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss"
-                                                 data-link-field="dtp_input1">
-                                                <input id="lastDate" class="form-control" size="16" type="text" value=""
-                                                       readonly>
-                                                <span class="input-group-addon"><span
-                                                        class="glyphicon glyphicon-th"></span></span>
-                                            </div>
-                                            <input type="hidden" id="dtp_input2" value=""/><br/>
+                                    <div class="form-group">
+                                        <label for="dtp_input2" class="control-label">结束日期</label>
+                                        <div class="input-group date form_datetime col-md-5"
+                                             data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss"
+                                             data-link-field="dtp_input1">
+                                            <input id="lastDate" class="form-control" size="16" type="text" value=""
+                                                   readonly>
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-th"></span></span>
                                         </div>
-                                    </fieldset>
+                                        <input type="hidden" id="dtp_input2" value=""/><br/>
+                                    </div>
                                 </form>
                             </div>
                         </div>
-                        <div>
+                        <div class="col-md-1">
                             <button type="button" class="btn-sm btn-primary" id="serch-his-button" onclick="searchHis()">查询</button>
                         </div>
 

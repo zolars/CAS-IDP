@@ -25,7 +25,7 @@ public class getOneRolesFunctionsAction extends ActionSupport {
         this.result = result;
     }
 
-    /* 查询角色拥有的功能
+    /* 查询一个角色拥有的功能
      */
     public String execute() throws Exception {
         try { //获取数据
@@ -37,19 +37,22 @@ public class getOneRolesFunctionsAction extends ActionSupport {
             PermissionDAO dao = new PermissionDAOImpl();
             RolesPermission ptree = dao.getRolesPermissionTree(rid);
 
-            String pstr = ptree.getPid();
-            String pset[] = pstr.split(",");
+            if (ptree != null) {
+                String pstr = ptree.getPid();
+                String pset[] = pstr.split(",");
 
-            List<String> rtlist = new ArrayList<>();
+                List<String> rtlist = new ArrayList<>();
 
-            for(int i = 0 ; i < pset.length; i++){
-                rtlist.add(pset[i]);
+                for(int i = 0 ; i < pset.length; i++){
+                    rtlist.add(pset[i]);
+                }
+
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("allrptree", rtlist);
+
+                result = jsonObject;
             }
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("allrptree", rtlist);
-
-            result = jsonObject;
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

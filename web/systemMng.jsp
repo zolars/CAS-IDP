@@ -2437,7 +2437,7 @@
                 alert(data);
             }
         });
-    };
+    }
 
     //点击左侧某个角色，右侧jstree显示角色的功能，先清理一下右侧树的选中状态
     function getOneRolesFunctions() {
