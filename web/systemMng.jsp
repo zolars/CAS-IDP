@@ -1723,8 +1723,8 @@
         }
     }
 
-    $(document).ready(function() {
-        /*初始加载角色下拉选*/
+    /*初始加载角色下拉选*/
+    function getAllRoles() {
         $.ajax({
             type: "post",
             url: "getAllRoles",
@@ -1732,12 +1732,16 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 var rt = obj.allroles;
+                $('#userroles').empty();
                 for (var i = 0; i < rt.length; i++) {
                     $('#userroles').append("<option value='" + rt[i].rolesname + "' >" + rt[i].rolesname + "</option>");
                 }
             }
         });
+    }
 
+    $(document).ready(function() {
+        getAllRoles();
         /*初始加载Province下拉选*/
         $.ajax({
             type: "post",
@@ -1891,6 +1895,7 @@
                 dataType: "json",
                 success: function (data) {
                     getALLRolesInfomation();
+                    getAllRoles();
                 },
                 error: function () {
                     alert("失败");
@@ -1901,35 +1906,41 @@
 
     <!-- 修改角色 -->
     function showUpdateRolesModal() {
-        $('#add-roles-modal').css('display', 'block');
-        $('#add-roles-handle').css('display', 'none');
-        $('#update-roles-handle').css('display', 'block');
-
-        $("#rolesname").val("");
-        $("#rolesextra").val("");
 
         //显示信息到div
         var rolesidcheck = $("input[name='rolesid']:checked").serialize();
 
-        $.ajax({
-            type: "post",
-            url: "getRolesInfo",
-            data: {
-                rid: rolesidcheck
-            },
-            dataType: "json",
-            success: function (data) {
-                var list = JSON.parse(data);
-                var rolesdata = list['roles'];
+        if (rolesidcheck == "") {
+            alert("清选择某个待修改的角色");
+        }
+        else {
+            $('#add-roles-modal').css('display', 'block');
+            $('#add-roles-handle').css('display', 'none');
+            $('#update-roles-handle').css('display', 'block');
 
-                $("#rid").val(rolesdata.rid);
-                $("#rolesname").val(rolesdata.rolesname);
-                $("#rolesextra").val(rolesdata.extra);
-            },
-            error: function () {
-                alert("失败");
-            }
-        });
+            $("#rolesname").val("");
+            $("#rolesextra").val("");
+
+            $.ajax({
+                type: "post",
+                url: "getRolesInfo",
+                data: {
+                    rid: rolesidcheck
+                },
+                dataType: "json",
+                success: function (data) {
+                    var list = JSON.parse(data);
+                    var rolesdata = list['roles'];
+
+                    $("#rid").val(rolesdata.rid);
+                    $("#rolesname").val(rolesdata.rolesname);
+                    $("#rolesextra").val(rolesdata.extra);
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        }
     }
 
     <!-- 修改角色 -确认修改 -->
@@ -1950,6 +1961,7 @@
             success: function (data) {
                 hiddenRolesModel();
                 getALLRolesInfomation();
+                getAllRoles();
             },
             error: function () {
                 alert("失败");
@@ -1985,6 +1997,7 @@
                 success: function (data) {
                     hiddenRolesModel();
                     getALLRolesInfomation();
+                    getAllRoles();
                 },
                 error: function () {
                     alert("失败");

@@ -13,6 +13,8 @@ public interface RolesDAO {
     /////删
     public boolean deleteRolesInfo(String rid);
 
+    public boolean deleteRolesPermission(String rid);
+
     /////改
     public boolean updateRoleInfo(String rid, String name, String extra);
 

@@ -24,7 +24,7 @@ public class deleteRolesInfoAction extends ActionSupport {
     }
 
 
-    /* 查询所有用户的基本信息、用户角色、用户权限
+    /* 删除某个角色、角色权限
      */
     public String execute() throws Exception {
         try { //获取数据
@@ -35,10 +35,11 @@ public class deleteRolesInfoAction extends ActionSupport {
             String rid[] = ridstr.split("=");
 
             RolesDAO dao = new RolesDAOImpl();
-            Boolean rt = dao.deleteRolesInfo(rid[1]);
+            Boolean rt1 = dao.deleteRolesInfo(rid[1]);
+            Boolean rt2 = dao.deleteRolesPermission(rid[1]);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("result", rt);
+            jsonObject.put("result", rt1 && rt2);
 
             result = JSON.toJSONString(jsonObject);
 

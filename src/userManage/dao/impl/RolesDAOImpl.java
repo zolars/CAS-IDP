@@ -2,6 +2,7 @@ package userManage.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.Roles;
+import hibernatePOJO.RolesPermission;
 import userManage.dao.RolesDAO;
 
 import java.util.List;
@@ -30,6 +31,15 @@ public class RolesDAOImpl implements RolesDAO {
         boolean rt;
 
         rt = hbsessionDao.delete( "Delete FROM Roles Where rid=?", rid);
+
+        return rt;
+    }
+
+    public boolean deleteRolesPermission(String rid) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt;
+
+        rt = hbsessionDao.delete( "Delete FROM RolesPermission Where rid=?", rid);
 
         return rt;
     }
