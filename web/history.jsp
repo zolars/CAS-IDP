@@ -158,7 +158,7 @@
                         <div class="col-md-2">
                             <select class="form-control" name="his-mpid-select" id="his-mpid-select"
                                     onclick="getMonitorPoints()">
-                                <option value="">请选择</option>
+                                <option value="">选择检测点</option>
                             </select>
                         </div>
                         <div class="col-md-6">

@@ -1588,6 +1588,92 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             qstRecordpltu2.push( {name: time, value:[time, pltU2]} );
             qstRecordpltu3.push( {name: time, value:[time, pltU3]} );
         }
+
+
+        <%--在线监测模块各个图表初始化--%>
+        function getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "-";
+            var seperator2 = ":";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                + " " + date.getHours() + seperator2 + date.getMinutes()
+                + seperator2 + date.getSeconds();
+            return currentdate;
+        }
+
+        function formatDateTime(time) {
+
+            var unixtime = time;
+            var unixTimestamp = new Date(unixtime * 1);
+            var Y = unixTimestamp.getFullYear();
+            var M = unixTimestamp.getMonth() + 1; //((unixTimestamp.getMonth() + 1) > 10 ? (unixTimestamp.getMonth() + 1) : '0' + (unixTimestamp.getMonth() + 1));
+            var D = (unixTimestamp.getDate() > 10 ? unixTimestamp.getDate() : '0' + unixTimestamp.getDate());
+            var Hour = unixTimestamp.getHours();
+            var Minute = unixTimestamp.getMinutes();
+            var Second = unixTimestamp.getSeconds();
+
+            if (M >= 1 && M <= 9) {
+                M = "0" + M;
+            }
+            if (D >= 0 && D <= 9) {
+                D = "0" + D;
+            }
+            if (Hour >= 0 && Hour <= 9) {
+                Hour = "0" + Hour;
+            }
+            if (Minute >= 0 && Minute <= 9) {
+                Minute = "0" + Minute;
+            }
+            if (Second >= 0 && Second <= 9) {
+                Second = "0" + Second;
+            }
+
+            return  Y + '-' + M + '-' + D + " " + Hour + ":" + Minute + ":" + Second;
+        }
+
+        function chartsInit(){
+            // 初始化图表
+            eventChart1.setOption(option1);
+            eventChart2.setOption(option2);
+            eventChart3.setOption(option3);
+            eventChart4.setOption(option4);
+
+            eventBanding();
+
+            // 更新时间 每1s
+            setInterval(function () {
+                $("#item3-realtime span").html(getNowFormatDate());
+            },1000);
+        }
+
+        chartsInit();
+
+        var qstinterval = 5000;  //qst默认刷新频率为5s
+
+        $.ajax({
+            type: "post",
+            url: "getQSTinterval",
+            success: function (data) {
+                qstinterval = data.qstinterval;
+            }
+        });
+
+        setInterval(function () {
+            getDataQst($("#monitorpnt").val());
+            getDataXb($("#monitorpnt").val());
+            getDataSxdy($("#monitorpnt").val());
+            getDataParams($("#monitorpnt").val());
+            getOnlineWave($("#monitorpnt").val());
+        }, qstinterval);
+
     </script>
 
     <%--谐波图相关函数 --%>
@@ -1968,95 +2054,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
-    <%--在线监测模块各个图表初始化--%>
-    <script type="text/javascript">
-        function getNowFormatDate() {
-            var date = new Date();
-            var seperator1 = "-";
-            var seperator2 = ":";
-            var month = date.getMonth() + 1;
-            var strDate = date.getDate();
-            if (month >= 1 && month <= 9) {
-                month = "0" + month;
-            }
-            if (strDate >= 0 && strDate <= 9) {
-                strDate = "0" + strDate;
-            }
-            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-                + " " + date.getHours() + seperator2 + date.getMinutes()
-                + seperator2 + date.getSeconds();
-            return currentdate;
-        }
-
-        function formatDateTime(time) {
-
-            var unixtime = time;
-            var unixTimestamp = new Date(unixtime * 1);
-            var Y = unixTimestamp.getFullYear();
-            var M = unixTimestamp.getMonth() + 1; //((unixTimestamp.getMonth() + 1) > 10 ? (unixTimestamp.getMonth() + 1) : '0' + (unixTimestamp.getMonth() + 1));
-            var D = (unixTimestamp.getDate() > 10 ? unixTimestamp.getDate() : '0' + unixTimestamp.getDate());
-            var Hour = unixTimestamp.getHours();
-            var Minute = unixTimestamp.getMinutes();
-            var Second = unixTimestamp.getSeconds();
-
-            if (M >= 1 && M <= 9) {
-                M = "0" + M;
-            }
-            if (D >= 0 && D <= 9) {
-                D = "0" + D;
-            }
-            if (Hour >= 0 && Hour <= 9) {
-                Hour = "0" + Hour;
-            }
-            if (Minute >= 0 && Minute <= 9) {
-                Minute = "0" + Minute;
-            }
-            if (Second >= 0 && Second <= 9) {
-                Second = "0" + Second;
-            }
-
-            return  Y + '-' + M + '-' + D + " " + Hour + ":" + Minute + ":" + Second;
-        }
-
-        function chartsInit(){
-            // 初始化图表
-            eventChart1.setOption(option1);
-            eventChart2.setOption(option2);
-            eventChart3.setOption(option3);
-            eventChart4.setOption(option4);
-
-            eventBanding();
-
-            // 更新时间 每1s
-            setInterval(function () {
-                $("#item3-realtime span").html(getNowFormatDate());
-            },1000);
-        }
-
-        chartsInit();
-
-        var qstinterval = 5000;  //qst默认刷新频率为5s
-
-        $.ajax({
-            type: "post",
-            url: "getQSTinterval",
-            success: function (data) {
-                qstinterval = data.qstinterval;
-            }
-        });
-
-        setInterval(function () {
-            getDataQst($("#monitorpnt").val());
-            getDataXb($("#monitorpnt").val());
-            getDataSxdy($("#monitorpnt").val());
-            getDataParams($("#monitorpnt").val());
-            getOnlineWave($("#monitorpnt").val());
-        }, qstinterval);
-
-    </script>
-
     <%--实时图形--%>
     <script type="text/javascript">
+
         function getOnlineWave(did){
 
             var data0 = 0;
@@ -2123,6 +2123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 });
             }
         }
+
     </script>
 
 </body>
