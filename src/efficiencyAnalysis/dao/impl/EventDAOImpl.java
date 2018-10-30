@@ -1559,6 +1559,7 @@ public class EventDAOImpl implements EventDAO {
             }
 
             String didsetstring = "(";
+            List<Integer> nlist = new ArrayList();
 
             for (int idx = 0; idx < didset.size(); idx++) {
                 didsetstring += didset.get(idx) + ",";
@@ -1571,55 +1572,68 @@ public class EventDAOImpl implements EventDAO {
                 List<AssessRecord> assessrecordlist = hbsessionDao.search(
                         "FROM AssessRecord where did IN" + didsetstring);
 
-                for (int i = 0; i < assessrecordlist.size(); i++) {
-                    if (assessrecordlist.get(i).getDegree() == 3) {
-                        degree3 = true;
-                    }
-                    if (assessrecordlist.get(i).getDegree() == 2) {
-                        degree2 = true;
+                if (assessrecordlist == null) { // 没用记录时
+                    nlist.add(0);
+                    nlist.add(0);
+                    nlist.add(0);
+                    nlist.add(0);
+                    nlist.add(0);
+                    nlist.add(0);
+                    nlist.add(0);
+                    nlist.add(0);
+
+                    nlist.add(1);
+                } else {
+                    for (int i = 0; i < assessrecordlist.size(); i++) {
+                        if (assessrecordlist.get(i).getDegree() == 3) {
+                            degree3 = true;
+                        }
+                        if (assessrecordlist.get(i).getDegree() == 2) {
+                            degree2 = true;
+                        }
+
+                        //计算电能类事件数量、温度类事件数量、湿度类事件数量、设备类事件数量
+                        if (assessrecordlist.get(i).getEventclass().equals(1)) {
+                            evnum1++;
+                        } else if (assessrecordlist.get(i).getEventclass().equals(2)) {
+                            evnum2++;
+                        } else if (assessrecordlist.get(i).getEventclass().equals(3)) {
+                            evnum3++;
+                        } else if (assessrecordlist.get(i).getEventclass().equals(4)) {
+                            evnum4++;
+                        }
+
+                        //计算电能类告警数量、温度类告警数量、湿度类告警数量、设备类告警数量
+                        Integer teid = assessrecordlist.get(i).getTeid();
+
+                        if (assessrecordlist.get(i).getEventclass().equals(1)) {
+                            anum1++;
+                        } else if (assessrecordlist.get(i).getEventclass().equals(2)) {
+                            anum2++;
+                        } else if (assessrecordlist.get(i).getEventclass().equals(3)) {
+                            anum3++;
+                        } else if (assessrecordlist.get(i).getEventclass().equals(4)) {
+                            anum4++;
+                        }
                     }
 
-                    //计算电能类事件数量、温度类事件数量、湿度类事件数量、设备类事件数量
-                    if (assessrecordlist.get(i).getEventclass().equals(1)) {
-                        evnum1++;
-                    } else if (assessrecordlist.get(i).getEventclass().equals(2)) {
-                        evnum2++;
-                    } else if (assessrecordlist.get(i).getEventclass().equals(3)) {
-                        evnum3++;
-                    } else if (assessrecordlist.get(i).getEventclass().equals(4)) {
-                        evnum4++;
-                    }
-
-                    //计算电能类告警数量、温度类告警数量、湿度类告警数量、设备类告警数量
-                    Integer teid = assessrecordlist.get(i).getTeid();
-
-                    if (assessrecordlist.get(i).getEventclass().equals(1)) {
-                        anum1++;
-                    } else if (assessrecordlist.get(i).getEventclass().equals(2)) {
-                        anum2++;
-                    } else if (assessrecordlist.get(i).getEventclass().equals(3)) {
-                        anum3++;
-                    } else if (assessrecordlist.get(i).getEventclass().equals(4)) {
-                        anum4++;
+                    nlist.add(evnum1);
+                    nlist.add(evnum2);
+                    nlist.add(evnum3);
+                    nlist.add(evnum4);
+                    nlist.add(anum1);
+                    nlist.add(anum2);
+                    nlist.add(anum3);
+                    nlist.add(anum4);
+                    if (degree3) {
+                        nlist.add(3);
+                    } else if (degree2) {
+                        nlist.add(2);
+                    } else {
+                        nlist.add(1);
                     }
                 }
-            }
 
-            List<Integer> nlist = new ArrayList();
-            nlist.add(evnum1);
-            nlist.add(evnum2);
-            nlist.add(evnum3);
-            nlist.add(evnum4);
-            nlist.add(anum1);
-            nlist.add(anum2);
-            nlist.add(anum3);
-            nlist.add(anum4);
-            if (degree3) {
-                nlist.add(3);
-            } else if (degree2) {
-                nlist.add(2);
-            } else {
-                nlist.add(1);
             }
 
             rtmap.put(provblist.get(j).getPbname(), nlist);
