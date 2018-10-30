@@ -397,16 +397,17 @@ public class uploadThresholdExcelToDBAction extends ActionSupport {
                 Double floorval = stuEntity.getFloorval();
                 Integer ismark = stuEntity.getIsmark();
 
-                List<DevicesThreshold> list = hbsessionDao.search("From DevicesThreshold where name='"+ name + "' and level = "+level);
+                List<DevicesThreshold> list = hbsessionDao.search("From DevicesThreshold where name='"+ name + "' and level = " + level);
 
-                if (list != null) {    //update
+                /*if (list != null) {    //update
                     DevicesThreshold dt = list.get(0);
                     Integer dtid = dt.getDtid();
 
                     String sql = "update DevicesThreshold dt set dt.did='"+ did + "', dt.classify='" + classify + "', dt.unit='" + unit + "', dt.cellval='" +
                             cellval + "', dt.floorval='" + floorval + "', dt.ismark='" + ismark + "' where dt.dtid='" + dtid + "'";
                     rt = hbsessionDao.update(sql);
-                } else {     //insert
+                } else { */
+                if (list == null) { //insert
                     Integer maxdtid = dao.getMaxThresholdId();
                     stuEntity.setDtid(maxdtid + 1);
                     stuEntity.setType(getDidByName(name));

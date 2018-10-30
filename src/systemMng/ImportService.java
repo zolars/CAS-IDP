@@ -1,6 +1,8 @@
 package systemMng;
 
 import Util.DBConnect;
+import deviceManage.dao.DeviceDAO;
+import deviceManage.dao.impl.DeviceDAOImpl;
 import hibernatePOJO.DevicesThreshold;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -19,21 +21,20 @@ public class ImportService {
      * @param file 文件完整路径
      * @return
      */
-    public static List<DevicesThreshold> getAllByExcel(String file){
+    public static List<DevicesThreshold> getAllByExcel(String file) {
         List<DevicesThreshold> list = new ArrayList<>();
         try {
-            Workbook rwb=Workbook.getWorkbook(new File(file));
-            Sheet rs=rwb.getSheet("Sheet1"); //或者rwb.getSheet(0)
-            int clos=rs.getColumns();//得到所有的列
-            int rows=rs.getRows();//得到所有的行
+            Workbook rwb = Workbook.getWorkbook(new File(file));
+            Sheet rs = rwb.getSheet("Sheet1"); //或者rwb.getSheet(0)
+            int clos = rs.getColumns();//得到所有的列
+            int rows = rs.getRows();//得到所有的行
 
             for (int i = 1; i < rows; i++) {
                 for (int j = 0; j < clos; j++) {
                     //第一个是列数，第二个是行数
                     //dtid自增或更新
                     String name=rs.getCell(j++, i).getContents();
-                    //type null  或删除
-                    String did=rs.getCell(j++, i).getContents();//默认最左边编号也算一列 所以这里得j++
+                    String dname=rs.getCell(j++, i).getContents();//默认最左边编号也算一列 所以这里得j++
                     String classify=rs.getCell(j++, i).getContents();
                     String unit=rs.getCell(j++, i).getContents();
                     String cellvalstr=rs.getCell(j++, i).getContents();
@@ -41,8 +42,8 @@ public class ImportService {
                     String ismarkstr=rs.getCell(j++, i).getContents();
                     String levelstr=rs.getCell(j++, i).getContents();
 
-                    Double cellval = 0.00;
-                    Double floorval = 0.00;
+                    Double cellval = null;
+                    Double floorval = null;
                     Integer ismark = 0;
                     Integer level = 1;
 
@@ -54,6 +55,9 @@ public class ImportService {
                         ismark = Integer.parseInt(ismarkstr);
                     if(levelstr != "")
                         level = Integer.parseInt(levelstr);
+
+                    DeviceDAO dao = new DeviceDAOImpl();
+                    String did = dao.getDeviceIDByName(dname);
 
                     DevicesThreshold dt = new DevicesThreshold();
 

@@ -3190,16 +3190,6 @@
 
     //点击上传钮
     function deviceThresholdupload() {
-
-        var obj = document.getElementById("uploadEventFile");
-        var len = obj.files.length;
-        for (var i = 0; i < len; i++) {
-            var temp = obj.files[i].name;
-            console.log("ttttttttttttttttt"+temp);
-        }
-
-
-
         var uploadEventFile = getFilePath(document.getElementById("uploadEventFile"));
         if (uploadEventFile == '') {
             alert("请择Excel,再上传");
