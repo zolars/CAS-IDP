@@ -46,18 +46,27 @@ public class updateUserInfoAction extends ActionSupport {
             String computerroom = request.getParameter("ccid");
             String temuser = request.getParameter("temuser");
 
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] bytes = md.digest(password.getBytes("utf-8"));
-            String passwd = ToHex.toHex(bytes);
-
-            UserDAO dao = new UserDAOImpl();
             Boolean rt1 = false;
             Boolean rt2 = false;
 
-            rt1 = dao.checkUnameIsOccupiedForUpdate(uid, name);
-            if (rt1) {
-                rt2 = dao.updateUserInfo(uid, passwd, name, chinesename, telephone, govtelephone, roles, province, city, computerroom, temuser);
+            UserDAO dao = new UserDAOImpl();
+
+            if (password.equals("")) {
+                rt1 = dao.checkUnameIsOccupiedForUpdate(uid, name);
+                if (rt1) {
+                    rt2 = dao.updateUserInfoWithoutPasswd(uid, name, chinesename, telephone, govtelephone, roles, province, city, computerroom, temuser);
+                }
+            } else {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                byte[] bytes = md.digest(password.getBytes("utf-8"));
+                String passwd = ToHex.toHex(bytes);
+
+                rt1 = dao.checkUnameIsOccupiedForUpdate(uid, name);
+                if (rt1) {
+                    rt2 = dao.updateUserInfo(uid, passwd, name, chinesename, telephone, govtelephone, roles, province, city, computerroom, temuser);
+                }
             }
+
             JSONObject jsonObject = new JSONObject();
 
             if (rt2) {

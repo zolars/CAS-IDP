@@ -313,17 +313,6 @@ public class UserDAOImpl implements UserDAO {
 
         if((uid.equals(temuser)) || (userole.getRid().equals("1"))) { //可以修改
 
-            User newur = new User();
-            newur.setUid(uid);
-            newur.setUname(name);
-            newur.setChinesename(chinesename);
-            newur.setPassword(password);
-            newur.setTelephone(telephone);
-            newur.setGovtelephone(govtelephone);
-            newur.setPbid(province);
-            newur.setCbid(city);
-            newur.setRid(computerroom);
-
             String hql = "update User newur set newur.uname='" + name + "', newur.chinesename='" + chinesename + "', newur.password='" + password + "'," +
                     "newur.telephone='" + telephone + "', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
                     ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
@@ -339,6 +328,40 @@ public class UserDAOImpl implements UserDAO {
         }
         return rt1 && rt2;
     }
+
+    /* 1.user表修改
+      2.userroles表修改
+      注意：需要验证是否为管理员或者用户自己
+    */
+    public boolean updateUserInfoWithoutPasswd(String uid, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt1 = false;
+        boolean rt2 = false;
+
+        //获取当前用户，判断是否可以更改信息
+        UserRoles userole = (UserRoles) hbsessionDao.getFirst("FROM UserRoles where uid = '" + temuser + "'"); //当前用户
+        UserRoles userole2 = (UserRoles) hbsessionDao.getFirst("FROM UserRoles where uid = '" + uid + "'"); //待修改用户
+        Roles role = (Roles) hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles + "'");
+
+        if((uid.equals(temuser)) || (userole.getRid().equals("1"))) { //可以修改
+
+            String hql = "update User newur set newur.uname='" + name + "', newur.chinesename='" + chinesename +
+                    "', newur.telephone='" + telephone + "', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
+                    ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
+                    " where newur.uid='" + uid + "'";
+
+            rt1 = hbsessionDao.update(hql);
+
+            if (userole2.getRid() != null) {
+                String hql2 = "update UserRoles newurole set newurole.rid='" + role.getRid() +
+                        "' where newurole.uid='" + uid + "'";
+                rt2 = hbsessionDao.update(hql2);
+            }
+        }
+        return rt1 && rt2;
+    }
+
+
 
     public List<Object> getUserDynamicMenu(User user) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();

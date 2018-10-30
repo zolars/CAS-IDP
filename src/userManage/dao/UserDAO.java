@@ -21,6 +21,8 @@ public interface UserDAO {
     /////改
     public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser);
 
+    public boolean updateUserInfoWithoutPasswd(String uid, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser);
+
     /////查
     //登录验证
     public boolean login(User user);

@@ -42,9 +42,11 @@ public class getOneDeviceThresholdAction extends ActionSupport {
             List<Devices> device = dao.getDeviceDataByName(dname);
             String did;
 
-            if(device.size() == 0)
+            if (device == null) {
                 return "error";
-            else did = device.get(0).getDid();
+            } else {
+                did = device.get(0).getDid();
+            }
 
             List<DevicesThreshold> dt = dtdao.getOneDeviceThreshold(did);
 

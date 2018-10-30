@@ -104,7 +104,7 @@
     }
 
     if (!getUrlParam('prov=')) {
-        window.location.href = <%=basePath%>+'province.jsp?prov=' + $.cookie('province_name');
+        window.location.href = <%=basePath%> +'province.jsp?prov=' + $.cookie('province_name');
     }
 </script>
 <%

@@ -2588,9 +2588,9 @@
     function getOneDeviceThreshold() {
         var dname = $("#device-threshold-name").val();
 
-        if(dname == null || dname == undefined || dname == "")
+        if (dname == null || dname == undefined || dname == "") {
             alert("请输入某个设备名称");
-        else{
+        } else {
             $.ajax({
                 type: "post",
                 url: "getOneDeviceThreshold",
