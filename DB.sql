@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50560
 File Encoding         : 65001
 
-Date: 2018-10-30 09:53:55
+Date: 2018-10-30 16:01:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3033,7 +3033,7 @@ DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `rid` varchar(255) NOT NULL COMMENT 'auto_increment=true',
   `rolesname` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `extra` varchar(255) DEFAULT NULL,
+  `extra` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`rid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -3098,7 +3098,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', '周小川', 'E10ADC3949BA59ABBE56E057F20F883E', '18511587339', '18710968430', null, null, '');
+INSERT INTO `user` VALUES ('1', 'admin', '周小川', 'E10ADC3949BA59ABBE56E057F20F883E', '18511587339', '18511587339', '', '', '');
 INSERT INTO `user` VALUES ('2', 'test', '测试账号', 'E10ADC3949BA59ABBE56E057F20F883E', '19900000000', '19900000000', '200', '2001', '10001');
 
 -- ----------------------------
