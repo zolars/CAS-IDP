@@ -39,7 +39,7 @@ public interface DeviceDAO {
     public Integer getQstinterval();
 
 
-    public Boolean addThresholdInfo(String did, Integer dtid, String name, String classify, String unit, Double cellval, Double floorval, Integer ismark, Integer alarmcontent);
+    public Boolean addThresholdInfo(String did, Integer dtid, String name, String classify, String unit, Double cellval, Double floorval, Integer ismark, Integer alarmcontent, String type);
 
     public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port, String extra, Integer sms, Integer alert, Integer plantform);
 

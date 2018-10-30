@@ -187,7 +187,7 @@ public class DeviceDAOImpl implements DeviceDAO {
      * @return 真或假
      */
     public Boolean addThresholdInfo(String did, Integer dtid, String name, String classify, String unit, Double cellval, Double floorval,
-                                    Integer ismark, Integer level) {
+                                    Integer ismark, Integer level, String type) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
@@ -195,7 +195,7 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         dt.setDtid(dtid);
         dt.setName(name);
-        dt.setType("9999");
+        dt.setType(type);
         dt.setDid(did);
         dt.setClassify(classify);
         dt.setUnit(unit);
