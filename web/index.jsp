@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="css/bootstrap-3.3.4.css">
     <style>
         form {
-            margin-bottom: 0;
+            margin-top: 60px;
+            margin-left: 200px;
         }
         label {
             margin-bottom: 0;
@@ -39,20 +40,9 @@
             position: relative;
             background: url("img/index/in_banner.jpg") no-repeat;
             background-size: 100% 100%;
-
-
-        }
-        .login-title {
-            display: block;
-            width: 100%;
-            height: 100px;
-            line-height: 100px;
-            text-align: center;
-            font-size: 30px;
         }
 
         .login-box {
-            background: #5f708d;
             position: absolute;
             top: 0;
             left: 0;
@@ -65,29 +55,26 @@
             padding: 20px;
         }
 
-        .login-box-title {
-            width: 100%;
-            margin-bottom: 20px;
-            font-size: 20px;
-            color: #ffffff;
-
-        }
-
         .login-item {
             width: 100%;
             margin-bottom: 20px;
         }
 
-        .login-label {
-            font-size: 16px;
-            color: #ffffff;
-        }
         .login-button {
              float: right;
          }
-        .login-input {
-            width: 228px;
 
+        .login-input {
+            width: 160px;
+        }
+
+        .pic{
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
         }
     </style>
 
@@ -111,15 +98,15 @@
 </script>
 
 <div class="login-container">
+
+    <img class="pic"  src="img/index/content-banner.png">
+    
     <div class="login-box">
-        <div class="login-box-title">用户登录</div>
         <form id="login" name="login" action="/IDP/login.action" method="post">
             <div class="login-item">
-                <label for="login_username" class="login-label">用户名&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 <input class="login-input" type="text" name="username" value="" id="login_username">
             </div>
             <div class="login-item">
-                <label for="login_password" class="login-label">密&nbsp;&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 <input class="login-input" type="text" name="password" value="" id="login_password">
             </div>
             <div class="login-item">
@@ -127,7 +114,6 @@
             </div>
        </form>
     </div>
-
 </div>
 
 
