@@ -1249,7 +1249,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var eventChart1 = echarts.init(document.getElementById('item1-graph'));
         var eventChart2 = echarts.init(document.getElementById('item2'));
         var eventChart3 = echarts.init(document.getElementById('item3-graph'));
-        var eventChart4 = echarts.init(document.getElementById('item4-graph'));
+      //  var eventChart4 = echarts.init(document.getElementById('item4-graph'));
 
         //事件绑定函数
         function eventBanding(){
@@ -1644,7 +1644,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             eventChart1.setOption(option1);
             eventChart2.setOption(option2);
             eventChart3.setOption(option3);
-            eventChart4.setOption(option4);
+          //  eventChart4.setOption(option4);
 
             eventBanding();
 
@@ -1671,7 +1671,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             getDataXb($("#monitorpnt").val());
             getDataSxdy($("#monitorpnt").val());
             getDataParams($("#monitorpnt").val());
-            getOnlineWave($("#monitorpnt").val());
+          //  getOnlineWave($("#monitorpnt").val());
         }, qstinterval);
 
     </script>
@@ -2054,7 +2054,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
 
-    <%--实时图形--%>
+   <%-- &lt;%&ndash;实时图形&ndash;%&gt;
     <script type="text/javascript">
 
         function getOnlineWave(did){
@@ -2124,7 +2124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         }
 
-    </script>
+    </script>--%>
 
 </body>
 
