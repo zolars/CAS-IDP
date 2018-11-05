@@ -6,10 +6,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import org.apache.struts2.ServletActionContext;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
-public class getOneCtrlDataAction extends ActionSupport {
+public class getCtrlDevicesAction extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -28,18 +30,14 @@ public class getOneCtrlDataAction extends ActionSupport {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
-            String did = request.getParameter("did");
-            String starttime = request.getParameter("stime");
-            String endtime = request.getParameter("etime");
+            String cbname = request.getParameter("cbname");
 
             EventDAO dao = new EventDAOImpl();
 
-            String rt = dao.getDeviceCtrlStatus(did, starttime, endtime);
-            String name = dao.getDeviceName(did);
+            List<String> didlist = dao.getCtrlDevices(cbname);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("rt", rt);
-            jsonObject.put("name",name);
+            jsonObject.put("rt", didlist);
 
             result = JSON.toJSONString(jsonObject);
 

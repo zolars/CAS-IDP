@@ -231,3 +231,8 @@ add-alarm-user{
 .location-select-item-w {
     width: 120px;
 }
+
+.item-position {
+    margin-top: 15px;
+    margin-left: 15px;
+}

@@ -8,10 +8,7 @@ import hibernatePOJO.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EventDAOImpl implements EventDAO {
 
@@ -1827,78 +1824,89 @@ public class EventDAOImpl implements EventDAO {
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
                 "FROM Computerroom where rid='" + compname + "'");
 
-        if (comps != null) {
-            String tempset = comps.getTempset();
+        String tempset = comps.getTempset();
 
-            if (tempset.equals(null) || tempset == null) {
-                return rtlist;
-            } else {
+        if (tempset.equals(null) || tempset == null) {
+            return rtlist;
+        } else {
 
-                String tempstr[] = tempset.split("，");
-                db = new DBConnect();
+            String tempstr[] = tempset.split("，");
+            db = new DBConnect();
 
-                for (int i = 0; i < tempstr.length; i++) {
-                    String sql = "select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
+            for (int i = 0; i < tempstr.length; i++) {
+                String sql = "select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
 
-                    try {
-                        ps = db.getPs(sql);
-                        rs = ps.executeQuery();
-                        while (rs.next()) {
-                            List<String> list = new ArrayList();
-                            list.add(rs.getString("dname"));
-                            list.add(rs.getString("temperature"));
-                            list.add(rs.getString("humidity"));
-
-                            rtlist.add(list);
-                        }
-                    } catch (SQLException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
                 try {
-                    db.free();
+                    ps = db.getPs(sql);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        List<String> list = new ArrayList();
+                        list.add(rs.getString("dname"));
+                        list.add(rs.getString("temperature"));
+                        list.add(rs.getString("humidity"));
+
+                        rtlist.add(list);
+                    }
                 } catch (SQLException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
+            try {
+                db.free();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return rtlist;
         }
-
-        return rtlist;
     }
 
-    public boolean getComputerroomCtrlStatus(String rname, String stime, String etime) {
+    public List getCtrlDevices(String rname) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rname='" + rname + "'");
+                "FROM Computerroom where rid='" + rname + "'");
+        String didset = comps.getDidset();
+        String didstr[] = didset.split("，");
+        List<String> didlist = new ArrayList();
 
-        if (comps != null) {
-            String didset = comps.getDidset();
-            String didstr[] = didset.split("，");
-            List<String> didlist = new ArrayList();
-
-            //寻找ctrl类（治理设备）的device
-            for (int i = 0; i < didstr.length; i++) {
-                Devices dv = (Devices) hbsessionDao.getFirst(
-                        "FROM Devices where did='" + didstr[i] + "' and type = 'ctrl'");
-                if (dv != null) {
-                    didlist.add(dv.getDid());
-                }
-            }
-
-            if (didlist != null) {
-                EventCtrl temp = (EventCtrl) hbsessionDao.getFirst(
-                        "from EventCtrl where did='" + didlist.get(0) + "' and time > '" + stime + "' and time < '" + etime + "'");
-                if (temp != null) {
-                    return true; //状态码为1，告警
-                }
+        //寻找ctrl类（治理设备）的device
+        for (int i = 0; i < didstr.length; i++) {
+            Devices dv = (Devices) hbsessionDao.getFirst(
+                    "FROM Devices where did='" + didstr[i] + "' and type = 'ctrl'");
+            if (dv != null) {
+                didlist.add(dv.getDid());
             }
         }
 
-        return false; //状态码为0，正常
+        return didlist;
     }
+
+    public String getDeviceCtrlStatus(String did, String stime, String etime) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        String rt = new String();
+
+        List list = hbsessionDao.getAll(
+                "from EventCtrl where did='" + did + "' and time > '" + stime + "' and time < '" + etime + "'");
+
+        if (list.isEmpty())
+            rt = "null";
+        else
+            for (Object ob : list) {
+                EventCtrl e = (EventCtrl) ob;
+                rt += e.toString() + "</br>";
+            }
+        return rt;
+    }
+
+    public String getDeviceName(String did) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Devices dv = (Devices) hbsessionDao.getFirst(
+                "FROM Devices where did='" + did + "' and type = 'ctrl'");
+        return dv.getName();
+    }
+
 
     public boolean setAssessInfo(Integer red_yellow, Integer yellow_green) {
 
@@ -1932,7 +1940,8 @@ public class EventDAOImpl implements EventDAO {
         return rt;
     }
 
-    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String thansentinterval, String uploadinterval) {
+    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String thansentinterval, String
+            uploadinterval) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;

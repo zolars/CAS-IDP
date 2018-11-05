@@ -318,35 +318,30 @@
                      style="width: 30%; height: 200px; text-align:center">
                     <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0">
                         <tr style="height: 8px;"></tr>
-                        <tr>
-                            <td style="padding-right: 30px;"><img src="img/1.png"/></td>
-                            <td style="padding-right: 30px;"><img src="img/2.png"/></td>
-                            <td style="padding-right: 30px;"><img src="img/3.png"/></td>
-                            <td style="padding-right: 30px;"><img src="img/4.png"/></td>
-                            <td style="padding-right: 30px;"><img src="img/5.png"/></td>
+
+                        <thead>
+                        <tr id="ctrlpics">
                         </tr>
-                        <tr>
-                            <td style="font-size: 12px;color: #000000">状态：良</td>
-                            <td style="font-size: 12px;color: #000000" id="ctrlstatus">状态：良</td>
-                            <td style="font-size: 12px;color: #000000">状态：良</td>
-                            <td style="font-size: 12px;color: #000000">状态：良</td>
-                            <td style="font-size: 12px;color: #000000">状态：良</td>
+                        </thead>
+
+                        <thead>
+                        <tr id="ctrlnames">
                         </tr>
+                        </thead>
+
+                        <thead>
+                        <tr id="ctrlstatus">
+                        </tr>
+                        </thead>
+
+                        <!--
+                        <tr>
+                            <td style="font-size: 12px;color: #000000" id="ctrlstatus3">状态：良</td>
+                            <td style="font-size: 12px;color: #000000" id="ctrlstatus5">状态：良</td>
+                        </tr>
+                        -->
+
                         <tr style="height: 18px;"></tr>
-                        <tr>
-                            <td style="padding-right: 30px;"><img src="img/6.png"/></td>
-                            <td style="padding-right: 30px;"><img src="img/6.png"/></td>
-                            <td style="padding-right: 30px;"><img src="img/6.png"/></td>
-                            <td style="padding-right: 30px;"><img src="img/6.png"/></td>
-                            <td style="padding-right: 30px;"><img src="img/6.png"/></td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 12px;color: #000000">状态：良</td>
-                            <td style="font-size: 12px;color: #000000">状态：良</td>
-                            <td style="font-size: 12px;color: #000000">状态：良</td>
-                            <td style="font-size: 12px;color: #000000">状态：良</td>
-                            <td style="font-size: 12px;color: #000000">状态：良</td>
-                        </tr>
                     </table>
                 </div>
 
@@ -778,25 +773,66 @@
     }
 
     function getCtrlStatus(cbname, stime, etime) {
-        //获取治理设备状态
-        $.ajax({
-            type: "post",
-            url: "getOneCtrlData",
-            data: {
-                compname: cbname,
-                stime: stime,
-                etime: etime
-            },
-            dataType: "json",
-            success: function (data) {
-                var obj = eval('(' + data + ')');
-                var list = obj.rt;
-                if (list == true)
-                    document.getElementById("ctrlstatus").innerHTML = "状态：告警";
-                else
-                    document.getElementById("ctrlstatus").innerHTML = "状态：良";
-            }
-        });
+
+        getCtrlDidset();
+
+        function getCtrlDidset() {
+            $.ajax({
+                type: "post",
+                url: "getCtrlDevices",
+                data: {
+                    cbname: cbname
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = eval('(' + data + ')');
+                    var list = obj.rt;
+
+                    var pic = $("#ctrlpics")[0];
+                    pic.innerHTML = null;
+                    var name = $("#ctrlnames")[0];
+                    name.innerHTML = null;
+                    var status = $("#ctrlstatus")[0];
+                    status.innerHTML = null;
+
+                    for (var i = 0; i < list.length; i++) {
+                        var did = list[i];
+                        pic.innerHTML += ('<td style="padding-right: 30px;"><img src="/img/2.png"/></td>');
+                        getDeviceCtrlStatus(did, name, status);
+                    }
+                }
+            });
+        }
+
+        function getDeviceCtrlStatus(did, name, status) {
+            //获取治理设备状态
+            $.ajax({
+                    type: "post",
+                    url: "getOneCtrlData",
+                    data: {
+                        did: did,
+                        stime: stime,
+                        etime: etime
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        var obj = eval('(' + data + ')');
+                        var list = obj.name;
+                        name.innerHTML += ('<td style="font-size: 12px;color: #000000">名称：' + list + '</td>');
+
+                        var rt = obj.rt;
+                        if (rt === "null")
+                            status.innerHTML += ('<td style="font-size: 12px;color: #000000">状态：良好</td>');
+                        else {
+                            status.innerHTML += ('<td><a data-toggle="popover" data-placement="bottom" data-trigger="hover"  data-html="true" data-title = "告警信息" data-content= "' + rt + '" style="font-size: 12px;color: #FF0000">状态：告警</a></td>');
+                            $(function () {
+                                $("[data-toggle='popover']").popover();
+                            });
+                        }
+                    }
+                }
+            );
+        }
     }
 
     //获取当前日期前adddaycount天时间

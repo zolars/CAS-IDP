@@ -157,13 +157,13 @@
             </result>
         </action>
 
-     <!--   <action name="getAllComputerroom" class="userManage.action.getAllComputerroomAction">
-            &lt;!&ndash;getAllComputerroom &ndash;&gt;
+        <action name="getAllComputerroom" class="userManage.action.getAllComputerroomAction">
+            <!--getAllComputerroom -->
             <result name="failure">/failure.jsp</result>
             <result name="success" type="json">
                 <param name="root">result</param>
             </result>
-        </action>-->
+        </action>
 
         <action name="getComputerroomByCity" class="userManage.action.getComputerroomByCityAction">
             <!--getComputerroomByCity -->
@@ -585,6 +585,14 @@
             </result>
         </action>
 
+        <action name="getCtrlDevices" class="efficiencyAnalysis.action.getCtrlDevicesAction">
+            <!--getCtrlDevices -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <action name="getOneCtrlData" class="efficiencyAnalysis.action.getOneCtrlDataAction">
             <!--getOneCtrlData -->
             <result name="failure">/failure.jsp</result>
@@ -762,21 +770,21 @@
             </result>
         </action>
 
-         <action name="uploadThresholdExcelToDB" class="systemMng.action.uploadThresholdExcelToDBAction">
-             <!--uploadThresholdExcelToDB -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
+        <action name="uploadThresholdExcelToDB" class="systemMng.action.uploadThresholdExcelToDBAction">
+            <!--uploadThresholdExcelToDB -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
 
-         <action name="getQSTinterval" class="systemMng.action.getQSTintervalAction">
-             <!--getQSTinterval -->
-             <result name="failure">/failure.jsp</result>
-             <result name="success" type="json">
-                 <param name="root">result</param>
-             </result>
-         </action>
+        <action name="getQSTinterval" class="systemMng.action.getQSTintervalAction">
+            <!--getQSTinterval -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
 
         <action name="uploadOne" class="Util.UploadImageAction">
             <!-- 限制图片的格式和图片的大小 -->
