@@ -149,14 +149,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </ul>
                     </div>
                     <div class="row">
-                        <div class="pull-left location-select">
+                        <div class="pull-left location-select item-position">
                             <select class="form-control location-select-item" id="monitorpnt" name="monitorpnt" onclick="getMonitorPoints()">
                                 <option value="">选择检测点</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="margin-left: 0px;">
                     <div id = "item1" class="col-md-12" style="height: 600px;">
                         <div class="row">
                             <div class="col-md-11">
