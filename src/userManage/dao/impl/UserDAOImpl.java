@@ -164,7 +164,11 @@ public class UserDAOImpl implements UserDAO {
         ProvinceBank prov = (ProvinceBank) hbsessionDao.getFirst(
                 "FROM ProvinceBank where pbid = '" + pbid + "'");
 
-        return prov.getPbname();
+        if (prov != null) {
+            return prov.getPbname();
+        } else {
+            return "";
+        }
     }
 
     public String getCityBankName(String cbid) {
@@ -173,7 +177,11 @@ public class UserDAOImpl implements UserDAO {
         CityBank prov = (CityBank) hbsessionDao.getFirst(
                 "FROM CityBank where cbid = '" + cbid + "'");
 
-        return prov.getCbname();
+        if (prov != null) {
+            return prov.getCbname();
+        } else {
+            return "";
+        }
     }
 
 
@@ -183,7 +191,11 @@ public class UserDAOImpl implements UserDAO {
         Computerroom prov = (Computerroom) hbsessionDao.getFirst(
                 "FROM Computerroom where rid = '" + rid + "'");
 
-        return prov.getRname();
+        if (prov != null) {
+            return prov.getRname();
+        } else {
+            return "";
+        }
     }
 
     public String getRoleName(String rid) {
@@ -192,7 +204,11 @@ public class UserDAOImpl implements UserDAO {
         Roles prov = (Roles) hbsessionDao.getFirst(
                 "FROM Roles where rid = '" + rid + "'");
 
-        return prov.getRolesname();
+        if (prov != null) {
+            return prov.getRolesname();
+        } else {
+            return "";
+        }
     }
 
     public List<List> getAllUserInfo() {

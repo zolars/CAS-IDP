@@ -42,7 +42,7 @@ public class getPowerEventAction extends ActionSupport {
             EventDAO dao = new EventDAOImpl();
             List pedata = new ArrayList();
 
-            for(int i = 0; i <cbnamelist.length; i++){
+            for(int i = 0; i < cbnamelist.length; i++){
                 if((starttime.equals(" ") && endtime.equals(" ")) || (starttime == null && endtime == null))
                     pedata.addAll(dao.getLocalLastPowerEvent(cbnamelist[i]));
                 else

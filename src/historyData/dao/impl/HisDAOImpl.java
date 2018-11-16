@@ -2,6 +2,7 @@ package historyData.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.PowerparmMonitor;
+import hibernatePOJO.PowerxbMonitor;
 import historyData.dao.HisDAO;
 
 import java.util.ArrayList;
@@ -15,15 +16,21 @@ public class HisDAOImpl implements HisDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<PowerparmMonitor> crlist = new ArrayList<>();
+        List<PowerxbMonitor> crlist2 = new ArrayList<>();
 
         List rtlist = new ArrayList<>();
 
         crlist = hbsessionDao.search(
                 "FROM PowerparmMonitor where did = '" + did + "' and time >= '"+ starttime + "' and time <= '" + endtime +"'");
 
+        crlist2 = hbsessionDao.search(
+                "FROM PowerxbMonitor where did = '" + did + "' and time >= '"+ starttime + "' and time <= '" + endtime +"'");
+
+
         if (crlist != null) {
             for (int i = 0; i < crlist.size(); i++) {
                 PowerparmMonitor temp = crlist.get(i);
+                PowerxbMonitor temp2 = crlist2.get(i);
                 Map<String, Object> map = new LinkedHashMap<>();
 
                 map.put("time", temp.getTime().toString());
@@ -56,6 +63,13 @@ public class HisDAOImpl implements HisDAO {
                 map.put("dpf2", temp.getPf2());
                 map.put("dpf3", temp.getPf3());
                 map.put("dpf", temp.getpFsum());
+
+                map.put("thdu1", temp2.getThdu1());
+                map.put("thdu2", temp2.getThdu2());
+                map.put("thdu3", temp2.getThdu3());
+                map.put("thdi1", temp2.getThdi1());
+                map.put("thdi2", temp2.getThdi2());
+                map.put("thdi3", temp2.getThdi3());
 
                 rtlist.add((Object) map);
             }

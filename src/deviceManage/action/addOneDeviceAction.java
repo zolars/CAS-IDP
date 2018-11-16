@@ -41,6 +41,8 @@ public class addOneDeviceAction extends ActionSupport {
             String iPaddress = request.getParameter("IPaddress");
             String port = request.getParameter("port");
             String extra = request.getParameter("extra");
+            String belongname = request.getParameter("belongid");
+            String belonglevel = request.getParameter("belonglevel");
 
             DeviceDAO dao = new DeviceDAOImpl();
 
@@ -68,10 +70,11 @@ public class addOneDeviceAction extends ActionSupport {
                 plantform = 1;
             }
 
-            Boolean rt = dao.addOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform);
+            Boolean rt1 = dao.addOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform);
+            Boolean rt2 = dao.addOneDeviceInfoToBelongPosition(deviceType, devname, belongname, belonglevel);
             JSONObject jsonObject = new JSONObject();
 
-            if (rt) {
+            if (rt1 && rt2) {
                 jsonObject.put("提示", "添加成功！");
             } else {
                 jsonObject.put("提示", "添加失败，请重试！");

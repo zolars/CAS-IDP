@@ -45,12 +45,35 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
 
     public Boolean delComputerroomOrgnization(String rid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        boolean rt1, rt2;
+        boolean rt1, rt2, rt3 = true;
 
         rt1 = hbsessionDao.delete( "Delete FROM OrgnizationStructure Where id=?", rid);
         rt2 = hbsessionDao.delete( "Delete FROM Computerroom Where rid=?", rid);
 
-        return rt1 && rt2;
+        //删除 citybank、provincebank表里的rid
+        CityBank cb = (CityBank)hbsessionDao.getFirst(
+                "FROM CityBank where compRoom like%" + rid + "%");
+
+        ProvinceBank pb = (ProvinceBank)hbsessionDao.getFirst(
+                "FROM ProvinceBank where compRoom like%" + rid + "%");
+
+        if (cb != null) {
+
+            String compstr = cb.getCompRoom();
+            String newcompstr = compstr.replaceAll("", rid);
+            String hql = "update CityBank set compRoom=" + newcompstr;
+            rt3 = hbsessionDao.update(hql);
+
+        } else if (pb != null) {
+
+            String compstr = cb.getCompRoom();
+            String newcompstr = compstr.replaceAll("", rid);
+            String hql = "update ProvinceBank set compRoom=" + newcompstr;
+            rt3 = hbsessionDao.update(hql);
+
+        }
+
+        return rt1 && rt2 && rt3;
     }
 
     public Boolean updateProvinceOrgnization(String pbid, String name) {
@@ -172,7 +195,7 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
 
     public Boolean addComputerroomOrgnizationUnderProvinceBank(String orgid, String computerroom) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        boolean rt1, rt2;
+        boolean rt1, rt2, rt3 = false;
 
         Computerroom maxcr = (Computerroom) hbsessionDao.getFirst(
                 "FROM Computerroom Order by rid desc");
@@ -193,7 +216,16 @@ public class OrgnizationDAOImpl implements OrgnizationDAO {
 
         rt2 = hbsessionDao.insert(os);
 
-        return rt1 && rt2;
+        ProvinceBank provb = (ProvinceBank) hbsessionDao.getFirst(
+                "FROM ProvinceBank where pbid=" + orgid);
+        if (provb != null) {
+            String oldcbidstr = provb.getCbidset();
+            String newcbidstr = oldcbidstr + "," + maxrid.toString();
+            String hql = "update CityBank set cbidset='" + newcbidstr+ "'";
+            rt3 = hbsessionDao.update(hql);
+        }
+
+        return rt1 && rt2 && rt3;
     }
 
     public Boolean addComputerroomOrgnizationUnderCityBank(String orgid, String computerroom) {

@@ -30,6 +30,7 @@
     <link href="css/mycss.css" rel="stylesheet">
     <link href="css/jstree-default/style.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/header.css">
+    <link href="css/buttons.css" rel="stylesheet">
 
     <!-- bootstrap datepicker时间选择控件 -->
     <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
@@ -153,6 +154,7 @@
                                 <option value="item2-2">频率</option>
                                 <option value="item2-3">功率</option>
                                 <option value="item2-4">浪涌/塌陷</option>
+                                <option value="item2-5">谐波总畸变率</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -192,8 +194,8 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="col-md-1">
-                            <button type="button" class="btn-sm btn-primary" id="serch-his-button" onclick="searchHis()">查询</button>
+                        <div class="col-md-2">
+                            <button type="button" class="button-primary button-pill button-small" id="serch-his-button" onclick="searchHis()">查询</button>
                         </div>
 
                         <div class="clearfix"></div>
@@ -265,6 +267,26 @@
                                     <input type="checkbox" value="Uc">Uc
                                 </div>
                                 <div id='item2-LyTx' class="chart-item" style='width: 100%;height: 500px;'></div>
+                            </li>
+                            <li id='item2-5'>
+                                <div id="item2-thd-ctrl">
+                                    <ul>
+                                        <li class="mark-ctrl">
+                                            <input type="checkbox" value='max'>最大值
+                                            <input type="checkbox" value='min'>最小值
+                                            <input type="checkbox" value='average'>平均值
+                                        </li>
+                                        <li class="series-ctrl">
+                                            <input class="default-show" type="checkbox" value="thdi1">THDi1
+                                            <input class="default-show" type="checkbox" value="thdi2">THDi2
+                                            <input class="default-show" type="checkbox" value="thdi3">THDi3
+                                            <input type="checkbox" value="thdu1">THDu1
+                                            <input type="checkbox" value="thdu2">THDu2
+                                            <input type="checkbox" value="thdu3">THDu3
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id='item2-thd' class="chart-item" style='width: 100%;height: 500px;'></div>
                             </li>
                         </ul>
                     </div>
@@ -814,10 +836,12 @@
     var eventChart2 = echarts.init(document.getElementById('item2-HZ'));
     var eventChart3 = echarts.init(document.getElementById('item2-P'));
     var eventChart4 = echarts.init(document.getElementById('item2-LyTx'));
+    var eventChart5 = echarts.init(document.getElementById('item2-thd'));
     var chart1Legend = ['u1', 'u2', 'u3', 'u4', 'i1', 'i2', 'i3', 'i4'];
     var chart3Legend = ['p1', 'p2', 'p3', 'p', 's1', 's2', 's3', 's', 'q1', 'q2', 'q3', 'q',
         'pf1', 'pf2', 'pf3', 'pf', 'dpf1', 'dpf2', 'dpf3', 'dpf'];
     var chart4Legend = ['Ua','Ub','Uc'];
+    var chart5Legend = ['thdu1', 'thdu2', 'thdu3', 'thdu4', 'thdi1', 'thdi2', 'thdi3', 'thdi4'];
     var markPointUI = {//电压\电流图最大值、最小值标注点
         label: {formatter: '{a}{b}:{c}'},
         data: []
@@ -880,6 +904,7 @@
             }
         },
         yAxis: {
+            name: '单位:（V/A）',
             type: 'value',
             scale: true,
             boundaryGap: ['10%', '10%'],
@@ -1198,6 +1223,105 @@
             }
         ]
     };
+    var option5 = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            show: false,
+            data: chart5Legend
+        },
+        xAxis: {
+            type: 'time',
+            splitLine: {
+                show: false
+            }
+        },
+        yAxis: {
+            name: '单位:（%）',
+            type: 'value',
+            scale: true,
+            boundaryGap: ['10%', '10%'],
+            splitLine: {
+                show: false
+            }
+        },
+        series: [
+            //thdU
+            {
+                name: "thdu1", type: "line", smooth: true, showSymbol: false,
+                markPoint: markPointUI, markLine: markLineUI,
+                encode: {x: "time", y: "thdu1"},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
+            },
+            {
+                name: "thdu2", type: "line", smooth: true, showSymbol: false,
+                markPoint: markPointUI, markLine: markLineUI,
+                encode: {x: "time", y: "thdu2"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
+            },
+            {
+                name: "thdu3", type: "line", smooth: true, showSymbol: false,
+                markPoint: markPointUI, markLine: markLineUI,
+                encode: {x: "time", y: "thdu3"},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
+            },
+            {
+                name: "thdu4", type: "line", smooth: true, showSymbol: false,
+                markPoint: markPointUI, markLine: markLineUI,
+                encode: {x: "time", y: "thdu4"}
+            },
+            //电流I
+            {
+                name: "thdi1", type: "line", smooth: true, showSymbol: false,
+                markPoint: markPointUI, markLine: markLineUI,
+                encode: {x: "time", y: "thdi1"},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
+            },
+            {
+                name: "thdi2", type: "line", smooth: true, showSymbol: false,
+                markPoint: markPointUI, markLine: markLineUI,
+                encode: {x: "time", y: "thdi2"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
+            },
+            {
+                name: "thdi3", type: "line", smooth: true, showSymbol: false,
+                markPoint: markPointUI, markLine: markLineUI,
+                encode: {x: "time", y: "thdi3"},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
+            },
+            {
+                name: "thdi4", type: "line", smooth: true, showSymbol: false,
+                markPoint: markPointUI, markLine: markLineUI,
+                encode: {x: "time", y: "thdi4"}
+            }
+        ]
+    };
+
 
     //事件绑定函数
     function eventBanding() {
@@ -1208,7 +1332,7 @@
         });
         //触发历史曲线菜单切换事件
         $('#item2-menu').trigger('change');
-        //绑定UI图电压U、电流Icheckbox点击事件
+        //绑定UI图电压U、电流I checkbox点击事件
         $('#item2-UI-ctrl ul li.series-ctrl input:checkbox').each(function () {
             $(this).click(function () {
                 if (this.checked) {
@@ -1225,6 +1349,25 @@
                 }
             });
         });
+
+        //绑定THD图电压U、电流I checkbox点击事件
+        $('#item2-thd-ctrl ul li.series-ctrl input:checkbox').each(function () {
+            $(this).click(function () {
+                if (this.checked) {
+                    eventChart5.dispatchAction({
+                        type: "legendSelect",
+                        name: this.value
+                    });
+                }
+                else {
+                    eventChart5.dispatchAction({
+                        type: "legendUnSelect",
+                        name: this.value
+                    });
+                }
+            });
+        });
+
         //绑定UI图最大值、最小值、平均值checkbox点击事件
         $('#item2-UI-ctrl ul li.mark-ctrl input:checkbox').each(function () {
             $(this).click(function () {
@@ -1261,7 +1404,7 @@
                 eventChart1.setOption(option1);
             });
         });
-        //绑定评率图最大值、最小值、平均值checkbox点击事件
+        //绑定频率图最大值、最小值、平均值checkbox点击事件
         $('#item2-HZ-ctrl input:checkbox').each(function () {
             $(this).click(function () {
                 if (this.checked) {
@@ -1350,6 +1493,42 @@
                 eventChart3.setOption(option3);
             });
         });
+        //绑定THD图最大值、最小值、平均值checkbox点击事件
+        $('#item2-thd-ctrl ul li.mark-ctrl input:checkbox').each(function () {
+            $(this).click(function () {
+                if (this.checked) {
+                    switch (this.value) {
+                        case 'max':
+                            markPointUI.data.unshift({name: '最大值', type: 'max'});
+                            break;//最大值标注配置项添加在数组头
+                        case 'min':
+                            markPointUI.data.push({name: '最小值', type: 'min'});
+                            break;//最小值标注配置项添加在数组尾
+                        case 'average':
+                            markLineUI.data.push({name: '平均值', type: 'average'});
+                            break;//平均值标注配置项添加
+                        default:
+                            break;
+                    }
+                }
+                else {
+                    switch (this.value) {
+                        case 'max':
+                            markPointUI.data.shift();
+                            break;//移除最大值标注配置项
+                        case 'min':
+                            markPointUI.data.pop();
+                            break;//移除最小值标注配置项
+                        case 'average':
+                            markLineUI.data.pop();
+                            break;//移除平均值标注配置项
+                        default:
+                            break;
+                    }
+                }
+                eventChart5.setOption(option5);
+            });
+        });
         //绑定浪涌塌陷图中checkbox点击事件
         $('#item2-LyTx-ctrl input:checkbox').each(function () {
             $(this).click(function () {
@@ -1376,6 +1555,8 @@
         eventChart2.setOption(option2);
         eventChart3.setOption(option3);
         eventChart4.setOption(option4);
+        eventChart5.setOption(option5);
+
         //设置曲线图初始不显示
         chart1Legend.forEach(function (item) {
             eventChart1.dispatchAction({
@@ -1395,11 +1576,17 @@
                 name: item
             });
         });
+        chart5Legend.forEach(function (item) {
+            eventChart5.dispatchAction({
+                type: "legendUnSelect",
+                name: item
+            });
+        });
     }
 
     //获取数据，并更新图
     function getData(starttime, endtime, did) {
-        //取电压、电流、频率、功率数据
+        //取电压、电流、频率、功率、thd数据
         $.ajax({
             type: "post",
             url: "getHisData",
@@ -1423,6 +1610,8 @@
                 $('#item2-P-ctrl input.default-show').each(function () {//显示默认的曲线系列
                     $(this).trigger('click');
                 });
+                //thd 图表部分
+                eventChart5.setOption({dataset: {source: data}});
 
             }
         });

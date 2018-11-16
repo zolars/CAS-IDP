@@ -171,9 +171,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <li><button class="btn btn-default active" value="rms">RMS</button></li>
                                         <li><button class="btn btn-default" value="thd">THD</button></li>
                                         <li><button class="btn btn-default" value="hz">Hz</button></li>
-                                        <li><button class="btn btn-default" value="W">W</button></li>
-                                        <li><button class="btn btn-default" value="s">VA</button></li>
-                                        <li><button class="btn btn-default" value="q">Var</button></li>
+                                        <li><button class="btn btn-default" value="W">P</button></li>
+                                        <li><button class="btn btn-default" value="s">S</button></li>
+                                        <li><button class="btn btn-default" value="q">Q</button></li>
                                         <li><button class="btn btn-default" value="pf">PF</button></li>
                                         <li><button class="btn btn-default" value="unb">unb</button></li>
                                         <li><button class="btn btn-default" value="pst">Pst</button></li>
@@ -969,22 +969,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         yAxisIndex: 'none'
                     },
                     dataView: {readOnly: false},
-                    magicType: {type: ['bar','line']},
+                    magicType: {type: ['bar']}, //,'line'
                     restore: {}
                 }
             },
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
                     20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
-                    37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
+                    37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
             },
             yAxis: {
+                name: '单位（V/A）',
                 type: 'value',
                 scale: true,
                 axisLabel: {
-                    formatter: '{value}%'
+                    formatter: '{value}'
                 }
             }
         };
@@ -1651,7 +1652,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             // 更新时间 每1s
             setInterval(function () {
                 $("#item3-realtime span").html(getNowFormatDate());
-            },1000);
+            }, 1000);
         }
 
         chartsInit();
@@ -1698,35 +1699,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         }
 
+
+       /* //四舍五入保留2位小数（不够位数，则用0替补）
+            function keepTwoDecimalFull(x) {
+                  var f = parseFloat(x);
+                  if (isNaN(f)) {
+                      return false;
+                  }
+                  var f = Math.round(x*100)/100;
+                  var s = f.toString();
+                  var rs = s.indexOf('.');
+                  if (rs < 0) {
+                      rs = s.length;
+                      s += '.';
+                  }
+                  while (s.length <= rs + 2) {
+                      s += '0';
+                  }
+                  return s;
+            }*/
+
         // 更新谐波图
         function updateXbt(obj) {
-
             var series=["u1Xb","u2Xb","u3Xb","u4Xb","i1Xb","i2Xb","i3Xb","i4Xb"];
-            var res=[];//二维数组
+            var res=[];  //二维数组
 
             for(var i = 0; i < series.length; i++){
-                var temp=[];    //一维数组
-
+                var temp=[]; //一维数组
                 var basic = parseFloat(obj["u1Xb1"]);
-
-                if(i == 0) temp.push(parseFloat(obj["thdu1"] * 100) / basic);
-                if(i == 1) temp.push(parseFloat(obj["thdu2"] * 100) / basic);
-                if(i == 2) temp.push(parseFloat(obj["thdu3"] * 100) / basic);
-                if(i == 3) temp.push(parseFloat(obj["thdu4"] * 100) / basic);
-                if(i == 4) temp.push(parseFloat(obj["thdi1"] * 100) / basic);
-                if(i == 5) temp.push(parseFloat(obj["thdi2"] * 100) / basic);
-                if(i == 6) temp.push(parseFloat(obj["thdi3"] * 100) / basic);
-                if(i == 7) temp.push(parseFloat(obj["thdi4"] * 100) / basic);
+            /*    if(i == 0) temp.push(parseFloat(obj["thdu1"] * 100));
+                if(i == 1) temp.push(parseFloat(obj["thdu2"] * 100));
+                if(i == 2) temp.push(parseFloat(obj["thdu3"] * 100));
+                if(i == 3) temp.push(parseFloat(obj["thdu4"] * 100));
+                if(i == 4) temp.push(parseFloat(obj["thdi1"] * 100));
+                if(i == 5) temp.push(parseFloat(obj["thdi2"] * 100));
+                if(i == 6) temp.push(parseFloat(obj["thdi3"] * 100));
+                if(i == 7) temp.push(parseFloat(obj["thdi4"] * 100));*/
 
                 for(var j = 1;j <= 50; j++){
                     var jindx = series[i] + j;
-
-                    if(j == 1){
-                        temp.push(100); //obj[jindx]
-                    }
-                    else {
-                        temp.push(10000 * parseFloat(obj[jindx]/ basic));
-                    }
+                 //   temp.push(keepTwoDecimalFull(100 * obj[jindx]));
+                    temp.push( (100 * parseFloat(obj[jindx])).toFixed(2));
                 }
                 res.push(temp);
             }
@@ -2010,44 +2023,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         var obj = JSON.parse(data);
                         var rt1 = obj.nowpowerparm;
                         var rt2 = obj.nowpoweruunb;
+                        var rt3 = obj.nowpowerxb;
 
-                        updateParams(rt1, rt2);
+                        updateParams(rt1, rt2, rt3);
                     }
                 });
             }
         }
         // 更新参数值表格
-        function updateParams(data, data2) {
+        function updateParams(data, data2, data3) {
 
             $("#params-basic").html(
                 "<caption>基本参数</caption>"+
-                "<tr><th>U1</th><td>"+data["u1"].toFixed(2)+"</td></tr>"+
-                "<tr><th>U2</th><td>"+data["u2"].toFixed(2)+"</td></tr>"+
-                "<tr><th>U3</th><td>"+data["u3"].toFixed(2)+"</td></tr>"+
-                "<tr><th>U4</th><td>"+data["u4"].toFixed(2)+"</td></tr>"+
-                "<tr><th>I1</th><td>"+data["i1"].toFixed(2)+"</td></tr>"+
-                "<tr><th>I2</th><td>"+data["i2"].toFixed(2)+"</td></tr>"+
-                "<tr><th>I3</th><td>"+data["i3"].toFixed(2)+"</td></tr>"+
-                "<tr><th>I4</th><td>"+data["i4"].toFixed(2)+"</td></tr>"
+                "<tr><th>U1 (V)</th><td>"+data["u1"].toFixed(2)+"</td></tr>"+
+                "<tr><th>U2 (V)</th><td>"+data["u2"].toFixed(2)+"</td></tr>"+
+                "<tr><th>U3 (V)</th><td>"+data["u3"].toFixed(2)+"</td></tr>"+
+                "<tr><th>U4 (V)</th><td>"+data["u4"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I1 (A)</th><td>"+data["i1"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I2 (A)</th><td>"+data["i2"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I3 (A)</th><td>"+data["i3"].toFixed(2)+"</td></tr>"+
+                "<tr><th>I4 (A)</th><td>"+data["i4"].toFixed(2)+"</td></tr>"
             );
             $("#params-power").html(
                 "<caption>功率参数</caption>"+
                 "<tr><th></th><th>相1</th><th>相2</th><th>相3</th><th>总和</th></tr>"+
-                "<tr><th>P(KW)</th><td>"+data["p1"].toFixed(2)+"</td><td>"+data["p2"].toFixed(2)+"</td><td>"+data["p3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["p1"])+parseFloat(data["p2"])+parseFloat(data["p3"])).toFixed(2)+"</td></tr>"+
-                "<tr><th>Q(KVar)</th><td>"+data["q1"].toFixed(2)+"</td><td>"+data["q2"].toFixed(2)+"</td><td>"+data["q3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["q1"])+parseFloat(data["q2"])+parseFloat(data["q3"])).toFixed(2)+"</td></tr>"+
-                "<tr><th>S(KVA)</th><td>"+data["s1"].toFixed(2)+"</td><td>"+data["s2"].toFixed(2)+"</td><td>"+data["s3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["s1"])+parseFloat(data["s2"])+parseFloat(data["s3"])).toFixed(2)+"</td></tr>"+
-                "<tr><th>PF</th><td>"+data["pf1"].toFixed(2)+"</td><td>"+data["pf2"].toFixed(2)+"</td><td>"+data["pf3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["pf1"])+parseFloat(data["pf2"])+parseFloat(data["pf3"])).toFixed(2)+"</td></tr>"+
-                "<tr><th>Cos PHI</th><td>"+data["cosPhi1"].toFixed(2)+"</td><td>"+data["cosPhi2"].toFixed(2)+"</td><td>"+data["cosPhi3"].toFixed(2)+"</td><td></td></tr>"
+                "<tr><th>P (KW)</th><td>"+data["p1"].toFixed(2)+"</td><td>"+data["p2"].toFixed(2)+"</td><td>"+data["p3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["p1"])+parseFloat(data["p2"])+parseFloat(data["p3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>Q (KVar)</th><td>"+data["q1"].toFixed(2)+"</td><td>"+data["q2"].toFixed(2)+"</td><td>"+data["q3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["q1"])+parseFloat(data["q2"])+parseFloat(data["q3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>S (KVA)</th><td>"+data["s1"].toFixed(2)+"</td><td>"+data["s2"].toFixed(2)+"</td><td>"+data["s3"].toFixed(2)+"</td><td>"+Number(parseFloat(data["s1"])+parseFloat(data["s2"])+parseFloat(data["s3"])).toFixed(2)+"</td></tr>"+
+                "<tr><th>PF</th><td>"+data["pf1"].toFixed(2)+"</td><td>"+data["pf2"].toFixed(2)+"</td><td>"+data["pf3"].toFixed(2)+"</td><td><tr>"+ /*+Number(parseFloat(data["pf1"])+parseFloat(data["pf2"])+parseFloat(data["pf3"])).toFixed(2)+"</td></tr>"+*/
+               /* "<tr><th>Cos PHI</th><td>"+data["cosPhi1"].toFixed(2)+"</td><td>"+data["cosPhi2"].toFixed(2)+"</td><td>"+data["cosPhi3"].toFixed(2)+"</td><td></td></tr>"*/
+                "<tr><th>THDu (%)</th><td>"+data3["thdu1"].toFixed(2)+"</td><td>"+data3["thdu2"].toFixed(2)+"</td><td>"+data3["thdu3"].toFixed(2)+"</td><td></td></tr>"+
+                "<tr><th>THDi (%)</th><td>"+data3["thdi1"].toFixed(2)+"</td><td>"+data3["thdi2"].toFixed(2)+"</td><td>"+data3["thdi3"].toFixed(2)+"</td><td></td></tr>"
             );
             $("#params-unb").html(
                 "<caption>&nbsp;</caption>"+
-                "<tr><th>不平衡度</th><td>"+data2.toFixed(2)+"</td></tr>"+
-                "<tr><th>频率</th><td>"+data["hz"].toFixed(2)+"</td></tr>"
+                "<tr><th>不平衡度 (%)</th><td>"+data2.toFixed(2)+"</td></tr>"+
+                "<tr><th>频率 (Hz)</th><td>"+data["hz"].toFixed(2)+"</td></tr>"
             );
             $("#params-shanbian").html(
                 "<caption>闪变</caption>"+
                 "<tr><th></th><th>U1</th><th>U2</th><th>U3</th></tr>"+
-                "<tr><th>|f|</th><td>"+data["iflU1"].toFixed(2)+"</td><td>"+data["iflU2"].toFixed(2)+"</td><td>"+data["iflU3"].toFixed(2)+"</td></tr>"+
+                /*"<tr><th>|f|</th><td>"+data["iflU1"].toFixed(2)+"</td><td>"+data["iflU2"].toFixed(2)+"</td><td>"+data["iflU3"].toFixed(2)+"</td></tr>"+*/
                 "<tr><th>Pst</th><td>"+data["pstU1"].toFixed(2)+"</td><td>"+data["pstU2"].toFixed(2)+"</td><td>"+data["pstU3"].toFixed(2)+"</td></tr>"+
                 "<tr><th>Plt</th><td>"+data["pltU1"].toFixed(2)+"</td><td>"+data["pltU2"].toFixed(2)+"</td><td>"+data["pltU3"].toFixed(2)+"</td></tr>"
             );

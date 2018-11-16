@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import grabData.DataOnline;
 import hibernatePOJO.PowerparmMonitor;
 import hibernatePOJO.PowersxdyMonitor;
+import hibernatePOJO.PowerxbMonitor;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,14 +36,16 @@ public class getParameteraction extends ActionSupport {
 
             if (did != "") {
                 PowerparmMonitor pp = DataOnline.getParmMap().get(did);
-
                 PowersxdyMonitor psxdy = DataOnline.getSxdyMap().get(did);
+                PowerxbMonitor pxb = DataOnline.getXbMap().get(did);
+
                 if (psxdy != null) {
                     Float uunb = psxdy.getUunb();
 
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("nowpowerparm", pp);
                     jsonObject.put("nowpoweruunb", uunb);
+                    jsonObject.put("nowpowerxb", pxb);
                     result = JSON.toJSONString(jsonObject);
                 }
             }

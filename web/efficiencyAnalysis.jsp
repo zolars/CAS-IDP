@@ -32,6 +32,7 @@
     <link href="css/menu.css" rel="stylesheet">
     <link href="css/mycss.css" rel="stylesheet">
     <link href="css/jstree-default/style.css" rel="stylesheet"/>
+    <link href="css/buttons.css" rel="stylesheet">
 
     <!-- bootstrap datepicker时间选择控件 -->
     <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
@@ -204,16 +205,16 @@
                                         <th><img src="img/setting.png" alt="" onClick="settingIcon()"></th>
                                         <th><img src="img/refresh.png" alt="" onClick="refreshIcon()"></th>
                                         <th>
-                                            <button type="button" class="btn-sm btn-primary" onClick="exportTable()">
+                                            <button type="button" class="button-primary button-pill button-small" onClick="exportTable()">
                                                 导出
                                             </button>
                                         </th>
                                         <th>
-                                            <button type="button" class="btn-sm btn-warning" onClick="printTable()">打印
+                                            <button type="button" class="button-primary button-pill button-small" onClick="printTable()">打印
                                             </button>
                                         </th>
                                         <th>
-                                            <button id="data-button" type="button" class="btn-sm btn-default">查询
+                                            <button id="data-button" type="button" class="button-primary button-pill button-small">查询
                                             </button>
                                         </th>
                                     </tr>
@@ -235,15 +236,9 @@
                                     </div>
 
                                     <div class="col-md-7">
-
                                         <!--startprint-->
-                                        <div id="eventdiv1" style="display: block">
-
-                                        </div>
-
                                         <!-- 电能详细事件-->
-                                        <div id="eventdiv2" style="display: none">
-
+                                        <div id="eventdiv2" style="display: block;background: white; border-radius: 0 0 15px 15px;">
                                             <ul class="nav nav-tabs" id="secItem" name="secItem">
                                                 <li class="active" style="width:16.6%">
                                                     <a data-toggle="tab" id="secItem0">•全部事件</a>
@@ -267,7 +262,7 @@
                                             <div class="table-container">
                                                 <div id="power-event-detail-0-div" style="width:100%;">
                                                     <table class="display" border="1px" id="power-event"
-                                                           style="width:100%;">
+                                                           style="width:100%; color:black;">
                                                         <thead>
                                                         <tr id="power-event-thead"></tr>
                                                         </thead>
@@ -278,7 +273,7 @@
 
                                                 <div id="power-event-detail-1-div" style="width:100%;display: none;">
                                                     <table class="display" border="1px" id="power-event-detail-1"
-                                                           style="width:100%;">
+                                                           style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="power-event-detail-thead-1-tr"></tr>
                                                         </thead>
@@ -289,7 +284,7 @@
 
                                                 <div id="power-event-detail-2-div" style="width:100%;display: none;">
                                                     <table class="display" border="1px" id="power-event-detail-2"
-                                                           style="width:100%;">
+                                                           style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="power-event-detail-thead-2-tr"></tr>
                                                         </thead>
@@ -300,7 +295,7 @@
 
                                                 <div id="power-event-detail-3-div" style="width:100%;display: none;">
                                                     <table class="display" border="1px" id="power-event-detail-3"
-                                                           style="width:100%;">
+                                                           style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="power-event-detail-thead-3-tr"></tr>
                                                         </thead>
@@ -311,7 +306,7 @@
 
                                                 <div id="power-event-detail-4-div" style="width:100%;display: none;">
                                                     <table class="display" border="1px" id="power-event-detail-4"
-                                                           style="width:100%;">
+                                                           style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="power-event-detail-thead-4-tr"></tr>
                                                         </thead>
@@ -322,7 +317,7 @@
 
                                                 <div id="power-event-detail-5-div" style="width:100%;display: none;">
                                                     <table class="display" border="1px" id="power-event-detail-5"
-                                                           style="width:100%;">
+                                                           style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="power-event-detail-thead-5-tr"></tr>
                                                         </thead>
@@ -331,12 +326,10 @@
                                                     </table>
                                                 </div>
                                             </div>
-
                                         </div>
 
                                         <!-- 温湿度详细事件-->
-                                        <div id="eventdiv3" style="display: none">
-
+                                        <div id="eventdiv3" style="display: none;background: white; border-radius: 0 0 15px 15px;">
                                             <ul class="nav nav-tabs" id="triItem" name="triItem">
                                                 <li class="active" style="width:15%">
                                                     <a data-toggle="tab" id="triItem0">•全部事件</a>
@@ -348,11 +341,10 @@
                                                     <a data-toggle="tab" id="triItem2">•湿度</a>
                                                 </li>
                                             </ul>
-
                                             <div class="table-container">
                                                 <div id="environment-event-div" style="width:100%;">
                                                     <table class="display" border="1px" id="environment-event"
-                                                           style="width:100%;">
+                                                           style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="environment-event-tr"></tr>
                                                         </thead>
@@ -363,7 +355,7 @@
 
                                                 <div id="environment-event-detail-1-div" style="width:100%;">
                                                     <table class="display" border="1px" id="environment-event-detail-1"
-                                                           style="width:100%;">
+                                                           style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="environment-event-detail-1-tr"></tr>
                                                         </thead>
@@ -374,7 +366,7 @@
 
                                                 <div id="environment-event-detail-2-div" style="width:100%;">
                                                     <table class="display" border="1px" id="environment-event-detail-2"
-                                                           style="width:100%;">
+                                                           style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="environment-event-detail-2-tr"></tr>
                                                         </thead>
@@ -386,8 +378,7 @@
                                         </div>
 
                                         <!-- 设备详细事件-->
-                                        <div id="eventdiv4" style="display: none">
-
+                                        <div id="eventdiv4" style="display: none;background: white; border-radius: 0 0 15px 15px;">
                                             <ul class="nav nav-tabs" id="fourItem" name="fourItem">
                                                 <li class="active" style="width:15%">
                                                     <a data-toggle="tab" id="fourItem0">•全部事件</a>
@@ -396,11 +387,10 @@
                                                     <a data-toggle="tab" id="fourItem1">•治理</a>
                                                 </li>
                                             </ul>
-
                                             <div class="table-container">
                                                 <div id="device-event-div" style="width:100%;">
                                                     <table border="1" class="display" id="device-event"
-                                                           style="width:100%;">
+                                                           style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="device-event-tr"></tr>
                                                         </thead>
@@ -410,7 +400,7 @@
                                                 </div>
                                                 <div id="device-event-detail-1-div" style="width:100%;">
                                                     <table class="display" id="device-event-detail-1"
-                                                           style="width:100%;">
+                                                           style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="device-event-detail-1-tr"></tr>
                                                         </thead>
@@ -420,7 +410,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <!--endprint-->
                                     </div>
 
@@ -435,13 +424,13 @@
                                             </li>
                                         </ul>
 
-                                        <div id="rightItem1" style="width: 100%;">
+                                        <div id="rightItem1" style="width: 100%;background: white; border-radius: 0 0 15px 15px; color:black;">
                                             <br>
                                             <!--<div>日期时间</div>-->
                                             <div><input id="radio-last-day-event" type="radio" name="event-data-period"
                                                         value="lastone">观看最后的事件
                                             </div>
-                                            <div class="time-pick-container">
+                                            <div style="background: #0880d7;" class="time-pick-container">
                                                 <input id="radio-from-to-event" class="time-picker-radio" type="radio"
                                                        name="event-data-period" value="fromto">
                                                 <div class="time-pick-text">从</div>
@@ -471,28 +460,25 @@
                                                     <input type="hidden" id="dtp_input2" value=""/><br/>
                                                 </div>
                                             </div>
-                                            <div><input id="radio-day-event" type="radio" name="event-data-period"
-                                                        value="day">天
-                                            </div>
-                                            <div><input id="radio-week-event" type="radio" name="event-data-period"
-                                                        value="week">周
-                                            </div>
-                                            <div><input id="radio-month-event" type="radio" name="event-data-period"
-                                                        value="month">月
-                                            </div>
+                                            <div style="background: #0880d7;"><input id="radio-day-event" type="radio" name="event-data-period"
+                                                        value="day">天</div>
+                                            <div style="background: #0880d7;"><input id="radio-week-event" type="radio" name="event-data-period"
+                                                        value="week">周</div>
+                                            <div style="background: #0880d7;"><input id="radio-month-event" type="radio" name="event-data-period"
+                                                        value="month">月</div>
                                             <table>
                                                 <tr>
                                                     <th>测量地点</th>
                                                     <th></th>
                                                 </tr>
                                             </table>
-                                            <table class="display" id="place-event" border="1" style="width: 100%">
+                                            <table class="display" id="place-event" border="1" style="width: 100%;color:black;">
                                             </table>
                                             <div>
-                                                <button id="add-button" type="button" class="btn-sm btn-success"
+                                                <button id="add-button" type="button" class="button-primary button-pill button-small"
                                                         onclick="addMonitorPoint()">添加
                                                 </button>
-                                                <button id="delete-button" type="button" class="btn-sm btn-danger"
+                                                <button id="delete-button" type="button" class="button-primary button-pill button-small"
                                                         onclick="deleteMonitorPoint()">删除
                                                 </button>
                                             </div>
@@ -509,28 +495,26 @@
                                             </div>
                                             <div>
                                                 <button onclick="confirmEvent()" type="button"
-                                                        class="btn-default btn-sm" style="width: 80px;">确认事件
+                                                        class="button-primary button-pill button-small" style="width: 120px;">确认事件
                                                 </button>
                                                 <button onclick="deleteEventOnlyPage()" id="deleteItem" type="button"
-                                                        class="btn-warning btn-sm" style="width: 80px;">删除事件
+                                                        class="button-primary button-pill button-small" style="width: 120px;">删除事件
                                                 </button>
                                             </div>
 
                                         </div>
 
-                                        <div id="rightItem2" style="width: 100%;">
+                                        <div id="rightItem2" style="width: 100%;background: white; border-radius: 0 0 15px 15px; color:black;">
                                             <table>
                                                 <br>
                                                 <tr>
-                                                    <table class="display" id="colume-table" border="1px" width="160px">
+                                                    <table class="display" id="colume-table" border="1px" width="160px" style="color:black;">
                                                         <thead>
                                                         <tr>
-                                                            <td>名字</td>
-                                                            <td>宽度</td>
+                                                            <td>名字</td><td>宽度</td>
                                                         </tr>
                                                         </thead>
                                                         <tbody></tbody>
-
                                                     </table>
                                                 </tr>
                                                 <tr>
@@ -550,7 +534,7 @@
                                                             </td>
                                                             <td>
                                                                 <button style="display: block;" id="add-col-button"
-                                                                        type="button" class="btn-success btn-sm"
+                                                                        type="button" class="button-primary button-pill button-small"
                                                                         onclick="addColumnItem()">添加
                                                                 </button>
                                                             </td>
@@ -574,18 +558,18 @@
             <!-- settingmodel DIV-->
             <div class="setting-class" id="setting-modal">
                 <div id="jstree"></div>
-                <button onclick="AllSelected()" type="button" class="btn btn-sm btn-alt">全选</button>
-                <button onclick="AllDisSelected()" type="button" class="btn btn-sm btn-alt">全不选</button>
-                <button onclick="OK()" type="button" class="btn btn-sm btn-alt">确定</button>
-                <button onclick="cancle()" type="button" class="btn btn-sm btn-alt">取消</button>
+                <button onclick="AllSelected()" type="button" class="button-primary button-pill button-small">全选</button>
+                <button onclick="AllDisSelected()" type="button" class="button-primary button-pill button-small">全不选</button>
+                <button onclick="OK()" type="button" class="button-primary button-pill button-small">确定</button>
+                <button onclick="cancle()" type="button" class="button-primary button-pill button-small">取消</button>
             </div>
             <!-- settingmodel DIV END-->
 
             <!-- addEventMonitorPoint DIV-->
             <div class="setting-class" id="addEventMonitorPoint-modal" style="display: none;">
                 <div id="citybank-jstree"></div>
-                <button onclick="addCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">确定</button>
-                <button onclick="cancleCityBankAsMonitorPoint()" type="button" class="btn btn-sm btn-alt">取消
+                <button onclick="addCityBankAsMonitorPoint()" type="button" class="button-primary button-pill button-small">确定</button>
+                <button onclick="cancleCityBankAsMonitorPoint()" type="button" class="button-primary button-pill button-small">取消
                 </button>
             </div>
             <!-- addEventMonitorPoint DIV END-->
@@ -617,10 +601,10 @@
                     <tr></tr>
                     <tr>
                         <td>
-                            <button onclick="confirmOKEvent()" type="button" class="btn btn-sm btn-alt">确认</button>
+                            <button onclick="confirmOKEvent()" type="button" class="button-primary button-pill button-small">确认</button>
                         </td>
                         <td>
-                            <button onclick="cancleOKEvent()" type="button" class="btn btn-sm btn-alt">取消</button>
+                            <button onclick="cancleOKEvent()" type="button" class="button-primary button-pill button-small">取消</button>
                         </td>
                     </tr>
                 </table>
@@ -897,8 +881,7 @@
 <!-- 切换子菜单-->
 <script type="text/javascript">
     // 刷新左侧菜单
-    $("#eventdiv1").show();
-    $("#eventdiv2").hide();
+    $("#eventdiv2").show();
     $("#eventdiv3").hide();
     $("#eventdiv4").hide();
     // 刷新右侧菜单
@@ -915,21 +898,18 @@
         });
         $("#subItem1").click();
         $("#detailItem1").click(function () {
-            $("#eventdiv1").show();
             $("#eventdiv2").show();
             $("#eventdiv3").hide();
             $("#eventdiv4").hide();
             getPowerEvent();
         });
         $("#detailItem2").click(function () {
-            $("#eventdiv1").show();
             $("#eventdiv2").hide();
             $("#eventdiv3").show();
             $("#eventdiv4").hide();
             getEnvironmentEvent();
         });
         $("#detailItem3").click(function () {
-            $("#eventdiv1").show();
             $("#eventdiv2").hide();
             $("#eventdiv3").hide();
             $("#eventdiv4").show();
@@ -1043,7 +1023,6 @@
         }
     }
 </script>
-
 
 <!-- 切换子菜单subItem效果-->
 <script type="text/javascript">
@@ -1207,7 +1186,7 @@
                         var annotation = liststr[7];
                         if (annotation == " null")
                             annotation = "";
-                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        var signature = liststr[8];
                         if (signature == " null")
                             signature = "";
                         var location = liststr[9].substring(0, liststr[9].length - 1);
@@ -1277,7 +1256,7 @@
                         var annotation = liststr[7];
                         if (annotation == " null")
                             annotation = "";
-                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        var signature = liststr[8];
                         if (signature == " null")
                             signature = "";
                         var location = liststr[9].substring(0, liststr[9].length - 1);
@@ -1347,7 +1326,7 @@
                         var annotation = liststr[7];
                         if (annotation == " null")
                             annotation = "";
-                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        var signature = liststr[8];
                         if (signature == " null")
                             signature = "";
                         var location = liststr[9].substring(0, liststr[9].length - 1);
@@ -1417,7 +1396,7 @@
                         var annotation = liststr[7];
                         if (annotation == " null")
                             annotation = "";
-                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        var signature = liststr[8];
                         if (signature == " null")
                             signature = "";
                         var location = liststr[9].substring(0, liststr[9].length - 1);
@@ -1485,10 +1464,10 @@
                         var description = liststr[4];
                         var duration = liststr[5] + " ms";
                         var deepth = liststr[6];
-                        var annotation = liststr[7].substring(0, liststr[7].length - 1);
+                        var annotation = liststr[7];
                         if (annotation == " null")
                             annotation = "";
-                        var signature = liststr[8].substring(0, liststr[8].length - 1);
+                        var signature = liststr[8];
                         if (signature == " null")
                             signature = "";
                         var location = liststr[9].substring(0, liststr[9].length - 1);
@@ -1769,7 +1748,6 @@
         }
     }
 </script>
-
 
 <!-- （详细）设备事件-点击进入第二个页面-->
 <script type="text/javascript">
@@ -2223,8 +2201,34 @@
     ];
     optionDataSource.forEach(function (item, index) {
         $("#useful-col").append('<option id=' + index + '>' + item.name + '</option>')
-    })
-    var visibleColumnData = [];
+    });
+
+ /*   var visibleColumnData = [];*/
+   /* var visibleColumnData = [
+        {name: '测量名称', length: '90'},
+        {name: '时间', length: '110'},
+        {name: '类型', length: '50'},
+        {name: '事件描述', length: '50'},
+        {name: '时间长短', length: '50'},
+        {name: '评论', length: '50'},
+        {name: '签名', length: '50'}
+    ];*/
+
+    if (!localStorage.getItem("visibleColumn")) {
+        var visibleColumnData = [
+            {name: '测量名称', length: '90'},
+            {name: '时间', length: '110'},
+            {name: '类型', length: '50'},
+            {name: '事件描述', length: '50'},
+            {name: '时间长短', length: '50'},
+            {name: '评论', length: '50'},
+            {name: '签名', length: '50'}
+        ];
+        localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
+    }
+
+    refresh();
+
     $(document).ready(function () {
         var tbody = $("#colume-table").children("tbody");
         if (localStorage.getItem("visibleColumn")) {

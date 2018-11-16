@@ -43,6 +43,8 @@ public interface DeviceDAO {
 
     public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port, String extra, Integer sms, Integer alert, Integer plantform);
 
+    public Boolean addOneDeviceInfoToBelongPosition(String deviceType, String devname, String belongname, String belonglevel);
+
     public Boolean addOneDeviceAlarmUser(String uid, String level);
 
     public Boolean addOneDeviceAlarmInfo(String etime);

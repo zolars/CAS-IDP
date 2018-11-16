@@ -1528,8 +1528,8 @@ hr {
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     border-color: transparent;
-    background: rgb(0, 0, 255);
-    color: #fff;
+    background: rgb(255, 255, 255);
+    color: #022067;
 }
 
 .nav-tabs > li > a {
@@ -1553,6 +1553,58 @@ hr {
 .tab-vertical > li:last-child {
     border-bottom: 0;
 }
+
+/* Tabs-行方向 */
+.nav-tabs-row {
+    background: #ffffff;
+    border-bottom-color: rgba(0,0,0,0.0);
+    width: 200px;
+    border-radius: 5px 0 0 5px;
+}
+
+.tab-content {
+    padding: 10px 13px;
+}
+
+.tab-right > li {
+ /*   float: right;*/
+}
+
+.nav-row > li > a:hover, .nav-row > li > a:focus {
+    background: rgba(0,0,0,0.15);
+    border-color: transparent;
+}
+
+.nav-tabs-row > li.active > a, .nav-tabs-row > li.active > a:hover, .nav-tabs-row > li.active > a:focus {
+    border-color: transparent;
+    background: #337ab7fc;
+    border-radius: 5px 0 0 5px;
+}
+
+.nav-tabs-row > li > a {
+    padding: 5px 10px 6px;
+    margin-right: 0;
+    display: inline-block;
+    width: 100%;
+    background-color: white;
+    color: black;
+}
+
+.tab-vertical {
+    margin: 0 !important;
+    min-width: 120px;
+}
+
+.tab-vertical > li {
+    float: none;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.tab-vertical > li:last-child {
+    border-bottom: 0;
+}
+
 
 /* Panel + Collapse*/
 .panel, .panel-group .panel-heading + .panel-collapse .panel-body {

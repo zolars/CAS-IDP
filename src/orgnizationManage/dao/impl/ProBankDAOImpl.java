@@ -69,7 +69,7 @@ public class ProBankDAOImpl implements ProBankDAO {
         Devices dv = (Devices)hbsessionDao.getFirst(
                 "FROM Devices where name = '" + name+ "'");
 
-        return dv.getDid();
+        return dv.getDid().toString();
     }
 
     public List getDeviceAlarmUserDataByName(String name){
@@ -144,7 +144,7 @@ public class ProBankDAOImpl implements ProBankDAO {
         if(kl == null)
             return "0";
         else
-            return kl.getDid();
+            return kl.getDid().toString();
     }
 
     public String getMaxDeviceAlarmId(){
@@ -183,7 +183,7 @@ public class ProBankDAOImpl implements ProBankDAO {
         String maxdid = getMaxDeviceId();
         Integer imaxid = Integer.parseInt(maxdid) + 1;
 
-        dt.setDid(imaxid.toString());
+        dt.setDid(imaxid);
         dt.setDevicetype(deviceType);
         dt.setName(devname);
         dt.setType(devtype);

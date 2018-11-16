@@ -3,7 +3,7 @@ package hibernatePOJO;
 import java.util.Objects;
 
 public class Devices {
-    private String did;
+    private Integer did;
     private String name;
     private String devicetype;
     private String type;
@@ -15,11 +15,11 @@ public class Devices {
     private Integer isAlart;
     private Integer isPlartform;
 
-    public String getDid() {
+    public Integer getDid() {
         return did;
     }
 
-    public void setDid(String did) {
+    public void setDid(Integer did) {
         this.did = did;
     }
 

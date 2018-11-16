@@ -49,25 +49,25 @@ public class MyListener implements ServletContextListener {
                                         + c.getPort());
                                 new DataOnlineClient(c.getiPaddress(),
                                         Integer.parseInt(c.getPort()),
-                                        c.getDid()).start();
+                                        c.getDid().toString()).start();
                                 System.out.println("创建取暂态事件连接 " + "监测点(" + c.getDid()
                                         + ") " + c.getiPaddress() + ":"
                                         + c.getExtra()); //暂态事件的端口是extra
                                 new TransientClient(c.getiPaddress(),
                                         Integer.parseInt(c.getExtra()),
-                                        c.getDid()).start();
+                                        c.getDid().toString()).start();
                                 System.out.println("创建取越限事件连接 " + "监测点(" + c.getDid()
                                         + ") " + c.getiPaddress() + ":"
                                         + c.getExtra()); //越限事件的端口是extra
                                 new OverLimitClient(c.getiPaddress(),
                                         Integer.parseInt(c.getExtra()),
-                                        c.getDid()).start();
+                                        c.getDid().toString()).start();
                                 System.out.println("创建写阈值数据连接 " + "监测点(" + c.getDid()
                                         + ") " + c.getiPaddress() + ":"
                                         + c.getPort());
                                 new ThresholdClient(c.getiPaddress(),
                                         Integer.parseInt(c.getPort()),
-                                        c.getDid()).start();
+                                        c.getDid().toString()).start();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -79,7 +79,7 @@ public class MyListener implements ServletContextListener {
                                         + c.getPort());
                                 new TempDataClient(c.getiPaddress(),
                                         Integer.parseInt(c.getPort()),
-                                        c.getDid()).start();
+                                        c.getDid().toString()).start();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -90,7 +90,7 @@ public class MyListener implements ServletContextListener {
                                         + ":" + c.getPort());
                                 new CtrlDataClient(c.getiPaddress(),
                                         Integer.parseInt(c.getPort()),
-                                        c.getDid()).start();
+                                        c.getDid().toString()).start();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

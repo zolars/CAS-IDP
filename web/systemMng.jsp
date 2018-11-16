@@ -35,6 +35,8 @@
     <link href="css/jstree-default/style.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/header.css">
 
+    <link href="css/buttons.css" rel="stylesheet">
+
     <style>
         .outer {
             width: 200px;
@@ -86,7 +88,7 @@
             width: 100px;
         }
         .table-container {
-            height: 700px;
+            height: 500px;
             overflow: scroll;
         }
     </style>
@@ -195,103 +197,110 @@
                 <div class="col-md-12">
                     <ul class="nav nav-tabs" id="ulItem">
                         <li class="active" style="width:11%">
-                            <a data-toggle="tab" id="subItem1">•账号管理</a>
+                            <a data-toggle="tab" id="subItem1">账号管理</a>
                         </li>
                         <li style="width:11%">
-                            <a data-toggle="tab" id="subItem2">•角色管理</a>
+                            <a data-toggle="tab" id="subItem2">角色管理</a>
                         </li>
                         <li style="width:11%">
-                            <a data-toggle="tab" id="subItem3">•功能管理</a>
+                            <a data-toggle="tab" id="subItem3">功能管理</a>
                         </li>
                         <li style="width:11%">
-                            <a data-toggle="tab" id="subItem4">•设备管理</a>
+                            <a data-toggle="tab" id="subItem4">设备管理</a>
                         </li>
                         <li style="width:11%">
-                            <a data-toggle="tab" id="subItem5">•接口管理</a>
+                            <a data-toggle="tab" id="subItem5">接口管理</a>
                         </li>
                         <li style="width:11%">
-                            <a data-toggle="tab" id="subItem6">•限值管理</a>
+                            <a data-toggle="tab" id="subItem6">限值管理</a>
                         </li>
                         <li style="width:11%">
-                            <a data-toggle="tab" id="subItem7">•预警管理</a>
+                            <a data-toggle="tab" id="subItem7">预警管理</a>
                         </li>
                         <li style="width:11%">
-                            <a data-toggle="tab" id="subItem8">•基础信息配置</a>
+                            <a data-toggle="tab" id="subItem8">基础信息配置</a>
                         </li>
-                        <li style="width:11%">
+                        <li style="width:12%">
                             <a data-toggle="tab" id="subItem9">•组织管理</a>
                         </li>
                     </ul>
 
-                    <div id="item1" class="col-md-2 col-xs-6 item-container">
+                    <div id="item1" class="col-md-2 col-xs-6 item-container" style="background: white; border-radius: 0 0 15px 15px;">
                         <div class="block-area-inner" id="defaultStyle">
-                            <div class="row">
-                                <div class="">
-                                    <div class="tile">
-                                        <h2 class="tile-title">账号信息</h2>
-                                        <div class="btn-group item-btn-container">
-                                            <button type="button" class="btn-sm btn-primary item-btn-item"
-                                                    onClick="getALLUserInfomation()">查询
-                                            </button>
-                                            <button type="button" class="btn-sm btn-success item-btn-item"
-                                                    onclick="showAddUserModal()">新增
-                                            </button>
-                                            <button type="button" class="btn-sm btn-danger item-btn-item"
-                                                    onClick="deleteUserInfomation()">删除
-                                            </button>
-                                            <button type="button" class="btn-sm btn-default item-btn-item"
-                                                    onclick="showUpdateUserModal()">修改
-                                            </button>
-                                        </div>
-
-                                        <table id="userinfotable" border="1px"></table>
-                                    </div>
+                            <div class="btn-group item-btn-container">
+                                  <button class="button-primary button-pill button-small"
+                                          onClick="getALLUserInfomation()">查询
+                                  </button>
+                                  <button type="button" class="button-primary button-pill button-small"
+                                          onclick="showAddUserModal()">新增
+                                  </button>
+                                  <button type="button" class="button-primary button-pill button-small"
+                                          onClick="deleteUserInfomation()">删除
+                                  </button>
+                                  <button type="button" class="button-primary button-pill button-small"
+                                          onclick="showUpdateUserModal()">修改
+                                  </button>
+                              </div>
+                            <div style="display:inline-block; vertical-align: top;">
+                                <div class="tile" style="text-align:center; margin:0 auto; width: 681px; height: 500px;">
+                                      <h2 class="tile-title">账号信息</h2>
+                                      <table id="userinfotable" border="1px">
+                                          <tr><td style="width:5%;"><div></div></td>
+                                          <td style="width:15%;"><div>账号</div></td>
+                                          <td style="width:15%;"><div>姓名</div></td>
+                                          <td style="width:20%;"><div>组织</div></td>
+                                          <td style="width:15%;"><div>角色</div></td>
+                                          <td style="width:15%;"><div>联系方式</div></td>
+                                          <td style="width:15%;"><div>公务手机</div></td></tr>
+                                      </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="item2">
+                    <div id="item2" class="col-md-2 col-xs-6 item-container" style="background: white; border-radius: 0 0 15px 15px;">
                         <div class="block-area-inner">
-                            <div class="">
-                                <div class="tile">
+                            <div class="btn-group item-btn-container">
+                                    <button type="button" class="button-primary button-pill button-small"
+                                            onClick="getALLRolesInfomation()">查询
+                                    </button>
+                                    <button type="button" class="button-primary button-pill button-small"
+                                            onclick="showAddRolesrModal()">新增
+                                    </button>
+                                    <button type="button" class="button-primary button-pill button-small"
+                                            onClick="deleteRolesInfomation()">删除
+                                    </button>
+                                    <button type="button" class="button-primary button-pill button-small"
+                                            onclick="showUpdateRolesModal()">修改
+                                    </button>
+                                </div>
+                            <div style="display:inline-block; vertical-align: top; width: 80%; height: 500px;">
+                                <div class="tile" style="text-align:center; margin:left; width: 681px; height: 500px;">
                                     <h2 class="tile-title">角色管理</h2>
-                                    <div class="btn-group item-btn-container">
-                                        <button type="button" class="btn-sm btn-primary item-btn-item"
-                                                onClick="getALLRolesInfomation()">查询
-                                        </button>
-                                        <button type="button" class="btn-sm btn-success item-btn-item"
-                                                onclick="showAddRolesrModal()">新增
-                                        </button>
-                                        <button type="button" class="btn-sm btn-danger item-btn-item"
-                                                onClick="deleteRolesInfomation()">删除
-                                        </button>
-                                        <button type="button" class="btn-sm btn-default item-btn-item"
-                                                onclick="showUpdateRolesModal()">修改
-                                        </button>
-                                    </div>
-
-                                    <table class="item-container" id="rolesinfotable" border="1px"></table>
+                                    <table id="rolesinfotable" border="1px" style="width:100%;"></table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="item3" class="">
+                    <div id="item3" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
                         <div class="block-area-inner">
-                                <div style="width: 500px;display: inline-block;vertical-align: top">
-                                    <div class="tile">
+
+                            <div class="row">
+                                <div class="btn-group" style="padding-left:30px;padding-top:15px;">
+                                    <button type="button" class="button-primary button-pill button-small" onclick="allocateRoles()">
+                                        分配功能
+                                    </button>
+                                    <button type="button" class="button-primary button-pill button-small"
+                                            onclick="getOneRolesFunctions()">查看角色功能
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top:20px;">
+                                <div style="width: 500px;display: inline-block;vertical-align: top;padding-left:20px;">
+                                    <div class="tile" style="height: 500px;">
                                         <h2 class="tile-title">角色</h2>
                                         <table id="rolesinfotable-functionmng" border="1px" class="item-container"></table>
 
                                         <div id="roleid" style="display: none"></div>
-
-                                        <div class="btn-group">
-                                            <button type="button" class="btn-sm btn-primary item-btn-item-widther" onclick="allocateRoles()">
-                                                分配功能
-                                            </button>
-                                            <button type="button" class="btn-sm btn-primary item-btn-item-widther"
-                                                    onclick="getOneRolesFunctions()">查看角色功能
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -301,152 +310,161 @@
 
                                         <div id="jstree"></div>
                                         <div id="nodeid" style="display: none"></div>
-
                                     </div>
                                 </div>
+                            </div>
 
                         </div>
                     </div>
-                    <div id="item4" class="">
-                        <div class="block-area-inner">
-                            <ul class="nav nav-tabs">
-                                <li class="active" name="device-type-li" style="width:16.66%">
-                                    <a data-toggle="tab" id="secsubItem1">IDP</a>
-                                </li>
-                                <li name="device-type-li" style="width:16.66%">
-                                    <a data-toggle="tab" id="secsubItem2">UPS</a>
-                                </li>
-                                <li name="device-type-li" style="width:16.66%">
-                                    <a data-toggle="tab" id="secsubItem3">蓄电池</a>
-                                </li>
-                                <li name="device-type-li" style="width:16.66%">
-                                    <a data-toggle="tab" id="secsubItem4">柴油发电机</a>
-                                </li>
-                                <li name="device-type-li" style="width:16.66%">
-                                    <a data-toggle="tab" id="secsubItem5">空调</a>
-                                </li>
-                                <li name="device-type-li" style="width:16.66%">
-                                    <a data-toggle="tab" id="secsubItem6">其他传感器</a>
-                                </li>
-                            </ul>
+                    <div id="item4" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
+                        <div class="block-area-inner" style="text-align:center; margin:0 auto; width: 98%; height: 500px;">
 
-                            <div id="TCP-device">
-                                <div class="outer">
-                                    <input id="searchInput" class="searchInput form-control"
-                                           type="text">
-                                    <div id="searchTips" class="tips" style="display: none">
-                                    </div>
+                            <div style="width: 80%;height: 65%;top: 12%;border-width: 10px;border-color: #337ab7fc;background: #337ab7fc;position: absolute;left: 220px;border-radius: 10px 10px 10px 10px;">
+                            </div>
+
+                            <div>
+                                <div style="float:left; padding-top:33px;">
+                                    <ul class="nav-row nav-tabs-row">
+                                        <li class="active" name="device-type-li">
+                                            <a data-toggle="tab" id="secsubItem1">IDP</a>
+                                        </li>
+                                        <li name="device-type-li">
+                                            <a data-toggle="tab" id="secsubItem2">UPS</a>
+                                        </li>
+                                        <li name="device-type-li">
+                                            <a data-toggle="tab" id="secsubItem3">蓄电池</a>
+                                        </li>
+                                        <li name="device-type-li">
+                                            <a data-toggle="tab" id="secsubItem4">柴油发电机</a>
+                                        </li>
+                                        <li name="device-type-li">
+                                            <a data-toggle="tab" id="secsubItem5">空调</a>
+                                        </li>
+                                        <li name="device-type-li">
+                                            <a data-toggle="tab" id="secsubItem6">其他传感器</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <button class="btn-sm btn-default searchButton item-btn-item" onclick="checkDevice()">查询</button>
-                                <button class="btn-sm btn-success item-btn-item-widther" onclick="addOneDevice()">添加设备</button>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="tile">
-                                            <h2 class="tile-title">类型</h2>
-                                            <div class="tile-config dropdown">
-                                                <a data-toggle="dropdown"></a>
-                                            </div>
-
-                                            <div class="listview todo-list sortable">
-                                                <div class="media">
-                                                    <div class="checkbox m-0">
-                                                        <label class="t-overflow">
-                                                            <input id="radio-Ethernet" name="myradio" type="radio"> 以太网
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="checkbox m-0">
-                                                        <label class="t-overflow">
-                                                            <input id="radio-R5485" name="myradio" type="radio"> R5485
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="checkbox m-0">
-                                                        <label class="t-overflow">
-                                                            <input id="radio-RS232" name="myradio" type="radio"> RS232
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                <div style="margin-left: 0px;">
+                                    <div id="TCP-device">
+                                        <div class="outer">
+                                            <input id="searchInput" class="searchInput form-control"
+                                                   type="text">
+                                            <div id="searchTips" class="tips" style="display: none">
                                             </div>
                                         </div>
+                                        <button class="button-primary button-pill button-small" onclick="checkDevice()">查询</button>
+                                        <button class="button-primary button-pill button-small" onclick="addOneDevice()">添加设备</button>
 
-                                        <div class="tile">
-                                            <h2 class="tile-title">预警方式</h2>
-                                            <div class="tile-config dropdown">
-                                                <a data-toggle="dropdown"></a>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="tile">
+                                                    <h2 class="tile-title">类型</h2>
+                                                    <div class="tile-config dropdown">
+                                                        <a data-toggle="dropdown"></a>
+                                                    </div>
+
+                                                    <div class="listview todo-list sortable">
+                                                        <div class="media">
+                                                            <div class="checkbox m-0">
+                                                                <label class="t-overflow">
+                                                                    <input id="radio-Ethernet" name="myradio" type="radio"> 以太网
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="media">
+                                                            <div class="checkbox m-0">
+                                                                <label class="t-overflow">
+                                                                    <input id="radio-R5485" name="myradio" type="radio"> R5485
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="media">
+                                                            <div class="checkbox m-0">
+                                                                <label class="t-overflow">
+                                                                    <input id="radio-RS232" name="myradio" type="radio"> RS232
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="tile">
+                                                    <h2 class="tile-title">预警方式</h2>
+                                                    <div class="tile-config dropdown">
+                                                        <a data-toggle="dropdown"></a>
+                                                    </div>
+
+                                                    <div class="listview todo-list sortable">
+                                                        <div class="media">
+                                                            <div class="checkbox m-0">
+                                                                <label class="t-overflow">
+                                                                    <input type="checkbox" id="checkbox-sms" name="checkbox-sms"> 短信
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="media">
+                                                            <div class="checkbox m-0">
+                                                                <label class="t-overflow">
+                                                                    <input type="checkbox" id="checkbox-alert" name="checkbox-alert"> 弹窗
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="media">
+                                                            <div class="checkbox m-0">
+                                                                <label class="t-overflow">
+                                                                    <input type="checkbox" id="checkbox-plantform" name="checkbox-plantform"> 平台
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <div class="col-md-5" style="color:black;">
+                                                <div class="tile">
+                                                    <h2 class="tile-title">设置</h2>
+                                                    <div class="tile-config dropdown">
+                                                        <a data-toggle="dropdown"></a>
+                                                    </div>
 
-                                            <div class="listview todo-list sortable">
-                                                <div class="media">
-                                                    <div class="checkbox m-0">
+                                                    <div>
+                                                        <div class="did" id="did"></div>
                                                         <label class="t-overflow">
-                                                            <input type="checkbox" id="checkbox-sms" name="checkbox-sms"> 短信
+                                                            设备名称<input id="devname" type="text" class="form-control setting-input">
+                                                        </label>
+                                                        <label class="t-overflow">
+                                                            设备类型 <input id="devtype" type="text" class="form-control setting-input">
+                                                        </label>
+                                                        <label class="t-overflow">
+                                                            序列号 <input id="serialno" type="text" class="form-control setting-input">
+                                                        </label>
+                                                        <div id="ipaddress-div" style="display: none;">
+                                                            <label class="t-overflow">
+                                                                IP地址 <input id="IPaddress" type="text"
+                                                                            class="form-control setting-input">
+                                                            </label>
+                                                        </div>
+                                                        <div id="port-div" style="display: none;">
+                                                            <label class="t-overflow">
+                                                                端口号 <input id="port" type="text" class="form-control setting-input">
+                                                            </label>
+                                                        </div>
+                                                        <div id="conncom-div" style="display: none;">
+                                                            <label class="t-overflow">
+                                                                通信串口 <input id="conncom" type="text" class="form-control setting-input">
+                                                            </label>
+                                                        </div>
+                                                        <div id="485address-div" style="display: none;">
+                                                            <label class="t-overflow">
+                                                                485地址 <input id="485address" type="text"
+                                                                             class="form-control setting-input">
+                                                            </label>
+                                                        </div>
+                                                        <label class="t-overflow">
+                                                            备注 <input id="extra" type="text" class="form-control setting-input">
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="media">
-                                                    <div class="checkbox m-0">
-                                                        <label class="t-overflow">
-                                                            <input type="checkbox" id="checkbox-alert" name="checkbox-alert"> 弹窗
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="checkbox m-0">
-                                                        <label class="t-overflow">
-                                                            <input type="checkbox" id="checkbox-plantform" name="checkbox-plantform"> 平台
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="tile">
-                                            <h2 class="tile-title">设置</h2>
-                                            <div class="tile-config dropdown">
-                                                <a data-toggle="dropdown"></a>
-                                            </div>
-
-                                            <div>
-                                                <div class="did" id="did"></div>
-                                                <label class="t-overflow">
-                                                    设备名称<input id="devname" type="text" class="form-control setting-input">
-                                                </label>
-                                                <label class="t-overflow">
-                                                    设备类型 <input id="devtype" type="text" class="form-control setting-input">
-                                                </label>
-                                                <label class="t-overflow">
-                                                    序列号 <input id="serialno" type="text" class="form-control setting-input">
-                                                </label>
-                                                <div id="ipaddress-div" style="display: none;">
-                                                    <label class="t-overflow">
-                                                        IP地址 <input id="IPaddress" type="text"
-                                                                    class="form-control setting-input">
-                                                    </label>
-                                                </div>
-                                                <div id="port-div" style="display: none;">
-                                                    <label class="t-overflow">
-                                                        端口号 <input id="port" type="text" class="form-control setting-input">
-                                                    </label>
-                                                </div>
-                                                <div id="conncom-div" style="display: none;">
-                                                    <label class="t-overflow">
-                                                        通信串口 <input id="conncom" type="text" class="form-control setting-input">
-                                                    </label>
-                                                </div>
-                                                <div id="485address-div" style="display: none;">
-                                                    <label class="t-overflow">
-                                                        485地址 <input id="485address" type="text"
-                                                                     class="form-control setting-input">
-                                                    </label>
-                                                </div>
-                                                <label class="t-overflow">
-                                                    备注 <input id="extra" type="text" class="form-control setting-input">
-                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -468,74 +486,14 @@
 
                         </div>
                     </div>
-                    <div id="item5" class="" style="width:90%; height: 600px;">
-                        <div class="block-area-inner">
-                           <div class="tile">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>
-                                        <div style="padding-left:30px;">接口描述</div>
-                                    </th>
-                                    <th>
-                                        <div style="padding-left:30px;">接口名称</div>
-                                    </th>
-                                    <th>
-                                        <div style="padding-left:40px;">测试接口</div>
-                                    </th>
-                                </tr>
-                                </thead>
-                            </table>
-                            <table>
-                                <tr>
-                                    <td>getDataQst</td>
-                                    <td>获取趋势图数据，输入监测点，返回json</td>
-                                    <td>
-                                        <button onclick="getDataQst()"></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>getDataXb</td>
-                                    <td>获取实时谐波数据，输入监测点，返回json</td>
-                                    <td>
-                                        <button onclick="getDataXb()"></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>getDataSxdy</td>
-                                    <td>获取实时三相电压数据，输入监测点，返回json</td>
-                                    <td>
-                                        <button onclick="getDataSxdy()"></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>getDataParams</td>
-                                    <td>获取实时参数值数据，输入监测点，返回json</td>
-                                    <td>
-                                        <button onclick="getDataParams()"></button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        </div>
+                    <div id="item5" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
                     </div>
-                    <div id="item6" style="height: 600px;">
+                    <div id="item6" style="background: white; border-radius: 0 0 15px 15px; height:580px;" >
                         <div class="block-area-inner">
                         <div class="row"></div>
-                        <ul class="nav nav-tabs" id="tridulItem">
-                            <li class="active" style="width:15%">
-                                <a data-toggle="tab" id="tridsubItem1">•电能质量</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="tridsubItem2">•动力环境</a>
-                            </li>
-                            <li style="width:15%">
-                                <a data-toggle="tab" id="tridsubItem3">•其他传感器</a>
-                            </li>
-                        </ul>
-                            <div class="row" style="padding-top:8px;padding-left:5px;">
-                                <div id="tridItem1" style="height: 600px;">
-                                    <div>
+                            <div class="row" style="padding-top:8px;padding-left:20px;">
+                                <div id="tridItem1">
+                                    <div style="float: top;">
                                         <table>
                                             <tr>
                                                 <td>
@@ -547,10 +505,10 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button class="btn-sm btn-primary item-btn-item" onclick="getOneDeviceThreshold()">查询</button>
-                                                    <button class="btn-sm btn-success item-btn-item" onclick="AddThresholdModal()" type="submit">添加</button>
-                                                    <button class="btn-sm btn-default item-btn-item" onclick="updateThresholdModal()">修改</button>
-                                                    <button class="btn-sm btn-danger item-btn-item" onclick="deleteThresholdModal()">删除</button>
+                                                    <button class="button-primary button-pill button-small" onclick="getOneDeviceThreshold()">查询</button>
+                                                    <button class="button-primary button-pill button-small" onclick="AddThresholdModal()" type="submit">添加</button>
+                                                    <button class="button-primary button-pill button-small" onclick="updateThresholdModal()">修改</button>
+                                                    <button class="button-primary button-pill button-small" onclick="deleteThresholdModal()">删除</button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -558,28 +516,24 @@
                                                     <input type="file" name="请选择导入文件" id="uploadEventFile">
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn-sm btn-success item-btn-item" onclick="deviceThresholdupload()">导入</button>
+                                                    <button type="button" class="button-primary button-pill button-small" onclick="deviceThresholdupload()">导入</button>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
 
-                                    <div style="width: 50%;">
+                                    <div style="float: bottom;">
                                         <div class="table-container">
-                                            <table border="1px" id="threadinfotablehead"></table>
+                                            <table border="1px" id="threadinfotablehead" style="width:95%;color:black;"></table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <div id="tridItem2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        </div>
-                        <div id="tridItem3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
-                        </div>
                         </div>
                     </div>
-                    <div id="item7" class="" style="width:90%;">
-                        <div class="block-area-inner" style="float: left">
-                            <div class="tile">
+                    <div id="item7" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
+                        <div class="block-area-inner" style="float:left;padding-left:20px;">
+                            <div class="tile" style="width: 90%;">
                                 <div>
                                     预警等级
                                     <select class="form-control location-select-item" id="alarmtype-select" name="alarmtype-select" onclick="getAlarmLevelSetting()">
@@ -614,29 +568,26 @@
                                 </div>
 
                                 <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text" style="width: 350px"></div>
-                                <button class="btn-sm btn-default item-btn-item" onclick="addAlarm()">确认</button>
+                                <button class="button-primary button-pill button-small" onclick="addAlarm()">确认</button>
                             </div>
 
-                            <div class="">
-                                <div class="tile">
-                                    <h2 class="tile-title">预警人员</h2>
-                                    <div class="tile-config dropdown">
-                                        <a data-toggle="dropdown"></a>
-                                    </div>
-                                    <table id="alarm-user-table" border="1px" class="alarm-user-table">
-                                    </table>
+                            <div class="tile" style="width: 90%;">
+                                <h2 class="tile-title">预警人员</h2>
+                                <div class="tile-config dropdown">
+                                    <a data-toggle="dropdown"></a>
                                 </div>
-
-                                <div>
-                                    <button class="btn-sm btn-success item-btn-item-widther" onclick="addDeviceAlarmUser()">添加预警人员</button>
-                                    <button class="btn-sm btn-default item-btn-item-widther" onclick="deleteDeviceAlarmUser()">取消预警人员</button>
-                                </div>
+                                <table id="alarm-user-table" border="1px" class="alarm-user-table">
+                                </table>
                             </div>
 
+                            <div>
+                                <button class="button-primary button-pill button-small" onclick="addDeviceAlarmUser()">添加预警人员</button>
+                                <button class="button-primary button-pill button-small" onclick="deleteDeviceAlarmUser()">取消预警人员</button>
+                            </div>
                         </div>
 
                         <!-- plantform div-->
-                        <div id = "plantform-div" class="col-md-6" style="display:none; float: right">
+                        <div id = "plantform-div" class="col-md-6" style="display:none; float: right; color:black;">
                             设备名称：<input type="text" id="plantform-dname" class="form-control setting-input">
                             ip地址:<input type="text" id="plantform-ip" class="form-control setting-input">
                             时间：<input type="text" id="plantform-time" class="form-control setting-input">
@@ -650,14 +601,13 @@
                             扩展字段2：<input type="text" id="plantform-ext2" class="form-control setting-input">
                             扩展字段3：<input type="text" id="plantform-ext3" class="form-control setting-input">
 
-                            <button class="btn btn-default" onclick="testOk()">点击测试短信平台</button>
+                            <button class="button-primary button-pill button-small" onclick="testOk()">点击测试短信平台</button>
                         </div>
                         <!-- plantform div end -->
                     </div>
-                    <div id="item8" class="" style="width:90%; height: 600px;">
-                        <div class="block-area-inner">
-                        <div class="">
-                            <table>
+                    <div id="item8" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
+                        <div class="block-area-inner" style="padding-left:20px;">
+                            <table style="color: black;">
                                 <tr>
                                     <td>实时数据采集频率：</td>
                                     <td><input type="text" class="form-control setting-input" id="onlineinterval-input"></td>
@@ -679,22 +629,19 @@
                                     <td>单位（小时）</td>
                                 </tr>
                             </table>
-
-                            <button class="btn-sm btn-default item-btn-item" onclick="captureSettingOk()">确定</button>
-
-                        </div>
+                            <button class="button-primary button-pill button-small" onclick="captureSettingOk()">确定</button>
                         </div>
                     </div>
-                    <div id="item9" class="" style="width:90%; height: 600px;">
+                    <div id="item9" style="background: white; border-radius: 0 0 15px 15px; height: 580px;">
                         <div class="block-area-inner">
-                        <div class="col-md-2">
+                        <div class="col-md-4" style="color:black;">
                             <div id="jstree-structure"></div>
                             <div id="nodeidstruct" style="display: none"></div>
                         </div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn-sm btn-success item-btn-item" onClick="addOrg()">添加</button>
-                            <button type="button" class="btn-sm btn-default item-btn-item" onClick="updateOrg()">修改</button>
-                            <button type="button" class="btn-sm btn-danger item-btn-item" onClick="deleteOrg()">删除</button>
+                        <div class="col-md-3">
+                            <button type="button" class="button-primary button-pill button-small" onClick="addOrg()">添加</button>
+                            <button type="button" class="button-primary button-pill button-small" onClick="updateOrg()">修改</button>
+                            <button type="button" class="button-primary button-pill button-small" onClick="deleteOrg()">删除</button>
                         </div>
                         </div>
                     </div>
@@ -708,33 +655,33 @@
             <div class="add-user-one-line">
                 <div class="add-user-item">
                     <div class="add-user-title">账号</div>
-                    <input id="useraccount" class="form-control add-user-input" type="text">
+                    <input id="useraccount" class="form-control add-user-input" type="text" style="color:white;">
                 </div>
                 <div class="add-user-item">
                     <div class="add-user-title">密码</div>
-                    <input id="userpassword" class="form-control add-user-input" type="text">
+                    <input id="userpassword" class="form-control add-user-input" type="text" style="color:white;">
                 </div>
             </div>
 
             <div class="add-user-one-line">
                 <div class="add-user-item">
                     <div class="add-user-title">姓名</div>
-                    <input id="username" class="form-control add-user-input" type="text">
+                    <input id="username" class="form-control add-user-input" type="text" style="color:white;">
                 </div>
                 <div class="add-user-item">
                     <div class="add-user-title">联系方式</div>
-                    <input id="usertelephone" class="form-control add-user-input" type="text">
+                    <input id="usertelephone" class="form-control add-user-input" type="text" style="color:white;">
                 </div>
             </div>
 
             <div class="add-user-one-line">
                 <div class="add-user-item">
                     <div class="add-user-title">公务手机</div>
-                    <input id="usergovtelephone" class="form-control add-user-input" type="text">
+                    <input id="usergovtelephone" class="form-control add-user-input" type="text" style="color:white;">
                 </div>
                 <div class="add-user-item">
                     <div class="add-user-title">角色</div>
-                    <select class="form-control" id="userroles" name="userroles">
+                    <select class="form-control" id="userroles" name="userroles"  style="color:white;">
                         <option value="">请选择</option>
                     </select>
                 </div>
@@ -744,30 +691,30 @@
                 <div class="add-user-item">
                     <div class="add-user-title">省</div>
                     <select class="form-control location-select-item" id="userorgnization-province"
-                            name="userorgnization-province">
+                            name="userorgnization-province" style="color:white;">
                         <option value="">请选择</option>
                     </select>
                 </div>
                 <div class="add-user-item">
                     <div class="add-user-title">市</div>
                     <select class="form-control location-select-item" id="userorgnization-city"
-                            name="userorgnization-city" onclick="getAllCity()">
+                            name="userorgnization-city" style="color:white;" onclick="getAllCity()">
                         <option value="">请选择</option>
                     </select>
                 </div>
                 <div class="add-user-item">
                     <div class="add-user-title">机房</div>
                     <select class="form-control location-select-item" id="userorgnization-computerroom"
-                            name="userorgnization-computerroom" onclick="getAllComputerroom()">
+                            name="userorgnization-computerroom" style="color:white;" onclick="getAllComputerroom()">
                         <option value="">请选择</option>
                     </select>
                 </div>
             </div>
 
             <div class="add-roles-handle">
-                <button type="submit" class="btn-primary" id="add-user-handle" onclick="submitAddUser()">确定</button>
-                <button type="submit" class="btn-primary" id="update-user-handle" onclick="submitUpdateUser()">确定</button>
-                <button class="btn-default" onclick="hiddenUserModel()">取消</button>
+                <button type="submit" class="button-primary button-pill button-small" id="add-user-handle" onclick="submitAddUser()">确定</button>
+                <button type="submit" class="button-primary button-pill button-small" id="update-user-handle" onclick="submitUpdateUser()">确定</button>
+                <button class="button-primary button-pill button-small" onclick="hiddenUserModel()">取消</button>
             </div>
         </div>
         <!-- user model DIV END-->
@@ -778,21 +725,21 @@
                 <div id="rid" style="display: none"></div>
                 <div class="add-roles-item">
                     <div class="add-roles-title">角色名称</div>
-                    <input id="rolesname" class="form-control add-roles-input" type="text">
+                    <input id="rolesname" class="form-control add-roles-input" type="text" style="color:white;">
                 </div>
                 <div class="add-roles-item">
                     <div class="add-roles-title">备注</div>
-                    <input id="rolesextra" class="form-control add-roles-input" type="text">
+                    <input id="rolesextra" class="form-control add-roles-input" type="text" style="color:white;">
                 </div>
             </div>
 
             <div class="add-roles-handle">
-                <button type="submit" class="btn-primary" id="add-roles-handle" onclick="submitAddRoles()">确定
+                <button type="submit" class="button-primary button-pill button-small" id="add-roles-handle" onclick="submitAddRoles()">确定
                 </button>
-                <button type="submit" class="btn-primary" id="update-roles-handle" onclick="submitUpdateRoles()">
+                <button type="submit" class="button-primary button-pill button-small" id="update-roles-handle" onclick="submitUpdateRoles()">
                     确定
                 </button>
-                <button class="btn-default" onclick="hiddenRolesModel()">取消</button>
+                <button class="button-primary button-pill button-small" onclick="hiddenRolesModel()">取消</button>
             </div>
         </div>
         <!-- roles model DIV END-->
@@ -803,17 +750,17 @@
             <div class="add-threshold-one-line">
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">设备名称</div>
-                    <input id="input-device-threshold-name" class="form-control" type="text">
+                    <input id="input-device-threshold-name" class="form-control" type="text" style="color:white;">
                 </div>
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数名称</div>
-                    <input class="form-control location-select-item" id="thresholdname" name="thresholdname">
+                    <input class="form-control location-select-item" id="thresholdname" name="thresholdname" style="color:white;">
                     </input>
                 </div>
 
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">参数分类</div>
-                    <select class="form-control location-select-item" id="thresholdtype" name="thresholdtype">
+                    <select class="form-control location-select-item" id="thresholdtype" name="thresholdtype" style="color:white;">
                         <option value="电能">电能</option>
                         <option value="环境">环境</option>
                         <option value="其他">其他</option>
@@ -824,29 +771,27 @@
             <div class="add-threshold-one-line">
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">单位</div>
-                    <input id="thresholdunit" class="form-control add-threshold-input" type="text">
+                    <input id="thresholdunit" class="form-control add-threshold-input" type="text" style="color:white;">
                 </div>
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">上限值</div>
-                    <input id="thresholdcellval" class="form-control add-threshold-input" type="text">
+                    <input id="thresholdcellval" class="form-control add-threshold-input" type="text" style="color:white;">
                 </div>
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">下限值</div>
-                    <input id="thresholdfloorval" class="form-control add-threshold-input" type="text">
+                    <input id="thresholdfloorval" class="form-control add-threshold-input" type="text" style="color:white;">
                 </div>
             </div>
             <div class="add-threshold-one-line">
                 <div class="add-threshold-item">
                     <div class="add-threshold-title">启用标识</div>
-                    <select class="form-control location-select-item" id="thresholdismark" name="thresholdismark"
-                            onclick="">
+                    <select class="form-control location-select-item" id="thresholdismark" name="thresholdismark" style="color:white;">
                         <option value="1">是</option>
                         <option value="0">否</option>
                     </select>
                 </div>
                 <div class="add-threshold-item">
-                    等级<select class="form-control location-select-item" id="thresholdlevel" name="thresholdlevel"
-                            onclick="">
+                    等级<select class="form-control location-select-item" id="thresholdlevel" name="thresholdlevel" style="color:white;">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -855,13 +800,13 @@
             </div>
 
             <div class="add-threshold-handle">
-                <button type="submit" class="btn-primary" id="add-threshold-handle" onclick="submitAddThreshold()">
+                <button type="submit" class="button-primary button-pill button-small" id="add-threshold-handle" onclick="submitAddThreshold()">
                     确定
                 </button>
-                <button type="submit" class="btn-primary" id="update-threshold-handle"
+                <button type="submit" class="button-primary button-pill button-small" id="update-threshold-handle"
                         onclick="submitUpdateThreshold()">确定
                 </button>
-                <button class="btn-default" onclick="hiddenThresholdModel()">取消</button>
+                <button class="button-primary button-pill button-small" onclick="hiddenThresholdModel()">取消</button>
             </div>
         </div>
         <!-- threshold model DIV END-->
@@ -871,7 +816,7 @@
             <div class="add-roles-one-line">
                 预警人员
                 <select class="form-control location-select-item" id="alarm-user"
-                        name="alarm-user">
+                        name="alarm-user" style="color:white;">
                     <option value="">请选择</option>
                 </select>
             </div>
@@ -879,7 +824,7 @@
             <div class="add-roles-one-line">
                 预警等级
                 <select class="form-control location-select-item" id="alarm-level"
-                        name="alarm-level">
+                        name="alarm-level" style="color:white;">
                     <option value="1" selected='selected'>1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -887,8 +832,8 @@
             </div>
 
             <div class="add-threshold-handle">
-                <button type="submit" class="btn-primary" id="add-alarm-user-handle" onclick="addAlarmUser()">确定</button>
-                <button class="btn-default" onclick="cancle()">取消</button>
+                <button type="submit" class="button-primary button-pill button-small" id="add-alarm-user-handle" onclick="addAlarmUser()">确定</button>
+                <button class="button-primary button-pill button-small" onclick="cancle()">取消</button>
             </div>
         </div>
         <!-- alarm user model DIV END-->
@@ -900,13 +845,13 @@
                 <div id="oid" style="display: none"></div>
                 <div class="add-roles-item">
                     <div class="add-roles-title">组织机构名称</div>
-                    <input id="orgname" class="form-control add-roles-input" type="text">
+                    <input id="orgname" class="form-control add-roles-input" type="text" style="color:white;">
                 </div>
             </div>
 
             <div class="update-org-handle">
-                <button type="submit" class="btn-primary" id="update-org-handle" onclick="submitUpdateOrg()">确定</button>
-                <button class="btn-default" onclick="cancleUpdateOrg()">取消</button>
+                <button type="submit" class="button-primary button-pill button-small" id="update-org-handle" onclick="submitUpdateOrg()">确定</button>
+                <button class="button-primary button-pill button-small" onclick="cancleUpdateOrg()">取消</button>
             </div>
         </div>
 
@@ -914,17 +859,17 @@
             <div class="add-roles-one-line">
                 <div class="add-roles-item">
                     <div class="add-roles-title">省行名称</div>
-                    <input id="orgprovincename" class="form-control add-roles-input" type="text">
+                    <input id="orgprovincename" class="form-control add-roles-input" type="text" style="color:white;">
                     <div class="add-roles-title">市行名称</div>
-                    <input id="orgcityname" class="form-control add-roles-input" type="text">
+                    <input id="orgcityname" class="form-control add-roles-input" type="text" style="color:white;">
                     <div class="add-roles-title">机房名称</div>
-                    <input id="orgcomputerroomname" class="form-control add-roles-input" type="text">
+                    <input id="orgcomputerroomname" class="form-control add-roles-input" type="text" style="color:white;">
                 </div>
             </div>
 
             <div class="add-org-handle">
-                <button type="submit" class="btn-primary" id="add-org-handle" onclick="submitAddOrg()">确定</button>
-                <button class="btn-default" onclick="cancleAddOrg()">取消</button>
+                <button type="submit" class="button-primary button-pill button-small" id="add-org-handle" onclick="submitAddOrg()">确定</button>
+                <button class="button-primary button-pill button-small" onclick="cancleAddOrg()">取消</button>
             </div>
         </div>
         <!-- orgnization model DIV END-->
@@ -934,9 +879,6 @@
 
 
 <!-- Javascript Libraries -->
-<!-- jQuery -->
-<!-- <script src="js/jquery-3.3.1.js"></script> -->
-
 <!-- Bootstrap -->
 <script src="js/bootstrap.min.js"></script>
 <!--Media Player-->
@@ -1148,7 +1090,7 @@
 
 <!-- 切换子菜单-->
 <script type="text/javascript">
-    $("#item1").hide();
+    $("#item1").show();
     $("#item2").hide();
     $("#item3").hide();
     $("#item4").hide();
@@ -1184,8 +1126,6 @@
             $("#item7").hide();
             $("#item8").hide();
             $("#item9").hide();
-
-            getALLUserInfomation();
         });
         $("#subItem2").click(function () {
             $("#item1").hide();
@@ -1197,7 +1137,6 @@
             $("#item7").hide();
             $("#item8").hide();
             $("#item9").hide();
-
             getALLRolesInfomation();
         });
         $("#subItem3").click(function () {
@@ -1210,7 +1149,6 @@
             $("#item7").hide();
             $("#item8").hide();
             $("#item9").hide();
-
 
             //功能管理
             //左侧角色表的初始化渲染
@@ -1279,7 +1217,6 @@
                 });
             });
         });
-
         $("#subItem4").click(function () {
             $("#item1").hide();
             $("#item2").hide();
@@ -1421,7 +1358,6 @@
             $("#item8").show();
             $("#item9").hide();
         });
-        <!--wsy2018.9.6-->
         $("#subItem9").click(function () {
             $("#item1").hide();
             $("#item2").hide();
@@ -2215,6 +2151,24 @@
         var address485 = $("#485address").val();
         var extra = $("#extra").val();
 
+        var province = $("#province_code option:selected").text();
+        var city = $("#city_code option:selected").text();
+        var computerroom= $("#comproom_code option:selected").text();
+
+        var belongid = "";
+        var belonglevel = "0";
+
+        if(computerroom != "未指定") {
+            belongid = computerroom;
+            belonglevel = 3;
+        } else if(city != "未指定") {
+            belongid = city;
+            belonglevel = 2;
+        } else if(province!= "未指定") {
+            belongid = province;
+            belonglevel = 1;
+        }
+
         if(radioEthernet == "on" && radioR5485 == "on" && radioRS232 == "on")
             alert("只能选择一种类型");
         else if(radioEthernet == "on" && radioR5485 == "on")
@@ -2257,7 +2211,9 @@
                     serialno: serialno,
                     IPaddress: IPaddress,
                     port: port,
-                    extra: extra
+                    extra: extra,
+                    belongid: belongid,
+                    belonglevel: belonglevel
                 },
                 dataType: "json",
                 success: function (data) {
@@ -2432,8 +2388,6 @@
 
         var tmpNodePid = $("#nodeid").val();
         var tmpRid = $("#roleid").val();
-
-        console.log(tmpNodePid);
 
         if (tmpRid == "") {
             alert("清选择角色");
@@ -3082,6 +3036,7 @@
             $('#update-orgnization-modal').css('display', 'block');
         }
     }
+
     <!-- 修改组织结构-确定修改-->
     function submitUpdateOrg(){
         var nodeid = $("#nodeidstruct").val();
@@ -3102,6 +3057,7 @@
             });
         }
     }
+
     <!-- 修改组织结构-取消修改-->
     function cancleUpdateOrg(){
         $('#update-orgnization-modal').css('display', 'none');
@@ -3110,7 +3066,7 @@
     <!-- 删除组织结构-->
     function deleteOrg() {
         var tmpNodeOrgid = $("#nodeidstruct").val();
-        del=window.confirm("确定删除该省行信息？");
+        del = window.confirm("确定删除该信息？");
 
         if(del){
             $.ajax({

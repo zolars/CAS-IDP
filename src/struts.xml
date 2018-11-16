@@ -198,6 +198,15 @@
                 <param name="root">result</param>
             </result>
         </action>
+
+        <action name="getHarmonicVoltage2" class="reportChart.action.getHarmonicVoltage2">
+            <!--getHarmonicVoltage2 -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <!--wsy2018.9.27 -->
         <action name="getHarmonicCurrent" class="reportChart.action.getHarmonicCurrent">
             <!--getHarmonicCurrent -->
@@ -206,6 +215,15 @@
                 <param name="root">result</param>
             </result>
         </action>
+
+        <action name="getHarmonicCurrent2" class="reportChart.action.getHarmonicCurrent2">
+            <!--getHarmonicCurrent2 -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <!--wsy2018.9.29 -->
         <action name="getHVCrate" class="reportChart.action.getHVCrate">
             <!--getHVCrate -->
@@ -214,9 +232,26 @@
                 <param name="root">result</param>
             </result>
         </action>
+
+        <action name="getHVCrate2" class="reportChart.action.getHVCrate2">
+            <!--getHVCrate2 -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <!--wsy2018.10.12 -->
         <action name="getSynthesis" class="reportChart.action.getSynthesis">
             <!--getSynthesis -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getSynthesis2" class="reportChart.action.getSynthesis2">
+            <!--getSynthesis2 -->
             <result name="failure">/failure.jsp</result>
             <result name="success" type="json">
                 <param name="root">result</param>

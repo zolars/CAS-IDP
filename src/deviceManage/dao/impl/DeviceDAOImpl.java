@@ -3,6 +3,7 @@ package deviceManage.dao.impl;
 import Util.HBSessionDaoImpl;
 import deviceManage.dao.DeviceDAO;
 import hibernatePOJO.*;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         if (dv == null) {
             return "";
         } else {
-            return dv.getDid();
+            return dv.getDid().toString();
         }
     }
 
@@ -169,7 +170,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         if (kl == null) {
             return "0";
         } else {
-            return kl.getDid();
+            return kl.getDid().toString();
         }
     }
 
@@ -250,7 +251,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         String maxdid = getMaxDeviceId();
         Integer imaxid = Integer.parseInt(maxdid) + 1;
 
-        dt.setDid(imaxid.toString());
+        dt.setDid(imaxid);
         dt.setDevicetype(deviceType);
         dt.setName(devname);
         dt.setType(devtype);
@@ -265,6 +266,91 @@ public class DeviceDAOImpl implements DeviceDAO {
         rt = hbsessionDao.insert(dt);
         return rt;
     }
+
+     public Boolean addOneDeviceInfoToBelongPosition(String deviceType, String devname, String belongname, String belonglevel){
+         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+         boolean rt = false;
+
+         Devices dv = (Devices) hbsessionDao.getFirst(
+                 "FROM Devices where name='" + devname + "'");
+
+         if(dv == null || belonglevel.equals("0")) {
+             return false;
+         } else {
+             String did = dv.getDid().toString();
+
+             if(belonglevel.equals("1")) {
+                 ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
+                         "FROM ProvinceBank where pbname='" + belongname + "分行" + "'");
+
+                 if(deviceType.equals("其他传感器")) {
+                     String tempset = pb.getTempset();
+                     if (tempset!= null && tempset.length() > 0) {
+                         tempset += "，";
+                     }
+                     tempset += did;
+                     String hql = "update ProvinceBank pb set tempset='" + tempset + "' where pbname = '" + belongname + "'";
+                     rt = hbsessionDao.update(hql);
+                 } else {
+                     String didset = pb.getDidset();
+                     if (didset!= null && didset.length() > 0) {
+                         didset += "，";
+                     }
+                     didset += did;
+                     String hql = "update ProvinceBank pb set didset='" + didset + "' where pbname = '" + belongname + "'";
+                     rt = hbsessionDao.update(hql);
+                 }
+             }
+
+             else if(belonglevel.equals("2")) {
+                 CityBank pb = (CityBank) hbsessionDao.getFirst(
+                         "FROM CityBank where cbname='" + belongname + "'");
+
+                 if(deviceType.equals("其他传感器")) {
+                     String tempset = pb.getTempset();
+                     if (tempset!= null && tempset.length() > 0) {
+                         tempset += "，";
+                     }
+                     tempset += did;
+                     String hql = "update CityBank pb set tempset='" + tempset + "' where cbname = '" + belongname + "'";
+                     rt = hbsessionDao.update(hql);
+                 } else {
+                     String didset = pb.getDidset();
+                     if (didset!= null && didset.length() > 0) {
+                         didset += "，";
+                     }
+                     didset += did;
+                     String hql = "update CityBank pb set didset='" + didset + "' where cbname = '" + belongname + "'";
+                     rt = hbsessionDao.update(hql);
+                 }
+             }
+
+             else if(belonglevel.equals("3")) {
+                 Computerroom pb = (Computerroom) hbsessionDao.getFirst(
+                         "FROM Computerroom where rname='" + belongname + "'");
+
+                 if(deviceType.equals("其他传感器")) {
+                     String tempset = pb.getTempset();
+                     if (tempset!= null && tempset.length() > 0) {
+                         tempset += "，";
+                     }
+                     tempset += did;
+                     String hql = "update Computerroom pb set tempset='" + tempset + "' where rname = '" + belongname + "'";
+                     rt = hbsessionDao.update(hql);
+                 } else {
+                     String didset = pb.getDidset();
+                     if (didset!= null && didset.length() > 0) {
+                         didset += "，";
+                     }
+                     didset += did;
+                     String hql = "update Computerroom pb set didset='" + didset + "' where rname = '" + belongname + "'";
+                     rt = hbsessionDao.update(hql);
+                 }
+             }
+         }
+
+         return rt;
+     }
 
     /**
      * 追加一个用户id到某个告警等级level的记录中

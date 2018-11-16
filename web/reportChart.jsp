@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/menu.css" rel="stylesheet">
     <link href="css/mycss.css" rel="stylesheet">
     <link rel="stylesheet" href="css/header.css">
-
+    <link href="css/buttons.css" rel="stylesheet">
     <!-- bootstrap datepicker时间选择控件 -->
     <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
@@ -156,33 +156,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <a data-toggle="tab" id="subItem4">•谐波电压、谐波电流合格率统计报表</a>
                             </li>
                         </ul>
-                        <div class="block-area" id="defaultStyle">
+                        <div class="block-area" id="defaultStyle" style="background: white;">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-2" style="color:black;">
                                     <form class="form-inline" role="form">
                                         <div class="form-group">
                                             <label for="item2-menu" class="form-label">报表：</label>
-                                            <select id="item2-menu" class="form-control" style="width:100px">
-                                                <option value="item2-1" selected="请选择">日报表</option>
+                                            <select id="item2-menu" name="item2-menu" class="form-control" style="width:100px;background: #999;">
+                                                <option value="item2-1">日报表</option>
+                                                <option value="item2-2">自定义报表</option>
                                             </select>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-md-2">
+                                <div id="div-time1" class="col-md-2" style="color:black;">
                                     <form class="form-inline" role="form">
-                                        <label for="date" class="form-label">时间：</label>
-                                        <div class="input-group date form_datetime" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-                                            <input id="date" class="form-control" size="16" type="text" value="" readonly>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                        <div class="form-group">
+                                            <label for="date" class="form-label" style="padding-top:10px;">时间：</label>
+                                            <div style="background: #999;border-radius:5px 5px 5px 5px;" class="input-group date form_datetime" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                <input id="date" class="form-control" size="16" type="text" value="" readonly>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                            </div>
+                                            <input type="hidden" id="dtp_input1" value=""/>
                                         </div>
-                                        <input type="hidden" id="dtp_input1" value=""/>
                                     </form>
                                 </div>
-                                <div class="col-md-2">
+
+                                <div id="div-time2" class="col-md-2" style="color:black; display:none;">
+                                    <form class="form-inline" role="form">
+                                        <div class="form-group">
+                                            <label for="date" class="form-label" style="padding-top:10px;">开始</label>
+                                            <div style="background: #999;border-radius:5px 5px 5px 5px;" class="input-group date form_datetime" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                <input id="date_start" class="form-control" size="16" type="text" value="" readonly>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                            </div>
+                                            <input type="hidden" id="dtp_input_start" value=""/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="date" class="form-label" style="padding-top:10px;">结束</label>
+                                            <div style="background: #999;border-radius:5px 5px 5px 5px;" class="input-group date form_datetime" data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+                                                <input id="date_end" class="form-control" size="16" type="text" value="" readonly>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                            </div>
+                                            <input type="hidden" id="dtp_input_end" value=""/>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-md-2" style="color:black;">
                                     <form class="form-inline" role="form">
                                         <div class="form-group">
                                             <label for="his-mpid-select" class="form-label">装置名称：</label>
-                                            <select class="form-control" style="width:100px" name="his-mpid-select" id="his-mpid-select"
+                                            <select class="form-control" style="width:100px; background: #999; border-radius:5px 5px 5px 5px;" name="his-mpid-select" id="his-mpid-select"
                                                     onclick="getMonitorPoints()">
                                                 <option value="">请选择</option>
                                             </select>
@@ -191,20 +216,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
                         </div>
-                        <div id="item1" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                        <div id="item1" style="background: white; border-radius: 0 0 15px 15px; color:black;">
                             <div class="block-area">
                                 <div class="row">
                                     <div class="col-md-7" style="text-align:right">
                                         <form class="form-inline" role="form">
                                             <div class="form-group">
-                                                <button type="button" class="btn-sm btn-primary" onclick="searchHV()">查询</button>
-                                                <button type="button" class="btn-sm btn-default" onclick="exportHVtable()">导出</button>
+                                                <button id="searchHV1-button" type="button" class="button-primary button-pill button-small" onclick="searchHV()">查询</button>
+                                                <button id="searchHV2-button" style="display:none;" type="button" class="button-primary button-pill button-small" onclick="searchHV2()">查询</button>
+                                                <button type="button" class="button-primary button-pill button-small" onclick="exportHVtable()">导出</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table border="1" id="hvtable">
+                                    <table border="1" id="hvtable" style="color:black;">
                                         <tr>
                                             <td style="text-align:center" rowspan="2">参数</td>
                                             <td style="text-align:center" colspan="5">A相</td>
@@ -1183,20 +1209,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
                         </div>
-                        <div id="item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                        <div id="item2" style="background: white; border-radius: 0 0 15px 15px; color:black;">
                             <div class="block-area">
                                 <div class="row">
                                     <div class="col-md-7" style="text-align:right">
                                         <form class="form-inline" role="form">
                                             <div class="form-group">
-                                                <button type="button" class="btn-sm btn-primary" onclick="searchHC()">查询</button>
-                                                <button type="button" class="btn-sm btn-default" onclick="exportHCtable()">导出</button>
+                                                <button id="searchHC1-button" type="button" class="button-primary button-pill button-small" onclick="searchHC()">查询</button>
+                                                <button id="searchHC2-button" style="display:none;" type="button" class="button-primary button-pill button-small" onclick="searchHC2()">查询</button>
+                                                <button type="button" class="button-primary button-pill button-small" onclick="exportHCtable()">导出</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table border="1" id="hctable">
+                                    <table border="1" id="hctable" style="color:black;">
                                         <tr>
                                             <td style="text-align:center" rowspan="2">参数</td>
                                             <td style="text-align:center" colspan="5">A相</td>
@@ -2175,20 +2202,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
                         </div>
-                        <div id="item3" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                        <div id="item3" style="background: white; border-radius: 0 0 15px 15px; color:black;">
                             <div class="block-area">
                                 <div class="row">
                                     <div class="col-md-8" style="text-align:right">
                                         <form class="form-inline" role="form">
                                             <div class="form-group">
-                                                <button type="button" class="btn-sm btn-primary" onclick="searchSynthesis()">查询</button>
-                                                <button type="button" class="btn-sm btn-default" onclick="searchHis()">导出</button>
+                                                <button id="searchSynthesis1-button" type="button" class="button-primary button-pill button-small" onclick="searchSynthesis()">查询</button>
+                                                <button id="searchSynthesis2-button" style="display:none;" type="button" class="button-primary button-pill button-small" onclick="searchSynthesis2()">查询</button>
+                                                <button type="button" class="button-primary button-pill button-small" onclick="searchHis()">导出</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table border="1" id="syntable">
+                                    <table border="1" id="syntable" style="color:black;">
                                         <tr>
                                             <td style="text-align:center">参数</td>
                                             <td style="text-align:center" colspan="2">最大值</td>
@@ -2405,20 +2433,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
                         </div>
-                        <div id="item4" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
+                        <div id="item4" style="background: white; border-radius: 0 0 15px 15px; color:black;">
                             <div class="block-area">
                                 <div class="row">
                                     <div class="col-md-8" style="text-align:right">
                                         <form class="form-inline" role="form">
                                             <div class="form-group">
-                                                <button type="button" class="btn-sm btn-primary" onclick="searchHVCrate()">查询</button>
-                                                <button type="button" class="btn-sm btn-default" onclick="exportHVCRateTable()">导出</button>
+                                                <button id="searchHVCrate1-button" type="button" class="button-primary button-pill button-small" onclick="searchHVCrate()">查询</button>
+                                                <button id="searchHVCrate2-button" style="display:none;" type="button" class="button-primary button-pill button-small" onclick="searchHVCrate2()">查询</button>
+                                                <button type="button" class="button-primary button-pill button-small" onclick="exportHVCRateTable()">导出</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table border="1" id="hvcRateTable">
+                                    <table border="1" id="hvcRateTable" style="color:black;">
                                         <tr>
                                             <td style="text-align:center" rowspan="2">参数</td>
                                             <td style="text-align:center" colspan="2">A相</td>
@@ -3257,9 +3286,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </section>
 
     <!-- Javascript Libraries -->
-
-    <!-- jQuery Library -->
-
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
     <!--Media Player-->
@@ -3280,7 +3306,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 切换子菜单-->
     <script type="text/javascript">
-        $("#item1").hide();
+        $("#item1").show();
         $("#item2").hide();
         $("#item3").hide();
         $("#item4").hide();
@@ -3311,8 +3337,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $("#item4").show();
             });
         });
-
-        $("#subItem1").click();
     </script>
 
 <!-- 省\市\机房下拉菜单-->
@@ -3583,55 +3607,83 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </script>
 
-    <!-- 事件选择器 -->
-    <script type="text/javascript">
-
-        <!-- 时间选择器-->
-        $('.form_datetime').datetimepicker({
-            //language:  'fr',
-            language: 'zh-CN',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            forceParse: 0,
-            showMeridian: 1
-        });
-        //当时间选择器变化时
-        $("#firstDate").change(function () {
-            $('.firstDate').datetimepicker('setStartDate', $(this).val());
-        });
-        //获取检测点列表
-        function getMonitorPoints() {
-            var computerroom = $("#comproom_code option:selected").val();
-            var mpcname = $("#his-mpid-select").val();
-            if(!computerroom){
-                alert("请先选择机房，再选择检测点");
-            }
-            else if (!mpcname) {
-                $.ajax({
-                    type: "post",
-                    url: "getMonitorPoints",
-                    data: {
-                        computerroom: computerroom
-                    },
-                    dataType: "json",
-                    success: function (data) {
-                        var obj = JSON.parse(data);
-                        var rt = obj.allmpdata;
-                        for (var i = 0; i < rt.length; i++) {
-                            if(i == 0)
-                                $('#his-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
-                            else
-                                $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
-                        }
-                    }
-                });
-            }
+<!-- 事件选择器 -->
+<script type="text/javascript">
+    <!-- 时间选择器-->
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+    //当时间选择器变化时
+    $("#firstDate").change(function () {
+        $('.firstDate').datetimepicker('setStartDate', $(this).val());
+    });
+    //获取检测点列表
+    function getMonitorPoints() {
+        var computerroom = $("#comproom_code option:selected").val();
+        var mpcname = $("#his-mpid-select").val();
+        if(!computerroom){
+            alert("请先选择机房，再选择检测点");
         }
+        else if (!mpcname) {
+            $.ajax({
+                type: "post",
+                url: "getMonitorPoints",
+                data: {
+                    computerroom: computerroom
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var rt = obj.allmpdata;
+                    for (var i = 0; i < rt.length; i++) {
+                        if(i == 0)
+                            $('#his-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
+                        else
+                            $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+                    }
+                }
+            });
+        }
+    }
 
-    </script>
+    //切换报表日报表、自定义报表
+    $("#item2-menu").change(function(){
+        var opt = $("#item2-menu").val();
+
+        if(opt == "item2-1") {
+            $("#div-time1").css('display', 'block');
+            $("#div-time2").css('display', 'none');
+            $("#searchHV1-button").css('display', 'block');
+            $("#searchHV2-button").css('display', 'none');
+            $("#searchHC1-button").css('display', 'block');
+            $("#searchHC2-button").css('display', 'none');
+            $("#searchSynthesis1-button").css('display', 'block');
+            $("#searchSynthesis2-button").css('display', 'none');
+            $("#searchHVCrate1-button").css('display', 'block');
+            $("#searchHVCrate2-button").css('display', 'none');
+        } else if(opt == "item2-2"){
+            $("#div-time1").css('display', 'none');
+            $("#div-time2").css('display', 'block');
+            $("#searchHV1-button").css('display', 'none');
+            $("#searchHV2-button").css('display', 'block');
+            $("#searchHC1-button").css('display', 'none');
+            $("#searchHC2-button").css('display', 'block');
+            $("#searchSynthesis1-button").css('display', 'none');
+            $("#searchSynthesis2-button").css('display', 'block');
+            $("#searchHVCrate1-button").css('display', 'none');
+            $("#searchHVCrate2-button").css('display', 'block');
+        }
+    });
+</script>
+
 
 <!-- 查询谐波电压 -->
 <script type="text/javascript">
@@ -3675,9 +3727,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[3].innerHTML = result[4];
                             table.rows[result[0]].cells[4].innerHTML = result[5];
                             if(table.rows[result[0]].cells[16].innerHTML == "")
-                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
-                               table.rows[result[0]].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                               table.rows[result[0]].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -3687,9 +3739,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[8].innerHTML = result[4];
                             table.rows[result[0]].cells[9].innerHTML = result[5];
                             if(table.rows[result[0]].cells[16].innerHTML == "")
-                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
-                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else{
                                 table.rows[result[0]].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
                             }
@@ -3700,9 +3752,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[13].innerHTML = result[4];
                             table.rows[result[0]].cells[14].innerHTML = result[5];
                             if(table.rows[result[0]].cells[16].innerHTML == "")
-                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: black;">合格</span>';
                             else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
-                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: black;">合格</span>';
                             else{
                                 table.rows[result[0]].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
                             }
@@ -3717,7 +3769,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[2].cells[3].innerHTML = vcfund[3];
                             table.rows[2].cells[4].innerHTML = vcfund[4];
                             if(vcfund[5] == '合格')
-                                table.rows[2].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[2].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else if(vcfund[5] == '不合格')
                                 table.rows[2].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -3727,7 +3779,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[2].cells[8].innerHTML = vcfund[3];
                             table.rows[2].cells[9].innerHTML = vcfund[4];
                             if(vcfund[5] == '合格')
-                                table.rows[2].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[2].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else if(vcfund[5] == '不合格')
                                 table.rows[2].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -3737,12 +3789,131 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[2].cells[13].innerHTML = vcfund[3];
                             table.rows[2].cells[14].innerHTML = vcfund[4];
                             if(vcfund[5] == '合格')
-                                table.rows[2].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[2].cells[15].innerHTML = '<span style="color: black;">合格</span>';
                             else if(vcfund[5] == '不合格')
                                 table.rows[2].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
                         }
                     }
                     table.rows[2].cells[16].innerHTML = '220';
+                    alert("查询完成！");
+                },
+                error:function(data){
+                    alert("Error!");
+                }
+            });
+        }
+    }
+
+    function searchHV2() {
+        var stime = $("#date_start").val();
+        var etime = $("#date_end").val();
+        var did = $('#his-mpid-select').val();
+
+        if(did && stime && etime){
+            $.ajax({
+                type: "post",
+                url: "getHarmonicVoltage2",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    did: did
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var temp_result= obj.hvresult;
+                    var temp_threshold = obj.thresholdResult;
+                    var temp_vcfund = obj.vcfund;
+                    var table = document.getElementById('hvtable');
+
+                    for (var j=0;j<49*3;j++) {
+                        var threshold = temp_threshold[j].split(",");
+                        if(threshold[1]=='a') {
+                            if (threshold[2] == 'null') {
+                                table.rows[threshold[0]].cells[16].innerHTML = "";
+                            } else {
+                                table.rows[threshold[0]].cells[16].innerHTML = threshold[2];
+                            }
+                        }
+                    }
+
+                    for (var i = 0; i < temp_result.length; i++) {
+                        var result= temp_result[i].split(",");
+                        if(result[1]=='a'){
+                            table.rows[result[0]].cells[1].innerHTML = result[2];
+                            table.rows[result[0]].cells[2].innerHTML = result[3];
+                            table.rows[result[0]].cells[3].innerHTML = result[4];
+                            table.rows[result[0]].cells[4].innerHTML = result[5];
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        else if(result[1]=='b'){
+                            table.rows[result[0]].cells[6].innerHTML = result[2];
+                            table.rows[result[0]].cells[7].innerHTML = result[3];
+                            table.rows[result[0]].cells[8].innerHTML = result[4];
+                            table.rows[result[0]].cells[9].innerHTML = result[5];
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else{
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
+                            }
+                        }
+                        else if(result[1]=='c'){
+                            table.rows[result[0]].cells[11].innerHTML = result[2];
+                            table.rows[result[0]].cells[12].innerHTML = result[3];
+                            table.rows[result[0]].cells[13].innerHTML = result[4];
+                            table.rows[result[0]].cells[14].innerHTML = result[5];
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            else{
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
+                            }
+                        }
+                    }
+
+                    for (var k=0;k<temp_vcfund.length;k++) {
+                        var vcfund = temp_vcfund[k].split(",");
+                        if(vcfund[0]=='u1'){
+                            table.rows[2].cells[1].innerHTML = vcfund[1];
+                            table.rows[2].cells[2].innerHTML = vcfund[2];
+                            table.rows[2].cells[3].innerHTML = vcfund[3];
+                            table.rows[2].cells[4].innerHTML = vcfund[4];
+                            if(vcfund[5] == '合格')
+                                table.rows[2].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(vcfund[5] == '不合格')
+                                table.rows[2].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(vcfund[0]=='u2'){
+                            table.rows[2].cells[6].innerHTML = vcfund[1];
+                            table.rows[2].cells[7].innerHTML = vcfund[2];
+                            table.rows[2].cells[8].innerHTML = vcfund[3];
+                            table.rows[2].cells[9].innerHTML = vcfund[4];
+                            if(vcfund[5] == '合格')
+                                table.rows[2].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(vcfund[5] == '不合格')
+                                table.rows[2].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(vcfund[0]=='u3'){
+                            table.rows[2].cells[11].innerHTML = vcfund[1];
+                            table.rows[2].cells[12].innerHTML = vcfund[2];
+                            table.rows[2].cells[13].innerHTML = vcfund[3];
+                            table.rows[2].cells[14].innerHTML = vcfund[4];
+                            if(vcfund[5] == '合格')
+                                table.rows[2].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(vcfund[5] == '不合格')
+                                table.rows[2].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                    }
+                    table.rows[2].cells[16].innerHTML = '220';
+                    alert("查询完成！");
                 },
                 error:function(data){
                     alert("Error!");
@@ -3793,9 +3964,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[3].innerHTML = result[4];
                             table.rows[result[0]].cells[4].innerHTML = result[5];
                             if(table.rows[result[0]].cells[16].innerHTML == "")
-                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
-                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[result[0]].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -3805,9 +3976,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[8].innerHTML = result[4];
                             table.rows[result[0]].cells[9].innerHTML = result[5];
                             if(table.rows[result[0]].cells[16].innerHTML == "")
-                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
-                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[result[0]].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -3817,9 +3988,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[13].innerHTML = result[4];
                             table.rows[result[0]].cells[14].innerHTML = result[5];
                             if(table.rows[result[0]].cells[16].innerHTML == "")
-                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: black;">合格</span>';
                             else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
-                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[result[0]].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -3833,7 +4004,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[2].cells[3].innerHTML = vcfund[3];
                             table.rows[2].cells[4].innerHTML = vcfund[4];
                             if(vcfund[5] == '合格')
-                                table.rows[2].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[2].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else if(vcfund[5] == '不合格')
                                 table.rows[2].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
 
@@ -3844,7 +4015,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[2].cells[8].innerHTML = vcfund[3];
                             table.rows[2].cells[9].innerHTML = vcfund[4];
                             if(vcfund[5] == '合格')
-                                table.rows[2].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[2].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else if(vcfund[5] == '不合格')
                                 table.rows[2].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
 
@@ -3855,13 +4026,133 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[2].cells[13].innerHTML = vcfund[3];
                             table.rows[2].cells[14].innerHTML = vcfund[4];
                             if(vcfund[5] == '合格')
-                                table.rows[2].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[2].cells[15].innerHTML = '<span style="color: black;">合格</span>';
                             else if(vcfund[5] == '不合格')
                                 table.rows[2].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
 
                         }
                     }
                     table.rows[2].cells[16].innerHTML = '50';
+                    alert("查询完成！");
+                },
+                error:function(data){
+                    alert("Error!");
+                }
+            });
+        }
+    }
+
+    function searchHC2() {
+        var stime = $("#date_start").val();
+        var etime = $("#date_end").val();
+        var did = $('#his-mpid-select').val();
+
+        if(stime && etime && did){
+            $.ajax({
+                type: "post",
+                url: "getHarmonicCurrent2",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    did: did
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var temp_result= obj.hcresult;
+                    var temp_threshold = obj.thresholdResult;
+                    var temp_vcfund = obj.vcfund;
+                    var table = document.getElementById('hctable');
+
+                    for (var j = 0; j < 49*3; j++) {
+                        var threshold = temp_threshold[j].split(",");
+                        if(threshold[1]=='a') {
+                            if (threshold[2]=='null') {
+                                table.rows[threshold[0]].cells[16].innerHTML = "";
+                            } else {
+                                table.rows[threshold[0]].cells[16].innerHTML = threshold[2];
+                            }
+                        }
+                    }
+
+                    for (var j = 0; j < temp_result.length; j++) {
+                        var result= temp_result[j].split(",");
+                        if(result[1]=='a'){
+                            table.rows[result[0]].cells[1].innerHTML = result[2];
+                            table.rows[result[0]].cells[2].innerHTML = result[3];
+                            table.rows[result[0]].cells[3].innerHTML = result[4];
+                            table.rows[result[0]].cells[4].innerHTML = result[5];
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        else if(result[1]=='b'){
+                            table.rows[result[0]].cells[6].innerHTML = result[2];
+                            table.rows[result[0]].cells[7].innerHTML = result[3];
+                            table.rows[result[0]].cells[8].innerHTML = result[4];
+                            table.rows[result[0]].cells[9].innerHTML = result[5];
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        else if(result[1]=='c'){
+                            table.rows[result[0]].cells[11].innerHTML = result[2];
+                            table.rows[result[0]].cells[12].innerHTML = result[3];
+                            table.rows[result[0]].cells[13].innerHTML = result[4];
+                            table.rows[result[0]].cells[14].innerHTML = result[5];
+                            if(table.rows[result[0]].cells[16].innerHTML == "")
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(result[5]<=table.rows[result[0]].cells[16].innerHTML)
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                    }
+
+                    for (var k = 0; k < temp_vcfund.length; k++) {
+                        var vcfund = temp_vcfund[k].split(",");
+                        if(vcfund[0]=='i1'){
+                            table.rows[2].cells[1].innerHTML = vcfund[1];
+                            table.rows[2].cells[2].innerHTML = vcfund[2];
+                            table.rows[2].cells[3].innerHTML = vcfund[3];
+                            table.rows[2].cells[4].innerHTML = vcfund[4];
+                            if(vcfund[5] == '合格')
+                                table.rows[2].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(vcfund[5] == '不合格')
+                                table.rows[2].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
+
+                        }
+                        if(vcfund[0]=='i2'){
+                            table.rows[2].cells[6].innerHTML = vcfund[1];
+                            table.rows[2].cells[7].innerHTML = vcfund[2];
+                            table.rows[2].cells[8].innerHTML = vcfund[3];
+                            table.rows[2].cells[9].innerHTML = vcfund[4];
+                            if(vcfund[5] == '合格')
+                                table.rows[2].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(vcfund[5] == '不合格')
+                                table.rows[2].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
+
+                        }
+                        if(vcfund[0]=='i3'){
+                            table.rows[2].cells[11].innerHTML = vcfund[1];
+                            table.rows[2].cells[12].innerHTML = vcfund[2];
+                            table.rows[2].cells[13].innerHTML = vcfund[3];
+                            table.rows[2].cells[14].innerHTML = vcfund[4];
+                            if(vcfund[5] == '合格')
+                                table.rows[2].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            else if(vcfund[5] == '不合格')
+                                table.rows[2].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
+
+                        }
+                    }
+                    table.rows[2].cells[16].innerHTML = '50';
+                    alert("查询完成！");
                 },
                 error:function(data){
                     alert("Error!");
@@ -3876,8 +4167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var time = $("#date").val();
         var did = $('#his-mpid-select').val();
         var date = time.substring(0,10);
-        console.log(date);
-        console.log(did);
+
         if(time && did){
             $.ajax({
                 type: "post",
@@ -3892,10 +4182,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var hvrate= obj.hvRateResult;
                     var hcrate= obj.hcRateResult;
                     var temp_vcfund_rate= obj.vcfund_rate;
-                    console.log(hvrate);
-                    console.log(hcrate);
                     var table = document.getElementById('hvcRateTable');
-                    console.log(table.rows.length);
+
                     for (var i = 0; i <hvrate.length; i++) {
                         var hvresult= hvrate[i].split(",");
                         if(hvresult[1]=='a'){
@@ -3926,7 +4214,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[hcresult[0]].cells[13].innerHTML = hcresult[3];
                         }
                     }
-                    console.log(temp_vcfund_rate);
+
                     for(var k=0;k<temp_vcfund_rate.length;k++){
                         var vcFundResult= temp_vcfund_rate[k].split(",");
                         if(vcFundResult[0]=='u1'){
@@ -3954,6 +4242,96 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[2].cells[13].innerHTML = vcFundResult[7];
                         }
                     }
+                    alert("查询完成！");
+                },
+                error:function(data){
+                    alert("Error!");
+                }
+            });
+        }
+    }
+
+    function searchHVCrate2() {
+        var stime = $("#date_start").val();
+        var etime = $("#date_end").val();
+        var did = $('#his-mpid-select').val();
+
+        if(did && stime && etime){
+            $.ajax({
+                type: "post",
+                url: "getHVCrate2",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    did: did
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var hvrate= obj.hvRateResult;
+                    var hcrate= obj.hcRateResult;
+                    var temp_vcfund_rate= obj.vcfund_rate;
+                    var table = document.getElementById('hvcRateTable');
+
+                    for (var i = 0; i <hvrate.length; i++) {
+                        var hvresult= hvrate[i].split(",");
+                        if(hvresult[1]=='a'){
+                            table.rows[hvresult[0]].cells[1].innerHTML = hvresult[2];
+                            table.rows[hvresult[0]].cells[2].innerHTML = hvresult[3];
+                        }
+                        else if(hvresult[1]=='b'){
+                            table.rows[hvresult[0]].cells[3].innerHTML = hvresult[2];
+                            table.rows[hvresult[0]].cells[4].innerHTML = hvresult[3];
+                        }
+                        else if(hvresult[1]=='c'){
+                            table.rows[hvresult[0]].cells[5].innerHTML = hvresult[2];
+                            table.rows[hvresult[0]].cells[6].innerHTML = hvresult[3];
+                        }
+                    }
+                    for (var j = 0; j < hcrate.length; j++) {
+                        var hcresult= hcrate[j].split(",");
+                        if(hcresult[1]=='a'){
+                            table.rows[hcresult[0]].cells[8].innerHTML = hcresult[2];
+                            table.rows[hcresult[0]].cells[9].innerHTML = hcresult[3];
+                        }
+                        else if(hcresult[1]=='b') {
+                            table.rows[hcresult[0]].cells[10].innerHTML = hcresult[2];
+                            table.rows[hcresult[0]].cells[11].innerHTML = hcresult[3];
+                        }
+                        else if(hcresult[1]=='c'){
+                            table.rows[hcresult[0]].cells[12].innerHTML = hcresult[2];
+                            table.rows[hcresult[0]].cells[13].innerHTML = hcresult[3];
+                        }
+                    }
+
+                    for(var k=0;k<temp_vcfund_rate.length;k++){
+                        var vcFundResult= temp_vcfund_rate[k].split(",");
+                        if(vcFundResult[0]=='u1'){
+                            table.rows[2].cells[1].innerHTML = vcFundResult[6];
+                            table.rows[2].cells[2].innerHTML = vcFundResult[7];
+                        }
+                        if(vcFundResult[0]=='u2'){
+                            table.rows[2].cells[3].innerHTML = vcFundResult[6];
+                            table.rows[2].cells[4].innerHTML = vcFundResult[7];
+                        }
+                        if(vcFundResult[0]=='u3'){
+                            table.rows[2].cells[5].innerHTML = vcFundResult[6];
+                            table.rows[2].cells[6].innerHTML = vcFundResult[7];
+                        }
+                        if(vcFundResult[0]=='i1'){
+                            table.rows[2].cells[8].innerHTML = vcFundResult[6];
+                            table.rows[2].cells[9].innerHTML = vcFundResult[7];
+                        }
+                        if(vcFundResult[0]=='i2'){
+                            table.rows[2].cells[10].innerHTML = vcFundResult[6];
+                            table.rows[2].cells[11].innerHTML = vcFundResult[7];
+                        }
+                        if(vcFundResult[0]=='i3'){
+                            table.rows[2].cells[12].innerHTML = vcFundResult[6];
+                            table.rows[2].cells[13].innerHTML = vcFundResult[7];
+                        }
+                    }
+                    alert("查询完成！");
                 },
                 error:function(data){
                     alert("Error!");
@@ -4008,10 +4386,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         table.rows[1].cells[3].innerHTML = hz[2];
                         table.rows[1].cells[4].innerHTML = hz[3];
 
-                        if(hz[3]<=50)
-                            table.rows[1].cells[6].innerHTML = '<span style="color: white;">合格</span>';
-                        else
+                        if(hz[3]<=50) {
+                            table.rows[1].cells[6].innerHTML = '<span style="color: black;">合格</span>';
+                        } else {
                             table.rows[1].cells[6].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
                     }
 
                     if(temp_hzpc!=""){
@@ -4021,7 +4400,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         table.rows[2].cells[3].innerHTML = hzpc[2];
                         table.rows[2].cells[4].innerHTML = hzpc[3];
                         if(hzpc[3]<=50)
-                            table.rows[2].cells[6].innerHTML = '<span style="color: white;">合格</span>';
+                            table.rows[2].cells[6].innerHTML = '<span style="color: black;">合格</span>';
                         else
                             table.rows[2].cells[6].innerHTML = '<span style="color: red;">不合格</span>';
                     }
@@ -4036,7 +4415,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         table.rows[3].cells[3].innerHTML = sxdy[2];
                         table.rows[3].cells[4].innerHTML = sxdy[3];
                         if(sxdy[3] <= temp_sxdyThresholdResult[0])
-                            table.rows[3].cells[6].innerHTML =  '<span style="color: white;">合格</span>';
+                            table.rows[3].cells[6].innerHTML =  '<span style="color: black;">合格</span>';
                         else
                             table.rows[3].cells[6].innerHTML = '<span style="color: red;">不合格</span>';
                     }
@@ -4051,7 +4430,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[6].cells[3].innerHTML = dsdysb[3];
                             table.rows[6].cells[4].innerHTML = dsdysb[4];
                             if(dsdysb[4] <= temp_dsdysbThresholdResult[0])
-                                table.rows[6].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[6].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[6].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4061,7 +4440,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[6].cells[8].innerHTML = dsdysb[3];
                             table.rows[6].cells[9].innerHTML = dsdysb[4];
                             if(dsdysb[4] <= temp_dsdysbThresholdResult[0])
-                                table.rows[6].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[6].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[6].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4071,7 +4450,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[6].cells[13].innerHTML = dsdysb[3];
                             table.rows[6].cells[14].innerHTML = dsdysb[4];
                             if(dsdysb[4] <= temp_dsdysbThresholdResult[0])
-                                table.rows[6].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[6].cells[15].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[6].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4087,7 +4466,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[7].cells[3].innerHTML = csdysb[3];
                             table.rows[7].cells[4].innerHTML = csdysb[4];
                             if(csdysb[4] <= temp_csdysbThresholdResult[0])
-                                table.rows[7].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[7].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[7].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4097,7 +4476,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[7].cells[8].innerHTML = csdysb[3];
                             table.rows[7].cells[9].innerHTML = csdysb[4];
                             if(csdysb[4] <= temp_csdysbThresholdResult[0])
-                                table.rows[7].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[7].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[7].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4107,7 +4486,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[7].cells[13].innerHTML = csdysb[3];
                             table.rows[7].cells[14].innerHTML = csdysb[4];
                             if(csdysb[4] <= temp_csdysbThresholdResult[0])
-                                table.rows[7].cells[15].innerHTML =  '<span style="color: white;">合格</span>';
+                                table.rows[7].cells[15].innerHTML =  '<span style="color: black;">合格</span>';
                             else
                                 table.rows[7].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4123,7 +4502,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[8].cells[3].innerHTML = dypc[3];
                             table.rows[8].cells[4].innerHTML = dypc[4];
                             if(dypc[4] <= temp_csdysbThresholdResult[0])
-                                table.rows[8].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[8].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[8].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4133,7 +4512,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[8].cells[8].innerHTML = dypc[3];
                             table.rows[8].cells[9].innerHTML = dypc[4];
                             if(dypc[4] <= temp_csdysbThresholdResult[0])
-                                table.rows[8].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[8].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[8].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4143,7 +4522,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[8].cells[13].innerHTML = dypc[3];
                             table.rows[8].cells[14].innerHTML = dypc[4];
                             if(dypc[4] <= temp_csdysbThresholdResult[0])
-                                table.rows[8].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[8].cells[15].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[8].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4198,7 +4577,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     //功率因数
                     for(var i=0;i<temp_powerFactorResult.length;i++){
                         var powerFactor = temp_powerFactorResult[i].split(",");
-                        console.log(powerFactor);
+
                         if(powerFactor[0]=='1'){
                             table.rows[11].cells[1].innerHTML = powerFactor[1];
                             table.rows[11].cells[2].innerHTML = powerFactor[2];
@@ -4222,14 +4601,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     //电压总谐波畸变率
                     for(var i=0;i<temp_thdUResult.length;i++){
                         var powerFactor = temp_thdUResult[i].split(",");
-                        console.log(powerFactor);
+
                         if(powerFactor[0]=='1'){
                             table.rows[12].cells[1].innerHTML = powerFactor[1];
                             table.rows[12].cells[2].innerHTML = powerFactor[2];
                             table.rows[12].cells[3].innerHTML = powerFactor[3];
                             table.rows[12].cells[4].innerHTML = powerFactor[4];
                             if(powerFactor[4] <= temp_thdUThresholdResult[0])
-                                table.rows[12].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[12].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[12].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4239,9 +4618,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[12].cells[8].innerHTML = powerFactor[3];
                             table.rows[12].cells[9].innerHTML = powerFactor[4];
                             if(powerFactor[4] <= temp_thdUThresholdResult[0])
-                                table.rows[12].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[12].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else
-                                table.rows[12].cells[10].innerHTML = '不合格';
+                                table.rows[12].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
                         }
                         if(powerFactor[0]=='3'){
                             table.rows[12].cells[11].innerHTML = powerFactor[1];
@@ -4249,26 +4628,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[12].cells[13].innerHTML = powerFactor[3];
                             table.rows[12].cells[14].innerHTML = powerFactor[4];
                             if(powerFactor[4] <= temp_thdUThresholdResult[0])
-                                table.rows[12].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[12].cells[15].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[12].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
                         }
-                        if(temp_thdUThresholdResult!=""){
-                            table.rows[12].cells[16].innerHTML = temp_thdUThresholdResult[0];
-                        }
+                    }
+                    if(temp_thdUThresholdResult!=""){
+                        table.rows[12].cells[16].innerHTML = temp_thdUThresholdResult[0];
                     }
 
                     //电流总谐波畸变率
                     for(var i=0;i<temp_thdIResult.length;i++){
                         var powerFactor = temp_thdIResult[i].split(",");
-                        console.log(powerFactor);
                         if(powerFactor[0]=='1') {
                             table.rows[13].cells[1].innerHTML = powerFactor[1];
                             table.rows[13].cells[2].innerHTML = powerFactor[2];
                             table.rows[13].cells[3].innerHTML = powerFactor[3];
                             table.rows[13].cells[4].innerHTML = powerFactor[4];
                             if(powerFactor[4] <= temp_thdUThresholdResult[0])
-                                table.rows[13].cells[5].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[13].cells[5].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[13].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4278,7 +4656,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[13].cells[8].innerHTML = powerFactor[3];
                             table.rows[13].cells[9].innerHTML = powerFactor[4];
                             if(powerFactor[4] <= temp_thdUThresholdResult[0])
-                                table.rows[13].cells[10].innerHTML = '<span style="color: white;">合格</span>';
+                                table.rows[13].cells[10].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[13].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
                         }
@@ -4287,16 +4665,358 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[13].cells[12].innerHTML = powerFactor[2];
                             table.rows[13].cells[13].innerHTML = powerFactor[3];
                             table.rows[13].cells[14].innerHTML = powerFactor[4];
-                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
-                                table.rows[13].cells[15].innerHTML = '<span style="color: white;">合格</span>';
+                            if(powerFactor[4] <= temp_thdIThresholdResult[0])
+                                table.rows[13].cells[15].innerHTML = '<span style="color: black;">合格</span>';
                             else
                                 table.rows[13].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
                         }
-                        if(temp_thdIThresholdResult!=""){
-                            table.rows[13].cells[16].innerHTML = temp_thdIThresholdResult[0];
+                    }
+                    if(temp_thdIThresholdResult!=""){
+                        table.rows[13].cells[16].innerHTML = temp_thdIThresholdResult[0];
+                    }
+                    alert("查询完成！");
+                },
+                error:function(data){
+                    alert("Error!");
+                }
+            });
+        }
+    }
+
+    function searchSynthesis2() {
+        var stime = $("#date_start").val();
+        var etime = $("#date_end").val();
+        var did = $('#his-mpid-select').val();
+
+        if(stime && etime && did){
+            $.ajax({
+                type: "post",
+                url: "getSynthesis2",
+                data: {
+                    stime: stime,
+                    etime: etime,
+                    did: did
+                },
+                dataType: "json",
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    var temp_hz= obj.hzresult;
+                    var temp_hzpc= obj.hzpcresult;
+                    var temp_sxdy= obj.sxdyresult;
+                    var temp_sxdyThresholdResult= obj.sxdyThresholdResult;
+                    var temp_dypc= obj.dypcresult;
+                    var temp_dypcThresholdResult= obj.dypcThresholdResult;
+                    var temp_dsdysbresult= obj.dsdysbresult;
+                    var temp_dsdysbThresholdResult= obj.dsdysbThresholdResult;
+                    var temp_csdysbresult= obj.csdysbresult;
+                    var temp_csdysbThresholdResult= obj.csdysbThresholdResult;
+                    var temp_activePowerResult= obj.activePowerResult;
+                    var temp_reactivePowerResult= obj.reactivePowerResult;
+                    var temp_powerFactorResult= obj.powerFactorResult;
+                    var temp_thdUResult= obj.thdUResult;
+                    var temp_thdIResult= obj.thdIResult;
+                    var temp_thdUThresholdResult= obj.thdUThresholdResult;
+                    var temp_thdIThresholdResult= obj.thdIThresholdResult;
+
+                    var table = document.getElementById('syntable');
+
+                    table.rows[1].cells[5].innerHTML = '50';
+                    if(temp_hz!=""){
+                        var hz = temp_hz[0].split(",");
+                        table.rows[1].cells[1].innerHTML = hz[0];
+                        table.rows[1].cells[2].innerHTML = hz[1];
+                        table.rows[1].cells[3].innerHTML = hz[2];
+                        table.rows[1].cells[4].innerHTML = hz[3];
+
+                        if(hz[3]<=50) {
+                            table.rows[1].cells[6].innerHTML = '<span style="color: black;">合格</span>';
+                        } else {
+                            table.rows[1].cells[6].innerHTML = '<span style="color: red;">不合格</span>';
                         }
                     }
 
+                    if(temp_hzpc!=""){
+                        var hzpc = temp_hzpc[0].split(",");
+                        table.rows[2].cells[1].innerHTML = hzpc[0];
+                        table.rows[2].cells[2].innerHTML = hzpc[1];
+                        table.rows[2].cells[3].innerHTML = hzpc[2];
+                        table.rows[2].cells[4].innerHTML = hzpc[3];
+                        if(hzpc[3]<=50)
+                            table.rows[2].cells[6].innerHTML = '<span style="color: black;">合格</span>';
+                        else
+                            table.rows[2].cells[6].innerHTML = '<span style="color: red;">不合格</span>';
+                    }
+
+                    if(temp_sxdyThresholdResult!=""){
+                        table.rows[3].cells[5].innerHTML = temp_sxdyThresholdResult[0];
+                    }
+                    if(temp_sxdy!=""){
+                        var sxdy = temp_sxdy[0].split(",");
+                        table.rows[3].cells[1].innerHTML = sxdy[0];
+                        table.rows[3].cells[2].innerHTML = sxdy[1];
+                        table.rows[3].cells[3].innerHTML = sxdy[2];
+                        table.rows[3].cells[4].innerHTML = sxdy[3];
+                        if(sxdy[3] <= temp_sxdyThresholdResult[0])
+                            table.rows[3].cells[6].innerHTML =  '<span style="color: black;">合格</span>';
+                        else
+                            table.rows[3].cells[6].innerHTML = '<span style="color: red;">不合格</span>';
+                    }
+
+                    //短时电压闪变
+                    table.rows[6].cells[16].innerHTML = temp_dsdysbThresholdResult[0];
+                    for(var i=0;i<temp_dsdysbresult.length;i++){
+                        var dsdysb = temp_dsdysbresult[i].split(",");
+                        if(dsdysb[0]=='1'){
+                            table.rows[6].cells[1].innerHTML = dsdysb[1];
+                            table.rows[6].cells[2].innerHTML = dsdysb[2];
+                            table.rows[6].cells[3].innerHTML = dsdysb[3];
+                            table.rows[6].cells[4].innerHTML = dsdysb[4];
+                            if(dsdysb[4] <= temp_dsdysbThresholdResult[0])
+                                table.rows[6].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[6].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(dsdysb[0]=='2'){
+                            table.rows[6].cells[6].innerHTML = dsdysb[1];
+                            table.rows[6].cells[7].innerHTML = dsdysb[2];
+                            table.rows[6].cells[8].innerHTML = dsdysb[3];
+                            table.rows[6].cells[9].innerHTML = dsdysb[4];
+                            if(dsdysb[4] <= temp_dsdysbThresholdResult[0])
+                                table.rows[6].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[6].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(dsdysb[0]=='3'){
+                            table.rows[6].cells[11].innerHTML = dsdysb[1];
+                            table.rows[6].cells[12].innerHTML = dsdysb[2];
+                            table.rows[6].cells[13].innerHTML = dsdysb[3];
+                            table.rows[6].cells[14].innerHTML = dsdysb[4];
+                            if(dsdysb[4] <= temp_dsdysbThresholdResult[0])
+                                table.rows[6].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[6].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                    }
+
+                    //长时电压闪变
+                    table.rows[7].cells[16].innerHTML = temp_csdysbThresholdResult[0];
+                    for(var i=0;i<temp_csdysbresult.length;i++){
+                        var csdysb = temp_csdysbresult[i].split(",");
+                        if(csdysb[0]=='1'){
+                            table.rows[7].cells[1].innerHTML = csdysb[1];
+                            table.rows[7].cells[2].innerHTML = csdysb[2];
+                            table.rows[7].cells[3].innerHTML = csdysb[3];
+                            table.rows[7].cells[4].innerHTML = csdysb[4];
+                            if(csdysb[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[7].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[7].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(csdysb[0]=='2'){
+                            table.rows[7].cells[6].innerHTML = csdysb[1];
+                            table.rows[7].cells[7].innerHTML = csdysb[2];
+                            table.rows[7].cells[8].innerHTML = csdysb[3];
+                            table.rows[7].cells[9].innerHTML = csdysb[4];
+                            if(csdysb[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[7].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[7].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(csdysb[0]=='3'){
+                            table.rows[7].cells[11].innerHTML = csdysb[1];
+                            table.rows[7].cells[12].innerHTML = csdysb[2];
+                            table.rows[7].cells[13].innerHTML = csdysb[3];
+                            table.rows[7].cells[14].innerHTML = csdysb[4];
+                            if(csdysb[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[7].cells[15].innerHTML =  '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[7].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                    }
+
+                    //电压偏差
+                    table.rows[8].cells[16].innerHTML = temp_dypcThresholdResult[0];
+                    for(var i=0;i<temp_dypc.length;i++){
+                        var dypc = temp_dypc[i].split(",");
+                        if(dypc[0]=='1'){
+                            table.rows[8].cells[1].innerHTML = dypc[1];
+                            table.rows[8].cells[2].innerHTML = dypc[2];
+                            table.rows[8].cells[3].innerHTML = dypc[3];
+                            table.rows[8].cells[4].innerHTML = dypc[4];
+                            if(dypc[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[8].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[8].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(dypc[0]=='2'){
+                            table.rows[8].cells[6].innerHTML = dypc[1];
+                            table.rows[8].cells[7].innerHTML = dypc[2];
+                            table.rows[8].cells[8].innerHTML = dypc[3];
+                            table.rows[8].cells[9].innerHTML = dypc[4];
+                            if(dypc[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[8].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[8].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(dypc[0]=='3'){
+                            table.rows[8].cells[11].innerHTML = dypc[1];
+                            table.rows[8].cells[12].innerHTML = dypc[2];
+                            table.rows[8].cells[13].innerHTML = dypc[3];
+                            table.rows[8].cells[14].innerHTML = dypc[4];
+                            if(dypc[4] <= temp_csdysbThresholdResult[0])
+                                table.rows[8].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[8].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                    }
+
+                    //有功功率
+                    for(var i=0;i<temp_activePowerResult.length;i++){
+                        var activePower = temp_activePowerResult[i].split(",");
+                        if(activePower[0]=='1'){
+                            table.rows[9].cells[1].innerHTML = activePower[1];
+                            table.rows[9].cells[2].innerHTML = activePower[2];
+                            table.rows[9].cells[3].innerHTML = activePower[3];
+                            table.rows[9].cells[4].innerHTML = activePower[4];
+                        }
+                        if(activePower[0]=='2'){
+                            table.rows[9].cells[6].innerHTML = activePower[1];
+                            table.rows[9].cells[7].innerHTML = activePower[2];
+                            table.rows[9].cells[8].innerHTML = activePower[3];
+                            table.rows[9].cells[9].innerHTML = activePower[4];
+                        }
+                        if(activePower[0]=='3'){
+                            table.rows[9].cells[11].innerHTML = activePower[1];
+                            table.rows[9].cells[12].innerHTML = activePower[2];
+                            table.rows[9].cells[13].innerHTML = activePower[3];
+                            table.rows[9].cells[14].innerHTML = activePower[4];
+                        }
+                    }
+
+                    //无功功率
+                    for(var i=0;i<temp_reactivePowerResult.length;i++){
+                        var reactivePower = temp_reactivePowerResult[i].split(",");
+                        if(reactivePower[0]=='1'){
+                            table.rows[10].cells[1].innerHTML = reactivePower[1];
+                            table.rows[10].cells[2].innerHTML = reactivePower[2];
+                            table.rows[10].cells[3].innerHTML = reactivePower[3];
+                            table.rows[10].cells[4].innerHTML = reactivePower[4];
+                        }
+                        if(reactivePower[0]=='2'){
+                            table.rows[10].cells[6].innerHTML = reactivePower[1];
+                            table.rows[10].cells[7].innerHTML = reactivePower[2];
+                            table.rows[10].cells[8].innerHTML = reactivePower[3];
+                            table.rows[10].cells[9].innerHTML = reactivePower[4];
+                        }
+                        if(reactivePower[0]=='3'){
+                            table.rows[10].cells[11].innerHTML = reactivePower[1];
+                            table.rows[10].cells[12].innerHTML = reactivePower[2];
+                            table.rows[10].cells[13].innerHTML = reactivePower[3];
+                            table.rows[10].cells[14].innerHTML = reactivePower[4];
+                        }
+                    }
+
+                    //功率因数
+                    for(var i=0;i<temp_powerFactorResult.length;i++){
+                        var powerFactor = temp_powerFactorResult[i].split(",");
+
+                        if(powerFactor[0]=='1'){
+                            table.rows[11].cells[1].innerHTML = powerFactor[1];
+                            table.rows[11].cells[2].innerHTML = powerFactor[2];
+                            table.rows[11].cells[3].innerHTML = powerFactor[3];
+                            table.rows[11].cells[4].innerHTML = powerFactor[4];
+                        }
+                        if(powerFactor[0]=='2'){
+                            table.rows[11].cells[6].innerHTML = powerFactor[1];
+                            table.rows[11].cells[7].innerHTML = powerFactor[2];
+                            table.rows[11].cells[8].innerHTML = powerFactor[3];
+                            table.rows[11].cells[9].innerHTML = powerFactor[4];
+                        }
+                        if(powerFactor[0]=='3'){
+                            table.rows[11].cells[11].innerHTML = powerFactor[1];
+                            table.rows[11].cells[12].innerHTML = powerFactor[2];
+                            table.rows[11].cells[13].innerHTML = powerFactor[3];
+                            table.rows[11].cells[14].innerHTML = powerFactor[4];
+                        }
+                    }
+
+                    //电压总谐波畸变率
+                    for(var i=0;i<temp_thdUResult.length;i++){
+                        var powerFactor = temp_thdUResult[i].split(",");
+
+                        if(powerFactor[0]=='1'){
+                            table.rows[12].cells[1].innerHTML = powerFactor[1];
+                            table.rows[12].cells[2].innerHTML = powerFactor[2];
+                            table.rows[12].cells[3].innerHTML = powerFactor[3];
+                            table.rows[12].cells[4].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[12].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[12].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(powerFactor[0]=='2'){
+                            table.rows[12].cells[6].innerHTML = powerFactor[1];
+                            table.rows[12].cells[7].innerHTML = powerFactor[2];
+                            table.rows[12].cells[8].innerHTML = powerFactor[3];
+                            table.rows[12].cells[9].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[12].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[12].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(powerFactor[0]=='3'){
+                            table.rows[12].cells[11].innerHTML = powerFactor[1];
+                            table.rows[12].cells[12].innerHTML = powerFactor[2];
+                            table.rows[12].cells[13].innerHTML = powerFactor[3];
+                            table.rows[12].cells[14].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[12].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[12].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                    }
+                    if(temp_thdUThresholdResult!=""){
+                        table.rows[12].cells[16].innerHTML = temp_thdUThresholdResult[0];
+                    }
+
+                    //电流总谐波畸变率
+                    for(var i=0;i<temp_thdIResult.length;i++){
+                        var powerFactor = temp_thdIResult[i].split(",");
+                        if(powerFactor[0]=='1') {
+                            table.rows[13].cells[1].innerHTML = powerFactor[1];
+                            table.rows[13].cells[2].innerHTML = powerFactor[2];
+                            table.rows[13].cells[3].innerHTML = powerFactor[3];
+                            table.rows[13].cells[4].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[13].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[13].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(powerFactor[0]=='2'){
+                            table.rows[13].cells[6].innerHTML = powerFactor[1];
+                            table.rows[13].cells[7].innerHTML = powerFactor[2];
+                            table.rows[13].cells[8].innerHTML = powerFactor[3];
+                            table.rows[13].cells[9].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdUThresholdResult[0])
+                                table.rows[13].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[13].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                        if(powerFactor[0]=='3'){
+                            table.rows[13].cells[11].innerHTML = powerFactor[1];
+                            table.rows[13].cells[12].innerHTML = powerFactor[2];
+                            table.rows[13].cells[13].innerHTML = powerFactor[3];
+                            table.rows[13].cells[14].innerHTML = powerFactor[4];
+                            if(powerFactor[4] <= temp_thdIThresholdResult[0])
+                                table.rows[13].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            else
+                                table.rows[13].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
+                        }
+                    }
+                    if(temp_thdIThresholdResult!=""){
+                        table.rows[13].cells[16].innerHTML = temp_thdIThresholdResult[0];
+                    }
+                    alert("查询完成！");
                 },
                 error:function(data){
                     alert("Error!");
@@ -4317,6 +5037,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }
     function exportHVCRateTable(){
         var tableid = "hvcRateTable";
+        exportToExcel(tableid);
+    }
+    function searchHis(){
+        var tableid = "syntable";
         exportToExcel(tableid);
     }
     var idTmr;

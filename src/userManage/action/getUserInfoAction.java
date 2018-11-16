@@ -43,23 +43,26 @@ public class getUserInfoAction extends ActionSupport {
                     String computerrom = "";
                     String role = "";
 
-                    if (tmpur.get(3) == null || tmpur.get(3) == "" || "".equals(tmpur.get(3)))
+                    if (tmpur.get(3) == null || tmpur.get(3) == "" || "".equals(tmpur.get(3))) {
                         prob = "";
-                    else
+                    } else {
                         prob = dao.getProBankName(tmpur.get(3).toString());
-                    if (tmpur.get(4) == null || tmpur.get(4) == "" || "".equals(tmpur.get(4)))
+                    }
+                    if (tmpur.get(4) == null || tmpur.get(4) == "" || "".equals(tmpur.get(4))) {
                         cityb = "";
-                    else
+                    } else {
                         cityb = dao.getCityBankName(tmpur.get(4).toString());
-                    if (tmpur.get(5) == null || tmpur.get(5) == "" || "".equals(tmpur.get(5)))
+                    }
+                    if (tmpur.get(5) == null || tmpur.get(5) == "" || "".equals(tmpur.get(5))) {
                         computerrom = "";
-                    else
+                    } else {
                         computerrom = dao.getComputerroomName(tmpur.get(5).toString());
-                    if (tmpur.get(6) == null || tmpur.get(6) == " "|| "".equals(tmpur.get(6)))
+                    }
+                    if (tmpur.get(6) == null || tmpur.get(6) == " "|| "".equals(tmpur.get(6))) {
                         role = "";
-                    else
+                    } else {
                         role = dao.getRoleName(tmpur.get(6).toString());
-
+                    }
                     tmpur.set(3, prob);
                     tmpur.set(4, cityb);
                     tmpur.set(5, computerrom);

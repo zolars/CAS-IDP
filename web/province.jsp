@@ -32,14 +32,14 @@
     <link rel="stylesheet" href="css/pick-pcc.min.1.0.1.css"/>
     <link rel="stylesheet" href="css/mycss.css">
     <link rel="stylesheet" href="css/header.css">
-
+    <link href="css/buttons.css" rel="stylesheet">
     <!-- bootstrap datepicker时间选择控件 -->
     <link href="bootstrap-timepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
     <!-- jquery -->
     <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
     <!--告警弹窗-->
-    <script type="text/javascript" src = "js/websocketconnect.js"></script>
+    <script type="text/javascript" src="js/websocketconnect.js"></script>
 
     <style>
         .datetimepicker {
@@ -218,7 +218,8 @@
                                 <input type="hidden" id="dtp_input2" value=""/><br/>
                             </div>
                             <!-- 刷新按钮 -->
-                            <button id="refresh-btn" class="btn-primary" data-loading-text="Loading..." type="button">
+                            <button id="refresh-btn" class="button-primary button-pill button-small"
+                                    data-loading-text="Loading..." type="button">
                                 刷新
                             </button>
                         </fieldset>
@@ -381,8 +382,7 @@
     $(document).ready(function () {
         $("#refresh-btn").click(function () {
             $(this).button('loading').delay(500).queue(function () {
-                var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
-                var pname = decodeURI(provinceidc[1]);
+                var pname = $.cookie('province_name');
                 var stime = $("#firstDate").val();
                 var etime = $("#lastDate").val();
                 var cbname = $("#comproom_code option:selected").val();
@@ -514,8 +514,7 @@
         panelChart.resize();
     };
 
-    var provinceidc = window.location.search.match(new RegExp("[\?\&]prov=([^\&]+)", "i"));
-    var pname = decodeURI(provinceidc[1]);
+    var pname = $.cookie('province_name');
     var cbname = $("#comproom_code option:selected").val();
 
     $("#firstDate").val(getFormatDate(-1));
@@ -821,8 +820,9 @@
                         name.innerHTML += ('<td style="font-size: 12px;color: #000000">名称：' + list + '</td>');
 
                         var rt = obj.rt;
-                        if (rt === "null")
+                        if (rt === "null") {
                             status.innerHTML += ('<td style="font-size: 12px;color: #000000">状态：良好</td>');
+                        }
                         else {
                             status.innerHTML += ('<td><a data-toggle="popover" data-placement="bottom" data-trigger="hover"  data-html="true" data-title = "告警信息" data-content= "' + rt + '" style="font-size: 12px;color: #FF0000">状态：告警</a></td>');
                             $(function () {
@@ -883,7 +883,7 @@
 
 <!-- 动态加载菜单项 -->
 <script type="text/javascript">
-    var menulist="<%=session.getAttribute("menulist")%>";
+    var menulist = "<%=session.getAttribute("menulist")%>";
     var cbidstr = menulist.split(",");
     var isSystemMng = false;
     var isNewSystemMng = false;
@@ -898,89 +898,87 @@
     var len = cbidstr[idx].length;
     cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
 
-    for(var i = 0; i < cbidstr.length; i++){
+    for (var i = 0; i < cbidstr.length; i++) {
 
         var menuname = "";
-        if(cbidstr[i] == " province.jsp"){
+        if (cbidstr[i] == " province.jsp") {
             isSystemMng = false;
             menuname = "集中监控";
         }
-        else if(cbidstr[i] == " efficiencyDevice.jsp"){
+        else if (cbidstr[i] == " efficiencyDevice.jsp") {
             isSystemMng = false;
             menuname = "动力设施";
         }
-        else if(cbidstr[i] == " onlineDetect.jsp"){
+        else if (cbidstr[i] == " onlineDetect.jsp") {
             isSystemMng = false;
             menuname = "在线监测";
         }
-        else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
+        else if (cbidstr[i] == ' efficiencyAnalysis.jsp') {
             isSystemMng = false;
             menuname = "动力分析";
         }
-        else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
+        else if (cbidstr[i] == ' efficiencyAssessment.jsp') {
             isSystemMng = false;
             menuname = "动力评估";
         }
-        else if(cbidstr[i] == ' reportChart.jsp'){
+        else if (cbidstr[i] == ' reportChart.jsp') {
             isSystemMng = false;
             menuname = "报表功能";
         }
-        else if(cbidstr[i] == ' history.jsp'){
+        else if (cbidstr[i] == ' history.jsp') {
             isSystemMng = false;
             menuname = "历史曲线";
         }
-        else if(cbidstr[i].search('systemMng.jsp')){
+        else if (cbidstr[i].search('systemMng.jsp')) {
 
             //对字符串分段处理（2或3段）
             var substr = cbidstr[i].split("/");
 
-            if(substr.length == 2){
+            if (substr.length == 2) {
                 ulist.push(substr[1]);
             }
 
-            else
-            {
+            else {
                 ulist.push(substr[1]);
                 u2list.push(substr[2]);
             }
 
-            if(!isNewSystemMng)
-            {//第一条systemMng的
+            if (!isNewSystemMng) {//第一条systemMng的
                 isNewSystemMng = true;
                 menuname = "系统管理";
                 $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'>" + menuname + "</a></li>");
             }
             isSystemMng = true;
         }
-        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
+        if (!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
     }
 
-    for(var i = 1; i <= 8; i++){
+    for (var i = 1; i <= 8; i++) {
         var ustr = "item" + i;
 
-        for(var j = 0; j < ulist.length; j++){
-            if(ustr == ulist[j]){
+        for (var j = 0; j < ulist.length; j++) {
+            if (ustr == ulist[j]) {
                 break;
             }
-            if(j == ulist.length - 1){
-                $("#"+ustr+"").remove();
+            if (j == ulist.length - 1) {
+                $("#" + ustr + "").remove();
             }
         }
     }
 
-    for(var i = 1; i <= 9; i++){
+    for (var i = 1; i <= 9; i++) {
         var ustr;
-        if(i < 7)
+        if (i < 7)
             ustr = "secsubItem" + i;
         else
             ustr = "tridsubItem" + i;
 
-        for(var j = 0; j < u2list.length; j++){
-            if(ustr == u2list[j]){
+        for (var j = 0; j < u2list.length; j++) {
+            if (ustr == u2list[j]) {
                 break;
             }
-            if(j == u2list.length - 1){
-                $("#"+ustr+"").remove();
+            if (j == u2list.length - 1) {
+                $("#" + ustr + "").remove();
             }
         }
     }

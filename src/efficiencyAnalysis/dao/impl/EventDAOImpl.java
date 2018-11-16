@@ -80,10 +80,10 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "'";
-
+            System.out.println("SQL LANGUAGE IS "+sql);
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -93,12 +93,14 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
                     list.add(rs.getString("signature"));
                     list.add(rs.getString("annotation"));
+
+                    System.out.println("THIS IS THE ANS:" + list.toString());
 
                     rtlist.add(list.toString());
                 }
@@ -153,7 +155,7 @@ public class EventDAOImpl implements EventDAO {
 
         for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "'";
             try {
@@ -165,7 +167,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
@@ -226,7 +228,7 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
                     "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2)";
@@ -239,12 +241,11 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("teid"));       //teid
                     list.add(rs.getString("name"));       //测量名称
                     list.add(rs.getString("type"));       //类型 (触发相位)
-                    //list.add(rs.getString("type"));         //触发相位
                     list.add(rs.getString("time"));         //时间
-                    list.add(rs.getString("cid"));          //cid
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
 
                     list.add(rs.getString("duration"));     //时间长短
-                    list.add(rs.getString("discription"));  //深度
+                    list.add(" ");  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
                     list.add(rs.getString("location")); // 位置
@@ -297,7 +298,7 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription， " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description， " +
                     "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type in (1,2)";
@@ -315,7 +316,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("cid"));          //cid
 
                     list.add(rs.getString("duration"));     //时间长短
-                    list.add(rs.getString("discription"));  //深度
+                    list.add(rs.getString("description"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
 
@@ -367,7 +368,7 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
                     "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and 322";
@@ -384,7 +385,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("cid"));          //cid
 
                     list.add(rs.getString("duration"));     //时间长短
-                    list.add(rs.getString("discription"));  //深度
+                    list.add(rs.getString("description"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
                     list.add(rs.getString("location")); // 位置
@@ -435,7 +436,7 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
                     "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.subtype between 23 and 322";
@@ -453,7 +454,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("cid"));          //cid
 
                     list.add(rs.getString("duration"));     //时间长短
-                    list.add(rs.getString("discription"));  //深度
+                    list.add(rs.getString("description"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
 
@@ -505,7 +506,7 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
                     "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9";
@@ -523,7 +524,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("cid"));          //cid
 
                     list.add(rs.getString("duration"));     //时间长短
-                    list.add(rs.getString("discription"));  //深度
+                    list.add(rs.getString("description"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
                     list.add(rs.getString("location")); // 位置
@@ -575,7 +576,7 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
                     "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type=9";
@@ -593,7 +594,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("cid"));          //cid
 
                     list.add(rs.getString("duration"));     //时间长短
-                    list.add(rs.getString("discription"));  //深度
+                    list.add(rs.getString("description"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
 
@@ -645,7 +646,7 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
                     "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3";
@@ -663,7 +664,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("cid"));          //cid
 
                     list.add(rs.getString("duration"));     //时间长短
-                    list.add(rs.getString("discription"));  //深度
+                    list.add(rs.getString("description"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
                     list.add(rs.getString("location")); // 位置
@@ -719,7 +720,7 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type=3";
             try {
@@ -731,7 +732,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
@@ -786,7 +787,7 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
                     "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8";
@@ -804,7 +805,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("cid"));          //cid
 
                     list.add(rs.getString("duration"));     //时间长短
-                    list.add(rs.getString("discription"));  //深度
+                    list.add(rs.getString("description"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
                     list.add(rs.getString("location")); // 位置
@@ -859,7 +860,7 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
                     "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type=8";
@@ -877,7 +878,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("cid"));          //cid
 
                     list.add(rs.getString("duration"));     //时间长短
-                    list.add(rs.getString("discription"));  //深度
+                    list.add(rs.getString("description"));  //深度
                     list.add(rs.getString("annotation"));  //评论
                     list.add(rs.getString("signature"));  //签名
 
@@ -932,7 +933,7 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
                     "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "'";
             try {
@@ -944,7 +945,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
@@ -1002,7 +1003,7 @@ public class EventDAOImpl implements EventDAO {
         String maxtime = "0000-00-00 00:00:00.0";
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.signature as signature, ta.annotation as annotation " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.signature as signature, ta.annotation as annotation " +
                     "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "'";
             try {
@@ -1014,7 +1015,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
@@ -1074,7 +1075,7 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid " +
                     "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=11";
             try {
@@ -1086,7 +1087,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
@@ -1137,7 +1138,7 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid " +
                     "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type=11";
             try {
@@ -1149,7 +1150,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
@@ -1201,7 +1202,7 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid " +
                     "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=12";
 
@@ -1214,7 +1215,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
@@ -1266,7 +1267,7 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid " +
                     "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type=12";
             try {
@@ -1278,7 +1279,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
@@ -1333,7 +1334,7 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
                     "from event_ctrl ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "'";
             try {
@@ -1345,7 +1346,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
@@ -1403,7 +1404,7 @@ public class EventDAOImpl implements EventDAO {
         String maxtime = "0000-00-00 00:00:00.0";
 
         for (int i = 0; i < didset.length; i++) {
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as discription, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
                     "from event_ctrl ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "'";
             try {
@@ -1415,7 +1416,7 @@ public class EventDAOImpl implements EventDAO {
                     list.add(rs.getString("name"));
                     list.add(rs.getString("location"));
                     list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("discription"));
+                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
                     list.add(rs.getString("time"));
                     list.add(rs.getString("cid"));
 
@@ -1824,59 +1825,67 @@ public class EventDAOImpl implements EventDAO {
         Computerroom comps = (Computerroom) hbsessionDao.getFirst(
                 "FROM Computerroom where rid='" + compname + "'");
 
-        String tempset = comps.getTempset();
+        if (comps != null) {
+            String tempset = comps.getTempset();
 
-        if (tempset.equals(null) || tempset == null) {
-            return rtlist;
-        } else {
+            if (tempset.equals(null) || tempset == null) {
+                return rtlist;
+            } else {
 
-            String tempstr[] = tempset.split("，");
-            db = new DBConnect();
+                String tempstr[] = tempset.split("，");
+                db = new DBConnect();
 
-            for (int i = 0; i < tempstr.length; i++) {
-                String sql = "select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
+                for (int i = 0; i < tempstr.length; i++) {
+                    String sql = "select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity from temperature_monitor ta, devices tb where ta.did = tb.did order by ta.time desc";
 
-                try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        List<String> list = new ArrayList();
-                        list.add(rs.getString("dname"));
-                        list.add(rs.getString("temperature"));
-                        list.add(rs.getString("humidity"));
+                    try {
+                        ps = db.getPs(sql);
+                        rs = ps.executeQuery();
+                        while (rs.next()) {
+                            List<String> list = new ArrayList();
+                            list.add(rs.getString("dname"));
+                            list.add(rs.getString("temperature"));
+                            list.add(rs.getString("humidity"));
 
-                        rtlist.add(list);
+                            rtlist.add(list);
+                        }
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
                     }
+                }
+                try {
+                    db.free();
                 } catch (SQLException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+                return rtlist;
             }
-            try {
-                db.free();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return rtlist;
         }
+        return rtlist;
     }
 
     public List getCtrlDevices(String rname) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rid='" + rname + "'");
-        String didset = comps.getDidset();
-        String didstr[] = didset.split("，");
         List<String> didlist = new ArrayList();
 
-        //寻找ctrl类（治理设备）的device
-        for (int i = 0; i < didstr.length; i++) {
-            Devices dv = (Devices) hbsessionDao.getFirst(
-                    "FROM Devices where did='" + didstr[i] + "' and type = 'ctrl'");
-            if (dv != null) {
-                didlist.add(dv.getDid());
+        Computerroom comps = (Computerroom) hbsessionDao.getFirst(
+                "FROM Computerroom where rid='" + rname + "'");
+
+        if (comps != null) {
+            String didset = comps.getDidset();
+
+            String didstr[] = didset.split("，");
+
+            //寻找ctrl类（治理设备）的device
+            for (int i = 0; i < didstr.length; i++) {
+                Devices dv = (Devices) hbsessionDao.getFirst(
+                        "FROM Devices where did='" + didstr[i] + "' and type = 'ctrl'");
+                if (dv != null) {
+                    didlist.add(dv.getDid().toString());
+                }
             }
         }
 
@@ -1890,13 +1899,14 @@ public class EventDAOImpl implements EventDAO {
         List list = hbsessionDao.getAll(
                 "from EventCtrl where did='" + did + "' and time > '" + stime + "' and time < '" + etime + "'");
 
-        if (list.isEmpty())
+        if (list.isEmpty()) {
             rt = "null";
-        else
+        } else {
             for (Object ob : list) {
                 EventCtrl e = (EventCtrl) ob;
                 rt += e.toString() + "</br>";
             }
+        }
         return rt;
     }
 

@@ -107,7 +107,7 @@
                 <input class="login-input" type="text" name="username" value="" id="login_username">
             </div>
             <div class="login-item">
-                <input class="login-input" type="text" name="password" value="" id="login_password">
+                <input class="login-input" type="password" name="password" value="" id="login_password">
             </div>
             <div class="login-item">
                 <button class="btn btn-primary login-button" type="submit">登录</button>
