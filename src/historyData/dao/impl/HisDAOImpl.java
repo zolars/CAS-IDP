@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class HisDAOImpl implements HisDAO {
 
-    public  List getHisData(String did, String starttime, String endtime) {
+    public List getHisData(String did, String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<PowerparmMonitor> crlist = new ArrayList<>();
@@ -21,10 +21,10 @@ public class HisDAOImpl implements HisDAO {
         List rtlist = new ArrayList<>();
 
         crlist = hbsessionDao.search(
-                "FROM PowerparmMonitor where did = '" + did + "' and time >= '"+ starttime + "' and time <= '" + endtime +"'");
+                "FROM PowerparmMonitor where did = '" + did + "' and time >= '" + starttime + "' and time <= '" + endtime + "'");
 
         crlist2 = hbsessionDao.search(
-                "FROM PowerxbMonitor where did = '" + did + "' and time >= '"+ starttime + "' and time <= '" + endtime +"'");
+                "FROM PowerxbMonitor where did = '" + did + "' and time >= '" + starttime + "' and time <= '" + endtime + "'");
 
 
         if (crlist != null) {
@@ -91,20 +91,20 @@ public class HisDAOImpl implements HisDAO {
         if (crlist != null) {
             for (int i = 0; i < crlist.size(); i++) {
                 Map<String, Object> map = new LinkedHashMap<>();
-                Object[] temp= (Object[])crlist.get(i);
+                Object[] temp = (Object[]) crlist.get(i);
                 map.put("time", temp[0]);
-                map.put("Ua",null);
-                map.put("Ub",null);
-                map.put("Uc",null);
-                String description=(String)temp[2];
-                if (description.indexOf("Ua")>=0) {
-                    map.put("Ua", 100 * (baseValue+(double)temp[1]) / baseValue );
+                map.put("Ua", null);
+                map.put("Ub", null);
+                map.put("Uc", null);
+                String description = (String) temp[2];
+                if (description.indexOf("Ua") >= 0) {
+                    map.put("Ua", 100 * (baseValue + (double) temp[1]) / baseValue);
                 }
-                if (description.indexOf("Ub")>=0) {
-                    map.put("Ub", 100 *(baseValue+(double)temp[1]) / baseValue );
+                if (description.indexOf("Ub") >= 0) {
+                    map.put("Ub", 100 * (baseValue + (double) temp[1]) / baseValue);
                 }
-                if (description.indexOf("Uc")>=0) {
-                    map.put("Uc", 100 *(baseValue+(double)temp[1]) / baseValue );
+                if (description.indexOf("Uc") >= 0) {
+                    map.put("Uc", 100 * (baseValue + (double) temp[1]) / baseValue);
                 }
                 rtlist.add(map);
             }

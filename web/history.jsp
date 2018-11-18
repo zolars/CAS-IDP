@@ -39,7 +39,7 @@
     <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
     <style>
         .datetimepicker {
-            background: black!important;
+            background: black !important;
         }
     </style>
 </head>
@@ -50,12 +50,12 @@
 <script src="js/jquery.cookie.js"></script>
 
 <!--告警弹窗-->
-<script type="text/javascript" src = "js/websocketconnect.js"></script>
+<script type="text/javascript" src="js/websocketconnect.js"></script>
 
 <!--登陆认证拦截-->
 <%
-    String userid = (String)session.getAttribute("userid");
-    if(userid == null) {
+    String userid = (String) session.getAttribute("userid");
+    if (userid == null) {
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
@@ -78,9 +78,9 @@
                 </select>
 
                 <script>
-                    $("#province_code").change(function(){
+                    $("#province_code").change(function () {
                         var options = $("#province_code option:selected");
-                        $. cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion1', options.text(), {expires: 1, path: '/'});
                         getCity();
                     })
                 </script>
@@ -90,9 +90,9 @@
                 </select>
 
                 <script>
-                    $("#city_code").change(function(){
+                    $("#city_code").change(function () {
                         var options = $("#city_code option:selected");
-                        $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion2', options.text(), {expires: 1, path: '/'});
                         getComproom();
                     })
 
@@ -103,9 +103,9 @@
                 </select>
 
                 <script>
-                    $("#comproom_code").change(function(){
+                    $("#comproom_code").change(function () {
                         var options = $("#comproom_code option:selected");
-                        $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion3', options.text(), {expires: 1, path: '/'});
                     })
                 </script>
 
@@ -195,7 +195,9 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button type="button" class="button-primary button-pill button-small" id="serch-his-button" onclick="searchHis()">查询</button>
+                            <button type="button" class="button-primary button-pill button-small" id="serch-his-button"
+                                    onclick="searchHisTwice()">查询
+                            </button>
                         </div>
 
                         <div class="clearfix"></div>
@@ -441,7 +443,7 @@
 
 <!-- 动态加载菜单项 -->
 <script type="text/javascript">
-    var menulist="<%=session.getAttribute("menulist")%>";
+    var menulist = "<%=session.getAttribute("menulist")%>";
     var cbidstr = menulist.split(",");
     var isSystemMng = false;
     var isNewSystemMng = false;
@@ -456,89 +458,87 @@
     var len = cbidstr[idx].length;
     cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
 
-    for(var i = 0; i < cbidstr.length; i++){
+    for (var i = 0; i < cbidstr.length; i++) {
 
         var menuname = "";
-        if(cbidstr[i] == " province.jsp"){
+        if (cbidstr[i] == " province.jsp") {
             isSystemMng = false;
             menuname = "集中监控";
         }
-        else if(cbidstr[i] == " efficiencyDevice.jsp"){
+        else if (cbidstr[i] == " efficiencyDevice.jsp") {
             isSystemMng = false;
             menuname = "动力设施";
         }
-        else if(cbidstr[i] == " onlineDetect.jsp"){
+        else if (cbidstr[i] == " onlineDetect.jsp") {
             isSystemMng = false;
             menuname = "在线监测";
         }
-        else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
+        else if (cbidstr[i] == ' efficiencyAnalysis.jsp') {
             isSystemMng = false;
             menuname = "动力分析";
         }
-        else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
+        else if (cbidstr[i] == ' efficiencyAssessment.jsp') {
             isSystemMng = false;
             menuname = "动力评估";
         }
-        else if(cbidstr[i] == ' reportChart.jsp'){
+        else if (cbidstr[i] == ' reportChart.jsp') {
             isSystemMng = false;
             menuname = "报表功能";
         }
-        else if(cbidstr[i] == ' history.jsp'){
+        else if (cbidstr[i] == ' history.jsp') {
             isSystemMng = false;
             menuname = "历史曲线";
         }
-        else if(cbidstr[i].search('systemMng.jsp')){
+        else if (cbidstr[i].search('systemMng.jsp')) {
 
             //对字符串分段处理（2或3段）
             var substr = cbidstr[i].split("/");
 
-            if(substr.length == 2){
+            if (substr.length == 2) {
                 ulist.push(substr[1]);
             }
 
-            else
-            {
+            else {
                 ulist.push(substr[1]);
                 u2list.push(substr[2]);
             }
 
-            if(!isNewSystemMng)
-            {//第一条systemMng的
+            if (!isNewSystemMng) {//第一条systemMng的
                 isNewSystemMng = true;
                 menuname = "系统管理";
                 $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'>" + menuname + "</a></li>");
             }
             isSystemMng = true;
         }
-        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
+        if (!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
     }
 
-    for(var i = 1; i <= 8; i++){
+    for (var i = 1; i <= 8; i++) {
         var ustr = "item" + i;
 
-        for(var j = 0; j < ulist.length; j++){
-            if(ustr == ulist[j]){
+        for (var j = 0; j < ulist.length; j++) {
+            if (ustr == ulist[j]) {
                 break;
             }
-            if(j == ulist.length - 1){
-                $("#"+ustr+"").remove();
+            if (j == ulist.length - 1) {
+                $("#" + ustr + "").remove();
             }
         }
     }
 
-    for(var i = 1; i <= 9; i++){
+    for (var i = 1; i <= 9; i++) {
         var ustr;
-        if(i < 7)
+        if (i < 7)
             ustr = "secsubItem" + i;
         else
             ustr = "tridsubItem" + i;
 
-        for(var j = 0; j < u2list.length; j++){
-            if(ustr == u2list[j]){
+        for (var j = 0; j < u2list.length; j++) {
+            if (ustr == u2list[j]) {
                 break;
             }
-            if(j == u2list.length - 1){
-                $("#"+ustr+"").remove();
+            if (j == u2list.length - 1) {
+                $("#" + ustr + "").remove();
             }
         }
     }
@@ -558,7 +558,7 @@
         var computerroom = $("#comproom_code option:selected").val();
         var mpcname = $("#his-mpid-select").val();
 
-        if(!computerroom){
+        if (!computerroom) {
             alert("请先选择机房，再选择检测点");
         }
         else if (!mpcname) {
@@ -573,7 +573,7 @@
                     var obj = JSON.parse(data);
                     var rt = obj.allmpdata;
                     for (var i = 0; i < rt.length; i++) {
-                        if(i == 0)
+                        if (i == 0)
                             $('#his-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
                         else
                             $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
@@ -840,7 +840,7 @@
     var chart1Legend = ['u1', 'u2', 'u3', 'u4', 'i1', 'i2', 'i3', 'i4'];
     var chart3Legend = ['p1', 'p2', 'p3', 'p', 's1', 's2', 's3', 's', 'q1', 'q2', 'q3', 'q',
         'pf1', 'pf2', 'pf3', 'pf', 'dpf1', 'dpf2', 'dpf3', 'dpf'];
-    var chart4Legend = ['Ua','Ub','Uc'];
+    var chart4Legend = ['Ua', 'Ub', 'Uc'];
     var chart5Legend = ['thdu1', 'thdu2', 'thdu3', 'thdu4', 'thdi1', 'thdi2', 'thdi3', 'thdi4'];
     var markPointUI = {//电压\电流图最大值、最小值标注点
         label: {formatter: '{a}{b}:{c}'},
@@ -868,25 +868,25 @@
     };
 
     var line1 = [];
-    line1.push([ '1' , '200']);
-    line1.push([ '2' , '185']);
-    line1.push([ '3' , '170']);
-    line1.push([ '4' , '155']);
-    line1.push([ '5' , '140']);
+    line1.push(['1', '200']);
+    line1.push(['2', '185']);
+    line1.push(['3', '170']);
+    line1.push(['4', '155']);
+    line1.push(['5', '140']);
 
-    for(var i = 5; i <= 500; i++){
-        line1.push([ i , '140']);
+    for (var i = 5; i <= 500; i++) {
+        line1.push([i, '140']);
     }
 
-    for(var i = 500; i <= 2000; i++){
-        line1.push([ i , '120']);
+    for (var i = 500; i <= 2000; i++) {
+        line1.push([i, '120']);
     }
 
     var line2 = [];
-    line2.push([ '30' , '0']);
+    line2.push(['30', '0']);
 
-    for(var i = 30; i <= 2000; i++){
-        line2.push([ i , '70']);
+    for (var i = 30; i <= 2000; i++) {
+        line2.push([i, '70']);
     }
 
     var option1 = {
@@ -918,9 +918,9 @@
                 name: "u1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "u1"},
-                itemStyle:{
-                    normal:{
-                        color:'#ffff00'
+                itemStyle: {
+                    normal: {
+                        color: '#ffff00'
                     }
                 }
             },
@@ -928,9 +928,9 @@
                 name: "u2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "u2"},
-                itemStyle:{
-                    normal:{
-                        color:'#00ff00'
+                itemStyle: {
+                    normal: {
+                        color: '#00ff00'
                     }
                 }
             },
@@ -938,9 +938,9 @@
                 name: "u3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "u3"},
-                itemStyle:{
-                    normal:{
-                        color:'#ff0000'
+                itemStyle: {
+                    normal: {
+                        color: '#ff0000'
                     }
                 }
             },
@@ -954,9 +954,9 @@
                 name: "i1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "i1"},
-                itemStyle:{
-                    normal:{
-                        color:'#ffff00'
+                itemStyle: {
+                    normal: {
+                        color: '#ffff00'
                     }
                 }
             },
@@ -964,9 +964,9 @@
                 name: "i2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "i2"},
-                itemStyle:{
-                    normal:{
-                        color:'#00ff00'
+                itemStyle: {
+                    normal: {
+                        color: '#00ff00'
                     }
                 }
             },
@@ -974,9 +974,9 @@
                 name: "i3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "i3"},
-                itemStyle:{
-                    normal:{
-                        color:'#ff0000'
+                itemStyle: {
+                    normal: {
+                        color: '#ff0000'
                     }
                 }
             },
@@ -1175,48 +1175,48 @@
         series: [
             // 浪涌/塌陷
             {
-                name: 'Ua',type: 'scatter',
-                encode: {x: 'time'* 1000, y: 'Ua'},
-                itemStyle:{
-                    normal:{
-                        color:'#ffff00'
+                name: 'Ua', type: 'scatter',
+                encode: {x: 'time' * 1000, y: 'Ua'},
+                itemStyle: {
+                    normal: {
+                        color: '#ffff00'
                     }
                 }
             },
             {
-                name: 'Ub',type: 'scatter',
-                encode: {x: 'time'* 1000, y: 'Ub'},
-                itemStyle:{
-                    normal:{
-                        color:'#00ff00'
+                name: 'Ub', type: 'scatter',
+                encode: {x: 'time' * 1000, y: 'Ub'},
+                itemStyle: {
+                    normal: {
+                        color: '#00ff00'
                     }
                 }
             },
             {
-                name: 'Uc',type: 'scatter',
-                encode: {x: 'time'* 1000, y: 'Uc'},
-                itemStyle:{
-                    normal:{
-                        color:'#ff0000'
+                name: 'Uc', type: 'scatter',
+                encode: {x: 'time' * 1000, y: 'Uc'},
+                itemStyle: {
+                    normal: {
+                        color: '#ff0000'
                     }
                 }
             },
             {
-                name:'',
-                type:'line',
-                itemStyle:{
-                    normal:{
-                        color:'#ff0000'
+                name: '',
+                type: 'line',
+                itemStyle: {
+                    normal: {
+                        color: '#ff0000'
                     }
                 },
                 data: line1
             },
             {
-                name:'',
-                type:'line',
-                itemStyle:{
-                    normal:{
-                        color:'#ff0000'
+                name: '',
+                type: 'line',
+                itemStyle: {
+                    normal: {
+                        color: '#ff0000'
                     }
                 },
                 data: line2
@@ -1252,9 +1252,9 @@
                 name: "thdu1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdu1"},
-                itemStyle:{
-                    normal:{
-                        color:'#ffff00'
+                itemStyle: {
+                    normal: {
+                        color: '#ffff00'
                     }
                 }
             },
@@ -1262,9 +1262,9 @@
                 name: "thdu2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdu2"},
-                itemStyle:{
-                    normal:{
-                        color:'#00ff00'
+                itemStyle: {
+                    normal: {
+                        color: '#00ff00'
                     }
                 }
             },
@@ -1272,9 +1272,9 @@
                 name: "thdu3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdu3"},
-                itemStyle:{
-                    normal:{
-                        color:'#ff0000'
+                itemStyle: {
+                    normal: {
+                        color: '#ff0000'
                     }
                 }
             },
@@ -1288,9 +1288,9 @@
                 name: "thdi1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdi1"},
-                itemStyle:{
-                    normal:{
-                        color:'#ffff00'
+                itemStyle: {
+                    normal: {
+                        color: '#ffff00'
                     }
                 }
             },
@@ -1298,9 +1298,9 @@
                 name: "thdi2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdi2"},
-                itemStyle:{
-                    normal:{
-                        color:'#00ff00'
+                itemStyle: {
+                    normal: {
+                        color: '#00ff00'
                     }
                 }
             },
@@ -1308,9 +1308,9 @@
                 name: "thdi3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdi3"},
-                itemStyle:{
-                    normal:{
-                        color:'#ff0000'
+                itemStyle: {
+                    normal: {
+                        color: '#ff0000'
                     }
                 }
             },
@@ -1554,7 +1554,7 @@
         eventChart1.setOption(option1);
         eventChart2.setOption(option2);
         eventChart3.setOption(option3);
-        eventChart4.setOption(option4);
+        // eventChart4.setOption(option4);
         eventChart5.setOption(option5);
 
         //设置曲线图初始不显示
@@ -1626,8 +1626,8 @@
                 monitorpointid: did
             },
             dataType: "json",
-            success: function(result){
-                var data=JSON.parse(result);
+            success: function (result) {
+                var data = JSON.parse(result);
                 eventChart4.setOption({dataset: {source: data}});
                 $('#item2-LyTx-ctrl input.default-show').each(function () {//显示默认的系列
                     $(this).trigger('click');
@@ -1663,6 +1663,16 @@
         $('.lastDate').datetimepicker('setEndDate', $(this).val());
     });
 
+
+    // todo: fix a strange bug, use this temporary method for test.
+    var markOfClick = false;
+    function searchHisTwice() {
+        if (markOfClick)
+            searchHis();
+        markOfClick = true;
+        searchHis();
+    }
+
     function searchHis() {
         var did = $("#his-mpid-select").val();
         var stime = $("#firstDate").val();
@@ -1670,10 +1680,9 @@
 
         if (stime > etime) {
             alert("开始日期不能早于结束日期");
-        } else if(did != "" && stime != "" && etime != "") {
+        } else if (did != "" && stime != "" && etime != "") {
             getData(stime, etime, did);
         }
-
     }
 
 </script>
