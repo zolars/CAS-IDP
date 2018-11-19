@@ -683,17 +683,8 @@
     }
 </script>
 
-<%--治理导致的数据变更函数 beginCtrl() ctrlFunc()--%>
+<%--治理导致的数据变更函数 beginCtrl() --%>
 <script type="text/javascript">
-    function ctrlFunc(num) {
-        var btn = document.getElementById("beginCtrl-btn");
-        if (btn.value == "结束治理") {
-            return num / 2;
-        }
-        else {
-            return num;
-        }
-    }
 
     function beginCtrl() {
         var btn = document.getElementById("beginCtrl-btn");
@@ -1541,10 +1532,14 @@
 
     // 添加数据
     function addData(newRecord) {
-        newRecord = generateQstRecord();
-
+        if (document.getElementById("beginCtrl-btn").value == "结束治理") {
+            newRecord = generateQstRecordAfter();
+        }
+        else {
+            newRecord = generateQstRecordBefore();
+        }
         // 构造1条记录
-        var time = formatDateTime(newRecord["allHZ"][0]["time"]);
+        var time = newRecord["allHZ"][0]["time"];
         // RMS
         var rmsU1 = newRecord["allRMS"][0]["u1"].toFixed(2);
         var rmsU2 = newRecord["allRMS"][0]["u2"].toFixed(2);
@@ -1796,7 +1791,12 @@
            });
        }
        */
-        var data = generateXbtData();
+
+        if (document.getElementById("beginCtrl-btn").value == "结束治理") {
+            var data = generateXbtDataAfter();
+        } else {
+            var data = generateXbtDataBefore();
+        }
         updateXbt(data);
     }
 
@@ -1879,7 +1879,11 @@
             });
         }
         */
-        var data = generateSxdytData();
+        if (document.getElementById("beginCtrl-btn").value == "结束治理") {
+            var data = generateSxdytDataAfter();
+        } else {
+            var data = generateSxdytDataBefore();
+        }
         updateSxdyt(data);
         // 设置显示的系列
         $("#item3-sidebar ol li button.active").trigger("click");
@@ -2144,9 +2148,17 @@
         // var rt1 = obj.nowpowerparm;
         // var rt2 = obj.nowpoweruunb;
 
-        var rt1 = generateParmData();
-        var rt2 = generateSxdytData()["uunb"];
-        var rt3 = generateXbtData();
+        if (document.getElementById("beginCtrl-btn").value == "结束治理") {
+            var rt1 = generateParmDataAfter();
+            var rt2 = generateSxdytDataAfter()["uunb"];
+            var rt3 = generateXbtDataAfter();
+        }
+        else {
+            var rt1 = generateParmDataBefore();
+            var rt2 = generateSxdytDataBefore()["uunb"];
+            var rt3 = generateXbtDataBefore();
+        }
+
 
         updateParams(rt1, rt2, rt3);
     }

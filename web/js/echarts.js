@@ -33673,7 +33673,7 @@ SeriesModel.extend({
         showAllSymbol: 'auto',
 
         // Whether to connect break point.
-        connectNulls: false,
+        connectNulls: true,
 
         // Sampling for large data. Can be: 'average', 'max', 'min', 'sum'.
         sampling: 'none',
@@ -34904,7 +34904,7 @@ var Polyline$1 = Path.extend({
 
         smoothMonotone: null,
 
-        connectNulls: false
+        connectNulls: true
     },
 
     style: {
@@ -34964,7 +34964,7 @@ var Polygon$1 = Path.extend({
 
         smoothMonotone: null,
 
-        connectNulls: false
+        connectNulls: true
     },
 
     brush: fixClipWithShadow(Path.prototype.brush),
