@@ -101,13 +101,13 @@ public class AlarmModelJob implements Job {
 
         // 打开服务器
         AlarmModelClient server = new AlarmModelClient();
-        ChannelFuture f = server.start(new InetSocketAddress(2048));
+        ChannelFuture f = server.start(new InetSocketAddress(9999));
 
         // 与端口建立连接并发送示例告警信息
         WebSocketContainer conmtainer = ContainerProvider.getWebSocketContainer();
         WebSocketClient client = new WebSocketClient();
         try {
-            conmtainer.connectToServer(client, new URI("ws://localhost:2048/ws"));
+            conmtainer.connectToServer(client, new URI("ws://localhost:9999/ws"));
         } catch (Exception e) {
             e.printStackTrace();
         }

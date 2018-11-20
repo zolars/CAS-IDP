@@ -298,6 +298,14 @@
             </result>
         </action>
 
+        <action name="setGenerationData" class="onlineTest.action.setGenerationDataaction">
+            <!--setParameter -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <action name="getSXDY" class="onlineTest.action.getSXDYaction">
             <!--getSXDY -->
             <result name="failure">/failure.jsp</result>
@@ -500,6 +508,7 @@
                 <param name="root">result</param>
             </result>
         </action>
+
         <!--获取浪涌塌陷数据-->
         <action name="getHisDataLyTx" class="historyData.action.getHisLyTxAction">
             <result name="failure">/failure.jsp</result>

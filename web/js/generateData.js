@@ -36,7 +36,8 @@ function generateQstRecordBefore() {
     var p = generateRandom(21.35, 2);
     var s = generateRandom(31.68, 2);
     var q = generateRandom(9.65, 1);
-    var pf = generateRandom(0.71, 0.01);
+    var cosPi = generateRandom(0.71, 0.01);
+    var pf = cosPi * generateRandomRate(112.82, 0.1) / i;
     var pstU = generateRandom(4.39, 1);
     var pltU = generateRandom(4.29, 1);
     var thdu = generateRandom(5.65, 0.3);
@@ -53,71 +54,63 @@ function generateQstRecordBefore() {
         "allRMS": [
             {
                 "u1": u,
-                "u2": generateRandomRate(u, 0.01),
-                "u3": generateRandomRate(u, 0.01),
-                "i1": i,
-                "i2": generateRandomRate(i, 0.01),
-                "i3": generateRandomRate(i, 0.01)
-                /*
-                "u1": u,
                 "u2": u + generateRandomElement(u),
                 "u3": u - generateRandomElement(u),
                 "i1": i,
                 "i2": i + generateRandomElement(i),
                 "i3": i - generateRandomElement(i)
-                */
             }
         ],
         "allTHD": [
             {
                 "u1": thdu, // todo
-                "u2": generateRandomRate(thdu, 0.01), // todo
-                "u3": generateRandomRate(thdu, 0.01), // todo
+                "u2": thdu + generateRandomElement(thdu), // todo
+                "u3": thdu - generateRandomElement(thdu), // todo
                 "i1": thdi, // todo
-                "i2": generateRandomRate(thdi, 0.01), // todo
-                "i3": generateRandomRate(thdi, 0.01)  // todo
+                "i2": thdi + generateRandomElement(thdi), // todo
+                "i3": thdi - generateRandomElement(thdi)  // todo
             }
         ],
         "allW": [
             {
                 "p1": p,
-                "p2": generateRandomRate(p, 0.01),
-                "p3": generateRandomRate(p, 0.01)
+                "p2": p + generateRandomElement(p),
+                "p3": p - generateRandomElement(p)
             }
         ],
         "allVA": [
             {
                 "s1": s,
-                "s2": generateRandomRate(s, 0.01),
-                "s3": generateRandomRate(s, 0.01)
+                "s2": s + generateRandomElement(s),
+                "s3": s - generateRandomElement(s)
             }
         ],
         "allVAR": [
             {
                 "q1": q,
-                "q2": generateRandomRate(q, 0.01),
-                "q3": generateRandomRate(q, 0.01)
+                "q2": q + generateRandomElement(q),
+                "q3": q - generateRandomElement(q)
             }
         ],
         "allPF": [
             {
                 "pf1": pf,
-                "pf2": generateRandomRate(pf, 0.01),
-                "pf3": generateRandomRate(pf, 0.01)
+                "pf2": pf + generateRandomElement(pf),
+                "pf3": pf - generateRandomElement(pf)
             }
         ],
         "allPST": [
             {
                 "pstU1": pstU,
-                "pstU2": generateRandomRate(pstU, 0.01),
-                "pstU3": generateRandomRate(pstU, 0.01)
+                "pstU2": pstU + generateRandomElement(pstU),
+                "pstU3": pstU - generateRandomElement(pstU)
             }
         ],
         "allPLT": [
             {
                 "pltU1": pltU,
-                "pltU2": generateRandomRate(pltU, 0.01),
-                "pltU3": generateRandomRate(pltU, 0.01)
+                "pltU2": pltU + generateRandomElement(pltU),
+                "pltU3": pltU - generateRandomElement(pltU)
             }
         ],
         "allUNB": [
@@ -136,7 +129,8 @@ function generateQstRecordAfter() {
     var p = generateRandom(23.98, 2);
     var s = generateRandom(24.64, 2);
     var q = generateRandom(5.21, 1);
-    var pf = generateRandom(0.97, 0.01);
+    var cosPi = generateRandom(0.97, 0.01);
+    var pf = cosPi * generateRandomRate(106.82, 0.1) / i;
     var pstU = generateRandom(4.37, 1);
     var pltU = generateRandom(4.29, 1);
     var thdu = generateRandom(1.30, 0.2);
@@ -152,71 +146,64 @@ function generateQstRecordAfter() {
         "allRMS": [
             {
                 "u1": u,
-                "u2": generateRandomRate(u, 0.01),
-                "u3": generateRandomRate(u, 0.01),
-                "i1": i,
-                "i2": generateRandomRate(i, 0.01),
-                "i3": generateRandomRate(i, 0.01)
-                /*
-                "u1": u,
                 "u2": u + generateRandomElement(u),
                 "u3": u - generateRandomElement(u),
                 "i1": i,
                 "i2": i + generateRandomElement(i),
                 "i3": i - generateRandomElement(i)
-                */
+
             }
         ],
         "allTHD": [
             {
                 "u1": thdu, // todo
-                "u2": generateRandomRate(thdu, 0.01), // todo
-                "u3": generateRandomRate(thdu, 0.01), // todo
+                "u2": thdu + generateRandomElement(thdu), // todo
+                "u3": thdu - generateRandomElement(thdu), // todo
                 "i1": thdi, // todo
-                "i2": generateRandomRate(thdi, 0.01), // todo
-                "i3": generateRandomRate(thdi, 0.01)  // todo
+                "i2": thdi + generateRandomElement(thdi), // todo
+                "i3": thdi - generateRandomElement(thdi)  // todo
             }
         ],
         "allW": [
             {
                 "p1": p,
-                "p2": generateRandomRate(p, 0.01),
-                "p3": generateRandomRate(p, 0.01)
+                "p2": p + generateRandomElement(p),
+                "p3": p - generateRandomElement(p)
             }
         ],
         "allVA": [
             {
                 "s1": s,
-                "s2": generateRandomRate(s, 0.01),
-                "s3": generateRandomRate(s, 0.01)
+                "s2": s + generateRandomElement(s),
+                "s3": s - generateRandomElement(s)
             }
         ],
         "allVAR": [
             {
                 "q1": q,
-                "q2": generateRandomRate(q, 0.01),
-                "q3": generateRandomRate(q, 0.01)
+                "q2": q + generateRandomElement(q),
+                "q3": q - generateRandomElement(q)
             }
         ],
         "allPF": [
             {
                 "pf1": pf,
-                "pf2": generateRandomRate(pf, 0.01),
-                "pf3": generateRandomRate(pf, 0.01)
+                "pf2": pf + generateRandomElement(pf),
+                "pf3": pf - generateRandomElement(pf)
             }
         ],
         "allPST": [
             {
                 "pstU1": pstU,
-                "pstU2": generateRandomRate(pstU, 0.01),
-                "pstU3": generateRandomRate(pstU, 0.01)
+                "pstU2": pstU + generateRandomElement(pstU),
+                "pstU3": pstU - generateRandomElement(pstU)
             }
         ],
         "allPLT": [
             {
                 "pltU1": pltU,
-                "pltU2": generateRandomRate(pltU, 0.01),
-                "pltU3": generateRandomRate(pltU, 0.01)
+                "pltU2": pltU + generateRandomElement(pltU),
+                "pltU3": pltU - generateRandomElement(pltU)
             }
         ],
         "allUNB": [
@@ -235,38 +222,43 @@ function generateParmDataBefore() {
     var p = generateRandom(21.35, 2);
     var s = generateRandom(31.68, 2);
     var q = generateRandom(9.65, 1);
-    var pf = generateRandom(0.71, 0.01);
+    var cosPhi = generateRandom(0.71, 0.01);
+    var pf = cosPhi * generateRandomRate(112.82, 0.1) / i;
     var pstU = generateRandom(4.39, 1);
     var pltU = generateRandom(4.29, 1);
 
     var data = {
+        "time": getNowFormatDate(),
         "u1": u, // todo
-        "u2": generateRandomRate(u, 0.01), // todo
-        "u3": generateRandomRate(u, 0.01), // todo
-        "u4": 10, // todo
+        "u2": u + generateRandomElement(u), // todo
+        "u3": u - generateRandomElement(u), // todo
+        "u4": 0, // todo
         "i1": i, // todo
-        "i2": generateRandomRate(i, 0.01), // todo
-        "i3": generateRandomRate(i, 0.01), // todo
-        "i4": 10, // todo
+        "i2": i + generateRandomElement(i), // todo
+        "i3": i - generateRandomElement(i), // todo
+        "i4": 0, // todo
         "p1": p, // todo
-        "p2": generateRandomRate(p, 0.01), // todo
-        "p3": generateRandomRate(p, 0.01), // todo
+        "p2": p + generateRandomElement(p), // todo
+        "p3": p - generateRandomElement(p), // todo
+        "cosPhi1": cosPhi, // todo
+        "cosPhi2": cosPhi + generateRandomElement(cosPhi), // todo
+        "cosPhi3": cosPhi - generateRandomElement(cosPhi), // todo
         "pf1": pf, // todo
-        "pf2": generateRandomRate(pf, 0.01), // todo
-        "pf3": generateRandomRate(pf, 0.01), // todo
+        "pf2": pf + generateRandomElement(pf), // todo
+        "pf3": pf - generateRandomElement(pf), // todo
         "q1": q, // todo
-        "q2": generateRandomRate(q, 0.01), // todo
-        "q3": generateRandomRate(q, 0.01), // todo
+        "q2": q + generateRandomElement(q), // todo
+        "q3": q - generateRandomElement(q), // todo
         "s1": s, // todo
-        "s2": generateRandomRate(s, 0.01), // todo
-        "s3": generateRandomRate(s, 0.01), // todo
+        "s2": s + generateRandomElement(s), // todo
+        "s3": s - generateRandomElement(s), // todo
         "hz": generateRandom(50.01, 0.1), // todo
         "pstU1": pstU, // todo
-        "pstU2": generateRandomRate(pstU, 0.01), // todo
-        "pstU3": generateRandomRate(pstU, 0.01), // todo
+        "pstU2": pstU + generateRandomElement(pstU), // todo
+        "pstU3": pstU - generateRandomElement(pstU), // todo
         "pltU1": pltU, // todo
-        "pltU2": generateRandomRate(pltU, 0.01), // todo
-        "pltU3": generateRandomRate(pltU, 0.01)  // todo
+        "pltU2": pltU + generateRandomElement(pltU), // todo
+        "pltU3": pltU - generateRandomElement(pltU)  // todo
     };
 
     return data;
@@ -276,7 +268,8 @@ function generateParmDataAfter() {
     var u = generateRandom(224.45, 4);
     var i = generateRandom(109.77, 4);
     var p = generateRandom(23.98, 2);
-    var pf = generateRandom(0.97, 0.01);
+    var cosPhi = generateRandom(0.97, 0.01);
+    var pf = cosPhi * generateRandomRate(106.82, 0.1) / i;
     var q = generateRandom(5.47, 1);
     var s = generateRandom(24.64, 2);
     var pstU = generateRandom(4.37, 1);
@@ -285,32 +278,35 @@ function generateParmDataAfter() {
 
     var data = {
         "u1": u, // todo
-        "u2": generateRandomRate(u, 0.01), // todo
-        "u3": generateRandomRate(u, 0.01), // todo
-        "u4": 10, // todo
+        "u2": u + generateRandomElement(u), // todo
+        "u3": u - generateRandomElement(u), // todo
+        "u4": 0, // todo
         "i1": i, // todo
-        "i2": generateRandomRate(i, 0.01), // todo
-        "i3": generateRandomRate(i, 0.01), // todo
-        "i4": 10, // todo
+        "i2": i + generateRandomElement(i), // todo
+        "i3": i - generateRandomElement(i), // todo
+        "i4": 0, // todo
         "p1": p, // todo
-        "p2": generateRandomRate(p, 0.01), // todo
-        "p3": generateRandomRate(p, 0.01), // todo
+        "p2": p + generateRandomElement(p), // todo
+        "p3": p - generateRandomElement(p), // todo
+        "cosPhi1": cosPhi, // todo
+        "cosPhi2": cosPhi + generateRandomElement(cosPhi), // todo
+        "cosPhi3": cosPhi - generateRandomElement(cosPhi), // todo
         "pf1": pf, // todo
-        "pf2": generateRandomRate(pf, 0.01), // todo
-        "pf3": generateRandomRate(pf, 0.01), // todo
+        "pf2": pf + generateRandomElement(pf), // todo
+        "pf3": pf - generateRandomElement(pf), // todo
         "q1": q, // todo
-        "q2": generateRandomRate(q, 0.01), // todo
-        "q3": generateRandomRate(q, 0.01), // todo
+        "q2": q + generateRandomElement(q), // todo
+        "q3": q - generateRandomElement(q), // todo
         "s1": s, // todo
-        "s2": generateRandomRate(s, 0.01), // todo
-        "s3": generateRandomRate(s, 0.01), // todo
+        "s2": s + generateRandomElement(s), // todo
+        "s3": s - generateRandomElement(s), // todo
         "hz": generateRandom(50.01, 0.1), // todo
         "pstU1": pstU, // todo
-        "pstU2": generateRandomRate(pstU, 0.01), // todo
-        "pstU3": generateRandomRate(pstU, 0.01), // todo
+        "pstU2": pstU + generateRandomElement(pstU), // todo
+        "pstU3": pstU - generateRandomElement(pstU), // todo
         "pltU1": pltU, // todo
-        "pltU2": generateRandomRate(pltU, 0.01), // todo
-        "pltU3": generateRandomRate(pltU, 0.01)  // todo
+        "pltU2": pltU + generateRandomElement(pltU), // todo
+        "pltU3": pltU - generateRandomElement(pltU)  // todo
     };
 
     return data;
@@ -434,6 +430,7 @@ function generateXbtDataBefore() {
     var iXb = generateIXbData(50);
 
     var data = {
+        "time": getNowFormatDate(),
         "u1Xb1": generateRandom(224.05, 4),
         "u1Xb2": 0,
         "u1Xb3": 0,
@@ -586,11 +583,11 @@ function generateXbtDataBefore() {
         "u3Xb50": 0,
         // iXb is not herr.
         "thdu1": thdu, // todo
-        "thdu2": generateRandomRate(thdu, 0.01), // todo
-        "thdu3": generateRandomRate(thdu, 0.01),  // todo
+        "thdu2": thdu + generateRandomElement(thdu), // todo
+        "thdu3": thdu - generateRandomElement(thdu),  // todo
         "thdi1": thdi, // todo
-        "thdi2": generateRandomRate(thdi, 0.01), // todo
-        "thdi3": generateRandomRate(thdi, 0.01),  // todo
+        "thdi2": thdi + generateRandomElement(thdi), // todo
+        "thdi3": thdi - generateRandomElement(thdi),  // todo
         "u1Va1": 0.00, // todo
         "u1Va2": (10), // todo
         "u1Va3": (10), // todo
@@ -893,6 +890,9 @@ function generateXbtDataBefore() {
         "i3Va50": (10) // todo
     };
 
+    data["i1Xb1"] = generateRandomRate(112.78, 0.1);
+    data["i2Xb1"] = generateRandomRate(112.78, 0.1);
+    data["i3Xb1"] = generateRandomRate(112.78, 0.1);
     for (var i = 2; i <= 50; i++) {
         data["i1Xb" + i] = generateRandomRate(iXb[i], 0.1);
         data["i2Xb" + i] = generateRandomRate(iXb[i], 0.1);
@@ -908,6 +908,7 @@ function generateXbtDataAfter() {
     var iXb = generateIXbData(0.5);
 
     var data = {
+        "time": getNowFormatDate(),
         "u1Xb1": generateRandom(224.05, 4),
         "u1Xb2": 0,
         "u1Xb3": 0,
@@ -1060,11 +1061,11 @@ function generateXbtDataAfter() {
         "u3Xb50": 0,
         // iXb is not herr.
         "thdu1": thdu, // todo
-        "thdu2": generateRandomRate(thdu, 0.01), // todo
-        "thdu3": generateRandomRate(thdu, 0.01),  // todo
+        "thdu2": thdu + generateRandomElement(thdu), // todo
+        "thdu3": thdu - generateRandomElement(thdu),  // todo
         "thdi1": thdi, // todo
-        "thdi2": generateRandomRate(thdi, 0.01), // todo
-        "thdi3": generateRandomRate(thdi, 0.01),  // todo
+        "thdi2": thdi + generateRandomElement(thdi), // todo
+        "thdi3": thdi - generateRandomElement(thdi),  // todo
         "u1Va1": 0.00, // todo
         "u1Va2": (10), // todo
         "u1Va3": (10), // todo
@@ -1367,6 +1368,9 @@ function generateXbtDataAfter() {
         "i3Va50": (10) // todo
     };
 
+    data["i1Xb1"] = generateRandomRate(106.82, 0.1);
+    data["i2Xb1"] = generateRandomRate(106.82, 0.1);
+    data["i3Xb1"] = generateRandomRate(106.82, 0.1);
     for (var i = 2; i <= 50; i++) {
         data["i1Xb" + i] = generateRandomRate(iXb[i], 0.1);
         data["i2Xb" + i] = generateRandomRate(iXb[i], 0.1);

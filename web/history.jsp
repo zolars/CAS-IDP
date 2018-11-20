@@ -1592,7 +1592,7 @@
             url: "getHisData",
             data: {
                 starttime: starttime, // "2018-2-1 10：00：00",
-                endtime: endtime, //"2018-10-5 10：00：00",
+                endtime: endtime,     //"2018-10-5 10：00：00",
                 monitorpointid: did
             },
             dataType: "json",
@@ -1666,6 +1666,7 @@
 
     // todo: fix a strange bug, use this temporary method for test.
     var markOfClick = false;
+
     function searchHisTwice() {
         if (markOfClick)
             searchHis();

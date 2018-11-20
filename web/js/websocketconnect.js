@@ -3,7 +3,7 @@ if (!window.WebSocket) {
     window.WebSocket = window.MozWebSocket;
 }
 if (window.WebSocket) {
-    socket = new WebSocket("ws://localhost:2048/ws");
+    socket = new WebSocket("ws://localhost:9999/ws");
     socket.onmessage = function (event) {
         alert(event.data);
     };

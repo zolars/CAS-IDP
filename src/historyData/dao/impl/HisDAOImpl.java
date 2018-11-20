@@ -46,7 +46,7 @@ public class HisDAOImpl implements HisDAO {
                 map.put("p1", temp.getP1());
                 map.put("p2", temp.getP2());
                 map.put("p3", temp.getP3());
-                map.put("p", temp.getpFsum());
+                map.put("p", temp.getPsum());
                 map.put("s1", temp.getS1());
                 map.put("s2", temp.getS2());
                 map.put("s3", temp.getS3());

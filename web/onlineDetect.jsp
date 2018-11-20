@@ -732,12 +732,14 @@
     var qstRecordpf1 = []; // 暂存趋势图pf1数据
     var qstRecordpf2 = []; // 暂存趋势图pf2数据
     var qstRecordpf3 = []; // 暂存趋势图pf3数据
+    /*
     var qstRecorddpf1 = []; // 暂存趋势图dpf1数据
     var qstRecorddpf2 = []; // 暂存趋势图dpf2数据
     var qstRecorddpf3 = []; // 暂存趋势图dpf3数据
     var qstRecordtan1 = []; // 暂存趋势图tan1数据
     var qstRecordtan2 = []; // 暂存趋势图tan2数据
     var qstRecordtan3 = []; // 暂存趋势图tan3数据
+    */
     var qstRecordunb = []; // 暂存趋势图unb数据
     var qstRecordpstu1 = []; // 暂存趋势图pstu1数据
     var qstRecordpstu2 = []; // 暂存趋势图pstu2数据
@@ -754,8 +756,8 @@
         "s1", "s2", "s3",
         "q1", "q2", "q3",
         "pf1", "pf2", "pf3",
-        "dpf1", "dpf2", "dpf3",
-        "tan1", "tan2", "tan3",
+        /*"dpf1", "dpf2", "dpf3",
+        "tan1", "tan2", "tan3",*/
         "unb",
         "pstU1", "pstU2", "pstU3",
         "pltU1", "pltU2", "pltU3"
@@ -1637,9 +1639,9 @@
         qstRecordRmsu2.push({name: time, value: [time, rmsU2]});
         qstRecordRmsu3.push({name: time, value: [time, rmsU3]});
 
-        qstRecordRmsv1.push({name: time, value: [time, Math.sqrt(3) * rmsU1]});
-        qstRecordRmsv2.push({name: time, value: [time, Math.sqrt(3) * rmsU2]});
-        qstRecordRmsv3.push({name: time, value: [time, Math.sqrt(3) * rmsU3]});
+        qstRecordRmsv1.push({name: time, value: [time, (Math.sqrt(3) * rmsU1).toFixed(2)]});
+        qstRecordRmsv2.push({name: time, value: [time, (Math.sqrt(3) * rmsU2).toFixed(2)]});
+        qstRecordRmsv3.push({name: time, value: [time, (Math.sqrt(3) * rmsU3).toFixed(2)]});
 
         qstRecordRmsi1.push({name: time, value: [time, rmsI1]});
         qstRecordRmsi2.push({name: time, value: [time, rmsI2]});
@@ -1839,7 +1841,7 @@
             for (var j = 1; j <= 50; j++) {
                 var jindx = series[i] + j;
                 // temp.push(keepTwoDecimalFull(100 * obj[jindx]));
-                temp.push((100 * parseFloat(obj[jindx])).toFixed(2));
+                temp.push((/*100 **/ parseFloat(obj[jindx])).toFixed(2));
             }
             res.push(temp);
         }
@@ -2149,16 +2151,36 @@
         // var rt2 = obj.nowpoweruunb;
 
         if (document.getElementById("beginCtrl-btn").value == "结束治理") {
-            var rt1 = generateParmDataAfter();
+            var rt1 = generateParmDataAfter(did);
             var rt2 = generateSxdytDataAfter()["uunb"];
-            var rt3 = generateXbtDataAfter();
+            var rt3 = generateXbtDataAfter(did);
         }
         else {
-            var rt1 = generateParmDataBefore();
+            var rt1 = generateParmDataBefore(did);
             var rt2 = generateSxdytDataBefore()["uunb"];
-            var rt3 = generateXbtDataBefore();
+            var rt3 = generateXbtDataBefore(did);
         }
+        rt1["did"] = did;
+        rt3["did"] = did;
+        rt1["type"] = "parmData";
+        rt3["type"] = "xbData";
+        if (did != null || did != "") {
+            $.ajax({
+                type: "post",
+                url: "setGenerationData",
+                data: rt1,
+                success: function (data) {
+                }
+            });
 
+            $.ajax({
+                type: "post",
+                url: "setGenerationData",
+                data: rt3,
+                success: function (data) {
+                }
+            });
+        }
 
         updateParams(rt1, rt2, rt3);
     }
@@ -2184,10 +2206,11 @@
             "<tr><th>Q (KVar)</th><td>" + data["q1"].toFixed(2) + "</td><td>" + data["q2"].toFixed(2) + "</td><td>" + data["q3"].toFixed(2) + "</td><td>" + Number(parseFloat(data["q1"]) + parseFloat(data["q2"]) + parseFloat(data["q3"])).toFixed(2) + "</td></tr>" +
             "<tr><th>S (KVA)</th><td>" + data["s1"].toFixed(2) + "</td><td>" + data["s2"].toFixed(2) + "</td><td>" + data["s3"].toFixed(2) + "</td><td>" + Number(parseFloat(data["s1"]) + parseFloat(data["s2"]) + parseFloat(data["s3"])).toFixed(2) + "</td></tr>" +
             "<tr><th>PF</th><td>" + data["pf1"].toFixed(2) + "</td><td>" + data["pf2"].toFixed(2) + "</td><td>" + data["pf3"].toFixed(2) + "</td><td><tr>" + /*+Number(parseFloat(data["pf1"])+parseFloat(data["pf2"])+parseFloat(data["pf3"])).toFixed(2)+"</td></tr>"+*/
-            /* "<tr><th>Cos PHI</th><td>"+data["cosPhi1"].toFixed(2)+"</td><td>"+data["cosPhi2"].toFixed(2)+"</td><td>"+data["cosPhi3"].toFixed(2)+"</td><td></td></tr>"*/
+            "<tr><th>Cos PHI</th><td>" + data["cosPhi1"].toFixed(2) + "</td><td>" + data["cosPhi2"].toFixed(2) + "</td><td>" + data["cosPhi3"].toFixed(2) + "</td><td></td></tr>" +
             "<tr><th>THDu (%)</th><td>" + data3["thdu1"].toFixed(2) + "</td><td>" + data3["thdu2"].toFixed(2) + "</td><td>" + data3["thdu3"].toFixed(2) + "</td><td></td></tr>" +
             "<tr><th>THDi (%)</th><td>" + data3["thdi1"].toFixed(2) + "</td><td>" + data3["thdi2"].toFixed(2) + "</td><td>" + data3["thdi3"].toFixed(2) + "</td><td></td></tr>"
-        );
+        )
+        ;
         $("#params-unb").html(
             "<caption>&nbsp;</caption>" +
             "<tr><th>不平衡度 (%)</th><td>" + data2.toFixed(2) + "</td></tr>" +
