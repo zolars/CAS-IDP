@@ -54,63 +54,63 @@ function generateQstRecordBefore() {
         "allRMS": [
             {
                 "u1": u,
-                "u2": u + generateRandomElement(u),
-                "u3": u - generateRandomElement(u),
+                "u2": u + generateRandomRate(0.92, 0.05),
+                "u3": u - generateRandomRate(0.98, 0.05),
                 "i1": i,
-                "i2": i + generateRandomElement(i),
-                "i3": i - generateRandomElement(i)
+                "i2": i + generateRandomRate(1.60, 0.05),
+                "i3": i - generateRandomRate(7.33, 0.05)
             }
         ],
         "allTHD": [
             {
                 "u1": thdu, // todo
-                "u2": thdu + generateRandomElement(thdu), // todo
-                "u3": thdu - generateRandomElement(thdu), // todo
+                "u2": thdu + generateRandomRate(0.17, 0.05), // todo
+                "u3": thdu - generateRandomRate(0.18, 0.05), // todo
                 "i1": thdi, // todo
-                "i2": thdi + generateRandomElement(thdi), // todo
-                "i3": thdi - generateRandomElement(thdi)  // todo
+                "i2": thdi + generateRandomRate(1.64, 0.05), // todo
+                "i3": thdi - generateRandomRate(1.35, 0.05)  // todo
             }
         ],
         "allW": [
             {
                 "p1": p,
-                "p2": p + generateRandomElement(p),
-                "p3": p - generateRandomElement(p)
+                "p2": p + generateRandomRate(0.51, 0.05),
+                "p3": p - generateRandomRate(1, 0.05)
             }
         ],
         "allVA": [
             {
                 "s1": s,
-                "s2": s + generateRandomElement(s),
-                "s3": s - generateRandomElement(s)
+                "s2": s + generateRandomRate(0.48, 0.05),
+                "s3": s - generateRandomRate(1.77, 0.05)
             }
         ],
         "allVAR": [
             {
                 "q1": q,
-                "q2": q + generateRandomElement(q),
-                "q3": q - generateRandomElement(q)
+                "q2": q + generateRandomRate(2.02, 0.05),
+                "q3": q - generateRandomRate(0.38, 0.05)
             }
         ],
         "allPF": [
             {
                 "pf1": pf,
-                "pf2": pf + generateRandomElement(pf),
-                "pf3": pf - generateRandomElement(pf)
+                "pf2": pf + generateRandomRate(0.6, 0.05),
+                "pf3": pf - generateRandomRate(0.6, 0.05)
             }
         ],
         "allPST": [
             {
                 "pstU1": pstU,
-                "pstU2": pstU + generateRandomElement(pstU),
-                "pstU3": pstU - generateRandomElement(pstU)
+                "pstU2": pstU + generateRandomRate(0.51, 0.05),
+                "pstU3": pstU - generateRandomRate(0.34, 0.05)
             }
         ],
         "allPLT": [
             {
                 "pltU1": pltU,
-                "pltU2": pltU + generateRandomElement(pltU),
-                "pltU3": pltU - generateRandomElement(pltU)
+                "pltU2": pltU + generateRandomRate(0.34, 0.05),
+                "pltU3": pltU - generateRandomRate(0.52, 0.05)
             }
         ],
         "allUNB": [
@@ -146,64 +146,64 @@ function generateQstRecordAfter() {
         "allRMS": [
             {
                 "u1": u,
-                "u2": u + generateRandomElement(u),
-                "u3": u - generateRandomElement(u),
+                "u2": u + generateRandomRate(0.54, 0.05),
+                "u3": u - generateRandomRate(0.36, 0.05),
                 "i1": i,
-                "i2": i + generateRandomElement(i),
-                "i3": i - generateRandomElement(i)
+                "i2": i + generateRandomRate(5.24, 0.05),
+                "i3": i - generateRandomRate(1.71, 0.05)
 
             }
         ],
         "allTHD": [
             {
                 "u1": thdu, // todo
-                "u2": thdu + generateRandomElement(thdu), // todo
-                "u3": thdu - generateRandomElement(thdu), // todo
+                "u2": thdu + generateRandomRate(0.24, 0.05), // todo
+                "u3": thdu - generateRandomRate(0.07, 0.05), // todo
                 "i1": thdi, // todo
-                "i2": thdi + generateRandomElement(thdi), // todo
-                "i3": thdi - generateRandomElement(thdi)  // todo
+                "i2": thdi + generateRandomRate(0.18, 0.05), // todo
+                "i3": thdi - generateRandomRate(0.05, 0.05)  // todo
             }
         ],
         "allW": [
             {
                 "p1": p,
-                "p2": p + generateRandomElement(p),
-                "p3": p - generateRandomElement(p)
+                "p2": p + generateRandomRate(0.46, 0.05),
+                "p3": p - generateRandomRate(1.18, 0.05)
             }
         ],
         "allVA": [
             {
                 "s1": s,
-                "s2": s + generateRandomElement(s),
-                "s3": s - generateRandomElement(s)
+                "s2": s + generateRandomRate(1.22, 0.05),
+                "s3": s - generateRandomRate(0.44, 0.05)
             }
         ],
         "allVAR": [
             {
                 "q1": q,
-                "q2": q + generateRandomElement(q),
-                "q3": q - generateRandomElement(q)
+                "q2": q + generateRandomRate(0.01, 0.05),
+                "q3": q - generateRandomRate(0.31, 0.05)
             }
         ],
         "allPF": [
             {
                 "pf1": pf,
-                "pf2": pf + generateRandomElement(pf),
-                "pf3": pf - generateRandomElement(pf)
+                "pf2": pf + generateRandomRate(0.95, 0.05),
+                "pf3": pf - generateRandomRate(0.95, 0.05)
             }
         ],
         "allPST": [
             {
                 "pstU1": pstU,
-                "pstU2": pstU + generateRandomElement(pstU),
-                "pstU3": pstU - generateRandomElement(pstU)
+                "pstU2": pstU + generateRandomRate(1.05, 0.05),
+                "pstU3": pstU - generateRandomRate(0.42, 0.05)
             }
         ],
         "allPLT": [
             {
                 "pltU1": pltU,
-                "pltU2": pltU + generateRandomElement(pltU),
-                "pltU3": pltU - generateRandomElement(pltU)
+                "pltU2": pltU + generateRandomRate(0.24, 0.05),
+                "pltU3": pltU - generateRandomRate(0.4, 0.05)
             }
         ],
         "allUNB": [
@@ -894,9 +894,13 @@ function generateXbtDataBefore() {
     data["i2Xb1"] = generateRandomRate(112.78, 0.1);
     data["i3Xb1"] = generateRandomRate(112.78, 0.1);
     for (var i = 2; i <= 50; i++) {
-        data["i1Xb" + i] = generateRandomRate(iXb[i], 0.1);
-        data["i2Xb" + i] = generateRandomRate(iXb[i], 0.1);
-        data["i3Xb" + i] = generateRandomRate(iXb[i], 0.1);
+        for (var j = 1; j <= 3; j++) {
+            var temp = generateRandomRate(iXb[i], 0.1);
+            if (temp > ((50 - i) * 2) || temp < ((50 - i) * 1.5)) {
+                temp /= 100;
+            }
+            data["i" + j + "Xb" + i] = temp;
+        }
     }
 
     return data;
