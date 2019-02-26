@@ -18,6 +18,7 @@ public class AlarmModelHandler extends SimpleChannelInboundHandler<TextWebSocket
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt == WebSocketServerProtocolHandler.ServerHandshakeStateEvent.HANDSHAKE_COMPLETE) {
             ctx.pipeline().remove(HttpRequestHandler.class);
+            /*ctx.pipeline().remove(AlarmServer.class);*/
             // group.writeAndFlush(new TextWebSocketFrame("Client " + ctx.channel() + " joined!"));
             group.add(ctx.channel());
         } else {

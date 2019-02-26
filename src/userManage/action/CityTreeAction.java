@@ -28,6 +28,7 @@ public class CityTreeAction extends ActionSupport {
     /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的行级结构树状串
      */
     public String execute() throws Exception {
+        List citybank = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
@@ -37,8 +38,6 @@ public class CityTreeAction extends ActionSupport {
             String uname = request.getParameter("uname");
 
             UserDAO dao = new UserDAOImpl();
-
-            List citybank = new ArrayList();
 
             citybank = dao.getCityBank(province + "分行", uname);
 
@@ -50,6 +49,8 @@ public class CityTreeAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            citybank = null;
         }
         return "success";
     }

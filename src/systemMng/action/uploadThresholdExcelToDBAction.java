@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 import systemMng.ImportService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -373,6 +374,7 @@ public class uploadThresholdExcelToDBAction extends ActionSupport {
 
 
     public String execute() throws Exception {
+        List<DevicesThreshold> list = new ArrayList<>();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -397,7 +399,7 @@ public class uploadThresholdExcelToDBAction extends ActionSupport {
                 Double floorval = stuEntity.getFloorval();
                 Integer ismark = stuEntity.getIsmark();
 
-                List<DevicesThreshold> list = hbsessionDao.search("From DevicesThreshold where name='"+ name + "' and level = " + level);
+                list = hbsessionDao.search("From DevicesThreshold where name='"+ name + "' and level = " + level);
 
                 /*if (list != null) {    //update
                     DevicesThreshold dt = list.get(0);
@@ -424,6 +426,8 @@ public class uploadThresholdExcelToDBAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            list = null;
         }
         return "success";
     }

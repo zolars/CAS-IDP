@@ -1,5 +1,7 @@
 package grabData;
 
+import Util.CRC16M;
+import deviceJobManager.DeviceManager;
 import hibernatePOJO.DictionaryCtrl;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
@@ -25,11 +27,13 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("Ctrl建立连接");
+        //record ctx in DeviceManager
+        System.out.println(did+"-connected");
+        DeviceManager.getCtxMap().put(this.did+"-6",ctx);
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        // TODO: 2018/10/10 0010 更改functionCode和readLength 
-        sendMsg.writeBytes(createMsg(1, 3, 1, 2));
+
+        sendMsg.writeBytes(createMsg(1, 1, 0, 34));
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
@@ -57,11 +61,12 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
         }
         dataResolve(recMsg);
         recMsg.clear();
+        // sleep 1s
+        Thread.sleep(1000);
 
         ByteBuf sendMsg = ctx.alloc().buffer();
-        // TODO: 2018/10/10 0010 更改functionCode和readLength 
-        sendMsg.writeBytes(createMsg(1, 3, 1, 2));
-        // System.out.println("CtrlSend:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
+
+        sendMsg.writeBytes(createMsg(1, 1, 0, 34));
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
@@ -74,28 +79,42 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
 
     //readLength单位是2字节
     public byte[] createMsg(int slaveId, int functionCode, int address, int readLength) {
-        byte[] msg = new byte[12];
-        msg[0] = 0;
-        msg[1] = 0;
-        msg[2] = 0;
-        msg[3] = 0;
-        msg[4] = 0;
-        msg[5] = 6;
-        msg[6] = ((byte) slaveId);
-        msg[7] = ((byte) functionCode);
-        msg[8] = ((byte) (address >> 8));
-        msg[9] = ((byte) (address & 0xFF));
-        msg[10] = ((byte) (readLength >> 8));
-        msg[11] = ((byte) (readLength & 0xFF));
-        return msg;
+        byte[] msg = new byte[6];
+
+        msg[0] = ((byte) 0x01);
+        msg[1] = ((byte) 0x01);
+        msg[2] = ((byte) (0x00 >> 8));
+        msg[3] = ((byte) (0x00 & 0xFF));
+        msg[4] = ((byte) (0x00 >> 8));
+        msg[5] = ((byte) (0x23 & 0xFF));
+
+        byte[] sbuf = CRC16M.getSendBuf(CRC16M.getBufHexStr(msg));
+
+        return sbuf;
     }
 
     public void dataResolve(ByteBuf buf) {
-        buf.skipBytes(9);//跳过前9个字节，与数据无关
-        String data = ByteBufUtil.hexDump(buf);
+//        buf.skipBytes(3); //跳过前9个字节，与数据无关
+//        String data = ByteBufUtil.hexDump(buf);
+//
+//        CtrlSave.ctrlSave(did, data);
+        byte[] bytes=new byte[5];
+        buf.getBytes(3,bytes,0,bytes.length);
+        System.out.println(did+"-线圈状态："+ByteBufUtil.hexDump(bytes));
+        CtrlSave.ctrlSave2(did,bytes);
 
-        data = "4008080002";
+        CtrlSave.setCtrlMap(did,bytes); //save ctrl online data
+    }
 
-        CtrlSave.ctrlSave(did, data);
+    /**
+     * 客户端 失去连接
+     */
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception
+    {
+        //remove ctrl data
+        CtrlSave.getEventCtrlMap().remove(this.did);
+        //remove ctx in DeviceManager
+        DeviceManager.getCtxMap().remove(this.did+"-6");
     }
 }

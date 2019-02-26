@@ -30,6 +30,7 @@ public class getOneProvinceMapDataAction extends ActionSupport {
     /* 获取省的所有时间范围内的等级+各类事件+各类告警个数
      */
     public String execute() throws Exception {
+        List<List<Integer>> oneprovince = new ArrayList<>();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -41,10 +42,11 @@ public class getOneProvinceMapDataAction extends ActionSupport {
             EventDAO dao = new EventDAOImpl();
             ProvinceDAO pdap = new ProvinceDAOImpl();
 
-            List<List<Integer>> oneprovince = new ArrayList<>();
             String pid = pdap.getProvinceIdByName(pname + "分行");
 
-            oneprovince = dao.getOneProvinceEvent(pid, starttime, endtime);
+            if(!pid.equals("")) {
+                oneprovince = dao.getOneProvinceEvent(pid, starttime, endtime);
+            }
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("oplist", oneprovince);
@@ -54,6 +56,8 @@ public class getOneProvinceMapDataAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            oneprovince = null;
         }
         return "success";
     }

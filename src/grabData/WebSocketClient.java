@@ -2,11 +2,22 @@ package grabData;
 
 import javax.websocket.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @ClientEndpoint
 public class WebSocketClient {
     private Session session;
 
+    public WebSocketClient(String url) throws URISyntaxException {
+        URI endpointURI = new URI(url);
+        try {
+            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+            container.connectToServer(this, endpointURI);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     @OnOpen
     public void open(Session session) {
         this.session = session;
@@ -14,6 +25,7 @@ public class WebSocketClient {
 
     @OnMessage
     public void onMessage(String message) {
+        System.out.println(message);
     }
 
     @OnClose

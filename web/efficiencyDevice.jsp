@@ -37,6 +37,7 @@
     <link href="css/mycss.css" rel="stylesheet">
     <link rel="stylesheet" href="css/header.css">
 
+
     <style>
         .location-select-item {
             width: 120px;
@@ -53,6 +54,12 @@
 <!--登陆认证拦截-->
 <script src="js/jquery-3.3.1.js"></script>
 <script src="js/jquery.cookie.js"></script>
+
+
+<!-- PNotify -->
+<script type="text/javascript" src="js/pnotify.custom.min.js"></script>
+<link href="css/pnotify.custom.min.css" rel="stylesheet" type="text/css" />
+
 <%
     String userid = (String)session.getAttribute("userid");
     if(userid == null) {
@@ -68,7 +75,7 @@
     <header id="header" class="media">
         <div class="header-left">
             <a href="" id="menu-toggle"></a>
-            <img src="img/index/logo.jpg" alt="" class="header-img">
+            <img src="img/index/logo.png" alt="" class="header-img">
         </div>
         <div class="header-right">
             <div class="media" id="top-menu">
@@ -294,10 +301,10 @@
             isSystemMng = false;
             menuname = "集中监控";
         }
-        else if(cbidstr[i] == " efficiencyDevice.jsp"){
+       /* else if(cbidstr[i] == " efficiencyDevice.jsp"){
             isSystemMng = false;
             menuname = "动力设施";
-        }
+        }*/
         else if(cbidstr[i] == " onlineDetect.jsp"){
             isSystemMng = false;
             menuname = "在线监测";
@@ -306,10 +313,10 @@
             isSystemMng = false;
             menuname = "动力分析";
         }
-        else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
+        /*else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
             isSystemMng = false;
             menuname = "动力评估";
-        }
+        }*/
         else if(cbidstr[i] == ' reportChart.jsp'){
             isSystemMng = false;
             menuname = "报表功能";

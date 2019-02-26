@@ -39,8 +39,9 @@ public class setAllEventtypePriortyAction extends ActionSupport {
             EventDAO dao = new EventDAOImpl();
             Boolean rt = false;
 
-            if((priortylist.length == eventtypelist.length)&&(priortylist.length > 0)&&(priortylist.length > 0))
-                 rt = dao.setAllEventtypePriorty(eventtypelist, priortylist);
+            if((priortylist.length == eventtypelist.length)&&(priortylist.length > 0)&&(priortylist.length > 0)) {
+                rt = dao.setAllEventtypePriorty(eventtypelist, priortylist);
+            }
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("", rt);

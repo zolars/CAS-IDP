@@ -5,7 +5,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
 import org.apache.struts2.ServletActionContext;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,6 +27,7 @@ public class getDeviceInfoAction extends ActionSupport {
     /* 根据设备名称查询设备其他信息
      */
     public String execute() throws Exception {
+        List qstdata = new ArrayList();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -36,15 +39,25 @@ public class getDeviceInfoAction extends ActionSupport {
                 devicetype = "temp";
             }
 
+            if (devicetype.equals("IDP_JC")) {
+                devicetype = "IDP";
+            }
+
+            if (devicetype.equals("IDP_ZL")) {
+                devicetype = "ctrl";
+            }
+
             DeviceDAO dao = new DeviceDAOImpl();
 
-            List qstdata = dao.getDeviceDataByName(devicetype, devicename);
+            qstdata = dao.getDeviceDataByName(devicetype, devicename);
 
             result = JSON.toJSONString(qstdata);
 
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            qstdata = null;
         }
         return "success";
     }

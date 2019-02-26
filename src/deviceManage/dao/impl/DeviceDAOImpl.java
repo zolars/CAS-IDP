@@ -127,6 +127,32 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     /**
+     * 删除Devices表中did=did的记录
+     * @param did did
+     * @return 真或假
+     */
+    public Boolean deleteOneDevice(String did){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+
+        rt = hbsessionDao.delete("Delete FROM Devices Where did=?", did);
+
+        return rt;
+    }
+
+    /**
+     * 删除did在省、市、机房表中的记录
+     * @param did did
+     * @return 真或假
+     */
+    public Boolean deleteOneDeviceInfoToBelongPosition(String did, String belongname, String belonglevel){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+
+        return rt;
+    }
+
+    /**
      * 删除DeviceAlarmUser表中id=id的记录
      * @param id id
      * @return 真或假
@@ -172,6 +198,23 @@ public class DeviceDAOImpl implements DeviceDAO {
         } else {
             return kl.getDid().toString();
         }
+    }
+
+    public Boolean addOneSMSDevice(String name, String ip, String port){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt = false;
+
+        Devices dt = new Devices();
+
+        dt.setName(name);
+        dt.setType("SMS");
+        dt.setiPaddress(ip);
+        dt.setPort(port);
+
+        rt = hbsessionDao.insert(dt);
+        return rt;
+
     }
 
     /**
@@ -229,7 +272,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     /**
-     * 添加一条设备信息到device表
+     * 添加一条设备信息到device表 注意设备名称唯一
      * @param deviceType deviceType
      * @param devname devname
      * @param devtype devtype
@@ -352,6 +395,112 @@ public class DeviceDAOImpl implements DeviceDAO {
          return rt;
      }
 
+
+    public Boolean addOneDeviceInfoAndBelongPos(String deviceType, String devname,String  devtype, String serialno, String iPaddress, String port, String extra, Integer sms, Integer alert,Integer plantform, String belongname, String belonglevel){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        boolean rt1 = false, rt2 = false;
+
+        Devices dt = new Devices();
+        String maxdid = getMaxDeviceId();
+        Integer imaxid = Integer.parseInt(maxdid) + 1;
+
+        dt.setDid(imaxid);
+        dt.setDevicetype(deviceType);
+        dt.setName(devname);
+        dt.setType(devtype);
+        dt.setSerialno(serialno);
+        dt.setiPaddress(iPaddress);
+        dt.setPort(port);
+        dt.setExtra(extra);
+        dt.setIsSms(sms);
+        dt.setIsAlart(alert);
+        dt.setIsPlartform(plantform);
+
+        rt1 = hbsessionDao.insert(dt);
+
+        Devices dv = (Devices) hbsessionDao.getFirst(
+                "FROM Devices where name='" + devname + "'");
+
+        if(dv == null || belonglevel.equals("0")) {
+            return false;
+        } else {
+            String did = dv.getDid().toString();
+
+            if(belonglevel.equals("1")) {
+                ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
+                        "FROM ProvinceBank where pbname='" + belongname + "分行" + "'");
+
+                if(deviceType.equals("其他传感器")) {
+                    String tempset = pb.getTempset();
+                    if (tempset!= null && tempset.length() > 0) {
+                        tempset += "，";
+                    }
+                    tempset += did;
+                    String hql = "update ProvinceBank pb set tempset='" + tempset + "' where pbname = '" + belongname + "'";
+                    rt2 = hbsessionDao.update(hql);
+                } else {
+                    String didset = pb.getDidset();
+                    if (didset!= null && didset.length() > 0) {
+                        didset += "，";
+                    }
+                    didset += did;
+                    String hql = "update ProvinceBank pb set didset='" + didset + "' where pbname = '" + belongname + "'";
+                    rt2 = hbsessionDao.update(hql);
+                }
+            }
+
+            else if(belonglevel.equals("2")) {
+                CityBank pb = (CityBank) hbsessionDao.getFirst(
+                        "FROM CityBank where cbname='" + belongname + "'");
+
+                if(deviceType.equals("其他传感器")) {
+                    String tempset = pb.getTempset();
+                    if (tempset!= null && tempset.length() > 0) {
+                        tempset += "，";
+                    }
+                    tempset += did;
+                    String hql = "update CityBank pb set tempset='" + tempset + "' where cbname = '" + belongname + "'";
+                    rt2 = hbsessionDao.update(hql);
+                } else {
+                    String didset = pb.getDidset();
+                    if (didset!= null && didset.length() > 0) {
+                        didset += "，";
+                    }
+                    didset += did;
+                    String hql = "update CityBank pb set didset='" + didset + "' where cbname = '" + belongname + "'";
+                    rt2 = hbsessionDao.update(hql);
+                }
+            }
+
+            else if(belonglevel.equals("3")) {
+                Computerroom pb = (Computerroom) hbsessionDao.getFirst(
+                        "FROM Computerroom where rname='" + belongname + "'");
+
+                if(deviceType.equals("其他传感器")) {
+                    String tempset = pb.getTempset();
+                    if (tempset!= null && tempset.length() > 0) {
+                        tempset += "，";
+                    }
+                    tempset += did;
+                    String hql = "update Computerroom pb set tempset='" + tempset + "' where rname = '" + belongname + "'";
+                    rt2 = hbsessionDao.update(hql);
+                } else {
+                    String didset = pb.getDidset();
+                    if (didset!= null && didset.length() > 0) {
+                        didset += "，";
+                    }
+                    didset += did;
+                    String hql = "update Computerroom pb set didset='" + didset + "' where rname = '" + belongname + "'";
+                    rt2 = hbsessionDao.update(hql);
+                }
+            }
+        }
+
+        return rt1 && rt2;
+
+    }
+
     /**
      * 追加一个用户id到某个告警等级level的记录中
      * @param uid uid
@@ -384,6 +533,34 @@ public class DeviceDAOImpl implements DeviceDAO {
         Boolean rt = false;
 
         String hql = "update DeviceAlarmUser kl set kl.precontent='" + precontent + "'";
+
+        rt = hbsessionDao.update(hql);
+        return rt;
+    }
+
+    /**
+     * 更新DevicesThreshold表中did=did的记录
+     * @param deviceType deviceType
+     * @param devname devname
+     * @param devtype devtype
+     * @param serialno serialno
+     * @param IPaddress IPaddress
+     * @param port port
+     * @param extra extra
+     * @param sms sms
+     * @param alert alert
+     * @param plantform plantform
+     * @return 真或假
+     */
+    public Boolean modifyOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress,
+                                       String port, String extra, Integer sms, Integer alert, Integer plantform, String did){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = false;
+
+        String hql = "update Devices kl set kl.devicetype='" + deviceType +  "', kl.type='" + devtype
+                + "', kl.serialno='" + serialno + "', kl.iPaddress='" + IPaddress + "', kl.port='" + port
+                + "', kl.extra='" + extra + "', kl.isSms='" + sms + "', kl.isAlart='" + alert
+                + "', kl.isPlartform='" + plantform + "', kl.name='" + devname + "' where kl.did='" + did + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -438,6 +615,99 @@ public class DeviceDAOImpl implements DeviceDAO {
         rt = hbsessionDao.update(hql);
         return rt;
     }
+
+    public Boolean existOneDevice(String devname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = false;
+
+        List list = hbsessionDao.search("FROM Devices where name='" + devname + "'");
+
+        if(list == null){
+            rt = false;
+        } else if(list.size() >= 1) {
+            rt = true;
+        }
+
+        return rt;
+    }
+
+    public Boolean isValidDevname(String devname){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = false;
+
+        List list = hbsessionDao.search("FROM Devices where name='" + devname + "'");
+
+        if(list == null){
+            rt = true;
+        }
+
+        return rt;
+    }
+
+    public String getdttypeBydtid(String dtid){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = false;
+
+        DevicesThreshold dt = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where dtid='" + dtid + "'");
+
+        return dt.getType();
+    }
+
+
+    // 阈值校验：低等级不能大于或小于高等级
+    public Boolean isValidValue(String type, Double dcellval, Double dfloorval, String level){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        Boolean rt = true;
+
+        DevicesThreshold dt1 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where type='" + type + "' and level = '1'");
+        DevicesThreshold dt2 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where type='" + type + "' and level = '2'");
+        DevicesThreshold dt3 = (DevicesThreshold)hbsessionDao.getFirst("FROM DevicesThreshold where type='" + type + "' and level = '3'");
+
+        if(dt1 == null || dt2 == null || dt3 == null){
+            rt = true;
+        } else {
+            //上限
+            if(level.equals("3") && dcellval != null){
+                if(dt2.getCellval() >= dcellval) {
+                    rt = false;
+                }
+            } else if(level.equals("2") && dcellval != null){
+                if(dt1.getCellval() >= dcellval) {
+                    rt = false;
+                }
+                if(dt3.getCellval() < dcellval) {
+                    rt = false;
+                }
+            } else if(level.equals("1") && dcellval != null){
+                if(dt2.getCellval() < dcellval) {
+                    rt = false;
+                }
+            }
+
+            //下限
+            if(level.equals("3") && dfloorval != null){
+                if(dt2.getFloorval() <= dfloorval) {
+                    rt = false;
+                }
+            } else if(level.equals("2") && dfloorval != null){
+                if(dt1.getFloorval() <= dfloorval) {
+                    rt = false;
+                }
+                if(dt3.getFloorval() > dfloorval) {
+                    rt = false;
+                }
+            } else if(level.equals("1") && dfloorval != null){
+                if(dt2.getFloorval() > dfloorval) {
+                    rt = false;
+                }
+            }
+        }
+
+        return rt;
+    }
+
 
     /**
      * 获得Devices表中type='IDP'的记录
@@ -562,6 +832,40 @@ public class DeviceDAOImpl implements DeviceDAO {
             return rtlist;
         } else {
             return list;
+        }
+    }
+
+    public List getAllDeviceName(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices");
+
+        if (list != null) {
+            List<String> rtlist = new ArrayList<>();
+            for (int i = 0; i < list.size(); i++) {
+                rtlist.add(list.get(i).getName());
+            }
+            return rtlist;
+        } else {
+            return null;
+        }
+    }
+
+    public List getOneTypeAllDeviceName(String dvtype){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        List<Devices> list = hbsessionDao.search(
+                "FROM Devices where type='" + dvtype+ "'");
+
+        if (list != null) {
+            List<String> rtlist = new ArrayList<>();
+            for (int i = 0; i < list.size(); i++) {
+                rtlist.add(list.get(i).getName());
+            }
+            return rtlist;
+        } else {
+            return null;
         }
     }
 

@@ -1,24 +1,28 @@
 package systemMng.dao.impl;
 
 import Util.HBSessionDaoImpl;
+import hibernatePOJO.BasicSetting;
+import hibernatePOJO.OrgnizationStructure;
 import hibernatePOJO.RolesPermission;
 import systemMng.dao.RolesPermissionDAO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RolesPermissionDAOImpl implements RolesPermissionDAO {
 
     /**
-     * 先根据rid查询pid，再在pid后追加新的权限pid
-     * 0.若无rid与pid的记录，需要新建
-     * 1.pid为空
-     * 2.pid非空
-     *   2.1 判断新的pid是否已存在老的pid中，若是，不操作
-     *   2.2 若不存在，追加
+     * 若无rid与pid的记录，需要新建
+     * 更新pid的值
      */
     public Boolean allocPermission(String rid, String pid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = false;
 
-        RolesPermission rp = (RolesPermission) hbsessionDao.getFirst(
+        String hql = "update RolesPermission rp set rp.pid='" + pid + "' where rp.rid='" + rid + "'";
+        rt = hbsessionDao.update(hql);
+
+        /*RolesPermission rp = (RolesPermission) hbsessionDao.getFirst(
                 "FROM RolesPermission where rid = '" + rid + "'");
 
         if (rp == null) {
@@ -55,9 +59,30 @@ public class RolesPermissionDAOImpl implements RolesPermissionDAO {
                 }
             }
         }
-
+*/
         return rt;
     }
 
+
+    public List<Integer> getbasicsetting(){
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        List<Integer> list = new ArrayList<>();
+
+        BasicSetting bs = (BasicSetting)hbsessionDao.getFirst(
+                "FROM BasicSetting");
+
+        list.add(bs.getOnlineinterval());
+        list.add(bs.getQstinterval());
+        list.add(bs.getThansentinterval());
+        list.add(bs.getUploadinterval());
+        list.add(bs.getAssessinterval());
+        list.add(bs.getAlarminterval());
+        list.add(bs.getTempinterval());
+        list.add(bs.getCtrlinterval());
+        list.add(bs.getThresholdsaveinterval());
+        list.add(bs.getDatainterval());
+
+        return list;
+    }
 
 }

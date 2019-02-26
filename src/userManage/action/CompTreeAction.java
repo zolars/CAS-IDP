@@ -9,6 +9,7 @@ import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompTreeAction extends ActionSupport {
@@ -27,6 +28,7 @@ public class CompTreeAction extends ActionSupport {
     /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的机房级结构树状串
      */
     public String execute() throws Exception {
+        List computerroom = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             HttpSession session = request.getSession();
@@ -37,7 +39,7 @@ public class CompTreeAction extends ActionSupport {
 
             UserDAO dao = new UserDAOImpl();
 
-            List computerroom = dao.getComputerroom(city, uname);
+            computerroom = dao.getComputerroom(city, uname);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allcomputerroom", computerroom);
@@ -50,6 +52,8 @@ public class CompTreeAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            computerroom = null;
         }
         return "success";
     }

@@ -3,6 +3,7 @@ package deviceManage.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import deviceJobManager.DeviceManager;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
 import org.apache.struts2.ServletActionContext;
@@ -30,7 +31,7 @@ public class addOneDeviceAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             String radioEthernet = request.getParameter("radioEthernet");
-            String radioR5485 = request.getParameter("radioR5485");
+            String radioR5485 = request.getParameter("radioRS485");
             String radioRS232 = request.getParameter("radioRS232");
             String checkboxsms = request.getParameter("checkboxsms");
             String checkboxalert = request.getParameter("checkboxalert");
@@ -70,15 +71,57 @@ public class addOneDeviceAction extends ActionSupport {
                 plantform = 1;
             }
 
-            Boolean rt1 = dao.addOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform);
-            Boolean rt2 = dao.addOneDeviceInfoToBelongPosition(deviceType, devname, belongname, belonglevel);
+            Boolean rt1 = false, rt2 = false, rt3 = false;
+            rt1 = dao.isValidDevname(devname); //判断是否为唯一设备名称 若重名 提示不可添加
             JSONObject jsonObject = new JSONObject();
 
-            if (rt1 && rt2) {
-                jsonObject.put("提示", "添加成功！");
+
+            //添加SMS平台
+            if(devtype.equals("SMS")) {
+
+                if(dao.addOneSMSDevice(devname, iPaddress, port)){
+                    jsonObject.put("提示", "添加成功！");
+                } else {
+                    jsonObject.put("提示", "添加失败，请重试！");
+                }
+
             } else {
-                jsonObject.put("提示", "添加失败，请重试！");
+
+                if(rt1) {
+                    rt2 = DeviceManager.checkNetwork(iPaddress, Integer.parseInt(port));
+
+                    if(rt2) {
+                        rt3 = dao.addOneDeviceInfoAndBelongPos(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform, belongname, belonglevel);
+                    } else if(!rt2){
+                        jsonObject.put("提示", "设备不可达，添加失败！");
+                    }
+                }
+
+                if (!rt1) {
+                    jsonObject.put("提示", "添加失败，不可添加一个重名的设备！");
+                } else if (rt1 && rt2 & rt3) {
+                    jsonObject.put("提示", "添加成功！");
+                    //
+                    String did = dao.getDeviceIDByName(devname);
+                    //type: 1-dataOnline, 2-transient, 3-overLimit, 4-threshold, 5-tempData, 6-ctrlData
+                    if(devtype.equals("IDP")) {
+                        DeviceManager.addDevice(iPaddress, Integer.parseInt(port), did, 1);
+                        if(extra.equals("")){
+                            DeviceManager.addDevice(iPaddress, Integer.parseInt(extra), did, 2);
+                            DeviceManager.addDevice(iPaddress, Integer.parseInt(extra), did, 3);
+                        }
+                        DeviceManager.addDevice(iPaddress, Integer.parseInt(port), did, 4);
+                    } else if(devtype.equals("temp")) {
+                        DeviceManager.addDevice(iPaddress, Integer.parseInt(port), did, 5);
+                    } else if(devtype.equals("ctrl")) {
+                        DeviceManager.addDevice(iPaddress, Integer.parseInt(port), did, 6);
+                    }
+                } else {
+                    jsonObject.put("提示", "添加失败，请重试！");
+                }
+
             }
+
             result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {

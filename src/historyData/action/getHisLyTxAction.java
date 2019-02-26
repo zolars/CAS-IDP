@@ -8,6 +8,7 @@ import historyData.dao.impl.HisDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 public class getHisLyTxAction extends ActionSupport {
@@ -24,6 +25,7 @@ public class getHisLyTxAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
+        List<Object> data = new ArrayList<>();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -34,7 +36,7 @@ public class getHisLyTxAction extends ActionSupport {
 
             HisDAO dao = new HisDAOImpl();
 
-            List<Object> data = dao.getHisDataLyTx(did, starttime, endtime);
+            data = dao.getHisDataLyTx(did, starttime, endtime);
             JSONObject jsonObject = new JSONObject();
 
             jsonObject.put("data", data);
@@ -44,6 +46,8 @@ public class getHisLyTxAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        }finally {
+            data = null;
         }
         return "success";
     }

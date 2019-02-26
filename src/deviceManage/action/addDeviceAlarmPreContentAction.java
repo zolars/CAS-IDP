@@ -36,11 +36,11 @@ public class addDeviceAlarmPreContentAction extends ActionSupport {
             Boolean rt = dao.addOneDeviceAlarmInfo(precontent);
             JSONObject jsonObject = new JSONObject();
 
-            if(rt)
+            if(rt) {
                 jsonObject.put("提示", "成功！");
-            else
+            } else {
                 jsonObject.put("提示", "失败，请重试！");
-
+            }
             result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {

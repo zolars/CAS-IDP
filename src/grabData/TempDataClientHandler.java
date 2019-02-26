@@ -1,5 +1,6 @@
 package grabData;
 
+import deviceJobManager.DeviceManager;
 import hibernatePOJO.TemperatureMonitor;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
@@ -26,33 +27,31 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("Temp建立连接");
+        // record ctx in DeviceManager
+        DeviceManager.getCtxMap().put(this.did+"-5",ctx);
 
         ByteBuf sendMsg = ctx.alloc().buffer();
         sendMsg.writeBytes(createMsg(1, 3, 1, 2));
-        // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
-        sc.writeAndFlush(sendMsg);
+        if (sc.isWritable()) {
+            sc.writeAndFlush(sendMsg);
+        }
     }
 
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        // super.handlerAdded(ctx);
         recMsg = ctx.alloc().buffer();
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        // super.handlerRemoved(ctx);
         recMsg.release();
         recMsg = null;
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // System.out.println("Recv:" + ByteBufUtil.hexDump(recMsg));
-
         ByteBuf buf = (ByteBuf) msg;
         recMsg.writeBytes(buf);
         buf.release();
@@ -65,13 +64,20 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
 
         TemperatureSave.tempSave(did, map);
 
-        // return;
+        // 发送报文间隔1秒
+        Thread.sleep(1000);
 
         ByteBuf sendMsg = ctx.alloc().buffer();
         sendMsg.writeBytes(createMsg(1, 3, 1, 2));
-        System.out.println("TempSend:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        //remove temperature data,ctx in map
+        TemperatureSave.getTempDataMap().remove(this.did);
+        DeviceManager.getCtxMap().remove(this.did+"-5");
     }
 
     @Override
@@ -110,7 +116,7 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
         float humidity = humidityInt / 10;
 
         map.put("temperature", temperature);
+        System.out.println(temperature+"------"+humidity);
         map.put("humidity",humidity);
-        System.out.println("temperature: " + temperature + " humidity: " + humidity);
     }
 }

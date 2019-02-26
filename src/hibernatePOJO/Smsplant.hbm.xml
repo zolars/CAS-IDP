@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernatePOJO.Smsplant" table="smsplant" schema="test">
+        <id name="id">
+            <column name="id" sql-type="smallint(6)"/>
+        </id>
+        <property name="bwt">
+            <column name="bwt" sql-type="varchar(8)" length="8" not-null="true"/>
+        </property>
+        <property name="sbname">
+            <column name="sbname" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="sbip">
+            <column name="sbip" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="status">
+            <column name="status" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="gjpro">
+            <column name="gjpro" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="gjexp">
+            <column name="gjexp" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="zbj">
+            <column name="zbj" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="ext1">
+            <column name="ext1" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="ext2">
+            <column name="ext2" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="ext3">
+            <column name="ext3" sql-type="varchar(255)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

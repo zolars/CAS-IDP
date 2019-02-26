@@ -20,54 +20,59 @@ public class getSynthesis extends ActionSupport {
     public void setResult(String result) {
         this.result = result;
     }
-    /* 根据省行名称查询市行信息
-     */
+
     public String execute() throws Exception {
+        List hzresult = new ArrayList();
+        List hzpcresult = new ArrayList();
+        List hzpcThresholdResult = new ArrayList();
+        List sxdyresult = new ArrayList();
+        List sxdyThresholdResult = new ArrayList();
+        List dsdysbresult = new ArrayList();
+        List dsdysbThresholdResult = new ArrayList();
+        List csdysbresult = new ArrayList();
+        List csdysbThresholdResult = new ArrayList();
+        List dypcresult = new ArrayList();
+        List dypcThresholdResult = new ArrayList();
+        List activePowerResult = new ArrayList();
+        List reactivePowerResult = new ArrayList();
+        List powerFactorResult = new ArrayList();
+        List thdUResult = new ArrayList();
+        List thdIResult = new ArrayList();
+        List thdUThresholdResult = new ArrayList();
+        List thdIThresholdResult = new ArrayList();
+        List powerthresholdResult = new ArrayList();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
             String time = request.getParameter("time");
             String did = request.getParameter("did");
             HarmonicVoltage dao = new HarmonicVoltageImpl();
-            List hzresult = new ArrayList();
-            List hzpcresult = new ArrayList();
-            List sxdyresult = new ArrayList();
-            List sxdyThresholdResult = new ArrayList();
-            List dsdysbresult = new ArrayList();
-            List dsdysbThresholdResult = new ArrayList();
-            List csdysbresult = new ArrayList();
-            List csdysbThresholdResult = new ArrayList();
-            List dypcresult = new ArrayList();
-            List dypcThresholdResult = new ArrayList();
-            List activePowerResult = new ArrayList();
-            List reactivePowerResult = new ArrayList();
-            List powerFactorResult = new ArrayList();
-            List thdUResult = new ArrayList();
-            List thdIResult = new ArrayList();
-            List thdUThresholdResult = new ArrayList();
-            List thdIThresholdResult = new ArrayList();
+
 
             hzresult = dao.getHzBydt(did, time);
             hzpcresult = dao.getHzpcBydt(did, time);
+            hzpcThresholdResult = dao.getHzpcthreshold();
             sxdyresult = dao.getsxdyBydt(did, time);
-            sxdyThresholdResult = dao.getsxdythreshold(did);
+            sxdyThresholdResult = dao.getsxdythreshold();
             dypcresult = dao.getDypcBydt(did, time);
-            dypcThresholdResult = dao.getDypcthreshold(did);
+            dypcThresholdResult = dao.getDypcthreshold();
             dsdysbresult = dao.getdsdysbBydt(did, time);
-            dsdysbThresholdResult = dao.getdsdysbthreshold(did);
+            dsdysbThresholdResult = dao.getdsdysbthreshold();
             csdysbresult = dao.getcsdysbBydt(did, time);
-            csdysbThresholdResult = dao.getcsdysbthreshold(did);
+            csdysbThresholdResult = dao.getcsdysbthreshold();
             activePowerResult = dao.getActivePowerBydt(did, time);
             reactivePowerResult = dao.getReactivePowerBydt(did, time);
             powerFactorResult = dao.getPowerFactorBydt(did, time);
             thdUResult = dao.getthdUBydt(did, time);
             thdIResult = dao.getthdIBydt(did, time);
-            thdUThresholdResult = dao.getthduthreshold(did);
-            thdIThresholdResult = dao.getthdithreshold(did);
+            thdUThresholdResult = dao.getthduthreshold();
+            thdIThresholdResult = dao.getthdithreshold();
+            powerthresholdResult=dao.getpowerthreshold();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("hzresult", hzresult);
             jsonObject.put("hzpcresult", hzpcresult);
+            jsonObject.put("hzpcThresholdResult", hzpcThresholdResult);
             jsonObject.put("sxdyresult", sxdyresult);
             jsonObject.put("sxdyThresholdResult", sxdyThresholdResult);
             jsonObject.put("dypcresult", dypcresult);
@@ -83,11 +88,33 @@ public class getSynthesis extends ActionSupport {
             jsonObject.put("thdIResult", thdIResult);
             jsonObject.put("thdUThresholdResult", thdUThresholdResult);
             jsonObject.put("thdIThresholdResult", thdIThresholdResult);
+            jsonObject.put("powerthresholdResult", powerthresholdResult);
+
 
             result = JSON.toJSONString(jsonObject); // List转json
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            hzresult = null;
+            hzpcresult = null;
+            hzpcThresholdResult = null;
+            sxdyresult = null;
+            sxdyThresholdResult = null;
+            dypcresult = null;
+            dypcThresholdResult = null;
+            dsdysbresult = null;
+            dsdysbThresholdResult = null;
+            csdysbresult = null;
+            csdysbThresholdResult = null;
+            activePowerResult = null;
+            reactivePowerResult = null;
+            powerFactorResult = null;
+            thdUResult = null;
+            thdIResult = null;
+            thdUThresholdResult = null;
+            thdIThresholdResult = null;
+
         }
         return "success";
     }

@@ -1,6 +1,9 @@
 package efficiencyAnalysis.dao;
 
 
+import Util.EventObject;
+import Util.PageHelper;
+
 import java.util.List;
 import java.util.Map;
 
@@ -55,17 +58,67 @@ public interface EventDAO {
 
     public List getLocalLastCtrlEvent(String cbid);
 
+    //分页查询 设备类事件数量
+    public int getLocalAllPowerTotal(String cbnamelist[], String starttime, String endtime);
+
+    public int getLocalAllPowerlytxTotal(String cbnamelist[], String starttime, String endtime);
+
+    public int getLocalAllPowerxbTotal(String cbnamelist[], String starttime, String endtime);
+
+    public int getLocalAllPowersxbphTotal(String cbnamelist[], String starttime, String endtime);
+
+    public int getLocalAllPowershunbianTotal(String cbnamelist[], String starttime, String endtime);
+
+    public int getLocalAllPowershanbianTotal(String cbnamelist[], String starttime, String endtime);
+
+    public int getLocalAllEnvironmentTotal(String cbnamelist[], String starttime, String endtime);
+
+    public int getLocalAllEnvironmenttempTotal(String cbnamelist[], String starttime, String endtime);
+
+    public int getLocalAllEnvironmentwetTotal(String cbnamelist[], String starttime, String endtime);
+
+    public int getLocalAllCtrlTotal(String cbnamelist[], String starttime, String endtime);
+
+
+    public PageHelper<EventObject> getPowerEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+
+    public PageHelper<EventObject> getPowerEventlytxObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+
+    public PageHelper<EventObject> getPowerEventxbObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+
+    public PageHelper<EventObject> getPowerEventsxbphObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+
+    public PageHelper<EventObject> getPowerEventshunbianObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+
+    public PageHelper<EventObject> getPowerEventshanbianObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+
+    public PageHelper<EventObject> getEnvironmentEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+
+    public PageHelper<EventObject> getEnvironmentEventtempObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+
+    public PageHelper<EventObject> getEnvironmentEventwetObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+
+    public PageHelper<EventObject> getCtrlEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+
+
     public List getAllCityEvent();
 
     public List getCtrlDevices(String cbname);
 
+    public List getIDPDevices(String cbname);
+
     public String getDeviceCtrlStatus(String did, String starttime, String endtime);
 
-    public String getDeviceName(String did);
+    public String getDeviceIDPStatus(String did, String starttime, String endtime);
+
+    public String getDeviceNameCtrl(String did);
+
+    public String getDeviceNameIDP(String did);
 
     public Map getAllProvinceEvent();
 
     public List getAllEventTypeTree();
+
 
     public List getOneProvinceEvent(String pid, String stime, String etime);
 
@@ -73,10 +126,15 @@ public interface EventDAO {
 
     public List getComputerroomWetAndHumdity(String compname);
 
+    public List getComputerroomAlarm(String compname);
+
     public boolean setAssessInfo(Integer red_yellow, Integer yellow_green);
 
     public boolean setAllEventtypePriorty(String[] eventtypelist, String[] priortylist);
 
-    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String tansentinterval, String uploadinterval);
+    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String tansentinterval, String uploadinterval ,String assessinterval,String alarminterval,String tempinterval,String ctrlinterval,
+                                         String thresholdsaveinterval,String qstdatainterval);
+
+
 
 }

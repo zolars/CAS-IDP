@@ -3,7 +3,6 @@ package userManage.dao.impl;
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.CityBank;
 import hibernatePOJO.Computerroom;
-import hibernatePOJO.Roles;
 import userManage.dao.ComputerroomDAO;
 
 import java.util.ArrayList;

@@ -7,7 +7,8 @@
         <!-- 指定连接数据库的驱动程序 -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <!-- 指定连接数据库的URL -->
-        <property name="connection.url">jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF8</property>
+        <!--<property name="connection.url">jdbc:mysql://36.0.179.187:3306/test?useUnicode=true&amp;characterEncoding=UTF8</property>-->
+        <property name="connection.url"><![CDATA[jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF8]]></property>
         <!-- 指定数据库使用的SQL方言 -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- 指定连接数据库的用户名 -->
@@ -15,13 +16,16 @@
         <!-- 指定连接数据库的口令 -->
         <property name="connection.password">root</property>
 
-
-
         <!-- true表示程序运行时，在控制台显示SQL语句，false表示不显示SQL语句 -->
         <property name="show_sql">false</property>
         <property name="format_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
         <property name="current_session_context_class">thread</property>
+
+        <!-- MYSQL链接断开-->
+        <property name="connection.autoReconnect">true</property>
+        <property name="connection.autoReconnectForPools">true</property>
+        <property name="connection.is-connection-validation-required">true</property>
 
         <!-- 持久化类所对应的映射文件 -->
         <mapping class="hibernatePOJO.AssessRecord"/>
@@ -50,6 +54,9 @@
         <mapping class="hibernatePOJO.User"/>
         <mapping class="hibernatePOJO.UserRoles"/>
         <mapping class="hibernatePOJO.OrgnizationStructure"/>
+        <mapping class="hibernatePOJO.EventEnvironment"/>
+        <mapping class="hibernatePOJO.Smsplant"/>
+        <mapping class="hibernatePOJO.Smsplantlevel"/>
 
         <mapping resource="hibernatePOJO/AssessRecord.hbm.xml"/>
         <mapping resource="hibernatePOJO/BasicSetting.hbm.xml"/>
@@ -78,6 +85,8 @@
         <mapping resource="hibernatePOJO/UserRoles.hbm.xml"/>
         <mapping resource="hibernatePOJO/OrgnizationStructure.hbm.xml"/>
         <mapping resource="hibernatePOJO/EventEnvironment.hbm.xml"/>
+        <mapping resource="hibernatePOJO/Smsplant.hbm.xml"/>
+        <mapping resource="hibernatePOJO/Smsplantlevel.hbm.xml"/>
 
 
     </session-factory>

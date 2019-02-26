@@ -80,29 +80,35 @@ public class UserDAOImpl implements UserDAO {
         if (pro != null && temuser != null) {
 
             String cbidset = pro.getCbidset();
-            String[] cbidstr = cbidset.split("，");
 
-            String usercbid = temuser.getCbid();
+            if(cbidset != null) { //省行下有市行时
+                if(!cbidset.equals("")) {
 
-            for (int i = 0; i < cbidstr.length; i++) {
-                if (cbidstr[i] == usercbid) { //若该用户所属的市行 在市行集合中存在，把这个cbid从市行集合中删除
-                    //删除数组中的某一个元素的方法：把最后一个元素替代指定的元素，然后数组缩容
-                    cbidstr[i] = cbidstr[cbidstr.length - 1];
-                    cbidstr = Arrays.copyOf(cbidstr, cbidstr.length-1);
+                    String[] cbidstr = cbidset.split("，");
+
+                    String usercbid = temuser.getCbid();
+
+                    for (int i = 0; i < cbidstr.length; i++) {
+                        if (cbidstr[i] == usercbid) { //若该用户所属的市行 在市行集合中存在，把这个cbid从市行集合中删除
+                            //删除数组中的某一个元素的方法：把最后一个元素替代指定的元素，然后数组缩容
+                            cbidstr[i] = cbidstr[cbidstr.length - 1];
+                            cbidstr = Arrays.copyOf(cbidstr, cbidstr.length-1);
+                        }
+                    }
+
+                    CityBank usercb = (CityBank) hbsessionDao.getFirst(
+                            "FROM CityBank where cbid = '" + usercbid + "'");
+
+                    if (usercb != null) {
+                        cblist.add(usercb);
+                    }
+
+                    for (int i = 0; i < cbidstr.length; i++) {
+                        CityBank cb = (CityBank) hbsessionDao.getFirst(
+                                "FROM CityBank where cbid = '" + cbidstr[i] + "'");
+                        cblist.add(cb);
+                    }
                 }
-            }
-
-            CityBank usercb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + usercbid + "'");
-
-            if (usercb != null) {
-                cblist.add(usercb);
-            }
-
-            for (int i = 0; i < cbidstr.length; i++) {
-                CityBank cb = (CityBank) hbsessionDao.getFirst(
-                        "FROM CityBank where cbid = '" + cbidstr[i] + "'");
-                cblist.add(cb);
             }
         }
 

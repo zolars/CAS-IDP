@@ -8,6 +8,7 @@ import systemMng.dao.OrgnizationDAO;
 import systemMng.dao.impl.OrgnizationDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,12 +26,13 @@ public class getOrgnizationTreeAction extends ActionSupport {
     /* 查询所有组织结构
      */
     public String execute() throws Exception {
+        List otree = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
             OrgnizationDAO dao = new OrgnizationDAOImpl();
-            List otree = dao.getOrgnizationTree();
+            otree = dao.getOrgnizationTree();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allotree", otree);
@@ -40,6 +42,8 @@ public class getOrgnizationTreeAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            otree = null;
         }
         return "success";
     }

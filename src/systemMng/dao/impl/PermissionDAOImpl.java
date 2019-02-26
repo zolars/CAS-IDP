@@ -32,11 +32,11 @@ public class PermissionDAOImpl implements PermissionDAO {
         return rp;
     }
 
-    public Boolean setDeviceAlarmUserInfo(String level, String precontent) {
+    public Boolean setDeviceAlarmUserInfo(String level, String precontent, Integer alert,Integer sms,Integer plantform) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        String sql = "update DeviceAlarmUser dt set dt.precontent='" + precontent + "' where dt.level='" + level + "'";
+        String sql = "update DeviceAlarmUser set precontent='" + precontent + "', isAlert='" + alert +  "', isPlantform='" + plantform +  "', isSMS='" + sms + "' where level='" + level + "'";
 
         Boolean rt = hbsessionDao.update(sql);
 
@@ -61,5 +61,25 @@ public class PermissionDAOImpl implements PermissionDAO {
         return rtlist;
     }
 
+    public Boolean setsysLevel(String input0,String input1, String input2,String  input3,String  input4, String input5){
+
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        String sql0 = "update Smsplantlevel set syslevel='" + input0 + "' where id = 0";
+        String sql1 = "update Smsplantlevel set syslevel='" + input1 + "' where id = 1";
+        String sql2 = "update Smsplantlevel set syslevel='" + input2 + "' where id = 2";
+        String sql3 = "update Smsplantlevel set syslevel='" + input3 + "' where id = 3";
+        String sql4 = "update Smsplantlevel set syslevel='" + input4 + "' where id = 4";
+        String sql5 = "update Smsplantlevel set syslevel='" + input5 + "' where id = 5";
+
+        Boolean rt0 = hbsessionDao.update(sql0);
+        Boolean rt1 = hbsessionDao.update(sql1);
+        Boolean rt2 = hbsessionDao.update(sql2);
+        Boolean rt3 = hbsessionDao.update(sql3);
+        Boolean rt4 = hbsessionDao.update(sql4);
+        Boolean rt5 = hbsessionDao.update(sql5);
+
+        return rt0 && rt1 && rt2 && rt3 && rt4 && rt5;
+    }
 
 }

@@ -173,9 +173,6 @@ public class Port {
                     break;
                 }
             }
-            /*if (answer.indexOf("OK") != -1) {
-                break;
-            }*/
             Thread.sleep( 100);
         }
         return answer;
@@ -190,11 +187,9 @@ public class Port {
     public String sendAT(String atcommand) throws java.rmi.RemoteException {
         String returnStr = "";
         try {
-            //Thread.sleep(500);
             writeln(atcommand);
             Thread.sleep(500);
             returnStr = read();
-            //Thread.sleep(500);
         } catch (Exception e) {
             System.gc();
         }

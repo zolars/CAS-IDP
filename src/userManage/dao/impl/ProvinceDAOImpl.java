@@ -25,7 +25,9 @@ public class ProvinceDAOImpl implements ProvinceDAO {
         ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
                 "FROM ProvinceBank where pbname='" + name + "'");
 
-        return pb.getPbid();
+        if (pb != null) {
+            return pb.getPbid();
+        } else return "";
     }
 
 

@@ -7,6 +7,7 @@ import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,13 +27,14 @@ public class getSettingTreeAction extends ActionSupport {
     /* 获取事件类型树
      */
     public String execute() throws Exception {
+        List plist = new ArrayList();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
             EventDAO dao = new EventDAOImpl();
 
-            List plist = dao.getAllEventTypeTree();
+            plist = dao.getAllEventTypeTree();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allptree", plist);
@@ -42,6 +44,8 @@ public class getSettingTreeAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            plist = null;
         }
         return "success";
     }

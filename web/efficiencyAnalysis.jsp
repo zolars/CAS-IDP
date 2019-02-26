@@ -42,9 +42,23 @@
     <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
     <script src="js/jquery.cookie.js"></script>
 
-    <!-- datatables plugsin css and js-->
+    <!-- PNotify -->
+    <script type="text/javascript" src="js/pnotify.custom.min.js"></script>
+    <link href="css/pnotify.custom.min.css" rel="stylesheet" type="text/css" />
+
+   <%-- <!-- datatables plugsin css and js-->
     <link href="css/datatables.min.css" rel="stylesheet"/>
-    <script src="js/datatables.min.js"></script>
+    <script src="js/datatables.min.js"></script>--%>
+
+    <!-- bootstrap table plugsin css and js-->
+    <%--<link rel="stylesheet" href="bootstrap-table-master/src/bootstrap.min.css">--%>
+    <link rel="stylesheet" href="bootstrap-table-master/src/bootstrap-table.css">
+   <%-- <script src="jquery.min.js"></script>--%>
+    <%--<script src="bootstrap.min.js"></script>--%>
+    <script src="bootstrap-table-master/src/bootstrap-table.js"></script>
+    <script src="bootstrap-table-master/src/locale/bootstrap-table-zh-CN.js"></script>
+
+
 
     <link rel="stylesheet" href="css/header.css">
     <style>
@@ -81,7 +95,7 @@
 
         .table-container {
             height: 460px;
-            overflow: scroll;
+           /* overflow: scroll;*/
         }
 
         .col-active {
@@ -114,7 +128,7 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <img src="img/index/logo.jpg" alt="" class="header-img">
+        <img src="img/index/logo.png" alt="" class="header-img">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -182,19 +196,22 @@
         <!-- Breadcrumb -->
         <!-- Main Widgets -->
         <div class="block-area">
+
+            <div id="searching" style="display: none;position:absolute;z-index: 999; left:400px;top:200px;"><img src="img/index/loading.gif"></div>
+
+
             <div class="row">
 
                 <div class="col-md-12">
                     <ul class="nav nav-tabs" id="ulItem">
                         <li class="active" style="width:50%">
-                            <a data-toggle="tab" id="subItem1">•事件分析</a>
+                            <a data-toggle="tab" id="subItem1">事件分析</a>
                         </li>
-                        <li style="width:50%">
-                            <a data-toggle="tab" id="subItem2">•能效分析</a>
-                        </li>
+                        <%--<li style="width:50%">
+                            <a data-toggle="tab" id="subItem2">       </a>
+                        </li>--%>
                     </ul>
                 </div>
-
                 <div id="item1" class="col-md-12 col-xs-6" style="height: 600px;">
                     <div class="block-area">
                         <div class="row">
@@ -202,7 +219,7 @@
                                 <table id="event-table-head1">
                                     <thead>
                                     <tr>
-                                        <th><img src="img/setting.png" alt="" onClick="settingIcon()"></th>
+                                      <%--  <th><img src="img/setting.png" alt="" onClick="settingIcon()"></th>--%>
                                         <th><img src="img/refresh.png" alt="" onClick="refreshIcon()"></th>
                                         <th>
                                             <button type="button" class="button-primary button-pill button-small" onClick="exportTable()">
@@ -236,33 +253,34 @@
                                     </div>
 
                                     <div class="col-md-7">
+
                                         <!--startprint-->
                                         <!-- 电能详细事件-->
-                                        <div id="eventdiv2" style="display: block;background: white; border-radius: 0 0 15px 15px;">
+                                        <div id="eventdiv1" style="display:block; background: white; border-radius: 0 0 15px 15px;">
                                             <ul class="nav nav-tabs" id="secItem" name="secItem">
-                                                <li class="active" style="width:16.6%">
+                                                <li class="active" style="width:16.6%" id="powerdetailItem0">
                                                     <a data-toggle="tab" id="secItem0">•全部事件</a>
                                                 </li>
-                                                <li style="width:16.6%">
+                                                <li style="width:16.6%" id="powerdetailItem1">
                                                     <a data-toggle="tab" id="secItem1">•浪涌塌陷</a>
                                                 </li>
-                                                <li style="width:16.6%">
+                                                <li style="width:16.6%" id="powerdetailItem2">
                                                     <a data-toggle="tab" id="secItem2">•谐波</a>
                                                 </li>
-                                                <li style="width:16.6%">
+                                                <li style="width:16.6%" id="powerdetailItem3">
                                                     <a data-toggle="tab" id="secItem3">•三相不平衡度</a>
                                                 </li>
-                                                <li style="width:16.6%">
+                                                <li style="width:16.6%" id="powerdetailItem4">
                                                     <a data-toggle="tab" id="secItem4">•瞬变</a>
                                                 </li>
-                                                <li style="width:16.6%">
+                                                <li style="width:16.6%" id="powerdetailItem5">
                                                     <a data-toggle="tab" id="secItem5">•闪变</a>
                                                 </li>
                                             </ul>
                                             <div class="table-container">
                                                 <div id="power-event-detail-0-div" style="width:100%;">
                                                     <table class="display" border="1px" id="power-event"
-                                                           style="width:100%; color:black;">
+                                                           style="width:100%; color:black;" data-uniqueId="teid">
                                                         <thead>
                                                         <tr id="power-event-thead"></tr>
                                                         </thead>
@@ -273,7 +291,7 @@
 
                                                 <div id="power-event-detail-1-div" style="width:100%;display: none;">
                                                     <table class="display" border="1px" id="power-event-detail-1"
-                                                           style="width:100%;color:black;">
+                                                           style="width:100%;color:black;"  data-uniqueId="teid">
                                                         <thead>
                                                         <tr id="power-event-detail-thead-1-tr"></tr>
                                                         </thead>
@@ -284,7 +302,7 @@
 
                                                 <div id="power-event-detail-2-div" style="width:100%;display: none;">
                                                     <table class="display" border="1px" id="power-event-detail-2"
-                                                           style="width:100%;color:black;">
+                                                           style="width:100%;color:black;" data-uniqueId="teid">
                                                         <thead>
                                                         <tr id="power-event-detail-thead-2-tr"></tr>
                                                         </thead>
@@ -295,7 +313,7 @@
 
                                                 <div id="power-event-detail-3-div" style="width:100%;display: none;">
                                                     <table class="display" border="1px" id="power-event-detail-3"
-                                                           style="width:100%;color:black;">
+                                                           style="width:100%;color:black;" data-uniqueId="teid">
                                                         <thead>
                                                         <tr id="power-event-detail-thead-3-tr"></tr>
                                                         </thead>
@@ -306,7 +324,7 @@
 
                                                 <div id="power-event-detail-4-div" style="width:100%;display: none;">
                                                     <table class="display" border="1px" id="power-event-detail-4"
-                                                           style="width:100%;color:black;">
+                                                           style="width:100%;color:black;" data-uniqueId="teid">
                                                         <thead>
                                                         <tr id="power-event-detail-thead-4-tr"></tr>
                                                         </thead>
@@ -317,7 +335,7 @@
 
                                                 <div id="power-event-detail-5-div" style="width:100%;display: none;">
                                                     <table class="display" border="1px" id="power-event-detail-5"
-                                                           style="width:100%;color:black;">
+                                                           style="width:100%;color:black;" data-uniqueId="teid">
                                                         <thead>
                                                         <tr id="power-event-detail-thead-5-tr"></tr>
                                                         </thead>
@@ -329,22 +347,22 @@
                                         </div>
 
                                         <!-- 温湿度详细事件-->
-                                        <div id="eventdiv3" style="display: none;background: white; border-radius: 0 0 15px 15px;">
+                                        <div id="eventdiv2" style="display: none;background: white; border-radius: 0 0 15px 15px;">
                                             <ul class="nav nav-tabs" id="triItem" name="triItem">
-                                                <li class="active" style="width:15%">
+                                                <li class="active" style="width:15%" id="envdetailItem0">
                                                     <a data-toggle="tab" id="triItem0">•全部事件</a>
                                                 </li>
-                                                <li style="width:15%">
+                                                <li style="width:15%" id="envdetailItem1">
                                                     <a data-toggle="tab" id="triItem1">•温度</a>
                                                 </li>
-                                                <li style="width:15%">
+                                                <li style="width:15%"id="envdetailItem2">
                                                     <a data-toggle="tab" id="triItem2">•湿度</a>
                                                 </li>
                                             </ul>
                                             <div class="table-container">
                                                 <div id="environment-event-div" style="width:100%;">
                                                     <table class="display" border="1px" id="environment-event"
-                                                           style="width:100%;color:black;">
+                                                           style="width:100%;color:black;" data-uniqueId="teid">
                                                         <thead>
                                                         <tr id="environment-event-tr"></tr>
                                                         </thead>
@@ -378,19 +396,19 @@
                                         </div>
 
                                         <!-- 设备详细事件-->
-                                        <div id="eventdiv4" style="display: none;background: white; border-radius: 0 0 15px 15px;">
+                                        <div id="eventdiv3" style="display: none;background: white; border-radius: 0 0 15px 15px;">
                                             <ul class="nav nav-tabs" id="fourItem" name="fourItem">
-                                                <li class="active" style="width:15%">
-                                                    <a data-toggle="tab" id="fourItem0">•全部事件</a>
+                                                <li class="active" style="width:15%" id="fourItem0">
+                                                    <a data-toggle="tab" >•全部事件</a>
                                                 </li>
-                                                <li style="width:15%">
-                                                    <a data-toggle="tab" id="fourItem1">•治理</a>
+                                                <li style="width:15%" id="ctrldetailItem1">
+                                                    <a data-toggle="tab" id="fourItem1" >•治理</a>
                                                 </li>
                                             </ul>
                                             <div class="table-container">
                                                 <div id="device-event-div" style="width:100%;">
-                                                    <table border="1" class="display" id="device-event"
-                                                           style="width:100%;color:black;">
+                                                    <table border="1px" class="display" id="device-event"
+                                                           style="width:100%;color:black;" data-uniqueId="teid">
                                                         <thead>
                                                         <tr id="device-event-tr"></tr>
                                                         </thead>
@@ -398,8 +416,9 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
+
                                                 <div id="device-event-detail-1-div" style="width:100%;">
-                                                    <table class="display" id="device-event-detail-1"
+                                                    <table border="1px" class="display" id="device-event-detail-1"
                                                            style="width:100%;color:black;">
                                                         <thead>
                                                         <tr id="device-event-detail-1-tr"></tr>
@@ -411,6 +430,7 @@
                                             </div>
                                         </div>
                                         <!--endprint-->
+
                                     </div>
 
                                     <div class="col-md-5">
@@ -432,11 +452,10 @@
                                             </div>
                                             <div style="background: #0880d7;" class="time-pick-container">
                                                 <input id="radio-from-to-event" class="time-picker-radio" type="radio"
-                                                       name="event-data-period" value="fromto">
+                                                       name="event-data-period" value="fromto" checked>
                                                 <div class="time-pick-text">从</div>
                                                 <div class="time-pick-outer">
                                                     <div class="input-group date form_datetime col-md-5"
-                                                         data-date="2018-07-16T05:25:07Z"
                                                          data-date-format="yyyy-mm-dd hh:ii:ss"
                                                          data-link-field="dtp_input1">
                                                         <input id="firstDate" class="form-control" size="16" type="text"
@@ -449,7 +468,6 @@
                                                 <div class="time-pick-text">到</div>
                                                 <div class="time-pick-outer">
                                                     <div class="input-group date form_datetime col-md-5"
-                                                         data-date="2019-09-16T05:25:07Z"
                                                          data-date-format="yyyy-mm-dd hh:ii:ss"
                                                          data-link-field="dtp_input1">
                                                         <input id="lastDate" class="form-control" size="16" type="text"
@@ -480,6 +498,9 @@
                                                 </button>
                                                 <button id="delete-button" type="button" class="button-primary button-pill button-small"
                                                         onclick="deleteMonitorPoint()">删除
+                                                </button>
+                                                <button id="check-all-button" type="button" class="button-primary button-pill button-small"
+                                                        onclick="check_all()">全选
                                                 </button>
                                             </div>
                                             <div>
@@ -548,11 +569,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div></div>
 
             <div id="item2" class="col-md-12 col-xs-6" style="height: 600px;">
-                能效分析
             </div>
 
             <!-- settingmodel DIV-->
@@ -574,11 +593,6 @@
             </div>
             <!-- addEventMonitorPoint DIV END-->
 
-            <!-- clickEventRow DIV-->
-            <%-- <div class="clickEventRow-class" id="clickEventRow-modal" style="display: none;">
-             </div>--%>
-            <!-- clickEventRow DIV END-->
-
             <!-- conformEventRow DIV-->
             <div class="conformEventRow-class" id="conformEventRow-modal" style="display: none;">
                 <table>
@@ -589,21 +603,21 @@
                         <td> 签名：</td>
                     </tr>
                     <tr>
-                        <td><input type="text" id="signature" class="form-control add-roles-input"></td>
+                        <td><input type="text" id="signature" class="form-control add-roles-input" style="color: white;"></td>
                     </tr>
                     <tr>
                         <td> 注释：</td>
                     </tr>
                     <tr>
-                        <td><input type="text" id="annotation" class="form-control add-roles-input"></td>
+                        <td><input type="text" id="annotation" class="form-control add-roles-input" style="color: white;"></td>
                     </tr>
                     <tr></tr>
                     <tr></tr>
                     <tr>
-                        <td>
+                        <td style="width: 50%;">
                             <button onclick="confirmOKEvent()" type="button" class="button-primary button-pill button-small">确认</button>
                         </td>
-                        <td>
+                        <td style="width: 50%;">
                             <button onclick="cancleOKEvent()" type="button" class="button-primary button-pill button-small">取消</button>
                         </td>
                     </tr>
@@ -672,7 +686,7 @@
 <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript">
     $('.form_datetime').datetimepicker({
-        //language:  'fr',
+        language:  'cn',
         weekStart: 1,
         todayBtn: 1,
         autoclose: 1,
@@ -687,6 +701,30 @@
     $("#lastDate").change(function () {
         $('.lastDate').datetimepicker('setEndDate', $(this).val());
     });
+
+    $("#firstDate").val(getFormatDate(-1));
+    $("#lastDate").val(getFormatDate(0));
+
+    //获取当前日期前adddaycount天时间
+    function getFormatDate(AddDayCount) {
+        var dd = new Date();
+        dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
+        var y = dd.getFullYear();
+        var m = dd.getMonth() + 1;//获取当前月份的日期
+        var d = dd.getDate();
+        var h = dd.getHours();
+        var minute = dd.getMinutes();
+        var s = dd.getSeconds();
+
+        var seperator1 = "-";
+        var seperator2 = ":";
+
+        var currentdate = y + seperator1 + m + seperator1 + d
+            + " " + h + seperator2 + minute
+            + seperator2 + s;
+        return currentdate;
+    }
+
 </script>
 
 <!-- 省\市\机房下拉菜单-->
@@ -796,10 +834,10 @@
             isSystemMng = false;
             menuname = "集中监控";
         }
-        else if(cbidstr[i] == " efficiencyDevice.jsp"){
+      /*  else if(cbidstr[i] == " efficiencyDevice.jsp"){
             isSystemMng = false;
             menuname = "动力设施";
-        }
+        }*/
         else if(cbidstr[i] == " onlineDetect.jsp"){
             isSystemMng = false;
             menuname = "在线监测";
@@ -808,10 +846,10 @@
             isSystemMng = false;
             menuname = "动力分析";
         }
-        else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
+       /* else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
             isSystemMng = false;
             menuname = "动力评估";
-        }
+        }*/
         else if(cbidstr[i] == ' reportChart.jsp'){
             isSystemMng = false;
             menuname = "报表功能";
@@ -880,109 +918,48 @@
 
 <!-- 切换子菜单-->
 <script type="text/javascript">
-    // 刷新左侧菜单
-    $("#eventdiv2").show();
-    $("#eventdiv3").hide();
-    $("#eventdiv4").hide();
     // 刷新右侧菜单
-    $("#rightItem1").show();
-    $("#rightItem2").hide();
-    $(document).ready(function () {
-        $("#subItem1").click(function () {
-            $("#item1").show();
-            $("#item2").hide();
-        });
-        $("#subItem2").click(function () {
-            $("#item1").hide();
-            $("#item2").show();
-        });
-        $("#subItem1").click();
-        $("#detailItem1").click(function () {
-            $("#eventdiv2").show();
-            $("#eventdiv3").hide();
-            $("#eventdiv4").hide();
-            getPowerEvent();
-        });
-        $("#detailItem2").click(function () {
-            $("#eventdiv2").hide();
-            $("#eventdiv3").show();
-            $("#eventdiv4").hide();
-            getEnvironmentEvent();
-        });
-        $("#detailItem3").click(function () {
-            $("#eventdiv2").hide();
-            $("#eventdiv3").hide();
-            $("#eventdiv4").show();
-            getDeviceEvent();
-        });
-        $("#rightsubItem1").click(function () {
-            $("#rightItem1").show();
-            $("#rightItem2").hide();
-        });
-        $("#rightsubItem2").click(function () {
-            $("#rightItem1").hide();
-            $("#rightItem2").show();
-        });
-        var col1 = $.cookie('row1-name');
-        var col2 = $.cookie('row2-name');
-        var col3 = $.cookie('row3-name');
-        var col4 = $.cookie('row4-name');
-        var col5 = $.cookie('row5-name');
-        var col6 = $.cookie('row6-name');
-        var col7 = $.cookie('row7-name');
-        var col8 = $.cookie('row8-name');
-        var col9 = $.cookie('row9-name');
-        var col10 = $.cookie('row10-name');
-        //第二页电能质量事件，根据点击的电能质量类型，获取相应的事件，并渲染
-        $("#secItem0").click(function () {
-            $("#power-event-detail-0-div").css('display', 'block');
-            $("#power-event-detail-1-div").css('display', 'none');
-            $("#power-event-detail-2-div").css('display', 'none');
-            $("#power-event-detail-3-div").css('display', 'none');
-            $("#power-event-detail-4-div").css('display', 'none');
-            $("#power-event-detail-5-div").css('display', 'none');
-        });
-        $("#secItem1").click(function () {
-            $("#power-event-detail-0-div").css('display', 'none');
-            $("#power-event-detail-1-div").css('display', 'block');
-            $("#power-event-detail-2-div").css('display', 'none');
-            $("#power-event-detail-3-div").css('display', 'none');
-            $("#power-event-detail-4-div").css('display', 'none');
-            $("#power-event-detail-5-div").css('display', 'none');
-        });
-        $("#secItem2").click(function () {
-            $("#power-event-detail-0-div").css('display', 'none');
-            $("#power-event-detail-1-div").css('display', 'none');
-            $("#power-event-detail-2-div").css('display', 'block');
-            $("#power-event-detail-3-div").css('display', 'none');
-            $("#power-event-detail-4-div").css('display', 'none');
-            $("#power-event-detail-5-div").css('display', 'none');
-        });
-        $("#secItem3").click(function () {
-            $("#power-event-detail-0-div").css('display', 'none');
-            $("#power-event-detail-1-div").css('display', 'none');
-            $("#power-event-detail-2-div").css('display', 'none');
-            $("#power-event-detail-3-div").css('display', 'block');
-            $("#power-event-detail-4-div").css('display', 'none');
-            $("#power-event-detail-5-div").css('display', 'none');
-        });
-        $("#secItem4").click(function () {
-            $("#power-event-detail-0-div").css('display', 'none');
-            $("#power-event-detail-1-div").css('display', 'none');
-            $("#power-event-detail-2-div").css('display', 'none');
-            $("#power-event-detail-3-div").css('display', 'none');
-            $("#power-event-detail-4-div").css('display', 'block');
-            $("#power-event-detail-5-div").css('display', 'none');
-        });
-        $("#secItem5").click(function () {
-            $("#power-event-detail-0-div").css('display', 'none');
-            $("#power-event-detail-1-div").css('display', 'none');
-            $("#power-event-detail-2-div").css('display', 'none');
-            $("#power-event-detail-3-div").css('display', 'none');
-            $("#power-event-detail-4-div").css('display', 'none');
-            $("#power-event-detail-5-div").css('display', 'block');
-        });
-        $("#triItem0").click(function () {
+    $("#subItem1").click(function () {
+        $("#item1").show();
+        $("#item2").hide();
+    });
+    $("#subItem2").click(function () {
+        $("#item1").hide();
+        $("#item2").show();
+    });
+    $("#subItem1").click();
+
+    $("#rightsubItem1").click(function () {
+        $("#rightItem1").show();
+        $("#rightItem2").hide();
+    });
+    $("#rightsubItem2").click(function () {
+        $("#rightItem1").hide();
+        $("#rightItem2").show();
+    });
+    $("#rightsubItem1").click();
+
+
+    // 刷新左侧菜单
+    $("#detailItem1").click(function () {
+        $("#eventdiv1").css('display', 'block');
+        $("#eventdiv2").css('display', 'none');
+        $("#eventdiv3").css('display', 'none');
+    });
+    $("#detailItem2").click(function () {
+        $("#eventdiv1").css('display', 'none');
+        $("#eventdiv2").css('display', 'block');
+        $("#eventdiv3").css('display', 'none');
+    });
+    $("#detailItem3").click(function () {
+        $("#eventdiv1").css('display', 'none');
+        $("#eventdiv2").css('display', 'none');
+        $("#eventdiv3").css('display', 'block');
+    });
+
+    $("#detailItem1").click();
+
+       /* $("#triItem0").click(function () {
             $("#environment-event-div").css('display', 'block');
             $("#environment-event-detail-1-div").css('display', 'none');
             $("#environment-event-detail-2-div").css('display', 'none');
@@ -1004,782 +981,84 @@
         $("#fourItem1").click(function () {
             $("#device-event-div").css('display', 'none');
             $("#device-event-detail-1-div").css('display', 'block');
-        });
-        $("#secItem0").click();
-        $("#triItem0").click();
-        $("#fourItem0").click();
-    });
-</script>
+        });*/
 
-<!--查询和刷新按钮效果-->
-<script>
-    function refresh() {
-        if ($("#detailItemTab1").hasClass("active")) {
-            getPowerEvent();
-        } else if ($("#detailItemTab2").hasClass("active")) {
-            getEnvironmentEvent();
-        } else if ($("#detailItemTab3").hasClass("active")) {
-            getDeviceEvent();
+    $("#secItem").on('click', 'li',
+        function(){
+            var id = $(this).attr("id");
+
+            if(id == "powerdetailItem0"){
+                getPowerEvent();
+            } else if(id == "powerdetailItem1"){
+                getDetailPowerEventlytx();
+            } else if(id == "powerdetailItem2"){
+                getDetailPowerEventxb();
+            } else if(id == "powerdetailItem3"){
+                getDetailPowerEventsxbph();
+            } else if(id == "powerdetailItem4"){
+                getDetailPowerEventshunbian();
+            } else if(id == "powerdetailItem5"){
+                getDetailPowerEventshanbian();
+            }
         }
-    }
-</script>
+    );
 
-<!-- 切换子菜单subItem效果-->
-<script type="text/javascript">
+    $("#triItem").on('click', 'li',
+        function(){
+            var id = $(this).attr("id");
+
+            if(id == "envdetailItem0"){
+                getEnvironmentEvent();
+            } else if(id == "envdetailItem1"){
+                getDetailEnvironmentEventtemp();
+            } else if(id == "envdetailItem2"){
+                getDetailEnvironmentEventwet();
+            }
+        }
+    );
+
+    $("#fourItem").on('click', 'li',
+        function(){
+            var id = $(this).attr("id");
+
+            if(id == "fourItem0"){
+                getDeviceEvent();
+            } else if(id == "ctrldetailItem1"){
+                getCtrlEvent();
+            }
+        }
+    );
+
+    $("#detailItem").on('click', 'li',
+        function(){
+            var id = $(this).attr("id");
+            if(id == "detailItemTab1"){
+                getPowerEvent();
+            } else if(id == "detailItemTab2"){
+                getEnvironmentEvent();
+            } else if(id == "detailItemTab3"){
+                getDeviceEvent();
+            }
+        }
+    );
+
+    <!-- 切换子菜单subItem效果-->
     $(function () {
         $("#ulItem li").click(function () {
             $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式selected
             $(this).addClass('active');                            // 添加当前元素的样式
         });
     });
-</script>
 
-<!-- （详细）设备事件-点击进入第二个页面-->
-<script type="text/javascript">
-    function getDeviceEvent() {
-        var tableData = [];
-        if (localStorage.getItem("visibleColumn")) {
-            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
-        }
-    }
-</script>
-
-<!-- （详细）电能事件-点击进入第二个页面-->
-<script type="text/javascript">
-
-    // 设置thead
-    function setThead1(tableData) {
-        var thead0 = $("#power-event-thead")[0];
-        var thead1 = $("#power-event-detail-thead-1-tr")[0];
-        var thead2 = $("#power-event-detail-thead-2-tr")[0];
-        var thead3 = $("#power-event-detail-thead-3-tr")[0];
-        var thead4 = $("#power-event-detail-thead-4-tr")[0];
-        var thead5 = $("#power-event-detail-thead-5-tr")[0];
-
-        thead0.innerHTML = ('<th style="width:30px;"></th>');
-        thead1.innerHTML = ('<th style="width:30px;"></th>');
-        thead2.innerHTML = ('<th style="width:30px;"></th>');
-        thead3.innerHTML = ('<th style="width:30px;"></th>');
-        thead4.innerHTML = ('<th style="width:30px;"></th>');
-        thead5.innerHTML = ('<th style="width:30px;"></th>');
-
-        tableData.forEach(function (item) {
-            thead0.innerHTML += ('<th>' + item.name + '</th>');
-            thead1.innerHTML += ('<th>' + item.name + '</th>');
-            thead2.innerHTML += ('<th>' + item.name + '</th>');
-            thead3.innerHTML += ('<th>' + item.name + '</th>');
-            thead4.innerHTML += ('<th>' + item.name + '</th>');
-            thead5.innerHTML += ('<th>' + item.name + '</th>');
-        });
-    }
-
-    function getPowerEvent() {
-        var tableData = [];
-        if (localStorage.getItem("visibleColumn")) {
-            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
-        }
-        setThead1(tableData);
-        $('#eventdiv1').css('display', 'block');
-        $('#eventdiv2').css('display', 'block');
-        $('#eventdiv3').css('display', 'none');
-        $('#eventdiv4').css('display', 'none');
-        var cbname = [];
-        var stime = null;
-        var etime = null;
-        var nowtime = getNowFormatDate();
-        var edate = $("input[name='event-data-period']:checked").val();
-        var nodeset = [], nodes2;
-        var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
-        if (nodes) {
-            nodes2 = nodes.toString();
-            nodeset = nodes2.split(",");
-            for (var i = 0; i < nodeset.length; i++) {
-                cbname.push(nodeset[i].split(":")[0]);
-            }
-        }
-        if (edate == "lastone") {
-            stime = " ";
-            etime = " ";
-        }
-        else if (edate == "fromto") {
-            stime = $("#firstDate").val();
-            etime = $("#lastDate").val();
-        }
-        else if (edate == "day") {
-            //昨天的时间
-            var now = new Date();
-            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var hour = date.getHours();
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-            stime = starttime;
-            etime = nowtime;
-        }
-        else if (edate == "week") {
-            // 获取一星期前的时间：
-            var now = new Date();
-            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var hour = date.getHours();
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-            stime = starttime;
-            etime = nowtime;
-        }
-        else if (edate == "month") {
-            // 获取一星期前的时间：
-            var now = new Date();
-            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var hour = date.getHours();
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-            stime = starttime;
-            etime = nowtime;
-        }
-        //读取设置中的优先级cookie
-        var priortylist = $.cookie('priortylist');
-        if (stime == null || etime == null) {
-             alert("请选择日期时间");
-        }
-        else if (cbname == "[object Object]") {
-             alert("请选择测量地点");
-        }
-        else if (priortylist == null) {
-             alert("请设定可查看的事件类型");
-        }
-        else {
-            $.ajax({
-                type: "post",
-                url: "getDetailPowerEventlytx",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#power-event-detail-tbody-1")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var type = liststr[2];
-                        var time = liststr[3];
-                        var description = liststr[4];
-                        var duration = liststr[5] + " ms";
-                        var deepth = liststr[6];
-                        var annotation = liststr[7];
-                        if (annotation == " null")
-                            annotation = "";
-                        var signature = liststr[8];
-                        if (signature == " null")
-                            signature = "";
-                        var location = liststr[9].substring(0, liststr[9].length - 1);
-                        var newLine = '<tr>';
-
-                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
-                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
-
-                        tableData.forEach(function (item) {
-                            if (item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
-                            } else if (item.name === "时间") {
-                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if (item.name === "类型") {
-                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if (item.name === "事件描述") {
-                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
-                            } else if (item.name === "位置") {
-                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
-                            } else if (item.name === "触发相位") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
-                            } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
-                            } else if (item.name === "方向") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "评论") {
-                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if (item.name === "签名") {
-                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if (item.name === "触发水平") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "中有波形数据") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            }
-                        });
-                        newLine += '</tr>';
-                        tbody.innerHTML += newLine;
-                    }
-                }
-            });
-            $.ajax({
-                type: "post",
-                url: "getDetailPowerEventxb",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#power-event-detail-tbody-2")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var type = liststr[2];
-                        var time = liststr[3];
-                        var description = liststr[4];
-                        var duration = liststr[5] + " ms";
-                        var deepth = liststr[6];
-                        var annotation = liststr[7];
-                        if (annotation == " null")
-                            annotation = "";
-                        var signature = liststr[8];
-                        if (signature == " null")
-                            signature = "";
-                        var location = liststr[9].substring(0, liststr[9].length - 1);
-                        var newLine = '<tr>';
-
-                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
-                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
-
-                        tableData.forEach(function (item) {
-                            if (item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
-                            } else if (item.name === "时间") {
-                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if (item.name === "类型") {
-                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if (item.name === "事件描述") {
-                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
-                            } else if (item.name === "位置") {
-                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
-                            } else if (item.name === "触发相位") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
-                            } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
-                            } else if (item.name === "方向") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "评论") {
-                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if (item.name === "签名") {
-                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if (item.name === "触发水平") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "中有波形数据") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            }
-                        });
-                        newLine += '</tr>';
-                        tbody.innerHTML += newLine;
-                    }
-                }
-            });
-            $.ajax({
-                type: "post",
-                url: "getDetailPowerEventsxbph",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#power-event-detail-tbody-3")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var type = liststr[2];
-                        var time = liststr[3];
-                        var description = liststr[4];
-                        var duration = liststr[5] + " ms";
-                        var deepth = liststr[6];
-                        var annotation = liststr[7];
-                        if (annotation == " null")
-                            annotation = "";
-                        var signature = liststr[8];
-                        if (signature == " null")
-                            signature = "";
-                        var location = liststr[9].substring(0, liststr[9].length - 1);
-                        var newLine = '<tr>';
-
-                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
-                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
-
-                        tableData.forEach(function (item) {
-                            if (item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
-                            } else if (item.name === "时间") {
-                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if (item.name === "类型") {
-                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if (item.name === "事件描述") {
-                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
-                            } else if (item.name === "位置") {
-                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
-                            } else if (item.name === "触发相位") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
-                            } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
-                            } else if (item.name === "方向") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "评论") {
-                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if (item.name === "签名") {
-                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if (item.name === "触发水平") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "中有波形数据") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            }
-                        });
-                        newLine += '</tr>';
-                        tbody.innerHTML += newLine;
-                    }
-                }
-            });
-            $.ajax({
-                type: "post",
-                url: "getDetailPowerEventshunbian",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#power-event-detail-tbody-4")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var type = liststr[2];
-                        var time = liststr[3];
-                        var description = liststr[4];
-                        var duration = liststr[5] + " ms";
-                        var deepth = liststr[6];
-                        var annotation = liststr[7];
-                        if (annotation == " null")
-                            annotation = "";
-                        var signature = liststr[8];
-                        if (signature == " null")
-                            signature = "";
-                        var location = liststr[9].substring(0, liststr[9].length - 1);
-                        var newLine = '<tr>';
-
-                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
-                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
-
-                        tableData.forEach(function (item) {
-                            if (item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
-                            } else if (item.name === "时间") {
-                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if (item.name === "类型") {
-                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if (item.name === "事件描述") {
-                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
-                            } else if (item.name === "位置") {
-                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
-                            } else if (item.name === "触发相位") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
-                            } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
-                            } else if (item.name === "方向") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "评论") {
-                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if (item.name === "签名") {
-                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if (item.name === "触发水平") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "中有波形数据") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            }
-                        });
-                        newLine += '</tr>';
-                        tbody.innerHTML += newLine;
-                    }
-                }
-            });
-            $.ajax({
-                type: "post",
-                url: "getDetailPowerEventshanbian",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#power-event-detail-tbody-5")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var type = liststr[2];
-                        var time = liststr[3];
-                        var description = liststr[4];
-                        var duration = liststr[5] + " ms";
-                        var deepth = liststr[6];
-                        var annotation = liststr[7];
-                        if (annotation == " null")
-                            annotation = "";
-                        var signature = liststr[8];
-                        if (signature == " null")
-                            signature = "";
-                        var location = liststr[9].substring(0, liststr[9].length - 1);
-                        var newLine = '<tr>';
-
-                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
-                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
-
-                        tableData.forEach(function (item) {
-                            if (item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
-                            } else if (item.name === "时间") {
-                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if (item.name === "类型") {
-                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if (item.name === "事件描述") {
-                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
-                            } else if (item.name === "位置") {
-                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
-                            } else if (item.name === "触发相位") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + duration + '</td>')
-                            } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
-                            } else if (item.name === "方向") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "评论") {
-                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if (item.name === "签名") {
-                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if (item.name === "触发水平") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "中有波形数据") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            }
-                        });
-                        newLine += '</tr>';
-                        tbody.innerHTML += newLine;
-                    }
-                }
-            });
-        }
-    }
-</script>
-
-<!-- （详细）环境事件-点击进入第二个页面-->
-<script type="text/javascript">
-    // 设置thead
-    function setThead2(tableData) {
-        var thead0 = $("#environment-event-tr")[0];
-        var thead1 = $("#environment-event-detail-1-tr")[0];
-        var thead2 = $("#environment-event-detail-2-tr")[0];
-
-        thead0.innerHTML += ('<th style="width:30px;"></th>');
-        thead1.innerHTML += ('<th style="width:30px;"></th>');
-        thead2.innerHTML += ('<th style="width:30px;"></th>');
-
-        tableData.forEach(function (item) {
-            thead0.innerHTML += ('<th>' + item.name + '</th>');
-            thead1.innerHTML += ('<th>' + item.name + '</th>');
-            thead2.innerHTML += ('<th>' + item.name + '</th>');
-        });
-    }
-
-    function getEnvironmentEvent() {
-        var tableData = [];
-        if (localStorage.getItem("visibleColumn")) {
-            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
-        }
-        setThead2();
-        $('#eventdiv1').css('display', 'none');
-        $('#eventdiv2').css('display', 'none');
-        $('#eventdiv3').css('display', 'block');
-        $('#eventdiv4').css('display', 'none');
-        var cbname = [];
-        var stime = null;
-        var etime = null;
-        var nowtime = getNowFormatDate();
-        var edate = $("input[name='event-data-period']:checked").val();
-        var nodeset = [], nodes2;
-        var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
-        if (nodes) {
-            nodes2 = nodes.toString();
-            nodeset = nodes2.split(",");
-            for (var i = 0; i < nodeset.length; i++) {
-                cbname.push(nodeset[i].split(":")[0]);
-            }
-        }
-        if (edate == "lastone") {
-            stime = " ";
-            etime = " ";
-        }
-        else if (edate == "fromto") {
-            stime = $("#firstDate").val();
-            etime = $("#lastDate").val();
-        }
-        else if (edate == "day") {
-            //昨天的时间
-            var now = new Date();
-            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var hour = date.getHours();
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-            stime = starttime;
-            etime = nowtime;
-        }
-        else if (edate == "week") {
-            // 获取一星期前的时间：
-            var now = new Date();
-            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var hour = date.getHours();
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-            stime = starttime;
-            etime = nowtime;
-        }
-        else if (edate == "month") {
-            // 获取一星期前的时间：
-            var now = new Date();
-            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var hour = date.getHours();
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-            stime = starttime;
-            etime = nowtime;
-        }
-        //读取设置中的优先级cookie
-        var priortylist = $.cookie('priortylist');
-        if (stime == null || etime == null) {
-            // alert("请选择日期时间");
-        }
-        else if (cbname == "[object Object]") {
-            // alert("请选择测量地点");
-        }
-        else if (priortylist == null) {
-            // alert("请设定可查看的事件类型");
-        }
-        else {
-            $.ajax({
-                type: "post",
-                url: "getDetailEnvironmentEventtemp",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#environment-event-detail-tbody-1")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        var newLine = '<tr>';
-
-                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
-                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
-
-                        tableData.forEach(function (item) {
-                            if (item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
-                            } else if (item.name === "时间") {
-                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if (item.name === "类型") {
-                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if (item.name === "事件描述") {
-                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
-                            } else if (item.name === "位置") {
-                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
-                            } else if (item.name === "触发相位") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + "" + '</td>')
-                            } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
-                            } else if (item.name === "方向") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "评论") {
-                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if (item.name === "签名") {
-                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if (item.name === "触发水平") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "中有波形数据") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            }
-                        });
-                        newLine += '</tr>';
-                        tbody.innerHTML += newLine;
-                    }
-                }
-            });
-            $.ajax({
-                type: "post",
-                url: "getDetailEnvironmentEventwet",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#environment-event-detail-tbody-2")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        var newLine = '<tr>';
-
-                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
-                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
-
-                        tableData.forEach(function (item) {
-                            if (item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
-                            } else if (item.name === "时间") {
-                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if (item.name === "类型") {
-                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if (item.name === "事件描述") {
-                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
-                            } else if (item.name === "位置") {
-                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
-                            } else if (item.name === "触发相位") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + "" + '</td>')
-                            } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
-                            } else if (item.name === "方向") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "评论") {
-                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if (item.name === "签名") {
-                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if (item.name === "触发水平") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "中有波形数据") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            }
-                        });
-                        newLine += '</tr>';
-                        tbody.innerHTML += newLine;
-                    }
-                }
-            });
-        }
-    }
-</script>
-
-<!-- （详细）设备事件-点击进入第二个页面-->
-<script type="text/javascript">
-    // 设置thead
-    function setThead3(tableData) {
-        var thead0 = $("#device-event-tr")[0];
-        var thead1 = $("#device-event-detail-1-tr")[0];
-
-        thead0.innerHTML += ('<th style="width:30px;"></th>');
-        thead1.innerHTML += ('<th style="width:30px;"></th>');
-
-        tableData.forEach(function (item) {
-            thead0.innerHTML += ('<th>' + item.name + '</th>');
-            thead1.innerHTML += ('<th>' + item.name + '</th>');
-        });
-    }
-</script>
-
-<!--查询按钮-->
-<script>
-    $("#data-button").click(function () {
-        getAllEvent();
-        refresh();
-        $(this).button('loading').delay(500).queue(function () {
-            $(this).button('reset');
-            $(this).dequeue();
-        });
-    });
 </script>
 
 <!-- 查询事件-->
 <script type="text/javascript">
+    // 事件查询按钮
+    $("#data-button").click(function () {
+        getAllEvent();
+    });
+
     //unix时间转常用时间格式
     function formatTime(time) {
         var unixtime = time;
@@ -1821,15 +1100,8 @@
         var etime = null;
         var nowtime = getNowFormatDate();
         var edate = $("input[name='event-data-period']:checked").val();
-        var nodeset = [], nodes2;
-        var nodes = $("#citybank-jstree").jstree("get_checked"); //使用get_checked方法
-        if (nodes) {
-            nodes2 = nodes.toString();
-            nodeset = nodes2.split(",");
-            for (var i = 0; i < nodeset.length; i++) {
-                cbname.push(nodeset[i].split(":")[0]);
-            }
-        }
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
         if (edate == "lastone") {
             stime = " ";
             etime = " ";
@@ -1892,222 +1164,40 @@
             alert("请设定可查看的事件类型");
         }
         else {
-            //获取所有电能事件
-            $.ajax({
-                type: "post",
-                url: "getPowerEvent",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#power-event-tbody")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        var annotationstr = liststr[8];
-                        var annotation = annotationstr.substring(0, annotationstr.length - 1);
-                        var signature = liststr[7];
-                        if (signature == " null")
-                            signature = "";
-                        if (annotation == " null")
-                            annotation = "";
-                        var newLine = '<tr>';
-
-                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
-                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
-
-                        tableData.forEach(function (item) {
-                            if (item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
-                            } else if (item.name === "时间") {
-                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if (item.name === "类型") {
-                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if (item.name === "事件描述") {
-                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
-                            } else if (item.name === "位置") {
-                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
-                            } else if (item.name === "触发相位") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + "" + '</td>')
-                            } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + '' + '</td>')
-                            } else if (item.name === "方向") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "评论") {
-                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if (item.name === "签名") {
-                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if (item.name === "触发水平") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "中有波形数据") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            }
-                        });
-                        newLine += '</tr>';
-                        tbody.innerHTML += newLine;
-                    }
+            if ($("#detailItemTab1").hasClass("active")) {
+                if($("#powerdetailItem0").hasClass("active")) {
+                    getPowerEvent();
+                } else if($("#powerdetailItem1").hasClass("active")){
+                    getDetailPowerEventlytx();
+                } else if($("#powerdetailItem2").hasClass("active")){
+                    getDetailPowerEventxb();
+                } else if($("#powerdetailItem3").hasClass("active")){
+                    getDetailPowerEventsxbph();
+                } else if($("#powerdetailItem4").hasClass("active")){
+                    getDetailPowerEventshunbian();
+                } else if($("#powerdetailItem5").hasClass("active")){
+                    getDetailPowerEventshanbian();
                 }
-            });
-            //获取所有环境事件
-            $.ajax({
-                type: "post",
-                url: "getEnvironmentEvent",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#environment-event-tbody")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        var signature = liststr[7];
-                        var annotationstr = liststr[8];
-                        var annotation = annotationstr.split("]");
-                        if (signature == " null")
-                            signature = "";
-                        if (annotation[0] == " null")
-                            annotation[0] = "";
-                        var newLine = '<tr>';
-
-                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
-                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
-
-                        tableData.forEach(function (item) {
-                            if (item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
-                            } else if (item.name === "时间") {
-                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if (item.name === "类型") {
-                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if (item.name === "事件描述") {
-                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
-                            } else if (item.name === "位置") {
-                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
-                            } else if (item.name === "触发相位") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + "" + '</td>')
-                            } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
-                            } else if (item.name === "方向") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "评论") {
-                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if (item.name === "签名") {
-                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if (item.name === "触发水平") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "中有波形数据") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            }
-                        });
-                        newLine += '</tr>';
-                        tbody.innerHTML += newLine;
-                    }
+            } else if ($("#detailItemTab2").hasClass("active")) {
+                if($("#envdetailItem0").hasClass("active")) {
+                   // alert("getEnvironmentEvent event");
+                    getEnvironmentEvent();
+                } else if($("#envdetailItem1").hasClass("active")){
+                    getDetailEnvironmentEventtemp();
+                } else if($("#envdetailItem2").hasClass("active")){
+                    getDetailEnvironmentEventwet();
                 }
-            });
-            //获取所有设备事件
-            $.ajax({
-                type: "post",
-                url: "getCtrlEvent",
-                data: {
-                    stime: stime,
-                    etime: etime,
-                    cbname: cbname.toString(),
-                    priortylist: priortylist
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var list = obj['allpelist'];
-                    var tbody = $("#device-event-tbody")[0];
-                    tbody.innerHTML = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var liststr = list[i].split(",");
-                        var teid = liststr[0].split("[");
-                        var name = liststr[1];
-                        var location = liststr[2];
-                        var type = liststr[3];
-                        var description = liststr[4];
-                        var rawtime = liststr[5].split("]");
-                        var time = rawtime[0];
-                        var signature = liststr[7];
-                        var annotationstr = liststr[8];
-                        var annotation = annotationstr.split("]");
-                        if (signature == " null")
-                            signature = "";
-                        if (annotation == undefined)
-                            annotation = "";
-                        var newLine = '<tr>';
-
-                        newLine += '<tr id=' + teid[1] + '>' + '<td style="width:20px;">' +
-                            '<input type="radio" id="teidPower" name="teid" value=' + teid[1] + '></td>';
-
-                        tableData.forEach(function (item) {
-                            if (item.name === "测量名称") {
-                                newLine += ('<td style="padding-left:60px;margin:auto">' + name + '</td>')
-                            } else if (item.name === "时间") {
-                                newLine += ('<td style="padding-left:60px;">' + time + '</td>')
-                            } else if (item.name === "类型") {
-                                newLine += ('<td style="padding-left:60px;">' + type + '</td>')
-                            } else if (item.name === "事件描述") {
-                                newLine += ('<td style="padding-left:60px;">' + description + '</td>')
-                            } else if (item.name === "位置") {
-                                newLine += ('<td style="padding-left:60px;">' + location + '</td>')
-                            } else if (item.name === "触发相位") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "时间长短") {
-                                newLine += ('<td style="padding-left:60px;">' + "" + '</td>')
-                            } else if (item.name === "深度") {
-                                newLine += ('<td style="padding-left:60px;">' + deepth + '</td>')
-                            } else if (item.name === "方向") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "评论") {
-                                newLine += ('<td style="padding-left:60px;">' + annotation + '</td>')
-                            } else if (item.name === "签名") {
-                                newLine += ('<td style="padding-left:60px;">' + signature + '</td>')
-                            } else if (item.name === "触发水平") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            } else if (item.name === "中有波形数据") {
-                                newLine += ('<td style="padding-left:60px;"></td>')
-                            }
-                        });
-                        newLine += '</tr>';
-                        tbody.innerHTML += newLine;
-                    }
+            } else if ($("#detailItemTab3").hasClass("active")) {
+                if($("#fourItem0").hasClass("active")) {
+                //    alert("getDeviceEvent event");
+                    getDeviceEvent();
+                } else if($("#ctrldetailItem1").hasClass("active")){
+                    getCtrlEvent();
                 }
-            });
+            }
         }
-        refresh();
     }
+
 </script>
 
 <!-- 观测地点-->
@@ -2152,6 +1242,38 @@
             "plugins": ["checkbox"]
         });
     }
+    addDFCityBankAsMonitorPoint();
+    //默认添加市行检测点
+    function addDFCityBankAsMonitorPoint() {
+        var pbname = $("#province_code option:selected").val();
+        $.ajax({
+            type: "post",
+            url: "getDFMP",
+            data: {
+                pbname: pbname
+            },
+            dataType: "json",
+            success: function (data) {
+                var ptable = $("#place-event");
+                ptable.empty();
+
+                var jdata = JSON.parse(data);
+                var nodeset = jdata.allcbtree;
+                for (var i = 0; i < nodeset.length; i++) {
+                    var id = nodeset[i].cbid;
+                    var text = nodeset[i].cbname;
+
+                    if(i===0){
+                        ptable.append('<tr id="' + id + '"><td><input id="radio-mpid" name="radio-mpid" type="radio" value="' + id + '" checked>' + text + '</td></tr>');
+                    } else {
+                        ptable.append('<tr id="' + id + '"><td><input id="radio-mpid" name="radio-mpid" type="radio" value="' + id + '">' + text + '</td></tr>');
+                    }
+                }
+            }
+        });
+
+        cancleCityBankAsMonitorPoint();
+    }
 
     //添加检测点-确定
     function addCityBankAsMonitorPoint() {
@@ -2160,10 +1282,9 @@
         var nodes2 = nodes.toString();
         var nodeset = nodes2.split(",");
         var ptable = $("#place-event");
-        ptable.empty();
         for (var i = 0; i < nodeset.length; i++) {
             var nset = nodeset[i].split(":");
-            ptable.append('<tr id="' + nset[0] + '"><td><input id="radio-mpid" name="radio-mpid" type="radio" value="' + nset[0] + '">' + nset[1] + '</td></tr>');
+            ptable.append('<tr id="' + nset[0] + '"><td><input id="radio-mpid" name="radio-mpid" type="radio" value="' + nset[0] + '" checked>' + nset[1] + '</td></tr>');
         }
         cancleCityBankAsMonitorPoint();
     }
@@ -2185,13 +1306,13 @@
 <!-- 右侧界面 第二个子菜单 列 -->
 <script type="text/javascript">
     var optionDataSource = [
-        {name: '测量名称', length: '90'},
-        {name: '时间', length: '110'},
+        {name: '测量名称', length: '50'},
+        {name: '时间', length: '50'},
         {name: '类型', length: '50'},
-        {name: '事件描述', length: '50'},
+        {name: '事件描述', length: '120'},
         {name: '位置', length: '50'},
         {name: '触发相位', length: '50'},
-        {name: '时间长短', length: '50'},
+        {name: '时间长短', length: '40'},
         {name: '深度', length: '50'},
         {name: '方向', length: '50'},
         {name: '评论', length: '50'},
@@ -2203,31 +1324,19 @@
         $("#useful-col").append('<option id=' + index + '>' + item.name + '</option>')
     });
 
- /*   var visibleColumnData = [];*/
-   /* var visibleColumnData = [
-        {name: '测量名称', length: '90'},
-        {name: '时间', length: '110'},
-        {name: '类型', length: '50'},
-        {name: '事件描述', length: '50'},
-        {name: '时间长短', length: '50'},
-        {name: '评论', length: '50'},
-        {name: '签名', length: '50'}
-    ];*/
-
     if (!localStorage.getItem("visibleColumn")) {
         var visibleColumnData = [
-            {name: '测量名称', length: '90'},
-            {name: '时间', length: '110'},
+            {name: '位置', length: '50'},
+            {name: '测量名称', length: '50'},
+            {name: '时间', length: '50'},
             {name: '类型', length: '50'},
-            {name: '事件描述', length: '50'},
-            {name: '时间长短', length: '50'},
+            {name: '事件描述', length: '120'},
+            {name: '时间长短', length: '40'},
             {name: '评论', length: '50'},
             {name: '签名', length: '50'}
         ];
         localStorage.setItem("visibleColumn", JSON.stringify(visibleColumnData));
     }
-
-    refresh();
 
     $(document).ready(function () {
         var tbody = $("#colume-table").children("tbody");
@@ -2283,9 +1392,7 @@
         var coltable = $("#colume-table");
         var target = coltable.children("tbody").children(".col-active");
         var list = coltable.children("tbody").children('tr');
-        console.log('target', target.attr("id"))
-        var targetId = Number(target.attr("id"))
-        console.log('targetId', targetId)
+        var targetId = Number(target.attr("id"));
         var downData = visibleColumnData[targetId + 1];
         if (target.length > 0) {
             var thisLocation = list.index(target);
@@ -2325,7 +1432,7 @@
 
 <!-- 设置icon-->
 <script type="text/javascript">
-    function settingIcon() {
+   /* function settingIcon() {
         $('#setting-modal').css('display', 'block');
         $('#jstree').jstree({
             "core": {
@@ -2356,8 +1463,16 @@
                 },
             },
             "plugins": ["checkbox"]
-        })
+        });
+        $('#jstree').jstree('select_all');
+        var priortylist = $('#jstree').jstree().get_checked();
+        $.cookie('priortylist', priortylist, {expires: 1, path: '/'});
     }
+*/
+    // 默认优先级全选
+    var priortylist = [ 3333,2222,1111,350,349,348,347,346,345,344,343,342,341,340,339,338,337,336,335,334,333,332,331,330,329,328,327,326,325,324,323,322,321,320,319,318,317,316,315,314,313,312,311,310,309,308,307,306,305,304,303,302,301,300,299,298,297,296,295,294,293,292,291,290,289,288,287,286,285,284,283,282,281,280,279,278,277,276,275,274,273,272,271,270,269,268,267,266,265,264,263,262,261,260,259,258,257,256,255,254,253,252,251,250,249,248,247,246,245,244,243,242,241,240,239,238,237,236,235,234,233,232,231,230,229,228,227,226,225,224,223,222,221,220,219,218,217,216,215,214,213,212,211,210,209,208,207,206,205,204,203,202,201,200,199,198,197,196,195,194,193,192,191,190,189,188,187,186,185,184,183,182,181,180,179,178,177,176,175,174,173,172,171,170,169,168,167,166,165,164,163,162,161,160,159,158,157,156,155,154,153,152,151,150,149,148,147,146,145,144,143,142,141,140,139,138,137,136,135,134,133,132,131,130,129,128,127,126,125,124,123,122,121,120,119,118,117,116,115,114,113,112,111,110,109,108,107,106,105,104,103,102,101,100,99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60,59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2];
+    $.cookie('priortylist', priortylist, {expires: 1, path: '/'});
+
 
     function AllSelected() {
         $('#jstree').jstree('select_all');
@@ -2384,12 +1499,44 @@
 
     //点击单条事件-确认事件
     function confirmEvent() {
-        var teidPower = $('input[id="teidPower"]:checked').val();
-        var teidCtrl = $('input[id="teidCtrl"]:checked').val();
-        var teidEnvironment = $('input[id="teidEnvironment"]:checked').val();
-        if (teidPower == undefined && teidCtrl == undefined && teidEnvironment == undefined)
+
+        var teidPower;
+        var teidEnvironment;
+        var teidCtrl;
+
+        if ($("#detailItemTab1").hasClass("active")) {
+            if($("#powerdetailItem0").hasClass("active")) {
+                teidPower = $('#power-event').bootstrapTable('getAllSelections');
+            } else if($("#powerdetailItem1").hasClass("active")){
+                teidPower = $('#power-event-detail-1').bootstrapTable('getAllSelections');
+            } else if($("#powerdetailItem2").hasClass("active")){
+                teidPower = $('#power-event-detail-2').bootstrapTable('getAllSelections');
+            } else if($("#powerdetailItem3").hasClass("active")){
+                teidPower = $('#power-event-detail-3').bootstrapTable('getAllSelections');
+            } else if($("#powerdetailItem4").hasClass("active")){
+                teidPower = $('#power-event-detail-4').bootstrapTable('getAllSelections');
+            } else if($("#powerdetailItem5").hasClass("active")){
+                teidPower = $('#power-event-detail-5').bootstrapTable('getAllSelections');
+            }
+        } else if ($("#detailItemTab2").hasClass("active")) {
+            if($("#envdetailItem0").hasClass("active")) {
+                teidEnvironment = $('#environment-event').bootstrapTable('getAllSelections');
+            } else if($("#envdetailItem1").hasClass("active")){
+                teidEnvironment = $('#environment-event-detail-1').bootstrapTable('getAllSelections');
+            } else if($("#envdetailItem2").hasClass("active")){
+                teidEnvironment = $('#environment-event-detail-2').bootstrapTable('getAllSelections');
+            }
+        } else if ($("#detailItemTab3").hasClass("active")) {
+            if($("#fourItem0").hasClass("active")) {
+                teidCtrl = $('#device-event').bootstrapTable('getAllSelections');
+            } else if($("#ctrldetailItem1").hasClass("active")){
+                teidCtrl = $('#device-event-detail-1').bootstrapTable('getAllSelections');
+            }
+        }
+
+        if (teidPower != undefined && teidCtrl != undefined && teidEnvironment != undefined) {
             alert("请选择一个要确认的事件");
-        else {
+        } else {
             $('#conformEventRow-modal').css('display', 'block');
             var sign = "<%=session.getAttribute("username")%>";
             $('#signature').val(sign);
@@ -2399,39 +1546,115 @@
     //点击单条事件-签名确认事件-确认
     function confirmOKEvent() {
         //添加该事件的签名和注释到数据库
-        var teid = "";
-        var teidPower = $('input[id="teidPower"]:checked').val();
-        var teidCtrl = $('input[id="teidCtrl"]:checked').val();
-        var teidEnvironment = $('input[id="teidEnvironment"]:checked').val();
+       /* var teidCtrl = $('#device-event').bootstrapTable('getAllSelections');
+        var teidPower = $('#power-event').bootstrapTable('getAllSelections'); //$("input[name='teidPower']:checked").serialize();
+        var teidEnvironment = $('#environment-event').bootstrapTable('getAllSelections'); //$('input[name="teidEnvironment"]:checked').serialize();
+*/
+
+        var teidPower;
+        var teidEnvironment;
+        var teidCtrl;
+
+        if ($("#detailItemTab1").hasClass("active")) {
+            if($("#powerdetailItem0").hasClass("active")) {
+                teidPower = $('#power-event').bootstrapTable('getAllSelections');
+            } else if($("#powerdetailItem1").hasClass("active")){
+                teidPower = $('#power-event-detail-1').bootstrapTable('getAllSelections');
+            } else if($("#powerdetailItem2").hasClass("active")){
+                teidPower = $('#power-event-detail-2').bootstrapTable('getAllSelections');
+            } else if($("#powerdetailItem3").hasClass("active")){
+                teidPower = $('#power-event-detail-3').bootstrapTable('getAllSelections');
+            } else if($("#powerdetailItem4").hasClass("active")){
+                teidPower = $('#power-event-detail-4').bootstrapTable('getAllSelections');
+            } else if($("#powerdetailItem5").hasClass("active")){
+                teidPower = $('#power-event-detail-5').bootstrapTable('getAllSelections');
+            }
+        } else if ($("#detailItemTab2").hasClass("active")) {
+            if($("#envdetailItem0").hasClass("active")) {
+                teidEnvironment = $('#environment-event').bootstrapTable('getAllSelections');
+            } else if($("#envdetailItem1").hasClass("active")){
+                teidEnvironment = $('#environment-event-detail-1').bootstrapTable('getAllSelections');
+            } else if($("#envdetailItem2").hasClass("active")){
+                teidEnvironment = $('#environment-event-detail-2').bootstrapTable('getAllSelections');
+            }
+        } else if ($("#detailItemTab3").hasClass("active")) {
+            if($("#fourItem0").hasClass("active")) {
+                teidCtrl = $('#device-event').bootstrapTable('getAllSelections');
+            } else if($("#ctrldetailItem1").hasClass("active")){
+                teidCtrl = $('#device-event-detail-1').bootstrapTable('getAllSelections');
+            }
+        }
+
         var sign = $('#signature').val();
         var annot = $('#annotation').val();
         var ettype;
 
-        if (teidPower != undefined) {
-            teid = teidPower;
-            ettype = "power";
-        }
-        else if (teidCtrl != undefined) {
-            teid = teidCtrl;
-            ettype = "device";
-        }
-        else if (teidEnvironment != undefined) {
-            teid = teidEnvironment;
-            ettype = "environment";
-        }
-        $.ajax({
-            type: "post",
-            url: "addSignatureAndAnnotation",
-            dataType: "json",
-            data: {
-                teid: teid,
-                sign: sign,
-                annot: annot,
-                eventtabletype: ettype
+        if ($("#detailItemTab1").hasClass("active")) {
+            if (teidPower.length != 0) {
+                //teidset = teidPower;
+                var teidset = new Array();
+                for(var i = 0; i < teidPower.length; i++) {
+                    teidset[i] = teidPower[i].teid;
+                }
+                ettype = "power";
+
+                $.ajax({
+                    type: "post",
+                    url: "addSignatureAndAnnotation",
+                    dataType: "json",
+                    data: {
+                        teid: teidset.toString(),
+                        sign: sign,
+                        annot: annot,
+                        eventtabletype: ettype
+                    }
+                });
             }
-        });
+        } else if ($("#detailItemTab2").hasClass("active")) {
+            if (teidEnvironment.length != 0) {
+               // teidset = teidEnvironment;
+                var teidset = new Array();
+                for(var i = 0; i < teidEnvironment.length; i++) {
+                    teidset[i] = teidEnvironment[i].teid;
+                }
+                ettype = "environment";
+
+                $.ajax({
+                    type: "post",
+                    url: "addSignatureAndAnnotation",
+                    dataType: "json",
+                    data: {
+                        teid: teidset.toString(),
+                        sign: sign,
+                        annot: annot,
+                        eventtabletype: ettype
+                    }
+                });
+            }
+        } else if ($("#detailItemTab3").hasClass("active")) {
+            if (teidCtrl.length != 0) {
+                //teidset = teidCtrl;
+                var teidset = new Array();
+                for(var i = 0; i < teidCtrl.length; i++) {
+                    teidset[i] = teidCtrl[i].teid;
+                }
+                ettype = "device";
+
+                $.ajax({
+                    type: "post",
+                    url: "addSignatureAndAnnotation",
+                    dataType: "json",
+                    data: {
+                        teid: teidset.toString(),
+                        sign: sign,
+                        annot: annot,
+                        eventtabletype: ettype
+                    }
+                });
+            }
+        }
+
         $('#conformEventRow-modal').css('display', 'none');
-        getAllEvent();
     }
 
     //点击单条事件-签名确认事件-取消
@@ -2444,7 +1667,35 @@
 <script type="text/javascript">
     function refreshIcon() {
         //刷新事件
-        getAllEvent();
+        if ($("#detailItemTab1").hasClass("active")) {
+            if($("#powerdetailItem0").hasClass("active")) {
+                getPowerEvent();
+            } else if($("#powerdetailItem1").hasClass("active")){
+                getDetailPowerEventlytx();
+            } else if($("#powerdetailItem2").hasClass("active")){
+                getDetailPowerEventxb();
+            } else if($("#powerdetailItem3").hasClass("active")){
+                getDetailPowerEventsxbph();
+            } else if($("#powerdetailItem4").hasClass("active")){
+                getDetailPowerEventshunbian();
+            } else if($("#powerdetailItem5").hasClass("active")){
+                getDetailPowerEventshanbian();
+            }
+        } else if ($("#detailItemTab2").hasClass("active")) {
+            if($("#envdetailItem0").hasClass("active")) {
+                getEnvironmentEvent();
+            } else if($("#envdetailItem1").hasClass("active")){
+                getDetailEnvironmentEventtemp();
+            } else if($("#envdetailItem2").hasClass("active")){
+                getDetailEnvironmentEventwet();
+            }
+        } else if ($("#detailItemTab3").hasClass("active")) {
+            if($("#fourItem0").hasClass("active")) {
+                getDeviceEvent();
+            } else if($("#ctrldetailItem1").hasClass("active")){
+                getCtrlEvent();
+            }
+        }
     }
 </script>
 
@@ -2613,23 +1864,62 @@
 
 <!-- 打印-->
 <script type="text/javascript">
-    function printTable() {
+
+    // bootstrap table 打印
+    function printTable(){
+        var printData;
+
+        if ($("#detailItemTab1").hasClass("active")) {
+            if($("#powerdetailItem0").hasClass("active")) {
+                printData = $('#power-event').parent().html();
+            } else if($("#powerdetailItem1").hasClass("active")){
+                printData = $('#power-event-detail-1').parent().html();
+            } else if($("#powerdetailItem2").hasClass("active")){
+                printData = $('#power-event-detail-2').parent().html();
+            } else if($("#powerdetailItem3").hasClass("active")){
+                printData = $('#power-event-detail-3').parent().html();
+            } else if($("#powerdetailItem4").hasClass("active")){
+                printData = $('#power-event-detail-4').parent().html();
+            } else if($("#powerdetailItem5").hasClass("active")){
+                printData = $('#power-event-detail-5').parent().html();
+            }
+        } else if ($("#detailItemTab2").hasClass("active")) {
+            if($("#envdetailItem0").hasClass("active")) {
+                printData = $('#environment-event').parent().html();
+            } else if($("#envdetailItem1").hasClass("active")){
+                printData = $('#environment-event-detail-1').parent().html();
+            } else if($("#envdetailItem2").hasClass("active")){
+                printData = $('#environment-event-detail-2').parent().html();
+            }
+        } else if ($("#detailItemTab3").hasClass("active")) {
+            if($("#fourItem0").hasClass("active")) {
+                printData = $('#device-event').parent().html();
+            } else if($("#ctrldetailItem1").hasClass("active")){
+                printData = $('#device-event-detail-1').parent().html();
+            }
+        }
+        window.document.body.innerHTML = printData;
+        window.print();
+        window.location.reload(true);
+    }
+
+    /*function printTable_old() {
         window.document.title = "";
         window.document.URL = "";
         bdhtml = window.document.body.innerHTML;
         sprnstr = "<!--startprint-->";
-        eprnstr = "<!--endprint-->";
+        eprnstr = "<!-display-endprint-->";
         prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17);
         prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
         window.document.body.innerHTML = prnhtml;
         window.print();
         setTimeout(location.reload(), 3000);
-    }
+    }*/
 </script>
 
 <!-- -->
 <script type="text/javascript">
-    //刷新功能
+    //自动更新间隔功能
     $("#auto-update-interval").on("change", function () {
         var updateinterval = $('#auto-update-interval').val();
         var timer = null;
@@ -2643,42 +1933,1945 @@
     });
     //点击table中的某一行
     $('#place-event tbody').on('change', 'tr', function () {
-        //alert("mp:"+ this);
     });
 
     //点击单条事件-删除事件（假删除，只是前端不显示）
     function deleteEventOnlyPage() {
-        var teidPowerId = $('input[id="teidPower"]:checked').val();
-        var teidCtrlId = $('input[id="teidCtrl"]:checked').val();
-        var teidEnvironmentId = $('input[id="teidEnvironment"]:checked').val();
-        if (teidPowerId != undefined) {
-            var tbody = [
-                $("#power-event-tbody"),
-                $("#power-event-detail-tbody-1"),
-                $("#power-event-detail-tbody-2"),
-                $("#power-event-detail-tbody-3"),
-                $("#power-event-detail-tbody-4"),
-                $("#power-event-detail-tbody-5")
-            ];
-            tbody.forEach(function (item) {
-                item.children("#" + teidPowerId).remove();
-            })
 
+        var teidset = 1;
+        var arr = [ parseInt('0'), parseInt('1'), parseInt('2'), parseInt('3'), parseInt('4'), parseInt('5')];
+
+
+        $('#device-event').bootstrapTable('remove', {
+            filed: 'teid',
+            values: [parseInt('0')]  //[parseInt(teidset)]
+        });
+
+
+        $('#power-event').bootstrapTable('remove', {
+            filed: 'checkboxid',
+            values: [parseInt(1)]//[parseInt(teidset)]
+        });
+
+        $('#environment-event').bootstrapTable('remove', {
+            filed: 'checkboxid',
+            values: [0]//[parseInt(teidset)]
+        });
+
+
+        var teidPowerId = $('input[name="teidPower"]:checked').serialize();
+        var teidCtrlId = $('input[name="teidCtrl"]:checked').serialize();
+        var teidEnvironmentId = $('input[name="teidEnvironment"]:checked').serialize();
+
+        if(teidPowerId != undefined){
+            var teidSet = teidPowerId.split("&");
+            var teidlist = new Array();
+
+            for(var i = 0; i < teidSet.length; i++){
+                var teidVal = teidSet[i].split("=");
+                var iteid = teidVal[1];
+                if(iteid != null || iteid != ""){
+                    teidlist[i] = iteid;
+                }
+            }
+            for(var i = 0; i < teidlist.length; i++){
+                if (teidlist[i] != undefined) {
+                    var tbody = [
+                        $("#power-event-tbody"),
+                        $("#power-event-detail-tbody-1"),
+                        $("#power-event-detail-tbody-2"),
+                        $("#power-event-detail-tbody-3"),
+                        $("#power-event-detail-tbody-4"),
+                        $("#power-event-detail-tbody-5")
+                    ];
+                    tbody.forEach(function (item) {
+                        item.children("#" + teidlist[i]).remove();
+                    })
+                }
+            }
         }
-        if (teidCtrlId != undefined) {
-            var tbody = [$("#device-event-tbody"), $("#device-event-detail-tbody-1"),];
-            tbody.children("#" + teidCtrlId).remove();
+
+        if(teidCtrlId != undefined) {
+            var teidSet2 = teidCtrlId.split("&");
+            var teidlist2 = new Array();
+
+            for (var i = 0; i < teidSet2.length; i++) {
+                var teidVal = teidSet2[i].split("=");
+                var iteid = teidVal[1];
+                if (iteid != null || iteid != "") {
+                    teidlist2[i] = iteid;
+                }
+            }
+            for(var i = 0; i < teidlist2.length; i++){
+                if (teidlist2[i] != undefined) {
+                    var tbody = [
+                        $("#device-event-tbody"),
+                        $("#device-event-detail-1-tbody") //device-event-detail-tbody-1
+                    ];
+                    tbody.forEach(function (item) {
+                        item.children("#" + teidlist2[i]).remove();
+                    })
+                }
+            }
         }
-        if (teidEnvironmentId != undefined) {
-            var tbody = [$("#environment-event-tbody"),
-                $("#environment-event-detail-tbody-1"),
-                $("#environment-event-detail-tbody-2")
-            ];
-            tbody.forEach(function (item) {
-                item.children("#" + teidEnvironmentId).remove();
-            })
+
+        if(teidEnvironmentId != undefined) {
+            var teidSet3 = teidEnvironmentId.split("&");
+            var teidlist3 = new Array();
+
+            for (var i = 0; i < teidSet3.length; i++) {
+                var teidVal = teidSet3[i].split("=");
+                var iteid = teidVal[1];
+                if (iteid != null || iteid != "") {
+                    teidlist3[i] = iteid;
+                }
+            }
+            for(var i = 0; i < teidlist3.length; i++){
+                if (teidlist3[i] != undefined) {
+                    var tbody = [$("#environment-event-tbody"),
+                        $("#environment-event-detail-tbody-1"),
+                        $("#environment-event-detail-tbody-2")
+                    ];
+                    tbody.forEach(function (item) {
+                        item.children("#" + teidlist3[i]).remove();
+                    })
+                }
+            }
         }
     }
+
+    //全选
+    function check_all() {
+
+        if ($("#detailItemTab1").hasClass("active")) {
+            if($("#powerdetailItem0").hasClass("active")) {
+                $('#power-event').bootstrapTable('checkAll');
+            } else if($("#powerdetailItem1").hasClass("active")){
+                $('#power-event-detail-1').bootstrapTable('checkAll');
+            } else if($("#powerdetailItem2").hasClass("active")){
+                $('#power-event-detail-2').bootstrapTable('checkAll');
+            } else if($("#powerdetailItem3").hasClass("active")){
+                $('#power-event-detail-3').bootstrapTable('checkAll');
+            } else if($("#powerdetailItem4").hasClass("active")){
+                $('#power-event-detail-4').bootstrapTable('checkAll');
+            } else if($("#powerdetailItem5").hasClass("active")){
+                $('#power-event-detail-5').bootstrapTable('checkAll');
+            }
+        } else if ($("#detailItemTab2").hasClass("active")) {
+            if($("#envdetailItem0").hasClass("active")) {
+                $('#environment-event').bootstrapTable('checkAll');
+            } else if($("#envdetailItem1").hasClass("active")){
+                $('#environment-event-detail-1').bootstrapTable('checkAll');
+            } else if($("#envdetailItem2").hasClass("active")){
+                $('#environment-event-detail-2').bootstrapTable('checkAll');
+            }
+        } else if ($("#detailItemTab3").hasClass("active")) {
+            if($("#fourItem0").hasClass("active")) {
+                $('#device-event').bootstrapTable('checkAll');
+            } else if($("#ctrldetailItem1").hasClass("active")){
+                $('#device-event-detail-1').bootstrapTable('checkAll');
+            }
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    initPowerTable();
+
+    initPowerlytxTable();
+
+    initPowerxbTable();
+
+    initPowersxbphTable();
+
+    initPowershunbianTable();
+
+    initPowershanbianTable();
+
+    initEnvironmentTable();
+
+    initEnvironmenttempTable();
+
+    initEnvironmentwetTable();
+
+    initDeviceTable();
+
+    function initPowerTable(){
+        $('#power-event').bootstrapTable({
+
+            url : 'getPowerEvent', //请求路径
+
+            striped : true, //是否显示行间隔色
+
+            pageNumber : 1, //初始化加载第一页
+
+            pagination : true,//是否分页
+
+            dataType : "json", // 数据类型
+
+            data_local: "zh-US",//表格汉化
+
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+
+            pageSize : 50,//单页记录数
+
+            pageList : [ 50, 100, 200 ],//可选择单页记录数
+
+            silent : true, // 必须设置刷新事件
+
+            //  showRefresh : true,//刷新按钮
+
+            queryParams :  queryParams,  //上传服务器的参数
+
+            columns : [{
+                title : '',
+                field : '',
+                checkbox: true,
+                visible: true
+            }, {
+                title : '',
+                field : 'teid',
+                visible: false
+            },{
+                title : '测量名称',
+                field : 'name'
+            }, {
+                title : '时间',
+                field : 'time'
+                // sortable : true
+            }, {
+                title : '类型',
+                field : 'type'
+            }, {
+                title : '事件描述',
+                field : 'description'
+            }, {
+                title : '时间长短',
+                field : 'duration'
+            }, {
+                title : '评论',
+                field : 'annotation'
+            }, {
+                title : '签名',
+                field : 'signature'
+            }/*,  {
+                   title : 'cid',
+                   field : 'cid'
+               }*/
+            ],
+            responseHandler:function (res) {
+                // $('#device-event').bootstrapTable('load', res);
+                return res;
+            },
+            onLoadSuccess: function(){ //加载成功时执行
+                $('#power-event').bootstrapTable('uncheckAll'); //checkbox 全不选
+                //alert("加载成功");
+            },
+            onLoadError: function(){ //加载失败时执行
+                //  alert("加载数据失败");
+            }
+        });
+    }
+
+    function initPowerlytxTable(){
+        $('#power-event-detail-1').bootstrapTable({
+
+            url : 'getDetailPowerEventlytx', //请求路径
+
+            striped : true, //是否显示行间隔色
+
+            pageNumber : 1, //初始化加载第一页
+
+            pagination : true,//是否分页
+
+            dataType : "json", // 数据类型
+
+            data_local: "zh-US",//表格汉化
+
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+
+            pageSize : 50,//单页记录数
+
+            pageList : [ 50, 100, 200 ],//可选择单页记录数
+
+            silent : true, // 必须设置刷新事件
+
+            //  showRefresh : true,//刷新按钮
+
+            queryParams :  queryParams,  //上传服务器的参数
+
+            columns : [{
+                title : '',
+                field : '',
+                checkbox: true,
+                visible: true
+            }, {
+                title : '',
+                field : 'teid',
+                visible: false
+            },{
+                title : '测量名称',
+                field : 'name'
+            }, {
+                title : '时间',
+                field : 'time'
+                // sortable : true
+            }, {
+                title : '类型',
+                field : 'type'
+            }, {
+                title : '事件描述',
+                field : 'description'
+            }, {
+                title : '时间长短',
+                field : 'duration'
+            }, {
+                title : '评论',
+                field : 'annotation'
+            }, {
+                title : '签名',
+                field : 'signature'
+            }/*,  {
+                   title : 'cid',
+                   field : 'cid'
+               }*/
+            ],
+            responseHandler:function (res) {
+                // $('#device-event').bootstrapTable('load', res);
+                return res;
+            },
+            onLoadSuccess: function(){ //加载成功时执行
+                $('#power-event-detail-1').bootstrapTable('uncheckAll'); //checkbox 全不选
+                //alert("加载成功");
+            },
+            onLoadError: function(){ //加载失败时执行
+                //  alert("加载数据失败");
+            }
+        });
+    }
+
+    function initPowerxbTable(){
+        $('#power-event-detail-2').bootstrapTable({
+
+            url : 'getDetailPowerEventxb', //请求路径
+
+            striped : true, //是否显示行间隔色
+
+            pageNumber : 1, //初始化加载第一页
+
+            pagination : true,//是否分页
+
+            dataType : "json", // 数据类型
+
+            data_local: "zh-US",//表格汉化
+
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+
+            pageSize : 50,//单页记录数
+
+            pageList : [ 50, 100, 200 ],//可选择单页记录数
+
+            silent : true, // 必须设置刷新事件
+
+            //  showRefresh : true,//刷新按钮
+
+            queryParams :  queryParams,  //上传服务器的参数
+
+            columns : [{
+                title : '',
+                field : '',
+                checkbox: true,
+                visible: true
+            }, {
+                title : '',
+                field : 'teid',
+                visible: false
+            },{
+                title : '测量名称',
+                field : 'name'
+            }, {
+                title : '时间',
+                field : 'time'
+                // sortable : true
+            }, {
+                title : '类型',
+                field : 'type'
+            }, {
+                title : '事件描述',
+                field : 'description'
+            }, {
+                title : '时间长短',
+                field : 'duration'
+            }, {
+                title : '评论',
+                field : 'annotation'
+            }, {
+                title : '签名',
+                field : 'signature'
+            }/*,  {
+                   title : 'cid',
+                   field : 'cid'
+               }*/
+            ],
+            responseHandler:function (res) {
+                // $('#device-event').bootstrapTable('load', res);
+                return res;
+            },
+            onLoadSuccess: function(){ //加载成功时执行
+                $('#power-event-detail-2').bootstrapTable('uncheckAll'); //checkbox 全不选
+                //alert("加载成功");
+            },
+            onLoadError: function(){ //加载失败时执行
+                //   alert("加载数据失败");
+            }
+        });
+    }
+
+    function initPowersxbphTable(){
+        $('#power-event-detail-3').bootstrapTable({
+
+            url : 'getDetailPowerEventsxbph', //请求路径
+
+            striped : true, //是否显示行间隔色
+
+            pageNumber : 1, //初始化加载第一页
+
+            pagination : true,//是否分页
+
+            dataType : "json", // 数据类型
+
+            data_local: "zh-US",//表格汉化
+
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+
+            pageSize : 50,//单页记录数
+
+            pageList : [ 50, 100, 200 ],//可选择单页记录数
+
+            silent : true, // 必须设置刷新事件
+
+            //  showRefresh : true,//刷新按钮
+
+            queryParams :  queryParams,  //上传服务器的参数
+
+            columns : [{
+                title : '',
+                field : '',
+                checkbox: true,
+                visible: true
+            }, {
+                title : '',
+                field : 'teid',
+                visible: false
+            },{
+                title : '测量名称',
+                field : 'name'
+            }, {
+                title : '时间',
+                field : 'time'
+                // sortable : true
+            }, {
+                title : '类型',
+                field : 'type'
+            }, {
+                title : '事件描述',
+                field : 'description'
+            }, {
+                title : '时间长短',
+                field : 'duration'
+            }, {
+                title : '评论',
+                field : 'annotation'
+            }, {
+                title : '签名',
+                field : 'signature'
+            }/*,  {
+                   title : 'cid',
+                   field : 'cid'
+               }*/
+            ],
+            responseHandler:function (res) {
+                // $('#device-event').bootstrapTable('load', res);
+                return res;
+            },
+            onLoadSuccess: function(){ //加载成功时执行
+                $('#power-event-detail-3').bootstrapTable('uncheckAll'); //checkbox 全不选
+                //alert("加载成功");
+            },
+            onLoadError: function(){ //加载失败时执行
+                // alert("加载数据失败");
+            }
+        });
+    }
+
+    function initPowershunbianTable(){
+        $('#power-event-detail-4').bootstrapTable({
+
+            url : 'getDetailPowerEventshunbian', //请求路径
+
+            striped : true, //是否显示行间隔色
+
+            pageNumber : 1, //初始化加载第一页
+
+            pagination : true,//是否分页
+
+            dataType : "json", // 数据类型
+
+            data_local: "zh-US",//表格汉化
+
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+
+            pageSize : 50,//单页记录数
+
+            pageList : [ 50, 100, 200 ],//可选择单页记录数
+
+            silent : true, // 必须设置刷新事件
+
+            //  showRefresh : true,//刷新按钮
+
+            queryParams :  queryParams,  //上传服务器的参数
+
+            columns : [{
+                title : '',
+                field : '',
+                checkbox: true,
+                visible: true
+            }, {
+                title : '',
+                field : 'teid',
+                visible: false
+            },{
+                title : '测量名称',
+                field : 'name'
+            }, {
+                title : '时间',
+                field : 'time'
+                // sortable : true
+            }, {
+                title : '类型',
+                field : 'type'
+            }, {
+                title : '事件描述',
+                field : 'description'
+            }, {
+                title : '时间长短',
+                field : 'duration'
+            }, {
+                title : '评论',
+                field : 'annotation'
+            }, {
+                title : '签名',
+                field : 'signature'
+            }/*,  {
+                   title : 'cid',
+                   field : 'cid'
+               }*/
+            ],
+            responseHandler:function (res) {
+                // $('#device-event').bootstrapTable('load', res);
+                return res;
+            },
+            onLoadSuccess: function(){ //加载成功时执行
+                $('#power-event-detail-4').bootstrapTable('uncheckAll'); //checkbox 全不选
+                //alert("加载成功");
+            },
+            onLoadError: function(){ //加载失败时执行
+                //   alert("加载数据失败");
+            }
+        });
+    }
+
+    function initPowershanbianTable(){
+        $('#power-event-detail-5').bootstrapTable({
+
+            url : 'getDetailPowerEventshanbian', //请求路径
+
+            striped : true, //是否显示行间隔色
+
+            pageNumber : 1, //初始化加载第一页
+
+            pagination : true,//是否分页
+
+            dataType : "json", // 数据类型
+
+            data_local: "zh-US",//表格汉化
+
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+
+            pageSize : 50,//单页记录数
+
+            pageList : [ 50, 100, 200 ],//可选择单页记录数
+
+            silent : true, // 必须设置刷新事件
+
+            //  showRefresh : true,//刷新按钮
+
+            queryParams :  queryParams,  //上传服务器的参数
+
+            columns : [{
+                title : '',
+                field : '',
+                checkbox: true,
+                visible: true
+            }, {
+                title : '',
+                field : 'teid',
+                visible: false
+            },{
+                title : '测量名称',
+                field : 'name'
+            }, {
+                title : '时间',
+                field : 'time'
+                // sortable : true
+            }, {
+                title : '类型',
+                field : 'type'
+            }, {
+                title : '事件描述',
+                field : 'description'
+            }, {
+                title : '时间长短',
+                field : 'duration'
+            }, {
+                title : '评论',
+                field : 'annotation'
+            }, {
+                title : '签名',
+                field : 'signature'
+            }/*,  {
+                   title : 'cid',
+                   field : 'cid'
+               }*/
+            ],
+            responseHandler:function (res) {
+                // $('#device-event').bootstrapTable('load', res);
+                return res;
+            },
+            onLoadSuccess: function(){ //加载成功时执行
+                $('#power-event-detail-5').bootstrapTable('uncheckAll'); //checkbox 全不选
+                //alert("加载成功");
+            },
+            onLoadError: function(){ //加载失败时执行
+                //   alert("加载数据失败");
+            }
+        });
+    }
+
+    function initEnvironmentTable(){
+        $('#environment-event').bootstrapTable({
+
+            url : 'getEnvironmentEvent', //请求路径
+
+            striped : true, //是否显示行间隔色
+
+            pageNumber : 1, //初始化加载第一页
+
+            pagination : true,//是否分页
+
+            dataType : "json", // 数据类型
+
+            data_local: "zh-US",//表格汉化
+
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+
+            pageSize : 50,//单页记录数
+
+            pageList : [ 50, 100, 200 ],//可选择单页记录数
+
+            silent : true, // 必须设置刷新事件
+
+            //  showRefresh : true,//刷新按钮
+
+            queryParams :  queryParams,  //上传服务器的参数
+
+            columns : [{
+                title : '',
+                field : '',
+                checkbox: true,
+                visible: true
+            }, {
+                title : '',
+                field : 'teid',
+                visible: false
+            },{
+                title : '测量名称',
+                field : 'name'
+            }, {
+                title : '时间',
+                field : 'time'
+                // sortable : true
+            }, {
+                title : '类型',
+                field : 'type'
+            }, {
+                title : '事件描述',
+                field : 'description'
+            }, {
+                title : '时间长短',
+                field : 'duration'
+            }, {
+                title : '评论',
+                field : 'annotation'
+            }, {
+                title : '签名',
+                field : 'signature'
+            }/*,  {
+                   title : 'cid',
+                   field : 'cid'
+               }*/
+            ],
+            responseHandler:function (res) {
+                // $('#environment-event').bootstrapTable('load', res);
+                return res;
+            },
+            onLoadSuccess: function(){ //加载成功时执行
+                $('#environment-event').bootstrapTable('uncheckAll'); //checkbox 全不选
+                //alert("加载成功");
+            },
+            onLoadError: function(){ //加载失败时执行
+                //   alert("加载数据失败");
+            }
+        });
+    }
+
+    function initEnvironmenttempTable(){
+        $('#environment-event-detail-1').bootstrapTable({
+
+            url : 'getDetailEnvironmentEventtemp', //请求路径
+
+            striped : true, //是否显示行间隔色
+
+            pageNumber : 1, //初始化加载第一页
+
+            pagination : true,//是否分页
+
+            dataType : "json", // 数据类型
+
+            data_local: "zh-US",//表格汉化
+
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+
+            pageSize : 50,//单页记录数
+
+            pageList : [ 50, 100, 200 ],//可选择单页记录数
+
+            silent : true, // 必须设置刷新事件
+
+            //  showRefresh : true,//刷新按钮
+
+            queryParams :  queryParams,  //上传服务器的参数
+
+            columns : [{
+                title : '',
+                field : '',
+                checkbox: true,
+                visible: true
+            }, {
+                title : '',
+                field : 'teid',
+                visible: false
+            },{
+                title : '测量名称',
+                field : 'name'
+            }, {
+                title : '时间',
+                field : 'time'
+                // sortable : true
+            }, {
+                title : '类型',
+                field : 'type'
+            }, {
+                title : '事件描述',
+                field : 'description'
+            }, {
+                title : '时间长短',
+                field : 'duration'
+            }, {
+                title : '评论',
+                field : 'annotation'
+            }, {
+                title : '签名',
+                field : 'signature'
+            }/*,  {
+                   title : 'cid',
+                   field : 'cid'
+               }*/
+            ],
+            responseHandler:function (res) {
+                return res;
+            },
+            onLoadSuccess: function(){ //加载成功时执行
+                $('#environment-event-detail-1').bootstrapTable('uncheckAll'); //checkbox 全不选
+                //alert("加载成功");
+            },
+            onLoadError: function(){ //加载失败时执行
+                //   alert("加载数据失败");
+            }
+        });
+    }
+
+    function initEnvironmentwetTable(){
+        $('#environment-event-detail-2').bootstrapTable({
+
+            url : 'getDetailEnvironmentEventwet', //请求路径
+
+            striped : true, //是否显示行间隔色
+
+            pageNumber : 1, //初始化加载第一页
+
+            pagination : true,//是否分页
+
+            dataType : "json", // 数据类型
+
+            data_local: "zh-US",//表格汉化
+
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+
+            pageSize : 50,//单页记录数
+
+            pageList : [ 50, 100, 200 ],//可选择单页记录数
+
+            silent : true, // 必须设置刷新事件
+
+            //  showRefresh : true,//刷新按钮
+
+            queryParams :  queryParams,  //上传服务器的参数
+
+            columns : [{
+                title : '',
+                field : '',
+                checkbox: true,
+                visible: true
+            }, {
+                title : '',
+                field : 'teid',
+                visible: false
+            },{
+                title : '测量名称',
+                field : 'name'
+            }, {
+                title : '时间',
+                field : 'time'
+                // sortable : true
+            }, {
+                title : '类型',
+                field : 'type'
+            }, {
+                title : '事件描述',
+                field : 'description'
+            }, {
+                title : '时间长短',
+                field : 'duration'
+            }, {
+                title : '评论',
+                field : 'annotation'
+            }, {
+                title : '签名',
+                field : 'signature'
+            }/*,  {
+                   title : 'cid',
+                   field : 'cid'
+               }*/
+            ],
+            responseHandler:function (res) {
+                return res;
+            },
+            onLoadSuccess: function(){ //加载成功时执行
+                $('#environment-event-detail-2').bootstrapTable('uncheckAll'); //checkbox 全不选
+                //alert("加载成功");
+            },
+            onLoadError: function(){ //加载失败时执行
+                //   alert("加载数据失败");
+            }
+        });
+    }
+
+    function initDeviceTable(){
+        $('#device-event').bootstrapTable({
+
+            url : 'getCtrlEvent', //请求路径
+
+            striped : true, //是否显示行间隔色
+
+            pageNumber : 1, //初始化加载第一页
+
+            pagination : true,//是否分页
+
+            dataType : "json", // 数据类型
+
+            data_local: "zh-US",//表格汉化
+
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+
+            pageSize : 50,//单页记录数
+
+            pageList : [ 50, 100, 200 ],//可选择单页记录数
+
+            silent : true, // 必须设置刷新事件
+
+            //  showRefresh : true,//刷新按钮
+
+            queryParams :  queryParams,  //上传服务器的参数
+
+            columns : [{
+                title : '',
+                field : 'checkboxid',
+                checkbox: true,
+                visible: true
+            }, {
+                title : '',
+                field : 'teid',
+                visible: false
+            },{
+                title : '测量名称',
+                field : 'name'
+            }, {
+                title : '时间',
+                field : 'time'
+                // sortable : true
+            }, {
+                title : '类型',
+                field : 'type'
+            }, {
+                title : '事件描述',
+                field : 'description'
+            }, {
+                title : '时间长短',
+                field : 'duration'
+            }, {
+                title : '评论',
+                field : 'annotation'
+            }, {
+                title : '签名',
+                field : 'signature'
+            }/*,  {
+                   title : 'cid',
+                   field : 'cid'
+               }*/
+            ],
+            responseHandler:function (res) {
+                // $('#device-event').bootstrapTable('load', res);
+                return res;
+            },
+            onLoadSuccess: function(){ //加载成功时执行
+                $('#device-event').bootstrapTable('uncheckAll'); //checkbox 全不选
+                //alert("加载成功");
+            },
+            onLoadError: function(){ //加载失败时执行
+               // alert("加载数据失败");
+            }
+        });
+    }
+
+    // 分页查询参数，是以键值对的形式设置的
+    function queryParams(params) {
+
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+
+        var cbname = [];
+        var stime = null;
+        var etime = null;
+        var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-period']:checked").val();
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
+        if (edate == "lastone") {
+            stime = " ";
+            etime = " ";
+        }
+        else if (edate == "fromto") {
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else if (edate == "day") {
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "week") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "month") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
+        if (stime == null || etime == null) {
+            alert("请选择日期时间");
+        }
+        else if (cbname == "[object Object]") {
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else if (cbname == undefined) {
+            console.log("wait for cbname loading...");
+        }
+        else {
+            var temp = {//如果是在服务器端实现分页，limit、offset这两个参数是必须的
+
+                limit : params.limit, // 每页显示数量
+                offset : params.offset, // SQL语句起始索引
+                // page : (params.offset / params.limit) + 1, //当前页码
+
+                //传给服务器的参数
+                stime: stime,
+                etime: etime,
+                cbname: cbname.toString(),
+                priortylist: priortylist
+            };
+            return temp;
+        }
+    }
+
+    function getPowerEvent() {
+       $('#searching').css('display', 'block');
+       var tableData = [];
+       if (localStorage.getItem("visibleColumn")) {
+           tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+       }
+       //setThead1(tableData);
+
+       $('#eventdiv1').css('display', 'block');
+       $('#eventdiv2').css('display', 'none');
+       $('#eventdiv3').css('display', 'none');
+       var cbname = [];
+       var stime = null;
+       var etime = null;
+       var nowtime = getNowFormatDate();
+       var edate = $("input[name='event-data-period']:checked").val();
+       var cbname = $('input[name="radio-mpid"]:checked').val();
+
+       if (edate == "lastone") {
+           stime = " ";
+           etime = " ";
+       }
+       else if (edate == "fromto") {
+           stime = $("#firstDate").val();
+           etime = $("#lastDate").val();
+       }
+       else if (edate == "day") {
+           //昨天的时间
+           var now = new Date();
+           var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+           var year = date.getFullYear();
+           var month = date.getMonth() + 1;
+           var day = date.getDate();
+           var hour = date.getHours();
+           var minute = date.getMinutes();
+           var second = date.getSeconds();
+           var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+           stime = starttime;
+           etime = nowtime;
+       }
+       else if (edate == "week") {
+           // 获取一星期前的时间：
+           var now = new Date();
+           var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+           var year = date.getFullYear();
+           var month = date.getMonth() + 1;
+           var day = date.getDate();
+           var hour = date.getHours();
+           var minute = date.getMinutes();
+           var second = date.getSeconds();
+           var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+           stime = starttime;
+           etime = nowtime;
+       }
+       else if (edate == "month") {
+           // 获取一星期前的时间：
+           var now = new Date();
+           var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+           var year = date.getFullYear();
+           var month = date.getMonth() + 1;
+           var day = date.getDate();
+           var hour = date.getHours();
+           var minute = date.getMinutes();
+           var second = date.getSeconds();
+           var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+           stime = starttime;
+           etime = nowtime;
+       }
+       //读取设置中的优先级cookie
+       var priortylist = $.cookie('priortylist');
+       if (stime == null || etime == null) {
+           alert("请选择日期时间");
+       }
+       else if (cbname == "[object Object]") {
+           alert("请选择测量地点");
+       }
+       else if (priortylist == null) {
+           alert("请设定可查看的事件类型");
+       }
+       else {
+           //获取所有电能事件
+           $('#power-event').bootstrapTable('refresh');
+
+           $('#eventdiv1').css('display', 'block');
+           $('#eventdiv2').css('display', 'none');
+           $('#eventdiv3').css('display', 'none');
+       }
+       $('#searching').css('display', 'none');
+   }
+
+    function getDetailPowerEventlytx() {
+        $('#searching').css('display', 'block');
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        //setThead1(tableData);
+        // $('#eventdiv1').css('display', 'block');
+        $('#eventdiv1').css('display', 'block');
+        $('#eventdiv2').css('display', 'none');
+        $('#eventdiv3').css('display', 'none');
+        var cbname = [];
+        var stime = null;
+        var etime = null;
+        var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-period']:checked").val();
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
+        if (edate == "lastone") {
+            stime = " ";
+            etime = " ";
+        }
+        else if (edate == "fromto") {
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else if (edate == "day") {
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "week") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "month") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
+        if (stime == null || etime == null) {
+            alert("请选择日期时间");
+        }
+        else if (cbname == "[object Object]") {
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            //获取所有lytx事件
+            $('#power-event-detail-1').bootstrapTable('refresh');
+
+            $("#power-event-detail-0-div").css('display', 'none');
+            $("#power-event-detail-1-div").css('display', 'block');
+            $("#power-event-detail-2-div").css('display', 'none');
+            $("#power-event-detail-3-div").css('display', 'none');
+            $("#power-event-detail-4-div").css('display', 'none');
+            $("#power-event-detail-5-div").css('display', 'none');
+        }
+        $('#searching').css('display', 'none');
+    }
+
+    function getDetailPowerEventxb() {
+        $('#searching').css('display', 'block');
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        //setThead1(tableData);
+        // $('#eventdiv1').css('display', 'block');
+        $('#eventdiv1').css('display', 'block');
+        $('#eventdiv2').css('display', 'none');
+        $('#eventdiv3').css('display', 'none');
+        var cbname = [];
+        var stime = null;
+        var etime = null;
+        var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-period']:checked").val();
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
+        if (edate == "lastone") {
+            stime = " ";
+            etime = " ";
+        }
+        else if (edate == "fromto") {
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else if (edate == "day") {
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "week") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "month") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
+        if (stime == null || etime == null) {
+            alert("请选择日期时间");
+        }
+        else if (cbname == "[object Object]") {
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            //获取所有电能事件
+            $('#power-event-detail-2').bootstrapTable('refresh');
+
+            $("#power-event-detail-0-div").css('display', 'none');
+            $("#power-event-detail-1-div").css('display', 'none');
+            $("#power-event-detail-2-div").css('display', 'block');
+            $("#power-event-detail-3-div").css('display', 'none');
+            $("#power-event-detail-4-div").css('display', 'none');
+            $("#power-event-detail-5-div").css('display', 'none');
+        }
+        $('#searching').css('display', 'none');
+    }
+
+    function getDetailPowerEventsxbph() {
+        $('#searching').css('display', 'block');
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        //setThead1(tableData);
+        // $('#eventdiv1').css('display', 'block');
+        $('#eventdiv1').css('display', 'block');
+        $('#eventdiv2').css('display', 'none');
+        $('#eventdiv3').css('display', 'none');
+        var cbname = [];
+        var stime = null;
+        var etime = null;
+        var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-period']:checked").val();
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
+        if (edate == "lastone") {
+            stime = " ";
+            etime = " ";
+        }
+        else if (edate == "fromto") {
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else if (edate == "day") {
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "week") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "month") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
+        if (stime == null || etime == null) {
+            alert("请选择日期时间");
+        }
+        else if (cbname == "[object Object]") {
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            //获取所有电能事件
+            $('#power-event-detail-3').bootstrapTable('refresh');
+
+            $("#power-event-detail-0-div").css('display', 'none');
+            $("#power-event-detail-1-div").css('display', 'none');
+            $("#power-event-detail-2-div").css('display', 'none');
+            $("#power-event-detail-3-div").css('display', 'block');
+            $("#power-event-detail-4-div").css('display', 'none');
+            $("#power-event-detail-5-div").css('display', 'none');
+        }
+        $('#searching').css('display', 'none');
+    }
+
+    function getDetailPowerEventshunbian() {
+        $('#searching').css('display', 'block');
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        //setThead1(tableData);
+        // $('#eventdiv1').css('display', 'block');
+        $('#eventdiv1').css('display', 'block');
+        $('#eventdiv2').css('display', 'none');
+        $('#eventdiv3').css('display', 'none');
+        var cbname = [];
+        var stime = null;
+        var etime = null;
+        var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-period']:checked").val();
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
+        if (edate == "lastone") {
+            stime = " ";
+            etime = " ";
+        }
+        else if (edate == "fromto") {
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else if (edate == "day") {
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "week") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "month") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
+        if (stime == null || etime == null) {
+            alert("请选择日期时间");
+        }
+        else if (cbname == "[object Object]") {
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            //获取所有电能事件
+            $('#power-event-detail-4').bootstrapTable('refresh');
+
+            $("#power-event-detail-0-div").css('display', 'none');
+            $("#power-event-detail-1-div").css('display', 'none');
+            $("#power-event-detail-2-div").css('display', 'none');
+            $("#power-event-detail-3-div").css('display', 'none');
+            $("#power-event-detail-4-div").css('display', 'block');
+            $("#power-event-detail-5-div").css('display', 'none');
+        }
+        $('#searching').css('display', 'none');
+    }
+
+    function getDetailPowerEventshanbian() {
+        $('#searching').css('display', 'block');
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        //setThead1(tableData);
+        // $('#eventdiv1').css('display', 'block');
+        $('#eventdiv1').css('display', 'block');
+        $('#eventdiv2').css('display', 'none');
+        $('#eventdiv3').css('display', 'none');
+        var cbname = [];
+        var stime = null;
+        var etime = null;
+        var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-period']:checked").val();
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
+        if (edate == "lastone") {
+            stime = " ";
+            etime = " ";
+        }
+        else if (edate == "fromto") {
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else if (edate == "day") {
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "week") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "month") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
+        if (stime == null || etime == null) {
+            alert("请选择日期时间");
+        }
+        else if (cbname == "[object Object]") {
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            //获取所有电能事件
+            $('#power-event-detail-5').bootstrapTable('refresh');
+
+            $("#power-event-detail-0-div").css('display', 'none');
+            $("#power-event-detail-1-div").css('display', 'none');
+            $("#power-event-detail-2-div").css('display', 'none');
+            $("#power-event-detail-3-div").css('display', 'none');
+            $("#power-event-detail-4-div").css('display', 'none');
+            $("#power-event-detail-5-div").css('display', 'block');
+        }
+        $('#searching').css('display', 'none');
+    }
+
+    function getEnvironmentEvent() {
+        $('#searching').css('display', 'block');
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        //setThead2(tableData);
+        // $('#eventdiv1').css('display', 'block');
+        $('#eventdiv1').css('display', 'none');
+        $('#eventdiv2').css('display', 'block');
+        $('#eventdiv3').css('display', 'none');
+        var cbname = [];
+        var stime = null;
+        var etime = null;
+        var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-period']:checked").val();
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
+        if (edate == "lastone") {
+            stime = " ";
+            etime = " ";
+        }
+        else if (edate == "fromto") {
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else if (edate == "day") {
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "week") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "month") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
+        if (stime == null || etime == null) {
+            alert("请选择日期时间");
+        }
+        else if (cbname == "[object Object]") {
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            //获取所有电能事件
+            $('#environment-event').bootstrapTable('refresh');
+
+            $("#environment-event-div").css('display', 'block');
+            $("#environment-event-detail-1-div").css('display', 'none');
+            $("#environment-event-detail-2-div").css('display', 'none');
+        }
+        $('#searching').css('display', 'none');
+    }
+
+    function getDetailEnvironmentEventtemp() {
+        $('#searching').css('display', 'block');
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        //setThead2(tableData);
+        // $('#eventdiv1').css('display', 'block');
+        $('#eventdiv1').css('display', 'none');
+        $('#eventdiv2').css('display', 'block');
+        $('#eventdiv3').css('display', 'none');
+        var cbname = [];
+        var stime = null;
+        var etime = null;
+        var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-period']:checked").val();
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
+        if (edate == "lastone") {
+            stime = " ";
+            etime = " ";
+        }
+        else if (edate == "fromto") {
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else if (edate == "day") {
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "week") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "month") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
+        if (stime == null || etime == null) {
+            alert("请选择日期时间");
+        }
+        else if (cbname == "[object Object]") {
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            //获取所有电能事件
+            $('#environment-event-detail-1').bootstrapTable('refresh');
+
+            $("#environment-event-div").css('display', 'none');
+            $("#environment-event-detail-1-div").css('display', 'block');
+            $("#environment-event-detail-2-div").css('display', 'none');
+        }
+        $('#searching').css('display', 'none');
+    }
+
+    function getDetailEnvironmentEventwet() {
+        $('#searching').css('display', 'block');
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        //setThead2(tableData);
+        // $('#eventdiv1').css('display', 'block');
+        $('#eventdiv1').css('display', 'none');
+        $('#eventdiv2').css('display', 'block');
+        $('#eventdiv3').css('display', 'none');
+        var cbname = [];
+        var stime = null;
+        var etime = null;
+        var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-period']:checked").val();
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
+        if (edate == "lastone") {
+            stime = " ";
+            etime = " ";
+        }
+        else if (edate == "fromto") {
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else if (edate == "day") {
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "week") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "month") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
+        if (stime == null || etime == null) {
+            alert("请选择日期时间");
+        }
+        else if (cbname == "[object Object]") {
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            //获取所有电能事件
+            $('#environment-event-detail-2').bootstrapTable('refresh');
+
+            $("#environment-event-div").css('display', 'none');
+            $("#environment-event-detail-1-div").css('display', 'none');
+            $("#environment-event-detail-2-div").css('display', 'block');
+        }
+        $('#searching').css('display', 'none');
+    }
+
+    function getDeviceEvent() {
+        $('#searching').css('display', 'block');
+        var tableData = [];
+        if (localStorage.getItem("visibleColumn")) {
+            tableData = JSON.parse(localStorage.getItem("visibleColumn"));
+        }
+        // setThead3(tableData);
+        // $('#eventdiv1').css('display', 'none');
+        $('#eventdiv1').css('display', 'none');
+        $('#eventdiv2').css('display', 'none');
+        $('#eventdiv3').css('display', 'block');
+        var cbname = [];
+        var stime = null;
+        var etime = null;
+        var nowtime = getNowFormatDate();
+        var edate = $("input[name='event-data-period']:checked").val();
+        var cbname = $('input[name="radio-mpid"]:checked').val();
+
+        if (edate == "lastone") {
+            stime = " ";
+            etime = " ";
+        }
+        else if (edate == "fromto") {
+            stime = $("#firstDate").val();
+            etime = $("#lastDate").val();
+        }
+        else if (edate == "day") {
+            //昨天的时间
+            var now = new Date();
+            var date = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "week") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        else if (edate == "month") {
+            // 获取一星期前的时间：
+            var now = new Date();
+            var date = new Date(now.getTime() - 30 * 24 * 3600 * 1000);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var starttime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            stime = starttime;
+            etime = nowtime;
+        }
+        //读取设置中的优先级cookie
+        var priortylist = $.cookie('priortylist');
+        if (stime == null || etime == null) {
+            alert("请选择日期时间");
+        }
+        else if (cbname == "[object Object]") {
+            alert("请选择测量地点");
+        }
+        else if (priortylist == null) {
+            alert("请设定可查看的事件类型");
+        }
+        else {
+            //查询按钮事件
+            $('#device-event').bootstrapTable('refresh');
+        }
+        $('#searching').css('display', 'none');
+    }
+
 </script>
 
 </body>

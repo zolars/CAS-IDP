@@ -2,18 +2,17 @@ package grabData;
 
 import Util.HBSessionDaoImpl;
 import com.alibaba.fastjson.JSON;
+import deviceJobManager.DeviceManager;
 import hibernatePOJO.EventPower;
 import hibernatePOJO.EventsType;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
 public class OverLimitHandler extends ChannelInboundHandlerAdapter {
-    private static Charset charset = Charset.forName("UTF-8");
     private boolean newResponse = true;
     private short resLength = 0;
     private ByteBuf tempBuf;
@@ -24,12 +23,12 @@ public class OverLimitHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        //super.handlerAdded(ctx);
         tempBuf = ctx.alloc().buffer();
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        System.out.println("读取越限事件");
         ByteBuf buf = (ByteBuf) msg;
         if (newResponse) {
             resLength = buf.getShort(2);
@@ -54,19 +53,32 @@ public class OverLimitHandler extends ChannelInboundHandlerAdapter {
                     HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
                     for (EventPower e:events) {
                         dataResolve(hbsessionDao, e);
-                        hbsessionDao.insert(e);
+
+                        if(e.getDid() != null) {
+                            hbsessionDao.insert(e);
+                        }
                     }
                     hbsessionDao = null;
                 }
             }
             tempBuf.clear();
         }
+        ctx.flush();
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        // record ctx in DeviceManager
+        DeviceManager.getCtxMap().put(this.did+"-3",ctx);
         //把channel存入map,用于发送OverLimitRequest
         DataOnline.getOverLimitChannelMap().put(this.did, ctx.channel());
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        //remove channel,ctx
+        DataOnline.getOverLimitChannelMap().remove(this.did);
+        DeviceManager.getCtxMap().remove(this.did+"-3");
     }
 
     @Override
@@ -77,8 +89,11 @@ public class OverLimitHandler extends ChannelInboundHandlerAdapter {
 
     public void dataResolve(HBSessionDaoImpl hbsessionDao, EventPower e) {
         EventsType et = (EventsType) hbsessionDao.getFirst("FROM EventsType where subtype='" + e.getSubtype() + "' and code ='0002'");
-        Integer cid = et.getCid();
-        e.setDid(did);
-        e.setCid(cid);
+
+        if(et != null) {
+            Integer cid = et.getCid();
+            e.setCid(cid);
+            e.setDid(did);
+        }
     }
 }

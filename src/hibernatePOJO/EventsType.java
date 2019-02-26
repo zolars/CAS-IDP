@@ -12,6 +12,7 @@ public class EventsType {
     private Integer prior;
     private String classify;
     private String description;
+    private Short zbj;
 
     public int getCid() {
         return cid;
@@ -85,6 +86,14 @@ public class EventsType {
         this.description = description;
     }
 
+    public Short getZbj() {
+        return zbj;
+    }
+
+    public void setZbj(Short zbj) {
+        this.zbj = zbj;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,12 +107,13 @@ public class EventsType {
                 Objects.equals(devicename, that.devicename) &&
                 Objects.equals(prior, that.prior) &&
                 Objects.equals(classify, that.classify) &&
-                Objects.equals(description, that.description);
+                Objects.equals(description, that.description) &&
+                Objects.equals(zbj, that.zbj);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(cid, code, pid, type, subtype, devicename, prior, classify, description);
+        return Objects.hash(cid, code, pid, type, subtype, devicename, prior, classify, description, zbj);
     }
 }

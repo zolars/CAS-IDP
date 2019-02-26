@@ -28,6 +28,7 @@ public class getParameteractionHis extends ActionSupport {
     /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的行级结构树状串
      */
     public String execute() throws Exception {
+        List xbdata = new ArrayList();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -38,8 +39,6 @@ public class getParameteractionHis extends ActionSupport {
 
             PowerParameterDAO dao = new PowerParameterDAOImpl();
 
-            List xbdata = new ArrayList();
-
             xbdata = dao.getHisParameterData(monitorpoint, starttime, endtime);
 
             result = JSON.toJSONString(xbdata); // List转json
@@ -47,6 +46,8 @@ public class getParameteractionHis extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            xbdata = null;
         }
         return "success";
     }

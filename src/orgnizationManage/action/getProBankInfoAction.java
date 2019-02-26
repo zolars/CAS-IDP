@@ -27,6 +27,9 @@ public class getProBankInfoAction extends ActionSupport {
     /* 根据省行名称查询市行信息
      */
     public String execute() throws Exception {
+
+        List cbdata = new ArrayList();
+        List crdata = new ArrayList();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -35,8 +38,6 @@ public class getProBankInfoAction extends ActionSupport {
 
             ProBankDAO dao = new ProBankDAOImpl();
 
-            List cbdata = new ArrayList();
-            List crdata = new ArrayList();
 
             cbdata = dao.getCityBankDataByName(probankname);
             crdata = dao.getCompRoomDataByName(probankname);
@@ -50,6 +51,9 @@ public class getProBankInfoAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            cbdata = null;
+            crdata = null;
         }
         return "success";
     }

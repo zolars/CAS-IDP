@@ -1,5 +1,6 @@
 package grabData;
 
+import deviceJobManager.HeartBeatHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -8,6 +9,9 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.timeout.IdleStateHandler;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class CtrlDataClient extends Thread {
@@ -19,7 +23,6 @@ public class CtrlDataClient extends Thread {
         this.host = host;
         this.port = port;
         this.did = did;
-        System.out.println(host + port + did);
     }
 
     @Override
@@ -33,15 +36,22 @@ public class CtrlDataClient extends Thread {
             b.handler(new ChannelInitializer<SocketChannel>() {
                 public void initChannel(SocketChannel ch)
                         throws Exception {
-                    ch.pipeline().addLast(new CtrlDataClientHandler(did));
-                    // System.out.println("CTRL-HANDLER-BUILT#####################################");
-
+                    ch.pipeline().addLast(new IdleStateHandler(0,HeartBeatHandler.timeout,0,TimeUnit.SECONDS))
+                            .addLast(new HeartBeatHandler(host,port,did,6))
+                            .addLast(new CtrlDataClientHandler(did));
                 }
             });
             ChannelFuture f = b.connect(host, port).sync();
-            f.channel().closeFuture().sync();
+            if(f.isSuccess()) {
+                f.channel().closeFuture().sync();
+            } else {
+                System.out.println("============================重新建立连接");
+                run();
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("============================重新建立连接");
+            run();
         } finally {
             workerGroup.shutdownGracefully();
         }

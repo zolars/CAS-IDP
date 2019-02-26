@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="msg"></p>
+<script>
+    s=new WebSocket("ws://36.0.179.191:9999/ws");
+    s.onmessage=function (ev) {
+        alert(ev.data);
+    }
+    s.onopen=function (ev) {
+        document.getElementById("msg").innerHTML="open";
+        s.send("test");
+    }
+    s.close=function (code) {
+        document.getElementById("msg").innerHTML="closed";
+    }
+</script>
+</body>
+</html>

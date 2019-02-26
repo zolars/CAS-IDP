@@ -24,15 +24,16 @@ public class getHarmonicVoltage extends ActionSupport {
     /* 根据设备名称、时间查询谐波电压统计报表
      */
     public String execute() throws Exception {
+        List hvresult = new ArrayList();
+        List thresholdResult = new ArrayList();
+        List vcfund = new ArrayList();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
             String time = request.getParameter("time");
             String did = request.getParameter("did");
             HarmonicVoltage dao = new HarmonicVoltageImpl();
-            List hvresult = new ArrayList();
-            List thresholdResult = new ArrayList();
-            List vcfund = new ArrayList();
+
             hvresult = dao.getHVresultBydt(did, time);
             thresholdResult = dao.getHVthreshold();
             vcfund = dao.getVCfundBydt(did, time);
@@ -44,6 +45,11 @@ public class getHarmonicVoltage extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            hvresult = null;
+            thresholdResult = null;
+            vcfund = null;
+
         }
         return "success";
     }

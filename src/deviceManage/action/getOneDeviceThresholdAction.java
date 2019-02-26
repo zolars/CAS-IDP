@@ -11,6 +11,7 @@ import hibernatePOJO.DevicesThreshold;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,6 +31,8 @@ public class getOneDeviceThresholdAction extends ActionSupport {
     再根据设备id找到该设备下所有的设备阈值信息
      */
     public String execute() throws Exception {
+        List<Devices> device = new ArrayList<>();
+        List<DevicesThreshold> dt = new ArrayList<>();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -39,7 +42,7 @@ public class getOneDeviceThresholdAction extends ActionSupport {
             DeviceDAO dao = new DeviceDAOImpl();
             DeviceThresholdDAO dtdao = new DeviceThresholdDAOImpl();
 
-            List<Devices> device = dao.getDeviceDataByName(dname);
+            device = dao.getDeviceDataByName(dname);
             String did;
 
             if (device == null) {
@@ -48,7 +51,7 @@ public class getOneDeviceThresholdAction extends ActionSupport {
                 did = device.get(0).getDid().toString();
             }
 
-            List<DevicesThreshold> dt = dtdao.getOneDeviceThreshold(did);
+            dt = dtdao.getOneDeviceThreshold(did);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("alldtlist", dt);
@@ -58,6 +61,9 @@ public class getOneDeviceThresholdAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            device = null;
+            dt = null;
         }
         return "success";
     }

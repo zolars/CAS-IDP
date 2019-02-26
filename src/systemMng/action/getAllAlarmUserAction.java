@@ -28,14 +28,13 @@ public class getAllAlarmUserAction extends ActionSupport {
     /* 查询all设备告警人员信息
      */
     public String execute() throws Exception {
+        List<DeviceAlarmUser> alrmlist = new ArrayList();
+        List rtlist = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
             DeviceDAO dao = new DeviceDAOImpl();
-
-            List<DeviceAlarmUser> alrmlist = new ArrayList();
-            List rtlist = new ArrayList();
 
             alrmlist = dao.getDeviceAlarmUserData();
 
@@ -71,6 +70,9 @@ public class getAllAlarmUserAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            alrmlist = null;
+            rtlist = null;
         }
         return "success";
     }

@@ -23,6 +23,9 @@ public class getHVCrate2 extends ActionSupport {
     /* 根据省行名称查询市行信息
      */
     public String execute() throws Exception {
+        List hvRateResult = new ArrayList();
+        List hcRateResult = new ArrayList();
+        List vcfund_rate = new ArrayList();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -30,9 +33,7 @@ public class getHVCrate2 extends ActionSupport {
             String etime = request.getParameter("etime");
             String did = request.getParameter("did");
             HarmonicVoltage dao = new HarmonicVoltageImpl();
-            List hvRateResult = new ArrayList();
-            List hcRateResult = new ArrayList();
-            List vcfund_rate = new ArrayList();
+
             hvRateResult = dao.getHVrateBydt2(did, stime, etime);
             hcRateResult = dao.getHCrateBydt2(did, stime, etime);
             vcfund_rate = dao.getVCfundBydt2(did, stime, etime);
@@ -44,6 +45,10 @@ public class getHVCrate2 extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            hvRateResult = null;
+            hcRateResult = null;
+            vcfund_rate = null;
         }
         return "success";
     }

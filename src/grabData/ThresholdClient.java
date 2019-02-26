@@ -37,13 +37,18 @@ public class ThresholdClient extends Thread{
                 }
             });
             ChannelFuture f = b.connect(host, port).sync();
-            f.channel().closeFuture().sync();
+            if(f.isSuccess()) {
+                f.channel().closeFuture().sync();
+            } else {
+                System.out.println("============================重新建立连接");
+                run();
+            }
         }
         catch (Exception e){
             e.printStackTrace();
-        }
-        finally
-        {
+            System.out.println("============================重新建立连接");
+            run();
+        } finally {
             workerGroup.shutdownGracefully();
         }
     }

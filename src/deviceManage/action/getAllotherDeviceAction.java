@@ -28,14 +28,12 @@ public class getAllotherDeviceAction extends ActionSupport {
     /*获取所有UPS类型的设备名称
      */
     public String execute() throws Exception {
+        List<Devices> dlist = new ArrayList();
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
             DeviceDAO dao = new DeviceDAOImpl();
-
-            List<Devices> dlist = new ArrayList();
-
             dlist = dao.getAllotherDevice();
 
             JSONObject jsonObject = new JSONObject();
@@ -46,6 +44,8 @@ public class getAllotherDeviceAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            dlist = null;
         }
         return "success";
     }

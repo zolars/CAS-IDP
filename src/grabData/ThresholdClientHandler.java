@@ -1,6 +1,7 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
+import deviceJobManager.DeviceManager;
 import hibernatePOJO.DevicesThreshold;
 import hibernatePOJO.DictionaryThreshold;
 import io.netty.buffer.ByteBuf;
@@ -11,8 +12,6 @@ import io.netty.channel.socket.SocketChannel;
 import java.util.List;
 import java.util.Map;
 
-//import com.sun.tools.javac.util.Convert;
-
 class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
     private Map<String, Float> map = null;
     private List<DictionaryThreshold> dicThreshold = null;
@@ -22,7 +21,9 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
     private int fCode;
     private int addr1;
     private int addr2;
-    private int len;
+    private int[] addr = new int[22];
+    private int[] len = new int [22];
+    private int length;
     private String[] name = new String[643];
     private Integer[] factor = new Integer[643];
 
@@ -38,19 +39,21 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        //record ctx in DeviceManager
+//        DeviceManager.getCtxMap().put(this.did+"-4",ctx);
+
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<DictionaryThreshold> dicThreshold = hbsessionDao.search(
                 "FROM DictionaryThreshold");
 
-        String address = ctx.channel().remoteAddress().toString().replace("/", "");
-        System.out.println("ip+端口为：" + address + "开始建立通讯");
+        //String address = ctx.channel().remoteAddress().toString().replace("/", "");
 
         for (int i = 0; i < dicThreshold.size(); i++) {
             slaveId = 1;
             fCode = dicThreshold.get(i).getFunctioncode();
             addr1 = dicThreshold.get(i).getAddr1();
             addr2 = dicThreshold.get(i).getAddr2();
-            len = 4;
+            length = 4;
 
             String thsholdname = dicThreshold.get(i).getDescription();
 
@@ -69,16 +72,9 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
                 }
 
                 if (!value.equals(null)) {
-
-                    ByteBuf sendMsg = ctx.alloc().buffer();
-
                     int addr = addr1 * 100 + addr2;
-                    value = (float) 0.1;
-                    //int addr = 8000;
-                    //float value = (float) 1.1111;
+                    ByteBuf sendMsg = ctx.alloc().buffer();
                     sendMsg.writeBytes(createMsg(addr, value));
-                    //System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
-
                     SocketChannel sc = (SocketChannel) ctx.channel();
                     sc.writeAndFlush(sendMsg);
                 }
@@ -87,7 +83,29 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        recMsg = ctx.alloc().buffer();
+    }
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        recMsg.release();
+        recMsg = null;
+    }
+
+    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        ByteBuf buf = (ByteBuf) msg;
+        recMsg.writeBytes(buf);
+        buf.release();
+        dataResolve(recMsg, addr[part], len[part]);
+        recMsg.clear();
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        //remove ctx in DeviceManager
+//        DeviceManager.getCtxMap().remove(this.did+"-4");
     }
 
     @Override
@@ -114,18 +132,33 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
     private static byte[] createMsg(int addr, float value) {
 
         byte[] msg = new byte[17];
+      /*  byte[] msg = new byte[29];*/
         msg[0] = 0;
         msg[1] = 0;
         msg[2] = 0;
         msg[3] = 0;
         msg[4] = 0;
-        msg[5] = (byte) 0x0b;
-        msg[6] = (byte) 0x01;
-        msg[7] = (byte) 0x10;
+      /*  msg[5] = 11;
+        msg[6] = ff;
+        msg[7] = 10;*/
 
-        byte[] addrByte = hexStrToByteArray(Integer.toString(addr));
+        msg[5] = (byte) 0x11;
+        msg[6] = (byte) 0xff;
+        msg[7] = (byte) 0x10;
+       /* msg[5] = (byte) 0x0b;
+        msg[6] = (byte) 0x01;
+        msg[7] = (byte) 0x10;*/
+
+        //地址重复写8000的错误
+       /* byte[] addrByte = hexStrToByteArray(Integer.toString(addr));
         msg[8] = (byte) addrByte[0];
-        msg[9] = (byte) addrByte[1];
+        msg[9] = (byte) addrByte[1];*/
+
+        msg[8] = ((byte)(addr >> 8));
+        msg[9] = ((byte)(addr & 0xFF));
+
+      /*  msg[8] = (byte) 0x80;
+        msg[9] = (byte) 0x04;*/
 
         msg[10] = (byte) 0x00;
         msg[11] = (byte) 0x02;
@@ -137,7 +170,18 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
         msg[14] = (byte) hexValueByte[1]; // 写入数据的第2个字节
         msg[15] = (byte) hexValueByte[2]; // 写入数据的第3个字节
         msg[16] = (byte) hexValueByte[3]; // 写入数据的第4个字节
+
         return msg;
+    }
+
+    public void dataResolve(ByteBuf buf, int addr, int len) {
+        float temp = 0;
+        buf.skipBytes(8); //跳过前8个字节，与数据无关
+        for (int i = addr / 2; i < (len + addr) / 2; i++) {
+            temp = Float.intBitsToFloat((int) buf.readUnsignedInt());
+            map.put(name[count], temp * factor[count]);
+            count++;
+        }
     }
 
 }

@@ -8,7 +8,6 @@ import hibernatePOJO.Devices;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +27,7 @@ public class fuzzySearchDeviceThresoldAction extends ActionSupport {
     /*获取模糊查询的设备阈值
      */
     public String execute() throws Exception {
+        List<Devices> dlist = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -35,9 +35,6 @@ public class fuzzySearchDeviceThresoldAction extends ActionSupport {
             String name = request.getParameter("name");
 
             DeviceThresholdDAO dao = new DeviceThresholdDAOImpl();
-
-            List<Devices> dlist = new ArrayList();
-
             dlist = dao.searchFuzzyDeviceThreshold(name);
 
             JSONObject jsonObject = new JSONObject();
@@ -48,6 +45,8 @@ public class fuzzySearchDeviceThresoldAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            dlist = null;
         }
         return "success";
     }

@@ -27,15 +27,13 @@ public class fuzzySearchDeviceAction extends ActionSupport {
     /*获取模糊查询的设备
      */
     public String execute() throws Exception {
+        List<Devices> dlist = new ArrayList();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
             String name = request.getParameter("name");
-
             DeviceDAO dao = new DeviceDAOImpl();
-
-            List<Devices> dlist = new ArrayList();
 
             dlist = dao.searchFuzzyDevice(name);
 
@@ -43,10 +41,11 @@ public class fuzzySearchDeviceAction extends ActionSupport {
             jsonObject.put("alldlist", dlist);
 
             result = jsonObject;
-
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            dlist = null;
         }
         return "success";
     }

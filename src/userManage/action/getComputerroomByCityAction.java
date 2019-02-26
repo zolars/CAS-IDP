@@ -8,6 +8,7 @@ import userManage.dao.ComputerroomDAO;
 import userManage.dao.impl.ComputerroomDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,6 +28,7 @@ public class getComputerroomByCityAction extends ActionSupport {
     /* 查询所有用户的基本信息、用户角色、用户权限
      */
     public String execute() throws Exception {
+        List allcomputerroom = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -34,7 +36,7 @@ public class getComputerroomByCityAction extends ActionSupport {
             String city = request.getParameter("city");
 
             ComputerroomDAO dao = new ComputerroomDAOImpl();
-            List allcomputerroom = dao.getComputerroomByCity(city);
+            allcomputerroom = dao.getComputerroomByCity(city);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allcomputerroom", allcomputerroom);
@@ -44,6 +46,8 @@ public class getComputerroomByCityAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            allcomputerroom = null;
         }
         return "success";
     }

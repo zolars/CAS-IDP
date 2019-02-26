@@ -20,5 +20,23 @@
         <property name="qstinterval">
             <column name="qstinterval" sql-type="int(11)" not-null="true"/>
         </property>
+        <property name="assessinterval">
+            <column name="assessinterval" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="alarminterval">
+            <column name="alarminterval" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="tempinterval">
+            <column name="tempinterval" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="ctrlinterval">
+            <column name="ctrlinterval" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="thresholdsaveinterval">
+            <column name="thresholdsaveinterval" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="datainterval">
+            <column name="datainterval" sql-type="int(11)" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

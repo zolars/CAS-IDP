@@ -32,5 +32,8 @@
         <property name="description">
             <column name="description" sql-type="varchar(255)" not-null="true"/>
         </property>
+        <property name="zbj">
+            <column name="zbj" sql-type="smallint(6)" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

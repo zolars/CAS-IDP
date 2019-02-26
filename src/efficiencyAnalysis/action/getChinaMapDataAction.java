@@ -29,13 +29,12 @@ public class getChinaMapDataAction extends ActionSupport {
     /* 获取按照省为单位的每个省所有时间范围内的等级+各类事件+各类告警个数
      */
     public String execute() throws Exception {
+        Map<String, List<Integer>> plist = new HashMap<>();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
             EventDAO dao = new EventDAOImpl();
-
-            Map<String, List<Integer>> plist = new HashMap<>();
 
             plist = dao.getAllProvinceEvent();
 
@@ -47,6 +46,8 @@ public class getChinaMapDataAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            plist = null;
         }
         return "success";
     }

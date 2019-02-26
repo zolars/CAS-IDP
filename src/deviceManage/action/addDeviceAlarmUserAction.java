@@ -38,11 +38,11 @@ public class addDeviceAlarmUserAction extends ActionSupport {
             Boolean rt = dao.addOneDeviceAlarmUser(auser, alevel);
             JSONObject jsonObject = new JSONObject();
 
-            if(rt)
+            if(rt) {
                 jsonObject.put("提示", "添加成功！");
-            else
+            } else {
                 jsonObject.put("提示", "添加失败，请重试！");
-
+            }
             result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {

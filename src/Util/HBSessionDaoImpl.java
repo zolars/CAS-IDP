@@ -33,8 +33,10 @@ public class HBSessionDaoImpl implements HBSessionDao{
     public List search(String hql) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        List alist = null;
-        alist = session.createQuery(hql).list();
+      /*  List alist = null;
+        alist = session.createQuery(hql).list();*/
+        Query query = session.createQuery(hql);
+        List alist = query.list();
 
         if (alist.size() == 0) {
             transaction.commit();

@@ -1,6 +1,5 @@
 package hibernatePOJO;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;

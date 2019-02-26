@@ -15,7 +15,9 @@ public class DBConnect {
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/test?characterEncoding=utf8",
 					"root", "root");
-			
+			/*conn = DriverManager.getConnection(
+					"jdbc:mysql://36.0.179.187:3306/test?characterEncoding=utf8",
+					"root", "root");*/
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException ex) {
@@ -57,14 +59,32 @@ public class DBConnect {
 		}
 		return iupdate;
 	}
-	//�ֶ��ύ
-	public void dbsubmit(){
+
+	public void commit(){
 		try {
 			conn.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+	}
+
+	public void setAutoCommit(boolean flag){
+		try {
+			conn.setAutoCommit(flag);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void rollback(){
+		try {
+			conn.rollback();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void free() throws SQLException {

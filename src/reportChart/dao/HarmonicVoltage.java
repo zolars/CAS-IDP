@@ -19,14 +19,15 @@ public interface HarmonicVoltage {
     public double get95p(List<Double> value);
     public List getHzBydt(String did, String time);
     public List getHzpcBydt(String did, String time);
+    public List getHzpcthreshold();
     public List getsxdyBydt(String did, String time);
-    public List getsxdythreshold(String did);
+    public List getsxdythreshold();
     public List getDypcBydt(String did, String time);
-    public List getDypcthreshold(String did);
+    public List getDypcthreshold();
     public List getdsdysbBydt(String did, String time);
-    public List getdsdysbthreshold(String did);
+    public List getdsdysbthreshold();
     public List getcsdysbBydt(String did, String time);
-    public List getcsdysbthreshold(String did);
+    public List getcsdysbthreshold();
     public List getActivePowerBydt(String did, String time);
     public List getReactivePowerBydt(String did, String time);
     public List getPowerFactorBydt(String did, String time);
@@ -45,6 +46,7 @@ public interface HarmonicVoltage {
     public List getthdUBydt2(String did, String stime, String etime);
     public List getthdIBydt2(String did, String stime, String etime);
 
-    public List getthduthreshold(String did);
-    public List getthdithreshold(String did);
+    public List getthduthreshold();
+    public List getthdithreshold();
+    public List getpowerthreshold();
 }

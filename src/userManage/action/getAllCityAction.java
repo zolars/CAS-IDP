@@ -9,6 +9,7 @@ import userManage.dao.CityDAO;
 import userManage.dao.impl.CityDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 public class getAllCityAction extends ActionSupport {
@@ -27,13 +28,14 @@ public class getAllCityAction extends ActionSupport {
     /* 查询所有市行list
      */
     public String execute() throws Exception {
+        List allcity = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
             CityDAO dao = new CityDAOImpl();
-            List allcity = dao.getAllCity();
 
+            allcity = dao.getAllCity();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allcity", allcity);
 
@@ -42,6 +44,8 @@ public class getAllCityAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            allcity = null;
         }
         return "success";
     }

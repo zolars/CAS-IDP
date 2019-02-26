@@ -40,9 +40,9 @@ public class allocRolesPermissionAction extends ActionSupport {
             Boolean rt = dao.allocPermission(rid, pid);
 
             if (rt) {
-                jsonObject.put("提示", "添加成功！");
+                jsonObject.put("提示", "成功！");
             } else {
-                jsonObject.put("提示", "添加失败，请重试！");
+                jsonObject.put("提示", "失败，请重试！");
             }
 
             result = JSON.toJSONString(jsonObject);

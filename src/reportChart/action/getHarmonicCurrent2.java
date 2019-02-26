@@ -23,6 +23,9 @@ public class getHarmonicCurrent2 extends ActionSupport {
     /* 根据设备名称、时间查询谐波电流值
      */
     public String execute() throws Exception {
+        List hcresult = new ArrayList();
+        List thresholdResult = new ArrayList();
+        List vcfund = new ArrayList();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -30,9 +33,7 @@ public class getHarmonicCurrent2 extends ActionSupport {
             String etime = request.getParameter("etime");
             String did = request.getParameter("did");
             HarmonicVoltage dao = new HarmonicVoltageImpl();
-            List hcresult = new ArrayList();
-            List thresholdResult = new ArrayList();
-            List vcfund = new ArrayList();
+
             hcresult = dao.getHCresultBydt2(did, stime, etime);
             thresholdResult = dao.getHCthreshold();
             vcfund = dao.getVCfundBydt2(did, stime, etime);
@@ -44,6 +45,10 @@ public class getHarmonicCurrent2 extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            hcresult = null;
+            thresholdResult = null;
+            vcfund = null;
         }
         return "success";
     }

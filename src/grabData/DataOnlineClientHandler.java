@@ -1,5 +1,6 @@
 package grabData;
 
+import deviceJobManager.DeviceManager;
 import hibernatePOJO.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -39,7 +40,10 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     }
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-       // System.out.println("建立连接");
+        // record ctx in DeviceManager
+        System.out.println(did+": channel active");
+        DeviceManager.getCtxMap().put(this.did+"-1",ctx);
+
         dicPlus = DataOnline.getDicPlus();
         dic = DataOnline.getDic();
 
@@ -53,14 +57,8 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
             addr[i] = dicPlus.get(i).getStart();
             len[i] = dicPlus.get(i).getLength();
         }
-       // System.out.println(dicPlus.size());
-        //byte[] bytes=new byte[12];
-        //String address = ctx.channel().remoteAddress().toString().replace("/", "");
-       // System.out.println("ip+端口为：" + address + "开始建立通讯");
-
         ByteBuf sendMsg = ctx.alloc().buffer();
         sendMsg.writeBytes(createMsg(slaveId[part], fCode[part], addr[part], len[part]));
-       // System.out.println("send:"+ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
@@ -68,13 +66,11 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        //super.handlerAdded(ctx);
         recMsg = ctx.alloc().buffer();
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-//        super.handlerRemoved(ctx);
         recMsg.release();
         recMsg = null;
     }
@@ -98,12 +94,24 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
             //取到一次完整的实时数据，暂存起来
             DataOnline.tempSave(did, map);
         }
-        //System.out.println("开始请求：part:" + part + "start:" + addr[part] + "length" + len[part]);
+        // sleep 1s
+//        Thread.sleep(1000);
+
         ByteBuf sendMsg = ctx.alloc().buffer(12);
         sendMsg.writeBytes(createMsg(slaveId[part], fCode[part], addr[part], len[part]));
-        //System.out.println("send:" + ByteBufUtil.hexDump(sendMsg));//打印发送数据
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        //remove map,so that old data will not be recorded in database
+        DataOnline.getParmMap().remove(this.did);
+        DataOnline.getXbMap().remove(this.did);
+        DataOnline.getSxdyMap().remove(this.did);
+        DataOnline.getOnlineDataMap().remove(this.did);
+        //remove ctx in DeviceManager
+        DeviceManager.getCtxMap().remove(this.did+"-1");
     }
 
     @Override

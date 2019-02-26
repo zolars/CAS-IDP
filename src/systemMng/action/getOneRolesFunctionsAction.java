@@ -28,6 +28,7 @@ public class getOneRolesFunctionsAction extends ActionSupport {
     /* 查询一个角色拥有的功能
      */
     public String execute() throws Exception {
+        List<String> rtlist = new ArrayList<>();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -40,8 +41,6 @@ public class getOneRolesFunctionsAction extends ActionSupport {
             if (ptree != null) {
                 String pstr = ptree.getPid();
                 String pset[] = pstr.split(",");
-
-                List<String> rtlist = new ArrayList<>();
 
                 for(int i = 0 ; i < pset.length; i++){
                     rtlist.add(pset[i]);
@@ -56,6 +55,8 @@ public class getOneRolesFunctionsAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            rtlist = null;
         }
         return "success";
     }

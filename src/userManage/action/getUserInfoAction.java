@@ -8,6 +8,7 @@ import userManage.dao.UserDAO;
 import userManage.dao.impl.UserDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 public class getUserInfoAction extends ActionSupport {
@@ -26,12 +27,13 @@ public class getUserInfoAction extends ActionSupport {
     /* 查询所有用户的基本信息、用户角色、用户权限
      */
     public String execute() throws Exception {
+        List<List> alluser = new ArrayList<>();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
             UserDAO dao = new UserDAOImpl();
-            List<List> alluser = dao.getAllUserInfo();
+            alluser = dao.getAllUserInfo();
 
             //处理 ：undefined 转为 空
             //      组织转为组织名称
@@ -78,6 +80,8 @@ public class getUserInfoAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            alluser = null;
         }
         return "success";
     }

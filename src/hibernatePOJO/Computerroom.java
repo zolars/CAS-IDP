@@ -7,6 +7,7 @@ public class Computerroom {
     private String rname;
     private String didset;
     private String tempset;
+    private String cidset;
 
     public String getRid() {
         return rid;
@@ -40,6 +41,14 @@ public class Computerroom {
         this.tempset = tempset;
     }
 
+    public String getCidset() {
+        return cidset;
+    }
+
+    public void setCidset(String cidset) {
+        this.cidset = cidset;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,12 +57,13 @@ public class Computerroom {
         return Objects.equals(rid, that.rid) &&
                 Objects.equals(rname, that.rname) &&
                 Objects.equals(didset, that.didset) &&
-                Objects.equals(tempset, that.tempset);
+                Objects.equals(tempset, that.tempset) &&
+                Objects.equals(cidset, that.cidset);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(rid, rname, didset, tempset);
+        return Objects.hash(rid, rname, didset, tempset, cidset);
     }
 }

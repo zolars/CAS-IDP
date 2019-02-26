@@ -7,6 +7,7 @@ import deviceManage.dao.impl.DeviceThresholdDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,6 +26,7 @@ public class getOneOfOneDeviceThresholdAction extends ActionSupport {
     /*根据阈值id找到其阈值信息
      */
     public String execute() throws Exception {
+        List dt = new ArrayList();
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -34,7 +36,7 @@ public class getOneOfOneDeviceThresholdAction extends ActionSupport {
 
             DeviceThresholdDAO dtdao = new DeviceThresholdDAOImpl();
 
-            List dt = dtdao.getOneofOneDeviceThreshold(dtid);
+            dt = dtdao.getOneofOneDeviceThreshold(dtid);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("devicesThreshold", dt);
@@ -44,6 +46,8 @@ public class getOneOfOneDeviceThresholdAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        }finally {
+            dt = null;
         }
         return "success";
     }

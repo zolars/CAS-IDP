@@ -3,6 +3,7 @@ package reportChart.dao.impl;
 import Util.DBConnect;
 import reportChart.dao.HarmonicVoltage;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,14 +20,17 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
          
         try {
             for (int i = 1; i <= 49; i++) {
                 for (int j = 1; j <= 3; j++) {
                     char state = (char) (96 + j);
                     List<Double> value = new ArrayList<>();
-                   //String sql = "SELECT ep.value as value FROM event_power ep, events_type et WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%' AND et.description = 'U" + state + "谐波含有率越限" + (i + 2) + "' AND ep.cid=et.cid ORDER BY ep.value";
-                    String sql = "SELECT ep." + "U" + j + "xb_" + i + " as value FROM powerxb_monitor ep WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%'";
+
+                    String sql = "SELECT ep." + "U" + j + "xb_" + i + " as value FROM powerxb_monitor ep WHERE ep.did = '" + did + "' AND ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -106,14 +110,16 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
-         
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             for (int i = 1; i <= 49; i++) {
                 for (int j = 1; j <= 3; j++) {
                     char state = (char) (96 + j);
                     List<Double> value = new ArrayList<>();
-                   // String sql = "SELECT ep.value as value FROM event_power ep, events_type et WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%' AND et.description = 'I" + state + "谐波有效值越限" + (i + 2) + "' AND ep.cid=et.cid ORDER BY ep.value";
-                    String sql = "SELECT ep." + "I" + j + "va_" + i + " as value FROM powerxb_monitor ep WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%'";
+                    String sql = "SELECT ep." + "I" + j + "va_" + i + " as value FROM powerxb_monitor ep WHERE ep.did = '" + did + "' AND ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -123,11 +129,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                         value.add(dvalue);
                     }
                     if (value.size() > 0) {
-                        double max = getMax(value);
-                        double min = getMin(value);
-                        double ave = getAve(value);
-                        double pro = get95p(value);
-                        result.add((i + 2) + "," + state + "," + max + "," + min + "," + ave + "," + pro);
+                        result.add((i + 2) + "," + state + "," + getMax(value) + "," + getMin(value) + "," + getAve(value) + "," + get95p(value));
                     }
                 }
             }
@@ -270,6 +272,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         int i1_passnum = 0;
         int i2_passnum = 0;
         int i3_passnum =0;
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
 
         try {
             List<Double> u1 = new ArrayList<>();
@@ -278,7 +282,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             List<Double> i1 = new ArrayList<>();
             List<Double> i2 = new ArrayList<>();
             List<Double> i3 = new ArrayList<>();
-            String sql = "SELECT pm.U1 as u1, pm.U2 as u2, pm.U3 as u3, pm.I1 as i1, pm.I2 as i2, pm.I3 as i3 FROM powerparm_monitor pm WHERE pm.did = '" + did + "' AND pm.time LIKE'" + time + "%'";
+
+            String sql = "SELECT pm.U1 as u1, pm.U2 as u2, pm.U3 as u3, pm.I1 as i1, pm.I2 as i2, pm.I3 as i3 FROM powerparm_monitor pm WHERE pm.did = '" + did + "'AND pm.time >'" + stime + "' AND pm.time <'" + etime + "'";
             ps = db.getPs(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -577,32 +582,57 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         List result = new ArrayList<String>();
         DecimalFormat df = new DecimalFormat();
         df.setMinimumFractionDigits(3);
-         
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             for (int i = 0; i < 49; i++) {
-                for (int j = 0; j < 3; j++) {
-                    char state = (char) (97 + j);
-                    String sql = "SELECT ep.value as value, ds.value as threshold FROM event_power ep, events_type et, devices_standard ds WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%' AND et.description = 'U" + state + "谐波含有率越限" + (i + 2) + "' AND ep.cid = et.cid AND ep.cid = ds.cid";
-                    int sum = 0;
-                    int pass_num = 0;
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        String svalue = rs.getString("value");
-                        String sthreshold = rs.getString("threshold");
-                        Double dvalue = Double.parseDouble(svalue);
-                        Double dthreshold = Double.parseDouble(sthreshold);
-                        if (dvalue < dthreshold) {
-                            pass_num += 1;
+
+                //读取电压总谐波含有率第i+2次
+                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" + "电压总谐波含有率限值" + (i + 2) + "' AND ep.level = 2";
+                ps = db.getPs(sql0);
+                rs = ps.executeQuery();
+                String sthreshold = "";
+                Double threshold = 0.00;
+
+                while (rs.next()) {
+                    sthreshold = rs.getString("threshold");
+                    if(sthreshold != null) {
+                        threshold = Double.parseDouble(sthreshold);
+
+                        //分别读取A.B.C次的值与阈值比较
+
+                        for (int j = 0; j < 3; j++) {
+                            char state = (char) (97 + j);
+
+                            int temp = j + 1;
+                            int temp2 = i + 2;
+                            String xbname = "U" + temp + "xb_" + temp2;
+
+                           // String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time LIKE'" + time + "%'";
+                            String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
+                            int sum = 0;
+                            int pass_num = 0;
+                            ps = db.getPs(sql);
+                            rs = ps.executeQuery();
+                            while (rs.next()) {
+                                String svalue = rs.getString("value");
+                                Double dvalue = Double.parseDouble(svalue);
+
+                                if (dvalue < threshold) {
+                                    pass_num += 1;
+                                }
+                                sum += 1;
+                            }
+                            if (sum == 0) {
+                                result.add((i + 3) + "," + state + "," + sum + ",-");
+                            } else {
+                                double temp_pass_rate = pass_num * 100.0 / sum;
+                                double pass_rate = Double.parseDouble(df.format(temp_pass_rate));
+                                result.add((i + 3) + "," + state + "," + sum + "," + pass_rate);
+                            }
                         }
-                        sum += 1;
-                    }
-                    if (sum == 0) {
-                        result.add((i + 3) + "," + state + "," + sum + ",-");
-                    } else {
-                        double temp_pass_rate = pass_num * 100.0 / sum;
-                        double pass_rate = Double.parseDouble(df.format(temp_pass_rate));
-                        result.add((i + 3) + "," + state + "," + sum + "," + pass_rate);
                     }
                 }
             }
@@ -631,29 +661,50 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
 
         try {
             for (int i = 0; i < 49; i++) {
-                for (int j = 0; j < 3; j++) {
-                    char state = (char) (97 + j);
-                    String sql = "SELECT ep.value as value, ds.value as threshold FROM event_power ep, events_type et, devices_standard ds WHERE ep.did = '" + did + "' AND ep.time>'" + stime + "' and ep.time<'" + etime + "' AND et.description = 'U" + state + "谐波含有率越限" + (i + 2) + "' AND ep.cid = et.cid AND ep.cid = ds.cid";
-                    int sum = 0;
-                    int pass_num = 0;
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        String svalue = rs.getString("value");
-                        String sthreshold = rs.getString("threshold");
-                        Double dvalue = Double.parseDouble(svalue);
-                        Double dthreshold = Double.parseDouble(sthreshold);
-                        if (dvalue < dthreshold) {
-                            pass_num += 1;
+
+                //读取电压总谐波含有率第i+2次
+                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" + "电压总谐波含有率限值" + (i + 2) + "' AND ep.level = 2";
+                ps = db.getPs(sql0);
+                rs = ps.executeQuery();
+                String sthreshold = "";
+                Double threshold = 0.00;
+
+                while (rs.next()) {
+                    sthreshold = rs.getString("threshold");
+                    if(sthreshold != null) {
+                        threshold = Double.parseDouble(sthreshold);
+
+                        //分别读取A.B.C次的值与阈值比较
+
+                        for (int j = 0; j < 3; j++) {
+                            char state = (char) (97 + j);
+
+                            int temp = j + 1;
+                            int temp2 = i + 2;
+                            String xbname = "U" + temp + "xb_" + temp2;
+
+                            String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE  ep.time>'" + stime + "' and ep.time<'" + etime + "'";
+                            int sum = 0;
+                            int pass_num = 0;
+                            ps = db.getPs(sql);
+                            rs = ps.executeQuery();
+                            while (rs.next()) {
+                                String svalue = rs.getString("value");
+                                Double dvalue = Double.parseDouble(svalue);
+
+                                if (dvalue < threshold) {
+                                    pass_num += 1;
+                                }
+                                sum += 1;
+                            }
+                            if (sum == 0) {
+                                result.add((i + 3) + "," + state + "," + sum + ",-");
+                            } else {
+                                double temp_pass_rate = pass_num * 100.0 / sum;
+                                double pass_rate = Double.parseDouble(df.format(temp_pass_rate));
+                                result.add((i + 3) + "," + state + "," + sum + "," + pass_rate);
+                            }
                         }
-                        sum += 1;
-                    }
-                    if (sum == 0) {
-                        result.add((i + 3) + "," + state + "," + sum + ",-");
-                    } else {
-                        double temp_pass_rate = pass_num * 100.0 / sum;
-                        double pass_rate = Double.parseDouble(df.format(temp_pass_rate));
-                        result.add((i + 3) + "," + state + "," + sum + "," + pass_rate);
                     }
                 }
             }
@@ -679,32 +730,58 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         List result = new ArrayList<String>();
         DecimalFormat df = new DecimalFormat();
         df.setMinimumFractionDigits(3);
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
          
         try {
             for (int i = 0; i < 49; i++) {
-                for (int j = 0; j < 3; j++) {
-                    char state = (char) (97 + j);
-                    String sql = "SELECT ep.value as value, ds.value as threshold FROM event_power ep, events_type et, devices_standard ds WHERE ep.did = '" + did + "' AND ep.time LIKE'" + time + "%' AND et.description = 'I" + state + "谐波有效值越限" + (i + 2) + "' AND ep.cid = et.cid AND ep.cid = ds.cid";
-                    int sum = 0;
-                    int pass_num = 0;
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        String svalue = rs.getString("value");
-                        String sthreshold = rs.getString("threshold");
-                        Double dvalue = Double.parseDouble(svalue);
-                        Double dthreshold = Double.parseDouble(sthreshold);
-                        if (dvalue < dthreshold) {
-                            pass_num += 1;
+
+                //读取电流总谐波含有率第i+2次
+                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" + "电流总谐波有效值限值" + (i + 2) + "' AND ep.level = 2";
+                ps = db.getPs(sql0);
+                rs = ps.executeQuery();
+                String sthreshold = "";
+                Double threshold = 0.00;
+
+                while (rs.next()) {
+                    sthreshold = rs.getString("threshold");
+                    if(sthreshold != null) {
+                        threshold = Double.parseDouble(sthreshold);
+
+                        //分别读取A.B.C次的值与阈值比较
+
+                        for (int j = 0; j < 3; j++) {
+                            char state = (char) (97 + j);
+
+                            int temp = j + 1;
+                            int temp2 = i + 2;
+                            String xbname = "I" + temp + "xb_" + temp2;
+
+                           // String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time LIKE'" + time + "%'";
+
+                            String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
+                            int sum = 0;
+                            int pass_num = 0;
+                            ps = db.getPs(sql);
+                            rs = ps.executeQuery();
+                            while (rs.next()) {
+                                String svalue = rs.getString("value");
+                                Double dvalue = Double.parseDouble(svalue);
+
+                                if (dvalue < threshold) {
+                                    pass_num += 1;
+                                }
+                                sum += 1;
+                            }
+                            if (sum == 0) {
+                                result.add((i + 3) + "," + state + "," + sum + ",-");
+                            } else {
+                                double temp_pass_rate = pass_num * 100.0 / sum;
+                                double pass_rate = Double.parseDouble(df.format(temp_pass_rate));
+                                result.add((i + 3) + "," + state + "," + sum + "," + pass_rate);
+                            }
                         }
-                        sum += 1;
-                    }
-                    if (sum == 0) {
-                        result.add((i + 3) + "," + state + "," + sum + ",-");
-                    } else {
-                        double temp_pass_rate = pass_num * 100.0 / sum;
-                        double pass_rate = Double.parseDouble(df.format(temp_pass_rate));
-                        result.add((i + 3) + "," + state + "," + sum + "," + pass_rate);
                     }
                 }
             }
@@ -733,29 +810,50 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
 
         try {
             for (int i = 0; i < 49; i++) {
-                for (int j = 0; j < 3; j++) {
-                    char state = (char) (97 + j);
-                    String sql = "SELECT ep.value as value, ds.value as threshold FROM event_power ep, events_type et, devices_standard ds WHERE ep.did = '" + did + "' AND ep.time>'" + stime + "' and ep.time<'" + etime + "' AND et.description = 'I" + state + "谐波有效值越限" + (i + 2) + "' AND ep.cid = et.cid AND ep.cid = ds.cid";
-                    int sum = 0;
-                    int pass_num = 0;
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        String svalue = rs.getString("value");
-                        String sthreshold = rs.getString("threshold");
-                        Double dvalue = Double.parseDouble(svalue);
-                        Double dthreshold = Double.parseDouble(sthreshold);
-                        if (dvalue < dthreshold) {
-                            pass_num += 1;
+
+                //读取电流总谐波含有率第i+2次
+                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" + "电流总谐波有效值限值" + (i + 2) + "' AND ep.level = 2";
+                ps = db.getPs(sql0);
+                rs = ps.executeQuery();
+                String sthreshold = "";
+                Double threshold = 0.00;
+
+                while (rs.next()) {
+                    sthreshold = rs.getString("threshold");
+                    if(sthreshold != null) {
+                        threshold = Double.parseDouble(sthreshold);
+
+                        //分别读取A.B.C次的值与阈值比较
+
+                        for (int j = 0; j < 3; j++) {
+                            char state = (char) (97 + j);
+
+                            int temp = j + 1;
+                            int temp2 = i + 2;
+                            String xbname = "I" + temp + "xb_" + temp2;
+
+                            String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE  ep.time>'" + stime + "' and ep.time<'" + etime + "'";
+                            int sum = 0;
+                            int pass_num = 0;
+                            ps = db.getPs(sql);
+                            rs = ps.executeQuery();
+                            while (rs.next()) {
+                                String svalue = rs.getString("value");
+                                Double dvalue = Double.parseDouble(svalue);
+
+                                if (dvalue < threshold) {
+                                    pass_num += 1;
+                                }
+                                sum += 1;
+                            }
+                            if (sum == 0) {
+                                result.add((i + 3) + "," + state + "," + sum + ",-");
+                            } else {
+                                double temp_pass_rate = pass_num * 100.0 / sum;
+                                double pass_rate = Double.parseDouble(df.format(temp_pass_rate));
+                                result.add((i + 3) + "," + state + "," + sum + "," + pass_rate);
+                            }
                         }
-                        sum += 1;
-                    }
-                    if (sum == 0) {
-                        result.add((i + 3) + "," + state + "," + sum + ",-");
-                    } else {
-                        double temp_pass_rate = pass_num * 100.0 / sum;
-                        double pass_rate = Double.parseDouble(df.format(temp_pass_rate));
-                        result.add((i + 3) + "," + state + "," + sum + "," + pass_rate);
                     }
                 }
             }
@@ -780,9 +878,14 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         int passnum = 0;
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             List<Double> hz = new ArrayList<>();
-            String sql = "SELECT ppm.Hz as hz FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE'" + time + "%'";
+
+            String sql = "SELECT ppm.Hz as hz FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -866,9 +969,14 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         int passnum = 0;
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             List<Double> hzpc = new ArrayList<>();
-            String sql = "SELECT ppm.Ifl_sum as hzpc FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE'" + time + "%'";
+
+            String sql = "SELECT ppm.Ifl_sum as hzpc FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -945,16 +1053,60 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         return result;
     }
 
+    public List getHzpcthreshold(){
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        try {
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '频率上限值' AND dt.level = '2'";
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String scellval = rs.getString("cellval");
+                Double cellval = Double.parseDouble(scellval);
+                result.add(cellval);
+            }
+
+            String sql2 = "SELECT dt.floorval as floorval FROM devices_threshold dt WHERE dt.name = '频率下限值' AND dt.level = '2'";
+
+            ps = db.getPs(sql2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String sfloorval = rs.getString("floorval");
+                Double floorval = Double.parseDouble(sfloorval);
+                result.add(floorval);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public List getsxdyBydt(String did, String time) {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
-         
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             List<Double> sxdy = new ArrayList<>();
-            String sql = "SELECT psm.Uunb as sxdy FROM powersxdy_monitor psm WHERE psm.did = '" + did + "' AND psm.time LIKE'" + time + "%'";
+
+            String sql = "SELECT psm.Uunb as sxdy FROM powersxdy_monitor psm WHERE psm.did = '" + did + "' AND psm.time >'" + stime + "' AND psm.time <'" + etime + "'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1023,14 +1175,14 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         return result;
     }
 
-    public List getsxdythreshold(String did) {
+    public List getsxdythreshold() {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.name = '三相电压负序不平衡度' AND dt.level = '1'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '三相电压负序不平衡度' AND dt.level = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1060,10 +1212,16 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
 
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> dypc = new ArrayList<>();
-                String sql = "SELECT ppm.Ifl_U" + (i + 1) + " as Ifl_U" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+
+                String sql = "SELECT ppm.Ifl_U" + (i + 1) + " as Ifl_U" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+
+
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1133,7 +1291,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         return result;
     }
 
-    public List getDypcthreshold(String did) {
+    public List getDypcthreshold() {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -1143,7 +1301,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             Double cellval = null, cfloorval = null;
 
 
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.name = '电压偏差越上限' AND dt.level = '1'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '电压偏差越上限' AND dt.level = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1152,7 +1310,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 cellval = Double.parseDouble(scellval);
             }
 
-            String sql2 = "SELECT dt.floorval as floorval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.name = '电压偏差越下限' AND dt.level = '1'";
+            String sql2 = "SELECT dt.floorval as floorval FROM devices_threshold dt WHERE dt.name = '电压偏差越下限' AND dt.level = '2'";
 
             ps = db.getPs(sql2);
             rs = ps.executeQuery();
@@ -1183,11 +1341,16 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
-         
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> shortu = new ArrayList<>();
-                String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+               // String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1257,14 +1420,14 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         return result;
     }
 
-    public List getdsdysbthreshold(String did) {
+    public List getdsdysbthreshold() {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.name = '短时闪变' AND dt.level = '1'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '短时闪变' AND dt.level = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1293,11 +1456,16 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
-         
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> longu = new ArrayList<>();
-                String sql = "SELECT ppm.Plt_U" + (i + 1) + " as long_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                //String sql = "SELECT ppm.Plt_U" + (i + 1) + " as long_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                String sql = "SELECT ppm.Plt_U" + (i + 1) + " as long_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1367,14 +1535,14 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         return result;
     }
 
-    public List getcsdysbthreshold(String did) {
+    public List getcsdysbthreshold() {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.did = '" + did + "' AND dt.name = '长时闪变' AND dt.level = '1'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '长时闪变' AND dt.level = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1403,11 +1571,17 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
-         
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> activePower = new ArrayList<>();
-                String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+               // String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+
+
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1483,11 +1657,16 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
-         
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> reactivePower = new ArrayList<>();
-                String sql = "SELECT ppm.Q" + (i + 1) + " as reactivePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+
+                String sql = "SELECT ppm.Q" + (i + 1) + " as reactivePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1557,17 +1736,24 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         return result;
     }
 
+    //功率因数
     public List getPowerFactorBydt(String did, String time) {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
-         
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> powerFactor = new ArrayList<>();
-                String sql = "SELECT ppm.S" + (i + 1) + " as powerFactor" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+
+                String sql = "SELECT ppm.PF" + (i + 1) + " as powerFactor" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+
+
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1576,10 +1762,10 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                     powerFactor.add(dpowerFactor);
                 }
                 if (powerFactor.size() > 0) {
-                    double max = getMax(powerFactor);
-                    double min = getMin(powerFactor);
-                    double ave = getAve(powerFactor);
-                    double pro = get95p(powerFactor);
+                    double max = new BigDecimal(getMax(powerFactor)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double min = new BigDecimal(getMin(powerFactor)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double ave = new BigDecimal(getAve(powerFactor)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double pro = new BigDecimal(get95p(powerFactor)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
                     result.add((i + 1) + "," + max + "," + min + "," + ave + "," + pro);
                 }
             }
@@ -1607,7 +1793,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> powerFactor = new ArrayList<>();
-                String sql = "SELECT ppm.S" + (i + 1) + " as powerFactor" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
+                String sql = "SELECT ppm.PF" + (i + 1) + " as powerFactor" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1643,11 +1829,14 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
-         
+
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> thd = new ArrayList<>();
-                String sql = "SELECT ppm.THDU" + (i + 1) + " as thduFactor" + (i + 1) + " FROM powerxb_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                String sql = "SELECT ppm.THDU" + (i + 1) + " as thduFactor" + (i + 1) + " FROM powerxb_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1724,10 +1913,15 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
 
+        String stime = time + " 00:00:00";
+        String etime = time + " 23:59:59";
+
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> thd = new ArrayList<>();
-                String sql = "SELECT ppm.THDI" + (i + 1) + " as thdiFactor" + (i + 1) + " FROM powerxb_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                //String sql = "SELECT ppm.THDI" + (i + 1) + " as thdiFactor" + (i + 1) + " FROM powerxb_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                String sql = "SELECT ppm.THDI" + (i + 1) + " as thdiFactor" + (i + 1) + " FROM powerxb_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1797,14 +1991,15 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         return result;
     }
 
-    public List getthduthreshold(String did) {
+
+    public List getpowerthreshold() {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '电压总谐波含有率' AND ds.level = '1' AND ds.did='" + did + "'";
+            String sql = "SELECT ds.floorval as value FROM devices_threshold ds WHERE ds.name = '功率因数下限' AND ds.level = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1826,14 +2021,43 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         return result;
     }
 
-    public List getthdithreshold(String did) {
+    public List getthduthreshold() {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '电流总谐波含有率' AND ds.level = '1' AND ds.did='" + did + "'";
+            String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '电压总谐波含有率' AND ds.level = '2'";
+
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String value = rs.getString("value");
+                result.add(value);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            db.free();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List getthdithreshold() {
+        DBConnect db;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        db = new DBConnect();
+        List result = new ArrayList<String>();
+        try {
+            String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '电流总谐波含有率' AND ds.level = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1856,23 +2080,11 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
     }
 
     public double getMax(List<Double> value) {
-        double max = value.get(0);
-        for (double v:value) {
-            if (v > max) {
-                max = v;
-            }
-        }
-        return max;
+        return  Collections.max(value);
     }
 
     public double getMin(List<Double> value) {
-        double min = value.get(0);
-        for (double v:value) {
-            if (v < min) {
-                min = v;
-            }
-        }
-        return min;
+        return  Collections.min(value);
     }
 
     public double getAve(List<Double> value) {

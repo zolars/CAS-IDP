@@ -75,9 +75,27 @@ public class UserLoginAction extends ActionSupport {
                 List mlist = new ArrayList();
                 mlist = dao.getUserDynamicMenu(user);
 
+                //为保证顺序，对mlist进行排序，5放在开始位置，后面顺序不管
+                for(int i = 0; i < mlist.size(); i++) {
+                    String temp = mlist.get(0).toString();
+                    if(mlist.get(i).equals("5")) {
+                        mlist.set(i, temp);
+                        mlist.set(0, "5");
+                    }
+                }
+
                 for (int i = 0; i < mlist.size(); i++) {
                     String s = (String) mlist.get(i);
                     switch (s) {
+                        case "5":
+                            menulist.add("province.jsp");
+                            menulist.add("onlineDetect.jsp");
+                            menulist.add("history.jsp");
+                            menulist.add("efficiencyAnalysis.jsp");
+                            //menulist.add("efficiencyDevice.jsp");
+                            // menulist.add("efficiencyAssessment.jsp");
+                            menulist.add("reportChart.jsp");
+                            break;
                         case "1":
                             menulist.add("systemMng.jsp/item8");
                             break;
@@ -89,15 +107,6 @@ public class UserLoginAction extends ActionSupport {
                             break;
                         case "4":
                             menulist.add("systemMng.jsp/item4");
-                            break;
-                        case "5":
-                            menulist.add("province.jsp");
-                            menulist.add("efficiencyDevice.jsp");
-                            menulist.add("onlineDetect.jsp");
-                            menulist.add("history.jsp");
-                            menulist.add("efficiencyAnalysis.jsp");
-                            menulist.add("efficiencyAssessment.jsp");
-                            menulist.add("reportChart.jsp");
                             break;
                         case "6":
                             menulist.add("systemMng.jsp/item9");

@@ -11,6 +11,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,12 @@ import java.util.List;
 public class uploadDataToCenterSvrJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        List<EventPower> eventpowerlist = new ArrayList<>();
+        List<EventEnvironment> eventenvrionlist = new ArrayList<>();
+        List<EventCtrl> eventctrllist = new ArrayList<>();
+
         try {
+
             System.out.println("开始上传事件到总服务器:" + System.currentTimeMillis());
 
             HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
@@ -33,7 +39,7 @@ public class uploadDataToCenterSvrJob implements Job {
             String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
             //1.上传电能质量事件到总服务器
-            List<EventPower> eventpowerlist = hbsessionDao.search(
+            eventpowerlist = hbsessionDao.search(
                     "FROM EventPower where time >'" + date + "'");
 
             if (eventpowerlist != null) {
@@ -44,7 +50,7 @@ public class uploadDataToCenterSvrJob implements Job {
             }
 
             //2.上传温湿度事件到总服务器
-            List<EventEnvironment> eventenvrionlist = hbsessionDao.search(
+            eventenvrionlist = hbsessionDao.search(
                     "FROM EventEnvironment where time >'" + date + "'");
 
             if (eventenvrionlist != null) {
@@ -55,7 +61,7 @@ public class uploadDataToCenterSvrJob implements Job {
             }
 
             //3.上传设备事件到总服务器
-            List<EventCtrl> eventctrllist = hbsessionDao.search(
+            eventctrllist = hbsessionDao.search(
                     "FROM EventCtrl where time >'" + date + "'");
 
             if (eventctrllist != null) {
@@ -68,7 +74,10 @@ public class uploadDataToCenterSvrJob implements Job {
             System.out.println("完成上传事件到总服务器:" + System.currentTimeMillis());
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            eventpowerlist = null;
+            eventenvrionlist = null;
+            eventctrllist = null;
         }
-
     }
 }

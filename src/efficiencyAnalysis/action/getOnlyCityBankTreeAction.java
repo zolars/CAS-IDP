@@ -28,6 +28,7 @@ public class getOnlyCityBankTreeAction extends ActionSupport {
     /* 获取市级的jstree
      */
     public String execute() throws Exception {
+        List<Integer> plist = new ArrayList<>();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -36,8 +37,6 @@ public class getOnlyCityBankTreeAction extends ActionSupport {
             pbname += "分行";
 
             EventDAO dao = new EventDAOImpl();
-
-            List<Integer> plist = new ArrayList<>();
 
             plist = dao.getAllCityBankEvent(pbname);
 
@@ -49,6 +48,8 @@ public class getOnlyCityBankTreeAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            plist = null;
         }
         return "success";
     }

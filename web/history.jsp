@@ -39,7 +39,7 @@
     <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
     <style>
         .datetimepicker {
-            background: black !important;
+            background: black!important;
         }
     </style>
 </head>
@@ -49,13 +49,17 @@
 <script src="js/jquery-3.3.1.js"></script>
 <script src="js/jquery.cookie.js"></script>
 
+<!-- PNotify -->
+<script type="text/javascript" src="js/pnotify.custom.min.js"></script>
+<link href="css/pnotify.custom.min.css" rel="stylesheet" type="text/css" />
+
 <!--告警弹窗-->
-<script type="text/javascript" src="js/websocketconnect.js"></script>
+<script type="text/javascript" src = "js/websocketconnect.js"></script>
 
 <!--登陆认证拦截-->
 <%
-    String userid = (String) session.getAttribute("userid");
-    if (userid == null) {
+    String userid = (String)session.getAttribute("userid");
+    if(userid == null) {
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
@@ -68,7 +72,7 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <img src="img/index/logo.jpg" alt="" class="header-img">
+        <img src="img/index/logo.png" alt="" class="header-img">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -78,9 +82,9 @@
                 </select>
 
                 <script>
-                    $("#province_code").change(function () {
+                    $("#province_code").change(function(){
                         var options = $("#province_code option:selected");
-                        $.cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                        $. cookie('opinion1', options.text(), {expires: 1, path: '/'});
                         getCity();
                     })
                 </script>
@@ -90,9 +94,9 @@
                 </select>
 
                 <script>
-                    $("#city_code").change(function () {
+                    $("#city_code").change(function(){
                         var options = $("#city_code option:selected");
-                        $.cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                        $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
                         getComproom();
                     })
 
@@ -103,9 +107,9 @@
                 </select>
 
                 <script>
-                    $("#comproom_code").change(function () {
+                    $("#comproom_code").change(function(){
                         var options = $("#comproom_code option:selected");
-                        $.cookie('opinion3', options.text(), {expires: 1, path: '/'});
+                        $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
                     })
                 </script>
 
@@ -135,41 +139,50 @@
     <!-- Content -->
     <section id="content" class="container">
         <!-- Main Widgets -->
-        <div class="block-area">
-            <div class="row">
+        <div class="block-area" style="position:relative;">
+
+            <div class="row" style="position:absolute;z-index: 0;width: 100%;">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs" id="ulItem" style="margin-bottom: 20px">
                         <li style="width:50%">
                             <a data-toggle="tab" id="subItem2">•历史曲线</a>
                         </li>
-                        <li style="width:50%">
+                       <%-- <li style="width:50%">
                             <a data-toggle="tab" id="subItem3">•知识库</a>
-                        </li>
+                        </li>--%>
                     </ul>
 
                     <div id="item2" class="col-md-2 col-xs-6" style="width:90%; height: 600px;">
                         <div class="col-md-2">
-                            <select id='item2-menu' class="form-control">
+                            <select id='item2-menu' class="form-control" onchange="showinfo(this[selectedIndex].value)">
                                 <option value="item2-1">电压/电流</option>
                                 <option value="item2-2">频率</option>
                                 <option value="item2-3">功率</option>
                                 <option value="item2-4">浪涌/塌陷</option>
                                 <option value="item2-5">谐波总畸变率</option>
+                                <option value="item2-6">温度</option>
+                                <option value="item2-7">湿度</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div id = "powermp" class="col-md-2">
                             <select class="form-control" name="his-mpid-select" id="his-mpid-select"
-                                    onclick="getMonitorPoints()">
-                                <option value="">选择检测点</option>
+                                    onclick="getMonitorPoints()" value="选择检测点">
                             </select>
                         </div>
+
+                        <div id = "tempmp" class="col-md-2" style="display: none;">
+                            <select class="form-control" name="his-temp-mpid-select" id="his-temp-mpid-select"
+                                    onclick="getMonitorPointsEnvironment()"  value="选择检测点">
+                            </select>
+                        </div>
+
                         <div class="col-md-6">
                             <div class="container">
                                 <form action="" class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <label for="dtp_input1" class="control-label">开始日期</label>
                                         <div class="input-group date form_datetime col-md-5"
-                                             data-date="2018-07-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss"
+                                             data-date-format="yyyy-mm-dd hh:ii:ss"
                                              data-link-field="dtp_input1">
                                             <input id="firstDate" class="form-control" size="16" type="text"
                                                    value="" readonly>
@@ -182,7 +195,7 @@
                                     <div class="form-group">
                                         <label for="dtp_input2" class="control-label">结束日期</label>
                                         <div class="input-group date form_datetime col-md-5"
-                                             data-date="2019-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss"
+                                             data-date-format="yyyy-mm-dd hh:ii:ss"
                                              data-link-field="dtp_input1">
                                             <input id="lastDate" class="form-control" size="16" type="text" value=""
                                                    readonly>
@@ -195,9 +208,7 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button type="button" class="button-primary button-pill button-small" id="serch-his-button"
-                                    onclick="searchHisTwice()">查询
-                            </button>
+                            <button type="button" class="button-primary button-pill button-small" id="serch-his-button" onclick="searchHis()">查询</button>
                         </div>
 
                         <div class="clearfix"></div>
@@ -256,7 +267,7 @@
                                             <input class="default-show" type="checkbox" value='pf1'>PF1
                                             <input type="checkbox" value='pf2'>PF2
                                             <input type="checkbox" value='pf3'>PF3
-                                            <input type="checkbox" value='pf'>PF
+                                           <%-- <input type="checkbox" value='pf'>PF--%>
                                         </li>
                                     </ul>
                                 </div>
@@ -289,6 +300,36 @@
                                     </ul>
                                 </div>
                                 <div id='item2-thd' class="chart-item" style='width: 100%;height: 500px;'></div>
+                            </li>
+                            <li id='item2-6'>
+                                <div id="item2-temp-env">
+                                    <ul>
+                                        <li class="mark-ctrl">
+                                            <input type="checkbox" value='max'>最大值
+                                            <input type="checkbox" value='min'>最小值
+                                            <input type="checkbox" value='average'>平均值
+                                        </li>
+                                        <li class="series-ctrl">
+                                            <input class="default-show" type="checkbox" value="temp">temp
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id='item2-temp' class="chart-item" style='width: 100%;height: 500px;'></div>
+                            </li>
+                            <li id='item2-7'>
+                                <div id="item2-wet-env">
+                                    <ul>
+                                        <li class="mark-ctrl">
+                                            <input type="checkbox" value='max'>最大值
+                                            <input type="checkbox" value='min'>最小值
+                                            <input type="checkbox" value='average'>平均值
+                                        </li>
+                                        <li class="series-ctrl">
+                                            <input class="default-show" type="checkbox" value="wet">wet
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id='item2-wet' class="chart-item" style='width: 100%;height: 500px;'></div>
                             </li>
                         </ul>
                     </div>
@@ -443,7 +484,7 @@
 
 <!-- 动态加载菜单项 -->
 <script type="text/javascript">
-    var menulist = "<%=session.getAttribute("menulist")%>";
+    var menulist="<%=session.getAttribute("menulist")%>";
     var cbidstr = menulist.split(",");
     var isSystemMng = false;
     var isNewSystemMng = false;
@@ -458,87 +499,89 @@
     var len = cbidstr[idx].length;
     cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
 
-    for (var i = 0; i < cbidstr.length; i++) {
+    for(var i = 0; i < cbidstr.length; i++){
 
         var menuname = "";
-        if (cbidstr[i] == " province.jsp") {
+        if(cbidstr[i] == " province.jsp"){
             isSystemMng = false;
             menuname = "集中监控";
         }
-        else if (cbidstr[i] == " efficiencyDevice.jsp") {
+       /* else if(cbidstr[i] == " efficiencyDevice.jsp"){
             isSystemMng = false;
             menuname = "动力设施";
-        }
-        else if (cbidstr[i] == " onlineDetect.jsp") {
+        }*/
+        else if(cbidstr[i] == " onlineDetect.jsp"){
             isSystemMng = false;
             menuname = "在线监测";
         }
-        else if (cbidstr[i] == ' efficiencyAnalysis.jsp') {
+        else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
             isSystemMng = false;
             menuname = "动力分析";
         }
-        else if (cbidstr[i] == ' efficiencyAssessment.jsp') {
+        /*else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
             isSystemMng = false;
             menuname = "动力评估";
-        }
-        else if (cbidstr[i] == ' reportChart.jsp') {
+        }*/
+        else if(cbidstr[i] == ' reportChart.jsp'){
             isSystemMng = false;
             menuname = "报表功能";
         }
-        else if (cbidstr[i] == ' history.jsp') {
+        else if(cbidstr[i] == ' history.jsp'){
             isSystemMng = false;
             menuname = "历史曲线";
         }
-        else if (cbidstr[i].search('systemMng.jsp')) {
+        else if(cbidstr[i].search('systemMng.jsp')){
 
             //对字符串分段处理（2或3段）
             var substr = cbidstr[i].split("/");
 
-            if (substr.length == 2) {
+            if(substr.length == 2){
                 ulist.push(substr[1]);
             }
 
-            else {
+            else
+            {
                 ulist.push(substr[1]);
                 u2list.push(substr[2]);
             }
 
-            if (!isNewSystemMng) {//第一条systemMng的
+            if(!isNewSystemMng)
+            {//第一条systemMng的
                 isNewSystemMng = true;
                 menuname = "系统管理";
                 $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'>" + menuname + "</a></li>");
             }
             isSystemMng = true;
         }
-        if (!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
+        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
     }
 
-    for (var i = 1; i <= 8; i++) {
+    for(var i = 1; i <= 8; i++){
         var ustr = "item" + i;
 
-        for (var j = 0; j < ulist.length; j++) {
-            if (ustr == ulist[j]) {
+        for(var j = 0; j < ulist.length; j++){
+            if(ustr == ulist[j]){
                 break;
             }
-            if (j == ulist.length - 1) {
-                $("#" + ustr + "").remove();
+            if(j == ulist.length - 1){
+                $("#"+ustr+"").remove();
             }
         }
     }
 
-    for (var i = 1; i <= 9; i++) {
+    for(var i = 1; i <= 9; i++){
         var ustr;
-        if (i < 7)
+        if(i < 7)
             ustr = "secsubItem" + i;
         else
             ustr = "tridsubItem" + i;
 
-        for (var j = 0; j < u2list.length; j++) {
-            if (ustr == u2list[j]) {
+        for(var j = 0; j < u2list.length; j++){
+            if(ustr == u2list[j]){
                 break;
             }
-            if (j == u2list.length - 1) {
-                $("#" + ustr + "").remove();
+            if(j == u2list.length - 1){
+                $("#"+ustr+"").remove();
             }
         }
     }
@@ -550,7 +593,76 @@
     //city 动态改变,computerroom清空
     document.getElementById("comproom_code").addEventListener('change', function () {
         $('#his-mpid-select').empty();
+        $('#his-temp-mpid-select').empty();
     });
+
+    //初始化 默认 监测点 start//////////////////
+    var flag = 1;
+    setInterval(function () {
+        var computerroom = $("#comproom_code option:selected").val();
+        if(computerroom != undefined && flag == 1) {
+            getDefaultMonitorPoints();
+            flag = 2;
+        }
+    }, 500);
+
+    function getDefaultMonitorPoints(){
+
+        var computerroom = $("#comproom_code option:selected").val();
+        var mpcname = $("#his-mpid-select").val();
+        if (!mpcname) {
+            var hisvalue = $('#his-mpid-select').val();
+
+            if(hisvalue == null) {
+                $.ajax({
+                    type: "post",
+                    url: "getMonitorPoints",
+                    data: {
+                        computerroom: computerroom
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        var rt = obj.allmpdata;
+                        for (var i = 0; i < rt.length; i++) {
+                            if (i == 0)
+                                $('#his-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
+                            else
+                                $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+                        }
+                    }
+                });
+            }
+        }
+
+        var tempname = $("#his-temp-mpid-select").val();
+        if (!tempname) {
+            var hisvalue = $('#his-temp-mpid-select').val();
+
+            if(hisvalue == null) {
+                $.ajax({
+                    type: "post",
+                    url: "getMonitorPointsEnvironment",
+                    data: {
+                        computerroom: computerroom
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        var rt = obj.allmpdata;
+                        for (var i = 0; i < rt.length; i++) {
+                            if (i == 0)
+                                $('#his-temp-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
+                            else
+                                $('#his-temp-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+                        }
+                    }
+                });
+            }
+        }
+
+    }
+    //初始化 默认 监测点 end/////////////////
 
     //获取检测点列表
     function getMonitorPoints() {
@@ -558,28 +670,70 @@
         var computerroom = $("#comproom_code option:selected").val();
         var mpcname = $("#his-mpid-select").val();
 
-        if (!computerroom) {
+        if(!computerroom){
             alert("请先选择机房，再选择检测点");
         }
         else if (!mpcname) {
-            $.ajax({
-                type: "post",
-                url: "getMonitorPoints",
-                data: {
-                    computerroom: computerroom
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    var rt = obj.allmpdata;
-                    for (var i = 0; i < rt.length; i++) {
-                        if (i == 0)
-                            $('#his-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
-                        else
-                            $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+            var hisvalue = $('#his-mpid-select').val();
+
+            if(hisvalue == null) {
+                $.ajax({
+                    type: "post",
+                    url: "getMonitorPoints",
+                    data: {
+                        computerroom: computerroom
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        var rt = obj.allmpdata;
+
+                        for (var i = 0; i < rt.length; i++) {
+
+                            if(i == 0)
+                                $('#his-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
+                            else
+                                $('#his-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+                        }
                     }
-                }
-            });
+                });
+            }
+        }
+    }
+
+    //获取检测点列表
+    function getMonitorPointsEnvironment() {
+
+        var computerroom = $("#comproom_code option:selected").val();
+        var mpcname = $("#his-temp-mpid-select").val();
+
+        if(!computerroom){
+            alert("请先选择机房，再选择检测点");
+        }
+        else if (!mpcname) {
+            var hisvalue = $('#his-temp-mpid-select').val();
+
+            if(hisvalue == null) {
+                $.ajax({
+                    type: "post",
+                    url: "getMonitorPointsEnvironment",
+                    data: {
+                        computerroom: computerroom
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        var rt = obj.allmpdata;
+
+                        for (var i = 0; i < rt.length; i++) {
+                            if(i == 0)
+                                $('#his-temp-mpid-select').append("<option value='" + rt[i].did + "' selected='selected'>" + rt[i].name + "</option>");
+                            else
+                                $('#his-temp-mpid-select').append("<option value='" + rt[i].did + "' >" + rt[i].name + "</option>");
+                        }
+                    }
+                });
+            }
         }
     }
 </script>
@@ -837,11 +991,16 @@
     var eventChart3 = echarts.init(document.getElementById('item2-P'));
     var eventChart4 = echarts.init(document.getElementById('item2-LyTx'));
     var eventChart5 = echarts.init(document.getElementById('item2-thd'));
+    var eventChart6 = echarts.init(document.getElementById('item2-temp'));
+    var eventChart7 = echarts.init(document.getElementById('item2-wet'));
     var chart1Legend = ['u1', 'u2', 'u3', 'u4', 'i1', 'i2', 'i3', 'i4'];
     var chart3Legend = ['p1', 'p2', 'p3', 'p', 's1', 's2', 's3', 's', 'q1', 'q2', 'q3', 'q',
         'pf1', 'pf2', 'pf3', 'pf', 'dpf1', 'dpf2', 'dpf3', 'dpf'];
-    var chart4Legend = ['Ua', 'Ub', 'Uc'];
+    var chart4Legend = ['Ua','Ub','Uc'];
     var chart5Legend = ['thdu1', 'thdu2', 'thdu3', 'thdu4', 'thdi1', 'thdi2', 'thdi3', 'thdi4'];
+    var chart6Legend = ['temp'];
+    var chart7Legend = ['wet'];
+
     var markPointUI = {//电压\电流图最大值、最小值标注点
         label: {formatter: '{a}{b}:{c}'},
         data: []
@@ -866,27 +1025,43 @@
         label: {formatter: '{a}{b}:{c}'},
         data: []
     };
+    var markPointTemp = {//Temp图最大值、最小值标注点
+        label: {formatter: '{a}{b}:{c}'},
+        data: []
+    };
+    var markLineTemp = {//Temp图平均值标注线
+        label: {formatter: '{a}{b}:{c}'},
+        data: []
+    };
+    var markPointWet = {//Wet图最大值、最小值标注点
+        label: {formatter: '{a}{b}:{c}'},
+        data: []
+    };
+    var markLineWet = {//Wet图平均值标注线
+        label: {formatter: '{a}{b}:{c}'},
+        data: []
+    };
 
     var line1 = [];
-    line1.push(['1', '200']);
-    line1.push(['2', '185']);
-    line1.push(['3', '170']);
-    line1.push(['4', '155']);
-    line1.push(['5', '140']);
+    line1.push([ '1' , '200']);
+    line1.push([ '2' , '185']);
+    line1.push([ '3' , '170']);
+    line1.push([ '4' , '155']);
+    line1.push([ '5' , '140']);
 
-    for (var i = 5; i <= 500; i++) {
-        line1.push([i, '140']);
+    for(var i = 5; i <= 500; i++){
+        line1.push([ i , '140']);
     }
 
-    for (var i = 500; i <= 2000; i++) {
-        line1.push([i, '120']);
+    for(var i = 500; i <= 2000; i++){
+        line1.push([ i , '120']);
     }
 
     var line2 = [];
-    line2.push(['30', '0']);
+    line2.push([ '30' , '0']);
 
-    for (var i = 30; i <= 2000; i++) {
-        line2.push([i, '70']);
+    for(var i = 30; i <= 2000; i++){
+        line2.push([ i , '70']);
     }
 
     var option1 = {
@@ -915,72 +1090,80 @@
         series: [
             //电压U
             {
+                connectNulls: false,
                 name: "u1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "u1"},
-                itemStyle: {
-                    normal: {
-                        color: '#ffff00'
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
                     }
                 }
             },
             {
+                connectNulls: false,
                 name: "u2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "u2"},
-                itemStyle: {
-                    normal: {
-                        color: '#00ff00'
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
                     }
                 }
             },
             {
+                connectNulls: false,
                 name: "u3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "u3"},
-                itemStyle: {
-                    normal: {
-                        color: '#ff0000'
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
                     }
                 }
             },
             {
+                connectNulls: false,
                 name: "u4", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "u4"}
             },
             //电流I
             {
+                connectNulls: true,
                 name: "i1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "i1"},
-                itemStyle: {
-                    normal: {
-                        color: '#ffff00'
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
                     }
                 }
             },
             {
+                connectNulls: true,
                 name: "i2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "i2"},
-                itemStyle: {
-                    normal: {
-                        color: '#00ff00'
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
                     }
                 }
             },
             {
+                connectNulls: true,
                 name: "i3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "i3"},
-                itemStyle: {
-                    normal: {
-                        color: '#ff0000'
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
                     }
                 }
             },
             {
+                connectNulls: true,
                 name: "i4", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "i4"}
@@ -1012,7 +1195,8 @@
         series: [
             //频率hz
             {
-                name: 'hz', type: 'line',
+                connectNulls: true,
+                name: 'hz', type: 'line', smooth: true, showSymbol: false,
                 markPoint: markPointHZ, markLine: markLineHZ,
                 encode: {x: 'time', y: 'hz'}
             }
@@ -1043,88 +1227,164 @@
         series: [
             //功率P
             {
+                connectNulls: true,
                 name: "p1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "p1"}
+                encode: {x: "time", y: "p1"},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "p2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "p2"}
+                encode: {x: "time", y: "p2"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "p3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "p3"}
+                encode: {x: "time", y: "p3"},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "p", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
                 encode: {x: "time", y: "p"}
             },
             //功率S
             {
+                connectNulls: true,
                 name: "s1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "s1"}
+                encode: {x: "time", y: "s1"},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "s2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "s2"}
+                encode: {x: "time", y: "s2"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "s3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "s3"}
+                encode: {x: "time", y: "s3"},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "s", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
                 encode: {x: "time", y: "s"}
             },
             //功率Q
             {
+                connectNulls: true,
                 name: "q1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "q1"}
+                encode: {x: "time", y: "q1"},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "q2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "q2"}
+                encode: {x: "time", y: "q2"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "q3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "q3"}
+                encode: {x: "time", y: "q3"},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "q", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
                 encode: {x: "time", y: "q"}
             },
             //功率PF
             {
+                connectNulls: true,
                 name: "pf1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "pf1"}
+                encode: {x: "time", y: "pf1"},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "pf2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "pf2"}
+                encode: {x: "time", y: "pf2"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
             },
             {
+                connectNulls: true,
                 name: "pf3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
-                encode: {x: "time", y: "pf3"}
-            },
+                encode: {x: "time", y: "pf3"},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
+                    }
+                }
+            }/*,
             {
+                connectNulls: true,
                 name: "pf", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointP, markLine: markLineP,
                 encode: {x: "time", y: "pf"}
-            }
+            }*/
         ]
     };
     var option4 = {
@@ -1175,48 +1435,51 @@
         series: [
             // 浪涌/塌陷
             {
-                name: 'Ua', type: 'scatter',
-                encode: {x: 'time' * 1000, y: 'Ua'},
-                itemStyle: {
-                    normal: {
-                        color: '#ffff00'
+                connectNulls: true,
+                name: 'Ua',type: 'scatter',
+                encode: {x: 'time'* 1000, y: 'Ua'},
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
                     }
                 }
             },
             {
-                name: 'Ub', type: 'scatter',
-                encode: {x: 'time' * 1000, y: 'Ub'},
-                itemStyle: {
-                    normal: {
-                        color: '#00ff00'
+                connectNulls: true,
+                name: 'Ub',type: 'scatter',
+                encode: {x: 'time'* 1000, y: 'Ub'},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
                     }
                 }
             },
             {
-                name: 'Uc', type: 'scatter',
-                encode: {x: 'time' * 1000, y: 'Uc'},
-                itemStyle: {
-                    normal: {
-                        color: '#ff0000'
+                connectNulls: true,
+                name: 'Uc',type: 'scatter',
+                encode: {x: 'time'* 1000, y: 'Uc'},
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
                     }
                 }
             },
             {
-                name: '',
-                type: 'line',
-                itemStyle: {
-                    normal: {
-                        color: '#ff0000'
+                name:'',
+                type:'line', smooth: true, showSymbol: false,
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
                     }
                 },
                 data: line1
             },
             {
-                name: '',
-                type: 'line',
-                itemStyle: {
-                    normal: {
-                        color: '#ff0000'
+                name:'',
+                type:'line', smooth: true, showSymbol: false,
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
                     }
                 },
                 data: line2
@@ -1249,79 +1512,170 @@
         series: [
             //thdU
             {
+                connectNulls: true,
                 name: "thdu1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdu1"},
-                itemStyle: {
-                    normal: {
-                        color: '#ffff00'
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
                     }
                 }
             },
             {
+                connectNulls: true,
                 name: "thdu2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdu2"},
-                itemStyle: {
-                    normal: {
-                        color: '#00ff00'
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
                     }
                 }
             },
             {
+                connectNulls: true,
                 name: "thdu3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdu3"},
-                itemStyle: {
-                    normal: {
-                        color: '#ff0000'
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
                     }
                 }
             },
             {
+                connectNulls: true,
                 name: "thdu4", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdu4"}
             },
             //电流I
             {
+                connectNulls: true,
                 name: "thdi1", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdi1"},
-                itemStyle: {
-                    normal: {
-                        color: '#ffff00'
+                itemStyle:{
+                    normal:{
+                        color:'#ffff00'
                     }
                 }
             },
             {
+                connectNulls: true,
                 name: "thdi2", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdi2"},
-                itemStyle: {
-                    normal: {
-                        color: '#00ff00'
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
                     }
                 }
             },
             {
+                connectNulls: true,
                 name: "thdi3", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdi3"},
-                itemStyle: {
-                    normal: {
-                        color: '#ff0000'
+                itemStyle:{
+                    normal:{
+                        color:'#ff0000'
                     }
                 }
             },
             {
+                connectNulls: true,
                 name: "thdi4", type: "line", smooth: true, showSymbol: false,
                 markPoint: markPointUI, markLine: markLineUI,
                 encode: {x: "time", y: "thdi4"}
             }
         ]
     };
-
+    var option6 = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            show: false,
+            data: chart6Legend
+        },
+        xAxis: {
+            type: 'time',
+            splitLine: {
+                show: false
+            }
+        },
+        yAxis: {
+            name: '单位:（℃）',
+            type: 'value',
+            scale: true,
+            splitLine: {
+                show: false
+            }
+        },
+        series: [
+            //temp
+            {
+                connectNulls: true,
+                name: "temp", type: "line", smooth: true, showSymbol: false,
+                markPoint: markPointTemp, markLine: markLineTemp,
+                encode: {x: "time", y: "temp"},
+                itemStyle:{
+                    normal:{
+                        color:'#00ff00'
+                    }
+                }
+            }
+        ]
+    };
+    var option7 = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            show: false,
+            data: chart7Legend
+        },
+        xAxis: {
+            type: 'time',
+            splitLine: {
+                show: false
+            }
+        },
+        yAxis: {
+            name: '单位:（%）',
+            type: 'value',
+            scale: true,
+            splitLine: {
+                show: false
+            }
+        },
+        series: [
+            //wet
+            {
+                connectNulls: true,
+                name: "wet", type: "line", smooth: true, showSymbol: false,
+                markPoint: markPointWet, markLine: markLineWet,
+                encode: {x: "time", y: "wet"},
+                itemStyle: {
+                    normal: {
+                        color: '#00ff00'
+                    }
+                }
+            }
+        ]
+    };
+    
+    function showinfo(values) {
+        if(values=='item2-6' || values=='item2-7'){
+            $("#powermp").css("display","none");
+            $("#tempmp").css("display","block");
+        } else {
+            $("#tempmp").css("display","none");
+            $("#powermp").css("display","block");
+        }
+    }
 
     //事件绑定函数
     function eventBanding() {
@@ -1349,7 +1703,6 @@
                 }
             });
         });
-
         //绑定THD图电压U、电流I checkbox点击事件
         $('#item2-thd-ctrl ul li.series-ctrl input:checkbox').each(function () {
             $(this).click(function () {
@@ -1367,7 +1720,6 @@
                 }
             });
         });
-
         //绑定UI图最大值、最小值、平均值checkbox点击事件
         $('#item2-UI-ctrl ul li.mark-ctrl input:checkbox').each(function () {
             $(this).click(function () {
@@ -1546,6 +1898,112 @@
                 }
             });
         });
+        //绑定temp图 checkbox点击事件
+        $('#item2-temp-env ul li.series-ctrl input:checkbox').each(function () {
+            $(this).click(function () {
+                if (this.checked) {
+                    eventChart6.dispatchAction({
+                        type: "legendSelect",
+                        name: this.value
+                    });
+                }
+                else {
+                    eventChart6.dispatchAction({
+                        type: "legendUnSelect",
+                        name: this.value
+                    });
+                }
+            });
+        });
+        //绑定wet图 checkbox点击事件
+        $('#item2-wet-env ul li.series-ctrl input:checkbox').each(function () {
+            $(this).click(function () {
+                if (this.checked) {
+                    eventChart7.dispatchAction({
+                        type: "legendSelect",
+                        name: this.value
+                    });
+                }
+                else {
+                    eventChart7.dispatchAction({
+                        type: "legendUnSelect",
+                        name: this.value
+                    });
+                }
+            });
+        });
+        //绑定temp图最大值、最小值、平均值checkbox点击事件
+        $('#item2-temp-env ul li.mark-ctrl input:checkbox').each(function () {
+            $(this).click(function () {
+                if (this.checked) {
+                    switch (this.value) {
+                        case 'max':
+                            markPointTemp.data.unshift({name: '最大值', type: 'max'});
+                            break;//最大值标注配置项添加在数组头
+                        case 'min':
+                            markPointTemp.data.push({name: '最小值', type: 'min'});
+                            break;//最小值标注配置项添加在数组尾
+                        case 'average':
+                            markLineTemp.data.push({name: '平均值', type: 'average'});
+                            break;//平均值标注配置项添加
+                        default:
+                            break;
+                    }
+                }
+                else {
+                    switch (this.value) {
+                        case 'max':
+                            markPointTemp.data.shift();
+                            break;//移除最大值标注配置项
+                        case 'min':
+                            markPointTemp.data.pop();
+                            break;//移除最小值标注配置项
+                        case 'average':
+                            markLineTemp.data.pop();
+                            break;//移除平均值标注配置项
+                        default:
+                            break;
+                    }
+                }
+                eventChart6.setOption(option6);
+            });
+        });
+        //绑定wet图最大值、最小值、平均值checkbox点击事件
+        $('#item2-wet-env ul li.mark-ctrl input:checkbox').each(function () {
+            $(this).click(function () {
+                if (this.checked) {
+                    switch (this.value) {
+                        case 'max':
+                            markPointWet.data.unshift({name: '最大值', type: 'max'});
+                            break;//最大值标注配置项添加在数组头
+                        case 'min':
+                            markPointWet.data.push({name: '最小值', type: 'min'});
+                            break;//最小值标注配置项添加在数组尾
+                        case 'average':
+                            markLineWet.data.push({name: '平均值', type: 'average'});
+                            break;//平均值标注配置项添加
+                        default:
+                            break;
+                    }
+                }
+                else {
+                    switch (this.value) {
+                        case 'max':
+                            markPointWet. data.shift();
+                            break;//移除最大值标注配置项
+                        case 'min':
+                            markPointWet.data.pop();
+                            break;//移除最小值标注配置项
+                        case 'average':
+                            markLineWet.data.pop();
+                            break;//移除平均值标注配置项
+                        default:
+                            break;
+                    }
+                }
+                eventChart7.setOption(option7);
+            });
+        });
     }
 
     //绘制图表
@@ -1554,8 +2012,10 @@
         eventChart1.setOption(option1);
         eventChart2.setOption(option2);
         eventChart3.setOption(option3);
-        // eventChart4.setOption(option4);
+        eventChart4.setOption(option4);
         eventChart5.setOption(option5);
+        eventChart6.setOption(option6);
+        eventChart7.setOption(option7);
 
         //设置曲线图初始不显示
         chart1Legend.forEach(function (item) {
@@ -1582,21 +2042,35 @@
                 name: item
             });
         });
+        chart6Legend.forEach(function (item) {
+            eventChart6.dispatchAction({
+                type: "legendUnSelect",
+                name: item
+            });
+        });
+        chart7Legend.forEach(function (item) {
+            eventChart7.dispatchAction({
+                type: "legendUnSelect",
+                name: item
+            });
+        });
     }
 
     //获取数据，并更新图
     function getData(starttime, endtime, did) {
-        //取电压、电流、频率、功率、thd数据
+
+        //取电压、电流、频率、功率数据
         $.ajax({
             type: "post",
             url: "getHisData",
             data: {
                 starttime: starttime, // "2018-2-1 10：00：00",
-                endtime: endtime,     //"2018-10-5 10：00：00",
+                endtime: endtime, //"2018-10-5 10：00：00",
                 monitorpointid: did
             },
             dataType: "json",
             success: function (result) {
+
                 var data = JSON.parse(result);
                 //UI图表部分
                 eventChart1.setOption({dataset: {source: data}});
@@ -1605,14 +2079,35 @@
                 });
                 //频率HZ图表部分
                 eventChart2.setOption({dataset: {source: data}});
+                $('#item2-HZ-ctrl input.default-show').each(function () {//显示默认的曲线系列
+                    $(this).trigger('click');
+                });
                 //功率P图表部分
                 eventChart3.setOption({dataset: {source: data}});
                 $('#item2-P-ctrl input.default-show').each(function () {//显示默认的曲线系列
                     $(this).trigger('click');
                 });
+            }
+        });
+
+        //取thd数据
+        $.ajax({
+            type: "post",
+            url: "getHisDataTHD",
+            data: {
+                starttime: starttime, // "2018-2-1 10：00：00",
+                endtime: endtime, //"2018-10-5 10：00：00",
+                monitorpointid: did
+            },
+            dataType: "json",
+            success: function (result) {
+
+                var data = JSON.parse(result);
                 //thd 图表部分
                 eventChart5.setOption({dataset: {source: data}});
-
+                $('#item2-thd-ctrl input.default-show').each(function () {//显示默认的曲线系列
+                    $(this).trigger('click');
+                });
             }
         });
 
@@ -1626,10 +2121,41 @@
                 monitorpointid: did
             },
             dataType: "json",
-            success: function (result) {
-                var data = JSON.parse(result);
-                eventChart4.setOption({dataset: {source: data}});
-                $('#item2-LyTx-ctrl input.default-show').each(function () {//显示默认的系列
+            success: function(result){
+               var data=JSON.parse(result);
+               if(data != null) {
+                   eventChart4.setOption({dataset: {source: data}});
+                   $('#item2-LyTx-ctrl input.default-show').each(function () {//显示默认的系列
+                       $(this).trigger('click');
+                   });
+               }
+            }
+        });
+
+    }
+
+    //wet temp
+    function getDataTemp(starttime, endtime, did) {
+        $.ajax({
+            type: "post",
+            url: "getHisDataEnvrionment",
+            data: {
+                starttime: starttime,
+                endtime: endtime,
+                monitorpointid: did
+            },
+            dataType: "json",
+            success: function(result){
+                var data=JSON.parse(result);
+                //temp-env 图表部分
+                eventChart6.setOption({dataset: {source: data}});
+                $('#item2-temp-env input.default-show').each(function () {//显示默认的曲线系列
+                    $(this).trigger('click');
+                });
+
+                //wet-env 图表部分
+                eventChart7.setOption({dataset: {source: data}});
+                $('#item2-wet-env input.default-show').each(function () {//显示默认的曲线系列
                     $(this).trigger('click');
                 });
             }
@@ -1638,8 +2164,7 @@
 
     <!-- 时间选择器-->
     $('.form_datetime').datetimepicker({
-        //language:  'fr',
-        language: 'zh-CN',
+        language: 'cn',
         weekStart: 1,
         todayBtn: 1,
         autoclose: 1,
@@ -1663,29 +2188,49 @@
         $('.lastDate').datetimepicker('setEndDate', $(this).val());
     });
 
+    $("#firstDate").val(getFormatDate(-1));
+    $("#lastDate").val(getFormatDate(0));
 
-    // todo: fix a strange bug, use this temporary method for test.
-    var markOfClick = false;
+    //获取当前日期前adddaycount天时间
+    function getFormatDate(AddDayCount) {
+        var dd = new Date();
+        dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
+        var y = dd.getFullYear();
+        var m = dd.getMonth() + 1;//获取当前月份的日期
+        var d = dd.getDate();
+        var h = dd.getHours();
+        var minute = dd.getMinutes();
+        var s = dd.getSeconds();
 
-    function searchHisTwice() {
-        if (markOfClick)
-            searchHis();
-        markOfClick = true;
-        searchHis();
+        var seperator1 = "-";
+        var seperator2 = ":";
+
+        var currentdate = y + seperator1 + m + seperator1 + d
+            + " " + h + seperator2 + minute
+            + seperator2 + s;
+        return currentdate;
     }
 
     function searchHis() {
         var did = $("#his-mpid-select").val();
+        var didtemp = $("#his-temp-mpid-select").val();
         var stime = $("#firstDate").val();
         var etime = $("#lastDate").val();
 
         if (stime > etime) {
             alert("开始日期不能早于结束日期");
-        } else if (did != "" && stime != "" && etime != "") {
-            getData(stime, etime, did);
+        } else if(did == null) {
+            alert("请选择检测点");
+        } else if(did != "" && didtemp != "" && stime != "" && etime != "") {
+            var options=$("#item2-menu option:selected"); //获取选中的项
+
+            if(options.val() == "item2-6" || options.val() == "item2-7"){
+                getDataTemp(stime, etime, didtemp);
+            } else if(options.val() == "item2-1" || options.val() == "item2-2" || options.val() == "item2-3" || options.val() == "item2-4" || options.val() == "item2-5"){
+                getData(stime, etime, did);
+            }
         }
     }
-
 </script>
 
 </body>

@@ -21,6 +21,11 @@
         <property name="hbm2ddl.auto">update</property>
         <property name="current_session_context_class">thread</property>
 
+        <!-- MYSQL链接断开-->
+        <property name="connection.autoReconnect">true</property>
+        <property name="connection.autoReconnectForPools">true</property>
+        <property name="connection.is-connection-validation-required">true</property>
+
         <!-- 持久化类所对应的映射文件 -->
         <mapping class="hibernatePOJO.AssessRecord"/>
         <mapping class="hibernatePOJO.BasicSetting"/>

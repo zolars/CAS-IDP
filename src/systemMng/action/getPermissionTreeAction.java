@@ -8,6 +8,7 @@ import systemMng.dao.PermissionDAO;
 import systemMng.dao.impl.PermissionDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,12 +28,13 @@ public class getPermissionTreeAction extends ActionSupport {
     /* 查询所有功能权限
      */
     public String execute() throws Exception {
+        List ptree = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
             PermissionDAO dao = new PermissionDAOImpl();
-            List ptree = dao.getPermissionTree();
+            ptree = dao.getPermissionTree();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allptree", ptree);
@@ -42,6 +44,8 @@ public class getPermissionTreeAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            ptree = null;
         }
         return "success";
     }

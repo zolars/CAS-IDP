@@ -29,6 +29,7 @@ public class setAssessmentInfoAction extends ActionSupport {
     /* 根据
      */
     public String execute() throws Exception {
+        List<EventPower> pedata = new ArrayList();
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -38,21 +39,21 @@ public class setAssessmentInfoAction extends ActionSupport {
 
             EventDAO dao = new EventDAOImpl();
 
-            List<EventPower> pedata = new ArrayList();
-
             boolean rt = dao.setAssessInfo(Integer.parseInt(red_yellow), Integer.parseInt(yellow_green));
             JSONObject jsonObject = new JSONObject();
 
-            if(rt)
+            if(rt) {
                 jsonObject.put("提示", "设置成功！");
-            else
+            } else {
                 jsonObject.put("提示", "设置失败，请重试！");
-
+            }
             result = JSON.toJSONString(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            pedata = null;
         }
         return "success";
     }

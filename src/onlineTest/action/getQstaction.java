@@ -8,6 +8,7 @@ import onlineTest.dao.impl.RMSDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,6 +29,26 @@ public class getQstaction extends ActionSupport {
     /* 根据监测点获取趋势图数据
      */
     public String execute() throws Exception {
+        //getQstRMS
+        List qstdata = new ArrayList();
+        //getQstTHD
+        List thddata = new ArrayList();
+        //getQstHZ
+        List hzdata = new ArrayList();
+        //getQstUNB%
+        List unbdata = new ArrayList();
+        //getQstW
+        List wdata = new ArrayList();
+        //getQstVA
+        List vadata = new ArrayList();
+        //getQstVar
+        List vardata = new ArrayList();
+        //getQstPF
+        List pfdata = new ArrayList();
+        //getQstPST
+        List pstdata = new ArrayList();
+        //getQstPLT
+        List pltdata = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -41,29 +62,29 @@ public class getQstaction extends ActionSupport {
 
             //1 records
             //getQstRMS
-            List qstdata = rmsdao.getCurrentRMSData(did);
+            qstdata = rmsdao.getCurrentRMSData(did);
             //getQstTHD
-            List thddata = rmsdao.getCurrentTHDData(did);
+            thddata = rmsdao.getCurrentTHDData(did);
             //getQstHZ
-            List hzdata = rmsdao.getCurrentHzData(did);
+            hzdata = rmsdao.getCurrentHzData(did);
             //getQstUNB%
-            List unbdata = rmsdao.getCurrentUnbData(did);
+            unbdata = rmsdao.getCurrentUnbData(did);
             //getQstW
-            List wdata = rmsdao.getCurrentWData(did);
+            wdata = rmsdao.getCurrentWData(did);
             //getQstVA
-            List vadata = rmsdao.getCurrentVAData(did);
+            vadata = rmsdao.getCurrentVAData(did);
             //getQstVar
-            List vardata = rmsdao.getCurrentVarData(did);
+            vardata = rmsdao.getCurrentVarData(did);
             //getQstPF
-            List pfdata = rmsdao.getCurrentPFData(did);
+            pfdata = rmsdao.getCurrentPFData(did);
             //getQstDPF
-            List dpfdata = rmsdao.getCurrentDPFData(did);
+            //List dpfdata = rmsdao.getCurrentDPFData(did);
             //getQstTAN
-            List tandata = rmsdao.getCurrentTanData(did);
+            //List tandata = rmsdao.getCurrentTanData(did);
             //getQstPST
-            List pstdata = rmsdao.getCurrentPstData(did);
+            pstdata = rmsdao.getCurrentPstData(did);
             //getQstPLT
-            List pltdata = rmsdao.getCurrentPltData(did);
+            pltdata = rmsdao.getCurrentPltData(did);
 
             // PowerparmMonitor pp = DataOnline.getParmMap().get(did);
             // PowerxbMonitor pxb = DataOnline.getXbMap().get(did);
@@ -71,13 +92,14 @@ public class getQstaction extends ActionSupport {
             jsonObject.put("allRMS", qstdata);
             jsonObject.put("allTHD", thddata);
             jsonObject.put("allHZ", hzdata);
-            jsonObject.put("allUNB", unbdata);
+
             jsonObject.put("allW", wdata);
             jsonObject.put("allVA", vadata);
             jsonObject.put("allVAR", vardata);
             jsonObject.put("allPF", pfdata);
-            jsonObject.put("allDPF", dpfdata);
-            jsonObject.put("allTAN", tandata);
+            jsonObject.put("allUNB", unbdata);
+            //jsonObject.put("allDPF", dpfdata);
+            //jsonObject.put("allTAN", tandata);
             jsonObject.put("allPST", pstdata);
             jsonObject.put("allPLT", pltdata);
 
@@ -86,6 +108,17 @@ public class getQstaction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            qstdata = null;
+            thddata = null;
+            hzdata = null;
+            unbdata = null;
+            wdata = null;
+            vadata = null;
+            vardata = null;
+            pfdata = null;
+            pstdata = null;
+            pltdata = null;
         }
         return "success";
     }

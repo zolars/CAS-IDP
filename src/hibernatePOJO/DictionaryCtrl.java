@@ -9,6 +9,7 @@ public class DictionaryCtrl {
     private String forTrue;
     private String forFalse;
     private int functioncode;
+    private String zbj;
 
     public long getId() {
         return id;
@@ -59,6 +60,15 @@ public class DictionaryCtrl {
         this.functioncode = functioncode;
     }
 
+    public String getZbj() {
+        return zbj;
+    }
+
+    public void setZbj(String zbj) {
+        this.zbj = zbj;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,12 +79,13 @@ public class DictionaryCtrl {
                 Objects.equals(addr, that.addr) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(forTrue, that.forTrue) &&
-                Objects.equals(forFalse, that.forFalse);
+                Objects.equals(forFalse, that.forFalse) &&
+                Objects.equals(zbj,that.zbj);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, addr, description, forTrue, forFalse, functioncode);
+        return Objects.hash(id, addr, description, forTrue, forFalse, functioncode,zbj);
     }
 }

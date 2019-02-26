@@ -37,7 +37,7 @@ public class Sms {
 
                 if (Return3.indexOf("OK", 0) != -1) {
                     System.out.println("AT+S 成功");
-                    Thread.sleep(30000);  //设备重启时间，暂定为3s
+                    //Thread.sleep(2000);  //设备重启时间，暂定为3s
                     String Return5 = myport.sendAT(Command5);
 
                     if (Return5.indexOf("OK", 0) != -1) {
@@ -54,9 +54,9 @@ public class Sms {
 
         } catch (RemoteException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        }// catch (InterruptedException e) {
+        //    e.printStackTrace();
+        //}
     }
 
     /**

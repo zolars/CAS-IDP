@@ -1,5 +1,11 @@
 package Util;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class ToHex {
     public static String toHex(byte[] bytes) {
 
@@ -67,6 +73,34 @@ public class ToHex {
 
     }
 
+    /**
+     * 这个方法挺简单的。
+     * DecimalFormat is a concrete subclass of NumberFormat that formats decimal numbers.
+     * @param d
+     * @return
+     */
+    public static String formatDouble(double d) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        return df.format(d);
+    }
 
+    //String 保留两位
+    public static String formatString(String str) {
+        String result = String.format("%.2f", Double.valueOf(str));
+        return result;
+    }
+
+    //获取当前时间前后推移的时间
+    public static String beforeNowTime(int second){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar c = new GregorianCalendar();
+        Date date = new Date();
+        System.out.println("系统当前时间      ："+df.format(date));
+        c.setTime(date);//设置参数时间
+        c.add(Calendar.SECOND,second);//把日期往后增加SECOND 秒.整数往后推,负数往前移动
+        date=c.getTime(); //这个时间就是日期往后推一天的结果
+        String str = df.format(date);
+        return str;
+    }
 
     }

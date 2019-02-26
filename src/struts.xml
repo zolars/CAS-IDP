@@ -274,6 +274,22 @@
             </result>
         </action>
 
+        <action name="modifyOneDevice" class="deviceManage.action.modifyOneDeviceAction">
+            <!--modifyOneDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="deleteOneDevice" class="deviceManage.action.deleteOneDeviceAction">
+            <!--deleteOneDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <action name="getXB" class="onlineTest.action.getXBaction">
             <!--getXB -->
             <result name="failure">/failure.jsp</result>
@@ -298,14 +314,6 @@
             </result>
         </action>
 
-        <action name="setGenerationData" class="onlineTest.action.setGenerationDataaction">
-            <!--setParameter -->
-            <result name="failure">/failure.jsp</result>
-            <result name="success" type="json">
-                <param name="root">result</param>
-            </result>
-        </action>
-
         <action name="getSXDY" class="onlineTest.action.getSXDYaction">
             <!--getSXDY -->
             <result name="failure">/failure.jsp</result>
@@ -322,6 +330,14 @@
             </result>
         </action>
 
+        <action name="getCtrlParameter" class="onlineTest.action.getCtrlParameterAction">
+            <!--getCtrlParameter -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <action name="getParameterHis" class="onlineTest.action.getParameteractionHis">
             <!--getParameter -->
             <result name="failure">/failure.jsp</result>
@@ -332,6 +348,20 @@
 
         <action name="getMonitorPoints" class="onlineTest.action.getMonitorPointsAction">
             <!--getMonitorPoints -->
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getMonitorPointsEnvironment" class="onlineTest.action.getMonitorPointsEnvironmentAction">
+            <!--getMonitorPoints -->
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getCtrlPoints" class="onlineTest.action.getCtrlPointsAction">
+            <!--getCtrlPoints -->
             <result name="success" type="json">
                 <param name="root">result</param>
             </result>
@@ -443,6 +473,14 @@
             </result>
         </action>
 
+        <action name="setSMSlevel" class="systemMng.action.setSMSlevelAction">
+            <!--setSMSlevel -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <action name="deleteDeviceAlarmRoles" class="deviceManage.action.deleteDeviceAlarmRolesAction">
             <!--deleteDeviceAlarmRoles -->
             <result name="failure">/failure.jsp</result>
@@ -509,6 +547,13 @@
             </result>
         </action>
 
+        <action name="getHisDataTHD" class="historyData.action.getHisTHDAction">
+            <!--getHisTHDData -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
         <!--获取浪涌塌陷数据-->
         <action name="getHisDataLyTx" class="historyData.action.getHisLyTxAction">
             <result name="failure">/failure.jsp</result>
@@ -516,6 +561,15 @@
                 <param name="root">result</param>
             </result>
         </action>
+
+        <!--获取浪涌塌陷数据-->
+        <action name="getHisDataEnvrionment" class="historyData.action.getHisEnvironmentAction">
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <!--获取历史数据结束-->
 
         <action name="getAllIDPDevice" class="deviceManage.action.getAllIDPDeviceAction">
@@ -592,8 +646,10 @@
 
         <action name="getCtrlEvent" class="efficiencyAnalysis.action.getCtrlEventAction">
             <!--getCtrlEvent -->
-            <result name="failure"></result>
-            <result name="success" type="json"></result>
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
         </action>
 
         <action name="getEnvironmentEvent" class="efficiencyAnalysis.action.getEnvironmentEventAction">
@@ -604,17 +660,25 @@
             </result>
         </action>
 
-        <action name="getDetailEvironmentEventtemp"
+        <!--<action name="getDetailCtrlEvent" class="efficiencyAnalysis.action.getDetailCtrlEvent">
+            &lt;!&ndash;getDetailCtrlEvent &ndash;&gt;
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>-->
+
+        <action name="getDetailEnvironmentEventtemp"
                 class="efficiencyAnalysis.action.getDetailEvironmentEventtempAction">
-            <!--getEnvironmentEvent -->
+            <!--getDetailEnvironmentEventtemp -->
             <result name="failure">/failure.jsp</result>
             <result name="success" type="json">
                 <param name="root">result</param>
             </result>
         </action>
 
-        <action name="getDetailEvironmentEventwet" class="efficiencyAnalysis.action.getDetailEvironmentEventwetAction">
-            <!--getEnvironmentEvent -->
+        <action name="getDetailEnvironmentEventwet" class="efficiencyAnalysis.action.getDetailEvironmentEventwetAction">
+            <!--getDetailEnvironmentEventwet -->
             <result name="failure">/failure.jsp</result>
             <result name="success" type="json">
                 <param name="root">result</param>
@@ -701,6 +765,14 @@
             </result>
         </action>
 
+        <action name="getBasicSetting" class="systemMng.action.getBasicSettingAction">
+            <!--getBasicSetting -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <action name="addDeviceAlarmInfo" class="deviceManage.action.addDeviceAlarmPreContentAction">
             <!--addDeviceAlarmInfo -->
             <result name="failure">/failure.jsp</result>
@@ -752,6 +824,7 @@
         <action name="getOneComputerroomMapData" class="efficiencyAnalysis.action.getOneComputerroomMapDataAction">
             <!--getOneComputerroomMapData -->
             <result name="failure">/failure.jsp</result>
+           <!-- <result name="error">/failure.jsp</result>-->
             <result name="success" type="json">
                 <param name="root">result</param>
             </result>
@@ -759,6 +832,30 @@
 
         <action name="plantformMessage" class="smsplantform.webservice">
             <!--plantformMessage -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getDFMP" class="efficiencyAnalysis.action.getDFMPAction">
+            <!--getDFMP -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="SearchOneTypeDevice" class="systemMng.action.SearchOneTypeDeviceAction">
+            <!--SearchOneTypeDevice -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="SearchAllDevice" class="systemMng.action.SearchAllDeviceAction">
+            <!--SearchAllDevice -->
             <result name="failure">/failure.jsp</result>
             <result name="success" type="json">
                 <param name="root">result</param>

@@ -75,25 +75,25 @@
             <column name="Ssum" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
         </property>
         <property name="pf1">
-            <column name="PF1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+            <column name="PF1" sql-type="float(255,4)" precision="255" scale="4" not-null="true"/>
         </property>
         <property name="pf2">
-            <column name="PF2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+            <column name="PF2" sql-type="float(255,4)" precision="255" scale="4" not-null="true"/>
         </property>
         <property name="pf3">
-            <column name="PF3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+            <column name="PF3" sql-type="float(255,4)" precision="255" scale="4" not-null="true"/>
         </property>
         <property name="pFsum">
-            <column name="PFsum" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+            <column name="PFsum" sql-type="float(255,4)" precision="255" scale="4" not-null="true"/>
         </property>
         <property name="cosPhi1">
-            <column name="CosPHI1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+            <column name="CosPHI1" sql-type="float(255,4)" precision="255" scale="4" not-null="true"/>
         </property>
         <property name="cosPhi2">
-            <column name="CosPHI2" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+            <column name="CosPHI2" sql-type="float(255,4)" precision="255" scale="4" not-null="true"/>
         </property>
         <property name="cosPhi3">
-            <column name="CosPHI3" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>
+            <column name="CosPHI3" sql-type="float(255,4)" precision="255" scale="4" not-null="true"/>
         </property>
         <property name="iflU1">
             <column name="Ifl_U1" sql-type="float(255,2)" precision="255" scale="2" not-null="true"/>

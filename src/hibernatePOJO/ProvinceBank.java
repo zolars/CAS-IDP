@@ -9,6 +9,7 @@ public class ProvinceBank {
     private String compRoom;
     private String didset;
     private String tempset;
+    private String cidset;
 
     public String getPbid() {
         return pbid;
@@ -58,6 +59,14 @@ public class ProvinceBank {
         this.tempset = tempset;
     }
 
+    public String getCidset() {
+        return cidset;
+    }
+
+    public void setCidset(String cidset) {
+        this.cidset = cidset;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,12 +77,13 @@ public class ProvinceBank {
                 Objects.equals(cbidset, that.cbidset) &&
                 Objects.equals(compRoom, that.compRoom) &&
                 Objects.equals(didset, that.didset) &&
-                Objects.equals(tempset, that.tempset);
+                Objects.equals(tempset, that.tempset) &&
+                Objects.equals(cidset, that.cidset);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(pbid, pbname, cbidset, compRoom, didset, tempset);
+        return Objects.hash(pbid, pbname, cbidset, compRoom, didset, tempset, cidset);
     }
 }

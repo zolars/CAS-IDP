@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+ <taxrates>
+  <taxrate id="1">
+    <lab>序列号：</lab>
+    <num>IDP Server-CCB-XA-201800185</num>
+  </taxrate>
+</taxrates>

@@ -25,9 +25,10 @@ public class getMonitorPointsAction extends ActionSupport {
     }
 
 
-    /* 根据机房名称查询检测点设备
+    /* 根据机房名称查询检测点IDP类型设备
      */
     public String execute() throws Exception {
+        List mpdata = new ArrayList();
         try {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -35,8 +36,6 @@ public class getMonitorPointsAction extends ActionSupport {
             String computerroom = request.getParameter("computerroom");
 
             MonitorPointDAO dao = new MonitorPointDAOImpl();
-
-            List mpdata = new ArrayList();
 
             mpdata = dao.getLocalAllMonitorPoint(computerroom);
 
@@ -48,6 +47,8 @@ public class getMonitorPointsAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            mpdata = null;
         }
         return "success";
     }

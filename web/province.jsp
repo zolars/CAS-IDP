@@ -38,8 +38,12 @@
 
     <!-- jquery -->
     <script type="text/javascript" src="bootstrap-timepicker/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+
+    <!-- PNotify -->
+    <script type="text/javascript" src="js/pnotify.custom.min.js"></script>
+    <link href="css/pnotify.custom.min.css" rel="stylesheet" type="text/css" />
     <!--告警弹窗-->
-    <script type="text/javascript" src="js/websocketconnect.js"></script>
+    <script type="text/javascript" src = "js/websocketconnect.js"></script>
 
     <style>
         .datetimepicker {
@@ -114,7 +118,7 @@
 <header id="header" class="media">
     <div class="header-left">
         <a href="" id="menu-toggle"></a>
-        <img src="img/index/logo.jpg" alt="" class="header-img">
+        <img src="img/index/logo.png" alt="" class="header-img">
     </div>
     <div class="header-right">
         <div class="media" id="top-menu">
@@ -163,7 +167,6 @@
                 </script>
             </div>
 
-
             <!-- 注销按钮 -->
             <div class="pull-right header-right-text">
                 <a class="header-logout" href="/index.jsp">注销</a>
@@ -190,7 +193,7 @@
 
         <h4 class="page-title">关键信息集中监控</h4>
 
-        <!-- Time choose -->
+        <%--<!-- Time choose -->
         <div class="block-area">
             <div class="row">
                 <div class="container">
@@ -218,8 +221,7 @@
                                 <input type="hidden" id="dtp_input2" value=""/><br/>
                             </div>
                             <!-- 刷新按钮 -->
-                            <button id="refresh-btn" class="button-primary button-pill button-small"
-                                    data-loading-text="Loading..." type="button">
+                            <button id="refresh-btn" class="button-primary button-pill button-small" data-loading-text="Loading..." type="button" onclick="refreshfunc()">
                                 刷新
                             </button>
                         </fieldset>
@@ -227,7 +229,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div>--%>
 
         <!-- Quick Stats -->
         <div id="first-page" class="block-area">
@@ -302,7 +304,7 @@
                          position: relative;
                      ">
 
-                    <img id="preview" src="upload/ElectricSystemImg.jpg" alt="" width="507px;" height="175px;"/>
+                    <img id="preview" src="upload/ElectricSystemImg.jpg" alt="" width="100%;" height="175px;"/>
                     <form action="uploadOne" method="post" enctype="multipart/form-data">
                         <a class="file">选择文件
                             <input type="file" name="uploadFile" onchange="uploadImage(this)">
@@ -316,9 +318,23 @@
                 </div>
 
                 <div id="devicebar" class="col-md-2 col-xs-6 chart-item"
-                     style="width: 30%; height: 200px; text-align:center">
-                    <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0">
-                        <tr style="height: 8px;"></tr>
+                     style="width: 30%; height: 200px; text-align:center;">
+                    <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0" style="margin: auto">
+                        <tr style="height: 0px;"></tr>
+                        <thead>
+                        <tr id="IDPpics">
+                        </tr>
+                        </thead>
+
+                        <thead>
+                        <tr id="IDPnames">
+                        </tr>
+                        </thead>
+
+                        <thead>
+                        <tr id="IDPstatus">
+                        </tr>
+                        </thead>
 
                         <thead>
                         <tr id="ctrlpics">
@@ -335,18 +351,11 @@
                         </tr>
                         </thead>
 
-                        <!--
-                        <tr>
-                            <td style="font-size: 12px;color: #000000" id="ctrlstatus3">状态：良</td>
-                            <td style="font-size: 12px;color: #000000" id="ctrlstatus5">状态：良</td>
-                        </tr>
-                        -->
-
-                        <tr style="height: 18px;"></tr>
+                        <tr style="height: 5px;"></tr>
                     </table>
                 </div>
 
-                <div id="" class="col-md-2 col-xs-6 chart-item" style="width: 30%; height: 200px;">
+                <div id="comproomalarmbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%; height: 200px;">
                 </div>
 
             </div>
@@ -379,24 +388,26 @@
 <script src="js/functions.js"></script>
 
 <script>
+    function refreshfunc(){
+       /* $("#refresh-btn").button('loading').delay(500).queue(function () {*/
+            var pname = $.cookie('province_name');
+            var stime = getFormatDate(-1); //$("#firstDate").val();
+            var etime = getFormatDate(0); //$("#lastDate").val();
+            var cbname = $("#comproom_code option:selected").val();
+
+            getOneProvinceMapData(pname, stime, etime);
+            getEnvironmentInfo(cbname);
+            getCtrlStatus(cbname, stime, etime);
+    }
+
     $(document).ready(function () {
-        $("#refresh-btn").click(function () {
-            $(this).button('loading').delay(500).queue(function () {
-                var pname = $.cookie('province_name');
-                var stime = $("#firstDate").val();
-                var etime = $("#lastDate").val();
-                var cbname = $("#comproom_code option:selected").val();
-
-                getOneProvinceMapData(pname, stime, etime);
-                getEnvironmentInfo(cbname);
-                getCtrlStatus(cbname, stime, etime);
-
-                $(this).button('reset');
-                $(this).dequeue();
-            });
-        });
+        refreshfunc();
 
         $('#second-page').css('display', 'none');
+
+        setInterval(function () {
+            refreshfunc();
+        }, 10000); //每10s刷新一次
     });
 
 </script>
@@ -494,6 +505,7 @@
     var tempChart = echarts.init(document.getElementById('tempbar'));
     var humidChart = echarts.init(document.getElementById('humidbar'));
     var panelChart = echarts.init(document.getElementById('panelbar'));
+    var comproomalarmChart = echarts.init(document.getElementById('comproomalarmbar'));
 
 
     window.onresize = function () {
@@ -504,6 +516,7 @@
         $("#tempChart").width($('#tempbar').width());
         $("#humidChart").width($('#humidbar').width());
         $("#panelChart").width($('#panelbar').width());
+        $("#comproomalarmChart").width($('#comproomalarmbar').width());
 
         eventChart.resize();
         alarmChart.resize();
@@ -512,23 +525,33 @@
         tempChart.resize();
         humidChart.resize();
         panelChart.resize();
+        comproomalarmChart.resize();
     };
 
     var pname = $.cookie('province_name');
-    var cbname = $("#comproom_code option:selected").val();
-
-    $("#firstDate").val(getFormatDate(-1));
-    $("#lastDate").val(getFormatDate(0));
-
-    var stime = $("#firstDate").val();
-    var etime = $("#lastDate").val();
+    var stime = getFormatDate(-1); //$("#firstDate").val();
+    var etime = getFormatDate(0);  //$("#lastDate").val();
 
     getOneProvinceMapData(pname, stime, etime);
-    getEnvironmentInfo(cbname);
-    getCtrlStatus(cbname, stime, etime);
+
+    var flag = 1;
+    setInterval(function () {
+
+        var cbname = $("#comproom_code option:selected").val();
+
+        if(cbname != "" && flag == 1) {
+            getEnvironmentInfo(cbname);
+            getCtrlStatus(cbname, stime, etime);
+            flag = 2;
+        }
+    }, 500);
+
+    //$("#firstDate").val(getFormatDate(-1));
+   // $("#lastDate").val(getFormatDate(0));
 
     //获取事件、告警、评估等级
     function getOneProvinceMapData(pname, stime, etime) {
+
         $.ajax({
             type: "post",
             url: "getOneProvinceMapData",
@@ -539,6 +562,7 @@
             },
             dataType: "json",
             success: function (data) {
+
                 //[1,2,3,4,1,1,1,1,3,2001]: event1, event2,event3, event4, alarm1, alram2, alarm3, alartm4, degree(R:1,Y:2,G:3)，cbid
                 var obj = eval('(' + data + ')');
                 var list = obj.oplist;
@@ -644,8 +668,10 @@
                     }]
                 };
 
-                //指定仪表盘的图表的配置项和数据
                 var paneloption = {
+                    title: {
+                        text: '评估等级'
+                    },
                     tooltip: {
                         formatter: "{a} <br/>{b} : {c}%"
                     },
@@ -653,13 +679,16 @@
                         {
                             name: '',
                             type: 'gauge',
+                            center: ['50%', '60%'], // 默认全局居中
+                            radius: '90%',
                             min: 1,
                             max: 3,
                             detail: {formatter: '{value}'},
-                            data: [{value: degree[0], name: '评估等级'}]
+                            data: [{value: degree[0], name: ''}]
                         }
                     ]
                 };
+
 
                 //指定评估结果块的数据
                 for (var i = 0; i < xdata.length; i++) {
@@ -687,7 +716,7 @@
     }
 
     function getEnvironmentInfo(cbname) {
-        //获取温度、湿度
+        //获取温度、湿度、机房告警事件
         $.ajax({
             type: "post",
             url: "getOneComputerroomMapData",
@@ -696,31 +725,146 @@
             },
             dataType: "json",
             success: function (data) {
-
                 var obj = eval('(' + data + ')');
                 var list = obj.oplist;
 
+                var listalarm = obj.oplistalarm;
+
                 var tempdata = [];
                 var humiddata = [];
+                var compalarmdata = [];
+
                 var xdata = [];
 
+                //解析温度湿度事件
                 for (var i = 0; i < list.length; i++) {
                     var k = true;
-                    for (var j = 0; j < xdata.length; j++) {
-                        if (xdata[j] == list[i][0]) {
-                            k = false;
-                        }
-                    }
-                    if (k) {
+                    // for (var j = 0; j < xdata.length; j++) {
+                    //     if (xdata[j] == list[i][0]) {
+                    //         k = false;
+                    //     }
+                    // }
+                    // if (k) {
                         xdata[xdata.length++] = list[i][0];
                         tempdata[tempdata.length++] = list[i][1];
                         humiddata[humiddata.length++] = list[i][2];
-                    }
+                    // }
+                }
+
+                //解析alram事件
+                for (var i = 0; i < listalarm.length; i++) {
+                    compalarmdata[i] = listalarm[i];
                 }
 
                 //指定温度的图表的配置项和数据
                 var tempoption = {
                     title: {
+                        text: 'IDP-A',
+                        subtext: '温湿度监测'
+                    },
+                    tooltip: {
+                        formatter: "{a} <br/>{b} : {c}",
+                        borderWidth: 0,
+                        padding: 50,
+                    },
+                    series: [
+                        {
+                            name: xdata[0],
+                            type: 'gauge',
+                            center: ['30%', '50%'], // 默认全局居中
+                            radius: '80%',
+                            min: 0,
+                            max: 100,
+                            itemStyle: {
+                                normal: {
+                                    color: '#389863'
+                                }
+                            },
+                            axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
+                                show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
+                                lineStyle: {			// 仪表盘轴线样式。
+                                     color: [[0.3, '#91c7ae'], [0.6, '#63869e'], [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                    width: 10,					//轴线宽度,默认 30。
+                                    shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                    shadowColor: "#fff"		//阴影颜色。支持的格式同color。
+                                }
+                            },
+                            splitLine: {			// 分隔线样式。
+                                show: true,				// 是否显示分隔线,默认 true。
+                                length: 10,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                                lineStyle: {			// 分隔线样式。
+                                    color: "#eee",				//线的颜色,默认 #eee。
+                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                    width: 2,					//线度,默认 2。
+                                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
+                                    shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
+                                }
+                            },
+                            itemStyle: {			// 仪表盘指针样式。
+                                color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
+                                opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
+                                borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
+                                borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
+                                shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
+                            },
+                            detail: {formatter: '{value}'},
+                            data: [{value: tempdata[0], name: '℃'}]
+
+                        },
+                        {
+                            name: xdata[0],
+                            type: 'gauge',
+                            center: ['70%', '50%'], // 默认全局居中
+                            radius: '80%',
+                            min: 0,
+                            max: 100,
+                            itemStyle: {
+                                normal: {
+                                    color: '#389863'
+                                }
+                            },
+                            axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
+                                show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
+                                lineStyle: {			// 仪表盘轴线样式。
+                                    color: [[0.5, '#91c7ae'],  [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                    width: 10,					//轴线宽度,默认 30。
+                                    shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                    shadowColor: "#fff"		//阴影颜色。支持的格式同color。
+                                }
+                            },
+                            splitLine: {			// 分隔线样式。
+                                show: true,				// 是否显示分隔线,默认 true。
+                                length: 10,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                                lineStyle: {			// 分隔线样式。
+                                    color: "#eee",				//线的颜色,默认 #eee。
+                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                    width: 2,					//线度,默认 2。
+                                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
+                                    shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
+                                }
+                            },
+                            itemStyle: {			// 仪表盘指针样式。
+                                color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
+                                opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
+                                borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
+                                borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
+                                shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
+                            },
+                            detail: {formatter: '{value}'},
+                            data: [{value: humiddata[0], name: '%'}]
+                        }
+
+                    ]
+
+                    /*title: {
                         text: '温度',
                         subtext: '温度监测'
                     },
@@ -738,12 +882,12 @@
                             }
                         },
                         data: tempdata
-                    }]
+                    }]*/
                 };
 
                 //指定湿度的图表的配置项和数据
                 var humidoption = {
-                    title: {
+                   /* title: {
                         text: '湿度',
                         subtext: '湿度监测'
                     },
@@ -761,78 +905,212 @@
                             }
                         },
                         data: humiddata
+                    }]*/
+
+                    title: {
+                        text: 'IDP-B',
+                        subtext: '温湿度监测'
+                    },
+                    tooltip: {
+                        formatter: "{a} <br/>{b} : {c}"
+                    },
+                    series: [
+                        {
+                            name: xdata[1],
+                            type: 'gauge',
+                            center: ['30%', '50%'], // 默认全局居中
+                            radius: '80%',
+                            min: 0,
+                            max: 100,
+                            itemStyle: {
+                                normal: {
+                                    color: '#9F842F'
+                                }
+                            },
+                            axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
+                                show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
+                                lineStyle: {			// 仪表盘轴线样式。
+                                    color: [[0.3, '#91c7ae'], [0.6, '#63869e'], [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                    width: 10,					//轴线宽度,默认 30。
+                                    shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                    shadowColor: "#fff"		//阴影颜色。支持的格式同color。
+                                }
+                            },
+                            splitLine: {			// 分隔线样式。
+                                show: true,				// 是否显示分隔线,默认 true。
+                                length: 10,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                                lineStyle: {			// 分隔线样式。
+                                    color: "#eee",				//线的颜色,默认 #eee。
+                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                    width: 2,					//线度,默认 2。
+                                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
+                                    shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
+                                }
+                            },
+                            itemStyle: {			// 仪表盘指针样式。
+                                color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
+                                opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
+                                borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
+                                borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
+                                shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
+                            },
+                            detail: {formatter: '{value}'},
+                            data: [{value: tempdata[1], name: '℃'}]
+                        },
+
+                        {
+                            name: xdata[1],
+                            type: 'gauge',
+                            center: ['70%', '50%'], // 默认全局居中
+                            radius: '80%',
+                            min: 0,
+                            max: 100,
+                            itemStyle: {
+                                normal: {
+                                    color: '#9F842F'
+                                }
+                            },
+                            axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
+                                show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
+                                lineStyle: {			// 仪表盘轴线样式。
+                                    color: [[0.5, '#91c7ae'], [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                    width: 10,					//轴线宽度,默认 30。
+                                    shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                    shadowColor: "#fff"		//阴影颜色。支持的格式同color。
+                                }
+                            },
+                            splitLine: {			// 分隔线样式。
+                                show: true,				// 是否显示分隔线,默认 true。
+                                length: 10,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                                lineStyle: {			// 分隔线样式。
+                                    color: "#eee",				//线的颜色,默认 #eee。
+                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                    width: 2,					//线度,默认 2。
+                                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
+                                    shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
+                                }
+                            },
+                            itemStyle: {			// 仪表盘指针样式。
+                                color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
+                                opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
+                                borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
+                                borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
+                                shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
+                            },
+                            detail: {formatter: '{value}'},
+                            data: [{value: humiddata[1], name: '%'}]
+                        }
+                    ]
+                };
+
+                //指定湿度的图表的配置项和数据
+                var compalarmoption = {
+                    title: {
+                        text: '告警',
+                        subtext: '告警事件'
+                    },
+                    tooltip: {},
+                    xAxis: {
+                        data: ['电能','治理','环境']
+                    },
+                    yAxis: {
+                        type : 'value',
+                        minInterval : 1
+
+                    },
+                    series: [{
+                        name: '数值',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: '#3EA3D8'
+                            }
+                        },
+                        data: compalarmdata
                     }]
                 };
 
                 // 使用刚指定的配置项和数据显示图表。
                 tempChart.setOption(tempoption);
                 humidChart.setOption(humidoption);
+                comproomalarmChart.setOption(compalarmoption);
             }
         });
     }
 
     function getCtrlStatus(cbname, stime, etime) {
+        //获取治理设备及状态 + 在线监测设备及状态
+        $.ajax({
+            type: "post",
+            url: "getCtrlDevices",
+            data: {
+                cbname: cbname,
+                stime: stime,
+                etime: etime
+            },
+            dataType: "json",
+            success: function (data) {
 
-        getCtrlDidset();
+                var obj = eval('(' + data + ')');
+                var didlist = obj.didlist;
+                var rtlist = obj.rtlist;
+                var namelist = obj.namelist;
 
-        function getCtrlDidset() {
-            $.ajax({
-                type: "post",
-                url: "getCtrlDevices",
-                data: {
-                    cbname: cbname
-                },
-                dataType: "json",
-                success: function (data) {
-                    var obj = eval('(' + data + ')');
-                    var list = obj.rt;
+                var didlist2 = obj.didlist2;
+                var rtlist2 = obj.rtlist2;
+                var namelist2 = obj.namelist2;
 
-                    var pic = $("#ctrlpics")[0];
-                    pic.innerHTML = null;
-                    var name = $("#ctrlnames")[0];
-                    name.innerHTML = null;
-                    var status = $("#ctrlstatus")[0];
-                    status.innerHTML = null;
+                var pic = $("#ctrlpics")[0];
+                pic.innerHTML = null;
+                var name = $("#ctrlnames")[0];
+                name.innerHTML = null;
+                var status = $("#ctrlstatus")[0];
+                status.innerHTML = null;
 
-                    for (var i = 0; i < list.length; i++) {
-                        var did = list[i];
-                        pic.innerHTML += ('<td style="padding-right: 30px;"><img src="/img/2.png"/></td>');
-                        getDeviceCtrlStatus(did, name, status);
+                for (var i = 0; i < didlist.length; i++) {
+                    pic.innerHTML += ('<td style="padding-right: 50px;"><img src="img/icon/ctrl-pic.png"/></td>');
+                    name.innerHTML += ('<td style="font-size: 12px;color: #000000">名称：' + namelist[i] + '</td>');
+
+                    if (rtlist[i] === "正常")
+                        status.innerHTML += ('<td style="font-size: 12px;color: #000000">状态：良好</td>');
+                    else {
+                        status.innerHTML += ('<td><a data-toggle="popover" data-placement="bottom" data-trigger="hover"  data-html="true" data-title = "告警信息" data-content= "' + rtlist[i] + '" style="font-size: 12px;color: #FF0000">状态：告警</a></td>');
+                        $(function () {
+                            $("[data-toggle='popover']").popover();
+                        });
                     }
                 }
-            });
-        }
 
-        function getDeviceCtrlStatus(did, name, status) {
-            //获取治理设备状态
-            $.ajax({
-                    type: "post",
-                    url: "getOneCtrlData",
-                    data: {
-                        did: did,
-                        stime: stime,
-                        etime: etime
-                    },
-                    dataType: "json",
-                    success: function (data) {
-                        var obj = eval('(' + data + ')');
-                        var list = obj.name;
-                        name.innerHTML += ('<td style="font-size: 12px;color: #000000">名称：' + list + '</td>');
+                var pic2 = $("#IDPpics")[0];
+                pic2.innerHTML = null;
+                var name2 = $("#IDPnames")[0];
+                name2.innerHTML = null;
+                var status2 = $("#IDPstatus")[0];
+                status2.innerHTML = null;
 
-                        var rt = obj.rt;
-                        if (rt === "null") {
-                            status.innerHTML += ('<td style="font-size: 12px;color: #000000">状态：良好</td>');
-                        }
-                        else {
-                            status.innerHTML += ('<td><a data-toggle="popover" data-placement="bottom" data-trigger="hover"  data-html="true" data-title = "告警信息" data-content= "' + rt + '" style="font-size: 12px;color: #FF0000">状态：告警</a></td>');
-                            $(function () {
-                                $("[data-toggle='popover']").popover();
-                            });
-                        }
+                for (var i = 0; i < didlist2.length; i++) {
+                    pic2.innerHTML += ('<td style="padding-right: 50px;"><img src="img/icon/grab-pic.png"/></td>');
+                    name2.innerHTML += ('<td style="font-size: 12px;color: #000000">名称：' + namelist2[i] + '</td>');
+
+                    if (rtlist2[i] === "正常")
+                        status2.innerHTML += ('<td style="font-size: 12px;color: #000000">状态：良好</td>');
+                    else {
+                        status2.innerHTML += ('<td><a data-toggle="popover" data-placement="bottom" data-trigger="hover"  data-html="true" data-title = "告警信息" data-content= "' + rtlist2[i] + '" style="font-size: 12px;color: #FF0000">状态：告警</a></td>');
+                        $(function () {
+                            $("[data-toggle='popover']").popover();
+                        });
                     }
                 }
-            );
-        }
+            }
+        });
     }
 
     //获取当前日期前adddaycount天时间
@@ -863,7 +1141,7 @@
 <script type="text/javascript" src="bootstrap-timepicker/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript">
     $('.form_datetime').datetimepicker({
-        //language:  'fr',
+        language:  'cn',
         weekStart: 1,
         todayBtn: 1,
         autoclose: 1,
@@ -883,7 +1161,7 @@
 
 <!-- 动态加载菜单项 -->
 <script type="text/javascript">
-    var menulist = "<%=session.getAttribute("menulist")%>";
+    var menulist="<%=session.getAttribute("menulist")%>";
     var cbidstr = menulist.split(",");
     var isSystemMng = false;
     var isNewSystemMng = false;
@@ -898,87 +1176,89 @@
     var len = cbidstr[idx].length;
     cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
 
-    for (var i = 0; i < cbidstr.length; i++) {
+    for(var i = 0; i < cbidstr.length; i++){
 
         var menuname = "";
-        if (cbidstr[i] == " province.jsp") {
+        if(cbidstr[i] == " province.jsp"){
             isSystemMng = false;
             menuname = "集中监控";
         }
-        else if (cbidstr[i] == " efficiencyDevice.jsp") {
+      /*  else if(cbidstr[i] == " efficiencyDevice.jsp"){
             isSystemMng = false;
             menuname = "动力设施";
-        }
-        else if (cbidstr[i] == " onlineDetect.jsp") {
+        }*/
+        else if(cbidstr[i] == " onlineDetect.jsp"){
             isSystemMng = false;
             menuname = "在线监测";
         }
-        else if (cbidstr[i] == ' efficiencyAnalysis.jsp') {
+        else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
             isSystemMng = false;
             menuname = "动力分析";
         }
-        else if (cbidstr[i] == ' efficiencyAssessment.jsp') {
+       /* else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
             isSystemMng = false;
             menuname = "动力评估";
-        }
-        else if (cbidstr[i] == ' reportChart.jsp') {
+        }*/
+        else if(cbidstr[i] == ' reportChart.jsp'){
             isSystemMng = false;
             menuname = "报表功能";
         }
-        else if (cbidstr[i] == ' history.jsp') {
+        else if(cbidstr[i] == ' history.jsp'){
             isSystemMng = false;
             menuname = "历史曲线";
         }
-        else if (cbidstr[i].search('systemMng.jsp')) {
+        else if(cbidstr[i].search('systemMng.jsp')){
 
             //对字符串分段处理（2或3段）
             var substr = cbidstr[i].split("/");
 
-            if (substr.length == 2) {
+            if(substr.length == 2){
                 ulist.push(substr[1]);
             }
 
-            else {
+            else
+            {
                 ulist.push(substr[1]);
                 u2list.push(substr[2]);
             }
 
-            if (!isNewSystemMng) {//第一条systemMng的
+            if(!isNewSystemMng)
+            {//第一条systemMng的
                 isNewSystemMng = true;
                 menuname = "系统管理";
                 $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'>" + menuname + "</a></li>");
             }
             isSystemMng = true;
         }
-        if (!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
+        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
     }
 
-    for (var i = 1; i <= 8; i++) {
+    for(var i = 1; i <= 8; i++){
         var ustr = "item" + i;
 
-        for (var j = 0; j < ulist.length; j++) {
-            if (ustr == ulist[j]) {
+        for(var j = 0; j < ulist.length; j++){
+            if(ustr == ulist[j]){
                 break;
             }
-            if (j == ulist.length - 1) {
-                $("#" + ustr + "").remove();
+            if(j == ulist.length - 1){
+                $("#"+ustr+"").remove();
             }
         }
     }
 
-    for (var i = 1; i <= 9; i++) {
+    for(var i = 1; i <= 9; i++){
         var ustr;
-        if (i < 7)
+        if(i < 7)
             ustr = "secsubItem" + i;
         else
             ustr = "tridsubItem" + i;
 
-        for (var j = 0; j < u2list.length; j++) {
-            if (ustr == u2list[j]) {
+        for(var j = 0; j < u2list.length; j++){
+            if(ustr == u2list[j]){
                 break;
             }
-            if (j == u2list.length - 1) {
-                $("#" + ustr + "").remove();
+            if(j == u2list.length - 1){
+                $("#"+ustr+"").remove();
             }
         }
     }

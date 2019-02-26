@@ -23,5 +23,8 @@
         <property name="functioncode">
             <column name="functioncode" sql-type="int(255)"/>
         </property>
+        <property name="zbj">
+            <column name="zbj" sql-type="longtext" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

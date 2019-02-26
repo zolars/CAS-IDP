@@ -8,6 +8,7 @@ public class CityBank {
     private String compRoom;
     private String didset;
     private String tempset;
+    private String cidset;
 
     public String getCbid() {
         return cbid;
@@ -49,6 +50,14 @@ public class CityBank {
         this.tempset = tempset;
     }
 
+    public String getCidset() {
+        return cidset;
+    }
+
+    public void setCidset(String cidset) {
+        this.cidset = cidset;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,12 +67,13 @@ public class CityBank {
                 Objects.equals(cbname, cityBank.cbname) &&
                 Objects.equals(compRoom, cityBank.compRoom) &&
                 Objects.equals(didset, cityBank.didset) &&
-                Objects.equals(tempset, cityBank.tempset);
+                Objects.equals(tempset, cityBank.tempset) &&
+                Objects.equals(cidset, cityBank.cidset);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(cbid, cbname, compRoom, didset, tempset);
+        return Objects.hash(cbid, cbname, compRoom, didset, tempset, cidset);
     }
 }

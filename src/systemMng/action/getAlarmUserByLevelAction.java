@@ -26,6 +26,7 @@ public class getAlarmUserByLevelAction extends ActionSupport {
     /* 设置
      */
     public String execute() throws Exception {
+        List<String> alist = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -33,7 +34,7 @@ public class getAlarmUserByLevelAction extends ActionSupport {
             String level = request.getParameter("alarmlevel");
 
             PermissionDAO dao = new PermissionDAOImpl();
-            List<String> alist = new ArrayList();
+
             alist = dao.getDeviceAlarmUserInfoByLevel(level);
 
             JSONObject jsonObject = new JSONObject();
@@ -43,6 +44,8 @@ public class getAlarmUserByLevelAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            alist = null;
         }
         return "success";
     }

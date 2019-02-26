@@ -100,6 +100,8 @@
 <div class="login-container">
 
     <img class="pic"  src="img/index/content-banner.png">
+
+    <img  src="img/index/ccb.png">
     
     <div class="login-box">
         <form id="login" name="login" action="/IDP/login.action" method="post">

@@ -9,6 +9,7 @@ import userManage.dao.CityDAO;
 import userManage.dao.impl.CityDAOImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 public class getCityByProvinceAction extends ActionSupport {
@@ -27,6 +28,7 @@ public class getCityByProvinceAction extends ActionSupport {
     /* 根据省行id查询所属的市行
      */
     public String execute() throws Exception {
+        List allcity = new ArrayList();
         try { //获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
@@ -34,7 +36,7 @@ public class getCityByProvinceAction extends ActionSupport {
             String province = request.getParameter("province");
 
             CityDAO dao = new CityDAOImpl();
-            List allcity = dao.getCityByProvince(province);
+            allcity = dao.getCityByProvince(province);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("allcity", allcity);
@@ -44,6 +46,8 @@ public class getCityByProvinceAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
+        } finally {
+            allcity = null;
         }
         return "success";
     }

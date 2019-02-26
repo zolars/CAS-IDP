@@ -3,7 +3,6 @@ package grabData;
 
 import hibernatePOJO.TemperatureMonitor;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,13 +16,10 @@ public class TemperatureSave {
     public static void tempSave(String did, Map<String, Float> dataset) {
         TemperatureMonitor tempData = tempDataMap.get(did);
         //当前时间、检测设备id、maxID
-        Timestamp currenttime = new Timestamp(System.currentTimeMillis());
-        tempData.setTime(currenttime);
-
         tempData.setDid(did);
+        tempData.setTemperature( dataset.get("temperature") );
+        tempData.setHumidity( dataset.get("humidity") );
 
-        tempData.setTemperature(dataset.get("temperature"));
-        tempData.setHumidity(dataset.get("humidity"));
     }
 
     public static Map<String, TemperatureMonitor> getTempDataMap() {

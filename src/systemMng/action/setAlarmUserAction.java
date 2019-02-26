@@ -30,9 +30,32 @@ public class setAlarmUserAction extends ActionSupport {
 
             String level = request.getParameter("alarmlevel");
             String precontent = request.getParameter("content");
+            String checkboxalert2 = request.getParameter("checkboxalert2");
+            String checkboxsms2 = request.getParameter("checkboxsms2");
+            String checkboxplantform2 = request.getParameter("checkboxplantform2");
+
+            Integer alert = 0;
+            Integer sms = 0;
+            Integer plantform = 0;
+            if(checkboxalert2 != null) {
+                if (checkboxalert2.equals("on")) {
+                    alert = 1;
+                }
+            }
+            if(checkboxsms2 != null) {
+                if (checkboxsms2.equals("on")) {
+                    sms = 1;
+                }
+            }
+            if(checkboxplantform2 != null){
+               if(checkboxplantform2.equals("on")) {
+                   plantform = 1;
+               }
+            }
+
 
             PermissionDAO dao = new PermissionDAOImpl();
-            Boolean rt = dao.setDeviceAlarmUserInfo(level, precontent);
+            Boolean rt = dao.setDeviceAlarmUserInfo(level, precontent, alert, sms, plantform);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("", rt);

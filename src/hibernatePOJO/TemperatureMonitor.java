@@ -71,11 +71,12 @@ public class TemperatureMonitor {
         return ppid == that.ppid &&
                 Objects.equals(did, that.did) &&
                 Objects.equals(time, that.time) &&
-                Objects.equals(temperature, that.temperature);
+                Objects.equals(temperature, that.temperature) &&
+                Objects.equals(humidity, that.humidity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ppid, did, time, temperature);
+        return Objects.hash(ppid, did, time, temperature, humidity);
     }
 }

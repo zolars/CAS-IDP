@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
 import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import org.apache.struts2.ServletActionContext;
+
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -35,7 +36,7 @@ public class getOneCtrlDataAction extends ActionSupport {
             EventDAO dao = new EventDAOImpl();
 
             String rt = dao.getDeviceCtrlStatus(did, starttime, endtime);
-            String name = dao.getDeviceName(did);
+            String name = dao.getDeviceNameCtrl(did);
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("rt", rt);

@@ -1,13 +1,12 @@
 package onlineTest.dao.impl;
 
 import Util.HBSessionDaoImpl;
+import com.sun.scenario.effect.impl.prism.ps.PPSBlend_ADDPeer;
+import grabData.DataOnline;
 import hibernatePOJO.PowerparmMonitor;
 import hibernatePOJO.PowersxdyMonitor;
 import hibernatePOJO.PowerxbMonitor;
-import onlineTest.dao.RMS;
-import onlineTest.dao.RMSDAO;
-import onlineTest.dao.THD;
-import onlineTest.dao.Tan;
+import onlineTest.dao.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,21 @@ public class RMSDAOImpl implements RMSDAO {
 
     public List getCurrentRMSData(String did) {
         List<RMS> crlist = new ArrayList<>();
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+
+        RMS rtobj = new RMS();
+        rtobj.setU1(pp.getU1());
+        rtobj.setU2(pp.getU2());
+        rtobj.setU3(pp.getU3());
+        rtobj.setI1(pp.getI1());
+        rtobj.setI2(pp.getI2());
+        rtobj.setI3(pp.getI3());
+        rtobj.setTime(pp.getTime());
+
+        crlist.add(rtobj);
+
+        /*HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowerparmMonitor where did = '" + did + "' order by time desc", 1);
@@ -33,13 +46,29 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
+
         return crlist;
 
     }
 
     public List getCurrentTHDData(String did) {
         List<THD> crlist = new ArrayList<>();
+
+        PowerxbMonitor pp = DataOnline.getXbMap().get(did);
+
+        THD rtobj = new THD();
+        rtobj.setU1(pp.getThdu1());
+        rtobj.setU2(pp.getThdu2());
+        rtobj.setU3(pp.getThdu3());
+        rtobj.setI1(pp.getThdi1());
+        rtobj.setI2(pp.getThdi2());
+        rtobj.setI3(pp.getThdi3());
+        rtobj.setTime(pp.getTime());
+
+        crlist.add(rtobj);
+
+        /*
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<PowerxbMonitor> obj = hbsessionDao.searchWithNum(
@@ -57,7 +86,7 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
 
         return crlist;
     }
@@ -206,6 +235,21 @@ public class RMSDAOImpl implements RMSDAO {
     public List getCurrentHzData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
+       // List<Hz> crlist = new ArrayList<>();
+        PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+
+
+        /*Hz rtobj = new Hz();
+        rtobj.setHz(pp.getHz());
+        rtobj.setTime(pp.getTime());
+*/
+       // List<Object> crlist = new ArrayList<>();
+        PowerparmMonitor rtobj = new PowerparmMonitor();
+        rtobj.setHz(pp.getHz());
+        rtobj.setTime(pp.getTime());
+        crlist.add(rtobj);
+        /*
+
 
         List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowerparmMonitor where did = '" + did + "' order by time desc", 1);
@@ -217,15 +261,30 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
         return crlist;
     }
 
     //Uunb
     public List getCurrentUnbData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+       // List<Uunb> crlist = new ArrayList<>();
         List<Object> crlist = new ArrayList<>();
+        PowersxdyMonitor pp = DataOnline.getSxdyMap().get(did);
 
+        /*
+        Uunb rtobj = new Uunb();
+        rtobj.setUunb(pp.getUunb());
+        rtobj.setTime(pp.getTime());
+ */
+      //  List<Object> crlist = new ArrayList<>();
+        PowersxdyMonitor rtobj = new PowersxdyMonitor();
+        rtobj.setUunb(pp.getUunb());
+        rtobj.setTime(pp.getTime());
+
+        crlist.add(rtobj);
+
+/*
         List<PowersxdyMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowersxdyMonitor where did = '" + did + "' order by time desc", 1);
 
@@ -236,7 +295,7 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
         return crlist;
     }
 
@@ -244,7 +303,24 @@ public class RMSDAOImpl implements RMSDAO {
     public List getCurrentWData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
+        //List<W> crlist = new ArrayList<>();
+        PowerparmMonitor pp = DataOnline.getParmMap().get(did);
 
+        /*
+        W rtobj = new W();
+        rtobj.setP1(pp.getP1());
+        rtobj.setP2(pp.getP2());
+        rtobj.setP3(pp.getP3());
+        List<Object> crlist = new ArrayList<>();
+*/
+        PowerparmMonitor rtobj = new PowerparmMonitor();
+        rtobj.setP1(pp.getP1());
+        rtobj.setP2(pp.getP2());
+        rtobj.setP3(pp.getP3());
+
+        rtobj.setTime(pp.getTime());
+        crlist.add(rtobj);
+       /*
         List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowerparmMonitor where did = '" + did + "' order by time desc", 1);
 
@@ -257,7 +333,7 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
         return crlist;
     }
 
@@ -265,6 +341,24 @@ public class RMSDAOImpl implements RMSDAO {
     public List getCurrentVAData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
+
+        //List<VA> crlist = new ArrayList<>();
+        PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+
+        /*VA rtobj = new VA();
+        rtobj.setS1(pp.getS1());
+        rtobj.setS2(pp.getS2());
+        rtobj.setS3(pp.getS3());
+*/
+        PowerparmMonitor rtobj = new PowerparmMonitor();
+        rtobj.setS1(pp.getS1());
+        rtobj.setS2(pp.getS2());
+        rtobj.setS3(pp.getS3());
+
+        rtobj.setTime(pp.getTime());
+
+        crlist.add(rtobj);
+       /*
 
         List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowerparmMonitor where did = '" + did + "' order by time desc", 1);
@@ -278,15 +372,30 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
         return crlist;
     }
 
     //Var
     public List getCurrentVarData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+       // List<Var> crlist = new ArrayList<>();
         List<Object> crlist = new ArrayList<>();
 
+        PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+       /* Var rtobj = new Var();
+        rtobj.setQ1(pp.getQ1());
+        rtobj.setQ2(pp.getQ2());
+        rtobj.setQ3(pp.getQ3());
+        */
+        PowerparmMonitor rtobj = new PowerparmMonitor();
+        rtobj.setQ1(pp.getQ1());
+        rtobj.setQ2(pp.getQ2());
+        rtobj.setQ3(pp.getQ3());
+
+        rtobj.setTime(pp.getTime());
+        crlist.add(rtobj);
+       /*
         List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowerparmMonitor where did = '" + did + "' order by time desc", 1);
 
@@ -299,15 +408,31 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
         return crlist;
     }
 
     //PF
     public List getCurrentPFData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        //List<PF> crlist = new ArrayList<>();
         List<Object> crlist = new ArrayList<>();
 
+        PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+        /*PF rtobj = new PF();
+        rtobj.setPf1(pp.getPf1());
+        rtobj.setPf2(pp.getPf2());
+        rtobj.setPf3(pp.getPf3());
+        */
+        PowerparmMonitor rtobj = new PowerparmMonitor();
+        rtobj.setPf1(pp.getPf1());
+        rtobj.setPf2(pp.getPf2());
+        rtobj.setPf3(pp.getPf3());
+
+        rtobj.setTime(pp.getTime());
+
+        crlist.add(rtobj);
+       /*
         List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowerparmMonitor where did = '" + did + "' order by time desc", 1);
 
@@ -320,16 +445,23 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
         return crlist;
     }
 
     //DPF = P/S
     public List getCurrentDPFData(String did) {
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<Object> crlist = new ArrayList<>();
+        //HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        List<DPF> crlist = new ArrayList<>();
 
-        List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
+        PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+        DPF rtobj = new DPF();
+        rtobj.setDpf1(pp.getCosPhi1());
+        rtobj.setDpf2(pp.getCosPhi2());
+        rtobj.setDpf3(pp.getCosPhi3());
+
+        crlist.add(rtobj);
+        /*List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowerparmMonitor where did = '" + did + "' order by time desc", 1);
 
         for (int i = 0; i < obj.size(); i++) {
@@ -341,16 +473,24 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
         return crlist;
     }
 
     //Tan
     public List getCurrentTanData(String did) {
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<Object> crlist = new ArrayList<>();
+        //HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        List<Tan> crlist = new ArrayList<>();
 
-        List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
+        PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+
+        Tan rtobj = new Tan();
+        rtobj.setTan1(pp.getQ1()/pp.getP1());
+        rtobj.setTan2(pp.getQ2()/pp.getP2());
+        rtobj.setTan3(pp.getQ3()/pp.getP3());
+
+        crlist.add(rtobj);
+     /*   List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowerparmMonitor where did = '" + did + "' order by time desc", 1);
 
         for (int i = 0; i < obj.size(); i++) {
@@ -362,7 +502,7 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
         return crlist;
     }
 
@@ -371,6 +511,20 @@ public class RMSDAOImpl implements RMSDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
+        PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+        /*Pst rtobj = new Pst();
+        rtobj.setPstU1(pp.getPstU1());
+        rtobj.setPstU2(pp.getPstU2());
+        rtobj.setPstU3(pp.getPstU3());
+*/
+        PowerparmMonitor rtobj = new PowerparmMonitor();
+        rtobj.setPstU1(pp.getPstU1());
+        rtobj.setPstU2(pp.getPstU2());
+        rtobj.setPstU3(pp.getPstU3());
+
+        rtobj.setTime(pp.getTime());
+        crlist.add(rtobj);
+        /*
         List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowerparmMonitor where did = '" + did + "' order by time desc", 1);
 
@@ -383,7 +537,7 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
         return crlist;
     }
 
@@ -392,6 +546,20 @@ public class RMSDAOImpl implements RMSDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
+        PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+        /*Plt rtobj = new Plt();
+        rtobj.setPltU1(pp.getPltU1());
+        rtobj.setPltU2(pp.getPltU2());
+        rtobj.setPltU3(pp.getPltU3());
+        */
+        PowerparmMonitor rtobj = new PowerparmMonitor();
+        rtobj.setPltU1(pp.getPltU1());
+        rtobj.setPltU2(pp.getPltU2());
+        rtobj.setPltU3(pp.getPltU3());
+
+        rtobj.setTime(pp.getTime());
+        crlist.add(rtobj);
+       /*
         List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(
                 "FROM PowerparmMonitor where did = '" + did + "' order by time desc", 1);
 
@@ -404,7 +572,7 @@ public class RMSDAOImpl implements RMSDAO {
             rtobj.setTime(obj.get(i).getTime());
 
             crlist.add(rtobj);
-        }
+        }*/
         return crlist;
     }
 

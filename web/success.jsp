@@ -17,18 +17,20 @@
     <meta http-equiv="description" content="This is my page">
     <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
 
+    <!-- PNotify -->
+    <script type="text/javascript" src="js/pnotify.custom.min.js"></script>
+    <link href="css/pnotify.custom.min.css" rel="stylesheet" type="text/css" />
 
     <style>
         #china-map {
-            width: 1000px;
-            height: 1000px;
+            width: 100%;
+            height: 100%;
             margin: auto;
         }
         #whole-page {
             width: 100%;
             height: 100%;
-            margin: auto;
-            background-color: #0d6aad;
+            background:url("img/body/night.jpg") no-repeat;
         }
     </style>
 

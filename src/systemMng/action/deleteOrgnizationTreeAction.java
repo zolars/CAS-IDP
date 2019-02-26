@@ -36,12 +36,13 @@ public class deleteOrgnizationTreeAction extends ActionSupport {
             OrgnizationDAO dao = new OrgnizationDAOImpl();
             Boolean rt = false;
 
-            if(orgid.length() == 3)
+            if(orgid.length() == 3) {
                 rt = dao.delProvinceOrgnization(orgid);
-            else if (orgid.length() == 4)
+            } else if (orgid.length() == 4) {
                 rt = dao.delCityOrgnization(orgid);
-            else if (orgid.length() == 5)
+            } else if (orgid.length() == 5) {
                 rt = dao.delComputerroomOrgnization(orgid);
+            }
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("", rt);

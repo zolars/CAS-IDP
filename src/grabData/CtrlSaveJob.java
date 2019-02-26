@@ -1,15 +1,9 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
-import hibernatePOJO.EventCtrl;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 
 public class CtrlSaveJob implements Job {
@@ -18,7 +12,7 @@ public class CtrlSaveJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        Map<String, List<EventCtrl>> eventCtrlMap = CtrlSave.getEventCtrlMap();
+      /*  Map<String, List<EventCtrl>> eventCtrlMap = CtrlSave.getEventCtrlMap();
         if (null != eventCtrlMap) {
             Set<String> didSet = eventCtrlMap.keySet();
             Iterator<String> iterator = didSet.iterator();
@@ -35,6 +29,6 @@ public class CtrlSaveJob implements Job {
                         hbsessionDao.insert(event);
                 }
             }
-        }
+        }*/
     }
 }
