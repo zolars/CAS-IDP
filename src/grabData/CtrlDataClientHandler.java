@@ -28,8 +28,8 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //record ctx in DeviceManager
-        System.out.println(did+"-connected");
-        DeviceManager.getCtxMap().put(this.did+"-6",ctx);
+        System.out.println(did + "-connected");
+        DeviceManager.getCtxMap().put(this.did + "-6", ctx);
 
         ByteBuf sendMsg = ctx.alloc().buffer();
 
@@ -89,7 +89,6 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
         msg[5] = ((byte) (0x23 & 0xFF));
 
         byte[] sbuf = CRC16M.getSendBuf(CRC16M.getBufHexStr(msg));
-
         return sbuf;
     }
 
@@ -98,23 +97,22 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
 //        String data = ByteBufUtil.hexDump(buf);
 //
 //        CtrlSave.ctrlSave(did, data);
-        byte[] bytes=new byte[5];
-        buf.getBytes(3,bytes,0,bytes.length);
-        System.out.println(did+"-线圈状态："+ByteBufUtil.hexDump(bytes));
-        CtrlSave.ctrlSave2(did,bytes);
+        byte[] bytes = new byte[5];
+        buf.getBytes(3, bytes, 0, bytes.length);
+        System.out.println(did + "-线圈状态：" + ByteBufUtil.hexDump(bytes));
+        CtrlSave.ctrlSave2(did, bytes);
 
-        CtrlSave.setCtrlMap(did,bytes); //save ctrl online data
+        CtrlSave.setCtrlMap(did, bytes); //save ctrl online data
     }
 
     /**
      * 客户端 失去连接
      */
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception
-    {
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         //remove ctrl data
         CtrlSave.getEventCtrlMap().remove(this.did);
         //remove ctx in DeviceManager
-        DeviceManager.getCtxMap().remove(this.did+"-6");
+        DeviceManager.getCtxMap().remove(this.did + "-6");
     }
 }
