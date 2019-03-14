@@ -29,49 +29,49 @@ public class CtrlSave {
             String bin = Integer.toBinaryString(i1);
             String binary = null;
 
-            if (i1 > 15) { //第一位有数
-                if (bin.length() == 7) {
+            if(i1 > 15) { //第一位有数
+                if(bin.length() == 7) {
                     String str = "0" + bin;
                     bin = str;
                 }
-                if (bin.length() == 6) {
+                if(bin.length() == 6) {
                     String str = "00" + bin;
                     bin = str;
                 }
-                if (bin.length() == 5) {
+                if(bin.length() == 5) {
                     String str = "000" + bin;
                     bin = str;
                 }
                 binary = bin;
             } else {      //第一位无数
-                if (bin.length() == 3) {
+                if(bin.length() == 3) {
                     String str = "0" + bin;
                     bin = str;
                 }
-                if (bin.length() == 2) {
+                if(bin.length() == 2) {
                     String str = "00" + bin;
                     bin = str;
                 }
-                if (bin.length() == 1) {
+                if(bin.length() == 1) {
                     String str = "000" + bin;
                     bin = str;
                 }
 
-                if (i1 <= 15) { //若第一位为0，string前面补充四个0
+                if(i1 <= 15) { //若第一位为0，string前面补充四个0
                     binary = "0000" + bin;
                 }
             }
 
-            if (count <= 24) {
+            if(count <= 24) {
                 //前四个线圈binary字符串循环读完
                 for (int j = 0; j < binary.length(); j++) {
-                    String s = binary.substring(j, j + 1);
+                    String s = binary.substring(j, j +1);
                     rtlist.add(s);
                 }
             } else {
                 //最后一个线圈binary字符串只读取前两位
                 for (int j = 0; j < 2; j++) {
-                    String s = binary.substring(j, j + 1);
+                    String s = binary.substring(j, j +1);
                     rtlist.add(s);
                 }
             }
@@ -95,38 +95,38 @@ public class CtrlSave {
         // idx 重排序 8~1 16~9 .。。
         List<String> idxlist = new ArrayList<>();
 
-        for (int idx = 7; idx >= 0; idx--) {
+        for(int idx = 7; idx >= 0; idx--) {
             idxlist.add(list.get(idx));
         }
 
-        for (int idx = 15; idx >= 8; idx--) {
+        for(int idx = 15; idx >= 8; idx--) {
             idxlist.add(list.get(idx));
         }
 
-        for (int idx = 23; idx >= 16; idx--) {
+        for(int idx = 23; idx >= 16; idx--) {
             idxlist.add(list.get(idx));
         }
 
-        for (int idx = 31; idx >= 24; idx--) {
+        for(int idx = 31; idx >= 24; idx--) {
             idxlist.add(list.get(idx));
         }
 
-        for (int idx = 33; idx >= 32; idx--) {
+        for(int idx = 33; idx >= 32; idx--) {
             idxlist.add(list.get(idx));
         }
 
 
-        for (int idx = 0; idx < idxlist.size(); idx++) {
+        for(int idx = 0; idx < idxlist.size(); idx++) {
             String value = idxlist.get(idx);
 
-            if (value.equals("1")) {  //若有告警事件
+            if(value.equals("1")) {  //若有告警事件
                 HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-                EventCtrl eventCtrl = (EventCtrl) hbsessionDao.getFirst(
+                EventCtrl eventCtrl = (EventCtrl)hbsessionDao.getFirst(
                         "FROM EventCtrl order by teid desc");
 
                 int maxteid = 0;
 
-                if (eventCtrl != null) {
+                if(eventCtrl != null) {
                     maxteid = eventCtrl.getTeid() + 1;
                 }
 
@@ -137,31 +137,32 @@ public class CtrlSave {
                 event.setDid(did);
                 event.setValue(value);
 
-                // eventCtrlMap.get(did).add(event);
+               // eventCtrlMap.get(did).add(event);
 
                 hbsessionDao.insert(event);
             }
         }
     }
 
-    public static void ctrlSave2(String did, byte[] bytes) {
-        boolean[] statusList = new boolean[40];   //boolean数组，数组第 i 个元素代表第 i+1 个线圈是否异常，末尾元素无意义
-        int count = 0;    //表示当前判断的线圈
-        boolean status = false;
-        for (int i = 0; i < 5; ++i) {
-            byte b = bytes[i];
-            for (int j = 0; j < 8; ++j) {
-                int flag = (b >> j) & (0x01);
-                count = i * 8 + j;
-                if (flag == 1) {
-                    status = true;
-                } else {
-                    status = false;
+    public static void ctrlSave2(String did,byte[] bytes){
+        boolean[] statusList=new boolean[40];   //boolean数组，数组第 i 个元素代表第 i+1 个线圈是否异常，末尾元素无意义
+        int count=0;    //表示当前判断的线圈
+        boolean status=false;
+        for(int i=0;i<5;++i){
+            byte b=bytes[i];
+            for(int j=0;j<8;++j){
+                int flag=(b>>j) & (0x01);
+                count=i*8+j;
+                if(flag==1){
+                    status=true;
                 }
-                if (count == 34) {  //第35个线圈是运行标识，状态取反
-                    status = !status;
+                else{
+                    status=false;
                 }
-                statusList[count] = status;
+                if(count==34){  //第35个线圈是运行标识，状态取反
+                    status=!status;
+                }
+                statusList[count]=status;
             }
         }
 
@@ -169,15 +170,15 @@ public class CtrlSave {
 //            System.out.println(i+1+":"+statusList[i]);
 //        }
 
-        for (int i = 0; i < 35; ++i) {
-            if (statusList[i]) {  //若有告警事件
+        for(int i=0;i<35;++i){
+            if(statusList[i]){  //若有告警事件
                 HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-                EventCtrl eventCtrl = (EventCtrl) hbsessionDao.getFirst(
+                EventCtrl eventCtrl = (EventCtrl)hbsessionDao.getFirst(
                         "FROM EventCtrl where signature is not null order by teid desc");
 
                 int maxteid = 0;
 
-                if (eventCtrl != null) {
+                if(eventCtrl != null) {
                     maxteid = eventCtrl.getTeid() + 1;
                 }
 
@@ -189,31 +190,32 @@ public class CtrlSave {
                 event.setValue("1");
                 // eventCtrlMap.get(did).add(event);
                 /************2018-12-24 马卫亮  ADD******************************/
-                hbsessionDao.update("update EventCtrl set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '" + i + 1 + "' signature is null ");
+                hbsessionDao.update("update EventCtrl set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '"+i+1+"' signature is null ");
                 /************2018-12-24 马卫亮  ADD******************************/
                 hbsessionDao.insert(event);
             }
         }
     }
 
-    public static void setCtrlMap(String did, byte[] bytes) {
-        boolean[] statusList = new boolean[40];   //boolean数组，数组第 i 个元素代表第 i+1 个线圈是否异常，末尾元素无意义
-        int count = 0;    //表示当前判断的线圈
-        boolean status = false;
-        for (int i = 0; i < 5; ++i) {
-            byte b = bytes[i];
-            for (int j = 0; j < 8; ++j) {
-                int flag = (b >> j) & (0x01);
-                count = i * 8 + j;
-                if (flag == 1) {
-                    status = true;
-                } else {
-                    status = false;
+    public static void setCtrlMap(String did,byte[] bytes){
+        boolean[] statusList=new boolean[40];   //boolean数组，数组第 i 个元素代表第 i+1 个线圈是否异常，末尾元素无意义
+        int count=0;    //表示当前判断的线圈
+        boolean status=false;
+        for(int i=0;i<5;++i){
+            byte b=bytes[i];
+            for(int j=0;j<8;++j){
+                int flag=(b>>j) & (0x01);
+                count=i*8+j;
+                if(flag==1){
+                    status=true;
                 }
-                if (count == 34) {  //第35个线圈是运行标识，状态取反
-                    status = !status;
+                else{
+                    status=false;
                 }
-                statusList[count] = status;
+                if(count==34){  //第35个线圈是运行标识，状态取反
+                    status=!status;
+                }
+                statusList[count]=status;
             }
         }
 
