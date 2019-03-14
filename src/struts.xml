@@ -314,6 +314,14 @@
             </result>
         </action>
 
+        <action name="getCtrlData" class="onlineTest.action.getCtrlParameterAction">
+            <!--getCtrlData -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <action name="getSXDY" class="onlineTest.action.getSXDYaction">
             <!--getSXDY -->
             <result name="failure">/failure.jsp</result>
