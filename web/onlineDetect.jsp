@@ -138,18 +138,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <li class="active" style="width:25%">
                                 <a data-toggle="tab" id="subItem1">•趋势图</a>
                             </li>
-                            <li style="width:25%">
+                            <li style="width:20%">
                                 <a data-toggle="tab" id="subItem2">•谐波</a>
                             </li>
-                            <li style="width:25%">
+                            <li style="width:20%">
                                 <a data-toggle="tab" id="subItem3">•三相电压不平衡度</a>
                             </li>
-                            <li style="width:25%">
+                            <li style="width:20%">
                                 <a data-toggle="tab" id="subItem4">•参数值</a>
                             </li>
-                            <!--<li style="width:20%">
+                            <li style="width:20%">
                                 <a data-toggle="tab" id="subItem5">•治理</a>
-                            </li>-->
+                            </li>
                            <!-- <li style="width:25%">
                                 <a data-toggle="tab" id="subItem5">•实时图形</a>
                             </li> -->
@@ -2560,11 +2560,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     }
 
-    // 更新zhili参数值表格
+    //2019.03.13 chenjy
+    // 更新治理状态
     function updateCtrlParams(data) {
-
-        console.log("ctrl data:"+data);
+        //console.log("ctrl data:"+data);
         $("#ctrl-params").html(
+            "<caption>状态数据</caption>" +
+            "<tr><th>硬件过压</th><td>" + data["ctrl4"].toFixed(2) + "</td></tr>" +
+            "<tr><th>硬件过流</th><td>" + data["ctrl5"].toFixed(2) + "</td></tr>" +
+            "<tr><th>硬件过热</th><td>" + data["ctrl6"].toFixed(2) + "</td></tr>" +
+            "<tr><th>主从机双向通讯异常</th><td>" + data["ctrl28"].toFixed(2) + "</td></tr>" +
+            "<tr><th>整机故障标志</th><td>" + data["ctrl34"].toFixed(2) + "</td></tr>"
+        );
+       /* $("#ctrl-params").html(
             "<caption>基本参数</caption>" +
             "<tr><th>预留</th><td>" + data["ctrl1"].toFixed(2) + "</td></tr>" +
             "<tr><th>预留</th><td>" + data["ctrl2"].toFixed(2) + "</td></tr>" +
@@ -2603,7 +2611,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             "<tr><th>预留</th><td>" + data["ctrl32"].toFixed(2) + "</td></tr>" +
             "<tr><th>环境温度过高</th><td>" + data["ctrl33"].toFixed(2) + "</td></tr>" +
             "<tr><th>整机故障标志</th><td>" + data["ctrl34"].toFixed(2) + "</td></tr>"
-        );
+        );*/
     }
 </script>
 

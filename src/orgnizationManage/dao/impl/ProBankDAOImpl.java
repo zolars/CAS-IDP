@@ -206,8 +206,6 @@ public class ProBankDAOImpl implements ProBankDAO {
         DeviceAlarmUser dt = new DeviceAlarmUser();
         String maxid = getMaxDeviceAlarmId();
         Integer imaxid = Integer.parseInt(maxid) + 1;
-        Timestamp tstime = Timestamp.valueOf(stime);
-        Timestamp tetime = Timestamp.valueOf(etime);
 
         dt.setId(imaxid.toString());
         dt.setDid(did);

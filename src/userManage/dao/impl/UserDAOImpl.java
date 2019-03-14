@@ -65,6 +65,7 @@ public class UserDAOImpl implements UserDAO {
      * @param pbname 省行名称
      * @param uname 当前登陆的用户名称
      * @return 市行list，第一个为当前用户所在的市行
+     * 2019.03.13 fix bugs of get deplicate citybank
      */
     public List<Object> getCityBank(String pbname, String uname) {
 
@@ -83,9 +84,7 @@ public class UserDAOImpl implements UserDAO {
 
             if(cbidset != null) { //省行下有市行时
                 if(!cbidset.equals("")) {
-
                     String[] cbidstr = cbidset.split("，");
-
                     String usercbid = temuser.getCbid();
 
                     for (int i = 0; i < cbidstr.length; i++) {
@@ -106,7 +105,9 @@ public class UserDAOImpl implements UserDAO {
                     for (int i = 0; i < cbidstr.length; i++) {
                         CityBank cb = (CityBank) hbsessionDao.getFirst(
                                 "FROM CityBank where cbid = '" + cbidstr[i] + "'");
-                        cblist.add(cb);
+                        if(!cb.getCbid().equals(usercb.getCbid())){
+                            cblist.add(cb);
+                        }
                     }
                 }
             }
@@ -120,6 +121,7 @@ public class UserDAOImpl implements UserDAO {
      * @param cbname 市行名称
      * @param uname 当前登陆的用户名称
      * @return 机房list，第一个为当前用户所在的机房
+     * * 2019.03.13 fix bugs of get deplicate computerroom
      */
     public List getComputerroom(String cbname, String uname) {
 
@@ -135,29 +137,35 @@ public class UserDAOImpl implements UserDAO {
         if (cb != null && temuser != null) {
 
             String comroomset = cb.getCompRoom();
-            String[] coroomstr = comroomset.split("，");
 
-            String usercbid = temuser.getCbid();
+            if(comroomset != null) { //省行下有市行时
+                if (!comroomset.equals("")) {
+                    String[] coroomstr = comroomset.split("，");
+                    String userrid = temuser.getRid();
 
-            for (int i = 0; i < coroomstr.length; i++) {
-                if (coroomstr[i] == usercbid) { //若该用户所属的市行 在市行集合中存在，把这个cbid从市行集合中删除
-                    //删除数组中的某一个元素的方法：把最后一个元素替代指定的元素，然后数组缩容
-                    coroomstr[i] = coroomstr[coroomstr.length - 1];
-                    coroomstr = Arrays.copyOf(coroomstr, coroomstr.length-1);
+                    for (int i = 0; i < coroomstr.length; i++) {
+                        if (coroomstr[i] == userrid) { //若该用户所属的市行 在市行集合中存在，把这个cbid从市行集合中删除
+                            //删除数组中的某一个元素的方法：把最后一个元素替代指定的元素，然后数组缩容
+                            coroomstr[i] = coroomstr[coroomstr.length - 1];
+                            coroomstr = Arrays.copyOf(coroomstr, coroomstr.length - 1);
+                        }
+                    }
+
+                    Computerroom usercb = (Computerroom) hbsessionDao.getFirst(
+                            "FROM Computerroom where rid = '" + userrid + "'");
+
+                    if (usercb != null) {
+                        crlist.add(usercb);
+                    }
+
+                    for (int i = 0; i < coroomstr.length; i++) {
+                        Computerroom cp = (Computerroom) hbsessionDao.getFirst(
+                                "FROM Computerroom where rid = '" + coroomstr[i] + "'");
+                        if(!cp.getRid().equals(usercb.getRid())) {
+                            crlist.add(cp);
+                        }
+                    }
                 }
-            }
-
-            Computerroom usercb = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + usercbid + "'");
-
-            if (usercb != null) {
-                crlist.add(usercb);
-            }
-
-            for (int i = 0; i < coroomstr.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + coroomstr[i] + "'");
-                crlist.add(cp);
             }
         }
 

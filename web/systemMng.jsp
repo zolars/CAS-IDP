@@ -1108,6 +1108,44 @@
                 var obj = eval("(" + data + ")");
                 for (var i = 0; i < obj.length; i++) {
                     if (obj[i].cbname == opinion2 || i == 0) {
+                        $('#city_code').append("<option value='" + obj[i].cbid + "' selected='selected' >" + obj[i].cbname + "</option>");
+                        getComproom();
+                    }
+                    else
+                        $('#city_code').append("<option value='" + obj[i].cbid + "' >" + obj[i].cbname + "</option>");
+
+                }
+            }
+        });
+    }
+
+  /*  /!*加载市下拉选*!/
+    function getCity() {
+        var pname = $("#province_code").val();
+
+        //读取cookie中已存的机房配置
+        var opinion2 = $.cookie('opinion2');
+        var uname = "${username}";
+
+        $("#city_code").empty();
+        $("#comproom_code").empty();
+
+        $.ajax({
+            type: "post",
+            url: "getCityTree",
+            data: {
+                provinceid: pname,
+                uname: uname
+            },
+            dataType: "json",
+            success: function (data) {
+
+                $('#city_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
+                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
+
+                var obj = eval("(" + data + ")");
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj[i].cbname == opinion2 || i == 0) {
                         $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
                         getComproom();
                     }
@@ -1117,7 +1155,7 @@
                 }
             }
         });
-    }
+    }*/
 
     /*加载机房下拉选*/
     function getComproom() {
@@ -2399,7 +2437,8 @@
         });
     }
 
-    <!-- 添加设备 -->
+    <!-- 添加设备
+    2019.03.13 chen : fix bugs -->
     function addOneDevice(){
 
         var radioEthernet = $('input[id="radio-Ethernet"]:checked').val();
@@ -2418,9 +2457,13 @@
         var address485 = $("#485address").val();
         var extra = $("#extra").val();
 
-        var province = $("#province_code option:selected").text();
-        var city = $("#city_code option:selected").text();
-        var computerroom= $("#comproom_code option:selected").text();
+        var province = $("#province_code option:selected").value();
+        var city = $("#city_code option:selected").value();
+        var computerroom= $("#comproom_code option:selected").value();
+
+        alert(province + "..." + city + "..." + computerroom);
+       /* var city = $("#city_code option:selected").text();
+        var computerroom= $("#comproom_code option:selected").text();*/
 
         var belongid = "";
         var belonglevel = "0";

@@ -123,7 +123,6 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         crlist.add(pm.getQ1() / pm.getP1());
         crlist.add(pm.getQ2() / pm.getP2());
         crlist.add(pm.getQ3() / pm.getP3());
-//        crlist.add(pm.getQ1()/pm.getP1() + pm.getQ2()/pm.getP2() + pm.getQ3()/pm.getP3());
 
         crlist.add(pm.getTime());
 
