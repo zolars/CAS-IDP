@@ -25,7 +25,7 @@ public class CompTreeAction extends ActionSupport {
     }
 
 
-    /* 根据用户名查询用户id，依据用户id找到用户可查看界面的权限、及用户可访问的机房级结构树状串
+    /* 根据市行id查询所属机房id的集合
      */
     public String execute() throws Exception {
         List computerroom = new ArrayList();

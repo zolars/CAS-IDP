@@ -10,6 +10,7 @@
     width: 180px;
     height: 50px;
 }
+
 .pull-left {
     margin-right: 0!important;
     padding-right: 0!important;
@@ -49,6 +50,12 @@ fieldset {
 }
 .chart-item {
     background: rgba(255, 255, 255, 1.0);
+    margin: 20px;
+    border: 2px solid;
+    border-radius: 5px;
+}
+.chart-item-gray {
+    background: rgba(6, 0, 32, 0.22);
     margin: 20px;
     border: 2px solid;
     border-radius: 5px;

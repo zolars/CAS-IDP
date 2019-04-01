@@ -11,13 +11,15 @@ import io.netty.channel.socket.SocketChannel;
 
 import java.util.List;
 
+
 class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
     private List<DictionaryCtrl> dic = null;
 
     private ByteBuf recMsg = null;
 
-    // 监测点id
+    //监测点id
     private String did;
+
 
     public CtrlDataClientHandler(String did) {
         this.did = did;
@@ -25,21 +27,17 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        // record ctx in DeviceManager
-        System.out.println(did + "-connected");
-        DeviceManager.getCtxMap().put(this.did + "-6", ctx);
+        //record ctx in DeviceManager
+        System.out.println(did+"-connected");
+        DeviceManager.getCtxMap().put(this.did+"-6",ctx);
 
         ByteBuf sendMsg = ctx.alloc().buffer();
 
-        sendMsg.writeBytes(createMsg(0x01, 0x01, 0x00, 0x23));
+        sendMsg.writeBytes(createMsg(1, 1, 0, 34));
         SocketChannel sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
-
-        sendMsg.writeBytes(createMsg(0x01, 0x04, 0x00, 0x3A));
-        sc = (SocketChannel) ctx.channel();
-        sc.writeAndFlush(sendMsg);
-
     }
+
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
@@ -57,8 +55,8 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
         ByteBuf buf = (ByteBuf) msg;
         recMsg.writeBytes(buf);
         buf.release();
-        // 数据累积
-        if (recMsg.readableBytes() < 9) { // TODO: 2019/3/14 change the number "9" in order to receive all msg
+        //数据累积
+        if (recMsg.readableBytes() < 9) {
             return;
         }
         dataResolve(recMsg);
@@ -68,12 +66,8 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
 
         ByteBuf sendMsg = ctx.alloc().buffer();
 
-        sendMsg.writeBytes(createMsg(0x01, 0x01, 0x00, 0x23));
+        sendMsg.writeBytes(createMsg(1, 1, 0, 34));
         SocketChannel sc = (SocketChannel) ctx.channel();
-        sc.writeAndFlush(sendMsg);
-
-        sendMsg.writeBytes(createMsg(0x01, 0x04, 0x00, 0x3A));
-        sc = (SocketChannel) ctx.channel();
         sc.writeAndFlush(sendMsg);
     }
 
@@ -83,16 +77,16 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
 
-    // readLength单位是2字节
+    //readLength单位是2字节
     public byte[] createMsg(int slaveId, int functionCode, int address, int readLength) {
         byte[] msg = new byte[6];
 
-        msg[0] = ((byte) slaveId);
-        msg[1] = ((byte) functionCode);
+        msg[0] = ((byte) 0x01);
+        msg[1] = ((byte) 0x01);
         msg[2] = ((byte) (0x00 >> 8));
-        msg[3] = ((byte) (address & 0xFF));
+        msg[3] = ((byte) (0x00 & 0xFF));
         msg[4] = ((byte) (0x00 >> 8));
-        msg[5] = ((byte) (readLength & 0xFF));
+        msg[5] = ((byte) (0x23 & 0xFF));
 
         byte[] sbuf = CRC16M.getSendBuf(CRC16M.getBufHexStr(msg));
 
@@ -100,32 +94,27 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void dataResolve(ByteBuf buf) {
-        byte[] StatusBytes = new byte[5];
-        buf.getBytes(3, StatusBytes, 0, StatusBytes.length); // TODO: 2019/3/14
-        System.out.println(did + "-线圈状态：" + ByteBufUtil.hexDump(StatusBytes));
+//        buf.skipBytes(3); //跳过前9个字节，与数据无关
+//        String data = ByteBufUtil.hexDump(buf);
+//
+//        CtrlSave.ctrlSave(did, data);
+        byte[] bytes=new byte[5];
+        buf.getBytes(3,bytes,0,bytes.length);
+        System.out.println(did+"-线圈状态："+ByteBufUtil.hexDump(bytes));
+        CtrlSave.ctrlSave2(did,bytes);
 
-        byte[] parmBytes = new byte[5];
-        //  float temp = 0;
-        //  buf.skipBytes(11); //跳过前9个字节，与数据无关
-        //  for (int i = addr / 2; i < (len + addr) / 2; i++) {
-        //      temp = Float.intBitsToFloat((int) buf.readUnsignedInt());
-        //      map.put(name[count], temp * factor[count]);
-        //      count++;
-        //  }
-
-
-        CtrlSave.ctrlSave(did, StatusBytes);
-        CtrlSave.setCtrlMap(did, StatusBytes, parmBytes); // save ctrl online data
+        CtrlSave.setCtrlMap(did,bytes); //save ctrl online data
     }
 
     /**
      * 客户端 失去连接
      */
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        // remove ctrl data
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception
+    {
+        //remove ctrl data
         CtrlSave.getEventCtrlMap().remove(this.did);
-        // remove ctx in DeviceManager
-        DeviceManager.getCtxMap().remove(this.did + "-6");
+        //remove ctx in DeviceManager
+        DeviceManager.getCtxMap().remove(this.did+"-6");
     }
 }

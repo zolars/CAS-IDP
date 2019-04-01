@@ -206,4 +206,17 @@ public class RMSDAOImpl implements RMSDAO {
         return crlist;
     }
 
+    //KONGTIAO WET TEM
+    public List getCurrentTemWetData(String did) {
+        List<KTtemWet> crlist = new ArrayList<>();
+
+        //PowerparmMonitor pp = DataOnline.getParmMap().get(did);
+        KTtemWet rtobj = new KTtemWet();
+        rtobj.setTem(23.7);
+        rtobj.setWet(45.3);
+
+        crlist.add(rtobj);
+        return crlist;
+    }
+
 }

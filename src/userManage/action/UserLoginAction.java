@@ -92,7 +92,7 @@ public class UserLoginAction extends ActionSupport {
                             menulist.add("onlineDetect.jsp");
                             menulist.add("history.jsp");
                             menulist.add("efficiencyAnalysis.jsp");
-                            //menulist.add("efficiencyDevice.jsp");
+                            menulist.add("efficiencyInstruction.jsp");
                             // menulist.add("efficiencyAssessment.jsp");
                             menulist.add("reportChart.jsp");
                             break;

@@ -23,8 +23,8 @@ public class addOneDeviceAction extends ActionSupport {
     }
 
 
-    /* 添加一个设备
-     */
+    // 添加一个设备
+    // 2019.03.14 chen ： change belongname to belongid
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
@@ -42,7 +42,7 @@ public class addOneDeviceAction extends ActionSupport {
             String iPaddress = request.getParameter("IPaddress");
             String port = request.getParameter("port");
             String extra = request.getParameter("extra");
-            String belongname = request.getParameter("belongid");
+            String belongid = request.getParameter("belongid");
             String belonglevel = request.getParameter("belonglevel");
 
             DeviceDAO dao = new DeviceDAOImpl();
@@ -91,7 +91,7 @@ public class addOneDeviceAction extends ActionSupport {
                     rt2 = DeviceManager.checkNetwork(iPaddress, Integer.parseInt(port));
 
                     if(rt2) {
-                        rt3 = dao.addOneDeviceInfoAndBelongPos(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform, belongname, belonglevel);
+                        rt3 = dao.addOneDeviceInfoAndBelongPos(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform, belongid, belonglevel);
                     } else if(!rt2){
                         jsonObject.put("提示", "设备不可达，添加失败！");
                     }
@@ -101,7 +101,6 @@ public class addOneDeviceAction extends ActionSupport {
                     jsonObject.put("提示", "添加失败，不可添加一个重名的设备！");
                 } else if (rt1 && rt2 & rt3) {
                     jsonObject.put("提示", "添加成功！");
-                    //
                     String did = dao.getDeviceIDByName(devname);
                     //type: 1-dataOnline, 2-transient, 3-overLimit, 4-threshold, 5-tempData, 6-ctrlData
                     if(devtype.equals("IDP")) {
@@ -119,7 +118,6 @@ public class addOneDeviceAction extends ActionSupport {
                 } else {
                     jsonObject.put("提示", "添加失败，请重试！");
                 }
-
             }
 
             result = JSON.toJSONString(jsonObject);

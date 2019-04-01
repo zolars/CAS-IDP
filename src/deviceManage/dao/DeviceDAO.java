@@ -64,7 +64,7 @@ public interface DeviceDAO {
 
     public Boolean deleteOneDevice(String did);
 
-    public Boolean deleteOneDeviceInfoToBelongPosition(String did, String belongname, String belonglevel);
+    public Boolean deleteOneDeviceInfoAndBelongPosition(String did, String belongid, String belonglevel, String deviceType);
 
 
     public Boolean modifyOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port, String extra, Integer sms, Integer alert, Integer plantform, String did);

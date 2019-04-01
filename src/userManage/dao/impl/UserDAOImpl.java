@@ -118,18 +118,19 @@ public class UserDAOImpl implements UserDAO {
 
     /**
      * 获取机房list
-     * @param cbname 市行名称
+     * @param cbid 市行名称
      * @param uname 当前登陆的用户名称
      * @return 机房list，第一个为当前用户所在的机房
-     * * 2019.03.13 fix bugs of get deplicate computerroom
+     * 2019.03.13 fix bugs of get deplicate computerroom;
+     * 2019.03.14 get computerroom according to cbid
      */
-    public List getComputerroom(String cbname, String uname) {
+    public List getComputerroom(String cbid, String uname) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Computerroom> crlist = new ArrayList<>();
 
         CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbname = '" + cbname + "'");
+                "FROM CityBank where cbid = '" + cbid + "'");
 
         User temuser = (User) hbsessionDao.getFirst(
                 "FROM User where uname = '" + uname + "'");

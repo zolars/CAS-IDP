@@ -45,6 +45,7 @@
             </result>
         </action>
 
+        <!-- 2019.03.14 chen : get comproom from citybankname to citybank id-->
         <action name="getCompTree" class="userManage.action.CompTreeAction">
             <!--将getUserTree映射到物理地址 -->
             <result name="failure">/failure.jsp</result>
@@ -282,6 +283,7 @@
             </result>
         </action>
 
+        <!-- 2019.03.14 chen-->
         <action name="deleteOneDevice" class="deviceManage.action.deleteOneDeviceAction">
             <!--deleteOneDevice -->
             <result name="failure">/failure.jsp</result>
@@ -298,6 +300,30 @@
             </result>
         </action>
 
+        <action name="getUabc" class="onlineTest.action.getUabcaction">
+            <!--getUabc -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getValueUI" class="onlineTest.action.getValueUIaction">
+            <!--getValueUI -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
+        <action name="getTemWet" class="onlineTest.action.getTemWetaction">
+            <!--getTemWet -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
+
         <action name="getXBwave" class="onlineTest.action.getXBwaveaction">
             <!--getXBwave -->
             <result name="failure">/failure.jsp</result>
@@ -308,14 +334,6 @@
 
         <action name="getParameter" class="onlineTest.action.getParameteraction">
             <!--getParameter -->
-            <result name="failure">/failure.jsp</result>
-            <result name="success" type="json">
-                <param name="root">result</param>
-            </result>
-        </action>
-
-        <action name="getCtrlData" class="onlineTest.action.getCtrlParameterAction">
-            <!--getCtrlData -->
             <result name="failure">/failure.jsp</result>
             <result name="success" type="json">
                 <param name="root">result</param>
