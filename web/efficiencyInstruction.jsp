@@ -45,7 +45,7 @@
             display: inline-block;
         }
 
-        .searchButton{
+        .searchButton {
             display: inline-block;
         }
 
@@ -71,48 +71,58 @@
         .tips-item:hover {
             background: #4e7bff;
         }
+
         #userinfotable {
             width: 100%;
         }
+
         .item-container {
             width: 100%;
         }
+
         .item-btn-container {
             width: 100%;
             padding: 20px;
         }
+
         .item-btn-item {
             width: 70px;
         }
+
         .item-btn-item-widther {
             width: 100px;
         }
+
         .table-container {
             height: 500px;
             overflow: scroll;
         }
-        .inputblack{
+
+        .inputblack {
             color: #0c0c0c;
         }
-        .vrla-img{
+
+        .vrla-img {
             width: 100px;
             height: 80px;
         }
-        .vrla-text{
+
+        .vrla-text {
             width: 100px;
             height: 10px;
             text-align: center;
         }
+
         .location-select-item {
             width: 120px;
             margin-right: 12px;
         }
 
-        .online-battery{
+        .online-battery {
             display: none;
             width: 750px;
             height: 620px;
-            background: rgba(0,0,0,.9);
+            background: rgba(0, 0, 0, .9);
             position: fixed;
             top: 0;
             left: 0;
@@ -124,18 +134,33 @@
             padding: 30px;
         }
 
-        .divheader,.divcontent,.divfooter{margin:0 auto;width:100%;}
+        .divheader, .divcontent, .divfooter {
+            margin: 0 auto;
+            width: 100%;
+        }
+
         /* 以上代码设置三个共用样式 */
-        .divheader{border:1px solid #F00; height:30px}
-        .divcontent{ border:1px solid #FF0; height:350px}
-        .divfooter{border:1px solid #00F; height:400px}
+        .divheader {
+            border: 1px solid #F00;
+            height: 30px
+        }
+
+        .divcontent {
+            border: 1px solid #FF0;
+            height: 350px
+        }
+
+        .divfooter {
+            border: 1px solid #00F;
+            height: 400px
+        }
     </style>
 </head>
 
 <body id="skin-blur-blue">
 
 <!--告警弹窗-->
-<script type="text/javascript" src = "js/websocketconnect.js"></script>
+<script type="text/javascript" src="js/websocketconnect.js"></script>
 <!-- echarts -->
 <script src="js/echarts.js"></script>
 
@@ -149,11 +174,11 @@
 
 <!-- PNotify -->
 <script type="text/javascript" src="js/pnotify.custom.min.js"></script>
-<link href="css/pnotify.custom.min.css" rel="stylesheet" type="text/css" />
+<link href="css/pnotify.custom.min.css" rel="stylesheet" type="text/css"/>
 
 <%
-    String userid = (String)session.getAttribute("userid");
-    if(userid == null) {
+    String userid = (String) session.getAttribute("userid");
+    if (userid == null) {
 %>
 <script>
     alert('您还未登录或您的认证已过期, 请先登陆.');
@@ -179,9 +204,9 @@
                 </select>
 
                 <script>
-                    $("#province_code").change(function(){
+                    $("#province_code").change(function () {
                         var options = $("#province_code option:selected");
-                        $. cookie('opinion1', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion1', options.text(), {expires: 1, path: '/'});
                         getCity();
                     })
                 </script>
@@ -191,9 +216,9 @@
                 </select>
 
                 <script>
-                    $("#city_code").change(function(){
+                    $("#city_code").change(function () {
                         var options = $("#city_code option:selected");
-                        $. cookie('opinion2', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion2', options.text(), {expires: 1, path: '/'});
                         getComproom();
                     })
 
@@ -204,9 +229,9 @@
                 </select>
 
                 <script>
-                    $("#comproom_code").change(function(){
+                    $("#comproom_code").change(function () {
                         var options = $("#comproom_code option:selected");
-                        $. cookie('opinion3', options.text(), {expires: 1, path: '/'});
+                        $.cookie('opinion3', options.text(), {expires: 1, path: '/'});
                     })
                 </script>
             </div>
@@ -264,17 +289,20 @@
                         </li>
                     </ul>
 
-                    <div id="item1" class="col-md-2 col-xs-6 item-container" style="background: white; border-radius: 0 0 15px 15px;">
+                    <div id="item1" class="col-md-2 col-xs-6 item-container"
+                         style="background: white; border-radius: 0 0 15px 15px;">
                         <div class="row">
                             <div id="mp-div" class="pull-left location-select item-position">
-                                <select class="form-control location-select-item" id="monitorpnt" name="monitorpnt" onclick="getMonitorPoints()" value="选择检测点">
+                                <select class="form-control location-select-item" id="monitorpnt" name="monitorpnt"
+                                        onclick="getMonitorPoints()" value="选择检测点">
                                 </select>
                             </div>
                         </div>
 
                         <div class="row">
                             <!--上传并显示图片-管理员专属-->
-                            <div class="col-md-2 col-xs-6 chart-item-gray" style=" width: 25%;height: 200px;-webkit-tap-highlight-color: transparent; user-select: none; position: relative;color: #0c0c0c;">
+                            <div class="col-md-2 col-xs-6 chart-item-gray"
+                                 style=" width: 25%;height: 200px;-webkit-tap-highlight-color: transparent; user-select: none; position: relative;color: #0c0c0c;">
                                 <img id="preview" src="upload/ElectricImg.jpg" alt="" width="100%;" height="175px;"/>
                                 <form action="uploadOne" method="post" enctype="multipart/form-data">
                                     <a class="file">选择文件
@@ -286,13 +314,15 @@
                                 </form>
                             </div>
 
-                            <div id="chart-status" class="col-md-2 col-xs-6 chart-item-gray" style="width:25%; height: 200px; color: #0c0c0c;">
+                            <div id="chart-status" class="col-md-2 col-xs-6 chart-item-gray"
+                                 style="width:25%; height: 200px; color: #0c0c0c;">
                                 图例:正常<img src="img/success.png"/> 报警 <img src="img/err.png"/><br/>
                                 市电故障：<img src="img/success.png"/> 整流器故障：<img src="img/success.png"/><br/>
                                 旁路故障：<img src="img/err.png"/> 逆变器故障：<img src="img/err.png"/><br/>
                             </div>
 
-                            <div id="chart-uuu" class="col-md-2 col-xs-6 chart-item-gray" style="width:40%; height: 400px;">
+                            <div id="chart-uuu" class="col-md-2 col-xs-6 chart-item-gray"
+                                 style="width:40%; height: 400px;">
                                 <div class="row chart-item" id="item1-graph" style="height: 250px;"></div>
                                 <table>
                                     <thead>
@@ -330,16 +360,20 @@
                         </div>
 
                         <div class="row">
-                            <div id="chart-s1" class="col-md-2 col-xs-6 chart-item-gray" style="width:20%; height: 150px;color: #0c0c0c">
+                            <div id="chart-s1" class="col-md-2 col-xs-6 chart-item-gray"
+                                 style="width:20%; height: 150px;color: #0c0c0c">
 
                             </div>
-                            <div id="chart-s2" class="col-md-2 col-xs-6 chart-item-gray" style="width:20%; height: 150px;color: #0c0c0c">
+                            <div id="chart-s2" class="col-md-2 col-xs-6 chart-item-gray"
+                                 style="width:20%; height: 150px;color: #0c0c0c">
 
                             </div>
-                            <div id="chart-s3" class="col-md-2 col-xs-6 chart-item-gray" style="width:20%; height:150px;color: #0c0c0c">
+                            <div id="chart-s3" class="col-md-2 col-xs-6 chart-item-gray"
+                                 style="width:20%; height:150px;color: #0c0c0c">
 
                             </div>
-                            <div id="chart-s4" class="col-md-2 col-xs-6 chart-item-gray" style="width:20%; height: 150px;color: #0c0c0c;font-size: 20px">
+                            <div id="chart-s4" class="col-md-2 col-xs-6 chart-item-gray"
+                                 style="width:20%; height: 150px;color: #0c0c0c;font-size: 20px">
                                 后备时间 <br/>
                                 001.68 <br/>
                                 Min <br/>
@@ -347,9 +381,11 @@
                         </div>
 
                     </div>
+
                     <div id="item2" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
 
                     </div>
+
                     <div id="item3" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
                         <div class="row" style="padding-left: 50px;"> xialak</div>
                         <div class="row" style="padding-left: 50px;" id="power-row1">
@@ -421,422 +457,476 @@
                                 <tr>
                                     <td>
                                         <table style="color:black;">
-                                            <tr><th>电压：</th><td>51.0 V</td><br/><th>平均内阻：</th><td>0.4 mΩ</td></tr>
-                                            <tr><th>电流：</th><td>208.1 A</td><br/><th>最高电压：</th><td>NO.15</td></tr>
-                                            <tr><th>温度1：</th><td>24.6 °C</td><br/><th>最低电压：</th><td>NO.21</td></tr>
-                                            <tr><th>温度2：</th><td>28.1 °C</td><br/><th>最高内阻：</th><td>NO.21</td></tr>
-                                            <tr><th>温度3：</th><td>25.0 °C</td><br/><th>最低内阻：</th><td>NO.51</td></tr>
+                                            <tr>
+                                                <th>电压：</th>
+                                                <td>51.0 V</td>
+                                                <br/>
+                                                <th>平均内阻：</th>
+                                                <td>0.4 mΩ</td>
+                                            </tr>
+                                            <tr>
+                                                <th>电流：</th>
+                                                <td>208.1 A</td>
+                                                <br/>
+                                                <th>最高电压：</th>
+                                                <td>NO.15</td>
+                                            </tr>
+                                            <tr>
+                                                <th>温度1：</th>
+                                                <td>24.6 °C</td>
+                                                <br/>
+                                                <th>最低电压：</th>
+                                                <td>NO.21</td>
+                                            </tr>
+                                            <tr>
+                                                <th>温度2：</th>
+                                                <td>28.1 °C</td>
+                                                <br/>
+                                                <th>最高内阻：</th>
+                                                <td>NO.21</td>
+                                            </tr>
+                                            <tr>
+                                                <th>温度3：</th>
+                                                <td>25.0 °C</td>
+                                                <br/>
+                                                <th>最低内阻：</th>
+                                                <td>NO.51</td>
+                                            </tr>
                                         </table>
                                     </td>
                                     <td>
-                                        <div id="chart-p1" class="col-md-2 col-xs-6 chart-item-gray" style="width:150px; height: 150px;"></div>
-                                        <div id="chart-p2" class="col-md-2 col-xs-6 chart-item-gray" style="width:150px; height: 150px;"></div>
-                                        <div id="chart-p3" class="col-md-2 col-xs-6 chart-item-gray" style="width:150px; height: 150px;"></div>
+                                        <div id="chart-p1" class="col-md-2 col-xs-6 chart-item-gray"
+                                             style="width:150px; height: 150px;"></div>
+                                        <div id="chart-p2" class="col-md-2 col-xs-6 chart-item-gray"
+                                             style="width:150px; height: 150px;"></div>
+                                        <div id="chart-p3" class="col-md-2 col-xs-6 chart-item-gray"
+                                             style="width:150px; height: 150px;"></div>
                                     </td>
                                 </tr>
                             </table>
 
                             <!-- cjy 蓄电池-->
-                        <button id="onlineanalysis" onclick="getOnlineBatteryData()">实时数据分析</button>
-                        <button id="histom" onclick="getHistomData()">柱状图</button>
+                            <button id="onlineanalysis" onclick="getOnlineBatteryData()">实时数据分析</button>
+                            <button id="histom" onclick="getHistomData()">柱状图</button>
 
-                        <div id="onlinebattery-div" class="online-battery" style="display: none;border-width: 1px;">
-                            <button onclick="closeonlinebattery()" class="button-primary button-pill button-small">关闭</button>
-                            <table>
-                                <thead>
-                                <th>数据编号</th>
-                                <th>电池组号</th>
-                                <th>电池只号</th>
-                                <th>电压/V</th>
-                                <th>内阻/mΩ</th>
-                                <th>温度</th>
-                                <th>时间</th>
-                                <th>首次记录内阻/mΩ</th>
-                                <th>偏差百分比</th>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>1</td>
-                                    <td>4</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>1</td>
-                                    <td>5</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>1</td>
-                                    <td>6</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>1</td>
-                                    <td>7</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>1</td>
-                                    <td>8</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>1</td>
-                                    <td>9</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>1</td>
-                                    <td>10</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>1</td>
-                                    <td>11</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>1</td>
-                                    <td>12</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    <td>1</td>
-                                    <td>13</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>14</td>
-                                    <td>1</td>
-                                    <td>14</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>15</td>
-                                    <td>1</td>
-                                    <td>15</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td>1</td>
-                                    <td>16</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>17</td>
-                                    <td>1</td>
-                                    <td>17</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>18</td>
-                                    <td>1</td>
-                                    <td>18</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>19</td>
-                                    <td>1</td>
-                                    <td>19</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>20</td>
-                                    <td>1</td>
-                                    <td>20</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>21</td>
-                                    <td>1</td>
-                                    <td>21</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>22</td>
-                                    <td>1</td>
-                                    <td>22</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>23</td>
-                                    <td>1</td>
-                                    <td>23</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                <tr>
-                                    <td>24</td>
-                                    <td>1</td>
-                                    <td>24</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td>0.0</td>
-                                    <td>0000 00:00:00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="onlinebattery-div2" class="online-battery" style="display: none;border-width: 1px;">
-                            <button onclick="closeonlinebattery2()" class="button-primary button-pill button-small">关闭</button>
-                            <div id="eventbar1" style="width:700px; height: 300px;">
+                            <div id="onlinebattery-div" class="online-battery" style="display: none;border-width: 1px;">
+                                <button onclick="closeonlinebattery()" class="button-primary button-pill button-small">
+                                    关闭
+                                </button>
+                                <table>
+                                    <thead>
+                                    <th>数据编号</th>
+                                    <th>电池组号</th>
+                                    <th>电池只号</th>
+                                    <th>电压/V</th>
+                                    <th>内阻/mΩ</th>
+                                    <th>温度</th>
+                                    <th>时间</th>
+                                    <th>首次记录内阻/mΩ</th>
+                                    <th>偏差百分比</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>1</td>
+                                        <td>3</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>1</td>
+                                        <td>4</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>1</td>
+                                        <td>5</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>1</td>
+                                        <td>6</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>1</td>
+                                        <td>7</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>1</td>
+                                        <td>8</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>1</td>
+                                        <td>9</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>1</td>
+                                        <td>10</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>1</td>
+                                        <td>11</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>1</td>
+                                        <td>12</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13</td>
+                                        <td>1</td>
+                                        <td>13</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+                                        <td>1</td>
+                                        <td>14</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15</td>
+                                        <td>1</td>
+                                        <td>15</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>1</td>
+                                        <td>16</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>17</td>
+                                        <td>1</td>
+                                        <td>17</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>18</td>
+                                        <td>1</td>
+                                        <td>18</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>19</td>
+                                        <td>1</td>
+                                        <td>19</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>1</td>
+                                        <td>20</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>21</td>
+                                        <td>1</td>
+                                        <td>21</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>22</td>
+                                        <td>1</td>
+                                        <td>22</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>23</td>
+                                        <td>1</td>
+                                        <td>23</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>24</td>
+                                        <td>1</td>
+                                        <td>24</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.0</td>
+                                        <td>0000 00:00:00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div id="eventbar2" style="width:700px; height: 300px;">
+                            <div id="onlinebattery-div2" class="online-battery"
+                                 style="display: none;border-width: 1px;">
+                                <button onclick="closeonlinebattery2()" class="button-primary button-pill button-small">
+                                    关闭
+                                </button>
+                                <div id="eventbar1" style="width:700px; height: 300px;">
+                                </div>
+                                <div id="eventbar2" style="width:700px; height: 300px;">
+                                </div>
                             </div>
-                        </div>
 
-                        <script type="text/javascript">
-                            function getOnlineBatteryData(){
-                                $('#onlinebattery-div').css('display', 'block');
+                            <script type="text/javascript">
+                                function getOnlineBatteryData() {
+                                    $('#onlinebattery-div').css('display', 'block');
 
-                                $.ajax({
-                                    type: "post",
-                                    url: "getOnlineBatteryData",
-                                    dataType: "json",
-                                    data: {
-                                        did: '8'
+                                    $.ajax({
+                                        type: "post",
+                                        url: "getOnlineBatteryData",
+                                        dataType: "json",
+                                        data: {
+                                            did: '8'
+                                        },
+                                        async: false,
+                                        success: function (result) {
+                                            console.log("sucss");
+
+
+                                        }
+                                    });
+                                }
+
+                                function closeonlinebattery() {
+                                    $('#onlinebattery-div').css('display', 'none');
+                                }
+
+                                function getHistomData() {
+                                    $('#onlinebattery-div2').css('display', 'block');
+
+                                    $.ajax({
+                                        type: "post",
+                                        url: "getOnlineBatteryData",
+                                        dataType: "json",
+                                        data: {
+                                            did: '8'
+                                        },
+                                        async: false,
+                                        success: function (result) {
+                                            console.log("sucss");
+
+                                        }
+                                    });
+                                }
+
+                                function closeonlinebattery2() {
+                                    $('#onlinebattery-div2').css('display', 'none');
+                                }
+
+                                var eventChart1 = echarts.init(document.getElementById('eventbar1'));
+                                var eventChart2 = echarts.init(document.getElementById('eventbar2'));
+
+                                var option1 = {
+                                    color: ['#1c9a4c'],
+                                    xAxis: {
+                                        type: 'category',
+                                        data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24']
                                     },
-                                    async: false,
-                                    success: function (result) {
-                                        console.log("sucss");
-
-
-
-                                    }
-                                });
-                            }
-
-                            function closeonlinebattery(){
-                                $('#onlinebattery-div').css('display', 'none');
-                            }
-
-                            function getHistomData() {
-                                $('#onlinebattery-div2').css('display', 'block');
-
-                                $.ajax({
-                                    type: "post",
-                                    url: "getOnlineBatteryData",
-                                    dataType: "json",
-                                    data: {
-                                        did: '8'
+                                    yAxis: {
+                                        type: 'value'
                                     },
-                                    async: false,
-                                    success: function (result) {
-                                        console.log("sucss");
+                                    series: [{
+                                        data: [2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2, 02],
+                                        type: 'bar'
+                                    }]
+                                };
+                                var option2 = {
+                                    color: ['#1c9a4c'],
+                                    xAxis: {
+                                        type: 'category',
+                                        data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24']
+                                    },
+                                    yAxis: {
+                                        type: 'value'
+                                    },
+                                    series: [{
+                                        data: [2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2, 02],
+                                        type: 'bar'
+                                    }]
+                                };
 
-                                    }
-                                });
-                            }
+                                eventChart1.setOption(option1);
+                                eventChart2.setOption(option2);
 
-                            function closeonlinebattery2(){
-                                $('#onlinebattery-div2').css('display', 'none');
-                            }
-
-                            var eventChart1 = echarts.init(document.getElementById('eventbar1'));
-                            var eventChart2 = echarts.init(document.getElementById('eventbar2'));
-
-                            var option1 = {
-                                color: ['#1c9a4c'],
-                                xAxis: {
-                                    type: 'category',
-                                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13','14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24']
-                                },
-                                yAxis: {
-                                    type: 'value'
-                                },
-                                series: [{
-                                    data: [2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2,02],
-                                    type: 'bar'
-                                }]
-                            };
-                            var option2 = {
-                                color: ['#1c9a4c'],
-                                xAxis: {
-                                    type: 'category',
-                                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13','14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24']
-                                },
-                                yAxis: {
-                                    type: 'value'
-                                },
-                                series: [{
-                                    data: [2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2.0, 2.13, 2.39, 2.14, 2.11, 2.130, 2.1, 2,02],
-                                    type: 'bar'
-                                }]
-                            };
-
-                            eventChart1.setOption(option1);
-                            eventChart2.setOption(option2);
-
-                        </script>
-                        <!-- cjy 蓄电池-->
+                            </script>
+                            <!-- cjy 蓄电池-->
 
                         </div>
                     </div>
-                    <div id="item4" class="col-md-2 col-xs-6 item-container" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
+
+                    <div id="item4" class="col-md-2 col-xs-6 item-container"
+                         style="background: white; border-radius: 0 0 15px 15px; height:580px;">
                         <div class="row"></div>
                         <div class="row" style="color: black;">
                             温湿度
                             <div class="col-md-2 col-xs-6 chart-item-gray" style="width:45%; height: 230px;">
-                                <div id="ktjc-bar1" class="col-md-3 col-xs-6 chart-item" style="width: 35%;height: 200px;">
+                                <div id="ktjc-bar1" class="col-md-3 col-xs-6 chart-item"
+                                     style="width: 35%;height: 200px;">
                                 </div>
                                 <table style="width: 20%;height: 200px;">
                                     <tbody>
-                                    <tr><th>回风温度</th><td>93.12 ℃</td><br/><th>温度设定值</th><td>8.12 ℃</td></tr>
-                                    <tr><th>回风湿度</th><td>20.22 %</td><br/><th>湿度设定值</th><td>75.22 %</td></tr>
+                                    <tr>
+                                        <th>回风温度</th>
+                                        <td>93.12 ℃</td>
+                                        <br/>
+                                        <th>温度设定值</th>
+                                        <td>8.12 ℃</td>
+                                    </tr>
+                                    <tr>
+                                        <th>回风湿度</th>
+                                        <td>20.22 %</td>
+                                        <br/>
+                                        <th>湿度设定值</th>
+                                        <td>75.22 %</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
 
                             空调温湿度变化曲线
-                            <div id="chart-ktwd" class="col-md-2 col-xs-6 chart-item-gray" style="width:40%; height: 450px;">
+                            <div id="chart-ktwd" class="col-md-2 col-xs-6 chart-item-gray"
+                                 style="width:40%; height: 450px;">
                                 <div class="row chart-item" id="item-ktwd" style="height: 250px;"></div>
                                 图例:正常<img src="img/success.png"/> 报警 <img src="img/err.png"/><br/>
-                                过滤网阻塞：<img src="img/success.png"/> 压缩机高压：<img src="img/success.png"/>加湿器故障：<img src="img/success.png"/><br/>
+                                过滤网阻塞：<img src="img/success.png"/> 压缩机高压：<img src="img/success.png"/>加湿器故障：<img
+                                    src="img/success.png"/><br/>
                                 风机状态：<img src="img/err.png"/> 压缩机低压：<img src="img/err.png"/><br/>
                                 风机过敏：<img src="img/err.png"/> 压缩机2高压：<img src="img/err.png"/><br/>
                                 气流丢失：<img src="img/err.png"/> 压缩机2低压：<img src="img/err.png"/><br/>
@@ -845,8 +935,17 @@
                         <div class="row">
                             <table>
                                 <tbody>
-                                <tr><th>加热/制冷</th> <th>加湿/除湿</th><th> 风机</th><th> 风机</th></tr>
-                                <tr><td><img src="img/hot.jpg"/></td><td><img src="img/wet.jpg"/></td><td><img src="img/fengji.jpg"/></td></tr>
+                                <tr>
+                                    <th>加热/制冷</th>
+                                    <th>加湿/除湿</th>
+                                    <th> 风机</th>
+                                    <th> 风机</th>
+                                </tr>
+                                <tr>
+                                    <td><img src="img/hot.jpg"/></td>
+                                    <td><img src="img/wet.jpg"/></td>
+                                    <td><img src="img/fengji.jpg"/></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -854,7 +953,7 @@
                         <script type="text/javascript">
                             var min = [0, 0, 0];
                             var max = [220, 100, 10];
-                            var splitNumber = [11, 5, 5] ;
+                            var splitNumber = [11, 5, 5];
 
                             var eventChart1 = echarts.init(document.getElementById('ktjc-bar1'));
                             var eventChart2 = echarts.init(document.getElementById('item-ktwd'));
@@ -870,8 +969,8 @@
                                     z: 3,
                                     min: min[0],
                                     max: max[0],
-                                    startAngle:  270,
-                                    endAngle:0,
+                                    startAngle: 270,
+                                    endAngle: 0,
                                     splitNumber: splitNumber[0],
                                     radius: '60%',
                                     axisLine: {
@@ -1001,10 +1100,10 @@
                                 getTemWet();
                             }, 1000);
 
-                            function getTemWet(){
+                            function getTemWet() {
                                 var did = $("#monitorpnt").val();
 
-                                if(did != null && did != ""){
+                                if (did != null && did != "") {
                                     $.ajax({
                                         type: "post",
                                         url: "getTemWet",
@@ -1033,6 +1132,7 @@
                                 Recordtem.push({name: time, value: [time, tem]});
                                 Recordwet.push({name: time, value: [time, wet]});
                             }
+
                             // 更新Uabc图
                             function updateTemWet() {
                                 eventChart2.setOption({
@@ -1047,13 +1147,12 @@
                     </div>
 
                     <div id="item5" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
-
                     </div>
-                    <div id="item6" style="background: white; border-radius: 0 0 15px 15px; height:580px;" >
 
+                    <div id="item6" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
                     </div>
+
                     <div id="item7" style="background: white; border-radius: 0 0 15px 15px; height:580px;">
-
                     </div>
 
                     <div id="noticecon">
@@ -1072,21 +1171,19 @@
 </section>
 
 
-
-
 <!-- Javascript Libraries -->
 <script type="text/javascript">
-    $(document).ready(function() {
-                $.get("./css/serial number.xml", function(data){
-                //console.log(data);
-                $(data).find("taxrate").each(function() {
-                    var Person = $(this);
-                    var titles = Person.find("lab").text();
-                    var links = Person.find("num").text();
-                    console.log(titles+'-----');
-                    $("#noticecon").find('tr').append('<td><lable >'+titles+'</lable></td><td><lable>'+links+'</lable></td>');
+    $(document).ready(function () {
+        $.get("./css/serial number.xml", function (data) {
+            //console.log(data);
+            $(data).find("taxrate").each(function () {
+                var Person = $(this);
+                var titles = Person.find("lab").text();
+                var links = Person.find("num").text();
+                console.log(titles + '-----');
+                $("#noticecon").find('tr').append('<td><lable >' + titles + '</lable></td><td><lable>' + links + '</lable></td>');
 
-                });
+            });
 
         });
     })
@@ -1150,8 +1247,7 @@
                     if (obj[i].cbname == opinion2 || i == 0) {
                         $('#city_code').append("<option value='" + obj[i].cbid + "' selected='selected' >" + obj[i].cbname + "</option>");
                         getComproom();
-                    }
-                    else
+                    } else
                         $('#city_code').append("<option value='" + obj[i].cbid + "' >" + obj[i].cbname + "</option>");
 
                 }
@@ -1186,8 +1282,7 @@
                         $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
                         $('#second-page').css('display', 'block');
                         $('#first-page').css('display', 'none');
-                    }
-                    else
+                    } else
                         $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
                 }
             }
@@ -1198,7 +1293,7 @@
 
 <!-- 动态加载菜单项 -->
 <script type="text/javascript">
-    var menulist="<%=session.getAttribute("menulist")%>";
+    var menulist = "<%=session.getAttribute("menulist")%>";
     var cbidstr = menulist.split(",");
     var isSystemMng = false;
     var isNewSystemMng = false;
@@ -1213,22 +1308,19 @@
     var len = cbidstr[idx].length;
     cbidstr[idx] = cbidstr[idx].substring(0, len - 1);
 
-    for(var i = 0; i < cbidstr.length; i++){
+    for (var i = 0; i < cbidstr.length; i++) {
 
         var menuname = "";
-        if(cbidstr[i] == " province.jsp"){
+        if (cbidstr[i] == " province.jsp") {
             isSystemMng = false;
             menuname = "集中监控";
-        }
-        else if(cbidstr[i] == " efficiencyInstruction.jsp"){
+        } else if (cbidstr[i] == " efficiencyInstruction.jsp") {
             isSystemMng = false;
             menuname = "动力设施";
-        }
-        else if(cbidstr[i] == " onlineDetect.jsp"){
+        } else if (cbidstr[i] == " onlineDetect.jsp") {
             isSystemMng = false;
             menuname = "在线监测";
-        }
-        else if(cbidstr[i] == ' efficiencyAnalysis.jsp'){
+        } else if (cbidstr[i] == ' efficiencyAnalysis.jsp') {
             isSystemMng = false;
             menuname = "动力分析";
         }
@@ -1236,66 +1328,60 @@
             isSystemMng = false;
             menuname = "动力评估";
         }*/
-        else if(cbidstr[i] == ' reportChart.jsp'){
+        else if (cbidstr[i] == ' reportChart.jsp') {
             isSystemMng = false;
             menuname = "报表功能";
-        }
-        else if(cbidstr[i] == ' history.jsp'){
+        } else if (cbidstr[i] == ' history.jsp') {
             isSystemMng = false;
             menuname = "历史曲线";
-        }
-        else if(cbidstr[i].search('systemMng.jsp')){
+        } else if (cbidstr[i].search('systemMng.jsp')) {
 
             //对字符串分段处理（2或3段）
             var substr = cbidstr[i].split("/");
 
-            if(substr.length == 2){
+            if (substr.length == 2) {
                 ulist.push(substr[1]);
-            }
-
-            else
-            {
+            } else {
                 ulist.push(substr[1]);
                 u2list.push(substr[2]);
             }
 
-            if(!isNewSystemMng)
-            {//第一条systemMng的
+            if (!isNewSystemMng) {//第一条systemMng的
                 isNewSystemMng = true;
                 menuname = "系统管理";
                 $('#ulbar').append("<li><a href='systemMng.jsp' id='menuurl'>" + menuname + "</a></li>");
             }
             isSystemMng = true;
         }
-        if(!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
+        if (!isSystemMng) $('#ulbar').append("<li><a href='" + cbidstr[i] + "'  id='menuurl'>" + menuname + "</a></li>");
     }
 
-    for(var i = 1; i <= 8; i++){
+    for (var i = 1; i <= 8; i++) {
         var ustr = "item" + i;
 
-        for(var j = 0; j < ulist.length; j++){
-            if(ustr == ulist[j]){
+        for (var j = 0; j < ulist.length; j++) {
+            if (ustr == ulist[j]) {
                 break;
             }
-            if(j == ulist.length - 1){
-                $("#"+ustr+"").remove();
+            if (j == ulist.length - 1) {
+                $("#" + ustr + "").remove();
             }
         }
     }
 
-    for(var i = 1; i <= 9; i++){
+    for (var i = 1; i <= 9; i++) {
         var ustr;
-        if(i < 7)
+        if (i < 7)
             ustr = "secsubItem" + i;
         else
             ustr = "tridsubItem" + i;
 
-        for(var j = 0; j < u2list.length; j++){
-            if(ustr == u2list[j]){
+        for (var j = 0; j < u2list.length; j++) {
+            if (ustr == u2list[j]) {
                 break;
             }
-            if(j == u2list.length - 1){
-                $("#"+ustr+"").remove();
+            if (j == u2list.length - 1) {
+                $("#" + ustr + "").remove();
             }
         }
     }
@@ -1418,8 +1504,7 @@
                 var img = document.getElementById('preview');
                 img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
             }
-        }
-        else {
+        } else {
             alert("抱歉, 您没有权限进行此操作, 请联系管理员!")
         }
     }
@@ -1447,19 +1532,19 @@
 <script>
 
     var ttt = 111;
+
     //获取检测点列表
-    function getMonitorPoints(){
+    function getMonitorPoints() {
 
         var computerroom = $("#comproom_code option:selected").val();
         var mpcname = $("#monitorpnt").val();
 
-        if(!computerroom){
+        if (!computerroom) {
             alert("请先选择机房，再选择检测点");
-        }
-        else if(!mpcname) { //若没有获取过，获取
+        } else if (!mpcname) { //若没有获取过，获取
             var hisvalue = $('#his-mpid-select').val();
 
-            if(hisvalue == null) {
+            if (hisvalue == null) {
                 $.ajax({
                     type: "post",
                     url: "getMonitorPoints",
@@ -1522,32 +1607,32 @@
         series: [
             //backgorond label
             {
-            name: '',
-            type: 'bar',
-            barWidth: '10%',
-            data: [50],
-            itemStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(
-                        0, 0, 0, 1,
-                        [
-                            {
-                                offset: 0,
-                                color: 'rgba(255, 0, 0, 1)'
-                            }, //定义颜色
-                            {
-                                offset: 0.5,
-                                color:  'rgba(255, 255, 0, 1)'
-                            },
-                            {
-                                offset: 1,
-                                color:  'rgba(0, 255, 0, 1)'
-                            }
-                        ]
-                    )
+                name: '',
+                type: 'bar',
+                barWidth: '10%',
+                data: [50],
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {
+                                    offset: 0,
+                                    color: 'rgba(255, 0, 0, 1)'
+                                }, //定义颜色
+                                {
+                                    offset: 0.5,
+                                    color: 'rgba(255, 255, 0, 1)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgba(0, 255, 0, 1)'
+                                }
+                            ]
+                        )
+                    }
                 }
-            }
-        }]
+            }]
     };
     var options2 = {
         title: {
@@ -1595,7 +1680,7 @@
                     color: '#666',
                 },
                 detail: {
-                    formatter:'{value}V',
+                    formatter: '{value}V',
                     fontSize: 24,
                     offsetCenter: [0, '85%']
                 },
@@ -1626,8 +1711,8 @@
             {
                 name: '仪表盘',
                 type: 'gauge',
-                startAngle:'265',
-                endAngle:'-85',
+                startAngle: '265',
+                endAngle: '-85',
                 data: [{value: '65.79', name: ''}],
                 radius: '80%',
                 center: ['50%', '50%'],
@@ -1637,7 +1722,7 @@
                 axisLine: {            // 坐标轴线
                     lineStyle: {       // 属性lineStyle控制线条样式
                         width: 5,
-                      //  color: [[0.2, '#62c87f'], [0.8, '#5d9cec'], [1, '#f15755']]
+                        //  color: [[0.2, '#62c87f'], [0.8, '#5d9cec'], [1, '#f15755']]
                     }
                 },
                 axisTick: {            // 坐标轴小标记
@@ -1656,7 +1741,7 @@
                     color: '#666',
                 },
                 detail: {
-                    formatter:'{value}V',
+                    formatter: '{value}V',
                     fontSize: 24,
                     offsetCenter: [0, '85%']
                 },
@@ -1878,10 +1963,10 @@
         getValueUI();
     }, 1000);
 
-    function getUabc(){
+    function getUabc() {
         var did = $("#monitorpnt").val();
 
-        if(did != null && did != ""){
+        if (did != null && did != "") {
             $.ajax({
                 type: "post",
                 url: "getUabc",
@@ -1897,7 +1982,7 @@
 
     function addData(newRecord) {
         // 构造1条记录
-        var time=new Date();
+        var time = new Date();
 
         var U1 = newRecord["allU"][0]["u1"].toFixed(2);
         var U2 = newRecord["allU"][0]["u2"].toFixed(2);
@@ -1913,6 +1998,7 @@
         Recordu2.push({name: time, value: [time, U2]});
         Recordu3.push({name: time, value: [time, U3]});
     }
+
     // 更新Uabc图
     function updateUabc() {
         eventChart1.setOption({
@@ -1924,10 +2010,10 @@
         });
     }
 
-    function getValueUI(){
+    function getValueUI() {
         var did = $("#monitorpnt").val();
 
-        if(did != null && did != ""){
+        if (did != null && did != "") {
             $.ajax({
                 type: "post",
                 url: "getValueUI",

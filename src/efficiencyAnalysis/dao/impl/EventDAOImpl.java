@@ -82,40 +82,40 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid AND td.did=ta.did" +
-                    " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid AND td.did=ta.did" +
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
 
+        try {
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
+
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
+
+                rtlist.add(list.toString());
+            }
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
             try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                for(int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
-
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
-
-                    rtlist.add(list.toString());
-                }
-
+                db.free();
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            }finally {
-                try {
-                    db.free();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
             }
+        }
         return rtlist;
     }
 
@@ -151,35 +151,35 @@ public class EventDAOImpl implements EventDAO {
         String maxtime = "0000-00-00 00:00:00.0";
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did=ta.did" +
-                    " ORDER BY signature limit 2000";
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did=ta.did" +
+                " ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    if (maxtime.compareTo(rs.getString("time")) < 0) { //若当前取的数据时间更新
-                        maxtime = rs.getString("time");
-                        rtlist.clear();
-                        rtlist.add(list.toString());
-                    }
+                if (maxtime.compareTo(rs.getString("time")) < 0) { //若当前取的数据时间更新
+                    maxtime = rs.getString("time");
+                    rtlist.clear();
+                    rtlist.add(list.toString());
                 }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         try {
             db.free();
         } catch (SQLException e) {
@@ -222,32 +222,32 @@ public class EventDAOImpl implements EventDAO {
 
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid  and td.did=ta.did " +
-                    " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY signature limit 2000";
+                "ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid  and td.did=ta.did " +
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                for(int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -288,32 +288,32 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and tb.type in (1,2) ORDER BY signature limit 2000";
+                "ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and tb.type in (1,2) ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -354,31 +354,31 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and 322 ORDER BY signature limit 2000";
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and 322 ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                for(int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -418,31 +418,31 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and tb.subtype between 24 and  322 ORDER BY signature limit 2000";
+                "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and tb.subtype between 24 and  322 ORDER BY signature limit 2000";
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -483,32 +483,32 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY signature limit 2000";
+                "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -548,31 +548,31 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and tb.type=9 ORDER BY signature limit 2000";
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and tb.type=9 ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -613,31 +613,31 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3 ORDER BY signature limit 2000";
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3 ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                for(int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -677,31 +677,31 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and tb.type=3 ORDER BY signature limit 2000";
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and tb.type=3 ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -742,31 +742,31 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and ta.time >'" + starttime + "' and ta.time <'" + endtime +  "' and tb.type=8 ORDER BY signature limit 2000";
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                for(int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -806,30 +806,30 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and tb.type=8 ORDER BY signature limit 2000";
+                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and tb.type=8 ORDER BY signature limit 2000";
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -870,32 +870,32 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_environment ta,events_type tb, devices_threshold tc,devices td  " +
-                    "where tb.cid = ta.cid and tb.type = tc.type  and td.did=ta.did " +
-                    " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
+                "from event_environment ta,events_type tb, devices_threshold tc,devices td  " +
+                "where tb.cid = ta.cid and tb.type = tc.type  and td.did=ta.did " +
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                for(int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -937,35 +937,36 @@ public class EventDAOImpl implements EventDAO {
         String maxtime = "0000-00-00 00:00:00.0";
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.signature as signature, ta.annotation as annotation " +
-                    "from event_environment ta,events_type tb, devices_threshold tc,devices td    " +
-                    "where tc.type = tb.type and ta.cid = tb.cid and td.did=ta.did" +
-                    " ORDER BY signature limit 2000";
-            try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+                "from event_environment ta,events_type tb, devices_threshold tc,devices td    " +
+                "where tc.type = tb.type and ta.cid = tb.cid and td.did=ta.did" +
+                " ORDER BY signature limit 2000";
+        try {
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    if (maxtime.compareTo(rs.getString("time")) < 0) { //若当前取的数据时间更新
-                        maxtime = rs.getString("time");
-                        rtlist.clear();
-                        rtlist.add(list.toString());
-                    }
+                if (maxtime.compareTo(rs.getString("time")) < 0) { //若当前取的数据时间更新
+                    maxtime = rs.getString("time");
+                    rtlist.clear();
+                    rtlist.add(list.toString());
                 }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace(); }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         try {
             db.free();
         } catch (SQLException e) {
@@ -1007,30 +1008,30 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta.annotation as annotation " +
-                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (113,114) ORDER BY signature limit 2000";
+                "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (113,114) ORDER BY signature limit 2000";
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -1070,31 +1071,31 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta.annotation as annotation " +
-                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and tb.type in (113,114) ORDER BY signature limit 2000";
+                "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and tb.type in (113,114) ORDER BY signature limit 2000";
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-               // while (rs.next()) {
-                if (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            // while (rs.next()) {
+            if (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -1135,31 +1136,31 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta.annotation as annotation " +
-                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (115,116) ORDER BY signature limit 2000";
+                "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (115,116) ORDER BY signature limit 2000";
 
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -1200,30 +1201,30 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta.annotation as annotation " +
-                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
-                    " and tb.type in (115,116) ORDER BY signature limit 2000";
+                "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+                " and tb.type in (115,116) ORDER BY signature limit 2000";
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add(rs.getString("name"));
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add(rs.getString("name"));
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -1264,30 +1265,30 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
         String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id   and td.did=ta.did " +
-                    " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
+                "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id   and td.did=ta.did " +
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                for(int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add("治理");
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前整机设备故障");
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add("治理");
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前整机设备故障");
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    rtlist.add(list.toString());
-                }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                rtlist.add(list.toString());
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -1314,7 +1315,7 @@ public class EventDAOImpl implements EventDAO {
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp= (Computerroom) hbsessionDao.getFirst(
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
                     "FROM Computerroom where rid = '" + comidset[i] + "'");
 
             String str = cp.getCidset();
@@ -1328,34 +1329,34 @@ public class EventDAOImpl implements EventDAO {
         String maxtime = "0000-00-00 00:00:00.0";
 
         String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
-                    "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id   and td.did=ta.did " +
-                    "ORDER BY signature limit 2000";
+                "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id   and td.did=ta.did " +
+                "ORDER BY signature limit 2000";
         try {
-                ps = db.getPs(sql);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    List list = new ArrayList();
-                    list.add(rs.getString("teid"));
-                    list.add("治理");
-                    list.add(rs.getString("location"));
-                    list.add(rs.getString("type"));
-                    list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
-                    list.add(rs.getString("time"));
-                    list.add(rs.getString("cid"));
+            ps = db.getPs(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                List list = new ArrayList();
+                list.add(rs.getString("teid"));
+                list.add("治理");
+                list.add(rs.getString("location"));
+                list.add(rs.getString("type"));
+                list.add(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                list.add(rs.getString("time"));
+                list.add(rs.getString("cid"));
 
-                    list.add(rs.getString("duration"));
-                    list.add(rs.getString("signature"));
-                    list.add(rs.getString("annotation"));
+                list.add(rs.getString("duration"));
+                list.add(rs.getString("signature"));
+                list.add(rs.getString("annotation"));
 
-                    if (maxtime.compareTo(rs.getString("time")) < 0) { //若当前取的数据时间更新
-                        maxtime = rs.getString("time");
-                        rtlist.clear();
-                        rtlist.add(list.toString());
-                    }
+                if (maxtime.compareTo(rs.getString("time")) < 0) { //若当前取的数据时间更新
+                    maxtime = rs.getString("time");
+                    rtlist.clear();
+                    rtlist.add(list.toString());
                 }
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         try {
             db.free();
@@ -1367,11 +1368,11 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取治理事件总数
-    public int getLocalAllCtrlTotal(String cbnamelist[], String starttime, String endtime){
+    public int getLocalAllCtrlTotal(String cbnamelist[], String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         int idx = 0;
-        for(int k = 0; k < cbnamelist.length; k++){
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1422,11 +1423,11 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取环境事件总数
-    public int getLocalAllEnvironmentTotal(String cbnamelist[], String starttime, String endtime){
+    public int getLocalAllEnvironmentTotal(String cbnamelist[], String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         int idx = 0;
-        for(int k = 0; k < cbnamelist.length; k++){
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1452,7 +1453,7 @@ public class EventDAOImpl implements EventDAO {
 
             for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+                String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
                         "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
                         "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
                         + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
@@ -1478,11 +1479,11 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取环境事件总数 -temp
-    public int getLocalAllEnvironmenttempTotal(String cbnamelist[], String starttime, String endtime){
+    public int getLocalAllEnvironmenttempTotal(String cbnamelist[], String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         int idx = 0;
-        for(int k = 0; k < cbnamelist.length; k++){
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1533,11 +1534,11 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取环境事件总数 -wet
-    public int getLocalAllEnvironmentwetTotal(String cbnamelist[], String starttime, String endtime){
+    public int getLocalAllEnvironmentwetTotal(String cbnamelist[], String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         int idx = 0;
-        for(int k = 0; k < cbnamelist.length; k++){
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1589,11 +1590,11 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取电能事件总数
-    public int getLocalAllPowerTotal(String cbnamelist[], String starttime, String endtime){
+    public int getLocalAllPowerTotal(String cbnamelist[], String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         int idx = 0;
-        for(int k = 0; k < cbnamelist.length; k++){
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1644,11 +1645,11 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取电能事件总数lytx
-    public int getLocalAllPowerlytxTotal(String cbnamelist[], String starttime, String endtime){
+    public int getLocalAllPowerlytxTotal(String cbnamelist[], String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         int idx = 0;
-        for(int k = 0; k < cbnamelist.length; k++){
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1673,17 +1674,17 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        +" and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY signature limit 2000";
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        idx++;
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    idx++;
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -1696,11 +1697,11 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取电能事件总数xb
-    public int getLocalAllPowerxbTotal(String cbnamelist[], String starttime, String endtime){
+    public int getLocalAllPowerxbTotal(String cbnamelist[], String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         int idx = 0;
-        for(int k = 0; k < cbnamelist.length; k++){
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1725,17 +1726,17 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and 322 ORDER BY signature limit 2000";
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and 322 ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        idx++;
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    idx++;
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -1748,11 +1749,11 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取电能事件总数sxbph
-    public int getLocalAllPowersxbphTotal(String cbnamelist[], String starttime, String endtime){
+    public int getLocalAllPowersxbphTotal(String cbnamelist[], String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         int idx = 0;
-        for(int k = 0; k < cbnamelist.length; k++){
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1777,17 +1778,17 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY signature limit 2000";
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        idx++;
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    idx++;
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -1800,11 +1801,11 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取电能事件总数shunbian
-    public int getLocalAllPowershunbianTotal(String cbnamelist[], String starttime, String endtime){
+    public int getLocalAllPowershunbianTotal(String cbnamelist[], String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         int idx = 0;
-        for(int k = 0; k < cbnamelist.length; k++){
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1829,17 +1830,17 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3 ORDER BY signature limit 2000";
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3 ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        idx++;
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    idx++;
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -1852,11 +1853,11 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取电能事件总数shanbian
-    public int getLocalAllPowershanbianTotal(String cbnamelist[], String starttime, String endtime){
+    public int getLocalAllPowershanbianTotal(String cbnamelist[], String starttime, String endtime) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         int idx = 0;
-        for(int k = 0; k < cbnamelist.length; k++){
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1881,17 +1882,17 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY signature limit 2000";
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        idx++;
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    idx++;
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -1904,13 +1905,13 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的治理事件
-    public PageHelper<EventObject>  getCtrlEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end){
+    public PageHelper<EventObject> getCtrlEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
         PageHelper<EventObject> alllist = new PageHelper<EventObject>();
 
-        for(int k = 0; k < cbnamelist.length; k++) {
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -1935,27 +1936,27 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
+                    "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                        EventObject eventObject = new EventObject();
-                        eventObject.setTeid(rs.getString("teid"));
-                        eventObject.setType("治理");
-                        eventObject.setName(rs.getString("location"));
-                        eventObject.setDescription(rs.getString("type")+ "。当前整机设备故障");
-                        eventObject.setTime(rs.getString("time"));
-                        eventObject.setDuration(rs.getString("duration"));
-                        eventObject.setSignature(rs.getString("signature"));
-                        eventObject.setAnnotation(rs.getString("annotation"));
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                    EventObject eventObject = new EventObject();
+                    eventObject.setTeid(rs.getString("teid"));
+                    eventObject.setType("治理");
+                    eventObject.setName(rs.getString("location"));
+                    eventObject.setDescription(rs.getString("type") + "。当前整机设备故障");
+                    eventObject.setTime(rs.getString("time"));
+                    eventObject.setDuration(rs.getString("duration"));
+                    eventObject.setSignature(rs.getString("signature"));
+                    eventObject.setAnnotation(rs.getString("annotation"));
 
-                        alllist.getRows().add(eventObject);
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    alllist.getRows().add(eventObject);
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -1966,8 +1967,8 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //get [start, end] data
-        for( int i = 0; i < alllist.getRows().size(); i++){
-            if(i >= start && i <= end) {
+        for (int i = 0; i < alllist.getRows().size(); i++) {
+            if (i >= start && i <= end) {
                 rtlist.getRows().add(alllist.getRows().get(i));
             }
         }
@@ -1976,13 +1977,13 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件
-    public PageHelper<EventObject>  getPowerEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end){
+    public PageHelper<EventObject> getPowerEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
         PageHelper<EventObject> alllist = new PageHelper<EventObject>();
 
-        for(int k = 0; k < cbnamelist.length; k++) {
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -2007,27 +2008,27 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                        EventObject eventObject = new EventObject();
-                        eventObject.setTeid(rs.getString("teid"));
-                        eventObject.setType(rs.getString("type"));
-                        eventObject.setName(rs.getString("location"));
-                        eventObject.setDescription(rs.getString("type")+ "。当前值为" + rs.getString("description"));
-                        eventObject.setTime(rs.getString("time"));
-                        eventObject.setDuration(rs.getString("duration"));
-                        eventObject.setSignature(rs.getString("signature"));
-                        eventObject.setAnnotation(rs.getString("annotation"));
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                    EventObject eventObject = new EventObject();
+                    eventObject.setTeid(rs.getString("teid"));
+                    eventObject.setType(rs.getString("type"));
+                    eventObject.setName(rs.getString("location"));
+                    eventObject.setDescription(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                    eventObject.setTime(rs.getString("time"));
+                    eventObject.setDuration(rs.getString("duration"));
+                    eventObject.setSignature(rs.getString("signature"));
+                    eventObject.setAnnotation(rs.getString("annotation"));
 
-                        alllist.getRows().add(eventObject);
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    alllist.getRows().add(eventObject);
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -2038,8 +2039,8 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //get [start, end] data
-        for( int i = 0; i < alllist.getRows().size(); i++){
-            if(i >= start && i <= end) {
+        for (int i = 0; i < alllist.getRows().size(); i++) {
+            if (i >= start && i <= end) {
                 rtlist.getRows().add(alllist.getRows().get(i));
             }
         }
@@ -2048,13 +2049,13 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件lytx
-    public PageHelper<EventObject>  getPowerEventlytxObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end){
+    public PageHelper<EventObject> getPowerEventlytxObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
         PageHelper<EventObject> alllist = new PageHelper<EventObject>();
 
-        for(int k = 0; k < cbnamelist.length; k++) {
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -2079,27 +2080,27 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY signature limit 2000";
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                        EventObject eventObject = new EventObject();
-                        eventObject.setTeid(rs.getString("teid"));
-                        eventObject.setType(rs.getString("type"));
-                        eventObject.setName(rs.getString("location"));
-                        eventObject.setDescription(rs.getString("type")+ "。当前值为" + rs.getString("description"));
-                        eventObject.setTime(rs.getString("time"));
-                        eventObject.setDuration(rs.getString("duration"));
-                        eventObject.setSignature(rs.getString("signature"));
-                        eventObject.setAnnotation(rs.getString("annotation"));
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                    EventObject eventObject = new EventObject();
+                    eventObject.setTeid(rs.getString("teid"));
+                    eventObject.setType(rs.getString("type"));
+                    eventObject.setName(rs.getString("location"));
+                    eventObject.setDescription(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                    eventObject.setTime(rs.getString("time"));
+                    eventObject.setDuration(rs.getString("duration"));
+                    eventObject.setSignature(rs.getString("signature"));
+                    eventObject.setAnnotation(rs.getString("annotation"));
 
-                        alllist.getRows().add(eventObject);
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    alllist.getRows().add(eventObject);
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -2110,8 +2111,8 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //get [start, end] data
-        for( int i = 0; i < alllist.getRows().size(); i++){
-            if(i >= start && i <= end) {
+        for (int i = 0; i < alllist.getRows().size(); i++) {
+            if (i >= start && i <= end) {
                 rtlist.getRows().add(alllist.getRows().get(i));
             }
         }
@@ -2120,13 +2121,13 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件xb
-    public PageHelper<EventObject>  getPowerEventxbObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end){
+    public PageHelper<EventObject> getPowerEventxbObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
         PageHelper<EventObject> alllist = new PageHelper<EventObject>();
 
-        for(int k = 0; k < cbnamelist.length; k++) {
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -2163,7 +2164,7 @@ public class EventDAOImpl implements EventDAO {
                         eventObject.setTeid(rs.getString("teid"));
                         eventObject.setType(rs.getString("type"));
                         eventObject.setName(rs.getString("location"));
-                        eventObject.setDescription(rs.getString("type")+ "。当前值为" + rs.getString("description"));
+                        eventObject.setDescription(rs.getString("type") + "。当前值为" + rs.getString("description"));
                         eventObject.setTime(rs.getString("time"));
                         eventObject.setDuration(rs.getString("duration"));
                         eventObject.setSignature(rs.getString("signature"));
@@ -2185,8 +2186,8 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //get [start, end] data
-        for( int i = 0; i < alllist.getRows().size(); i++){
-            if(i >= start && i <= end) {
+        for (int i = 0; i < alllist.getRows().size(); i++) {
+            if (i >= start && i <= end) {
                 rtlist.getRows().add(alllist.getRows().get(i));
             }
         }
@@ -2195,13 +2196,13 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件sxbph
-    public PageHelper<EventObject>  getPowerEventsxbphObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end){
+    public PageHelper<EventObject> getPowerEventsxbphObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
         PageHelper<EventObject> alllist = new PageHelper<EventObject>();
 
-        for(int k = 0; k < cbnamelist.length; k++) {
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -2226,27 +2227,27 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime +  "' and tb.type=9 ORDER BY signature limit 2000";
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                        EventObject eventObject = new EventObject();
-                        eventObject.setTeid(rs.getString("teid"));
-                        eventObject.setType(rs.getString("type"));
-                        eventObject.setName(rs.getString("location"));
-                        eventObject.setDescription(rs.getString("type")+ "。当前值为" + rs.getString("description"));
-                        eventObject.setTime(rs.getString("time"));
-                        eventObject.setDuration(rs.getString("duration"));
-                        eventObject.setSignature(rs.getString("signature"));
-                        eventObject.setAnnotation(rs.getString("annotation"));
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                    EventObject eventObject = new EventObject();
+                    eventObject.setTeid(rs.getString("teid"));
+                    eventObject.setType(rs.getString("type"));
+                    eventObject.setName(rs.getString("location"));
+                    eventObject.setDescription(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                    eventObject.setTime(rs.getString("time"));
+                    eventObject.setDuration(rs.getString("duration"));
+                    eventObject.setSignature(rs.getString("signature"));
+                    eventObject.setAnnotation(rs.getString("annotation"));
 
-                        alllist.getRows().add(eventObject);
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    alllist.getRows().add(eventObject);
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -2257,8 +2258,8 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //get [start, end] data
-        for( int i = 0; i < alllist.getRows().size(); i++){
-            if(i >= start && i <= end) {
+        for (int i = 0; i < alllist.getRows().size(); i++) {
+            if (i >= start && i <= end) {
                 rtlist.getRows().add(alllist.getRows().get(i));
             }
         }
@@ -2267,13 +2268,13 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件shunbian
-    public PageHelper<EventObject>  getPowerEventshunbianObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end){
+    public PageHelper<EventObject> getPowerEventshunbianObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
         PageHelper<EventObject> alllist = new PageHelper<EventObject>();
 
-        for(int k = 0; k < cbnamelist.length; k++) {
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -2310,7 +2311,7 @@ public class EventDAOImpl implements EventDAO {
                         eventObject.setTeid(rs.getString("teid"));
                         eventObject.setType(rs.getString("type"));
                         eventObject.setName(rs.getString("location"));
-                        eventObject.setDescription(rs.getString("type")+ "。当前值为" + rs.getString("description"));
+                        eventObject.setDescription(rs.getString("type") + "。当前值为" + rs.getString("description"));
                         eventObject.setTime(rs.getString("time"));
                         eventObject.setDuration(rs.getString("duration"));
                         eventObject.setSignature(rs.getString("signature"));
@@ -2332,8 +2333,8 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //get [start, end] data
-        for( int i = 0; i < alllist.getRows().size(); i++){
-            if(i >= start && i <= end) {
+        for (int i = 0; i < alllist.getRows().size(); i++) {
+            if (i >= start && i <= end) {
                 rtlist.getRows().add(alllist.getRows().get(i));
             }
         }
@@ -2342,13 +2343,13 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件shanbian
-    public PageHelper<EventObject>  getPowerEventshanbianObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end){
+    public PageHelper<EventObject> getPowerEventshanbianObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
         PageHelper<EventObject> alllist = new PageHelper<EventObject>();
 
-        for(int k = 0; k < cbnamelist.length; k++) {
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -2373,27 +2374,27 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY signature limit 2000";
+                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                        EventObject eventObject = new EventObject();
-                        eventObject.setTeid(rs.getString("teid"));
-                        eventObject.setType(rs.getString("type"));
-                        eventObject.setName(rs.getString("location"));
-                        eventObject.setDescription(rs.getString("type")+ "。当前值为" + rs.getString("description"));
-                        eventObject.setTime(rs.getString("time"));
-                        eventObject.setDuration(rs.getString("duration"));
-                        eventObject.setSignature(rs.getString("signature"));
-                        eventObject.setAnnotation(rs.getString("annotation"));
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                    EventObject eventObject = new EventObject();
+                    eventObject.setTeid(rs.getString("teid"));
+                    eventObject.setType(rs.getString("type"));
+                    eventObject.setName(rs.getString("location"));
+                    eventObject.setDescription(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                    eventObject.setTime(rs.getString("time"));
+                    eventObject.setDuration(rs.getString("duration"));
+                    eventObject.setSignature(rs.getString("signature"));
+                    eventObject.setAnnotation(rs.getString("annotation"));
 
-                        alllist.getRows().add(eventObject);
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    alllist.getRows().add(eventObject);
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -2404,8 +2405,8 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //get [start, end] data
-        for( int i = 0; i < alllist.getRows().size(); i++){
-            if(i >= start && i <= end) {
+        for (int i = 0; i < alllist.getRows().size(); i++) {
+            if (i >= start && i <= end) {
                 rtlist.getRows().add(alllist.getRows().get(i));
             }
         }
@@ -2415,13 +2416,13 @@ public class EventDAOImpl implements EventDAO {
 
 
     // 获取分页的环境事件
-    public PageHelper<EventObject>  getEnvironmentEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end){
+    public PageHelper<EventObject> getEnvironmentEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
         PageHelper<EventObject> alllist = new PageHelper<EventObject>();
 
-        for(int k = 0; k < cbnamelist.length; k++) {
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -2446,29 +2447,29 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
-                        "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did"
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
+                    "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
+                    "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did"
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
 
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                        EventObject eventObject = new EventObject();
-                        eventObject.setTeid(rs.getString("teid"));
-                        eventObject.setType(rs.getString("type"));
-                        eventObject.setName(rs.getString("location"));
-                        eventObject.setDescription(rs.getString("type")+ "。当前值为" + rs.getString("description"));
-                        eventObject.setTime(rs.getString("time"));
-                        eventObject.setDuration(rs.getString("duration"));
-                        eventObject.setSignature(rs.getString("signature"));
-                        eventObject.setAnnotation(rs.getString("annotation"));
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                    EventObject eventObject = new EventObject();
+                    eventObject.setTeid(rs.getString("teid"));
+                    eventObject.setType(rs.getString("type"));
+                    eventObject.setName(rs.getString("location"));
+                    eventObject.setDescription(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                    eventObject.setTime(rs.getString("time"));
+                    eventObject.setDuration(rs.getString("duration"));
+                    eventObject.setSignature(rs.getString("signature"));
+                    eventObject.setAnnotation(rs.getString("annotation"));
 
-                        alllist.getRows().add(eventObject);
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    alllist.getRows().add(eventObject);
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -2479,8 +2480,8 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //get [start, end] data
-        for( int i = 0; i < alllist.getRows().size(); i++){
-            if(i >= start && i <= end) {
+        for (int i = 0; i < alllist.getRows().size(); i++) {
+            if (i >= start && i <= end) {
                 rtlist.getRows().add(alllist.getRows().get(i));
             }
         }
@@ -2489,86 +2490,13 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的环getLocalAllDetailEnvironmentEventtemp境事件-temp
-    public PageHelper<EventObject>  getEnvironmentEventtempObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end){
+    public PageHelper<EventObject> getEnvironmentEventtempObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
         PageHelper<EventObject> alllist = new PageHelper<EventObject>();
 
-        for(int k = 0; k < cbnamelist.length; k++) {
-            String didstr = "";
-
-            //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
-
-            //再根据机房id查询设备id的集合
-            String comstr = cb.getCompRoom();
-            String comidset[] = comstr.split("，");
-
-            for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
-
-                String str = cp.getTempset();
-                str += "，";
-                didstr += str;
-            }
-
-            //再根据设备id查询事件
-            String didset[] = didstr.split("，");
-            db = new DBConnect();
-
-                String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
-                        "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (113,114) ORDER BY signature limit 2000";
-                try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                        EventObject eventObject = new EventObject();
-                        eventObject.setTeid(rs.getString("teid"));
-                        eventObject.setType(rs.getString("type"));
-                        eventObject.setName(rs.getString("location"));
-                        eventObject.setDescription(rs.getString("type")+ "。当前值为" + rs.getString("description"));
-                        eventObject.setTime(rs.getString("time"));
-                        eventObject.setDuration(rs.getString("duration"));
-                        eventObject.setSignature(rs.getString("signature"));
-                        eventObject.setAnnotation(rs.getString("annotation"));
-
-                        alllist.getRows().add(eventObject);
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            try {
-                db.free();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-        //get [start, end] data
-        for( int i = 0; i < alllist.getRows().size(); i++){
-            if(i >= start && i <= end) {
-                rtlist.getRows().add(alllist.getRows().get(i));
-            }
-        }
-
-        return rtlist;
-    }
-
-    // 获取分页的环境事件-wet
-    public PageHelper<EventObject>  getEnvironmentEventwetObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end){
-        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-
-        PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
-        PageHelper<EventObject> alllist = new PageHelper<EventObject>();
-
-        for(int k = 0; k < cbnamelist.length; k++) {
+        for (int k = 0; k < cbnamelist.length; k++) {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
@@ -2593,28 +2521,28 @@ public class EventDAOImpl implements EventDAO {
             db = new DBConnect();
 
             String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
-                        "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (115,116) ORDER BY signature limit 2000";
+                    "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
+                    "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (113,114) ORDER BY signature limit 2000";
             try {
-                    ps = db.getPs(sql);
-                    rs = ps.executeQuery();
-                    for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
-                        EventObject eventObject = new EventObject();
-                        eventObject.setTeid(rs.getString("teid"));
-                        eventObject.setType(rs.getString("type"));
-                        eventObject.setName(rs.getString("location"));
-                        eventObject.setDescription(rs.getString("type")+ "。当前值为" + rs.getString("description"));
-                        eventObject.setTime(rs.getString("time"));
-                        eventObject.setDuration(rs.getString("duration"));
-                        eventObject.setSignature(rs.getString("signature"));
-                        eventObject.setAnnotation(rs.getString("annotation"));
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                    EventObject eventObject = new EventObject();
+                    eventObject.setTeid(rs.getString("teid"));
+                    eventObject.setType(rs.getString("type"));
+                    eventObject.setName(rs.getString("location"));
+                    eventObject.setDescription(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                    eventObject.setTime(rs.getString("time"));
+                    eventObject.setDuration(rs.getString("duration"));
+                    eventObject.setSignature(rs.getString("signature"));
+                    eventObject.setAnnotation(rs.getString("annotation"));
 
-                        alllist.getRows().add(eventObject);
-                    }
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    alllist.getRows().add(eventObject);
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             try {
                 db.free();
@@ -2625,8 +2553,81 @@ public class EventDAOImpl implements EventDAO {
         }
 
         //get [start, end] data
-        for( int i = 0; i < alllist.getRows().size(); i++){
-            if(i >= start && i <= end) {
+        for (int i = 0; i < alllist.getRows().size(); i++) {
+            if (i >= start && i <= end) {
+                rtlist.getRows().add(alllist.getRows().get(i));
+            }
+        }
+
+        return rtlist;
+    }
+
+    // 获取分页的环境事件-wet
+    public PageHelper<EventObject> getEnvironmentEventwetObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+        HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+        PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
+        PageHelper<EventObject> alllist = new PageHelper<EventObject>();
+
+        for (int k = 0; k < cbnamelist.length; k++) {
+            String didstr = "";
+
+            //根据市行名称查询机房id的集合
+            CityBank cb = (CityBank) hbsessionDao.getFirst(
+                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+
+            //再根据机房id查询设备id的集合
+            String comstr = cb.getCompRoom();
+            String comidset[] = comstr.split("，");
+
+            for (int i = 0; i < comidset.length; i++) {
+                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
+                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+
+                String str = cp.getTempset();
+                str += "，";
+                didstr += str;
+            }
+
+            //再根据设备id查询事件
+            String didset[] = didstr.split("，");
+            db = new DBConnect();
+
+            String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+                    "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
+                    "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (115,116) ORDER BY signature limit 2000";
+            try {
+                ps = db.getPs(sql);
+                rs = ps.executeQuery();
+                for (int idx = 0; (idx < 10000) && rs.next(); idx++) {
+                    EventObject eventObject = new EventObject();
+                    eventObject.setTeid(rs.getString("teid"));
+                    eventObject.setType(rs.getString("type"));
+                    eventObject.setName(rs.getString("location"));
+                    eventObject.setDescription(rs.getString("type") + "。当前值为" + rs.getString("description"));
+                    eventObject.setTime(rs.getString("time"));
+                    eventObject.setDuration(rs.getString("duration"));
+                    eventObject.setSignature(rs.getString("signature"));
+                    eventObject.setAnnotation(rs.getString("annotation"));
+
+                    alllist.getRows().add(eventObject);
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                db.free();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        //get [start, end] data
+        for (int i = 0; i < alllist.getRows().size(); i++) {
+            if (i >= start && i <= end) {
                 rtlist.getRows().add(alllist.getRows().get(i));
             }
         }
@@ -2852,7 +2853,7 @@ public class EventDAOImpl implements EventDAO {
                 "FROM ProvinceBank where pbid='" + pid + "'");
 
         String cbidset = provb.getCbidset();
-        if(cbidset == null || cbidset.equals("")) { //省行下无市行
+        if (cbidset == null || cbidset.equals("")) { //省行下无市行
             List nlist = new ArrayList();
             nlist.add(0);
             nlist.add(0);
@@ -2977,7 +2978,7 @@ public class EventDAOImpl implements EventDAO {
                     //电能类事件类型为1
                     String sql1 = "select degree,eventclass from assess_record ta, event_power tb where ta.teid = tb.teid and (tb.signature is NULL or tb.signature = '') and ta.did IN " + didsetstring;
 
-                   //温度类事件类型为2//湿度类事件类型为3
+                    //温度类事件类型为2//湿度类事件类型为3
                     String sql23 = "select degree,eventclass from assess_record ta, event_environment tb where ta.teid = tb.teid and (tb.signature is NULL or tb.signature = '') and ta.did IN " + tempsetstring;
 
                     //治理类事件类型为4
@@ -2989,7 +2990,7 @@ public class EventDAOImpl implements EventDAO {
                         ps = db.getPs(sql1);
                         rs = ps.executeQuery();
 
-                        while(rs.next()) {
+                        while (rs.next()) {
                             String temp = rs.getString("degree");
                             String eventclass = rs.getString("eventclass");
 
@@ -3015,7 +3016,7 @@ public class EventDAOImpl implements EventDAO {
                         ps = db.getPs(sql23);
                         rs = ps.executeQuery();
 
-                        while(rs.next()) {
+                        while (rs.next()) {
                             String temp = rs.getString("degree");
                             String eventclass = rs.getString("eventclass");
 
@@ -3027,7 +3028,7 @@ public class EventDAOImpl implements EventDAO {
                             }
 
                             //计算电能类事件数量、温度类事件数量、湿度类事件数量、设备类事件数量
-                            if(eventclass.equals(2)) {
+                            if (eventclass.equals(2)) {
                                 evnum2++;
                             } else if (eventclass.equals(3)) {
                                 evnum3++;
@@ -3035,7 +3036,7 @@ public class EventDAOImpl implements EventDAO {
 
                             //计算电能类告警数量、温度类告警数量、湿度类告警数量、设备类告警数量
 
-                            if(eventclass.equals(2)) {
+                            if (eventclass.equals(2)) {
                                 anum2++;
                             } else if (eventclass.equals(3)) {
                                 anum3++;
@@ -3045,7 +3046,7 @@ public class EventDAOImpl implements EventDAO {
                         ps = db.getPs(sql4);
                         rs = ps.executeQuery();
 
-                        while(rs.next()) {
+                        while (rs.next()) {
                             String temp = rs.getString("degree");
                             String eventclass = rs.getString("eventclass");
                             if (temp.equals("3")) {
@@ -3136,7 +3137,7 @@ public class EventDAOImpl implements EventDAO {
                 if (null != tempDataMap) {
                     for (int i = 0; i < tempstr.length; i++) {
                         List<String> aa = new ArrayList<>();
-                        List<String> list = hbsessionDao.search("select name as dname from  Devices  where did =" + tempstr[i] );
+                        List<String> list = hbsessionDao.search("select name as dname from  Devices  where did =" + tempstr[i]);
                         if (list != null) {
                             aa.add(list.get(0));
                             aa.add("0.00");
@@ -3146,10 +3147,10 @@ public class EventDAOImpl implements EventDAO {
                         Iterator<String> iterator = didSet.iterator();
                         while (iterator.hasNext()) {
                             String did = iterator.next();  //监测点id
-                            if(did.equals(tempstr[i])){
+                            if (did.equals(tempstr[i])) {
                                 if (list != null) {
-                                    aa.set(1,tempDataMap.get(did).getTemperature()==null?"0.00":tempDataMap.get(did).getTemperature().toString());
-                                    aa.set(2,tempDataMap.get(did).getHumidity()==null?"0.00":tempDataMap.get(did).getHumidity().toString());
+                                    aa.set(1, tempDataMap.get(did).getTemperature() == null ? "0.00" : tempDataMap.get(did).getTemperature().toString());
+                                    aa.set(2, tempDataMap.get(did).getHumidity() == null ? "0.00" : tempDataMap.get(did).getHumidity().toString());
                                 }
                             }
                         }
@@ -3163,7 +3164,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     //获取当前机房下的三大类告警记录 所有的 未确认的事件
-    public List getComputerroomAlarm(String compname){
+    public List getComputerroomAlarm(String compname) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<Integer> rtlist = new ArrayList<>();
@@ -3178,8 +3179,8 @@ public class EventDAOImpl implements EventDAO {
 
             db = new DBConnect();
 
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date=new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             calendar.add(Calendar.HOUR, -24);
@@ -3201,7 +3202,7 @@ public class EventDAOImpl implements EventDAO {
                         ps = db.getPs(sql);
                         rs = ps.executeQuery();
 
-                        if(rs.next()) {
+                        if (rs.next()) {
                             sumpower += Integer.parseInt(rs.getString("num1"));
                         }
                     } catch (SQLException e) {
@@ -3286,7 +3287,7 @@ public class EventDAOImpl implements EventDAO {
             String cidstr[] = cidset.split("，");
 
             //寻找ctrl类（治理设备）的device
-            if(cidstr != null) {
+            if (cidstr != null) {
                 for (int i = 0; i < cidstr.length; i++) {
                     Devices dv = (Devices) hbsessionDao.getFirst(
                             "FROM Devices where did='" + cidstr[i] + "' and type = 'ctrl'");
@@ -3313,7 +3314,7 @@ public class EventDAOImpl implements EventDAO {
             String didstr[] = didset.split("，");
 
             //寻找（在线监测设备）的device
-            if(didstr != null) {
+            if (didstr != null) {
                 for (int i = 0; i < didstr.length; i++) {
                     Devices dv = (Devices) hbsessionDao.getFirst(
                             "FROM Devices where did='" + didstr[i] + "' and type = 'IDP'");
@@ -3343,7 +3344,7 @@ public class EventDAOImpl implements EventDAO {
             DictionaryCtrl dictionaryCtrl = (DictionaryCtrl) hbsessionDao.getFirst(
                     "from DictionaryCtrl where id='" + cid + "'");
 
-            if(dictionaryCtrl != null) {
+            if (dictionaryCtrl != null) {
                 rt = dictionaryCtrl.getDescription() + dictionaryCtrl.getForFalse();
             }
         }
@@ -3358,15 +3359,15 @@ public class EventDAOImpl implements EventDAO {
         if (null != parmMap) {
             Set<String> didSet = parmMap.keySet();
             Iterator<String> iterator = didSet.iterator();
-            boolean txflag =false;
+            boolean txflag = false;
             while (iterator.hasNext()) {
                 String sdid = iterator.next();  //监测点id
-                if(did.equals(sdid)){
-                    txflag=true;
+                if (did.equals(sdid)) {
+                    txflag = true;
                     break;
                 }
             }
-            if(txflag){
+            if (txflag) {
                 List<EventPower> list = hbsessionDao.search(
                         "from EventPower where (signature is NULL or signature = '') and did='" + did + "' and time > '" + stime + "' and time < '" + etime + "' order by time desc");
 
@@ -3379,12 +3380,12 @@ public class EventDAOImpl implements EventDAO {
                     EventsType dictionary = (EventsType) hbsessionDao.getFirst(
                             "from EventsType where id='" + cid + "'");
 
-                    if(dictionary != null) {
+                    if (dictionary != null) {
                         rt = dictionary.getDescription();
                     }
                 }
-            }else{
-                rt="通讯异常";
+            } else {
+                rt = "通讯异常";
             }
         }
         return rt;
@@ -3437,8 +3438,8 @@ public class EventDAOImpl implements EventDAO {
     }
 
     public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String thansentinterval, String
-            uploadinterval,String assessinterval,String alarminterval,String tempinterval,String ctrlinterval,
-                                         String thresholdsaveinterval,String qstdatainterval) {
+            uploadinterval, String assessinterval, String alarminterval, String tempinterval, String ctrlinterval,
+                                         String thresholdsaveinterval, String qstdatainterval) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
