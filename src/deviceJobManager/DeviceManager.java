@@ -1,42 +1,48 @@
 package deviceJobManager;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import grabData.*;
+import hibernatePOJO.Devices;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import jdk.internal.org.objectweb.asm.Handle;
 
 import java.util.HashMap;
 
 public class DeviceManager {
     //type: 1-dataOnline, 2-transient, 3-overLimit, 4-threshold, 5-tempData, 6-ctrlData
 
-    //add device
-    private static HashMap<String, ChannelHandlerContext> ctxMap=new HashMap<String, ChannelHandlerContext>();
+    /*2019-03-04 wubo*/
+    private static HashMap<Devices, Boolean> firstConnection = new HashMap<Devices, Boolean>();
 
-    public static boolean addDevice(String host,int port,String did,int type){
+    //add device
+    private static HashMap<String, ChannelHandlerContext> ctxMap = new HashMap<String, ChannelHandlerContext>();
+
+    public static boolean addDevice(String host, int port, String did, int type) {
 //        if(checkNetwork(host,port)==false){
 //            return false;
 //        }
-        switch (type){
+        switch (type) {
             case 1:
-                new DataOnlineClient(host,port,did).start();
+                new DataOnlineClient(host, port, did).start();
                 break;
             case 2:
-                new TransientClient(host,port,did).start();
+                new TransientClient(host, port, did).start();
                 break;
             case 3:
-                new OverLimitClient(host,port,did).start();
+                new OverLimitClient(host, port, did).start();
                 break;
             case 4:
 //                new ThresholdClient(host,port,did).start();
                 break;
             case 5:
-                new TempDataClient(host,port,did).start();
+                new TempDataClient(host, port, did).start();
                 break;
             case 6:
-                new CtrlDataClient(host,port,did).start();
+                new CtrlDataClient(host, port, did).start();
                 break;
             default:
                 ;
@@ -45,11 +51,11 @@ public class DeviceManager {
     }
 
     //remove device
-    public static boolean removeDevice(String did,int type){
-        if(ctxMap.get(did+"-"+type)==null){
+    public static boolean removeDevice(String did, int type) {
+        if (ctxMap.get(did + "-" + type) == null) {
             return false;
         }
-        ctxMap.get(did+"-"+type).close();
+        ctxMap.get(did + "-" + type).close();
         return true;
 //        switch (type){
 //            case 1:
@@ -76,7 +82,7 @@ public class DeviceManager {
     }
 
     //update device
-    public static boolean updateDevice(String host,int port,String did,int type){
+    public static boolean updateDevice(String host, int port, String did, int type) {
 //        if(removeDevice(did,type) &&  addDevice(host,port,did,type)){
 //            return true;
 //        }
@@ -85,11 +91,10 @@ public class DeviceManager {
 //        }
 //        removeDevice(did, type);
 //        if()
-        removeDevice(host,port);
-        addDevice(host,port,did,type);
+        removeDevice(host, port);
+        addDevice(host, port, did, type);
         return true;
     }
-
 
 
     public static HashMap<String, ChannelHandlerContext> getCtxMap() {
@@ -100,8 +105,8 @@ public class DeviceManager {
         DeviceManager.ctxMap = ctxMap;
     }
 
-    public static boolean checkNetwork(String host,int port){
-        boolean isAccesible=false;
+    public static boolean checkNetwork(String host, int port) {
+        boolean isAccesible = false;
 
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -115,15 +120,14 @@ public class DeviceManager {
                     ch.pipeline().addLast();
                 }
             });
-            ChannelFuture f=b.connect(host,port).sync();
-            if(f.isSuccess()){
-                isAccesible=true;
-            }
-            else {
-                isAccesible=false;
+            ChannelFuture f = b.connect(host, port).sync();
+            if (f.isSuccess()) {
+                isAccesible = true;
+            } else {
+                isAccesible = false;
             }
         } catch (Exception e) {
-            isAccesible=false;
+            isAccesible = false;
         } finally {
             workerGroup.shutdownGracefully();
         }
@@ -131,6 +135,12 @@ public class DeviceManager {
 
     }
 
+    public static HashMap<Devices, Boolean> getFirstConnection() {
+        return firstConnection;
+    }
 
+    public static void setFirstConnection(HashMap<Devices, Boolean> firstConnection) {
+        DeviceManager.firstConnection = firstConnection;
+    }
 }
 

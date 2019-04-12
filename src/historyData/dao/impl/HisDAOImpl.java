@@ -127,6 +127,7 @@ public class HisDAOImpl implements HisDAO {
                 rtlist.add(map);
             }
         }
+
         return rtlist;
     }
 
@@ -149,12 +150,14 @@ public class HisDAOImpl implements HisDAO {
                 Map<String, Object> map = new LinkedHashMap<>();
 
                 map.put("time", temp.getTime().toString());
+
                 map.put("temp", temp.getTemperature());
                 map.put("wet", temp.getHumidity());
 
                 rtlist.add((Object) map);
             }
         }
+
         return rtlist;
     }
 }

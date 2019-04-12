@@ -8,6 +8,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import sms.SmsUtil;
 import smsplantform.smsPlantformService;
+import test.creatXML;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -192,6 +193,9 @@ public class AlarmModelJob implements Job {
                     String time = timestr.substring(11, 19);
 
                     Devices dv = (Devices)hbsessionDao.getFirst("FROM Devices WHERE did ='" + did + "'");
+                    if(dv.getIsSms()==0){
+                        continue;
+                    }
                     String dname = "【"+dv.getName()+"】";
 
                     typelist = hbsessionDao.search("From EventsType where cid ='" + cid + "'");
@@ -334,6 +338,9 @@ public class AlarmModelJob implements Job {
                     String time = timestr.substring(11, 19);
 
                     Devices dv = (Devices)hbsessionDao.getFirst("FROM Devices WHERE did ='" + did + "'");
+                    if(dv.getIsSms()==0){
+                        continue;
+                    }
                     String dname = "【"+dv.getName()+"】";
 
                     typelist =  hbsessionDao.search("From EventsType where cid ='" + cid + "'");
@@ -446,6 +453,9 @@ public class AlarmModelJob implements Job {
                     String time = timestr.substring(11, 19);
 
                     Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices WHERE did ='" + did + "'");
+                    if(dv.getIsSms()==0){
+                        continue;
+                    }
                     String dname = "【"+dv.getName()+"】";
 
                     ctrltypelist = hbsessionDao.search("From DictionaryCtrl where id ='" + id + "'");

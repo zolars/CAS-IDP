@@ -2,13 +2,12 @@ package grabData;
 
 import Util.HBSessionDaoImpl;
 import alarmUtil.WebSocketServer;
+import deviceJobManager.CheckConnection;
+import deviceJobManager.DeviceManager;
 import deviceJobManager.JobManager;
 import hibernatePOJO.BasicSetting;
 import hibernatePOJO.Devices;
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
+import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import sms.SmsClient;
 
@@ -46,6 +45,11 @@ public class MyListener implements ServletContextListener {
                 if (null != list) {
                     // 创建取实时数据和暂态数据的client
                     for (Devices c : list) {
+
+                        /*2019-03-04*/
+                        DeviceManager.getFirstConnection().put(c,false);
+                        /*2019-03-04*/
+
                         if (c.getType().equals("IDP")) {
                             try {
                                 System.out.println("创建取实时数据连接 " + "监测点(" + c.getDid()
@@ -266,6 +270,18 @@ public class MyListener implements ServletContextListener {
                         new WebSocketServer(8989).start();
 
                         ///////////////////////////
+
+                        /*2019-03-04, 设置一个定时任务，检查第一次连接建立情况,15秒后检查*/
+                        Trigger trigger99=(SimpleTrigger)newTrigger()
+                                .withIdentity("trigger99","triggerGroup99")
+                                .startAt(DateBuilder.futureDate(15,DateBuilder.IntervalUnit.SECOND))
+                                .build();
+                        JobDetail job99=newJob(CheckConnection.class)
+                                .withIdentity("job99","jobGroup99")
+                                .build();
+                        scheduler.scheduleJob(job99,trigger99);
+                        /*2019-03-04*/
+
                         scheduler.start();
                     } catch (SchedulerException e) {
                         e.printStackTrace();

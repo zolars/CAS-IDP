@@ -29,5 +29,4 @@ public interface RMSDAO {
 
     public List getCurrentPltData(String did);
 
-    public List getCurrentTemWetData(String did);
 }

@@ -45,9 +45,20 @@
     <!-- PNotify -->
     <script type="text/javascript" src="js/pnotify.custom.min.js"></script>
     <link href="css/pnotify.custom.min.css" rel="stylesheet" type="text/css" />
+
+   <%-- <!-- datatables plugsin css and js-->
+    <link href="css/datatables.min.css" rel="stylesheet"/>
+    <script src="js/datatables.min.js"></script>--%>
+
+    <!-- bootstrap table plugsin css and js-->
+    <%--<link rel="stylesheet" href="bootstrap-table-master/src/bootstrap.min.css">--%>
     <link rel="stylesheet" href="bootstrap-table-master/src/bootstrap-table.css">
+   <%-- <script src="jquery.min.js"></script>--%>
+    <%--<script src="bootstrap.min.js"></script>--%>
     <script src="bootstrap-table-master/src/bootstrap-table.js"></script>
     <script src="bootstrap-table-master/src/locale/bootstrap-table-zh-CN.js"></script>
+
+
 
     <link rel="stylesheet" href="css/header.css">
     <style>
@@ -84,44 +95,11 @@
 
         .table-container {
             height: 460px;
+           /* overflow: scroll;*/
         }
 
-        .box3 {
-            color: white;
-            margin-top: 20px;
-        }
-        .box3 .header {
-            width: 100%;
-            height: 50px;
-        }
-        .box3 .container {
-            clear: both;
-            overflow: hidden;
-            padding: 0 130px 0 100px;
-            position: relative;
-        }
-        .box3 .container .left {
-            width: 350px;
-            height: 400px;
-            position: absolute;
-            top: 0px;
-            left: 0px;
-        }
-        .box3 .container .center {
-            height: 400px;
-            width: 60%;
-            text-align:center;
-        }
-        .box3 .container .right {
-            width: 680px;
-            height: 400px;
-            position: absolute;
-            top: 0px;
-            right: 0px;
-        }
-        .box3 .footer {
-            width: 100%;
-            height: 300px;
+        .col-active {
+            background: black;
         }
     </style>
 
@@ -232,12 +210,8 @@
                         <%--<li style="width:50%">
                             <a data-toggle="tab" id="subItem2">       </a>
                         </li>--%>
-                        <li style="width:50%">
-                            <a data-toggle="tab" id="subItem3">能效分析</a>
-                        </li>
                     </ul>
                 </div>
-
                 <div id="item1" class="col-md-12 col-xs-6" style="height: 600px;">
                     <div class="block-area">
                         <div class="row">
@@ -505,11 +479,11 @@
                                                 </div>
                                             </div>
                                             <div style="background: #0880d7;"><input id="radio-day-event" type="radio" name="event-data-period"
-                                                                                     value="day">天</div>
+                                                        value="day">天</div>
                                             <div style="background: #0880d7;"><input id="radio-week-event" type="radio" name="event-data-period"
-                                                                                     value="week">周</div>
+                                                        value="week">周</div>
                                             <div style="background: #0880d7;"><input id="radio-month-event" type="radio" name="event-data-period"
-                                                                                     value="month">月</div>
+                                                        value="month">月</div>
                                             <table>
                                                 <tr>
                                                     <th>测量地点</th>
@@ -595,83 +569,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></div>
 
-                <div id="item2" class="col-md-12 col-xs-6" style="height: 600px;;display: none;">222</div>
-
-                <div id="item3" class="col-md-12 col-xs-6" style="height: 600px;display: none;">
-                    <div class="box3">
-                        <div class="header"> <table>
-                            <tr>
-                                <td>周期</td>
-                                <td><input id="radio-day-assume" type="radio" name="event-data-period" value="day" checked></td>
-                                <td>日</td>
-                                <td><input id="radio-week-assume" type="radio" name="event-data-period" value="week"></td>
-                                <td>周</td>
-                                <td><input id="radio-month-assume" type="radio" name="event-data-period" value="month"></td>
-                                <td>月</td>
-                                <td><input id="radio-from-to-assume" class="time-picker-radio" type="radio" name="event-data-period" value="fromto"></td>
-                                <td>自定义</td>
-                                <td>&nbsp;&nbsp;</td>
-                                <td>时间范围从</td>
-                                <td><div class="time-pick-outer">
-                                    <div class="input-group date form_datetime col-md-5"
-                                         data-date-format="yyyy-mm-dd hh:ii:ss"
-                                         data-link-field="dtp_input1">
-                                        <input id="fdate" class="form-control" size="16" type="text"
-                                               value="" readonly>
-                                        <span class="input-group-addon"><span
-                                                class="glyphicon glyphicon-th"></span></span>
-                                    </div>
-                                    <input type="hidden" id="d_input1" value=""/><br/>
-                                </div></td>
-                                <td>到</td>
-                                <td> <div class="time-pick-outer">
-                                    <div class="input-group date form_datetime col-md-5"
-                                         data-date-format="yyyy-mm-dd hh:ii:ss"
-                                         data-link-field="dtp_input1">
-                                        <input id="ldate" class="form-control" size="16" type="text"
-                                               value="" readonly>
-                                        <span class="input-group-addon"><span
-                                                class="glyphicon glyphicon-th"></span></span>
-                                    </div>
-                                    <input type="hidden" id="d_input2" value=""/><br/>
-                                </div></td>
-                            </tr>
-                        </table></div>
-
-                        <div class="container">
-                            <div class="center">
-
-                                    耗电量总计<input id="hdlsum" type="text" style="color: #555;">KWh<br/>
-                                    电费单价&nbsp;&nbsp;&nbsp;&nbsp;<input id="dfsum" type="text" style="color: #555;">元/度<br/>
-                                    总电费&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="summoney" type="text" style="color: #555;">元<br/>
-
-                            </div>
-                            <div class="left">
-                                <div id='sumassumehist' class="chart-item" style='width: 300px;height: 300px;float: left;'></div>
-                            </div>
-                            <div class="right">
-                                <div id='sumassumecircle' class="chart-item" style='width: 300px;height: 300px;'></div>
-                            </div>
-                        </div>
-
-                        <div class="footer">
-                            <div id='ups3-1' class="chart-item" style='width: 300px;height: 200px;float: left;'></div>
-                            <div id='ups3-2' class="chart-item" style='width: 300px;height: 200px;float: left;'></div>
-                            <div id='ups3-3' class="chart-item" style='width: 300px;height: 200px;float: left;'></div>
-                            <div id='ups3-4' class="chart-item" style='width: 300px;height: 200px;float: left;'></div>
-                        </div>
-                        <div class="footer">
-                            <div id='ups3-1-bottom' style='width: 350px;height: 100px;float: left;'>THDu <input id="thdu-input" type="text" style="color: #555;" value="2.5%"><br/> 评价等级 <input id="thdu-level" type="text" style="background-color: #0000FF;" value="好"></div>
-                            <div id='ups3-2-bottom' style='width: 350px;height: 100px;float: left;'>THDi <input id="thdi-input" type="text" style="color: #555;" value="2.2%"><br/> 评价等级 <input id="thdi-level" type="text" style="background-color: #00CC00;" value="优秀"></div>
-                            <div id='ups3-3-bottom' style='width: 350px;height: 100px;float: left;'>UPS输入端 <input id="ups-input" type="text" style="color: #555;" value="2.5%"><br/> 评价等级 <input id="ups-level" type="text" style="background-color: #0000FF;" value="好"></div>
-                            <div id='ups3-4-bottom' style='width: 350px;height: 100px;float: left;'>整体能效分析 <input id="sum-input" type="text" style="color: #555;" value="1.69"><br/> 评价等级 <input id="sum-level" type="text" style="background-color: #00CC00;" value="优秀"></div>
-                        </div>
-                    </div>
-                </div>
+            <div id="item2" class="col-md-12 col-xs-6" style="height: 600px;">
             </div>
-
 
             <!-- settingmodel DIV-->
             <div class="setting-class" id="setting-modal">
@@ -826,7 +727,7 @@
 
 </script>
 
-<%--<!-- 省\市\机房下拉菜单-->
+<!-- 省\市\机房下拉菜单-->
 <script type="text/javascript">
 
     //读取cookie中已存的机房配置
@@ -907,90 +808,6 @@
         });
     }
 
-</script>--%>
-
-<!-- 省\市\机房下拉菜单-->
-<!--- 2019.03.14 change getCity() option.value from cbname to cbid; change getComproom() ajax getCompTree from name to id -->
-<script type="text/javascript">
-
-    //读取cookie中已存的机房配置
-    var opinion1 = $.cookie('province_name');
-    $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
-    getCity();
-
-    /*加载市下拉选*/
-    function getCity() {
-        var pname = $("#province_code").val();
-
-        //读取cookie中已存的机房配置
-        var opinion2 = $.cookie('opinion2');
-        var uname = "${username}";
-
-        $("#city_code").empty();
-        $("#comproom_code").empty();
-
-        $.ajax({
-            type: "post",
-            url: "getCityTree",
-            data: {
-                provinceid: pname,
-                uname: uname
-            },
-            dataType: "json",
-            success: function (data) {
-
-                $('#city_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
-                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
-
-                var obj = eval("(" + data + ")");
-                for (var i = 0; i < obj.length; i++) {
-                    if (obj[i].cbname == opinion2 || i == 0) {
-                        $('#city_code').append("<option value='" + obj[i].cbid + "' selected='selected' >" + obj[i].cbname + "</option>");
-                        getComproom();
-                    }
-                    else
-                        $('#city_code').append("<option value='" + obj[i].cbid + "' >" + obj[i].cbname + "</option>");
-
-                }
-            }
-        });
-    }
-
-    /*加载机房下拉选*/
-    function getComproom() {
-        var cbid = $("#city_code option:selected").val();
-
-        //读取cookie中已存的机房配置
-        var opinion3 = $.cookie('opinion3');
-        var uname = "${username}";
-
-        $("#comproom_code").empty();
-
-        $.ajax({
-            type: "post",
-            url: "getCompTree",
-            data: {
-                cityid: cbid,
-                uname: uname
-            },
-            dataType: "json",
-            success: function (data) {
-                var list = data.allcomputerroom;
-
-                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
-                for (var i = 0; i < list.length; i++) {
-                    if (list[i].rname == opinion3 || i == 0) {
-                        $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
-                        $('#second-page').css('display', 'block');
-                        $('#first-page').css('display', 'none');
-                    }
-                    else
-                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
-                }
-            }
-        });
-    }
-
 </script>
 
 <!-- 动态加载菜单项 -->
@@ -1017,10 +834,10 @@
             isSystemMng = false;
             menuname = "集中监控";
         }
-        else if(cbidstr[i] == " efficiencyInstruction.jsp"){
+      /*  else if(cbidstr[i] == " efficiencyDevice.jsp"){
             isSystemMng = false;
             menuname = "动力设施";
-        }
+        }*/
         else if(cbidstr[i] == " onlineDetect.jsp"){
             isSystemMng = false;
             menuname = "在线监测";
@@ -1100,23 +917,15 @@
 </script>
 
 <!-- 切换子菜单-->
-<!-- 2019.03.29 cjy: add item3-->
 <script type="text/javascript">
     // 刷新右侧菜单
     $("#subItem1").click(function () {
         $("#item1").show();
         $("#item2").hide();
-        $("#item3").hide();
     });
     $("#subItem2").click(function () {
         $("#item1").hide();
         $("#item2").show();
-        $("#item3").hide();
-    });
-    $("#subItem3").click(function () {
-        $("#item1").hide();
-        $("#item2").hide();
-        $("#item3").show();
     });
     $("#subItem1").click();
 
@@ -1149,6 +958,30 @@
     });
 
     $("#detailItem1").click();
+
+       /* $("#triItem0").click(function () {
+            $("#environment-event-div").css('display', 'block');
+            $("#environment-event-detail-1-div").css('display', 'none');
+            $("#environment-event-detail-2-div").css('display', 'none');
+        });
+        $("#triItem1").click(function () {
+            $("#environment-event-div").css('display', 'none');
+            $("#environment-event-detail-1-div").css('display', 'block');
+            $("#environment-event-detail-2-div").css('display', 'none');
+        });
+        $("#triItem2").click(function () {
+            $("#environment-event-div").css('display', 'none');
+            $("#environment-event-detail-1-div").css('display', 'none');
+            $("#environment-event-detail-2-div").css('display', 'block');
+        });
+        $("#fourItem0").click(function () {
+            $("#device-event-div").css('display', 'block');
+            $("#device-event-detail-1-div").css('display', 'none');
+        });
+        $("#fourItem1").click(function () {
+            $("#device-event-div").css('display', 'none');
+            $("#device-event-detail-1-div").css('display', 'block');
+        });*/
 
     $("#secItem").on('click', 'li',
         function(){
@@ -4038,1028 +3871,6 @@
         }
         $('#searching').css('display', 'none');
     }
-
-</script>
-
-<!-- 2019.03.29 cjy: nengxiaopinggu ecahrts--->
-<script>
-    var eventChart1 = echarts.init(document.getElementById('sumassumehist'));
-    var eventChart2 = echarts.init(document.getElementById('sumassumecircle'));
-
-    var eventChart31 = echarts.init(document.getElementById('ups3-1'));
-    var eventChart32 = echarts.init(document.getElementById('ups3-2'));
-    var eventChart33 = echarts.init(document.getElementById('ups3-3'));
-    var eventChart34 = echarts.init(document.getElementById('ups3-4'));
-
-    var myColor=['#eb2100','#eb3600','#d0570e','#d0a00e','#34da62','#00e9db','#00c0e9','#0096f3'];
-    var highlight = '#03b7c9', bgColor='#FFFFFF';
-
-    var option1 = {
-        color: ['#3398DB'],
-        title: {
-            text: '整体能耗分布图'
-        },
-        tooltip : {
-            trigger: 'axis',
-            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                data : ['IT', 'UPS供电', '制冷', '空调末端', '照明及其他'],
-                axisTick: {
-                    alignWithLabel: true
-                }
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value'
-            }
-        ],
-        series : [
-            {
-                type:'bar',
-                barWidth: '40%',
-                data:[10, 52, 200, 334, 390],
-                itemStyle: {
-                    normal: {
-                        color: function(params) {
-                            var num = myColor.length;
-                            return myColor[params.dataIndex%num]
-                        }
-                    }
-                }
-            }
-        ]
-    };
-
-    var option2 = {
-        title: {
-            text: '机房用电情况（%）'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            x: 'left',
-            data:['IT', 'UPS供电', '制冷', '空调末端', '照明及其他']
-        },
-        series: [
-            {
-                type:'pie',
-                radius: ['50%', '70%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data:[
-                    {value:10, name:'IT'},
-                    {value:52, name:'UPS供电'},
-                    {value:200, name:'制冷'},
-                    {value:334, name:'空调末端'},
-                    {value:390, name:'照明及其他'}
-                ]
-            }
-        ]
-    };
-
-    var option31 = {
-        title: {
-            text: 'UPS输入端',
-            textStyle: {
-                fontSize: 10,
-                color: '#000'
-            }
-        },
-        series: [
-            {
-                name: '刻度',
-                type: 'gauge',
-                center: ['50%', '55%'], // 默认全局居中
-                splitNumber: 4, //刻度数量
-                min: 1,
-                max: 3,
-                startAngle: 180,
-                endAngle: 0,
-                clockwise: true,
-                axisLine: {
-                    show: true,
-                    lineStyle: {
-                        width: 2,
-                        shadowBlur: 0,
-                        color: [
-                            [1, highlight]
-                        ]
-                    }
-                },
-                axisTick: {
-                    show: true,
-                    lineStyle: {
-                        color: highlight,
-                        width: 1
-                    },
-                    length: -4,
-                    splitNumber: 10
-                },
-                splitLine: {
-                    show: true,
-                    length: -7,
-                    lineStyle: {
-                        color: highlight,
-                    }
-                },
-                axisLabel: {
-                    distance: -20,
-                    textStyle: {
-                        color: highlight,
-                        fontSize: "14",
-                        fontWeight: "bold"
-                    }
-                },
-                pointer: { //仪表盘指针
-                    show: 0
-                },
-                detail: {
-                    show: false
-                }
-            },
-            {
-                name: '渐变标尺',
-                center: ['50%', '55%'], // 默认全局居中
-                type: 'gauge',
-                radius: '70%',
-                splitNumber: 0, //刻度数量
-                startAngle: 180,
-                endAngle: 0,
-                axisLine: {
-                    lineStyle: {
-                        shadowColor: 'rgba(0, 0, 0, 0.4)',
-                        shadowBlur: 15,
-                        color: [
-                            [0.25, ['#9b9e9b']],
-                            [
-                                0.45, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#6fed5c'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#b2f268'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.48, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#b2f268'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#d8d563'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.66, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#d8d563'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#edb168'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.83, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#edb168'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#eb7742'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                1, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#eb7742'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#e8412e'
-                                    }
-                                ]
-                            )
-                            ]
-                        ]
-                    }
-                },
-                axisLabel: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                },
-                detail: {
-                    show: false
-                },
-                pointer: {
-                    show: true
-                }
-            },
-            {
-                name: '数值',
-                type: 'gauge',
-                startAngle: 180,
-                endAngle: 0,
-                radius: '40%',
-                center: ['50%', '55%'], // 默认全局居中
-                min: 0,
-                max: 4,
-                splitNumber: 0,
-                axisLine: { // 坐标轴线
-                    lineStyle: {
-                        color: [
-                            [1, highlight]
-                        ], // 属性lineStyle控制线条样式
-                        width: '1%'
-                    }
-                },
-
-                axisLabel: { // 坐标轴小标记
-                    show: false
-                },
-                splitLine: { // 分隔线
-                    lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
-                        width: 0
-                    }
-                },
-                pointer: { // 分隔线 指针
-                    color: highlight,
-                    width: '30%',
-                    length: '170%'
-                },
-                detail: {
-                    show: true
-                },
-                data: [{
-                    name: "",
-                    value: 2.5
-                }]
-            },
-            {
-                name: '遮罩',
-                tooltip:{
-                    show:false
-                },
-                type: 'pie',
-                radius: '38%',
-                center: ['50%', '55%'], // 默认全局居中
-                hoverAnimation:false,
-                itemStyle:{
-                    normal:{
-                        color: bgColor
-                    },
-                    emphasis:{
-                        color: bgColor
-                    }
-                },
-                labelLine:{
-                    normal:{
-                        show:false
-                    }
-                },
-                animation:false,
-                data: [2.5]
-            }
-        ]
-    };
-
-    var option32 = {
-        title: {
-            text: 'UPS输入端',
-            textStyle: {
-                fontSize: 10,
-                color: '#000'
-            }
-        },
-        series: [
-            {
-                name: '刻度',
-                type: 'gauge',
-                center: ['50%', '55%'], // 默认全局居中
-                splitNumber: 4, //刻度数量
-                min: 1,
-                max: 3,
-                startAngle: 180,
-                endAngle: 0,
-                clockwise: true,
-                axisLine: {
-                    show: true,
-                    lineStyle: {
-                        width: 2,
-                        shadowBlur: 0,
-                        color: [
-                            [1, highlight]
-                        ]
-                    }
-                },
-                axisTick: {
-                    show: true,
-                    lineStyle: {
-                        color: highlight,
-                        width: 1
-                    },
-                    length: -4,
-                    splitNumber: 10
-                },
-                splitLine: {
-                    show: true,
-                    length: -7,
-                    lineStyle: {
-                        color: highlight,
-                    }
-                },
-                axisLabel: {
-                    distance: -20,
-                    textStyle: {
-                        color: highlight,
-                        fontSize: "14",
-                        fontWeight: "bold"
-                    }
-                },
-                pointer: { //仪表盘指针
-                    show: 0
-                },
-                detail: {
-                    show: false
-                }
-            },
-            {
-                name: '渐变标尺',
-                center: ['50%', '55%'], // 默认全局居中
-                type: 'gauge',
-                radius: '70%',
-                splitNumber: 0, //刻度数量
-                startAngle: 180,
-                endAngle: 0,
-                axisLine: {
-                    lineStyle: {
-                        shadowColor: 'rgba(0, 0, 0, 0.4)',
-                        shadowBlur: 15,
-                        color: [
-                            [0.25, ['#9b9e9b']],
-                            [
-                                0.45, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#6fed5c'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#b2f268'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.48, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#b2f268'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#d8d563'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.66, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#d8d563'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#edb168'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.83, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#edb168'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#eb7742'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                1, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#eb7742'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#e8412e'
-                                    }
-                                ]
-                            )
-                            ]
-                        ]
-                    }
-                },
-                axisLabel: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                },
-                detail: {
-                    show: false
-                },
-                pointer: {
-                    show: true
-                }
-            },
-            {
-                name: '数值',
-                type: 'gauge',
-                startAngle: 180,
-                endAngle: 0,
-                radius: '40%',
-                center: ['50%', '55%'], // 默认全局居中
-                min: 0,
-                max: 4,
-                splitNumber: 0,
-                axisLine: { // 坐标轴线
-                    lineStyle: {
-                        color: [
-                            [1, highlight]
-                        ], // 属性lineStyle控制线条样式
-                        width: '1%'
-                    }
-                },
-
-                axisLabel: { // 坐标轴小标记
-                    show: false
-                },
-                splitLine: { // 分隔线
-                    lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
-                        width: 0
-                    }
-                },
-                pointer: { // 分隔线 指针
-                    color: highlight,
-                    width: '30%',
-                    length: '170%'
-                },
-                detail: {
-                    show: true
-                },
-                data: [{
-                    name: "",
-                    value: 2.3
-                }]
-            },
-            {
-                name: '遮罩',
-                tooltip:{
-                    show:false
-                },
-                type: 'pie',
-                radius: '38%',
-                center: ['50%', '55%'], // 默认全局居中
-                hoverAnimation:false,
-                itemStyle:{
-                    normal:{
-                        color: bgColor
-                    },
-                    emphasis:{
-                        color: bgColor
-                    }
-                },
-                labelLine:{
-                    normal:{
-                        show:false
-                    }
-                },
-                animation:false,
-                data: [2.2]
-            }
-        ]
-    };
-
-    var option33 = {
-        title: {
-            text: 'UPS输入端',
-            textStyle: {
-                fontSize: 10,
-                color: '#000'
-            }
-        },
-        series: [
-            {
-                name: '刻度',
-                type: 'gauge',
-                center: ['50%', '55%'], // 默认全局居中
-                splitNumber: 4, //刻度数量
-                min: 1,
-                max: 3,
-                startAngle: 180,
-                endAngle: 0,
-                clockwise: true,
-                axisLine: {
-                    show: true,
-                    lineStyle: {
-                        width: 2,
-                        shadowBlur: 0,
-                        color: [
-                            [1, highlight]
-                        ]
-                    }
-                },
-                axisTick: {
-                    show: true,
-                    lineStyle: {
-                        color: highlight,
-                        width: 1
-                    },
-                    length: -4,
-                    splitNumber: 10
-                },
-                splitLine: {
-                    show: true,
-                    length: -7,
-                    lineStyle: {
-                        color: highlight,
-                    }
-                },
-                axisLabel: {
-                    distance: -20,
-                    textStyle: {
-                        color: highlight,
-                        fontSize: "14",
-                        fontWeight: "bold"
-                    }
-                },
-                pointer: { //仪表盘指针
-                    show: 0
-                },
-                detail: {
-                    show: false
-                }
-            },
-            {
-                name: '渐变标尺',
-                center: ['50%', '55%'], // 默认全局居中
-                type: 'gauge',
-                radius: '70%',
-                splitNumber: 0, //刻度数量
-                startAngle: 180,
-                endAngle: 0,
-                axisLine: {
-                    lineStyle: {
-                        shadowColor: 'rgba(0, 0, 0, 0.4)',
-                        shadowBlur: 15,
-                        color: [
-                            [0.25, ['#9b9e9b']],
-                            [
-                                0.45, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#6fed5c'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#b2f268'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.48, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#b2f268'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#d8d563'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.66, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#d8d563'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#edb168'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.83, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#edb168'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#eb7742'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                1, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#eb7742'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#e8412e'
-                                    }
-                                ]
-                            )
-                            ]
-                        ]
-                    }
-                },
-                axisLabel: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                },
-                detail: {
-                    show: false
-                },
-                pointer: {
-                    show: true
-                }
-            },
-            {
-                name: '数值',
-                type: 'gauge',
-                startAngle: 180,
-                endAngle: 0,
-                radius: '40%',
-                center: ['50%', '55%'], // 默认全局居中
-                min: 0,
-                max: 4,
-                splitNumber: 0,
-                axisLine: { // 坐标轴线
-                    lineStyle: {
-                        color: [
-                            [1, highlight]
-                        ], // 属性lineStyle控制线条样式
-                        width: '1%'
-                    }
-                },
-
-                axisLabel: { // 坐标轴小标记
-                    show: false
-                },
-                splitLine: { // 分隔线
-                    lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
-                        width: 0
-                    }
-                },
-                pointer: { // 分隔线 指针
-                    color: highlight,
-                    width: '30%',
-                    length: '170%'
-                },
-                detail: {
-                    show: true
-                },
-                data: [{
-                    name: "",
-                    value: 2.5
-                }]
-            },
-            {
-                name: '遮罩',
-                tooltip:{
-                    show:false
-                },
-                type: 'pie',
-                radius: '38%',
-                center: ['50%', '55%'], // 默认全局居中
-                hoverAnimation:false,
-                itemStyle:{
-                    normal:{
-                        color: bgColor
-                    },
-                    emphasis:{
-                        color: bgColor
-                    }
-                },
-                labelLine:{
-                    normal:{
-                        show:false
-                    }
-                },
-                animation:false,
-                data: [2.5]
-            }
-        ]
-    };
-
-    var option34 = {
-        title: {
-            text: '整体能效分析',
-            textStyle: {
-                fontSize: 10,
-                color: '#000'
-            }
-        },
-        series: [
-            {
-                name: '刻度',
-                type: 'gauge',
-                center: ['50%', '55%'], // 默认全局居中
-                splitNumber: 4, //刻度数量
-                min: 1,
-                max: 3,
-                startAngle: 180,
-                endAngle: 0,
-                clockwise: true,
-                axisLine: {
-                    show: true,
-                    lineStyle: {
-                        width: 2,
-                        shadowBlur: 0,
-                        color: [
-                            [1, highlight]
-                        ]
-                    }
-                },
-                axisTick: {
-                    show: true,
-                    lineStyle: {
-                        color: highlight,
-                        width: 1
-                    },
-                    length: -4,
-                    splitNumber: 10
-                },
-                splitLine: {
-                    show: true,
-                    length: -7,
-                    lineStyle: {
-                        color: highlight,
-                    }
-                },
-                axisLabel: {
-                    distance: -20,
-                    textStyle: {
-                        color: highlight,
-                        fontSize: "14",
-                        fontWeight: "bold"
-                    }
-                },
-                pointer: { //仪表盘指针
-                    show: 0
-                },
-                detail: {
-                    show: false
-                }
-            },
-            {
-                name: '渐变标尺',
-                center: ['50%', '55%'], // 默认全局居中
-                type: 'gauge',
-                radius: '70%',
-                splitNumber: 0, //刻度数量
-                startAngle: 180,
-                endAngle: 0,
-                axisLine: {
-                    lineStyle: {
-                        shadowColor: 'rgba(0, 0, 0, 0.4)',
-                        shadowBlur: 15,
-                        color: [
-                            [0.25, ['#9b9e9b']],
-                            [
-                                0.45, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#6fed5c'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#b2f268'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.48, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#b2f268'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#d8d563'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.66, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#d8d563'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#edb168'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                0.83, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#edb168'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#eb7742'
-                                    }
-                                ]
-                            )
-                            ],
-                            [
-                                1, new echarts.graphic.LinearGradient(
-                                0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: '#eb7742'
-                                },
-                                    {
-                                        offset: 1,
-                                        color: '#e8412e'
-                                    }
-                                ]
-                            )
-                            ]
-                        ]
-                    }
-                },
-                axisLabel: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                splitLine: {
-                    show: false
-                },
-                detail: {
-                    show: false
-                },
-                pointer: {
-                    show: true
-                }
-            },
-            {
-                name: '数值',
-                type: 'gauge',
-                startAngle: 180,
-                endAngle: 0,
-                radius: '40%',
-                center: ['50%', '55%'], // 默认全局居中
-                min: 0,
-                max: 4,
-                splitNumber: 0,
-                axisLine: { // 坐标轴线
-                    lineStyle: {
-                        color: [
-                            [1, highlight]
-                        ], // 属性lineStyle控制线条样式
-                        width: '1%'
-                    }
-                },
-
-                axisLabel: { // 坐标轴小标记
-                    show: false
-                },
-                splitLine: { // 分隔线
-                    lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
-                        width: 0
-                    }
-                },
-                pointer: { // 分隔线 指针
-                    color: highlight,
-                    width: '30%',
-                    length: '170%'
-                },
-                detail: {
-                    show: true
-                },
-                data: [{
-                    name: "",
-                    value: 1.69
-                }]
-            },
-            {
-                name: '遮罩',
-                tooltip:{
-                    show:false
-                },
-                type: 'pie',
-                radius: '38%',
-                center: ['50%', '55%'], // 默认全局居中
-                hoverAnimation:false,
-                itemStyle:{
-                    normal:{
-                        color: bgColor
-                    },
-                    emphasis:{
-                        color: bgColor
-                    }
-                },
-                labelLine:{
-                    normal:{
-                        show:false
-                    }
-                },
-                animation:false,
-                data: [1.69]
-            }
-        ]
-    };
-
-    eventChart1.setOption(option1);
-    eventChart2.setOption(option2);
-
-    eventChart31.setOption(option31);
-    eventChart32.setOption(option32);
-    eventChart33.setOption(option33);
-    eventChart34.setOption(option34);
 
 </script>
 

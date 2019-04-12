@@ -30,7 +30,7 @@
         #whole-page {
             width: 100%;
             height: 100%;
-            background: #154E90 no-repeat;
+            background:url("img/body/night.jpg") no-repeat;
         }
     </style>
 
@@ -86,9 +86,7 @@
 
             var myChart = echarts.init(document.getElementById("china-map"));
             var option = {
-                tooltip: {
-                    backgroundColor:'rgba(50,50,50,0.7)',
-                },
+                tooltip: {},
                 visualMap: {
                     left: "right",
                     min: 1,
@@ -116,29 +114,6 @@
                         roam: true,
                         map: "china",
                         itemStyle: {
-                            normal: {
-                                borderColor: 'rgba(147, 235, 248, 1)',
-                                borderWidth: 1,
-                                areaColor: {
-                                    type: 'radial',
-                                    x: 0.5,
-                                    y: 0.5,
-                                    r: 0.8,
-                                    colorStops: [{
-                                        offset: 0,
-                                        color: 'rgba(147, 235, 248, 0)' // 0% 处的颜色
-                                    }, {
-                                        offset: 1,
-                                        color: 'rgba(147, 235, 248, .2)' // 100% 处的颜色
-                                    }],
-                                    globalCoord: false // 缺省为 false
-                                },
-                                shadowColor: 'rgba(128, 217, 248, 1)',
-                                // shadowColor: 'rgba(255, 255, 255, 1)',
-                                shadowOffsetX: -2,
-                                shadowOffsetY: 2,
-                                shadowBlur: 10
-                            },
                             emphasis: {label: {show: true}}
                         },
                         // 文本位置修正

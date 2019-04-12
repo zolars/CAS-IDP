@@ -399,7 +399,7 @@
 
 <script src="js/jstree.js"></script>
 
-<%--<!-- 省\市\机房下拉菜单-->
+<!-- 省\市\机房下拉菜单-->
 <script type="text/javascript">
 
     //读取cookie中已存的机房配置
@@ -480,90 +480,6 @@
         });
     }
 
-</script>--%>
-
-<!-- 省\市\机房下拉菜单-->
-<!--- 2019.03.14 change getCity() option.value from cbname to cbid; change getComproom() ajax getCompTree from name to id -->
-<script type="text/javascript">
-
-    //读取cookie中已存的机房配置
-    var opinion1 = $.cookie('province_name');
-    $('#province_code').append("<option value='" + opinion1 + "' selected='selected' >" + opinion1 + "</option>");
-    getCity();
-
-    /*加载市下拉选*/
-    function getCity() {
-        var pname = $("#province_code").val();
-
-        //读取cookie中已存的机房配置
-        var opinion2 = $.cookie('opinion2');
-        var uname = "${username}";
-
-        $("#city_code").empty();
-        $("#comproom_code").empty();
-
-        $.ajax({
-            type: "post",
-            url: "getCityTree",
-            data: {
-                provinceid: pname,
-                uname: uname
-            },
-            dataType: "json",
-            success: function (data) {
-
-                $('#city_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
-                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
-
-                var obj = eval("(" + data + ")");
-                for (var i = 0; i < obj.length; i++) {
-                    if (obj[i].cbname == opinion2 || i == 0) {
-                        $('#city_code').append("<option value='" + obj[i].cbid + "' selected='selected' >" + obj[i].cbname + "</option>");
-                        getComproom();
-                    }
-                    else
-                        $('#city_code').append("<option value='" + obj[i].cbid + "' >" + obj[i].cbname + "</option>");
-
-                }
-            }
-        });
-    }
-
-    /*加载机房下拉选*/
-    function getComproom() {
-        var cbid = $("#city_code option:selected").val();
-
-        //读取cookie中已存的机房配置
-        var opinion3 = $.cookie('opinion3');
-        var uname = "${username}";
-
-        $("#comproom_code").empty();
-
-        $.ajax({
-            type: "post",
-            url: "getCompTree",
-            data: {
-                cityid: cbid,
-                uname: uname
-            },
-            dataType: "json",
-            success: function (data) {
-                var list = data.allcomputerroom;
-
-                $('#comproom_code').append("<option value='' selected='selected' >" + '未指定' + "</option>");
-                for (var i = 0; i < list.length; i++) {
-                    if (list[i].rname == opinion3 || i == 0) {
-                        $('#comproom_code').append("<option value='" + list[i].rid + "' selected='selected'>" + list[i].rname + "</option>");
-                        $('#second-page').css('display', 'block');
-                        $('#first-page').css('display', 'none');
-                    }
-                    else
-                        $('#comproom_code').append("<option value='" + list[i].rid + "' >" + list[i].rname + "</option>");
-                }
-            }
-        });
-    }
-
 </script>
 
 <!-- 动态加载菜单项 -->
@@ -590,10 +506,10 @@
             isSystemMng = false;
             menuname = "集中监控";
         }
-        else if(cbidstr[i] == " efficiencyInstruction.jsp"){
+       /* else if(cbidstr[i] == " efficiencyDevice.jsp"){
             isSystemMng = false;
             menuname = "动力设施";
-        }
+        }*/
         else if(cbidstr[i] == " onlineDetect.jsp"){
             isSystemMng = false;
             menuname = "在线监测";
@@ -683,7 +599,10 @@
     //初始化 默认 监测点 start//////////////////
     var flag = 1;
     setInterval(function () {
+
         var computerroom = $("#comproom_code option:selected").val();
+        var mpcname = $("#his-mpid-select").val();
+
         if(computerroom != undefined && flag == 1) {
             getDefaultMonitorPoints();
             flag = 2;
@@ -1787,6 +1706,7 @@
                 }
             });
         });
+
         //绑定THD图电压U、电流I checkbox点击事件
         $('#item2-thd-ctrl ul li.series-ctrl input:checkbox').each(function () {
             $(this).click(function () {
@@ -1804,6 +1724,7 @@
                 }
             });
         });
+
         //绑定UI图最大值、最小值、平均值checkbox点击事件
         $('#item2-UI-ctrl ul li.mark-ctrl input:checkbox').each(function () {
             $(this).click(function () {

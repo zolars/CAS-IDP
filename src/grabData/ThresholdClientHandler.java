@@ -2,6 +2,7 @@ package grabData;
 
 import Util.HBSessionDaoImpl;
 import deviceJobManager.DeviceManager;
+import hibernatePOJO.Devices;
 import hibernatePOJO.DevicesThreshold;
 import hibernatePOJO.DictionaryThreshold;
 import io.netty.buffer.ByteBuf;
@@ -39,6 +40,15 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+
+        /*2019-03-04*//*
+        for(Devices d:DeviceManager.getFirstConnection().keySet()){
+            if(d.getDid().toString()==this.did){
+                DeviceManager.getFirstConnection().put(d,true);
+            }
+        }
+        *//*2019-03-04*/
+
         //record ctx in DeviceManager
 //        DeviceManager.getCtxMap().put(this.did+"-4",ctx);
 

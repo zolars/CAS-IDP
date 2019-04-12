@@ -364,7 +364,9 @@
                                         <button class="button-primary button-pill button-small" onclick="checkDevice()">查询</button>
                                         <button class="button-primary button-pill button-small" onclick="addOneDevice()">添加设备</button>
                                         <button class="button-primary button-pill button-small" onclick="modifyOneDevice()">修改设备</button>
-                                        <button class="button-primary button-pill button-small" onclick="deleteOneDevice()">删除设备</button>
+                                        <%--<button class="button-primary button-pill button-small" onclick="deleteOneDevice()">删除设备</button>
+--%>
+
 
                                        <%-- <div id="devicemanage-hide-did" style="display: none"></div>--%>
                                         <div class="row">
@@ -1072,7 +1074,6 @@
 <script src="js/jstree.js"></script>
 
 <!-- 省\市\机房下拉菜单-->
-<!--- 2019.03.14 change getCity() option.value from cbname to cbid; change getComproom() ajax getCompTree from name to id -->
 <script type="text/javascript">
 
     //读取cookie中已存的机房配置
@@ -1107,11 +1108,11 @@
                 var obj = eval("(" + data + ")");
                 for (var i = 0; i < obj.length; i++) {
                     if (obj[i].cbname == opinion2 || i == 0) {
-                        $('#city_code').append("<option value='" + obj[i].cbid + "' selected='selected' >" + obj[i].cbname + "</option>");
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' selected='selected' >" + obj[i].cbname + "</option>");
                         getComproom();
                     }
                     else
-                        $('#city_code').append("<option value='" + obj[i].cbid + "' >" + obj[i].cbname + "</option>");
+                        $('#city_code').append("<option value='" + obj[i].cbname + "' >" + obj[i].cbname + "</option>");
 
                 }
             }
@@ -1120,7 +1121,7 @@
 
     /*加载机房下拉选*/
     function getComproom() {
-        var cbid = $("#city_code option:selected").val();
+        var cname = $("#city_code").val();
 
         //读取cookie中已存的机房配置
         var opinion3 = $.cookie('opinion3');
@@ -1132,7 +1133,7 @@
             type: "post",
             url: "getCompTree",
             data: {
-                cityid: cbid,
+                cityid: cname,
                 uname: uname
             },
             dataType: "json",
@@ -1179,10 +1180,10 @@
             isSystemMng = false;
             menuname = "集中监控";
         }
-        else if(cbidstr[i] == " efficiencyInstruction.jsp"){
+        /*else if(cbidstr[i] == " efficiencyDevice.jsp"){
             isSystemMng = false;
             menuname = "动力设施";
-        }
+        }*/
         else if(cbidstr[i] == " onlineDetect.jsp"){
             isSystemMng = false;
             menuname = "在线监测";
@@ -2398,7 +2399,7 @@
         });
     }
 
-    <!-- 添加设备2019.03.13 chen : fix bugs -->
+    <!-- 添加设备 -->
     function addOneDevice(){
 
         var radioEthernet = $('input[id="radio-Ethernet"]:checked').val();
@@ -2417,9 +2418,9 @@
         var address485 = $("#485address").val();
         var extra = $("#extra").val();
 
-        var province = $("#province_code option:selected").val();
-        var city = $("#city_code option:selected").val();
-        var computerroom= $("#comproom_code option:selected").val();
+        var province = $("#province_code option:selected").text();
+        var city = $("#city_code option:selected").text();
+        var computerroom= $("#comproom_code option:selected").text();
 
         var belongid = "";
         var belonglevel = "0";
@@ -2491,7 +2492,6 @@
     }
 
     <!-- 修改设备 -->
-    <!-- 2019.03.14 chen：delete unused var province、city、computerroom-->
     function modifyOneDevice(){
 
         var radioEthernet = $('input[id="radio-Ethernet"]:checked').val();
@@ -2509,7 +2509,26 @@
         var conncom = $("#conncom").val();
         var address485 = $("#485address").val();
         var extra = $("#extra").val();
+
+        var province = $("#province_code option:selected").text();
+        var city = $("#city_code option:selected").text();
+        var computerroom= $("#comproom_code option:selected").text();
+
+        var belongid = "";
+        var belonglevel = "0";
+
         var did = $("#did").val();
+
+        if(computerroom != "未指定") {
+            belongid = computerroom;
+            belonglevel = 3;
+        } else if(city != "未指定") {
+            belongid = city;
+            belonglevel = 2;
+        } else if(province!= "未指定") {
+            belongid = province;
+            belonglevel = 1;
+        }
 
         if(IPaddress == "" && conncom=="")
             alert("请输入IP地址");
@@ -2592,38 +2611,19 @@
     }
 
     <!-- 删除设备 -->
-    <!-- 2019.03.14 chen -->
     function deleteOneDevice(){
-        var did = $("#did").val();
-        var province = $("#province_code option:selected").val();
-        var city = $("#city_code option:selected").val();
-        var computerroom= $("#comproom_code option:selected").val();
 
-        var belongid = "";
-        var belonglevel = "0";
-        var devtype = $("#devtype").val();
+        var devname = $("#devname").val();
 
-        if(computerroom != "未指定") {
-            belongid = computerroom;
-            belonglevel = 3;
-        } else if(city != "未指定") {
-            belongid = city;
-            belonglevel = 2;
-        } else if(province!= "未指定") {
-            belongid = province;
-            belonglevel = 1;
-        }
-
-        if(did == "")
-            alert("请选择一个设备");
+        if(devname == "")
+            alert("请输入设备名称");
         else $.ajax({
                 type: "post",
                 url: "deleteOneDevice",
                 data: {
-                    did: did,
+                    devname: devname,
                     belongid: belongid,
-                    belonglevel: belonglevel,
-                    devtype: devtype
+                    belonglevel: belonglevel
                 },
                 dataType: "json",
                 success: function (data) {

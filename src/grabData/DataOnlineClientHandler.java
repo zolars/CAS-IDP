@@ -2,14 +2,13 @@ package grabData;
 
 import deviceJobManager.DeviceManager;
 import hibernatePOJO.*;
+import hibernatePOJO.Dictionary;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     private Map<String, Float> map = null;
@@ -40,6 +39,15 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     }
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+
+        /*2019-03-04*/
+        for(Devices d:DeviceManager.getFirstConnection().keySet()){
+            if(d.getDid().toString()==this.did){
+                DeviceManager.getFirstConnection().put(d,true);
+            }
+        }
+        /*2019-03-04*/
+
         // record ctx in DeviceManager
         System.out.println(did+": channel active");
         DeviceManager.getCtxMap().put(this.did+"-1",ctx);
@@ -145,5 +153,9 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
             map.put(name[count], temp * factor[count]);
             count++;
         }
+//        Set<String> didSet = map.keySet();
+//        Iterator<String> iterator = didSet.iterator();
+//        String did = iterator.next();
+//        map.get(did);
     }
 }

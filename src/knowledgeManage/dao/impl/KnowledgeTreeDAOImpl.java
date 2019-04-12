@@ -88,9 +88,10 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
             UserRoles ur = (UserRoles)hbsessionDao.getFirst(
                     "FROM UserRoles where uid = '" + uid + "'");
 
-            if(ur.getRid() == "1") {
+            if(ur.getRid() == "1")
                 return true;
-            } else return false;
+
+            else return false;
         }
     }
 
@@ -161,5 +162,6 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
 
         return rt;
     }
+
 
 }

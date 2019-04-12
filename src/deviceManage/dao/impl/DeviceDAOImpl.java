@@ -1,12 +1,10 @@
 package deviceManage.dao.impl;
 
-import Util.DBConnect;
 import Util.HBSessionDaoImpl;
 import deviceManage.dao.DeviceDAO;
 import hibernatePOJO.*;
 import org.apache.commons.lang3.ObjectUtils;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +12,6 @@ import java.util.List;
  * this CLASS is used for device related operation
  */
 public class DeviceDAOImpl implements DeviceDAO {
-
-    DBConnect db = null;
-    PreparedStatement ps = null;
 
     /**
      * 通过设备名称获取设备
@@ -146,170 +141,13 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
     /**
-     * 1.删除Devices表中did=did的记录
-     * 2.删除did在省、市、机房表中的记录
+     * 删除did在省、市、机房表中的记录
      * @param did did
-     * @param belongid belongid
-     * @param belonglevel belonglevel
-     * @param deviceType deviceType
      * @return 真或假
-     * 2019.03.14 chen :use transient
      */
-    public Boolean deleteOneDeviceInfoAndBelongPosition(String did, String belongid, String belonglevel, String deviceType){
+    public Boolean deleteOneDeviceInfoToBelongPosition(String did, String belongname, String belonglevel){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
-
-        try {
-            // 获取数据库链接
-            db = new DBConnect();
-            // 开启事务
-            //不把其设置为true之前都是一个当作一个事务来处理
-            db.setAutoCommit(false);
-
-            //1.删除Devices表中did=did的记录
-            String maxdid = getMaxDeviceId();
-            Integer imaxid = Integer.parseInt(maxdid) + 1;
-
-            String sql1 = "DELETE FROM devices WHERE did = '" + did + "'";
-
-            ps = db.getPs(sql1);
-            ps.executeUpdate(sql1);
-
-            // 2.根据设备所属等级（belonglevel  1：省级； 2：市级； 3：机房级）更新相应表（province、city、computerroom）
-            if( belonglevel.equals("0")) {
-                return false;
-            } else {
-                if(belonglevel.equals("1")) {
-                    ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
-                            "FROM ProvinceBank where pbid='" + belongid + "分行" + "'");
-
-                    if(deviceType.equals("其他传感器")) {
-                        String tempset = pb.getTempset();
-                        String newtempset = new String();
-                        if (tempset!= null && tempset.length() > 0) {
-                            String temp[] = tempset.split("，");
-                            for(int i = 0; i < temp.length; i++) {
-                                if(!temp[i] .equals(did)){
-                                    newtempset += temp[i];
-                                    newtempset += "，";
-                                }
-                            }
-                        }
-                        String sql2 = "UPDATE province_bank SET tempset='" + newtempset + "' WHERE pbid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    } else {
-                        String didset = pb.getDidset();
-                        String newdidset = new String();
-                        if (didset!= null && didset.length() > 0) {
-                            String temp[] = didset.split("，");
-                            for(int i = 0; i < temp.length; i++) {
-                                if(!temp[i] .equals(did)){
-                                    newdidset += temp[i];
-                                    newdidset += "，";
-                                }
-                            }
-                        }
-                        String sql2 = "UPDATE province_bank SET didset='" + newdidset + "' WHERE pbid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    }
-                }
-
-                else if(belonglevel.equals("2")) {
-                    CityBank pb = (CityBank) hbsessionDao.getFirst(
-                            "FROM CityBank where cbid='" + belongid + "'");
-
-                    if(deviceType.equals("其他传感器")) {
-                        String tempset = pb.getTempset();
-                        String newtempset = new String();
-                        if (tempset!= null && tempset.length() > 0) {
-                            String temp[] = tempset.split("，");
-                            for(int i = 0; i < temp.length; i++) {
-                                if(!temp[i] .equals(did)){
-                                    newtempset += temp[i];
-                                    newtempset += "，";
-                                }
-                            }
-                        }
-                        String sql2 = "UPDATE city_bank SET tempset='" + newtempset + "' WHERE cbid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    } else {
-                        String didset = pb.getDidset();
-                        String newdidset = new String();
-                        if (didset!= null && didset.length() > 0) {
-                            String temp[] = didset.split("，");
-                            for(int i = 0; i < temp.length; i++) {
-                                if(!temp[i] .equals(did)){
-                                    newdidset += temp[i];
-                                    newdidset += "，";
-                                }
-                            }
-                        }
-                        String sql2 = "UPDATE city_bank SET didset='" + newdidset + "' WHERE cbid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    }
-                }
-
-                else if(belonglevel.equals("3")) {
-                    Computerroom pb = (Computerroom) hbsessionDao.getFirst(
-                            "FROM Computerroom where rid='" + belongid + "'");
-
-                    if(deviceType.equals("其他传感器")) {
-                        String tempset = pb.getTempset();
-                        String newtempset = new String();
-                        if (tempset!= null && tempset.length() > 0) {
-                            String temp[] = tempset.split("，");
-                            for(int i = 0; i < temp.length; i++) {
-                                if(!temp[i] .equals(did)){
-                                    newtempset += temp[i];
-                                    newtempset += "，";
-                                }
-                            }
-                        }
-                        String sql2 = "UPDATE computerroom SET tempset='" + newtempset + "' WHERE rid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    } else {
-                        String didset = pb.getDidset();
-                        String newdidset = new String();
-                        if (didset!= null && didset.length() > 0) {
-                            String temp[] = didset.split("，");
-                            for(int i = 0; i < temp.length; i++) {
-                                if(!temp[i] .equals(did)){
-                                    newdidset += temp[i];
-                                    newdidset += "，";
-                                }
-                            }
-                        }
-
-                        String sql2 = "UPDATE computerroom SET didset='" + newdidset + "' WHERE rid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    }
-                }
-            }
-
-            // 提交事务
-            db.commit();
-            rt = true;
-        }catch (Exception e) {
-            e.printStackTrace();
-            try {// 回滚事务,撤销上面对事务的所有操作
-                db.rollback();
-            } catch ( Exception e2 ) {}
-        } finally {
-            // 关闭Statement
-            try {
-                ps.close();
-            } catch (Exception e) {}
-            // 关闭Connection
-            try {
-                db.free();
-            } catch (Exception e) {}
-        }
 
         return rt;
     }
@@ -557,145 +395,10 @@ public class DeviceDAOImpl implements DeviceDAO {
          return rt;
      }
 
-     /*
-     更新新增的设备所关联的表的信息
-     1.添加一个设备到device表
-     2.根据设备所属等级（belonglevel  1：省级； 2：市级； 3：机房级）更新相应表（province、city、computerroom）
-     2019.03.13 chen use transient
-      */
-    public Boolean addOneDeviceInfoAndBelongPos(String deviceType, String devname,String  devtype, String serialno, String iPaddress, String port, String extra, Integer sms, Integer alert,Integer plantform, String belongid, String belonglevel){
+
+    public Boolean addOneDeviceInfoAndBelongPos(String deviceType, String devname,String  devtype, String serialno, String iPaddress, String port, String extra, Integer sms, Integer alert,Integer plantform, String belongname, String belonglevel){
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        boolean rt = false;
-
-        try {
-            // 获取数据库链接
-            db = new DBConnect();
-            // 开启事务
-            //不把其设置为true之前都是一个当作一个事务来处理
-            db.setAutoCommit(false);
-
-            //1.添加一个设备到device表
-            String maxdid = getMaxDeviceId();
-            Integer imaxid = Integer.parseInt(maxdid) + 1;
-
-            String sql1 = "INSERT INTO devices ( did,name,devicetype,type,serialno,IPaddress,port,extra,isSMS,isAlart,isPlartform ) " +
-                    "VALUES ( '"+imaxid+"', '"+devname+"','"+deviceType+"','"+devtype+"','"+serialno+"','"+iPaddress+"','"+port+"','"+extra+"','"+sms+"','"+alert+"','"+plantform+"' )";
-
-            ps = db.getPs(sql1);
-            ps.executeUpdate(sql1);
-
-            // 2.根据设备所属等级（belonglevel  1：省级； 2：市级； 3：机房级）更新相应表（province、city、computerroom）
-
-            if( belonglevel.equals("0")) {
-                return false;
-            } else {
-                String did = imaxid.toString();
-
-                if(belonglevel.equals("1")) {
-                    ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
-                            "FROM ProvinceBank where pbid='" + belongid + "分行" + "'");
-
-                    if(deviceType.equals("其他传感器")) {
-                        String tempset = pb.getTempset();
-                        if (tempset!= null && tempset.length() > 0) {
-                            tempset += "，";
-                        }
-                        tempset += did;
-
-                        String sql2 = "UPDATE province_bank SET tempset='" + tempset + "' WHERE pbid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    } else {
-                        String didset = pb.getDidset();
-                        if (didset!= null && didset.length() > 0) {
-                            didset += "，";
-                        }
-                        didset += did;
-
-                        String sql2 = "UPDATE province_bank SET didset='" + didset + "' WHERE pbid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    }
-                }
-
-                else if(belonglevel.equals("2")) {
-                    CityBank pb = (CityBank) hbsessionDao.getFirst(
-                            "FROM CityBank where cbid='" + belongid + "'");
-
-                    if(deviceType.equals("其他传感器")) {
-                        String tempset = pb.getTempset();
-                        if (tempset!= null && tempset.length() > 0) {
-                            tempset += "，";
-                        }
-                        tempset += did;
-
-                        String sql2 = "UPDATE city_bank SET tempset='" + tempset + "' WHERE cbid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    } else {
-                        String didset = pb.getDidset();
-                        if (didset!= null && didset.length() > 0) {
-                            didset += "，";
-                        }
-                        didset += did;
-
-                        String sql2 = "UPDATE city_bank SET didset='" + didset + "' WHERE cbid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    }
-                }
-
-                else if(belonglevel.equals("3")) {
-                    Computerroom pb = (Computerroom) hbsessionDao.getFirst(
-                            "FROM Computerroom where rid='" + belongid + "'");
-
-                    if(deviceType.equals("其他传感器")) {
-                        String tempset = pb.getTempset();
-                        if (tempset!= null && tempset.length() > 0) {
-                            tempset += "，";
-                        }
-                        tempset += did;
-
-                        String sql2 = "UPDATE computerroom SET tempset='" + tempset + "' WHERE rid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    } else {
-                        String didset = pb.getDidset();
-                        if (didset!= null && didset.length() > 0) {
-                            didset += "，";
-                        }
-                        didset += did;
-
-                        String sql2 = "UPDATE computerroom SET didset='" + didset + "' WHERE rid='" + belongid + "'";
-                        ps = db.getPs(sql2);
-                        ps.executeUpdate(sql2);
-                    }
-                }
-            }
-
-            // 提交事务
-            db.commit();
-            rt = true;
-        }catch (Exception e) {
-            e.printStackTrace();
-            try {// 回滚事务,撤销上面对事务的所有操作
-                db.rollback();
-            } catch ( Exception e2 ) {}
-        } finally {
-            // 关闭Statement
-            try {
-                ps.close();
-            } catch (Exception e) {}
-            // 关闭Connection
-            try {
-                db.free();
-            } catch (Exception e) {}
-        }
-        return rt;
-
-////////////////////old
-        /*HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1 = false, rt2 = false;
 
         Devices dt = new Devices();
@@ -794,7 +497,8 @@ public class DeviceDAOImpl implements DeviceDAO {
             }
         }
 
-        return rt1 && rt2;*/
+        return rt1 && rt2;
+
     }
 
     /**

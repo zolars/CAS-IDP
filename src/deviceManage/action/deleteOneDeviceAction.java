@@ -22,24 +22,26 @@ public class deleteOneDeviceAction extends ActionSupport {
     }
 
 
-    // 删除一个设备
-    // 2019.03.14 chen: DELETE devicve from device table and related table
+    /* 删除一个设备
+     */
     public String execute() throws Exception {
         try {//获取数据
             HttpServletRequest request = ServletActionContext.getRequest();
             request.setCharacterEncoding("utf-8");
 
-            String did = request.getParameter("did");
-            String belongid = request.getParameter("belongid");
+            String devname = request.getParameter("devname");
+            String belongname = request.getParameter("belongid");
             String belonglevel = request.getParameter("belonglevel");
-            String devtype = request.getParameter("devtype");
 
             DeviceDAO dao = new DeviceDAOImpl();
 
-            Boolean rt = dao.deleteOneDeviceInfoAndBelongPosition(did, belongid, belonglevel, devtype);
+            String did = dao.getDeviceIDByName(devname);
+
+            Boolean rt1 = dao.deleteOneDevice(did);
+            Boolean rt2 = dao.deleteOneDeviceInfoToBelongPosition(did, belongname, belonglevel);
             JSONObject jsonObject = new JSONObject();
 
-            if (rt) {
+            if (rt1 && rt2) {
                 jsonObject.put("提示", "删除成功！");
             } else {
                 jsonObject.put("提示", "删除失败，请重试！");

@@ -3,6 +3,7 @@ package grabData;
 import Util.HBSessionDaoImpl;
 import com.alibaba.fastjson.JSON;
 import deviceJobManager.DeviceManager;
+import hibernatePOJO.Devices;
 import hibernatePOJO.EventPower;
 import hibernatePOJO.EventsType;
 import io.netty.buffer.ByteBuf;
@@ -67,6 +68,14 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        /*2019-03-04*//*
+        for(Devices d:DeviceManager.getFirstConnection().keySet()){
+            if(d.getDid().toString()==this.did){
+                DeviceManager.getFirstConnection().put(d,true);
+            }
+        }
+        *//*2019-03-04*/
+
         // record ctx in DeviceManager
         DeviceManager.getCtxMap().put(this.did+"-2",ctx);
         DataOnline.getTransientChannelMap().put(this.did, ctx.channel());

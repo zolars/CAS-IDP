@@ -3,6 +3,7 @@ package grabData;
 import com.alibaba.fastjson.JSON;
 import hibernatePOJO.*;
 import io.netty.channel.Channel;
+import test.creatXML;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -773,6 +774,8 @@ public class DataOnline {
         varsxdy.setAngleV2(defzero);
         varsxdy.setAngleV3(defzero);
         varsxdy.setVunb(defzero);
+
+
     }
 
     public static Map<String, Channel> getTransientChannelMap() {

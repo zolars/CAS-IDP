@@ -67,6 +67,7 @@ public class UserLoginAction extends ActionSupport {
             session.setAttribute("userrole", rid);
 
             if (userid != "") {
+                session.setMaxInactiveInterval(604800);
                 session.setAttribute("userid", userid);
                 session.setAttribute("username", username);
                 user.setUid(userid);
@@ -92,7 +93,7 @@ public class UserLoginAction extends ActionSupport {
                             menulist.add("onlineDetect.jsp");
                             menulist.add("history.jsp");
                             menulist.add("efficiencyAnalysis.jsp");
-                            menulist.add("efficiencyInstruction.jsp");
+                            //menulist.add("efficiencyDevice.jsp");
                             // menulist.add("efficiencyAssessment.jsp");
                             menulist.add("reportChart.jsp");
                             break;

@@ -30,10 +30,10 @@ public class getCtrlParameterAction extends ActionSupport {
             request.setCharacterEncoding("utf-8");
 
             //获取ctrl监测点
-            String cid = request.getParameter("cid");
+            String did = request.getParameter("did");
 
-            if (cid != "") {
-                CtrlParameter pp = CtrlSave.getCtrlMap().get(cid);
+            if (!did.equals("") && did != null) {
+                CtrlParameter pp = CtrlSave.getCtrlMap().get(did);
 
                 if (pp != null) {
                     JSONObject jsonObject = new JSONObject();
