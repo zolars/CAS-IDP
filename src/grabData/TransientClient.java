@@ -35,7 +35,7 @@ public class TransientClient extends Thread {
                 }
             });
             ChannelFuture f = b.connect(host, port).sync();
-            if(f.isSuccess()) {
+            if (f.isSuccess()) {
                 f.channel().closeFuture().sync();
             } else {
                 System.out.println("============================重新建立连接");

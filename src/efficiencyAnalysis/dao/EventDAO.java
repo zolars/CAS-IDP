@@ -132,9 +132,8 @@ public interface EventDAO {
 
     public boolean setAllEventtypePriorty(String[] eventtypelist, String[] priortylist);
 
-    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String tansentinterval, String uploadinterval ,String assessinterval,String alarminterval,String tempinterval,String ctrlinterval,
-                                         String thresholdsaveinterval,String qstdatainterval);
-
+    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String tansentinterval, String uploadinterval, String assessinterval, String alarminterval, String tempinterval, String ctrlinterval,
+                                         String thresholdsaveinterval, String qstdatainterval);
 
 
 }

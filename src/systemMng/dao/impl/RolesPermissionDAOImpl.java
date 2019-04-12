@@ -2,8 +2,6 @@ package systemMng.dao.impl;
 
 import Util.HBSessionDaoImpl;
 import hibernatePOJO.BasicSetting;
-import hibernatePOJO.OrgnizationStructure;
-import hibernatePOJO.RolesPermission;
 import systemMng.dao.RolesPermissionDAO;
 
 import java.util.ArrayList;
@@ -64,11 +62,11 @@ public class RolesPermissionDAOImpl implements RolesPermissionDAO {
     }
 
 
-    public List<Integer> getbasicsetting(){
+    public List<Integer> getbasicsetting() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Integer> list = new ArrayList<>();
 
-        BasicSetting bs = (BasicSetting)hbsessionDao.getFirst(
+        BasicSetting bs = (BasicSetting) hbsessionDao.getFirst(
                 "FROM BasicSetting");
 
         list.add(bs.getOnlineinterval());

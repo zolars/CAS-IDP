@@ -29,7 +29,7 @@ public class ComputerroomDAOImpl implements ComputerroomDAO {
         CityBank cb = (CityBank) hbsessionDao.getFirst(
                 "FROM CityBank where cbid='" + city + "'");
 
-        if ( cb != null) {
+        if (cb != null) {
             String comidstr = cb.getCompRoom();
 
             if (comidstr != null && !comidstr.equals("")) {

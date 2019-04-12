@@ -1,12 +1,9 @@
 package deviceJobManager;
 
-import antlr.debug.Event;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.EventLoop;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class ConnectionListener implements ChannelFutureListener {
     private String host;
@@ -23,7 +20,7 @@ public class ConnectionListener implements ChannelFutureListener {
 
     @Override
     public void operationComplete(ChannelFuture future) throws Exception {
-        if(!future.isSuccess()){
+        if (!future.isSuccess()) {
             System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
             future.cause().printStackTrace();
             System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
@@ -35,10 +32,9 @@ public class ConnectionListener implements ChannelFutureListener {
 //                }
 //            },1L,TimeUnit.SECONDS);
             Thread.sleep(2000);
-            DeviceManager.addDevice(host,port,did,type);
-        }
-        else{
-            System.out.println(new Date()+":connected.");
+            DeviceManager.addDevice(host, port, did, type);
+        } else {
+            System.out.println(new Date() + ":connected.");
         }
     }
 }

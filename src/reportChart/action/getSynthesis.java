@@ -14,9 +14,11 @@ import java.util.List;
 public class getSynthesis extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
+
     public String getResult() {
         return result;
     }
+
     public void setResult(String result) {
         this.result = result;
     }
@@ -67,7 +69,7 @@ public class getSynthesis extends ActionSupport {
             thdIResult = dao.getthdIBydt(did, time);
             thdUThresholdResult = dao.getthduthreshold();
             thdIThresholdResult = dao.getthdithreshold();
-            powerthresholdResult=dao.getpowerthreshold();
+            powerthresholdResult = dao.getpowerthreshold();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("hzresult", hzresult);

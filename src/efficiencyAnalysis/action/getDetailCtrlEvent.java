@@ -42,29 +42,29 @@ public class getDetailCtrlEvent extends ActionSupport {
 
             EventDAO dao = new EventDAOImpl();
 
-            for(int i = 0; i <cbnamelist.length; i++) {
-                if((starttime == null && endtime == null) || (starttime.equals(" ") && endtime.equals(" "))) {
+            for (int i = 0; i < cbnamelist.length; i++) {
+                if ((starttime == null && endtime == null) || (starttime.equals(" ") && endtime.equals(" "))) {
                     pedata.addAll(dao.getLocalLastDetailPowerEventlytx(cbnamelist[i]));
                 } else {
                     pedata.addAll(dao.getLocalAllDetailPowerEventlytx(cbnamelist[i], starttime, endtime));
                 }
             }
 
-            for (int i = 0 ; i < pedata.size(); i++) {
-                String ep = (String)pedata.get(i);
+            for (int i = 0; i < pedata.size(); i++) {
+                String ep = (String) pedata.get(i);
                 List<String> eplist = java.util.Arrays.asList(ep.split(","));
 
-                String cid= (String)eplist.get(4);
+                String cid = (String) eplist.get(4);
                 String cidn = cid.substring(1, cid.length());
 
                 Boolean has = false;
 
-                for (int j = 0 ; j < priortylist.length; j++) {
+                for (int j = 0; j < priortylist.length; j++) {
                     if (cidn.equals(priortylist[j]))
                         has = true;
                 }
 
-                if(!has) {
+                if (!has) {
                     pedata.remove(i);
                 }
             }

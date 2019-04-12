@@ -62,8 +62,9 @@ public class UserDAOImpl implements UserDAO {
 
     /**
      * 获取市行list
+     *
      * @param pbname 省行名称
-     * @param uname 当前登陆的用户名称
+     * @param uname  当前登陆的用户名称
      * @return 市行list，第一个为当前用户所在的市行
      */
     public List<Object> getCityBank(String pbname, String uname) {
@@ -81,8 +82,8 @@ public class UserDAOImpl implements UserDAO {
 
             String cbidset = pro.getCbidset();
 
-            if(cbidset != null) { //省行下有市行时
-                if(!cbidset.equals("")) {
+            if (cbidset != null) { //省行下有市行时
+                if (!cbidset.equals("")) {
 
                     String[] cbidstr = cbidset.split("，");
 
@@ -92,7 +93,7 @@ public class UserDAOImpl implements UserDAO {
                         if (cbidstr[i] == usercbid) { //若该用户所属的市行 在市行集合中存在，把这个cbid从市行集合中删除
                             //删除数组中的某一个元素的方法：把最后一个元素替代指定的元素，然后数组缩容
                             cbidstr[i] = cbidstr[cbidstr.length - 1];
-                            cbidstr = Arrays.copyOf(cbidstr, cbidstr.length-1);
+                            cbidstr = Arrays.copyOf(cbidstr, cbidstr.length - 1);
                         }
                     }
 
@@ -117,8 +118,9 @@ public class UserDAOImpl implements UserDAO {
 
     /**
      * 获取机房list
+     *
      * @param cbname 市行名称
-     * @param uname 当前登陆的用户名称
+     * @param uname  当前登陆的用户名称
      * @return 机房list，第一个为当前用户所在的机房
      */
     public List getComputerroom(String cbname, String uname) {
@@ -143,7 +145,7 @@ public class UserDAOImpl implements UserDAO {
                 if (coroomstr[i] == usercbid) { //若该用户所属的市行 在市行集合中存在，把这个cbid从市行集合中删除
                     //删除数组中的某一个元素的方法：把最后一个元素替代指定的元素，然后数组缩容
                     coroomstr[i] = coroomstr[coroomstr.length - 1];
-                    coroomstr = Arrays.copyOf(coroomstr, coroomstr.length-1);
+                    coroomstr = Arrays.copyOf(coroomstr, coroomstr.length - 1);
                 }
             }
 
@@ -248,7 +250,7 @@ public class UserDAOImpl implements UserDAO {
             }
             return crlist;
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -258,7 +260,7 @@ public class UserDAOImpl implements UserDAO {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return  new ArrayList<>();
+        return new ArrayList<>();
     }
 
     public User getOneUserInfo(String uid) {
@@ -274,7 +276,7 @@ public class UserDAOImpl implements UserDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
 
-        rt = hbsessionDao.delete( "Delete FROM User Where uid=?", uid);
+        rt = hbsessionDao.delete("Delete FROM User Where uid=?", uid);
 
         return rt;
     }
@@ -283,7 +285,7 @@ public class UserDAOImpl implements UserDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
 
-        rt = hbsessionDao.delete( "Delete FROM UserRoles Where uid=?", uid);
+        rt = hbsessionDao.delete("Delete FROM UserRoles Where uid=?", uid);
 
         return rt;
     }
@@ -333,11 +335,11 @@ public class UserDAOImpl implements UserDAO {
         UserRoles userole2 = (UserRoles) hbsessionDao.getFirst("FROM UserRoles where uid = '" + uid + "'"); //待修改用户
         Roles role = (Roles) hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles + "'");
 
-        if((uid.equals(temuser)) || (userole.getRid().equals("1"))) { //可以修改
+        if ((uid.equals(temuser)) || (userole.getRid().equals("1"))) { //可以修改
 
             String hql = "update User newur set newur.uname='" + name + "', newur.chinesename='" + chinesename + "', newur.password='" + password + "'," +
-                    "newur.telephone='" + telephone + "', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
-                    ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
+                    "newur.telephone='" + telephone + "', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'" +
+                    ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'" +
                     " where newur.uid='" + uid + "'";
 
             rt1 = hbsessionDao.update(hql);
@@ -365,11 +367,11 @@ public class UserDAOImpl implements UserDAO {
         UserRoles userole2 = (UserRoles) hbsessionDao.getFirst("FROM UserRoles where uid = '" + uid + "'"); //待修改用户
         Roles role = (Roles) hbsessionDao.getFirst("FROM Roles where rolesname = '" + roles + "'");
 
-        if((uid.equals(temuser)) || (userole.getRid().equals("1"))) { //可以修改
+        if ((uid.equals(temuser)) || (userole.getRid().equals("1"))) { //可以修改
 
             String hql = "update User newur set newur.uname='" + name + "', newur.chinesename='" + chinesename +
-                    "', newur.telephone='" + telephone + "', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'"+
-                    ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'"+
+                    "', newur.telephone='" + telephone + "', newur.govtelephone='" + govtelephone + "', newur.pbid='" + province + "'" +
+                    ", newur.cbid='" + city + "', newur.rid='" + computerroom + "'" +
                     " where newur.uid='" + uid + "'";
 
             rt1 = hbsessionDao.update(hql);
@@ -382,7 +384,6 @@ public class UserDAOImpl implements UserDAO {
         }
         return rt1 && rt2;
     }
-
 
 
     public List<Object> getUserDynamicMenu(User user) {
@@ -415,11 +416,11 @@ public class UserDAOImpl implements UserDAO {
         return ur.getUid();
     }
 
-    public Boolean checkUnameIsOccupiedForAdd(String uname){
+    public Boolean checkUnameIsOccupiedForAdd(String uname) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = true;
 
-        List<User> urlist =  hbsessionDao.search(
+        List<User> urlist = hbsessionDao.search(
                 "FROM User where uname = '" + uname + "'");
 
         if (urlist != null) {
@@ -428,11 +429,11 @@ public class UserDAOImpl implements UserDAO {
         return rt;
     }
 
-    public Boolean checkUnameIsOccupiedForUpdate(String uid, String uname){
+    public Boolean checkUnameIsOccupiedForUpdate(String uid, String uname) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = true;
 
-        List<User> urlist =  hbsessionDao.search(
+        List<User> urlist = hbsessionDao.search(
                 "FROM User where uname = '" + uname + "'");
 
         if (urlist != null) {

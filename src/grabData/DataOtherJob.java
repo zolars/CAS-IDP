@@ -132,12 +132,12 @@ public class DataOtherJob implements Job {
 
                                 EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE description = '" + templist.get(1) + "'");
                                 /***********2019-01-09    ADD****************************/
-                                List list = hbsessionDao.search("select CEILING(value),time  from EventPower where  cid ='"+tempet.getCid()+"' and did = '"+did+"' and (signature ='' or signature is null)");
-                                if(list != null){
-                                    Object[] event= (Object[])list.get(0);
+                                List list = hbsessionDao.search("select CEILING(value),time  from EventPower where  cid ='" + tempet.getCid() + "' and did = '" + did + "' and (signature ='' or signature is null)");
+                                if (list != null) {
+                                    Object[] event = (Object[]) list.get(0);
 
-                                    if(templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
-                                        if(Double.parseDouble(templist.get(2))<Double.valueOf(event[0].toString())){
+                                    if (templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
+                                        if (Double.parseDouble(templist.get(2)) < Double.valueOf(event[0].toString())) {
                                             continue;
                                         }
                                     }
@@ -161,7 +161,7 @@ public class DataOtherJob implements Job {
                                     ep.setSubtype(tempet.getSubtype());
 
                                     /************2018-12-24 马卫亮  ADD******************************/
-                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '"+tempet.getCid()+"' and did='"+did+"' and signature is null  ");
+                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '" + tempet.getCid() + "' and did='" + did + "' and signature is null  ");
                                     /************2018-12-24 马卫亮  ADD******************************/
                                     hbsessionDao.insert(ep);
                                 }
@@ -203,12 +203,12 @@ public class DataOtherJob implements Job {
                                     EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE description = '" + templist.get(1) + "'");
 
                                     /***********2019-01-09    ADD****************************/
-                                    List list = hbsessionDao.search("select CEILING(value),time  from EventPower where  cid ='"+tempet.getCid()+"' and did = '"+did+"' and (signature ='' or signature is null)");
-                                    if(list != null){
-                                        Object[] event= (Object[])list.get(0);
+                                    List list = hbsessionDao.search("select CEILING(value),time  from EventPower where  cid ='" + tempet.getCid() + "' and did = '" + did + "' and (signature ='' or signature is null)");
+                                    if (list != null) {
+                                        Object[] event = (Object[]) list.get(0);
 
-                                        if(templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
-                                            if(Double.parseDouble(templist.get(2))<Double.valueOf(event[0].toString())){
+                                        if (templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
+                                            if (Double.parseDouble(templist.get(2)) < Double.valueOf(event[0].toString())) {
                                                 continue;
                                             }
                                         }
@@ -223,7 +223,7 @@ public class DataOtherJob implements Job {
                                     ep.setSubtype(tempet.getSubtype());
 
                                     /************2018-12-24 马卫亮  ADD******************************/
-                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '"+tempet.getCid()+"' and did='"+did+"' and  signature is null ");
+                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '" + tempet.getCid() + "' and did='" + did + "' and  signature is null ");
                                     /************2018-12-24 马卫亮  ADD******************************/
                                     hbsessionDao.insert(ep);
                                 }
@@ -280,12 +280,12 @@ public class DataOtherJob implements Job {
 
                                     EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE description = '" + templist.get(1) + "'");
                                     /***********2019-01-09    ADD****************************/
-                                    List list = hbsessionDao.search("select CEILING(value),time  from EventPower where  cid ='"+tempet.getCid()+"' and did = '"+did+"' and (signature ='' or signature is null)");
-                                    if(list != null){
-                                        Object[] event= (Object[])list.get(0);
+                                    List list = hbsessionDao.search("select CEILING(value),time  from EventPower where  cid ='" + tempet.getCid() + "' and did = '" + did + "' and (signature ='' or signature is null)");
+                                    if (list != null) {
+                                        Object[] event = (Object[]) list.get(0);
 
-                                        if(templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
-                                            if(Double.parseDouble(templist.get(2))<Double.valueOf(event[0].toString())){
+                                        if (templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
+                                            if (Double.parseDouble(templist.get(2)) < Double.valueOf(event[0].toString())) {
                                                 continue;
                                             }
                                         }
@@ -301,7 +301,7 @@ public class DataOtherJob implements Job {
                                     ep.setSubtype(tempet.getSubtype());
 
                                     /************2018-12-24 马卫亮  ADD******************************/
-                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '"+tempet.getCid()+"' and did='"+did+"' and  signature is null  ");
+                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '" + tempet.getCid() + "' and did='" + did + "' and  signature is null  ");
                                     /************2018-12-24 马卫亮  ADD******************************/
                                     hbsessionDao.insert(ep);
                                 }

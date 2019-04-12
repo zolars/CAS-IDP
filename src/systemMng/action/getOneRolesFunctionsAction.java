@@ -42,7 +42,7 @@ public class getOneRolesFunctionsAction extends ActionSupport {
                 String pstr = ptree.getPid();
                 String pset[] = pstr.split(",");
 
-                for(int i = 0 ; i < pset.length; i++){
+                for (int i = 0; i < pset.length; i++) {
                     rtlist.add(pset[i]);
                 }
 

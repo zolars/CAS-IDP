@@ -1,6 +1,5 @@
 package deviceJobManager;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import grabData.*;
 import hibernatePOJO.Devices;
 import io.netty.bootstrap.Bootstrap;
@@ -8,7 +7,6 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import jdk.internal.org.objectweb.asm.Handle;
 
 import java.util.HashMap;
 

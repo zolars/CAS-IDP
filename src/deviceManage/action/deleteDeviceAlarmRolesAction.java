@@ -42,7 +42,7 @@ public class deleteDeviceAlarmRolesAction extends ActionSupport {
                 Boolean rt = dao.deleteDeviceAlarmUser(str[0], temp);
                 JSONObject jsonObject = new JSONObject();
 
-                if(rt) {
+                if (rt) {
                     jsonObject.put("提示", "删除成功！");
                 } else {
                     jsonObject.put("提示", "删除失败，请重试！");

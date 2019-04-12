@@ -14,12 +14,15 @@ import java.util.List;
 public class getHVCrate2 extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
+
     public String getResult() {
         return result;
     }
+
     public void setResult(String result) {
         this.result = result;
     }
+
     /* 根据省行名称查询市行信息
      */
     public String execute() throws Exception {
@@ -38,9 +41,9 @@ public class getHVCrate2 extends ActionSupport {
             hcRateResult = dao.getHCrateBydt2(did, stime, etime);
             vcfund_rate = dao.getVCfundBydt2(did, stime, etime);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("hvRateResult",hvRateResult);
-            jsonObject.put("hcRateResult",hcRateResult);
-            jsonObject.put("vcfund_rate",vcfund_rate);
+            jsonObject.put("hvRateResult", hvRateResult);
+            jsonObject.put("hcRateResult", hcRateResult);
+            jsonObject.put("vcfund_rate", vcfund_rate);
             result = JSON.toJSONString(jsonObject); // List转json
         } catch (Exception e) {
             e.printStackTrace();

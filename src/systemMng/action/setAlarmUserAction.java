@@ -37,20 +37,20 @@ public class setAlarmUserAction extends ActionSupport {
             Integer alert = 0;
             Integer sms = 0;
             Integer plantform = 0;
-            if(checkboxalert2 != null) {
+            if (checkboxalert2 != null) {
                 if (checkboxalert2.equals("on")) {
                     alert = 1;
                 }
             }
-            if(checkboxsms2 != null) {
+            if (checkboxsms2 != null) {
                 if (checkboxsms2.equals("on")) {
                     sms = 1;
                 }
             }
-            if(checkboxplantform2 != null){
-               if(checkboxplantform2.equals("on")) {
-                   plantform = 1;
-               }
+            if (checkboxplantform2 != null) {
+                if (checkboxplantform2.equals("on")) {
+                    plantform = 1;
+                }
             }
 
 

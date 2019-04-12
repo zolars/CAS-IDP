@@ -40,20 +40,19 @@ public class uploadKnowledgeTreeAction extends ActionSupport {
             KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();
 
             //判断是否为管理员和作者用户
-            String userid = (String)session.getAttribute("userid");
+            String userid = (String) session.getAttribute("userid");
 
             Boolean isValid = dao.isUserOrAdmin(kid, userid);
             JSONObject jsonObject = new JSONObject();
 
-            if(isValid){
+            if (isValid) {
                 Boolean rt = dao.uploadKnowledgeNode(kid, tmpContent);
 
-                if(rt)
+                if (rt)
                     jsonObject.put("提示", "上传成功！");
                 else
                     jsonObject.put("提示", "上传失败，请重试！");
-            }
-            else
+            } else
                 jsonObject.put("提示", "上传失败，没有上传权限！");
 
             result = JSON.toJSONString(jsonObject);

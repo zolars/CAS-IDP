@@ -29,7 +29,9 @@ public class HBSessionCenterDaoImpl implements HBSessionCenterDao {
     }
 
     @Override
-    public Session getSession() { return session; }
+    public Session getSession() {
+        return session;
+    }
 
     @Override
     public List search(String hql) {

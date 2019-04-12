@@ -46,7 +46,7 @@ public class getOneOfOneDeviceThresholdAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
-        }finally {
+        } finally {
             dt = null;
         }
         return "success";

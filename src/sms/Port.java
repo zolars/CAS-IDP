@@ -11,7 +11,6 @@ import java.util.Random;
 
 /**
  * 串口操作实现类
- *
  */
 public class Port {
     private CommPortIdentifier portId;
@@ -72,6 +71,7 @@ public class Port {
 
     /**
      * 构造器打开com口
+     *
      * @param portName
      * @return
      */
@@ -115,10 +115,10 @@ public class Port {
     // 获取密码
     public static String getrechargeablePassword() {
         Random random = new Random();
-        char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
+        char[] codeSequence = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
                 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'c',
                 'b', 'd', 'f', 'e', 'g', 'h', 'j', 'i', 'l', 'k', 'n', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w',
-                'v' };
+                'v'};
         String strRand = "";
         for (int i = 0; i < 18; i++) {
             strRand = strRand + String.valueOf(codeSequence[random.nextInt(59)]);
@@ -128,6 +128,7 @@ public class Port {
 
     /**
      * 关闭COM口
+     *
      * @return boolean
      */
     public void close() {
@@ -144,17 +145,19 @@ public class Port {
 
     /**
      * 向串口中写入字符串命令
+     *
      * @param s 字符串命令
      * @throws Exception 异常
      */
     public void writeln(String s) throws Exception {
         out.write(s);
-       // out.write('\r');
+        // out.write('\r');
         out.flush();
     }
 
     /**
      * 读取COM命令的返回字符串
+     *
      * @return 结果字符串
      * @throws Exception
      */
@@ -173,13 +176,14 @@ public class Port {
                     break;
                 }
             }
-            Thread.sleep( 100);
+            Thread.sleep(100);
         }
         return answer;
     }
 
     /**
      * 向串口发送AT指令
+     *
      * @param atcommand 指令内容
      * @return 指令返回结果
      * @throws java.rmi.RemoteException

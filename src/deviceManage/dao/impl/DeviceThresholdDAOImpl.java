@@ -17,7 +17,7 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
     ResultSet rs = null;
     PreparedStatement ps = null;
 
-    public List searchFuzzyDeviceThreshold(String name){
+    public List searchFuzzyDeviceThreshold(String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<DevicesThreshold> list = hbsessionDao.search(
@@ -26,7 +26,7 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
         return list;
     }
 
-    public List getOneDeviceThreshold(String did){
+    public List getOneDeviceThreshold(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         List<DevicesThreshold> crlist = hbsessionDao.search(
@@ -35,11 +35,11 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
         return crlist;
     }
 
-    public List getOneofOneDeviceThreshold(Integer dtid){
+    public List getOneofOneDeviceThreshold(Integer dtid) {
         db = new DBConnect();
         List crlist = new ArrayList<>();
         String sql = "select ta.dtid as dtid, tb.description as name, ta.classify as type, ta.unit as unit, ta.cellval as cellval, ta.floorval as floorval, ta.isMark as ismark, ta.level as level " +
-                "from devices_threshold as ta, events_type as tb where ta.type = tb.type and ta.dtid = '"+ dtid +"'";
+                "from devices_threshold as ta, events_type as tb where ta.type = tb.type and ta.dtid = '" + dtid + "'";
 
         try {
             ps = db.getPs(sql);
@@ -57,7 +57,7 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
 
                 crlist.add(list);
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

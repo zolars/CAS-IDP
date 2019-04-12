@@ -35,7 +35,7 @@ public class deleteKnowledgeTreeNodeContentAction extends ActionSupport {
 
             //获取节点id
             String kid = request.getParameter("kid");
-            String userid = (String)session.getAttribute("userid");
+            String userid = (String) session.getAttribute("userid");
 
             KnowledgeTreeDAO dao = new KnowledgeTreeDAOImpl();
 
@@ -43,16 +43,15 @@ public class deleteKnowledgeTreeNodeContentAction extends ActionSupport {
             Boolean isValid = dao.isUser(kid, userid);
             JSONObject jsonObject = new JSONObject();
 
-            if(isValid){
+            if (isValid) {
 
                 Boolean rt = dao.deleteKnowledgeNode(kid);
 
-                if(rt)
+                if (rt)
                     jsonObject.put("提示", "删除成功！");
                 else
                     jsonObject.put("提示", "删除失败，请重试！");
-            }
-            else
+            } else
                 jsonObject.put("提示", "删除失败，没有删除权限！");
 
             result = JSON.toJSONString(jsonObject);

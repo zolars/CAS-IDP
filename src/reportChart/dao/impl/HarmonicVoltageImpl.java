@@ -23,7 +23,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
 
         String stime = time + " 00:00:00";
         String etime = time + " 23:59:59";
-         
+
         try {
             for (int i = 1; i <= 49; i++) {
                 for (int j = 1; j <= 3; j++) {
@@ -205,7 +205,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                     rs = ps.executeQuery();
                     while (rs.next()) {
                         String value = rs.getString("value");
-                        result.add((i + 3) + "," + state + "," +  value);
+                        result.add((i + 3) + "," + state + "," + value);
                     }
                 }
             }
@@ -239,7 +239,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                     rs = ps.executeQuery();
                     while (rs.next()) {
                         String value = rs.getString("value");
-                        result.add((i + 3) + "," + state + "," +  value);
+                        result.add((i + 3) + "," + state + "," + value);
                     }
                 }
             }
@@ -271,7 +271,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         int u3_passnum = 0;
         int i1_passnum = 0;
         int i2_passnum = 0;
-        int i3_passnum =0;
+        int i3_passnum = 0;
         String stime = time + " 00:00:00";
         String etime = time + " 23:59:59";
 
@@ -358,7 +358,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 double u3_pro = get95p(u3);
                 double temp_u3_rate = 100.0 * u3_passnum / u3.size();
                 double u3_rate = Double.parseDouble(df.format(temp_u3_rate));
-                if(u3_pro <= 220) {
+                if (u3_pro <= 220) {
                     result.add("u3," + u3_max + "," + u3_min + "," + u3_ave + "," + u3_pro + "," + "合格" + "," + u3.size() + "," + u3_rate);
                 } else {
                     result.add("u3," + u3_max + "," + u3_min + "," + u3_ave + "," + u3_pro + "," + "不合格" + "," + u3.size() + "," + u3_rate);
@@ -384,13 +384,13 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 double i2_pro = get95p(i2);
                 double temp_i2_rate = 100.0 * i2_passnum / i2.size();
                 double i2_rate = Double.parseDouble(df.format(temp_i2_rate));
-                if(i2_pro <= 50) {
+                if (i2_pro <= 50) {
                     result.add("i2," + i2_max + "," + i2_min + "," + i2_ave + "," + i2_pro + "," + "合格" + "," + i2.size() + "," + i2_rate);
                 } else {
                     result.add("i2," + i2_max + "," + i2_min + "," + i2_ave + "," + i2_pro + "," + "不合格" + "," + i2.size() + "," + i2_rate);
                 }
             }
-            if (i3.size()>0) {
+            if (i3.size() > 0) {
                 double i3_max = getMax(i3);
                 double i3_min = getMin(i3);
                 double i3_ave = getAve(i3);
@@ -431,7 +431,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         int u3_passnum = 0;
         int i1_passnum = 0;
         int i2_passnum = 0;
-        int i3_passnum =0;
+        int i3_passnum = 0;
 
         try {
             List<Double> u1 = new ArrayList<>();
@@ -515,7 +515,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 double u3_pro = get95p(u3);
                 double temp_u3_rate = 100.0 * u3_passnum / u3.size();
                 double u3_rate = Double.parseDouble(df.format(temp_u3_rate));
-                if(u3_pro <= 220) {
+                if (u3_pro <= 220) {
                     result.add("u3," + u3_max + "," + u3_min + "," + u3_ave + "," + u3_pro + "," + "合格" + "," + u3.size() + "," + u3_rate);
                 } else {
                     result.add("u3," + u3_max + "," + u3_min + "," + u3_ave + "," + u3_pro + "," + "不合格" + "," + u3.size() + "," + u3_rate);
@@ -541,13 +541,13 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 double i2_pro = get95p(i2);
                 double temp_i2_rate = 100.0 * i2_passnum / i2.size();
                 double i2_rate = Double.parseDouble(df.format(temp_i2_rate));
-                if(i2_pro <= 50) {
+                if (i2_pro <= 50) {
                     result.add("i2," + i2_max + "," + i2_min + "," + i2_ave + "," + i2_pro + "," + "合格" + "," + i2.size() + "," + i2_rate);
                 } else {
                     result.add("i2," + i2_max + "," + i2_min + "," + i2_ave + "," + i2_pro + "," + "不合格" + "," + i2.size() + "," + i2_rate);
                 }
             }
-            if (i3.size()>0) {
+            if (i3.size() > 0) {
                 double i3_max = getMax(i3);
                 double i3_min = getMin(i3);
                 double i3_ave = getAve(i3);
@@ -598,7 +598,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
 
                 while (rs.next()) {
                     sthreshold = rs.getString("threshold");
-                    if(sthreshold != null) {
+                    if (sthreshold != null) {
                         threshold = Double.parseDouble(sthreshold);
 
                         //分别读取A.B.C次的值与阈值比较
@@ -610,7 +610,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                             int temp2 = i + 2;
                             String xbname = "U" + temp + "xb_" + temp2;
 
-                           // String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time LIKE'" + time + "%'";
+                            // String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time LIKE'" + time + "%'";
                             String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
                             int sum = 0;
                             int pass_num = 0;
@@ -671,7 +671,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
 
                 while (rs.next()) {
                     sthreshold = rs.getString("threshold");
-                    if(sthreshold != null) {
+                    if (sthreshold != null) {
                         threshold = Double.parseDouble(sthreshold);
 
                         //分别读取A.B.C次的值与阈值比较
@@ -733,7 +733,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
 
         String stime = time + " 00:00:00";
         String etime = time + " 23:59:59";
-         
+
         try {
             for (int i = 0; i < 49; i++) {
 
@@ -746,7 +746,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
 
                 while (rs.next()) {
                     sthreshold = rs.getString("threshold");
-                    if(sthreshold != null) {
+                    if (sthreshold != null) {
                         threshold = Double.parseDouble(sthreshold);
 
                         //分别读取A.B.C次的值与阈值比较
@@ -758,7 +758,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                             int temp2 = i + 2;
                             String xbname = "I" + temp + "xb_" + temp2;
 
-                           // String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time LIKE'" + time + "%'";
+                            // String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time LIKE'" + time + "%'";
 
                             String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
                             int sum = 0;
@@ -820,7 +820,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
 
                 while (rs.next()) {
                     sthreshold = rs.getString("threshold");
-                    if(sthreshold != null) {
+                    if (sthreshold != null) {
                         threshold = Double.parseDouble(sthreshold);
 
                         //分别读取A.B.C次的值与阈值比较
@@ -1053,7 +1053,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         return result;
     }
 
-    public List getHzpcthreshold(){
+    public List getHzpcthreshold() {
         DBConnect db;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -1348,7 +1348,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> shortu = new ArrayList<>();
-               // String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                // String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
                 String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
                 ps = db.getPs(sql);
@@ -1578,7 +1578,7 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> activePower = new ArrayList<>();
-               // String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                // String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
                 String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
 
@@ -1762,10 +1762,10 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                     powerFactor.add(dpowerFactor);
                 }
                 if (powerFactor.size() > 0) {
-                    double max = new BigDecimal(getMax(powerFactor)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-                    double min = new BigDecimal(getMin(powerFactor)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-                    double ave = new BigDecimal(getAve(powerFactor)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-                    double pro = new BigDecimal(get95p(powerFactor)).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double max = new BigDecimal(getMax(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double min = new BigDecimal(getMin(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double ave = new BigDecimal(getAve(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double pro = new BigDecimal(get95p(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                     result.add((i + 1) + "," + max + "," + min + "," + ave + "," + pro);
                 }
             }
@@ -2080,18 +2080,18 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
     }
 
     public double getMax(List<Double> value) {
-        return  Collections.max(value);
+        return Collections.max(value);
     }
 
     public double getMin(List<Double> value) {
-        return  Collections.min(value);
+        return Collections.min(value);
     }
 
     public double getAve(List<Double> value) {
         double sum = 0;
         DecimalFormat df = new DecimalFormat();
         df.setMinimumFractionDigits(3);
-        for (double v:value) {
+        for (double v : value) {
             sum += v;
         }
         double temp_ave = sum / (value.size());

@@ -2,13 +2,14 @@ package grabData;
 
 import deviceJobManager.DeviceManager;
 import hibernatePOJO.*;
-import hibernatePOJO.Dictionary;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     private Map<String, Float> map = null;
@@ -19,7 +20,7 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
     private int[] slaveId = new int[22];
     private int[] fCode = new int[22];
     private int[] addr = new int[22];
-    private int[] len = new int [22];
+    private int[] len = new int[22];
     private String[] name = new String[643];
     private Integer[] factor = new Integer[643];
 
@@ -37,20 +38,21 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
         DataOnline.getSxdyMap().put(did, new PowersxdyMonitor());
         DataOnline.getOnlineDataMap().put(did, this.map); //把实时数据map的引用存起来
     }
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
         /*2019-03-04*/
-        for(Devices d:DeviceManager.getFirstConnection().keySet()){
-            if(d.getDid().toString()==this.did){
-                DeviceManager.getFirstConnection().put(d,true);
+        for (Devices d : DeviceManager.getFirstConnection().keySet()) {
+            if (d.getDid().toString() == this.did) {
+                DeviceManager.getFirstConnection().put(d, true);
             }
         }
         /*2019-03-04*/
 
         // record ctx in DeviceManager
-        System.out.println(did+": channel active");
-        DeviceManager.getCtxMap().put(this.did+"-1",ctx);
+        System.out.println(did + ": channel active");
+        DeviceManager.getCtxMap().put(this.did + "-1", ctx);
 
         dicPlus = DataOnline.getDicPlus();
         dic = DataOnline.getDic();
@@ -119,7 +121,7 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
         DataOnline.getSxdyMap().remove(this.did);
         DataOnline.getOnlineDataMap().remove(this.did);
         //remove ctx in DeviceManager
-        DeviceManager.getCtxMap().remove(this.did+"-1");
+        DeviceManager.getCtxMap().remove(this.did + "-1");
     }
 
     @Override
@@ -127,6 +129,7 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
+
     //readLength单位是2字节
     public byte[] createMsg(int slaveId, int functionCode, int address, int readLength) {
         byte[] msg = new byte[12];
@@ -138,10 +141,10 @@ class DataOnlineClientHandler extends ChannelInboundHandlerAdapter {
         msg[5] = 6;
         msg[6] = ((byte) slaveId);
         msg[7] = ((byte) functionCode);
-        msg[8] = ((byte)(address >> 8));
-        msg[9] = ((byte)(address & 0xFF));
-        msg[10] = ((byte)(readLength >> 8));
-        msg[11] = ((byte)(readLength & 0xFF));
+        msg[8] = ((byte) (address >> 8));
+        msg[9] = ((byte) (address & 0xFF));
+        msg[10] = ((byte) (readLength >> 8));
+        msg[11] = ((byte) (readLength & 0xFF));
         return msg;
     }
 

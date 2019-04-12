@@ -3,7 +3,6 @@ package grabData;
 import Util.HBSessionDaoImpl;
 import com.alibaba.fastjson.JSON;
 import deviceJobManager.DeviceManager;
-import hibernatePOJO.Devices;
 import hibernatePOJO.EventPower;
 import hibernatePOJO.EventsType;
 import io.netty.buffer.ByteBuf;
@@ -52,10 +51,10 @@ public class OverLimitHandler extends ChannelInboundHandlerAdapter {
                 List<EventPower> events = tr.getResult();
                 if (events.size() > 0) {
                     HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-                    for (EventPower e:events) {
+                    for (EventPower e : events) {
                         dataResolve(hbsessionDao, e);
 
-                        if(e.getDid() != null) {
+                        if (e.getDid() != null) {
                             hbsessionDao.insert(e);
                         }
                     }
@@ -79,7 +78,7 @@ public class OverLimitHandler extends ChannelInboundHandlerAdapter {
         *//*2019-03-04*/
 
         // record ctx in DeviceManager
-        DeviceManager.getCtxMap().put(this.did+"-3",ctx);
+        DeviceManager.getCtxMap().put(this.did + "-3", ctx);
         //把channel存入map,用于发送OverLimitRequest
         DataOnline.getOverLimitChannelMap().put(this.did, ctx.channel());
     }
@@ -88,7 +87,7 @@ public class OverLimitHandler extends ChannelInboundHandlerAdapter {
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         //remove channel,ctx
         DataOnline.getOverLimitChannelMap().remove(this.did);
-        DeviceManager.getCtxMap().remove(this.did+"-3");
+        DeviceManager.getCtxMap().remove(this.did + "-3");
     }
 
     @Override
@@ -100,7 +99,7 @@ public class OverLimitHandler extends ChannelInboundHandlerAdapter {
     public void dataResolve(HBSessionDaoImpl hbsessionDao, EventPower e) {
         EventsType et = (EventsType) hbsessionDao.getFirst("FROM EventsType where subtype='" + e.getSubtype() + "' and code ='0002'");
 
-        if(et != null) {
+        if (et != null) {
             Integer cid = et.getCid();
             e.setCid(cid);
             e.setDid(did);

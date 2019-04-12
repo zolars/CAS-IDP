@@ -36,13 +36,13 @@ public class TempDataClient extends Thread {
             b.handler(new ChannelInitializer<SocketChannel>() {
                 public void initChannel(SocketChannel ch)
                         throws Exception {
-                    ch.pipeline().addLast(new IdleStateHandler(0,20,0,TimeUnit.SECONDS))
-                            .addLast(new HeartBeatHandler(host,port,did,5))
+                    ch.pipeline().addLast(new IdleStateHandler(0, 20, 0, TimeUnit.SECONDS))
+                            .addLast(new HeartBeatHandler(host, port, did, 5))
                             .addLast(new TempDataClientHandler(did));
                 }
             });
             ChannelFuture f = b.connect(host, port).sync();
-            if(f.isSuccess()) {
+            if (f.isSuccess()) {
                 f.channel().closeFuture().sync();
             } else {
                 System.out.println("============================重新建立连接");

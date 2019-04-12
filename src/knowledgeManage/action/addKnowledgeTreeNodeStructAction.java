@@ -41,9 +41,9 @@ public class addKnowledgeTreeNodeStructAction extends ActionSupport {
 
             JSONObject jsonObject = new JSONObject();
 
-            Boolean rt = dao.addKnowledgeTreeNodeStruct(maxkid+1, kid, kname, kcontent);
+            Boolean rt = dao.addKnowledgeTreeNodeStruct(maxkid + 1, kid, kname, kcontent);
 
-            if(rt)
+            if (rt)
                 jsonObject.put("提示", "添加成功！");
             else
                 jsonObject.put("提示", "添加失败，请重试！");

@@ -38,7 +38,7 @@ public class updateKnowledgeTreeNodeStructAction extends ActionSupport {
 
             JSONObject jsonObject = new JSONObject();
 
-            if(rt)
+            if (rt)
                 jsonObject.put("提示", "修改成功！");
             else
                 jsonObject.put("提示", "修改失败，请重试！");

@@ -2,12 +2,14 @@ package grabData;
 
 import Util.HBSessionDaoImpl;
 import Util.ToHex;
-import hibernatePOJO.*;
+import hibernatePOJO.DevicesThreshold;
+import hibernatePOJO.EventEnvironment;
+import hibernatePOJO.EventPower;
+import hibernatePOJO.TemperatureMonitor;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import javax.swing.event.DocumentEvent;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -20,7 +22,7 @@ public class TemperatureSaveJob implements Job {
 
         Map<String, TemperatureMonitor> tempDataMap = new HashMap<>();
 
-        try{
+        try {
             tempDataMap = TemperatureSave.getTempDataMap();
 
             if (null != tempDataMap) {
@@ -64,11 +66,11 @@ public class TemperatureSaveJob implements Job {
                             /*********2019-01-09 MAWEILIANG  ADD*************/
 //                            String datenow = ToHex.beforeNowTime(0).split(" ")[0];
                             if (temp > temphigh) {
-                                List list = hbsessionDao.search("select CEILING(value),time from EventEnvironment where   cid ='344' and did = '"+did+"' and (signature ='' or signature is null)");
-                                if(list != null){
-                                    Object[] event= (Object[])list.get(0);
-                                    if(currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
-                                        if(Double.parseDouble(String.valueOf(temp))<Double.valueOf(event[0].toString())){
+                                List list = hbsessionDao.search("select CEILING(value),time from EventEnvironment where   cid ='344' and did = '" + did + "' and (signature ='' or signature is null)");
+                                if (list != null) {
+                                    Object[] event = (Object[]) list.get(0);
+                                    if (currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
+                                        if (Double.parseDouble(String.valueOf(temp)) < Double.valueOf(event[0].toString())) {
                                             continue;
                                         }
                                     }
@@ -76,14 +78,14 @@ public class TemperatureSaveJob implements Job {
 
 
                                 EventEnvironment ee = new EventEnvironment();
-                                EventEnvironment maxobj = (EventEnvironment)hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
-                                if(maxobj != null) {
+                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
+                                if (maxobj != null) {
                                     ee.setTeid(maxobj.getTeid() + 1);
                                 } else {
                                     ee.setTeid(1);
                                 }
 
-                               // ee.setCid(dt1.getDtid());
+                                // ee.setCid(dt1.getDtid());
                                 ee.setCid(344); //temp high
                                 ee.setDid(did);
                                 ee.setTime(currenttime);
@@ -97,23 +99,23 @@ public class TemperatureSaveJob implements Job {
                                 ee.setSubtype("");
 
                                 /************2018-12-24 马卫亮  ADD******************************/
-                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 344 and did="+did+"  and (signature ='' or signature is null) ");
+                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 344 and did=" + did + "  and (signature ='' or signature is null) ");
                                 /************2018-12-24 马卫亮  ADD******************************/
                                 hbsessionDao.insert(ee);
                             } else if (temp < templow) {
-                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   cid ='345' and did = '"+did+"' and (signature ='' or signature is null)");
-                                if(list != null){
-                                    Object[] event= (Object[])list.get(0);
-                                    if(currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
-                                        if(Double.parseDouble(String.valueOf(temp))<Double.valueOf(event[0].toString())){
+                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   cid ='345' and did = '" + did + "' and (signature ='' or signature is null)");
+                                if (list != null) {
+                                    Object[] event = (Object[]) list.get(0);
+                                    if (currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
+                                        if (Double.parseDouble(String.valueOf(temp)) < Double.valueOf(event[0].toString())) {
                                             continue;
                                         }
                                     }
                                 }
                                 EventPower ee = new EventPower();
 
-                                EventEnvironment maxobj = (EventEnvironment)hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
-                                if(maxobj != null) {
+                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
+                                if (maxobj != null) {
                                     ee.setTeid(maxobj.getTeid() + 1);
                                 } else {
                                     ee.setTeid(1);
@@ -133,23 +135,23 @@ public class TemperatureSaveJob implements Job {
                                 ee.setSubtype("");
 
                                 /************2018-12-24 马卫亮  ADD******************************/
-                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 345 and did='"+did+"' and (signature ='' or signature is null) ");
+                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 345 and did='" + did + "' and (signature ='' or signature is null) ");
                                 /************2018-12-24 马卫亮  ADD******************************/
                                 hbsessionDao.insert(ee);
                             } else if (wet > wethigh) {
-                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   cid ='346' and did = '"+did+"' and (signature ='' or signature is null)");
-                                if(list != null){
-                                    Object[] event= (Object[])list.get(0);
-                                    if(currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
-                                        if(Double.parseDouble(String.valueOf(temp))<Double.valueOf(event[0].toString())){
+                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   cid ='346' and did = '" + did + "' and (signature ='' or signature is null)");
+                                if (list != null) {
+                                    Object[] event = (Object[]) list.get(0);
+                                    if (currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
+                                        if (Double.parseDouble(String.valueOf(temp)) < Double.valueOf(event[0].toString())) {
                                             continue;
                                         }
                                     }
                                 }
                                 EventEnvironment ee = new EventEnvironment();
 
-                                EventEnvironment maxobj = (EventEnvironment)hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
-                                if(maxobj != null) {
+                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
+                                if (maxobj != null) {
                                     ee.setTeid(maxobj.getTeid() + 1);
                                 } else {
                                     ee.setTeid(1);
@@ -169,29 +171,29 @@ public class TemperatureSaveJob implements Job {
                                 ee.setSubtype("");
 
                                 /************2018-12-24 马卫亮  ADD******************************/
-                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 346 and did='"+did+"' and (signature ='' or signature is null) ");
+                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 346 and did='" + did + "' and (signature ='' or signature is null) ");
                                 /************2018-12-24 马卫亮  ADD******************************/
                                 hbsessionDao.insert(ee);
                             } else if (wet < wetlow) {
-                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   cid ='347' and did = '"+did+"' and (signature ='' or signature is null)");
-                                if(list != null){
-                                    Object[] event= (Object[])list.get(0);
-                                    if(currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
-                                        if(Double.parseDouble(String.valueOf(temp))<Double.valueOf(event[0].toString())){
+                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   cid ='347' and did = '" + did + "' and (signature ='' or signature is null)");
+                                if (list != null) {
+                                    Object[] event = (Object[]) list.get(0);
+                                    if (currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
+                                        if (Double.parseDouble(String.valueOf(temp)) < Double.valueOf(event[0].toString())) {
                                             continue;
                                         }
                                     }
                                 }
                                 EventEnvironment ee = new EventEnvironment();
 
-                                EventEnvironment maxobj = (EventEnvironment)hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
-                                if(maxobj != null) {
+                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
+                                if (maxobj != null) {
                                     ee.setTeid(maxobj.getTeid() + 1);
                                 } else {
                                     ee.setTeid(1);
                                 }
 
-                               // ee.setCid(dt4.getDtid());
+                                // ee.setCid(dt4.getDtid());
                                 ee.setCid(347); //wet low
                                 ee.setDid(did);
                                 ee.setTime(currenttime);
@@ -204,7 +206,7 @@ public class TemperatureSaveJob implements Job {
                                 ee.setSubtype("");
 
                                 /************2018-12-24 马卫亮  ADD******************************/
-                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 347 and did='"+did+"'  and (signature ='' or signature is null) ");
+                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 347 and did='" + did + "'  and (signature ='' or signature is null) ");
                                 /************2018-12-24 马卫亮  ADD******************************/
                                 hbsessionDao.insert(ee);
                             }

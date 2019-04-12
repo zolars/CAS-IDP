@@ -39,20 +39,18 @@ public class addOrgnizationTreeAction extends ActionSupport {
             OrgnizationDAO dao = new OrgnizationDAOImpl();
             Boolean rt = false;
 
-            if(orgid.length() == 1){
-                if(province.length() > 0)
+            if (orgid.length() == 1) {
+                if (province.length() > 0)
                     rt = dao.addProvinceOrgnization(orgid, province);
-                else if(computerroom.length() > 0)
+                else if (computerroom.length() > 0)
                     rt = dao.addComputerroomOrgnizationUnderHeadBank(orgid, computerroom);
-            }
-            else if(orgid.length() == 3){
-                if(city.length() > 0)
+            } else if (orgid.length() == 3) {
+                if (city.length() > 0)
                     rt = dao.addCityOrgnization(orgid, city);
-                else if(computerroom.length() > 0)
+                else if (computerroom.length() > 0)
                     rt = dao.addComputerroomOrgnizationUnderProvinceBank(orgid, computerroom);
-            }
-            else if(orgid.length() == 4){
-                if(computerroom.length() > 0)
+            } else if (orgid.length() == 4) {
+                if (computerroom.length() > 0)
                     rt = dao.addComputerroomOrgnizationUnderCityBank(orgid, computerroom);
             }
 

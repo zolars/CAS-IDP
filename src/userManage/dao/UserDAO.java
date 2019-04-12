@@ -10,7 +10,8 @@ public interface UserDAO {
 
     /////增
     //新建用户
-    public boolean addUserInfo(String uid,String account,String password,String name,String telephone,String govtelephone, String province, String city, String computerroom);
+    public boolean addUserInfo(String uid, String account, String password, String name, String telephone, String govtelephone, String province, String city, String computerroom);
+
     //新建一条用户和角色的对应记录
     public boolean addUserRolesInfo(String uid, String roles);
 
@@ -18,6 +19,7 @@ public interface UserDAO {
     public boolean deleteUserInfo(String uid);
 
     public boolean deleteUserRoles(String uid);
+
     /////改
     public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser);
 
@@ -26,8 +28,10 @@ public interface UserDAO {
     /////查
     //登录验证
     public boolean login(User user);
+
     //查询所有用户的账号信息，包括暂时未分配角色的用户的账号信息
     public List<List> getAllUserInfo();
+
     //根据用户名获取用户ID
     public String getUserId(User user);
 

@@ -37,7 +37,7 @@ public class updateOrgnizationTreeAction extends ActionSupport {
             OrgnizationDAO dao = new OrgnizationDAOImpl();
             Boolean rt = false;
 
-            if(orgid.length() == 3)
+            if (orgid.length() == 3)
                 rt = dao.updateProvinceOrgnization(orgid, newname);
             else if (orgid.length() == 4)
                 rt = dao.updateCityOrgnization(orgid, newname);

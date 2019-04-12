@@ -1,6 +1,6 @@
 package Util;
 
-public class EventObject extends Page{
+public class EventObject extends Page {
     private String teid;
     private String name;
     private String time;

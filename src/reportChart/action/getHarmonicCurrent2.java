@@ -14,12 +14,15 @@ import java.util.List;
 public class getHarmonicCurrent2 extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
+
     public String getResult() {
         return result;
     }
+
     public void setResult(String result) {
         this.result = result;
     }
+
     /* 根据设备名称、时间查询谐波电流值
      */
     public String execute() throws Exception {

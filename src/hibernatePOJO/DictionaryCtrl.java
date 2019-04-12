@@ -80,12 +80,12 @@ public class DictionaryCtrl {
                 Objects.equals(description, that.description) &&
                 Objects.equals(forTrue, that.forTrue) &&
                 Objects.equals(forFalse, that.forFalse) &&
-                Objects.equals(zbj,that.zbj);
+                Objects.equals(zbj, that.zbj);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, addr, description, forTrue, forFalse, functioncode,zbj);
+        return Objects.hash(id, addr, description, forTrue, forFalse, functioncode, zbj);
     }
 }

@@ -24,7 +24,7 @@ public class assessModelJob implements Job {
         List<DevicesThreshold> thresholdlist = new ArrayList<>();
         List<DeviceAlarmUser> alarmuserlist = new ArrayList<>();
 
-        try{
+        try {
             System.out.println("开始执行评估模块:" + System.currentTimeMillis());
 
             HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
@@ -41,7 +41,7 @@ public class assessModelJob implements Job {
             //将该事件的did、tlevel（degree）、teid 写入assess_record表
 
             //电能类事件评估开始
-            eventpowerlist = hbsessionDao.search("FROM EventPower where time >'"+ date +"' and (signature is NULL or signature = '')");
+            eventpowerlist = hbsessionDao.search("FROM EventPower where time >'" + date + "' and (signature is NULL or signature = '')");
 
             if (eventpowerlist != null) {
                 for (int i = 0; i < eventpowerlist.size(); i++) {
@@ -53,8 +53,8 @@ public class assessModelJob implements Job {
                     Timestamp time = eventpowerlist.get(i).getTime();
                     Integer tlevel = 1;
 
-                    AssessRecord assess = (AssessRecord) hbsessionDao.getFirst("FROM AssessRecord where teid = '"+teid+"'");
-                    if(assess != null){
+                    AssessRecord assess = (AssessRecord) hbsessionDao.getFirst("FROM AssessRecord where teid = '" + teid + "'");
+                    if (assess != null) {
                         continue;
                     }
 
@@ -104,9 +104,9 @@ public class assessModelJob implements Job {
             //电能类事件评估结束
 
             //温湿度类事件评估开始
-            eventenvironmentlist = hbsessionDao.search("FROM EventEnvironment where time >'"+ date + "' and (signature is NULL or signature = '')");
+            eventenvironmentlist = hbsessionDao.search("FROM EventEnvironment where time >'" + date + "' and (signature is NULL or signature = '')");
 
-            if(eventenvironmentlist != null) {
+            if (eventenvironmentlist != null) {
                 for (int i = 0; i < eventenvironmentlist.size(); i++) {
                     Integer teid = eventenvironmentlist.get(i).getTeid();
                     String sdid = eventenvironmentlist.get(i).getDid();
@@ -116,8 +116,8 @@ public class assessModelJob implements Job {
                     Timestamp time = eventenvironmentlist.get(i).getTime();
                     Integer tlevel = 1;
 
-                    AssessRecord assess = (AssessRecord) hbsessionDao.getFirst("FROM AssessRecord where teid = '"+teid+"'");
-                    if(assess != null){
+                    AssessRecord assess = (AssessRecord) hbsessionDao.getFirst("FROM AssessRecord where teid = '" + teid + "'");
+                    if (assess != null) {
                         continue;
                     }
 
@@ -172,9 +172,9 @@ public class assessModelJob implements Job {
 
 
             //治理设备类事件评估开始
-            eventctrllist = hbsessionDao.search("FROM EventCtrl where time >'"+ date + "' and (signature is NULL or signature = '')");
+            eventctrllist = hbsessionDao.search("FROM EventCtrl where time >'" + date + "' and (signature is NULL or signature = '')");
 
-            if(eventctrllist != null) {
+            if (eventctrllist != null) {
                 for (int i = 0; i < eventctrllist.size(); i++) {
                     Integer teid = eventctrllist.get(i).getTeid();
                     String sdid = eventctrllist.get(i).getDid();
@@ -184,8 +184,8 @@ public class assessModelJob implements Job {
                     Timestamp time = eventctrllist.get(i).getTime();
                     Integer tlevel = 1;
 
-                    AssessRecord assess = (AssessRecord) hbsessionDao.getFirst("FROM AssessRecord where teid = '"+teid+"'");
-                    if(assess != null){
+                    AssessRecord assess = (AssessRecord) hbsessionDao.getFirst("FROM AssessRecord where teid = '" + teid + "'");
+                    if (assess != null) {
                         continue;
                     }
 
@@ -193,7 +193,7 @@ public class assessModelJob implements Job {
 
                     String type = typelist.get(0).getType();
 
-                    if(value.equals("1")){  //1为整机告警状态
+                    if (value.equals("1")) {  //1为整机告警状态
                         AssessRecord maxar = (AssessRecord) hbsessionDao.getFirst("FROM AssessRecord Order by aid desc");
 
                         Integer aid = 0;

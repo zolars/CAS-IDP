@@ -8,7 +8,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import sms.SmsUtil;
 import smsplantform.smsPlantformService;
-import test.creatXML;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -22,47 +21,47 @@ public class AlarmModelJob implements Job {
 
     private WebSocketClient client = null;
 
-    private String getjkzbm(int cid){
+    private String getjkzbm(int cid) {
 
 //        if(cid >= 0 && cid <= 21){
 //            return "transientEvents"; //
 //        } else
-        if(cid >= 24 && cid <= 26){
+        if (cid >= 24 && cid <= 26) {
             return "currentHarmonicOvershoot"; //
-        } else if(cid >= 174 && cid <= 176){
+        } else if (cid >= 174 && cid <= 176) {
             return "voltageHarmonicOvershoot"; //
-        } else if(cid >= 324 && cid <= 329){
+        } else if (cid >= 324 && cid <= 329) {
             return "voltageDeviationOvershoot"; //
-        } else if(cid >= 22 && cid <= 23){
+        } else if (cid >= 22 && cid <= 23) {
             return "frequencyLimit"; //
-        } else if(cid == 336){
+        } else if (cid == 336) {
             return "unbalanceBeyondLimit"; //
         }
         return "";
     }
 
-    private String getjkzbmwd(int cid){
+    private String getjkzbmwd(int cid) {
 
-        if(cid >= 344 && cid <= 347){
+        if (cid >= 344 && cid <= 347) {
             return "temperatureLimit"; //
         } else {
             return "";
         }
     }
 
-    private String getjkzbmctrl(int cid){
+    private String getjkzbmctrl(int cid) {
 
-        if(cid == 4){
+        if (cid == 4) {
             return "hardwareOvervoltage"; //
-        } else if(cid == 5){
+        } else if (cid == 5) {
             return "hardwareOvercurrent"; //
-        } else if(cid == 6){
+        } else if (cid == 6) {
             return "hardwareOverheating"; //
-        } else if(cid == 13){
+        } else if (cid == 13) {
             return "gridVoltageAnomaly"; //
-        } else if(cid == 27){
+        } else if (cid == 27) {
             return "outputOvercurrent"; //
-        } else if(cid == 28){
+        } else if (cid == 28) {
             return "abnormalCommunication"; //
         }
         return "";
@@ -147,7 +146,8 @@ public class AlarmModelJob implements Job {
     读取当前时间之前的30分钟内的告警事件、
     并分别根据设定的告警方式、执行短信、弹窗、平台告警
      */
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {List<EventPower> eventpowerlist = new ArrayList<>();
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        List<EventPower> eventpowerlist = new ArrayList<>();
         List<EventEnvironment> eventenvironmentlist = new ArrayList<>();
         List<EventCtrl> eventctrllist = new ArrayList<>();
         List<EventsType> typelist = new ArrayList<>();
@@ -187,16 +187,16 @@ public class AlarmModelJob implements Job {
                 for (int i = 0; i < eventpowerlist.size(); i++) {
                     String did = eventpowerlist.get(i).getDid();
                     Integer cid = eventpowerlist.get(i).getCid();
-                    Double value = eventpowerlist.get(i).getValue() ; //220为基准值
+                    Double value = eventpowerlist.get(i).getValue(); //220为基准值
                     Timestamp timestamp = eventpowerlist.get(i).getTime();
                     String timestr = timestamp.toString();
                     String time = timestr.substring(11, 19);
 
-                    Devices dv = (Devices)hbsessionDao.getFirst("FROM Devices WHERE did ='" + did + "'");
-                    if(dv.getIsSms()==0){
+                    Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices WHERE did ='" + did + "'");
+                    if (dv.getIsSms() == 0) {
                         continue;
                     }
-                    String dname = "【"+dv.getName()+"】";
+                    String dname = "【" + dv.getName() + "】";
 
                     typelist = hbsessionDao.search("From EventsType where cid ='" + cid + "'");
 
@@ -204,7 +204,7 @@ public class AlarmModelJob implements Job {
                         break;
                     } else {
                         //读取当前时段（当前时刻到3分钟前）的电能事件时，查询其中是否存在一条value=0且事件类型为上述事件类型时，舍弃其他事件，只报该条事件。
-                        if(value.equals(0.00) && (cid.equals(350)||cid.equals(349))){
+                        if (value.equals(0.00) && (cid.equals(350) || cid.equals(349))) {
 
                             String description = typelist.get(0).getDescription();
                             String preContent = "";
@@ -239,7 +239,7 @@ public class AlarmModelJob implements Job {
 
                             thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='" + type + "' and ismark = '1' order by level desc");
 
-                            if(thresholdlist != null) {
+                            if (thresholdlist != null) {
 
                                 for (int j = 0; j < thresholdlist.size(); j++) {
 
@@ -284,11 +284,11 @@ public class AlarmModelJob implements Job {
                                             allalarmstring.add(alarmString);
 
                                             //dxpt
-                                            int zbj =  typelist.get(0).getZbj();
+                                            int zbj = typelist.get(0).getZbj();
                                             String syslevel = tlevel.toString();
 
-                                            Smsplant smsplant = (Smsplant)hbsessionDao.getFirst(" from Smsplant where id='" + zbj + "'");
-                                            Smsplantlevel smsplantlevel = (Smsplantlevel)hbsessionDao.getFirst(" from Smsplantlevel where syslevel like '%" + syslevel + "%'");
+                                            Smsplant smsplant = (Smsplant) hbsessionDao.getFirst(" from Smsplant where id='" + zbj + "'");
+                                            Smsplantlevel smsplantlevel = (Smsplantlevel) hbsessionDao.getFirst(" from Smsplantlevel where syslevel like '%" + syslevel + "%'");
 
                                             if (!smsplant.equals("") && !smsplantlevel.equals("")) {
 
@@ -337,13 +337,13 @@ public class AlarmModelJob implements Job {
                     String timestr = timestamp.toString();
                     String time = timestr.substring(11, 19);
 
-                    Devices dv = (Devices)hbsessionDao.getFirst("FROM Devices WHERE did ='" + did + "'");
-                    if(dv.getIsSms()==0){
+                    Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices WHERE did ='" + did + "'");
+                    if (dv.getIsSms() == 0) {
                         continue;
                     }
-                    String dname = "【"+dv.getName()+"】";
+                    String dname = "【" + dv.getName() + "】";
 
-                    typelist =  hbsessionDao.search("From EventsType where cid ='" + cid + "'");
+                    typelist = hbsessionDao.search("From EventsType where cid ='" + cid + "'");
 
                     if (typelist == null) {
                         break;
@@ -353,7 +353,7 @@ public class AlarmModelJob implements Job {
 
                         thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='" + type + "' and ismark = '1' order by level desc");
 
-                        if(thresholdlist != null) {
+                        if (thresholdlist != null) {
 
                             for (int j = 0; j < thresholdlist.size(); j++) {
 
@@ -400,13 +400,13 @@ public class AlarmModelJob implements Job {
                                         allalarmstring.add(alarmString);
 
                                         //dxpt
-                                        int zbj =  typelist.get(0).getZbj();
+                                        int zbj = typelist.get(0).getZbj();
                                         String syslevel = tlevel.toString();
 
-                                        Smsplant smsplant = (Smsplant)hbsessionDao.getFirst(" from Smsplant where id='" + zbj + "'");
-                                        Smsplantlevel smsplantlevel = (Smsplantlevel)hbsessionDao.getFirst(" from Smsplantlevel where syslevel like '%" + syslevel + "%'");
+                                        Smsplant smsplant = (Smsplant) hbsessionDao.getFirst(" from Smsplant where id='" + zbj + "'");
+                                        Smsplantlevel smsplantlevel = (Smsplantlevel) hbsessionDao.getFirst(" from Smsplantlevel where syslevel like '%" + syslevel + "%'");
 
-                                        if (smsplant != null && smsplantlevel !=null) {
+                                        if (smsplant != null && smsplantlevel != null) {
 
                                             int plantlevel = smsplantlevel.getPlantlevel();
 
@@ -453,10 +453,10 @@ public class AlarmModelJob implements Job {
                     String time = timestr.substring(11, 19);
 
                     Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices WHERE did ='" + did + "'");
-                    if(dv.getIsSms()==0){
+                    if (dv.getIsSms() == 0) {
                         continue;
                     }
-                    String dname = "【"+dv.getName()+"】";
+                    String dname = "【" + dv.getName() + "】";
 
                     ctrltypelist = hbsessionDao.search("From DictionaryCtrl where id ='" + id + "'");
 
@@ -496,10 +496,10 @@ public class AlarmModelJob implements Job {
                                     String zbj = ctrltypelist.get(0).getZbj();
                                     String syslevel = tlevel.toString();
 
-                                    Smsplantlevel smsplantlevel = (Smsplantlevel)hbsessionDao.getFirst(" from Smsplantlevel where syslevel like '%" + syslevel + "%'");
-                                    Smsplant smsplant = (Smsplant)hbsessionDao.getFirst(" from Smsplant where id='" + zbj + "'");
+                                    Smsplantlevel smsplantlevel = (Smsplantlevel) hbsessionDao.getFirst(" from Smsplantlevel where syslevel like '%" + syslevel + "%'");
+                                    Smsplant smsplant = (Smsplant) hbsessionDao.getFirst(" from Smsplant where id='" + zbj + "'");
 
-                                    if (smsplant !=null && smsplantlevel !=null) {
+                                    if (smsplant != null && smsplantlevel != null) {
 
                                         int plantlevel = smsplantlevel.getPlantlevel();
 
@@ -558,9 +558,9 @@ public class AlarmModelJob implements Job {
                         govtelephone = userlist.get(0).getGovtelephone();
                         telephone = userlist.get(0).getTelephone();
 
-                    //执行告警开始
-                    if (isAlart == 1) { //执行弹窗报警
-                        AlarmUtil.sendMsg(allalarmstring.toString());
+                        //执行告警开始
+                        if (isAlart == 1) { //执行弹窗报警
+                            AlarmUtil.sendMsg(allalarmstring.toString());
 //                        // 与端口建立连接并发送示例告警信息
 //                        try {
 //                             client = new WebSocketClient("ws://localhost:9999/ws");
@@ -569,25 +569,25 @@ public class AlarmModelJob implements Job {
 //                        } catch (Exception e) {
 //                            e.printStackTrace();
 //                        }
-                    }
+                        }
                         if (timeperiod == "1") { //若是第二等级,即timeperiod == 1
                             if (isWorkTime(nowtime)) {
                                 if (isSms == 1) { //执行短信报警
                                     if (!govtelephone.equals("") && !govtelephone.equals(" ") && !govtelephone.equals(null)) {
 
                                         String allalarmstri = allalarmstring.toString();
-                                        allalarmstri = allalarmstri.replaceAll("\n","");
-                                        allalarmstri = allalarmstri.replaceAll(",","");
-                                        allalarmstri = allalarmstri.replaceAll(" ","");
+                                        allalarmstri = allalarmstri.replaceAll("\n", "");
+                                        allalarmstri = allalarmstri.replaceAll(",", "");
+                                        allalarmstri = allalarmstri.replaceAll(" ", "");
 
                                         SmsUtil.sendSms(govtelephone, allalarmstri);
                                     }
                                     if (!telephone.equals("") && !telephone.equals(" ") && !telephone.equals(null)) {
 
                                         String allalarmstri = allalarmstring.toString();
-                                        allalarmstri = allalarmstri.replaceAll("\n","");
-                                        allalarmstri = allalarmstri.replaceAll(",","");
-                                        allalarmstri = allalarmstri.replaceAll(" ","");
+                                        allalarmstri = allalarmstri.replaceAll("\n", "");
+                                        allalarmstri = allalarmstri.replaceAll(",", "");
+                                        allalarmstri = allalarmstri.replaceAll(" ", "");
 
                                         SmsUtil.sendSms(govtelephone, allalarmstri);
                                     }
@@ -596,7 +596,7 @@ public class AlarmModelJob implements Job {
                                     smsPlantformService sp = new smsPlantformService();
                                     String time = Long.toString(new Date().getTime());
 
-                                    for(int i = 0 ; i < dxptstring.size(); i++){
+                                    for (int i = 0; i < dxptstring.size(); i++) {
                                         String bwt = dxptstring.get(i).get(0);
                                         String sbname = dxptstring.get(i).get(1);
                                         String sbip = dxptstring.get(i).get(2);
@@ -611,7 +611,7 @@ public class AlarmModelJob implements Job {
                                         String ext2 = dxptstring.get(i).get(9);
                                         String ext3 = dxptstring.get(i).get(10);
 
-                                        sp.execute(bwt, sbname, sbip, time, level, status, gjpro, gjexp, zbj, content, ext1,ext2,ext3);
+                                        sp.execute(bwt, sbname, sbip, time, level, status, gjpro, gjexp, zbj, content, ext1, ext2, ext3);
                                     }
                                 }
                             }
@@ -640,7 +640,7 @@ public class AlarmModelJob implements Job {
                                 smsPlantformService sp = new smsPlantformService();
                                 String time = Long.toString(new Date().getTime());
 
-                                for(int i = 0 ; i < dxptstring.size(); i++){
+                                for (int i = 0; i < dxptstring.size(); i++) {
                                     String bwt = dxptstring.get(i).get(0);
                                     String sbname = dxptstring.get(i).get(1);
                                     String sbip = dxptstring.get(i).get(2);
@@ -655,7 +655,7 @@ public class AlarmModelJob implements Job {
                                     String ext2 = dxptstring.get(i).get(9);
                                     String ext3 = dxptstring.get(i).get(10);
 
-                                    sp.execute(bwt, sbname, sbip, time, level, status, gjpro, gjexp, zbj, content, ext1,ext2,ext3);
+                                    sp.execute(bwt, sbname, sbip, time, level, status, gjpro, gjexp, zbj, content, ext1, ext2, ext3);
                                 }
                             }
                         }

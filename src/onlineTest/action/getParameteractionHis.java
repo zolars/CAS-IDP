@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class getParameteractionHis extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;

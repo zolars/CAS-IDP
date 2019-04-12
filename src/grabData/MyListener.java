@@ -13,7 +13,6 @@ import sms.SmsClient;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.net.InetSocketAddress;
 import java.util.List;
 
 import static org.quartz.JobBuilder.newJob;
@@ -47,7 +46,7 @@ public class MyListener implements ServletContextListener {
                     for (Devices c : list) {
 
                         /*2019-03-04*/
-                        DeviceManager.getFirstConnection().put(c,false);
+                        DeviceManager.getFirstConnection().put(c, false);
                         /*2019-03-04*/
 
                         if (c.getType().equals("IDP")) {
@@ -272,14 +271,14 @@ public class MyListener implements ServletContextListener {
                         ///////////////////////////
 
                         /*2019-03-04, 设置一个定时任务，检查第一次连接建立情况,15秒后检查*/
-                        Trigger trigger99=(SimpleTrigger)newTrigger()
-                                .withIdentity("trigger99","triggerGroup99")
-                                .startAt(DateBuilder.futureDate(15,DateBuilder.IntervalUnit.SECOND))
+                        Trigger trigger99 = (SimpleTrigger) newTrigger()
+                                .withIdentity("trigger99", "triggerGroup99")
+                                .startAt(DateBuilder.futureDate(15, DateBuilder.IntervalUnit.SECOND))
                                 .build();
-                        JobDetail job99=newJob(CheckConnection.class)
-                                .withIdentity("job99","jobGroup99")
+                        JobDetail job99 = newJob(CheckConnection.class)
+                                .withIdentity("job99", "jobGroup99")
                                 .build();
-                        scheduler.scheduleJob(job99,trigger99);
+                        scheduler.scheduleJob(job99, trigger99);
                         /*2019-03-04*/
 
                         scheduler.start();

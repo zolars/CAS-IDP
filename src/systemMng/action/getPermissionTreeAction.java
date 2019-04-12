@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class getPermissionTreeAction extends ActionSupport {
 
     private JSONObject result;

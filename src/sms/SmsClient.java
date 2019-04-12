@@ -10,7 +10,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 
-public class SmsClient extends Thread{
+public class SmsClient extends Thread {
     private String host;
     private int port;
 
@@ -18,6 +18,7 @@ public class SmsClient extends Thread{
         this.host = host;
         this.port = port;
     }
+
     public void run() {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {

@@ -5,7 +5,6 @@ import deviceJobManager.DeviceManager;
 import hibernatePOJO.Devices;
 import hibernatePOJO.DictionaryCtrl;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
@@ -78,7 +77,7 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
 
         Thread.sleep(200);
 
-        
+
         if (recMsg.readableBytes() < 131) { // TODO: 2019/3/14 change the number "9" in order to receive all msg
             sendMsg.writeBytes(createMsg(0x01, 0x04, 0x00, 0x3A));
             sc = (SocketChannel) ctx.channel();

@@ -18,6 +18,7 @@ public class WebSocketClient {
             throw new RuntimeException(e);
         }
     }
+
     @OnOpen
     public void open(Session session) {
         this.session = session;

@@ -44,7 +44,7 @@ public class addUserInfoAction extends ActionSupport {
 
             UserDAO dao = new UserDAOImpl();
             String uid = dao.getMaxUserId();
-            Integer maxuid = Integer.parseInt(uid)+1;
+            Integer maxuid = Integer.parseInt(uid) + 1;
 
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] bytes = md.digest(password.getBytes("utf-8"));

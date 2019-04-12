@@ -36,7 +36,7 @@ public class deleteOrgnizationTreeAction extends ActionSupport {
             OrgnizationDAO dao = new OrgnizationDAOImpl();
             Boolean rt = false;
 
-            if(orgid.length() == 3) {
+            if (orgid.length() == 3) {
                 rt = dao.delProvinceOrgnization(orgid);
             } else if (orgid.length() == 4) {
                 rt = dao.delCityOrgnization(orgid);

@@ -40,7 +40,7 @@ public class getOneCtrlDataAction extends ActionSupport {
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("rt", rt);
-            jsonObject.put("name",name);
+            jsonObject.put("name", name);
 
             result = JSON.toJSONString(jsonObject);
 

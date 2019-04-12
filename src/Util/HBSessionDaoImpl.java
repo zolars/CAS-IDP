@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
-public class HBSessionDaoImpl implements HBSessionDao{
+public class HBSessionDaoImpl implements HBSessionDao {
     private static SessionFactory sessionFactory;
     private static Session onlineSession;
 

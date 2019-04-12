@@ -3,15 +3,12 @@ package smsplantform;
 import Util.HBSessionDaoImpl;
 import com.opensymphony.xwork2.ActionSupport;
 import hibernatePOJO.Devices;
-import org.apache.struts2.ServletActionContext;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.Socket;
-import java.sql.Timestamp;
 
 
-public class smsPlantformService extends ActionSupport{
+public class smsPlantformService extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
 
@@ -29,23 +26,23 @@ public class smsPlantformService extends ActionSupport{
         try {
 
             HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-            Devices dv = (Devices)hbsessionDao.getFirst("FROM Devices WHERE type ='SMS'");
+            Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices WHERE type ='SMS'");
 
             String sockertip = dv.getiPaddress();
             String socketpoertss = dv.getPort();
             Integer socketpoert = Integer.parseInt(socketpoertss);
 
             // socket建立
-           // socket = new Socket("36.0.20.10", 9773);
+            // socket = new Socket("36.0.20.10", 9773);
             socket = new Socket(sockertip, socketpoert);
-            PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(),"GBK"));
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(),"GBK"));
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "GBK"));
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "GBK"));
             //String dataToSend = "ECMP_DCP|1002|XXXXAP4530##192.168.1.1##1258359994000##5##OPEN##UPS##ups1##inputVoltage##ups1的输入电压异常，当前值99##Ext1##Ext2##Ext3\n";
             //String dataToSend = "ECMP_DCP|1002|spcnapp021210##10.100.62.184##1516847200##5##OPEN##DTJDBC##esb##JDBCCurrConnCnt## JDBC Connection Pool Active Connections Current Count.Was 1.00num but should be lower than 1.00num. ##Ext1##Ext2##Ext3\n";
 
             String dataToSend = bwt + "|" + sbname + "##" + sbip + "##" + time + "##" + level + "##" + status + "##" + gjpro + "##" + gjexp + "##" + zbj + "##" + content + "##" + ext1 + "##" + ext2 + "##" + ext3 + "\n";
 
-           // System.out.println(dataToSend);
+            // System.out.println(dataToSend);
             writer.print(dataToSend);
             writer.flush();
             result = in.readLine();
@@ -57,7 +54,7 @@ public class smsPlantformService extends ActionSupport{
             // TODO Auto-generated catch block
             e.printStackTrace();
             return "error";
-        }finally {
+        } finally {
             socket.close();
         }
         return "success";

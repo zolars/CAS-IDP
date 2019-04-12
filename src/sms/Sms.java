@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * 短信息发送
- *
  */
 public class Sms {
 
@@ -48,7 +47,7 @@ public class Sms {
                 } else {
                     System.out.println("AT+S 失败;");
                 }
-            }  else {
+            } else {
                 System.out.println("AT+WKMOD=cmd 失败;");
             }
 
@@ -61,6 +60,7 @@ public class Sms {
 
     /**
      * 号码，内容，发送短信息
+     *
      * @param phone
      * @param countstring
      * @throws Exception

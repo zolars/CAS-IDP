@@ -14,9 +14,11 @@ import java.util.List;
 public class getSynthesis2 extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
+
     public String getResult() {
         return result;
     }
+
     public void setResult(String result) {
         this.result = result;
     }
@@ -110,7 +112,6 @@ public class getSynthesis2 extends ActionSupport {
             thdIResult = null;
             thdUThresholdResult = null;
             thdIThresholdResult = null;
-
 
 
         }

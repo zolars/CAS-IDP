@@ -10,12 +10,15 @@ import reportChart.dao.impl.HarmonicVoltageImpl;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+
 public class getHVCrate extends ActionSupport {
     private static final long serialVersionUID = 13L;
     private String result;
+
     public String getResult() {
         return result;
     }
+
     public void setResult(String result) {
         this.result = result;
     }
@@ -31,13 +34,13 @@ public class getHVCrate extends ActionSupport {
             String did = request.getParameter("did");
             HarmonicVoltage dao = new HarmonicVoltageImpl();
 
-            hvRateResult = dao.getHVrateBydt(did,time);
-            hcRateResult = dao.getHCrateBydt(did,time);
-            vcfund_rate = dao.getVCfundBydt(did,time);
+            hvRateResult = dao.getHVrateBydt(did, time);
+            hcRateResult = dao.getHCrateBydt(did, time);
+            vcfund_rate = dao.getVCfundBydt(did, time);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("hvRateResult",hvRateResult);
-            jsonObject.put("hcRateResult",hcRateResult);
-            jsonObject.put("vcfund_rate",vcfund_rate);
+            jsonObject.put("hvRateResult", hvRateResult);
+            jsonObject.put("hcRateResult", hcRateResult);
+            jsonObject.put("vcfund_rate", vcfund_rate);
             result = JSON.toJSONString(jsonObject); // List转json
         } catch (Exception e) {
             e.printStackTrace();

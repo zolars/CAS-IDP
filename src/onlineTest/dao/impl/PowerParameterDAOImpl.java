@@ -15,7 +15,7 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
 
         PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc" );
+                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
 
         crlist.add(pm);
 
@@ -199,7 +199,7 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
 
         crlist = hbsessionDao.search(
-                "FROM PowerparmMonitor where did = '" + did+ "' and time>='" + stime + "' and time<=' " + etime + "'");
+                "FROM PowerparmMonitor where did = '" + did + "' and time>='" + stime + "' and time<=' " + etime + "'");
 
         return crlist;
     }

@@ -44,16 +44,16 @@ public class updateOneDeviceThresholdAction extends ActionSupport {
             Integer iismark = null;
             Integer ilevel = null;
 
-            if(cellval != "") {
+            if (cellval != "") {
                 dcellval = Double.valueOf(cellval);
             }
-            if(floorval != "") {
+            if (floorval != "") {
                 dfloorval = Double.valueOf(floorval);
             }
-            if(ismark != "") {
+            if (ismark != "") {
                 iismark = Integer.valueOf(ismark);
             }
-            if(level != "") {
+            if (level != "") {
                 ilevel = Integer.valueOf(level);
             }
 
@@ -64,13 +64,13 @@ public class updateOneDeviceThresholdAction extends ActionSupport {
 
             Boolean rt1 = dao.isValidValue(dtype, dcellval, dfloorval, level);
 
-            if(!rt1) {
+            if (!rt1) {
                 jsonObject.put("提示", "失败，低等级阈值不能大于或小于高等级阈值！");
             } else {
 
                 Boolean rt2 = dao.updateDeviceThreshold(dtid, type, unit, dcellval, dfloorval, iismark, ilevel);
 
-                if(rt2) {
+                if (rt2) {
                     jsonObject.put("提示", "修改成功！");
                 } else {
                     jsonObject.put("提示", "修改失败，请重试！");

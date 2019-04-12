@@ -12,6 +12,7 @@ public interface MonitorPointDAO {
 
     //get wet temp
     public List getLocalAllMonitorPointEnv(String computerroom);
+
     /*
   根据机房，获取本地机房中所有的治理检测点
    */

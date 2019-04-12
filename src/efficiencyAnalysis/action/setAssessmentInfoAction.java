@@ -42,7 +42,7 @@ public class setAssessmentInfoAction extends ActionSupport {
             boolean rt = dao.setAssessInfo(Integer.parseInt(red_yellow), Integer.parseInt(yellow_green));
             JSONObject jsonObject = new JSONObject();
 
-            if(rt) {
+            if (rt) {
                 jsonObject.put("提示", "设置成功！");
             } else {
                 jsonObject.put("提示", "设置失败，请重试！");
