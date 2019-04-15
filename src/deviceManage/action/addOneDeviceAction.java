@@ -91,7 +91,8 @@ public class addOneDeviceAction extends ActionSupport {
                     rt2 = DeviceManager.checkNetwork(iPaddress, Integer.parseInt(port));
 
                     if (rt2) {
-                        rt3 = dao.addOneDeviceInfoAndBelongPos(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform, belongname, belonglevel);
+                        rt3 = dao.addOneDeviceInfoAndBelongPos(deviceType, devname, devtype, serialno, iPaddress,
+                                port, extra, sms, alert, plantform, belongname, belonglevel);
                     } else if (!rt2) {
                         jsonObject.put("提示", "设备不可达，添加失败！");
                     }

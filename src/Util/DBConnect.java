@@ -12,14 +12,12 @@ public class DBConnect {
     public DBConnect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/test?characterEncoding=utf8",
-                    "root", "root");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?characterEncoding=utf8", "root",
+                    "root");
 			/*conn = DriverManager.getConnection(
 					"jdbc:mysql://36.0.179.187:3306/test?characterEncoding=utf8",
 					"root", "root");*/
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         } catch (ClassNotFoundException ex) {
@@ -54,8 +52,7 @@ public class DBConnect {
             return iupdate;
         } catch (SQLException se) {
             conn.rollback();
-            System.out.println("DBBean.executeUpdate() ERROR:"
-                    + se.getMessage());
+            System.out.println("DBBean.executeUpdate() ERROR:" + se.getMessage());
         }
         return iupdate;
     }
@@ -89,12 +86,9 @@ public class DBConnect {
 
     public void free() throws SQLException {
         try {
-            if (rs != null)
-                rs.close();
-            if (stmt != null)
-                stmt.close();
-            if (conn != null)
-                conn.close();
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
         } catch (SQLException se) {
             System.out.println("DBBean.free() ERROR:" + se.getMessage());
         }

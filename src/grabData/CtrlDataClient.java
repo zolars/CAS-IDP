@@ -34,11 +34,8 @@ public class CtrlDataClient extends Thread {
             b.channel(NioSocketChannel.class);
             b.option(ChannelOption.SO_KEEPALIVE, Boolean.valueOf(true));
             b.handler(new ChannelInitializer<SocketChannel>() {
-                public void initChannel(SocketChannel ch)
-                        throws Exception {
-                    ch.pipeline().addLast(new IdleStateHandler(0, HeartBeatHandler.timeout, 0, TimeUnit.SECONDS))
-                            .addLast(new HeartBeatHandler(host, port, did, 6))
-                            .addLast(new CtrlDataClientHandler(did));
+                public void initChannel(SocketChannel ch) throws Exception {
+                    ch.pipeline().addLast(new IdleStateHandler(0, HeartBeatHandler.timeout, 0, TimeUnit.SECONDS)).addLast(new HeartBeatHandler(host, port, did, 6)).addLast(new CtrlDataClientHandler(did));
                 }
             });
             ChannelFuture f = b.connect(host, port).sync();

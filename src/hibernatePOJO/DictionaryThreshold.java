@@ -54,11 +54,7 @@ public class DictionaryThreshold {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DictionaryThreshold that = (DictionaryThreshold) o;
-        return id == that.id &&
-                functioncode == that.functioncode &&
-                Objects.equals(addr1, that.addr1) &&
-                Objects.equals(addr2, that.addr2) &&
-                Objects.equals(description, that.description);
+        return id == that.id && functioncode == that.functioncode && Objects.equals(addr1, that.addr1) && Objects.equals(addr2, that.addr2) && Objects.equals(description, that.description);
     }
 
     @Override

@@ -26,9 +26,7 @@ public class WebSocketServer extends Thread {
 
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-                    .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new WebSocketChannelInitializer());
+            serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).handler(new LoggingHandler(LogLevel.INFO)).childHandler(new WebSocketChannelInitializer());
 
             ChannelFuture channelFuture = serverBootstrap.bind(this.getPort()).sync();
             channelFuture.channel().closeFuture().sync();

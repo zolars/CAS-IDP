@@ -113,8 +113,7 @@ public class DeviceManager {
             b.channel(NioSocketChannel.class);
             b.option(ChannelOption.SO_KEEPALIVE, Boolean.valueOf(true));
             b.handler(new ChannelInitializer<SocketChannel>() {
-                public void initChannel(SocketChannel ch)
-                        throws Exception {
+                public void initChannel(SocketChannel ch) throws Exception {
                     ch.pipeline().addLast();
                 }
             });

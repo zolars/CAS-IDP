@@ -17,8 +17,7 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
 
         List<Devices> list = new ArrayList<>();
 
-        cp = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rid = '" + computerroom + "'");
+        cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + computerroom + "'");
 
         String didset = cp.getDidset();
 
@@ -27,8 +26,8 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
                 String did[] = didset.split("，");
 
                 for (int i = 0; i < did.length; i++) {
-                    Devices dv = (Devices) hbsessionDao.getFirst(
-                            "FROM Devices where did = '" + did[i] + "' and type='IDP'");
+                    Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where did = '" + did[i] + "' and " +
+                            "type='IDP'");
                     if (dv != null) {
                         list.add(dv);
                     }
@@ -44,8 +43,7 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
 
         List<Devices> list = new ArrayList<>();
 
-        cp = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rid = '" + computerroom + "'");
+        cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + computerroom + "'");
 
         String tempset = cp.getTempset();
 
@@ -54,8 +52,8 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
                 String did[] = tempset.split("，");
 
                 for (int i = 0; i < did.length; i++) {
-                    Devices dv = (Devices) hbsessionDao.getFirst(
-                            "FROM Devices where did = '" + did[i] + "' and type='temp'");
+                    Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where did = '" + did[i] + "' and " +
+                            "type='temp'");
                     if (dv != null) {
                         list.add(dv);
                     }
@@ -71,8 +69,7 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
 
         List<Devices> list = new ArrayList<>();
 
-        cp = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rid = '" + computerroom + "'");
+        cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + computerroom + "'");
 
         String cidset = cp.getCidset();
 
@@ -81,8 +78,8 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
                 String cid[] = cidset.split("，");
 
                 for (int i = 0; i < cid.length; i++) {
-                    Devices dv = (Devices) hbsessionDao.getFirst(
-                            "FROM Devices where did = '" + cid[i] + "' and type='ctrl'");
+                    Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where did = '" + cid[i] + "' and " +
+                            "type='ctrl'");
                     if (dv != null) {
                         list.add(dv);
                     }

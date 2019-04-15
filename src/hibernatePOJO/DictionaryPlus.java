@@ -67,11 +67,8 @@ public class DictionaryPlus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DictionaryPlus that = (DictionaryPlus) o;
-        return part == that.part &&
-                Objects.equals(slaveid, that.slaveid) &&
-                Objects.equals(functioncode, that.functioncode) &&
-                Objects.equals(start, that.start) &&
-                Objects.equals(length, that.length);
+        return part == that.part && Objects.equals(slaveid, that.slaveid) && Objects.equals(functioncode,
+                that.functioncode) && Objects.equals(start, that.start) && Objects.equals(length, that.length);
     }
 
     @Override

@@ -55,13 +55,15 @@ public class DataOnlineSaveJob implements Job {
                         hbsessionDao.insert(varsxdy);
 
                         //SDDD
-                        Float thdu1 = varsxdy.getU1(), thdu2 = varsxdy.getU2(), thdu3 = varsxdy.getU3(), thdi1 = varsxdy.getI1(), thdi2 = varsxdy.getI2(), thdi3 = varsxdy.getI3();
+                        Float thdu1 = varsxdy.getU1(), thdu2 = varsxdy.getU2(), thdu3 = varsxdy.getU3(), thdi1 =
+                                varsxdy.getI1(), thdi2 = varsxdy.getI2(), thdi3 = varsxdy.getI3();
 
                         if (thdu1.equals("0.00") && thdu2.equals("0.00") && thdu3.equals("0.00")) {
                             String time = varsxdy.getTime().toString();
 
                             //判断是否越限 若越限写入数据库
-                            EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE description = 'Ua Ub Uc为0'");
+                            EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE description" +
+                                    " = 'Ua Ub Uc为0'");
                             EventPower epp = (EventPower) hbsessionDao.getFirst("FROM EventPower order by xbid desc");
 
                             int maxteid = 0;
@@ -79,7 +81,9 @@ public class DataOnlineSaveJob implements Job {
                                 ep.setSubtype(tempet.getSubtype());
 
                                 /************2018-12-24 马卫亮  ADD******************************/
-                                hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型自动确认' where cid = '" + tempet.getCid() + "' and did=" + did + " and signature is null ");
+                                hbsessionDao.update("update EventPower set signature = 'admin',annotation = " +
+                                        "'相同类型自动确认' where cid = '" + tempet.getCid() + "' and did=" + did + " and " +
+                                        "signature is null ");
                                 /************2018-12-24 马卫亮  ADD******************************/
                                 hbsessionDao.insert(ep);
                             }
@@ -89,7 +93,8 @@ public class DataOnlineSaveJob implements Job {
                             String time = varsxdy.getTime().toString();
 
                             //判断是否越限 若越限写入数据库
-                            EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE description = 'Ia Ib Ic为0'");
+                            EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE description" +
+                                    " = 'Ia Ib Ic为0'");
                             EventPower epp = (EventPower) hbsessionDao.getFirst("FROM EventPower order by xbid desc");
 
                             int maxteid = 0;
@@ -107,7 +112,9 @@ public class DataOnlineSaveJob implements Job {
                                 ep.setSubtype(tempet.getSubtype());
 
                                 /************2018-12-24 马卫亮  ADD******************************/
-                                hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型自动确认' where cid = '" + tempet.getCid() + "' and did=" + did + " and signature is null ");
+                                hbsessionDao.update("update EventPower set signature = 'admin',annotation = " +
+                                        "'相同类型自动确认' where cid = '" + tempet.getCid() + "' and did=" + did + " and " +
+                                        "signature is null ");
                                 /************2018-12-24 马卫亮  ADD******************************/
 
                                 hbsessionDao.insert(ep);

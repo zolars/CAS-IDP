@@ -80,25 +80,35 @@ public interface EventDAO {
     public int getLocalAllCtrlTotal(String cbnamelist[], String starttime, String endtime);
 
 
-    public PageHelper<EventObject> getPowerEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+    public PageHelper<EventObject> getPowerEventObjectListPage(String cbnamelist[], String starttime, String endtime,
+                                                               Integer start, Integer end);
 
-    public PageHelper<EventObject> getPowerEventlytxObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+    public PageHelper<EventObject> getPowerEventlytxObjectListPage(String cbnamelist[], String starttime,
+                                                                   String endtime, Integer start, Integer end);
 
-    public PageHelper<EventObject> getPowerEventxbObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+    public PageHelper<EventObject> getPowerEventxbObjectListPage(String cbnamelist[], String starttime,
+                                                                 String endtime, Integer start, Integer end);
 
-    public PageHelper<EventObject> getPowerEventsxbphObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+    public PageHelper<EventObject> getPowerEventsxbphObjectListPage(String cbnamelist[], String starttime,
+                                                                    String endtime, Integer start, Integer end);
 
-    public PageHelper<EventObject> getPowerEventshunbianObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+    public PageHelper<EventObject> getPowerEventshunbianObjectListPage(String cbnamelist[], String starttime,
+                                                                       String endtime, Integer start, Integer end);
 
-    public PageHelper<EventObject> getPowerEventshanbianObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+    public PageHelper<EventObject> getPowerEventshanbianObjectListPage(String cbnamelist[], String starttime,
+                                                                       String endtime, Integer start, Integer end);
 
-    public PageHelper<EventObject> getEnvironmentEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+    public PageHelper<EventObject> getEnvironmentEventObjectListPage(String cbnamelist[], String starttime,
+                                                                     String endtime, Integer start, Integer end);
 
-    public PageHelper<EventObject> getEnvironmentEventtempObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+    public PageHelper<EventObject> getEnvironmentEventtempObjectListPage(String cbnamelist[], String starttime,
+                                                                         String endtime, Integer start, Integer end);
 
-    public PageHelper<EventObject> getEnvironmentEventwetObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+    public PageHelper<EventObject> getEnvironmentEventwetObjectListPage(String cbnamelist[], String starttime,
+                                                                        String endtime, Integer start, Integer end);
 
-    public PageHelper<EventObject> getCtrlEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end);
+    public PageHelper<EventObject> getCtrlEventObjectListPage(String cbnamelist[], String starttime, String endtime,
+                                                              Integer start, Integer end);
 
 
     public List getAllCityEvent();
@@ -132,8 +142,10 @@ public interface EventDAO {
 
     public boolean setAllEventtypePriorty(String[] eventtypelist, String[] priortylist);
 
-    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String tansentinterval, String uploadinterval, String assessinterval, String alarminterval, String tempinterval, String ctrlinterval,
-                                         String thresholdsaveinterval, String qstdatainterval);
+    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String tansentinterval,
+                                         String uploadinterval, String assessinterval, String alarminterval,
+                                         String tempinterval, String ctrlinterval, String thresholdsaveinterval,
+                                         String qstdatainterval);
 
 
 }

@@ -17,17 +17,18 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest msg)
-            throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest msg) throws Exception {
         if (wsUri.equalsIgnoreCase(msg.getUri())) {
             ctx.fireChannelRead(msg.retain());
         } else {
             if (HttpHeaders.is100ContinueExpected(msg)) {
-                FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.CONTINUE);
+                FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1,
+                        HttpResponseStatus.CONTINUE);
                 ctx.writeAndFlush(response);
             }
 
-            RandomAccessFile file = new RandomAccessFile(HttpRequestHandler.class.getResource("/").getPath() + "/index.html", "r");
+            RandomAccessFile file = new RandomAccessFile(HttpRequestHandler.class.getResource("/").getPath() +
+                    "/index.html", "r");
             HttpResponse response = new DefaultHttpResponse(msg.getProtocolVersion(), HttpResponseStatus.OK);
             response.headers().set(HttpHeaders.Names.CONTENT_TYPE, "text/html;charset=UTF-8");
 
@@ -54,8 +55,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
-            throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         ctx.close();
         cause.printStackTrace(System.err);
     }

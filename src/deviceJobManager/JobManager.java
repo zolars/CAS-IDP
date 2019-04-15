@@ -21,14 +21,8 @@ public class JobManager {
         Trigger trigger = null;
         JobDetail job = null;
         try {
-            trigger = newTrigger()
-                    .withIdentity("trigger" + jobType,
-                            "triggerGroup" + jobType)
-                    .startNow()
-                    .withPriority(getPriorityByJobType(jobType))
-                    .withSchedule(simpleSchedule().withIntervalInSeconds(timeConvert(timeSize, interval))
-                            .repeatForever())
-                    .build();
+            trigger =
+                    newTrigger().withIdentity("trigger" + jobType, "triggerGroup" + jobType).startNow().withPriority(getPriorityByJobType(jobType)).withSchedule(simpleSchedule().withIntervalInSeconds(timeConvert(timeSize, interval)).repeatForever()).build();
             job = newJobByJobType(jobType);
             scheduler.scheduleJob(job, trigger);
         } catch (SchedulerException e) {
@@ -42,14 +36,8 @@ public class JobManager {
         Trigger oldTrigger = null;
         try {
             oldTrigger = scheduler.getTrigger(triggerKey("trigger" + jobType, "triggerGroup" + jobType));
-            Trigger newtrigger = newTrigger()
-                    .withIdentity("trigger" + jobType,
-                            "triggerGroup" + jobType)
-                    .startNow()
-                    .withPriority(getPriorityByJobType(jobType))
-                    .withSchedule(simpleSchedule().withIntervalInSeconds(timeConvert(timeSize, interval))
-                            .repeatForever())
-                    .build();
+            Trigger newtrigger =
+                    newTrigger().withIdentity("trigger" + jobType, "triggerGroup" + jobType).startNow().withPriority(getPriorityByJobType(jobType)).withSchedule(simpleSchedule().withIntervalInSeconds(timeConvert(timeSize, interval)).repeatForever()).build();
 
             scheduler.rescheduleJob(oldTrigger.getKey(), newtrigger);
         } catch (SchedulerException e) {

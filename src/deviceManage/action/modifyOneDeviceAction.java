@@ -78,7 +78,8 @@ public class modifyOneDeviceAction extends ActionSupport {
             //添加SMS平台
             if (devtype.equals("SMS")) {
 
-                if (dao.modifyOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform, did)) {
+                if (dao.modifyOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms,
+                        alert, plantform, did)) {
                     jsonObject.put("提示", "修改成功！");
                 } else {
                     jsonObject.put("提示", "修改失败，请重试！");
@@ -88,7 +89,8 @@ public class modifyOneDeviceAction extends ActionSupport {
                 rt2 = DeviceManager.checkNetwork(iPaddress, Integer.parseInt(port));
 
                 if (rt2) {
-                    rt3 = dao.modifyOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform, did);
+                    rt3 = dao.modifyOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms
+                            , alert, plantform, did);
                 } else if (!rt2) {
                     jsonObject.put("提示", "设备不可达，修改失败！");
                 }

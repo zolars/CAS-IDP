@@ -145,8 +145,7 @@ public class AlarmModelJob implements Job {
     /*
     读取当前时间之前的30分钟内的告警事件、
     并分别根据设定的告警方式、执行短信、弹窗、平台告警
-     */
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+     */ public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         List<EventPower> eventpowerlist = new ArrayList<>();
         List<EventEnvironment> eventenvironmentlist = new ArrayList<>();
         List<EventCtrl> eventctrllist = new ArrayList<>();
@@ -211,7 +210,8 @@ public class AlarmModelJob implements Job {
                             String uidstr = "";
                             String alarmString = dname;
 
-                            List<DeviceAlarmUser> aulist = hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
+                            List<DeviceAlarmUser> aulist =
+                                    hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
 
                             if (aulist != null) {
                                 preContent = (String) aulist.get(0).getPrecontent();
@@ -237,7 +237,8 @@ public class AlarmModelJob implements Job {
                             String type = typelist.get(0).getType();
                             String description = typelist.get(0).getDescription();
 
-                            thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='" + type + "' and ismark = '1' order by level desc");
+                            thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='" + type + "' and" +
+                                    " ismark = '1' order by level desc");
 
                             if (thresholdlist != null) {
 
@@ -263,7 +264,8 @@ public class AlarmModelJob implements Job {
                                 String uidstr = "";
                                 String alarmString = dname;
 
-                                List<DeviceAlarmUser> aulist = hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
+                                List<DeviceAlarmUser> aulist = hbsessionDao.search(" from DeviceAlarmUser where " +
+                                        "level='" + tlevel + "'");
 
                                 if (aulist != null) {
                                     preContent = (String) aulist.get(0).getPrecontent();
@@ -287,8 +289,10 @@ public class AlarmModelJob implements Job {
                                             int zbj = typelist.get(0).getZbj();
                                             String syslevel = tlevel.toString();
 
-                                            Smsplant smsplant = (Smsplant) hbsessionDao.getFirst(" from Smsplant where id='" + zbj + "'");
-                                            Smsplantlevel smsplantlevel = (Smsplantlevel) hbsessionDao.getFirst(" from Smsplantlevel where syslevel like '%" + syslevel + "%'");
+                                            Smsplant smsplant = (Smsplant) hbsessionDao.getFirst(" from Smsplant " +
+                                                    "where id='" + zbj + "'");
+                                            Smsplantlevel smsplantlevel = (Smsplantlevel) hbsessionDao.getFirst(" " +
+                                                    "from Smsplantlevel where syslevel like '%" + syslevel + "%'");
 
                                             if (!smsplant.equals("") && !smsplantlevel.equals("")) {
 
@@ -326,7 +330,8 @@ public class AlarmModelJob implements Job {
 
             //2.1.环境事件
             //2.2.查询各个事件的告警方式、告警用户、告警时间范围
-            eventenvironmentlist = hbsessionDao.search("FROM EventEnvironment where time >'" + date + "' and (signature ='' or signature is null)");
+            eventenvironmentlist = hbsessionDao.search("FROM EventEnvironment where time >'" + date + "' and " +
+                    "(signature ='' or signature is null)");
 
             if (eventenvironmentlist != null) {
                 for (int i = 0; i < eventenvironmentlist.size(); i++) {
@@ -351,7 +356,8 @@ public class AlarmModelJob implements Job {
                         String type = typelist.get(0).getType();
                         String description = typelist.get(0).getDescription();
 
-                        thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='" + type + "' and ismark = '1' order by level desc");
+                        thresholdlist = hbsessionDao.search("From DevicesThreshold where type ='" + type + "' and " +
+                                "ismark = '1' order by level desc");
 
                         if (thresholdlist != null) {
 
@@ -379,7 +385,8 @@ public class AlarmModelJob implements Job {
                             String uidstr = "";
                             String alarmString = dname;
 
-                            List<DeviceAlarmUser> aulist = hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
+                            List<DeviceAlarmUser> aulist =
+                                    hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
 
                             if (aulist != null) {
                                 preContent = (String) aulist.get(0).getPrecontent();
@@ -403,8 +410,10 @@ public class AlarmModelJob implements Job {
                                         int zbj = typelist.get(0).getZbj();
                                         String syslevel = tlevel.toString();
 
-                                        Smsplant smsplant = (Smsplant) hbsessionDao.getFirst(" from Smsplant where id='" + zbj + "'");
-                                        Smsplantlevel smsplantlevel = (Smsplantlevel) hbsessionDao.getFirst(" from Smsplantlevel where syslevel like '%" + syslevel + "%'");
+                                        Smsplant smsplant = (Smsplant) hbsessionDao.getFirst(" from Smsplant where " +
+                                                "id='" + zbj + "'");
+                                        Smsplantlevel smsplantlevel = (Smsplantlevel) hbsessionDao.getFirst(" from " +
+                                                "Smsplantlevel where syslevel like '%" + syslevel + "%'");
 
                                         if (smsplant != null && smsplantlevel != null) {
 
@@ -472,7 +481,8 @@ public class AlarmModelJob implements Job {
                         String uidstr = "";
                         String alarmString = dname;
 
-                        List<DeviceAlarmUser> aulist = hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
+                        List<DeviceAlarmUser> aulist =
+                                hbsessionDao.search(" from DeviceAlarmUser where level='" + tlevel + "'");
 
                         if (aulist != null) {
                             preContent = (String) aulist.get(0).getPrecontent();
@@ -496,8 +506,10 @@ public class AlarmModelJob implements Job {
                                     String zbj = ctrltypelist.get(0).getZbj();
                                     String syslevel = tlevel.toString();
 
-                                    Smsplantlevel smsplantlevel = (Smsplantlevel) hbsessionDao.getFirst(" from Smsplantlevel where syslevel like '%" + syslevel + "%'");
-                                    Smsplant smsplant = (Smsplant) hbsessionDao.getFirst(" from Smsplant where id='" + zbj + "'");
+                                    Smsplantlevel smsplantlevel = (Smsplantlevel) hbsessionDao.getFirst(" from " +
+                                            "Smsplantlevel where syslevel like '%" + syslevel + "%'");
+                                    Smsplant smsplant =
+                                            (Smsplant) hbsessionDao.getFirst(" from Smsplant where id='" + zbj + "'");
 
                                     if (smsplant != null && smsplantlevel != null) {
 
@@ -611,13 +623,15 @@ public class AlarmModelJob implements Job {
                                         String ext2 = dxptstring.get(i).get(9);
                                         String ext3 = dxptstring.get(i).get(10);
 
-                                        sp.execute(bwt, sbname, sbip, time, level, status, gjpro, gjexp, zbj, content, ext1, ext2, ext3);
+                                        sp.execute(bwt, sbname, sbip, time, level, status, gjpro, gjexp, zbj, content
+                                                , ext1, ext2, ext3);
                                     }
                                 }
                             }
                         } else { //非第二等级
                             /*if (isSms == 1) { //执行短信报警
-                                if (!govtelephone.equals("") && !govtelephone.equals(" ") && !govtelephone.equals(null)) {
+                                if (!govtelephone.equals("") && !govtelephone.equals(" ") && !govtelephone.equals
+                                (null)) {
 
                                     String allalarmstri = allalarmstring.toString();
                                     allalarmstri = allalarmstri.replaceAll("\n","");
@@ -655,7 +669,8 @@ public class AlarmModelJob implements Job {
                                     String ext2 = dxptstring.get(i).get(9);
                                     String ext3 = dxptstring.get(i).get(10);
 
-                                    sp.execute(bwt, sbname, sbip, time, level, status, gjpro, gjexp, zbj, content, ext1, ext2, ext3);
+                                    sp.execute(bwt, sbname, sbip, time, level, status, gjpro, gjexp, zbj, content,
+                                            ext1, ext2, ext3);
                                 }
                             }
                         }
@@ -687,9 +702,8 @@ public class AlarmModelJob implements Job {
                 Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
                 while (addresses.hasMoreElements()) {
                     InetAddress ip = (InetAddress) addresses.nextElement();
-                    if (ip != null
-                            && ip instanceof Inet4Address
-                            && !ip.isLoopbackAddress() //loopback地址即本机地址，IPv4的loopback范围是127.0.0.0 ~ 127.255.255.255
+                    if (ip != null && ip instanceof Inet4Address && !ip.isLoopbackAddress() //loopback地址即本机地址，IPv4
+                            // 的loopback范围是127.0.0.0 ~ 127.255.255.255
                             && ip.getHostAddress().indexOf(":") == -1) {
                         System.out.println("本机的IP = " + ip.getHostAddress());
                         return ip.getHostAddress();

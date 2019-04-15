@@ -99,16 +99,7 @@ public class DeviceAlarmUser {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeviceAlarmUser that = (DeviceAlarmUser) o;
-        return aid == that.aid &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(level, that.level) &&
-                Objects.equals(timeperiod, that.timeperiod) &&
-                Objects.equals(isAlert, that.isAlert) &&
-                Objects.equals(isPlantform, that.isPlantform) &&
-                Objects.equals(isSms, that.isSms) &&
-                Objects.equals(precontent, that.precontent) &&
-                Objects.equals(uid, that.uid) &&
-                Objects.equals(did, that.did);
+        return aid == that.aid && Objects.equals(id, that.id) && Objects.equals(level, that.level) && Objects.equals(timeperiod, that.timeperiod) && Objects.equals(isAlert, that.isAlert) && Objects.equals(isPlantform, that.isPlantform) && Objects.equals(isSms, that.isSms) && Objects.equals(precontent, that.precontent) && Objects.equals(uid, that.uid) && Objects.equals(did, that.did);
     }
 
     @Override

@@ -10,7 +10,8 @@ public interface UserDAO {
 
     /////增
     //新建用户
-    public boolean addUserInfo(String uid, String account, String password, String name, String telephone, String govtelephone, String province, String city, String computerroom);
+    public boolean addUserInfo(String uid, String account, String password, String name, String telephone,
+                               String govtelephone, String province, String city, String computerroom);
 
     //新建一条用户和角色的对应记录
     public boolean addUserRolesInfo(String uid, String roles);
@@ -21,9 +22,13 @@ public interface UserDAO {
     public boolean deleteUserRoles(String uid);
 
     /////改
-    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser);
+    public boolean updateUserInfo(String uid, String password, String name, String chinesename, String telephone,
+                                  String govtelephone, String roles, String province, String city,
+                                  String computerroom, String temuser);
 
-    public boolean updateUserInfoWithoutPasswd(String uid, String name, String chinesename, String telephone, String govtelephone, String roles, String province, String city, String computerroom, String temuser);
+    public boolean updateUserInfoWithoutPasswd(String uid, String name, String chinesename, String telephone,
+                                               String govtelephone, String roles, String province, String city,
+                                               String computerroom, String temuser);
 
     /////查
     //登录验证

@@ -20,8 +20,7 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
     public List searchFuzzyDeviceThreshold(String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<DevicesThreshold> list = hbsessionDao.search(
-                "FROM DevicesThreshold where name like '" + name + "%'");
+        List<DevicesThreshold> list = hbsessionDao.search("FROM DevicesThreshold where name like '" + name + "%'");
 
         return list;
     }
@@ -29,8 +28,7 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
     public List getOneDeviceThreshold(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<DevicesThreshold> crlist = hbsessionDao.search(
-                "FROM DevicesThreshold where did ='" + did + "'");
+        List<DevicesThreshold> crlist = hbsessionDao.search("FROM DevicesThreshold where did ='" + did + "'");
 
         return crlist;
     }
@@ -38,8 +36,9 @@ public class DeviceThresholdDAOImpl implements DeviceThresholdDAO {
     public List getOneofOneDeviceThreshold(Integer dtid) {
         db = new DBConnect();
         List crlist = new ArrayList<>();
-        String sql = "select ta.dtid as dtid, tb.description as name, ta.classify as type, ta.unit as unit, ta.cellval as cellval, ta.floorval as floorval, ta.isMark as ismark, ta.level as level " +
-                "from devices_threshold as ta, events_type as tb where ta.type = tb.type and ta.dtid = '" + dtid + "'";
+        String sql = "select ta.dtid as dtid, tb.description as name, ta.classify as type, ta.unit as unit, ta" +
+                ".cellval as cellval, ta.floorval as floorval, ta.isMark as ismark, ta.level as level " + "from " +
+                "devices_threshold as ta, events_type as tb where ta.type = tb.type and ta.dtid = '" + dtid + "'";
 
         try {
             ps = db.getPs(sql);

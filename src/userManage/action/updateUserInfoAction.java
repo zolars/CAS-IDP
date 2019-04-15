@@ -54,7 +54,8 @@ public class updateUserInfoAction extends ActionSupport {
             if (password.equals("")) {
                 rt1 = dao.checkUnameIsOccupiedForUpdate(uid, name);
                 if (rt1) {
-                    rt2 = dao.updateUserInfoWithoutPasswd(uid, name, chinesename, telephone, govtelephone, roles, province, city, computerroom, temuser);
+                    rt2 = dao.updateUserInfoWithoutPasswd(uid, name, chinesename, telephone, govtelephone, roles,
+                            province, city, computerroom, temuser);
                 }
             } else {
                 MessageDigest md = MessageDigest.getInstance("MD5");
@@ -63,7 +64,8 @@ public class updateUserInfoAction extends ActionSupport {
 
                 rt1 = dao.checkUnameIsOccupiedForUpdate(uid, name);
                 if (rt1) {
-                    rt2 = dao.updateUserInfo(uid, passwd, name, chinesename, telephone, govtelephone, roles, province, city, computerroom, temuser);
+                    rt2 = dao.updateUserInfo(uid, passwd, name, chinesename, telephone, govtelephone, roles, province
+                            , city, computerroom, temuser);
                 }
             }
 

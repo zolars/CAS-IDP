@@ -43,10 +43,8 @@ public class addKnowledgeTreeNodeStructAction extends ActionSupport {
 
             Boolean rt = dao.addKnowledgeTreeNodeStruct(maxkid + 1, kid, kname, kcontent);
 
-            if (rt)
-                jsonObject.put("提示", "添加成功！");
-            else
-                jsonObject.put("提示", "添加失败，请重试！");
+            if (rt) jsonObject.put("提示", "添加成功！");
+            else jsonObject.put("提示", "添加失败，请重试！");
 
             // result = jsonObject;
             result = JSON.toJSONString(jsonObject);

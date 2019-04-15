@@ -9,8 +9,9 @@ public class XBDAOImpl implements XBDAO {
     public PowerxbMonitor getCurrentXbData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        PowerxbMonitor powerxbMonitor = (PowerxbMonitor) hbsessionDao.getFirst(
-                "FROM PowerxbMonitor where did = '" + did + "' order by time desc");
+        PowerxbMonitor powerxbMonitor =
+                (PowerxbMonitor) hbsessionDao.getFirst("FROM PowerxbMonitor where did = '" + did + "' order by time " +
+                        "desc");
 
         return powerxbMonitor;
     }

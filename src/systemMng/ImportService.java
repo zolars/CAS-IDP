@@ -48,14 +48,10 @@ public class ImportService {
                     Integer ismark = 0;
                     Integer level = 1;
 
-                    if (cellvalstr != "")
-                        cellval = Double.parseDouble(cellvalstr);
-                    if (floorvalstr != "")
-                        floorval = Double.parseDouble(floorvalstr);
-                    if (ismarkstr != "")
-                        ismark = Integer.parseInt(ismarkstr);
-                    if (levelstr != "")
-                        level = Integer.parseInt(levelstr);
+                    if (cellvalstr != "") cellval = Double.parseDouble(cellvalstr);
+                    if (floorvalstr != "") floorval = Double.parseDouble(floorvalstr);
+                    if (ismarkstr != "") ismark = Integer.parseInt(ismarkstr);
+                    if (levelstr != "") level = Integer.parseInt(levelstr);
 
                     DeviceDAO dao = new DeviceDAOImpl();
                     String did = dao.getDeviceIDByName(dname);

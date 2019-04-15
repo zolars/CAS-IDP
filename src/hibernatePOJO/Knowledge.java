@@ -69,11 +69,9 @@ public class Knowledge {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Knowledge knowledge = (Knowledge) o;
-        return kid == knowledge.kid &&
-                Objects.equals(uid, knowledge.uid) &&
-                Objects.equals(parentkid, knowledge.parentkid) &&
-                Objects.equals(kname, knowledge.kname) &&
-                Objects.equals(content, knowledge.content);
+        return kid == knowledge.kid && Objects.equals(uid, knowledge.uid) && Objects.equals(parentkid,
+                knowledge.parentkid) && Objects.equals(kname, knowledge.kname) && Objects.equals(content,
+                knowledge.content);
     }
 
     @Override

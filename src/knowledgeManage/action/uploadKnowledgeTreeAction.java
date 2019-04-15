@@ -48,12 +48,9 @@ public class uploadKnowledgeTreeAction extends ActionSupport {
             if (isValid) {
                 Boolean rt = dao.uploadKnowledgeNode(kid, tmpContent);
 
-                if (rt)
-                    jsonObject.put("提示", "上传成功！");
-                else
-                    jsonObject.put("提示", "上传失败，请重试！");
-            } else
-                jsonObject.put("提示", "上传失败，没有上传权限！");
+                if (rt) jsonObject.put("提示", "上传成功！");
+                else jsonObject.put("提示", "上传失败，请重试！");
+            } else jsonObject.put("提示", "上传失败，没有上传权限！");
 
             result = JSON.toJSONString(jsonObject);
 

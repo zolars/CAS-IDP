@@ -24,8 +24,8 @@ public class EventDAOImpl implements EventDAO {
     public boolean addSignAndAnnotDeviceEvent(String teid, String sign, String annot) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
-        String hql = "update EventCtrl ep set ep.signature='" + sign +
-                "', ep.annotation='" + annot + "' where ep.teid='" + teid + "'";
+        String hql = "update EventCtrl ep set ep.signature='" + sign + "', ep.annotation='" + annot + "' where ep" +
+                ".teid='" + teid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -34,8 +34,8 @@ public class EventDAOImpl implements EventDAO {
     public boolean addSignAndAnnotPowerEvent(String teid, String sign, String annot) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
-        String hql = "update EventPower ep set ep.signature='" + sign +
-                "', ep.annotation='" + annot + "' where ep.teid='" + teid + "'";
+        String hql = "update EventPower ep set ep.signature='" + sign + "', ep.annotation='" + annot + "' where ep" +
+                ".teid='" + teid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -44,8 +44,8 @@ public class EventDAOImpl implements EventDAO {
     public boolean addSignAndAnnotEnvironEvent(String teid, String sign, String annot) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
-        String hql = "update EventEnvironment ep set ep.signature='" + sign +
-                "', ep.annotation='" + annot + "' where ep.teid='" + teid + "'";
+        String hql = "update EventEnvironment ep set ep.signature='" + sign + "', ep.annotation='" + annot + "' where" +
+                " ep.teid='" + teid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -60,16 +60,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -81,8 +80,10 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
 //        for (int i = 0; i < didset.length; i++) {
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid AND td.did=ta.did" +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid AND td.did=ta.did" +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
                 " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
@@ -133,8 +134,7 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
@@ -142,8 +142,8 @@ public class EventDAOImpl implements EventDAO {
 
         for (int i = 0; i < comidset.length; i++) {
 
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -157,11 +157,15 @@ public class EventDAOImpl implements EventDAO {
 
 //        for (int i = 0; i < didset.length; i++) {
 
-           /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
+           /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+            ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as
+            annotation " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "'";*/
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did=ta.did" +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid and td.did=ta.did" +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
                 " ORDER BY signature limit 2000";
@@ -213,16 +217,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -234,17 +237,22 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
 //        for (int i = 0; i < didset.length; i++) {
-           /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
+           /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+            ta.value as description, " +
+                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta
+                    .signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2)";
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime +
+                     "' and tb.type in (1,2)";
 */
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                "ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid  and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, " + "ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid  and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
-                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY signature limit 2000";
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY " +
+                "signature limit 2000";
 
         try {
             ps = db.getPs(sql);
@@ -289,16 +297,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -310,14 +317,17 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
 //        for (int i = 0; i < didset.length; i++) {
-            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
+            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+             ta.value as description, " +
+                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta
+                    .signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type in (1,2)";
 */
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                "ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, " + "ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
                 " and tb.type in (1,2) ORDER BY signature limit 2000";
@@ -366,16 +376,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -387,16 +396,22 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
 //        for (int i = 0; i < didset.length; i++) {
-            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
+            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+             ta.value as description, " +
+                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta
+                    .signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and 322";*/
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime +
+                     "' and tb.subtype between 23 and 322";*/
 
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
-                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and 322 ORDER BY signature limit 2000";
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and 322 " +
+                "ORDER BY signature limit 2000";
 
         try {
             ps = db.getPs(sql);
@@ -440,16 +455,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -461,9 +475,10 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
 //        for (int i = 0; i < didset.length; i++) {
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, " + "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as " +
+                "annotation, ta.signature as signature " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
                 " and tb.subtype between 24 and  322 ORDER BY signature limit 2000";
@@ -511,16 +526,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -532,12 +546,14 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
 //        for (int i = 0; i < didset.length; i++) {
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, " + "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as " +
+                "annotation, ta.signature as signature " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
-                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY signature limit 2000";
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY signature " +
+                "limit 2000";
 
         try {
             ps = db.getPs(sql);
@@ -580,16 +596,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -601,12 +616,16 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
 //        for (int i = 0; i < didset.length; i++) {
-            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
+            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+             ta.value as description, " +
+                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta
+                    .signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type=9";*/
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
                 " and tb.type=9 ORDER BY signature limit 2000";
@@ -655,16 +674,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -676,16 +694,22 @@ public class EventDAOImpl implements EventDAO {
         String didset[] = didstr.split("，");
 
 //        for (int i = 0; i < didset.length; i++) {
-            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
+            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+             ta.value as description, " +
+                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta
+                    .signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3";
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime +
+                     "' and tb.type=3";
 */
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
-                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3 ORDER BY signature limit 2000";
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3 ORDER BY signature " +
+                "limit 2000";
 
         try {
             ps = db.getPs(sql);
@@ -729,16 +753,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -750,12 +773,15 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
 //        for (int i = 0; i < didset.length; i++) {
-            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid " +
+            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+             ta.value as description, ta.time as time, ta.cid as cid " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type=3";*/
 
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] +  "'" +
                 " and tb.type=3 ORDER BY signature limit 2000";
@@ -805,16 +831,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -826,16 +851,22 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
 //        for (int i = 0; i < didset.length; i++) {
-            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
+            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+             ta.value as description, " +
+                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta
+                    .signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8";
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime +
+                     "' and tb.type=8";
 */
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
-                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY signature limit 2000";
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY signature " +
+                "limit 2000";
 
         try {
             ps = db.getPs(sql);
@@ -879,16 +910,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getDidset();
             str += "，";
@@ -900,13 +930,17 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
 //        for (int i = 0; i < didset.length; i++) {
-            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, " +
-                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta.signature as signature " +
+            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+             ta.value as description, " +
+                    "ta.time as time, ta.cid as cid, ta.duration as duration, ta.annotation as annotation, ta
+                    .signature as signature " +
                     "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "' and tb.type=8";*/
 
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_power ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = tb" +
+                ".cid   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
                 " and tb.type=8 ORDER BY signature limit 2000";
@@ -954,16 +988,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getTempset();
             str += "，";
@@ -975,13 +1008,18 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
 //        for (int i = 0; i < didset.length; i++) {
-            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "'";
+            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+             ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as
+             annotation, ta.duration as duration " +
+                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" +
+                    didset[i]
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime +
+                     "'";
            */
-        String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_environment ta,events_type tb, devices_threshold tc,devices td  " +
-                "where tb.cid = ta.cid and tb.type = tc.type  and td.did=ta.did " +
+        String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as " +
+                "type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                "annotation, ta.duration as duration " + "from event_environment ta,events_type tb, devices_threshold tc," +
+                "devices td  " + "where tb.cid = ta.cid and tb.type = tc.type  and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
                 " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
@@ -1029,16 +1067,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getTempset();
             str += "，";
@@ -1051,13 +1088,16 @@ public class EventDAOImpl implements EventDAO {
         String maxtime = "0000-00-00 00:00:00.0";
 
 //        for (int i = 0; i < didset.length; i++) {
-           /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.signature as signature, ta.annotation as annotation " +
-                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
+           /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+            ta.value as description, ta.time as time, ta.signature as signature, ta.annotation as annotation " +
+                    "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" +
+                    didset[i]
                     + "' and ta.did ='" + didset[i] + "'";*/
 
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.signature as signature, ta.annotation as annotation " +
-                "from event_environment ta,events_type tb, devices_threshold tc,devices td    " +
-                "where tc.type = tb.type and ta.cid = tb.cid and td.did=ta.did" +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.signature as signature, ta.annotation as annotation " + "from " +
+                "event_environment ta,events_type tb, devices_threshold tc,devices td    " + "where tc.type = tb.type and " +
+                "ta.cid = tb.cid and td.did=ta.did" +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "' " +
                 " ORDER BY signature limit 2000";
@@ -1109,8 +1149,7 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
@@ -1119,8 +1158,7 @@ public class EventDAOImpl implements EventDAO {
         for (int i = 0; i < comidset.length; i++) {
 
             Computerroom cp = new Computerroom();
-            cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
             String str = cp.getTempset();
             str += "，";
@@ -1132,11 +1170,14 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
 //        for (int i = 0; i < didset.length; i++) {
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta.annotation as annotation " +
-                "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta" +
+                ".annotation as annotation " + "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid  " +
+                " and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
-                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (113,114) ORDER BY signature limit 2000";
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (113,114) ORDER BY " +
+                "signature limit 2000";
         try {
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1178,16 +1219,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getTempset();
             str += "，";
@@ -1199,8 +1239,10 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
 //        for (int i = 0; i < didset.length; i++) {
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta.annotation as annotation " +
-                "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta" +
+                ".annotation as annotation " + "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid  " +
+                " and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "'" +
                 " and tb.type in (113,114) ORDER BY signature limit 2000";
@@ -1247,16 +1289,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getTempset();
             str += "，";
@@ -1268,11 +1309,14 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
 //        for (int i = 0; i < didset.length; i++) {
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta.annotation as annotation " +
-                "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta" +
+                ".annotation as annotation " + "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid  " +
+                " and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "' " +
-                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (115,116) ORDER BY signature limit 2000";
+                " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (115,116) ORDER BY " +
+                "signature limit 2000";
 
         try {
             ps = db.getPs(sql);
@@ -1315,8 +1359,7 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
@@ -1324,8 +1367,8 @@ public class EventDAOImpl implements EventDAO {
 
         for (int i = 0; i < comidset.length; i++) {
 
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getTempset();
             str += "，";
@@ -1337,8 +1380,10 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
 //        for (int i = 0; i < didset.length; i++) {
-        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta.annotation as annotation " +
-                "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta" +
+                ".value as description, ta.time as time, ta.cid as cid, ta.duration as duration,ta.signature as signature,ta" +
+                ".annotation as annotation " + "from event_environment ta,events_type tb,devices td where ta.cid = tb.cid  " +
+                " and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "' " +
                 " and tb.type in (115,116) ORDER BY signature limit 2000";
@@ -1385,16 +1430,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getCidset();
             str += "，";
@@ -1406,12 +1450,16 @@ public class EventDAOImpl implements EventDAO {
         db = new DBConnect();
 
 //        for (int i = 0; i < didset.length; i++) {
-           /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+           /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+            ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as
+            annotation, ta.duration as duration " +
                     "from event_ctrl ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "'";
+                    + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime +
+                     "'";
 */
-        String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as description, " +
+                "ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as " +
+                "duration " + "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "' " +
                 " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
@@ -1457,16 +1505,15 @@ public class EventDAOImpl implements EventDAO {
         String didstr = "";
 
         //根据市行名称查询机房id的集合
-        CityBank cb = (CityBank) hbsessionDao.getFirst(
-                "FROM CityBank where cbid = '" + cbid + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbid + "'");
 
         //再根据机房id查询设备id的集合
         String comstr = cb.getCompRoom();
         String comidset[] = comstr.split("，");
 
         for (int i = 0; i < comidset.length; i++) {
-            Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                    "FROM Computerroom where rid = '" + comidset[i] + "'");
+            Computerroom cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] +
+                    "'");
 
             String str = cp.getCidset();
             str += "，";
@@ -1479,12 +1526,15 @@ public class EventDAOImpl implements EventDAO {
         String maxtime = "0000-00-00 00:00:00.0";
 
 //        for (int i = 0; i < didset.length; i++) {
-            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
+            /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type,
+             ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as
+             annotation " +
                     "from event_ctrl ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
                     + "' and ta.did ='" + didset[i] + "'";*/
 
-        String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " +
-                "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id   and td.did=ta.did " +
+        String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as description, " +
+                "ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation " + "from event_ctrl" +
+                " ta,dictionary_ctrl tb,devices td where ta.cid = tb.id   and td.did=ta.did " +
 //                    "and td.did ='" + didset[i]
 //                    + "' and ta.did ='" + didset[i] + "' " +
                 "ORDER BY signature limit 2000";
@@ -1537,16 +1587,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getCidset();
                 str += "，";
@@ -1559,9 +1608,10 @@ public class EventDAOImpl implements EventDAO {
 
             for (int i = 0; i < didset.length; i++) {
 
-                String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id and td.did =ta.did"
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
+                String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as " +
+                        "description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                        "annotation, ta.duration as duration " + "from event_ctrl ta,dictionary_ctrl tb,devices td where ta" +
+                        ".cid = tb.id and td.did =ta.did" + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
                 try {
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -1592,16 +1642,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getTempset();
                 str += "，";
@@ -1614,13 +1663,18 @@ public class EventDAOImpl implements EventDAO {
 
             for (int i = 0; i < didset.length; i++) {
 
-              /*  String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+              /*  String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as
+              type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation
+               as annotation, ta.duration as duration " +
                         "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "'";*/
-                String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
-                        "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
+                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" +
+                        endtime + "'";*/
+                String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb" +
+                        ".description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as " +
+                        "signature, ta.annotation as annotation, ta.duration as duration " + "from event_environment ta," +
+                        "events_type tb, devices_threshold tc,devices td " + "where tb.cid = ta.cid and tb.type = tc.type " +
+                        "and td.did =ta.did " + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and " +
+                        "ta.time <'" + endtime + "' ORDER BY signature limit 2000";
                 try {
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -1651,16 +1705,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getTempset();
                 str += "，";
@@ -1673,14 +1726,19 @@ public class EventDAOImpl implements EventDAO {
 
             for (int i = 0; i < didset.length; i++) {
 
-               /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+               /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as
+               type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta
+               .annotation as annotation, ta.duration as duration " +
                         "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (113,114)";
+                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" +
+                        endtime + "' and tb.type in (113,114)";
 */
-                String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
-                        "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (113,114) ORDER BY signature limit 2000";
+                String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb" +
+                        ".description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as " +
+                        "signature, ta.annotation as annotation, ta.duration as duration " + "from event_environment ta," +
+                        "events_type tb, devices_threshold tc,devices td " + "where tb.cid = ta.cid and tb.type = tc.type " +
+                        "and td.did =ta.did " + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and " +
+                        "ta.time <'" + endtime + "' and tb.type in (113,114) ORDER BY signature limit 2000";
                 try {
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -1711,16 +1769,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getTempset();
                 str += "，";
@@ -1733,15 +1790,20 @@ public class EventDAOImpl implements EventDAO {
 
             for (int i = 0; i < didset.length; i++) {
 
-                /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+                /*String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as
+                type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta
+                .annotation as annotation, ta.duration as duration " +
                         "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (115,116)";
+                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" +
+                        endtime + "' and tb.type in (115,116)";
                */
 
-                String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
-                        "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
-                        + " and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
+                String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb" +
+                        ".description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as " +
+                        "signature, ta.annotation as annotation, ta.duration as duration " + "from event_environment ta," +
+                        "events_type tb, devices_threshold tc,devices td " + "where tb.cid = ta.cid and tb.type = tc.type " +
+                        "and td.did =ta.did " + " and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta" +
+                        ".time <'" + endtime + "' ORDER BY signature limit 2000";
 
                 try {
                     ps = db.getPs(sql);
@@ -1773,16 +1835,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -1795,9 +1856,11 @@ public class EventDAOImpl implements EventDAO {
 
             for (int i = 0; i < didset.length; i++) {
 
-                String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
+                String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as " +
+                        "type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta" +
+                        ".annotation as annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices" +
+                        " td where ta.cid = tb.cid and td.did =ta.did " + "' and ta.did ='" + didset[i] + "' and ta.time " +
+                        ">'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
                 try {
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -1828,16 +1891,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -1850,10 +1912,13 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, " +
+                    "ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                    "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = " +
+                    "tb.cid and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i] + "'" +
-                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY signature limit 2000";
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY" +
+                    " signature limit 2000";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -1884,16 +1949,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -1906,10 +1970,13 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, " +
+                    "ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                    "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = " +
+                    "tb.cid and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i]
-                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and 322 ORDER BY signature limit 2000";
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and" +
+                    " 322 ORDER BY signature limit 2000";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -1940,16 +2007,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -1962,10 +2028,13 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, " +
+                    "ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                    "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = " +
+                    "tb.cid and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i]
-                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY signature limit 2000";
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY " +
+                    "signature limit 2000";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -1996,16 +2065,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -2018,10 +2086,13 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, " +
+                    "ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                    "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = " +
+                    "tb.cid and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i]
-                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3 ORDER BY signature limit 2000";
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3 ORDER BY " +
+                    "signature limit 2000";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -2052,16 +2123,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -2074,10 +2144,13 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, " +
+                    "ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                    "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = " +
+                    "tb.cid and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i]
-                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY signature limit 2000";
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY " +
+                    "signature limit 2000";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -2101,7 +2174,8 @@ public class EventDAOImpl implements EventDAO {
 
 
     // 获取分页的治理事件
-    public PageHelper<EventObject> getCtrlEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+    public PageHelper<EventObject> getCtrlEventObjectListPage(String cbnamelist[], String starttime, String endtime,
+                                                              Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
@@ -2111,16 +2185,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getCidset();
                 str += "，";
@@ -2133,8 +2206,10 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id and td.did =ta.did "
+            String sql = "select ta.teid as teid, td.name as location, tb.description as type, ta.value as " +
+                    "description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta" +
+                    ".duration as duration " + "from event_ctrl ta,dictionary_ctrl tb,devices td where ta.cid = tb.id and " +
+                    "td.did =ta.did "
 //                        + "' and ta.did='" + didset[i]
                     + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
             try {
@@ -2180,7 +2255,8 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件
-    public PageHelper<EventObject> getPowerEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+    public PageHelper<EventObject> getPowerEventObjectListPage(String cbnamelist[], String starttime, String endtime,
+                                                               Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
@@ -2190,16 +2266,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -2212,8 +2287,10 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, " +
+                    "ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                    "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = " +
+                    "tb.cid and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i]
                     + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
             try {
@@ -2259,7 +2336,8 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件lytx
-    public PageHelper<EventObject> getPowerEventlytxObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+    public PageHelper<EventObject> getPowerEventlytxObjectListPage(String cbnamelist[], String starttime,
+                                                                   String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
@@ -2269,16 +2347,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -2291,10 +2368,13 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, " +
+                    "ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                    "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = " +
+                    "tb.cid and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i]
-                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY signature limit 2000";
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (1,2) ORDER BY" +
+                    " signature limit 2000";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -2338,7 +2418,8 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件xb
-    public PageHelper<EventObject> getPowerEventxbObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+    public PageHelper<EventObject> getPowerEventxbObjectListPage(String cbnamelist[], String starttime,
+                                                                 String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
@@ -2348,16 +2429,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -2370,10 +2450,13 @@ public class EventDAOImpl implements EventDAO {
 
             for (int i = 0; i < didset.length; i++) {
 
-                String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+                String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as " +
+                        "type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta" +
+                        ".annotation as annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices" +
+                        " td where ta.cid = tb.cid and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i]
-                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23 and 322 ORDER BY signature limit 2000";
+                        + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.subtype between 23" +
+                        " and 322 ORDER BY signature limit 2000";
                 try {
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -2417,7 +2500,8 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件sxbph
-    public PageHelper<EventObject> getPowerEventsxbphObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+    public PageHelper<EventObject> getPowerEventsxbphObjectListPage(String cbnamelist[], String starttime,
+                                                                    String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
@@ -2427,16 +2511,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -2449,10 +2532,13 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, " +
+                    "ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                    "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = " +
+                    "tb.cid and td.did =ta.did "
 //                        + " and ta.did ='" + didset[i]
-                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY signature limit 2000";
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=9 ORDER BY " +
+                    "signature limit 2000";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -2496,7 +2582,8 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件shunbian
-    public PageHelper<EventObject> getPowerEventshunbianObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+    public PageHelper<EventObject> getPowerEventshunbianObjectListPage(String cbnamelist[], String starttime,
+                                                                       String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
@@ -2506,16 +2593,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -2528,9 +2614,11 @@ public class EventDAOImpl implements EventDAO {
 
             for (int i = 0; i < didset.length; i++) {
 
-                String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                        "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3 ORDER BY signature limit 2000";
+                String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as " +
+                        "type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta" +
+                        ".annotation as annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices" +
+                        " td where ta.cid = tb.cid and td.did =ta.did " + "' and ta.did ='" + didset[i] + "' and ta.time " +
+                        ">'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=3 ORDER BY signature limit 2000";
                 try {
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -2574,7 +2662,8 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的电能事件shanbian
-    public PageHelper<EventObject> getPowerEventshanbianObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+    public PageHelper<EventObject> getPowerEventshanbianObjectListPage(String cbnamelist[], String starttime,
+                                                                       String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
@@ -2584,16 +2673,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getDidset();
                 str += "，";
@@ -2606,10 +2694,13 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did =ta.did "
+            String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, " +
+                    "ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as " +
+                    "annotation, ta.duration as duration " + "from event_power ta,events_type tb,devices td where ta.cid = " +
+                    "tb.cid and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i]
-                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY signature limit 2000";
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type=8 ORDER BY " +
+                    "signature limit 2000";
             try {
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -2654,7 +2745,8 @@ public class EventDAOImpl implements EventDAO {
 
 
     // 获取分页的环境事件
-    public PageHelper<EventObject> getEnvironmentEventObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+    public PageHelper<EventObject> getEnvironmentEventObjectListPage(String cbnamelist[], String starttime,
+                                                                     String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
@@ -2664,16 +2756,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getTempset();
                 str += "，";
@@ -2686,13 +2777,17 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-               /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+               /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as
+               type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta
+               .annotation as annotation, ta.duration as duration " +
                         "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "'";
+                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" +
+                        endtime + "'";
              */
-            String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
-                    "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did"
+            String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description " +
+                    "as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta" +
+                    ".annotation as annotation, ta.duration as duration " + "from event_environment ta,events_type tb, " +
+                    "devices_threshold tc,devices td " + "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did"
 //                        + "' and ta.did ='" + didset[i]
                     + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' ORDER BY signature limit 2000";
 
@@ -2739,7 +2834,8 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的环getLocalAllDetailEnvironmentEventtemp境事件-temp
-    public PageHelper<EventObject> getEnvironmentEventtempObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+    public PageHelper<EventObject> getEnvironmentEventtempObjectListPage(String cbnamelist[], String starttime,
+                                                                         String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
@@ -2749,16 +2845,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getTempset();
                 str += "，";
@@ -2771,15 +2866,20 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-               /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+               /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as
+               type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta
+               .annotation as annotation, ta.duration as duration " +
                         "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "'";
+                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" +
+                        endtime + "'";
              */
-            String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
-                    "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
+            String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description " +
+                    "as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta" +
+                    ".annotation as annotation, ta.duration as duration " + "from event_environment ta,events_type tb, " +
+                    "devices_threshold tc,devices td " + "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i]
-                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (113,114) ORDER BY signature limit 2000";
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (113,114) " +
+                    "ORDER BY signature limit 2000";
 
             try {
                 ps = db.getPs(sql);
@@ -2824,7 +2924,8 @@ public class EventDAOImpl implements EventDAO {
     }
 
     // 获取分页的环境事件-wet
-    public PageHelper<EventObject> getEnvironmentEventwetObjectListPage(String cbnamelist[], String starttime, String endtime, Integer start, Integer end) {
+    public PageHelper<EventObject> getEnvironmentEventwetObjectListPage(String cbnamelist[], String starttime,
+                                                                        String endtime, Integer start, Integer end) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         PageHelper<EventObject> rtlist = new PageHelper<EventObject>();
@@ -2834,16 +2935,15 @@ public class EventDAOImpl implements EventDAO {
             String didstr = "";
 
             //根据市行名称查询机房id的集合
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid = '" + cbnamelist[k] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid = '" + cbnamelist[k] + "'");
 
             //再根据机房id查询设备id的集合
             String comstr = cb.getCompRoom();
             String comidset[] = comstr.split("，");
 
             for (int i = 0; i < comidset.length; i++) {
-                Computerroom cp = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rid = '" + comidset[i] + "'");
+                Computerroom cp =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + comidset[i] + "'");
 
                 String str = cp.getTempset();
                 str += "，";
@@ -2856,15 +2956,20 @@ public class EventDAOImpl implements EventDAO {
 
 //            for (int i = 0; i < didset.length; i++) {
 
-               /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
+               /* String sql = "select ta.teid as teid, tb.classify as name, td.name as location, tb.description as
+               type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta
+               .annotation as annotation, ta.duration as duration " +
                         "from event_power ta,events_type tb,devices td where ta.cid = tb.cid and td.did ='" + didset[i]
-                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" + endtime + "'";
+                        + "' and ta.did ='" + didset[i] + "' and ta.time >'" + starttime + "' and ta.time <'" +
+                        endtime + "'";
              */
-            String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta.annotation as annotation, ta.duration as duration " +
-                    "from event_environment ta,events_type tb, devices_threshold tc,devices td " +
-                    "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
+            String sql = "select DISTINCT ta.teid as teid, tb.classify as name, td.name as location, tb.description " +
+                    "as type, ta.value as description, ta.time as time, ta.cid as cid, ta.signature as signature, ta" +
+                    ".annotation as annotation, ta.duration as duration " + "from event_environment ta,events_type tb, " +
+                    "devices_threshold tc,devices td " + "where tb.cid = ta.cid and tb.type = tc.type and td.did =ta.did "
 //                        + "' and ta.did ='" + didset[i]
-                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (115,116) ORDER BY signature limit 2000";
+                    + " and ta.time >'" + starttime + "' and ta.time <'" + endtime + "' and tb.type in (115,116) " +
+                    "ORDER BY signature limit 2000";
 
             try {
                 ps = db.getPs(sql);
@@ -2913,8 +3018,7 @@ public class EventDAOImpl implements EventDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<AssessRecord> rtlist = hbsessionDao.search(
-                "FROM AssessRecord");
+        List<AssessRecord> rtlist = hbsessionDao.search("FROM AssessRecord");
 
         return rtlist;
     }
@@ -2931,8 +3035,7 @@ public class EventDAOImpl implements EventDAO {
 
         Map<String, List<Integer>> rtmap = new HashMap<>();
 
-        List<ProvinceBank> provblist = hbsessionDao.search(
-                "FROM ProvinceBank");
+        List<ProvinceBank> provblist = hbsessionDao.search("FROM ProvinceBank");
 
         for (int j = 0; j < provblist.size(); j++) {
 
@@ -2971,8 +3074,7 @@ public class EventDAOImpl implements EventDAO {
 
                 //查找当前市行下的设备
                 for (int i = 0; i < cbidstr.length; i++) {
-                    List<CityBank> cityblist = hbsessionDao.search(
-                            "FROM CityBank where cbid='" + cbidstr[i] + "'");
+                    List<CityBank> cityblist = hbsessionDao.search("FROM CityBank where cbid='" + cbidstr[i] + "'");
                     String didset2 = cityblist.get(0).getDidset();
                     String tempset2 = cityblist.get(0).getTempset();
                     String didset2str[] = new String[0];
@@ -2997,8 +3099,8 @@ public class EventDAOImpl implements EventDAO {
                         String compstr[] = comproomset.split("，");
                         //查找当前机房下的设备
                         for (int ii = 0; ii < compstr.length; ii++) {
-                            List<Computerroom> complist = hbsessionDao.search(
-                                    "FROM Computerroom where rid='" + compstr[ii] + "'");
+                            List<Computerroom> complist =
+                                    hbsessionDao.search("FROM Computerroom where rid='" + compstr[ii] + "'");
 
                             String didset3 = complist.get(0).getDidset();
                             String tempset3 = complist.get(0).getTempset();
@@ -3033,8 +3135,8 @@ public class EventDAOImpl implements EventDAO {
                 didsetstring = didsetstring.substring(0, didsetstring.length() - 1);
                 didsetstring += ")";
 
-                List<AssessRecord> assessrecordlist = hbsessionDao.search(
-                        " FROM AssessRecord where did in " + didsetstring);
+                List<AssessRecord> assessrecordlist =
+                        hbsessionDao.search(" FROM AssessRecord where did in " + didsetstring);
 
                 if (assessrecordlist == null) { // 没用记录时
                     nlist.add(0);
@@ -3109,8 +3211,7 @@ public class EventDAOImpl implements EventDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<EventsType> rtlist = hbsessionDao.search(
-                "FROM EventsType");
+        List<EventsType> rtlist = hbsessionDao.search("FROM EventsType");
 
         return rtlist;
     }
@@ -3124,8 +3225,7 @@ public class EventDAOImpl implements EventDAO {
 
         List<List<String>> rtlist = new ArrayList<>();
 
-        ProvinceBank provb = (ProvinceBank) hbsessionDao.getFirst(
-                "FROM ProvinceBank where pbid='" + pid + "'");
+        ProvinceBank provb = (ProvinceBank) hbsessionDao.getFirst("FROM ProvinceBank where pbid='" + pid + "'");
 
         String cbidset = provb.getCbidset();
         if (cbidset == null || cbidset.equals("")) { //省行下无市行
@@ -3156,8 +3256,7 @@ public class EventDAOImpl implements EventDAO {
                 List<String> tempset = new ArrayList<>();
                 List<String> cidset = new ArrayList<>();
 
-                CityBank cityb = (CityBank) hbsessionDao.getFirst(
-                        "FROM CityBank where cbid='" + cbidstr[i] + "'");
+                CityBank cityb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid='" + cbidstr[i] + "'");
 
                 //挂在市行下的设备
                 String didset1 = cityb.getDidset();
@@ -3192,8 +3291,8 @@ public class EventDAOImpl implements EventDAO {
                     String compstr[] = comproomset.split("，");
                     //查找当前机房下的设备
                     for (int ii = 0; ii < compstr.length; ii++) {
-                        List<Computerroom> complist = hbsessionDao.search(
-                                "FROM Computerroom where rid='" + compstr[ii] + "'");
+                        List<Computerroom> complist =
+                                hbsessionDao.search("FROM Computerroom where rid='" + compstr[ii] + "'");
 
                         String didset3 = complist.get(0).getDidset();
                         String tempset3 = complist.get(0).getTempset();
@@ -3253,13 +3352,16 @@ public class EventDAOImpl implements EventDAO {
                             hbsessionDao.search("FROM AssessRecord where did IN" + didsetstring);*/
 
                     //电能类事件类型为1
-                    String sql1 = "select degree,eventclass from assess_record ta, event_power tb where ta.teid = tb.teid and (tb.signature is NULL or tb.signature = '') and ta.did IN " + didsetstring;
+                    String sql1 = "select degree,eventclass from assess_record ta, event_power tb where ta.teid = tb" +
+                            ".teid and (tb.signature is NULL or tb.signature = '') and ta.did IN " + didsetstring;
 
                     //温度类事件类型为2//湿度类事件类型为3
-                    String sql23 = "select degree,eventclass from assess_record ta, event_environment tb where ta.teid = tb.teid and (tb.signature is NULL or tb.signature = '') and ta.did IN " + tempsetstring;
+                    String sql23 = "select degree,eventclass from assess_record ta, event_environment tb where ta" +
+                            ".teid = tb.teid and (tb.signature is NULL or tb.signature = '') and ta.did IN " + tempsetstring;
 
                     //治理类事件类型为4
-                    String sql4 = "select degree,eventclass from assess_record ta, event_ctrl tb where ta.teid = tb.teid and (tb.signature is NULL or tb.signature = '') and ta.did IN " + cidsetstring;
+                    String sql4 = "select degree,eventclass from assess_record ta, event_ctrl tb where ta.teid = tb" +
+                            ".teid and (tb.signature is NULL or tb.signature = '') and ta.did IN " + cidsetstring;
 
 
                     try {
@@ -3353,7 +3455,8 @@ public class EventDAOImpl implements EventDAO {
                         e.printStackTrace();
                     }
 
-                    //hbsessionDao.search("FROM AssessRecord where did IN" + didsetstring + " and time > '" + stime + "' and time < '" + etime + "'");
+                    //hbsessionDao.search("FROM AssessRecord where did IN" + didsetstring + " and time > '" + stime +
+                    // "' and time < '" + etime + "'");
                     /*if (assessrecordlist != null) {
                         for (int j = 0; j < assessrecordlist.size(); j++) {
                             if (assessrecordlist.get(j).getDegree().equals(3)) {
@@ -3419,15 +3522,13 @@ public class EventDAOImpl implements EventDAO {
 
         List<CityBank> list = new ArrayList<>();
 
-        ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
-                "FROM ProvinceBank where pbname='" + pbname + "'");
+        ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst("FROM ProvinceBank where pbname='" + pbname + "'");
 
         String cbistr = pb.getCbidset();
         String cbidset[] = cbistr.split("，");
 
         for (int i = 0; i < cbidset.length; i++) {
-            CityBank cb = (CityBank) hbsessionDao.getFirst(
-                    "FROM CityBank where cbid='" + cbidset[i] + "'");
+            CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid='" + cbidset[i] + "'");
 
             list.add(cb);
         }
@@ -3442,8 +3543,7 @@ public class EventDAOImpl implements EventDAO {
 
         List<List<String>> rtlist = new ArrayList<>();
 
-        Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rid='" + compname + "'");
+        Computerroom comps = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid='" + compname + "'");
 
         if (comps != null) {
             String tempset = comps.getTempset();
@@ -3459,7 +3559,8 @@ public class EventDAOImpl implements EventDAO {
                 if (null != tempDataMap) {
                     for (int i = 0; i < tempstr.length; i++) {
                         List<String> aa = new ArrayList<>();
-                        List<String> list = hbsessionDao.search("select name as dname from  Devices  where did =" + tempstr[i]);
+                        List<String> list =
+                                hbsessionDao.search("select name as dname from  Devices  where did =" + tempstr[i]);
                         if (list != null) {
                             aa.add(list.get(0));
                             aa.add("0.00");
@@ -3470,11 +3571,16 @@ public class EventDAOImpl implements EventDAO {
                         while (iterator.hasNext()) {
                             String did = iterator.next();  //监测点id
                             if (did.equals(tempstr[i])) {
-//                                List<List<String>> list = hbsessionDao.search("select tb.name as dname, ta.temperature as temperature, ta.humidity as humidity from TemperatureMonitor ta, Devices tb where ta.did =" + tempstr[i] + " and tb.did =ta.did order by ta.time desc");
+//                                List<List<String>> list = hbsessionDao.search("select tb.name as dname, ta
+//                                .temperature as temperature, ta.humidity as humidity from TemperatureMonitor ta,
+//                                Devices tb where ta.did =" + tempstr[i] + " and tb.did =ta.did order by ta.time
+//                                desc");
 
                                 if (list != null) {
-                                    aa.set(1, tempDataMap.get(did).getTemperature() == null ? "0.00" : tempDataMap.get(did).getTemperature().toString());
-                                    aa.set(2, tempDataMap.get(did).getHumidity() == null ? "0.00" : tempDataMap.get(did).getHumidity().toString());
+                                    aa.set(1, tempDataMap.get(did).getTemperature() == null ? "0.00" :
+                                            tempDataMap.get(did).getTemperature().toString());
+                                    aa.set(2, tempDataMap.get(did).getHumidity() == null ? "0.00" :
+                                            tempDataMap.get(did).getHumidity().toString());
 
                                 }
                             }
@@ -3496,8 +3602,7 @@ public class EventDAOImpl implements EventDAO {
 
         List<Integer> rtlist = new ArrayList<>();
 
-        Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rid='" + compname + "'");
+        Computerroom comps = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid='" + compname + "'");
 
         if (comps != null) {
             String didset = comps.getDidset();
@@ -3523,7 +3628,9 @@ public class EventDAOImpl implements EventDAO {
                 Integer sumpower = 0;
 
                 for (int i = 0; i < didstr.length; i++) {
-                    String sql = "select count(*) as num1 from event_power ta, devices tb where ta.did = tb.did and ta.did = " + didstr[i] + " and (ta.signature is NULL or ta.signature = '')"; //and ta.time >'" + sdf.format(date) + "'
+                    String sql = "select count(*) as num1 from event_power ta, devices tb where ta.did = tb.did and " +
+                            "ta.did = " + didstr[i] + " and (ta.signature is NULL or ta.signature = '')"; //and ta.time >'"
+                    // + sdf.format(date) + "'
 
                     try {
                         ps = db.getPs(sql);
@@ -3550,7 +3657,8 @@ public class EventDAOImpl implements EventDAO {
                 Integer sumctrl = 0;
 
                 for (int i = 0; i < cidstr.length; i++) {
-                    String sql = "select count(*) as num2 from event_ctrl ta, devices tb where ta.did = tb.did and ta.did = " + cidstr[i] + " and (ta.signature is NULL or ta.signature = '')";
+                    String sql = "select count(*) as num2 from event_ctrl ta, devices tb where ta.did = tb.did and ta" +
+                            ".did = " + cidstr[i] + " and (ta.signature is NULL or ta.signature = '')";
 
                     try {
                         ps = db.getPs(sql);
@@ -3577,7 +3685,8 @@ public class EventDAOImpl implements EventDAO {
                 Integer sumtemp = 0;
 
                 for (int i = 0; i < tempstr.length; i++) {
-                    String sql = "select count(*) as num3 from event_environment ta, devices tb where ta.did = tb.did and ta.did = " + tempstr[i] + " and (ta.signature is NULL or ta.signature = '')";
+                    String sql = "select count(*) as num3 from event_environment ta, devices tb where ta.did = tb.did" +
+                            " and ta.did = " + tempstr[i] + " and (ta.signature is NULL or ta.signature = '')";
 
                     try {
                         ps = db.getPs(sql);
@@ -3609,8 +3718,7 @@ public class EventDAOImpl implements EventDAO {
 
         List<String> didlist = new ArrayList();
 
-        Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rid='" + rname + "'");
+        Computerroom comps = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid='" + rname + "'");
 
         if (comps != null) {
             String cidset = comps.getCidset();
@@ -3619,8 +3727,8 @@ public class EventDAOImpl implements EventDAO {
             //寻找ctrl类（治理设备）的device
             if (cidstr != null) {
                 for (int i = 0; i < cidstr.length; i++) {
-                    Devices dv = (Devices) hbsessionDao.getFirst(
-                            "FROM Devices where did='" + cidstr[i] + "' and type = 'ctrl'");
+                    Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where did='" + cidstr[i] + "' and type" +
+                            " = 'ctrl'");
                     if (dv != null) {
                         didlist.add(dv.getDid().toString());
                     }
@@ -3636,8 +3744,7 @@ public class EventDAOImpl implements EventDAO {
 
         List<String> didlist = new ArrayList();
 
-        Computerroom comps = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rid='" + rname + "'");
+        Computerroom comps = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid='" + rname + "'");
 
         if (comps != null) {
             String didset = comps.getDidset();
@@ -3646,8 +3753,8 @@ public class EventDAOImpl implements EventDAO {
             //寻找（在线监测设备）的device
             if (didstr != null) {
                 for (int i = 0; i < didstr.length; i++) {
-                    Devices dv = (Devices) hbsessionDao.getFirst(
-                            "FROM Devices where did='" + didstr[i] + "' and type = 'IDP'");
+                    Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where did='" + didstr[i] + "' and type" +
+                            " = 'IDP'");
                     if (dv != null) {
                         didlist.add(dv.getDid().toString());
                     }
@@ -3662,8 +3769,8 @@ public class EventDAOImpl implements EventDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         String rt = new String();
 
-        List<EventCtrl> list = hbsessionDao.search(
-                "from EventCtrl where (signature is NULL or signature = '') and did='" + did + "' and time > '" + stime + "' and time < '" + etime + "' order by time desc");
+        List<EventCtrl> list = hbsessionDao.search("from EventCtrl where (signature is NULL or signature = '') and " +
+                "did='" + did + "' and time > '" + stime + "' and time < '" + etime + "' order by time desc");
 
         if (list == null) {
             rt = "正常";
@@ -3671,8 +3778,8 @@ public class EventDAOImpl implements EventDAO {
             EventCtrl eventCtrl = list.get(0);
             Integer cid = eventCtrl.getCid();
 
-            DictionaryCtrl dictionaryCtrl = (DictionaryCtrl) hbsessionDao.getFirst(
-                    "from DictionaryCtrl where id='" + cid + "'");
+            DictionaryCtrl dictionaryCtrl =
+                    (DictionaryCtrl) hbsessionDao.getFirst("from DictionaryCtrl where id='" + cid + "'");
 
             if (dictionaryCtrl != null) {
                 rt = dictionaryCtrl.getDescription() + dictionaryCtrl.getForFalse();
@@ -3698,8 +3805,8 @@ public class EventDAOImpl implements EventDAO {
                 }
             }
             if (txflag) {
-                List<EventPower> list = hbsessionDao.search(
-                        "from EventPower where (signature is NULL or signature = '') and did='" + did + "' and time > '" + stime + "' and time < '" + etime + "' order by time desc");
+                List<EventPower> list = hbsessionDao.search("from EventPower where (signature is NULL or signature = " +
+                        "'') and did='" + did + "' and time > '" + stime + "' and time < '" + etime + "' order by time desc");
 
                 if (list == null) {
                     rt = "正常";
@@ -3707,8 +3814,8 @@ public class EventDAOImpl implements EventDAO {
                     EventPower eventPower = list.get(0);
                     Integer cid = eventPower.getCid();
 
-                    EventsType dictionary = (EventsType) hbsessionDao.getFirst(
-                            "from EventsType where id='" + cid + "'");
+                    EventsType dictionary = (EventsType) hbsessionDao.getFirst("from EventsType where id='" + cid +
+                            "'");
 
                     if (dictionary != null) {
                         rt = dictionary.getDescription();
@@ -3725,15 +3832,13 @@ public class EventDAOImpl implements EventDAO {
 
     public String getDeviceNameCtrl(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        Devices dv = (Devices) hbsessionDao.getFirst(
-                "FROM Devices where did='" + did + "' and type = 'ctrl'");
+        Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where did='" + did + "' and type = 'ctrl'");
         return dv.getName();
     }
 
     public String getDeviceNameIDP(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        Devices dv = (Devices) hbsessionDao.getFirst(
-                "FROM Devices where did='" + did + "' and type = 'IDP'");
+        Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where did='" + did + "' and type = 'IDP'");
         return dv.getName();
     }
 
@@ -3743,8 +3848,8 @@ public class EventDAOImpl implements EventDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
 
-        String hql = "update AssessmentSetting assess set assess.redyellow='" + red_yellow +
-                "', assess.yellowgreen ='" + yellow_green + "' where assess.aid='" + 1 + "'";
+        String hql = "update AssessmentSetting assess set assess.redyellow='" + red_yellow + "', assess.yellowgreen " +
+                "='" + yellow_green + "' where assess.aid='" + 1 + "'";
 
         rt = hbsessionDao.update(hql);
 
@@ -3757,8 +3862,8 @@ public class EventDAOImpl implements EventDAO {
         boolean rt = false;
 
         for (int i = 0; i < eventtypelist.length; i++) {
-            String hql = "update EventsType et set et.prior='" + priortylist[i] +
-                    "' where et.type='" + eventtypelist[i] + "'";
+            String hql =
+                    "update EventsType et set et.prior='" + priortylist[i] + "' where et.type='" + eventtypelist[i] + "'";
 
             rt = hbsessionDao.update(hql);
 
@@ -3770,17 +3875,16 @@ public class EventDAOImpl implements EventDAO {
         return rt;
     }
 
-    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String thansentinterval, String
-            uploadinterval, String assessinterval, String alarminterval, String tempinterval, String ctrlinterval,
+    public boolean setCaptrueSettingInfo(String onlineinterval, String qstinterval, String thansentinterval,
+                                         String uploadinterval, String assessinterval, String alarminterval, String tempinterval, String ctrlinterval,
                                          String thresholdsaveinterval, String qstdatainterval) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
-        String hql = "update BasicSetting bs set bs.onlineinterval=" + onlineinterval + ", bs.qstinterval=" + qstinterval + ", bs.thansentinterval=" + thansentinterval +
-                ", bs.uploadinterval=" + uploadinterval + ", bs.assessinterval=" + assessinterval + ", bs.alarminterval=" + alarminterval +
-                ", bs.tempinterval=" + tempinterval + ", bs.ctrlinterval=" + ctrlinterval + ", bs.thresholdsaveinterval=" + thresholdsaveinterval +
-                ", bs.datainterval=" + qstdatainterval + " where bs.id=0";
+        String hql =
+                "update BasicSetting bs set bs.onlineinterval=" + onlineinterval + ", bs.qstinterval=" + qstinterval + ", bs" +
+                        ".thansentinterval=" + thansentinterval + ", bs.uploadinterval=" + uploadinterval + ", bs.assessinterval=" + assessinterval + ", bs.alarminterval=" + alarminterval + ", bs.tempinterval=" + tempinterval + ", bs.ctrlinterval=" + ctrlinterval + ", bs.thresholdsaveinterval=" + thresholdsaveinterval + ", bs.datainterval=" + qstdatainterval + " where bs.id=0";
 
         rt = hbsessionDao.update(hql);
 

@@ -14,8 +14,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
-        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
+        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst("FROM PowerparmMonitor where did = '" + did +
+                "' order by time desc");
 
         crlist.add(pm);
 
@@ -27,8 +27,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
-        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
+        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst("FROM PowerparmMonitor where did = '" + did +
+                "' order by time desc");
 
         rtobj.setP1(pm.getP1());
         rtobj.setP2(pm.getP2());
@@ -45,8 +45,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
-        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
+        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst("FROM PowerparmMonitor where did = '" + did +
+                "' order by time desc");
 
         rtobj.setS1(pm.getS1());
         rtobj.setS2(pm.getS2());
@@ -63,8 +63,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
-        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
+        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst("FROM PowerparmMonitor where did = '" + did +
+                "' order by time desc");
 
         rtobj.setQ1(pm.getQ1());
         rtobj.setQ2(pm.getQ2());
@@ -81,8 +81,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
-        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
+        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst("FROM PowerparmMonitor where did = '" + did +
+                "' order by time desc");
 
         rtobj.setPf1(pm.getPf1());
         rtobj.setPf2(pm.getPf2());
@@ -99,8 +99,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
-        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
+        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst("FROM PowerparmMonitor where did = '" + did +
+                "' order by time desc");
 
 
         rtobj.setCosPhi1(pm.getCosPhi1());
@@ -117,8 +117,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
-        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
+        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst("FROM PowerparmMonitor where did = '" + did +
+                "' order by time desc");
 
         crlist.add(pm.getQ1() / pm.getP1());
         crlist.add(pm.getQ2() / pm.getP2());
@@ -135,8 +135,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
-        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
+        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst("FROM PowerparmMonitor where did = '" + did +
+                "' order by time desc");
 
         rtobj.setPstU1(pm.getPstU1());
         rtobj.setPstU2(pm.getPstU2());
@@ -153,8 +153,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
-        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
+        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst("FROM PowerparmMonitor where did = '" + did +
+                "' order by time desc");
 
         rtobj.setPltU1(pm.getPltU1());
         rtobj.setPltU2(pm.getPltU2());
@@ -171,8 +171,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
 
-        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst(
-                "FROM PowerparmMonitor where did = '" + did + "' order by time desc");
+        PowerparmMonitor pm = (PowerparmMonitor) hbsessionDao.getFirst("FROM PowerparmMonitor where did = '" + did +
+                "' order by time desc");
 
         rtobj.setHz(pm.getHz());
         rtobj.setTime(pm.getTime());
@@ -186,8 +186,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
-        PowersxdyMonitor pm = (PowersxdyMonitor) hbsessionDao.getFirst(
-                "FROM PowersxdyMonitor where did = '" + did + "' order by time desc");
+        PowersxdyMonitor pm = (PowersxdyMonitor) hbsessionDao.getFirst("FROM PowersxdyMonitor where did = '" + did +
+                "' order by time desc");
 
         crlist.add(pm);
 
@@ -198,8 +198,8 @@ public class PowerParameterDAOImpl implements PowerParameterDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
 
-        crlist = hbsessionDao.search(
-                "FROM PowerparmMonitor where did = '" + did + "' and time>='" + stime + "' and time<=' " + etime + "'");
+        crlist = hbsessionDao.search("FROM PowerparmMonitor where did = '" + did + "' and time>='" + stime + "' and " +
+                "time<=' " + etime + "'");
 
         return crlist;
     }

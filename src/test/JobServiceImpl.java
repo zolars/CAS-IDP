@@ -2,7 +2,7 @@ package test;
 
 import javax.jws.WebService;
 
-@WebService(endpointInterface = ("cn.it.ws.e.JobService"))//设置服务端点接口 ，指定对外提供服务的接口
+@WebService(endpointInterface = "cn.it.ws.e.JobService")//设置服务端点接口 ，指定对外提供服务的接口
 public class JobServiceImpl implements JobService {
     @Override
     public String getJob() {

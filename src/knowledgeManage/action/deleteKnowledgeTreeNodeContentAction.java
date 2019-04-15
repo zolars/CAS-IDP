@@ -47,12 +47,9 @@ public class deleteKnowledgeTreeNodeContentAction extends ActionSupport {
 
                 Boolean rt = dao.deleteKnowledgeNode(kid);
 
-                if (rt)
-                    jsonObject.put("提示", "删除成功！");
-                else
-                    jsonObject.put("提示", "删除失败，请重试！");
-            } else
-                jsonObject.put("提示", "删除失败，没有删除权限！");
+                if (rt) jsonObject.put("提示", "删除成功！");
+                else jsonObject.put("提示", "删除失败，请重试！");
+            } else jsonObject.put("提示", "删除失败，没有删除权限！");
 
             result = JSON.toJSONString(jsonObject);
 

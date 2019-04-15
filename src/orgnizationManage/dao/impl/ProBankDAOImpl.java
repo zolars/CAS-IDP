@@ -14,8 +14,7 @@ public class ProBankDAOImpl implements ProBankDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         System.out.println(name);
-        List<ProvinceBank> pblist = hbsessionDao.search(
-                "FROM ProvinceBank where pbname = '" + name + "'");
+        List<ProvinceBank> pblist = hbsessionDao.search("FROM ProvinceBank where pbname = '" + name + "'");
 
         System.out.println("here:" + pblist.get(0).getCbidset());
         String cbidset = pblist.get(0).getCbidset();
@@ -23,8 +22,7 @@ public class ProBankDAOImpl implements ProBankDAO {
 
         List<String> cbname = new ArrayList();
         for (String s : cbid) {
-            List<CityBank> cblist = hbsessionDao.search(
-                    "FROM CityBank where cbid = '" + s + "'");
+            List<CityBank> cblist = hbsessionDao.search("FROM CityBank where cbid = '" + s + "'");
             cbname.add(cblist.get(0).getCbname());
         }
 
@@ -35,16 +33,14 @@ public class ProBankDAOImpl implements ProBankDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
         System.out.println(name);
-        List<ProvinceBank> pblist = hbsessionDao.search(
-                "FROM ProvinceBank where pbname = '" + name + "'");
+        List<ProvinceBank> pblist = hbsessionDao.search("FROM ProvinceBank where pbname = '" + name + "'");
 
         String cbidset = pblist.get(0).getCbidset();
         String[] cbid = cbidset.split("，");
 
         List<String> compRoom = new ArrayList();
         for (String s : cbid) {
-            List<CityBank> cblist = hbsessionDao.search(
-                    "FROM CityBank where cbid = '" + s + "'");
+            List<CityBank> cblist = hbsessionDao.search("FROM CityBank where cbid = '" + s + "'");
             compRoom.add(cblist.get(0).getCompRoom());
         }
 
@@ -53,8 +49,7 @@ public class ProBankDAOImpl implements ProBankDAO {
             String[] cbroom = compRoom.get(i).split("，");
             String s = "1";
             for (String r : cbroom) {
-                List<Computerroom> roomlist = hbsessionDao.search(
-                        "FROM Computerroom where rid = '" + r + "'");
+                List<Computerroom> roomlist = hbsessionDao.search("FROM Computerroom where rid = '" + r + "'");
                 s += roomlist.get(0).getRname() + "，";
             }
             rname.add(s.substring(1, s.length() - 1));
@@ -66,8 +61,7 @@ public class ProBankDAOImpl implements ProBankDAO {
     public String getDeviceIDByName(String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Devices dv = (Devices) hbsessionDao.getFirst(
-                "FROM Devices where name = '" + name + "'");
+        Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where name = '" + name + "'");
 
         return dv.getDid().toString();
     }
@@ -75,11 +69,9 @@ public class ProBankDAOImpl implements ProBankDAO {
     public List getDeviceAlarmUserDataByName(String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Devices dv = (Devices) hbsessionDao.getFirst(
-                "FROM Devices where name = '" + name + "'");
+        Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where name = '" + name + "'");
 
-        List<DeviceAlarmUser> list = hbsessionDao.search(
-                "FROM DeviceAlarmUser where did = '" + dv.getDid() + "'");
+        List<DeviceAlarmUser> list = hbsessionDao.search("FROM DeviceAlarmUser where did = '" + dv.getDid() + "'");
 
         return list;
     }
@@ -87,11 +79,9 @@ public class ProBankDAOImpl implements ProBankDAO {
     public List getDeviceAlarmUserNameDataByName(String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Devices dv = (Devices) hbsessionDao.getFirst(
-                "FROM Devices where name = '" + name + "'");
+        Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where name = '" + name + "'");
 
-        List<DeviceAlarmUser> list = hbsessionDao.search(
-                "FROM DeviceAlarmUser where did = '" + dv.getDid() + "'");
+        List<DeviceAlarmUser> list = hbsessionDao.search("FROM DeviceAlarmUser where did = '" + dv.getDid() + "'");
 
         return list;
     }
@@ -99,8 +89,7 @@ public class ProBankDAOImpl implements ProBankDAO {
     public List getDeviceThresholdInfoByType(String type) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<DevicesThreshold> dtlist = hbsessionDao.search(
-                "FROM DevicesThreshold where type = '" + type + "'");
+        List<DevicesThreshold> dtlist = hbsessionDao.search("FROM DevicesThreshold where type = '" + type + "'");
 
         return dtlist;
     }
@@ -126,40 +115,32 @@ public class ProBankDAOImpl implements ProBankDAO {
     public Integer getMaxThresholdId() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        DevicesThreshold kl = (DevicesThreshold) hbsessionDao.getFirst(
-                "FROM DevicesThreshold order by dtid desc");
+        DevicesThreshold kl = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold order by dtid desc");
 
-        if (kl == null)
-            return 1;
-        else
-            return kl.getDtid();
+        if (kl == null) return 1;
+        else return kl.getDtid();
     }
 
     public String getMaxDeviceId() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Devices kl = (Devices) hbsessionDao.getFirst(
-                "FROM Devices order by did desc");
+        Devices kl = (Devices) hbsessionDao.getFirst("FROM Devices order by did desc");
 
-        if (kl == null)
-            return "0";
-        else
-            return kl.getDid().toString();
+        if (kl == null) return "0";
+        else return kl.getDid().toString();
     }
 
     public String getMaxDeviceAlarmId() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        DeviceAlarmUser kl = (DeviceAlarmUser) hbsessionDao.getFirst(
-                "FROM DeviceAlarmUser order by id desc");
+        DeviceAlarmUser kl = (DeviceAlarmUser) hbsessionDao.getFirst("FROM DeviceAlarmUser order by id desc");
 
-        if (kl == null)
-            return "0";
-        else
-            return kl.getId();
+        if (kl == null) return "0";
+        else return kl.getId();
     }
 
-    public Boolean addThresholdInfo(String did, Integer dtid, String name, String type, String unit, Double standval, Double cellval, Double floorval, Integer ismark, String alarmcontent) {
+    public Boolean addThresholdInfo(String did, Integer dtid, String name, String type, String unit, Double standval,
+                                    Double cellval, Double floorval, Integer ismark, String alarmcontent) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
@@ -174,8 +155,9 @@ public class ProBankDAOImpl implements ProBankDAO {
         return rt;
     }
 
-    public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port,
-                                    String extra, Integer sms, Integer alert, Integer plantform) {
+    public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno,
+                                    String IPaddress, String port, String extra, Integer sms, Integer alert,
+                                    Integer plantform) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
@@ -221,19 +203,21 @@ public class ProBankDAOImpl implements ProBankDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        DevicesThreshold dt = (DevicesThreshold) hbsessionDao.getFirst(
-                "FROM DevicesThreshold where dtid='" + dtid + "'");
+        DevicesThreshold dt = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where dtid='" + dtid +
+                "'");
 
         return dt;
     }
 
-    public Boolean updateDeviceThreshold(String dtid, String name, String type, String unit, Double standval, Double cellval, Double floorval, Integer ismark, String alarmcontent) {
+    public Boolean updateDeviceThreshold(String dtid, String name, String type, String unit, Double standval,
+                                         Double cellval, Double floorval, Integer ismark, String alarmcontent) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = false;
         DevicesThreshold kl = getDeviceThreshold(dtid);
 
-        String hql = "update DevicesThreshold kl set kl.name='" + name + "', kl.type='" + type + "', kl.unit='" + unit + "', kl.standardval='" + standval +
-                "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.isMark='" + ismark + "', kl.alarmcontent='" + alarmcontent + "' where kl.dtid='" + dtid + "'";
+        String hql =
+                "update DevicesThreshold kl set kl.name='" + name + "', kl.type='" + type + "', kl.unit='" + unit +
+                        "', kl.standardval='" + standval + "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.isMark='" + ismark + "', kl.alarmcontent='" + alarmcontent + "' where kl.dtid='" + dtid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -242,8 +226,7 @@ public class ProBankDAOImpl implements ProBankDAO {
     public List getAllIDPDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'IDP'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'IDP'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -256,8 +239,7 @@ public class ProBankDAOImpl implements ProBankDAO {
     public List getAllUPSDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'UPS'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'UPS'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -270,8 +252,7 @@ public class ProBankDAOImpl implements ProBankDAO {
     public List getAllxdcDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'battery'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'battery'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -284,8 +265,7 @@ public class ProBankDAOImpl implements ProBankDAO {
     public List getAllfdjDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'generator'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'generator'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -298,8 +278,7 @@ public class ProBankDAOImpl implements ProBankDAO {
     public List getAllktDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'air conditioner'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'air conditioner'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -312,8 +291,7 @@ public class ProBankDAOImpl implements ProBankDAO {
     public List getAllotherDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'other'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'other'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -326,8 +304,7 @@ public class ProBankDAOImpl implements ProBankDAO {
     public List searchFuzzyDevice(String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where name like '" + name + "%'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where name like '" + name + "%'");
 
         return list;
     }

@@ -30,7 +30,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                     char state = (char) (96 + j);
                     List<Double> value = new ArrayList<>();
 
-                    String sql = "SELECT ep." + "U" + j + "xb_" + i + " as value FROM powerxb_monitor ep WHERE ep.did = '" + did + "' AND ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
+                    String sql = "SELECT ep." + "U" + j + "xb_" + i + " as value FROM powerxb_monitor ep WHERE ep.did" +
+                            " = '" + did + "' AND ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -73,7 +74,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 for (int j = 1; j <= 3; j++) {
                     char state = (char) (96 + j);
                     List<Double> value = new ArrayList<>();
-                    String sql = "SELECT ep." + "U" + j + "xb_" + i + " as value FROM powerxb_monitor ep WHERE ep.did = '" + did + "' AND ep.time>'" + stime + "' and ep.time <'" + etime + "'";
+                    String sql = "SELECT ep." + "U" + j + "xb_" + i + " as value FROM powerxb_monitor ep WHERE ep.did" +
+                            " = '" + did + "' AND ep.time>'" + stime + "' and ep.time <'" + etime + "'";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -119,7 +121,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 for (int j = 1; j <= 3; j++) {
                     char state = (char) (96 + j);
                     List<Double> value = new ArrayList<>();
-                    String sql = "SELECT ep." + "I" + j + "va_" + i + " as value FROM powerxb_monitor ep WHERE ep.did = '" + did + "' AND ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
+                    String sql = "SELECT ep." + "I" + j + "va_" + i + " as value FROM powerxb_monitor ep WHERE ep.did" +
+                            " = '" + did + "' AND ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -158,7 +161,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 for (int j = 1; j <= 3; j++) {
                     char state = (char) (96 + j);
                     List<Double> value = new ArrayList<>();
-                    String sql = "SELECT ep." + "I" + j + "va_" + i + " as value FROM powerxb_monitor ep WHERE ep.did = '" + did + "' AND ep.time >'" + stime + "' and ep.time<'" + etime + "'";
+                    String sql = "SELECT ep." + "I" + j + "va_" + i + " as value FROM powerxb_monitor ep WHERE ep.did" +
+                            " = '" + did + "' AND ep.time >'" + stime + "' and ep.time<'" + etime + "'";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -199,7 +203,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 49; i++) {
                 for (int j = 0; j < 3; j++) {
                     char state = (char) (97 + j);
-                    String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '" + "电压总谐波含有率限值" + (i + 2) + "' AND ds.level=1";
+                    String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '" +
+                            "电压总谐波含有率限值" + (i + 2) + "' AND ds.level=1";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -233,7 +238,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 49; i++) {
                 for (int j = 0; j < 3; j++) {
                     char state = (char) (97 + j);
-                    String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '" + "电流总谐波有效值限值" + (i + 2) + "' AND ds.level=1";
+                    String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '" +
+                            "电流总谐波有效值限值" + (i + 2) + "' AND ds.level=1";
 
                     ps = db.getPs(sql);
                     rs = ps.executeQuery();
@@ -283,7 +289,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             List<Double> i2 = new ArrayList<>();
             List<Double> i3 = new ArrayList<>();
 
-            String sql = "SELECT pm.U1 as u1, pm.U2 as u2, pm.U3 as u3, pm.I1 as i1, pm.I2 as i2, pm.I3 as i3 FROM powerparm_monitor pm WHERE pm.did = '" + did + "'AND pm.time >'" + stime + "' AND pm.time <'" + etime + "'";
+            String sql = "SELECT pm.U1 as u1, pm.U2 as u2, pm.U3 as u3, pm.I1 as i1, pm.I2 as i2, pm.I3 as i3 FROM " +
+                    "powerparm_monitor pm WHERE pm.did = '" + did + "'AND pm.time >'" + stime + "' AND pm.time <'" + etime + "'";
             ps = db.getPs(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -440,7 +447,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             List<Double> i1 = new ArrayList<>();
             List<Double> i2 = new ArrayList<>();
             List<Double> i3 = new ArrayList<>();
-            String sql = "SELECT pm.U1 as u1, pm.U2 as u2, pm.U3 as u3, pm.I1 as i1, pm.I2 as i2, pm.I3 as i3 FROM powerparm_monitor pm WHERE pm.did = '" + did + "' AND pm.time>'" + stime + "' and pm.time<'" + etime + "'";
+            String sql = "SELECT pm.U1 as u1, pm.U2 as u2, pm.U3 as u3, pm.I1 as i1, pm.I2 as i2, pm.I3 as i3 FROM " +
+                    "powerparm_monitor pm WHERE pm.did = '" + did + "' AND pm.time>'" + stime + "' and pm.time<'" + etime + "'";
             ps = db.getPs(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -590,7 +598,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 49; i++) {
 
                 //读取电压总谐波含有率第i+2次
-                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" + "电压总谐波含有率限值" + (i + 2) + "' AND ep.level = 2";
+                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" +
+                        "电压总谐波含有率限值" + (i + 2) + "' AND ep.level = 2";
                 ps = db.getPs(sql0);
                 rs = ps.executeQuery();
                 String sthreshold = "";
@@ -610,8 +619,10 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                             int temp2 = i + 2;
                             String xbname = "U" + temp + "xb_" + temp2;
 
-                            // String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time LIKE'" + time + "%'";
-                            String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
+                            // String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time
+                            // LIKE'" + time + "%'";
+                            String sql =
+                                    "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
                             int sum = 0;
                             int pass_num = 0;
                             ps = db.getPs(sql);
@@ -663,7 +674,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 49; i++) {
 
                 //读取电压总谐波含有率第i+2次
-                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" + "电压总谐波含有率限值" + (i + 2) + "' AND ep.level = 2";
+                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" +
+                        "电压总谐波含有率限值" + (i + 2) + "' AND ep.level = 2";
                 ps = db.getPs(sql0);
                 rs = ps.executeQuery();
                 String sthreshold = "";
@@ -683,7 +695,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                             int temp2 = i + 2;
                             String xbname = "U" + temp + "xb_" + temp2;
 
-                            String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE  ep.time>'" + stime + "' and ep.time<'" + etime + "'";
+                            String sql =
+                                    "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE  ep.time>'" + stime + "' and ep.time<'" + etime + "'";
                             int sum = 0;
                             int pass_num = 0;
                             ps = db.getPs(sql);
@@ -738,7 +751,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 49; i++) {
 
                 //读取电流总谐波含有率第i+2次
-                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" + "电流总谐波有效值限值" + (i + 2) + "' AND ep.level = 2";
+                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" +
+                        "电流总谐波有效值限值" + (i + 2) + "' AND ep.level = 2";
                 ps = db.getPs(sql0);
                 rs = ps.executeQuery();
                 String sthreshold = "";
@@ -758,9 +772,11 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                             int temp2 = i + 2;
                             String xbname = "I" + temp + "xb_" + temp2;
 
-                            // String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time LIKE'" + time + "%'";
+                            // String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time
+                            // LIKE'" + time + "%'";
 
-                            String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
+                            String sql =
+                                    "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE ep.time >'" + stime + "' AND ep.time <'" + etime + "'";
                             int sum = 0;
                             int pass_num = 0;
                             ps = db.getPs(sql);
@@ -812,7 +828,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 49; i++) {
 
                 //读取电流总谐波含有率第i+2次
-                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" + "电流总谐波有效值限值" + (i + 2) + "' AND ep.level = 2";
+                String sql0 = "SELECT ep.cellval as threshold FROM devices_threshold ep WHERE ep.name = '" +
+                        "电流总谐波有效值限值" + (i + 2) + "' AND ep.level = 2";
                 ps = db.getPs(sql0);
                 rs = ps.executeQuery();
                 String sthreshold = "";
@@ -832,7 +849,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                             int temp2 = i + 2;
                             String xbname = "I" + temp + "xb_" + temp2;
 
-                            String sql = "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE  ep.time>'" + stime + "' and ep.time<'" + etime + "'";
+                            String sql =
+                                    "SELECT " + xbname + " as value FROM powerxb_monitor ep WHERE  ep.time>'" + stime + "' and ep.time<'" + etime + "'";
                             int sum = 0;
                             int pass_num = 0;
                             ps = db.getPs(sql);
@@ -885,7 +903,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             List<Double> hz = new ArrayList<>();
 
-            String sql = "SELECT ppm.Hz as hz FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+            String sql = "SELECT ppm.Hz as hz FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time " +
+                    ">'" + stime + "' AND ppm.time <'" + etime + "'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -928,7 +947,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         int passnum = 0;
         try {
             List<Double> hz = new ArrayList<>();
-            String sql = "SELECT ppm.Hz as hz FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
+            String sql = "SELECT ppm.Hz as hz FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm" +
+                    ".time>'" + stime + "' and ppm.time<'" + etime + "'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -976,7 +996,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             List<Double> hzpc = new ArrayList<>();
 
-            String sql = "SELECT ppm.Ifl_sum as hzpc FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+            String sql = "SELECT ppm.Ifl_sum as hzpc FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm" +
+                    ".time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1019,7 +1040,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         int passnum = 0;
         try {
             List<Double> hzpc = new ArrayList<>();
-            String sql = "SELECT ppm.Ifl_sum as hzpc FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
+            String sql = "SELECT ppm.Ifl_sum as hzpc FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm" +
+                    ".time>'" + stime + "' and ppm.time<'" + etime + "'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1060,7 +1082,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '频率上限值' AND dt.level = '2'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '频率上限值' AND dt.level" +
+                    " = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1070,7 +1093,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 result.add(cellval);
             }
 
-            String sql2 = "SELECT dt.floorval as floorval FROM devices_threshold dt WHERE dt.name = '频率下限值' AND dt.level = '2'";
+            String sql2 = "SELECT dt.floorval as floorval FROM devices_threshold dt WHERE dt.name = '频率下限值' AND dt" +
+                    ".level = '2'";
 
             ps = db.getPs(sql2);
             rs = ps.executeQuery();
@@ -1106,7 +1130,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             List<Double> sxdy = new ArrayList<>();
 
-            String sql = "SELECT psm.Uunb as sxdy FROM powersxdy_monitor psm WHERE psm.did = '" + did + "' AND psm.time >'" + stime + "' AND psm.time <'" + etime + "'";
+            String sql = "SELECT psm.Uunb as sxdy FROM powersxdy_monitor psm WHERE psm.did = '" + did + "' AND psm" +
+                    ".time >'" + stime + "' AND psm.time <'" + etime + "'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1145,7 +1170,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
 
         try {
             List<Double> sxdy = new ArrayList<>();
-            String sql = "SELECT psm.Uunb as sxdy FROM powersxdy_monitor psm WHERE psm.did = '" + did + "' AND psm.time>'" + stime + "' and psm.time<'" + etime + "'";
+            String sql = "SELECT psm.Uunb as sxdy FROM powersxdy_monitor psm WHERE psm.did = '" + did + "' AND psm" +
+                    ".time>'" + stime + "' and psm.time<'" + etime + "'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1182,7 +1208,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '三相电压负序不平衡度' AND dt.level = '2'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '三相电压负序不平衡度' AND dt" +
+                    ".level = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1219,7 +1246,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 3; i++) {
                 List<Double> dypc = new ArrayList<>();
 
-                String sql = "SELECT ppm.Ifl_U" + (i + 1) + " as Ifl_U" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+                String sql = "SELECT ppm.Ifl_U" + (i + 1) + " as Ifl_U" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
 
                 ps = db.getPs(sql);
@@ -1261,7 +1289,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> dypc = new ArrayList<>();
-                String sql = "SELECT ppm.Ifl_U" + (i + 1) + " as Ifl_U" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' and ppm.time <'" + etime + "'";
+                String sql = "SELECT ppm.Ifl_U" + (i + 1) + " as Ifl_U" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' and ppm.time <'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1301,7 +1330,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             Double cellval = null, cfloorval = null;
 
 
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '电压偏差越上限' AND dt.level = '2'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '电压偏差越上限' AND dt" +
+                    ".level = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1310,7 +1340,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                 cellval = Double.parseDouble(scellval);
             }
 
-            String sql2 = "SELECT dt.floorval as floorval FROM devices_threshold dt WHERE dt.name = '电压偏差越下限' AND dt.level = '2'";
+            String sql2 = "SELECT dt.floorval as floorval FROM devices_threshold dt WHERE dt.name = '电压偏差越下限' AND dt" +
+                    ".level = '2'";
 
             ps = db.getPs(sql2);
             rs = ps.executeQuery();
@@ -1348,8 +1379,10 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> shortu = new ArrayList<>();
-                // String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
-                String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+                // String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm
+                // WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -1390,7 +1423,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> shortu = new ArrayList<>();
-                String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
+                String sql = "SELECT ppm.Pst_U" + (i + 1) + " as short_u" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1427,7 +1461,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '短时闪变' AND dt.level = '2'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '短时闪变' AND dt.level " +
+                    "= '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1463,8 +1498,10 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> longu = new ArrayList<>();
-                //String sql = "SELECT ppm.Plt_U" + (i + 1) + " as long_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
-                String sql = "SELECT ppm.Plt_U" + (i + 1) + " as long_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+                //String sql = "SELECT ppm.Plt_U" + (i + 1) + " as long_u" + (i + 1) + " FROM powerparm_monitor ppm
+                // WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                String sql = "SELECT ppm.Plt_U" + (i + 1) + " as long_u" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -1505,7 +1542,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> longu = new ArrayList<>();
-                String sql = "SELECT ppm.Plt_U" + (i + 1) + " as long_u" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
+                String sql = "SELECT ppm.Plt_U" + (i + 1) + " as long_u" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1542,7 +1580,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '长时闪变' AND dt.level = '2'";
+            String sql = "SELECT dt.cellval as cellval FROM devices_threshold dt WHERE dt.name = '长时闪变' AND dt.level " +
+                    "= '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -1578,8 +1617,10 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> activePower = new ArrayList<>();
-                // String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
-                String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+                // String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm
+                // WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
 
                 ps = db.getPs(sql);
@@ -1621,7 +1662,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> activePower = new ArrayList<>();
-                String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
+                String sql = "SELECT ppm.P" + (i + 1) + " as activePower" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1665,7 +1707,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 3; i++) {
                 List<Double> reactivePower = new ArrayList<>();
 
-                String sql = "SELECT ppm.Q" + (i + 1) + " as reactivePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+                String sql = "SELECT ppm.Q" + (i + 1) + " as reactivePower" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -1706,7 +1749,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> reactivePower = new ArrayList<>();
-                String sql = "SELECT ppm.Q" + (i + 1) + " as reactivePower" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
+                String sql = "SELECT ppm.Q" + (i + 1) + " as reactivePower" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1751,7 +1795,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
             for (int i = 0; i < 3; i++) {
                 List<Double> powerFactor = new ArrayList<>();
 
-                String sql = "SELECT ppm.PF" + (i + 1) + " as powerFactor" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+                String sql = "SELECT ppm.PF" + (i + 1) + " as powerFactor" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
 
                 ps = db.getPs(sql);
@@ -1762,10 +1807,14 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
                     powerFactor.add(dpowerFactor);
                 }
                 if (powerFactor.size() > 0) {
-                    double max = new BigDecimal(getMax(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-                    double min = new BigDecimal(getMin(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-                    double ave = new BigDecimal(getAve(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-                    double pro = new BigDecimal(get95p(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double max =
+                            new BigDecimal(getMax(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double min =
+                            new BigDecimal(getMin(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double ave =
+                            new BigDecimal(getAve(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    double pro =
+                            new BigDecimal(get95p(powerFactor)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                     result.add((i + 1) + "," + max + "," + min + "," + ave + "," + pro);
                 }
             }
@@ -1793,7 +1842,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> powerFactor = new ArrayList<>();
-                String sql = "SELECT ppm.PF" + (i + 1) + " as powerFactor" + (i + 1) + " FROM powerparm_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
+                String sql = "SELECT ppm.PF" + (i + 1) + " as powerFactor" + (i + 1) + " FROM powerparm_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1836,7 +1886,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> thd = new ArrayList<>();
-                String sql = "SELECT ppm.THDU" + (i + 1) + " as thduFactor" + (i + 1) + " FROM powerxb_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+                String sql = "SELECT ppm.THDU" + (i + 1) + " as thduFactor" + (i + 1) + " FROM powerxb_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1876,7 +1927,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> thd = new ArrayList<>();
-                String sql = "SELECT ppm.THDU" + (i + 1) + " as thduFactor" + (i + 1) + " FROM powerxb_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
+                String sql = "SELECT ppm.THDU" + (i + 1) + " as thduFactor" + (i + 1) + " FROM powerxb_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1919,8 +1971,10 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> thd = new ArrayList<>();
-                //String sql = "SELECT ppm.THDI" + (i + 1) + " as thdiFactor" + (i + 1) + " FROM powerxb_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
-                String sql = "SELECT ppm.THDI" + (i + 1) + " as thdiFactor" + (i + 1) + " FROM powerxb_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
+                //String sql = "SELECT ppm.THDI" + (i + 1) + " as thdiFactor" + (i + 1) + " FROM powerxb_monitor ppm
+                // WHERE ppm.did = '" + did + "' AND ppm.time LIKE '" + time + "%'";
+                String sql = "SELECT ppm.THDI" + (i + 1) + " as thdiFactor" + (i + 1) + " FROM powerxb_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time >'" + stime + "' AND ppm.time <'" + etime + "'";
 
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
@@ -1961,7 +2015,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         try {
             for (int i = 0; i < 3; i++) {
                 List<Double> thd = new ArrayList<>();
-                String sql = "SELECT ppm.THDI" + (i + 1) + " as thdiFactor" + (i + 1) + " FROM powerxb_monitor ppm WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
+                String sql = "SELECT ppm.THDI" + (i + 1) + " as thdiFactor" + (i + 1) + " FROM powerxb_monitor ppm " +
+                        "WHERE ppm.did = '" + did + "' AND ppm.time>'" + stime + "' and ppm.time<'" + etime + "'";
                 ps = db.getPs(sql);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -1999,7 +2054,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT ds.floorval as value FROM devices_threshold ds WHERE ds.name = '功率因数下限' AND ds.level = '2'";
+            String sql = "SELECT ds.floorval as value FROM devices_threshold ds WHERE ds.name = '功率因数下限' AND ds.level" +
+                    " = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -2028,7 +2084,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '电压总谐波含有率' AND ds.level = '2'";
+            String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '电压总谐波含有率' AND ds" +
+                    ".level = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();
@@ -2057,7 +2114,8 @@ public class HarmonicVoltageImpl implements HarmonicVoltage {
         db = new DBConnect();
         List result = new ArrayList<String>();
         try {
-            String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '电流总谐波含有率' AND ds.level = '2'";
+            String sql = "SELECT ds.cellval as value FROM devices_threshold ds WHERE ds.name = '电流总谐波含有率' AND ds" +
+                    ".level = '2'";
 
             ps = db.getPs(sql);
             rs = ps.executeQuery();

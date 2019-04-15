@@ -29,10 +29,8 @@ public class Book implements Comparable<Object> {
     public int compareTo(Object o) {
         // TODO Auto-generated method stub
         Book book = (Book) o;
-        if (book.price == this.price)
-            return 1;
-        else
-            return 0;
+        if (book.price == this.price) return 1;
+        else return 0;
     }
 }
 

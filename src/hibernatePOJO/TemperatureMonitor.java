@@ -68,11 +68,7 @@ public class TemperatureMonitor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TemperatureMonitor that = (TemperatureMonitor) o;
-        return ppid == that.ppid &&
-                Objects.equals(did, that.did) &&
-                Objects.equals(time, that.time) &&
-                Objects.equals(temperature, that.temperature) &&
-                Objects.equals(humidity, that.humidity);
+        return ppid == that.ppid && Objects.equals(did, that.did) && Objects.equals(time, that.time) && Objects.equals(temperature, that.temperature) && Objects.equals(humidity, that.humidity);
     }
 
     @Override

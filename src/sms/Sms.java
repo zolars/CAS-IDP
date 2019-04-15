@@ -25,7 +25,8 @@ public class Sms {
 
         String Command3 = "AT+S" + String.valueOf(symbol1);
 
-        String Command5 = "AT+SMSEND=\"" + commonsms.getRecver() + "\",3,\"" + commonsms.getSmstext() + "\"" + String.valueOf(symbol1);
+        String Command5 =
+                "AT+SMSEND=\"" + commonsms.getRecver() + "\",3,\"" + commonsms.getSmstext() + "\"" + String.valueOf(symbol1);
 
         try {
             String Return2 = myport.sendAT(Command2);

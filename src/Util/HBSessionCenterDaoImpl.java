@@ -16,8 +16,8 @@ public class HBSessionCenterDaoImpl implements HBSessionCenterDao {
             //创建配置对象
             Configuration cfg = new Configuration().configure("/hibernate_center.cfg.xml");
             //创建服务注册对象
-            StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                    .applySettings(cfg.getProperties()).build();
+            StandardServiceRegistry serviceRegistry =
+                    new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
 
             //创建会话工厂对象
             sessionFactory = cfg.buildSessionFactory(serviceRegistry);

@@ -34,12 +34,9 @@ public class DataOnlineClient extends Thread {
             b.channel(NioSocketChannel.class);
             b.option(ChannelOption.SO_KEEPALIVE, Boolean.valueOf(true));
             b.handler(new ChannelInitializer<SocketChannel>() {
-                public void initChannel(SocketChannel ch)
-                        throws Exception {
+                public void initChannel(SocketChannel ch) throws Exception {
                     // heart beat check
-                    ch.pipeline().addLast(new IdleStateHandler(0, HeartBeatHandler.timeout, 0, TimeUnit.SECONDS))
-                            .addLast(new HeartBeatHandler(host, port, did, 1))
-                            .addLast(new DataOnlineClientHandler(did));
+                    ch.pipeline().addLast(new IdleStateHandler(0, HeartBeatHandler.timeout, 0, TimeUnit.SECONDS)).addLast(new HeartBeatHandler(host, port, did, 1)).addLast(new DataOnlineClientHandler(did));
                 }
             });
 

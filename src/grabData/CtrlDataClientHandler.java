@@ -130,8 +130,7 @@ class CtrlDataClientHandler extends ChannelInboundHandlerAdapter {
 
         byte[] mark = new byte[2];
         buf.getBytes(10, mark, 0, 2);
-        if (mark[0] == 1 && mark[1] == 4)
-            CtrlSave.setCtrlMap(did, StatusBytes, parmList); // save ctrl online data
+        if (mark[0] == 1 && mark[1] == 4) CtrlSave.setCtrlMap(did, StatusBytes, parmList); // save ctrl online data
 
     }
 

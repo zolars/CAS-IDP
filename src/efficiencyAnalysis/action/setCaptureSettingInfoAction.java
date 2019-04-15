@@ -57,7 +57,8 @@ public class setCaptureSettingInfoAction extends ActionSupport {
 
             EventDAO dao = new EventDAOImpl();
 
-            boolean rt = dao.setCaptrueSettingInfo(onlineinterval, qstinterval, tansentinterval, uploadinterval, assessinterval, alarminterval, tempinterval, ctrlinterval, thresholdsaveinterval, qstdatainterval);
+            boolean rt = dao.setCaptrueSettingInfo(onlineinterval, qstinterval, tansentinterval, uploadinterval,
+                    assessinterval, alarminterval, tempinterval, ctrlinterval, thresholdsaveinterval, qstdatainterval);
             JSONObject jsonObject = new JSONObject();
 
             if (rt) {

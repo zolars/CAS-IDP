@@ -15,8 +15,7 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Knowledge> list = hbsessionDao.search(
-                "FROM Knowledge");
+        List<Knowledge> list = hbsessionDao.search("FROM Knowledge");
 
         return list;
     }
@@ -24,8 +23,7 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
     public Knowledge getKnowledgeNode(String kid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Knowledge kl = (Knowledge) hbsessionDao.getFirst(
-                "FROM Knowledge where kid = '" + kid + "'");
+        Knowledge kl = (Knowledge) hbsessionDao.getFirst("FROM Knowledge where kid = '" + kid + "'");
 
         return kl;
     }
@@ -34,7 +32,8 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = false;
 
-        String hql = "update Knowledge kl set kl.content='" + content + "', kl.kname='" + tmpTitle + "' where kl.kid='" + kid + "'";
+        String hql = "update Knowledge kl set kl.content='" + content + "', kl.kname='" + tmpTitle + "' where kl" +
+                ".kid='" + kid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -56,7 +55,8 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         Boolean rt = false;
         Knowledge kl = getKnowledgeNode(kid);
         kl.setContent(content);
-        String hql = "update Knowledge kl set kl.content='" + content + "', kl.kname='" + tmpTitle + " where kl.kid='" + kid + "'";
+        String hql = "update Knowledge kl set kl.content='" + content + "', kl.kname='" + tmpTitle + " where kl" +
+                ".kid='" + kid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -79,17 +79,13 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
     public boolean isUserOrAdmin(String kid, String uid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Knowledge kl = (Knowledge) hbsessionDao.getFirst(
-                "FROM Knowledge where kid = '" + kid + "'");
+        Knowledge kl = (Knowledge) hbsessionDao.getFirst("FROM Knowledge where kid = '" + kid + "'");
 
-        if (kl.getUid().equals(uid))
-            return true; //若uid与传入的uid一样，则为用户本身
+        if (kl.getUid().equals(uid)) return true; //若uid与传入的uid一样，则为用户本身
         else {
-            UserRoles ur = (UserRoles) hbsessionDao.getFirst(
-                    "FROM UserRoles where uid = '" + uid + "'");
+            UserRoles ur = (UserRoles) hbsessionDao.getFirst("FROM UserRoles where uid = '" + uid + "'");
 
-            if (ur.getRid() == "1")
-                return true;
+            if (ur.getRid() == "1") return true;
 
             else return false;
         }
@@ -101,11 +97,9 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
     public boolean isUser(String kid, String uid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Knowledge kl = (Knowledge) hbsessionDao.getFirst(
-                "FROM Knowledge where kid = '" + kid + "'");
+        Knowledge kl = (Knowledge) hbsessionDao.getFirst("FROM Knowledge where kid = '" + kid + "'");
 
-        if (kl.getUid().equals(uid))
-            return true; //若uid与传入的uid一样，则为用户本身
+        if (kl.getUid().equals(uid)) return true; //若uid与传入的uid一样，则为用户本身
         else return false;
 
     }
@@ -113,8 +107,7 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
     public Integer getMaxKid() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Knowledge kl = (Knowledge) hbsessionDao.getFirst(
-                "FROM Knowledge order by kid desc");
+        Knowledge kl = (Knowledge) hbsessionDao.getFirst("FROM Knowledge order by kid desc");
 
         return kl.getKid();
     }
@@ -126,8 +119,7 @@ public class KnowledgeTreeDAOImpl implements KnowledgeTreeDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt;
 
-        Knowledge kluid = (Knowledge) hbsessionDao.getFirst(
-                "FROM Knowledge where kid = '" + parentkid + "'");
+        Knowledge kluid = (Knowledge) hbsessionDao.getFirst("FROM Knowledge where kid = '" + parentkid + "'");
 
         String uid = kluid.getUid();
         Integer pkid = Integer.parseInt(parentkid);

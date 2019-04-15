@@ -101,8 +101,8 @@ public class CtrlSave {
         for (int i = 0; i < 35; ++i) {
             if (statusList[i]) { // 若有告警事件
                 HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-                EventCtrl eventCtrl = (EventCtrl) hbsessionDao
-                        .getFirst("FROM EventCtrl where signature is not null order by teid desc");
+                EventCtrl eventCtrl = (EventCtrl) hbsessionDao.getFirst("FROM EventCtrl where signature is not null " +
+                        "order by teid desc");
 
                 int maxteid = 0;
 
@@ -118,8 +118,8 @@ public class CtrlSave {
                 event.setValue("1");
                 // eventCtrlMap.get(did).add(event);
                 /************ 2018-12-24 马卫亮 ADD ******************************/
-                hbsessionDao.update("update EventCtrl set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '"
-                        + i + 1 + "' signature is null ");
+                hbsessionDao.update("update EventCtrl set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = " +
+                        "'" + i + 1 + "' signature is null ");
                 /************ 2018-12-24 马卫亮 ADD ******************************/
                 hbsessionDao.insert(event);
             }

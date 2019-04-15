@@ -16,15 +16,13 @@ public class MonitorPointDAOImpl implements MonitorPointDAO {
 
         List<Devices> list = new ArrayList<>();
 
-        cp = (Computerroom) hbsessionDao.getFirst(
-                "FROM Computerroom where rid = '" + computerroom + "'");
+        cp = (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid = '" + computerroom + "'");
 
         String didset = cp.getDidset();
         String did[] = didset.split(",");
 
         for (int i = 0; i < did.length; i++) {
-            Devices dv = (Devices) hbsessionDao.getFirst(
-                    "FROM Devices where did = '" + did[i] + "'");
+            Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where did = '" + did[i] + "'");
             list.add(dv);
         }
 

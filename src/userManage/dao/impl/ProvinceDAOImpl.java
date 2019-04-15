@@ -12,8 +12,7 @@ public class ProvinceDAOImpl implements ProvinceDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<ProvinceBank> list = hbsessionDao.search(
-                "FROM ProvinceBank");
+        List<ProvinceBank> list = hbsessionDao.search("FROM ProvinceBank");
 
         return list;
     }
@@ -22,8 +21,7 @@ public class ProvinceDAOImpl implements ProvinceDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
-                "FROM ProvinceBank where pbname='" + name + "'");
+        ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst("FROM ProvinceBank where pbname='" + name + "'");
 
         if (pb != null) {
             return pb.getPbid();

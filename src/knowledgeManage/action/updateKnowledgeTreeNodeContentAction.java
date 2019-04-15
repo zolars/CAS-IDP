@@ -48,12 +48,9 @@ public class updateKnowledgeTreeNodeContentAction extends ActionSupport {
             if (isValid) {
                 Boolean rt = dao.updateKnowledgeNode(kid, tmpTitle, tmpContent);
 
-                if (rt)
-                    jsonObject.put("提示", "修改成功！");
-                else
-                    jsonObject.put("提示", "修改失败，请重试！");
-            } else
-                jsonObject.put("提示", "修改失败，没有修改权限！");
+                if (rt) jsonObject.put("提示", "修改成功！");
+                else jsonObject.put("提示", "修改失败，请重试！");
+            } else jsonObject.put("提示", "修改失败，没有修改权限！");
 
             result = JSON.toJSONString(jsonObject);
 

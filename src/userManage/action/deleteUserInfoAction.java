@@ -39,10 +39,8 @@ public class deleteUserInfoAction extends ActionSupport {
 
             JSONObject jsonObject = new JSONObject();
 
-            if (rt && rt2)
-                jsonObject.put("提示", "删除成功！");
-            else
-                jsonObject.put("提示", "删除失败，请重试！");
+            if (rt && rt2) jsonObject.put("提示", "删除成功！");
+            else jsonObject.put("提示", "删除失败，请重试！");
 
             result = JSON.toJSONString(jsonObject);
 

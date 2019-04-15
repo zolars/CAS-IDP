@@ -109,17 +109,7 @@ public class EventEnvironment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventEnvironment that = (EventEnvironment) o;
-        return teid == that.teid &&
-                cid == that.cid &&
-                Double.compare(that.value, value) == 0 &&
-                Objects.equals(limitval, that.limitval) &&
-                Objects.equals(status, that.status) &&
-                Objects.equals(did, that.did) &&
-                Objects.equals(time, that.time) &&
-                Objects.equals(duration, that.duration) &&
-                Objects.equals(signature, that.signature) &&
-                Objects.equals(annotation, that.annotation) &&
-                Objects.equals(subtype, that.subtype);
+        return teid == that.teid && cid == that.cid && Double.compare(that.value, value) == 0 && Objects.equals(limitval, that.limitval) && Objects.equals(status, that.status) && Objects.equals(did, that.did) && Objects.equals(time, that.time) && Objects.equals(duration, that.duration) && Objects.equals(signature, that.signature) && Objects.equals(annotation, that.annotation) && Objects.equals(subtype, that.subtype);
     }
 
     @Override

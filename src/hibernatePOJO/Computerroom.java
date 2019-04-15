@@ -54,11 +54,8 @@ public class Computerroom {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Computerroom that = (Computerroom) o;
-        return Objects.equals(rid, that.rid) &&
-                Objects.equals(rname, that.rname) &&
-                Objects.equals(didset, that.didset) &&
-                Objects.equals(tempset, that.tempset) &&
-                Objects.equals(cidset, that.cidset);
+        return Objects.equals(rid, that.rid) && Objects.equals(rname, that.rname) && Objects.equals(didset,
+                that.didset) && Objects.equals(tempset, that.tempset) && Objects.equals(cidset, that.cidset);
     }
 
     @Override

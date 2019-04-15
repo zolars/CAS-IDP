@@ -47,9 +47,8 @@ public class Roles {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Roles roles = (Roles) o;
-        return Objects.equals(rid, roles.rid) &&
-                Objects.equals(rolesname, roles.rolesname) &&
-                Objects.equals(extra, roles.extra);
+        return Objects.equals(rid, roles.rid) && Objects.equals(rolesname, roles.rolesname) && Objects.equals(extra,
+                roles.extra);
     }
 
     @Override

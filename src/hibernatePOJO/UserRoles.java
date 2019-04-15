@@ -34,8 +34,7 @@ public class UserRoles {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserRoles userRoles = (UserRoles) o;
-        return Objects.equals(uid, userRoles.uid) &&
-                Objects.equals(rid, userRoles.rid);
+        return Objects.equals(uid, userRoles.uid) && Objects.equals(rid, userRoles.rid);
     }
 
     @Override

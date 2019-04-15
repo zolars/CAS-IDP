@@ -20,8 +20,8 @@ public class HisDAOImpl implements HisDAO {
 
         List rtlist = new ArrayList<>();
 
-        crlist = hbsessionDao.search(
-                "FROM PowerparmMonitor where did = '" + did + "' and time >= '" + starttime + "' and time <= '" + endtime + "'");
+        crlist = hbsessionDao.search("FROM PowerparmMonitor where did = '" + did + "' and time >= '" + starttime + "'" +
+                " and time <= '" + endtime + "'");
 
         if (crlist != null) {
 
@@ -73,8 +73,8 @@ public class HisDAOImpl implements HisDAO {
 
         List rtlist = new ArrayList<>();
 
-        crlist2 = hbsessionDao.search(
-                "FROM PowerxbMonitor where did = '" + did + "' and time >= '" + starttime + "' and time <= '" + endtime + "'");
+        crlist2 = hbsessionDao.search("FROM PowerxbMonitor where did = '" + did + "' and time >= '" + starttime + "' " +
+                "and time <= '" + endtime + "'");
 
         if (crlist2 != null) {
 
@@ -102,8 +102,9 @@ public class HisDAOImpl implements HisDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List rtlist = new ArrayList<>();
 
-        List crlist = hbsessionDao.search("select a.duration, a.value, b.description from EventPower a, EventsType b " +
-                "where a.did='" + did + "' and a.time>='" + starttime + "' and a.time<='" + endtime + "' and (b.classify='塌陷' or b.classify='浪涌') and a.cid=b.cid");
+        List crlist = hbsessionDao.search("select a.duration, a.value, b.description from EventPower a, EventsType b "
+                + "where a.did='" + did + "' and a.time>='" + starttime + "' and a.time<='" + endtime + "' and (b" +
+                ".classify='塌陷' or b.classify='浪涌') and a.cid=b.cid");
 
         double baseValue = 220.00; //Ua Ub Uc的基值
         if (crlist != null) {
@@ -139,8 +140,8 @@ public class HisDAOImpl implements HisDAO {
 
         List rtlist = new ArrayList<>();
 
-        crlist = hbsessionDao.search(
-                "FROM TemperatureMonitor where did = '" + did + "' and time >= '" + starttime + "' and time <= '" + endtime + "'");
+        crlist = hbsessionDao.search("FROM TemperatureMonitor where did = '" + did + "' and time >= '" + starttime +
+                "' and time <= '" + endtime + "'");
 
         if (crlist != null) {
 

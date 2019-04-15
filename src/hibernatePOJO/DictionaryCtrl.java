@@ -74,13 +74,7 @@ public class DictionaryCtrl {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DictionaryCtrl that = (DictionaryCtrl) o;
-        return id == that.id &&
-                functioncode == that.functioncode &&
-                Objects.equals(addr, that.addr) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(forTrue, that.forTrue) &&
-                Objects.equals(forFalse, that.forFalse) &&
-                Objects.equals(zbj, that.zbj);
+        return id == that.id && functioncode == that.functioncode && Objects.equals(addr, that.addr) && Objects.equals(description, that.description) && Objects.equals(forTrue, that.forTrue) && Objects.equals(forFalse, that.forFalse) && Objects.equals(zbj, that.zbj);
     }
 
     @Override

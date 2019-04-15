@@ -94,7 +94,8 @@ public class TransientClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void dataResolve(HBSessionDaoImpl hbsessionDao, EventPower e) {
-        EventsType et = (EventsType) hbsessionDao.getFirst("FROM EventsType where subtype='" + e.getSubtype() + "' and code ='0001'");
+        EventsType et = (EventsType) hbsessionDao.getFirst("FROM EventsType where subtype='" + e.getSubtype() + "' " +
+                "and code ='0001'");
 
         if (et != null) {
             Integer cid = et.getCid();

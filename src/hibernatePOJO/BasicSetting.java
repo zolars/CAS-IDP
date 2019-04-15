@@ -108,17 +108,7 @@ public class BasicSetting {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BasicSetting that = (BasicSetting) o;
-        return id == that.id &&
-                Objects.equals(onlineinterval, that.onlineinterval) &&
-                Objects.equals(thansentinterval, that.thansentinterval) &&
-                Objects.equals(uploadinterval, that.uploadinterval) &&
-                Objects.equals(qstinterval, that.qstinterval) &&
-                Objects.equals(assessinterval, that.assessinterval) &&
-                Objects.equals(alarminterval, that.alarminterval) &&
-                Objects.equals(tempinterval, that.tempinterval) &&
-                Objects.equals(ctrlinterval, that.ctrlinterval) &&
-                Objects.equals(thresholdsaveinterval, that.thresholdsaveinterval) &&
-                Objects.equals(datainterval, that.datainterval);
+        return id == that.id && Objects.equals(onlineinterval, that.onlineinterval) && Objects.equals(thansentinterval, that.thansentinterval) && Objects.equals(uploadinterval, that.uploadinterval) && Objects.equals(qstinterval, that.qstinterval) && Objects.equals(assessinterval, that.assessinterval) && Objects.equals(alarminterval, that.alarminterval) && Objects.equals(tempinterval, that.tempinterval) && Objects.equals(ctrlinterval, that.ctrlinterval) && Objects.equals(thresholdsaveinterval, that.thresholdsaveinterval) && Objects.equals(datainterval, that.datainterval);
     }
 
     @Override

@@ -16,8 +16,7 @@ public class PermissionDAOImpl implements PermissionDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Permission> list = hbsessionDao.search(
-                "FROM Permission");
+        List<Permission> list = hbsessionDao.search("FROM Permission");
 
         return list;
     }
@@ -26,17 +25,18 @@ public class PermissionDAOImpl implements PermissionDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        RolesPermission rp = (RolesPermission) hbsessionDao.getFirst(
-                "FROM RolesPermission where rid='" + rid + "'");
+        RolesPermission rp = (RolesPermission) hbsessionDao.getFirst("FROM RolesPermission where rid='" + rid + "'");
 
         return rp;
     }
 
-    public Boolean setDeviceAlarmUserInfo(String level, String precontent, Integer alert, Integer sms, Integer plantform) {
+    public Boolean setDeviceAlarmUserInfo(String level, String precontent, Integer alert, Integer sms,
+                                          Integer plantform) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        String sql = "update DeviceAlarmUser set precontent='" + precontent + "', isAlert='" + alert + "', isPlantform='" + plantform + "', isSMS='" + sms + "' where level='" + level + "'";
+        String sql = "update DeviceAlarmUser set precontent='" + precontent + "', isAlert='" + alert + "', " +
+                "isPlantform='" + plantform + "', isSMS='" + sms + "' where level='" + level + "'";
 
         Boolean rt = hbsessionDao.update(sql);
 
@@ -48,8 +48,8 @@ public class PermissionDAOImpl implements PermissionDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List rtlist = new ArrayList();
 
-        DeviceAlarmUser alarmUser = (DeviceAlarmUser) hbsessionDao.getFirst(
-                "FROM DeviceAlarmUser where level='" + level + "'");
+        DeviceAlarmUser alarmUser =
+                (DeviceAlarmUser) hbsessionDao.getFirst("FROM DeviceAlarmUser where level='" + level + "'");
 
         if (alarmUser.getId() != null) {
             rtlist.add(alarmUser.getIsAlert());
@@ -61,7 +61,8 @@ public class PermissionDAOImpl implements PermissionDAO {
         return rtlist;
     }
 
-    public Boolean setsysLevel(String input0, String input1, String input2, String input3, String input4, String input5) {
+    public Boolean setsysLevel(String input0, String input1, String input2, String input3, String input4,
+                               String input5) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 

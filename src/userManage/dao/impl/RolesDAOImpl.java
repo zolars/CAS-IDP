@@ -12,16 +12,14 @@ public class RolesDAOImpl implements RolesDAO {
     public List getAllRoles() {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<Roles> list = hbsessionDao.search(
-                "FROM Roles");
+        List<Roles> list = hbsessionDao.search("FROM Roles");
         return list;
     }
 
     public String getMaxRolesId() {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        Roles role = (Roles) hbsessionDao.getFirst(
-                "FROM Roles order by rid desc");
+        Roles role = (Roles) hbsessionDao.getFirst("FROM Roles order by rid desc");
         return role.getRid();
     }
 
@@ -58,16 +56,15 @@ public class RolesDAOImpl implements RolesDAO {
 
     public Roles getOneRolesInfo(String rid) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        Roles role = (Roles) hbsessionDao.getFirst(
-                "FROM Roles order where rid = '" + rid + "'");
+        Roles role = (Roles) hbsessionDao.getFirst("FROM Roles order where rid = '" + rid + "'");
         return role;
     }
 
     public boolean updateRoleInfo(String rid, String name, String extra) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
-        String hql = "update Roles role set role.rolesname='" + name +
-                "', role.extra='" + extra + "' where role.rid='" + rid + "'";
+        String hql = "update Roles role set role.rolesname='" + name + "', role.extra='" + extra + "' where role" +
+                ".rid='" + rid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;

@@ -136,8 +136,7 @@ public class CRC16M {
         CRC16M crc16 = new CRC16M();
         crc16.update(bb, bb.length - 2);
         int ri = crc16.getValue();
-        if (bb[bb.length - 1] == (byte) (ri & 0xff) && bb[bb.length - 2] == (byte) ((0xff00 & ri) >> 8))
-            return true;
+        if (bb[bb.length - 1] == (byte) (ri & 0xff) && bb[bb.length - 2] == (byte) ((0xff00 & ri) >> 8)) return true;
         return false;
     }
 

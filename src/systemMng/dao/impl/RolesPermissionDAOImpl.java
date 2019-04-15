@@ -52,7 +52,8 @@ public class RolesPermissionDAOImpl implements RolesPermissionDAO {
                     rt = true;
                 } else {
                     String npid = oldpid + "," + pid;
-                    String hql = "update RolesPermission newrp2 set newrp2.pid='" + npid + "' where newrp2.rid='" + rid + "'";
+                    String hql = "update RolesPermission newrp2 set newrp2.pid='" + npid + "' where newrp2.rid='" +
+                    rid + "'";
                     rt = hbsessionDao.update(hql);
                 }
             }
@@ -66,8 +67,7 @@ public class RolesPermissionDAOImpl implements RolesPermissionDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Integer> list = new ArrayList<>();
 
-        BasicSetting bs = (BasicSetting) hbsessionDao.getFirst(
-                "FROM BasicSetting");
+        BasicSetting bs = (BasicSetting) hbsessionDao.getFirst("FROM BasicSetting");
 
         list.add(bs.getOnlineinterval());
         list.add(bs.getQstinterval());

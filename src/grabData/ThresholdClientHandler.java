@@ -51,8 +51,7 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
 //        DeviceManager.getCtxMap().put(this.did+"-4",ctx);
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<DictionaryThreshold> dicThreshold = hbsessionDao.search(
-                "FROM DictionaryThreshold");
+        List<DictionaryThreshold> dicThreshold = hbsessionDao.search("FROM DictionaryThreshold");
 
         //String address = ctx.channel().remoteAddress().toString().replace("/", "");
 
@@ -65,8 +64,9 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
 
             String thsholdname = dicThreshold.get(i).getDescription();
 
-            DevicesThreshold dt = (DevicesThreshold) hbsessionDao.getFirst(
-                    "FROM DevicesThreshold where name='" + thsholdname + "' and level = 1");
+            DevicesThreshold dt =
+                    (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where name='" + thsholdname + "' " +
+                            "and level = 1");
 
             if (dt != null) {
                 Float value = null;

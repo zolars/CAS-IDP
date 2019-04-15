@@ -37,7 +37,8 @@ public class TemperatureSaveJob implements Job {
                     if (tempData.getDid() != null) {
                         try {
 
-                            TemperatureMonitor tempobj = (TemperatureMonitor) hbsessionDao.getFirst("FROM TemperatureMonitor  order by ppid desc ");
+                            TemperatureMonitor tempobj = (TemperatureMonitor) hbsessionDao.getFirst("FROM " +
+                                    "TemperatureMonitor  order by ppid desc ");
                             if (tempobj != null) {
                                 tempData.setPpid(tempobj.getPpid() + 1);
                             } else {
@@ -50,11 +51,15 @@ public class TemperatureSaveJob implements Job {
 
 
                             //查询温度阈值
-                            DevicesThreshold dt1 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where name='温度过高' and level=1");
-                            DevicesThreshold dt2 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where name='温度过低' and level=1");
+                            DevicesThreshold dt1 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold " +
+                                    "where name='温度过高' and level=1");
+                            DevicesThreshold dt2 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold " +
+                                    "where name='温度过低' and level=1");
 
-                            DevicesThreshold dt3 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where name='湿度过高' and level=1");
-                            DevicesThreshold dt4 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where name='湿度过低' and level=1");
+                            DevicesThreshold dt3 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold " +
+                                    "where name='湿度过高' and level=1");
+                            DevicesThreshold dt4 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold " +
+                                    "where name='湿度过低' and level=1");
 
                             double temphigh = dt1.getCellval();
                             double templow = dt2.getFloorval();
@@ -66,7 +71,9 @@ public class TemperatureSaveJob implements Job {
                             /*********2019-01-09 MAWEILIANG  ADD*************/
 //                            String datenow = ToHex.beforeNowTime(0).split(" ")[0];
                             if (temp > temphigh) {
-                                List list = hbsessionDao.search("select CEILING(value),time from EventEnvironment where   cid ='344' and did = '" + did + "' and (signature ='' or signature is null)");
+                                List list = hbsessionDao.search("select CEILING(value),time from EventEnvironment " +
+                                        "where   cid ='344' and did = '" + did + "' and (signature ='' or signature " +
+                                        "is null)");
                                 if (list != null) {
                                     Object[] event = (Object[]) list.get(0);
                                     if (currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
@@ -78,7 +85,8 @@ public class TemperatureSaveJob implements Job {
 
 
                                 EventEnvironment ee = new EventEnvironment();
-                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
+                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM " +
+                                        "EventEnvironment order by teid desc");
                                 if (maxobj != null) {
                                     ee.setTeid(maxobj.getTeid() + 1);
                                 } else {
@@ -99,11 +107,14 @@ public class TemperatureSaveJob implements Job {
                                 ee.setSubtype("");
 
                                 /************2018-12-24 马卫亮  ADD******************************/
-                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 344 and did=" + did + "  and (signature ='' or signature is null) ");
+                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = " +
+                                        "'相同类型的告警自动确认' where cid = 344 and did=" + did + "  and (signature ='' or " +
+                                        "signature is null) ");
                                 /************2018-12-24 马卫亮  ADD******************************/
                                 hbsessionDao.insert(ee);
                             } else if (temp < templow) {
-                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   cid ='345' and did = '" + did + "' and (signature ='' or signature is null)");
+                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   " +
+                                        "cid ='345' and did = '" + did + "' and (signature ='' or signature is null)");
                                 if (list != null) {
                                     Object[] event = (Object[]) list.get(0);
                                     if (currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
@@ -114,7 +125,8 @@ public class TemperatureSaveJob implements Job {
                                 }
                                 EventPower ee = new EventPower();
 
-                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
+                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM " +
+                                        "EventEnvironment order by teid desc");
                                 if (maxobj != null) {
                                     ee.setTeid(maxobj.getTeid() + 1);
                                 } else {
@@ -135,11 +147,14 @@ public class TemperatureSaveJob implements Job {
                                 ee.setSubtype("");
 
                                 /************2018-12-24 马卫亮  ADD******************************/
-                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 345 and did='" + did + "' and (signature ='' or signature is null) ");
+                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = " +
+                                        "'相同类型的告警自动确认' where cid = 345 and did='" + did + "' and (signature ='' or " +
+                                        "signature is null) ");
                                 /************2018-12-24 马卫亮  ADD******************************/
                                 hbsessionDao.insert(ee);
                             } else if (wet > wethigh) {
-                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   cid ='346' and did = '" + did + "' and (signature ='' or signature is null)");
+                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   " +
+                                        "cid ='346' and did = '" + did + "' and (signature ='' or signature is null)");
                                 if (list != null) {
                                     Object[] event = (Object[]) list.get(0);
                                     if (currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
@@ -150,7 +165,8 @@ public class TemperatureSaveJob implements Job {
                                 }
                                 EventEnvironment ee = new EventEnvironment();
 
-                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
+                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM " +
+                                        "EventEnvironment order by teid desc");
                                 if (maxobj != null) {
                                     ee.setTeid(maxobj.getTeid() + 1);
                                 } else {
@@ -171,11 +187,14 @@ public class TemperatureSaveJob implements Job {
                                 ee.setSubtype("");
 
                                 /************2018-12-24 马卫亮  ADD******************************/
-                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 346 and did='" + did + "' and (signature ='' or signature is null) ");
+                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = " +
+                                        "'相同类型的告警自动确认' where cid = 346 and did='" + did + "' and (signature ='' or " +
+                                        "signature is null) ");
                                 /************2018-12-24 马卫亮  ADD******************************/
                                 hbsessionDao.insert(ee);
                             } else if (wet < wetlow) {
-                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   cid ='347' and did = '" + did + "' and (signature ='' or signature is null)");
+                                List list = hbsessionDao.search("select CEILING(value),time from EventPower where   " +
+                                        "cid ='347' and did = '" + did + "' and (signature ='' or signature is null)");
                                 if (list != null) {
                                     Object[] event = (Object[]) list.get(0);
                                     if (currenttime.toString().split(" ")[0].equals(event[1].toString().split(" ")[0])) {
@@ -186,7 +205,8 @@ public class TemperatureSaveJob implements Job {
                                 }
                                 EventEnvironment ee = new EventEnvironment();
 
-                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM EventEnvironment order by teid desc");
+                                EventEnvironment maxobj = (EventEnvironment) hbsessionDao.getFirst("FROM " +
+                                        "EventEnvironment order by teid desc");
                                 if (maxobj != null) {
                                     ee.setTeid(maxobj.getTeid() + 1);
                                 } else {
@@ -206,7 +226,9 @@ public class TemperatureSaveJob implements Job {
                                 ee.setSubtype("");
 
                                 /************2018-12-24 马卫亮  ADD******************************/
-                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = 347 and did='" + did + "'  and (signature ='' or signature is null) ");
+                                hbsessionDao.update("update EventEnvironment set signature = 'admin',annotation = " +
+                                        "'相同类型的告警自动确认' where cid = 347 and did='" + did + "'  and (signature ='' or " +
+                                        "signature is null) ");
                                 /************2018-12-24 马卫亮  ADD******************************/
                                 hbsessionDao.insert(ee);
                             }

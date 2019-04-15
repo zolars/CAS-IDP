@@ -55,7 +55,8 @@ public class addUserInfoAction extends ActionSupport {
 
             rt1 = dao.checkUnameIsOccupiedForAdd(account);
             if (rt1) {
-                Boolean rt2 = dao.addUserInfo(maxuid.toString(), account, passwd, name, telephone, govtelephone, province, city, computerroom);
+                Boolean rt2 = dao.addUserInfo(maxuid.toString(), account, passwd, name, telephone, govtelephone,
+                        province, city, computerroom);
 
                 if (rt2) {
                     rt3 = dao.addUserRolesInfo(maxuid.toString(), roles);

@@ -298,7 +298,8 @@ public class addThresholdInfoAction extends ActionSupport {
                 if (dtid.equals(0)) { //不存在的才插入，已存在的就只能修改
                     maxdtid = dao.getMaxThresholdId();
                     String type = getDidByName(name);
-                    rt = dao.addThresholdInfo(did, maxdtid + 1, name, classify, unit, dcellval, dfloorval, iismark, ilevel, type);
+                    rt = dao.addThresholdInfo(did, maxdtid + 1, name, classify, unit, dcellval, dfloorval, iismark,
+                            ilevel, type);
                 }
 
                 if (rt) {

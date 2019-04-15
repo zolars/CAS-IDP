@@ -36,9 +36,7 @@ public class OrgnizationStructure {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrgnizationStructure that = (OrgnizationStructure) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(pid, that.pid) &&
-                Objects.equals(name, that.name);
+        return Objects.equals(id, that.id) && Objects.equals(pid, that.pid) && Objects.equals(name, that.name);
     }
 
     @Override

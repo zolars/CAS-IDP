@@ -60,8 +60,7 @@ public class getDetailCtrlEvent extends ActionSupport {
                 Boolean has = false;
 
                 for (int j = 0; j < priortylist.length; j++) {
-                    if (cidn.equals(priortylist[j]))
-                        has = true;
+                    if (cidn.equals(priortylist[j])) has = true;
                 }
 
                 if (!has) {

@@ -291,8 +291,10 @@ public class uploadThresholdExcelToDBAction extends ActionSupport {
                     DevicesThreshold dt = list.get(0);
                     Integer dtid = dt.getDtid();
 
-                    String sql = "update DevicesThreshold dt set dt.did='"+ did + "', dt.classify='" + classify + "', dt.unit='" + unit + "', dt.cellval='" +
-                            cellval + "', dt.floorval='" + floorval + "', dt.ismark='" + ismark + "' where dt.dtid='" + dtid + "'";
+                    String sql = "update DevicesThreshold dt set dt.did='"+ did + "', dt.classify='" + classify + "',
+                     dt.unit='" + unit + "', dt.cellval='" +
+                            cellval + "', dt.floorval='" + floorval + "', dt.ismark='" + ismark + "' where dt.dtid='"
+                             + dtid + "'";
                     rt = hbsessionDao.update(sql);
                 } else { */
                 if (list == null) { //insert

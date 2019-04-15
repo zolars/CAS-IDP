@@ -79,12 +79,7 @@ public class AssessRecord {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AssessRecord that = (AssessRecord) o;
-        return aid == that.aid &&
-                Objects.equals(did, that.did) &&
-                Objects.equals(degree, that.degree) &&
-                Objects.equals(teid, that.teid) &&
-                Objects.equals(eventclass, that.eventclass) &&
-                Objects.equals(time, that.time);
+        return aid == that.aid && Objects.equals(did, that.did) && Objects.equals(degree, that.degree) && Objects.equals(teid, that.teid) && Objects.equals(eventclass, that.eventclass) && Objects.equals(time, that.time);
     }
 
     @Override

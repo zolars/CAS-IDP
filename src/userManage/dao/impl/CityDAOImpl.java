@@ -14,8 +14,7 @@ public class CityDAOImpl implements CityDAO {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<CityBank> list = hbsessionDao.search(
-                "FROM CityBank");
+        List<CityBank> list = hbsessionDao.search("FROM CityBank");
 
         return list;
     }
@@ -26,8 +25,7 @@ public class CityDAOImpl implements CityDAO {
 
         List<CityBank> list = new ArrayList<>();
 
-        ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
-                "FROM ProvinceBank where pbid='" + province + "'");
+        ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst("FROM ProvinceBank where pbid='" + province + "'");
 
         String cbidstr = pb.getCbidset();
 
@@ -35,8 +33,7 @@ public class CityDAOImpl implements CityDAO {
             String cbidset[] = cbidstr.split("，");
 
             for (int i = 0; i < cbidset.length; i++) {
-                CityBank cb = (CityBank) hbsessionDao.getFirst(
-                        "FROM CityBank where cbid='" + cbidset[i] + "'");
+                CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid='" + cbidset[i] + "'");
                 list.add(cb);
             }
         }

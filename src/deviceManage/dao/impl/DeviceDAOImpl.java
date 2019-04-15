@@ -21,8 +21,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getDeviceDataByName(String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where name = '" + name + "'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where name = '" + name + "'");
 
         return list;
     }
@@ -36,8 +35,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getDeviceDataByName(String type, String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where name = '" + name + "' and type='" + type + "'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where name = '" + name + "' and type='" + type + "'");
 
         return list;
     }
@@ -51,8 +49,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public String getDeviceIDByName(String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Devices dv = (Devices) hbsessionDao.getFirst(
-                "FROM Devices where name = '" + name + "'");
+        Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where name = '" + name + "'");
         if (dv == null) {
             return "";
         } else {
@@ -68,8 +65,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getDeviceAlarmUserData() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<DeviceAlarmUser> list = hbsessionDao.search(
-                "FROM DeviceAlarmUser");
+        List<DeviceAlarmUser> list = hbsessionDao.search("FROM DeviceAlarmUser");
 
         return list;
     }
@@ -83,8 +79,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         String uname = "";
 
-        User dauser = (User) hbsessionDao.getFirst(
-                "FROM User where uid=" + uid);
+        User dauser = (User) hbsessionDao.getFirst("FROM User where uid=" + uid);
 
         if (dauser != null) {
             uname = dauser.getUname();
@@ -102,8 +97,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getDeviceThresholdInfoByType(String type) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<DevicesThreshold> dtlist = hbsessionDao.search(
-                "FROM DevicesThreshold where type = '" + type + "'");
+        List<DevicesThreshold> dtlist = hbsessionDao.search("FROM DevicesThreshold where type = '" + type + "'");
 
         return dtlist;
     }
@@ -111,8 +105,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public String getDeviceAlarmUserSet(String id) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        DeviceAlarmUser da = (DeviceAlarmUser) hbsessionDao.getFirst(
-                "FROM DeviceAlarmUser where id = '" + id + "'");
+        DeviceAlarmUser da = (DeviceAlarmUser) hbsessionDao.getFirst("FROM DeviceAlarmUser where id = '" + id + "'");
 
         return da.getUid();
     }
@@ -183,8 +176,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public Integer getMaxThresholdId() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        DevicesThreshold kl = (DevicesThreshold) hbsessionDao.getFirst(
-                "FROM DevicesThreshold order by dtid desc");
+        DevicesThreshold kl = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold order by dtid desc");
 
         if (kl == null) {
             return 1;
@@ -201,8 +193,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public String getMaxDeviceId() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        Devices kl = (Devices) hbsessionDao.getFirst(
-                "FROM Devices order by did desc");
+        Devices kl = (Devices) hbsessionDao.getFirst("FROM Devices order by did desc");
 
         if (kl == null) {
             return "0";
@@ -242,8 +233,8 @@ public class DeviceDAOImpl implements DeviceDAO {
      * @param level    level
      * @return 真或假
      */
-    public Boolean addThresholdInfo(String did, Integer dtid, String name, String classify, String unit, Double cellval, Double floorval,
-                                    Integer ismark, Integer level, String type) {
+    public Boolean addThresholdInfo(String did, Integer dtid, String name, String classify, String unit,
+                                    Double cellval, Double floorval, Integer ismark, Integer level, String type) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
@@ -274,8 +265,8 @@ public class DeviceDAOImpl implements DeviceDAO {
     public Integer getOneDeviceThresholdByNameAndLevel(String name, String level) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        DevicesThreshold kl = (DevicesThreshold) hbsessionDao.getFirst(
-                "FROM DevicesThreshold where name='" + name + "' and level=" + level);
+        DevicesThreshold kl = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where name='" + name +
+                "' and level=" + level);
 
         if (kl == null) {
             return 0;
@@ -299,8 +290,9 @@ public class DeviceDAOImpl implements DeviceDAO {
      * @param plantform  plantform
      * @return 真或假
      */
-    public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String ipaddress, String port,
-                                    String extra, Integer sms, Integer alert, Integer plantform) {
+    public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno,
+                                    String ipaddress, String port, String extra, Integer sms, Integer alert,
+                                    Integer plantform) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
@@ -324,12 +316,12 @@ public class DeviceDAOImpl implements DeviceDAO {
         return rt;
     }
 
-    public Boolean addOneDeviceInfoToBelongPosition(String deviceType, String devname, String belongname, String belonglevel) {
+    public Boolean addOneDeviceInfoToBelongPosition(String deviceType, String devname, String belongname,
+                                                    String belonglevel) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
 
-        Devices dv = (Devices) hbsessionDao.getFirst(
-                "FROM Devices where name='" + devname + "'");
+        Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where name='" + devname + "'");
 
         if (dv == null || belonglevel.equals("0")) {
             return false;
@@ -337,8 +329,8 @@ public class DeviceDAOImpl implements DeviceDAO {
             String did = dv.getDid().toString();
 
             if (belonglevel.equals("1")) {
-                ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
-                        "FROM ProvinceBank where pbname='" + belongname + "分行" + "'");
+                ProvinceBank pb =
+                        (ProvinceBank) hbsessionDao.getFirst("FROM ProvinceBank where pbname='" + belongname + "分行" + "'");
 
                 if (deviceType.equals("其他传感器")) {
                     String tempset = pb.getTempset();
@@ -346,7 +338,8 @@ public class DeviceDAOImpl implements DeviceDAO {
                         tempset += "，";
                     }
                     tempset += did;
-                    String hql = "update ProvinceBank pb set tempset='" + tempset + "' where pbname = '" + belongname + "'";
+                    String hql =
+                            "update ProvinceBank pb set tempset='" + tempset + "' where pbname = '" + belongname + "'";
                     rt = hbsessionDao.update(hql);
                 } else {
                     String didset = pb.getDidset();
@@ -354,12 +347,12 @@ public class DeviceDAOImpl implements DeviceDAO {
                         didset += "，";
                     }
                     didset += did;
-                    String hql = "update ProvinceBank pb set didset='" + didset + "' where pbname = '" + belongname + "'";
+                    String hql =
+                            "update ProvinceBank pb set didset='" + didset + "' where pbname = '" + belongname + "'";
                     rt = hbsessionDao.update(hql);
                 }
             } else if (belonglevel.equals("2")) {
-                CityBank pb = (CityBank) hbsessionDao.getFirst(
-                        "FROM CityBank where cbname='" + belongname + "'");
+                CityBank pb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbname='" + belongname + "'");
 
                 if (deviceType.equals("其他传感器")) {
                     String tempset = pb.getTempset();
@@ -379,8 +372,8 @@ public class DeviceDAOImpl implements DeviceDAO {
                     rt = hbsessionDao.update(hql);
                 }
             } else if (belonglevel.equals("3")) {
-                Computerroom pb = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rname='" + belongname + "'");
+                Computerroom pb =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rname='" + belongname + "'");
 
                 if (deviceType.equals("其他传感器")) {
                     String tempset = pb.getTempset();
@@ -388,7 +381,8 @@ public class DeviceDAOImpl implements DeviceDAO {
                         tempset += "，";
                     }
                     tempset += did;
-                    String hql = "update Computerroom pb set tempset='" + tempset + "' where rname = '" + belongname + "'";
+                    String hql =
+                            "update Computerroom pb set tempset='" + tempset + "' where rname = '" + belongname + "'";
                     rt = hbsessionDao.update(hql);
                 } else {
                     String didset = pb.getDidset();
@@ -396,7 +390,8 @@ public class DeviceDAOImpl implements DeviceDAO {
                         didset += "，";
                     }
                     didset += did;
-                    String hql = "update Computerroom pb set didset='" + didset + "' where rname = '" + belongname + "'";
+                    String hql = "update Computerroom pb set didset='" + didset + "' where rname = '" + belongname +
+                            "'";
                     rt = hbsessionDao.update(hql);
                 }
             }
@@ -406,7 +401,10 @@ public class DeviceDAOImpl implements DeviceDAO {
     }
 
 
-    public Boolean addOneDeviceInfoAndBelongPos(String deviceType, String devname, String devtype, String serialno, String iPaddress, String port, String extra, Integer sms, Integer alert, Integer plantform, String belongname, String belonglevel) {
+    public Boolean addOneDeviceInfoAndBelongPos(String deviceType, String devname, String devtype, String serialno,
+                                                String iPaddress, String port, String extra, Integer sms,
+                                                Integer alert, Integer plantform, String belongname,
+                                                String belonglevel) {
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt1 = false, rt2 = false;
@@ -429,8 +427,7 @@ public class DeviceDAOImpl implements DeviceDAO {
 
         rt1 = hbsessionDao.insert(dt);
 
-        Devices dv = (Devices) hbsessionDao.getFirst(
-                "FROM Devices where name='" + devname + "'");
+        Devices dv = (Devices) hbsessionDao.getFirst("FROM Devices where name='" + devname + "'");
 
         if (dv == null || belonglevel.equals("0")) {
             return false;
@@ -438,8 +435,8 @@ public class DeviceDAOImpl implements DeviceDAO {
             String did = dv.getDid().toString();
 
             if (belonglevel.equals("1")) {
-                ProvinceBank pb = (ProvinceBank) hbsessionDao.getFirst(
-                        "FROM ProvinceBank where pbname='" + belongname + "分行" + "'");
+                ProvinceBank pb =
+                        (ProvinceBank) hbsessionDao.getFirst("FROM ProvinceBank where pbname='" + belongname + "分行" + "'");
 
                 if (deviceType.equals("其他传感器")) {
                     String tempset = pb.getTempset();
@@ -447,7 +444,8 @@ public class DeviceDAOImpl implements DeviceDAO {
                         tempset += "，";
                     }
                     tempset += did;
-                    String hql = "update ProvinceBank pb set tempset='" + tempset + "' where pbname = '" + belongname + "'";
+                    String hql =
+                            "update ProvinceBank pb set tempset='" + tempset + "' where pbname = '" + belongname + "'";
                     rt2 = hbsessionDao.update(hql);
                 } else {
                     String didset = pb.getDidset();
@@ -455,12 +453,12 @@ public class DeviceDAOImpl implements DeviceDAO {
                         didset += "，";
                     }
                     didset += did;
-                    String hql = "update ProvinceBank pb set didset='" + didset + "' where pbname = '" + belongname + "'";
+                    String hql =
+                            "update ProvinceBank pb set didset='" + didset + "' where pbname = '" + belongname + "'";
                     rt2 = hbsessionDao.update(hql);
                 }
             } else if (belonglevel.equals("2")) {
-                CityBank pb = (CityBank) hbsessionDao.getFirst(
-                        "FROM CityBank where cbname='" + belongname + "'");
+                CityBank pb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbname='" + belongname + "'");
 
                 if (deviceType.equals("其他传感器")) {
                     String tempset = pb.getTempset();
@@ -480,8 +478,8 @@ public class DeviceDAOImpl implements DeviceDAO {
                     rt2 = hbsessionDao.update(hql);
                 }
             } else if (belonglevel.equals("3")) {
-                Computerroom pb = (Computerroom) hbsessionDao.getFirst(
-                        "FROM Computerroom where rname='" + belongname + "'");
+                Computerroom pb =
+                        (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rname='" + belongname + "'");
 
                 if (deviceType.equals("其他传感器")) {
                     String tempset = pb.getTempset();
@@ -489,7 +487,8 @@ public class DeviceDAOImpl implements DeviceDAO {
                         tempset += "，";
                     }
                     tempset += did;
-                    String hql = "update Computerroom pb set tempset='" + tempset + "' where rname = '" + belongname + "'";
+                    String hql =
+                            "update Computerroom pb set tempset='" + tempset + "' where rname = '" + belongname + "'";
                     rt2 = hbsessionDao.update(hql);
                 } else {
                     String didset = pb.getDidset();
@@ -497,7 +496,8 @@ public class DeviceDAOImpl implements DeviceDAO {
                         didset += "，";
                     }
                     didset += did;
-                    String hql = "update Computerroom pb set didset='" + didset + "' where rname = '" + belongname + "'";
+                    String hql = "update Computerroom pb set didset='" + didset + "' where rname = '" + belongname +
+                            "'";
                     rt2 = hbsessionDao.update(hql);
                 }
             }
@@ -517,8 +517,8 @@ public class DeviceDAOImpl implements DeviceDAO {
     public Boolean addOneDeviceAlarmUser(String uid, String level) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         boolean rt = false;
-        DeviceAlarmUser adu = (DeviceAlarmUser) hbsessionDao.getFirst(
-                "FROM DeviceAlarmUser where level='" + level + "'");
+        DeviceAlarmUser adu = (DeviceAlarmUser) hbsessionDao.getFirst("FROM DeviceAlarmUser where level='" + level +
+                "'");
 
         String uidset = adu.getUid();
         String appendstr = "，" + uid;
@@ -561,15 +561,14 @@ public class DeviceDAOImpl implements DeviceDAO {
      * @param plantform  plantform
      * @return 真或假
      */
-    public Boolean modifyOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress,
-                                       String port, String extra, Integer sms, Integer alert, Integer plantform, String did) {
+    public Boolean modifyOneDeviceInfo(String deviceType, String devname, String devtype, String serialno,
+                                       String IPaddress, String port, String extra, Integer sms, Integer alert,
+                                       Integer plantform, String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = false;
 
-        String hql = "update Devices kl set kl.devicetype='" + deviceType + "', kl.type='" + devtype
-                + "', kl.serialno='" + serialno + "', kl.iPaddress='" + IPaddress + "', kl.port='" + port
-                + "', kl.extra='" + extra + "', kl.isSms='" + sms + "', kl.isAlart='" + alert
-                + "', kl.isPlartform='" + plantform + "', kl.name='" + devname + "' where kl.did='" + did + "'";
+        String hql = "update Devices kl set kl.devicetype='" + deviceType + "', kl.type='" + devtype + "', kl" +
+                ".serialno='" + serialno + "', kl.iPaddress='" + IPaddress + "', kl.port='" + port + "', kl.extra='" + extra + "', kl.isSms='" + sms + "', kl.isAlart='" + alert + "', kl.isPlartform='" + plantform + "', kl.name='" + devname + "' where kl.did='" + did + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -587,13 +586,13 @@ public class DeviceDAOImpl implements DeviceDAO {
      * @param level    level
      * @return 真或假
      */
-    public Boolean updateDeviceThreshold(String dtid, String type, String unit, Double cellval, Double floorval, Integer ismark, Integer level) {
+    public Boolean updateDeviceThreshold(String dtid, String type, String unit, Double cellval, Double floorval,
+                                         Integer ismark, Integer level) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = false;
 
-        String hql = "update DevicesThreshold kl set kl.classify='" + type + "', kl.unit='" + unit
-                + "', kl.cellval=" + cellval + ", kl.floorval=" + floorval + ", kl.ismark=" + ismark
-                + ", kl.level='" + level + "' where kl.dtid='" + dtid + "'";
+        String hql =
+                "update DevicesThreshold kl set kl.classify='" + type + "', kl.unit='" + unit + "', kl.cellval=" + cellval + ", kl.floorval=" + floorval + ", kl.ismark=" + ismark + ", kl.level='" + level + "' where kl.dtid='" + dtid + "'";
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -613,15 +612,13 @@ public class DeviceDAOImpl implements DeviceDAO {
      * @param level    level
      * @return 真或假
      */
-    public Boolean updateThresholdInfo(String did, Integer dtid, String name, String classify, String unit, Double cellval,
-                                       Double floorval, Integer ismark, Integer level) {
+    public Boolean updateThresholdInfo(String did, Integer dtid, String name, String classify, String unit,
+                                       Double cellval, Double floorval, Integer ismark, Integer level) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = false;
 
-        String hql = "update DevicesThreshold kl set kl.dtid='" + dtid + "', kl.classify='" + classify
-                + "', kl.did='" + did + "', kl.unit='" + unit + "', kl.cellval='" + cellval
-                + "', kl.floorval='" + floorval + "', kl.ismark='" + ismark
-                + "' where kl.name='" + name + "' and kl.level=" + level;
+        String hql = "update DevicesThreshold kl set kl.dtid='" + dtid + "', kl.classify='" + classify + "', kl" +
+                ".did='" + did + "', kl.unit='" + unit + "', kl.cellval='" + cellval + "', kl.floorval='" + floorval + "', kl.ismark='" + ismark + "' where kl.name='" + name + "' and kl.level=" + level;
 
         rt = hbsessionDao.update(hql);
         return rt;
@@ -660,7 +657,8 @@ public class DeviceDAOImpl implements DeviceDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = false;
 
-        DevicesThreshold dt = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where dtid='" + dtid + "'");
+        DevicesThreshold dt = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where dtid='" + dtid +
+                "'");
 
         return dt.getType();
     }
@@ -672,9 +670,15 @@ public class DeviceDAOImpl implements DeviceDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Boolean rt = true;
 
-        DevicesThreshold dt1 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where type='" + type + "' and level = '1'");
-        DevicesThreshold dt2 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where type='" + type + "' and level = '2'");
-        DevicesThreshold dt3 = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where type='" + type + "' and level = '3'");
+        DevicesThreshold dt1 =
+                (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where type='" + type + "' and level =" +
+                        " '1'");
+        DevicesThreshold dt2 =
+                (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where type='" + type + "' and level =" +
+                        " '2'");
+        DevicesThreshold dt3 =
+                (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where type='" + type + "' and level =" +
+                        " '3'");
 
         if (dt1 == null || dt2 == null || dt3 == null) {
             rt = true;
@@ -728,8 +732,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getAllIDPDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'IDP'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'IDP'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -750,8 +753,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getAllUPSDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'UPS'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'UPS'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -772,8 +774,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getAllxdcDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'battery'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'battery'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -794,8 +795,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getAllfdjDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'generator'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'generator'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -816,8 +816,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getAllktDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'air conditioner'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'air conditioner'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -838,8 +837,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getAllotherDevice() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type = 'other'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type = 'other'");
 
         if (list.size() > 10) {
             List<Devices> rtlist = new ArrayList<>();
@@ -855,8 +853,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getAllDeviceName() {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices");
+        List<Devices> list = hbsessionDao.search("FROM Devices");
 
         if (list != null) {
             List<String> rtlist = new ArrayList<>();
@@ -872,8 +869,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List getOneTypeAllDeviceName(String dvtype) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where type='" + dvtype + "'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where type='" + dvtype + "'");
 
         if (list != null) {
             List<String> rtlist = new ArrayList<>();
@@ -895,8 +891,7 @@ public class DeviceDAOImpl implements DeviceDAO {
     public List searchFuzzyDevice(String name) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
-        List<Devices> list = hbsessionDao.search(
-                "FROM Devices where name like '" + name + "%'");
+        List<Devices> list = hbsessionDao.search("FROM Devices where name like '" + name + "%'");
 
         return list;
     }
@@ -905,8 +900,7 @@ public class DeviceDAOImpl implements DeviceDAO {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         Integer rt = null;
 
-        BasicSetting bs = (BasicSetting) hbsessionDao.getFirst(
-                "FROM BasicSetting");
+        BasicSetting bs = (BasicSetting) hbsessionDao.getFirst("FROM BasicSetting");
 
         if (bs != null) {
             rt = bs.getQstinterval();

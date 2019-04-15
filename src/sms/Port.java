@@ -116,9 +116,9 @@ public class Port {
     public static String getrechargeablePassword() {
         Random random = new Random();
         char[] codeSequence = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
-                'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'c',
-                'b', 'd', 'f', 'e', 'g', 'h', 'j', 'i', 'l', 'k', 'n', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w',
-                'v'};
+                'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a',
+                'c', 'b', 'd', 'f', 'e', 'g', 'h', 'j', 'i', 'l', 'k', 'n', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u',
+                'w', 'v'};
         String strRand = "";
         for (int i = 0; i < 18; i++) {
             strRand = strRand + String.valueOf(codeSequence[random.nextInt(59)]);
