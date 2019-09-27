@@ -38,13 +38,13 @@ public class getOneProvinceMapDataAction extends ActionSupport {
             String pname = request.getParameter("pname");
             String starttime = request.getParameter("stime");
             String endtime = request.getParameter("etime");
-
+            
             EventDAO dao = new EventDAOImpl();
             ProvinceDAO pdap = new ProvinceDAOImpl();
 
             String pid = pdap.getProvinceIdByName(pname + "分行");
 
-            if (!pid.equals("")) {
+            if(!pid.equals("")) {
                 oneprovince = dao.getOneProvinceEvent(pid, starttime, endtime);
             }
 

@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlarmUtil {
-    private static List<ChannelHandlerContext> ctxs = new ArrayList<ChannelHandlerContext>();
+    private static List<ChannelHandlerContext> ctxs=new ArrayList<ChannelHandlerContext>();
 
-    public static boolean sendMsg(String msg) {
-        if (ctxs.isEmpty()) {
+    public static boolean sendMsg(String msg){
+        if(ctxs.isEmpty()){
             return false;
         }
-        for (ChannelHandlerContext ctx : ctxs) {
+        for(ChannelHandlerContext ctx:ctxs){
             ctx.writeAndFlush(new TextWebSocketFrame(msg));
         }
         return true;

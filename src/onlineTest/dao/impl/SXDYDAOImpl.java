@@ -9,12 +9,12 @@ import java.util.List;
 
 public class SXDYDAOImpl implements SXDYDAO {
 
-    public List getCurrentSXDYData(String did) {
+    public List getCurrentSXDYData(String did){
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<PowersxdyMonitor> crlist = new ArrayList<>();
 
-        PowersxdyMonitor ob = (PowersxdyMonitor) hbsessionDao.getFirst("FROM PowersxdyMonitor where did = '" + did +
-                "' order by time Desc");
+        PowersxdyMonitor ob = (PowersxdyMonitor)hbsessionDao.getFirst(
+                "FROM PowersxdyMonitor where did = '" + did+ "' order by time Desc");
 
         crlist.add(ob);
 

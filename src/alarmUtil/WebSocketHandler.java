@@ -9,7 +9,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         //System.out.println("wensocket receive:"+msg);
         AlarmUtil.getCtxs().add(ctx);
-        System.out.println("******************" + "websocket:" + AlarmUtil.getCtxs().size() + "******************");
+        System.out.println("******************"+"websocket:"+AlarmUtil.getCtxs().size()+"******************");
     }
 
     @Override

@@ -109,7 +109,17 @@ public class EventPower {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventPower that = (EventPower) o;
-        return teid == that.teid && cid == that.cid && Double.compare(that.value, value) == 0 && duration == that.duration && Objects.equals(limitval, that.limitval) && Objects.equals(status, that.status) && Objects.equals(did, that.did) && Objects.equals(time, that.time) && Objects.equals(signature, that.signature) && Objects.equals(annotation, that.annotation) && Objects.equals(subtype, that.subtype);
+        return teid == that.teid &&
+                cid == that.cid &&
+                Double.compare(that.value, value) == 0 &&
+                duration == that.duration &&
+                Objects.equals(limitval, that.limitval) &&
+                Objects.equals(status, that.status) &&
+                Objects.equals(did, that.did) &&
+                Objects.equals(time, that.time) &&
+                Objects.equals(signature, that.signature) &&
+                Objects.equals(annotation, that.annotation) &&
+                Objects.equals(subtype, that.subtype);
     }
 
     @Override

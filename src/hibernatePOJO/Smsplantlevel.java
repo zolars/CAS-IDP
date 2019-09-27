@@ -45,7 +45,10 @@ public class Smsplantlevel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Smsplantlevel that = (Smsplantlevel) o;
-        return id == that.id && plantlevel == that.plantlevel && Objects.equals(levelbz, that.levelbz) && Objects.equals(syslevel, that.syslevel);
+        return id == that.id &&
+                plantlevel == that.plantlevel &&
+                Objects.equals(levelbz, that.levelbz) &&
+                Objects.equals(syslevel, that.syslevel);
     }
 
     @Override

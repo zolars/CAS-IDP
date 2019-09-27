@@ -10,38 +10,41 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 
-public class ThresholdClient extends Thread {
+public class ThresholdClient extends Thread{
     private String host;
     private int port;
     private String did;
 
-    public ThresholdClient(String host, int port, String did) {
-        this.host = host;
-        this.port = port;
-        this.did = did;
+    public ThresholdClient(String host, int port, String did){
+        this.host=host;
+        this.port=port;
+        this.did=did;
     }
-
     @Override
-    public void run() {
+    public void run(){
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-        try {
+        try{
             Bootstrap b = new Bootstrap();
             b.group(workerGroup);
             b.channel(NioSocketChannel.class);
             b.option(ChannelOption.SO_KEEPALIVE, Boolean.valueOf(true));
-            b.handler(new ChannelInitializer<SocketChannel>() {
-                public void initChannel(SocketChannel ch) throws Exception {
+            b.handler(new ChannelInitializer<SocketChannel>()
+            {
+                public void initChannel(SocketChannel ch)
+                        throws Exception
+                {
                     ch.pipeline().addLast(new ThresholdClientHandler(did));
                 }
             });
             ChannelFuture f = b.connect(host, port).sync();
-            if (f.isSuccess()) {
+            if(f.isSuccess()) {
                 f.channel().closeFuture().sync();
             } else {
                 System.out.println("============================重新建立连接");
                 run();
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e){
             e.printStackTrace();
             System.out.println("============================重新建立连接");
             run();

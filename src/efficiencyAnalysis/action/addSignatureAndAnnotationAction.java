@@ -8,6 +8,8 @@ import efficiencyAnalysis.dao.impl.EventDAOImpl;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class addSignatureAndAnnotationAction extends ActionSupport {
@@ -45,16 +47,16 @@ public class addSignatureAndAnnotationAction extends ActionSupport {
 
             EventDAO dao = new EventDAOImpl();
             Boolean rt = false;
-            if (ettype.equals("device")) {
-                for (int i = 0; i < teidSet.length; i++) {
+            if(ettype.equals("device")) {
+                for(int i = 0 ; i < teidSet.length; i ++){
                     rt = dao.addSignAndAnnotDeviceEvent(teidSet[i], sign, annot);
                 }
-            } else if (ettype.equals("power")) {
-                for (int i = 0; i < teidSet.length; i++) {
+            } else if(ettype.equals("power")) {
+                for(int i = 0 ; i < teidSet.length; i ++) {
                     rt = dao.addSignAndAnnotPowerEvent(teidSet[i], sign, annot);
                 }
-            } else if (ettype.equals("environment")) {
-                for (int i = 0; i < teidSet.length; i++) {
+            } else if(ettype.equals("environment")) {
+                for(int i = 0 ; i < teidSet.length; i ++) {
                     rt = dao.addSignAndAnnotEnvironEvent(teidSet[i], sign, annot);
                 }
             }

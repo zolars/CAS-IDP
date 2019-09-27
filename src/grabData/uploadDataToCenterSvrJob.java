@@ -39,7 +39,8 @@ public class uploadDataToCenterSvrJob implements Job {
             String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(calendar.getTime());
 
             //1.上传电能质量事件到总服务器
-            eventpowerlist = hbsessionDao.search("FROM EventPower where time >'" + date + "'");
+            eventpowerlist = hbsessionDao.search(
+                    "FROM EventPower where time >'" + date + "'");
 
             if (eventpowerlist != null) {
                 for (int i = 0; i < eventpowerlist.size(); i++) {
@@ -49,7 +50,8 @@ public class uploadDataToCenterSvrJob implements Job {
             }
 
             //2.上传温湿度事件到总服务器
-            eventenvrionlist = hbsessionDao.search("FROM EventEnvironment where time >'" + date + "'");
+            eventenvrionlist = hbsessionDao.search(
+                    "FROM EventEnvironment where time >'" + date + "'");
 
             if (eventenvrionlist != null) {
                 for (int i = 0; i < eventenvrionlist.size(); i++) {
@@ -59,7 +61,8 @@ public class uploadDataToCenterSvrJob implements Job {
             }
 
             //3.上传设备事件到总服务器
-            eventctrllist = hbsessionDao.search("FROM EventCtrl where time >'" + date + "'");
+            eventctrllist = hbsessionDao.search(
+                    "FROM EventCtrl where time >'" + date + "'");
 
             if (eventctrllist != null) {
                 for (int i = 0; i < eventctrllist.size(); i++) {

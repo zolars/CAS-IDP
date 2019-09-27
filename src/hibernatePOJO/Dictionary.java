@@ -58,7 +58,10 @@ public class Dictionary {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dictionary that = (Dictionary) o;
-        return id == that.id && Objects.equals(item, that.item) && Objects.equals(coefficient, that.coefficient) && Objects.equals(description, that.description);
+        return id == that.id &&
+                Objects.equals(item, that.item) &&
+                Objects.equals(coefficient, that.coefficient) &&
+                Objects.equals(description, that.description);
     }
 
     @Override

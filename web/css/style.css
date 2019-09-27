@@ -404,14 +404,16 @@ blockquote small {
 }
 
 #content {
-    margin-left: 180px;
+    /*margin-left: 180px;*/
+    margin-left: 10%;
     min-height: 500px;
     position: relative;
 }
 
 /* Sidebar */
 #sidebar {
-    width: 180px;
+    /* width: 180px;*/
+    width: 10%;
     float: left;
     background: rgba(0,0,0,0.3);
     height: 100%;

@@ -7,7 +7,7 @@ import org.quartz.JobExecutionException;
 
 
 public class CtrlSaveJob implements Job {
-    private static HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+        private static HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {

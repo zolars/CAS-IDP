@@ -3531,10 +3531,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             isSystemMng = false;
             menuname = "集中监控";
         }
-       /* else if(cbidstr[i] == " efficiencyDevice.jsp"){
+        else if(cbidstr[i] == " efficiencyDevice.jsp"){
             isSystemMng = false;
             menuname = "动力设施";
-        }*/
+        }
         else if(cbidstr[i] == " onlineDetect.jsp"){
             isSystemMng = false;
             menuname = "在线监测";
@@ -3804,8 +3804,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             if (threshold[2] == 'null') {
                                 table.rows[threshold[0]].cells[16].innerHTML = "";
                             } else {
-                               // table.rows[threshold[0]].cells[16].innerHTML = threshold[2];
-                                table.rows[threshold[0]].cells[16].innerHTML = "";
+                                table.rows[threshold[0]].cells[16].innerHTML = threshold[2];
+                                //  table.rows[threshold[0]].cells[16].innerHTML = "";
                             }
                         }
                     }
@@ -3817,18 +3817,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[result[0]].cells[2].innerHTML = result[3];
                             table.rows[result[0]].cells[3].innerHTML = result[4];
                             table.rows[result[0]].cells[4].innerHTML = result[5];
+                            if(table.rows[result[0]].cells[16].innerHTML == ""){
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            } else if(parseFloat(result[5]) <= parseFloat(table.rows[result[0]].cells[16].innerHTML)){
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: black;">合格</span>';
+                            } else {
+                                table.rows[result[0]].cells[5].innerHTML = '<span style="color: red;">不合格</span>';
+                            }
                         }
                         else if(result[1]=='b'){
                             table.rows[result[0]].cells[6].innerHTML = result[2];
                             table.rows[result[0]].cells[7].innerHTML = result[3];
                             table.rows[result[0]].cells[8].innerHTML = result[4];
                             table.rows[result[0]].cells[9].innerHTML = result[5];
+                            if (table.rows[result[0]].cells[16].innerHTML == "") {
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            } else if(parseFloat(result[5]) <= parseFloat(table.rows[result[0]].cells[16].innerHTML)) {
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: black;">合格</span>';
+                            } else {
+                                table.rows[result[0]].cells[10].innerHTML = '<span style="color: red;">不合格</span>';
+                            }
                         }
                         else if(result[1]=='c'){
                             table.rows[result[0]].cells[11].innerHTML = result[2];
                             table.rows[result[0]].cells[12].innerHTML = result[3];
                             table.rows[result[0]].cells[13].innerHTML = result[4];
                             table.rows[result[0]].cells[14].innerHTML = result[5];
+                            if(table.rows[result[0]].cells[16].innerHTML == "") {
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            } else if(parseFloat(result[5]) <= parseFloat(table.rows[result[0]].cells[16].innerHTML)) {
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: black;">合格</span>';
+                            } else {
+                                table.rows[result[0]].cells[15].innerHTML = '<span style="color: red;">不合格</span>';
+                            }
                         }
                     }
 
@@ -3858,7 +3879,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     alert("查询完成！");
                 },
                 error:function(data){
-                    alert("Error!5555");
+                    alert("Error!");
                 }
             });
         }
@@ -3954,36 +3975,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[2].cells[2].innerHTML = vcfund[2];
                             table.rows[2].cells[3].innerHTML = vcfund[3];
                             table.rows[2].cells[4].innerHTML = vcfund[4];
-                          /*  if(vcfund[5] == '合格')
-                                table.rows[2].cells[5].innerHTML = '<span style="color: black;">合格</span>';
-                            else if(vcfund[5] == '不合格')
-                                table.rows[2].cells[5].innerHTML = '<span style="color: red;">不合格</span>';*/
                         }
                         if(vcfund[0]=='u2'){
                             table.rows[2].cells[6].innerHTML = vcfund[1];
                             table.rows[2].cells[7].innerHTML = vcfund[2];
                             table.rows[2].cells[8].innerHTML = vcfund[3];
                             table.rows[2].cells[9].innerHTML = vcfund[4];
-                          /*  if(vcfund[5] == '合格')
-                                table.rows[2].cells[10].innerHTML = '<span style="color: black;">合格</span>';
-                            else if(vcfund[5] == '不合格')
-                                table.rows[2].cells[10].innerHTML = '<span style="color: red;">不合格</span>';*/
                         }
                         if(vcfund[0]=='u3'){
                             table.rows[2].cells[11].innerHTML = vcfund[1];
                             table.rows[2].cells[12].innerHTML = vcfund[2];
                             table.rows[2].cells[13].innerHTML = vcfund[3];
                             table.rows[2].cells[14].innerHTML = vcfund[4];
-                         /*   if(vcfund[5] == '合格')
-                                table.rows[2].cells[15].innerHTML = '<span style="color: black;">合格</span>';
-                            else if(vcfund[5] == '不合格')
-                                table.rows[2].cells[15].innerHTML = '<span style="color: red;">不合格</span>';*/
                         }
                     }
                     table.rows[2].cells[16].innerHTML = '-';
                     $('#searching').css('display', 'none');
                     alert("查询完成！");
-                   // $("#searchHV2-button").button('查询');
                 },
                 error:function(data){
                     alert("Error!");
@@ -4031,10 +4039,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         }
                     }
 
+
                     for (var j = 0; j < temp_result.length; j++) {
                         var result= temp_result[j].split(",");
-
-                        console.log(result);
 
                         if(result[1]=='a'){
                             table.rows[result[0]].cells[1].innerHTML = result[2];
@@ -4084,39 +4091,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             table.rows[2].cells[2].innerHTML = vcfund[2];
                             table.rows[2].cells[3].innerHTML = vcfund[3];
                             table.rows[2].cells[4].innerHTML = vcfund[4];
-                          /*  if(vcfund[5] == '合格')
-                                table.rows[2].cells[5].innerHTML = '<span style="color: black;">合格</span>';
-                            else if(vcfund[5] == '不合格')
-                                table.rows[2].cells[5].innerHTML = '<span style="color: red;">不合格</span>';*/
-
                         }
                         if(vcfund[0]=='i2'){
                             table.rows[2].cells[6].innerHTML = vcfund[1];
                             table.rows[2].cells[7].innerHTML = vcfund[2];
                             table.rows[2].cells[8].innerHTML = vcfund[3];
                             table.rows[2].cells[9].innerHTML = vcfund[4];
-                           /* if(vcfund[5] == '合格')
-                                table.rows[2].cells[10].innerHTML = '<span style="color: black;">合格</span>';
-                            else if(vcfund[5] == '不合格')
-                                table.rows[2].cells[10].innerHTML = '<span style="color: red;">不合格</span>';*/
-
                         }
                         if(vcfund[0]=='i3'){
                             table.rows[2].cells[11].innerHTML = vcfund[1];
                             table.rows[2].cells[12].innerHTML = vcfund[2];
                             table.rows[2].cells[13].innerHTML = vcfund[3];
                             table.rows[2].cells[14].innerHTML = vcfund[4];
-                         /*   if(vcfund[5] == '合格')
-                                table.rows[2].cells[15].innerHTML = '<span style="color: black;">合格</span>';
-                            else if(vcfund[5] == '不合格')
-                                table.rows[2].cells[15].innerHTML = '<span style="color: red;">不合格</span>';*/
-
                         }
                     }
                     table.rows[2].cells[16].innerHTML = '-';
                     $('#searching').css('display', 'none');
                     alert("查询完成！");
-                    //$("#searchHC1-button").button('查询');
                 },
                 error:function(data){
                     alert("Error!");

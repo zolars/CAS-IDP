@@ -99,7 +99,16 @@ public class DevicesThreshold {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DevicesThreshold that = (DevicesThreshold) o;
-        return dtid == that.dtid && Objects.equals(name, that.name) && Objects.equals(type, that.type) && Objects.equals(did, that.did) && Objects.equals(classify, that.classify) && Objects.equals(unit, that.unit) && Objects.equals(cellval, that.cellval) && Objects.equals(floorval, that.floorval) && Objects.equals(level, that.level) && Objects.equals(ismark, that.ismark);
+        return dtid == that.dtid &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(did, that.did) &&
+                Objects.equals(classify, that.classify) &&
+                Objects.equals(unit, that.unit) &&
+                Objects.equals(cellval, that.cellval) &&
+                Objects.equals(floorval, that.floorval) &&
+                Objects.equals(level, that.level) &&
+                Objects.equals(ismark, that.ismark);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class TransientRequestJob implements Job {
                     String did = iterator.next(); //监测点id
                     Channel channel = channelMap.get(did); //某个监测点的channel
                     List<ByteBuf> list = TransientUtil.createMsg();
-                    for (ByteBuf buf : list) {
+                    for (ByteBuf buf:list) {
                         System.out.println(new Date() + "暂态请求：" + ByteBufUtil.hexDump(buf));
                         channel.writeAndFlush(buf);
                     }

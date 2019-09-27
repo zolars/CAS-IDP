@@ -1,6 +1,7 @@
 package onlineTest.dao.impl;
 
 import Util.HBSessionDaoImpl;
+import com.sun.scenario.effect.impl.prism.ps.PPSBlend_ADDPeer;
 import grabData.DataOnline;
 import hibernatePOJO.PowerparmMonitor;
 import hibernatePOJO.PowersxdyMonitor;
@@ -234,7 +235,7 @@ public class RMSDAOImpl implements RMSDAO {
     public List getCurrentHzData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
         List<Object> crlist = new ArrayList<>();
-        // List<Hz> crlist = new ArrayList<>();
+       // List<Hz> crlist = new ArrayList<>();
         PowerparmMonitor pp = DataOnline.getParmMap().get(did);
 
 
@@ -242,7 +243,7 @@ public class RMSDAOImpl implements RMSDAO {
         rtobj.setHz(pp.getHz());
         rtobj.setTime(pp.getTime());
 */
-        // List<Object> crlist = new ArrayList<>();
+       // List<Object> crlist = new ArrayList<>();
         PowerparmMonitor rtobj = new PowerparmMonitor();
         rtobj.setHz(pp.getHz());
         rtobj.setTime(pp.getTime());
@@ -267,7 +268,7 @@ public class RMSDAOImpl implements RMSDAO {
     //Uunb
     public List getCurrentUnbData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        // List<Uunb> crlist = new ArrayList<>();
+       // List<Uunb> crlist = new ArrayList<>();
         List<Object> crlist = new ArrayList<>();
         PowersxdyMonitor pp = DataOnline.getSxdyMap().get(did);
 
@@ -276,7 +277,7 @@ public class RMSDAOImpl implements RMSDAO {
         rtobj.setUunb(pp.getUunb());
         rtobj.setTime(pp.getTime());
  */
-        //  List<Object> crlist = new ArrayList<>();
+      //  List<Object> crlist = new ArrayList<>();
         PowersxdyMonitor rtobj = new PowersxdyMonitor();
         rtobj.setUunb(pp.getUunb());
         rtobj.setTime(pp.getTime());
@@ -378,7 +379,7 @@ public class RMSDAOImpl implements RMSDAO {
     //Var
     public List getCurrentVarData(String did) {
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        // List<Var> crlist = new ArrayList<>();
+       // List<Var> crlist = new ArrayList<>();
         List<Object> crlist = new ArrayList<>();
 
         PowerparmMonitor pp = DataOnline.getParmMap().get(did);
@@ -484,9 +485,9 @@ public class RMSDAOImpl implements RMSDAO {
         PowerparmMonitor pp = DataOnline.getParmMap().get(did);
 
         Tan rtobj = new Tan();
-        rtobj.setTan1(pp.getQ1() / pp.getP1());
-        rtobj.setTan2(pp.getQ2() / pp.getP2());
-        rtobj.setTan3(pp.getQ3() / pp.getP3());
+        rtobj.setTan1(pp.getQ1()/pp.getP1());
+        rtobj.setTan2(pp.getQ2()/pp.getP2());
+        rtobj.setTan3(pp.getQ3()/pp.getP3());
 
         crlist.add(rtobj);
      /*   List<PowerparmMonitor> obj = hbsessionDao.searchWithNum(

@@ -30,15 +30,15 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
         /*2019-03-04*/
-        for (Devices d : DeviceManager.getFirstConnection().keySet()) {
-            if (d.getDid().toString() == this.did) {
-                DeviceManager.getFirstConnection().put(d, true);
+        for(Devices d:DeviceManager.getFirstConnection().keySet()){
+            if(d.getDid().toString()==this.did){
+                DeviceManager.getFirstConnection().put(d,true);
             }
         }
         /*2019-03-04*/
 
         // record ctx in DeviceManager
-        DeviceManager.getCtxMap().put(this.did + "-5", ctx);
+        DeviceManager.getCtxMap().put(this.did+"-5",ctx);
 
         ByteBuf sendMsg = ctx.alloc().buffer();
         sendMsg.writeBytes(createMsg(1, 3, 1, 2));
@@ -87,7 +87,7 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         //remove temperature data,ctx in map
         TemperatureSave.getTempDataMap().remove(this.did);
-        DeviceManager.getCtxMap().remove(this.did + "-5");
+        DeviceManager.getCtxMap().remove(this.did+"-5");
     }
 
     @Override
@@ -119,14 +119,14 @@ class TempDataClientHandler extends ChannelInboundHandlerAdapter {
 
         String data = ByteBufUtil.hexDump(buf);
 
-        float temperatureInt = Integer.parseInt(data.substring(0, 4), 16);
-        float humidityInt = Integer.parseInt(data.substring(4, 8), 16);
+        float temperatureInt = Integer.parseInt(data.substring(0,4), 16);
+        float humidityInt = Integer.parseInt(data.substring(4,8), 16);
 
         float temperature = temperatureInt / 10;
         float humidity = humidityInt / 10;
 
         map.put("temperature", temperature);
-        System.out.println(temperature + "------" + humidity);
-        map.put("humidity", humidity);
+        System.out.println(temperature+"------"+humidity);
+        map.put("humidity",humidity);
     }
 }

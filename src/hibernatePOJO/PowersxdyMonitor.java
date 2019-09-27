@@ -277,13 +277,35 @@ public class PowersxdyMonitor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PowersxdyMonitor that = (PowersxdyMonitor) o;
-        return sxid == that.sxid && did == that.did && Objects.equals(time, that.time) && Objects.equals(u1, that.u1) && Objects.equals(u2, that.u2) && Objects.equals(u3, that.u3) && Objects.equals(v1, that.v1) && Objects.equals(v2, that.v2) && Objects.equals(v3, that.v3) && Objects.equals(i1, that.i1) && Objects.equals(i2, that.i2) && Objects.equals(i3, that.i3) && Objects.equals(angleU1, that.angleU1) && Objects.equals(angleU2, that.angleU2) && Objects.equals(angleU3, that.angleU3) && Objects.equals(angleV1, that.angleV1) && Objects.equals(angleV2, that.angleV2) && Objects.equals(angleV3, that.angleV3) && Objects.equals(angleI1, that.angleI1) && Objects.equals(angleI2, that.angleI2) && Objects.equals(angleI3, that.angleI3) && Objects.equals(aunb, that.aunb) && Objects.equals(uunb, that.uunb) && Objects.equals(vunb, that.vunb);
+        return sxid == that.sxid &&
+                did == that.did &&
+                Objects.equals(time, that.time) &&
+                Objects.equals(u1, that.u1) &&
+                Objects.equals(u2, that.u2) &&
+                Objects.equals(u3, that.u3) &&
+                Objects.equals(v1, that.v1) &&
+                Objects.equals(v2, that.v2) &&
+                Objects.equals(v3, that.v3) &&
+                Objects.equals(i1, that.i1) &&
+                Objects.equals(i2, that.i2) &&
+                Objects.equals(i3, that.i3) &&
+                Objects.equals(angleU1, that.angleU1) &&
+                Objects.equals(angleU2, that.angleU2) &&
+                Objects.equals(angleU3, that.angleU3) &&
+                Objects.equals(angleV1, that.angleV1) &&
+                Objects.equals(angleV2, that.angleV2) &&
+                Objects.equals(angleV3, that.angleV3) &&
+                Objects.equals(angleI1, that.angleI1) &&
+                Objects.equals(angleI2, that.angleI2) &&
+                Objects.equals(angleI3, that.angleI3) &&
+                Objects.equals(aunb, that.aunb) &&
+                Objects.equals(uunb, that.uunb) &&
+                Objects.equals(vunb, that.vunb);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(sxid, did, time, u1, u2, u3, v1, v2, v3, i1, i2, i3, angleU1, angleU2, angleU3, angleV1,
-                angleV2, angleV3, angleI1, angleI2, angleI3, aunb, uunb, vunb);
+        return Objects.hash(sxid, did, time, u1, u2, u3, v1, v2, v3, i1, i2, i3, angleU1, angleU2, angleU3, angleV1, angleV2, angleV3, angleI1, angleI2, angleI3, aunb, uunb, vunb);
     }
 }

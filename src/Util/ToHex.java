@@ -26,12 +26,12 @@ public class ToHex {
      * @return
      */
     public static byte[] toBytes(String str) {
-        if (str == null || str.trim().equals("")) {
+        if(str == null || str.trim().equals("")) {
             return new byte[0];
         }
 
         byte[] bytes = new byte[str.length() / 2];
-        for (int i = 0; i < str.length() / 2; i++) {
+        for(int i = 0; i < str.length() / 2; i++) {
             String subStr = str.substring(i * 2, i * 2 + 2);
 
             bytes[i] = (byte) Integer.parseInt(subStr, 16);
@@ -53,18 +53,20 @@ public class ToHex {
      */
     public static byte[] hexString2Bytes(String hex) {
 
-        if ((hex == null) || (hex.equals(""))) {
+        if ((hex == null) || (hex.equals(""))){
             return null;
-        } else if (hex.length() % 2 != 0) {
+        }
+        else if (hex.length()%2 != 0){
             return null;
-        } else {
+        }
+        else{
             hex = hex.toUpperCase();
-            int len = hex.length() / 2;
+            int len = hex.length()/2;
             byte[] b = new byte[len];
             char[] hc = hex.toCharArray();
-            for (int i = 0; i < len; i++) {
-                int p = 2 * i;
-                b[i] = (byte) (charToByte(hc[p]) << 4 | charToByte(hc[p + 1]));
+            for (int i=0; i<len; i++){
+                int p=2*i;
+                b[i] = (byte) (charToByte(hc[p]) << 4 | charToByte(hc[p+1]));
             }
             return b;
         }
@@ -74,7 +76,6 @@ public class ToHex {
     /**
      * 这个方法挺简单的。
      * DecimalFormat is a concrete subclass of NumberFormat that formats decimal numbers.
-     *
      * @param d
      * @return
      */
@@ -90,16 +91,16 @@ public class ToHex {
     }
 
     //获取当前时间前后推移的时间
-    public static String beforeNowTime(int second) {
+    public static String beforeNowTime(int second){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar c = new GregorianCalendar();
         Date date = new Date();
-        System.out.println("系统当前时间      ：" + df.format(date));
+        System.out.println("系统当前时间      ："+df.format(date));
         c.setTime(date);//设置参数时间
-        c.add(Calendar.SECOND, second);//把日期往后增加SECOND 秒.整数往后推,负数往前移动
-        date = c.getTime(); //这个时间就是日期往后推一天的结果
+        c.add(Calendar.SECOND,second);//把日期往后增加SECOND 秒.整数往后推,负数往前移动
+        date=c.getTime(); //这个时间就是日期往后推一天的结果
         String str = df.format(date);
         return str;
     }
 
-}
+    }

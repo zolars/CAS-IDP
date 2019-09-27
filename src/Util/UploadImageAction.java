@@ -50,8 +50,7 @@ public class UploadImageAction extends ActionSupport {
             if (!folder.exists()) {
                 try {
                     folder.mkdirs();
-                } catch (Exception e) {
-                }
+                } catch (Exception e){}
             }
 
             if (destFile.exists()) {

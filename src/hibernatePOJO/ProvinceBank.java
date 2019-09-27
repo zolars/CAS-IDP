@@ -72,8 +72,13 @@ public class ProvinceBank {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProvinceBank that = (ProvinceBank) o;
-        return Objects.equals(pbid, that.pbid) && Objects.equals(pbname, that.pbname) && Objects.equals(cbidset,
-                that.cbidset) && Objects.equals(compRoom, that.compRoom) && Objects.equals(didset, that.didset) && Objects.equals(tempset, that.tempset) && Objects.equals(cidset, that.cidset);
+        return Objects.equals(pbid, that.pbid) &&
+                Objects.equals(pbname, that.pbname) &&
+                Objects.equals(cbidset, that.cbidset) &&
+                Objects.equals(compRoom, that.compRoom) &&
+                Objects.equals(didset, that.didset) &&
+                Objects.equals(tempset, that.tempset) &&
+                Objects.equals(cidset, that.cidset);
     }
 
     @Override

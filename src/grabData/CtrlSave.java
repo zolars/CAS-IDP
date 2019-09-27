@@ -81,52 +81,7 @@ public class CtrlSave {
         return rtlist;
     }
 
-    public static void ctrlSave(String did, byte[] bytes) {
-        boolean[] statusList = new boolean[40]; // boolean数组，数组第 i 个元素代表第 i+1 个线圈是否异常，末尾元素无意义
-        int count = 0; // 表示当前判断的线圈
-        boolean status = false;
-        for (int i = 0; i < 5; ++i) {
-            byte b = bytes[i];
-            for (int j = 0; j < 8; ++j) {
-                int flag = (b >> j) & (0x01);
-                count = i * 8 + j;
-                status = flag == 1;
-                if (count == 34) { // 第35个线圈是运行标识，状态取反
-                    status = !status;
-                }
-                statusList[count] = status;
-            }
-        }
-
-        for (int i = 0; i < 35; ++i) {
-            if (statusList[i]) { // 若有告警事件
-                HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-                EventCtrl eventCtrl = (EventCtrl) hbsessionDao.getFirst("FROM EventCtrl where signature is not null " +
-                        "order by teid desc");
-
-                int maxteid = 0;
-
-                if (eventCtrl != null) {
-                    maxteid = eventCtrl.getTeid() + 1;
-                }
-
-                EventCtrl event = new EventCtrl();
-                event.setTeid(maxteid);
-                event.setTime(new Timestamp(System.currentTimeMillis()));
-                event.setCid(i + 1);
-                event.setDid(did);
-                event.setValue("1");
-                // eventCtrlMap.get(did).add(event);
-                /************ 2018-12-24 马卫亮 ADD ******************************/
-                hbsessionDao.update("update EventCtrl set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = " +
-                        "'" + i + 1 + "' signature is null ");
-                /************ 2018-12-24 马卫亮 ADD ******************************/
-                hbsessionDao.insert(event);
-            }
-        }
-    }
-
-    public static void ctrlSave2(String did, String data) {
+    public static void ctrlSave(String did, String data) {
         eventCtrlMap = new HashMap<>();
         eventCtrlMap.put(did, new ArrayList<>());
 
@@ -165,7 +120,8 @@ public class CtrlSave {
 
             if (value.equals("1")) { // 若有告警事件
                 HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-                EventCtrl eventCtrl = (EventCtrl) hbsessionDao.getFirst("FROM EventCtrl order by teid desc");
+                EventCtrl eventCtrl = (EventCtrl)hbsessionDao.getFirst(
+                        "FROM EventCtrl order by teid desc");
 
                 int maxteid = 0;
 
@@ -181,25 +137,28 @@ public class CtrlSave {
                 event.setValue(value);
 
                 // eventCtrlMap.get(did).add(event);
-
+                /************2018-12-24 马卫亮  ADD******************************/
+                hbsessionDao.update("update EventCtrl set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '"+idx+1+"' signature is null ");
+                /************2018-12-24 马卫亮  ADD******************************/
                 hbsessionDao.insert(event);
             }
         }
     }
 
-    public static void setCtrlMap(String did, byte[] statusBytes, float[] parmList) {
-        boolean[] statusList = new boolean[40]; // boolean数组，数组第 i 个元素代表第 i+1 个线圈是否异常，末尾元素无意义
-        int count = 0; // 表示当前判断的线圈
-        boolean status = false;
-        for (int i = 0; i < 5; ++i) {
-            byte b = statusBytes[i];
-            for (int j = 0; j < 8; ++j) {
-                int flag = (b >> j) & (0x01);
-                count = i * 8 + j;
-                if (flag == 1) {
-                    status = true;
-                } else {
-                    status = false;
+    public static void ctrlSave2(String did,byte[] bytes){
+        boolean[] statusList=new boolean[40];   //boolean数组，数组第 i 个元素代表第 i+1 个线圈是否异常，末尾元素无意义
+        int count=0;    //表示当前判断的线圈
+        boolean status=false;
+        for(int i=0;i<5;++i){
+            byte b=bytes[i];
+            for(int j=0;j<8;++j){
+                int flag=(b>>j) & (0x01);
+                count=i*8+j;
+                if(flag==1){
+                    status=true;
+                }
+                else{
+                    status=false;
                 }
                 if (count == 34) { // 第35个线圈是运行标识，状态取反
                     status = !status;
@@ -208,6 +167,62 @@ public class CtrlSave {
             }
         }
 
+//        for(int i=0;i<40;++i){
+//            System.out.println(i+1+":"+statusList[i]);
+//        }
+
+        for(int i=0;i<35;++i){
+            if(statusList[i]){  //若有告警事件
+                HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+                EventCtrl eventCtrl = (EventCtrl)hbsessionDao.getFirst(
+                        "FROM EventCtrl where signature is not null order by teid desc");
+
+                int maxteid = 0;
+
+                if(eventCtrl != null) {
+                    maxteid = eventCtrl.getTeid() + 1;
+                }
+
+                EventCtrl event = new EventCtrl();
+                event.setTeid(maxteid);
+                event.setTime(new Timestamp(System.currentTimeMillis()));
+                event.setCid(i + 1);
+                event.setDid(did);
+                event.setValue("1");
+                // eventCtrlMap.get(did).add(event);
+                /************2018-12-24 马卫亮  ADD******************************/
+                hbsessionDao.update("update EventCtrl set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '"+i+1+"' signature is null ");
+                /************2018-12-24 马卫亮  ADD******************************/
+                hbsessionDao.insert(event);
+            }
+        }
+    }
+
+    public static void setCtrlMap(String did,byte[] bytes){
+        boolean[] statusList=new boolean[40];   //boolean数组，数组第 i 个元素代表第 i+1 个线圈是否异常，末尾元素无意义
+        int count=0;    //表示当前判断的线圈
+        boolean status=false;
+        for(int i=0;i<5;++i){
+            byte b=bytes[i];
+            for(int j=0;j<8;++j){
+                int flag=(b>>j) & (0x01);
+                count=i*8+j;
+                if(flag==1){
+                    status=true;
+                }
+                else{
+                    status=false;
+                }
+                if(count==34){  //第35个线圈是运行标识，状态取反
+                    status=!status;
+                }
+                statusList[count]=status;
+            }
+        }
+
+//        for(int i=0;i<40;++i){
+//            System.out.println(i+1+":"+statusList[i]);
+//        }
         CtrlParameter cp = new CtrlParameter();
 
         cp.setCtrl1(statusList[0]);
@@ -245,65 +260,6 @@ public class CtrlSave {
         cp.setCtrl33(statusList[32]);
         cp.setCtrl34(statusList[33]);
 
-        cp.setCtrl30001(parmList[0] * (float) 0.1);
-        cp.setCtrl30002(parmList[1] * (float) 0.1);
-        cp.setCtrl30003(parmList[2] * (float) 0.1);
-        cp.setCtrl30004(parmList[3] * (float) 0.1);
-        cp.setCtrl30005(parmList[4] * (float) 0.1);
-        cp.setCtrl30006(parmList[5] * (float) 0.1);
-        cp.setCtrl30007(parmList[6] * (float) 0.1);
-        cp.setCtrl30008(parmList[7] * (float) 0.1);
-        cp.setCtrl30009(parmList[8] * (float) 0.1);
-        cp.setCtrl30010(parmList[9] * (float) 0.1);
-        cp.setCtrl30011(parmList[10] * (float) 0.1);
-        cp.setCtrl30012(parmList[11] * (float) 1);
-        cp.setCtrl30013(parmList[12] * (float) 1);
-        cp.setCtrl30014(parmList[13] * (float) 1);
-        cp.setCtrl30015(parmList[14]);
-        cp.setCtrl30016(parmList[15] * (float) 0.1);
-        cp.setCtrl30017(parmList[16]);
-        cp.setCtrl30018(parmList[17]);
-        cp.setCtrl30019(parmList[18]);
-        cp.setCtrl30020(parmList[19]);
-        cp.setCtrl30021(parmList[20]);
-        cp.setCtrl30022(parmList[21]);
-        cp.setCtrl30023(parmList[22]);
-        cp.setCtrl30024(parmList[23]);
-        cp.setCtrl30025(parmList[24]);
-        cp.setCtrl30026(parmList[25]);
-        cp.setCtrl30027(parmList[26]);
-        cp.setCtrl30028(parmList[27] * (float) 0.001);
-        cp.setCtrl30029(parmList[28] * (float) 0.001);
-        cp.setCtrl30030(parmList[29] * (float) 0.001);
-        cp.setCtrl30031(parmList[30] * (float) 0.001);
-        cp.setCtrl30032(parmList[31] * (float) 0.001);
-        cp.setCtrl30033(parmList[32] * (float) 0.001);
-        cp.setCtrl30034(parmList[33] * (float) 0.1);
-        cp.setCtrl30035(parmList[34] * (float) 0.1);
-        cp.setCtrl30036(parmList[35] * (float) 0.1);
-        cp.setCtrl30037(parmList[36] * (float) 0.1);
-        cp.setCtrl30038(parmList[37] * (float) 0.1);
-        cp.setCtrl30039(parmList[38] * (float) 0.1);
-        cp.setCtrl30040(parmList[39] * (float) 0.1);
-        cp.setCtrl30041(parmList[40] * (float) 0.1);
-        cp.setCtrl30042(parmList[41] * (float) 0.1);
-        cp.setCtrl30043(parmList[42] * (float) 0.1);
-        cp.setCtrl30044(parmList[43] * (float) 0.1);
-        cp.setCtrl30045(parmList[44] * (float) 0.1);
-        cp.setCtrl30046(parmList[45]);
-        cp.setCtrl30047(parmList[46]);
-        cp.setCtrl30048(parmList[47]);
-        cp.setCtrl30049(parmList[48] * (float) 0.1);
-        cp.setCtrl30050(parmList[49] * (float) 0.1);
-        cp.setCtrl30051(parmList[50] * (float) 0.1);
-        cp.setCtrl30052(parmList[51]);
-        cp.setCtrl30053(parmList[52]);
-        cp.setCtrl30054(parmList[53]);
-        cp.setCtrl30055(parmList[54]);
-        cp.setCtrl30056(parmList[55] * (float) 0.1);
-        cp.setCtrl30057(parmList[56] * (float) 0.1);
-        cp.setCtrl30058(parmList[57] * (float) 0.1);
-
         ctrlMap.put(did, cp);
     }
 
@@ -315,3 +271,5 @@ public class CtrlSave {
         return ctrlMap;
     }
 }
+
+

@@ -47,8 +47,9 @@ public class Permission {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Permission that = (Permission) o;
-        return pid == that.pid && Objects.equals(parentpid, that.parentpid) && Objects.equals(permissionname,
-                that.permissionname);
+        return pid == that.pid &&
+                Objects.equals(parentpid, that.parentpid) &&
+                Objects.equals(permissionname, that.permissionname);
     }
 
     @Override

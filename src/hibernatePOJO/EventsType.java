@@ -99,7 +99,16 @@ public class EventsType {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventsType that = (EventsType) o;
-        return cid == that.cid && Objects.equals(code, that.code) && Objects.equals(pid, that.pid) && Objects.equals(type, that.type) && Objects.equals(subtype, that.subtype) && Objects.equals(devicename, that.devicename) && Objects.equals(prior, that.prior) && Objects.equals(classify, that.classify) && Objects.equals(description, that.description) && Objects.equals(zbj, that.zbj);
+        return cid == that.cid &&
+                Objects.equals(code, that.code) &&
+                Objects.equals(pid, that.pid) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(subtype, that.subtype) &&
+                Objects.equals(devicename, that.devicename) &&
+                Objects.equals(prior, that.prior) &&
+                Objects.equals(classify, that.classify) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(zbj, that.zbj);
     }
 
     @Override

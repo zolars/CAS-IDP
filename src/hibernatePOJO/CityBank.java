@@ -63,7 +63,12 @@ public class CityBank {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CityBank cityBank = (CityBank) o;
-        return Objects.equals(cbid, cityBank.cbid) && Objects.equals(cbname, cityBank.cbname) && Objects.equals(compRoom, cityBank.compRoom) && Objects.equals(didset, cityBank.didset) && Objects.equals(tempset, cityBank.tempset) && Objects.equals(cidset, cityBank.cidset);
+        return Objects.equals(cbid, cityBank.cbid) &&
+                Objects.equals(cbname, cityBank.cbname) &&
+                Objects.equals(compRoom, cityBank.compRoom) &&
+                Objects.equals(didset, cityBank.didset) &&
+                Objects.equals(tempset, cityBank.tempset) &&
+                Objects.equals(cidset, cityBank.cidset);
     }
 
     @Override

@@ -705,6 +705,21 @@
 
 
                                 <div>告警内容：<input id="sms-content-input" class="searchInput form-control" type="text" style="width: 350px"></div>
+
+
+                                <div>
+                                    预警等级
+                                    <select class="form-control location-select-item" id="alarmmethod-select" name="alarmmethod-select" onclick="getAlarmMethod()">
+                                        <option value="1">实时报警</option>
+                                        <option value="2">分析报警</option>
+                                    </select>
+                                </div>
+
+                                <div id = "fenxibaojing-div" style="display: none">
+                                <div>报警分析时间段：<input id="alarmanalysisinterval-content-input" class="searchInput form-control" type="text" style="width: 350px"></div>
+                                <div>报警分析百分比阈值：<input id="aapercentthreshold-content-input" class="searchInput form-control" type="text" style="width: 350px"></div>
+                                </div>
+
                                 <button class="button-primary button-pill button-small" onclick="addAlarm()">确认</button>
                             </div>
 
@@ -3295,6 +3310,10 @@
         var checkboxsms2;
         var checkboxplantform2;
 
+        var alarmmethod;
+        var alarmanalysisinterval;
+        var alarmanalysispercentthreshold;
+
         if(alarmlevel == '1') {
             checkboxalert2 = $('input[name="checkbox-alert-2-1"]:checked').val();
             checkboxsms2 = $('input[name="checkbox-sms-2-1"]:checked').val();
@@ -3312,22 +3331,64 @@
         if(content == "")
             alert("请填写预警内容");
         else{
-            $.ajax({
-                type: "post",
-                url: "setAlarmUser",
-                data: {
-                    alarmlevel: alarmlevel,
-                    content: content,
-                    checkboxalert2: checkboxalert2,
-                    checkboxsms2: checkboxsms2,
-                    checkboxplantform2: checkboxplantform2
-                },
-                dataType: "json",
-                success: function (data) {
+
+            alarmmethod =  $("#alarmmethod-select").val();
+
+            if(alarmmethod == '1'){
+                // 2019/06/20 陈静怡：实时报警
+                $.ajax({
+                    type: "post",
+                    url: "setAlarmUser",
+                    data: {
+                        alarmlevel: alarmlevel,
+                        content: content,
+                        checkboxalert2: checkboxalert2,
+                        checkboxsms2: checkboxsms2,
+                        checkboxplantform2: checkboxplantform2
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+            } else if(alarmmethod == '2'){
+
+                alarmanalysisinterval = $("#alarmanalysisinterval-content-input").val();
+                alarmanalysispercentthreshold = $("#aapercentthreshold-content-input").val();
+                console.log("alarmanalysisinterval",alarmanalysisinterval);
+                console.log("alarmanalysispercentthreshold",alarmanalysispercentthreshold);
+                if(alarmanalysisinterval == null){
+                    alert("请输入报警分析时间段");
+                } else if (alarmanalysispercentthreshold == null){
+                    alert("请输入报警分析百分比阈值");
+                } else {
+                    // 2019/06/20 陈静怡：分析报警
+                    $.ajax({
+                        type: "post",
+                        url: "setAlarmUserByPercent",
+                        data: {
+                            alarmlevel: alarmlevel,
+                            content: content,
+                            checkboxalert2: checkboxalert2,
+                            checkboxsms2: checkboxsms2,
+                            checkboxplantform2: checkboxplantform2,
+                            alarmanalysisinterval: alarmanalysisinterval,
+                            alarmanalysispercentthreshold: alarmanalysispercentthreshold
+                        },
+                        dataType: "json",
+                        success: function (data) {
+
+                            alert(data);
+                        }
+                    });
                 }
-            });
+            }
         }
     }
+
+
+
+
 
     //告警管理-查询某个等级对应的告警设置
     function getAlarmLevelSetting(){
@@ -3405,6 +3466,16 @@
                 $("#sms-content-input").val(list[3]);
             }
         });
+    }
+
+    //告警管理-告警方式设置图层
+    function getAlarmMethod(){
+        var alarmmethod = $("#alarmmethod-select").val();
+
+        if(alarmmethod == '1')
+            $('#fenxibaojing-div').css('display', 'none');
+        else if(alarmmethod == '2')
+            $('#fenxibaojing-div').css('display','block');
     }
 
 </script>

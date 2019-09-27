@@ -24,7 +24,6 @@ public class DataOnlineClient extends Thread {
         this.port = port;
         this.did = did;
     }
-
     @Override
     public void run() {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -34,14 +33,17 @@ public class DataOnlineClient extends Thread {
             b.channel(NioSocketChannel.class);
             b.option(ChannelOption.SO_KEEPALIVE, Boolean.valueOf(true));
             b.handler(new ChannelInitializer<SocketChannel>() {
-                public void initChannel(SocketChannel ch) throws Exception {
+                public void initChannel(SocketChannel ch)
+                        throws Exception {
                     // heart beat check
-                    ch.pipeline().addLast(new IdleStateHandler(0, HeartBeatHandler.timeout, 0, TimeUnit.SECONDS)).addLast(new HeartBeatHandler(host, port, did, 1)).addLast(new DataOnlineClientHandler(did));
+                    ch.pipeline().addLast(new IdleStateHandler(0, HeartBeatHandler.timeout,0, TimeUnit.SECONDS))
+                            .addLast(new HeartBeatHandler(host,port,did,1))
+                            .addLast(new DataOnlineClientHandler(did));
                 }
             });
 
             ChannelFuture f = b.connect(host, port).sync();
-            if (f.isSuccess()) {
+            if(f.isSuccess()) {
                 f.channel().closeFuture().sync();
             } else {
                 System.out.println("============================重新建立连接");

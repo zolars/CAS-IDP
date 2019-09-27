@@ -1,6 +1,8 @@
 package grabData;
 
 import Util.HBSessionDaoImpl;
+import deviceJobManager.DeviceManager;
+import hibernatePOJO.Devices;
 import hibernatePOJO.DevicesThreshold;
 import hibernatePOJO.DictionaryThreshold;
 import io.netty.buffer.ByteBuf;
@@ -21,7 +23,7 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
     private int addr1;
     private int addr2;
     private int[] addr = new int[22];
-    private int[] len = new int[22];
+    private int[] len = new int [22];
     private int length;
     private String[] name = new String[643];
     private Integer[] factor = new Integer[643];
@@ -51,7 +53,8 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
 //        DeviceManager.getCtxMap().put(this.did+"-4",ctx);
 
         HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
-        List<DictionaryThreshold> dicThreshold = hbsessionDao.search("FROM DictionaryThreshold");
+        List<DictionaryThreshold> dicThreshold = hbsessionDao.search(
+                "FROM DictionaryThreshold");
 
         //String address = ctx.channel().remoteAddress().toString().replace("/", "");
 
@@ -64,9 +67,8 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
 
             String thsholdname = dicThreshold.get(i).getDescription();
 
-            DevicesThreshold dt =
-                    (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold where name='" + thsholdname + "' " +
-                            "and level = 1");
+            DevicesThreshold dt = (DevicesThreshold) hbsessionDao.getFirst(
+                    "FROM DevicesThreshold where name='" + thsholdname + "' and level = 1");
 
             if (dt != null) {
                 Float value = null;
@@ -140,7 +142,7 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
     private static byte[] createMsg(int addr, float value) {
 
         byte[] msg = new byte[17];
-        /*  byte[] msg = new byte[29];*/
+      /*  byte[] msg = new byte[29];*/
         msg[0] = 0;
         msg[1] = 0;
         msg[2] = 0;
@@ -162,8 +164,8 @@ class ThresholdClientHandler extends ChannelInboundHandlerAdapter {
         msg[8] = (byte) addrByte[0];
         msg[9] = (byte) addrByte[1];*/
 
-        msg[8] = ((byte) (addr >> 8));
-        msg[9] = ((byte) (addr & 0xFF));
+        msg[8] = ((byte)(addr >> 8));
+        msg[9] = ((byte)(addr & 0xFF));
 
       /*  msg[8] = (byte) 0x80;
         msg[9] = (byte) 0x04;*/

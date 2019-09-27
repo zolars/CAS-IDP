@@ -62,7 +62,7 @@ public class getCtrlEventAction extends ActionSupport {
 
             // 查询当前页实体对象
             pageHelper = dao.getCtrlEventObjectListPage(cbnamelist, starttime, endtime, start, end);
-            pageHelper.setPage((end + 1) / Integer.parseInt(limit));
+            pageHelper.setPage((end+1)/Integer.parseInt(limit));
 
             // 统计总记录数
             Integer total = dao.getLocalAllCtrlTotal(cbnamelist, starttime, endtime);

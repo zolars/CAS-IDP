@@ -293,10 +293,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             isSystemMng = false;
             menuname = "集中监控";
         }
-       /* else if(cbidstr[i] == " efficiencyDevice.jsp"){
+        else if(cbidstr[i] == " efficiencyDevice.jsp"){
             isSystemMng = false;
             menuname = "动力设施";
-        }*/
+        }
         else if(cbidstr[i] == " onlineDetect.jsp"){
             isSystemMng = false;
             menuname = "在线监测";

@@ -46,7 +46,7 @@ public class getHisLyTxAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
-        } finally {
+        }finally {
             data = null;
         }
         return "success";

@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -50,8 +51,8 @@ public class getCtrlDevicesAction extends ActionSupport {
             //获取治理设备
             didlist = dao.getCtrlDevices(cbname);
 
-            if (didlist != null) {
-                for (int i = 0; i < didlist.size(); i++) {
+            if(didlist != null) {
+                for(int i = 0; i < didlist.size(); i++) {
                     String did = didlist.get(i);
 
                     String rt = dao.getDeviceCtrlStatus(did, starttime, endtime);
@@ -65,8 +66,8 @@ public class getCtrlDevicesAction extends ActionSupport {
             //获取在线监控设备
             didlist2 = dao.getIDPDevices(cbname);
 
-            if (didlist2 != null) {
-                for (int i = 0; i < didlist2.size(); i++) {
+            if(didlist2 != null) {
+                for(int i = 0; i < didlist2.size(); i++) {
                     String did = didlist2.get(i);
 
                     String rt = dao.getDeviceIDPStatus(did, starttime, endtime);
@@ -80,11 +81,11 @@ public class getCtrlDevicesAction extends ActionSupport {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("didlist", didlist);
             jsonObject.put("rtlist", rtlist);
-            jsonObject.put("namelist", namelist);
+            jsonObject.put("namelist",namelist);
 
             jsonObject.put("didlist2", didlist2);
             jsonObject.put("rtlist2", rtlist2);
-            jsonObject.put("namelist2", namelist2);
+            jsonObject.put("namelist2",namelist2);
 
             result = JSON.toJSONString(jsonObject);
 

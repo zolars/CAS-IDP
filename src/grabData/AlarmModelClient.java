@@ -33,7 +33,8 @@ public class AlarmModelClient {
     }
 
     public void destroy() {
-        if (channel != null) channel.close();
+        if (channel != null)
+            channel.close();
         group.close();
         workerGroup.shutdownGracefully();
     }

@@ -77,9 +77,9 @@ public class UserLoginAction extends ActionSupport {
                 mlist = dao.getUserDynamicMenu(user);
 
                 //为保证顺序，对mlist进行排序，5放在开始位置，后面顺序不管
-                for (int i = 0; i < mlist.size(); i++) {
+                for(int i = 0; i < mlist.size(); i++) {
                     String temp = mlist.get(0).toString();
-                    if (mlist.get(i).equals("5")) {
+                    if(mlist.get(i).equals("5")) {
                         mlist.set(i, temp);
                         mlist.set(0, "5");
                     }
@@ -93,7 +93,7 @@ public class UserLoginAction extends ActionSupport {
                             menulist.add("onlineDetect.jsp");
                             menulist.add("history.jsp");
                             menulist.add("efficiencyAnalysis.jsp");
-                            //menulist.add("efficiencyDevice.jsp");
+                            menulist.add("efficiencyDevice.jsp");
                             // menulist.add("efficiencyAssessment.jsp");
                             menulist.add("reportChart.jsp");
                             break;

@@ -777,10 +777,13 @@
                         {
                             name: xdata[0],
                             type: 'gauge',
-                            center: ['30%', '50%'], // 默认全局居中
-                            radius: '80%',
+                            center: ['50%', '55%'], // 默认全局居中
+                            radius: '90%',
                             min: 0,
-                            max: 100,
+                            max: 90,
+                            splitNumber:9,
+                            startAngle:240,//开始角度
+                            endAngle:-60,//结束角度
                             itemStyle: {
                                 normal: {
                                     color: '#389863'
@@ -789,7 +792,7 @@
                             axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
                                 show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
                                 lineStyle: {			// 仪表盘轴线样式。
-                                     color: [[0.3, '#91c7ae'], [0.6, '#63869e'], [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                                    color: [[0.3, '#91c7ae'], [0.6, '#63869e'], [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
                                     opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
                                     width: 10,					//轴线宽度,默认 30。
                                     shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
@@ -798,7 +801,7 @@
                             },
                             splitLine: {			// 分隔线样式。
                                 show: true,				// 是否显示分隔线,默认 true。
-                                length: 10,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                                length: 5,				// 分隔线线长。支持相对半径的百分比,默认 30。
                                 lineStyle: {			// 分隔线样式。
                                     color: "#eee",				//线的颜色,默认 #eee。
                                     opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
@@ -807,6 +810,9 @@
                                     shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                     shadowColor: "#fff",		//阴影颜色。支持的格式同color。
                                 }
+                            },
+                            pointer: { //指针粗细
+                                width: 4
                             },
                             itemStyle: {			// 仪表盘指针样式。
                                 color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
@@ -817,35 +823,49 @@
                                 shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                 shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
                             },
-                            detail: {formatter: '{value}'},
-                            data: [{value: tempdata[0], name: '℃'}]
+                            detail: {
+                                formatter: '{value}℃',
+                                show:true,
+                                textStyle: {
+                                    color: 'auto',
+                                    fontSize : 20
+                                },
+                                backgroundColor: 'rgba(0,0,0,0)',
+                                borderWidth: 1,
+                                borderColor: '#ccc',
+                                offsetCenter: [0, '70%'],
+                            },
+                            data: [{value: tempdata[0], name: ''}]
 
                         },
                         {
                             name: xdata[0],
                             type: 'gauge',
-                            center: ['70%', '50%'], // 默认全局居中
-                            radius: '80%',
+                            center: ['50%', '55%'], // 默认全局居中
+                            radius: '60%',
                             min: 0,
-                            max: 100,
-                            itemStyle: {
-                                normal: {
-                                    color: '#389863'
-                                }
+                            max: 70,
+                            splitNumber:7,
+                            startAngle:240,//开始角度
+                            endAngle:-60,//结束角度
+
+                            axisTick: {            // 坐标轴小标记
+                                show: false
                             },
+                            axisLabel:{show:true},
                             axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
                                 show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
                                 lineStyle: {			// 仪表盘轴线样式。
-                                    color: [[0.5, '#91c7ae'],  [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                                    color: [[0.5,'#91c7ae'],  [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
                                     opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 10,					//轴线宽度,默认 30。
+                                    width: 5,					//轴线宽度,默认 30。
                                     shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                     shadowColor: "#fff"		//阴影颜色。支持的格式同color。
                                 }
                             },
                             splitLine: {			// 分隔线样式。
                                 show: true,				// 是否显示分隔线,默认 true。
-                                length: 10,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                                length: 5,				// 分隔线线长。支持相对半径的百分比,默认 30。
                                 lineStyle: {			// 分隔线样式。
                                     color: "#eee",				//线的颜色,默认 #eee。
                                     opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
@@ -854,6 +874,9 @@
                                     shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                     shadowColor: "#fff",		//阴影颜色。支持的格式同color。
                                 }
+                            },
+                            pointer: { //指针粗细
+                                width: 2
                             },
                             itemStyle: {			// 仪表盘指针样式。
                                 color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
@@ -864,11 +887,22 @@
                                 shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                 shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
                             },
-                            detail: {formatter: '{value}'},
+                            detail: {
+                                show:true,
+                                formatter: '{value}',
+                                textStyle: {
+                                    color: 'auto',
+                                    fontSize : 15
+                                },
+                                backgroundColor: 'rgba(0,0,0,0)',
+                                borderWidth: 1,
+                                borderColor: '#ccc'
+                            },
                             data: [{value: humiddata[0], name: '%'}]
                         }
 
                     ]
+
                 };
 
                 //指定湿度的图表的配置项和数据
@@ -885,13 +919,16 @@
                         {
                             name: xdata[1],
                             type: 'gauge',
-                            center: ['30%', '50%'], // 默认全局居中
-                            radius: '80%',
+                            center: ['50%', '55%'], // 默认全局居中
+                            radius: '90%',
                             min: 0,
-                            max: 100,
+                            max: 90,
+                            splitNumber:9,
+                            startAngle:240,//开始角度
+                            endAngle:-60,//结束角度
                             itemStyle: {
                                 normal: {
-                                    color: '#9F842F'
+                                    color: '#389863'
                                 }
                             },
                             axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
@@ -906,7 +943,7 @@
                             },
                             splitLine: {			// 分隔线样式。
                                 show: true,				// 是否显示分隔线,默认 true。
-                                length: 10,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                                length: 5,				// 分隔线线长。支持相对半径的百分比,默认 30。
                                 lineStyle: {			// 分隔线样式。
                                     color: "#eee",				//线的颜色,默认 #eee。
                                     opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
@@ -915,6 +952,9 @@
                                     shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                     shadowColor: "#fff",		//阴影颜色。支持的格式同color。
                                 }
+                            },
+                            pointer: { //指针粗细
+                                width: 4
                             },
                             itemStyle: {			// 仪表盘指针样式。
                                 color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
@@ -925,35 +965,49 @@
                                 shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                 shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
                             },
-                            detail: {formatter: '{value}'},
-                            data: [{value: tempdata[1], name: '℃'}]
-                        },
+                            detail: {
+                                formatter: '{value}℃',
+                                show:true,
+                                textStyle: {
+                                    color: 'auto',
+                                    fontSize : 20
+                                },
+                                backgroundColor: 'rgba(0,0,0,0)',
+                                borderWidth: 1,
+                                borderColor: '#ccc',
+                                offsetCenter: [0, '70%'],
+                            },
+                            data: [{value: tempdata[1], name: ''}]
 
+                        },
                         {
                             name: xdata[1],
                             type: 'gauge',
-                            center: ['70%', '50%'], // 默认全局居中
-                            radius: '80%',
+                            center: ['50%', '55%'], // 默认全局居中
+                            radius: '60%',
                             min: 0,
-                            max: 100,
-                            itemStyle: {
-                                normal: {
-                                    color: '#9F842F'
-                                }
+                            max: 70,
+                            splitNumber:7,
+                            startAngle:240,//开始角度
+                            endAngle:-60,//结束角度
+
+                            axisTick: {            // 坐标轴小标记
+                                show: false
                             },
+                            axisLabel:{show:true},
                             axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
                                 show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
                                 lineStyle: {			// 仪表盘轴线样式。
-                                    color: [[0.5, '#91c7ae'], [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                                    color: [[0.5,'#91c7ae'],  [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
                                     opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 10,					//轴线宽度,默认 30。
+                                    width: 5,					//轴线宽度,默认 30。
                                     shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                     shadowColor: "#fff"		//阴影颜色。支持的格式同color。
                                 }
                             },
                             splitLine: {			// 分隔线样式。
                                 show: true,				// 是否显示分隔线,默认 true。
-                                length: 10,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                                length: 5,				// 分隔线线长。支持相对半径的百分比,默认 30。
                                 lineStyle: {			// 分隔线样式。
                                     color: "#eee",				//线的颜色,默认 #eee。
                                     opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
@@ -962,6 +1016,9 @@
                                     shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                     shadowColor: "#fff",		//阴影颜色。支持的格式同color。
                                 }
+                            },
+                            pointer: { //指针粗细
+                                width: 2
                             },
                             itemStyle: {			// 仪表盘指针样式。
                                 color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
@@ -972,7 +1029,17 @@
                                 shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                 shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
                             },
-                            detail: {formatter: '{value}'},
+                            detail: {
+                                show:true,
+                                formatter: '{value}',
+                                textStyle: {
+                                    color: 'auto',
+                                    fontSize : 15
+                                },
+                                backgroundColor: 'rgba(0,0,0,0)',
+                                borderWidth: 1,
+                                borderColor: '#ccc'
+                            },
                             data: [{value: humiddata[1], name: '%'}]
                         }
                     ]
@@ -992,13 +1059,16 @@
                         {
                             name: xdata[2],
                             type: 'gauge',
-                            center: ['30%', '50%'], // 默认全局居中
-                            radius: '80%',
+                            center: ['50%', '55%'], // 默认全局居中
+                            radius: '90%',
                             min: 0,
-                            max: 100,
+                            max: 90,
+                            splitNumber:9,
+                            startAngle:240,//开始角度
+                            endAngle:-60,//结束角度
                             itemStyle: {
                                 normal: {
-                                    color: '#9F842F'
+                                    color: '#389863'
                                 }
                             },
                             axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
@@ -1013,7 +1083,7 @@
                             },
                             splitLine: {			// 分隔线样式。
                                 show: true,				// 是否显示分隔线,默认 true。
-                                length: 10,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                                length: 5,				// 分隔线线长。支持相对半径的百分比,默认 30。
                                 lineStyle: {			// 分隔线样式。
                                     color: "#eee",				//线的颜色,默认 #eee。
                                     opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
@@ -1022,6 +1092,9 @@
                                     shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                     shadowColor: "#fff",		//阴影颜色。支持的格式同color。
                                 }
+                            },
+                            pointer: { //指针粗细
+                                width: 4
                             },
                             itemStyle: {			// 仪表盘指针样式。
                                 color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
@@ -1032,35 +1105,49 @@
                                 shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                 shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
                             },
-                            detail: {formatter: '{value}'},
-                            data: [{value: tempdata[2], name: '℃'}]
-                        },
+                            detail: {
+                                formatter: '{value}℃',
+                                show:true,
+                                textStyle: {
+                                    color: 'auto',
+                                    fontSize : 20
+                                },
+                                backgroundColor: 'rgba(0,0,0,0)',
+                                borderWidth: 1,
+                                borderColor: '#ccc',
+                                offsetCenter: [0, '70%'],
+                            },
+                            data: [{value: tempdata[2], name: ''}]
 
+                        },
                         {
                             name: xdata[2],
                             type: 'gauge',
-                            center: ['70%', '50%'], // 默认全局居中
-                            radius: '80%',
+                            center: ['50%', '55%'], // 默认全局居中
+                            radius: '60%',
                             min: 0,
-                            max: 100,
-                            itemStyle: {
-                                normal: {
-                                    color: '#9F842F'
-                                }
+                            max: 70,
+                            splitNumber:7,
+                            startAngle:240,//开始角度
+                            endAngle:-60,//结束角度
+
+                            axisTick: {            // 坐标轴小标记
+                                show: false
                             },
+                            axisLabel:{show:true},
                             axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
                                 show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
                                 lineStyle: {			// 仪表盘轴线样式。
-                                    color: [[0.5, '#91c7ae'], [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                                    color: [[0.5,'#91c7ae'],  [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
                                     opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 10,					//轴线宽度,默认 30。
+                                    width: 5,					//轴线宽度,默认 30。
                                     shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                     shadowColor: "#fff"		//阴影颜色。支持的格式同color。
                                 }
                             },
                             splitLine: {			// 分隔线样式。
                                 show: true,				// 是否显示分隔线,默认 true。
-                                length: 10,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                                length: 5,				// 分隔线线长。支持相对半径的百分比,默认 30。
                                 lineStyle: {			// 分隔线样式。
                                     color: "#eee",				//线的颜色,默认 #eee。
                                     opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
@@ -1069,6 +1156,9 @@
                                     shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                     shadowColor: "#fff",		//阴影颜色。支持的格式同color。
                                 }
+                            },
+                            pointer: { //指针粗细
+                                width: 2
                             },
                             itemStyle: {			// 仪表盘指针样式。
                                 color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
@@ -1079,7 +1169,17 @@
                                 shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                                 shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
                             },
-                            detail: {formatter: '{value}'},
+                            detail: {
+                                show:true,
+                                formatter: '{value}',
+                                textStyle: {
+                                    color: 'auto',
+                                    fontSize : 15
+                                },
+                                backgroundColor: 'rgba(0,0,0,0)',
+                                borderWidth: 1,
+                                borderColor: '#ccc'
+                            },
                             data: [{value: humiddata[2], name: '%'}]
                         }
                     ]

@@ -71,15 +71,14 @@ public class modifyOneDeviceAction extends ActionSupport {
                 plantform = 1;
             }
 
-            Boolean rt2 = false, rt3 = false;
+            Boolean rt2 = false, rt3= false;
             JSONObject jsonObject = new JSONObject();
 
 
             //添加SMS平台
-            if (devtype.equals("SMS")) {
+            if(devtype.equals("SMS")) {
 
-                if (dao.modifyOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms,
-                        alert, plantform, did)) {
+                if(dao.modifyOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform, did)){
                     jsonObject.put("提示", "修改成功！");
                 } else {
                     jsonObject.put("提示", "修改失败，请重试！");
@@ -89,25 +88,24 @@ public class modifyOneDeviceAction extends ActionSupport {
                 rt2 = DeviceManager.checkNetwork(iPaddress, Integer.parseInt(port));
 
                 if (rt2) {
-                    rt3 = dao.modifyOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms
-                            , alert, plantform, did);
-                } else if (!rt2) {
+                    rt3 = dao.modifyOneDeviceInfo(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform, did);
+                } else if(!rt2){
                     jsonObject.put("提示", "设备不可达，修改失败！");
                 }
 
                 if (rt2 && rt3) {
                     jsonObject.put("提示", "修改成功！");
                     //type: 1-dataOnline, 2-transient, 3-overLimit, 4-threshold, 5-tempData, 6-ctrlData
-                    if (devtype.equals("IDP")) {
+                    if(devtype.equals("IDP")) {
                         DeviceManager.updateDevice(iPaddress, Integer.parseInt(port), did, 1);
-                        if (extra.equals("")) {
+                        if(extra.equals("")){
                             DeviceManager.updateDevice(iPaddress, Integer.parseInt(extra), did, 2);
                             DeviceManager.updateDevice(iPaddress, Integer.parseInt(extra), did, 3);
                         }
                         DeviceManager.updateDevice(iPaddress, Integer.parseInt(port), did, 4);
-                    } else if (devtype.equals("temp")) {
+                    } else if(devtype.equals("temp")) {
                         DeviceManager.updateDevice(iPaddress, Integer.parseInt(port), did, 5);
-                    } else if (devtype.equals("ctrl")) {
+                    } else if(devtype.equals("ctrl")) {
                         DeviceManager.updateDevice(iPaddress, Integer.parseInt(port), did, 6);
                     }
                 } else {

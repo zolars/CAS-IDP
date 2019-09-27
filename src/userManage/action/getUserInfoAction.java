@@ -38,7 +38,7 @@ public class getUserInfoAction extends ActionSupport {
             //处理 ：undefined 转为 空
             //      组织转为组织名称
             if (alluser != null) {
-                for (int i = 0; i < alluser.size(); i++) {
+                for(int i = 0; i < alluser.size(); i++){
                     List tmpur = alluser.get(i);
                     String prob = "";
                     String cityb = "";
@@ -60,7 +60,7 @@ public class getUserInfoAction extends ActionSupport {
                     } else {
                         computerrom = dao.getComputerroomName(tmpur.get(5).toString());
                     }
-                    if (tmpur.get(6) == null || tmpur.get(6) == " " || "".equals(tmpur.get(6))) {
+                    if (tmpur.get(6) == null || tmpur.get(6) == " "|| "".equals(tmpur.get(6))) {
                         role = "";
                     } else {
                         role = dao.getRoleName(tmpur.get(6).toString());

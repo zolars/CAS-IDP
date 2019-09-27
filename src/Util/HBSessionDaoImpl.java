@@ -8,18 +8,44 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+import java.security.PrivateKey;
 import java.util.List;
+import java.util.Properties;
+import Util.AESUtil;
 
-public class HBSessionDaoImpl implements HBSessionDao {
+public class HBSessionDaoImpl implements HBSessionDao{
     private static SessionFactory sessionFactory;
     private static Session onlineSession;
 
     static {
         //创建配置对象
         Configuration cfg = new Configuration().configure("/hibernate.cfg.xml");
+        //decode password
+        Properties props = cfg.getProperties();
+        String username = cfg.getProperty("connection.username");
+        String password = cfg.getProperty("connection.password");
+
+        String key = "12345678";
+        byte[] s = new byte[8]; //s 为密文
+        s[0] = (byte)23;
+        s[1] = (byte)38;
+        s[2] = (byte)64;
+        s[3] = (byte)-35;
+        s[4] = (byte)80;
+        s[5] = (byte)-128;
+        s[6] = (byte)118;
+        s[7] = (byte)37;
+
+        byte[] deMsgBytes = AESUtil.decrypt(s,key.getBytes());
+
+        props.setProperty("connection.username", new String(deMsgBytes));
+        props.setProperty("connection.password", new String(deMsgBytes));
+        props.setProperty("hibernate.connection.username", new String(deMsgBytes));
+        props.setProperty("hibernate.connection.password", new String(deMsgBytes));
+
         //创建服务注册对象
-        StandardServiceRegistry serviceRegistry =
-                new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
+        StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(props).build();
         //创建会话工厂对象
         sessionFactory = cfg.buildSessionFactory(serviceRegistry);
         onlineSession = sessionFactory.openSession();

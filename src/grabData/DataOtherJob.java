@@ -16,7 +16,8 @@ public class DataOtherJob implements Job {
     @Override
     /*
     每10s读一次 实时THDU\THDI\不平衡度\PF的值是否越限，并记录这几个电能质量事件
-     */ public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+     */
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         List<List<String>> eventlist = new ArrayList<>();
         List<List<String>> eventlist2 = new ArrayList<>();
         List<List<String>> eventlist3 = new ArrayList<>();
@@ -64,15 +65,11 @@ public class DataOtherJob implements Job {
                         thdi2 = tempxb.getThdi2();
                         thdi3 = tempxb.getThdi3();
 
-                        DevicesThreshold thdu = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold WHERE" +
-                                " name = '电压总谐波含有率' and level = '1'");
-                        DevicesThreshold thdi = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold WHERE" +
-                                " name = '电流总谐波含有率' and level = '1'");
+                        DevicesThreshold thdu = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold WHERE name = '电压总谐波含有率' and level = '1'");
+                        DevicesThreshold thdi = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold WHERE name = '电流总谐波含有率' and level = '1'");
 
-//                        List<String> thdulist = hbsessionDao.search("select cellval FROM DevicesThreshold WHERE
-//                        name = '电压总谐波含有率' order by level");
-//                        List<String> thdilist = hbsessionDao.search("select cellval FROM DevicesThreshold WHERE
-//                        name = '电流总谐波含有率' order by level");
+//                        List<String> thdulist = hbsessionDao.search("select cellval FROM DevicesThreshold WHERE name = '电压总谐波含有率' order by level");
+//                        List<String> thdilist = hbsessionDao.search("select cellval FROM DevicesThreshold WHERE name = '电流总谐波含有率' order by level");
                         if (thdu != null && thdi != null) {
 //                        if (thdulist != null && thdilist != null) {
                             thduthreshold = thdu.getCellval();
@@ -133,24 +130,20 @@ public class DataOtherJob implements Job {
                             for (int i = 0; i < eventlist.size(); i++) {
                                 List<String> templist = eventlist.get(i);
 
-                                EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE " +
-                                        "description = '" + templist.get(1) + "'");
+                                EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE description = '" + templist.get(1) + "'");
                                 /***********2019-01-09    ADD****************************/
-                                List list = hbsessionDao.search("select CEILING(value),time  from EventPower where  " +
-                                        "cid ='" + tempet.getCid() + "' and did = '" + did + "' and (signature ='' or" +
-                                        " signature is null)");
-                                if (list != null) {
-                                    Object[] event = (Object[]) list.get(0);
+                                List list = hbsessionDao.search("select CEILING(value),time  from EventPower where  cid ='"+tempet.getCid()+"' and did = '"+did+"' and (signature ='' or signature is null)");
+                                if(list != null){
+                                    Object[] event= (Object[])list.get(0);
 
-                                    if (templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
-                                        if (Double.parseDouble(templist.get(2)) < Double.valueOf(event[0].toString())) {
+                                    if(templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
+                                        if(Double.parseDouble(templist.get(2))<Double.valueOf(event[0].toString())){
                                             continue;
                                         }
                                     }
                                 }
 
-                                EventPower epmax = (EventPower) hbsessionDao.getFirst("FROM EventPower order by teid " +
-                                        "desc");
+                                EventPower epmax = (EventPower) hbsessionDao.getFirst("FROM EventPower order by teid desc");
 
                                 int maxteid = 0;
                                 if (epmax != null) {
@@ -168,9 +161,7 @@ public class DataOtherJob implements Job {
                                     ep.setSubtype(tempet.getSubtype());
 
                                     /************2018-12-24 马卫亮  ADD******************************/
-                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = " +
-                                            "'相同类型的告警自动确认' where cid = '" + tempet.getCid() + "' and did='" + did +
-                                            "' and signature is null  ");
+                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '"+tempet.getCid()+"' and did='"+did+"' and signature is null  ");
                                     /************2018-12-24 马卫亮  ADD******************************/
                                     hbsessionDao.insert(ep);
                                 }
@@ -184,14 +175,12 @@ public class DataOtherJob implements Job {
                         Float Uunb;
                         Double uunbthreshold;
 
-//                        PowersxdyMonitor tempsxdy  = (PowersxdyMonitor)hbsessionDao.getFirst("FROM PowersxdyMonitor
-//                        order by sxid desc");
+//                        PowersxdyMonitor tempsxdy  = (PowersxdyMonitor)hbsessionDao.getFirst("FROM PowersxdyMonitor order by sxid desc");
 
                         if (tempsxdy != null) {
                             Uunb = tempsxdy.getUunb();
 
-                            DevicesThreshold uunbobj = (DevicesThreshold) hbsessionDao.getFirst("FROM " +
-                                    "DevicesThreshold WHERE name = '三相电压负序不平衡度' and level = '1'");
+                            DevicesThreshold uunbobj = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold WHERE name = '三相电压负序不平衡度' and level = '1'");
 
                             if (uunbobj != null) {
                                 uunbthreshold = uunbobj.getCellval();
@@ -211,18 +200,15 @@ public class DataOtherJob implements Job {
                                 for (int i = 0; i < eventlist2.size(); i++) {
                                     List<String> templist = eventlist2.get(i);
 
-                                    EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE " +
-                                            "description = '" + templist.get(1) + "'");
+                                    EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE description = '" + templist.get(1) + "'");
 
                                     /***********2019-01-09    ADD****************************/
-                                    List list = hbsessionDao.search("select CEILING(value),time  from EventPower " +
-                                            "where  cid ='" + tempet.getCid() + "' and did = '" + did + "' and " +
-                                            "(signature ='' or signature is null)");
-                                    if (list != null) {
-                                        Object[] event = (Object[]) list.get(0);
+                                    List list = hbsessionDao.search("select CEILING(value),time  from EventPower where  cid ='"+tempet.getCid()+"' and did = '"+did+"' and (signature ='' or signature is null)");
+                                    if(list != null){
+                                        Object[] event= (Object[])list.get(0);
 
-                                        if (templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
-                                            if (Double.parseDouble(templist.get(2)) < Double.valueOf(event[0].toString())) {
+                                        if(templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
+                                            if(Double.parseDouble(templist.get(2))<Double.valueOf(event[0].toString())){
                                                 continue;
                                             }
                                         }
@@ -237,9 +223,7 @@ public class DataOtherJob implements Job {
                                     ep.setSubtype(tempet.getSubtype());
 
                                     /************2018-12-24 马卫亮  ADD******************************/
-                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = " +
-                                            "'相同类型的告警自动确认' where cid = '" + tempet.getCid() + "' and did='" + did +
-                                            "' and  signature is null ");
+                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '"+tempet.getCid()+"' and did='"+did+"' and  signature is null ");
                                     /************2018-12-24 马卫亮  ADD******************************/
                                     hbsessionDao.insert(ep);
                                 }
@@ -253,16 +237,14 @@ public class DataOtherJob implements Job {
                         Float pf1, pf2, pf3;
                         Double pfthreshold;
 
-//                        PowerparmMonitor tempparm  = (PowerparmMonitor)hbsessionDao.getFirst("FROM PowerparmMonitor
-//                        order by ppid desc");
+//                        PowerparmMonitor tempparm  = (PowerparmMonitor)hbsessionDao.getFirst("FROM PowerparmMonitor order by ppid desc");
 
                         if (tempparm != null) {
                             pf1 = tempparm.getPf1();
                             pf2 = tempparm.getPf2();
                             pf3 = tempparm.getPf3();
 
-                            DevicesThreshold pfobj = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold " +
-                                    "WHERE name = '功率因数下限' and level = '1'");
+                            DevicesThreshold pfobj = (DevicesThreshold) hbsessionDao.getFirst("FROM DevicesThreshold WHERE name = '功率因数下限' and level = '1'");
 
                             if (pfobj != null) {
                                 pfthreshold = pfobj.getFloorval();
@@ -296,17 +278,14 @@ public class DataOtherJob implements Job {
                                 for (int i = 0; i < eventlist3.size(); i++) {
                                     List<String> templist = eventlist3.get(i);
 
-                                    EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE " +
-                                            "description = '" + templist.get(1) + "'");
+                                    EventsType tempet = (EventsType) hbsessionDao.getFirst("FROM EventsType WHERE description = '" + templist.get(1) + "'");
                                     /***********2019-01-09    ADD****************************/
-                                    List list = hbsessionDao.search("select CEILING(value),time  from EventPower " +
-                                            "where  cid ='" + tempet.getCid() + "' and did = '" + did + "' and " +
-                                            "(signature ='' or signature is null)");
-                                    if (list != null) {
-                                        Object[] event = (Object[]) list.get(0);
+                                    List list = hbsessionDao.search("select CEILING(value),time  from EventPower where  cid ='"+tempet.getCid()+"' and did = '"+did+"' and (signature ='' or signature is null)");
+                                    if(list != null){
+                                        Object[] event= (Object[])list.get(0);
 
-                                        if (templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
-                                            if (Double.parseDouble(templist.get(2)) < Double.valueOf(event[0].toString())) {
+                                        if(templist.get(0).split(" ")[0].equals(event[1].toString().split(" ")[0])) {
+                                            if(Double.parseDouble(templist.get(2))<Double.valueOf(event[0].toString())){
                                                 continue;
                                             }
                                         }
@@ -322,9 +301,7 @@ public class DataOtherJob implements Job {
                                     ep.setSubtype(tempet.getSubtype());
 
                                     /************2018-12-24 马卫亮  ADD******************************/
-                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = " +
-                                            "'相同类型的告警自动确认' where cid = '" + tempet.getCid() + "' and did='" + did +
-                                            "' and  signature is null  ");
+                                    hbsessionDao.update("update EventPower set signature = 'admin',annotation = '相同类型的告警自动确认' where cid = '"+tempet.getCid()+"' and did='"+did+"' and  signature is null  ");
                                     /************2018-12-24 马卫亮  ADD******************************/
                                     hbsessionDao.insert(ep);
                                 }

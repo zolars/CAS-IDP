@@ -44,20 +44,13 @@ public interface DeviceDAO {
 
     public Boolean addOneSMSDevice(String name, String ip, String port);
 
-    public Boolean addThresholdInfo(String did, Integer dtid, String name, String classify, String unit,
-                                    Double cellval, Double floorval, Integer ismark, Integer alarmcontent, String type);
+    public Boolean addThresholdInfo(String did, Integer dtid, String name, String classify, String unit, Double cellval, Double floorval, Integer ismark, Integer alarmcontent, String type);
 
-    public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno,
-                                    String IPaddress, String port, String extra, Integer sms, Integer alert,
-                                    Integer plantform);
+    public Boolean addOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port, String extra, Integer sms, Integer alert, Integer plantform);
 
-    public Boolean addOneDeviceInfoToBelongPosition(String deviceType, String devname, String belongname,
-                                                    String belonglevel);
+    public Boolean addOneDeviceInfoToBelongPosition(String deviceType, String devname, String belongname, String belonglevel);
 
-    public Boolean addOneDeviceInfoAndBelongPos(String deviceType, String devname, String devtype, String serialno,
-                                                String iPaddress, String port, String extra, Integer sms,
-                                                Integer alert, Integer plantform, String belongname,
-                                                String belonglevel);
+    public Boolean addOneDeviceInfoAndBelongPos(String deviceType, String devname,String  devtype, String serialno, String iPaddress, String port, String extra, Integer sms, Integer alert,Integer plantform, String belongname, String belonglevel);
 
 
     public Boolean addOneDeviceAlarmUser(String uid, String level);
@@ -74,21 +67,17 @@ public interface DeviceDAO {
     public Boolean deleteOneDeviceInfoToBelongPosition(String did, String belongname, String belonglevel);
 
 
-    public Boolean modifyOneDeviceInfo(String deviceType, String devname, String devtype, String serialno,
-                                       String IPaddress, String port, String extra, Integer sms, Integer alert,
-                                       Integer plantform, String did);
+    public Boolean modifyOneDeviceInfo(String deviceType, String devname, String devtype, String serialno, String IPaddress, String port, String extra, Integer sms, Integer alert, Integer plantform, String did);
 
-    public Boolean updateDeviceThreshold(String dtid, String type, String unit, Double cellval, Double floorval,
-                                         Integer ismark, Integer level);
+    public Boolean updateDeviceThreshold(String dtid, String type,String unit, Double cellval, Double floorval, Integer ismark, Integer level);
 
-    public Boolean updateThresholdInfo(String did, Integer dtid, String name, String classify, String unit,
-                                       Double cellval, Double floorval, Integer ismark, Integer level);
+    public Boolean updateThresholdInfo(String did, Integer dtid, String name, String classify, String unit, Double cellval, Double floorval, Integer ismark, Integer level);
 
     public Boolean existOneDevice(String devname);
 
     public Boolean isValidDevname(String devname);
 
-    public Boolean isValidValue(String type, Double dcellval, Double dfloorval, String level);
+    public Boolean isValidValue(String type, Double dcellval, Double dfloorval,String level);
 
     public List searchFuzzyDevice(String name);
 

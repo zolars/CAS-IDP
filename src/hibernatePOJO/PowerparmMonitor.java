@@ -39,8 +39,8 @@ public class PowerparmMonitor {
     private Float iflU3;
     private Float iflSum;
     private Float pstU1;
-    private Float pstU2;
     private Float pstU3;
+    private Float pstU2;
     private Float pltU1;
     private Float pltU2;
     private Float pltU3;
@@ -379,14 +379,52 @@ public class PowerparmMonitor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PowerparmMonitor that = (PowerparmMonitor) o;
-        return ppid == that.ppid && Objects.equals(did, that.did) && Objects.equals(time, that.time) && Objects.equals(u1, that.u1) && Objects.equals(u2, that.u2) && Objects.equals(u3, that.u3) && Objects.equals(u4, that.u4) && Objects.equals(i1, that.i1) && Objects.equals(i2, that.i2) && Objects.equals(i3, that.i3) && Objects.equals(i4, that.i4) && Objects.equals(p1, that.p1) && Objects.equals(p2, that.p2) && Objects.equals(p3, that.p3) && Objects.equals(psum, that.psum) && Objects.equals(q1, that.q1) && Objects.equals(q2, that.q2) && Objects.equals(q3, that.q3) && Objects.equals(qsum, that.qsum) && Objects.equals(s1, that.s1) && Objects.equals(s2, that.s2) && Objects.equals(s3, that.s3) && Objects.equals(ssum, that.ssum) && Objects.equals(pf1, that.pf1) && Objects.equals(pf2, that.pf2) && Objects.equals(pf3, that.pf3) && Objects.equals(pFsum, that.pFsum) && Objects.equals(cosPhi1, that.cosPhi1) && Objects.equals(cosPhi2, that.cosPhi2) && Objects.equals(cosPhi3, that.cosPhi3) && Objects.equals(iflU1, that.iflU1) && Objects.equals(iflU2, that.iflU2) && Objects.equals(iflU3, that.iflU3) && Objects.equals(iflSum, that.iflSum) && Objects.equals(pstU1, that.pstU1) && Objects.equals(pstU2, that.pstU2) && Objects.equals(pstU3, that.pstU3) && Objects.equals(pltU1, that.pltU1) && Objects.equals(pltU2, that.pltU2) && Objects.equals(pltU3, that.pltU3) && Objects.equals(hz, that.hz);
+        return ppid == that.ppid &&
+                Objects.equals(did, that.did) &&
+                Objects.equals(time, that.time) &&
+                Objects.equals(u1, that.u1) &&
+                Objects.equals(u2, that.u2) &&
+                Objects.equals(u3, that.u3) &&
+                Objects.equals(u4, that.u4) &&
+                Objects.equals(i1, that.i1) &&
+                Objects.equals(i2, that.i2) &&
+                Objects.equals(i3, that.i3) &&
+                Objects.equals(i4, that.i4) &&
+                Objects.equals(p1, that.p1) &&
+                Objects.equals(p2, that.p2) &&
+                Objects.equals(p3, that.p3) &&
+                Objects.equals(psum, that.psum) &&
+                Objects.equals(q1, that.q1) &&
+                Objects.equals(q2, that.q2) &&
+                Objects.equals(q3, that.q3) &&
+                Objects.equals(qsum, that.qsum) &&
+                Objects.equals(s1, that.s1) &&
+                Objects.equals(s2, that.s2) &&
+                Objects.equals(s3, that.s3) &&
+                Objects.equals(ssum, that.ssum) &&
+                Objects.equals(pf1, that.pf1) &&
+                Objects.equals(pf2, that.pf2) &&
+                Objects.equals(pf3, that.pf3) &&
+                Objects.equals(pFsum, that.pFsum) &&
+                Objects.equals(cosPhi1, that.cosPhi1) &&
+                Objects.equals(cosPhi2, that.cosPhi2) &&
+                Objects.equals(cosPhi3, that.cosPhi3) &&
+                Objects.equals(iflU1, that.iflU1) &&
+                Objects.equals(iflU2, that.iflU2) &&
+                Objects.equals(iflU3, that.iflU3) &&
+                Objects.equals(iflSum, that.iflSum) &&
+                Objects.equals(pstU1, that.pstU1) &&
+                Objects.equals(pstU2, that.pstU2) &&
+                Objects.equals(pstU3, that.pstU3) &&
+                Objects.equals(pltU1, that.pltU1) &&
+                Objects.equals(pltU2, that.pltU2) &&
+                Objects.equals(pltU3, that.pltU3) &&
+                Objects.equals(hz, that.hz);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(ppid, did, time, u1, u2, u3, u4, i1, i2, i3, i4, p1, p2, p3, psum, q1, q2, q3, qsum, s1,
-                s2, s3, ssum, pf1, pf2, pf3, pFsum, cosPhi1, cosPhi2, cosPhi3, iflU1, iflU2, iflU3, iflSum, pstU1,
-                pstU2, pstU3, pltU1, pltU2, pltU3, hz);
+        return Objects.hash(ppid, did, time, u1, u2, u3, u4, i1, i2, i3, i4, p1, p2, p3, psum, q1, q2, q3, qsum, s1, s2, s3, ssum, pf1, pf2, pf3, pFsum, cosPhi1, cosPhi2, cosPhi3, iflU1, iflU2, iflU3, iflSum, pstU1, pstU2, pstU3, pltU1, pltU2, pltU3, hz);
     }
 }

@@ -43,8 +43,8 @@ public class getProBankInfoAction extends ActionSupport {
             crdata = dao.getCompRoomDataByName(probankname);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("CityBank", cbdata);
-            jsonObject.put("CompRoom", crdata);
+            jsonObject.put("CityBank",cbdata);
+            jsonObject.put("CompRoom",crdata);
 
             result = JSON.toJSONString(jsonObject); // List转json
 

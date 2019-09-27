@@ -1,6 +1,6 @@
 package systemMng;
 
-import Util.DBConnect;
+import Util.HBSessionDaoImpl;
 import deviceManage.dao.DeviceDAO;
 import deviceManage.dao.impl.DeviceDAOImpl;
 import hibernatePOJO.DevicesThreshold;
@@ -18,7 +18,6 @@ public class ImportService {
 
     /**
      * 查询指定目录中电子表格中所有的数据
-     *
      * @param file 文件完整路径
      * @return
      */
@@ -34,31 +33,35 @@ public class ImportService {
                 for (int j = 0; j < clos; j++) {
                     //第一个是列数，第二个是行数
                     //dtid自增或更新
-                    String name = rs.getCell(j++, i).getContents();
-                    String dname = rs.getCell(j++, i).getContents();//默认最左边编号也算一列 所以这里得j++
-                    String classify = rs.getCell(j++, i).getContents();
-                    String unit = rs.getCell(j++, i).getContents();
-                    String cellvalstr = rs.getCell(j++, i).getContents();
-                    String floorvalstr = rs.getCell(j++, i).getContents();
-                    String ismarkstr = rs.getCell(j++, i).getContents();
-                    String levelstr = rs.getCell(j++, i).getContents();
+                    String name=rs.getCell(j++, i).getContents();
+                    String dname=rs.getCell(j++, i).getContents();//默认最左边编号也算一列 所以这里得j++
+                    String classify=rs.getCell(j++, i).getContents();
+                    String unit=rs.getCell(j++, i).getContents();
+                    String cellvalstr=rs.getCell(j++, i).getContents();
+                    String floorvalstr=rs.getCell(j++, i).getContents();
+                    String ismarkstr=rs.getCell(j++, i).getContents();
+                    String levelstr=rs.getCell(j++, i).getContents();
 
                     Double cellval = null;
                     Double floorval = null;
                     Integer ismark = 0;
                     Integer level = 1;
 
-                    if (cellvalstr != "") cellval = Double.parseDouble(cellvalstr);
-                    if (floorvalstr != "") floorval = Double.parseDouble(floorvalstr);
-                    if (ismarkstr != "") ismark = Integer.parseInt(ismarkstr);
-                    if (levelstr != "") level = Integer.parseInt(levelstr);
+                    if(cellvalstr != "")
+                        cellval = Double.parseDouble(cellvalstr);
+                    if(floorvalstr != "")
+                        floorval = Double.parseDouble(floorvalstr);
+                    if(ismarkstr != "")
+                        ismark = Integer.parseInt(ismarkstr);
+                    if(levelstr != "")
+                        level = Integer.parseInt(levelstr);
 
                     DeviceDAO dao = new DeviceDAOImpl();
                     String did = dao.getDeviceIDByName(dname);
 
                     DevicesThreshold dt = new DevicesThreshold();
 
-                    dt.setDtid((i - 1) * clos + j);
+                    dt.setDtid((i-1)*clos + j);
                     dt.setName(name);
                     dt.setDid(did);
                     dt.setClassify(classify);
@@ -79,20 +82,21 @@ public class ImportService {
     }
 
     /**
+     * 2019 /9/20 cjy: no use DDBConnect
      * 通过Id判断是否存在
-     *
      * @param id
      * @return
      */
-    public static boolean isExist(int id) {
+    public static boolean isExist(int id){
         try {
-            DBConnect db = new DBConnect();
-            ResultSet rs = db.executeQuery("select * from stu where id='" + id + "'");
-            if (rs.next()) {
+            String sql = "FROM stu where id='"+ id + "'";
+            HBSessionDaoImpl hbsessionDao = new HBSessionDaoImpl();
+
+            List hlist =  hbsessionDao.search(sql);
+            if (hlist != null) {
                 return true;
             }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

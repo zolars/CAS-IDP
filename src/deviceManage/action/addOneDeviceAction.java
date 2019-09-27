@@ -77,9 +77,9 @@ public class addOneDeviceAction extends ActionSupport {
 
 
             //添加SMS平台
-            if (devtype.equals("SMS")) {
+            if(devtype.equals("SMS")) {
 
-                if (dao.addOneSMSDevice(devname, iPaddress, port)) {
+                if(dao.addOneSMSDevice(devname, iPaddress, port)){
                     jsonObject.put("提示", "添加成功！");
                 } else {
                     jsonObject.put("提示", "添加失败，请重试！");
@@ -87,13 +87,12 @@ public class addOneDeviceAction extends ActionSupport {
 
             } else {
 
-                if (rt1) {
+                if(rt1) {
                     rt2 = DeviceManager.checkNetwork(iPaddress, Integer.parseInt(port));
 
-                    if (rt2) {
-                        rt3 = dao.addOneDeviceInfoAndBelongPos(deviceType, devname, devtype, serialno, iPaddress,
-                                port, extra, sms, alert, plantform, belongname, belonglevel);
-                    } else if (!rt2) {
+                    if(rt2) {
+                        rt3 = dao.addOneDeviceInfoAndBelongPos(deviceType, devname, devtype, serialno, iPaddress, port, extra, sms, alert, plantform, belongname, belonglevel);
+                    } else if(!rt2){
                         jsonObject.put("提示", "设备不可达，添加失败！");
                     }
                 }
@@ -105,16 +104,16 @@ public class addOneDeviceAction extends ActionSupport {
                     //
                     String did = dao.getDeviceIDByName(devname);
                     //type: 1-dataOnline, 2-transient, 3-overLimit, 4-threshold, 5-tempData, 6-ctrlData
-                    if (devtype.equals("IDP")) {
+                    if(devtype.equals("IDP")) {
                         DeviceManager.addDevice(iPaddress, Integer.parseInt(port), did, 1);
-                        if (extra.equals("")) {
+                        if(extra.equals("")){
                             DeviceManager.addDevice(iPaddress, Integer.parseInt(extra), did, 2);
                             DeviceManager.addDevice(iPaddress, Integer.parseInt(extra), did, 3);
                         }
                         DeviceManager.addDevice(iPaddress, Integer.parseInt(port), did, 4);
-                    } else if (devtype.equals("temp")) {
+                    } else if(devtype.equals("temp")) {
                         DeviceManager.addDevice(iPaddress, Integer.parseInt(port), did, 5);
-                    } else if (devtype.equals("ctrl")) {
+                    } else if(devtype.equals("ctrl")) {
                         DeviceManager.addDevice(iPaddress, Integer.parseInt(port), did, 6);
                     }
                 } else {

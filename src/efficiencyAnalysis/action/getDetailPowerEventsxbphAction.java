@@ -2,6 +2,7 @@ package efficiencyAnalysis.action;
 
 import Util.EventObject;
 import Util.PageHelper;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
@@ -24,6 +25,7 @@ public class getDetailPowerEventsxbphAction extends ActionSupport {
     public void setResult(JSONObject result) {
         this.result = result;
     }
+
 
 
     /* 根据测量地点（市行名称）获取详细的 第二页设备事件-三相不平衡度
@@ -54,7 +56,7 @@ public class getDetailPowerEventsxbphAction extends ActionSupport {
 
             // 查询当前页实体对象
             pageHelper = dao.getPowerEventsxbphObjectListPage(cbnamelist, starttime, endtime, start, end);
-            pageHelper.setPage((end + 1) / Integer.parseInt(limit));
+            pageHelper.setPage((end+1)/Integer.parseInt(limit) );
 
             // 统计总记录数
             Integer total = dao.getLocalAllPowersxbphTotal(cbnamelist, starttime, endtime);

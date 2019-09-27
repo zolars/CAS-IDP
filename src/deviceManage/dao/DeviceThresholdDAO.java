@@ -5,8 +5,8 @@ import java.util.List;
 public interface DeviceThresholdDAO {
 
     public List getOneDeviceThreshold(String name);
-
-    public List getOneofOneDeviceThreshold(Integer dtid);
+    // 2019 /9 /19 cjy : unused function
+//    public List getOneofOneDeviceThreshold(Integer dtid);
 
     public List searchFuzzyDeviceThreshold(String name);
 

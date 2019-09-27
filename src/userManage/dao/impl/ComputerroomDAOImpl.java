@@ -26,17 +26,18 @@ public class ComputerroomDAOImpl implements ComputerroomDAO {
 
         List<Computerroom> list = new ArrayList<>();
 
-        CityBank cb = (CityBank) hbsessionDao.getFirst("FROM CityBank where cbid='" + city + "'");
+        CityBank cb = (CityBank) hbsessionDao.getFirst(
+                "FROM CityBank where cbid='" + city + "'");
 
-        if (cb != null) {
+        if ( cb != null) {
             String comidstr = cb.getCompRoom();
 
             if (comidstr != null && !comidstr.equals("")) {
                 String comidset[] = comidstr.split("，");
 
                 for (int i = 0; i < comidset.length; i++) {
-                    Computerroom com =
-                            (Computerroom) hbsessionDao.getFirst("FROM Computerroom where rid='" + comidset[i] + "'");
+                    Computerroom com = (Computerroom) hbsessionDao.getFirst(
+                            "FROM Computerroom where rid='" + comidset[i] + "'");
                     list.add(com);
                 }
             }

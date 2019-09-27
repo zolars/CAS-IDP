@@ -134,7 +134,17 @@ public class EventCtrl {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventCtrl eventCtrl = (EventCtrl) o;
-        return teid == eventCtrl.teid && Objects.equals(cid, eventCtrl.cid) && Objects.equals(value, eventCtrl.value) && Objects.equals(limitval, eventCtrl.limitval) && Objects.equals(status, eventCtrl.status) && Objects.equals(did, eventCtrl.did) && Objects.equals(time, eventCtrl.time) && Objects.equals(duration, eventCtrl.duration) && Objects.equals(signature, eventCtrl.signature) && Objects.equals(annotation, eventCtrl.annotation) && Objects.equals(subtype, eventCtrl.subtype);
+        return teid == eventCtrl.teid &&
+                Objects.equals(cid, eventCtrl.cid) &&
+                Objects.equals(value, eventCtrl.value) &&
+                Objects.equals(limitval, eventCtrl.limitval) &&
+                Objects.equals(status, eventCtrl.status) &&
+                Objects.equals(did, eventCtrl.did) &&
+                Objects.equals(time, eventCtrl.time) &&
+                Objects.equals(duration, eventCtrl.duration) &&
+                Objects.equals(signature, eventCtrl.signature) &&
+                Objects.equals(annotation, eventCtrl.annotation) &&
+                Objects.equals(subtype, eventCtrl.subtype);
     }
 
     @Override

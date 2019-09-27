@@ -3,6 +3,8 @@ package systemMng.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import deviceManage.dao.DeviceDAO;
+import deviceManage.dao.impl.DeviceDAOImpl;
 import org.apache.struts2.ServletActionContext;
 import systemMng.dao.RolesPermissionDAO;
 import systemMng.dao.impl.RolesPermissionDAOImpl;

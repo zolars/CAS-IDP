@@ -34,7 +34,8 @@ public class RolesPermission {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RolesPermission that = (RolesPermission) o;
-        return Objects.equals(rid, that.rid) && Objects.equals(pid, that.pid);
+        return Objects.equals(rid, that.rid) &&
+                Objects.equals(pid, that.pid);
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * 短信息发送
+ *
  */
 public class Sms {
 
@@ -25,8 +26,7 @@ public class Sms {
 
         String Command3 = "AT+S" + String.valueOf(symbol1);
 
-        String Command5 =
-                "AT+SMSEND=\"" + commonsms.getRecver() + "\",3,\"" + commonsms.getSmstext() + "\"" + String.valueOf(symbol1);
+        String Command5 = "AT+SMSEND=\"" + commonsms.getRecver() + "\",3,\"" + commonsms.getSmstext() + "\"" + String.valueOf(symbol1);
 
         try {
             String Return2 = myport.sendAT(Command2);
@@ -48,7 +48,7 @@ public class Sms {
                 } else {
                     System.out.println("AT+S 失败;");
                 }
-            } else {
+            }  else {
                 System.out.println("AT+WKMOD=cmd 失败;");
             }
 
@@ -61,7 +61,6 @@ public class Sms {
 
     /**
      * 号码，内容，发送短信息
-     *
      * @param phone
      * @param countstring
      * @throws Exception

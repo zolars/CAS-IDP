@@ -10,7 +10,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 
-public class SmsClient extends Thread {
+public class SmsClient extends Thread{
     private String host;
     private int port;
 
@@ -18,7 +18,6 @@ public class SmsClient extends Thread {
         this.host = host;
         this.port = port;
     }
-
     public void run() {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -27,7 +26,8 @@ public class SmsClient extends Thread {
             b.channel(NioSocketChannel.class);
             b.option(ChannelOption.SO_KEEPALIVE, Boolean.valueOf(true));
             b.handler(new ChannelInitializer<SocketChannel>() {
-                public void initChannel(SocketChannel ch) throws Exception {
+                public void initChannel(SocketChannel ch)
+                        throws Exception {
                     ch.pipeline().addLast(new SmsClientHandler());
                 }
             });

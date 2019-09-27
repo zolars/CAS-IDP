@@ -113,9 +113,15 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(uid, user.uid) && Objects.equals(uname, user.uname) && Objects.equals(chinesename,
-                user.chinesename) && Objects.equals(password, user.password) && Objects.equals(telephone,
-                user.telephone) && Objects.equals(govtelephone, user.govtelephone) && Objects.equals(pbid, user.pbid) && Objects.equals(cbid, user.cbid) && Objects.equals(rid, user.rid);
+        return Objects.equals(uid, user.uid) &&
+                Objects.equals(uname, user.uname) &&
+                Objects.equals(chinesename, user.chinesename) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(telephone, user.telephone) &&
+                Objects.equals(govtelephone, user.govtelephone) &&
+                Objects.equals(pbid, user.pbid) &&
+                Objects.equals(cbid, user.cbid) &&
+                Objects.equals(rid, user.rid);
     }
 
     @Override

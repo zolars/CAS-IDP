@@ -108,10 +108,16 @@ public class Devices {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Devices devices = (Devices) o;
-        return Objects.equals(did, devices.did) && Objects.equals(name, devices.name) && Objects.equals(devicetype,
-                devices.devicetype) && Objects.equals(type, devices.type) && Objects.equals(serialno,
-                devices.serialno) && Objects.equals(iPaddress, devices.iPaddress) && Objects.equals(port,
-                devices.port) && Objects.equals(extra, devices.extra) && Objects.equals(isSms, devices.isSms) && Objects.equals(isAlart, devices.isAlart);
+        return Objects.equals(did, devices.did) &&
+                Objects.equals(name, devices.name) &&
+                Objects.equals(devicetype, devices.devicetype) &&
+                Objects.equals(type, devices.type) &&
+                Objects.equals(serialno, devices.serialno) &&
+                Objects.equals(iPaddress, devices.iPaddress) &&
+                Objects.equals(port, devices.port) &&
+                Objects.equals(extra, devices.extra) &&
+                Objects.equals(isSms, devices.isSms) &&
+                Objects.equals(isAlart, devices.isAlart);
     }
 
     @Override

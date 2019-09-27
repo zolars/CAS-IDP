@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface HBSessionCenterDao {
 
-    public Session getSession();
+    public  Session getSession();
 
     public List search(String hql);
 

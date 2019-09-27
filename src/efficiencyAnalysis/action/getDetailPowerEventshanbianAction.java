@@ -2,6 +2,7 @@ package efficiencyAnalysis.action;
 
 import Util.EventObject;
 import Util.PageHelper;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import efficiencyAnalysis.dao.EventDAO;
@@ -55,7 +56,7 @@ public class getDetailPowerEventshanbianAction extends ActionSupport {
 
             // 查询当前页实体对象
             pageHelper = dao.getPowerEventshanbianObjectListPage(cbnamelist, starttime, endtime, start, end);
-            pageHelper.setPage((end + 1) / Integer.parseInt(limit));
+            pageHelper.setPage((end+1)/Integer.parseInt(limit) );
 
             // 统计总记录数
             Integer total = dao.getLocalAllPowershanbianTotal(cbnamelist, starttime, endtime);

@@ -28,7 +28,8 @@ public class DeviceAlarmUserPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeviceAlarmUserPK that = (DeviceAlarmUserPK) o;
-        return aid == that.aid && Objects.equals(id, that.id);
+        return aid == that.aid &&
+                Objects.equals(id, that.id);
     }
 
     @Override

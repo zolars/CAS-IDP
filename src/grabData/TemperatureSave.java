@@ -17,8 +17,8 @@ public class TemperatureSave {
         TemperatureMonitor tempData = tempDataMap.get(did);
         //当前时间、检测设备id、maxID
         tempData.setDid(did);
-        tempData.setTemperature(dataset.get("temperature"));
-        tempData.setHumidity(dataset.get("humidity"));
+        tempData.setTemperature( dataset.get("temperature") );
+        tempData.setHumidity( dataset.get("humidity") );
 
     }
 

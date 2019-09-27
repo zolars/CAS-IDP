@@ -29,8 +29,8 @@ public class TransientUtil {
         TransientRequest tr = createTransientRequest();
         String content = JSON.toJSONString(tr);
         List<ByteBuf> list = new ArrayList();
-        int frame_num = content.length() / 2048;    //请求帧帧数
-        int remain = content.length() % 2048;
+        int frame_num = content.length()/2048;    //请求帧帧数
+        int remain = content.length()%2048;
         if (0 != remain) {
             frame_num += 1;   //请求帧总帧数
         }
@@ -39,9 +39,9 @@ public class TransientUtil {
             String cmc = null;
             byte[] cmcBytes = null;
             if (i == frame_num) {
-                cmc = content.substring((i - 1) * 2048, content.length());
+                cmc = content.substring((i-1)*2048, content.length());
             } else {
-                cmc = content.substring((i - 1) * 2048, i * 2048);
+                cmc = content.substring((i-1)*2048, i*2048);
             }
             try {
                 cmcBytes = cmc.getBytes("UTF-8");
@@ -67,7 +67,6 @@ public class TransientUtil {
         }
         return list;
     }
-
     //返回一个请求体对象,code为"0001",starttime为当前时间往前24个小时，endtime为当前时间
     public static TransientRequest createTransientRequest() {
         HBSessionDaoImpl hbSessionDao = new HBSessionDaoImpl();
@@ -83,7 +82,6 @@ public class TransientUtil {
         tr.setStarttime(sdf.format(c.getTime()));
         return tr;
     }
-
     //byte数组计算MD5摘要
     public static byte[] md5(byte[] msg) {
         MessageDigest md = null;
@@ -95,16 +93,15 @@ public class TransientUtil {
         md.update(msg);
         return md.digest();
     }
-
     //合并两个byte数组
     public static byte[] mergeByteArray(byte[] array1, byte[] array2) {
         if (null != array1 && null != array2) {
             byte[] out = new byte[array1.length + array2.length];
-            System.arraycopy(array1, 0, out, 0, array1.length);
-            System.arraycopy(array2, 0, out, array1.length, array2.length);
+            System.arraycopy(array1,0, out, 0, array1.length);
+            System.arraycopy(array2,0, out, array1.length, array2.length);
             return out;
         }
-        return null;
+         return null;
     }
 
     public static String getCode() {

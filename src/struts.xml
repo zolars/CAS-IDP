@@ -521,13 +521,14 @@
             </result>
         </action>
 
-        <action name="getOneofOneDeviceThreshold" class="deviceManage.action.getOneOfOneDeviceThresholdAction">
-            <!--getOneDeviceThreshold -->
-            <result name="failure">/failure.jsp</result>
-            <result name="success" type="json">
-                <param name="root">result</param>
-            </result>
-        </action>
+        <!--2019/9/19 cjy: unused action-->
+        <!--<action name="getOneofOneDeviceThreshold" class="deviceManage.action.getOneOfOneDeviceThresholdAction">-->
+            <!--&lt;!&ndash;getOneDeviceThreshold &ndash;&gt;-->
+            <!--<result name="failure">/failure.jsp</result>-->
+            <!--<result name="success" type="json">-->
+                <!--<param name="root">result</param>-->
+            <!--</result>-->
+        <!--</action>-->
 
         <action name="updateOneDeviceThreshold" class="deviceManage.action.updateOneDeviceThresholdAction">
             <!--updateOneDeviceThreshold -->
@@ -832,7 +833,7 @@
         <action name="getOneComputerroomMapData" class="efficiencyAnalysis.action.getOneComputerroomMapDataAction">
             <!--getOneComputerroomMapData -->
             <result name="failure">/failure.jsp</result>
-            <!-- <result name="error">/failure.jsp</result>-->
+           <!-- <result name="error">/failure.jsp</result>-->
             <result name="success" type="json">
                 <param name="root">result</param>
             </result>
@@ -894,6 +895,14 @@
             </result>
         </action>
 
+        <!-- 2019.06.20 cjy :add alarm analysis function-->
+        <action name="setAlarmUserByPercent" class="systemMng.action.setAlarmUserByPercentAction">
+            <!--setAlarmUser -->
+            <result name="failure">/failure.jsp</result>
+            <result name="success" type="json">
+                <param name="root">result</param>
+            </result>
+        </action>
 
         <action name="setAlarmUser" class="systemMng.action.setAlarmUserAction">
             <!--setAlarmUser -->

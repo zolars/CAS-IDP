@@ -236,14 +236,14 @@
 
             <div class="row">
 
-                <div id="eventbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
+                <div id="eventbar" class="col-md-2 col-xs-6 chart-item" style="width:28%; height: 200px;">
                 </div>
 
-                <div id="alarmbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
+                <div id="alarmbar" class="col-md-2 col-xs-6 chart-item" style="width:28%; height: 200px;">
                 </div>
 
                 <div id="assessbar" class="col-md-2 col-xs-6 chart-item"
-                     style="width:30%; height: 200px;text-align:center">
+                     style="width:28%; height: 200px;text-align:center">
                     <div class="chart-item-title">评估结果</div>
                     <table id="assesstable" name="assesstable" cellspacing="0" cellpadding="0">
                         <tr>
@@ -279,13 +279,13 @@
                 </div>
             </div>
             <div class="row">
-                <div id="nxbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
+                <div id="nxbar" class="col-md-2 col-xs-6 chart-item" style="width:28%; height: 200px;">
                 </div>
 
-                <div id="nhbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
+                <div id="nhbar" class="col-md-2 col-xs-6 chart-item" style="width:28%; height: 200px;">
                 </div>
 
-                <div id="nullbar" class="col-md-2 col-xs-6 chart-item" style="width:30%; height: 200px;">
+                <div id="nullbar" class="col-md-2 col-xs-6 chart-item" style="width:28%; height: 200px;">
                 </div>
             </div>
 
@@ -297,27 +297,37 @@
                 <!--上传并显示图片-管理员专属-->
                 <div class="col-md-2 col-xs-6 chart-item"
                      style="
-                         width: 30%;
+                         width: 28%;
                          height: 27%;
                          -webkit-tap-highlight-color: transparent;
                          user-select: none;
                          position: relative;
                      ">
 
-                    <img id="preview" src="upload/ElectricSystemImg.jpg" alt="" width="100%;" height="175px;"/>
-                    <form action="uploadOne" method="post" enctype="multipart/form-data">
-                        <a class="file">选择文件
-                            <input type="file" name="uploadFile" onchange="uploadImage(this)">
-                        </a>
-                        <a id="submit" style="display:none;" class="file">上传
-                            <input type="submit">
-                        </a>
-                    </form>
+                    <div style="
+                         width: 100%;
+                         height: 85%;
+                         position: relative;">
+                        <img id="preview" src="upload/ElectricSystemImg.jpg" alt="" width="100%;" height="100%;"/>
+                    </div>
+                    <div style="
+                         width: 100%;
+                         height: 15%;
+                         position: relative;">
+                        <form action="uploadOne" method="post" enctype="multipart/form-data">
+                            <a class="file">选择文件
+                                <input type="file" name="uploadFile" onchange="uploadImage(this)">
+                            </a>
+                            <a id="submit" style="display:none;" class="file">上传
+                                <input type="submit">
+                            </a>
+                        </form>
+                    </div>
                 </div>
 
 
                 <div id="devicebar" class="col-md-2 col-xs-6 chart-item"
-                     style="width: 30%; height: 27%; text-align:center;">
+                     style="width: 28%; height: 27%; text-align:center;">
                     <table id="devicetable" name="devicetable" cellspacing="0" cellpadding="0" style="margin: auto">
                         <tr style="height: 0px;"></tr>
                         <thead>
@@ -354,19 +364,19 @@
                     </table>
                 </div>
 
-                <div id="comproomalarmbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%; height: 27%;">
+                <div id="comproomalarmbar" class="col-md-2 col-xs-6 chart-item" style="width: 28%; height: 27%;">
                 </div>
 
             </div>
             <div class="row">
 
-                <div id="tempbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%;height: 27%;">
+                <div id="tempbar" class="col-md-2 col-xs-6 chart-item" style="width: 28%;height: 27%;">
                 </div>
 
-                <div id="humidbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%;height: 27%;">
+                <div id="humidbar" class="col-md-2 col-xs-6 chart-item" style="width: 28%;height: 27%;">
                 </div>
 
-                <div id="panelbar" class="col-md-2 col-xs-6 chart-item" style="width: 30%;height: 27%;">
+                <div id="panelbar" class="col-md-2 col-xs-6 chart-item" style="width: 28%;height: 27%;">
                 </div>
                 <%--<div id="humidbar1" class="col-md-2 col-xs-6 chart-item" style="width: 30%;height: 200px;">--%>
                 <%--</div>--%>
@@ -390,15 +400,15 @@
 
 <script>
     function refreshfunc(){
-       /* $("#refresh-btn").button('loading').delay(500).queue(function () {*/
-            var pname = $.cookie('province_name');
-            var stime = getFormatDate(-1); //$("#firstDate").val();
-            var etime = getFormatDate(0); //$("#lastDate").val();
-            var cbname = $("#comproom_code option:selected").val();
+        /* $("#refresh-btn").button('loading').delay(500).queue(function () {*/
+        var pname = $.cookie('province_name');
+        var stime = getFormatDate(-1); //$("#firstDate").val();
+        var etime = getFormatDate(0); //$("#lastDate").val();
+        var cbname = $("#comproom_code option:selected").val();
 
-            getOneProvinceMapData(pname, stime, etime);
-            getEnvironmentInfo(cbname);
-            getCtrlStatus(cbname, stime, etime);
+        getOneProvinceMapData(pname, stime, etime);
+        getEnvironmentInfo(cbname);
+        getCtrlStatus(cbname, stime, etime);
     }
 
     $(document).ready(function () {
@@ -548,7 +558,7 @@
     }, 500);
 
     //$("#firstDate").val(getFormatDate(-1));
-   // $("#lastDate").val(getFormatDate(0));
+    // $("#lastDate").val(getFormatDate(0));
 
     //获取事件、告警、评估等级
     function getOneProvinceMapData(pname, stime, etime) {
@@ -746,9 +756,9 @@
                     //     }
                     // }
                     // if (k) {
-                        xdata[xdata.length++] = list[i][0];
-                        tempdata[tempdata.length++] = list[i][1];
-                        humiddata[humiddata.length++] = list[i][2];
+                    xdata[xdata.length++] = list[i][0];
+                    tempdata[tempdata.length++] = list[i][1];
+                    humiddata[humiddata.length++] = list[i][2];
                     // }
                 }
 
@@ -772,7 +782,7 @@
                         {
                             name: xdata[0],
                             type: 'gauge',
-                            center: ['30%', '55%'], // 默认全局居中
+                            center: ['50%', '55%'], // 默认全局居中
                             radius: '90%',
                             min: 0,
                             max: 90,
@@ -836,7 +846,7 @@
                         {
                             name: xdata[0],
                             type: 'gauge',
-                            center: ['30%', '55%'], // 默认全局居中
+                            center: ['50%', '55%'], // 默认全局居中
                             radius: '60%',
                             min: 0,
                             max: 70,
@@ -894,132 +904,6 @@
                                 borderColor: '#ccc'
                             },
                             data: [{value: humiddata[0], name: '%'}]
-                        },
-                        {
-                            name: xdata[2],
-                            type: 'gauge',
-                            center: ['75%', '55%'], // 默认全局居中
-                            radius: '90%',
-                            min: 0,
-                            max: 90,
-                            splitNumber:9,
-                            startAngle:240,//开始角度
-                            endAngle:-60,//结束角度
-                            itemStyle: {
-                                normal: {
-                                    color: '#389863'
-                                }
-                            },
-                            axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
-                                show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
-                                lineStyle: {			// 仪表盘轴线样式。
-                                    color: [[0.3, '#91c7ae'], [0.6, '#63869e'], [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
-                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 10,					//轴线宽度,默认 30。
-                                    shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                    shadowColor: "#fff"		//阴影颜色。支持的格式同color。
-                                }
-                            },
-                            splitLine: {			// 分隔线样式。
-                                show: true,				// 是否显示分隔线,默认 true。
-                                length: 5,				// 分隔线线长。支持相对半径的百分比,默认 30。
-                                lineStyle: {			// 分隔线样式。
-                                    color: "#eee",				//线的颜色,默认 #eee。
-                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 2,					//线度,默认 2。
-                                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
-                                    shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
-                                }
-                            },
-                            pointer: { //指针粗细
-                                width: 4
-                            },
-                            itemStyle: {			// 仪表盘指针样式。
-                                color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
-                                opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
-                                borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
-                                borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
-                                shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
-                            },
-                            detail: {
-                                formatter: '{value}℃',
-                                show:true,
-                                textStyle: {
-                                    color: 'auto',
-                                    fontSize : 20
-                                },
-                                backgroundColor: 'rgba(0,0,0,0)',
-                                borderWidth: 1,
-                                borderColor: '#ccc',
-                                offsetCenter: [0, '70%'],
-                            },
-                            data: [{value: tempdata[2], name: ''}]
-
-                        },
-                        {
-                            name: xdata[2],
-                            type: 'gauge',
-                            center: ['75%', '55%'], // 默认全局居中
-                            radius: '60%',
-                            min: 0,
-                            max: 70,
-                            splitNumber:7,
-                            startAngle:240,//开始角度
-                            endAngle:-60,//结束角度
-
-                            axisTick: {            // 坐标轴小标记
-                                show: false
-                            },
-                            axisLabel:{show:true},
-                            axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
-                                show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
-                                lineStyle: {			// 仪表盘轴线样式。
-                                    color: [[0.5,'#91c7ae'],  [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
-                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 5,					//轴线宽度,默认 30。
-                                    shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                    shadowColor: "#fff"		//阴影颜色。支持的格式同color。
-                                }
-                            },
-                            splitLine: {			// 分隔线样式。
-                                show: true,				// 是否显示分隔线,默认 true。
-                                length: 5,				// 分隔线线长。支持相对半径的百分比,默认 30。
-                                lineStyle: {			// 分隔线样式。
-                                    color: "#eee",				//线的颜色,默认 #eee。
-                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 2,					//线度,默认 2。
-                                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
-                                    shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
-                                }
-                            },
-                            pointer: { //指针粗细
-                                width: 2
-                            },
-                            itemStyle: {			// 仪表盘指针样式。
-                                color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
-                                opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
-                                borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
-                                borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
-                                shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
-                            },
-                            detail: {
-                                show:true,
-                                formatter: '{value}',
-                                textStyle: {
-                                    color: 'auto',
-                                    fontSize : 15
-                                },
-                                backgroundColor: 'rgba(0,0,0,0)',
-                                borderWidth: 1,
-                                borderColor: '#ccc'
-                            },
-                            data: [{value: humiddata[2], name: '%'}]
                         }
 
                     ]
@@ -1040,7 +924,7 @@
                         {
                             name: xdata[1],
                             type: 'gauge',
-                            center: ['30%', '55%'], // 默认全局居中
+                            center: ['50%', '55%'], // 默认全局居中
                             radius: '90%',
                             min: 0,
                             max: 90,
@@ -1104,7 +988,7 @@
                         {
                             name: xdata[1],
                             type: 'gauge',
-                            center: ['30%', '55%'], // 默认全局居中
+                            center: ['50%', '55%'], // 默认全局居中
                             radius: '60%',
                             min: 0,
                             max: 70,
@@ -1162,132 +1046,6 @@
                                 borderColor: '#ccc'
                             },
                             data: [{value: humiddata[1], name: '%'}]
-                        },
-                        {
-                            name: xdata[3],
-                            type: 'gauge',
-                            center: ['75%', '55%'], // 默认全局居中
-                            radius: '90%',
-                            min: 0,
-                            max: 90,
-                            splitNumber:9,
-                            startAngle:240,//开始角度
-                            endAngle:-60,//结束角度
-                            itemStyle: {
-                                normal: {
-                                    color: '#389863'
-                                }
-                            },
-                            axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
-                                show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
-                                lineStyle: {			// 仪表盘轴线样式。
-                                    color: [[0.3, '#91c7ae'], [0.6, '#63869e'], [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
-                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 10,					//轴线宽度,默认 30。
-                                    shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                    shadowColor: "#fff"		//阴影颜色。支持的格式同color。
-                                }
-                            },
-                            splitLine: {			// 分隔线样式。
-                                show: true,				// 是否显示分隔线,默认 true。
-                                length: 5,				// 分隔线线长。支持相对半径的百分比,默认 30。
-                                lineStyle: {			// 分隔线样式。
-                                    color: "#eee",				//线的颜色,默认 #eee。
-                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 2,					//线度,默认 2。
-                                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
-                                    shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
-                                }
-                            },
-                            pointer: { //指针粗细
-                                width: 4
-                            },
-                            itemStyle: {			// 仪表盘指针样式。
-                                color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
-                                opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
-                                borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
-                                borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
-                                shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
-                            },
-                            detail: {
-                                formatter: '{value}℃',
-                                show:true,
-                                textStyle: {
-                                    color: 'auto',
-                                    fontSize : 20
-                                },
-                                backgroundColor: 'rgba(0,0,0,0)',
-                                borderWidth: 1,
-                                borderColor: '#ccc',
-                                offsetCenter: [0, '70%'],
-                            },
-                            data: [{value: tempdata[3], name: ''}]
-
-                        },
-                        {
-                            name: xdata[3],
-                            type: 'gauge',
-                            center: ['75%', '55%'], // 默认全局居中
-                            radius: '60%',
-                            min: 0,
-                            max: 70,
-                            splitNumber:7,
-                            startAngle:240,//开始角度
-                            endAngle:-60,//结束角度
-
-                            axisTick: {            // 坐标轴小标记
-                                show: false
-                            },
-                            axisLabel:{show:true},
-                            axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
-                                show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
-                                lineStyle: {			// 仪表盘轴线样式。
-                                    color: [[0.5,'#91c7ae'],  [1, '#c23531']], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
-                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 5,					//轴线宽度,默认 30。
-                                    shadowBlur: 20,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                    shadowColor: "#fff"		//阴影颜色。支持的格式同color。
-                                }
-                            },
-                            splitLine: {			// 分隔线样式。
-                                show: true,				// 是否显示分隔线,默认 true。
-                                length: 5,				// 分隔线线长。支持相对半径的百分比,默认 30。
-                                lineStyle: {			// 分隔线样式。
-                                    color: "#eee",				//线的颜色,默认 #eee。
-                                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                    width: 2,					//线度,默认 2。
-                                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
-                                    shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
-                                }
-                            },
-                            pointer: { //指针粗细
-                                width: 2
-                            },
-                            itemStyle: {			// 仪表盘指针样式。
-                                color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
-                                opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                                borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
-                                borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
-                                borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
-                                shadowBlur: 10,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
-                                shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
-                            },
-                            detail: {
-                                show:true,
-                                formatter: '{value}',
-                                textStyle: {
-                                    color: 'auto',
-                                    fontSize : 15
-                                },
-                                backgroundColor: 'rgba(0,0,0,0)',
-                                borderWidth: 1,
-                                borderColor: '#ccc'
-                            },
-                            data: [{value: humiddata[3], name: '%'}]
                         }
                     ]
                 };
@@ -1358,12 +1116,12 @@
 
                 for (var i = 0; i < didlist.length; i++) {
                     pic.innerHTML += ('<td style="padding-right: 50px;"><img src="img/icon/ctrl-pic.png"/></td>');
-                    name.innerHTML += ('<td style="font-size: 4%;color: #000000">名称：' + namelist[i] + '</td>');
+                    name.innerHTML += ('<td style="font-size: 0.1vw;color: #000000">' + namelist[i] + '</td>');
 
                     if (rtlist[i] === "正常")
-                        status.innerHTML += ('<td style="font-size: 4%;color: #000000">状态：良好</td>');
+                        status.innerHTML += ('<td style="padding-right: 50px;font-size: 0.1vw;color: #000000";text-align:center;>良好</td>');
                     else {
-                        status.innerHTML += ('<td><a data-toggle="popover" data-placement="bottom" data-trigger="hover"  data-html="true" data-title = "告警信息" data-content= "' + rtlist[i] + '" style="font-size: 12px;color: #FF0000">状态：告警</a></td>');
+                        status.innerHTML += ('<td><a data-toggle="popover" data-placement="bottom" data-trigger="hover"  data-html="true" data-title = "告警信息" data-content= "' + rtlist[i] + '" style="font-size: 0.1vw;color: #FF0000">告警</a></td>');
                         $(function () {
                             $("[data-toggle='popover']").popover();
                         });
@@ -1379,12 +1137,12 @@
 
                 for (var i = 0; i < didlist2.length; i++) {
                     pic2.innerHTML += ('<td style="padding-right: 50px;"><img src="img/icon/grab-pic.png"/></td>');
-                    name2.innerHTML += ('<td style="font-size: 5%;color: #000000">名称：' + namelist2[i] + '</td>');
+                    name2.innerHTML += ('<td style="font-size: 0.1vw;color: #000000">' + namelist2[i] + '</td>');
 
                     if (rtlist2[i] === "正常")
-                        status2.innerHTML += ('<td style="font-size: 5%;color: #000000">状态：良好</td>');
+                        status2.innerHTML += ('<td style="font-size: 0.1vw;color: #000000";align:center;>良好</td>');
                     else {
-                        status2.innerHTML += ('<td><a data-toggle="popover" data-placement="bottom" data-trigger="hover"  data-html="true" data-title = "告警信息" data-content= "' + rtlist2[i] + '" style="font-size: 12px;color: #FF0000">状态：告警</a></td>');
+                        status2.innerHTML += ('<td><a data-toggle="popover" data-placement="bottom" data-trigger="hover"  data-html="true" data-title = "告警信息" data-content= "' + rtlist2[i] + '" style="font-size: 0.1vw;color: #FF0000">告警</a></td>');
                         $(function () {
                             $("[data-toggle='popover']").popover();
                         });
@@ -1464,10 +1222,10 @@
             isSystemMng = false;
             menuname = "集中监控";
         }
-      /*  else if(cbidstr[i] == " efficiencyDevice.jsp"){
-            isSystemMng = false;
-            menuname = "动力设施";
-        }*/
+          else if(cbidstr[i] == " efficiencyDevice.jsp"){
+              isSystemMng = false;
+              menuname = "动力设施";
+          }
         else if(cbidstr[i] == " onlineDetect.jsp"){
             isSystemMng = false;
             menuname = "在线监测";
@@ -1476,10 +1234,10 @@
             isSystemMng = false;
             menuname = "动力分析";
         }
-       /* else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
-            isSystemMng = false;
-            menuname = "动力评估";
-        }*/
+        /* else if(cbidstr[i] == ' efficiencyAssessment.jsp'){
+             isSystemMng = false;
+             menuname = "动力评估";
+         }*/
         else if(cbidstr[i] == ' reportChart.jsp'){
             isSystemMng = false;
             menuname = "报表功能";

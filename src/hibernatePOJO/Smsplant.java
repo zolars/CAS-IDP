@@ -108,7 +108,17 @@ public class Smsplant {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Smsplant smsplant = (Smsplant) o;
-        return id == smsplant.id && Objects.equals(bwt, smsplant.bwt) && Objects.equals(sbname, smsplant.sbname) && Objects.equals(sbip, smsplant.sbip) && Objects.equals(status, smsplant.status) && Objects.equals(gjpro, smsplant.gjpro) && Objects.equals(gjexp, smsplant.gjexp) && Objects.equals(zbj, smsplant.zbj) && Objects.equals(ext1, smsplant.ext1) && Objects.equals(ext2, smsplant.ext2) && Objects.equals(ext3, smsplant.ext3);
+        return id == smsplant.id &&
+                Objects.equals(bwt, smsplant.bwt) &&
+                Objects.equals(sbname, smsplant.sbname) &&
+                Objects.equals(sbip, smsplant.sbip) &&
+                Objects.equals(status, smsplant.status) &&
+                Objects.equals(gjpro, smsplant.gjpro) &&
+                Objects.equals(gjexp, smsplant.gjexp) &&
+                Objects.equals(zbj, smsplant.zbj) &&
+                Objects.equals(ext1, smsplant.ext1) &&
+                Objects.equals(ext2, smsplant.ext2) &&
+                Objects.equals(ext3, smsplant.ext3);
     }
 
     @Override
