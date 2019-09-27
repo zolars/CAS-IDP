@@ -1,7 +1,6 @@
-/.idea/
-/out/
+.idea
+.vscode
+out
 /web/WEB-INF/classes/
 /web/WEB-INF/lib/
-/vim.exe.stackdump
 /IDP.iml
-/DB.sql
